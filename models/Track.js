@@ -7,8 +7,8 @@ const trackSchema = new Schema({
   description: String,
   category: { type: String, enum: ["awareness", "beginner", "intermediate", "advanced"] },
   modules: [{ type: Schema.Types.ObjectId, ref: "Module" }],
-  xpReward: { type: Number, default: 500 },
-  estimatedWeeks: Number,
+  xpReward: { type: Number, default: 500, min: 0 },
+  estimatedWeeks: { type: Number, min: 1 },
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 

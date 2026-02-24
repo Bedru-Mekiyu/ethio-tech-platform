@@ -72,7 +72,7 @@ We are **actively looking for**:
 - **Financial supporters** (small or large) to cover hosting, domains, Cloudinary credits, etc.  
 - **Schools & parent associations** in Ethiopia interested in pilot participation
 
-→ Open an issue or email: **[your-email@example.com]**  
+→ Open an issue or email: **bedru.mekiyu-ug@aau.edu.et**  
 → Join the discussion: **[Discord / Telegram link when ready]**
 
 ## 📜 License
@@ -91,4 +91,4 @@ Every star helps attract more mentors, contributors, and supporters.
 
 ---
 
-Made with ❤️ in Addis Ababa for Ethiopia and the world.
+Made with vision in Addis Ababa for Ethiopia and the world.

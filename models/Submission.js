@@ -2,14 +2,16 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
+const urlRegex = /^https?:\/\/\S+$/;
+
 const submissionSchema = new Schema({
   student: { type: Schema.Types.ObjectId, ref: "User", required: true },
   project: { type: Schema.Types.ObjectId, ref: "Project", required: true },
-  githubLink: String,
-  deployedUrl: String,
+  githubLink: { type: String, match: [urlRegex, "Invalid URL"] },
+  deployedUrl: { type: String, match: [urlRegex, "Invalid URL"] },
   files: [String],
-  feedback: String,
-  grade: Number,
+  feedback: { type: String, trim: true },
+  grade: { type: Number, min: 0 },
   status: { 
     type: String, 
     enum: ["pending", "reviewed", "approved", "rejected"], 
