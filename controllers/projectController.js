@@ -1,10 +1,14 @@
 import Project from "../models/Project.js";
+import Track from "../models/Track.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import { getPagination } from "../utils/pagination.js";
 
 export const createProject = asyncHandler(async (req, res) => {
+  const track = await Track.findById(req.body.track);
+  if (!track) throw new ApiError(404, "Track not found");
+
   const project = await Project.create(req.body);
   sendResponse(res, 201, "Project created", { project });
 });
@@ -36,6 +40,11 @@ export const getProjectById = asyncHandler(async (req, res) => {
 });
 
 export const updateProject = asyncHandler(async (req, res) => {
+  if (req.body.track) {
+    const track = await Track.findById(req.body.track);
+    if (!track) throw new ApiError(404, "Track not found");
+  }
+
   const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,

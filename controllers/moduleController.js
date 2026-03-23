@@ -5,6 +5,9 @@ import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 
 export const createModule = asyncHandler(async (req, res) => {
+  const track = await Track.findById(req.body.track);
+  if (!track) throw new ApiError(404, "Track not found");
+
   const moduleDoc = await Module.create(req.body);
   await Track.findByIdAndUpdate(moduleDoc.track, { $addToSet: { modules: moduleDoc._id } });
   sendResponse(res, 201, "Module created", { module: moduleDoc });
@@ -23,11 +26,26 @@ export const getModuleById = asyncHandler(async (req, res) => {
 });
 
 export const updateModule = asyncHandler(async (req, res) => {
+  const existingModule = await Module.findById(req.params.id);
+  if (!existingModule) throw new ApiError(404, "Module not found");
+
+  if (req.body.track) {
+    const targetTrack = await Track.findById(req.body.track);
+    if (!targetTrack) throw new ApiError(404, "Track not found");
+  }
+
   const moduleDoc = await Module.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
-  if (!moduleDoc) throw new ApiError(404, "Module not found");
+
+  if (req.body.track && String(existingModule.track) !== String(moduleDoc.track)) {
+    await Promise.all([
+      Track.findByIdAndUpdate(existingModule.track, { $pull: { modules: moduleDoc._id } }),
+      Track.findByIdAndUpdate(moduleDoc.track, { $addToSet: { modules: moduleDoc._id } }),
+    ]);
+  }
+
   sendResponse(res, 200, "Module updated", { module: moduleDoc });
 });
 

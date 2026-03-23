@@ -1,9 +1,10 @@
 import Submission from "../models/Submission.js";
 import Project from "../models/Project.js";
+import Notification from "../models/Notification.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
-import { grantXP } from "../services/xpService.js";
+import { grantXPWithOptions } from "../services/xpService.js";
 
 export const createSubmission = asyncHandler(async (req, res) => {
   const { project: projectId } = req.body;
@@ -57,14 +58,24 @@ export const reviewSubmission = asyncHandler(async (req, res) => {
   await submission.save();
 
   if (status === "approved") {
-    await grantXP({
+    await grantXPWithOptions({
       userId: submission.student,
       amount: submission.project?.xpReward || 0,
       reason: `Project approved: ${submission.project?.title || "Project"}`,
       sourceType: "project",
       sourceId: submission.project?._id,
+      enforceUniqueSource: true,
+      allowExisting: true,
     });
   }
+
+  await Notification.create({
+    recipient: submission.student,
+    type: "project",
+    message: `Your submission for ${submission.project?.title || "project"} was marked as ${status}.`,
+    link: `/submissions/${submission._id}`,
+    createdBy: req.user._id,
+  });
 
   sendResponse(res, 200, "Submission reviewed", { submission });
 });

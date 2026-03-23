@@ -22,6 +22,8 @@
     { "key": "projectId", "value": "" },
     { "key": "submissionId", "value": "" },
     { "key": "sessionId", "value": "" },
+    { "key": "liveRoomId", "value": "" },
+    { "key": "liveAccessToken", "value": "" },
     { "key": "groupId", "value": "" },
     { "key": "resourceId", "value": "" },
     { "key": "notificationId", "value": "" },
@@ -127,6 +129,8 @@
           "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Variables and Data Types\",\n  \"content\": \"JS basics\",\n  \"module\": \"{{moduleId}}\",\n  \"xpReward\": 40,\n  \"durationMinutes\": 30,\n  \"order\": 1\n}" }, "url": { "raw": "{{baseUrl}}/lessons", "host": ["{{baseUrl}}"], "path": ["lessons"] } }
         },
         { "name": "GET /lessons", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons?module={{moduleId}}", "host": ["{{baseUrl}}"], "path": ["lessons"], "query": [{"key":"module","value":"{{moduleId}}"}] } } },
+        { "name": "GET /lessons/me/progress", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons/me/progress", "host": ["{{baseUrl}}"], "path": ["lessons", "me", "progress"] } } },
+        { "name": "GET /lessons/me/progress/summary", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons/me/progress/summary", "host": ["{{baseUrl}}"], "path": ["lessons", "me", "progress", "summary"] } } },
         { "name": "GET /lessons/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}"] } } },
         { "name": "PATCH /lessons/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"durationMinutes\": 35\n}" }, "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}"] } } },
         { "name": "POST /lessons/:id/complete", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}/complete", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}", "complete"] } } },
@@ -174,11 +178,15 @@
         {
           "name": "POST /sessions",
           "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.session?._id;", "if (id) pm.environment.set('sessionId', id);"] }}],
-          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Mentor Q&A Session\",\n  \"scheduledAt\": \"2026-04-10T10:00:00.000Z\",\n  \"durationMinutes\": 60,\n  \"meetingLink\": \"https://meet.google.com/example\",\n  \"xpPerAttendee\": 80\n}" }, "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] } }
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Mentor Q&A Session\",\n  \"scheduledAt\": \"2026-04-10T10:00:00.000Z\",\n  \"durationMinutes\": 60,\n  \"classroomMode\": \"immersive-3d\",\n  \"liveProvider\": \"custom\",\n  \"meetingLink\": \"https://meet.google.com/example\",\n  \"xpPerAttendee\": 80\n}" }, "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] } }
         },
         { "name": "GET /sessions", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] } } },
         { "name": "PATCH /sessions/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"live\"\n}" }, "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}"] } } },
         { "name": "POST /sessions/:id/join", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/join", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "join"] } } },
+        { "name": "POST /sessions/:id/start", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/start", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "start"] } } },
+        { "name": "GET /sessions/:id/live-access", "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const d = pm.response.json()?.data;", "if (d?.roomId) pm.environment.set('liveRoomId', d.roomId);", "if (d?.accessToken) pm.environment.set('liveAccessToken', d.accessToken);"] }}], "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/live-access", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "live-access"] } } },
+        { "name": "POST /sessions/:id/feedback", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"quality\": 5,\n  \"engagement\": 5,\n  \"impact\": 4,\n  \"comment\": \"Very practical and clear mentoring.\"\n}" }, "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/feedback", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "feedback"] } } },
+        { "name": "GET /sessions/:id/feedback-summary", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/feedback-summary", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "feedback-summary"] } } },
         { "name": "POST /sessions/:id/leave", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/leave", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "leave"] } } },
         { "name": "POST /sessions/:id/end", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/end", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "end"] } } }
       ]
