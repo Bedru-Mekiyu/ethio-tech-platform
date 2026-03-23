@@ -41,6 +41,8 @@ const userSchema = new Schema({
   totalSessions: { type: Number, default: 0, min: 0 },
 
   isVerified: { type: Boolean, default: false },
+  refreshTokenHash: { type: String, select: false },
+  refreshTokenExpiresAt: { type: Date, select: false },
 }, { timestamps: true });
 
 export default model("User", userSchema);

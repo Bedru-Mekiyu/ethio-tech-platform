@@ -5,6 +5,8 @@ import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 
 import { connectDB } from "./config/db.js";
+import apiRouter from "./routes/index.js";
+import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 
 // Load env
 dotenv.config();
@@ -27,17 +29,19 @@ const limiter = rateLimit({
 app.use("/api/", limiter);
 
 // Health check (useful for Render/Vercel)
-app.get("/health", (req, res) => res.status(200).json({ status: "OK", mission: "Building Ethiopia's tech future" }));
+app.get("/health", (req, res) =>
+  res.status(200).json({
+    status: "OK",
+    mission: "Building Ethiopia's tech future",
+    version: "v1",
+    timestamp: new Date().toISOString(),
+  })
+);
 
-// Import routes later (we'll add them step-by-step)
-app.use("/api/users", (req, res) => res.send("Users route coming..."));
-app.use("/api/xp", (req, res) => res.send("XP engine coming..."));
+app.use("/api/v1", apiRouter);
 
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Something broke — but we fix fast 🇪🇹" });
-});
+app.use(notFound);
+app.use(errorHandler);
 
 // Start server
 const startServer = async () => {

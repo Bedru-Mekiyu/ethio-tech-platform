@@ -1,0 +1,276 @@
+{
+  "info": {
+    "name": "Ethio Tech Platform API",
+    "description": "Full backend API collection for /api/v1 endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api/v1" },
+    { "key": "accessToken", "value": "" },
+    { "key": "refreshToken", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "studentId", "value": "" },
+    { "key": "trackId", "value": "" },
+    { "key": "moduleId", "value": "" },
+    { "key": "lessonId", "value": "" },
+    { "key": "projectId", "value": "" },
+    { "key": "submissionId", "value": "" },
+    { "key": "sessionId", "value": "" },
+    { "key": "groupId", "value": "" },
+    { "key": "resourceId", "value": "" },
+    { "key": "notificationId", "value": "" },
+    { "key": "hubId", "value": "" },
+    { "key": "badgeId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "auth": { "type": "noauth" },
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "http://localhost:5000/health", "host": ["http://localhost:5000"], "path": ["health"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "auth": { "type": "noauth" },
+      "item": [
+        {
+          "name": "POST /auth/register",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const d = pm.response.json()?.data;", "if (d?.user?.id) pm.environment.set('userId', d.user.id);", "if (d?.user?.id) pm.environment.set('studentId', d.user.id);"] }}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"fullName\": \"Student One\",\n  \"email\": \"student1@example.com\",\n  \"password\": \"Password123\",\n  \"role\": \"student\",\n  \"gradeLevel\": 10\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "POST /auth/login",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const d = pm.response.json()?.data;", "if (d?.accessToken) pm.environment.set('accessToken', d.accessToken);", "if (d?.refreshToken) pm.environment.set('refreshToken', d.refreshToken);", "if (d?.user?.id) pm.environment.set('userId', d.user.id);"] }}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"student1@example.com\",\n  \"password\": \"Password123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] }
+          }
+        },
+        {
+          "name": "POST /auth/refresh",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const d = pm.response.json()?.data;", "if (d?.accessToken) pm.environment.set('accessToken', d.accessToken);", "if (d?.refreshToken) pm.environment.set('refreshToken', d.refreshToken);"] }}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/auth/refresh", "host": ["{{baseUrl}}"], "path": ["auth", "refresh"] }
+          }
+        },
+        { "name": "POST /auth/logout", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/auth/logout", "host": ["{{baseUrl}}"], "path": ["auth", "logout"] } } },
+        { "name": "GET /auth/me", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/auth/me", "host": ["{{baseUrl}}"], "path": ["auth", "me"] } } }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        { "name": "GET /users", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/users?role=student&page=1&limit=20", "host": ["{{baseUrl}}"], "path": ["users"], "query": [{"key":"role","value":"student"},{"key":"page","value":"1"},{"key":"limit","value":"20"}] } } },
+        { "name": "GET /users/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["users", "{{userId}}"] } } },
+        { "name": "PATCH /users/me", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"bio\": \"Future Ethiopian software engineer\",\n  \"phone\": \"+251900000000\"\n}" }, "url": { "raw": "{{baseUrl}}/users/me", "host": ["{{baseUrl}}"], "path": ["users", "me"] } } },
+        { "name": "POST /users/me/enroll/:trackId", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/users/me/enroll/{{trackId}}", "host": ["{{baseUrl}}"], "path": ["users", "me", "enroll", "{{trackId}}"] } } }
+      ]
+    },
+    {
+      "name": "Tracks",
+      "item": [
+        {
+          "name": "POST /tracks",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.track?._id;", "if (id) pm.environment.set('trackId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Web Development Foundations\",\n  \"description\": \"HTML, CSS, JS for beginners\",\n  \"category\": \"beginner\",\n  \"xpReward\": 500,\n  \"estimatedWeeks\": 8\n}" }, "url": { "raw": "{{baseUrl}}/tracks", "host": ["{{baseUrl}}"], "path": ["tracks"] } }
+        },
+        { "name": "GET /tracks", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/tracks", "host": ["{{baseUrl}}"], "path": ["tracks"] } } },
+        { "name": "GET /tracks/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/tracks/{{trackId}}", "host": ["{{baseUrl}}"], "path": ["tracks", "{{trackId}}"] } } },
+        { "name": "PATCH /tracks/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"description\": \"Updated track description\"\n}" }, "url": { "raw": "{{baseUrl}}/tracks/{{trackId}}", "host": ["{{baseUrl}}"], "path": ["tracks", "{{trackId}}"] } } },
+        { "name": "DELETE /tracks/:id", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/tracks/{{trackId}}", "host": ["{{baseUrl}}"], "path": ["tracks", "{{trackId}}"] } } }
+      ]
+    },
+    {
+      "name": "Modules",
+      "item": [
+        {
+          "name": "POST /modules",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.module?._id;", "if (id) pm.environment.set('moduleId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"JavaScript Basics\",\n  \"description\": \"Variables and functions\",\n  \"track\": \"{{trackId}}\",\n  \"order\": 1\n}" }, "url": { "raw": "{{baseUrl}}/modules", "host": ["{{baseUrl}}"], "path": ["modules"] } }
+        },
+        { "name": "GET /modules", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/modules?track={{trackId}}", "host": ["{{baseUrl}}"], "path": ["modules"], "query": [{"key":"track","value":"{{trackId}}"}] } } },
+        { "name": "GET /modules/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/modules/{{moduleId}}", "host": ["{{baseUrl}}"], "path": ["modules", "{{moduleId}}"] } } },
+        { "name": "PATCH /modules/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"description\": \"Updated module description\"\n}" }, "url": { "raw": "{{baseUrl}}/modules/{{moduleId}}", "host": ["{{baseUrl}}"], "path": ["modules", "{{moduleId}}"] } } },
+        { "name": "DELETE /modules/:id", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/modules/{{moduleId}}", "host": ["{{baseUrl}}"], "path": ["modules", "{{moduleId}}"] } } }
+      ]
+    },
+    {
+      "name": "Lessons",
+      "item": [
+        {
+          "name": "POST /lessons",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.lesson?._id;", "if (id) pm.environment.set('lessonId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Variables and Data Types\",\n  \"content\": \"JS basics\",\n  \"module\": \"{{moduleId}}\",\n  \"xpReward\": 40,\n  \"durationMinutes\": 30,\n  \"order\": 1\n}" }, "url": { "raw": "{{baseUrl}}/lessons", "host": ["{{baseUrl}}"], "path": ["lessons"] } }
+        },
+        { "name": "GET /lessons", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons?module={{moduleId}}", "host": ["{{baseUrl}}"], "path": ["lessons"], "query": [{"key":"module","value":"{{moduleId}}"}] } } },
+        { "name": "GET /lessons/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}"] } } },
+        { "name": "PATCH /lessons/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"durationMinutes\": 35\n}" }, "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}"] } } },
+        { "name": "POST /lessons/:id/complete", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}/complete", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}", "complete"] } } },
+        { "name": "DELETE /lessons/:id", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/lessons/{{lessonId}}", "host": ["{{baseUrl}}"], "path": ["lessons", "{{lessonId}}"] } } }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "POST /projects",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.project?._id;", "if (id) pm.environment.set('projectId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Build a Portfolio\",\n  \"description\": \"Create personal portfolio site\",\n  \"track\": \"{{trackId}}\",\n  \"difficulty\": \"easy\",\n  \"xpReward\": 250\n}" }, "url": { "raw": "{{baseUrl}}/projects", "host": ["{{baseUrl}}"], "path": ["projects"] } }
+        },
+        { "name": "GET /projects", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/projects?track={{trackId}}", "host": ["{{baseUrl}}"], "path": ["projects"], "query": [{"key":"track","value":"{{trackId}}"}] } } },
+        { "name": "GET /projects/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/projects/{{projectId}}", "host": ["{{baseUrl}}"], "path": ["projects", "{{projectId}}"] } } },
+        { "name": "PATCH /projects/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"difficulty\": \"medium\"\n}" }, "url": { "raw": "{{baseUrl}}/projects/{{projectId}}", "host": ["{{baseUrl}}"], "path": ["projects", "{{projectId}}"] } } },
+        { "name": "DELETE /projects/:id", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/projects/{{projectId}}", "host": ["{{baseUrl}}"], "path": ["projects", "{{projectId}}"] } } }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "item": [
+        {
+          "name": "POST /submissions",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.submission?._id;", "if (id) pm.environment.set('submissionId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"project\": \"{{projectId}}\",\n  \"githubLink\": \"https://github.com/example/student-project\",\n  \"deployedUrl\": \"https://student-project.vercel.app\"\n}" }, "url": { "raw": "{{baseUrl}}/submissions", "host": ["{{baseUrl}}"], "path": ["submissions"] } }
+        },
+        { "name": "GET /submissions/mine", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/submissions/mine", "host": ["{{baseUrl}}"], "path": ["submissions", "mine"] } } },
+        { "name": "GET /submissions", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/submissions", "host": ["{{baseUrl}}"], "path": ["submissions"] } } },
+        { "name": "PATCH /submissions/:id/review", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"approved\",\n  \"feedback\": \"Great project, clean work!\",\n  \"grade\": 95\n}" }, "url": { "raw": "{{baseUrl}}/submissions/{{submissionId}}/review", "host": ["{{baseUrl}}"], "path": ["submissions", "{{submissionId}}", "review"] } } }
+      ]
+    },
+    {
+      "name": "XP",
+      "item": [
+        { "name": "GET /xp/me/history", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/xp/me/history", "host": ["{{baseUrl}}"], "path": ["xp", "me", "history"] } } },
+        { "name": "GET /xp/me/summary", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/xp/me/summary", "host": ["{{baseUrl}}"], "path": ["xp", "me", "summary"] } } },
+        { "name": "POST /xp/grant", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"amount\": 20,\n  \"reason\": \"Community support\",\n  \"sourceType\": \"manual\"\n}" }, "url": { "raw": "{{baseUrl}}/xp/grant", "host": ["{{baseUrl}}"], "path": ["xp", "grant"] } } }
+      ]
+    },
+    {
+      "name": "Sessions",
+      "item": [
+        {
+          "name": "POST /sessions",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.session?._id;", "if (id) pm.environment.set('sessionId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"Mentor Q&A Session\",\n  \"scheduledAt\": \"2026-04-10T10:00:00.000Z\",\n  \"durationMinutes\": 60,\n  \"meetingLink\": \"https://meet.google.com/example\",\n  \"xpPerAttendee\": 80\n}" }, "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] } }
+        },
+        { "name": "GET /sessions", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] } } },
+        { "name": "PATCH /sessions/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"status\": \"live\"\n}" }, "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}"] } } },
+        { "name": "POST /sessions/:id/join", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/join", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "join"] } } },
+        { "name": "POST /sessions/:id/leave", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/leave", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "leave"] } } },
+        { "name": "POST /sessions/:id/end", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/sessions/{{sessionId}}/end", "host": ["{{baseUrl}}"], "path": ["sessions", "{{sessionId}}", "end"] } } }
+      ]
+    },
+    {
+      "name": "Peer Groups",
+      "item": [
+        {
+          "name": "POST /peer-groups",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.group?._id;", "if (id) pm.environment.set('groupId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Addis Coders Circle\",\n  \"track\": \"{{trackId}}\"\n}" }, "url": { "raw": "{{baseUrl}}/peer-groups", "host": ["{{baseUrl}}"], "path": ["peer-groups"] } }
+        },
+        { "name": "GET /peer-groups", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/peer-groups", "host": ["{{baseUrl}}"], "path": ["peer-groups"] } } },
+        { "name": "POST /peer-groups/:id/join", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/peer-groups/{{groupId}}/join", "host": ["{{baseUrl}}"], "path": ["peer-groups", "{{groupId}}", "join"] } } },
+        { "name": "POST /peer-groups/:id/leave", "request": { "method": "POST", "url": { "raw": "{{baseUrl}}/peer-groups/{{groupId}}/leave", "host": ["{{baseUrl}}"], "path": ["peer-groups", "{{groupId}}", "leave"] } } },
+        { "name": "POST /peer-groups/:id/promote", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"newLeaderId\": \"{{userId}}\"\n}" }, "url": { "raw": "{{baseUrl}}/peer-groups/{{groupId}}/promote", "host": ["{{baseUrl}}"], "path": ["peer-groups", "{{groupId}}", "promote"] } } }
+      ]
+    },
+    {
+      "name": "Leaderboard",
+      "auth": { "type": "noauth" },
+      "item": [
+        { "name": "GET /leaderboard/students", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/leaderboard/students", "host": ["{{baseUrl}}"], "path": ["leaderboard", "students"] } } },
+        { "name": "GET /leaderboard/mentors", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/leaderboard/mentors", "host": ["{{baseUrl}}"], "path": ["leaderboard", "mentors"] } } },
+        { "name": "GET /leaderboard/peer-groups", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/leaderboard/peer-groups", "host": ["{{baseUrl}}"], "path": ["leaderboard", "peer-groups"] } } }
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "POST /resources",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.resource?._id;", "if (id) pm.environment.set('resourceId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"title\": \"JS Cheatsheet\",\n  \"description\": \"Quick JS reference\",\n  \"fileUrl\": \"https://example.com/js-cheatsheet.pdf\",\n  \"minLevelRequired\": 1,\n  \"tags\": [\"javascript\", \"beginner\"]\n}" }, "url": { "raw": "{{baseUrl}}/resources", "host": ["{{baseUrl}}"], "path": ["resources"] } }
+        },
+        { "name": "GET /resources", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/resources", "host": ["{{baseUrl}}"], "path": ["resources"] } } },
+        { "name": "GET /resources/:id", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/resources/{{resourceId}}", "host": ["{{baseUrl}}"], "path": ["resources", "{{resourceId}}"] } } },
+        { "name": "PATCH /resources/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"description\": \"Updated guide\"\n}" }, "url": { "raw": "{{baseUrl}}/resources/{{resourceId}}", "host": ["{{baseUrl}}"], "path": ["resources", "{{resourceId}}"] } } },
+        { "name": "DELETE /resources/:id", "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/resources/{{resourceId}}", "host": ["{{baseUrl}}"], "path": ["resources", "{{resourceId}}"] } } }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "POST /notifications",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.notification?._id;", "if (id) pm.environment.set('notificationId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"recipient\": \"{{userId}}\",\n  \"type\": \"system\",\n  \"message\": \"Welcome to Ethio Tech Platform!\"\n}" }, "url": { "raw": "{{baseUrl}}/notifications", "host": ["{{baseUrl}}"], "path": ["notifications"] } }
+        },
+        { "name": "GET /notifications/me", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/notifications/me", "host": ["{{baseUrl}}"], "path": ["notifications", "me"] } } },
+        { "name": "PATCH /notifications/:id/read", "request": { "method": "PATCH", "url": { "raw": "{{baseUrl}}/notifications/{{notificationId}}/read", "host": ["{{baseUrl}}"], "path": ["notifications", "{{notificationId}}", "read"] } } }
+      ]
+    },
+    {
+      "name": "Hubs",
+      "item": [
+        {
+          "name": "POST /hubs",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.hub?._id;", "if (id) pm.environment.set('hubId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"city\": \"Addis Ababa\",\n  \"address\": \"Bole\",\n  \"capacity\": 30,\n  \"computersAvailable\": 20\n}" }, "url": { "raw": "{{baseUrl}}/hubs", "host": ["{{baseUrl}}"], "path": ["hubs"] } }
+        },
+        { "name": "GET /hubs", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/hubs", "host": ["{{baseUrl}}"], "path": ["hubs"] } } },
+        { "name": "PATCH /hubs/:id", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"capacity\": 40\n}" }, "url": { "raw": "{{baseUrl}}/hubs/{{hubId}}", "host": ["{{baseUrl}}"], "path": ["hubs", "{{hubId}}"] } } },
+        { "name": "POST /hubs/attendance", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"hubId\": \"{{hubId}}\",\n  \"studentId\": \"{{studentId}}\",\n  \"date\": \"2026-03-23T09:00:00.000Z\"\n}" }, "url": { "raw": "{{baseUrl}}/hubs/attendance", "host": ["{{baseUrl}}"], "path": ["hubs", "attendance"] } } },
+        { "name": "GET /hubs/attendance/list", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/hubs/attendance/list?hubId={{hubId}}", "host": ["{{baseUrl}}"], "path": ["hubs", "attendance", "list"], "query": [{"key":"hubId","value":"{{hubId}}"}] } } }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        { "name": "GET /dashboard/student", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/dashboard/student", "host": ["{{baseUrl}}"], "path": ["dashboard", "student"] } } },
+        { "name": "GET /dashboard/mentor", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/dashboard/mentor", "host": ["{{baseUrl}}"], "path": ["dashboard", "mentor"] } } }
+      ]
+    },
+    {
+      "name": "Badges",
+      "item": [
+        {
+          "name": "POST /badges",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["const id = pm.response.json()?.data?.badge?._id;", "if (id) pm.environment.set('badgeId', id);"] }}],
+          "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Team Player\",\n  \"description\": \"Great collaboration\",\n  \"xpBonus\": 30,\n  \"category\": \"community\"\n}" }, "url": { "raw": "{{baseUrl}}/badges", "host": ["{{baseUrl}}"], "path": ["badges"] } }
+        },
+        { "name": "GET /badges", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/badges", "host": ["{{baseUrl}}"], "path": ["badges"] } } },
+        { "name": "POST /badges/assign", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"userId\": \"{{userId}}\",\n  \"badgeId\": \"{{badgeId}}\"\n}" }, "url": { "raw": "{{baseUrl}}/badges/assign", "host": ["{{baseUrl}}"], "path": ["badges", "assign"] } } }
+      ]
+    },
+    {
+      "name": "Certificates",
+      "item": [
+        { "name": "POST /certificates", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"student\": \"{{studentId}}\",\n  \"track\": \"{{trackId}}\",\n  \"certificateUrl\": \"https://example.com/certificate.pdf\"\n}" }, "url": { "raw": "{{baseUrl}}/certificates", "host": ["{{baseUrl}}"], "path": ["certificates"] } } },
+        { "name": "GET /certificates", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/certificates?student={{studentId}}", "host": ["{{baseUrl}}"], "path": ["certificates"], "query": [{"key":"student","value":"{{studentId}}"}] } } }
+      ]
+    }
+  ]
+}

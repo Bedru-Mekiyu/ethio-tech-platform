@@ -47,6 +47,29 @@ It is a **national movement** to accelerate Ethiopia’s technological future.
 - **Authentication**: JWT + bcrypt
 - **Deployment**: Vercel (frontend) + Render / Railway (backend) + MongoDB Atlas
 
+## 🧪 API Testing (Postman)
+
+The backend API collection is available in:
+
+- `postman/ethio-tech-platform.postman_collection.json`
+- `postman/ethio-tech-platform.postman_environment.json`
+
+### Quick start
+
+1. Run the backend:
+  - `npm run dev`
+2. Import both Postman files.
+3. Select environment **Ethio Tech Platform Local**.
+4. Start with requests in this order:
+  - `Auth -> POST /auth/register`
+  - `Auth -> POST /auth/login`
+  - `Tracks -> POST /tracks`
+  - `Modules -> POST /modules`
+  - `Lessons -> POST /lessons`
+  - `Projects -> POST /projects`
+
+Collection tests automatically save key variables like `accessToken`, `refreshToken`, `trackId`, `moduleId`, `lessonId`, and `projectId`.
+
 ## 📅 Current Phase
 
 **Phase 0 — Vision & Prototype** (active now)  
