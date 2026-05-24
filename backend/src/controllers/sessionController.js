@@ -47,6 +47,24 @@ export const getSessions = asyncHandler(async (req, res) => {
   sendResponse(res, 200, "Sessions fetched", { sessions });
 });
 
+export const getSessionById = asyncHandler(async (req, res) => {
+  const session = await Session.findById(req.params.id)
+    .populate("mentor", "fullName avatar role mentorScore totalSessions")
+    .populate("participants", "fullName avatar role level");
+
+  if (!session) throw new ApiError(404, "Session not found");
+
+  const isMentor = String(session.mentor?._id ?? session.mentor) === String(req.user._id);
+  const isParticipant = session.participants.some((participant) => String(participant._id) === String(req.user._id));
+  const isAdmin = req.user.role === "admin";
+
+  if (!isMentor && !isParticipant && !isAdmin) {
+    throw new ApiError(403, "Only mentor, participants, or admin can access session details");
+  }
+
+  sendResponse(res, 200, "Session fetched", { session });
+});
+
 export const updateSession = asyncHandler(async (req, res) => {
   const session = await Session.findById(req.params.id);
   if (!session) throw new ApiError(404, "Session not found");

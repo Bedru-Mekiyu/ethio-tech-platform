@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createSession,
   endSession,
+  getSessionById,
   getSessionFeedbackSummary,
   getLiveSessionAccess,
   getSessions,
@@ -27,5 +28,6 @@ router.get("/:id/live-access", protect, authorize("student", "mentor", "admin"),
 router.post("/:id/end", protect, authorize("mentor", "admin"), validateRequest({ params: commonSchemas.idParam }), endSession);
 router.post("/:id/feedback", protect, authorize("student"), validateRequest({ params: commonSchemas.idParam, body: sessionSchemas.feedback }), submitSessionFeedback);
 router.get("/:id/feedback-summary", protect, authorize("mentor", "admin"), validateRequest({ params: commonSchemas.idParam }), getSessionFeedbackSummary);
+router.get("/:id", protect, validateRequest({ params: commonSchemas.idParam }), getSessionById);
 
 export default router;
