@@ -1,24 +1,21 @@
 {
   "name": "ethio-tech-platform",
   "version": "1.0.0",
-  "type": "module",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "seed": "node scripts/seed.js"
-  },
-  "dependencies": {
-    "bcryptjs": "^3.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "express-rate-limit": "^7.5.0",
-    "helmet": "^8.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.0",
-    "zod": "^4.3.6"
+    "dev": "concurrently \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "seed": "npm run seed -w backend",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "lint": "npm run lint -w frontend && npm run lint -w backend"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "concurrently": "^9.1.2"
   }
 }
