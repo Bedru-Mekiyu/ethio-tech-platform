@@ -8,16 +8,8 @@ const toCompactCount = (value) => {
   return String(value);
 };
 
-export const getMarketingHomeData = async () => {
-  const [
-    activeLearners,
-    mentorNetwork,
-    trackCount,
-    submissionSummary,
-    featuredTracks,
-    featuredMentors,
-    featuredLearners,
-  ] = await Promise.all([
+const getMarketingMetrics = async () => {
+  const [activeLearners, mentorNetwork, trackCount, submissionSummary] = await Promise.all([
     User.countDocuments({ role: "student" }),
     User.countDocuments({ role: "mentor" }),
     Track.countDocuments({ isActive: true }),
@@ -34,6 +26,29 @@ export const getMarketingHomeData = async () => {
         },
       },
     ]),
+  ]);
+
+  const submissionStats = submissionSummary[0] || { total: 0, approved: 0 };
+  const approvalRate = submissionStats.total
+    ? Math.round((submissionStats.approved / submissionStats.total) * 100)
+    : 0;
+
+  return {
+    activeLearners,
+    mentorNetwork,
+    trackCount,
+    approvalRate,
+    compact: {
+      activeLearners: toCompactCount(activeLearners),
+      mentorNetwork: toCompactCount(mentorNetwork),
+      trackCount: toCompactCount(trackCount),
+    },
+  };
+};
+
+export const getMarketingHomeData = async () => {
+  const [metrics, featuredTracks, featuredMentors, featuredLearners] = await Promise.all([
+    getMarketingMetrics(),
     Track.find({ isActive: true })
       .sort({ xpReward: -1, createdAt: 1 })
       .limit(3)
@@ -52,20 +67,10 @@ export const getMarketingHomeData = async () => {
       .lean(),
   ]);
 
-  const submissionStats = submissionSummary[0] || { total: 0, approved: 0 };
-  const approvalRate = submissionStats.total
-    ? Math.round((submissionStats.approved / submissionStats.total) * 100)
-    : 0;
-
   return {
-    stats: {
-      activeLearners,
-      mentorNetwork,
-      trackCount,
-      approvalRate,
-    },
+    stats: metrics,
     hero: {
-      activeLearners,
+      activeLearners: metrics.activeLearners,
       topLearnerXp: featuredLearners[0]?.xp ?? 0,
       topMentorScore: featuredMentors[0]?.mentorScore ?? 0,
       topMentorName: featuredMentors[0]?.fullName ?? "",
@@ -96,9 +101,73 @@ export const getMarketingHomeData = async () => {
       gradeLevel: learner.gradeLevel,
     })),
     compact: {
-      activeLearners: toCompactCount(activeLearners),
-      mentorNetwork: toCompactCount(mentorNetwork),
-      trackCount: toCompactCount(trackCount),
+      ...metrics.compact,
+    },
+  };
+};
+
+export const getMarketingAboutData = async () => {
+  const metrics = await getMarketingMetrics();
+
+  return {
+    stats: metrics,
+    hero: {
+      eyebrow: "About EthioTech",
+      title: "Empowering the Next Generation of Ethiopian Tech Leaders",
+      description:
+        "We are building a national learning network that blends practical engineering, mentor support, and immersive digital classrooms into one scalable ecosystem.",
+      highlights: ["Real projects", "Mentor guided", "Built for mobile"],
+    },
+    mission: {
+      title: "Our Mission",
+      description:
+        "Open access to practical, future-ready technology education so learners can build confidence, ship real work, and grow with support from a trusted community.",
+    },
+    vision: {
+      title: "Our Vision",
+      description:
+        "A connected Ethiopia where every motivated learner can access world-class digital education, mentorship, and a clear path into the technology economy.",
+    },
+    bridge: {
+      eyebrow: "The problem",
+      title: "Bridging the Tech Education Gap",
+      description:
+        "Many learners still encounter theory-heavy instruction, limited mentorship, and little access to real-world projects. EthioTech closes that gap with structured pathways, live support, and hands-on practice.",
+      bullets: [
+        "Project-based learning that proves skill through delivery",
+        "Live mentor support for feedback, guidance, and accountability",
+        "Mobile-friendly experiences for low-end devices and unstable networks",
+      ],
+    },
+    roadmap: [
+      {
+        year: "2022",
+        title: "The Genesis",
+        description: "EthioTech began as a response to the practical skills gap in digital education.",
+      },
+      {
+        year: "2023",
+        title: "Platform Launch",
+        description: "The first learning tracks, mentors, and classroom workflows came online.",
+      },
+      {
+        year: "2024",
+        title: "Immersive Growth",
+        description: "Gamified learning, badges, and live collaboration made progression more visible.",
+      },
+      {
+        year: "2025",
+        title: "Scaling Nationwide",
+        description: "Partnerships and hub-based access extended the platform to more learners.",
+      },
+    ],
+    cta: {
+      title: "Ready to shape the future?",
+      description:
+        "Whether you want to learn, mentor, or help scale the ecosystem, there is a clear way to contribute.",
+      primary: { to: "/register?role=student", label: "Join as a Student" },
+      secondary: { to: "/register?role=mentor", label: "Become a Mentor" },
+      tertiary: { to: "/how-it-works", label: "Explore the learning flow" },
     },
   };
 };
