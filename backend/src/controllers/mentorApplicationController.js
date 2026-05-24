@@ -29,7 +29,7 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
       admins.map((admin) => ({
         recipient: admin._id,
         type: "system",
-        message: `Mentor application submitted by ${payload.fullName} (${payload.currentCompany || payload.currentRole})`,
+        message: `Mentor application submitted by ${payload.fullName} (${payload.currentCompany || payload.currentRole || "Not provided"})`,
         link: "/admin/moderation",
       }))
     );

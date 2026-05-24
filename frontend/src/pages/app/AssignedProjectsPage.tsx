@@ -44,6 +44,9 @@ function ProjectCard({
       : project.category === "feedback"
         ? "Read feedback"
         : "Submit work";
+  const actionMode =
+    project.category === "completed" ? "view" : project.category === "feedback" ? "feedback" : "submit";
+  const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
     <Card className="flex h-full flex-col gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
@@ -89,7 +92,7 @@ function ProjectCard({
       ) : null}
 
       <div className="mt-auto flex flex-wrap gap-3">
-        <Link to="/app/projects/submit">
+        <Link to={actionRoute}>
           <Button size="sm">{actionLabel}</Button>
         </Link>
         <Link to={project.trackId ? `/app/tracks/${project.trackId}` : "/app/tracks"}>

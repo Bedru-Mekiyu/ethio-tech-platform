@@ -252,8 +252,8 @@ export function AchievementsPage() {
             <h3 className="mt-3 text-xl font-semibold text-white">Recent wins</h3>
             <div className="mt-4 space-y-3">
               {recentBadges.length ? (
-                recentBadges.slice(0, 4).map((badge) => (
-                  <div key={badge._id ?? badge.name} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+                recentBadges.slice(0, 4).map((badge, index) => (
+                  <div key={badge._id ?? `${badge.name}-${index}`} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
                     <p className="text-sm font-medium text-white">{badge.name}</p>
                     <p className="mt-1 text-xs text-[var(--text-secondary)]">{badge.category ?? "achievement"}</p>
                   </div>

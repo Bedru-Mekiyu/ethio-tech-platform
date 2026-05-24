@@ -188,8 +188,8 @@ export function MentorSessionsPage() {
                     <>
                       <p className="text-sm font-semibold text-white">{day.getDate()}</p>
                       <div className="mt-2 space-y-1">
-                        {sessionsForDay.slice(0, 2).map((session) => (
-                          <div key={session._id ?? session.title} className="rounded-lg bg-secondary/15 px-2 py-1 text-[10px] text-secondary">
+                        {sessionsForDay.slice(0, 2).map((session, index) => (
+                          <div key={session._id ?? `${session.title}-${index}`} className="rounded-lg bg-secondary/15 px-2 py-1 text-[10px] text-secondary">
                             {session.title}
                           </div>
                         ))}
@@ -218,10 +218,10 @@ export function MentorSessionsPage() {
 
           <div className="mt-5 space-y-3">
             {filtered.slice(0, 5).length ? (
-              filtered.slice(0, 5).map((session) => {
+              filtered.slice(0, 5).map((session, index) => {
                 const participantCount = Array.isArray(session.participants) ? session.participants.length : 0;
                 return (
-                  <div key={session._id ?? session.title} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
+                  <div key={session._id ?? `${session.title}-${index}`} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
                         <p className="font-semibold text-white">{session.title}</p>

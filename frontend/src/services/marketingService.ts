@@ -171,7 +171,7 @@ export interface MentorApplicationPayload {
   whyMentor: string;
   linkedin?: string;
   portfolio?: string;
-  consent: true;
+  consent: boolean;
 }
 
 export async function fetchMarketingHome() {

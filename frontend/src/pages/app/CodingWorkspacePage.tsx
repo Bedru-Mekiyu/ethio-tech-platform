@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   BookOpen,
@@ -56,6 +56,7 @@ function buildStarterSnippet(lesson?: LessonDetail | null, track?: TrackSummary 
 }
 
 export function CodingWorkspacePage() {
+  const navigate = useNavigate();
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
@@ -110,7 +111,7 @@ export function CodingWorkspacePage() {
         description="Enroll in a learning track to unlock the guided coding workspace."
         actionLabel="Browse tracks"
         onAction={() => {
-          window.location.assign("/app/tracks");
+          navigate("/app/tracks");
         }}
       />
     );

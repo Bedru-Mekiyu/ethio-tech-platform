@@ -241,7 +241,7 @@ export function TracksPage() {
     const filtered = enriched.filter((track) => {
       if (filter === "completed") return track.progress >= 100;
       if (filter === "in-progress") return track.progress > 0 && track.progress < 100;
-      if (filter === "not-started") return !track.enrolled || track.progress === 0;
+      if (filter === "not-started") return !track.enrolled;
       return true;
     });
 

@@ -103,11 +103,7 @@ export function LoginPage() {
           {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
         </div>
 
-        <div className="flex items-center justify-between gap-3 text-sm">
-          <label className="inline-flex items-center gap-2 text-[var(--text-secondary)]">
-            <input type="checkbox" className="h-4 w-4 rounded border-[var(--border)] bg-transparent text-primary focus:ring-primary" />
-            Keep me signed in
-          </label>
+        <div className="flex items-center justify-end gap-3 text-sm">
           <Link to="/contact" className="text-primary hover:underline">
             Need help?
           </Link>

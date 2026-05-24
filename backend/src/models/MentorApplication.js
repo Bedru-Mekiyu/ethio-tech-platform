@@ -9,16 +9,38 @@ const mentorApplicationSchema = new Schema(
     currentRole: { type: String, required: true, trim: true },
     currentCompany: { type: String, trim: true },
     location: { type: String, trim: true },
-    yearsExperience: { type: Number, min: 0 },
-    expertise: [{ type: String, trim: true }],
+    yearsExperience: { type: Number, min: 0, max: 60 },
+    expertise: {
+      type: [{ type: String, trim: true }],
+      validate: [
+        {
+          validator: (value) => Array.isArray(value) && value.length >= 2,
+          message: "Expertise must include at least 2 items",
+        },
+        {
+          validator: (value) =>
+            Array.isArray(value) &&
+            value.every((item) => typeof item === "string" && item.trim().length >= 2),
+          message: "Each expertise item must be at least 2 characters",
+        },
+      ],
+    },
     availability: {
       type: String,
       enum: ["weeknights", "weekends", "flexible", "ad-hoc"],
     },
-    mentoringStyle: [{
-      type: String,
-      enum: ["live-sessions", "project-reviews", "office-hours", "cohort-support"],
-    }],
+    mentoringStyle: {
+      type: [
+        {
+          type: String,
+          enum: ["live-sessions", "project-reviews", "office-hours", "cohort-support"],
+        },
+      ],
+      validate: {
+        validator: (value) => Array.isArray(value) && value.length >= 1,
+        message: "Mentoring style must include at least 1 option",
+      },
+    },
     whyMentor: { type: String, required: true, trim: true },
     linkedin: { type: String, trim: true },
     portfolio: { type: String, trim: true },

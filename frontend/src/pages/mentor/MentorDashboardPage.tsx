@@ -137,9 +137,9 @@ export function MentorDashboardPage() {
           </div>
 
           <div className="mt-5 space-y-3">
-            {upcomingSessions.slice(0, 3).map((session) => (
+            {upcomingSessions.slice(0, 3).map((session, index) => (
               <div
-                key={session._id ?? session.title}
+                key={session._id ?? `${session.title}-${index}`}
                 className="flex flex-col gap-4 rounded-[22px] border border-[var(--border)] bg-white/5 p-4 md:flex-row md:items-center md:justify-between"
               >
                 <div className="min-w-0">

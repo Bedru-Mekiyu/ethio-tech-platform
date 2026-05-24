@@ -147,6 +147,15 @@ export function MentorReviewPage() {
     );
   }
 
+  if (!filtered.length) {
+    return (
+      <EmptyState
+        title="No submissions in this filter"
+        description="Try another status filter to review available submissions."
+      />
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">

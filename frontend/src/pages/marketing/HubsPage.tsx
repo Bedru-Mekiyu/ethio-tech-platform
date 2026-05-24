@@ -119,9 +119,12 @@ function HubCard({ hub }: { hub: MarketingHub }) {
 }
 
 function HubMarker({ hub, index }: { hub: MarketingHub; index: number }) {
+  const fallbackCols = 5;
+  const fallbackRow = Math.floor(index / fallbackCols);
+  const fallbackCol = index % fallbackCols;
   const position = cityPositions[hub.city] ?? {
-    top: `${20 + (index % 5) * 14}%`,
-    left: `${22 + (index % 4) * 18}%`,
+    top: `${20 + fallbackRow * 10 + (fallbackCol % 2) * 2}%`,
+    left: `${22 + fallbackCol * 14 + (fallbackRow % 2) * 3}%`,
   };
   return (
     <div

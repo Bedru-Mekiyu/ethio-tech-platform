@@ -281,9 +281,9 @@ export function StudentDashboardPage() {
             <Skeleton className="h-40 w-full rounded-2xl" />
           ) : upcomingSessions.length ? (
             <div className="space-y-3">
-              {upcomingSessions.slice(0, 3).map((session) => (
+              {upcomingSessions.slice(0, 3).map((session, index) => (
                 <div
-                  key={session._id ?? session.title}
+                  key={session._id ?? `${session.title}-${index}`}
                   className="flex flex-col gap-4 rounded-2xl border border-[var(--border)] bg-white/5 p-4 md:flex-row md:items-center md:justify-between"
                 >
                   <div className="min-w-0">
@@ -335,12 +335,12 @@ export function StudentDashboardPage() {
             <Skeleton className="h-56 w-full rounded-2xl" />
           ) : recentBadges.length ? (
             <div className="grid gap-3">
-              {recentBadges.slice(0, 3).map((badge) => {
+              {recentBadges.slice(0, 3).map((badge, index) => {
                 const meta = getBadgeMeta(badge.category);
                 const Icon = meta.icon;
                 return (
                   <div
-                    key={badge._id ?? badge.name}
+                    key={badge._id ?? `${badge.name}-${index}`}
                     className="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white/5 p-4"
                   >
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -373,8 +373,8 @@ export function StudentDashboardPage() {
                 Recent XP
               </div>
               <div className="space-y-2">
-                {dashboard.recentXp.slice(0, 3).map((event) => (
-                  <div key={`${event.reason}-${event.createdAt}`} className="flex items-start justify-between gap-4">
+                {dashboard.recentXp.slice(0, 3).map((event, index) => (
+                  <div key={`${event.reason}-${event.createdAt}-${index}`} className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
                       <p className="text-sm text-white">{event.reason}</p>
                       <p className="text-xs text-[var(--text-muted)]">

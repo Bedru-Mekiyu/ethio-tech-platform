@@ -108,7 +108,7 @@ export function MentorRecruitmentPage() {
     "project-reviews",
   ]);
   const [availability, setAvailability] = useState<MentorApplicationPayload["availability"]>("flexible");
-  const [consent, setConsent] = useState(true);
+  const [consent, setConsent] = useState(false);
 
   const { data, isLoading, isError, error, refetch } = useQuery<MarketingMentorPageData>({
     queryKey: ["marketing", "mentor-application", "context"],
@@ -142,6 +142,7 @@ export function MentorRecruitmentPage() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const parsedYearsExperience = Number(yearsExperience);
     const extraSkills = expertiseInput
       .split(",")
       .map((skill) => skill.trim())
@@ -153,14 +154,17 @@ export function MentorRecruitmentPage() {
       currentRole,
       currentCompany: currentCompany || undefined,
       location: location || undefined,
-      yearsExperience: yearsExperience ? Number(yearsExperience) : undefined,
+      yearsExperience:
+        yearsExperience && !Number.isNaN(parsedYearsExperience)
+          ? parsedYearsExperience
+          : undefined,
       expertise: Array.from(new Set([...expertise, ...extraSkills])),
       availability,
       mentoringStyle,
       whyMentor,
       linkedin: linkedin || undefined,
       portfolio: portfolio || undefined,
-      consent: true,
+      consent,
     });
   };
 
