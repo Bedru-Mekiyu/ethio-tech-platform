@@ -1,3 +1,11 @@
-.env 
-node_modules
-.qodo
+.env
+.env.local
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+coverage/
+.vscode/
+.idea/
+.qodo/
