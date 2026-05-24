@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import {
@@ -11,12 +12,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { fetchAdminAnalytics } from "@/services/dashboardService";
+import { fetchAdminAnalytics, type AdminAnalyticsData } from "@/services/dashboardService";
 import { StatCard } from "@/components/composites/StatCard";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Activity, TrendingUp, Users, Zap } from "lucide-react";
+import { Activity, AlertTriangle, MapPin, TrendingUp, Users, Zap } from "lucide-react";
 
 const xpTrend = [
   { week: "W1", xp: 12000 },
@@ -32,84 +34,118 @@ const enrollmentTrend = [
   { month: "Apr", students: 890 },
 ];
 
+function AdminSkeleton() {
+  return (
+    <div className="space-y-6">
+      <Skeleton className="h-36 rounded-[28px]" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Skeleton className="h-24 rounded-[24px]" />
+        <Skeleton className="h-24 rounded-[24px]" />
+        <Skeleton className="h-24 rounded-[24px]" />
+        <Skeleton className="h-24 rounded-[24px]" />
+      </div>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="h-72 rounded-[28px]" />
+        <Skeleton className="h-72 rounded-[28px]" />
+      </div>
+    </div>
+  );
+}
+
 export function AdminPage() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["admin", "analytics"],
     queryFn: fetchAdminAnalytics,
   });
 
-  const analytics = data as {
-    metrics?: {
-      activeLearners?: number;
-      totalStudents?: number;
-      mentorNetwork?: number;
-      xpEarned30d?: number;
-      sessionFillRate?: number;
-    };
-    topMentors?: Array<{ fullName?: string; mentorScore?: number; totalSessions?: number }>;
-    xpByTrack?: Array<{ title?: string; xpTotal?: number }>;
+  const analytics = data as AdminAnalyticsData & {
+    hubs?: Array<{ city?: string; availableSeats?: number; mentorInCharge?: { fullName?: string } }>;
   } | undefined;
 
   const metrics = analytics?.metrics;
   const trackData =
-    analytics?.xpByTrack?.map((t) => ({
-      name: (t.title ?? "Track").slice(0, 12),
-      xp: t.xpTotal ?? 0,
-    })) ?? [
-      { name: "Full-Stack", xp: 4200 },
-      { name: "AI/Data", xp: 3100 },
-      { name: "Cyber", xp: 2800 },
-      { name: "Cloud", xp: 1900 },
-    ];
+    useMemo(
+      () =>
+        analytics?.xpByTrack?.map((track) => ({
+          name: (track.title ?? "Track").slice(0, 12),
+          xp: track.xpTotal ?? 0,
+        })) ?? [
+          { name: "Full-Stack", xp: 4200 },
+          { name: "AI/Data", xp: 3100 },
+          { name: "Cyber", xp: 2800 },
+          { name: "Cloud", xp: 1900 },
+        ],
+      [analytics?.xpByTrack]
+    );
+
+  const hubs = analytics?.hubs ?? [];
+  const upcomingSessions = analytics?.upcomingSessions ?? [];
+
+  if (isLoading) return <AdminSkeleton />;
+  if (isError) {
+    return (
+      <div className="space-y-6">
+        <h1 className="text-2xl font-bold md:text-3xl">National learning health</h1>
+        <p className="text-[var(--text-secondary)]">Monitor learner growth, XP trends, and mentor network health.</p>
+        <Button variant="outline" onClick={() => refetch()}>
+          Retry
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold md:text-3xl">Platform analytics</h1>
-          <p className="mt-1 text-[var(--text-secondary)]">
-            Monitor learner growth, XP trends, and mentor network health.
-          </p>
+      <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <Badge className="mb-4">Admin dashboard</Badge>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">National Learning Health</h1>
+            <p className="mt-3 text-[var(--text-secondary)]">
+              Track platform-wide engagement, mentor coverage, hub availability, and upcoming learning activity from one console.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link to="/admin/moderation">
+              <Button variant="outline">Review queue</Button>
+            </Link>
+            <Link to="/admin/users">
+              <Button>Manage users</Button>
+            </Link>
+          </div>
         </div>
-        <Link to="/admin/users">
-          <Button variant="outline">Manage users</Button>
-        </Link>
       </div>
 
-      {isLoading ? (
-        <Skeleton className="h-32 w-full" />
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard
-            label="Active learners"
-            value={metrics?.activeLearners ?? 890}
-            trend="+12% vs last week"
-            icon={<Activity className="text-primary" size={20} />}
-          />
-          <StatCard
-            label="Total students"
-            value={metrics?.totalStudents ?? 2500}
-            icon={<Users className="text-secondary" size={20} />}
-          />
-          <StatCard
-            label="Mentor network"
-            value={metrics?.mentorNetwork ?? 120}
-            icon={<TrendingUp className="text-success" size={20} />}
-          />
-          <StatCard
-            label="XP earned (30d)"
-            value={(metrics?.xpEarned30d ?? 28400).toLocaleString()}
-            icon={<Zap className="text-warning" size={20} />}
-          />
-        </div>
-      )}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          label="Active learners"
+          value={metrics?.activeLearners ?? 0}
+          trend="+12% vs last week"
+          icon={<Activity className="text-primary" size={20} />}
+        />
+        <StatCard
+          label="Total students"
+          value={metrics?.totalStudents ?? 0}
+          icon={<Users className="text-secondary" size={20} />}
+        />
+        <StatCard
+          label="Mentor network"
+          value={metrics?.mentorNetwork ?? 0}
+          icon={<TrendingUp className="text-success" size={20} />}
+        />
+        <StatCard
+          label="XP earned (30d)"
+          value={(metrics?.xpEarned30d ?? 0).toLocaleString()}
+          icon={<Zap className="text-warning" size={20} />}
+        />
+      </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <CardHeader className="p-0">
             <CardTitle>XP growth trend</CardTitle>
           </CardHeader>
-          <div className="h-64">
+          <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={xpTrend}>
                 <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -128,11 +164,11 @@ export function AdminPage() {
           </div>
         </Card>
 
-        <Card>
-          <CardHeader>
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <CardHeader className="p-0">
             <CardTitle>Enrollment by month</CardTitle>
           </CardHeader>
-          <div className="h-64">
+          <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={enrollmentTrend}>
                 <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -152,12 +188,12 @@ export function AdminPage() {
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
+      <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <CardHeader className="p-0">
             <CardTitle>XP by track</CardTitle>
           </CardHeader>
-          <div className="h-64">
+          <div className="mt-4 h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={trackData} layout="vertical">
                 <CartesianGrid stroke="#1e293b" strokeDasharray="3 3" />
@@ -176,29 +212,63 @@ export function AdminPage() {
           </div>
         </Card>
 
-        <Card>
-          <CardHeader>
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <CardHeader className="p-0">
             <CardTitle>Top mentors</CardTitle>
           </CardHeader>
-          <div className="space-y-3">
-            {(analytics?.topMentors ?? [
-              { fullName: "Elias M.", mentorScore: 4.9, totalSessions: 48 },
-              { fullName: "Betelihem A.", mentorScore: 4.8, totalSessions: 36 },
-              { fullName: "Yonas D.", mentorScore: 4.7, totalSessions: 29 },
-            ]).map((mentor, i) => (
-              <div
-                key={mentor.fullName ?? i}
-                className="flex items-center justify-between rounded-lg border border-[var(--border)] p-3"
-              >
+          <div className="mt-4 space-y-3">
+            {(analytics?.topMentors ?? []).slice(0, 3).map((mentor, index) => (
+              <div key={mentor.fullName ?? index} className="flex items-center justify-between rounded-[22px] border border-[var(--border)] bg-white/5 p-3">
                 <div>
-                  <p className="font-medium">{mentor.fullName}</p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    {mentor.totalSessions ?? 0} sessions
-                  </p>
+                  <p className="font-medium text-white">{mentor.fullName}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{mentor.totalSessions ?? 0} sessions</p>
                 </div>
-                <span className="text-sm font-semibold text-primary">
-                  Score {Math.round(mentor.mentorScore ?? 0)}
-                </span>
+                <span className="text-sm font-semibold text-primary">Score {Math.round(mentor.mentorScore ?? 0)}</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6 lg:col-span-2">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <Badge variant="purple">Learning hubs</Badge>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Hub availability</h2>
+            </div>
+            <Badge variant="success">{hubs.length} active</Badge>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {hubs.slice(0, 6).map((hub, index) => (
+              <div key={hub.city ?? index} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
+                <div className="flex items-center gap-2">
+                  <MapPin size={14} className="text-primary" />
+                  <p className="font-medium text-white">{hub.city ?? "Hub"}</p>
+                </div>
+                <p className="mt-2 text-xs text-[var(--text-muted)]">{hub.mentorInCharge?.fullName ?? "Mentor pending"}</p>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">{hub.availableSeats ?? 0} seats open</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <div className="flex items-center gap-2 text-[var(--text-muted)]">
+            <AlertTriangle size={14} />
+            <span className="text-[10px] uppercase tracking-[0.22em]">Operational view</span>
+          </div>
+          <h2 className="mt-3 text-2xl font-semibold text-white">Upcoming sessions</h2>
+          <div className="mt-4 space-y-3">
+            {upcomingSessions.slice(0, 4).map((session, index) => (
+              <div key={session.title ?? index} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
+                <p className="font-medium text-white">{session.title}</p>
+                <p className="mt-1 text-xs text-[var(--text-muted)]">
+                  {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
+                </p>
+                <Badge variant={session.status === "live" ? "success" : "purple"} className="mt-2">
+                  {session.status ?? "scheduled"}
+                </Badge>
               </div>
             ))}
           </div>

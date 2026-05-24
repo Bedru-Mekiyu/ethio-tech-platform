@@ -73,6 +73,9 @@ const MentorDashboardPage = lazy(() =>
 const MentorSessionsPage = lazy(() =>
   import("@/pages/mentor/MentorSessionsPage").then((module) => ({ default: module.MentorSessionsPage }))
 );
+const MentorReviewPage = lazy(() =>
+  import("@/pages/mentor/MentorReviewPage").then((module) => ({ default: module.MentorReviewPage }))
+);
 const ClassroomPage = lazy(() =>
   import("@/features/classroom/ClassroomPage").then((module) => ({ default: module.ClassroomPage }))
 );
@@ -213,7 +216,7 @@ export default function App() {
             >
               <Route index element={<MentorDashboardPage />} />
               <Route path="sessions" element={<MentorSessionsPage />} />
-              <Route path="reviews" element={<ProjectSubmitPage />} />
+              <Route path="reviews" element={<MentorReviewPage />} />
               <Route path="settings" element={<SettingsPage scope="mentor" />} />
             </Route>
             <Route
