@@ -32,7 +32,7 @@ const SupportPage = lazy(() =>
   import("@/pages/marketing/InfoPages").then((module) => ({ default: module.SupportPage }))
 );
 const MentorRecruitmentPage = lazy(() =>
-  import("@/pages/marketing/InfoPages").then((module) => ({ default: module.MentorRecruitmentPage }))
+  import("@/pages/marketing/MentorRecruitmentPage").then((module) => ({ default: module.MentorRecruitmentPage }))
 );
 const SuccessStoriesPage = lazy(() =>
   import("@/pages/marketing/InfoPages").then((module) => ({ default: module.SuccessStoriesPage }))

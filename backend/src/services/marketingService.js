@@ -171,3 +171,81 @@ export const getMarketingAboutData = async () => {
     },
   };
 };
+
+const normalizeExpertise = (value = "") => value.trim().toLowerCase();
+
+export const getMarketingMentorsData = async () => {
+  const mentors = await User.find({ role: "mentor" })
+    .sort({ mentorScore: -1, totalSessions: -1, createdAt: 1 })
+    .select("fullName avatar bio currentCompany mentorScore totalSessions expertise isVerified")
+    .lean();
+
+  const totalSessions = mentors.reduce((sum, mentor) => sum + (mentor.totalSessions ?? 0), 0);
+  const averageScore = mentors.length
+    ? Math.round(mentors.reduce((sum, mentor) => sum + (mentor.mentorScore ?? 0), 0) / mentors.length)
+    : 0;
+  const verifiedCount = mentors.filter((mentor) => mentor.isVerified).length;
+
+  const expertiseCounts = new Map();
+  for (const mentor of mentors) {
+    for (const skill of mentor.expertise ?? []) {
+      const key = normalizeExpertise(skill);
+      if (!key) continue;
+      expertiseCounts.set(key, (expertiseCounts.get(key) || 0) + 1);
+    }
+  }
+
+  const topExpertise = [...expertiseCounts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, 6)
+    .map(([label, count]) => ({
+      label: label
+        .replace(/\b\w/g, (char) => char.toUpperCase())
+        .replace(/\bAi\b/g, "AI")
+        .replace(/\bUi\b/g, "UI")
+        .replace(/\bUx\b/g, "UX"),
+      count,
+    }));
+
+  const mapMentor = (mentor) => ({
+    _id: mentor._id,
+    fullName: mentor.fullName,
+    avatar: mentor.avatar,
+    bio: mentor.bio ?? "",
+    currentCompany: mentor.currentCompany ?? "",
+    mentorScore: mentor.mentorScore ?? 0,
+    totalSessions: mentor.totalSessions ?? 0,
+    expertise: mentor.expertise ?? [],
+    isVerified: Boolean(mentor.isVerified),
+  });
+
+  return {
+    stats: {
+      totalMentors: mentors.length,
+      verifiedMentors: verifiedCount,
+      totalSessions,
+      averageScore,
+    },
+    hero: {
+      eyebrow: "Global mentor network",
+      title: "Learn from the Best in Global Technology",
+      description:
+        "EthioTech connects learners with experienced mentors who blend practical engineering, career guidance, and live feedback into one supportive network.",
+      highlights: ["Verified mentors", "Live sessions", "Project reviews"],
+    },
+    featuredMentors: mentors.slice(0, 3).map(mapMentor),
+    discoverMentors: mentors.slice(3, 12).map(mapMentor),
+    filters: [
+      { label: "All mentors", value: "all", count: mentors.length },
+      ...topExpertise.map((item) => ({ label: item.label, value: item.label.toLowerCase(), count: item.count })),
+    ],
+    focusAreas: topExpertise,
+    cta: {
+      title: "Want to mentor the next generation?",
+      description:
+        "Join the mentor network, run live sessions, and help learners turn curiosity into practical skill.",
+      primary: { to: "/register?role=mentor", label: "Apply as a mentor" },
+      secondary: { to: "/contact", label: "Talk to the team" },
+    },
+  };
+};

@@ -2,11 +2,20 @@ import { api, type ApiResponse } from "./api";
 import type { AuthUser } from "@/store/authStore";
 
 export interface StudentDashboardData {
-  user?: AuthUser & { badges?: Array<{ _id?: string; name: string; category?: string }> };
+  user?: AuthUser & {
+    badges?: Array<{ _id?: string; name: string; category?: string }>;
+    enrolledTracks?: Array<{ _id: string; title: string; category?: string }>;
+  };
   recentXp?: Array<{ amount: number; reason: string; createdAt: string }>;
   upcomingSessions?: Array<{ _id?: string; title: string; scheduledAt: string; status?: string }>;
   recentSubmissions?: Array<{ project?: { title?: string }; status?: string; createdAt?: string }>;
-  progressByTrack?: Array<{ trackId?: string; title: string; overallProgressPercent: number }>;
+  progressByTrack?: Array<{
+    trackId?: string;
+    title: string;
+    overallProgressPercent: number;
+    lessons: { completed: number; total: number; progressPercent: number };
+    projects: { approved: number; total: number; progressPercent: number };
+  }>;
   leaderboardPosition?: number;
   streak?: { currentStreak?: number; longestStreak?: number; lastActiveDate?: string };
 }

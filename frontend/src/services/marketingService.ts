@@ -87,6 +87,43 @@ export interface MarketingAboutData {
   };
 }
 
+export interface MarketingMentorPageMentor {
+  _id: string;
+  fullName: string;
+  avatar?: string;
+  bio?: string;
+  currentCompany?: string;
+  mentorScore?: number;
+  totalSessions?: number;
+  expertise?: string[];
+  isVerified?: boolean;
+}
+
+export interface MarketingMentorPageData {
+  stats: {
+    totalMentors: number;
+    verifiedMentors: number;
+    totalSessions: number;
+    averageScore: number;
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    highlights: string[];
+  };
+  featuredMentors: MarketingMentorPageMentor[];
+  discoverMentors: MarketingMentorPageMentor[];
+  filters: Array<{ label: string; value: string; count: number }>;
+  focusAreas: Array<{ label: string; count: number }>;
+  cta: {
+    title: string;
+    description: string;
+    primary: { to: string; label: string };
+    secondary: { to: string; label: string };
+  };
+}
+
 export async function fetchMarketingHome() {
   const { data } = await api.get<ApiResponse<MarketingHomeData>>("/marketing/home");
   return data.data;
@@ -94,5 +131,10 @@ export async function fetchMarketingHome() {
 
 export async function fetchMarketingAbout() {
   const { data } = await api.get<ApiResponse<MarketingAboutData>>("/marketing/about");
+  return data.data;
+}
+
+export async function fetchMarketingMentors() {
+  const { data } = await api.get<ApiResponse<MarketingMentorPageData>>("/marketing/mentors");
   return data.data;
 }
