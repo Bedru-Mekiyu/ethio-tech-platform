@@ -8,6 +8,7 @@ export interface StudentDashboardData {
   recentSubmissions?: Array<{ project?: { title?: string }; status?: string; createdAt?: string }>;
   progressByTrack?: Array<{ trackId?: string; title: string; overallProgressPercent: number }>;
   leaderboardPosition?: number;
+  streak?: { currentStreak?: number; longestStreak?: number; lastActiveDate?: string };
 }
 
 export interface MentorDashboardData {

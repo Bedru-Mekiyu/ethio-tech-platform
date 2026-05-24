@@ -6,6 +6,7 @@ import Track from "../models/Track.js";
 import Project from "../models/Project.js";
 import LessonProgress from "../models/LessonProgress.js";
 import SessionFeedback from "../models/SessionFeedback.js";
+import UserStreak from "../models/UserStreak.js";
 
 const toObjectIdString = (value) => String(value);
 
@@ -67,7 +68,7 @@ export const getStudentDashboardData = async (userId) => {
     .populate("badges", "name category")
     .populate("enrolledTracks", "title category");
 
-  const [recentXp, upcomingSessions, recentSubmissions, leaderboardPosition] = await Promise.all([
+  const [recentXp, upcomingSessions, recentSubmissions, leaderboardPosition, streak] = await Promise.all([
     XPLog.find({ user: userId }).sort({ createdAt: -1 }).limit(10),
     Session.find({ participants: userId, scheduledAt: { $gte: new Date() } })
       .sort({ scheduledAt: 1 })
@@ -75,6 +76,7 @@ export const getStudentDashboardData = async (userId) => {
       .select("title scheduledAt meetingLink status _id"),
     Submission.find({ student: userId }).sort({ createdAt: -1 }).limit(5).populate("project", "title"),
     User.countDocuments({ xp: { $gt: user?.xp || 0 } }),
+    UserStreak.findOne({ user: userId }).select("currentStreak longestStreak lastActiveDate"),
   ]);
 
   const progressByTrack = await computeStudentProgressByTrack(userId, user?.enrolledTracks || []);
@@ -86,6 +88,7 @@ export const getStudentDashboardData = async (userId) => {
     recentSubmissions,
     progressByTrack,
     leaderboardPosition: leaderboardPosition + 1,
+    streak,
   };
 };
 
