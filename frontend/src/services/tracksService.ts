@@ -21,6 +21,14 @@ export interface LessonDetail {
   durationMinutes?: number;
 }
 
+export interface LeaderboardEntry {
+  _id?: string;
+  fullName: string;
+  avatar?: string;
+  xp?: number;
+  level?: number;
+}
+
 export async function fetchTracks() {
   const { data } = await api.get<
     ApiResponse<{ items: TrackSummary[] } | { tracks: TrackSummary[] }>
@@ -44,9 +52,12 @@ export async function completeLesson(lessonId: string) {
   return data.data;
 }
 
-export async function fetchLeaderboard() {
-  const { data } = await api.get<ApiResponse<{ leaderboard: unknown[] }>>("/leaderboard/students");
-  return (data.data as { leaderboard?: unknown[] }).leaderboard ?? data.data;
+export async function fetchLeaderboard(top = 10): Promise<LeaderboardEntry[]> {
+  const { data } = await api.get<ApiResponse<{ students: LeaderboardEntry[] }>>(
+    `/leaderboard/students?top=${top}`
+  );
+  const payload = data.data as { students?: LeaderboardEntry[]; leaderboard?: LeaderboardEntry[] };
+  return payload.students ?? payload.leaderboard ?? [];
 }
 
 export async function fetchBadges() {

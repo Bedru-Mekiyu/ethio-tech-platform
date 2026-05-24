@@ -6,7 +6,7 @@ import { sendResponse } from "../utils/apiResponse.js";
 export const getStudentLeaderboard = asyncHandler(async (req, res) => {
   const top = Number(req.query.top || 20);
   const students = await User.find({ role: "student" })
-    .select("fullName xp level")
+    .select("fullName avatar xp level")
     .sort({ xp: -1, level: -1, createdAt: 1 })
     .limit(top);
 
