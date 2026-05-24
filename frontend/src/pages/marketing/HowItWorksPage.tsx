@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
+import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchTracks, type TrackSummary } from "@/services/tracksService";
 
@@ -179,10 +180,29 @@ export function HowItWorksPage() {
   const totalXp = tracks.reduce((sum, track) => sum + (track.xpReward ?? 0), 0);
   const strongestTrack = [...tracks].sort((a, b) => (b.xpReward ?? 0) - (a.xpReward ?? 0))[0];
 
+  const journeyCards = [
+    {
+      title: "Beginner",
+      description: "Start with guided foundations and low-friction practice.",
+      track: featuredTracks[0],
+    },
+    {
+      title: "Intermediate",
+      description: "Grow into modules, projects, and peer review.",
+      track: featuredTracks[1] ?? featuredTracks[0],
+    },
+    {
+      title: "Advanced",
+      description: "Move into deep projects, mentorship, and specialization.",
+      track: featuredTracks[2] ?? strongestTrack,
+    },
+  ];
+  const journeyProgress = Math.min(100, Math.round((totalModules / Math.max(1, tracks.length * 3)) * 100));
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
       <motion.section
-        className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center"
+        className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-start"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
@@ -190,20 +210,20 @@ export function HowItWorksPage() {
         <div className="max-w-2xl">
           <Badge className="mb-5">Learning journey</Badge>
           <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Your Journey to <span className="glow-text">Tech Mastery</span>
+            Build your immersive <span className="glow-text">learning plan</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
-            Every track is structured to move learners from guided practice into real project delivery,
-            with support, momentum, and recognition built into every step.
+            Pick a pace, compare pathways, and move into real projects with a structure that stays calm,
+            inspiring, and easy to follow.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/register?role=student">
               <Button size="lg">Start learning</Button>
             </Link>
-            <Link to="/mentor-recruitment">
+            <Link to="/how-it-works#tracks">
               <Button variant="outline" size="lg">
-                Become a mentor
+                Explore tracks
               </Button>
             </Link>
           </div>
@@ -238,18 +258,25 @@ export function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.18),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.15),transparent_34%)] blur-2xl" />
-          <Card className="relative overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(15,22,36,0.98),rgba(5,10,19,0.98))] p-4">
-            <div className="absolute left-4 top-4 z-10 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.9)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary">
-              Guided progression
+        <div className="space-y-4">
+          <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <Badge variant="purple">Your journey so far</Badge>
+                <h2 className="mt-3 text-2xl font-semibold text-white">Track your momentum</h2>
+              </div>
+              <div className="rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 text-xs text-secondary">
+                Live
+              </div>
             </div>
-            <img
-              src={heroImage}
-              alt="EthioTech learning journey preview"
-              className="h-full min-h-[320px] w-full rounded-[22px] object-cover"
-            />
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            <div className="mt-5">
+              <div className="mb-2 flex items-center justify-between text-sm text-[var(--text-secondary)]">
+                <span>Journey completion</span>
+                <span>{journeyProgress}%</span>
+              </div>
+              <ProgressBar value={journeyProgress} className="h-2.5" />
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <Card className="border-[var(--border)] bg-white/5 p-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Lessons</p>
                 <p className="mt-2 text-2xl font-semibold text-white">{formatCompactNumber(totalLessons)}</p>
@@ -262,6 +289,38 @@ export function HowItWorksPage() {
                 <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">XP available</p>
                 <p className="mt-2 text-2xl font-semibold text-white">{formatCompactNumber(totalXp)}</p>
               </Card>
+            </div>
+          </Card>
+
+          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <Badge className="mb-3">Where are you on your tech journey?</Badge>
+                <h3 className="text-xl font-semibold text-white">Choose the pace that fits you</h3>
+              </div>
+              <Sparkles className="text-primary" size={18} />
+            </div>
+            <div className="mt-4 grid gap-3">
+              {journeyCards.map((journey) => (
+                <div
+                  key={journey.title}
+                  className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4 transition hover:border-primary/40 hover:bg-white/7"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-semibold text-white">{journey.title}</p>
+                      <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">{journey.description}</p>
+                    </div>
+                    <Badge variant="purple">{journey.track?.modules?.length ?? 0} modules</Badge>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
+                    <span>{journey.track?.title ?? "Pathway"}</span>
+                    <Link to="/register?role=student" className="text-primary hover:underline">
+                      Start here
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
           </Card>
         </div>

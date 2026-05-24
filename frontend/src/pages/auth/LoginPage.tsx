@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { ArrowRight, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { login } from "@/services/authService";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
 import { cn } from "@/lib/utils";
@@ -16,6 +18,8 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
+
+const supportPills = ["Realtime rooms", "Mentor review", "Secure tokens"] as const;
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -43,46 +47,94 @@ export function LoginPage() {
   };
 
   return (
-    <Card className="mx-auto max-w-md border-primary/20 p-8">
-      <div className="mb-6 flex rounded-lg bg-[var(--bg-elevated)] p-1">
-        {(["login", "signup"] as const).map((t) => (
-          <button
-            key={t}
-            type="button"
-            onClick={() => t === "signup" && navigate("/register")}
-            className={cn(
-              "flex-1 rounded-md py-2 text-sm capitalize",
-              tab === t && "bg-primary text-[var(--bg-base)] font-medium"
-            )}
-          >
-            {t === "login" ? "Login" : "Sign up"}
-          </button>
+    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
+          {(["login", "signup"] as const).map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => item === "signup" && navigate("/register")}
+              className={cn(
+                "rounded-full px-4 py-2 text-sm font-medium transition",
+                tab === item ? "bg-primary text-[var(--bg-base)]" : "text-[var(--text-secondary)] hover:text-white"
+              )}
+            >
+              {item === "login" ? "Login" : "Sign up"}
+            </button>
+          ))}
+        </div>
+        <Badge variant="purple">Secure access</Badge>
+      </div>
+
+      <div className="mt-6 space-y-3">
+        <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+          Welcome back to <span className="glow-text">EthioTech</span>
+        </h2>
+        <p className="max-w-md text-sm leading-6 text-[var(--text-secondary)]">
+          Pick up your immersive classroom where you left off. Your dashboard, mentors, and live sessions stay synced in one account.
+        </p>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        {supportPills.map((pill) => (
+          <div key={pill} className="rounded-2xl border border-[var(--border)] bg-white/5 px-3 py-2 text-center text-xs text-[var(--text-secondary)]">
+            {pill}
+          </div>
         ))}
       </div>
-      <h2 className="text-xl font-bold">Welcome back to EthioTech</h2>
-      <p className="mt-1 text-sm text-[var(--text-secondary)]">
-        Enter your credentials to access your learning journey.
-      </p>
+
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-        <div>
+        <div className="space-y-2">
           <Label>Email address</Label>
-          <Input type="email" placeholder="you@example.com" {...register("email")} />
-          {errors.email && <p className="mt-1 text-xs text-danger">{errors.email.message}</p>}
+          <div className="relative">
+            <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+            <Input className="pl-10" type="email" placeholder="you@example.com" autoComplete="email" {...register("email")} />
+          </div>
+          {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
         </div>
-        <div>
+
+        <div className="space-y-2">
           <Label>Password</Label>
-          <Input type="password" placeholder="••••••••" {...register("password")} />
-          {errors.password && <p className="mt-1 text-xs text-danger">{errors.password.message}</p>}
+          <div className="relative">
+            <LockKeyhole size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+            <Input className="pl-10" type="password" placeholder="••••••••" autoComplete="current-password" {...register("password")} />
+          </div>
+          {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
         </div>
-        {error && <p className="text-sm text-danger">{error}</p>}
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Signing in…" : "Continue to dashboard →"}
+
+        <div className="flex items-center justify-between gap-3 text-sm">
+          <label className="inline-flex items-center gap-2 text-[var(--text-secondary)]">
+            <input type="checkbox" className="h-4 w-4 rounded border-[var(--border)] bg-transparent text-primary focus:ring-primary" />
+            Keep me signed in
+          </label>
+          <Link to="/contact" className="text-primary hover:underline">
+            Need help?
+          </Link>
+        </div>
+
+        {error ? <p className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</p> : null}
+
+        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+          {isSubmitting ? "Signing in…" : "Continue to dashboard"}
+          <ArrowRight size={16} />
         </Button>
       </form>
+
+      <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 p-4">
+        <div className="flex items-center gap-2 text-sm font-medium text-white">
+          <ShieldCheck size={16} className="text-primary" />
+          Protected classroom access
+        </div>
+        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+          Authentication is role-aware, short-lived, and ready for mentor, student, parent, and admin sessions.
+        </p>
+      </div>
+
       <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
-        New to EthioTech?{" "}
-        <Link to="/register" className="text-primary hover:underline">
-          Create an account
+        New here?{" "}
+        <Link to="/register" className="inline-flex items-center gap-1 text-primary hover:underline">
+          Create your account <Sparkles size={14} />
         </Link>
       </p>
     </Card>
