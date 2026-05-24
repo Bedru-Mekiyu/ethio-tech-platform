@@ -8,6 +8,7 @@ import { useState } from "react";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/how-it-works", label: "Programs" },
+  { to: "/mentors", label: "Mentors" },
   { to: "/hubs", label: "Hubs" },
   { to: "/leaderboard", label: "Leaderboard" },
   { to: "/about", label: "About" },

@@ -212,6 +212,31 @@ export const hubSchemas = {
   }),
 };
 
+export const mentorApplicationSchemas = {
+  create: z.object({
+    fullName: z.string().min(2),
+    email: z.string().email(),
+    currentRole: z.string().min(2),
+    currentCompany: z.string().min(2).optional(),
+    location: z.string().min(2).optional(),
+    yearsExperience: z.coerce.number().int().min(0).max(60).optional(),
+    expertise: z.array(z.string().min(2)).min(2),
+    availability: z.enum(["weeknights", "weekends", "flexible", "ad-hoc"]).optional(),
+    mentoringStyle: z.array(z.enum(["live-sessions", "project-reviews", "office-hours", "cohort-support"])).min(1),
+    whyMentor: z.string().min(20),
+    linkedin: z.string().url().optional(),
+    portfolio: z.string().url().optional(),
+    consent: z.literal(true),
+  }),
+};
+
+export const adminSchemas = {
+  reviewMentorApplication: z.object({
+    status: z.enum(["pending", "in-review", "approved", "rejected"]),
+    reviewedNotes: z.string().min(2).max(1000).optional(),
+  }),
+};
+
 export const badgeSchemas = {
   create: z.object({
     name: z.string().min(2),

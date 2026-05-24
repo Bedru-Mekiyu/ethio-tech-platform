@@ -31,6 +31,9 @@ const ResourcesPage = lazy(() =>
 const SupportPage = lazy(() =>
   import("@/pages/marketing/InfoPages").then((module) => ({ default: module.SupportPage }))
 );
+const MentorsPage = lazy(() =>
+  import("@/pages/marketing/MentorsPage").then((module) => ({ default: module.MentorsPage }))
+);
 const MentorRecruitmentPage = lazy(() =>
   import("@/pages/marketing/MentorRecruitmentPage").then((module) => ({ default: module.MentorRecruitmentPage }))
 );
@@ -139,6 +142,7 @@ export default function App() {
               <Route index element={<HomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="how-it-works" element={<HowItWorksPage />} />
+              <Route path="mentors" element={<MentorsPage />} />
               <Route path="hubs" element={<HubsPage />} />
               <Route path="leaderboard" element={<LeaderboardPage />} />
               <Route path="faq" element={<FaqPage />} />

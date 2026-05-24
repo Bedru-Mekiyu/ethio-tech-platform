@@ -65,6 +65,27 @@ export interface AdminAnalyticsData {
   upcomingSessions?: Array<{ title?: string; scheduledAt?: string; status?: string }>;
 }
 
+export interface AdminMentorApplication {
+  _id: string;
+  fullName: string;
+  email: string;
+  currentRole: string;
+  currentCompany?: string;
+  location?: string;
+  yearsExperience?: number;
+  expertise?: string[];
+  availability?: "weeknights" | "weekends" | "flexible" | "ad-hoc";
+  mentoringStyle?: Array<"live-sessions" | "project-reviews" | "office-hours" | "cohort-support">;
+  whyMentor?: string;
+  linkedin?: string;
+  portfolio?: string;
+  status?: "pending" | "in-review" | "approved" | "rejected";
+  reviewedAt?: string;
+  reviewedNotes?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export async function fetchStudentDashboard() {
   const { data } = await api.get<ApiResponse<StudentDashboardData>>("/dashboard/student");
   return data.data;
@@ -87,5 +108,25 @@ export async function fetchAdminUsers() {
       pagination: { page: number; limit: number; total: number; totalPages: number };
     }>
   >("/users?limit=8");
+  return data.data;
+}
+
+export async function fetchAdminMentorApplications() {
+  const { data } = await api.get<ApiResponse<{ applications: AdminMentorApplication[] }>>(
+    "/admin/mentor-applications"
+  );
+  return data.data;
+}
+
+export async function reviewAdminMentorApplication(payload: {
+  id: string;
+  status: NonNullable<AdminMentorApplication["status"]>;
+  reviewedNotes?: string;
+}) {
+  const { id, ...body } = payload;
+  const { data } = await api.patch<ApiResponse<{ application: AdminMentorApplication }>>(
+    `/admin/mentor-applications/${id}`,
+    body
+  );
   return data.data;
 }

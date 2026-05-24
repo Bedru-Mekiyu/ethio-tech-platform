@@ -1,4 +1,6 @@
 import Submission from "../models/Submission.js";
+import Hub from "../models/Hub.js";
+import HubAttendance from "../models/HubAttendance.js";
 import Track from "../models/Track.js";
 import User from "../models/User.js";
 
@@ -246,6 +248,65 @@ export const getMarketingMentorsData = async () => {
         "Join the mentor network, run live sessions, and help learners turn curiosity into practical skill.",
       primary: { to: "/register?role=mentor", label: "Apply as a mentor" },
       secondary: { to: "/contact", label: "Talk to the team" },
+    },
+  };
+};
+
+export const getMarketingHubsData = async () => {
+  const [hubs, attendanceSummary] = await Promise.all([
+    Hub.find({ isActive: true })
+      .populate("mentorInCharge", "fullName avatar mentorScore")
+      .sort({ city: 1 })
+      .lean(),
+    HubAttendance.aggregate([
+      {
+        $group: {
+          _id: "$hub",
+          visits: { $sum: 1 },
+        },
+      },
+    ]),
+  ]);
+
+  const visitMap = new Map(attendanceSummary.map((item) => [String(item._id), item.visits]));
+  const totalSeats = hubs.reduce((sum, hub) => sum + (hub.capacity ?? 0), 0);
+  const availableSeats = hubs.reduce((sum, hub) => sum + (hub.computersAvailable ?? 0), 0);
+
+  return {
+    stats: {
+      hubCount: hubs.length,
+      totalSeats,
+      availableSeats,
+      activeMentors: hubs.filter((hub) => hub.mentorInCharge).length,
+    },
+    hero: {
+      eyebrow: "Community hubs",
+      title: "Nationwide Learning Hubs",
+      description:
+        "Learning spaces across Ethiopia connect students to fast internet, mentor support, and practical collaboration rooms.",
+      highlights: ["Map-based access", "Community support", "Open to learners"],
+    },
+    hubs: hubs.map((hub, index) => ({
+      _id: hub._id,
+      city: hub.city,
+      address: hub.address ?? "Address coming soon",
+      capacity: hub.capacity ?? 0,
+      computersAvailable: hub.computersAvailable ?? 0,
+      mentorInCharge: hub.mentorInCharge ? { fullName: hub.mentorInCharge.fullName, avatar: hub.mentorInCharge.avatar } : null,
+      visits: visitMap.get(String(hub._id)) ?? 0,
+      rank: index + 1,
+    })),
+    legend: [
+      { label: "Open seats", tone: "primary" },
+      { label: "Mentor supported", tone: "purple" },
+      { label: "High demand", tone: "warning" },
+    ],
+    cta: {
+      title: "Want your community to host a hub?",
+      description:
+        "Schools and partners can work with EthioTech to bring learning closer to the students who need it most.",
+      primary: { to: "/contact", label: "Talk to the team" },
+      secondary: { to: "/register", label: "Join the platform" },
     },
   };
 };

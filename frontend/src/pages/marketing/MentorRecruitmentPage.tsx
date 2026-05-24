@@ -1,177 +1,90 @@
-import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMemo, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
-  Trophy,
+  CalendarDays,
+  Clock3,
+  GraduationCap,
+  Laptop2,
+  MessageSquareQuote,
+  ShieldCheck,
+  Sparkles,
   Users,
-  Video,
   type LucideIcon,
 } from "lucide-react";
-import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { EmptyState } from "@/components/composites/EmptyState";
+import { Input, Label, Textarea } from "@/components/ui/input";
 import { QueryError } from "@/components/composites/QueryError";
-import { ProgressBar } from "@/components/ui/progress";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   fetchMarketingMentors,
+  submitMentorApplication,
   type MarketingMentorPageData,
-  type MarketingMentorPageMentor,
+  type MentorApplicationPayload,
 } from "@/services/marketingService";
-
-type MentorFilter = "all" | string;
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-function formatCompactNumber(value: number) {
-  return new Intl.NumberFormat("en", {
-    notation: "compact",
-    compactDisplay: "short",
-    maximumFractionDigits: value >= 1_000 ? 1 : 0,
-  }).format(value);
-}
+const skillOptions = [
+  "Web Development",
+  "Frontend",
+  "Backend",
+  "AI / ML",
+  "Cybersecurity",
+  "Mobile",
+  "Design Systems",
+  "DevOps",
+];
 
-function MentorSkeleton() {
+const mentoringStyles = [
+  { value: "live-sessions", label: "Live sessions" },
+  { value: "project-reviews", label: "Project reviews" },
+  { value: "office-hours", label: "Office hours" },
+  { value: "cohort-support", label: "Cohort support" },
+] as const;
+
+const availabilityOptions = [
+  { value: "weeknights", label: "Weeknights" },
+  { value: "weekends", label: "Weekends" },
+  { value: "flexible", label: "Flexible" },
+  { value: "ad-hoc", label: "Ad hoc" },
+] as const;
+
+function MentorApplySkeleton() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-      <div className="mx-auto max-w-4xl text-center">
-        <Skeleton className="mx-auto h-6 w-44 rounded-full" />
-        <Skeleton className="mx-auto mt-5 h-14 w-full max-w-4xl" />
-        <Skeleton className="mx-auto mt-4 h-5 w-full max-w-3xl" />
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Skeleton className="h-12 w-40 rounded-xl" />
-          <Skeleton className="h-12 w-40 rounded-xl" />
-        </div>
-      </div>
-      <div className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
-      </div>
-      <div className="mt-16 grid gap-6 md:grid-cols-3">
-        <Skeleton className="h-80 rounded-[28px]" />
-        <Skeleton className="h-80 rounded-[28px]" />
-        <Skeleton className="h-80 rounded-[28px]" />
-      </div>
-      <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <Skeleton className="h-60 rounded-[24px]" />
-        <Skeleton className="h-60 rounded-[24px]" />
-        <Skeleton className="h-60 rounded-[24px]" />
-        <Skeleton className="h-60 rounded-[24px]" />
+      <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+        <Card className="h-[520px] rounded-[28px]" />
+        <Card className="h-[520px] rounded-[28px]" />
       </div>
     </div>
   );
 }
 
-function MentorStatCard({
+function MetricPill({
   icon: Icon,
-  value,
   label,
-  helper,
-  tone,
+  value,
 }: {
   icon: LucideIcon;
-  value: string;
   label: string;
-  helper: string;
-  tone: "primary" | "purple" | "success" | "warning";
+  value: string;
 }) {
-  const toneClass =
-    tone === "primary"
-      ? "bg-primary/10 text-primary"
-      : tone === "purple"
-        ? "bg-secondary/10 text-secondary"
-        : tone === "success"
-          ? "bg-success/10 text-success"
-          : "bg-warning/10 text-warning";
-
   return (
-    <Card className="border-[var(--border)] bg-[var(--bg-card)]/85 p-5 text-center">
-      <div className={`mx-auto flex h-11 w-11 items-center justify-center rounded-2xl ${toneClass}`}>
+    <Card className="flex items-center gap-3 border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
         <Icon size={18} />
       </div>
-      <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{value}</p>
-      <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
-      <p className="mt-2 text-xs text-[var(--text-secondary)]">{helper}</p>
-    </Card>
-  );
-}
-
-function MentorCard({
-  mentor,
-  featured = false,
-}: {
-  mentor: MarketingMentorPageMentor;
-  featured?: boolean;
-}) {
-  const score = Math.min(100, mentor.mentorScore ?? 0);
-
-  return (
-    <Card
-      className={`flex h-full flex-col gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 ${
-        featured ? "p-6" : "p-5"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div className="relative">
-          <Avatar src={mentor.avatar} name={mentor.fullName} size={featured ? "lg" : "md"} />
-          {mentor.isVerified ? (
-            <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full border border-success/25 bg-success/15 text-success">
-              <BadgeCheck size={14} />
-            </span>
-          ) : null}
-        </div>
-        <Badge variant={featured ? "purple" : "default"}>{featured ? "Featured mentor" : "Mentor"}</Badge>
-      </div>
-
-      <div className="space-y-1">
-        <h3 className={`font-semibold text-white ${featured ? "text-2xl" : "text-lg"}`}>
-          {mentor.fullName}
-        </h3>
-        <p className="text-sm text-primary">{mentor.currentCompany || "Independent mentor"}</p>
-        <p className="text-xs text-[var(--text-muted)]">{mentor.totalSessions ?? 0} sessions delivered</p>
-      </div>
-
-      {mentor.bio ? (
-        <p className="text-sm leading-6 text-[var(--text-secondary)]">{mentor.bio}</p>
-      ) : null}
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
-          <span>Mentor score</span>
-          <span>{score}%</span>
-        </div>
-        <ProgressBar value={score} max={100} color="primary" />
-      </div>
-
-      <div className="mt-auto space-y-3">
-        <div className="flex flex-wrap gap-2">
-          {(mentor.expertise ?? []).slice(0, featured ? 4 : 3).map((skill) => (
-            <Badge key={skill} variant="purple">
-              {skill}
-            </Badge>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-3">
-          <Link to="/contact">
-            <Button variant="outline" size={featured ? "lg" : "md"}>
-              Connect
-            </Button>
-          </Link>
-          <Link to="/how-it-works" className="inline-flex items-center text-sm text-primary hover:underline">
-            See mentorship flow
-          </Link>
-        </div>
+      <div>
+        <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
+        <p className="text-lg font-semibold text-white">{value}</p>
       </div>
     </Card>
   );
@@ -179,36 +92,87 @@ function MentorCard({
 
 export function MentorRecruitmentPage() {
   const reduceMotion = useReducedMotion();
-  const navigate = useNavigate();
-  const [filter, setFilter] = useState<MentorFilter>("all");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [currentRole, setCurrentRole] = useState("");
+  const [currentCompany, setCurrentCompany] = useState("");
+  const [location, setLocation] = useState("");
+  const [yearsExperience, setYearsExperience] = useState("");
+  const [whyMentor, setWhyMentor] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [portfolio, setPortfolio] = useState("");
+  const [expertiseInput, setExpertiseInput] = useState("");
+  const [expertise, setExpertise] = useState<string[]>(["Web Development", "Frontend"]);
+  const [mentoringStyle, setMentoringStyle] = useState<Array<MentorApplicationPayload["mentoringStyle"][number]>>([
+    "live-sessions",
+    "project-reviews",
+  ]);
+  const [availability, setAvailability] = useState<MentorApplicationPayload["availability"]>("flexible");
+  const [consent, setConsent] = useState(true);
 
   const { data, isLoading, isError, error, refetch } = useQuery<MarketingMentorPageData>({
-    queryKey: ["marketing", "mentors"],
+    queryKey: ["marketing", "mentor-application", "context"],
     queryFn: fetchMarketingMentors,
   });
 
-  const mentors = useMemo(() => {
-    const allMentors = [...(data?.featuredMentors ?? []), ...(data?.discoverMentors ?? [])];
-    return filter === "all"
-      ? allMentors
-      : allMentors.filter((mentor) =>
-          (mentor.expertise ?? []).some((skill) => skill.trim().toLowerCase() === filter)
-        );
-  }, [data, filter]);
+  const mutation = useMutation({
+    mutationFn: submitMentorApplication,
+  });
 
-  const featured = data?.featuredMentors ?? [];
-  const featuredIds = new Set(featured.map((mentor) => mentor._id));
-  const discover = mentors.filter((mentor) => !featuredIds.has(mentor._id));
+  const stats = useMemo(
+    () => [
+      { label: "Mentor network", value: data?.stats.totalMentors ?? 0, icon: Users },
+      { label: "Verified mentors", value: data?.stats.verifiedMentors ?? 0, icon: BadgeCheck },
+      { label: "Live sessions", value: data?.stats.totalSessions ?? 0, icon: CalendarDays },
+    ],
+    [data]
+  );
+
+  const toggleSkill = (skill: string) => {
+    setExpertise((current) =>
+      current.includes(skill) ? current.filter((item) => item !== skill) : [...current, skill]
+    );
+  };
+
+  const toggleStyle = (style: MentorApplicationPayload["mentoringStyle"][number]) => {
+    setMentoringStyle((current) =>
+      current.includes(style) ? current.filter((item) => item !== style) : [...current, style]
+    );
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const extraSkills = expertiseInput
+      .split(",")
+      .map((skill) => skill.trim())
+      .filter(Boolean);
+
+    await mutation.mutateAsync({
+      fullName,
+      email,
+      currentRole,
+      currentCompany: currentCompany || undefined,
+      location: location || undefined,
+      yearsExperience: yearsExperience ? Number(yearsExperience) : undefined,
+      expertise: Array.from(new Set([...expertise, ...extraSkills])),
+      availability,
+      mentoringStyle,
+      whyMentor,
+      linkedin: linkedin || undefined,
+      portfolio: portfolio || undefined,
+      consent: true,
+    });
+  };
 
   if (isLoading) {
-    return <MentorSkeleton />;
+    return <MentorApplySkeleton />;
   }
 
   if (isError) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 lg:px-8">
         <QueryError
-          message={error instanceof Error ? error.message : "Unable to load mentors right now."}
+          message={error instanceof Error ? error.message : "Unable to load mentor application right now."}
           onRetry={() => {
             void refetch();
           }}
@@ -220,187 +184,298 @@ export function MentorRecruitmentPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
       <motion.section
-        className="mx-auto max-w-4xl text-center"
+        className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <Badge className="mb-5">{data?.hero.eyebrow ?? "Global mentor network"}</Badge>
-        <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-          {data?.hero.title ?? "Learn from the Best in Global Technology"}
-        </h1>
-        <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
-          {data?.hero.description}
-        </p>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link to="/register?role=mentor">
-            <Button size="lg">Become a mentor</Button>
-          </Link>
-          <Link to="/contact">
-            <Button variant="outline" size="lg">
-              Talk to the team
-            </Button>
-          </Link>
-        </div>
-
-        <div className="mt-8 flex flex-wrap justify-center gap-3 text-xs text-[var(--text-secondary)]">
-          {(data?.hero.highlights ?? []).map((item) => (
-            <span key={item} className="rounded-full border border-[var(--border)] bg-white/5 px-3 py-2">
-              {item}
-            </span>
-          ))}
-        </div>
-      </motion.section>
-
-      <section className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <MentorStatCard
-          icon={Users}
-          value={formatCompactNumber(data?.stats.totalMentors ?? 0)}
-          label="Mentors"
-          helper="Active in the public network"
-          tone="primary"
-        />
-        <MentorStatCard
-          icon={BadgeCheck}
-          value={formatCompactNumber(data?.stats.verifiedMentors ?? 0)}
-          label="Verified"
-          helper="Trusted and reviewed mentors"
-          tone="purple"
-        />
-        <MentorStatCard
-          icon={Video}
-          value={formatCompactNumber(data?.stats.totalSessions ?? 0)}
-          label="Sessions"
-          helper="Live sessions delivered"
-          tone="success"
-        />
-        <MentorStatCard
-          icon={Trophy}
-          value={`${data?.stats.averageScore ?? 0}%`}
-          label="Average score"
-          helper="Quality signal across mentors"
-          tone="warning"
-        />
-      </section>
-
-      <section className="mt-16">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <Badge className="mb-4">Featured Global Mentors</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Mentors who combine skill, clarity, and care.</h2>
-            <p className="mt-4 text-[var(--text-secondary)]">
-              Start with the strongest mentors in the network, then browse the wider community by expertise
-              and teaching style.
+        <div className="space-y-6">
+          <div>
+            <Badge className="mb-5">Mentor application</Badge>
+            <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+              Apply to become a <span className="glow-text">Mentor</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
+              Share your background, teaching style, and availability so we can match you with learners who
+              need practical guidance, not just more content.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {(data?.filters ?? []).slice(0, 6).map((item) => (
-              <button
-                key={item.value}
-                type="button"
-                onClick={() => setFilter(item.value)}
-                className={`rounded-full border px-4 py-2 text-sm transition ${
-                  filter === item.value
-                    ? "border-primary bg-primary text-[var(--bg-base)]"
-                    : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
-                }`}
-              >
-                {item.label}
-              </button>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {stats.map((stat) => (
+              <MetricPill
+                key={stat.label}
+                icon={stat.icon}
+                label={stat.label}
+                value={new Intl.NumberFormat("en", { notation: "compact" }).format(stat.value)}
+              />
             ))}
           </div>
+
+          <div className="grid gap-3 md:grid-cols-3">
+            <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
+              <Badge variant="purple">01</Badge>
+              <h2 className="mt-3 font-semibold text-white">Professional information</h2>
+              <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                We use your role and company to understand the perspective you bring to learners.
+              </p>
+            </Card>
+            <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
+              <Badge variant="purple">02</Badge>
+              <h2 className="mt-3 font-semibold text-white">Expertise & style</h2>
+              <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                Choose the topics and mentoring formats that match your strengths.
+              </p>
+            </Card>
+            <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
+              <Badge variant="purple">03</Badge>
+              <h2 className="mt-3 font-semibold text-white">Review process</h2>
+              <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+                Submissions are reviewed by the team and routed to moderation for onboarding.
+              </p>
+            </Card>
+          </div>
+
+          <Card className="overflow-hidden border-primary/20 bg-[linear-gradient(180deg,rgba(9,14,24,0.98),rgba(6,9,18,0.98))] p-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card className="border-[var(--border)] bg-white/5 p-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck className="text-primary" size={18} />
+                  <p className="font-medium text-white">Clear expectations</p>
+                </div>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                  Mentor sessions should be practical, respectful, and learner-focused.
+                </p>
+              </Card>
+              <Card className="border-[var(--border)] bg-white/5 p-4">
+                <div className="flex items-center gap-3">
+                  <Laptop2 className="text-secondary" size={18} />
+                  <p className="font-medium text-white">Works across devices</p>
+                </div>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                  The application is mobile-friendly and safe to complete on low-bandwidth connections.
+                </p>
+              </Card>
+            </div>
+          </Card>
         </div>
 
-        {featured.length ? (
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {featured.map((mentor) => (
-              <MentorCard key={mentor._id} mentor={mentor} featured />
-            ))}
-          </div>
-        ) : (
-          <div className="mt-10">
-            <EmptyState
-              title="Featured mentors are loading"
-              description="As mentor data becomes available, the featured section will populate automatically."
-              actionLabel="Become a mentor"
-              onAction={() => navigate("/register?role=mentor")}
-            />
-          </div>
-        )}
-      </section>
+        <div className="space-y-6">
+          {mutation.isSuccess ? (
+            <Card className="border-success/25 bg-success/10 p-6">
+              <Badge variant="success">Application received</Badge>
+              <h2 className="mt-4 text-2xl font-semibold text-white">Thanks, {fullName || "mentor"}.</h2>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
+                Your application is now queued for review. We&apos;ll follow up after moderation checks your profile.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link to="/mentors">
+                  <Button variant="outline">Browse mentors</Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="ghost" className="text-primary hover:bg-primary/10 hover:text-primary">
+                    Talk to the team
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+          ) : (
+            <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <Badge>Application form</Badge>
+                  <h2 className="mt-3 text-2xl font-semibold text-white">Tell us about your mentoring profile</h2>
+                </div>
+                <Badge variant="purple">Public application</Badge>
+              </div>
 
-      <section className="mt-16">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <Badge className="mb-4">Discover Mentors</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Explore the full mentor ecosystem.</h2>
-          </div>
-          <p className="max-w-2xl text-[var(--text-secondary)]">
-            Pick a specialty, scan the profiles, and connect with mentors who fit the way you want to learn.
-          </p>
+              <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <Label>Full name</Label>
+                    <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required placeholder="Amina Tesfaye" />
+                  </div>
+                  <div>
+                    <Label>Email address</Label>
+                    <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="amina@example.com" />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <Label>Current role</Label>
+                    <Input value={currentRole} onChange={(e) => setCurrentRole(e.target.value)} required placeholder="Senior Frontend Engineer" />
+                  </div>
+                  <div>
+                    <Label>Current company</Label>
+                    <Input value={currentCompany} onChange={(e) => setCurrentCompany(e.target.value)} placeholder="EthioTech Labs" />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <Label>Location</Label>
+                    <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Addis Ababa, Ethiopia" />
+                  </div>
+                  <div>
+                    <Label>Years of experience</Label>
+                    <Input
+                      value={yearsExperience}
+                      onChange={(e) => setYearsExperience(e.target.value)}
+                      type="number"
+                      min={0}
+                      max={60}
+                      placeholder="8"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Areas of expertise</Label>
+                  <div className="flex flex-wrap gap-2">
+                    {skillOptions.map((skill) => {
+                      const active = expertise.includes(skill);
+                      return (
+                        <button
+                          key={skill}
+                          type="button"
+                          onClick={() => toggleSkill(skill)}
+                          className={`rounded-full border px-4 py-2 text-sm transition ${
+                            active
+                              ? "border-primary bg-primary text-[var(--bg-base)]"
+                              : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                          }`}
+                        >
+                          {skill}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="mt-2 text-xs text-[var(--text-muted)]">Add any extra skills separated by commas below.</p>
+                  <Input
+                    value={expertiseInput}
+                    onChange={(e) => setExpertiseInput(e.target.value)}
+                    placeholder="React, Node.js, MongoDB"
+                    className="mt-3"
+                  />
+                </div>
+
+                <div>
+                  <Label>Mentoring style</Label>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {mentoringStyles.map((style) => {
+                      const active = mentoringStyle.includes(style.value);
+                      return (
+                        <button
+                          key={style.value}
+                          type="button"
+                          onClick={() => toggleStyle(style.value)}
+                          className={`rounded-xl border px-4 py-3 text-left transition ${
+                            active
+                              ? "border-secondary bg-secondary/15 text-white"
+                              : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                          }`}
+                        >
+                          <span className="text-sm font-medium">{style.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Weekly availability</Label>
+                  <div className="grid gap-2 sm:grid-cols-4">
+                    {availabilityOptions.map((option) => {
+                      const active = availability === option.value;
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => setAvailability(option.value)}
+                          className={`rounded-xl border px-4 py-3 text-sm transition ${
+                            active
+                              ? "border-primary bg-primary/15 text-white"
+                              : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <Label>Why do you want to mentor?</Label>
+                  <Textarea
+                    value={whyMentor}
+                    onChange={(e) => setWhyMentor(e.target.value)}
+                    required
+                    placeholder="Share what drives you to mentor and how you want to support learners."
+                  />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <Label>LinkedIn profile</Label>
+                    <Input value={linkedin} onChange={(e) => setLinkedin(e.target.value)} type="url" placeholder="https://linkedin.com/in/..." />
+                  </div>
+                  <div>
+                    <Label>Portfolio or website</Label>
+                    <Input value={portfolio} onChange={(e) => setPortfolio(e.target.value)} type="url" placeholder="https://..." />
+                  </div>
+                </div>
+
+                <label className="flex items-start gap-3 rounded-xl border border-[var(--border)] bg-white/5 p-4 text-sm text-[var(--text-secondary)]">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    required
+                    className="mt-1 h-4 w-4 rounded border-[var(--border)] bg-[var(--bg-elevated)] text-primary"
+                  />
+                  <span>
+                    I confirm this information is accurate and I agree to be contacted about mentor onboarding.
+                  </span>
+                </label>
+
+                {mutation.isError ? (
+                  <p className="text-sm text-danger">
+                    {(mutation.error as Error)?.message || "Unable to submit the application."}
+                  </p>
+                ) : null}
+
+                <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending || !consent}>
+                  {mutation.isPending ? "Submitting..." : "Submit application"}
+                  <ArrowRight size={16} className="ml-2" />
+                </Button>
+              </form>
+            </Card>
+          )}
+
+          <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
+            <div className="flex items-center gap-3">
+              <MessageSquareQuote className="text-primary" size={18} />
+              <h3 className="font-semibold text-white">What happens next</h3>
+            </div>
+            <div className="mt-4 space-y-3">
+              <div className="flex items-start gap-3">
+                <Clock3 className="mt-0.5 text-secondary" size={16} />
+                <p className="text-sm text-[var(--text-secondary)]">We review each application and check for role fit.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <GraduationCap className="mt-0.5 text-secondary" size={16} />
+                <p className="text-sm text-[var(--text-secondary)]">Approved mentors get onboarding guidance and dashboard access.</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <Sparkles className="mt-0.5 text-secondary" size={16} />
+                <p className="text-sm text-[var(--text-secondary)]">You can then run sessions, review projects, and support cohorts.</p>
+              </div>
+            </div>
+          </Card>
         </div>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          {(data?.filters ?? []).map((item) => (
-            <button
-              key={item.value}
-              type="button"
-              onClick={() => setFilter(item.value)}
-              className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.22em] transition ${
-                filter === item.value
-                  ? "border-secondary bg-secondary text-white"
-                  : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
-              }`}
-            >
-              {item.label} · {item.count}
-            </button>
-          ))}
-        </div>
-
-        {discover.length ? (
-          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {discover.map((mentor) => (
-              <MentorCard key={mentor._id} mentor={mentor} />
-            ))}
-          </div>
-        ) : (
-          <div className="mt-8">
-            <EmptyState
-              title="No mentors match this filter"
-              description="Try switching back to All mentors or choose a broader expertise."
-              actionLabel="Show all mentors"
-              onAction={() => setFilter("all")}
-            />
-          </div>
-        )}
-      </section>
-
-      <Card className="mt-16 overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <Badge className="mb-4">Mentor impact</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">{data?.cta.title}</h2>
-            <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data?.cta.description}</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
-            <Link to={data?.cta.primary.to ?? "/register?role=mentor"}>
-              <Button size="lg">{data?.cta.primary.label ?? "Apply as a mentor"}</Button>
-            </Link>
-            <Link to={data?.cta.secondary.to ?? "/contact"}>
-              <Button variant="outline" size="lg">
-                {data?.cta.secondary.label ?? "Talk to the team"}
-              </Button>
-            </Link>
-            <Link to="/about">
-              <Button variant="ghost" size="lg" className="text-primary hover:bg-primary/10 hover:text-primary">
-                Learn about EthioTech
-                <ArrowRight size={16} className="ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </Card>
+      </motion.section>
     </div>
   );
 }

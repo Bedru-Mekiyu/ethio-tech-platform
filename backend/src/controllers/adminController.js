@@ -6,6 +6,7 @@ import Hub from "../models/Hub.js";
 import XPLog from "../models/XPLog.js";
 import AuditLog from "../models/AuditLog.js";
 import Submission from "../models/Submission.js";
+import MentorApplication from "../models/MentorApplication.js";
 import ApiError from "../utils/ApiError.js";
 
 export const getAnalytics = asyncHandler(async (_req, res) => {
@@ -140,4 +141,31 @@ export const flagSubmission = asyncHandler(async (req, res) => {
   );
   if (!submission) throw new ApiError(404, "Submission not found");
   sendResponse(res, 200, "Submission flagged", { submission });
+});
+
+export const getMentorApplications = asyncHandler(async (_req, res) => {
+  const applications = await MentorApplication.find()
+    .sort({ updatedAt: -1 })
+    .limit(100)
+    .lean();
+
+  sendResponse(res, 200, "Mentor applications fetched", { applications });
+});
+
+export const reviewMentorApplication = asyncHandler(async (req, res) => {
+  const { status, reviewedNotes } = req.body;
+  const application = await MentorApplication.findByIdAndUpdate(
+    req.params.id,
+    {
+      status,
+      reviewedAt: new Date(),
+      reviewedBy: req.user._id,
+      ...(reviewedNotes ? { reviewedNotes } : {}),
+    },
+    { new: true, runValidators: true }
+  );
+
+  if (!application) throw new ApiError(404, "Mentor application not found");
+
+  sendResponse(res, 200, "Mentor application updated", { application });
 });
