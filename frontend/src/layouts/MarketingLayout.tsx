@@ -45,12 +45,22 @@ export function MarketingLayout() {
               <Button>Join EthioTech</Button>
             </Link>
           </div>
-          <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
+          <button
+            type="button"
+            className="md:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={open}
+            aria-controls="mobile-marketing-nav"
+          >
             {open ? <X /> : <Menu />}
           </button>
         </div>
         {open && (
-          <div className="border-t border-[var(--border)] px-4 py-4 md:hidden">
+          <div
+            id="mobile-marketing-nav"
+            className="border-t border-[var(--border)] px-4 py-4 md:hidden"
+          >
             {nav.map((item) => (
               <Link key={item.to} to={item.to} className="block py-2" onClick={() => setOpen(false)}>
                 {item.label}
