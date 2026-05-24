@@ -56,6 +56,9 @@ const StudentDashboardPage = lazy(() =>
 );
 const SettingsPage = lazy(() => import("@/pages/app/SettingsPage").then((module) => ({ default: module.SettingsPage })));
 const TracksPage = lazy(() => import("@/pages/app/TracksPage").then((module) => ({ default: module.TracksPage })));
+const AssignedProjectsPage = lazy(() =>
+  import("@/pages/app/AssignedProjectsPage").then((module) => ({ default: module.AssignedProjectsPage }))
+);
 const AchievementsPage = lazy(() =>
   import("@/pages/app/AchievementsPage").then((module) => ({ default: module.AchievementsPage }))
 );
@@ -174,6 +177,7 @@ export default function App() {
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<StudentDashboardPage />} />
               <Route path="tracks" element={<TracksPage />} />
+              <Route path="projects" element={<AssignedProjectsPage />} />
               <Route path="tracks/:trackId" element={<TrackDetailPage />} />
               <Route path="lessons/:lessonId" element={<LessonPage />} />
               <Route path="xp" element={<XpHistoryPage />} />

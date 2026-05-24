@@ -16,6 +16,24 @@ export interface StudentDashboardData {
     lessons: { completed: number; total: number; progressPercent: number };
     projects: { approved: number; total: number; progressPercent: number };
   }>;
+  assignedProjects?: Array<{
+    projectId: string;
+    title: string;
+    description?: string;
+    trackId?: string;
+    trackTitle: string;
+    difficulty?: string;
+    xpReward?: number;
+    category: "active" | "feedback" | "completed";
+    completionPercent: number;
+    submissionStatus: string;
+    feedback?: string;
+    grade?: number;
+    submittedAt?: string;
+    updatedAt?: string;
+    githubLink?: string;
+    deployedUrl?: string;
+  }>;
   leaderboardPosition?: number;
   streak?: { currentStreak?: number; longestStreak?: number; lastActiveDate?: string };
 }

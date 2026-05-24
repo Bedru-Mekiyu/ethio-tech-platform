@@ -11,6 +11,7 @@ import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
 import {
   LayoutDashboard,
   BookOpen,
+  FolderKanban,
   Users,
   Trophy,
   MessageSquare,
@@ -34,6 +35,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const studentNav: NavItem[] = [
     { to: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { to: "/app/tracks", label: "Learning Tracks", icon: <BookOpen size={18} /> },
+    { to: "/app/projects", label: "Projects", icon: <FolderKanban size={18} /> },
     { to: classroomPath, label: "Virtual Class", icon: <Video size={18} /> },
     { to: squadPath, label: "Collaboration", icon: <MessageSquare size={18} /> },
     { to: "/app/achievements", label: "Achievements", icon: <Award size={18} /> },

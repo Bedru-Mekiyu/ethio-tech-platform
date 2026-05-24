@@ -68,7 +68,7 @@ export const getStudentDashboardData = async (userId) => {
     .populate("badges", "name category")
     .populate("enrolledTracks", "title category");
 
-  const [recentXp, upcomingSessions, recentSubmissions, leaderboardPosition, streak] = await Promise.all([
+  const [recentXp, upcomingSessions, recentSubmissions, leaderboardPosition, streak, assignedProjects] = await Promise.all([
     XPLog.find({ user: userId }).sort({ createdAt: -1 }).limit(10),
     Session.find({ participants: userId, scheduledAt: { $gte: new Date() } })
       .sort({ scheduledAt: 1 })
@@ -77,9 +77,64 @@ export const getStudentDashboardData = async (userId) => {
     Submission.find({ student: userId }).sort({ createdAt: -1 }).limit(5).populate("project", "title"),
     User.countDocuments({ xp: { $gt: user?.xp || 0 } }),
     UserStreak.findOne({ user: userId }).select("currentStreak longestStreak lastActiveDate"),
+    Project.find({ track: { $in: (user?.enrolledTracks || []).map((track) => track._id || track) } })
+      .sort({ createdAt: -1 })
+      .populate("track", "title"),
   ]);
 
   const progressByTrack = await computeStudentProgressByTrack(userId, user?.enrolledTracks || []);
+  const submissionMap = new Map();
+  for (const submission of await Submission.find({ student: userId }).sort({ createdAt: -1 }).populate("project", "title track xpReward")) {
+    const projectId = String(submission.project?._id ?? submission.project);
+    if (!submissionMap.has(projectId)) {
+      submissionMap.set(projectId, submission);
+    }
+  }
+
+  const assignedProjectsById = new Map();
+  for (const project of assignedProjects) {
+    const projectId = String(project._id);
+    const submission = submissionMap.get(projectId);
+    const track = project.track;
+    const trackProgress = progressByTrack.find((item) => String(item.trackId) === String(track?._id ?? track));
+    const submissionStatus = submission?.status ?? "not-submitted";
+    const completionPercent =
+      submissionStatus === "approved"
+        ? 100
+        : submissionStatus === "reviewed"
+          ? 72
+          : submissionStatus === "rejected"
+            ? 42
+            : submissionStatus === "pending"
+              ? 24
+              : 8;
+
+    const category =
+      submissionStatus === "approved"
+        ? "completed"
+        : submissionStatus === "reviewed" || submissionStatus === "rejected"
+          ? "feedback"
+          : "active";
+
+    assignedProjectsById.set(projectId, {
+      projectId,
+      title: project.title,
+      description: project.description,
+      trackId: track?._id ?? track,
+      trackTitle: track?.title ?? "Learning track",
+      difficulty: project.difficulty,
+      xpReward: project.xpReward ?? 0,
+      category,
+      completionPercent: trackProgress ? Math.max(completionPercent, trackProgress.overallProgressPercent) : completionPercent,
+      submissionStatus,
+      feedback: submission?.feedback,
+      grade: submission?.grade,
+      submittedAt: submission?.createdAt,
+      updatedAt: submission?.updatedAt ?? project.updatedAt,
+      githubLink: submission?.githubLink,
+      deployedUrl: submission?.deployedUrl,
+    });
+  }
 
   return {
     user,
@@ -87,6 +142,7 @@ export const getStudentDashboardData = async (userId) => {
     upcomingSessions,
     recentSubmissions,
     progressByTrack,
+    assignedProjects: Array.from(assignedProjectsById.values()),
     leaderboardPosition: leaderboardPosition + 1,
     streak,
   };
