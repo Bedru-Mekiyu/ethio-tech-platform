@@ -1,116 +1,159 @@
-# Immersive Tech Education Platform for Ethiopia
+# EthioTech Platform
 
-**Empowering Ethiopia's youth to become the next generation of global tech leaders — starting from Grade 8.**
+**Immersive, gamified tech education for Ethiopia — MERN monorepo.**
 
-<p align="center">
-  <img src="https://via.placeholder.com/1200x400/1e3a8a/ffffff?text=Ethiopia+Tech+Future" alt="Ethiopia Tech Future Banner" width="100%">
-</p>
+Empowering youth from Grade 8 upward with hands-on software engineering, mentorship, and virtual classrooms.
 
-## 🎯 Vision & Mission
+## Monorepo structure
 
-**Vision**  
-To help Ethiopia become one of the most technologically capable nations in Africa and beyond — by giving every young student (starting from Grade 8) real, practical access to software engineering, IT, and digital innovation skills.
+```
+ethio-tech-platform/
+├── backend/          # Express + TypeScript API (legacy JS modules coexisting)
+├── frontend/         # Vite + React + TypeScript SPA
+├── docker-compose.yml
+├── .env.example
+└── package.json      # npm workspaces root
+```
 
-**Mission**  
-Build a **free, immersive, gamified, mentorship-driven** online learning platform that:
-- Prioritizes **hands-on skills** over theory
-- Uses **live 3D-style virtual classrooms** + peer-to-peer learning
-- Connects students directly with Ethiopian professionals working at Google, Amazon, Microsoft, etc.
-- Eventually expands to **physical tech hubs** in every major Ethiopian city
+| Package   | Stack                                      | Port |
+|-----------|--------------------------------------------|------|
+| `backend` | Node.js, Express, Mongoose, Socket.io      | 5000 |
+| `frontend`| Vite, React 19, Tailwind CSS 4, React Query| 5173 |
 
-This is **not** a commercial product.  
-It is a **national movement** to accelerate Ethiopia’s technological future.
+**Design:** dark theme with cyan `#00d2ff` primary and purple `#7b61ff` secondary.
 
-## 🌟 Why This Matters
+## Prerequisites
 
-- Most Ethiopian schools still teach **theory-heavy** computer science with almost no practical coding or projects.
-- Children rarely meet real software engineers or understand what tech careers actually look like.
-- Ethiopia has one of the **youngest populations** in the world — this is our greatest asset.
-- Early exposure + mentorship + gamification = massive long-term national impact.
+- Node.js 22+
+- MongoDB (local or Atlas)
+- npm 10+
 
-## 🚀 Core Features (MVP)
+## Quick start
 
-- **Immersive 3D virtual classrooms** (avatars, live video, shared whiteboard & code editor)
-- **Gamified progression** — XP, levels (Explorer → Ambassador), badges, credits, leaderboards
-- **Mentorship** from Ethiopian diaspora professionals (Google, Amazon, Meta, etc.)
-- **Peer-to-peer learning circles** — students help and teach each other
-- **Project-based learning** — real coding projects with mentor review & feedback
-- **Skill tracks** starting with awareness → beginner coding → full-stack → advanced topics
-- Future: **physical tech hubs** in Addis, Hawassa, Bahir Dar, Mekelle, Dire Dawa, etc.
+### 1. Clone and install
 
-## 🛠️ Technology Stack (current direction)
+```bash
+git clone <repo-url>
+cd ethio-tech-platform
+npm install
+```
 
-- **Frontend**: React + Next.js + TailwindCSS + Three.js (for 3D immersive experience)
-- **Backend**: Node.js + Express + ES Modules
-- **Database**: MongoDB (Atlas free tier for MVP) + Mongoose
-- **Real-time**: WebRTC (Agora / Twilio / Daily.co) + Socket.io
-- **Authentication**: JWT + bcrypt
-- **Deployment**: Vercel (frontend) + Render / Railway (backend) + MongoDB Atlas
+### 2. Environment variables
 
-## 🧪 API Testing (Postman)
+Copy the root example and create workspace env files:
 
-The backend API collection is available in:
+```bash
+cp .env.example .env
+cp frontend/.env.example frontend/.env
+```
 
-- `postman/ethio-tech-platform.postman_collection.json`
-- `postman/ethio-tech-platform.postman_environment.json`
+**Root / backend `.env`:**
 
-### Quick start
+```env
+MONGO_URI=mongodb://localhost:27017/ethiotech
+PORT=5000
+JWT_SECRET=change-me-in-production
+JWT_REFRESH_SECRET=change-me-refresh-in-production
+JWT_EXPIRES_IN=1d
+JWT_REFRESH_DAYS=14
+CORS_ORIGIN=http://localhost:5173
+LOG_LEVEL=info
+```
 
-1. Run the backend:
-  - `npm run dev`
-2. Import both Postman files.
-3. Select environment **Ethio Tech Platform Local**.
-4. Start with requests in this order:
-  - `Auth -> POST /auth/register`
-  - `Auth -> POST /auth/login`
-  - `Tracks -> POST /tracks`
-  - `Modules -> POST /modules`
-  - `Lessons -> POST /lessons`
-  - `Projects -> POST /projects`
+**Frontend `frontend/.env`:**
 
-Collection tests automatically save key variables like `accessToken`, `refreshToken`, `trackId`, `moduleId`, `lessonId`, and `projectId`.
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
 
-## 📅 Current Phase
+### 3. Start MongoDB (optional Docker)
 
-**Phase 0 — Vision & Prototype** (active now)  
-- Finalizing product requirements & architecture  
-- Designing core UI/UX in Figma (landing, dashboard, 3D classroom, leaderboard, etc.)  
-- Building backend data models & authentication  
-- Recruiting first 5–10 diaspora mentors for pilot
+```bash
+docker compose up -d mongo
+```
 
-**Next milestones (target: Q2–Q3 2026)**  
-- Launch clickable Figma prototype  
-- Onboard first pilot group (50–100 students + 5 mentors)  
-- Run manual sessions via Zoom + Discord + Google Sheets tracking  
-- Build & deploy real MVP backend + basic frontend
+### 4. Seed the database (optional)
 
-## 🤝 How You Can Help Right Now
+```bash
+npm run seed
+```
 
-We are **actively looking for**:
+### 5. Run development servers
 
-- **Ethiopian tech professionals** (anywhere in the world) willing to mentor 1–2 hours/month  
-- **Frontend / React developers** to help build the immersive UI  
-- **Backend / Node.js developers** to implement XP system & APIs  
-- **UI/UX designers** to polish Figma prototype  
-- **Financial supporters** (small or large) to cover hosting, domains, Cloudinary credits, etc.  
-- **Schools & parent associations** in Ethiopia interested in pilot participation
+```bash
+npm run dev
+```
 
-→ Open an issue or email: **bedru.mekiyu-ug@aau.edu.et**  
-→ Join the discussion: **[Discord / Telegram link when ready]**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000/api/v1
+- Health check: http://localhost:5000/health
 
-## 📜 License
+## Scripts (root)
 
-This project is open-source under the **MIT License** — but the **core mission remains non-commercial**.
+| Command            | Description                          |
+|--------------------|--------------------------------------|
+| `npm run dev`      | Start backend + frontend together    |
+| `npm run dev:backend`  | Backend only (`tsx watch`)       |
+| `npm run dev:frontend` | Frontend only (`vite`)           |
+| `npm run build`    | Build backend (`tsc`) + frontend   |
+| `npm run test`     | Backend Vitest suite               |
+| `npm run lint`     | ESLint on frontend                 |
+| `npm run seed`     | Seed MongoDB with sample data      |
 
-The goal is impact, not profit.
+## Frontend routes
 
-## 🇪🇹 Let's Build Ethiopia's Tech Future Together
+| Path | Description |
+|------|-------------|
+| `/` | Marketing home |
+| `/login`, `/register` | Auth |
+| `/app/dashboard` | Student dashboard |
+| `/app/tracks` | Learning tracks |
+| `/app/achievements` | Badges & XP |
+| `/app/projects/submit` | Project submission |
+| `/app/squads/:id` | Socket.io squad chat |
+| `/app/tracks/:trackId` | Track modules & lessons |
+| `/app/lessons/:lessonId` | Lesson content & completion |
+| `/app/xp` | XP history |
+| `/app/notifications` | Notification inbox |
+| `/app/sessions` | Session history |
+| `/app/classroom/:sessionId` | Live classroom (Socket.io + 3D) |
+| `/parent` | Parent dashboard |
+| `/parent/settings` | Parent account settings |
+| `/mentor` | Mentor dashboard |
+| `/mentor/sessions` | Session management |
+| `/admin` | Admin analytics |
+| `/admin/moderation` | Submission moderation queue |
+| `/blog`, `/partners`, `/donate` | Public extended pages |
 
-> “The best way to predict the future is to create it.”  
-> — Peter Drucker (and now — us)
+## API overview
 
-Star ⭐ this repo if you believe in the vision.  
-Every star helps attract more mentors, contributors, and supporters.
+Base URL: `http://localhost:5000/api/v1`
+
+See [docs/API.md](docs/API.md) for endpoint reference. Platform review: [docs/PLATFORM_REVIEW.md](docs/PLATFORM_REVIEW.md). Monitoring: [docs/MONITORING.md](docs/MONITORING.md).
+
+## CI
+
+GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push/PR to `main`:
+
+1. `npm ci`
+2. `npm run lint`
+3. `npm run build`
+4. `npm run test`
+
+## Technology stack
+
+- **Frontend:** React, Vite, TypeScript, Tailwind CSS, TanStack Query, Zustand, React Router, Socket.io client, Recharts, React Three Fiber
+- **Backend:** Node.js, Express, TypeScript entry (`server.ts`), Mongoose, JWT auth, Socket.io
+- **Database:** MongoDB
+- **Real-time:** Socket.io (squad chat, classroom sync)
+
+## Contributing
+
+Open an issue or PR. The mission is non-commercial — impact over profit.
+
+## License
+
+MIT — see repository license file.
 
 ---
 
