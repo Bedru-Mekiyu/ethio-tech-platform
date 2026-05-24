@@ -29,6 +29,21 @@ export interface LeaderboardEntry {
   level?: number;
 }
 
+export interface MentorLeaderboardEntry {
+  _id?: string;
+  fullName: string;
+  mentorScore?: number;
+  totalSessions?: number;
+}
+
+export interface PeerGroupLeaderboardEntry {
+  _id?: string;
+  name: string;
+  groupXP?: number;
+  members?: number[];
+  leader?: { fullName?: string };
+}
+
 export async function fetchTracks() {
   const { data } = await api.get<
     ApiResponse<{ items: TrackSummary[] } | { tracks: TrackSummary[] }>
@@ -58,6 +73,20 @@ export async function fetchLeaderboard(top = 10): Promise<LeaderboardEntry[]> {
   );
   const payload = data.data as { students?: LeaderboardEntry[]; leaderboard?: LeaderboardEntry[] };
   return payload.students ?? payload.leaderboard ?? [];
+}
+
+export async function fetchMentorLeaderboard(top = 10): Promise<MentorLeaderboardEntry[]> {
+  const { data } = await api.get<ApiResponse<{ mentors: MentorLeaderboardEntry[] }>>(
+    `/leaderboard/mentors?top=${top}`
+  );
+  return (data.data as { mentors?: MentorLeaderboardEntry[] }).mentors ?? [];
+}
+
+export async function fetchPeerGroupLeaderboard(top = 10): Promise<PeerGroupLeaderboardEntry[]> {
+  const { data } = await api.get<ApiResponse<{ groups: PeerGroupLeaderboardEntry[] }>>(
+    `/leaderboard/peer-groups?top=${top}`
+  );
+  return (data.data as { groups?: PeerGroupLeaderboardEntry[] }).groups ?? [];
 }
 
 export async function fetchBadges() {

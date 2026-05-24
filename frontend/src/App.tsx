@@ -62,6 +62,7 @@ const AssignedProjectsPage = lazy(() =>
 const AchievementsPage = lazy(() =>
   import("@/pages/app/AchievementsPage").then((module) => ({ default: module.AchievementsPage }))
 );
+const ProfilePage = lazy(() => import("@/pages/app/ProfilePage").then((module) => ({ default: module.ProfilePage })));
 const ProjectSubmitPage = lazy(() =>
   import("@/pages/app/ProjectSubmitPage").then((module) => ({ default: module.ProjectSubmitPage }))
 );
@@ -186,6 +187,7 @@ export default function App() {
               <Route path="sessions/:sessionId/feedback" element={<SessionFeedbackPage />} />
               <Route path="workspace" element={<CodingWorkspacePage />} />
               <Route path="achievements" element={<AchievementsPage />} />
+              <Route path="profile" element={<ProfilePage />} />
               <Route path="projects/submit" element={<ProjectSubmitPage />} />
               <Route path="squads/:id" element={<SquadPage />} />
               <Route path="settings" element={<SettingsPage scope="student" />} />

@@ -23,6 +23,7 @@ import {
   BarChart3,
   Menu,
   X,
+  UserRound,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
@@ -39,6 +40,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: classroomPath, label: "Virtual Class", icon: <Video size={18} /> },
     { to: squadPath, label: "Collaboration", icon: <MessageSquare size={18} /> },
     { to: "/app/achievements", label: "Achievements", icon: <Award size={18} /> },
+    { to: "/app/profile", label: "Profile", icon: <UserRound size={18} /> },
     { to: "/app/xp", label: "XP", icon: <Trophy size={18} /> },
     { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
     { to: "/leaderboard", label: "Leaderboard", icon: <Trophy size={18} /> },
