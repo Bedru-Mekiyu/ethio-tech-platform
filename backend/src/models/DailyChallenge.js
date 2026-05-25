@@ -13,4 +13,6 @@ const dailyChallengeSchema = new Schema(
   { timestamps: true }
 );
 
+dailyChallengeSchema.index({ activeDate: 1, isActive: 1 });
+
 export default model("DailyChallenge", dailyChallengeSchema);
