@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import {
   BookOpen,
@@ -11,9 +11,13 @@ import {
   ShieldCheck,
   BadgeCheck,
   Award,
+  ArrowRight,
+  CheckCircle2,
+  Circle,
 } from "lucide-react";
 import heroImage from "@/assets/hero.png";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
+import { completeDailyChallenge } from "@/services/gamificationService";
 import { useAuthStore } from "@/store/authStore";
 import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,6 +28,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { getRankTitle } from "@/lib/utils";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "short",
@@ -86,13 +91,23 @@ function StatChip({
 }
 
 export function StudentDashboardPage() {
+  usePageTitle("Dashboard");
   const user = useAuthStore((s) => s.user);
   const navigate = useNavigate();
   const { classroomPath, squadPath } = useQuickNavLinks();
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
     enabled: !!user,
+  });
+
+  const completeChallengeMutation = useMutation({
+    mutationFn: completeDailyChallenge,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
+    },
   });
 
   const dashboard = data as StudentDashboardData | undefined;
@@ -102,6 +117,10 @@ export function StudentDashboardPage() {
   const latestSubmission = dashboard?.recentSubmissions?.[0];
   const currentStreak = dashboard?.streak?.currentStreak ?? 0;
   const completion = currentTrack?.overallProgressPercent ?? 0;
+  const onboarding = dashboard?.onboarding;
+  const dailyChallenge = dashboard?.dailyChallenge;
+  const dailyChallengeCompleted = dashboard?.dailyChallengeCompleted ?? false;
+  const nextActions = dashboard?.nextActions ?? [];
   const currentTitle = currentTrack?.title ?? latestSubmission?.project?.title ?? "Choose a learning track";
   const currentSubtitle = currentTrack
     ? `${completion}% complete with project work and mentor checkpoints.`
@@ -130,7 +149,7 @@ export function StudentDashboardPage() {
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-xl">
                 <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-                  Welcome back, {firstName} 👋
+                  Welcome back, {firstName}
                 </h1>
                 <p className="mt-3 text-[var(--text-secondary)]">
                   Keep your momentum going. The next milestone is close, and your mentors are already
@@ -262,6 +281,92 @@ export function StudentDashboardPage() {
           <p className="mt-1 text-xs text-[var(--text-secondary)]">Live classroom slots available.</p>
         </div>
       </Card>
+
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <Badge variant="purple">Launch checklist</Badge>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Onboarding progress</h2>
+              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                The fastest path to a useful learning loop is track enrollment, one lesson, one project, one session, and one squad.
+              </p>
+            </div>
+            <div className="min-w-[180px] rounded-2xl border border-primary/20 bg-primary/10 p-4">
+              <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Complete</p>
+              <p className="mt-2 text-2xl font-semibold text-white">
+                {onboarding?.completed ?? 0}/{onboarding?.total ?? 0}
+              </p>
+              <ProgressBar value={onboarding?.percent ?? 0} max={100} className="mt-3 h-2" />
+            </div>
+          </div>
+
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {(onboarding?.items ?? []).map((item) => {
+              const Icon = item.completed ? CheckCircle2 : Circle;
+              return (
+                <Link
+                  key={item.key}
+                  to={item.href}
+                  className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4 transition hover:border-primary/40 hover:bg-white/10"
+                >
+                  <span className="flex items-center gap-3 text-sm font-medium text-white">
+                    <Icon size={18} className={item.completed ? "text-success" : "text-[var(--text-muted)]"} />
+                    {item.label}
+                  </span>
+                  <ArrowRight size={16} className="text-[var(--text-muted)]" />
+                </Link>
+              );
+            })}
+          </div>
+        </Card>
+
+        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <Badge variant="success">Daily challenge</Badge>
+          <h2 className="mt-3 text-2xl font-semibold text-white">
+            {dailyChallenge?.title ?? "Build a habit today"}
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            {dailyChallenge?.description ??
+              "Complete one lesson, review one project requirement, or ask one useful question in your squad to keep your streak alive."}
+          </p>
+          <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+            <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Reward</p>
+            <p className="mt-2 text-xl font-semibold text-success">+{dailyChallenge?.xpReward ?? 25} XP</p>
+          </div>
+          <div className="mt-5">
+            {dailyChallengeCompleted ? (
+              <p className="flex items-center gap-2 text-sm font-medium text-success">
+                <CheckCircle2 size={18} />
+                Challenge completed today
+              </p>
+            ) : (
+              <Button
+                className="w-full"
+                disabled={completeChallengeMutation.isPending || !dailyChallenge}
+                onClick={() => completeChallengeMutation.mutate()}
+              >
+                {completeChallengeMutation.isPending ? "Claiming reward…" : "Claim daily challenge XP"}
+              </Button>
+            )}
+            {completeChallengeMutation.isError ? (
+              <p className="mt-2 text-sm text-danger">Could not complete challenge. Try again.</p>
+            ) : null}
+          </div>
+          <div className="mt-5 space-y-3">
+            {(nextActions.length ? nextActions : [{ label: "Open your learning track", href: "/app/tracks" }]).map((action) => (
+              <Link
+                key={`${action.href}-${action.label}`}
+                to={action.href}
+                className="flex items-center justify-between rounded-2xl border border-[var(--border)] bg-white/5 px-4 py-3 text-sm font-medium text-white transition hover:border-primary/40"
+              >
+                {action.label}
+                <ArrowRight size={16} className="text-primary" />
+              </Link>
+            ))}
+          </div>
+        </Card>
+      </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
