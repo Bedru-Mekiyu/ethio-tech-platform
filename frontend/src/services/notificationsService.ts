@@ -17,3 +17,7 @@ export async function fetchMyNotifications() {
 export async function markNotificationRead(id: string) {
   await api.patch(`/notifications/${id}/read`);
 }
+
+export async function markAllNotificationsRead() {
+  await api.patch("/notifications/read-all");
+}
