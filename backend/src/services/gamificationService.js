@@ -1,9 +1,18 @@
 import UserStreak from "../models/UserStreak.js";
 import DailyChallenge from "../models/DailyChallenge.js";
+import DailyChallengeCompletion from "../models/DailyChallengeCompletion.js";
 import Badge from "../models/Badge.js";
 import User from "../models/User.js";
+import { notifyBadgeEarned } from "./notificationService.js";
 
 const todayKey = () => new Date().toISOString().slice(0, 10);
+
+const STREAK_MILESTONES = [
+  { days: 7,  xp: 50,  label: "7-day streak" },
+  { days: 14, xp: 120, label: "14-day streak" },
+  { days: 30, xp: 300, label: "30-day streak" },
+  { days: 60, xp: 750, label: "60-day streak" },
+];
 
 export const recordDailyActivity = async (userId) => {
   const key = todayKey();
@@ -15,9 +24,9 @@ export const recordDailyActivity = async (userId) => {
       longestStreak: 1,
       lastActiveDate: key,
     });
-    return streak;
+    return { streak, milestoneReward: null };
   }
-  if (streak.lastActiveDate === key) return streak;
+  if (streak.lastActiveDate === key) return { streak, milestoneReward: null };
 
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
@@ -31,7 +40,29 @@ export const recordDailyActivity = async (userId) => {
   streak.longestStreak = Math.max(streak.longestStreak, streak.currentStreak);
   streak.lastActiveDate = key;
   await streak.save();
-  return streak;
+
+  // G1: Check for streak milestone rewards
+  const milestone = STREAK_MILESTONES.find((m) => m.days === streak.currentStreak);
+  let milestoneReward = null;
+  if (milestone) {
+    try {
+      // Lazy import to avoid circular dependency
+      const { grantXPWithOptions } = await import("./xpService.js");
+      const result = await grantXPWithOptions({
+        userId,
+        amount: milestone.xp,
+        reason: `Streak milestone: ${milestone.label}`,
+        sourceType: "badge",
+        sourceId: streak._id,
+        enforceUniqueSource: false,
+      });
+      milestoneReward = { ...milestone, xpAwarded: result.log?.amount ?? milestone.xp };
+    } catch {
+      // XP grant failed silently — streak is still recorded
+    }
+  }
+
+  return { streak, milestoneReward };
 };
 
 export const getTodayChallenge = async () => {
@@ -56,5 +87,18 @@ export const awardEligibleBadges = async (userId) => {
 
   user.badges.push(...eligible.map((b) => b._id));
   await user.save();
+
+  await Promise.all(
+    eligible.map((badge) =>
+      notifyBadgeEarned({ userId, badgeName: badge.name }).catch(() => {})
+    )
+  );
+
   return eligible;
 };
+
+export const getChallengeCompletionForUser = async (userId, challengeId) => {
+  if (!challengeId) return null;
+  return DailyChallengeCompletion.findOne({ user: userId, challenge: challengeId });
+};
+
