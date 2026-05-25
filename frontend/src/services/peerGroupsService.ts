@@ -11,3 +11,10 @@ export async function fetchMyPeerGroups() {
   const payload = data.data as { groups?: PeerGroup[] };
   return payload.groups ?? (Array.isArray(data.data) ? (data.data as PeerGroup[]) : []);
 }
+
+export async function fetchPeerGroupById(id: string) {
+  const { data } = await api.get<ApiResponse<{ group: PeerGroup & { members?: unknown[] } }>>(
+    `/peer-groups/${id}`
+  );
+  return data.data.group;
+}
