@@ -12,6 +12,15 @@ export const createPeerGroup = asyncHandler(async (req, res) => {
   sendResponse(res, 201, "Peer group created", { group });
 });
 
+export const getPeerGroupById = asyncHandler(async (req, res) => {
+  const group = await PeerGroup.findById(req.params.id)
+    .populate("leader", "fullName")
+    .populate("members", "fullName role")
+    .populate("track", "title");
+  if (!group) throw new ApiError(404, "Peer group not found");
+  sendResponse(res, 200, "Peer group fetched", { group });
+});
+
 export const getPeerGroups = asyncHandler(async (req, res) => {
   const filter = req.query.track ? { track: req.query.track } : {};
   if (req.query.mine === "true") {
