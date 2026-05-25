@@ -12,7 +12,7 @@ import { useAuthStore, getDashboardPath } from "@/store/authStore";
 const schema = z.object({
   fullName: z.string().min(2),
   email: z.string().email(),
-  password: z.string().min(6),
+  password: z.string().min(8).regex(/[A-Za-z]/, "Use at least one letter").regex(/\d/, "Use at least one number"),
   gradeLevel: z.coerce.number().min(8).max(12).optional(),
 });
 
@@ -20,7 +20,7 @@ type FormData = z.infer<typeof schema>;
 
 export function RegisterPage() {
   const [params] = useSearchParams();
-  const role = (params.get("role") as "student" | "mentor") || "student";
+  const role = params.get("role") === "mentor" ? "mentor" : "student";
   const navigate = useNavigate();
   const setAuth = useAuthStore((s) => s.setAuth);
   const [error, setError] = useState("");
@@ -42,7 +42,7 @@ export function RegisterPage() {
         gradeLevel: role === "student" ? data.gradeLevel : undefined,
       });
       const result = await login(data.email, data.password);
-      setAuth(result.user, result.accessToken, result.refreshToken);
+      setAuth(result.user, result.accessToken);
       navigate(getDashboardPath(result.user.role));
     } catch {
       setError("Registration failed. Email may already be in use.");
