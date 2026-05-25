@@ -28,5 +28,7 @@ xpLogSchema.index(
     },
   }
 );
+xpLogSchema.index({ user: 1, createdAt: -1 });
+xpLogSchema.index({ sourceType: 1, createdAt: -1 });
 
 export default model("XPLog", xpLogSchema);
