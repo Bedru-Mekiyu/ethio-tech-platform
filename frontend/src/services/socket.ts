@@ -6,6 +6,7 @@ import type {
 } from "@/lib/realtime";
 
 let socket: Socket<SocketServerToClientEvents, SocketClientToServerEvents> | null = null;
+let connectionRefCount = 0;
 
 export function getSocket() {
   if (!socket) {
@@ -39,9 +40,23 @@ export function connectSocket() {
   return s;
 }
 
+/** Increments shared connection refcount; call releaseSocketConnection on unmount. */
+export function acquireSocketConnection() {
+  connectionRefCount += 1;
+  return connectSocket();
+}
+
+export function releaseSocketConnection() {
+  connectionRefCount = Math.max(0, connectionRefCount - 1);
+  if (connectionRefCount === 0 && socket?.connected) {
+    socket.disconnect();
+  }
+}
+
+/** Force teardown (e.g. logout). */
 export function disconnectSocket() {
+  connectionRefCount = 0;
   if (!socket) return;
-  socket.removeAllListeners();
   socket.disconnect();
   socket = null;
 }
