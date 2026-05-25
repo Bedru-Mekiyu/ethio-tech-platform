@@ -15,4 +15,8 @@ const notificationSchema = new Schema({
 	createdBy: { type: Schema.Types.ObjectId, ref: "User" },
 }, { timestamps: true });
 
+notificationSchema.index({ recipient: 1, createdAt: -1 });
+notificationSchema.index({ recipient: 1, isRead: 1, createdAt: -1 });
+notificationSchema.index({ createdAt: 1 }, { expireAfterSeconds: 90 * 24 * 60 * 60 }); // TTL: 90 days
+
 export default model("Notification", notificationSchema);
