@@ -4,6 +4,7 @@ import XPLog from "../models/XPLog.js";
 import LevelConfig from "../models/LevelConfig.js";
 import ApiError from "../utils/ApiError.js";
 import { awardEligibleBadges, recordDailyActivity } from "./gamificationService.js";
+import { notifyXpEarned } from "./notificationService.js";
 
 export const calculateLevelForXp = async (xp) => {
   const levels = await LevelConfig.find({ xpRequired: { $lte: xp } }).sort({ level: -1 }).limit(1);
@@ -82,6 +83,11 @@ export const grantXPWithOptions = async ({
     await session.commitTransaction();
     await recordDailyActivity(userId).catch(() => {});
     await awardEligibleBadges(userId).catch(() => {});
+    await notifyXpEarned({
+      userId,
+      amount,
+      reason: reason ?? "Activity completed",
+    }).catch(() => {});
     return { user, log };
   } catch (error) {
     await session.abortTransaction();
