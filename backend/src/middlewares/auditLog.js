@@ -14,3 +14,27 @@ export const auditAction = (action, resource) => async (req, res, next) => {
   });
   next();
 };
+
+export const logAuditEvent = async ({
+  actor,
+  action,
+  resource,
+  resourceId,
+  metadata,
+  ip,
+  success = true,
+}) => {
+  if (!success) return null;
+  try {
+    return await AuditLog.create({
+      actor,
+      action,
+      resource,
+      resourceId,
+      metadata,
+      ip,
+    });
+  } catch {
+    return null;
+  }
+};
