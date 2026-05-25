@@ -20,4 +20,6 @@ const lessonSchema = new Schema({
   order: { type: Number, min: 0 },
 }, { timestamps: true });
 
+lessonSchema.index({ module: 1, order: 1, createdAt: 1 });
+
 export default model("Lesson", lessonSchema);
