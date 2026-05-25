@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Socket } from "socket.io-client";
-import {
-  connectSocket,
-  disconnectSocket,
-} from "@/services/socket";
+import { acquireSocketConnection, releaseSocketConnection } from "@/services/socket";
+import { fetchRoomMessages } from "@/services/chatService";
 import {
   createMessageId,
   getConnectionQuality,
@@ -113,7 +111,34 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
   }, [roomId]);
 
   useEffect(() => {
-    const socket = connectSocket();
+    let cancelled = false;
+
+    const loadHistory = async () => {
+      try {
+        const history = await fetchRoomMessages(roomId);
+        if (cancelled) return;
+        for (const item of history) {
+          if (!item.messageId || !item.text) continue;
+          messageHandlerRef.current({
+            id: item.messageId,
+            roomId,
+            messageId: item.messageId,
+            text: item.text,
+            author: item.author ?? (item.userId === userId ? "You" : "Participant"),
+            at: item.at,
+            userId: item.userId,
+            mine: item.userId === userId,
+            status: "delivered",
+          });
+        }
+      } catch {
+        eventHandlerRef.current?.("History unavailable", "Live messages will still appear.");
+      }
+    };
+
+    void loadHistory();
+
+    const socket = acquireSocketConnection();
     socketRef.current = socket;
 
     const joinRoom = () => {
@@ -229,6 +254,7 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     connection?.addEventListener?.("change", connectionChangeHandler);
 
     return () => {
+      cancelled = true;
       window.clearInterval(heartbeatTimer);
       window.removeEventListener("online", onlineHandler);
       window.removeEventListener("offline", offlineHandler);
@@ -246,7 +272,7 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
       if (socket.connected) {
         socket.emit("leave-room", roomId);
       }
-      disconnectSocket();
+      releaseSocketConnection();
     };
   }, [flushQueue, roomId, syncConnectionQuality, userId]);
 
@@ -301,7 +327,7 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     roomState,
     isOnline,
     reconnect: () => {
-      connectSocket();
+      acquireSocketConnection();
     },
     sendMessage,
   };
