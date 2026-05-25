@@ -1,4 +1,5 @@
-import { api, type ApiResponse } from "./api";
+import axios from "axios";
+import { api, API_ORIGIN, type ApiResponse } from "./api";
 import type { AuthUser } from "@/store/authStore";
 
 export interface StudentDashboardData {
@@ -36,6 +37,26 @@ export interface StudentDashboardData {
   }>;
   leaderboardPosition?: number;
   streak?: { currentStreak?: number; longestStreak?: number; lastActiveDate?: string };
+  dailyChallenge?: {
+    _id?: string;
+    title: string;
+    description?: string;
+    xpReward?: number;
+    activeDate?: string;
+  } | null;
+  dailyChallengeCompleted?: boolean;
+  onboarding?: {
+    completed: number;
+    total: number;
+    percent: number;
+    items: Array<{
+      key: string;
+      label: string;
+      completed: boolean;
+      href: string;
+    }>;
+  };
+  nextActions?: Array<{ label: string; href: string }>;
 }
 
 export interface MentorDashboardData {
@@ -104,6 +125,38 @@ export interface AdminMentorApplication {
   updatedAt?: string;
 }
 
+export interface AdminAuditLog {
+  _id: string;
+  action: string;
+  resource: string;
+  resourceId?: string;
+  actor?: { fullName?: string; email?: string; role?: string };
+  metadata?: { method?: string; path?: string };
+  ip?: string;
+  createdAt?: string;
+}
+
+export interface PlatformHealthData {
+  live?: {
+    status: string;
+    mission?: string;
+    version?: string;
+    timestamp?: string;
+  };
+  ready?: {
+    status: string;
+    database?: string;
+    timestamp?: string;
+  };
+  realtime?: {
+    status: string;
+    rooms?: number;
+    activeSockets?: number;
+    uptimeSeconds?: number;
+    timestamp?: string;
+  };
+}
+
 export async function fetchStudentDashboard() {
   const { data } = await api.get<ApiResponse<StudentDashboardData>>("/dashboard/student");
   return data.data;
@@ -134,6 +187,21 @@ export async function fetchAdminMentorApplications() {
     "/admin/mentor-applications"
   );
   return data.data;
+}
+
+export async function fetchAdminAuditLogs() {
+  const { data } = await api.get<ApiResponse<{ logs: AdminAuditLog[] }>>("/admin/audit-logs");
+  return data.data;
+}
+
+export async function fetchPlatformHealth(): Promise<PlatformHealthData> {
+  const [live, ready, realtime] = await Promise.all([
+    axios.get(`${API_ORIGIN}/health`).then((res) => res.data),
+    axios.get(`${API_ORIGIN}/health/ready`, { validateStatus: () => true }).then((res) => res.data),
+    axios.get(`${API_ORIGIN}/health/realtime`).then((res) => res.data),
+  ]);
+
+  return { live, ready, realtime };
 }
 
 export async function reviewAdminMentorApplication(payload: {
