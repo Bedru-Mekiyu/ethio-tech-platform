@@ -13,8 +13,10 @@ import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { useRealtimeRoom } from "@/hooks/useRealtimeRoom";
 import { upsertChatMessage, type RealtimeChatMessage } from "@/lib/realtime";
+import { fetchPeerGroupById } from "@/services/peerGroupsService";
 import { fetchMyNotifications, type NotificationItem } from "@/services/notificationsService";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const formatTime = new Intl.DateTimeFormat("en-US", {
   hour: "numeric",
@@ -85,7 +87,7 @@ function MessageRow({ msg, currentUserId }: { msg: RealtimeChatMessage; currentU
 
 export function SquadPage() {
   const { id } = useParams<{ id: string }>();
-  const roomId = `squad-${id ?? "demo"}`;
+  const roomId = id ? `squad-${id}` : "";
   const user = useAuthStore((s) => s.user);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<RealtimeChatMessage[]>([
@@ -111,16 +113,37 @@ export function SquadPage() {
     queryFn: fetchStudentDashboard,
   });
 
+  const squadQuery = useQuery({
+    queryKey: ["peer-group", id],
+    queryFn: () => fetchPeerGroupById(id!),
+    enabled: Boolean(id),
+  });
+
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;
 
   const { connectionStatus, presenceCount, connectionQuality, pendingCount, isOnline, roomState, sendMessage } =
     useRealtimeRoom({
-      roomId,
+      roomId: id ? roomId : "squad-idle",
       userId: user?.id,
       onMessage: (message) => {
         setMessages((prev) => upsertChatMessage(prev, message));
       },
     });
+
+  if (!id) {
+    return (
+      <EmptyState
+        title="Squad not found"
+        description="Choose a squad from your collaboration list."
+        actionLabel="View squads"
+        actionHref="/app/squads"
+      />
+    );
+  }
+
+  if (squadQuery.isLoading) {
+    return <Skeleton className="h-64 w-full rounded-[24px]" />;
+  }
 
   const unreadCount = notificationsQuery.data?.filter((item) => !item.isRead).length ?? 0;
   const activeProjects = dashboard?.assignedProjects?.filter((project) => project.category === "active").length ?? 0;
@@ -156,7 +179,10 @@ export function SquadPage() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <Badge className="mb-4">News center squad</Badge>
-              <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Squad updates, collaboration, and live room context.</h1>
+              <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+                {squadQuery.data?.name ?? "Squad"} · collaboration room
+              </h1>
+              <p className="mt-2 text-sm text-success">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
               <p className="mt-3 text-[var(--text-secondary)]">
                 Keep a shared pulse on mentor updates, project progress, and your realtime room without leaving the learning flow.
               </p>
