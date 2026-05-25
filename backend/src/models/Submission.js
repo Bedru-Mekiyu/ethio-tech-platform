@@ -22,4 +22,10 @@ const submissionSchema = new Schema({
   flagReason: { type: String, trim: true },
 }, { timestamps: true });
 
+submissionSchema.index({ student: 1, createdAt: -1 });
+submissionSchema.index({ project: 1, status: 1, createdAt: -1 });
+submissionSchema.index({ status: 1, updatedAt: -1 });
+submissionSchema.index({ reviewedBy: 1, updatedAt: -1 });
+submissionSchema.index({ flagged: 1, status: 1, updatedAt: -1 });
+
 export default model("Submission", submissionSchema);
