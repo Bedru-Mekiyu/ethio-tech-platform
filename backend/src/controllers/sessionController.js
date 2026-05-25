@@ -81,7 +81,16 @@ export const updateSession = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Ended or canceled sessions cannot be updated");
   }
 
-  Object.assign(session, req.body);
+  const allowedFields = [
+    "title", "scheduledAt", "durationMinutes", "classroomMode",
+    "liveProvider", "meetingLink", "recordingUrl", "xpPerAttendee",
+    "whiteboardEnabled", "codeCollabEnabled",
+  ];
+  for (const field of allowedFields) {
+    if (req.body[field] !== undefined) {
+      session[field] = req.body[field];
+    }
+  }
   await session.save();
   sendResponse(res, 200, "Session updated", { session });
 });
