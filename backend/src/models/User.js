@@ -34,6 +34,9 @@ const userSchema = new Schema({
   // Student fields
   enrolledTracks: [{ type: Schema.Types.ObjectId, ref: "Track" }],
 
+  // Parent fields
+  linkedStudents: [{ type: Schema.Types.ObjectId, ref: "User" }],
+
   // Mentor fields
   expertise: [String],
   currentCompany: String,
@@ -43,6 +46,16 @@ const userSchema = new Schema({
   isVerified: { type: Boolean, default: false },
   refreshTokenHash: { type: String, select: false },
   refreshTokenExpiresAt: { type: Date, select: false },
+  passwordResetHash: { type: String, select: false },
+  passwordResetExpiresAt: { type: Date, select: false },
+  loginAttempts: { type: Number, required: true, default: 0, select: false },
+  lockUntil: { type: Date, select: false },
 }, { timestamps: true });
+
+userSchema.index({ role: 1, xp: -1, level: -1, createdAt: 1 });
+userSchema.index({ role: 1, updatedAt: -1 });
+userSchema.index({ role: 1, isVerified: 1 });
+userSchema.index({ enrolledTracks: 1 });
+userSchema.index({ mentorScore: -1, totalSessions: -1 });
 
 export default model("User", userSchema);
