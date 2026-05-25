@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Activity, AlertTriangle, MapPin, TrendingUp, Users, Zap } from "lucide-react";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const xpTrend = [
   { week: "W1", xp: 12000 },
@@ -53,6 +54,7 @@ function AdminSkeleton() {
 }
 
 export function AdminPage() {
+  usePageTitle("Admin Analytics");
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["admin", "analytics"],
     queryFn: fetchAdminAnalytics,
@@ -63,20 +65,19 @@ export function AdminPage() {
   } | undefined;
 
   const metrics = analytics?.metrics;
-  const trackData =
-    useMemo(
-      () =>
-        analytics?.xpByTrack?.map((track) => ({
-          name: (track.title ?? "Track").slice(0, 12),
-          xp: track.xpTotal ?? 0,
-        })) ?? [
-          { name: "Full-Stack", xp: 4200 },
-          { name: "AI/Data", xp: 3100 },
-          { name: "Cyber", xp: 2800 },
-          { name: "Cloud", xp: 1900 },
-        ],
-      [analytics?.xpByTrack]
-    );
+  const trackData = useMemo(
+    () =>
+      analytics?.xpByTrack?.map((track) => ({
+        name: (track.title ?? "Track").slice(0, 12),
+        xp: track.xpTotal ?? 0,
+      })) ?? [
+        { name: "Full-Stack", xp: 4200 },
+        { name: "AI/Data", xp: 3100 },
+        { name: "Cyber", xp: 2800 },
+        { name: "Cloud", xp: 1900 },
+      ],
+    [analytics?.xpByTrack]
+  );
 
   const hubs = analytics?.hubs ?? [];
   const upcomingSessions = analytics?.upcomingSessions ?? [];
@@ -106,6 +107,9 @@ export function AdminPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <Link to="/admin/operations">
+              <Button variant="outline">Operations</Button>
+            </Link>
             <Link to="/admin/moderation">
               <Button variant="outline">Review queue</Button>
             </Link>
