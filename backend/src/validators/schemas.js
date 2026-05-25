@@ -11,6 +11,57 @@ export const commonSchemas = {
   idParam: z.object({ id: objectId }),
 };
 
+export const contactSchemas = {
+  submit: z.object({
+    name: z.string().trim().min(2).max(120),
+    email: z.string().trim().toLowerCase().email(),
+    message: z.string().trim().min(10).max(2000),
+  }),
+};
+
+export const authSchemas = {
+  register: z.object({
+    fullName: z.string().trim().min(2).max(120),
+    email: z.string().trim().toLowerCase().email(),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+    role: z.enum(["student", "mentor"]).optional(),
+    gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
+  }),
+  login: z.object({
+    email: z.string().trim().toLowerCase().email(),
+    password: z.string().min(1).max(128),
+  }),
+  refresh: z.object({
+    refreshToken: z.string().min(20).max(2000),
+  }),
+  forgotPassword: z.object({
+    email: z.string().trim().toLowerCase().email(),
+  }),
+  resetPassword: z.object({
+    token: z.string().min(20).max(200),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+  }),
+  changePassword: z.object({
+    currentPassword: z.string().min(1).max(128),
+    newPassword: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+  }),
+};
+
 export const trackSchemas = {
   create: z.object({
     title: z.string().min(2),
@@ -242,12 +293,35 @@ export const badgeSchemas = {
     name: z.string().min(2),
     description: z.string().optional(),
     icon: z.string().optional(),
+    xpRequired: z.number().int().nonnegative().optional(),
     xpBonus: z.number().int().nonnegative().optional(),
     category: z.enum(["achievement", "skill", "community"]).optional(),
   }),
   assign: z.object({
     userId: objectId,
     badgeId: objectId,
+  }),
+};
+
+export const mentorAvailabilitySchemas = {
+  set: z.object({
+    slots: z
+      .array(
+        z.object({
+          dayOfWeek: z.number().int().min(0).max(6),
+          startMinutes: z.number().int().min(0).max(1439),
+          endMinutes: z.number().int().min(1).max(1440),
+          timezone: z.string().trim().max(64).optional(),
+        })
+      )
+      .min(1)
+      .max(21),
+  }),
+  book: z.object({
+    mentorId: objectId,
+    title: z.string().trim().min(3).max(200),
+    scheduledAt: isoDateString,
+    durationMinutes: z.number().int().min(15).max(180).optional(),
   }),
 };
 
