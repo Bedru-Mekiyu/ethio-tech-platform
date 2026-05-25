@@ -37,6 +37,23 @@ const startServer = async () => {
     },
   });
 
+  const redisUrl = process.env.REDIS_URL || process.env.RATE_LIMIT_REDIS_URL;
+  if (redisUrl) {
+    try {
+      const { createClient } = await import("redis");
+      const { createAdapter } = await import("@socket.io/redis-adapter");
+      const pubClient = createClient({ url: redisUrl });
+      const subClient = pubClient.duplicate();
+      await Promise.all([pubClient.connect(), subClient.connect()]);
+      io.adapter(createAdapter(pubClient, subClient));
+      logger.info("Socket.io Redis adapter enabled");
+    } catch (error) {
+      logger.warn("Socket.io Redis adapter unavailable; using in-memory adapter", {
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+
   setupSocket(io);
   app.set("io", io);
 
