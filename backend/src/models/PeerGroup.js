@@ -11,4 +11,9 @@ const peerGroupSchema = new Schema({
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 
+peerGroupSchema.index({ track: 1, isActive: 1 });
+peerGroupSchema.index({ members: 1, isActive: 1 });
+peerGroupSchema.index({ leader: 1, isActive: 1 });
+peerGroupSchema.index({ groupXP: -1, createdAt: 1 });
+
 export default model("PeerGroup", peerGroupSchema);
