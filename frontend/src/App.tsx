@@ -8,6 +8,10 @@ import { ClassroomLayout } from "@/layouts/ClassroomLayout";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
 import { RouteFallback } from "@/components/layout/RouteFallback";
 import { AuthBootstrap } from "@/components/auth/AuthBootstrap";
+import { ErrorBoundary } from "@/components/composites/ErrorBoundary";
+import { ToastProvider } from "@/components/composites/ToastProvider";
+import { OfflineBanner } from "@/components/composites/OfflineBanner";
+import { useFocusOnRouteChange } from "@/hooks/useFocusOnRouteChange";
 
 const HomePage = lazy(() => import("@/pages/marketing/HomePage").then((module) => ({ default: module.HomePage })));
 const AboutPage = lazy(() => import("@/pages/marketing/AboutPage").then((module) => ({ default: module.AboutPage })));
@@ -51,6 +55,27 @@ const LoginPage = lazy(() => import("@/pages/auth/LoginPage").then((module) => (
 const RegisterPage = lazy(() =>
   import("@/pages/auth/RegisterPage").then((module) => ({ default: module.RegisterPage }))
 );
+const ForgotPasswordPage = lazy(() =>
+  import("@/pages/auth/ForgotPasswordPage").then((module) => ({ default: module.ForgotPasswordPage }))
+);
+const ResetPasswordPage = lazy(() =>
+  import("@/pages/auth/ResetPasswordPage").then((module) => ({ default: module.ResetPasswordPage }))
+);
+const ProgressPage = lazy(() =>
+  import("@/pages/app/ProgressPage").then((module) => ({ default: module.ProgressPage }))
+);
+const SquadsListPage = lazy(() =>
+  import("@/pages/app/SquadsListPage").then((module) => ({ default: module.SquadsListPage }))
+);
+const CertificatesPage = lazy(() =>
+  import("@/pages/app/CertificatesPage").then((module) => ({ default: module.CertificatesPage }))
+);
+const RoadmapPage = lazy(() =>
+  import("@/pages/app/RoadmapPage").then((module) => ({ default: module.RoadmapPage }))
+);
+const MentorAvailabilityPage = lazy(() =>
+  import("@/pages/mentor/MentorAvailabilityPage").then((module) => ({ default: module.MentorAvailabilityPage }))
+);
 const StudentDashboardPage = lazy(() =>
   import("@/pages/app/StudentDashboardPage").then((module) => ({ default: module.StudentDashboardPage }))
 );
@@ -85,6 +110,15 @@ const AdminUsersPage = lazy(() =>
 );
 const AdminModerationPage = lazy(() =>
   import("@/pages/admin/AdminModerationPage").then((module) => ({ default: module.AdminModerationPage }))
+);
+const AdminOperationsPage = lazy(() =>
+  import("@/pages/admin/AdminOperationsPage").then((module) => ({ default: module.AdminOperationsPage }))
+);
+const AdminContentPage = lazy(() =>
+  import("@/pages/admin/AdminContentPage").then((module) => ({ default: module.AdminContentPage }))
+);
+const AdminGamificationPage = lazy(() =>
+  import("@/pages/admin/AdminGamificationPage").then((module) => ({ default: module.AdminGamificationPage }))
 );
 const TrackDetailPage = lazy(() =>
   import("@/pages/app/TrackDetailPage").then((module) => ({ default: module.TrackDetailPage }))
@@ -138,11 +172,20 @@ const queryClient = new QueryClient({
   },
 });
 
+function NavigationManager() {
+  useFocusOnRouteChange();
+  return null;
+}
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
+      <ToastProvider>
       <AuthBootstrap>
+      <OfflineBanner />
       <BrowserRouter>
+        <NavigationManager />
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route element={<MarketingLayout />}>
@@ -170,6 +213,10 @@ export default function App() {
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
             </Route>
+            <Route element={<AuthLayout />}>
+              <Route path="auth/forgot-password" element={<ForgotPasswordPage />} />
+              <Route path="auth/reset-password" element={<ResetPasswordPage />} />
+            </Route>
             <Route
               path="/app"
               element={
@@ -190,6 +237,10 @@ export default function App() {
               <Route path="sessions/:sessionId/feedback" element={<SessionFeedbackPage />} />
               <Route path="workspace" element={<CodingWorkspacePage />} />
               <Route path="achievements" element={<AchievementsPage />} />
+              <Route path="progress" element={<ProgressPage />} />
+              <Route path="squads" element={<SquadsListPage />} />
+              <Route path="certificates" element={<CertificatesPage />} />
+              <Route path="roadmap" element={<RoadmapPage />} />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="projects/submit" element={<ProjectSubmitPage />} />
               <Route path="squads/:id" element={<SquadPage />} />
@@ -217,6 +268,8 @@ export default function App() {
               <Route index element={<MentorDashboardPage />} />
               <Route path="sessions" element={<MentorSessionsPage />} />
               <Route path="reviews" element={<MentorReviewPage />} />
+              <Route path="availability" element={<MentorAvailabilityPage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
               <Route path="settings" element={<SettingsPage scope="mentor" />} />
             </Route>
             <Route
@@ -230,6 +283,9 @@ export default function App() {
               <Route index element={<AdminPage />} />
               <Route path="users" element={<AdminUsersPage />} />
               <Route path="moderation" element={<AdminModerationPage />} />
+              <Route path="operations" element={<AdminOperationsPage />} />
+              <Route path="content" element={<AdminContentPage />} />
+              <Route path="gamification" element={<AdminGamificationPage />} />
               <Route path="settings" element={<SettingsPage scope="admin" />} />
             </Route>
             <Route
@@ -242,11 +298,15 @@ export default function App() {
             >
               <Route index element={<ClassroomPage />} />
             </Route>
-            <Route path="*" element={<NotFoundPage />} />
+            <Route element={<MarketingLayout />}>
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
       </AuthBootstrap>
+      </ToastProvider>
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 }
