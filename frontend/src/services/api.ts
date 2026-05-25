@@ -1,12 +1,14 @@
 import axios, { AxiosHeaders } from "axios";
 import { useAuthStore } from "@/store/authStore";
 
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api/v1";
+export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api/v1";
+export const API_ORIGIN = API_URL.replace(/\/api\/v1\/?$/, "");
 
 export const api = axios.create({
   baseURL: API_URL,
   headers: { "Content-Type": "application/json" },
   timeout: 15_000,
+  withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
@@ -32,12 +34,14 @@ api.interceptors.response.use(
 
     if (!refreshing) {
       refreshing = (async () => {
-        const refreshToken = useAuthStore.getState().refreshToken;
-        if (!refreshToken) return null;
         try {
-          const { data } = await axios.post(`${API_URL}/auth/refresh`, { refreshToken });
+          const { data } = await axios.post(
+            `${API_URL}/auth/refresh`,
+            {},
+            { withCredentials: true }
+          );
           const payload = data.data ?? data;
-          useAuthStore.getState().setTokens(payload.accessToken, payload.refreshToken);
+          useAuthStore.getState().setAccessToken(payload.accessToken);
           return payload.accessToken as string;
         } catch {
           if (typeof navigator === "undefined" || navigator.onLine) {
