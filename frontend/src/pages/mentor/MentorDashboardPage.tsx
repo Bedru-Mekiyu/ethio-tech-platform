@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock3, ClipboardList, Flame, Star, Users, Video } from "lucide-react";
+import { ArrowRight, Clock3, ClipboardList, Flame, ShieldCheck, Star, Users, Video } from "lucide-react";
 import { fetchMentorDashboard, type MentorDashboardData } from "@/services/dashboardService";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { getRankTitle } from "@/lib/utils";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 function MentorDashboardSkeleton() {
   return (
@@ -63,6 +64,7 @@ function MetricCard({
 }
 
 export function MentorDashboardPage() {
+  usePageTitle("Mentor Dashboard");
   const user = useAuthStore((s) => s.user);
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["dashboard", "mentor"],
@@ -75,6 +77,50 @@ export function MentorDashboardPage() {
   const recentReviews = dashboard?.reviewsDone ?? [];
   const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
+
+  if (user?.role === "mentor" && user.isVerified === false) {
+    return (
+      <div className="space-y-6">
+        <Card className="rounded-[28px] border-warning/30 bg-[linear-gradient(180deg,rgba(245,158,11,0.12),rgba(14,20,32,0.98))] p-6">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div className="max-w-2xl">
+              <Badge variant="warning">Verification required</Badge>
+              <h1 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+                Complete mentor onboarding before using mentor tools
+              </h1>
+              <p className="mt-3 text-[var(--text-secondary)]">
+                Mentor accounts can sign in immediately, but scheduling sessions, reviewing projects, and issuing awards
+                are enabled only after the admin team approves the mentor application.
+              </p>
+            </div>
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-warning/15 text-warning">
+              <ShieldCheck size={24} />
+            </div>
+          </div>
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {[
+              "Submit your mentor application",
+              "Admin reviews experience and availability",
+              "Verified mentors unlock sessions and reviews",
+            ].map((item, index) => (
+              <div key={item} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Step {index + 1}</p>
+                <p className="mt-2 text-sm font-medium text-white">{item}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link to="/mentor-recruitment">
+              <Button>Open application</Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="outline">Contact support</Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   if (isLoading) return <MentorDashboardSkeleton />;
   if (isError) {
