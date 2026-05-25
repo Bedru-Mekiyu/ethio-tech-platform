@@ -30,7 +30,11 @@ export const issueCertificate = asyncHandler(async (req, res) => {
 
 export const getCertificates = asyncHandler(async (req, res) => {
   const filter = {};
-  if (req.query.student) filter.student = req.query.student;
+  if (req.user.role === "student") {
+    filter.student = req.user._id;
+  } else if (req.query.student) {
+    filter.student = req.query.student;
+  }
   if (req.query.track) filter.track = req.query.track;
 
   const certificates = await Certificate.find(filter)
