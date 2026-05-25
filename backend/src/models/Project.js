@@ -14,4 +14,7 @@ const projectSchema = new Schema({
   requirements: [String],
 }, { timestamps: true });
 
+projectSchema.index({ track: 1, createdAt: -1 });
+projectSchema.index({ difficulty: 1, xpReward: -1 });
+
 export default model("Project", projectSchema);
