@@ -8,6 +8,7 @@ import AuditLog from "../models/AuditLog.js";
 import Submission from "../models/Submission.js";
 import MentorApplication from "../models/MentorApplication.js";
 import ApiError from "../utils/ApiError.js";
+import { getPagination } from "../utils/pagination.js";
 
 export const getAnalytics = asyncHandler(async (_req, res) => {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
@@ -115,12 +116,22 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
   });
 });
 
-export const getAuditLogs = asyncHandler(async (_req, res) => {
-  const logs = await AuditLog.find()
-    .sort({ createdAt: -1 })
-    .limit(100)
-    .populate("actor", "fullName email role");
-  sendResponse(res, 200, "Audit logs fetched", { logs });
+export const getAuditLogs = asyncHandler(async (req, res) => {
+  const { page, limit, skip } = getPagination(req.query);
+
+  const [logs, total] = await Promise.all([
+    AuditLog.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("actor", "fullName email role"),
+    AuditLog.countDocuments(),
+  ]);
+
+  sendResponse(res, 200, "Audit logs fetched", {
+    logs,
+    pagination: { page, limit, total, pages: Math.ceil(total / limit) },
+  });
 });
 
 export const getModerationQueue = asyncHandler(async (_req, res) => {
@@ -166,6 +177,19 @@ export const reviewMentorApplication = asyncHandler(async (req, res) => {
   );
 
   if (!application) throw new ApiError(404, "Mentor application not found");
+
+  if (status === "approved") {
+    await User.findOneAndUpdate(
+      { email: application.email.toLowerCase(), role: "mentor" },
+      {
+        isVerified: true,
+        expertise: application.expertise ?? [],
+        currentCompany: application.currentCompany,
+        bio: application.whyMentor,
+      },
+      { runValidators: true }
+    );
+  }
 
   sendResponse(res, 200, "Mentor application updated", { application });
 });
