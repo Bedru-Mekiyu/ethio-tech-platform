@@ -38,7 +38,7 @@ export function LoginPage() {
     setError("");
     try {
       const result = await login(data.email, data.password);
-      setAuth(result.user, result.accessToken, result.refreshToken);
+      setAuth(result.user, result.accessToken);
       const from = (location.state as { from?: { pathname: string } })?.from?.pathname;
       navigate(from ?? getDashboardPath(result.user.role));
     } catch {
@@ -103,8 +103,11 @@ export function LoginPage() {
           {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
         </div>
 
-        <div className="flex items-center justify-end gap-3 text-sm">
-          <Link to="/contact" className="text-primary hover:underline">
+        <div className="flex items-center justify-between gap-3 text-sm">
+          <Link to="/auth/forgot-password" className="text-primary hover:underline">
+            Forgot password?
+          </Link>
+          <Link to="/contact" className="text-[var(--text-secondary)] hover:text-white">
             Need help?
           </Link>
         </div>
