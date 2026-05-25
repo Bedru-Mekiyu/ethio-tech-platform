@@ -23,6 +23,8 @@ import adminRoutes from "./adminRoutes.js";
 import gamificationRoutes from "./gamificationRoutes.js";
 import contactRoutes from "./contactRoutes.js";
 import chatRoutes from "./chatRoutes.js";
+import parentRoutes from "./parentRoutes.js";
+import mentorAvailabilityRoutes from "./mentorAvailabilityRoutes.js";
 
 const router = Router();
 
@@ -49,5 +51,7 @@ router.use("/admin", adminRoutes);
 router.use("/gamification", gamificationRoutes);
 router.use("/contact", contactRoutes);
 router.use("/chat", chatRoutes);
+router.use("/parent", parentRoutes);
+router.use("/mentor-availability", mentorAvailabilityRoutes);
 
 export default router;
