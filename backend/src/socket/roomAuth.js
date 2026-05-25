@@ -1,5 +1,6 @@
 import Session from "../models/Session.js";
 import PeerGroup from "../models/PeerGroup.js";
+import mongoose from "mongoose";
 
 const PUBLIC_ROOM_PREFIXES = ["lobby-", "public-"];
 
@@ -34,6 +35,7 @@ export const canUserJoinRoom = async (roomId, user) => {
 
   if (type === "classroom" || type === "session") {
     const sessionId = type === "session" ? resourceId : resourceId;
+    if (!mongoose.Types.ObjectId.isValid(sessionId)) return false;
     const session = await Session.findById(sessionId).select("mentor participants status");
     if (!session) return false;
     if (["ended", "canceled"].includes(session.status) && user.role !== "admin") {
@@ -45,6 +47,7 @@ export const canUserJoinRoom = async (roomId, user) => {
   }
 
   if (type === "squad" || type === "peer") {
+    if (!mongoose.Types.ObjectId.isValid(resourceId)) return false;
     const group = await PeerGroup.findById(resourceId).select("members leader isActive");
     if (!group || !group.isActive) return false;
     const memberIds = [...group.members.map(String), String(group.leader)].filter(Boolean);
