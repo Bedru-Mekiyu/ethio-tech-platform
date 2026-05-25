@@ -21,9 +21,10 @@ import {
   Video,
   FileCheck,
   BarChart3,
+  Activity,
   Menu,
   X,
-  UserRound,
+  CalendarClock,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
@@ -36,12 +37,13 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const studentNav: NavItem[] = [
     { to: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { to: "/app/tracks", label: "Learning Tracks", icon: <BookOpen size={18} /> },
+    { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
     { to: "/app/projects", label: "Projects", icon: <FolderKanban size={18} /> },
+    { to: "/app/squads", label: "Squads", icon: <MessageSquare size={18} /> },
     { to: classroomPath, label: "Virtual Class", icon: <Video size={18} /> },
-    { to: squadPath, label: "Collaboration", icon: <MessageSquare size={18} /> },
+    { to: "/app/workspace", label: "Workspace", icon: <Activity size={18} /> },
+    { to: "/app/notifications", label: "Notifications", icon: <Bell size={18} /> },
     { to: "/app/achievements", label: "Achievements", icon: <Award size={18} /> },
-    { to: "/app/profile", label: "Profile", icon: <UserRound size={18} /> },
-    { to: "/app/xp", label: "XP", icon: <Trophy size={18} /> },
     { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
     { to: "/leaderboard", label: "Leaderboard", icon: <Trophy size={18} /> },
   ];
@@ -49,7 +51,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const mentorNav: NavItem[] = [
     { to: "/mentor", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { to: "/mentor/sessions", label: "Sessions", icon: <BookOpen size={18} /> },
+    { to: "/mentor/availability", label: "Availability", icon: <CalendarClock size={18} /> },
     { to: "/mentor/reviews", label: "Project Reviews", icon: <FileCheck size={18} /> },
+    { to: "/mentor/notifications", label: "Notifications", icon: <Bell size={18} /> },
     { to: squadPath, label: "Community", icon: <Users size={18} /> },
   ];
 
@@ -65,6 +69,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
     { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
     { to: "/admin/moderation", label: "Moderation", icon: <FileCheck size={18} /> },
+    { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
+    { to: "/admin/gamification", label: "Gamification", icon: <Trophy size={18} /> },
+    { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
   ];
 
   const nav = variant === "mentor" ? mentorNav : variant === "admin" ? adminNav : variant === "parent" ? parentNav : studentNav;
@@ -175,7 +182,13 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           </div>
           <div className="flex items-center gap-4">
             <Link
-              to={variant === "student" || variant === "parent" || user?.role === "parent" ? "/app/notifications" : "#"}
+              to={
+                variant === "mentor"
+                  ? "/mentor/notifications"
+                  : variant === "student" || variant === "parent" || user?.role === "parent"
+                    ? "/app/notifications"
+                    : "/admin"
+              }
               className="text-[var(--text-secondary)] hover:text-white"
               aria-label="Notifications"
             >
@@ -199,7 +212,15 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[var(--bg-elevated)] lg:hidden"
           aria-label="Mobile navigation"
         >
-          {nav.slice(0, 4).map((item) => (
+          {(variant === "student"
+            ? [
+                { to: "/app/dashboard", label: "Home", icon: <LayoutDashboard size={18} /> },
+                { to: "/app/tracks", label: "Tracks", icon: <BookOpen size={18} /> },
+                { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
+                { to: "/app/notifications", label: "Alerts", icon: <Bell size={18} /> },
+              ]
+            : nav.slice(0, 4)
+          ).map((item) => (
             <NavLink
               key={item.to + item.label}
               to={item.to}
