@@ -1,6 +1,8 @@
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { submitContact } from "../controllers/contactController.js";
+import validateRequest from "../middlewares/validateRequest.js";
+import { contactSchemas } from "../validators/schemas.js";
 
 const router = Router();
 const contactLimiter = rateLimit({
@@ -9,6 +11,6 @@ const contactLimiter = rateLimit({
   message: { success: false, message: "Too many contact requests" },
 });
 
-router.post("/", contactLimiter, submitContact);
+router.post("/", contactLimiter, validateRequest({ body: contactSchemas.submit }), submitContact);
 
 export default router;
