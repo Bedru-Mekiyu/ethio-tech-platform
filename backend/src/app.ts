@@ -8,11 +8,16 @@ import mongoose from "mongoose";
 import type { Server as SocketServer } from "socket.io";
 import apiRouter from "./routes/index.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
+import { rejectMongoOperators } from "./middlewares/inputSecurity.js";
+import { attachRequestId } from "./middlewares/requestId.js";
 import { logger } from "./lib/logger.js";
 import { getEnv } from "./config/env.js";
 
 export const createApp = () => {
   const app = express();
+  if (getEnv().isProduction) {
+    app.set("trust proxy", 1);
+  }
 
   app.use(helmet());
   app.use(
@@ -24,6 +29,9 @@ export const createApp = () => {
   app.use(compression());
   app.use(cookieParser());
   app.use(express.json({ limit: "10mb" }));
+  app.use(express.urlencoded({ extended: false, limit: "1mb" }));
+  app.use(rejectMongoOperators);
+  app.use(attachRequestId);
 
   app.use((req, res, next) => {
     const startedAt = Date.now();
@@ -31,6 +39,7 @@ export const createApp = () => {
       const durationMs = Date.now() - startedAt;
       if (durationMs >= 500 || res.statusCode >= 400) {
         logger.info("HTTP request", {
+          requestId: (req as { requestId?: string }).requestId,
           method: req.method,
           path: req.originalUrl,
           statusCode: res.statusCode,
@@ -68,6 +77,10 @@ export const createApp = () => {
   });
 
   app.get("/health/realtime", (req, res) => {
+    if (getEnv().isProduction) {
+      res.status(200).json({ status: "OK" });
+      return;
+    }
     const io = req.app.get("io") as SocketServer | undefined;
     res.status(200).json({
       status: "OK",
