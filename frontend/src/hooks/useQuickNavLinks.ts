@@ -28,7 +28,7 @@ export function useQuickNavLinks(options?: { enabled?: boolean }) {
 
   return {
     classroomPath: liveSession ? `/app/classroom/${liveSession._id}` : "/app/tracks",
-    squadPath: firstGroup ? `/app/squads/${firstGroup._id}` : "/app/tracks",
+    squadPath: firstGroup ? `/app/squads/${firstGroup._id}` : "/app/squads",
     hasLiveSession: !!liveSession,
     hasSquad: !!firstGroup,
     isLoading: enabled && (sessionsQuery.isLoading || groupsQuery.isLoading),
