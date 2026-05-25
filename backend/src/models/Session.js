@@ -35,4 +35,9 @@ const sessionSchema = new Schema({
   },
 }, { timestamps: true });
 
+sessionSchema.index({ mentor: 1, scheduledAt: 1, status: 1 });
+sessionSchema.index({ participants: 1, scheduledAt: 1, status: 1 });
+sessionSchema.index({ status: 1, scheduledAt: 1 });
+sessionSchema.index({ liveRoomId: 1 }, { sparse: true });
+
 export default model("Session", sessionSchema);
