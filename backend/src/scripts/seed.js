@@ -8,6 +8,7 @@ import Track from "../models/Track.js";
 import Module from "../models/Module.js";
 import Lesson from "../models/Lesson.js";
 import Project from "../models/Project.js";
+import DailyChallenge from "../models/DailyChallenge.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ const seed = async () => {
   await Module.deleteMany({});
   await Lesson.deleteMany({});
   await Project.deleteMany({});
+  await DailyChallenge.deleteMany({});
 
   const levels = [
     { level: 1, title: "Starter", xpRequired: 0, perks: ["Access beginner lessons"] },
@@ -29,13 +31,23 @@ const seed = async () => {
   ];
 
   const badges = [
-    { name: "First Steps", description: "Complete your first lesson", xpBonus: 20, category: "achievement" },
-    { name: "Helper", description: "Support peers consistently", xpBonus: 40, category: "community" },
-    { name: "Project Finisher", description: "Get first project approved", xpBonus: 60, category: "skill" },
+    { name: "First Steps", description: "Complete your first lesson", xpRequired: 40, xpBonus: 20, category: "achievement" },
+    { name: "Helper", description: "Support peers consistently", xpRequired: 200, xpBonus: 40, category: "community" },
+    { name: "Project Finisher", description: "Get first project approved", xpRequired: 500, xpBonus: 60, category: "skill" },
   ];
 
   await LevelConfig.insertMany(levels);
   await Badge.insertMany(badges);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  await DailyChallenge.create({
+    title: "Complete one lesson today",
+    description: "Finish any lesson in your track to earn bonus XP.",
+    xpReward: 25,
+    activeDate: today,
+    isActive: true,
+  });
 
   const track = await Track.create({
     title: "Software Engineering Foundations",
