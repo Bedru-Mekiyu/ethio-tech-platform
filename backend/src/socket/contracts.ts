@@ -36,6 +36,7 @@ export interface ChatMessageServerPayload {
   clientId?: string;
 }
 
+/** Reserved for future whiteboard/code sync; chat-only rooms do not emit this yet. */
 export interface ClassroomSyncPayload {
   roomId: string;
   state: unknown;
