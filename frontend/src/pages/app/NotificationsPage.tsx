@@ -1,12 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Bell, CalendarClock, CheckCircle2, MessageSquareText, Rocket, Trophy } from "lucide-react";
-import { fetchMyNotifications, markNotificationRead, type NotificationItem } from "@/services/notificationsService";
+import { fetchMyNotifications, markNotificationRead, markAllNotificationsRead, type NotificationItem } from "@/services/notificationsService";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 function NotificationsSkeleton() {
   return (
@@ -36,6 +37,7 @@ function iconForType(type?: string) {
 }
 
 export function NotificationsPage() {
+  usePageTitle("Notifications");
   const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["notifications"],
@@ -44,6 +46,11 @@ export function NotificationsPage() {
 
   const markRead = useMutation({
     mutationFn: markNotificationRead,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notifications"] }),
+  });
+
+  const markAllRead = useMutation({
+    mutationFn: markAllNotificationsRead,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notifications"] }),
   });
 
@@ -89,9 +96,21 @@ export function NotificationsPage() {
       <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <CardHeader className="p-0">
-            <div>
-              <Badge variant="purple">Unread first</Badge>
-              <CardTitle className="mt-3">Priority updates</CardTitle>
+            <div className="flex items-center justify-between">
+              <div>
+                <Badge variant="purple">Unread first</Badge>
+                <CardTitle className="mt-3">Priority updates</CardTitle>
+              </div>
+              {unread.length > 0 && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => markAllRead.mutate()}
+                  disabled={markAllRead.isPending}
+                >
+                  Mark all read
+                </Button>
+              )}
             </div>
           </CardHeader>
 
