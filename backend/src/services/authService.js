@@ -22,9 +22,11 @@ const signAccessToken = (user) =>
   });
 
 const signRefreshToken = (user) =>
-  jwt.sign({ id: user._id, type: "refresh" }, getEnv().jwtRefreshSecret, {
-    expiresIn: `${refreshExpiryDays()}d`,
-  });
+  jwt.sign(
+    { id: user._id, type: "refresh", jti: crypto.randomBytes(16).toString("hex") },
+    getEnv().jwtRefreshSecret,
+    { expiresIn: `${refreshExpiryDays()}d` }
+  );
 
 export const registerUser = async ({ fullName, email, password, role = "student", gradeLevel }) => {
   const safeRole = sanitizeRegisterRole(role);
@@ -47,15 +49,33 @@ export const registerUser = async ({ fullName, email, password, role = "student"
 };
 
 export const loginUser = async ({ email, password }) => {
-  const user = await User.findOne({ email: email.toLowerCase() }).select("+refreshTokenHash +refreshTokenExpiresAt");
+  const user = await User.findOne({ email: email.toLowerCase() }).select(
+    "+refreshTokenHash +refreshTokenExpiresAt +loginAttempts +lockUntil"
+  );
   if (!user) {
     throw new ApiError(401, "Invalid credentials");
   }
 
+  if (user.lockUntil && user.lockUntil > new Date()) {
+    const minutesLeft = Math.ceil((user.lockUntil.getTime() - Date.now()) / 60000);
+    throw new ApiError(
+      403,
+      `Account is temporarily locked due to too many failed attempts. Try again in ${minutesLeft} minute${minutesLeft > 1 ? "s" : ""}.`
+    );
+  }
+
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
+    user.loginAttempts = (user.loginAttempts ?? 0) + 1;
+    if (user.loginAttempts >= 10) {
+      user.lockUntil = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes lockout
+    }
+    await user.save();
     throw new ApiError(401, "Invalid credentials");
   }
+
+  user.loginAttempts = 0;
+  user.lockUntil = undefined;
 
   const accessToken = signAccessToken(user);
   const refreshToken = signRefreshToken(user);
@@ -87,7 +107,10 @@ export const refreshAccessToken = async (refreshToken) => {
 
   const incomingHash = hashToken(refreshToken);
   if (incomingHash !== user.refreshTokenHash) {
-    throw new ApiError(401, "Refresh token mismatch");
+    user.refreshTokenHash = undefined;
+    user.refreshTokenExpiresAt = undefined;
+    await user.save();
+    throw new ApiError(401, "Refresh token reuse detected — please sign in again");
   }
 
   const newAccessToken = signAccessToken(user);
@@ -98,6 +121,58 @@ export const refreshAccessToken = async (refreshToken) => {
   await user.save();
 
   return { accessToken: newAccessToken, refreshToken: newRefreshToken, user };
+};
+
+export const requestPasswordReset = async (email) => {
+  const user = await User.findOne({ email: email.toLowerCase() }).select(
+    "+passwordResetHash +passwordResetExpiresAt"
+  );
+  if (!user) {
+    return { sent: true };
+  }
+
+  const resetToken = crypto.randomBytes(32).toString("hex");
+  user.passwordResetHash = hashToken(resetToken);
+  user.passwordResetExpiresAt = new Date(Date.now() + 60 * 60 * 1000);
+  await user.save();
+
+  return { sent: true, resetToken, userId: user._id };
+};
+
+export const resetPasswordWithToken = async ({ token, password }) => {
+  const incomingHash = hashToken(token);
+  const user = await User.findOne({
+    passwordResetHash: incomingHash,
+    passwordResetExpiresAt: { $gt: new Date() },
+  }).select("+passwordResetHash +passwordResetExpiresAt +refreshTokenHash +refreshTokenExpiresAt");
+
+  if (!user) {
+    throw new ApiError(400, "Invalid or expired reset token");
+  }
+
+  user.password = await bcrypt.hash(password, 10);
+  user.passwordResetHash = undefined;
+  user.passwordResetExpiresAt = undefined;
+  user.refreshTokenHash = undefined;
+  user.refreshTokenExpiresAt = undefined;
+  await user.save();
+  return user;
+};
+
+export const changePassword = async ({ userId, currentPassword, newPassword }) => {
+  const user = await User.findById(userId).select(
+    "+password +refreshTokenHash +refreshTokenExpiresAt"
+  );
+  if (!user) throw new ApiError(404, "User not found");
+
+  const matches = await bcrypt.compare(currentPassword, user.password);
+  if (!matches) throw new ApiError(401, "Current password is incorrect");
+
+  user.password = await bcrypt.hash(newPassword, 10);
+  user.refreshTokenHash = undefined;
+  user.refreshTokenExpiresAt = undefined;
+  await user.save();
+  return user;
 };
 
 export const logoutUser = async (userId) => {
