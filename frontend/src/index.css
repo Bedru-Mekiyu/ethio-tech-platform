@@ -88,3 +88,31 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+@keyframes slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-in {
+  animation: slide-in-from-right var(--motion-base) ease-out;
+}
+
+.slide-in-from-right-5 {
+  --tw-enter-translate-x: 1.25rem;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+dialog {
+  color: inherit;
+}
+
