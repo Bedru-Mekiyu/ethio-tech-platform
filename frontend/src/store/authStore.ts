@@ -8,16 +8,16 @@ export interface AuthUser {
   role: "student" | "mentor" | "admin" | "parent";
   level?: number;
   xp?: number;
+  isVerified?: boolean;
 }
 
 interface AuthState {
   hydrated: boolean;
   user: AuthUser | null;
   accessToken: string | null;
-  refreshToken: string | null;
   setHydrated: (hydrated: boolean) => void;
-  setAuth: (user: AuthUser, accessToken: string, refreshToken: string) => void;
-  setTokens: (accessToken: string, refreshToken: string) => void;
+  setAuth: (user: AuthUser, accessToken: string) => void;
+  setAccessToken: (accessToken: string) => void;
   setUser: (user: AuthUser) => void;
   logout: () => void;
 }
@@ -28,13 +28,11 @@ export const useAuthStore = create<AuthState>()(
       hydrated: false,
       user: null,
       accessToken: null,
-      refreshToken: null,
       setHydrated: (hydrated) => set({ hydrated }),
-      setAuth: (user, accessToken, refreshToken) =>
-        set({ user, accessToken, refreshToken }),
-      setTokens: (accessToken, refreshToken) => set({ accessToken, refreshToken }),
+      setAuth: (user, accessToken) => set({ user, accessToken }),
+      setAccessToken: (accessToken) => set({ accessToken }),
       setUser: (user) => set({ user }),
-      logout: () => set({ user: null, accessToken: null, refreshToken: null }),
+      logout: () => set({ user: null, accessToken: null }),
     }),
     {
       name: "ethiotech-auth",
