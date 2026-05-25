@@ -12,4 +12,7 @@ const trackSchema = new Schema({
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 
+trackSchema.index({ isActive: 1, category: 1, createdAt: -1 });
+trackSchema.index({ category: 1, xpReward: -1 });
+
 export default model("Track", trackSchema);
