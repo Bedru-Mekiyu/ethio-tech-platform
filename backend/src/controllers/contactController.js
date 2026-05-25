@@ -3,12 +3,12 @@ import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import Notification from "../models/Notification.js";
 import User from "../models/User.js";
+import { sanitizePlainText } from "../utils/sanitize.js";
 
 export const submitContact = asyncHandler(async (req, res) => {
-  const { name, email, message } = req.body;
-  if (!name || !email || !message) {
-    throw new ApiError(400, "name, email, and message are required");
-  }
+  const name = sanitizePlainText(req.body.name, 120);
+  const email = sanitizePlainText(req.body.email, 200).toLowerCase();
+  const message = sanitizePlainText(req.body.message, 2000);
 
   const admins = await User.find({ role: "admin" }).select("_id").limit(5);
   if (admins.length) {
