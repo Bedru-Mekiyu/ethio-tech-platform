@@ -13,5 +13,12 @@ const chatMessageSchema = new Schema(
 );
 
 chatMessageSchema.index({ roomId: 1, createdAt: -1 });
+chatMessageSchema.index(
+  { roomId: 1, messageId: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { messageId: { $exists: true } },
+  }
+);
 
 export default model("ChatMessage", chatMessageSchema);
