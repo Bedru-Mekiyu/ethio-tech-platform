@@ -10,4 +10,6 @@ const moduleSchema = new Schema({
   order: { type: Number, min: 0 },
 }, { timestamps: true });
 
+moduleSchema.index({ track: 1, order: 1, createdAt: 1 });
+
 export default model("Module", moduleSchema);
