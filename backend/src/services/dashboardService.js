@@ -7,6 +7,8 @@ import Project from "../models/Project.js";
 import LessonProgress from "../models/LessonProgress.js";
 import SessionFeedback from "../models/SessionFeedback.js";
 import UserStreak from "../models/UserStreak.js";
+import PeerGroup from "../models/PeerGroup.js";
+import { getChallengeCompletionForUser, getTodayChallenge } from "./gamificationService.js";
 
 const toObjectIdString = (value) => String(value);
 
@@ -68,18 +70,35 @@ export const getStudentDashboardData = async (userId) => {
     .populate("badges", "name category")
     .populate("enrolledTracks", "title category");
 
-  const [recentXp, upcomingSessions, recentSubmissions, leaderboardPosition, streak, assignedProjects] = await Promise.all([
+  const [
+    recentXp,
+    upcomingSessions,
+    recentSubmissions,
+    leaderboardPosition,
+    streak,
+    assignedProjects,
+    dailyChallenge,
+    completedLessonCount,
+    submissionCount,
+    sessionCount,
+    peerGroupCount,
+  ] = await Promise.all([
     XPLog.find({ user: userId }).sort({ createdAt: -1 }).limit(10),
     Session.find({ participants: userId, scheduledAt: { $gte: new Date() } })
       .sort({ scheduledAt: 1 })
       .limit(5)
       .select("title scheduledAt meetingLink status _id"),
     Submission.find({ student: userId }).sort({ createdAt: -1 }).limit(5).populate("project", "title"),
-    User.countDocuments({ xp: { $gt: user?.xp || 0 } }),
+    User.countDocuments({ role: "student", xp: { $gt: user?.xp || 0 } }),
     UserStreak.findOne({ user: userId }).select("currentStreak longestStreak lastActiveDate"),
     Project.find({ track: { $in: (user?.enrolledTracks || []).map((track) => track._id || track) } })
       .sort({ createdAt: -1 })
       .populate("track", "title"),
+    getTodayChallenge(),
+    LessonProgress.countDocuments({ student: userId }),
+    Submission.countDocuments({ student: userId }),
+    Session.countDocuments({ participants: userId }),
+    PeerGroup.countDocuments({ isActive: true, $or: [{ members: userId }, { leader: userId }] }),
   ]);
 
   const progressByTrack = await computeStudentProgressByTrack(userId, user?.enrolledTracks || []);
@@ -136,6 +155,50 @@ export const getStudentDashboardData = async (userId) => {
     });
   }
 
+  const onboardingItems = [
+    {
+      key: "profile",
+      label: "Complete your learner profile",
+      completed: Boolean(user?.gradeLevel),
+      href: "/app/profile",
+    },
+    {
+      key: "track",
+      label: "Enroll in a learning track",
+      completed: Boolean(user?.enrolledTracks?.length),
+      href: "/app/tracks",
+    },
+    {
+      key: "lesson",
+      label: "Finish your first lesson",
+      completed: completedLessonCount > 0,
+      href: "/app/tracks",
+    },
+    {
+      key: "project",
+      label: "Submit your first project",
+      completed: submissionCount > 0,
+      href: "/app/projects",
+    },
+    {
+      key: "session",
+      label: "Join a mentor session",
+      completed: sessionCount > 0,
+      href: "/app/sessions",
+    },
+    {
+      key: "squad",
+      label: "Join a collaboration squad",
+      completed: peerGroupCount > 0,
+      href: "/app/squads",
+    },
+  ];
+
+  const completedOnboardingItems = onboardingItems.filter((item) => item.completed).length;
+  const dailyChallengeCompleted = dailyChallenge
+    ? Boolean(await getChallengeCompletionForUser(userId, dailyChallenge._id))
+    : false;
+
   return {
     user,
     recentXp,
@@ -145,12 +208,27 @@ export const getStudentDashboardData = async (userId) => {
     assignedProjects: Array.from(assignedProjectsById.values()),
     leaderboardPosition: leaderboardPosition + 1,
     streak,
+    dailyChallenge,
+    dailyChallengeCompleted,
+    onboarding: {
+      completed: completedOnboardingItems,
+      total: onboardingItems.length,
+      percent: Math.round((completedOnboardingItems / onboardingItems.length) * 100),
+      items: onboardingItems,
+    },
+    nextActions: onboardingItems
+      .filter((item) => !item.completed)
+      .slice(0, 3)
+      .map((item) => ({
+        label: item.label,
+        href: item.href,
+      })),
   };
 };
 
 export const getMentorDashboardData = async (userId) => {
   const [mentor, mySessions, reviewsDone, recentXpEvents, feedbackSummary, pendingReviews] = await Promise.all([
-    User.findById(userId).select("fullName role mentorScore totalSessions expertise"),
+    User.findById(userId).select("fullName role mentorScore totalSessions expertise isVerified"),
     Session.find({ mentor: userId })
       .sort({ scheduledAt: -1 })
       .limit(10)
