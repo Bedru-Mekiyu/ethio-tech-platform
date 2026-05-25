@@ -2,6 +2,7 @@ import Notification from "../models/Notification.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
+import { getPagination } from "../utils/pagination.js";
 
 export const createNotification = asyncHandler(async (req, res) => {
   const { recipient, type, message, link } = req.body;
@@ -21,10 +22,21 @@ export const createNotification = asyncHandler(async (req, res) => {
 });
 
 export const getMyNotifications = asyncHandler(async (req, res) => {
-  const notifications = await Notification.find({ recipient: req.user._id })
-    .sort({ createdAt: -1 })
-    .limit(100);
-  sendResponse(res, 200, "Notifications fetched", { notifications });
+  const { page, limit, skip } = getPagination(req.query);
+  const filter = { recipient: req.user._id };
+
+  const [notifications, total] = await Promise.all([
+    Notification.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit),
+    Notification.countDocuments(filter),
+  ]);
+
+  sendResponse(res, 200, "Notifications fetched", {
+    notifications,
+    pagination: { page, limit, total, pages: Math.ceil(total / limit) },
+  });
 });
 
 export const markNotificationRead = asyncHandler(async (req, res) => {
@@ -33,4 +45,12 @@ export const markNotificationRead = asyncHandler(async (req, res) => {
   notification.isRead = true;
   await notification.save();
   sendResponse(res, 200, "Notification marked as read", { notification });
+});
+
+export const markAllNotificationsRead = asyncHandler(async (req, res) => {
+  await Notification.updateMany(
+    { recipient: req.user._id, isRead: false },
+    { $set: { isRead: true } }
+  );
+  sendResponse(res, 200, "All notifications marked as read");
 });
