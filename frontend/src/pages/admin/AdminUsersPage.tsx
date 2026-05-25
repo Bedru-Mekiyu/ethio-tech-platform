@@ -3,16 +3,22 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/composites/EmptyState";
+import { QueryError } from "@/components/composites/QueryError";
 import { fetchAdminUsers } from "@/services/dashboardService";
 import { Link } from "react-router-dom";
 
 export function AdminUsersPage() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["admin", "users"],
     queryFn: fetchAdminUsers,
   });
 
   const items = data?.items ?? [];
+
+  if (isError) {
+    return <QueryError onRetry={() => refetch()} />;
+  }
 
   return (
     <div className="space-y-8">
@@ -30,6 +36,8 @@ export function AdminUsersPage() {
 
       {isLoading ? (
         <Skeleton className="h-40 w-full" />
+      ) : items.length === 0 ? (
+        <EmptyState title="No users found" description="Try adjusting filters or check back later." />
       ) : (
         <div className="grid gap-4 xl:grid-cols-2">
           {items.map((user) => (
