@@ -3,6 +3,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import { getPagination } from "../utils/pagination.js";
+import { sanitizeOptionalText } from "../utils/sanitize.js";
 
 export const getUsers = asyncHandler(async (req, res) => {
   const { page, limit, skip } = getPagination(req.query);
@@ -35,7 +36,16 @@ export const getUsers = asyncHandler(async (req, res) => {
 export const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select("-password -refreshTokenHash -refreshTokenExpiresAt");
   if (!user) throw new ApiError(404, "User not found");
-  sendResponse(res, 200, "User fetched", { user });
+
+  const isSelf = String(req.user._id) === String(user._id);
+  const isAdmin = req.user.role === "admin";
+  const payload = user.toObject();
+  if (!isSelf && !isAdmin) {
+    delete payload.email;
+    delete payload.phone;
+  }
+
+  sendResponse(res, 200, "User fetched", { user: payload });
 });
 
 export const updateMyProfile = asyncHandler(async (req, res) => {
@@ -51,7 +61,16 @@ export const updateMyProfile = asyncHandler(async (req, res) => {
 
   const updates = {};
   allowedFields.forEach((field) => {
-    if (req.body[field] !== undefined) updates[field] = req.body[field];
+    if (req.body[field] === undefined) return;
+    if (field === "bio") {
+      updates.bio = sanitizeOptionalText(req.body.bio, 1000);
+      return;
+    }
+    if (field === "fullName") {
+      updates.fullName = sanitizeOptionalText(req.body.fullName, 120);
+      return;
+    }
+    updates[field] = req.body[field];
   });
 
   const user = await User.findByIdAndUpdate(req.user._id, updates, {
