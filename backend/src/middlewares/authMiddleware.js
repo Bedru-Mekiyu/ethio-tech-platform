@@ -32,3 +32,11 @@ export const authorize = (...roles) => (req, res, next) => {
   }
   next();
 };
+
+export const requireVerifiedMentor = (req, res, next) => {
+  if (req.user?.role === "mentor" && !req.user.isVerified) {
+    return next(new ApiError(403, "Mentor account must be verified before using mentor tools"));
+  }
+
+  next();
+};
