@@ -110,7 +110,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       >
         Skip to main content
       </a>
-      <aside className="hidden w-64 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[var(--bg-elevated)] p-4 lg:flex">
+      <aside className="hidden w-64 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.96)] p-4 lg:flex">
         <Logo to={homePath} />
         <nav className="mt-8 flex flex-1 flex-col gap-1">
           {navItems}
@@ -141,7 +141,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       ) : null}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-[var(--border)] bg-[var(--bg-elevated)] p-4 transition-transform lg:hidden",
+          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.98)] p-4 transition-transform lg:hidden",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -157,7 +157,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       </aside>
 
       <div className="flex flex-1 flex-col pb-16 lg:pb-0">
-        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] px-4 py-4 lg:px-8">
+        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[rgba(5,10,20,0.7)] px-4 py-4 backdrop-blur-xl lg:px-8">
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -209,7 +209,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           <Outlet />
         </main>
         <nav
-          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[var(--bg-elevated)] lg:hidden"
+          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[rgba(11,14,20,0.96)] pb-[env(safe-area-inset-bottom)] lg:hidden"
           aria-label="Mobile navigation"
         >
           {(variant === "student"

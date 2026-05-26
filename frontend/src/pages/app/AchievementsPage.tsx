@@ -110,8 +110,8 @@ export function AchievementsPage() {
   if (dashboardQuery.isLoading || badgesQuery.isLoading) return <AchievementsSkeleton />;
 
   return (
-    <div className="space-y-8">
-      <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
+    <div className="page-shell space-y-8">
+      <div className="hero-shell p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Badge className="mb-4">Achievements</Badge>
@@ -131,7 +131,7 @@ export function AchievementsPage() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+        <Card className="surface-panel p-4">
           <div className="flex items-center gap-2 text-[var(--text-muted)]">
             <Crown size={14} />
             <span className="text-[10px] uppercase tracking-[0.22em]">Level</span>
@@ -139,7 +139,7 @@ export function AchievementsPage() {
           <p className="mt-3 text-2xl font-semibold text-white">{level}</p>
           <p className="mt-1 text-xs text-[var(--text-secondary)]">{xp.toLocaleString()} XP total</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+        <Card className="surface-panel p-4">
           <div className="flex items-center gap-2 text-[var(--text-muted)]">
             <Trophy size={14} />
             <span className="text-[10px] uppercase tracking-[0.22em]">Current track</span>
@@ -147,7 +147,7 @@ export function AchievementsPage() {
           <p className="mt-3 text-2xl font-semibold text-white">{totalTrackProgress}%</p>
           <p className="mt-1 text-xs text-[var(--text-secondary)]">{currentTrack?.title ?? "No active track"}</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+        <Card className="surface-panel p-4">
           <div className="flex items-center gap-2 text-[var(--text-muted)]">
             <Rocket size={14} />
             <span className="text-[10px] uppercase tracking-[0.22em]">Next goal</span>
@@ -157,11 +157,11 @@ export function AchievementsPage() {
         </Card>
       </div>
 
-      <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+      <Card className="surface-panel p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <Badge variant="purple">Milestone road</Badge>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Badge roadmap</h2>
+            <h2 className="section-title mt-3 text-2xl">Badge roadmap</h2>
           </div>
           <div className="min-w-[220px] max-w-md flex-1">
             <ProgressBar value={Math.min(xp, 3500)} max={3500} color="primary" />

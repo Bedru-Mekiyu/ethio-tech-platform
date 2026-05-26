@@ -6,9 +6,9 @@ import { ProgressBar } from "@/components/ui/progress";
 
 export function AuthLayout() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#050a14] via-[#0a1628] to-[#050a14] px-4 py-10">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.12),transparent_28%),linear-gradient(135deg,#050a14_0%,#07111f_40%,#050a14_100%)] px-4 py-10">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2 lg:items-center">
-        <Card className="hidden border-primary/20 bg-[var(--bg-card)]/80 p-8 lg:block">
+        <Card className="hidden border-primary/20 bg-[rgba(11,14,20,0.84)] p-8 lg:block">
           <Logo />
           <p className="mt-2 text-sm text-[var(--text-secondary)]">
             Revolutionary learning for the next generation

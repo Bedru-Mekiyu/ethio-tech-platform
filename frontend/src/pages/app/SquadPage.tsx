@@ -130,6 +130,8 @@ export function SquadPage() {
       },
     });
 
+  const newsItems = useMemo(() => notificationsQuery.data ?? [], [notificationsQuery.data]);
+
   if (!id) {
     return (
       <EmptyState
@@ -149,8 +151,6 @@ export function SquadPage() {
   const activeProjects = dashboard?.assignedProjects?.filter((project) => project.category === "active").length ?? 0;
   const feedbackReady = dashboard?.assignedProjects?.filter((project) => project.category === "feedback").length ?? 0;
   const completedProjects = dashboard?.assignedProjects?.filter((project) => project.category === "completed").length ?? 0;
-
-  const newsItems = useMemo(() => notificationsQuery.data ?? [], [notificationsQuery.data]);
 
   const sendDraft = () => {
     const text = draft.trim();
@@ -173,9 +173,9 @@ export function SquadPage() {
   }
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
+    <div className="page-shell grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
       <div className="space-y-6">
-        <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
+        <Card className="hero-shell p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <Badge className="mb-4">News center squad</Badge>
@@ -195,7 +195,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
               <Badge variant="purple">News feed</Badge>
@@ -215,7 +215,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
               <Badge variant="purple">Live chat</Badge>
@@ -287,7 +287,7 @@ export function SquadPage() {
       </div>
 
       <div className="space-y-6">
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-5">
+        <Card className="surface-panel p-5">
           <div className="flex items-center gap-3">
             <Users className="text-primary" size={20} />
             <div>
@@ -307,7 +307,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-5">
+        <Card className="surface-panel p-5">
           <div className="flex items-center justify-between gap-3">
             <div>
               <Badge variant="purple">Upcoming sessions</Badge>
@@ -334,7 +334,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-5">
+        <Card className="surface-panel p-5">
           <Badge variant="success">Quick links</Badge>
           <div className="mt-4 space-y-3">
             <Link to="/app/projects">

@@ -140,9 +140,9 @@ export function StudentDashboardPage() {
   const upcomingSessions = dashboard?.upcomingSessions ?? [];
 
   return (
-    <div className="space-y-6">
+    <div className="page-shell space-y-6">
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-        <Card className="relative overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(16,23,37,0.96),rgba(7,12,20,0.98))] p-6">
+        <Card className="hero-shell relative overflow-hidden p-6">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,210,255,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.12),transparent_30%)]" />
           <div className="relative">
             <Badge className="mb-4">Current learning path</Badge>
@@ -220,7 +220,7 @@ export function StudentDashboardPage() {
           </div>
         </Card>
 
-        <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-0">
+        <Card className="surface-panel overflow-hidden p-0">
           <div className="relative h-full min-h-[28rem]">
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.18),rgba(6,10,18,0.92))]" />
             <img
@@ -257,7 +257,7 @@ export function StudentDashboardPage() {
         </Card>
       </div>
 
-      <Card className="grid gap-4 rounded-[24px] border-[var(--border)] bg-[var(--bg-elevated)]/90 p-4 md:grid-cols-4">
+      <Card className="surface-panel grid gap-4 p-4 md:grid-cols-4">
         <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
           <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Current streak</p>
           <p className="mt-2 text-2xl font-semibold text-white">{currentStreak} days</p>
@@ -283,7 +283,7 @@ export function StudentDashboardPage() {
       </Card>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
               <Badge variant="purple">Launch checklist</Badge>
@@ -321,7 +321,7 @@ export function StudentDashboardPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <Badge variant="success">Daily challenge</Badge>
           <h2 className="mt-3 text-2xl font-semibold text-white">
             {dailyChallenge?.title ?? "Build a habit today"}

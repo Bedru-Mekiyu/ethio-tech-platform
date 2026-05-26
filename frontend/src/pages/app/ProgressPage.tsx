@@ -36,17 +36,17 @@ export function ProgressPage() {
     challengeQuery.data?.completed ?? dashboard?.dailyChallengeCompleted ?? false;
 
   return (
-    <div className="space-y-6">
+    <div className="page-shell space-y-6">
       <div>
         <Badge variant="purple">Progress hub</Badge>
-        <h1 className="mt-3 text-3xl font-bold text-white">Your learning momentum</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+        <h1 className="section-title mt-3 text-3xl">Your learning momentum</h1>
+        <p className="section-copy mt-2 text-sm">
           Streaks, daily challenges, badges, and XP in one place.
         </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <Flame className="text-warning" />
           <p className="mt-3 text-xs uppercase tracking-widest text-[var(--text-muted)]">Streak</p>
           <p className="mt-2 text-3xl font-bold text-white">{dashboard?.streak?.currentStreak ?? 0} days</p>
@@ -54,13 +54,13 @@ export function ProgressPage() {
             Best: {dashboard?.streak?.longestStreak ?? 0} days
           </p>
         </Card>
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <Zap className="text-success" />
           <p className="mt-3 text-xs uppercase tracking-widest text-[var(--text-muted)]">Total XP</p>
           <p className="mt-2 text-3xl font-bold text-white">{dashboard?.user?.xp ?? 0}</p>
           <p className="mt-1 text-sm text-[var(--text-secondary)]">Level {dashboard?.user?.level ?? 1}</p>
         </Card>
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <Trophy className="text-primary" />
           <p className="mt-3 text-xs uppercase tracking-widest text-[var(--text-muted)]">Leaderboard</p>
           <p className="mt-2 text-3xl font-bold text-white">#{dashboard?.leaderboardPosition ?? "—"}</p>
@@ -70,7 +70,7 @@ export function ProgressPage() {
         </Card>
       </div>
 
-      <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+      <Card className="surface-panel p-6">
         <CardHeader className="p-0">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <CardTitle className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export function ProgressPage() {
         ) : null}
       </Card>
 
-      <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+      <Card className="surface-panel p-6">
         <CardTitle className="flex items-center gap-2">
           <Award size={20} /> Badges
         </CardTitle>

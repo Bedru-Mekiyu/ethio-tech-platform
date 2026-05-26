@@ -4,6 +4,8 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { resetPassword } from "@/services/authService";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -49,8 +51,9 @@ export function ResetPasswordPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <h1 className="text-2xl font-bold text-white">Choose a new password</h1>
+    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
+      <Badge variant="purple">Password reset</Badge>
+      <h1 className="mt-4 text-2xl font-bold tracking-tight text-white">Choose a new password</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label htmlFor="password" className="text-sm text-[var(--text-secondary)]">
@@ -71,6 +74,6 @@ export function ResetPasswordPage() {
           {isSubmitting ? "Updating…" : "Update password"}
         </Button>
       </form>
-    </div>
+    </Card>
   );
 }

@@ -6,7 +6,7 @@ export function Card({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("card-surface p-6 transition-colors duration-200", className)} {...props}>
+    <div className={cn("card-surface p-6 transition-all duration-200 hover:border-[var(--border-strong)]", className)} {...props}>
       {children}
     </div>
   );

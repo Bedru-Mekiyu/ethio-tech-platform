@@ -19,8 +19,8 @@ export function MarketingLayout() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)]">
-      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg-base)]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(5,10,20,0.86)] backdrop-blur-xl">
+        <div className="page-shell flex items-center justify-between py-4">
           <Logo />
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((item) => (
@@ -60,7 +60,7 @@ export function MarketingLayout() {
         {open && (
           <div
             id="mobile-marketing-nav"
-            className="border-t border-[var(--border)] px-4 py-4 md:hidden"
+            className="border-t border-[var(--border)] bg-[rgba(8,14,24,0.98)] px-4 py-4 md:hidden"
           >
             {nav.map((item) => (
               <Link key={item.to} to={item.to} className="block py-2" onClick={() => setOpen(false)}>
@@ -79,8 +79,8 @@ export function MarketingLayout() {
       <main>
         <Outlet />
       </main>
-      <footer className="mt-20 border-t border-[var(--border)] py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm text-[var(--text-muted)] md:flex-row lg:px-8">
+      <footer className="mt-20 border-t border-[var(--border)] bg-[rgba(5,10,20,0.82)] py-10">
+        <div className="page-shell flex flex-col items-center justify-between gap-4 text-sm text-[var(--text-muted)] md:flex-row">
           <Logo />
           <div className="flex gap-6">
             <Link to="/privacy">Privacy</Link>

@@ -35,8 +35,13 @@ const startServer = async () => {
       origin: getEnv().corsOrigin,
       credentials: true,
     },
+    connectionStateRecovery: {
+      maxDisconnectionDuration: 2 * 60 * 1000,
+      skipMiddlewares: false,
+    },
   });
 
+  let redisClient: any = null;
   const redisUrl = process.env.REDIS_URL || process.env.RATE_LIMIT_REDIS_URL;
   if (redisUrl) {
     try {
@@ -44,6 +49,7 @@ const startServer = async () => {
       const { createAdapter } = await import("@socket.io/redis-adapter");
       const pubClient = createClient({ url: redisUrl });
       const subClient = pubClient.duplicate();
+      redisClient = pubClient;
       await Promise.all([pubClient.connect(), subClient.connect()]);
       io.adapter(createAdapter(pubClient, subClient));
       logger.info("Socket.io Redis adapter enabled");
@@ -53,6 +59,8 @@ const startServer = async () => {
       });
     }
   }
+
+  app.set("redisClient", redisClient);
 
   setupSocket(io);
   app.set("io", io);

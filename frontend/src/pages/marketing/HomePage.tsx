@@ -243,7 +243,7 @@ export function HomePage() {
   return (
     <div>
       <motion.section
-        className="mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pt-16"
+        className="page-shell grid gap-10 pb-14 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:pt-16"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
@@ -326,18 +326,16 @@ export function HomePage() {
         </div>
       </motion.section>
 
-      <section className="px-4 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <Card className="grid gap-4 rounded-[28px] border-primary/20 bg-[var(--bg-elevated)]/90 p-4 md:grid-cols-4">
-            {stats.map((stat) => (
-              <MarketingStat key={stat.label} {...stat} />
-            ))}
-          </Card>
+      <section className="page-shell">
+        <div className="surface-panel grid gap-4 p-4 md:grid-cols-4">
+          {stats.map((stat) => (
+            <MarketingStat key={stat.label} {...stat} />
+          ))}
         </div>
       </section>
 
       <motion.section
-        className="mx-auto max-w-7xl px-4 py-20 lg:px-8"
+        className="page-shell py-20"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -346,8 +344,8 @@ export function HomePage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <Badge className="mb-4">Learning pathways</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Master the Tech of Tomorrow</h2>
-            <p className="mt-4 text-[var(--text-secondary)]">
+            <h2 className="section-title">Master the Tech of Tomorrow</h2>
+            <p className="section-copy mt-4">
               Structured tracks from fundamentals to job-ready engineering skills, with the same
               visual weight and clarity across every device.
             </p>
@@ -374,7 +372,7 @@ export function HomePage() {
       </motion.section>
 
       <motion.section
-        className="mx-auto max-w-7xl px-4 pb-24 lg:px-8"
+        className="page-shell pb-24"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -383,7 +381,7 @@ export function HomePage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <Badge className="mb-4">Expert mentors</Badge>
-            <h2 className="text-2xl font-bold md:text-3xl">Learn from Global Industry Leaders</h2>
+            <h2 className="section-title text-2xl md:text-3xl">Learn from Global Industry Leaders</h2>
           </div>
           <Link to="/register?role=mentor">
             <Button variant="outline">View all mentors</Button>

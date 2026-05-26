@@ -283,7 +283,7 @@ export function TracksPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+    <div className="page-shell py-16">
       <motion.section
         className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center"
         initial={reduceMotion ? false : { opacity: 0, y: 16 }}
@@ -292,10 +292,10 @@ export function TracksPage() {
       >
         <div className="max-w-2xl">
           <Badge className="mb-5">Learning tracks</Badge>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="section-title text-4xl md:text-5xl lg:text-6xl">
             Learning Tracks
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
+          <p className="section-copy mt-6 max-w-xl text-base md:text-lg">
             Choose the path that matches your momentum, keep your current progress visible, and move
             through each track with clear next steps.
           </p>
@@ -352,7 +352,7 @@ export function TracksPage() {
 
         <div className="relative">
           <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.18),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.15),transparent_34%)] blur-2xl" />
-          <Card className="relative overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(15,22,36,0.98),rgba(5,10,19,0.98))] p-4">
+          <Card className="hero-shell relative overflow-hidden p-4">
             <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="relative overflow-hidden rounded-[22px] border border-white/5 bg-black/20">
                 <div className="absolute left-4 top-4 z-10 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.9)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary">
@@ -426,8 +426,8 @@ export function TracksPage() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <Badge className="mb-4">Your curriculum</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Track your path, then keep moving.</h2>
-            <p className="mt-4 text-[var(--text-secondary)]">
+            <h2 className="section-title text-3xl md:text-4xl">Track your path, then keep moving.</h2>
+            <p className="section-copy mt-4">
               The cards below use real enrollment and progress data so students can immediately see what
               they have started, what they have finished, and what still needs attention.
             </p>

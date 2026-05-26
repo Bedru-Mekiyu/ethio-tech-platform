@@ -52,6 +52,7 @@ export interface OutboxMessage {
   text: string;
   at: string;
   clientId: string;
+  queuedAt?: string;
 }
 
 export interface SocketClientToServerEvents {

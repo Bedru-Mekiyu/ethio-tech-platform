@@ -53,7 +53,13 @@ const isValidRoomId = (roomId: unknown): roomId is string =>
   ROOM_ID_PATTERN.test(roomId);
 
 const sanitizeChatText = (text: string) =>
-  text.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim();
+  Array.from(text)
+    .filter((char) => {
+      const code = char.charCodeAt(0);
+      return code === 9 || code === 10 || code === 13 || (code >= 32 && code !== 127);
+    })
+    .join("")
+    .trim();
 
 const payloadSize = (payload: unknown) => {
   try {
@@ -134,11 +140,18 @@ const emitRoomState = (io: Server, roomId: string) => {
   io.to(roomId).emit("room:state", snapshot);
 };
 
-const updateRoomActivity = (io: Server, roomId: string, quality?: ConnectionQuality) => {
+const updateRoomActivity = (
+  io: Server,
+  roomId: string,
+  quality?: ConnectionQuality,
+  broadcast = true
+) => {
   const state = getRoomState(roomId);
   state.lastActivityAt = new Date().toISOString();
   if (quality) state.connectionQuality = quality;
-  emitRoomState(io, roomId);
+  if (broadcast) {
+   emitRoomState(io, roomId);
+  }
 };
 
 const cleanupRooms = () => {
@@ -211,15 +224,13 @@ export const setupSocket = (io: Server) => {
       joinedRooms.add(roomId);
       const state = getRoomState(roomId);
       state.connectedParticipants.set(socket.id, user?.id);
-      updateRoomActivity(io, roomId);
       socket.to(roomId).emit("presence:join", {
         roomId,
         userId: user?.id,
         socketId: socket.id,
         at: new Date().toISOString(),
       });
-      socket.emit("room:state", snapshotRoom(io, roomId));
-      emitRoomState(io, roomId);
+      updateRoomActivity(io, roomId);
     });
 
     socket.on("leave-room", (roomId: string) => {
@@ -229,7 +240,6 @@ export const setupSocket = (io: Server) => {
       const state = rooms.get(roomId);
       if (state) {
         state.connectedParticipants.delete(socket.id);
-        updateRoomActivity(io, roomId);
       }
       socket.to(roomId).emit("presence:leave", {
         roomId,
@@ -237,7 +247,7 @@ export const setupSocket = (io: Server) => {
         socketId: socket.id,
         at: new Date().toISOString(),
       });
-      emitRoomState(io, roomId);
+      updateRoomActivity(io, roomId);
     });
 
     socket.on("chat:message", (payload: ChatMessageClientPayload, ack?: (_response: { ok: boolean; messageId?: string }) => void) => {
@@ -348,7 +358,7 @@ export const setupSocket = (io: Server) => {
       if (!joinedRooms.has(payload.roomId)) return;
       const receivedAt = new Date().toISOString();
       const sentAtMs = Date.parse(payload.sentAt);
-      updateRoomActivity(io, payload.roomId, payload.connectionQuality);
+      updateRoomActivity(io, payload.roomId, payload.connectionQuality, false);
       const response = {
         roomId: payload.roomId,
         receivedAt,
@@ -364,7 +374,7 @@ export const setupSocket = (io: Server) => {
       if (!joinedRooms.has(payload.roomId)) return;
       const state = getRoomState(payload.roomId);
       state.connectionQuality = payload.connectionQuality;
-      updateRoomActivity(io, payload.roomId, payload.connectionQuality);
+      updateRoomActivity(io, payload.roomId, payload.connectionQuality, false);
     });
 
     socket.on("disconnect", () => {

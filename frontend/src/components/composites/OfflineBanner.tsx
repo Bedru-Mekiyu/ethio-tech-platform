@@ -22,10 +22,10 @@ export function OfflineBanner() {
   return (
     <div
       role="alert"
-      className="fixed left-0 right-0 top-0 z-[9999] flex items-center justify-center gap-2 bg-[var(--warning)] px-4 py-2 text-sm font-medium text-black"
+      className="fixed left-3 right-3 top-3 z-[9999] flex items-center justify-center gap-2 rounded-2xl border border-warning/30 bg-[rgba(17,24,35,0.94)] px-4 py-3 text-sm font-medium text-white shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-md sm:left-4 sm:right-4"
     >
-      <WifiOff size={16} />
-      <span>You are offline. Some features may be unavailable.</span>
+      <WifiOff size={16} className="text-warning" />
+      <span>You are offline. Messages will queue until the connection returns.</span>
     </div>
   );
 }

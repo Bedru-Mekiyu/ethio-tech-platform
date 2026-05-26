@@ -15,16 +15,21 @@ export function EmptyState({
   onAction?: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-dashed border-[var(--border)] p-8 text-center">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      {description ? <p className="mt-2 text-sm text-[var(--text-muted)]">{description}</p> : null}
+    <div className="surface-panel flex flex-col items-center justify-center gap-4 px-6 py-10 text-center">
+      <div className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
+        Learning space
+      </div>
+      <div className="max-w-md">
+        <h3 className="text-xl font-semibold text-white">{title}</h3>
+        {description ? <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{description}</p> : null}
+      </div>
       {actionLabel && actionHref ? (
-        <Link to={actionHref} className="mt-4 inline-block">
+        <Link to={actionHref} className="inline-flex">
           <Button>{actionLabel}</Button>
         </Link>
       ) : null}
       {actionLabel && onAction && !actionHref ? (
-        <Button className="mt-4" onClick={onAction}>
+        <Button onClick={onAction}>
           {actionLabel}
         </Button>
       ) : null}

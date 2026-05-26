@@ -4,6 +4,8 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { forgotPassword } from "@/services/authService";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -31,10 +33,11 @@ export function ForgotPasswordPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-white">Reset your password</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
+      <Badge variant="purple">Account recovery</Badge>
+      <div className="mt-4">
+        <h1 className="text-2xl font-bold tracking-tight text-white">Reset your password</h1>
+        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
           Enter your account email and we will send reset instructions.
         </p>
       </div>
@@ -60,9 +63,9 @@ export function ForgotPasswordPage() {
           </Link>
         </p>
       ) : null}
-      <Link to="/login" className="text-sm text-primary hover:underline">
+      <Link to="/login" className="inline-flex text-sm text-primary hover:underline">
         Back to sign in
       </Link>
-    </div>
+    </Card>
   );
 }

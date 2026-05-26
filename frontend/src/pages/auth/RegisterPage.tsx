@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { register as registerApi, login } from "@/services/authService";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
 
@@ -50,9 +51,10 @@ export function RegisterPage() {
   };
 
   return (
-    <Card className="mx-auto max-w-md p-8">
-      <h2 className="text-xl font-bold">Create your {role} profile</h2>
-      <p className="mt-1 text-sm text-[var(--text-secondary)]">
+    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
+      <Badge variant="purple">Secure enrollment</Badge>
+      <h2 className="mt-4 text-2xl font-bold tracking-tight text-white">Create your {role} profile</h2>
+      <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
         Join Ethiopia&apos;s immersive tech education movement.
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">

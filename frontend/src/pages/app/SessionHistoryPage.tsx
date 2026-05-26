@@ -23,18 +23,26 @@ export function SessionHistoryPage() {
       <EmptyState
         title="No sessions yet"
         description="Join a live session from your dashboard when your mentor schedules one."
+        actionLabel="Back to dashboard"
+        actionHref="/app/dashboard"
       />
     );
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Session history</h1>
+    <div className="page-shell space-y-6">
+      <Card className="hero-shell p-6">
+        <Badge variant="purple">Session timeline</Badge>
+        <h1 className="mt-4 text-2xl font-bold text-white md:text-3xl">Session history</h1>
+        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+          Track your live classroom schedule and post-session feedback.
+        </p>
+      </Card>
       <div className="space-y-3">
         {sessions.map((s) => (
-          <Card key={s._id} className="flex flex-wrap items-center justify-between gap-4 p-4">
+          <Card key={s._id} className="surface-panel flex flex-wrap items-center justify-between gap-4 p-4">
             <div>
-              <p className="font-semibold">{s.title}</p>
+              <p className="font-semibold text-white">{s.title}</p>
               <p className="text-sm text-[var(--text-muted)]">
                 {new Date(s.scheduledAt).toLocaleString()}
               </p>

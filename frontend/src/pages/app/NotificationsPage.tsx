@@ -76,13 +76,13 @@ export function NotificationsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
+    <div className="page-shell space-y-6">
+      <Card className="hero-shell p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <Badge className="mb-3">Notifications</Badge>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Stay synced with the learning network</h1>
-            <p className="mt-3 max-w-2xl text-[var(--text-secondary)]">
+            <h1 className="section-title text-3xl md:text-4xl">Stay synced with the learning network</h1>
+            <p className="section-copy mt-3 max-w-2xl">
               Important classroom, project, and mentor updates live here so you can respond quickly without losing focus.
             </p>
           </div>
@@ -94,7 +94,7 @@ export function NotificationsPage() {
       </Card>
 
       <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <Card className="surface-panel p-6">
           <CardHeader className="p-0">
             <div className="flex items-center justify-between">
               <div>
@@ -154,7 +154,7 @@ export function NotificationsPage() {
         </Card>
 
         <div className="space-y-6">
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <Card className="surface-panel p-6">
             <div className="flex items-center gap-2 text-[var(--text-muted)]">
               <CheckCircle2 size={14} />
               <span className="text-[10px] uppercase tracking-[0.22em]">Recent read items</span>
@@ -175,7 +175,7 @@ export function NotificationsPage() {
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+          <Card className="surface-panel p-6">
             <div className="flex items-center gap-2 text-[var(--text-muted)]">
               <Bell size={14} />
               <span className="text-[10px] uppercase tracking-[0.22em]">Notification types</span>

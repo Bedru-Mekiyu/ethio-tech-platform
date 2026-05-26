@@ -296,8 +296,8 @@ export function ClassroomPage() {
   }
 
   return (
-    <div className="space-y-4">
-      <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-elevated)]/90 p-4">
+    <div className="page-shell space-y-4">
+      <Card className="surface-panel p-4">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
@@ -342,7 +342,7 @@ export function ClassroomPage() {
           <Suspense
             fallback={
               <div className="absolute inset-0 flex items-center justify-center">
-                <Card className="w-full max-w-md text-center">
+                <Card className="surface-panel w-full max-w-md text-center">
                   <Skeleton className="mx-auto h-3 w-24" />
                   <Skeleton className="mx-auto mt-4 h-10 w-56" />
                   <Skeleton className="mx-auto mt-3 h-4 w-72 max-w-full" />
@@ -366,7 +366,7 @@ export function ClassroomPage() {
           </div>
 
           <div className="absolute left-1/2 top-4 hidden -translate-x-1/2 md:block">
-            <Card className="min-w-[220px] border-primary/25 bg-[rgba(8,14,24,0.9)] p-3 text-center backdrop-blur">
+            <Card className="surface-panel min-w-[220px] border-primary/25 p-3 text-center backdrop-blur">
               <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Instructor</p>
               <div className="mt-3 flex items-center justify-center gap-3">
                 <Avatar src={mentor?.avatar} name={mentor?.fullName ?? "Mentor"} size="md" />
@@ -378,7 +378,7 @@ export function ClassroomPage() {
             </Card>
           </div>
 
-          <div className="absolute right-4 top-4 hidden max-w-xs rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/80 p-4 backdrop-blur md:block">
+          <div className="absolute right-4 top-4 hidden max-w-xs rounded-2xl border border-[var(--border)] bg-[rgba(11,14,20,0.82)] p-4 backdrop-blur md:block">
             <p className="text-xs uppercase tracking-widest text-[var(--text-muted)]">Classroom atmosphere</p>
             <p className="mt-2 text-sm text-[var(--text-secondary)]">
               Built for collaboration on weak networks, with presence-aware sync and a calm learning pace.
@@ -386,7 +386,7 @@ export function ClassroomPage() {
           </div>
 
           <div className="absolute bottom-4 left-4 right-4 space-y-3">
-            <Card className="border-[var(--border)] bg-[rgba(8,14,24,0.88)] p-4 backdrop-blur">
+            <Card className="surface-panel p-4 backdrop-blur">
               <div className="grid gap-3 md:grid-cols-4">
                 <SessionBadge icon={Video} label="Mode" value={session?.classroomMode ?? "immersive-3d"} />
                 <SessionBadge icon={Code2} label="Collab" value={session?.codeCollabEnabled ? "Enabled" : "Paused"} />
@@ -396,7 +396,7 @@ export function ClassroomPage() {
             </Card>
 
             {showControls ? (
-              <Card className="border-[var(--border)] bg-[rgba(8,14,24,0.95)] p-3 backdrop-blur">
+              <Card className="surface-panel p-3 backdrop-blur">
                 <div className="flex flex-wrap items-center justify-center gap-2">
                   <Button variant={audioMuted ? "danger" : "outline"} size="sm" onClick={() => setAudioMuted((value) => !value)}>
                     {audioMuted ? <MicOff size={16} /> : <Mic size={16} />}
@@ -429,7 +429,7 @@ export function ClassroomPage() {
 
         {!compactScene ? (
           <aside className="flex min-h-0 flex-col gap-4">
-            <Card id="classroom-activity" className="rounded-[28px] border border-[var(--border)] bg-[var(--bg-elevated)]">
+            <Card id="classroom-activity" className="surface-panel">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-primary">Room activity</p>
@@ -494,7 +494,7 @@ export function ClassroomPage() {
 
             <Card
               id="classroom-chat"
-              className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--bg-elevated)] p-0"
+              className="surface-panel flex min-h-0 flex-1 flex-col overflow-hidden p-0"
             >
               <div className="border-b border-[var(--border)] p-4">
                 <div className="flex items-center justify-between gap-3">

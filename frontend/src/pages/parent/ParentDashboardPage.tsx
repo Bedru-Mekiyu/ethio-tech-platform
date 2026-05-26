@@ -30,26 +30,28 @@ export function ParentDashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="max-w-3xl space-y-3">
-          <Badge variant="purple">Parent access</Badge>
-          <h1 className="text-2xl font-bold md:text-3xl">Welcome back, {firstName}</h1>
-          <p className="text-[var(--text-secondary)]">
-            Monitor linked learners&apos; progress, sessions, and platform activity.
-          </p>
+    <div className="page-shell space-y-8">
+      <Card className="hero-shell p-6">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="max-w-3xl space-y-3">
+            <Badge variant="purple">Parent access</Badge>
+            <h1 className="text-2xl font-bold md:text-3xl">Welcome back, {firstName}</h1>
+            <p className="section-copy">
+              Monitor linked learners&apos; progress, sessions, and platform activity.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link to="/parent/settings">
+              <Button variant="outline">Account settings</Button>
+            </Link>
+            <Link to="/app/notifications">
+              <Button variant="secondary">
+                <Bell size={16} /> Notifications
+              </Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Link to="/parent/settings">
-            <Button variant="outline">Account settings</Button>
-          </Link>
-          <Link to="/app/notifications">
-            <Button variant="secondary">
-              <Bell size={16} /> Notifications
-            </Button>
-          </Link>
-        </div>
-      </div>
+      </Card>
 
       {!data?.hasLinkedStudents ? (
         <EmptyState
@@ -61,7 +63,7 @@ export function ParentDashboardPage() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {learners.map((learner) => (
-            <Card key={learner.id} className="p-6">
+            <Card key={learner.id} className="surface-panel p-6">
               <div className="flex items-center gap-3">
                 <Users className="text-primary" size={18} />
                 <p className="font-semibold text-white">{learner.fullName}</p>
@@ -85,7 +87,7 @@ export function ParentDashboardPage() {
       )}
 
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="p-6">
+        <Card className="surface-panel p-6">
           <div className="flex items-center gap-3">
             <ShieldCheck className="text-primary" size={18} />
             <p className="font-semibold">Access status</p>
@@ -94,7 +96,7 @@ export function ParentDashboardPage() {
             Parent accounts use role-based access and short-lived tokens.
           </p>
         </Card>
-        <Card className="p-6">
+        <Card className="surface-panel p-6">
           <div className="flex items-center gap-3">
             <BookOpen className="text-secondary" size={18} />
             <p className="font-semibold">Progress</p>
@@ -103,7 +105,7 @@ export function ParentDashboardPage() {
             Lesson completion and project approvals update as learners work.
           </p>
         </Card>
-        <Card className="p-6">
+        <Card className="surface-panel p-6">
           <div className="flex items-center gap-3">
             <Sparkles className="text-warning" size={18} />
             <p className="font-semibold">Support</p>

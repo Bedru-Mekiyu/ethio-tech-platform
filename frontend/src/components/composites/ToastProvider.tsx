@@ -1,4 +1,5 @@
-import { useState, useCallback, createContext, useContext } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { useState, useCallback, createContext, useContext, useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { CheckCircle2, AlertTriangle, Info, X, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -46,8 +47,14 @@ let nextId = 0;
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const timersRef = useRef(new Map<string, number>());
 
   const removeToast = useCallback((id: string) => {
+    const timer = timersRef.current.get(id);
+    if (timer) {
+      window.clearTimeout(timer);
+      timersRef.current.delete(id);
+    }
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
@@ -56,7 +63,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       const id = `toast-${++nextId}`;
       setToasts((prev) => [...prev.slice(-4), { id, message, variant, duration }]);
       if (duration > 0) {
-        setTimeout(() => removeToast(id), duration);
+        const timer = window.setTimeout(() => removeToast(id), duration);
+        timersRef.current.set(id, timer);
       }
     },
     [removeToast]
@@ -69,6 +77,16 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     warning: (msg) => addToast(msg, "warning"),
     info: (msg) => addToast(msg, "info"),
   };
+
+  useEffect(
+    () => () => {
+      for (const timer of timersRef.current.values()) {
+        window.clearTimeout(timer);
+      }
+      timersRef.current.clear();
+    },
+    []
+  );
 
   return (
     <ToastContext.Provider value={ctx}>
@@ -84,7 +102,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             <div
               key={t.id}
               className={cn(
-                "pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3 shadow-lg backdrop-blur-sm transition-all animate-in slide-in-from-right-5 duration-300",
+                "pointer-events-auto flex items-start gap-3 rounded-2xl border px-4 py-3 shadow-lg backdrop-blur-sm transition-all animate-in slide-in-from-right-5 duration-300",
                 variantStyles[t.variant]
               )}
             >

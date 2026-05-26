@@ -12,6 +12,9 @@ import {
   type RealtimeRoomState,
 } from "@/lib/realtime";
 
+const MAX_QUEUE_LENGTH = 40;
+const MAX_QUEUE_AGE_MS = 6 * 60 * 60 * 1000;
+
 interface UseRealtimeRoomOptions {
   roomId: string;
   userId?: string;
@@ -32,6 +35,16 @@ interface UseRealtimeRoomOptions {
   onEvent?: (title: string, detail: string) => void;
 }
 
+const pruneQueuedMessages = (messages: OutboxMessage[]) => {
+  const now = Date.now();
+  return messages
+    .filter((message) => {
+      if (!message.queuedAt) return true;
+      return now - Date.parse(message.queuedAt) < MAX_QUEUE_AGE_MS;
+    })
+    .slice(-MAX_QUEUE_LENGTH);
+};
+
 const readQueuedMessages = (roomId: string): OutboxMessage[] => {
   if (typeof window === "undefined") return [];
 
@@ -40,7 +53,7 @@ const readQueuedMessages = (roomId: string): OutboxMessage[] => {
 
   try {
     const parsed = JSON.parse(raw) as OutboxMessage[];
-    return Array.isArray(parsed) ? parsed : [];
+    return Array.isArray(parsed) ? pruneQueuedMessages(parsed) : [];
   } catch {
     return [];
   }
@@ -48,7 +61,7 @@ const readQueuedMessages = (roomId: string): OutboxMessage[] => {
 
 const writeQueuedMessages = (roomId: string, messages: OutboxMessage[]) => {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(storageKeyForRoom(roomId), JSON.stringify(messages));
+  window.localStorage.setItem(storageKeyForRoom(roomId), JSON.stringify(pruneQueuedMessages(messages)));
 };
 
 export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }: UseRealtimeRoomOptions) {
@@ -64,6 +77,28 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
   const [roomState, setRoomState] = useState<RealtimeRoomState | null>(null);
   const [isOnline, setIsOnline] = useState(getConnectionQuality() !== "offline");
 
+  const loadHistory = useCallback(async () => {
+    try {
+      const history = await fetchRoomMessages(roomId);
+      for (const item of history) {
+        if (!item.messageId || !item.text) continue;
+        messageHandlerRef.current({
+          id: item.messageId,
+          roomId,
+          messageId: item.messageId,
+          text: item.text,
+          author: item.author ?? (item.userId === userId ? "You" : "Participant"),
+          at: item.at,
+          userId: item.userId,
+          mine: item.userId === userId,
+          status: "delivered",
+        });
+      }
+    } catch {
+      eventHandlerRef.current?.("History unavailable", "Live messages will still appear.");
+    }
+  }, [roomId, userId]);
+
   useEffect(() => {
     messageHandlerRef.current = onMessage;
     stateHandlerRef.current = onState;
@@ -72,7 +107,10 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
 
   const queueMessage = useCallback(
     (message: OutboxMessage) => {
-      queueRef.current = [...queueRef.current, message];
+      queueRef.current = pruneQueuedMessages([
+        ...queueRef.current.filter((item) => item.messageId !== message.messageId),
+        { ...message, queuedAt: message.queuedAt ?? new Date().toISOString() },
+      ]);
       writeQueuedMessages(roomId, queueRef.current);
       setPendingCount(queueRef.current.length);
       eventHandlerRef.current?.("Queued offline", "Your message will send when the network recovers.");
@@ -111,31 +149,6 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
   }, [roomId]);
 
   useEffect(() => {
-    let cancelled = false;
-
-    const loadHistory = async () => {
-      try {
-        const history = await fetchRoomMessages(roomId);
-        if (cancelled) return;
-        for (const item of history) {
-          if (!item.messageId || !item.text) continue;
-          messageHandlerRef.current({
-            id: item.messageId,
-            roomId,
-            messageId: item.messageId,
-            text: item.text,
-            author: item.author ?? (item.userId === userId ? "You" : "Participant"),
-            at: item.at,
-            userId: item.userId,
-            mine: item.userId === userId,
-            status: "delivered",
-          });
-        }
-      } catch {
-        eventHandlerRef.current?.("History unavailable", "Live messages will still appear.");
-      }
-    };
-
     void loadHistory();
 
     const socket = acquireSocketConnection();
@@ -148,6 +161,15 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     };
 
     const handleConnect = () => joinRoom();
+    const handleReconnectAttempt = () => {
+      setConnectionStatus("reconnecting");
+      eventHandlerRef.current?.("Reconnecting", "Restoring your classroom session.");
+    };
+    const handleReconnect = () => {
+      setConnectionStatus("connected");
+      void loadHistory();
+      flushQueue();
+    };
     const handleDisconnect = (reason: string) => {
       setConnectionStatus(reason === "io client disconnect" ? "disconnected" : "reconnecting");
       if (reason !== "io client disconnect") {
@@ -160,6 +182,10 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     const handleConnectError = () => {
       setConnectionStatus("error");
       eventHandlerRef.current?.("Connection issue", "We are retrying in the background.");
+    };
+    const socketRecovery = socket as Socket & {
+      on(event: "reconnect_attempt" | "reconnect", listener: (...args: unknown[]) => void): Socket;
+      off(event: "reconnect_attempt" | "reconnect", listener?: (...args: unknown[]) => void): Socket;
     };
     const handlePresence = (payload: { roomId?: string; count?: number }) => {
       if (payload.roomId !== roomId || typeof payload.count !== "number") return;
@@ -205,6 +231,8 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     };
 
     socket.on("connect", handleConnect);
+    socketRecovery.on("reconnect_attempt", handleReconnectAttempt);
+    socketRecovery.on("reconnect", handleReconnect);
     socket.on("disconnect", handleDisconnect);
     socket.on("connect_error", handleConnectError);
     socket.on("room:presence", handlePresence);
@@ -254,13 +282,14 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
     connection?.addEventListener?.("change", connectionChangeHandler);
 
     return () => {
-      cancelled = true;
       window.clearInterval(heartbeatTimer);
       window.removeEventListener("online", onlineHandler);
       window.removeEventListener("offline", offlineHandler);
       connection?.removeEventListener?.("change", connectionChangeHandler);
 
       socket.off("connect", handleConnect);
+      socketRecovery.off("reconnect_attempt", handleReconnectAttempt);
+      socketRecovery.off("reconnect", handleReconnect);
       socket.off("disconnect", handleDisconnect);
       socket.off("connect_error", handleConnectError);
       socket.off("room:presence", handlePresence);
@@ -274,7 +303,7 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
       }
       releaseSocketConnection();
     };
-  }, [flushQueue, roomId, syncConnectionQuality, userId]);
+  }, [flushQueue, loadHistory, roomId, syncConnectionQuality, userId]);
 
   const sendMessage = useCallback(
     (text: string, options?: { author?: string; userId?: string; system?: boolean }) => {
@@ -289,6 +318,7 @@ export function useRealtimeRoom({ roomId, userId, onMessage, onState, onEvent }:
         text: trimmed,
         at,
         clientId: messageId,
+        queuedAt: undefined,
       };
 
       messageHandlerRef.current({

@@ -18,7 +18,7 @@ export function ClassroomLayout() {
       >
         Skip to classroom
       </a>
-      <header className="flex items-center justify-between border-b border-[var(--border)] bg-black/20 px-4 py-3 backdrop-blur-md">
+      <header className="flex items-center justify-between border-b border-[var(--border)] bg-[rgba(5,10,20,0.68)] px-4 py-3 backdrop-blur-xl">
         <Logo to="/app/dashboard" />
         <div className="flex items-center gap-2">
           <span className="rounded-full border border-danger/30 bg-danger/15 px-2.5 py-0.5 text-xs font-bold text-danger">
@@ -34,7 +34,7 @@ export function ClassroomLayout() {
         </span>
       </header>
       <div className="relative flex flex-1 overflow-hidden">
-        <aside className="hidden w-14 flex-col items-center gap-4 border-r border-[var(--border)] bg-[var(--bg-elevated)]/80 py-4 md:flex">
+        <aside className="hidden w-14 flex-col items-center gap-4 border-r border-[var(--border)] bg-[rgba(11,14,20,0.84)] py-4 md:flex">
           <Link to="/app/dashboard" className="text-[var(--text-muted)] hover:text-primary" aria-label="Back to dashboard">
             ←
           </Link>
@@ -42,7 +42,7 @@ export function ClassroomLayout() {
         <div className="relative flex-1" id="classroom-main">
           <Outlet />
           <div
-            className="absolute bottom-6 left-1/2 flex w-[calc(100%-2rem)] max-w-4xl -translate-x-1/2 flex-wrap items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] px-4 py-3 shadow-xl backdrop-blur"
+            className="absolute bottom-4 left-1/2 flex w-[calc(100%-1rem)] max-w-4xl -translate-x-1/2 flex-wrap items-center gap-3 rounded-3xl border border-[var(--border)] bg-[rgba(11,14,20,0.92)] px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.4)] backdrop-blur-xl md:bottom-6 md:w-[calc(100%-2rem)]"
             role="toolbar"
             aria-label="Classroom collaboration tools"
           >

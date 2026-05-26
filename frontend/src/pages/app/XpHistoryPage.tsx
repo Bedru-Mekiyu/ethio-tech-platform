@@ -18,23 +18,30 @@ export function XpHistoryPage() {
   const logs = historyQuery.data ?? [];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">XP Progress</h1>
-      {summaryQuery.isLoading ? (
-        <Skeleton className="h-16 w-48" />
-      ) : (
-        <XpPill xp={user?.xp ?? 0} />
-      )}
+    <div className="page-shell space-y-6">
+      <Card className="hero-shell p-6">
+        <h1 className="text-2xl font-bold text-white md:text-3xl">XP Progress</h1>
+        <p className="mt-2 text-sm text-[var(--text-secondary)]">
+          Every lesson, session, and project adds momentum to your learning identity.
+        </p>
+        <div className="mt-4">
+          {summaryQuery.isLoading ? (
+            <Skeleton className="h-16 w-48" />
+          ) : (
+            <XpPill xp={user?.xp ?? 0} />
+          )}
+        </div>
+      </Card>
       {historyQuery.isLoading ? (
-        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-48 w-full rounded-[24px]" />
       ) : logs.length === 0 ? (
         <EmptyState title="No XP yet" description="Complete lessons and sessions to earn your first points." />
       ) : (
         <div className="space-y-3">
           {logs.map((log) => (
-            <Card key={log._id} className="flex items-center justify-between p-4">
+            <Card key={log._id} className="surface-panel flex items-center justify-between p-4">
               <div>
-                <p className="font-medium">{log.reason ?? "XP earned"}</p>
+                <p className="font-medium text-white">{log.reason ?? "XP earned"}</p>
                 <p className="text-xs text-[var(--text-muted)]">
                   {new Date(log.createdAt).toLocaleString()}
                   {log.sourceType ? ` · ${log.sourceType}` : ""}
