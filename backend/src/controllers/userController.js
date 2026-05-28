@@ -4,6 +4,7 @@ import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
+import { v2 as cloudinary } from "cloudinary";
 
 export const getUsers = asyncHandler(async (req, res) => {
   const { page, limit, skip } = getPagination(req.query);
@@ -79,6 +80,36 @@ export const updateMyProfile = asyncHandler(async (req, res) => {
   }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
 
   sendResponse(res, 200, "Profile updated", { user });
+});
+
+// Upload avatar to Cloudinary and update user avatar URL
+import { v2 as cloudinary } from "cloudinary";
+
+export const updateAvatar = asyncHandler(async (req, res) => {
+  if (!req.file) throw new ApiError(400, "No file uploaded");
+
+  // Configure cloudinary via env variables
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+  });
+
+  // Upload buffer
+  const uploadResult = await new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "avatars", transformation: [{ width: 512, height: 512, crop: "limit" }, { quality: "auto" }] },
+      (error, result) => {
+        if (error) return reject(error);
+        resolve(result);
+      }
+    );
+    stream.end(req.file.buffer);
+  });
+
+  const url = (uploadResult as any).secure_url as string;
+  const user = await User.findByIdAndUpdate(req.user._id, { avatar: url }, { new: true }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
+  sendResponse(res, 200, "Avatar updated", { user });
 });
 
 export const enrollTrack = asyncHandler(async (req, res) => {
