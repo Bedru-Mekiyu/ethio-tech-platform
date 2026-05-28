@@ -9,6 +9,7 @@ export interface AuthUser {
   level?: number;
   xp?: number;
   isVerified?: boolean;
+  avatar?: string;
 }
 
 interface AuthState {

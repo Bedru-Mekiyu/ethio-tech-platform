@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { ProgressBar } from "@/components/ui/progress";
 
 const profileSchema = z.object({
   fullName: z.string().min(2).max(120),
@@ -40,13 +41,14 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
 
-  const [avatarPreview, setAvatarPreview] = useState<string | null>((user as any)?.avatar ?? null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(user?.avatar ?? null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarError, setAvatarError] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
 
   useEffect(() => {
-    setAvatarPreview((user as any)?.avatar ?? null);
-  }, [(user as any)?.avatar]);
+    setAvatarPreview(user?.avatar ?? null);
+  }, [user?.avatar]);
 
   const profileForm = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema as never) as Resolver<ProfileForm>,
@@ -128,8 +130,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     setAvatarError("Please select an image file.");
                     return;
                   }
-                  if (f.size > 2_000_000) {
-                    setAvatarError("Image must be smaller than 2 MB.");
+                      if (f.size > 5_000_000) {
+                        setAvatarError("Image must be smaller than 5 MB.");
                     return;
                   }
                   const reader = new FileReader();
@@ -143,7 +145,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               />
             </div>
 
-            <div>
+                <div className="flex-1">
               <h1 className="text-2xl font-bold text-white">Settings</h1>
               <p className="text-sm text-[var(--text-secondary)]">{user?.email}</p>
               <Badge variant="purple" className="mt-2">
@@ -151,21 +153,27 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               </Badge>
               {avatarError ? <p className="mt-2 text-sm text-danger">{avatarError}</p> : null}
               {avatarFile ? (
-                <div className="mt-2 flex gap-2">
+                    <div className="mt-2 flex gap-2 items-center">
                   <button
                     type="button"
                     className="text-sm text-primary underline"
                     onClick={() => {
                       setAvatarFile(null);
-                      setAvatarPreview((user as any)?.avatar ?? null);
-                    }}
-                  >
-                    Remove selection
-                  </button>
+                          setAvatarPreview(user?.avatar ?? null);
+                          setUploadProgress(null);
+                        }}
+                      >
+                        Remove selection
+                      </button>
+                      {uploadProgress !== null ? (
+                        <div className="w-48">
+                          <ProgressBar value={uploadProgress} />
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
-            </div>
-          </div>
+              </div>
           <div className="flex gap-3">
             <Link to={dashboardPath}>
               <Button variant="outline">
@@ -206,9 +214,11 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               <Input id="phone" className="mt-2" {...profileForm.register("phone")} />
             </div>
             {profileMessage ? <p className="text-sm text-success">{profileMessage}</p> : null}
-            <Button type="submit" disabled={profileForm.formState.isSubmitting}>
-              Save profile
-            </Button>
+            <div>
+             <Button type="submit" disabled={profileForm.formState.isSubmitting || uploadProgress !== null && uploadProgress < 100}>
+               {uploadProgress !== null && uploadProgress < 100 ? `Saving (${uploadProgress}%)` : "Save profile"}
+             </Button>
+                  </div>
           </form>
         </Card>
 

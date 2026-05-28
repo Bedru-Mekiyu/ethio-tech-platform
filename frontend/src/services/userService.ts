@@ -13,13 +13,18 @@ export const updateMyProfile = async (payload: {
   return data.data.user;
 };
 
+import { compressImage } from "@/lib/image";
+
 export const uploadAvatar = async (file: File, onProgress?: (percent: number) => void) => {
+  // Compress image for mobile and low-bandwidth users
+  const compressed = await compressImage(file, 512, 0.8);
+
   // Request signature from backend
   const { data: signData } = await api.get<ApiResponse<{ signature: string; timestamp: number; apiKey: string; cloudName: string; folder: string }>>("/users/me/avatar/sign");
   const { signature, timestamp, apiKey, cloudName, folder } = signData.data;
 
   const fd = new FormData();
-  fd.append("file", file);
+  fd.append("file", compressed);
   fd.append("api_key", apiKey);
   fd.append("timestamp", String(timestamp));
   fd.append("signature", signature);
