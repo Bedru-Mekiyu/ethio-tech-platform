@@ -6,7 +6,7 @@ import { z } from "zod";
 import { LogOut, LayoutDashboard, Lock, UserCircle2 } from "lucide-react";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
 import { logoutApi, changePassword } from "@/services/authService";
-import { updateMyProfile } from "@/services/userService";
+import { updateMyProfile, uploadAvatar } from "@/services/userService";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -69,11 +69,16 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   const onProfileSubmit = async (values: ProfileForm) => {
     setProfileMessage(null);
     try {
-      const payload: any = { ...values };
-      if (avatarFile && avatarPreview) {
-        // Send small preview data URL as avatar fallback (backend expects avatar URL/string)
-        payload.avatar = avatarPreview;
+      // First upload avatar if selected
+      let updatedUser = null;
+      if (avatarFile) {
+        updatedUser = await uploadAvatar(avatarFile, (pct) => {
+          setProfileMessage(`Uploading avatar ${pct}%`);
+        });
+        setUser({ ...user!, ...updatedUser });
       }
+
+      const payload: any = { ...values };
       const updated = await updateMyProfile(payload);
       setUser({ ...user!, ...updated });
       setProfileMessage("Profile updated.");

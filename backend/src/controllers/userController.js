@@ -83,8 +83,6 @@ export const updateMyProfile = asyncHandler(async (req, res) => {
 });
 
 // Upload avatar to Cloudinary and update user avatar URL
-import { v2 as cloudinary } from "cloudinary";
-
 export const updateAvatar = asyncHandler(async (req, res) => {
   if (!req.file) throw new ApiError(400, "No file uploaded");
 
@@ -107,7 +105,7 @@ export const updateAvatar = asyncHandler(async (req, res) => {
     stream.end(req.file.buffer);
   });
 
-  const url = (uploadResult as any).secure_url as string;
+  const url = uploadResult && uploadResult.secure_url;
   const user = await User.findByIdAndUpdate(req.user._id, { avatar: url }, { new: true }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
   sendResponse(res, 200, "Avatar updated", { user });
 });
