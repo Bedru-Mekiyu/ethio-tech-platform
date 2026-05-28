@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,11 +6,14 @@ import { z } from "zod";
 import { ArrowRight, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input, Label } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Badge } from "@/components/ui/badge";
+import { AuthNavTabs } from "@/components/auth/AuthNavTabs";
+import { FormField, fieldAriaProps } from "@/components/ui/form-field";
 import { login } from "@/services/authService";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
-import { cn } from "@/lib/utils";
+import { useToast } from "@/components/composites/ToastProvider";
 
 const schema = z.object({
   email: z.string().email(),
@@ -25,14 +28,22 @@ export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const setAuth = useAuthStore((s) => s.setAuth);
+  const toast = useToast();
   const [error, setError] = useState("");
-  const [tab] = useState<"login" | "signup">("login");
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema as never) as Resolver<FormData> });
+
+  useEffect(() => {
+    const message = (location.state as { message?: string } | null)?.message;
+    if (message) {
+      toast.success(message);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.pathname, location.state, navigate, toast]);
 
   const onSubmit = async (data: FormData) => {
     setError("");
@@ -49,21 +60,7 @@ export function LoginPage() {
   return (
     <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
       <div className="flex items-center justify-between gap-4">
-        <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
-          {(["login", "signup"] as const).map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => item === "signup" && navigate("/register")}
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium transition",
-                tab === item ? "bg-primary text-[var(--bg-base)]" : "text-[var(--text-secondary)] hover:text-white"
-              )}
-            >
-              {item === "login" ? "Login" : "Sign up"}
-            </button>
-          ))}
-        </div>
+        <AuthNavTabs />
         <Badge variant="purple">Secure access</Badge>
       </div>
 
@@ -84,24 +81,34 @@ export function LoginPage() {
         ))}
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-        <div className="space-y-2">
-          <Label>Email address</Label>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
+        <FormField id="email" label="Email address" error={errors.email?.message}>
           <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
-            <Input className="pl-10" type="email" placeholder="you@example.com" autoComplete="email" {...register("email")} />
+            <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]" />
+            <Input
+              className="pl-10"
+              type="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              {...fieldAriaProps("email", errors.email?.message)}
+              {...register("email")}
+            />
           </div>
-          {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
-        </div>
+        </FormField>
 
-        <div className="space-y-2">
-          <Label>Password</Label>
+        <FormField id="password" label="Password" error={errors.password?.message}>
           <div className="relative">
-            <LockKeyhole size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
-            <Input className="pl-10" type="password" placeholder="••••••••" autoComplete="current-password" {...register("password")} />
+            <LockKeyhole size={16} className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]" />
+            <PasswordInput
+              wrapperClassName="w-full"
+              className="pl-10"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              {...fieldAriaProps("password", errors.password?.message)}
+              {...register("password")}
+            />
           </div>
-          {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
-        </div>
+        </FormField>
 
         <div className="flex items-center justify-between gap-3 text-sm">
           <Link to="/auth/forgot-password" className="text-primary hover:underline">
@@ -112,23 +119,14 @@ export function LoginPage() {
           </Link>
         </div>
 
-        {error ? <p className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</p> : null}
+        {error ? <p className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger" role="alert">{error}</p> : null}
 
-        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+        <Button type="submit" className="w-full min-h-11" size="lg" disabled={isSubmitting}>
           {isSubmitting ? "Signing in…" : "Continue to dashboard"}
           <ArrowRight size={16} />
         </Button>
       </form>
 
-      <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 p-4">
-        <div className="flex items-center gap-2 text-sm font-medium text-white">
-          <ShieldCheck size={16} className="text-primary" />
-          Protected classroom access
-        </div>
-        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-          Authentication is role-aware, short-lived, and ready for mentor, student, parent, and admin sessions.
-        </p>
-      </div>
 
       <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
         New here?{" "}
