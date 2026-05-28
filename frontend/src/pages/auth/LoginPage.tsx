@@ -48,24 +48,6 @@ export function LoginPage() {
 
   return (
     <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex rounded-full border border-white/10 bg-white/5 p-1">
-          {(["login", "signup"] as const).map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => item === "signup" && navigate("/register")}
-              className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium transition",
-                tab === item ? "bg-primary text-[var(--bg-base)]" : "text-[var(--text-secondary)] hover:text-white"
-              )}
-            >
-              {item === "login" ? "Login" : "Sign up"}
-            </button>
-          ))}
-        </div>
-        <Badge variant="purple">Secure access</Badge>
-      </div>
 
       <div className="mt-6 space-y-3">
         <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
