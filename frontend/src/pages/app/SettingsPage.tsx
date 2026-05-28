@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,9 +35,18 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   const setUser = useAuthStore((s) => s.setUser);
   const logout = useAuthStore((s) => s.logout);
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [profileMessage, setProfileMessage] = useState<string | null>(null);
   const [passwordMessage, setPasswordMessage] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  const [avatarPreview, setAvatarPreview] = useState<string | null>((user as any)?.avatar ?? null);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setAvatarPreview((user as any)?.avatar ?? null);
+  }, [(user as any)?.avatar]);
 
   const profileForm = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema as never) as Resolver<ProfileForm>,
@@ -59,9 +68,18 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
   const onProfileSubmit = async (values: ProfileForm) => {
     setProfileMessage(null);
-    const updated = await updateMyProfile(values);
-    setUser({ ...user!, ...updated });
-    setProfileMessage("Profile updated.");
+    try {
+      const payload: any = { ...values };
+      if (avatarFile && avatarPreview) {
+        // Send small preview data URL as avatar fallback (backend expects avatar URL/string)
+        payload.avatar = avatarPreview;
+      }
+      const updated = await updateMyProfile(payload);
+      setUser({ ...user!, ...updated });
+      setProfileMessage("Profile updated.");
+    } catch (err) {
+      setProfileMessage("Could not update profile.");
+    }
   };
 
   const onPasswordSubmit = async (values: PasswordForm) => {
@@ -83,13 +101,64 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
       <Card className="rounded-[28px] border-primary/20 bg-[var(--bg-card)] p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <Avatar name={user?.fullName ?? "User"} size="lg" />
+            <div className="relative">
+              <Avatar src={avatarPreview ?? undefined} name={user?.fullName ?? "User"} size="lg" />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="absolute -right-1 -bottom-1 rounded-full bg-[var(--bg-card)]/80 p-2 text-sm shadow-md hover:brightness-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Upload profile photo"
+              >
+                Upload
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                className="sr-only"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (!f) return;
+                  if (!f.type.startsWith("image/")) {
+                    setAvatarError("Please select an image file.");
+                    return;
+                  }
+                  if (f.size > 2_000_000) {
+                    setAvatarError("Image must be smaller than 2 MB.");
+                    return;
+                  }
+                  const reader = new FileReader();
+                  reader.onload = () => {
+                    setAvatarPreview(String(reader.result));
+                    setAvatarFile(f);
+                    setAvatarError(null);
+                  };
+                  reader.readAsDataURL(f);
+                }}
+              />
+            </div>
+
             <div>
               <h1 className="text-2xl font-bold text-white">Settings</h1>
               <p className="text-sm text-[var(--text-secondary)]">{user?.email}</p>
               <Badge variant="purple" className="mt-2">
                 {scope}
               </Badge>
+              {avatarError ? <p className="mt-2 text-sm text-danger">{avatarError}</p> : null}
+              {avatarFile ? (
+                <div className="mt-2 flex gap-2">
+                  <button
+                    type="button"
+                    className="text-sm text-primary underline"
+                    onClick={() => {
+                      setAvatarFile(null);
+                      setAvatarPreview((user as any)?.avatar ?? null);
+                    }}
+                  >
+                    Remove selection
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="flex gap-3">
