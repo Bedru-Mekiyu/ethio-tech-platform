@@ -5,6 +5,7 @@ import { sendResponse } from "../utils/apiResponse.js";
 import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
 import { v2 as cloudinary } from "cloudinary";
+import { logger } from "../lib/logger.js";
 
 // Configure Cloudinary from environment (used for server-side uploads and signing)
 cloudinary.config({
@@ -12,6 +13,10 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+// Simple in-memory rate limiter per user for signature requests
+const signatureRequestTimestamps = new Map();
+const SIGNATURE_COOLDOWN_MS = 5 * 1000; // 5 seconds
 
 
 export const getUsers = asyncHandler(async (req, res) => {
@@ -120,10 +125,28 @@ export const updateAvatar = asyncHandler(async (req, res) => {
 
 // Generate a Cloudinary signature for direct client uploads
 export const getAvatarUploadSignature = asyncHandler(async (req, res) => {
-  const timestamp = Math.floor(Date.now() / 1000);
+  // Ensure Cloudinary is configured
+  if (!process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET || !process.env.CLOUDINARY_CLOUD_NAME) {
+    logger.error("Cloudinary configuration missing when requesting upload signature", { userId: req.user?._id });
+    throw new ApiError(500, "Upload service not configured");
+  }
+
+  // Rate-limit per user
+  const userId = String(req.user?._id ?? "anonymous");
+  const last = signatureRequestTimestamps.get(userId) ?? 0;
+  const now = Date.now();
+  if (now - last < SIGNATURE_COOLDOWN_MS) {
+    logger.warn("Signature request throttled", { userId, ip: req.ip });
+    throw new ApiError(429, "Too many requests. Please wait before trying again.");
+  }
+  signatureRequestTimestamps.set(userId, now);
+
+  const timestamp = Math.floor(now / 1000);
   const folder = "avatars";
   const paramsToSign = { timestamp, folder };
   const signature = cloudinary.utils.api_sign_request(paramsToSign, process.env.CLOUDINARY_API_SECRET);
+
+  logger.info("Generated Cloudinary signature for avatar upload", { userId, ip: req.ip });
 
   sendResponse(res, 200, "Signature generated", {
     signature,
