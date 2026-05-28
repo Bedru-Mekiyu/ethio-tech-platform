@@ -6,6 +6,14 @@ import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
 import { v2 as cloudinary } from "cloudinary";
 
+// Configure Cloudinary from environment (used for server-side uploads and signing)
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+
 export const getUsers = asyncHandler(async (req, res) => {
   const { page, limit, skip } = getPagination(req.query);
   const { role, search } = req.query;
@@ -108,6 +116,22 @@ export const updateAvatar = asyncHandler(async (req, res) => {
   const url = uploadResult && uploadResult.secure_url;
   const user = await User.findByIdAndUpdate(req.user._id, { avatar: url }, { new: true }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
   sendResponse(res, 200, "Avatar updated", { user });
+});
+
+// Generate a Cloudinary signature for direct client uploads
+export const getAvatarUploadSignature = asyncHandler(async (req, res) => {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const folder = "avatars";
+  const paramsToSign = { timestamp, folder };
+  const signature = cloudinary.utils.api_sign_request(paramsToSign, process.env.CLOUDINARY_API_SECRET);
+
+  sendResponse(res, 200, "Signature generated", {
+    signature,
+    timestamp,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    folder,
+  });
 });
 
 export const enrollTrack = asyncHandler(async (req, res) => {

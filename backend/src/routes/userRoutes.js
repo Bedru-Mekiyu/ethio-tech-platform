@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { enrollTrack, getUserById, getUsers, updateMyProfile, updateAvatar } from "../controllers/userController.js";
+import { enrollTrack, getUserById, getUsers, updateMyProfile, updateAvatar, getAvatarUploadSignature } from "../controllers/userController.js";
 import { authorize, protect } from "../middlewares/authMiddleware.js";
 import multer from "multer";
 
@@ -13,6 +13,7 @@ router.get("/:id", authorize("admin", "mentor"), getUserById);
 router.patch("/me", updateMyProfile);
 // Avatar upload via multipart/form-data
 router.post("/me/avatar", upload.single("avatar"), updateAvatar);
+router.get("/me/avatar/sign", getAvatarUploadSignature);
 router.post("/me/enroll/:trackId", authorize("student"), enrollTrack);
 
 export default router;
