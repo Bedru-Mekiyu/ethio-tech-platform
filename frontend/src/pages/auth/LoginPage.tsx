@@ -59,11 +59,6 @@ export function LoginPage() {
 
   return (
     <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
-      <div className="flex items-center justify-between gap-4">
-        <AuthNavTabs />
-        <Badge variant="purple">Secure access</Badge>
-      </div>
-
       <div className="mt-6 space-y-3">
         <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
           Welcome back to <span className="glow-text">EthioTech</span>
