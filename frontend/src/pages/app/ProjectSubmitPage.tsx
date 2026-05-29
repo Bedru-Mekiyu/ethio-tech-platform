@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input, Label, Textarea } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
@@ -233,15 +234,15 @@ export function ProjectSubmitPage() {
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <Card className="border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Feedback</p>
+                <p className="stat-label">Feedback</p>
                 <p className="mt-2 text-sm text-white">{selectedProject?.feedback || "Awaiting review"}</p>
               </Card>
               <Card className="border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Grade</p>
+                <p className="stat-label">Grade</p>
                 <p className="mt-2 text-2xl font-semibold text-white">{selectedProject?.grade ?? "—"}</p>
               </Card>
               <Card className="border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Submitted</p>
+                <p className="stat-label">Submitted</p>
                 <p className="mt-2 text-sm text-white">
                   {selectedProject?.submittedAt ? new Date(selectedProject.submittedAt).toLocaleDateString() : "Not yet"}
                 </p>
@@ -262,8 +263,7 @@ export function ProjectSubmitPage() {
             <form className="mt-6 space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-2">
                 <Label>Project</Label>
-                <select
-                  className="h-11 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-4 text-sm text-white"
+                <Select
                   {...projectField}
                   onChange={(event) => {
                     projectField.onChange(event);
@@ -276,7 +276,7 @@ export function ProjectSubmitPage() {
                       {project.title}
                     </option>
                   ))}
-                </select>
+                </Select>
                 {errors.projectId ? <p className="text-xs text-danger">{errors.projectId.message}</p> : null}
               </div>
 

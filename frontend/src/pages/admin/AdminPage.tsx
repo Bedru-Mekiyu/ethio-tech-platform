@@ -86,7 +86,7 @@ export function AdminPage() {
   if (isError) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold md:text-3xl">National learning health</h1>
+        <h1 className="section-title text-2xl md:text-3xl">National learning health</h1>
         <p className="text-[var(--text-secondary)]">Monitor learner growth, XP trends, and mentor network health.</p>
         <Button variant="outline" onClick={() => refetch()}>
           Retry
@@ -101,7 +101,7 @@ export function AdminPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Badge className="mb-4">Admin dashboard</Badge>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">National Learning Health</h1>
+            <h1 className="section-title">National Learning Health</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Track platform-wide engagement, mentor coverage, hub availability, and upcoming learning activity from one console.
             </p>

@@ -110,7 +110,7 @@ function TrackStatCard({
         <Icon size={18} />
       </div>
       <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{value}</p>
-      <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
+      <p className="mt-1 stat-label">{label}</p>
       <p className="mt-2 text-xs text-[var(--text-secondary)]">{helper}</p>
     </Card>
   );
@@ -167,7 +167,7 @@ function TrackCard({ track }: { track: TrackView }) {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+          <div className="flex items-center justify-between stat-label">
             <span>Progress</span>
             <span>{track.progress}%</span>
           </div>
@@ -188,7 +188,7 @@ function TrackCard({ track }: { track: TrackView }) {
 
       <div className="flex flex-col justify-between gap-3 lg:text-right">
         <div className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Track action</p>
+          <p className="stat-label">Track action</p>
           <p className="text-sm text-[var(--text-secondary)]">
             {done
               ? "Review your completed work and keep momentum."
@@ -364,7 +364,7 @@ export function TracksPage() {
                   className="h-full min-h-[280px] w-full object-cover"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                  <p className="stat-label">
                     Current focus
                   </p>
                   <p className="mt-1 text-lg font-semibold text-white">
@@ -383,7 +383,7 @@ export function TracksPage() {
                       <PlayCircle size={20} />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                      <p className="stat-label">
                         Average progress
                       </p>
                       <p className="font-semibold text-white">{view.averageProgress}%</p>
@@ -396,7 +396,7 @@ export function TracksPage() {
                       <Layers3 size={20} />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                      <p className="stat-label">
                         Total lessons
                       </p>
                       <p className="font-semibold text-white">{formatCompactNumber(view.totalLessons)}</p>
@@ -409,7 +409,7 @@ export function TracksPage() {
                       <Rocket size={20} />
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                      <p className="stat-label">
                         Momentum
                       </p>
                       <p className="font-semibold text-white">{view.streak} day streak</p>
