@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchMe } from "@/services/authService";
+import { getMyProfile } from "@/services/userService";
 import { useAuthStore } from "@/store/authStore";
 
 export function AuthBootstrap({ children }: { children: React.ReactNode }) {
@@ -10,7 +10,7 @@ export function AuthBootstrap({ children }: { children: React.ReactNode }) {
     if (!accessToken) return;
 
     let cancelled = false;
-    fetchMe()
+    getMyProfile()
       .then((user) => {
         if (!cancelled) setUser(user);
       })
