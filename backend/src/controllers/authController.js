@@ -12,16 +12,7 @@ import {
   requestPasswordReset,
   resetPasswordWithToken,
 } from "../services/authService.js";
-
-const serializeAuthUser = (user) => ({
-  id: user._id,
-  fullName: user.fullName,
-  email: user.email,
-  role: user.role,
-  level: user.level,
-  xp: user.xp,
-  isVerified: user.isVerified,
-});
+import { serializeAuthUser } from "../utils/serializeUser.js";
 
 export const register = asyncHandler(async (req, res) => {
   const { fullName, email, password, role, gradeLevel } = req.body;

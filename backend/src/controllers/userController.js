@@ -6,6 +6,7 @@ import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
 import { v2 as cloudinary } from "cloudinary";
 import { logger } from "../lib/logger.js";
+import { serializeAuthUser } from "../utils/serializeUser.js";
 
 // Configure Cloudinary from environment (used for server-side uploads and signing)
 cloudinary.config({
@@ -45,6 +46,10 @@ export const getUsers = asyncHandler(async (req, res) => {
     items,
     pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
   });
+});
+
+export const getMe = asyncHandler(async (req, res) => {
+  sendResponse(res, 200, "Profile fetched", { user: serializeAuthUser(req.user) });
 });
 
 export const getUserById = asyncHandler(async (req, res) => {
@@ -92,7 +97,7 @@ export const updateMyProfile = asyncHandler(async (req, res) => {
     runValidators: true,
   }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
 
-  sendResponse(res, 200, "Profile updated", { user });
+  sendResponse(res, 200, "Profile updated", { user: serializeAuthUser(user) });
 });
 
 // Upload avatar to Cloudinary and update user avatar URL
@@ -120,7 +125,7 @@ export const updateAvatar = asyncHandler(async (req, res) => {
 
   const url = uploadResult && uploadResult.secure_url;
   const user = await User.findByIdAndUpdate(req.user._id, { avatar: url }, { new: true }).select("-password -refreshTokenHash -refreshTokenExpiresAt");
-  sendResponse(res, 200, "Avatar updated", { user });
+  sendResponse(res, 200, "Avatar updated", { user: serializeAuthUser(user) });
 });
 
 // Generate a Cloudinary signature for direct client uploads
