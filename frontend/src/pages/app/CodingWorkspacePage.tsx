@@ -174,7 +174,7 @@ export function CodingWorkspacePage() {
               </div>
               <div className="absolute bottom-4 left-4 right-4 grid gap-3 lg:grid-cols-[1fr_240px]">
                 <Card className="border-primary/25 bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Instructor hint</p>
+                  <p className="stat-label">Instructor hint</p>
                   <h2 className="mt-2 text-xl font-semibold text-white">
                     {lesson?.title ?? "Build your first React component"}
                   </h2>
@@ -183,7 +183,7 @@ export function CodingWorkspacePage() {
                   </p>
                 </Card>
                 <Card className="border-[var(--border)] bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Next step</p>
+                  <p className="stat-label">Next step</p>
                   <p className="mt-2 text-sm text-white">
                     {lesson?.videoUrl ? "Open the lesson video and follow along." : "Review the starter snippet and complete the task."}
                   </p>
@@ -222,14 +222,14 @@ export function CodingWorkspacePage() {
             <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_320px]">
               <div className="space-y-4">
                 <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Lesson content</p>
+                  <p className="stat-label">Lesson content</p>
                   <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-[var(--text-secondary)]">
                     {lesson?.content || "The lesson content will guide you through the core implementation and review checkpoints."}
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Discussion</p>
+                  <p className="stat-label">Discussion</p>
                   <div className="mt-4 space-y-3">
                     {(recentSubmissions.slice(0, 3).length ? recentSubmissions.slice(0, 3) : [{ project: { title: "No discussion yet" }, status: "waiting" }]).map((entry, index) => (
                       <div key={`${entry.project?.title ?? "note"}-${index}`} className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4">
@@ -296,15 +296,15 @@ export function CodingWorkspacePage() {
             </div>
             <div className="space-y-4 p-5">
               <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Current lesson</p>
+                <p className="stat-label">Current lesson</p>
                 <p className="mt-2 text-lg font-semibold text-white">{lesson?.title ?? "No lesson selected"}</p>
               </div>
               <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Assigned projects</p>
+                <p className="stat-label">Assigned projects</p>
                 <p className="mt-2 text-3xl font-semibold text-white">{assignedProjects.length}</p>
               </div>
               <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Recent activity</p>
+                <p className="stat-label">Recent activity</p>
                 <p className="mt-2 text-sm text-[var(--text-secondary)]">
                   {recentSubmissions[0]?.project?.title
                     ? `Latest submission: ${recentSubmissions[0].project?.title}`

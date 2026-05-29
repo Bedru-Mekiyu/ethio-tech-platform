@@ -253,14 +253,14 @@ export function SquadPage() {
 
             <div className="space-y-3">
               <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Presence</p>
+                <p className="stat-label">Presence</p>
                 <p className="mt-2 text-3xl font-semibold text-white">{presenceCount}</p>
                 <p className="mt-1 text-sm text-[var(--text-secondary)]">{pendingCount} messages queued for sync.</p>
               </div>
               <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Squad progress</p>
+                <p className="stat-label">Squad progress</p>
                 <div className="mt-3 space-y-2">
-                  <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                  <div className="flex items-center justify-between stat-label">
                     <span>Current sprint</span>
                     <span>{dashboard?.progressByTrack?.[0]?.overallProgressPercent ?? 0}%</span>
                   </div>
@@ -291,17 +291,17 @@ export function SquadPage() {
           <div className="flex items-center gap-3">
             <Users className="text-primary" size={20} />
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Squad pulse</p>
+              <p className="stat-label">Squad pulse</p>
               <p className="text-lg font-semibold text-white">Realtime overview</p>
             </div>
           </div>
           <div className="mt-4 grid gap-3">
             <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Room members</p>
+              <p className="stat-label">Room members</p>
               <p className="mt-2 text-2xl font-semibold text-white">{roomState?.connectedUserIds?.length ?? presenceCount}</p>
             </div>
             <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-              <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Notifications</p>
+              <p className="stat-label">Notifications</p>
               <p className="mt-2 text-2xl font-semibold text-white">{newsItems.length}</p>
             </div>
           </div>

@@ -67,7 +67,7 @@ function ProjectCard({
       </p>
 
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+        <div className="flex items-center justify-between stat-label">
           <span>Momentum</span>
           <span>{project.completionPercent}%</span>
         </div>
@@ -158,15 +158,15 @@ export function AssignedProjectsPage() {
 
       <div className="grid gap-3 sm:grid-cols-3">
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Active</p>
+          <p className="stat-label">Active</p>
           <p className="mt-2 text-3xl font-semibold text-white">{counts.active}</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Feedback ready</p>
+          <p className="stat-label">Feedback ready</p>
           <p className="mt-2 text-3xl font-semibold text-white">{counts.feedback}</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Completed</p>
+          <p className="stat-label">Completed</p>
           <p className="mt-2 text-3xl font-semibold text-white">{counts.completed}</p>
         </Card>
       </div>

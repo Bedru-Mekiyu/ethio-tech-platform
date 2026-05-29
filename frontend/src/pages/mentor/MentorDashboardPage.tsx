@@ -56,7 +56,7 @@ function MetricCard({
   return (
     <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
       <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${toneClass}`}>{icon}</div>
-      <p className="mt-4 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
+      <p className="mt-4 stat-label">{label}</p>
       <p className="mt-2 text-2xl font-semibold text-white">{value}</p>
       {note ? <p className="mt-2 text-xs text-[var(--text-secondary)]">{note}</p> : null}
     </Card>
@@ -85,7 +85,7 @@ export function MentorDashboardPage() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
               <Badge variant="warning">Verification required</Badge>
-              <h1 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h1 className="section-title mt-4">
                 Complete mentor onboarding before using mentor tools
               </h1>
               <p className="mt-3 text-[var(--text-secondary)]">
@@ -104,7 +104,7 @@ export function MentorDashboardPage() {
               "Verified mentors unlock sessions and reviews",
             ].map((item, index) => (
               <div key={item} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Step {index + 1}</p>
+                <p className="stat-label">Step {index + 1}</p>
                 <p className="mt-2 text-sm font-medium text-white">{item}</p>
               </div>
             ))}
@@ -138,7 +138,7 @@ export function MentorDashboardPage() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <Badge className="mb-4">Mentor dashboard</Badge>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+            <h1 className="section-title">
               Welcome back, {firstName} 👋
             </h1>
             <p className="mt-3 text-[var(--text-secondary)]">
