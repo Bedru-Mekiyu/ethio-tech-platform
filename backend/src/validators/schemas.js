@@ -19,6 +19,26 @@ export const contactSchemas = {
   }),
 };
 
+const cloudinaryAvatarUrl = z
+  .string()
+  .url()
+  .refine((url) => /^https:\/\/res\.cloudinary\.com\//.test(url), "Avatar must be a Cloudinary URL");
+
+export const userSchemas = {
+  updateProfile: atLeastOneField(
+    z.object({
+      fullName: z.string().trim().min(2).max(120).optional(),
+      avatar: cloudinaryAvatarUrl.optional(),
+      bio: z.string().max(1000).optional(),
+      phone: z.string().trim().max(40).optional(),
+      gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
+      expertise: z.array(z.string().trim().min(2).max(80)).max(20).optional(),
+      currentCompany: z.string().trim().min(2).max(120).optional(),
+    }),
+    { message: "At least one field is required" }
+  ),
+};
+
 export const authSchemas = {
   register: z.object({
     fullName: z.string().trim().min(2).max(120),

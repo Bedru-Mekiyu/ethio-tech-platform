@@ -7,10 +7,9 @@
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
-    "seed": "tsx src/scripts/seed.ts",
+    "seed": "tsx src/scripts/seed.js",
     "test": "vitest run",
-    "lint": "eslint src --ext .js,.ts",
-    "seed": "node ./src/scripts/seed.js"
+    "lint": "eslint src --ext .js,.ts"
   },
   "dependencies": {
     "@socket.io/redis-adapter": "^8.3.0",
