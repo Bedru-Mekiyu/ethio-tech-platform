@@ -112,6 +112,7 @@ export function ProfilePage() {
               unsplashId={MEDIA_CATEGORIES.dashboard.stats.xp}
               alt="Profile banner"
               className="h-full w-full object-cover opacity-85"
+              wrapperClassName="h-full w-full border-0 bg-transparent"
               width={1000}
               quality={80}
             />
@@ -282,4 +283,3 @@ export function ProfilePage() {
     </motion.div>
   );
 }
-

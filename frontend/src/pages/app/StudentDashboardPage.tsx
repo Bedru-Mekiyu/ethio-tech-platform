@@ -186,6 +186,7 @@ export function StudentDashboardPage() {
                 unsplashId={MEDIA_CATEGORIES.dashboard.coding[0].unsplashId}
                 alt=""
                 className="h-full w-full object-cover"
+                wrapperClassName="h-full w-full border-0 bg-transparent"
                 width={800}
                 quality={80}
               />
@@ -279,6 +280,7 @@ export function StudentDashboardPage() {
               unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
               alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
               className="h-full w-full object-cover"
+              wrapperClassName="h-full w-full border-0 bg-transparent"
               width={600}
               quality={80}
             />
@@ -600,4 +602,3 @@ export function StudentDashboardPage() {
     </motion.div>
   );
 }
-

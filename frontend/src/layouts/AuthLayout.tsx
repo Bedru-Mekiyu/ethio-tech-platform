@@ -30,19 +30,19 @@ export function AuthLayout() {
       </div>
 
       {/* ── Left Brand Panel (desktop) ── */}
-      <div className="relative hidden w-[48%] flex-col justify-between p-10 lg:flex xl:p-14 overflow-hidden border-r border-white/5 bg-[var(--bg-card)]/10">
+      <div className="relative hidden w-[48%] flex-col justify-between overflow-hidden border-r border-white/5 bg-[var(--bg-card)]/10 p-10 lg:flex xl:p-14">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0 opacity-[0.06] mix-blend-luminosity pointer-events-none">
           <SmartImage
             unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
             alt=""
             className="h-full w-full object-cover"
+            wrapperClassName="h-full w-full border-0 bg-transparent"
             width={1000}
             quality={85}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-transparent to-transparent" />
         </div>
-
         <div className="relative z-10">
           <Logo />
           <div className="mt-16">
