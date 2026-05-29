@@ -23,6 +23,8 @@ import {
   type MarketingMentorPageData,
   type MarketingMentorPageMentor,
 } from "@/services/marketingService";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 
 type MentorFilter = "all" | string;
 
@@ -374,8 +376,18 @@ export function MentorsPage() {
         )}
       </section>
 
-      <Card className="mt-16 overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <Card className="mt-16 relative overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 z-0 opacity-[0.05] mix-blend-luminosity pointer-events-none">
+          <SmartImage
+            unsplashId={MEDIA_CATEGORIES.mentorship.sessions[0].unsplashId}
+            alt=""
+            className="h-full w-full object-cover"
+            width={1000}
+            quality={80}
+          />
+        </div>
+        <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <Badge className="mb-4">Mentor impact</Badge>
             <h2 className="text-3xl font-bold md:text-4xl">{data?.cta.title}</h2>

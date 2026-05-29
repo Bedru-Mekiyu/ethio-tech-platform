@@ -11,7 +11,8 @@ import {
   Sparkles,
   Trophy,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -313,13 +314,14 @@ export function HomePage() {
                 </Card>
               </div>
 
-              <motion.img
-                src={heroImage}
-                alt="EthioTech immersive campus preview"
-                className="mx-auto max-h-[440px] w-full object-contain py-8 drop-shadow-[0_0_48px_rgba(123,97,255,0.25)]"
-                initial={reduceMotion ? false : { opacity: 0, scale: 0.98 }}
-                animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
+              <SmartImage
+                unsplashId={MEDIA_CATEGORIES.marketing.hero[0].unsplashId}
+                alt={MEDIA_CATEGORIES.marketing.hero[0].alt}
+                hoverEffect="zoom"
+                wrapperClassName="rounded-2xl border border-white/5 shadow-2xl overflow-hidden mt-6"
+                className="mx-auto max-h-[420px] aspect-[16/10] w-full object-cover"
+                width={800}
+                quality={85}
               />
             </div>
           </div>

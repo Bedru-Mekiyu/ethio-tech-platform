@@ -30,6 +30,8 @@ import { QueryError } from "@/components/composites/QueryError";
 import { getRankTitle } from "@/lib/utils";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { motion } from "framer-motion";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "short",
@@ -178,8 +180,18 @@ export function StudentDashboardPage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
         <motion.div variants={cardVariants} className="h-full">
           <Card className="hero-shell relative overflow-hidden p-6 h-full border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl">
+            {/* Background Image Overlay */}
+            <div className="absolute inset-0 z-0 opacity-[0.04] mix-blend-luminosity pointer-events-none">
+              <SmartImage
+                unsplashId={MEDIA_CATEGORIES.dashboard.coding[0].unsplashId}
+                alt=""
+                className="h-full w-full object-cover"
+                width={800}
+                quality={80}
+              />
+            </div>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,210,255,0.12),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.1),transparent_35%)]" />
-            <div className="relative flex flex-col h-full justify-between">
+            <div className="relative flex flex-col h-full justify-between z-10">
               <div>
                 <Badge className="mb-4" showDot variant="purple">Current learning path</Badge>
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
