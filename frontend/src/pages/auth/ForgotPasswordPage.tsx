@@ -3,15 +3,25 @@ import { Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
+import { ArrowLeft, Mail, KeyRound, CheckCircle2 } from "lucide-react";
 import { forgotPassword } from "@/services/authService";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { FormField, fieldAriaProps } from "@/components/ui/form-field";
 
-const schema = z.object({ email: z.string().email() });
+const schema = z.object({ email: z.string().email("Enter a valid email address") });
 
 type FormValues = z.infer<typeof schema>;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export function ForgotPasswordPage() {
   const [message, setMessage] = useState<string | null>(null);
@@ -27,45 +37,92 @@ export function ForgotPasswordPage() {
     setDevToken(null);
     const result = await forgotPassword(values.email);
     setMessage(result.message ?? "If that email exists, reset instructions were sent.");
-    if (result.devResetToken) {
+    if (import.meta.env.DEV && result.devResetToken) {
       setDevToken(result.devResetToken);
     }
   };
 
   return (
-    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
-      <Badge variant="purple">Account recovery</Badge>
-      <div className="mt-4">
-        <h1 className="text-2xl font-bold tracking-tight text-white">Reset your password</h1>
-        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-          Enter your account email and we will send reset instructions.
-        </p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="text-sm text-[var(--text-secondary)]">
-            Email
-          </label>
-          <Input id="email" type="email" className="mt-2" {...register("email")} />
-          {errors.email ? <p className="mt-1 text-sm text-danger">{errors.email.message}</p> : null}
+    <motion.div initial="hidden" animate="show">
+      {/* Back link */}
+      <motion.div variants={fadeUp} custom={0}>
+        <Link
+          to="/login"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] transition hover:text-white"
+        >
+          <ArrowLeft size={14} />
+          Back to sign in
+        </Link>
+      </motion.div>
+
+      {/* Icon + Header */}
+      <motion.div variants={fadeUp} custom={1} className="mt-6">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-white/[0.03]">
+          <KeyRound size={22} className="text-primary" />
         </div>
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Reset your password</h1>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+          Enter your account email and we&apos;ll send you instructions to reset your password.
+        </p>
+      </motion.div>
+
+      {/* Form */}
+      <motion.form
+        variants={fadeUp}
+        custom={2}
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-8 space-y-5"
+        noValidate
+      >
+        <FormField id="email" label="Email address" error={errors.email?.message}>
+          <div className="relative">
+            <Mail
+              size={16}
+              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+            />
+            <Input
+              className="pl-11"
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              {...fieldAriaProps("email", errors.email?.message)}
+              {...register("email")}
+            />
+          </div>
+        </FormField>
+
+        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
           {isSubmitting ? "Sending…" : "Send reset link"}
         </Button>
-      </form>
-      {message ? <p className="text-sm text-success">{message}</p> : null}
-      {devToken ? (
-        <p className="rounded-lg border border-warning/30 bg-warning/10 p-3 text-sm text-warning">
-          Dev reset token: <code className="break-all">{devToken}</code>
-          <br />
-          <Link to={`/auth/reset-password?token=${devToken}`} className="underline">
-            Open reset form
+      </motion.form>
+
+      {/* Success message */}
+      <div aria-live="polite">
+        {message ? (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-6 flex items-start gap-3 rounded-xl border border-success/30 bg-[var(--success-muted)] px-4 py-3"
+          >
+            <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-success" />
+            <p className="text-sm text-success">{message}</p>
+          </motion.div>
+        ) : null}
+      </div>
+
+      {/* Dev token (only in development) */}
+      {import.meta.env.DEV && devToken ? (
+        <div className="mt-4 rounded-xl border border-warning/30 bg-[var(--warning-muted)] p-4 text-sm text-warning">
+          <p className="font-medium">Dev reset token:</p>
+          <code className="mt-1 block break-all text-xs">{devToken}</code>
+          <Link
+            to={`/auth/reset-password?token=${devToken}`}
+            className="mt-2 inline-block text-sm font-medium underline"
+          >
+            Open reset form →
           </Link>
-        </p>
+        </div>
       ) : null}
-      <Link to="/login" className="inline-flex text-sm text-primary hover:underline">
-        Back to sign in
-      </Link>
-    </Card>
+    </motion.div>
   );
 }

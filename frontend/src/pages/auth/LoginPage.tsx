@@ -1,38 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, LockKeyhole, Mail, ShieldCheck, Sparkles } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { ArrowRight, LockKeyhole, Mail, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input, Label } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
+import { FormField, fieldAriaProps } from "@/components/ui/form-field";
 import { login } from "@/services/authService";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
-import { cn } from "@/lib/utils";
+import { useToast } from "@/components/composites/ToastProvider";
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type FormData = z.infer<typeof schema>;
 
-const supportPills = ["Realtime rooms", "Mentor review", "Secure tokens"] as const;
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const setAuth = useAuthStore((s) => s.setAuth);
+  const toast = useToast();
   const [error, setError] = useState("");
-  const [tab] = useState<"login" | "signup">("login");
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema as never) as Resolver<FormData> });
+
+  useEffect(() => {
+    const message = (location.state as { message?: string } | null)?.message;
+    if (message) {
+      toast.success(message);
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.pathname, location.state, navigate, toast]);
 
   const onSubmit = async (data: FormData) => {
     setError("");
@@ -42,82 +58,118 @@ export function LoginPage() {
       const from = (location.state as { from?: { pathname: string } })?.from?.pathname;
       navigate(from ?? getDashboardPath(result.user.role));
     } catch {
-      setError("Invalid email or password");
+      setError("Invalid email or password. Please try again.");
     }
   };
 
   return (
-    <Card className="mx-auto w-full max-w-lg border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-6 shadow-[0_24px_120px_rgba(0,0,0,0.35)] md:p-8">
-
-      <div className="mt-6 space-y-3">
-        <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-          Welcome back to <span className="glow-text">EthioTech</span>
+    <motion.div initial="hidden" animate="show">
+      {/* Header */}
+      <motion.div variants={fadeUp} custom={0} className="space-y-2">
+        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          Welcome back
         </h2>
-        <p className="max-w-md text-sm leading-6 text-[var(--text-secondary)]">
-          Pick up your immersive classroom where you left off. Your dashboard, mentors, and live sessions stay synced in one account.
+        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+          Sign in to continue your learning journey.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        {supportPills.map((pill) => (
-          <div key={pill} className="rounded-2xl border border-[var(--border)] bg-white/5 px-3 py-2 text-center text-xs text-[var(--text-secondary)]">
-            {pill}
-          </div>
-        ))}
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
-        <div className="space-y-2">
-          <Label>Email address</Label>
+      {/* Form */}
+      <motion.form
+        variants={fadeUp}
+        custom={1}
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-8 space-y-5"
+        noValidate
+      >
+        <FormField id="email" label="Email address" error={errors.email?.message}>
           <div className="relative">
-            <Mail size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
-            <Input className="pl-10" type="email" placeholder="you@example.com" autoComplete="email" {...register("email")} />
+            <Mail
+              size={16}
+              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+            />
+            <Input
+              className="pl-11"
+              type="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              {...fieldAriaProps("email", errors.email?.message)}
+              {...register("email")}
+            />
           </div>
-          {errors.email && <p className="text-xs text-danger">{errors.email.message}</p>}
-        </div>
+        </FormField>
 
-        <div className="space-y-2">
-          <Label>Password</Label>
+        <FormField id="password" label="Password" error={errors.password?.message}>
           <div className="relative">
-            <LockKeyhole size={16} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
-            <Input className="pl-10" type="password" placeholder="••••••••" autoComplete="current-password" {...register("password")} />
+            <LockKeyhole
+              size={16}
+              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+            />
+            <PasswordInput
+              wrapperClassName="w-full"
+              className="pl-11"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              {...fieldAriaProps("password", errors.password?.message)}
+              {...register("password")}
+            />
           </div>
-          {errors.password && <p className="text-xs text-danger">{errors.password.message}</p>}
-        </div>
+        </FormField>
 
-        <div className="flex items-center justify-between gap-3 text-sm">
-          <Link to="/auth/forgot-password" className="text-primary hover:underline">
+        <div className="flex items-center justify-end">
+          <Link
+            to="/auth/forgot-password"
+            className="text-sm font-medium text-[var(--text-secondary)] transition hover:text-primary"
+          >
             Forgot password?
           </Link>
-          <Link to="/contact" className="text-[var(--text-secondary)] hover:text-white">
-            Need help?
+        </div>
+
+        {error ? (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-start gap-3 rounded-xl border border-danger/30 bg-[var(--danger-muted)] px-4 py-3"
+            role="alert"
+          >
+            <AlertCircle size={16} className="mt-0.5 flex-shrink-0 text-danger" />
+            <p className="text-sm text-danger">{error}</p>
+          </motion.div>
+        ) : null}
+
+        <Button
+          type="submit"
+          className="w-full"
+          size="lg"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Signing in…" : "Sign in"}
+          {!isSubmitting && <ArrowRight size={16} />}
+        </Button>
+      </motion.form>
+
+      {/* Footer */}
+      <motion.div variants={fadeUp} custom={2} className="mt-8">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-[var(--border)]" />
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="bg-[var(--bg-base)] px-3 text-[var(--text-muted)]">
+              New to EthioTech?
+            </span>
+          </div>
+        </div>
+        <div className="mt-6 text-center">
+          <Link
+            to="/register"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-[var(--primary-hover)]"
+          >
+            Create your free account
+            <ArrowRight size={14} />
           </Link>
         </div>
-
-        {error ? <p className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</p> : null}
-
-        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-          {isSubmitting ? "Signing in…" : "Continue to dashboard"}
-          <ArrowRight size={16} />
-        </Button>
-      </form>
-
-      <div className="mt-6 rounded-2xl border border-primary/15 bg-primary/5 p-4">
-        <div className="flex items-center gap-2 text-sm font-medium text-white">
-          <ShieldCheck size={16} className="text-primary" />
-          Protected classroom access
-        </div>
-        <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-          Authentication is role-aware, short-lived, and ready for mentor, student, parent, and admin sessions.
-        </p>
-      </div>
-
-      <p className="mt-6 text-center text-sm text-[var(--text-muted)]">
-        New here?{" "}
-        <Link to="/register" className="inline-flex items-center gap-1 text-primary hover:underline">
-          Create your account <Sparkles size={14} />
-        </Link>
-      </p>
-    </Card>
+      </motion.div>
+    </motion.div>
   );
 }
