@@ -6,6 +6,7 @@ import { AuthLayout } from "@/layouts/AuthLayout";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
 import { ClassroomLayout } from "@/layouts/ClassroomLayout";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
+import { GuestRoute } from "@/routes/GuestRoute";
 import { RouteFallback } from "@/components/layout/RouteFallback";
 import { AuthBootstrap } from "@/components/auth/AuthBootstrap";
 import { ErrorBoundary } from "@/components/composites/ErrorBoundary";
@@ -209,11 +210,15 @@ export default function App() {
               <Route path="partners" element={<PartnersPage />} />
               <Route path="donate" element={<DonationPage />} />
             </Route>
-            <Route element={<AuthLayout />}>
+            <Route
+              element={
+                <GuestRoute>
+                  <AuthLayout />
+                </GuestRoute>
+              }
+            >
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
-            </Route>
-            <Route element={<AuthLayout />}>
               <Route path="auth/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="auth/reset-password" element={<ResetPasswordPage />} />
             </Route>
