@@ -15,7 +15,7 @@ import {
   CheckCircle2,
   Circle,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
 import { completeDailyChallenge } from "@/services/gamificationService";
 import { useAuthStore } from "@/store/authStore";
@@ -275,10 +275,12 @@ export function StudentDashboardPage() {
         <motion.div variants={cardVariants}>
           <Card className="surface-panel overflow-hidden p-0 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl h-full min-h-[28rem] relative">
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.12),rgba(6,10,18,0.94))]" />
-            <img
-              src={heroImage}
-              alt="Immersive dashboard preview"
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
+              alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
               className="h-full w-full object-cover"
+              width={600}
+              quality={80}
             />
             <div className="absolute left-4 top-4 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.86)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary font-bold shadow-sm">
               Live learning

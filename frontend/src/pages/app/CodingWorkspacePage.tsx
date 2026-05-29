@@ -10,7 +10,8 @@ import {
   MessageSquareText,
   FileCode2,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -166,7 +167,13 @@ export function CodingWorkspacePage() {
         <div className="space-y-6">
           <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-0">
             <div className="relative min-h-[22rem]">
-              <img src={heroImage} alt="Lesson preview" className="h-full w-full object-cover" />
+              <SmartImage
+                unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
+                alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
+                className="h-full w-full object-cover"
+                width={800}
+                quality={80}
+              />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(7,12,20,0.92))]" />
               <div className="absolute left-4 top-4 flex flex-wrap gap-2">
                 <Badge variant="purple">Video lesson</Badge>

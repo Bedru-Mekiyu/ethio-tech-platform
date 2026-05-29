@@ -14,7 +14,8 @@ import {
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -358,10 +359,12 @@ export function TracksPage() {
                 <div className="absolute left-4 top-4 z-10 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.9)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary">
                   Track spotlight
                 </div>
-                <img
-                  src={heroImage}
-                  alt="EthioTech learning tracks preview"
+                <SmartImage
+                  unsplashId={MEDIA_CATEGORIES.classroom.immersive[0].unsplashId}
+                  alt={MEDIA_CATEGORIES.classroom.immersive[0].alt}
                   className="h-full min-h-[280px] w-full object-cover"
+                  width={600}
+                  quality={80}
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4">
                   <p className="stat-label">

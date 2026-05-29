@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Camera, Crown, Edit3, Medal, ShieldCheck, Sparkles } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { useAuthStore } from "@/store/authStore";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -107,7 +108,13 @@ export function ProfilePage() {
       <motion.div variants={itemVariants}>
         <Card className="overflow-hidden rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-0">
           <div className="relative h-56">
-            <img src={heroImage} alt="Profile banner" className="h-full w-full object-cover opacity-85" />
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.dashboard.stats.xp}
+              alt="Profile banner"
+              className="h-full w-full object-cover opacity-85"
+              width={1000}
+              quality={80}
+            />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,14,24,0.1),rgba(7,12,20,0.96))]" />
             <div className="absolute left-6 top-6 flex flex-wrap gap-2">
               <Badge variant="purple" showDot>Personal profile</Badge>
