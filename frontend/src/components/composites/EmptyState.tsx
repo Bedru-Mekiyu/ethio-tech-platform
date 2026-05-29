@@ -1,38 +1,76 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Inbox } from "lucide-react";
+
+export interface EmptyStateProps {
+  title: string;
+  description?: string;
+  eyebrow?: string;
+  illustration?: React.ReactNode;
+  actionLabel?: string;
+  actionHref?: string;
+  onAction?: () => void;
+}
 
 export function EmptyState({
   title,
   description,
+  eyebrow = "Workspace",
+  illustration,
   actionLabel,
   actionHref,
   onAction,
-}: {
-  title: string;
-  description?: string;
-  actionLabel?: string;
-  actionHref?: string;
-  onAction?: () => void;
-}) {
+}: EmptyStateProps) {
   return (
-    <div className="surface-panel flex flex-col items-center justify-center gap-4 px-6 py-10 text-center">
-      <div className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
-        Learning space
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col items-center justify-center gap-4.5 px-6 py-12 text-center rounded-2xl border border-white/5 bg-white/3 backdrop-blur-sm shadow-inner"
+    >
+      {/* Eyebrow badge */}
+      <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-0.5 text-[9px] font-bold uppercase tracking-[0.24em] text-primary select-none">
+        {eyebrow}
+      </span>
+
+      {/* Floating Illustration / Icon */}
+      <motion.div
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/3 border border-white/5 shadow-md text-[var(--text-muted)] mt-2 select-none relative overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+        {illustration ?? <Inbox size={26} className="text-[var(--text-secondary)] opacity-80" />}
+      </motion.div>
+
+      {/* Text group */}
+      <div className="max-w-md space-y-2 mt-1">
+        <h3 className="text-lg font-bold text-white tracking-tight leading-snug">{title}</h3>
+        {description && (
+          <p className="text-xs text-[var(--text-secondary)] leading-relaxed max-w-sm mx-auto font-medium">
+            {description}
+          </p>
+        )}
       </div>
-      <div className="max-w-md">
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
-        {description ? <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{description}</p> : null}
-      </div>
-      {actionLabel && actionHref ? (
-        <Link to={actionHref} className="inline-flex">
-          <Button>{actionLabel}</Button>
-        </Link>
-      ) : null}
-      {actionLabel && onAction && !actionHref ? (
-        <Button onClick={onAction}>
-          {actionLabel}
-        </Button>
-      ) : null}
-    </div>
+
+      {/* Action Button */}
+      {actionLabel && (
+        <div className="mt-2.5">
+          {actionHref ? (
+            <Link to={actionHref} className="inline-flex">
+              <Button size="md" className="font-semibold shadow-sm">
+                {actionLabel}
+              </Button>
+            </Link>
+          ) : (
+            <Button size="md" onClick={onAction} className="font-semibold shadow-sm">
+              {actionLabel}
+            </Button>
+          )}
+        </div>
+      )}
+    </motion.div>
   );
 }
+

@@ -1,51 +1,49 @@
-import { Card } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
+import { motion } from "framer-motion";
+import { Logo } from "@/components/brand/Logo";
 
 export function RouteFallback({ label = "Loading your learning space" }: { label?: string }) {
   return (
-    <div className="page-shell min-h-screen py-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6">
-        <div className="surface-panel space-y-4 p-6">
-          <div className="flex items-center gap-3">
-            <Spinner size="sm" />
-            <p className="section-eyebrow">{label}</p>
-          </div>
-          <Skeleton className="h-11 w-72 max-w-full" />
-          <Skeleton className="h-5 w-[32rem] max-w-full" />
-        </div>
+    <div className="flex min-h-[60vh] w-full flex-col items-center justify-center gap-6 px-4 select-none">
+      <motion.div
+        animate={{
+          scale: [1, 1.06, 1],
+          opacity: [0.7, 1, 0.7],
+        }}
+        transition={{
+          duration: 2.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="relative"
+      >
+        {/* Soft ambient backglow */}
+        <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-xl scale-125 animate-pulse" />
+        <Logo to="#" variant="default" className="scale-110" />
+      </motion.div>
+      
+      <div className="flex flex-col items-center gap-1.5 text-center mt-1">
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary animate-pulse">
+          {label}
+        </p>
+        <span className="text-[11px] font-semibold text-[var(--text-muted)] tracking-wide">
+          Syncing secure platform data...
+        </span>
+      </div>
 
-        <div className="grid gap-4 lg:grid-cols-3">
-          <Card>
-            <Skeleton className="h-4 w-28" />
-            <Skeleton className="mt-4 h-10 w-24" />
-            <Skeleton className="mt-3 h-3 w-3/4" />
-          </Card>
-          <Card>
-            <Skeleton className="h-4 w-28" />
-            <Skeleton className="mt-4 h-10 w-28" />
-            <Skeleton className="mt-3 h-3 w-2/3" />
-          </Card>
-          <Card>
-            <Skeleton className="h-4 w-28" />
-            <Skeleton className="mt-4 h-10 w-20" />
-            <Skeleton className="mt-3 h-3 w-5/6" />
-          </Card>
-        </div>
-
-        <Card className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
-          <div>
-            <Skeleton className="h-4 w-40" />
-            <Skeleton className="mt-4 h-64 w-full" />
-          </div>
-          <div className="space-y-3">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-10 w-full" />
-          </div>
-        </Card>
+      {/* Slim high-end infinite sliding track */}
+      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-white/5 relative">
+        <motion.div
+          initial={{ left: "-100%" }}
+          animate={{ left: "100%" }}
+          transition={{
+            duration: 1.6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-0 bottom-0 w-28 bg-gradient-to-r from-transparent via-primary to-transparent"
+        />
       </div>
     </div>
   );
 }
+
