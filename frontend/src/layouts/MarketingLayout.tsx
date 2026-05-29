@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X, Github, Twitter, Linkedin, Globe } from "lucide-react";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const nav = [
@@ -18,10 +18,26 @@ const nav = [
 export function MarketingLayout() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg-base)] text-[var(--text-primary)]">
       <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(5,10,20,0.8)] backdrop-blur-xl transition-colors duration-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4.5">
+        <div className="page-shell flex items-center justify-between py-4.5">
           <Logo />
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((item) => (
@@ -78,6 +94,9 @@ export function MarketingLayout() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="border-t border-[var(--border)] bg-[rgba(8,14,24,0.98)] px-5 py-6 md:hidden flex flex-col gap-4 overflow-hidden shadow-2xl"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
             >
               {nav.map((item) => (
                 <Link
@@ -111,7 +130,7 @@ export function MarketingLayout() {
       </main>
 
       <footer className="border-t border-[var(--border)] bg-[rgba(5,10,20,0.85)] py-16 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="page-shell grid grid-cols-1 gap-10 md:grid-cols-4">
           <div className="space-y-4">
             <Logo />
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
@@ -157,7 +176,7 @@ export function MarketingLayout() {
             </ul>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
+        <div className="page-shell mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 text-xs text-[var(--text-muted)] md:flex-row">
           <p>© {new Date().getFullYear()} EthioTech. Empowering African innovators.</p>
           <p className="flex items-center gap-1">Made with <span className="text-danger">♥</span> for East Africa</p>
         </div>
@@ -165,4 +184,3 @@ export function MarketingLayout() {
     </div>
   );
 }
-

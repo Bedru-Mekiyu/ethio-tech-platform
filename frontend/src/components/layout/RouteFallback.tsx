@@ -3,7 +3,12 @@ import { Logo } from "@/components/brand/Logo";
 
 export function RouteFallback({ label = "Loading your learning space" }: { label?: string }) {
   return (
-    <div className="flex min-h-[60vh] w-full flex-col items-center justify-center gap-6 px-4 select-none">
+    <div
+      className="page-shell flex min-h-[60vh] w-full flex-col items-center justify-center gap-6 px-4 py-16 text-center select-none"
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+    >
       <motion.div
         animate={{
           scale: [1, 1.06, 1],
@@ -14,11 +19,10 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="relative"
+        className="relative flex items-center justify-center"
       >
-        {/* Soft ambient backglow */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-xl scale-125 animate-pulse" />
-        <Logo to="#" variant="default" className="scale-110" />
+        <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-xl scale-125 animate-pulse" aria-hidden="true" />
+        <Logo to="/" variant="full" className="scale-110" />
       </motion.div>
       
       <div className="flex flex-col items-center gap-1.5 text-center mt-1">
@@ -30,8 +34,7 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
         </span>
       </div>
 
-      {/* Slim high-end infinite sliding track */}
-      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-white/5 relative">
+      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-white/5 relative" aria-hidden="true">
         <motion.div
           initial={{ left: "-100%" }}
           animate={{ left: "100%" }}
@@ -46,4 +49,3 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
     </div>
   );
 }
-
