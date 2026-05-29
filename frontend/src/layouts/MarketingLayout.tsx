@@ -2,8 +2,9 @@ import { Outlet, Link, NavLink } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github, Twitter, Linkedin, Globe } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -18,9 +19,9 @@ export function MarketingLayout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-base)]">
-      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(5,10,20,0.86)] backdrop-blur-xl">
-        <div className="page-shell flex items-center justify-between py-4">
+    <div className="min-h-screen flex flex-col bg-[var(--bg-base)] text-[var(--text-primary)]">
+      <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[rgba(5,10,20,0.8)] backdrop-blur-xl transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4.5">
           <Logo />
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((item) => (
@@ -29,67 +30,139 @@ export function MarketingLayout() {
                 to={item.to}
                 className={({ isActive }) =>
                   cn(
-                    "text-sm text-[var(--text-secondary)] transition hover:text-white",
-                    isActive && "text-primary"
+                    "relative py-1 text-sm font-medium transition-colors duration-200",
+                    isActive ? "text-primary" : "text-[var(--text-secondary)] hover:text-white"
                   )
                 }
               >
-                {item.label}
+                {({ isActive }) => (
+                  <>
+                    {isActive && (
+                      <motion.span
+                        layoutId="active-marketing-tab"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-primary shadow-[0_1px_8px_rgba(0,210,255,0.6)]"
+                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                      />
+                    )}
+                    <span className="relative z-10">{item.label}</span>
+                  </>
+                )}
               </NavLink>
             ))}
           </nav>
-          <div className="hidden items-center gap-3 md:flex">
-            <Link to="/login" className="text-sm text-[var(--text-secondary)] hover:text-white">
+          <div className="hidden items-center gap-4 md:flex">
+            <Link to="/login" className="text-sm font-medium text-[var(--text-secondary)] hover:text-white transition-colors duration-200">
               Sign in
             </Link>
             <Link to="/register">
-              <Button>Join EthioTech</Button>
+              <Button size="md">Join EthioTech</Button>
             </Link>
           </div>
           <button
             type="button"
-            className="md:hidden"
+            className="md:hidden p-2 rounded-xl border border-[var(--border)] hover:bg-white/5 text-white transition-colors duration-200"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={open}
             aria-controls="mobile-marketing-nav"
           >
-            {open ? <X /> : <Menu />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-        {open && (
-          <div
-            id="mobile-marketing-nav"
-            className="border-t border-[var(--border)] bg-[rgba(8,14,24,0.98)] px-4 py-4 md:hidden"
-          >
-            {nav.map((item) => (
-              <Link key={item.to} to={item.to} className="block py-2" onClick={() => setOpen(false)}>
-                {item.label}
-              </Link>
-            ))}
-            <Link to="/login" className="block py-2" onClick={() => setOpen(false)}>
-              Sign in
-            </Link>
-            <Link to="/register" onClick={() => setOpen(false)}>
-              <Button className="mt-2 w-full">Join EthioTech</Button>
-            </Link>
-          </div>
-        )}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              id="mobile-marketing-nav"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="border-t border-[var(--border)] bg-[rgba(8,14,24,0.98)] px-5 py-6 md:hidden flex flex-col gap-4 overflow-hidden shadow-2xl"
+            >
+              {nav.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="text-base font-medium text-[var(--text-secondary)] hover:text-white py-1.5 transition-colors duration-200"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="border-t border-[var(--border)] pt-4 mt-2 flex flex-col gap-4">
+                <Link
+                  to="/login"
+                  className="text-base font-medium text-[var(--text-secondary)] hover:text-white py-1.5 transition-colors duration-200"
+                  onClick={() => setOpen(false)}
+                >
+                  Sign in
+                </Link>
+                <Link to="/register" onClick={() => setOpen(false)}>
+                  <Button className="w-full">Join EthioTech</Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
-      <main>
+
+      <main className="flex-grow">
         <Outlet />
       </main>
-      <footer className="mt-20 border-t border-[var(--border)] bg-[rgba(5,10,20,0.82)] py-10">
-        <div className="page-shell flex flex-col items-center justify-between gap-4 text-sm text-[var(--text-muted)] md:flex-row">
-          <Logo />
-          <div className="flex gap-6">
-            <Link to="/privacy">Privacy</Link>
-            <Link to="/terms">Terms</Link>
-            <Link to="/contact">Contact</Link>
+
+      <footer className="border-t border-[var(--border)] bg-[rgba(5,10,20,0.85)] py-16 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="space-y-4">
+            <Logo />
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
+              Empowering the next generation of tech innovators and digital pioneers in Ethiopia and beyond.
+            </p>
+            <div className="flex gap-4">
+              <a href="#" className="text-[var(--text-muted)] hover:text-primary transition-colors duration-200" aria-label="GitHub">
+                <Github size={18} />
+              </a>
+              <a href="#" className="text-[var(--text-muted)] hover:text-primary transition-colors duration-200" aria-label="Twitter">
+                <Twitter size={18} />
+              </a>
+              <a href="#" className="text-[var(--text-muted)] hover:text-primary transition-colors duration-200" aria-label="LinkedIn">
+                <Linkedin size={18} />
+              </a>
+              <a href="#" className="text-[var(--text-muted)] hover:text-primary transition-colors duration-200" aria-label="Website">
+                <Globe size={18} />
+              </a>
+            </div>
           </div>
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4.5">Platform</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/how-it-works" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Programs</Link></li>
+              <li><Link to="/mentors" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Mentors</Link></li>
+              <li><Link to="/hubs" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Hubs</Link></li>
+              <li><Link to="/leaderboard" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Leaderboard</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4.5">Company</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/about" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">About Us</Link></li>
+              <li><Link to="/contact" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Contact</Link></li>
+              <li><a href="#" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Careers</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-4.5">Legal</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/privacy" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-[var(--text-muted)] hover:text-white transition-colors duration-200">Terms of Service</Link></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--text-muted)]">
           <p>© {new Date().getFullYear()} EthioTech. Empowering African innovators.</p>
+          <p className="flex items-center gap-1">Made with <span className="text-danger">♥</span> for East Africa</p>
         </div>
       </footer>
     </div>
   );
 }
+

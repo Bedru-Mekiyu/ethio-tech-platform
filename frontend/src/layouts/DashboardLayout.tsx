@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Avatar } from "@/components/ui/avatar";
@@ -8,6 +8,7 @@ import { useAuthStore } from "@/store/authStore";
 import { getRankTitle, cn } from "@/lib/utils";
 import { getSettingsPath } from "@/store/authStore";
 import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   BookOpen,
@@ -33,6 +34,19 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const user = useAuthStore((s) => s.user);
   const { classroomPath, squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   const studentNav: NavItem[] = [
     { to: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
@@ -84,23 +98,39 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           ? "/mentor"
           : "/admin";
 
-  const navItems = nav.map((item) => (
-    <NavLink
-      key={item.to + item.label}
-      to={item.to}
-      end
-      onClick={() => setMobileOpen(false)}
-      className={({ isActive }) =>
-        cn(
-          "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-[var(--text-secondary)] transition hover:bg-white/5 hover:text-white",
-          isActive && "border border-primary/30 bg-primary/10 text-primary"
-        )
-      }
-    >
-      {item.icon}
-      {item.label}
-    </NavLink>
-  ));
+  const renderNavItems = (isMobile: boolean = false) =>
+    nav.map((item) => (
+      <NavLink
+        key={item.to + item.label}
+        to={item.to}
+        end
+        onClick={() => isMobile && setMobileOpen(false)}
+        className={({ isActive }) =>
+          cn(
+            "group relative flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200 select-none border border-transparent",
+            isActive
+              ? "bg-primary/8 text-primary shadow-[inset_0_1px_0_rgba(0,210,255,0.06),0_4px_12px_rgba(0,210,255,0.04)] border-primary/20"
+              : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
+          )
+        }
+      >
+        {({ isActive }) => (
+          <>
+            {isActive && (
+              <motion.div
+                layoutId={isMobile ? "active-mobile-drawer-glow" : "active-sidebar-glow"}
+                className="absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full bg-primary"
+                transition={{ type: "spring", stiffness: 350, damping: 30 }}
+              />
+            )}
+            <span className={cn("transition-transform duration-200 group-hover:scale-110", isActive ? "text-primary" : "text-[var(--text-muted)] group-hover:text-white")}>
+              {item.icon}
+            </span>
+            <span>{item.label}</span>
+          </>
+        )}
+      </NavLink>
+    ));
 
   return (
     <div className="flex min-h-screen bg-[var(--bg-base)]">
@@ -110,71 +140,112 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       >
         Skip to main content
       </a>
-      <aside className="hidden w-64 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.96)] p-4 lg:flex">
+
+      {/* Desktop Sidebar */}
+      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.96)] p-5 lg:flex">
         <Logo to={homePath} />
-        <nav className="mt-8 flex flex-1 flex-col gap-1">
-          {navItems}
+        <nav className="mt-8 flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
+          {renderNavItems(false)}
         </nav>
-        <Link
-          to={getSettingsPath(user?.role ?? variant)}
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-[var(--text-muted)] hover:text-white"
-        >
-          <Settings size={18} /> Settings
-        </Link>
-        {user && (
-          <div className="mt-4 flex items-center gap-3 border-t border-[var(--border)] pt-4">
-            <Avatar name={user.fullName} size="sm" />
-            <div>
-              <p className="text-sm font-medium">{user.fullName}</p>
-              <p className="text-xs capitalize text-[var(--text-muted)]">{user.role}</p>
+        <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+          <Link
+            to={getSettingsPath(user?.role ?? variant)}
+            className="flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors duration-200 border border-transparent hover:bg-white/5"
+          >
+            <Settings size={18} /> Settings
+          </Link>
+          {user && (
+            <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
+              <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
+              <div className="overflow-hidden min-w-0">
+                <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
+                <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
+              </div>
             </div>
-          </div>
-        )}
-      </aside>
-
-      {mobileOpen ? (
-        <div
-          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
-          onClick={() => setMobileOpen(false)}
-          aria-hidden
-        />
-      ) : null}
-      <aside
-        className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.98)] p-4 transition-transform lg:hidden",
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        )}
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <Logo to={homePath} />
-          <button type="button" onClick={() => setMobileOpen(false)} aria-label="Close menu">
-            <X size={20} />
-          </button>
+          )}
         </div>
-        <nav className="flex flex-1 flex-col gap-1">
-          {navItems}
-        </nav>
       </aside>
 
-      <div className="flex flex-1 flex-col pb-16 lg:pb-0">
-        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[rgba(5,10,20,0.7)] px-4 py-4 backdrop-blur-xl lg:px-8">
+      {/* Mobile Drawer (Animated) */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[4px] lg:hidden"
+            />
+            <motion.aside
+              id="mobile-nav-drawer"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 26, stiffness: 220 }}
+              className="fixed inset-y-0 left-0 z-50 flex w-66 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.98)] p-5 lg:hidden shadow-2xl"
+              role="dialog"
+              aria-label="Navigation Menu"
+            >
+              <div className="mb-6 flex items-center justify-between">
+                <Logo to={homePath} />
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close menu"
+                  className="p-1 rounded-lg hover:bg-white/5 text-[var(--text-secondary)] hover:text-white transition-colors duration-200 min-h-10 min-w-10 flex items-center justify-center"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <nav className="flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
+                {renderNavItems(true)}
+              </nav>
+              <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+                <Link
+                  to={getSettingsPath(user?.role ?? variant)}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors duration-200 border border-transparent hover:bg-white/5"
+                >
+                  <Settings size={18} /> Settings
+                </Link>
+                {user && (
+                  <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
+                    <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
+                    <div className="overflow-hidden min-w-0">
+                      <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
+                      <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Main Content Area */}
+      <div className="flex flex-1 flex-col pb-20 lg:pb-0">
+        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[rgba(5,10,20,0.7)] px-4 py-4.5 backdrop-blur-xl lg:px-8">
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="rounded-lg border border-[var(--border)] p-2 lg:hidden"
+              className="min-h-11 min-w-11 rounded-xl border border-[var(--border)] p-2.5 lg:hidden flex items-center justify-center hover:bg-white/5 text-white transition-colors duration-200"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-drawer"
             >
               <Menu size={20} />
             </button>
             {variant === "parent" ? (
               <div className="flex items-center gap-3">
-                <Badge variant="purple">Family workspace</Badge>
-                <span className="text-sm text-[var(--text-secondary)]">Parent view</span>
+                <Badge variant="purple" showDot>Family workspace</Badge>
+                <span className="text-sm font-medium text-[var(--text-secondary)]">Parent view</span>
               </div>
             ) : (
               <div className="flex items-center gap-4">
-                <span className="hidden text-xs uppercase text-[var(--text-muted)] sm:inline">Current rank</span>
+                <span className="hidden text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] sm:inline">Current rank</span>
                 <span className="font-semibold text-primary">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
@@ -189,27 +260,32 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                     ? "/app/notifications"
                     : "/admin"
               }
-              className="text-[var(--text-secondary)] hover:text-white"
+              className="relative p-2 rounded-lg text-[var(--text-secondary)] hover:text-white hover:bg-white/5 transition-colors duration-200 min-w-10 min-h-10 flex items-center justify-center"
               aria-label="Notifications"
             >
               <Bell size={20} />
+              {/* Notification indicator badge */}
+              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(0,210,255,0.8)]" />
             </Link>
             {user && (
-              <div className="flex items-center gap-2">
-                <Avatar name={user.fullName} />
+              <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
+                <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
                 <div className="hidden sm:block">
-                  <p className="text-sm font-medium">{user.fullName}</p>
-                  <p className="text-xs capitalize text-[var(--text-muted)]">{user.role}</p>
+                  <p className="text-sm font-semibold text-white leading-tight">{user.fullName}</p>
+                  <p className="text-xs capitalize text-[var(--text-muted)] mt-0.5">{user.role}</p>
                 </div>
               </div>
             )}
           </div>
         </header>
-        <main id="main-content" className="flex-1 p-4 lg:p-8">
+
+        <main id="main-content" className="flex-1 p-4 lg:p-8 overflow-y-auto scroll-smooth">
           <Outlet />
         </main>
+
+        {/* Mobile bottom nav with sliding layout indicator */}
         <nav
-          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[rgba(11,14,20,0.96)] pb-[env(safe-area-inset-bottom)] lg:hidden"
+          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[rgba(11,14,20,0.96)] pb-[env(safe-area-inset-bottom)] lg:hidden backdrop-blur-xl"
           aria-label="Mobile navigation"
         >
           {(variant === "student"
@@ -227,13 +303,26 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               end
               className={({ isActive }) =>
                 cn(
-                  "flex flex-1 flex-col items-center gap-1 py-2 text-[10px] text-[var(--text-muted)]",
-                  isActive && "text-primary"
+                  "relative flex min-h-14 flex-1 flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] transition-colors duration-200 select-none",
+                  isActive ? "text-primary" : "hover:text-white"
                 )
               }
             >
-              {item.icon}
-              <span>{item.label.split(" ")[0]}</span>
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <motion.span
+                      layoutId="active-bottom-bar-indicator"
+                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_8px_rgba(0,210,255,0.8)]"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span className={cn("transition-transform duration-200", isActive ? "scale-110 text-primary" : "scale-100")}>
+                    {item.icon}
+                  </span>
+                  <span>{item.label.split(" ")[0]}</span>
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
@@ -241,3 +330,4 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     </div>
   );
 }
+
