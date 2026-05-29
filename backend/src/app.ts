@@ -15,14 +15,18 @@ import { getEnv } from "./config/env.js";
 
 export const createApp = () => {
   const app = express();
-  if (getEnv().isProduction) {
+  const env = getEnv();
+
+  app.disable("x-powered-by");
+
+  if (env.isProduction) {
     app.set("trust proxy", 1);
   }
 
   app.use(helmet());
   app.use(
     cors({
-      origin: getEnv().corsOrigin,
+      origin: env.corsOrigin,
       credentials: true,
     })
   );
@@ -53,6 +57,8 @@ export const createApp = () => {
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 200,
+    standardHeaders: true,
+    legacyHeaders: false,
     message: { success: false, message: "Too many requests" },
   });
   app.use("/api/", limiter);
@@ -77,7 +83,7 @@ export const createApp = () => {
   });
 
   app.get("/health/realtime", (req, res) => {
-    if (getEnv().isProduction) {
+    if (env.isProduction) {
       res.status(200).json({ status: "OK" });
       return;
     }

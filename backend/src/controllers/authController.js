@@ -94,7 +94,8 @@ export const logout = asyncHandler(async (req, res) => {
     ip: req.ip,
   });
 
-  const { maxAge, ...clearOptions } = getCookieOptions();
+  const clearOptions = { ...getCookieOptions() };
+  delete clearOptions.maxAge;
   res.clearCookie("refreshToken", clearOptions);
 
   sendResponse(res, 200, "Logged out successfully");
