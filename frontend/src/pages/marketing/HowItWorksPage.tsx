@@ -13,7 +13,8 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -335,10 +336,14 @@ export function HowItWorksPage() {
       >
         <div className="order-2 lg:order-1">
           <Card className="overflow-hidden border-primary/20 bg-[linear-gradient(180deg,rgba(9,14,24,0.98),rgba(7,10,18,0.98))] p-4">
-            <img
-              src={heroImage}
-              alt="Immersive learning preview"
-              className="h-full min-h-[300px] w-full rounded-[20px] object-cover"
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
+              alt="Immersive learning preview - pair programming in a modern workspace"
+              hoverEffect="zoom"
+              wrapperClassName="rounded-[20px]"
+              className="h-full min-h-[300px] w-full object-cover"
+              width={800}
+              quality={85}
             />
           </Card>
         </div>
@@ -400,13 +405,17 @@ export function HowItWorksPage() {
         <div className="order-1 lg:order-2">
           <Card className="overflow-hidden border-secondary/20 bg-[linear-gradient(180deg,rgba(12,16,30,0.98),rgba(6,9,18,0.98))] p-4">
             <div className="relative overflow-hidden rounded-[22px]">
-              <img
-                src={heroImage}
-                alt="Project building preview"
+              <SmartImage
+                unsplashId={MEDIA_CATEGORIES.community.showcase[1].unsplashId}
+                alt="Project building preview - Ethiopian developers showcasing a local fintech solution at an innovation hub"
+                hoverEffect="zoom"
+                wrapperClassName="border-none bg-transparent h-full w-full"
                 className="h-full min-h-[300px] w-full object-cover"
+                width={800}
+                quality={85}
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.72))]" />
-              <div className="absolute bottom-4 left-4 right-4">
+              <div className="absolute bottom-4 left-4 right-4 z-10">
                 <Card className="border-primary/25 bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
                   <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Build real projects</p>
                   <p className="mt-1 text-lg font-semibold text-white">{strongestTrack?.title || "Project pathway"}</p>

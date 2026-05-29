@@ -13,7 +13,8 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import heroImage from "@/assets/hero.png";
+import { SmartImage } from "@/components/ui/smart-image";
+import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -339,10 +340,14 @@ export function AboutPage() {
               </Card>
             </div>
 
-            <img
-              src={heroImage}
-              alt="EthioTech immersive learning environment preview"
-              className="mx-auto max-h-[440px] w-full object-contain py-8 drop-shadow-[0_0_48px_rgba(123,97,255,0.25)]"
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
+              alt="EthioTech immersive learning environment preview - student programmer at work"
+              hoverEffect="glow"
+              wrapperClassName="border-none bg-transparent mx-auto rounded-2xl overflow-hidden drop-shadow-[0_0_48px_rgba(123,97,255,0.25)]"
+              className="mx-auto max-h-[440px] aspect-[16/10] w-full object-cover"
+              width={800}
+              quality={85}
             />
           </div>
         </div>
