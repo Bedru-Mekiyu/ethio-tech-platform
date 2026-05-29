@@ -10,6 +10,11 @@ export interface AuthUser {
   xp?: number;
   isVerified?: boolean;
   avatar?: string;
+  bio?: string;
+  phone?: string;
+  gradeLevel?: number;
+  expertise?: string[];
+  currentCompany?: string;
 }
 
 interface AuthState {

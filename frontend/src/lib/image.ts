@@ -16,7 +16,7 @@ export async function compressImage(file: File, maxWidth = 512, quality = 0.8): 
   // Prefer webp if available for better compression
   const mime = typeof HTMLCanvasElement !== "undefined" && canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0 ? "image/webp" : "image/jpeg";
 
-  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve as any, mime, quality));
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob((result: Blob | null) => resolve(result), mime, quality));
   if (!blob) throw new Error("Image compression failed");
 
   // Create a new File to preserve filename

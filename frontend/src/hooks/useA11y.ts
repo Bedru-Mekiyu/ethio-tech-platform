@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 /**
  * Hook to detect if the user prefers reduced motion.
@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
  * or on low-end devices with limited GPU resources.
  */
 export const usePrefersReducedMotion = (): boolean => {
-  const [prefersReduced, setPrefersReduced] = useState(false);
+  const [prefersReduced, setPrefersReduced] = useState(() => {
+    // Initialize from media query (no setState in effect)
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   useEffect(() => {
-    // Check initial preference
+    // Listen for changes only
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReduced(mediaQuery.matches);
-
-    // Listen for changes
     const handler = (e: MediaQueryListEvent) => {
       setPrefersReduced(e.matches);
     };
@@ -30,29 +30,23 @@ export const usePrefersReducedMotion = (): boolean => {
  * Helps disable expensive animations and 3D rendering on constrained hardware.
  */
 export const useLowEndDevice = (): boolean => {
-  const [isLowEnd, setIsLowEnd] = useState(false);
-
-  useEffect(() => {
+  return useState(() => {
     // Check device memory (if available)
-    const deviceMemory = (navigator as any).deviceMemory;
+    const deviceMemory = (navigator as { deviceMemory?: number }).deviceMemory;
     if (deviceMemory && deviceMemory <= 4) {
-      setIsLowEnd(true);
-      return;
+      return true;
     }
 
-    // Check max touch points (touch devices are often constrained)
     const maxTouchPoints = navigator.maxTouchPoints ?? 0;
     if (maxTouchPoints > 0 && window.innerWidth < 768) {
-      // Mobile device
-      setIsLowEnd(true);
+      return true;
     }
 
-    // Check hardware concurrency (logical CPUs)
     const concurrency = navigator.hardwareConcurrency ?? 1;
     if (concurrency <= 2) {
-      setIsLowEnd(true);
+      return true;
     }
-  }, []);
 
-  return isLowEnd;
+    return false;
+  })[0];
 };
