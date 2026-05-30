@@ -5,6 +5,7 @@ import compression from "compression";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import mongoose from "mongoose";
+import path from "path";
 import type { Server as SocketServer } from "socket.io";
 import apiRouter from "./routes/index.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
@@ -36,6 +37,16 @@ export const createApp = () => {
   app.use(express.urlencoded({ extended: false, limit: "1mb" }));
   app.use(rejectMongoOperators);
   app.use(attachRequestId);
+  app.use(
+    "/avatars",
+    express.static(path.resolve(process.cwd(), "public", "avatars"), {
+      maxAge: env.isProduction ? "30d" : 0,
+      immutable: env.isProduction,
+      setHeaders: (res) => {
+        res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+      },
+    })
+  );
 
   app.use((req, res, next) => {
     const startedAt = Date.now();
