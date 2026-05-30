@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,7 +6,7 @@ import { z } from "zod";
 import { LogOut, LayoutDashboard, Lock, UserCircle2, Sparkles } from "lucide-react";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
 import { logoutApi, changePassword } from "@/services/authService";
-import { updateMyProfile, uploadAvatar, getMyProfile } from "@/services/userService";
+import { updateMyProfile, uploadAvatar, getMyProfile, getAvatarOptions, selectSystemAvatar, removeAvatar } from "@/services/userService";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,7 @@ import { ProgressBar } from "@/components/ui/progress";
 import { FormField, fieldAriaProps } from "@/components/ui/form-field";
 import { FileInput } from "@/components/ui/file-input";
 import { useToast } from "@/components/composites/ToastProvider";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 const profileSchema = z.object({
@@ -68,10 +69,12 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   const navigate = useNavigate();
   const toast = useToast();
 
-  const [avatarPreview, setAvatarPreview] = useState<string | null>(() => user?.avatar ?? null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(() => user?.avatarUrl ?? user?.avatar ?? null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+  const [avatarOptions, setAvatarOptions] = useState<Awaited<ReturnType<typeof getAvatarOptions>>>([]);
+  const [avatarBusy, setAvatarBusy] = useState(false);
 
   const profileForm = useForm<ProfileForm>({
     resolver: zodResolver(profileSchema as never) as Resolver<ProfileForm>,
@@ -104,7 +107,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
           expertise: profile.expertise?.join(", ") ?? "",
           currentCompany: profile.currentCompany ?? "",
         });
-        setAvatarPreview(profile.avatar ?? null);
+        setAvatarPreview(profile.avatarUrl ?? profile.avatar ?? null);
       } catch {
         if (user) {
           profileForm.reset({
@@ -115,7 +118,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             expertise: user.expertise?.join(", ") ?? "",
             currentCompany: user.currentCompany ?? "",
           });
-          setAvatarPreview(user.avatar ?? null);
+          setAvatarPreview(user.avatarUrl ?? user.avatar ?? null);
         }
       }
     })();
@@ -125,10 +128,34 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const options = await getAvatarOptions();
+        if (!cancelled) {
+          setAvatarOptions(options);
+        }
+      } catch {
+        if (!cancelled) {
+          setAvatarOptions([]);
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const currentAvatarId = useMemo(
+    () => avatarOptions.find((option) => option.url === (avatarPreview ?? user?.avatarUrl ?? user?.avatar))?.id,
+    [avatarOptions, avatarPreview, user?.avatar, user?.avatarUrl]
+  );
+
   const handleAvatarPick = (file: File | null, preview?: string) => {
     if (!file) {
       setAvatarFile(null);
-      setAvatarPreview(user?.avatar ?? null);
+      setAvatarPreview(user?.avatarUrl ?? user?.avatar ?? null);
       setAvatarError(null);
       return;
     }
@@ -137,14 +164,49 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
       toast.error("Please select an image file.");
       return;
     }
-    if (file.size > 5_000_000) {
-      setAvatarError("Image must be smaller than 5 MB.");
-      toast.error("Image must be smaller than 5 MB.");
+    if (file.size > 4_000_000) {
+      setAvatarError("Image must be smaller than 4 MB.");
+      toast.error("Image must be smaller than 4 MB.");
       return;
     }
     setAvatarFile(file);
-    setAvatarPreview(preview ?? user?.avatar ?? null);
+    setAvatarPreview(preview ?? user?.avatarUrl ?? user?.avatar ?? null);
     setAvatarError(null);
+  };
+
+  const applyUserAvatar = async (nextUser: Awaited<ReturnType<typeof getMyProfile>>) => {
+    setUser(nextUser);
+    setAvatarPreview(nextUser.avatarUrl ?? nextUser.avatar ?? null);
+    setAvatarFile(null);
+    setAvatarError(null);
+  };
+
+  const handleSystemAvatarSelect = async (avatarId: string) => {
+    try {
+      setAvatarBusy(true);
+      const updated = await selectSystemAvatar(avatarId);
+      await applyUserAvatar(updated);
+      toast.success("System avatar selected.");
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Could not select avatar.";
+      toast.error(errorMsg);
+    } finally {
+      setAvatarBusy(false);
+    }
+  };
+
+  const handleAvatarRemove = async () => {
+    try {
+      setAvatarBusy(true);
+      const updated = await removeAvatar();
+      await applyUserAvatar(updated);
+      toast.success("Avatar reverted to a system avatar.");
+    } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : "Could not reset avatar.";
+      toast.error(errorMsg);
+    } finally {
+      setAvatarBusy(false);
+    }
   };
 
   const handleLogout = async () => {
@@ -161,9 +223,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
       let latest = user!;
       if (avatarFile) {
         latest = await uploadAvatar(avatarFile, (pct) => setUploadProgress(pct));
-        setUploadProgress(null);
         setAvatarFile(null);
-        setAvatarPreview(latest.avatar ?? null);
+        setAvatarPreview(latest.avatarUrl ?? latest.avatar ?? null);
       }
 
       const payload = {
@@ -187,6 +248,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "Could not update profile.";
       toast.error(errorMsg);
+    } finally {
+      setUploadProgress(null);
     }
   };
 
@@ -201,7 +264,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   };
 
   const dashboardPath = getDashboardPath(scope);
-  const profileSaving = profileForm.formState.isSubmitting || (uploadProgress !== null && uploadProgress < 100);
+  const profileSaving = profileForm.formState.isSubmitting || (uploadProgress !== null && uploadProgress < 100) || avatarBusy;
 
   return (
     <motion.div
@@ -216,7 +279,14 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,210,255,0.06),transparent_35%)] pointer-events-none" />
           <div className="relative flex flex-wrap items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <Avatar src={avatarPreview ?? undefined} name={user?.fullName ?? "User"} size="lg" status="online" />
+              <Avatar
+                src={avatarPreview ?? undefined}
+                name={user?.fullName ?? "User"}
+                userId={user?.id}
+                role={scope === "mentor" ? "mentor" : "student"}
+                size="lg"
+                status="online"
+              />
               <div className="overflow-hidden min-w-0">
                 <h1 className="text-2xl font-extrabold text-white tracking-tight">Settings</h1>
                 <p className="text-xs text-[var(--text-secondary)] truncate font-medium mt-0.5">{user?.email}</p>
@@ -267,9 +337,9 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               <div className="p-4 rounded-xl border border-white/5 bg-white/3 flex flex-col gap-4">
                 <FileInput
                   label="Profile photo"
-                  accept="image/*"
-                  maxSize={5_000_000}
-                  description="PNG or JPG, max 5 MB. Saved when you click Save profile."
+                  accept="image/jpeg,image/png,image/webp"
+                  maxSize={4_000_000}
+                  description="JPG, PNG, or WEBP up to 4 MB."
                   error={avatarError ?? undefined}
                   onFileSelect={(file) => {
                     if (!file) {
@@ -285,15 +355,49 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     reader.readAsDataURL(file);
                   }}
                 />
+                <div className="flex flex-wrap gap-2">
+                  <Button type="button" variant="outline" size="sm" onClick={() => handleAvatarPick(null)} disabled={avatarBusy}>
+                    Clear selection
+                  </Button>
+                  <Button type="button" variant="secondary" size="sm" onClick={handleAvatarRemove} disabled={avatarBusy}>
+                    Revert to system
+                  </Button>
+                </div>
                 {avatarFile && (
-                  <button
-                    type="button"
-                    className="text-xs text-danger font-semibold self-start hover:underline ml-1"
-                    onClick={() => handleAvatarPick(null)}
-                  >
-                    Reset selection
-                  </button>
+                  <p className="text-xs font-medium text-[var(--text-secondary)]">
+                    Ready to upload: {avatarFile.name}
+                  </p>
                 )}
+                {avatarOptions.length ? (
+                  <div className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
+                      Choose a default avatar
+                    </p>
+                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                      {avatarOptions.map((option) => {
+                        const selected = currentAvatarId === option.id;
+                        return (
+                          <button
+                            key={option.id}
+                            type="button"
+                            onClick={() => handleSystemAvatarSelect(option.id)}
+                            disabled={avatarBusy}
+                            className={cn(
+                              "group rounded-2xl border p-3 text-left transition",
+                              selected
+                                ? "border-primary bg-primary/10 shadow-[0_0_0_1px_rgba(0,210,255,0.2)]"
+                                : "border-[var(--border)] bg-white/3 hover:border-primary/40 hover:bg-primary/5"
+                            )}
+                          >
+                            <Avatar src={option.url} name={option.label} size="lg" className="mx-auto" alt={option.alt} />
+                            <p className="mt-2 text-center text-[11px] font-semibold text-white">{option.label}</p>
+                            <p className="text-center text-[10px] text-[var(--text-muted)] capitalize">{option.role}</p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : null}
               </div>
 
               <FormField id="fullName" label="Full name" required error={profileForm.formState.errors.fullName?.message}>
@@ -387,4 +491,3 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     </motion.div>
   );
 }
-
