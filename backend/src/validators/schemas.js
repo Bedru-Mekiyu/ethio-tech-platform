@@ -3,6 +3,7 @@ import { z } from "zod";
 const objectId = z.string().regex(/^[a-f\d]{24}$/i, "Invalid ObjectId");
 const isoDateString = z.string().datetime({ offset: true });
 const httpUrl = z.string().url();
+const systemAvatarUrl = z.string().refine((value) => /^\/avatars\/[a-z0-9-]+\.svg$/i.test(value), "Invalid system avatar URL");
 
 const atLeastOneField = (schema, message) =>
   schema.refine((value) => Object.keys(value).length > 0, message);
@@ -24,19 +25,32 @@ const cloudinaryAvatarUrl = z
   .url()
   .refine((url) => /^https:\/\/res\.cloudinary\.com\//.test(url), "Avatar must be a Cloudinary URL");
 
+const avatarUrl = z.union([cloudinaryAvatarUrl, systemAvatarUrl]);
+
 export const userSchemas = {
   updateProfile: atLeastOneField(
     z.object({
       fullName: z.string().trim().min(2).max(120).optional(),
-      avatar: cloudinaryAvatarUrl.optional(),
+      avatar: avatarUrl.optional(),
+      avatarUrl: avatarUrl.optional(),
+      avatarType: z.enum(["uploaded", "default"]).optional(),
+      avatarSource: z.enum(["cloudinary", "system"]).optional(),
       bio: z.string().max(1000).optional(),
       phone: z.string().trim().max(40).optional(),
+      city: z.string().trim().min(2).max(120).optional(),
+      learningInterests: z.array(z.string().trim().min(2).max(80)).max(12).optional(),
       gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
       expertise: z.array(z.string().trim().min(2).max(80)).max(20).optional(),
       currentCompany: z.string().trim().min(2).max(120).optional(),
     }),
     { message: "At least one field is required" }
   ),
+};
+
+export const avatarSchemas = {
+  avatarIdParam: z.object({
+    avatarId: z.string().regex(/^(student|mentor)-\d{2}$/i, "Invalid avatar id"),
+  }),
 };
 
 export const authSchemas = {
@@ -49,8 +63,9 @@ export const authSchemas = {
       .max(128)
       .regex(/[A-Za-z]/, "Password must include a letter")
       .regex(/\d/, "Password must include a number"),
-    role: z.enum(["student", "mentor"]).optional(),
     gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
+    city: z.string().trim().min(2).max(120).optional(),
+    learningInterests: z.array(z.string().trim().min(2).max(80)).max(12).optional(),
   }),
   login: z.object({
     email: z.string().trim().toLowerCase().email(),
@@ -303,7 +318,7 @@ export const mentorApplicationSchemas = {
 
 export const adminSchemas = {
   reviewMentorApplication: z.object({
-    status: z.enum(["pending", "in-review", "approved", "rejected"]),
+    status: z.enum(["pending", "approved", "rejected"]),
     reviewedNotes: z.string().min(2).max(1000).optional(),
   }),
 };
