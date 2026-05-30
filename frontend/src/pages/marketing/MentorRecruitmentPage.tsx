@@ -109,6 +109,7 @@ export function MentorRecruitmentPage() {
   ]);
   const [availability, setAvailability] = useState<MentorApplicationPayload["availability"]>("flexible");
   const [consent, setConsent] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
 
   const { data, isLoading, isError, error, refetch } = useQuery<MarketingMentorPageData>({
     queryKey: ["marketing", "mentor-application", "context"],
@@ -142,11 +143,30 @@ export function MentorRecruitmentPage() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmissionError("");
     const parsedYearsExperience = Number(yearsExperience);
     const extraSkills = expertiseInput
       .split(",")
       .map((skill) => skill.trim())
       .filter(Boolean);
+    const normalizedExpertise = Array.from(new Set([...expertise, ...extraSkills]));
+
+    if (normalizedExpertise.length < 2) {
+      setSubmissionError("Please include at least 2 expertise areas.");
+      return;
+    }
+    if (mentoringStyle.length < 1) {
+      setSubmissionError("Please choose at least one mentoring style.");
+      return;
+    }
+    if (whyMentor.trim().length < 20) {
+      setSubmissionError("Tell us more about your motivation (minimum 20 characters).");
+      return;
+    }
+    if (!consent) {
+      setSubmissionError("Please confirm consent before submitting your application.");
+      return;
+    }
 
     await mutation.mutateAsync({
       fullName,
@@ -158,7 +178,7 @@ export function MentorRecruitmentPage() {
         yearsExperience && !Number.isNaN(parsedYearsExperience)
           ? parsedYearsExperience
           : undefined,
-      expertise: Array.from(new Set([...expertise, ...extraSkills])),
+      expertise: normalizedExpertise,
       availability,
       mentoringStyle,
       whyMentor,
@@ -270,7 +290,8 @@ export function MentorRecruitmentPage() {
               <Badge variant="success">Application received</Badge>
               <h2 className="mt-4 text-2xl font-semibold text-white">Thanks, {fullName || "mentor"}.</h2>
               <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)]">
-                Your application is now queued for review. We&apos;ll follow up after moderation checks your profile.
+                Your application is now queued for review with status <strong>pending</strong>. We&apos;ll follow up
+                after moderation checks your profile.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/mentors">
@@ -289,6 +310,9 @@ export function MentorRecruitmentPage() {
                 <div>
                   <Badge>Application form</Badge>
                   <h2 className="mt-3 text-2xl font-semibold text-white">Tell us about your mentoring profile</h2>
+                  <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                    This form starts a mentor application. It does not create a mentor account.
+                  </p>
                 </div>
                 <Badge variant="purple">Public application</Badge>
               </div>
@@ -296,18 +320,18 @@ export function MentorRecruitmentPage() {
               <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <Label>Full name</Label>
+                    <Label required>Full name</Label>
                     <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required placeholder="Amina Tesfaye" />
                   </div>
                   <div>
-                    <Label>Email address</Label>
+                    <Label required>Email address</Label>
                     <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="amina@example.com" />
                   </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <Label>Current role</Label>
+                    <Label required>Current role</Label>
                     <Input value={currentRole} onChange={(e) => setCurrentRole(e.target.value)} required placeholder="Senior Frontend Engineer" />
                   </div>
                   <div>
@@ -444,15 +468,21 @@ export function MentorRecruitmentPage() {
                   </span>
                 </label>
 
+                {submissionError ? (
+                <p className="text-sm text-danger" role="alert">
+                   {submissionError}
+                </p>
+                ) : null}
+
                 {mutation.isError ? (
-                  <p className="text-sm text-danger">
-                    {(mutation.error as Error)?.message || "Unable to submit the application."}
-                  </p>
+                <p className="text-sm text-danger" role="alert">
+                   {(mutation.error as Error)?.message || "Unable to submit the application."}
+                </p>
                 ) : null}
 
                 <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending || !consent}>
-                  {mutation.isPending ? "Submitting..." : "Submit application"}
-                  <ArrowRight size={16} className="ml-2" />
+                {mutation.isPending ? "Submitting..." : "Apply to become a mentor"}
+                <ArrowRight size={16} className="ml-2" />
                 </Button>
               </form>
             </Card>
