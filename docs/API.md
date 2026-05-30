@@ -3,7 +3,8 @@
 Base: `http://localhost:5000/api/v1`
 
 ## Auth
-- `POST /auth/register` — student/mentor only
+- `POST /auth/register` — student-only account creation
+- `POST /mentor-applications` — mentor application submission (does not create mentor account)
 - `POST /auth/login`
 - `POST /auth/refresh`
 - `POST /auth/logout` (Bearer)
