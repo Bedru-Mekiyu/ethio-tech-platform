@@ -1,3 +1,5 @@
+import { createAssignedAvatar, isSystemAvatarUrl } from "../services/avatarService.js";
+
 /** Shared auth/profile payload for API responses */
 export const serializeAuthUser = (user) => ({
   id: user._id?.toString?.() ?? user._id,
@@ -7,9 +9,21 @@ export const serializeAuthUser = (user) => ({
   level: user.level,
   xp: user.xp,
   isVerified: user.isVerified,
-  avatar: user.avatar ?? undefined,
+  mentorStatus:
+    user.mentorStatus ??
+    (user.role === "mentor" ? (user.isVerified ? "approved" : "pending") : undefined),
+  avatar: user.avatarUrl ?? user.avatar ?? createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl,
+  avatarUrl: user.avatarUrl ?? user.avatar ?? createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl,
+  avatarType:
+    user.avatarType ??
+    (user.avatarUrl || user.avatar ? (isSystemAvatarUrl(user.avatarUrl ?? user.avatar) ? "default" : "uploaded") : "default"),
+  avatarSource:
+    user.avatarSource ??
+    (user.avatarUrl || user.avatar ? (isSystemAvatarUrl(user.avatarUrl ?? user.avatar) ? "system" : "cloudinary") : "system"),
   bio: user.bio ?? undefined,
   phone: user.phone ?? undefined,
+  city: user.city ?? undefined,
+  learningInterests: user.learningInterests ?? undefined,
   gradeLevel: user.gradeLevel ?? undefined,
   expertise: user.expertise ?? undefined,
   currentCompany: user.currentCompany ?? undefined,
