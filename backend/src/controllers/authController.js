@@ -15,7 +15,7 @@ import {
 import { serializeAuthUser } from "../utils/serializeUser.js";
 
 export const register = asyncHandler(async (req, res) => {
-  const { fullName, email, password, role, gradeLevel } = req.body;
+  const { fullName, email, password, gradeLevel, city, learningInterests } = req.body;
 
   if (!fullName || !email || !password) {
     throw new ApiError(400, "fullName, email, and password are required");
@@ -25,7 +25,15 @@ export const register = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Password must be at least 8 characters");
   }
 
-  const user = await registerUser({ fullName, email, password, role, gradeLevel });
+  const user = await registerUser({
+    fullName,
+    email,
+    password,
+    role: "student",
+    gradeLevel,
+    city,
+    learningInterests,
+  });
   await logAuditEvent({
     actor: user._id,
     action: "register",
