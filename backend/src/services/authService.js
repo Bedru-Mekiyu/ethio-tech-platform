@@ -4,8 +4,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { getEnv } from "../config/env.js";
+import { createAssignedAvatar } from "./avatarService.js";
 
-export const PUBLIC_REGISTER_ROLES = ["student", "mentor"];
+export const PUBLIC_REGISTER_ROLES = ["student"];
 
 export const sanitizeRegisterRole = (role) =>
   PUBLIC_REGISTER_ROLES.includes(role) ? role : "student";
@@ -28,7 +29,15 @@ const signRefreshToken = (user) =>
     { expiresIn: `${refreshExpiryDays()}d` }
   );
 
-export const registerUser = async ({ fullName, email, password, role = "student", gradeLevel }) => {
+export const registerUser = async ({
+  fullName,
+  email,
+  password,
+  role = "student",
+  gradeLevel,
+  city,
+  learningInterests,
+}) => {
   const safeRole = sanitizeRegisterRole(role);
 
   const existingUser = await User.findOne({ email: email.toLowerCase() });
@@ -37,12 +46,22 @@ export const registerUser = async ({ fullName, email, password, role = "student"
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+  const avatar = createAssignedAvatar({ role: safeRole, seed: email.toLowerCase() });
   const user = await User.create({
     fullName,
     email,
     password: hashedPassword,
     role: safeRole,
-    gradeLevel: safeRole === "student" ? gradeLevel : undefined,
+    gradeLevel,
+    city: city?.trim() || undefined,
+    learningInterests: Array.isArray(learningInterests)
+      ? learningInterests.map((item) => item.trim()).filter(Boolean)
+      : undefined,
+    avatar: avatar.avatarUrl,
+    avatarUrl: avatar.avatarUrl,
+    avatarType: avatar.avatarType,
+    avatarSource: avatar.avatarSource,
+    avatarPublicId: avatar.avatarPublicId,
   });
 
   return user;
