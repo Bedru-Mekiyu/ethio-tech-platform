@@ -77,20 +77,28 @@ export function MentorDashboardPage() {
   const recentReviews = dashboard?.reviewsDone ?? [];
   const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
+  const mentorStatus = user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
 
-  if (user?.role === "mentor" && user.isVerified === false) {
+  if (user?.role === "mentor" && mentorStatus !== "approved") {
     return (
       <div className="space-y-6">
         <Card className="rounded-[28px] border-warning/30 bg-[linear-gradient(180deg,rgba(245,158,11,0.12),rgba(14,20,32,0.98))] p-6">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
-              <Badge variant="warning">Verification required</Badge>
+              <Badge variant="warning">
+                {mentorStatus === "rejected" ? "Application not approved" : "Verification required"}
+              </Badge>
               <h1 className="section-title mt-4">
-                Complete mentor onboarding before using mentor tools
+                {mentorStatus === "rejected"
+                  ? "Your mentor application needs another review"
+                  : "Complete mentor onboarding before using mentor tools"}
               </h1>
               <p className="mt-3 text-[var(--text-secondary)]">
-                Mentor accounts can sign in immediately, but scheduling sessions, reviewing projects, and issuing awards
-                are enabled only after the admin team approves the mentor application.
+                {mentorStatus === "rejected"
+                  ? "Your application was reviewed, but you do not currently have access to mentor tools. Contact support if you want feedback or want to apply again."
+                  : mentorStatus === "pending"
+                    ? "Your mentor application is under review. Mentor tools stay locked until the admin team approves your application and verifies your account for live mentoring."
+                    : "Mentor tools stay locked until the admin team approves your mentor application and verifies your account for live mentoring."}
               </p>
             </div>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-warning/15 text-warning">
@@ -99,9 +107,9 @@ export function MentorDashboardPage() {
           </div>
           <div className="mt-6 grid gap-3 md:grid-cols-3">
             {[
-              "Submit your mentor application",
-              "Admin reviews experience and availability",
-              "Verified mentors unlock sessions and reviews",
+              mentorStatus === "pending" ? "Application waiting in review" : "Mentor profile flagged for review",
+              "Admin checks experience, expertise, and availability",
+              "Approved mentors unlock sessions and reviews",
             ].map((item, index) => (
               <div key={item} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
                 <p className="stat-label">Step {index + 1}</p>
@@ -111,7 +119,7 @@ export function MentorDashboardPage() {
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/mentor-recruitment">
-              <Button>Open application</Button>
+              <Button>{mentorStatus === "rejected" ? "Review application path" : "Open application"}</Button>
             </Link>
             <Link to="/contact">
               <Button variant="outline">Contact support</Button>
