@@ -210,7 +210,7 @@ export function MentorRecruitmentPage() {
       eyebrow="Mentors"
       title="Recruit mentors who can actually move learners forward"
       intro="The platform is designed to help mentors run sessions, review submissions, and guide real progression."
-      primary={{ to: "/register?role=mentor", label: "Apply as a mentor" }}
+      primary={{ to: "/mentor-recruitment", label: "Apply as a mentor" }}
       secondary={{ to: "/community", label: "See the community" }}
       sections={[
         { title: "What mentors do", body: "Mentors host live sessions, review projects, and give targeted feedback." },
