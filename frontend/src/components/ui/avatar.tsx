@@ -1,22 +1,52 @@
+import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
+import { buildAvatarFallbackChain, resolveAvatarUrl, type SystemAvatarRole } from "@/config/avatarLibrary";
+import { useAvatarSnapshot } from "@/store/avatarRegistry";
 
 export interface AvatarProps {
   src?: string;
   name: string;
+  userId?: string;
   size?: "sm" | "md" | "lg" | "xl";
   status?: "online" | "offline" | "away";
   hoverZoom?: boolean;
   className?: string;
+  alt?: string;
+  role?: SystemAvatarRole;
 }
+
+const initialsFromName = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase() || "•";
+
+const unique = (items: Array<string | null | undefined>) =>
+  items.filter((item, index, list) => Boolean(item) && list.indexOf(item) === index) as string[];
 
 export function Avatar({
   src,
   name,
+  userId,
   size = "md",
   status,
   hoverZoom = false,
   className,
+  alt,
+  role,
 }: AvatarProps) {
+  const registryAvatar = useAvatarSnapshot(userId);
+
+  const candidateSources = useMemo(() => {
+    const resolvedSource = resolveAvatarUrl(registryAvatar?.avatarUrl ?? src);
+    const fallbackSeed = userId ?? name;
+    const systemCandidates = buildAvatarFallbackChain(fallbackSeed, role).map((candidate) => resolveAvatarUrl(candidate));
+    return unique([resolvedSource, ...systemCandidates]);
+  }, [name, registryAvatar?.avatarUrl, role, src, userId]);
+
   const sizes = {
     sm: "h-8 w-8 text-xs",
     md: "h-10 w-10 text-sm",
@@ -37,45 +67,25 @@ export function Avatar({
     offline: "bg-neutral-500 shadow-[0_0_8px_rgba(100,116,139,0.5)]",
   };
 
-  const initials = name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-
   return (
     <div className="relative inline-block shrink-0">
-      <div
+      <AvatarMedia
+        key={candidateSources.join("|")}
+        candidateSources={candidateSources}
+        name={name}
+        sizeClass={sizes[size]}
+        initials={initialsFromName(name)}
+        alt={alt ?? `${name} profile avatar`}
         className={cn(
-          "rounded-full overflow-hidden transition-transform duration-300 ease-out",
+          "relative overflow-hidden rounded-full transition-transform duration-300 ease-out",
           hoverZoom && "hover:scale-[1.05] hover:shadow-lg hover:shadow-primary/10",
-          sizes[size],
           className
         )}
-      >
-        {src ? (
-          <img
-            src={src}
-            alt={name}
-            className="h-full w-full object-cover ring-2 ring-primary/30"
-          />
-        ) : (
-          <div
-            className={cn(
-              "flex h-full w-full items-center justify-center font-semibold text-white ring-2 ring-primary/20",
-              "bg-gradient-to-tr from-secondary/40 via-primary/30 to-secondary/30",
-              "shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
-            )}
-          >
-            {initials}
-          </div>
-        )}
-      </div>
+      />
       {status && (
         <span
           className={cn(
-            "absolute rounded-full ring-[var(--bg-base)] block",
+            "absolute block rounded-full ring-[var(--bg-base)]",
             statusDotSizes[size],
             statusColors[status]
           )}
@@ -86,3 +96,72 @@ export function Avatar({
   );
 }
 
+interface AvatarMediaProps {
+  candidateSources: string[];
+  name: string;
+  sizeClass: string;
+  initials: string;
+  alt: string;
+  className?: string;
+}
+
+function AvatarMedia({ candidateSources, name, sizeClass, initials, alt, className }: AvatarMediaProps) {
+  const [attemptIndex, setAttemptIndex] = useState(0);
+  const [hasErrored, setHasErrored] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const activeSource = candidateSources[attemptIndex];
+
+  const handleError = () => {
+    if (attemptIndex < candidateSources.length - 1) {
+      setAttemptIndex((current) => Math.min(current + 1, candidateSources.length - 1));
+      return;
+    }
+    setHasErrored(true);
+  };
+
+  return (
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-full transition-transform duration-300 ease-out",
+        sizeClass,
+        className
+      )}
+      aria-busy={!isLoaded && !hasErrored}
+    >
+      {activeSource && !hasErrored ? (
+        <img
+          src={activeSource}
+          alt={alt}
+          className={cn("h-full w-full object-cover ring-2 ring-primary/30", !isLoaded && "opacity-0")}
+          onLoad={() => setIsLoaded(true)}
+          onError={handleError}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : null}
+      {!hasErrored ? (
+        <div
+          className={cn(
+            "absolute inset-0 flex items-center justify-center font-semibold text-white ring-2 ring-primary/20 transition-opacity duration-200",
+            "bg-gradient-to-tr from-secondary/40 via-primary/30 to-secondary/30",
+            isLoaded ? "opacity-0" : "opacity-100",
+            !activeSource && "opacity-100"
+          )}
+        >
+          <span className="sr-only">{name}</span>
+        </div>
+      ) : (
+        <div
+          className={cn(
+            "flex h-full w-full items-center justify-center font-semibold text-white ring-2 ring-primary/20",
+            "bg-gradient-to-tr from-secondary/40 via-primary/30 to-secondary/30"
+          )}
+          aria-label={`${name} avatar unavailable`}
+        >
+          {initials}
+        </div>
+      )}
+    </div>
+  );
+}
