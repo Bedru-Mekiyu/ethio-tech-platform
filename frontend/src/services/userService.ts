@@ -2,16 +2,38 @@ import { api, type ApiResponse } from "./api";
 import type { AuthUser } from "@/store/authStore";
 import { compressImage } from "@/lib/image";
 
-function normalizeUser(raw: AuthUser & { _id?: string }): AuthUser {
+export interface SystemAvatarOption {
+  id: string;
+  role: "student" | "mentor";
+  label: string;
+  alt: string;
+  url: string;
+}
+
+interface UserPayload extends AuthUser {
+  _id?: string;
+}
+
+function normalizeUser(raw: UserPayload): AuthUser {
+  const avatar = raw.avatarUrl ?? raw.avatar ?? null;
   return {
     ...raw,
     id: raw.id ?? raw._id ?? "",
+    avatar: avatar ?? undefined,
+    avatarUrl: avatar ?? undefined,
+    avatarType: raw.avatarType ?? (avatar?.startsWith("/avatars/") ? "default" : "uploaded"),
+    avatarSource: raw.avatarSource ?? (avatar?.startsWith("/avatars/") ? "system" : "cloudinary"),
   };
 }
 
 export const getMyProfile = async (): Promise<AuthUser> => {
   const { data } = await api.get<ApiResponse<{ user: AuthUser }>>("/users/me");
   return normalizeUser(data.data.user);
+};
+
+export const getAvatarOptions = async (): Promise<SystemAvatarOption[]> => {
+  const { data } = await api.get<ApiResponse<{ avatars: SystemAvatarOption[] }>>("/users/me/avatars");
+  return data.data.avatars;
 };
 
 export const updateMyProfile = async (payload: {
@@ -26,11 +48,10 @@ export const updateMyProfile = async (payload: {
   return normalizeUser(data.data.user);
 };
 
-/** Server multipart fallback when Cloudinary sign is unavailable */
-const uploadAvatarViaServer = async (file: File, onProgress?: (percent: number) => void) => {
-  const compressed = await compressImage(file, 512, 0.8);
+export const uploadAvatar = async (file: File, onProgress?: (percent: number) => void) => {
+  const compressed = await compressImage(file, 512, 0.84);
   const fd = new FormData();
-  fd.append("avatar", compressed, compressed.name || "avatar.jpg");
+  fd.append("avatar", compressed, compressed.name || "avatar.webp");
   onProgress?.(10);
   const { data } = await api.post<ApiResponse<{ user: AuthUser }>>("/users/me/avatar", fd, {
     headers: { "Content-Type": "multipart/form-data" },
@@ -43,43 +64,15 @@ const uploadAvatarViaServer = async (file: File, onProgress?: (percent: number) 
   return normalizeUser(data.data.user);
 };
 
-export const uploadAvatar = async (file: File, onProgress?: (percent: number) => void) => {
-  const compressed = await compressImage(file, 512, 0.8);
-
-  try {
-    const { data: signData } = await api.get<
-      ApiResponse<{ signature: string; timestamp: number; apiKey: string; cloudName: string; folder: string }>
-    >("/users/me/avatar/sign");
-    const { signature, timestamp, apiKey, cloudName, folder } = signData.data;
-
-    const fd = new FormData();
-    fd.append("file", compressed);
-    fd.append("api_key", apiKey);
-    fd.append("timestamp", String(timestamp));
-    fd.append("signature", signature);
-    if (folder) fd.append("folder", folder);
-
-    const cloudUrl = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
-    const res = await import("axios").then(({ default: axios }) =>
-      axios.post(cloudUrl, fd, {
-        onUploadProgress: (e: { total?: number; loaded: number }) => {
-          if (!e.total) return;
-          const pct = Math.round((e.loaded / e.total) * 100);
-          onProgress?.(pct);
-        },
-      })
-    );
-
-    const secureUrl = res.data?.secure_url;
-    if (!secureUrl) throw new Error("Cloudinary upload failed");
-
-    const { data } = await api.patch<ApiResponse<{ user: AuthUser }>>("/users/me", { avatar: secureUrl });
-    return normalizeUser(data.data.user);
-  } catch (err) {
-    const status = (err as { response?: { status?: number } })?.response?.status;
-    if (status === 500 || status === 503) {
-      return uploadAvatarViaServer(file, onProgress);
-    }
-    throw err;
-  }
+export const selectSystemAvatar = async (avatarId: string) => {
+  const { data } = await api.patch<ApiResponse<{ user: AuthUser; avatar: SystemAvatarOption }>>(
+    `/users/me/avatar/default/${avatarId}`
+  );
+  return normalizeUser(data.data.user);
 };
+
+export const removeAvatar = async () => {
+  const { data } = await api.delete<ApiResponse<{ user: AuthUser }>>("/users/me/avatar");
+  return normalizeUser(data.data.user);
+};
+
