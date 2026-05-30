@@ -125,7 +125,7 @@ function MentorCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="relative">
-          <Avatar src={mentor.avatar} name={mentor.fullName} size={featured ? "lg" : "md"} />
+          <Avatar src={mentor.avatar} name={mentor.fullName} userId={mentor._id} role="mentor" size={featured ? "lg" : "md"} />
           {mentor.isVerified ? (
             <span className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full border border-success/25 bg-success/15 text-success">
               <BadgeCheck size={14} />
@@ -234,7 +234,7 @@ export function MentorsPage() {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link to="/register?role=mentor">
+          <Link to="/mentor-recruitment">
             <Button size="lg">Become a mentor</Button>
           </Link>
           <Link to="/contact">
@@ -324,7 +324,7 @@ export function MentorsPage() {
               title="Featured mentors are loading"
               description="As mentor data becomes available, the featured section will populate automatically."
               actionLabel="Become a mentor"
-              onAction={() => navigate("/register?role=mentor")}
+              onAction={() => navigate("/mentor-recruitment")}
             />
           </div>
         )}
@@ -382,6 +382,7 @@ export function MentorsPage() {
           <SmartImage
             unsplashId={MEDIA_CATEGORIES.mentorship.sessions[0].unsplashId}
             alt=""
+            wrapperClassName="h-full w-full border-none bg-transparent"
             className="h-full w-full object-cover"
             width={1000}
             quality={80}
@@ -394,7 +395,7 @@ export function MentorsPage() {
             <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data?.cta.description}</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
-            <Link to={data?.cta.primary.to ?? "/register?role=mentor"}>
+            <Link to={data?.cta.primary.to ?? "/mentor-recruitment"}>
               <Button size="lg">{data?.cta.primary.label ?? "Apply as a mentor"}</Button>
             </Link>
             <Link to={data?.cta.secondary.to ?? "/contact"}>
