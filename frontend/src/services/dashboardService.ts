@@ -118,7 +118,7 @@ export interface AdminMentorApplication {
   whyMentor?: string;
   linkedin?: string;
   portfolio?: string;
-  status?: "pending" | "in-review" | "approved" | "rejected";
+  status?: "pending" | "approved" | "rejected";
   reviewedAt?: string;
   reviewedNotes?: string;
   createdAt?: string;
