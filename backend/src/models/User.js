@@ -20,9 +20,15 @@ const userSchema = new Schema({
     required: true 
   },
 
-  avatar: { type: String, default: "/default-avatar.png" },
+  avatar: { type: String },
+  avatarUrl: { type: String },
+  avatarType: { type: String, enum: ["uploaded", "default"], default: "default" },
+  avatarSource: { type: String, enum: ["cloudinary", "system"], default: "system" },
+  avatarPublicId: { type: String, select: false },
   bio: { type: String, trim: true },
   phone: { type: String, trim: true },
+  city: { type: String, trim: true },
+  learningInterests: [{ type: String, trim: true }],
   gradeLevel: { type: Number, min: 8 }, // only for students
 
   // Gamification
@@ -40,6 +46,7 @@ const userSchema = new Schema({
   // Mentor fields
   expertise: [String],
   currentCompany: String,
+  mentorStatus: { type: String, enum: ["pending", "approved", "rejected"] },
   mentorScore: { type: Number, default: 0, min: 0 },
   totalSessions: { type: Number, default: 0, min: 0 },
 
