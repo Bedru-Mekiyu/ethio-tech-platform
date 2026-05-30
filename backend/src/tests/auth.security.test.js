@@ -3,10 +3,10 @@ import { sanitizeRegisterRole, PUBLIC_REGISTER_ROLES } from "../services/authSer
 import { getEnv } from "../config/env.js";
 
 describe("auth security helpers", () => {
-  it("allows only student and mentor registration roles", () => {
-    expect(PUBLIC_REGISTER_ROLES).toEqual(["student", "mentor"]);
+  it("forces public registration to student-only", () => {
+    expect(PUBLIC_REGISTER_ROLES).toEqual(["student"]);
     expect(sanitizeRegisterRole("admin")).toBe("student");
-    expect(sanitizeRegisterRole("mentor")).toBe("mentor");
+    expect(sanitizeRegisterRole("mentor")).toBe("student");
     expect(sanitizeRegisterRole("parent")).toBe("student");
   });
 
