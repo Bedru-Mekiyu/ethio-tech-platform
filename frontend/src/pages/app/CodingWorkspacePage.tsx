@@ -170,6 +170,7 @@ export function CodingWorkspacePage() {
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
                 alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
+                wrapperClassName="h-full w-full border-none bg-transparent"
                 className="h-full w-full object-cover"
                 width={800}
                 quality={80}
