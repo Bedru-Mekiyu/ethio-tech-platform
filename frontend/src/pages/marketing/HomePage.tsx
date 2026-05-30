@@ -160,7 +160,7 @@ function MentorCard({ mentor }: { mentor: MarketingMentor }) {
   return (
     <Card className="flex h-full flex-col gap-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
       <div className="relative mx-auto">
-        <Avatar src={mentor.avatar} name={mentor.fullName} size="lg" className="ring-4 ring-primary/20" />
+        <Avatar src={mentor.avatar} name={mentor.fullName} userId={mentor._id} role="mentor" size="lg" className="ring-4 ring-primary/20" />
         <span className="absolute -right-2 -top-1 rounded-full border border-success/30 bg-success/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-success">
           {mentor.mentorScore ?? 0}%
         </span>
@@ -260,7 +260,7 @@ export function HomePage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/register?role=student">
+            <Link to="/register">
               <Button size="lg">Get Learning</Button>
             </Link>
             <Link to="/mentor-recruitment">
@@ -281,49 +281,48 @@ export function HomePage() {
 
         <div className="relative">
           <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.22),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.18),transparent_30%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(10,16,28,0.96),rgba(4,9,18,0.98))] p-4 shadow-[0_24px_120px_rgba(0,0,0,0.45)]">
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40" />
-            <div className="relative rounded-[24px] border border-white/5 bg-black/20 p-4">
-              <div className="absolute right-4 top-4 max-w-[160px]">
-                <Card className="border-primary/30 bg-[rgba(8,14,24,0.92)] p-3 shadow-lg shadow-primary/10 backdrop-blur">
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                    Live learners
-                  </p>
-                  <p className="mt-1 text-2xl font-semibold text-white">
-                    {formatCompactCount(data?.hero.activeLearners ?? 0)}
-                  </p>
-                  <p className="text-xs text-success">
-                    {data?.hero.topMentorScore ?? 0}% mentor quality
-                  </p>
-                </Card>
-              </div>
-
-              <div className="absolute bottom-4 left-4 z-10">
-                <Card className="max-w-[220px] border-secondary/30 bg-[rgba(8,14,24,0.92)] p-3 shadow-lg shadow-secondary/10 backdrop-blur">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
-                      <Trophy size={18} />
-                    </div>
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                        Top mentor
-                      </p>
-                      <p className="text-sm font-semibold text-white">{data?.hero.topMentorName || "Mentor"}</p>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-
-              <SmartImage
-                unsplashId={MEDIA_CATEGORIES.marketing.hero[0].unsplashId}
-                alt={MEDIA_CATEGORIES.marketing.hero[0].alt}
-                hoverEffect="zoom"
-                wrapperClassName="rounded-2xl border border-white/5 shadow-2xl overflow-hidden mt-6"
-                className="mx-auto max-h-[420px] aspect-[16/10] w-full object-cover"
-                width={800}
-                quality={85}
-              />
+          <div className="relative overflow-hidden rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(10,16,28,0.96),rgba(4,9,18,0.98))] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40 z-10 pointer-events-none" />
+            
+            <div className="absolute right-6 top-6 z-15 max-w-[160px]">
+              <Card className="border-primary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                  Live learners
+                </p>
+                <p className="mt-1 text-2xl font-semibold text-white">
+                  {formatCompactCount(data?.hero.activeLearners ?? 0)}
+                </p>
+                <p className="text-xs text-success">
+                  {data?.hero.topMentorScore ?? 0}% mentor quality
+                </p>
+              </Card>
             </div>
+
+            <div className="absolute bottom-6 left-6 z-15">
+              <Card className="max-w-[220px] border-secondary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
+                    <Trophy size={18} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+                      Top mentor
+                    </p>
+                    <p className="text-sm font-semibold text-white">{data?.hero.topMentorName || "Mentor"}</p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.marketing.hero[0].unsplashId}
+              alt={MEDIA_CATEGORIES.marketing.hero[0].alt}
+              hoverEffect="zoom"
+              wrapperClassName="h-full w-full border-none bg-transparent rounded-[28px] overflow-hidden"
+              className="h-full w-full object-cover"
+              width={1000}
+              quality={85}
+            />
           </div>
         </div>
       </motion.section>
@@ -385,7 +384,7 @@ export function HomePage() {
             <Badge className="mb-4">Expert mentors</Badge>
             <h2 className="section-title text-2xl md:text-3xl">Learn from Global Industry Leaders</h2>
           </div>
-          <Link to="/register?role=mentor">
+          <Link to="/mentors">
             <Button variant="outline">View all mentors</Button>
           </Link>
         </div>
