@@ -369,7 +369,7 @@ export function ClassroomPage() {
             <Card className="surface-panel min-w-[220px] border-primary/25 p-3 text-center backdrop-blur">
               <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Instructor</p>
               <div className="mt-3 flex items-center justify-center gap-3">
-                <Avatar src={mentor?.avatar} name={mentor?.fullName ?? "Mentor"} size="md" />
+                <Avatar src={mentor?.avatar} name={mentor?.fullName ?? "Mentor"} userId={mentor?._id} role="mentor" size="md" />
                 <div className="text-left">
                   <p className="text-sm font-semibold text-white">{mentor?.fullName ?? "Mentor"}</p>
                   <p className="text-xs text-[var(--text-secondary)]">Guiding the session</p>
@@ -542,7 +542,7 @@ export function ClassroomPage() {
                     {roster.length ? (
                       roster.map((person) => (
                         <div key={person.id} className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-3">
-                          <Avatar src={person.avatar} name={person.name} size="sm" />
+                          <Avatar src={person.avatar} name={person.name} userId={person.id} role={person.role === "mentor" ? "mentor" : "student"} size="sm" />
                           <div className="min-w-0 flex-1">
                             <p className="font-medium text-white">{person.name}</p>
                             <p className="text-xs text-[var(--text-muted)] capitalize">{person.role}</p>
