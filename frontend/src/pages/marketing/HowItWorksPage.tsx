@@ -219,7 +219,7 @@ export function HowItWorksPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/register?role=student">
+            <Link to="/register">
               <Button size="lg">Start learning</Button>
             </Link>
             <Link to="/how-it-works#tracks">
@@ -316,7 +316,7 @@ export function HowItWorksPage() {
                   </div>
                   <div className="mt-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
                     <span>{journey.track?.title ?? "Pathway"}</span>
-                    <Link to="/register?role=student" className="text-primary hover:underline">
+                    <Link to="/register" className="text-primary hover:underline">
                       Start here
                     </Link>
                   </div>
@@ -335,17 +335,15 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.25 }}
       >
         <div className="order-2 lg:order-1">
-          <Card className="overflow-hidden border-primary/20 bg-[linear-gradient(180deg,rgba(9,14,24,0.98),rgba(7,10,18,0.98))] p-4">
-            <SmartImage
-              unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
-              alt="Immersive learning preview - pair programming in a modern workspace"
-              hoverEffect="zoom"
-              wrapperClassName="rounded-[20px]"
-              className="h-full min-h-[300px] w-full object-cover"
-              width={800}
-              quality={85}
-            />
-          </Card>
+          <SmartImage
+            unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
+            alt="Immersive learning preview - pair programming in a modern workspace"
+            hoverEffect="zoom"
+            wrapperClassName="rounded-[28px] border border-primary/20 shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden aspect-[16/10] w-full"
+            className="h-full w-full object-cover"
+            width={1000}
+            quality={85}
+          />
         </div>
         <JourneySection
           eyebrow="01 · Immersive Learning"
@@ -402,30 +400,28 @@ export function HowItWorksPage() {
             />
           </div>
         </JourneySection>
-        <div className="order-1 lg:order-2">
-          <Card className="overflow-hidden border-secondary/20 bg-[linear-gradient(180deg,rgba(12,16,30,0.98),rgba(6,9,18,0.98))] p-4">
-            <div className="relative overflow-hidden rounded-[22px]">
-              <SmartImage
-                unsplashId={MEDIA_CATEGORIES.community.showcase[1].unsplashId}
-                alt="Project building preview - Ethiopian developers showcasing a local fintech solution at an innovation hub"
-                hoverEffect="zoom"
-                wrapperClassName="border-none bg-transparent h-full w-full"
-                className="h-full min-h-[300px] w-full object-cover"
-                width={800}
-                quality={85}
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.72))]" />
-              <div className="absolute bottom-4 left-4 right-4 z-10">
-                <Card className="border-primary/25 bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
-                  <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Build real projects</p>
-                  <p className="mt-1 text-lg font-semibold text-white">{strongestTrack?.title || "Project pathway"}</p>
-                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                    {strongestTrack?.description || "A path that moves from fundamentals to delivery."}
-                  </p>
-                </Card>
-              </div>
+        <div className="order-1 lg:order-2 w-full">
+          <div className="relative overflow-hidden rounded-[28px] border border-secondary/20 bg-[linear-gradient(180deg,rgba(12,16,30,0.98),rgba(6,9,18,0.98))] shadow-[0_20px_50px_rgba(0,0,0,0.3)] aspect-[16/10] w-full">
+            <SmartImage
+              unsplashId={MEDIA_CATEGORIES.community.showcase[1].unsplashId}
+              alt="Project building preview - Ethiopian developers showcasing a local fintech solution at an innovation hub"
+              hoverEffect="zoom"
+              wrapperClassName="h-full w-full border-none bg-transparent rounded-[28px] overflow-hidden"
+              className="h-full w-full object-cover"
+              width={1000}
+              quality={85}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.72))] z-10 pointer-events-none" />
+            <div className="absolute bottom-6 left-6 right-6 z-15">
+              <Card className="border-primary/25 bg-[rgba(8,14,24,0.85)] p-4 backdrop-blur shadow-2xl">
+                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Build real projects</p>
+                <p className="mt-1 text-lg font-semibold text-white">{strongestTrack?.title || "Project pathway"}</p>
+                <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                  {strongestTrack?.description || "A path that moves from fundamentals to delivery."}
+                </p>
+              </Card>
             </div>
-          </Card>
+          </div>
         </div>
       </motion.section>
 
@@ -491,7 +487,7 @@ export function HowItWorksPage() {
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
-            <Link to="/register?role=student">
+            <Link to="/register">
               <Button size="lg">Join a learning track</Button>
             </Link>
             <Link to="/leaderboard">
