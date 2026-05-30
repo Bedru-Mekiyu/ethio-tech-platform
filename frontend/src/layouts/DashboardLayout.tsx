@@ -156,7 +156,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           </Link>
           {user && (
             <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-              <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
+              <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
               <div className="overflow-hidden min-w-0">
                 <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
                 <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
@@ -211,7 +211,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 </Link>
                 {user && (
                   <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-                    <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
+                    <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
                     <div className="overflow-hidden min-w-0">
                       <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
                       <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
@@ -269,7 +269,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             </Link>
             {user && (
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
-                <Avatar src={user.avatar} name={user.fullName} size="md" status="online" />
+                <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
                 <div className="hidden sm:block">
                   <p className="text-sm font-semibold text-white leading-tight">{user.fullName}</p>
                   <p className="text-xs capitalize text-[var(--text-muted)] mt-0.5">{user.role}</p>
@@ -330,4 +330,3 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     </div>
   );
 }
-
