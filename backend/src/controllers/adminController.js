@@ -178,18 +178,19 @@ export const reviewMentorApplication = asyncHandler(async (req, res) => {
 
   if (!application) throw new ApiError(404, "Mentor application not found");
 
-  if (status === "approved") {
-    await User.findOneAndUpdate(
-      { email: application.email.toLowerCase(), role: "mentor" },
-      {
-        isVerified: true,
-        expertise: application.expertise ?? [],
-        currentCompany: application.currentCompany,
-        bio: application.whyMentor,
-      },
-      { runValidators: true }
-    );
-  }
+  const mentorUserUpdate = {
+    mentorStatus: status,
+    isVerified: status === "approved",
+    expertise: application.expertise ?? [],
+    currentCompany: application.currentCompany,
+    bio: application.whyMentor,
+  };
+
+  await User.findOneAndUpdate(
+    { email: application.email.toLowerCase(), role: "mentor" },
+    mentorUserUpdate,
+    { runValidators: true }
+  );
 
   sendResponse(res, 200, "Mentor application updated", { application });
 });
