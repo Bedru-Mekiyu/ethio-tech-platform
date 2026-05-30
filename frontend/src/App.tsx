@@ -7,11 +7,13 @@ import { DashboardLayout } from "@/layouts/DashboardLayout";
 import { ClassroomLayout } from "@/layouts/ClassroomLayout";
 import { ProtectedRoute } from "@/routes/ProtectedRoute";
 import { GuestRoute } from "@/routes/GuestRoute";
+import { MentorToolsRoute } from "@/routes/MentorToolsRoute";
 import { RouteFallback } from "@/components/layout/RouteFallback";
 import { AuthBootstrap } from "@/components/auth/AuthBootstrap";
 import { ErrorBoundary } from "@/components/composites/ErrorBoundary";
 import { ToastProvider } from "@/components/composites/ToastProvider";
 import { OfflineBanner } from "@/components/composites/OfflineBanner";
+import { AvatarSyncBootstrap } from "@/components/auth/AvatarSyncBootstrap";
 import { useFocusOnRouteChange } from "@/hooks/useFocusOnRouteChange";
 
 const HomePage = lazy(() => import("@/pages/marketing/HomePage").then((module) => ({ default: module.HomePage })));
@@ -184,6 +186,7 @@ export default function App() {
       <ErrorBoundary>
       <ToastProvider>
       <AuthBootstrap>
+      <AvatarSyncBootstrap />
       <OfflineBanner />
       <BrowserRouter>
         <NavigationManager />
@@ -271,11 +274,13 @@ export default function App() {
               }
             >
               <Route index element={<MentorDashboardPage />} />
-              <Route path="sessions" element={<MentorSessionsPage />} />
-              <Route path="reviews" element={<MentorReviewPage />} />
-              <Route path="availability" element={<MentorAvailabilityPage />} />
-              <Route path="notifications" element={<NotificationsPage />} />
-              <Route path="settings" element={<SettingsPage scope="mentor" />} />
+              <Route element={<MentorToolsRoute />}>
+                <Route path="sessions" element={<MentorSessionsPage />} />
+                <Route path="reviews" element={<MentorReviewPage />} />
+                <Route path="availability" element={<MentorAvailabilityPage />} />
+                <Route path="notifications" element={<NotificationsPage />} />
+                <Route path="settings" element={<SettingsPage scope="mentor" />} />
+              </Route>
             </Route>
             <Route
               path="/admin"
