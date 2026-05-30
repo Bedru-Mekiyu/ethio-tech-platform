@@ -75,6 +75,13 @@ export interface SocketServerToClientEvents {
   "presence:leave": (payload: { roomId: string; userId?: string; socketId: string; at: string }) => void;
   "room:presence": (payload: RoomPresencePayload) => void;
   "room:state": (payload: RealtimeRoomState) => void;
+  "user:avatar:updated": (payload: {
+    userId: string;
+    avatarUrl: string;
+    avatarType?: "uploaded" | "default";
+    avatarSource?: "cloudinary" | "system";
+    updatedAt: string;
+  }) => void;
   "chat:message": (
     payload: {
       roomId?: string;
