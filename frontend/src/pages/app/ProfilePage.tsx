@@ -128,8 +128,10 @@ export function ProfilePage() {
               <div className="flex items-end gap-5">
                 <div className="relative group shrink-0 select-none">
                   <Avatar
-                    src={liveUser?.avatar}
+                    src={liveUser?.avatarUrl ?? liveUser?.avatar}
                     name={liveUser?.fullName ?? "Learner"}
+                    userId={liveUser?.id}
+                    role={liveUser?.role === "mentor" ? "mentor" : "student"}
                     size="xl"
                     className="h-28 w-28 rounded-2xl border-4 border-[var(--bg-base)] text-2xl shadow-xl group-hover:scale-105 transition-all duration-300"
                   />
