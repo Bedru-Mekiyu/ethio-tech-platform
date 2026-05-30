@@ -11,7 +11,7 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
 
   const existing = await MentorApplication.findOne({
     email: normalizedEmail,
-    status: { $in: ["pending", "in-review", "approved"] },
+    status: { $in: ["pending", "approved"] },
   }).select("_id status");
 
   if (existing) {
