@@ -10,8 +10,14 @@ export interface AuthUser {
   xp?: number;
   isVerified?: boolean;
   avatar?: string;
+  avatarUrl?: string;
+  avatarType?: "uploaded" | "default";
+  avatarSource?: "cloudinary" | "system";
   bio?: string;
   phone?: string;
+  city?: string;
+  learningInterests?: string[];
+  mentorStatus?: "pending" | "approved" | "rejected";
   gradeLevel?: number;
   expertise?: string[];
   currentCompany?: string;
