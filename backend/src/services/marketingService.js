@@ -167,8 +167,8 @@ export const getMarketingAboutData = async () => {
       title: "Ready to shape the future?",
       description:
         "Whether you want to learn, mentor, or help scale the ecosystem, there is a clear way to contribute.",
-      primary: { to: "/register?role=student", label: "Join as a Student" },
-      secondary: { to: "/register?role=mentor", label: "Become a Mentor" },
+      primary: { to: "/register", label: "Join as a Student" },
+      secondary: { to: "/mentor-recruitment", label: "Become a Mentor" },
       tertiary: { to: "/how-it-works", label: "Explore the learning flow" },
     },
   };
@@ -246,7 +246,7 @@ export const getMarketingMentorsData = async () => {
       title: "Want to mentor the next generation?",
       description:
         "Join the mentor network, run live sessions, and help learners turn curiosity into practical skill.",
-      primary: { to: "/register?role=mentor", label: "Apply as a mentor" },
+      primary: { to: "/mentor-recruitment", label: "Apply as a mentor" },
       secondary: { to: "/contact", label: "Talk to the team" },
     },
   };
