@@ -112,6 +112,8 @@ function RankCard({
         <Avatar
           src={tab === "teams" ? undefined : (entry as LeaderboardEntry).avatar}
           name={title}
+          userId={(entry as LeaderboardEntry)._id ?? (entry as MentorLeaderboardEntry)._id ?? (entry as PeerGroupLeaderboardEntry)._id}
+          role={tab === "mentors" ? "mentor" : "student"}
           size={featured ? "lg" : "md"}
           className={featured ? "ring-4 ring-primary/25" : ""}
         />
@@ -267,7 +269,7 @@ export function LeaderboardPage() {
               <p className="text-xs uppercase tracking-[0.24em] text-primary">Rankings</p>
               <h2 className="text-2xl font-semibold text-white">Moving up the board</h2>
             </div>
-            <Link to={tab === "students" ? "/register?role=student" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"} className="inline-flex items-center gap-2 text-sm text-primary">
+            <Link to={tab === "students" ? "/register" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"} className="inline-flex items-center gap-2 text-sm text-primary">
               Join the challenge <ArrowRight size={16} />
             </Link>
           </div>
@@ -304,7 +306,13 @@ export function LeaderboardPage() {
                       </td>
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <Avatar src={(row as LeaderboardEntry).avatar} name={title} size="sm" />
+                          <Avatar
+                            src={(row as LeaderboardEntry).avatar}
+                            name={title}
+                            userId={(row as LeaderboardEntry)._id ?? (row as MentorLeaderboardEntry)._id ?? (row as PeerGroupLeaderboardEntry)._id}
+                            role={tab === "mentors" ? "mentor" : "student"}
+                            size="sm"
+                          />
                           <div>
                             <p className="font-medium text-white">{title}</p>
                             <p className="text-xs text-[var(--text-muted)]">
