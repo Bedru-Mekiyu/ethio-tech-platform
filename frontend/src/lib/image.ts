@@ -1,9 +1,12 @@
 export async function compressImage(file: File, maxWidth = 512, quality = 0.8): Promise<File> {
   // Create an image bitmap for efficient decoding
   const img = await createImageBitmap(file);
-  const ratio = Math.min(1, maxWidth / img.width);
-  const width = Math.round(img.width * ratio);
-  const height = Math.round(img.height * ratio);
+  const cropSize = Math.min(img.width, img.height);
+  const cropX = Math.max(0, Math.floor((img.width - cropSize) / 2));
+  const cropY = Math.max(0, Math.floor((img.height - cropSize) / 2));
+  const ratio = Math.min(1, maxWidth / cropSize);
+  const width = Math.round(cropSize * ratio);
+  const height = Math.round(cropSize * ratio);
 
   const canvas = document.createElement("canvas");
   canvas.width = width;
@@ -11,7 +14,7 @@ export async function compressImage(file: File, maxWidth = 512, quality = 0.8): 
   const ctx = canvas.getContext("2d");
   if (!ctx) throw new Error("Could not get canvas context");
 
-  ctx.drawImage(img, 0, 0, width, height);
+  ctx.drawImage(img, cropX, cropY, cropSize, cropSize, 0, 0, width, height);
 
   // Prefer webp if available for better compression
   const mime = typeof HTMLCanvasElement !== "undefined" && canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0 ? "image/webp" : "image/jpeg";
