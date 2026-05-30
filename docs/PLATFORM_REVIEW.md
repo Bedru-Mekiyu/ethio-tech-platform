@@ -2,7 +2,7 @@
 
 | ID | Area | Severity | Status |
 |----|------|----------|--------|
-| P0-1 | Open role on register | Critical | Fixed — student/mentor only |
+| P0-1 | Open role on register | Critical | Fixed — student-only register + mentor recruitment pipeline |
 | P0-2 | Socket room ACL | Critical | Fixed — membership checks |
 | P0-3 | Session list scoping | High | Fixed — role-based filters |
 | P1-1 | Demo classroom links | High | Fixed — real session IDs |
