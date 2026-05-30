@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/input";
 
 type QueueTab = "mentor-applications" | "submissions";
 
@@ -44,10 +45,16 @@ function ModerationSkeleton() {
 function ApplicationCard({
   application,
   onReview,
+  notes,
+  onNotesChange,
 }: {
   application: AdminMentorApplication;
-  onReview: (status: NonNullable<AdminMentorApplication["status"]>) => void;
+  onReview: (status: NonNullable<AdminMentorApplication["status"]>, reviewedNotes?: string) => void;
+  notes: string;
+  onNotesChange: (value: string) => void;
 }) {
+  const trimmedNotes = notes.trim();
+
   return (
     <Card className="space-y-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -65,9 +72,7 @@ function ApplicationCard({
               ? "success"
               : application.status === "rejected"
                 ? "warning"
-                : application.status === "in-review"
-                  ? "purple"
-                  : "default"
+                : "default"
           }
         >
           {application.status ?? "pending"}
@@ -93,14 +98,24 @@ function ApplicationCard({
         ))}
       </div>
 
+      <div>
+        <p className="mb-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Review notes</p>
+        <Textarea
+          value={notes}
+          onChange={(event) => onNotesChange(event.target.value)}
+          placeholder="Add review feedback or request additional information."
+          className="min-h-[90px]"
+        />
+      </div>
+
       <div className="flex flex-wrap gap-3">
-        <Button size="sm" variant="outline" onClick={() => onReview("in-review")}>
-          Mark in review
+        <Button size="sm" variant="outline" onClick={() => onReview("pending", trimmedNotes || "Additional information requested from applicant.")}>
+          Request info
         </Button>
-        <Button size="sm" variant="primary" onClick={() => onReview("approved")}>
+        <Button size="sm" variant="primary" onClick={() => onReview("approved", trimmedNotes || undefined)}>
           Approve
         </Button>
-        <Button size="sm" variant="danger" onClick={() => onReview("rejected")}>
+        <Button size="sm" variant="danger" onClick={() => onReview("rejected", trimmedNotes || undefined)}>
           Reject
         </Button>
       </div>
@@ -110,6 +125,7 @@ function ApplicationCard({
 
 export function AdminModerationPage() {
   const [tab, setTab] = useState<QueueTab>("mentor-applications");
+  const [reviewNotes, setReviewNotes] = useState<Record<string, string>>({});
   const queryClient = useQueryClient();
 
   const mentorApplicationsQuery = useQuery({
@@ -179,8 +195,12 @@ export function AdminModerationPage() {
               <ApplicationCard
                 key={application._id}
                 application={application}
-                onReview={(status) => {
-                  void reviewMutation.mutateAsync({ id: application._id, status });
+                notes={reviewNotes[application._id] ?? ""}
+                onNotesChange={(value) => {
+                  setReviewNotes((current) => ({ ...current, [application._id]: value }));
+                }}
+                onReview={(status, reviewedNotes) => {
+                  void reviewMutation.mutateAsync({ id: application._id, status, reviewedNotes });
                 }}
               />
             ))
