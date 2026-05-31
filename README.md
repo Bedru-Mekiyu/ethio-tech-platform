@@ -63,7 +63,7 @@ LOG_LEVEL=info
 **Frontend `frontend/.env`:**
 
 ```env
-VITE_API_URL=http://localhost:5000/api/v1
+VITE_API_URL=http://localhost:5000
 ```
 
 ### 3. Start MongoDB (optional Docker)

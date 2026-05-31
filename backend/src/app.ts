@@ -108,6 +108,18 @@ export const createApp = () => {
     });
   });
 
+  app.get("/", (_req, res) => {
+    res.status(200).json({
+      success: true,
+      message: "Ethio Tech Platform API",
+      docs: "/health",
+      api: "/api/v1",
+      timestamp: new Date().toISOString(),
+    });
+  });
+
+  // Keep both prefixed and unprefixed API paths working for deployed clients.
+  app.use(apiRouter);
   app.use("/api/v1", apiRouter);
   app.use(notFound);
   app.use(errorHandler);
