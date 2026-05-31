@@ -223,6 +223,12 @@ export const updateMyProfile = asyncHandler(async (req, res) => {
 });
 
 export const uploadMyAvatar = asyncHandler(async (req, res) => {
+  // Ensure upload service (Cloudinary) is configured before attempting server-side upload
+  if (!process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET || !process.env.CLOUDINARY_CLOUD_NAME) {
+    logger.error("Cloudinary configuration missing for multipart upload", { userId: req.user?._id });
+    throw new ApiError(500, "Upload service not configured");
+  }
+
   if (!req.file) throw new ApiError(400, "No file uploaded");
 
   const currentUser = await User.findById(req.user._id).select("+avatarPublicId");
