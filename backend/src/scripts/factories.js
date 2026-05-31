@@ -106,7 +106,7 @@ export function createAdmin({
   return {
     fullName: `${firstName} ${lastName}`,
     email: email || generateEmail(firstName, lastName, "admin.ethiotech.com"),
-    password: hashPassword("SecureAdmin123!"),
+    password: hashPassword("Passw0rd!"),
     role: "admin",
     avatar: generateAvatarUrl(firstName, lastName),
     bio: "Platform administrator managing community and content.",
