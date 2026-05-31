@@ -1,5 +1,6 @@
 import { io, type Socket } from "socket.io-client";
 import { useAuthStore } from "@/store/authStore";
+import { getBackendOrigin } from "@/config/runtime";
 import type {
   SocketClientToServerEvents,
   SocketServerToClientEvents,
@@ -10,10 +11,7 @@ let connectionRefCount = 0;
 
 export function getSocket() {
   if (!socket) {
-    const base = (import.meta.env.VITE_API_URL ?? "http://localhost:5000/api/v1").replace(
-      "/api/v1",
-      ""
-    );
+    const base = getBackendOrigin();
     socket = io(base, {
       autoConnect: false,
       transports: ["websocket", "polling"],

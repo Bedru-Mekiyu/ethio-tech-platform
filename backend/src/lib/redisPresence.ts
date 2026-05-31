@@ -14,7 +14,11 @@ const PRESENCE_KEY_PREFIX = "presence:";
 const PRESENCE_TTL = 30 * 60; // 30 minutes
 
 export class RedisPresenceService {
-  constructor(private redis: RedisClientType) {}
+  private readonly redis: RedisClientType;
+
+  constructor(redis: RedisClientType) {
+    this.redis = redis;
+  }
 
   async recordJoin(roomId: string, userId: string): Promise<void> {
     try {

@@ -7,7 +7,7 @@ import Badge from "../models/Badge.js";
 import LevelConfig from "../models/LevelConfig.js";
 
 import { TRACK_SLUGS } from "./datasets.js";
-import { sleep, randomInt, daysAgo } from "./utils.js";
+import { sleep, randomInt } from "./utils.js";
 import {
   createDailyChallenge,
   createBadge,
@@ -351,6 +351,7 @@ export async function createTracksAndContent() {
       projects.push(project);
     }
 
+    void projects;
     await track.save();
     created.push(track);
     await sleep(20);

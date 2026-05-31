@@ -3,7 +3,6 @@ import {
   nowMinusDays,
   pick,
   randomInt,
-  randomFloat,
   pickMany,
   generateEmail,
   generatePhoneNumber,
@@ -11,7 +10,6 @@ import {
   calculateLevel,
   daysAgo,
   hoursAgo,
-  minutesAgo,
 } from "./utils.js";
 
 import {
@@ -22,8 +20,6 @@ import {
   EXPERTISE_AREAS,
   MENTOR_ORIGINS,
   STUDENT_LEARNING_GOALS,
-  PROJECT_IDEAS,
-  ACHIEVEMENT_TITLES,
 } from "./datasets.js";
 
 // ====== USER FACTORIES ======
@@ -35,7 +31,6 @@ export function createStudent({
   city = pick(ETHIOPIAN_CITIES),
   gradeLevel = randomInt(8, 12),
   xp = randomInt(0, 15000),
-  streakDays = randomInt(0, 180),
   isActive = Math.random() > 0.2, // 80% active students
 } = {}) {
   const createdAt = nowMinusDays(randomInt(10, 300));
@@ -268,7 +263,7 @@ export function createDailyChallenge(date, index) {
 
 // ====== CERTIFICATE FACTORIES ======
 
-export function createCertificate(studentId, trackId, trackTitle) {
+export function createCertificate(studentId, trackId) {
   return {
     student: studentId,
     track: trackId,
@@ -320,7 +315,6 @@ export function createSession({
   title = null,
   scheduledAt = hoursAgo(-randomInt(1, 72)), // Future sessions
   durationMinutes = randomInt(45, 120),
-  participantCount = randomInt(2, 30),
   status = "scheduled",
 } = {}) {
   const sessionTitles = [
@@ -360,7 +354,6 @@ export function createSubmission({
   studentId,
   projectId,
   status = "pending",
-  grade = null,
   reviewedBy = null,
 } = {}) {
   const createdAt = nowMinusDays(randomInt(1, 60));

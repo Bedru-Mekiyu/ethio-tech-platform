@@ -51,7 +51,7 @@ const getCookieOptions = () => {
   return {
     httpOnly: true,
     secure: isProd,
-    sameSite: isProd ? "strict" : "lax",
+    sameSite: isProd ? "none" : "lax",
     maxAge: (getEnv().jwtRefreshDays || 14) * 24 * 60 * 60 * 1000,
   };
 };

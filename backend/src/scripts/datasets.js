@@ -139,6 +139,9 @@ export const GLOBAL_TECH_COMPANIES = [
   "Vercel",
   "Datadog",
   "Twilio",
+  "Andela",
+  "Safaricom",
+  "Gebeya",
 ];
 
 // ====== EXPERTISE AREAS ======

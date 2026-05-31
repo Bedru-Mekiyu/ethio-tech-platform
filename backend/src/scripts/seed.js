@@ -3,13 +3,8 @@ import mongoose from "mongoose";
 
 import { connectDB } from "../config/db.js";
 import User from "../models/User.js";
-import Track from "../models/Track.js";
-import Module from "../models/Module.js";
-import Lesson from "../models/Lesson.js";
 import Project from "../models/Project.js";
 import DailyChallenge from "../models/DailyChallenge.js";
-import Badge from "../models/Badge.js";
-import LevelConfig from "../models/LevelConfig.js";
 import XPLog from "../models/XPLog.js";
 import UserStreak from "../models/UserStreak.js";
 import Session from "../models/Session.js";
@@ -84,7 +79,7 @@ const seed = async () => {
     for (const collection of collections) {
       try {
         await mongoose.connection.collection(collection).deleteMany({});
-      } catch (e) {
+      } catch {
         // Silently ignore errors
       }
     }
@@ -309,7 +304,7 @@ const seed = async () => {
     for (let i = 0; i < Math.min(createdStudents.length, 25); i++) {
       const student = createdStudents[i];
       for (const track of pickMany(tracks, randomInt(1, 2))) {
-        certificates.push(createCertificate(student._id, track._id, track.title));
+        certificates.push(createCertificate(student._id, track._id));
       }
     }
     if (certificates.length > 0) {
@@ -363,7 +358,7 @@ const seed = async () => {
     console.error(error.stack);
     try {
       await mongoose.connection.close();
-    } catch (e) {
+    } catch {
       // Ignore
     }
     process.exit(1);

@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
 import { createServer } from "http";
-import mongoose from "mongoose";
 import { Server as SocketServer } from "socket.io";
 import type { RedisClientType } from "redis";
-import { connectDB } from "./config/db.js";
+import { connectDB, stopDB } from "./config/db.js";
 import { validateEnvOnBoot, getEnv } from "./config/env.js";
 import { createApp } from "./app.js";
 import { setupSocket } from "./socket/index.js";
@@ -14,6 +13,7 @@ validateEnvOnBoot();
 
 const PORT = getEnv().port;
 let httpServer: ReturnType<typeof createServer> | null = null;
+let socketServer: SocketServer | null = null;
 let redisClients: { pubClient: RedisClientType; subClient: RedisClientType } | null = null;
 
 const closeRedisClients = async () => {
@@ -31,8 +31,10 @@ const shutdown = async (signal: string) => {
       httpServer?.close(() => resolve());
     });
   }
+  socketServer?.close();
+  socketServer = null;
   await closeRedisClients();
-  await mongoose.connection.close();
+  await stopDB();
   process.exit(0);
 };
 
@@ -41,7 +43,7 @@ const startServer = async () => {
 
   const app = createApp();
   httpServer = createServer(app);
-  const io = new SocketServer(httpServer, {
+  socketServer = new SocketServer(httpServer, {
     cors: {
       origin: getEnv().corsOrigin,
       credentials: true,
@@ -63,7 +65,7 @@ const startServer = async () => {
       subClient = pubClient.duplicate();
       await Promise.all([pubClient.connect(), subClient.connect()]);
       redisClients = { pubClient, subClient };
-      io.adapter(createAdapter(pubClient, subClient));
+      socketServer.adapter(createAdapter(pubClient, subClient));
       logger.info("Socket.io Redis adapter enabled");
     } catch (error) {
       await Promise.allSettled([pubClient?.disconnect(), subClient?.disconnect()]);
@@ -73,11 +75,11 @@ const startServer = async () => {
     }
   }
 
-  setupSocket(io);
-  app.set("io", io);
+  setupSocket(socketServer);
+  app.set("io", socketServer);
 
   httpServer.listen(PORT, () => {
-    logger.info(`Server running on http://localhost:${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
   });
 
   process.on("SIGTERM", () => shutdown("SIGTERM"));

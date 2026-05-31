@@ -1,8 +1,9 @@
 import axios, { AxiosHeaders } from "axios";
 import { useAuthStore } from "@/store/authStore";
+import { getBackendApiUrl, getBackendOrigin } from "@/config/runtime";
 
-export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5000/api/v1";
-export const API_ORIGIN = API_URL.replace(/\/api\/v1\/?$/, "");
+export const API_URL = getBackendApiUrl();
+export const API_ORIGIN = getBackendOrigin();
 
 export const api = axios.create({
   baseURL: API_URL,

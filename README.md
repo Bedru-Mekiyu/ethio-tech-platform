@@ -96,8 +96,9 @@ npm run dev
 | `npm run dev:backend`  | Backend only (`tsx watch`)       |
 | `npm run dev:frontend` | Frontend only (`vite`)           |
 | `npm run build`    | Build backend (`tsc`) + frontend   |
+| `npm run typecheck` | Typecheck backend + frontend       |
 | `npm run test`     | Backend Vitest suite               |
-| `npm run lint`     | ESLint on frontend                 |
+| `npm run lint`     | ESLint on frontend + backend       |
 | `npm run seed`     | Seed MongoDB with sample data      |
 
 ## Frontend routes
@@ -137,8 +138,9 @@ GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push/PR to `main`:
 
 1. `npm ci`
 2. `npm run lint`
-3. `npm run build`
+3. `npm run typecheck`
 4. `npm run test`
+5. `npm run build`
 
 ## Technology stack
 

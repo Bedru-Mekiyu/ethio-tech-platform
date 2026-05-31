@@ -1,3 +1,5 @@
+import { getBackendOrigin } from "@/config/runtime";
+
 export type SystemAvatarRole = "student" | "mentor";
 
 export interface SystemAvatarEntry {
@@ -65,7 +67,6 @@ export function buildAvatarFallbackChain(seed: string, role?: SystemAvatarRole) 
 
 export function resolveAvatarUrl(src?: string | null) {
   if (!src) return null;
-  if (src.startsWith("/avatars/")) return `${import.meta.env.VITE_API_URL?.replace(/\/api\/v1\/?$/, "") ?? "http://localhost:5000"}${src}`;
+  if (src.startsWith("/avatars/")) return `${getBackendOrigin()}${src}`;
   return src;
 }
-
