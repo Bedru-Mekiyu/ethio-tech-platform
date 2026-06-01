@@ -336,9 +336,8 @@ export function ClassroomPage() {
       <div className={cn("grid gap-4", compactScene ? "xl:grid-cols-[minmax(0,1fr)]" : "xl:grid-cols-[minmax(0,1fr)_380px]")}>
         <section
           id="classroom-scene"
-          className="relative min-h-[26rem] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[linear-gradient(160deg,rgba(0,210,255,0.1),rgba(17,24,35,0.96)_40%,rgba(123,97,255,0.12))] shadow-[0_20px_80px_rgba(0,0,0,0.35)]"
+          className="relative min-h-[26rem] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--bg-base)] shadow-[0_20px_80px_rgba(0,0,0,0.35)]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_32%)]" />
           <Suspense
             fallback={
               <div className="absolute inset-0 flex items-center justify-center">
@@ -376,13 +375,6 @@ export function ClassroomPage() {
                 </div>
               </div>
             </Card>
-          </div>
-
-          <div className="absolute right-4 top-4 hidden max-w-xs rounded-2xl border border-[var(--border)] bg-[rgba(11,14,20,0.82)] p-4 backdrop-blur md:block">
-            <p className="text-xs uppercase tracking-widest text-[var(--text-muted)]">Classroom atmosphere</p>
-            <p className="mt-2 text-sm text-[var(--text-secondary)]">
-              Built for collaboration on weak networks, with presence-aware sync and a calm learning pace.
-            </p>
           </div>
 
           <div className="absolute bottom-4 left-4 right-4 space-y-3">
