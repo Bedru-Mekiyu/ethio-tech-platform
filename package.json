@@ -14,9 +14,18 @@
     "seed": "npm run seed -w backend",
     "typecheck": "npm run typecheck -w backend && npm run typecheck -w frontend",
     "test": "npm run test -w backend && npm run test -w frontend",
-    "lint": "npm run lint -w frontend && npm run lint -w backend"
+    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": ["prettier --write", "eslint --fix"],
+    "*.css": ["prettier --write"],
+    "*.json": ["prettier --write"]
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3"
   }
 }
