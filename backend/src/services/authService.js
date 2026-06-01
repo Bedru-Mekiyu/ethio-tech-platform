@@ -69,7 +69,7 @@ export const registerUser = async ({
 
 export const loginUser = async ({ email, password }) => {
   const user = await User.findOne({ email: email.toLowerCase() }).select(
-    "+refreshTokenHash +refreshTokenExpiresAt +loginAttempts +lockUntil"
+    "+password +refreshTokenHash +refreshTokenExpiresAt +loginAttempts +lockUntil"
   );
   if (!user) {
     throw new ApiError(401, "Invalid credentials");

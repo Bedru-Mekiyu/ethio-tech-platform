@@ -12,7 +12,7 @@ const userSchema = new Schema({
     trim: true,
     match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email format"],
   },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
 
   role: { 
     type: String, 
@@ -64,5 +64,7 @@ userSchema.index({ role: 1, updatedAt: -1 });
 userSchema.index({ role: 1, isVerified: 1 });
 userSchema.index({ enrolledTracks: 1 });
 userSchema.index({ mentorScore: -1, totalSessions: -1 });
+userSchema.index({ fullName: 1 });
+userSchema.index({ fullName: "text", email: "text" });
 
 export default model("User", userSchema);

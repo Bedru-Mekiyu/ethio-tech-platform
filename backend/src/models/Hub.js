@@ -11,4 +11,8 @@ const hubSchema = new Schema({
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 
+hubSchema.index({ city: 1 });
+hubSchema.index({ isActive: 1 });
+hubSchema.index({ mentorInCharge: 1 });
+
 export default model("Hub", hubSchema);

@@ -13,4 +13,9 @@ const resourceSchema = new Schema({
   tags: [String],
 }, { timestamps: true });
 
+resourceSchema.index({ uploadedBy: 1 });
+resourceSchema.index({ tags: 1 });
+resourceSchema.index({ minLevelRequired: 1 });
+resourceSchema.index({ title: "text", description: "text", tags: "text" });
+
 export default model("Resource", resourceSchema);

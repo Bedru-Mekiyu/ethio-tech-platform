@@ -28,6 +28,7 @@ export const errorHandler = (err, req, res, _next) => {
 
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
+  const isProduction = req.app.get("env") === "production";
 
   logger.error("Request failed", {
     statusCode,
@@ -35,12 +36,13 @@ export const errorHandler = (err, req, res, _next) => {
     path: req.originalUrl,
     message,
     details: err.details || null,
-    stack: err.stack,
+    stack: isProduction ? "(hidden)" : err.stack,
   });
 
   res.status(statusCode).json({
     success: false,
     message,
     details: err.details || null,
+    ...(isProduction ? {} : { stack: err.stack }),
   });
 };
