@@ -111,16 +111,11 @@ export function ProfilePage() {
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.dashboard.stats.xp}
               alt="Profile banner"
-              className="h-full w-full object-cover opacity-85"
+              className="h-full w-full object-cover"
               wrapperClassName="h-full w-full border-0 bg-transparent"
               width={1000}
               quality={80}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,14,24,0.1),rgba(7,12,20,0.96))]" />
-            <div className="absolute left-6 top-6 flex flex-wrap gap-2">
-              <Badge variant="purple" showDot>Personal profile</Badge>
-              <Badge variant="success" className="capitalize">{liveUser?.role}</Badge>
-            </div>
           </div>
 
           <div className="relative -mt-14 px-6 pb-6">

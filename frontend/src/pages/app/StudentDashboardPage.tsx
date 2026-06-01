@@ -4,7 +4,6 @@ import {
   BookOpen,
   CalendarClock,
   GraduationCap,
-  PlayCircle,
   Sparkles,
   Trophy,
   Zap,
@@ -180,19 +179,7 @@ export function StudentDashboardPage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
         <motion.div variants={cardVariants} className="h-full">
           <Card className="hero-shell relative overflow-hidden p-6 h-full border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl">
-            {/* Background Image Overlay */}
-            <div className="absolute inset-0 z-0 opacity-[0.04] mix-blend-luminosity pointer-events-none">
-              <SmartImage
-                unsplashId={MEDIA_CATEGORIES.dashboard.coding[0].unsplashId}
-                alt=""
-                className="h-full w-full object-cover"
-                wrapperClassName="h-full w-full border-0 bg-transparent"
-                width={800}
-                quality={80}
-              />
-            </div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,210,255,0.12),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.1),transparent_35%)]" />
-            <div className="relative flex flex-col h-full justify-between z-10">
+            <div className="flex flex-col h-full justify-between">
               <div>
                 <Badge className="mb-4" showDot variant="purple">Current learning path</Badge>
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -275,7 +262,6 @@ export function StudentDashboardPage() {
 
         <motion.div variants={cardVariants}>
           <Card className="surface-panel overflow-hidden p-0 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl h-full min-h-[28rem] relative">
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,18,0.12),rgba(6,10,18,0.94))]" />
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
               alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
@@ -284,31 +270,6 @@ export function StudentDashboardPage() {
               width={600}
               quality={80}
             />
-            <div className="absolute left-4 top-4 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.86)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary font-bold shadow-sm">
-              Live learning
-            </div>
-            <Card className="absolute right-4 top-4 max-w-[180px] border-primary/20 bg-[rgba(8,14,24,0.92)] p-4 shadow-lg backdrop-blur-[4px]">
-              <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-[var(--text-muted)]">
-                Active sessions
-              </p>
-              <p className="mt-1 text-2xl font-bold text-white">{upcomingSessions.length}</p>
-              <p className="text-xs font-semibold text-success mt-0.5">Mentor rooms ready</p>
-            </Card>
-            <Card className="absolute bottom-4 left-4 right-4 border-secondary/15 bg-[rgba(8,14,24,0.92)] p-4 shadow-lg backdrop-blur-[6px]">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-                  <PlayCircle size={20} className="animate-pulse" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[10px] uppercase font-bold tracking-[0.22em] text-[var(--text-muted)]">
-                    Next action
-                  </p>
-                  <p className="truncate text-sm font-bold text-white mt-0.5">
-                    {currentTrack ? "Continue your current module" : "Join your first learning track"}
-                  </p>
-                </div>
-              </div>
-            </Card>
           </Card>
         </motion.div>
       </div>

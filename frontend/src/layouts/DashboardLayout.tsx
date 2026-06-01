@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Avatar } from "@/components/ui/avatar";
@@ -34,17 +34,44 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const user = useAuthStore((s) => s.user);
   const { classroomPath, squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
   const [mobileOpen, setMobileOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const openButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!mobileOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobileOpen(false);
     };
+    const handleFocusTrap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !drawerRef.current) return;
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
     window.addEventListener("keydown", onKey);
+    window.addEventListener("keydown", handleFocusTrap);
     document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+    setTimeout(() => {
+      drawerRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+    }, 100);
+    const buttonEl = openButtonRef.current;
     return () => {
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("keydown", handleFocusTrap);
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+      buttonEl?.focus();
     };
   }, [mobileOpen]);
 
@@ -113,6 +140,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
           )
         }
+        aria-current={({ isActive }) => isActive ? "page" : undefined}
       >
         {({ isActive }) => (
           <>
@@ -178,6 +206,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[4px] lg:hidden"
             />
             <motion.aside
+              ref={drawerRef}
               id="mobile-nav-drawer"
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
@@ -229,6 +258,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
         <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[rgba(5,10,20,0.7)] px-4 py-4.5 backdrop-blur-xl lg:px-8">
           <div className="flex items-center gap-3">
             <button
+              ref={openButtonRef}
               type="button"
               className="min-h-11 min-w-11 rounded-xl border border-[var(--border)] p-2.5 lg:hidden flex items-center justify-center hover:bg-white/5 text-white transition-colors duration-200"
               onClick={() => setMobileOpen(true)}
@@ -307,6 +337,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   isActive ? "text-primary" : "hover:text-white"
                 )
               }
+              aria-current={({ isActive }) => isActive ? "page" : undefined}
             >
               {({ isActive }) => (
                 <>
