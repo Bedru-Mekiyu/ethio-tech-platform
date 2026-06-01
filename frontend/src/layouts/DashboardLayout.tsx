@@ -171,7 +171,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
       {/* Desktop Sidebar */}
       <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.96)] p-5 lg:flex">
-        <Logo to={homePath} />
+        <Logo to="/" />
         <nav className="mt-8 flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
           {renderNavItems(false)}
         </nav>
@@ -217,7 +217,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               aria-label="Navigation Menu"
             >
               <div className="mb-6 flex items-center justify-between">
-                <Logo to={homePath} />
+                <Logo to="/" />
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}

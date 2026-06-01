@@ -13,7 +13,7 @@ export function Logo({ className, to = "/", variant = "default" }: LogoProps) {
   const isFull = variant === "full";
 
   return (
-    <Link to={to} className={cn("inline-flex items-center gap-2.5 group select-none", className)}>
+    <Link to={to} className={cn("inline-flex items-center gap-2.5 group select-none", className)} title="Back to home" aria-label="Back to home">
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
