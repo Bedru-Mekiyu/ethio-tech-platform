@@ -8,10 +8,7 @@ export const notFound = (req, res, next) => {
 
 export const errorHandler = (err, req, res, _next) => {
   if (err instanceof multer.MulterError) {
-    const message =
-      err.code === "LIMIT_FILE_SIZE"
-        ? "Avatar must be 4 MB or smaller"
-        : "Invalid avatar upload";
+    const message = err.code === "LIMIT_FILE_SIZE" ? "Avatar must be 4 MB or smaller" : "Invalid avatar upload";
     logger.warn("Multipart upload rejected", {
       method: req.method,
       path: req.originalUrl,
