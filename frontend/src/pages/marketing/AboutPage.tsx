@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   Sparkles,
   Target,
-  TrendingUp,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -308,43 +307,12 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.28 }}
       >
         <div className="relative">
-          <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.16),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.16),transparent_32%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(10,16,28,0.96),rgba(4,9,18,0.98))] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-35 z-10 pointer-events-none" />
-
-            <div className="absolute right-6 top-6 z-15 max-w-[170px]">
-              <Card className="border-primary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                  Live network
-                </p>
-                <p className="mt-1 text-2xl font-semibold text-white">
-                  {data?.stats.compact.activeLearners ?? "0"}
-                </p>
-                <p className="text-xs text-success">Students learning now</p>
-              </Card>
-            </div>
-
-            <div className="absolute bottom-6 left-6 z-15 max-w-[220px]">
-              <Card className="border-secondary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <TrendingUp size={18} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                      Project quality
-                    </p>
-                    <p className="text-sm font-semibold text-white">{data?.stats.approvalRate ?? 0}%</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-
+          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
               alt="EthioTech immersive learning environment preview - student programmer at work"
               hoverEffect="glow"
-              wrapperClassName="h-full w-full border-none bg-transparent rounded-[28px] overflow-hidden drop-shadow-[0_0_48px_rgba(123,97,255,0.25)]"
+              wrapperClassName="h-full w-full border-none bg-transparent rounded-[28px] overflow-hidden"
               className="h-full w-full object-cover"
               width={1000}
               quality={85}

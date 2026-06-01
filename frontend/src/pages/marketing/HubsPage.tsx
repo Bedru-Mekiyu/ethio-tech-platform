@@ -267,19 +267,11 @@ export function HubsPage() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="relative min-h-[460px] overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(12,17,30,0.98),rgba(5,10,18,0.98))] p-4">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,210,255,0.1),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.18),transparent_28%)]" />
-            <div className="absolute inset-0 opacity-35">
-              <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:42px_42px]" />
-            </div>
-            <div className="relative h-[420px] rounded-[24px] border border-white/5 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
+          <Card className="relative min-h-[460px] overflow-hidden rounded-[28px] border-white/[0.06] bg-[var(--bg-card)] p-4">
+            <div className="relative h-[420px] rounded-[24px] border border-white/5 bg-[var(--bg-base)]">
               {filteredHubs.map((hub, index) => (
                 <HubMarker key={hub._id} hub={hub} index={index} />
               ))}
-              <div className="absolute bottom-4 left-4 rounded-2xl border border-[var(--border)] bg-[rgba(8,14,24,0.9)] px-4 py-3">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Ethiopia network</p>
-                <p className="mt-1 text-sm text-white">Regional hub map with live location signals</p>
-              </div>
             </div>
           </Card>
 

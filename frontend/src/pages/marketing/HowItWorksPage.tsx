@@ -401,7 +401,7 @@ export function HowItWorksPage() {
           </div>
         </JourneySection>
         <div className="order-1 lg:order-2 w-full">
-          <div className="relative overflow-hidden rounded-[28px] border border-secondary/20 bg-[linear-gradient(180deg,rgba(12,16,30,0.98),rgba(6,9,18,0.98))] shadow-[0_20px_50px_rgba(0,0,0,0.3)] aspect-[16/10] w-full">
+          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_20px_50px_rgba(0,0,0,0.3)] aspect-[16/10] w-full">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.community.showcase[1].unsplashId}
               alt="Project building preview - Ethiopian developers showcasing a local fintech solution at an innovation hub"
@@ -411,16 +411,6 @@ export function HowItWorksPage() {
               width={1000}
               quality={85}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.72))] z-10 pointer-events-none" />
-            <div className="absolute bottom-6 left-6 right-6 z-15">
-              <Card className="border-primary/25 bg-[rgba(8,14,24,0.85)] p-4 backdrop-blur shadow-2xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Build real projects</p>
-                <p className="mt-1 text-lg font-semibold text-white">{strongestTrack?.title || "Project pathway"}</p>
-                <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                  {strongestTrack?.description || "A path that moves from fundamentals to delivery."}
-                </p>
-              </Card>
-            </div>
           </div>
         </div>
       </motion.section>

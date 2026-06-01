@@ -9,7 +9,6 @@ import {
   MonitorPlay,
   ShieldCheck,
   Sparkles,
-  Trophy,
 } from "lucide-react";
 import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
@@ -161,9 +160,6 @@ function MentorCard({ mentor }: { mentor: MarketingMentor }) {
     <Card className="flex h-full flex-col gap-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
       <div className="relative mx-auto">
         <Avatar src={mentor.avatar} name={mentor.fullName} userId={mentor._id} role="mentor" size="lg" className="ring-4 ring-primary/20" />
-        <span className="absolute -right-2 -top-1 rounded-full border border-success/30 bg-success/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-success">
-          {mentor.mentorScore ?? 0}%
-        </span>
       </div>
 
       <div className="space-y-1">
@@ -280,40 +276,7 @@ export function HomePage() {
         </div>
 
         <div className="relative">
-          <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.22),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.18),transparent_30%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(10,16,28,0.96),rgba(4,9,18,0.98))] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40 z-10 pointer-events-none" />
-            
-            <div className="absolute right-6 top-6 z-15 max-w-[160px]">
-              <Card className="border-primary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                  Live learners
-                </p>
-                <p className="mt-1 text-2xl font-semibold text-white">
-                  {formatCompactCount(data?.hero.activeLearners ?? 0)}
-                </p>
-                <p className="text-xs text-success">
-                  {data?.hero.topMentorScore ?? 0}% mentor quality
-                </p>
-              </Card>
-            </div>
-
-            <div className="absolute bottom-6 left-6 z-15">
-              <Card className="max-w-[220px] border-secondary/30 bg-[rgba(8,14,24,0.85)] p-3 shadow-2xl backdrop-blur-md">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/15 text-primary">
-                    <Trophy size={18} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-                      Top mentor
-                    </p>
-                    <p className="text-sm font-semibold text-white">{data?.hero.topMentorName || "Mentor"}</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-
+          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.marketing.hero[0].unsplashId}
               alt={MEDIA_CATEGORIES.marketing.hero[0].alt}
