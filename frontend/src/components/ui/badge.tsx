@@ -8,19 +8,13 @@ export interface BadgeProps {
   children: React.ReactNode;
 }
 
-export function Badge({
-  className,
-  variant = "default",
-  size = "md",
-  showDot = false,
-  children,
-}: BadgeProps) {
+export function Badge({ className, variant = "default", size = "md", showDot = false, children }: BadgeProps) {
   const variants = {
     default: "border-primary/20 bg-primary/8 text-primary hover:bg-primary/12",
     success: "border-success/20 bg-success/8 text-success hover:bg-success/12",
     warning: "border-warning/20 bg-warning/8 text-warning hover:bg-warning/12",
     purple: "border-secondary/20 bg-secondary/8 text-secondary hover:bg-secondary/12",
-    danger: "border-danger/20 bg-danger/8 text-[var(--text-danger)] hover:bg-danger/12",
+    danger: "border-danger/20 bg-danger/8 text-danger hover:bg-danger/12",
   };
 
   const sizes = {
@@ -42,19 +36,11 @@ export function Badge({
         "inline-flex items-center rounded-full border font-semibold uppercase backdrop-blur-[2px] transition-colors duration-200",
         variants[variant],
         sizes[size],
-        className
+        className,
       )}
     >
-      {showDot && (
-        <span
-          className={cn(
-            "h-1.5 w-1.5 rounded-full shrink-0",
-            dotColors[variant]
-          )}
-        />
-      )}
+      {showDot && <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", dotColors[variant])} />}
       {children}
     </span>
   );
 }
-
