@@ -354,14 +354,15 @@ export function TracksPage() {
         <div className="relative">
           <Card className="hero-shell relative overflow-hidden p-0">
             <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative overflow-hidden w-full h-full min-h-[300px] lg:min-h-[360px] rounded-t-[28px] lg:rounded-l-[28px] lg:rounded-tr-none">
+              <div className="relative overflow-hidden w-full h-full min-h-[280px] md:min-h-[320px] lg:min-h-[380px] rounded-t-[28px] lg:rounded-l-[28px] lg:rounded-tr-none">
                 <SmartImage
                   unsplashId={MEDIA_CATEGORIES.classroom.immersive[0].unsplashId}
                   alt={MEDIA_CATEGORIES.classroom.immersive[0].alt}
                   wrapperClassName="h-full w-full border-none bg-transparent rounded-t-[28px] lg:rounded-l-[28px] lg:rounded-tr-none overflow-hidden"
                   className="h-full w-full object-cover"
-                  width={800}
-                  quality={80}
+                  width={900}
+                  quality={85}
+                  hoverEffect="zoom"
                 />
               </div>
 

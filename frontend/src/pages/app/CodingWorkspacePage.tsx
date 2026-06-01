@@ -166,14 +166,15 @@ export function CodingWorkspacePage() {
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <div className="space-y-6">
           <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)]">
-            <div className="relative min-h-[22rem]">
+            <div className="relative min-h-[22rem] md:min-h-[26rem] lg:min-h-[30rem]">
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
                 alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
                 wrapperClassName="h-full w-full border-none bg-transparent"
                 className="h-full w-full object-cover"
-                width={800}
-                quality={80}
+                width={900}
+                quality={85}
+                hoverEffect="zoom"
               />
             </div>
             <div className="grid gap-3 p-6 lg:grid-cols-[1fr_240px]">

@@ -107,14 +107,15 @@ export function ProfilePage() {
     >
       <motion.div variants={itemVariants}>
         <Card className="overflow-hidden rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-0">
-          <div className="relative h-56">
+          <div className="relative h-56 md:h-72 lg:h-96">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.dashboard.stats.xp}
               alt="Profile banner"
               className="h-full w-full object-cover"
               wrapperClassName="h-full w-full border-0 bg-transparent"
-              width={1000}
-              quality={80}
+              width={1200}
+              quality={85}
+              hoverEffect="zoom"
             />
           </div>
 
@@ -132,11 +133,11 @@ export function ProfilePage() {
                   />
                   <Link
                     to={getSettingsPath(liveUser?.role ?? "student")}
-                    className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer border-4 border-[var(--bg-base)]"
-                    aria-label="Upload avatar in settings"
+                    className="absolute inset-0 flex items-center justify-center rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                    aria-label="Change avatar in settings"
                     title="Change Avatar"
                   >
-                    <Camera className="text-white h-6 w-6 transform scale-75 group-hover:scale-100 transition-transform duration-200" />
+                    <Camera className="text-white h-6 w-6 transform scale-75 group-hover:scale-100 transition-transform duration-200 drop-shadow-lg" />
                   </Link>
                 </div>
                 <div>

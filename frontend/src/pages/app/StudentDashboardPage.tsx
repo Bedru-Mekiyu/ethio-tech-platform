@@ -261,14 +261,15 @@ export function StudentDashboardPage() {
         </motion.div>
 
         <motion.div variants={cardVariants}>
-          <Card className="surface-panel overflow-hidden p-0 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl h-full min-h-[28rem] relative">
+          <Card className="surface-panel overflow-hidden p-0 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl h-full min-h-[28rem] md:min-h-[32rem] lg:min-h-[40rem] relative">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
               alt={MEDIA_CATEGORIES.classroom.immersive[1].alt}
               className="h-full w-full object-cover"
               wrapperClassName="h-full w-full border-0 bg-transparent"
-              width={600}
-              quality={80}
+              width={800}
+              quality={85}
+              hoverEffect="zoom"
             />
           </Card>
         </motion.div>
