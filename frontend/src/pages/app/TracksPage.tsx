@@ -352,13 +352,9 @@ export function TracksPage() {
         </div>
 
         <div className="relative">
-          <div className="absolute -inset-4 rounded-[32px] bg-[radial-gradient(circle_at_top,rgba(0,210,255,0.18),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(123,97,255,0.15),transparent_34%)] blur-2xl" />
           <Card className="hero-shell relative overflow-hidden p-0">
             <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="relative overflow-hidden w-full h-full min-h-[300px] lg:min-h-[360px] rounded-t-[28px] lg:rounded-l-[28px] lg:rounded-tr-none">
-                <div className="absolute left-4 top-4 z-10 rounded-full border border-primary/25 bg-[rgba(5,10,20,0.9)] px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary font-bold shadow-sm">
-                  Track spotlight
-                </div>
                 <SmartImage
                   unsplashId={MEDIA_CATEGORIES.classroom.immersive[0].unsplashId}
                   alt={MEDIA_CATEGORIES.classroom.immersive[0].alt}
@@ -367,17 +363,6 @@ export function TracksPage() {
                   width={800}
                   quality={80}
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-6 z-10">
-                  <p className="stat-label">
-                    Current focus
-                  </p>
-                  <p className="mt-1.5 text-xl font-bold text-white tracking-tight leading-tight">
-                    {view.currentFocus?.title || "Structured learning paths"}
-                  </p>
-                  <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                    {view.currentFocus?.progress ?? 0}% progress and {view.currentFocus?.totalLessons ?? 0} lessons tracked
-                  </p>
-                </div>
               </div>
 
               <div className="grid gap-3 p-6 lg:p-8 lg:pl-6 justify-stretch align-middle self-center">

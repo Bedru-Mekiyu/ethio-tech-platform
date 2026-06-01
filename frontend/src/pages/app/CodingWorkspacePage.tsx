@@ -165,7 +165,7 @@ export function CodingWorkspacePage() {
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
         <div className="space-y-6">
-          <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-0">
+          <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)]">
             <div className="relative min-h-[22rem]">
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.classroom.immersive[1].unsplashId}
@@ -175,27 +175,22 @@ export function CodingWorkspacePage() {
                 width={800}
                 quality={80}
               />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(7,12,20,0.92))]" />
-              <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-                <Badge variant="purple">Video lesson</Badge>
-                <Badge variant="success">Live sync ready</Badge>
+            </div>
+            <div className="grid gap-3 p-6 lg:grid-cols-[1fr_240px]">
+              <div>
+                <p className="stat-label">Instructor hint</p>
+                <h2 className="mt-2 text-xl font-semibold text-white">
+                  {lesson?.title ?? "Build your first React component"}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--text-secondary)]">
+                  Keep the layout simple, readable, and easy to extend.
+                </p>
               </div>
-              <div className="absolute bottom-4 left-4 right-4 grid gap-3 lg:grid-cols-[1fr_240px]">
-                <Card className="border-primary/25 bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
-                  <p className="stat-label">Instructor hint</p>
-                  <h2 className="mt-2 text-xl font-semibold text-white">
-                    {lesson?.title ?? "Build your first React component"}
-                  </h2>
-                  <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                    Keep the layout simple, readable, and easy to extend.
-                  </p>
-                </Card>
-                <Card className="border-[var(--border)] bg-[rgba(8,14,24,0.92)] p-4 backdrop-blur">
-                  <p className="stat-label">Next step</p>
-                  <p className="mt-2 text-sm text-white">
-                    {lesson?.videoUrl ? "Open the lesson video and follow along." : "Review the starter snippet and complete the task."}
-                  </p>
-                </Card>
+              <div>
+                <p className="stat-label">Next step</p>
+                <p className="mt-2 text-sm text-white">
+                  {lesson?.videoUrl ? "Open the lesson video and follow along." : "Review the starter snippet and complete the task."}
+                </p>
               </div>
             </div>
           </Card>
