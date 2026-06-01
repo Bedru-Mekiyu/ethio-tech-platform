@@ -21,11 +21,13 @@
   --warning: #f59e0b;
   --warning-muted: rgba(245, 158, 11, 0.15);
   --danger: #ff4b5c;
+  --danger-hover: #ff6b7a;
   --danger-muted: rgba(255, 75, 92, 0.15);
 
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
+  --text-danger: #ff4b5c;
   --text-inverse: #050a14;
 
   --border: rgba(30, 41, 59, 0.8);
