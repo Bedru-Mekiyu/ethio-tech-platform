@@ -45,7 +45,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     const handleFocusTrap = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || !drawerRef.current) return;
       const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
       );
       if (focusable.length === 0) return;
       const first = focusable[0];
@@ -63,7 +63,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     document.body.style.overflow = "hidden";
     document.body.style.touchAction = "none";
     setTimeout(() => {
-      drawerRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+      drawerRef.current?.querySelector<HTMLElement>("a, button")?.focus();
     }, 100);
     const buttonEl = openButtonRef.current;
     return () => {
@@ -115,16 +115,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
   ];
 
-  const nav = variant === "mentor" ? mentorNav : variant === "admin" ? adminNav : variant === "parent" ? parentNav : studentNav;
-  const homePath =
-    variant === "parent" || user?.role === "parent"
-      ? "/parent"
-      : variant === "student"
-        ? "/app/dashboard"
-        : variant === "mentor"
-          ? "/mentor"
-          : "/admin";
-
+  const nav =
+    variant === "mentor" ? mentorNav : variant === "admin" ? adminNav : variant === "parent" ? parentNav : studentNav;
   const renderNavItems = (isMobile: boolean = false) =>
     nav.map((item) => (
       <NavLink
@@ -137,10 +129,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             "group relative flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200 select-none border border-transparent",
             isActive
               ? "bg-primary/8 text-primary shadow-[inset_0_1px_0_rgba(0,210,255,0.06),0_4px_12px_rgba(0,210,255,0.04)] border-primary/20"
-              : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
+              : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
           )
         }
-        aria-current={({ isActive }) => isActive ? "page" : undefined}
       >
         {({ isActive }) => (
           <>
@@ -151,7 +142,12 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}
-            <span className={cn("transition-transform duration-200 group-hover:scale-110", isActive ? "text-primary" : "text-[var(--text-muted)] group-hover:text-white")}>
+            <span
+              className={cn(
+                "transition-transform duration-200 group-hover:scale-110",
+                isActive ? "text-primary" : "text-[var(--text-muted)] group-hover:text-white",
+              )}
+            >
               {item.icon}
             </span>
             <span>{item.label}</span>
@@ -184,7 +180,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           </Link>
           {user && (
             <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-              <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
+              <Avatar
+                src={user.avatarUrl ?? user.avatar}
+                name={user.fullName}
+                userId={user.id}
+                role={user.role === "mentor" ? "mentor" : "student"}
+                size="md"
+                status="online"
+              />
               <div className="overflow-hidden min-w-0">
                 <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
                 <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
@@ -240,7 +243,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 </Link>
                 {user && (
                   <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-                    <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
+                    <Avatar
+                      src={user.avatarUrl ?? user.avatar}
+                      name={user.fullName}
+                      userId={user.id}
+                      role={user.role === "mentor" ? "mentor" : "student"}
+                      size="md"
+                      status="online"
+                    />
                     <div className="overflow-hidden min-w-0">
                       <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
                       <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
@@ -270,12 +280,16 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             </button>
             {variant === "parent" ? (
               <div className="flex items-center gap-3">
-                <Badge variant="purple" showDot>Family workspace</Badge>
+                <Badge variant="purple" showDot>
+                  Family workspace
+                </Badge>
                 <span className="text-sm font-medium text-[var(--text-secondary)]">Parent view</span>
               </div>
             ) : (
               <div className="flex items-center gap-4">
-                <span className="hidden text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] sm:inline">Current rank</span>
+                <span className="hidden text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] sm:inline">
+                  Current rank
+                </span>
                 <span className="font-semibold text-primary">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
@@ -299,7 +313,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             </Link>
             {user && (
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
-                <Avatar src={user.avatarUrl ?? user.avatar} name={user.fullName} userId={user.id} role={user.role === "mentor" ? "mentor" : "student"} size="md" status="online" />
+                <Avatar
+                  src={user.avatarUrl ?? user.avatar}
+                  name={user.fullName}
+                  userId={user.id}
+                  role={user.role === "mentor" ? "mentor" : "student"}
+                  size="md"
+                  status="online"
+                />
                 <div className="hidden sm:block">
                   <p className="text-sm font-semibold text-white leading-tight">{user.fullName}</p>
                   <p className="text-xs capitalize text-[var(--text-muted)] mt-0.5">{user.role}</p>
@@ -334,10 +355,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               className={({ isActive }) =>
                 cn(
                   "relative flex min-h-14 flex-1 flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] transition-colors duration-200 select-none",
-                  isActive ? "text-primary" : "hover:text-white"
+                  isActive ? "text-primary" : "hover:text-white",
                 )
               }
-              aria-current={({ isActive }) => isActive ? "page" : undefined}
             >
               {({ isActive }) => (
                 <>
@@ -348,7 +368,12 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
-                  <span className={cn("transition-transform duration-200", isActive ? "scale-110 text-primary" : "scale-100")}>
+                  <span
+                    className={cn(
+                      "transition-transform duration-200",
+                      isActive ? "scale-110 text-primary" : "scale-100",
+                    )}
+                  >
                     {item.icon}
                   </span>
                   <span>{item.label.split(" ")[0]}</span>

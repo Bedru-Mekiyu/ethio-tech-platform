@@ -16,7 +16,7 @@ export interface SmartImageProps extends React.ImgHTMLAttributes<HTMLImageElemen
   wrapperClassName?: string;
 }
 
-function generateSrcSet(unsplashId: string, fit: string): string {
+function generateSrcSet(unsplashId: string, fit: "crop" | "facearea" | "fill" | "max" | "min" | "scale"): string {
   const widths = [400, 800, 1200];
   return widths.map((w) => `${getOptimizedImageUrl(unsplashId, { width: w, fit, quality: 82 })} ${w}w`).join(", ");
 }

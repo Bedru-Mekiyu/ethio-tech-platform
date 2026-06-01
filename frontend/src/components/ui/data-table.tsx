@@ -19,7 +19,7 @@ interface DataTableProps<T> {
   emptyMessage?: string;
 }
 
-export function DataTable<T extends Record<string, unknown>>({
+export function DataTable<T>({
   columns,
   data,
   keyExtractor,
@@ -33,8 +33,8 @@ export function DataTable<T extends Record<string, unknown>>({
 
   const sorted = [...data].sort((a, b) => {
     if (!sortKey) return 0;
-    const aVal = a[sortKey];
-    const bVal = b[sortKey];
+    const aVal = (a as unknown as Record<string, unknown>)[sortKey];
+    const bVal = (b as unknown as Record<string, unknown>)[sortKey];
     if (aVal == null) return 1;
     if (bVal == null) return -1;
     const cmp = String(aVal).localeCompare(String(bVal), undefined, { numeric: true });
@@ -66,28 +66,22 @@ export function DataTable<T extends Record<string, unknown>>({
                   key={col.key}
                   className={cn(
                     "px-4 py-3 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]",
-                    col.sortable && "cursor-pointer select-none hover:text-[var(--text-primary)] transition-colors duration-150",
-                    col.className
+                    col.sortable &&
+                      "cursor-pointer select-none hover:text-[var(--text-primary)] transition-colors duration-150",
+                    col.className,
                   )}
                   onClick={() => col.sortable && handleSort(col.key)}
                   scope="col"
-                  aria-sort={
-                    sortKey === col.key
-                      ? sortDir === "asc"
-                        ? "ascending"
-                        : "descending"
-                      : undefined
-                  }
+                  aria-sort={sortKey === col.key ? (sortDir === "asc" ? "ascending" : "descending") : undefined}
                 >
                   <span className="inline-flex items-center gap-1.5">
                     {col.header}
-                    {col.sortable && (
-                      sortKey === col.key ? (
+                    {col.sortable &&
+                      (sortKey === col.key ? (
                         <ArrowUpDown size={13} className="text-primary" />
                       ) : (
                         <ChevronsUpDown size={13} className="opacity-40" />
-                      )
-                    )}
+                      ))}
                   </span>
                 </th>
               ))}
@@ -96,10 +90,7 @@ export function DataTable<T extends Record<string, unknown>>({
           <tbody>
             {paged.length === 0 ? (
               <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-4 py-12 text-center text-sm text-[var(--text-muted)]"
-                >
+                <td colSpan={columns.length} className="px-4 py-12 text-center text-sm text-[var(--text-muted)]">
                   {emptyMessage}
                 </td>
               </tr>
@@ -111,7 +102,9 @@ export function DataTable<T extends Record<string, unknown>>({
                 >
                   {columns.map((col) => (
                     <td key={col.key} className={cn("px-4 py-3 text-[var(--text-secondary)]", col.className)}>
-                      {col.render ? col.render(item) : String(item[col.key] ?? "")}
+                      {col.render
+                        ? col.render(item)
+                        : String((item as unknown as Record<string, unknown>)[col.key] ?? "")}
                     </td>
                   ))}
                 </tr>
@@ -139,9 +132,7 @@ export function DataTable<T extends Record<string, unknown>>({
               .filter((p) => Math.abs(p - safePage) <= 2 || p === 1 || p === totalPages)
               .map((p, idx, arr) => (
                 <span key={p} className="inline-flex items-center">
-                  {idx > 0 && arr[idx - 1] !== p - 1 && (
-                    <span className="px-1 text-[var(--text-muted)]">...</span>
-                  )}
+                  {idx > 0 && arr[idx - 1] !== p - 1 && <span className="px-1 text-[var(--text-muted)]">...</span>}
                   <button
                     type="button"
                     onClick={() => setPage(p)}
@@ -149,7 +140,7 @@ export function DataTable<T extends Record<string, unknown>>({
                       "flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium transition-colors duration-150 min-w-9 min-h-9",
                       p === safePage
                         ? "bg-primary/10 text-primary"
-                        : "text-[var(--text-muted)] hover:text-white hover:bg-white/5"
+                        : "text-[var(--text-muted)] hover:text-white hover:bg-white/5",
                     )}
                     aria-current={p === safePage ? "page" : undefined}
                     aria-label={`Page ${p}`}
