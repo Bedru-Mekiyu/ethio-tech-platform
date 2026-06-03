@@ -5,6 +5,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { RankProgress } from "@/components/composites/StatCard";
 import { Badge } from "@/components/ui/badge";
 import { useAuthStore } from "@/store/authStore";
+import { useNotificationStore } from "@/store/notificationStore";
 import { getRankTitle, cn } from "@/lib/utils";
 import { getSettingsPath } from "@/store/authStore";
 import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
@@ -26,12 +27,14 @@ import {
   Menu,
   X,
   CalendarClock,
+  Film,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
 
 export function DashboardLayout({ variant = "student" }: { variant?: "student" | "mentor" | "admin" | "parent" }) {
   const user = useAuthStore((s) => s.user);
+  const notifBadge = useNotificationStore((s) => s.badge);
   const { classroomPath, squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
   const [mobileOpen, setMobileOpen] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -80,22 +83,29 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/app/tracks", label: "Learning Tracks", icon: <BookOpen size={18} /> },
     { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
     { to: "/app/projects", label: "Projects", icon: <FolderKanban size={18} /> },
+    { to: "/app/assignments", label: "Assignments", icon: <FileCheck size={18} /> },
     { to: "/app/squads", label: "Squads", icon: <MessageSquare size={18} /> },
     { to: classroomPath, label: "Virtual Class", icon: <Video size={18} /> },
+    { to: "/app/explore-sessions", label: "Explore Sessions", icon: <Video size={18} /> },
+    { to: "/app/calendar", label: "Calendar", icon: <CalendarClock size={18} /> },
     { to: "/app/workspace", label: "Workspace", icon: <Activity size={18} /> },
     { to: "/app/notifications", label: "Notifications", icon: <Bell size={18} /> },
+    { to: "/app/mentors", label: "Mentors", icon: <Users size={18} /> },
+    { to: "/app/certificates", label: "Certificates", icon: <Award size={18} /> },
     { to: "/app/achievements", label: "Achievements", icon: <Award size={18} /> },
     { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
+    { to: "/app/recordings", label: "Recordings", icon: <Film size={18} /> },
     { to: "/leaderboard", label: "Leaderboard", icon: <Trophy size={18} /> },
   ];
 
   const mentorNav: NavItem[] = [
     { to: "/mentor", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
     { to: "/mentor/sessions", label: "Sessions", icon: <BookOpen size={18} /> },
+    { to: "/mentor/students", label: "My Students", icon: <Users size={18} /> },
     { to: "/mentor/availability", label: "Availability", icon: <CalendarClock size={18} /> },
     { to: "/mentor/reviews", label: "Project Reviews", icon: <FileCheck size={18} /> },
     { to: "/mentor/notifications", label: "Notifications", icon: <Bell size={18} /> },
-    { to: squadPath, label: "Community", icon: <Users size={18} /> },
+    { to: squadPath, label: "Community", icon: <MessageSquare size={18} /> },
   ];
 
   const parentNav: NavItem[] = [
@@ -308,8 +318,11 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               aria-label="Notifications"
             >
               <Bell size={20} />
-              {/* Notification indicator badge */}
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(0,210,255,0.8)]" />
+              {notifBadge.count > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold text-white">
+                  {notifBadge.count > 99 ? "99+" : notifBadge.count}
+                </span>
+              )}
             </Link>
             {user && (
               <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">

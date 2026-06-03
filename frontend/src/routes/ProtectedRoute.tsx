@@ -7,7 +7,7 @@ export function ProtectedRoute({
   roles,
 }: {
   children: React.ReactNode;
-  roles?: Array<"student" | "mentor" | "admin" | "parent">;
+  roles?: Array<"super_admin" | "admin" | "moderator" | "reviewer" | "support" | "student" | "mentor" | "parent">;
 }) {
   const { accessToken, user, hydrated } = useAuthStore();
   const location = useLocation();

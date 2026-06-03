@@ -14,7 +14,7 @@ export function MentorToolsRoute() {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (user.role === "admin") {
+  if (["admin", "super_admin", "moderator"].includes(user.role)) {
     return <Outlet />;
   }
 

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import { MarketingLayout } from "@/layouts/MarketingLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
@@ -13,6 +13,7 @@ import { AuthBootstrap } from "@/components/auth/AuthBootstrap";
 import { ErrorBoundary } from "@/components/composites/ErrorBoundary";
 import { ToastProvider } from "@/components/composites/ToastProvider";
 import { OfflineBanner } from "@/components/composites/OfflineBanner";
+import { AchievementToast } from "@/components/composites/AchievementNotification";
 import { AvatarSyncBootstrap } from "@/components/auth/AvatarSyncBootstrap";
 import { useFocusOnRouteChange } from "@/hooks/useFocusOnRouteChange";
 
@@ -104,6 +105,15 @@ const MentorSessionsPage = lazy(() =>
 const MentorReviewPage = lazy(() =>
   import("@/pages/mentor/MentorReviewPage").then((module) => ({ default: module.MentorReviewPage }))
 );
+const MentorControlCenterPage = lazy(() =>
+  import("@/pages/mentor/MentorControlCenterPage").then((module) => ({ default: module.default }))
+);
+const MentorAnalyticsPage = lazy(() =>
+  import("@/pages/mentor/MentorAnalyticsPage").then((module) => ({ default: module.MentorAnalyticsPage }))
+);
+const MentorStudentsPage = lazy(() =>
+  import("@/pages/mentor/MentorStudentsPage").then((module) => ({ default: module.MentorStudentsPage }))
+);
 const ClassroomPage = lazy(() =>
   import("@/features/classroom/ClassroomPage").then((module) => ({ default: module.ClassroomPage }))
 );
@@ -138,14 +148,35 @@ const NotificationsPage = lazy(() =>
 const SessionHistoryPage = lazy(() =>
   import("@/pages/app/SessionHistoryPage").then((module) => ({ default: module.SessionHistoryPage }))
 );
+const SessionRecordingsPage = lazy(() =>
+  import("@/pages/app/SessionRecordingsPage").then((module) => ({ default: module.SessionRecordingsPage }))
+);
 const SessionFeedbackPage = lazy(() =>
   import("@/pages/app/SessionFeedbackPage").then((module) => ({ default: module.SessionFeedbackPage }))
+);
+const MessagesPage = lazy(() =>
+  import("@/features/messages/MessagesPage").then((module) => ({ default: module.MessagesPage }))
 );
 const ParentDashboardPage = lazy(() =>
   import("@/pages/parent/ParentDashboardPage").then((module) => ({ default: module.ParentDashboardPage }))
 );
 const CodingWorkspacePage = lazy(() =>
   import("@/pages/app/CodingWorkspacePage").then((module) => ({ default: module.CodingWorkspacePage }))
+);
+const AssignmentsPage = lazy(() =>
+  import("@/pages/app/AssignmentsPage").then((module) => ({ default: module.AssignmentsPage }))
+);
+const CalendarPage = lazy(() =>
+  import("@/pages/app/CalendarPage").then((module) => ({ default: module.CalendarPage }))
+);
+const SessionExplorerPage = lazy(() =>
+  import("@/pages/app/SessionExplorerPage").then((module) => ({ default: module.SessionExplorerPage }))
+);
+const MentorDirectoryPage = lazy(() =>
+  import("@/pages/app/MentorDirectoryPage").then((module) => ({ default: module.default }))
+);
+const CertificatePreviewPage = lazy(() =>
+  import("@/pages/app/CertificatePreviewPage").then((module) => ({ default: module.default }))
 );
 const BlogPage = lazy(() =>
   import("@/pages/marketing/BlogPage").then((module) => ({ default: module.BlogPage }))
@@ -180,6 +211,22 @@ function NavigationManager() {
   return null;
 }
 
+function AchievementToastWrapper() {
+  const [socket, setSocket] = useState<React.ComponentProps<typeof AchievementToast>["socket"] | null>(null);
+
+  useEffect(() => {
+    import("@/services/socket").then(mod => {
+      if (typeof mod.acquireSocketConnection === "function") {
+        const conn = mod.acquireSocketConnection();
+        if (conn) setSocket(conn as unknown as React.ComponentProps<typeof AchievementToast>["socket"]);
+      }
+    }).catch(() => {});
+  }, []);
+
+  if (!socket) return null;
+  return <AchievementToast socket={socket} />;
+}
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -188,6 +235,7 @@ export default function App() {
       <AuthBootstrap>
       <AvatarSyncBootstrap />
       <OfflineBanner />
+      <AchievementToastWrapper />
       <BrowserRouter>
         <NavigationManager />
         <Suspense fallback={<RouteFallback />}>
@@ -228,7 +276,7 @@ export default function App() {
             <Route
               path="/app"
               element={
-                <ProtectedRoute roles={["student", "admin", "parent"]}>
+                <ProtectedRoute roles={["student", "admin", "super_admin", "moderator", "reviewer", "support", "parent"]}>
                   <DashboardLayout variant="student" />
                 </ProtectedRoute>
               }
@@ -243,7 +291,14 @@ export default function App() {
               <Route path="notifications" element={<NotificationsPage />} />
               <Route path="sessions" element={<SessionHistoryPage />} />
               <Route path="sessions/:sessionId/feedback" element={<SessionFeedbackPage />} />
+              <Route path="messages" element={<MessagesPage />} />
+              <Route path="recordings" element={<SessionRecordingsPage />} />
               <Route path="workspace" element={<CodingWorkspacePage />} />
+              <Route path="assignments" element={<AssignmentsPage />} />
+              <Route path="calendar" element={<CalendarPage />} />
+              <Route path="explore-sessions" element={<SessionExplorerPage />} />
+              <Route path="mentors" element={<MentorDirectoryPage />} />
+              <Route path="certificates" element={<CertificatePreviewPage />} />
               <Route path="achievements" element={<AchievementsPage />} />
               <Route path="progress" element={<ProgressPage />} />
               <Route path="squads" element={<SquadsListPage />} />
@@ -257,7 +312,7 @@ export default function App() {
             <Route
               path="/parent"
               element={
-                <ProtectedRoute roles={["parent"]}>
+                <ProtectedRoute roles={["parent", "super_admin"]}>
                   <DashboardLayout variant="parent" />
                 </ProtectedRoute>
               }
@@ -268,7 +323,7 @@ export default function App() {
             <Route
               path="/mentor"
               element={
-                <ProtectedRoute roles={["mentor", "admin"]}>
+                <ProtectedRoute roles={["mentor", "admin", "super_admin"]}>
                   <DashboardLayout variant="mentor" />
                 </ProtectedRoute>
               }
@@ -277,15 +332,24 @@ export default function App() {
               <Route element={<MentorToolsRoute />}>
                 <Route path="sessions" element={<MentorSessionsPage />} />
                 <Route path="reviews" element={<MentorReviewPage />} />
+                <Route path="students" element={<MentorStudentsPage />} />
                 <Route path="availability" element={<MentorAvailabilityPage />} />
                 <Route path="notifications" element={<NotificationsPage />} />
+                <Route path="analytics" element={<MentorAnalyticsPage />} />
                 <Route path="settings" element={<SettingsPage scope="mentor" />} />
+              </Route>
+              <Route path="control-center/:sessionId" element={
+                <ProtectedRoute roles={["mentor", "admin", "super_admin"]}>
+                  <DashboardLayout variant="mentor" />
+                </ProtectedRoute>
+              }>
+                <Route index element={<MentorControlCenterPage />} />
               </Route>
             </Route>
             <Route
               path="/admin"
               element={
-                <ProtectedRoute roles={["admin"]}>
+                <ProtectedRoute roles={["admin", "super_admin", "moderator", "reviewer", "support"]}>
                   <DashboardLayout variant="admin" />
                 </ProtectedRoute>
               }
@@ -301,7 +365,7 @@ export default function App() {
             <Route
               path="/app/classroom/:sessionId"
               element={
-                <ProtectedRoute roles={["student", "mentor", "admin"]}>
+                <ProtectedRoute roles={["student", "mentor", "admin", "super_admin", "moderator"]}>
                   <ClassroomLayout />
                 </ProtectedRoute>
               }
