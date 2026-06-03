@@ -1,4 +1,5 @@
 import Session from "../models/Session.js";
+import SessionParticipant from "../models/SessionParticipant.js";
 import PeerGroup from "../models/PeerGroup.js";
 import mongoose from "mongoose";
 
@@ -21,38 +22,45 @@ export const parseRoomId = (roomId) => {
 };
 
 export const canUserJoinRoom = async (roomId, user) => {
-  if (!user?.id) return false;
+  if (!user?.id) return { allowed: false };
 
   if (PUBLIC_ROOM_PREFIXES.some((prefix) => roomId.startsWith(prefix))) {
-    return true;
+    return { allowed: true };
   }
 
   const { type, resourceId } = parseRoomId(roomId);
 
   if (type === "generic") {
-    return user.role === "admin";
+    return { allowed: user.role === "admin" };
   }
 
   if (type === "classroom" || type === "session") {
     const sessionId = type === "session" ? resourceId : resourceId;
-    if (!mongoose.Types.ObjectId.isValid(sessionId)) return false;
-    const session = await Session.findById(sessionId).select("mentor participants status");
-    if (!session) return false;
+    if (!mongoose.Types.ObjectId.isValid(sessionId)) return { allowed: false };
+    const session = await Session.findById(sessionId).select("mentor status");
+    if (!session) return { allowed: false };
     if (["ended", "canceled"].includes(session.status) && user.role !== "admin") {
-      return false;
+      return { allowed: false };
     }
     const isMentor = String(session.mentor) === String(user.id);
-    const isParticipant = session.participants.map(String).includes(String(user.id));
-    return isMentor || isParticipant || user.role === "admin";
+    if (isMentor) return { allowed: true, role: "host" };
+    if (user.role === "admin") return { allowed: true, role: "host" };
+    const participant = await SessionParticipant.findOne({
+      session: sessionId,
+      user: user.id,
+      status: { $in: ["registered", "joined", "active", "completed"] },
+    }).select("role");
+    if (!participant) return { allowed: false };
+    return { allowed: true, role: participant.role };
   }
 
   if (type === "squad" || type === "peer") {
-    if (!mongoose.Types.ObjectId.isValid(resourceId)) return false;
+    if (!mongoose.Types.ObjectId.isValid(resourceId)) return { allowed: false };
     const group = await PeerGroup.findById(resourceId).select("members leader isActive");
-    if (!group || !group.isActive) return false;
+    if (!group || !group.isActive) return { allowed: false };
     const memberIds = [...group.members.map(String), String(group.leader)].filter(Boolean);
-    return memberIds.includes(String(user.id)) || user.role === "admin";
+    return { allowed: memberIds.includes(String(user.id)) || user.role === "admin" };
   }
 
-  return false;
+  return { allowed: false };
 };
