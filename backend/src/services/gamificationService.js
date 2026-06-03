@@ -90,7 +90,7 @@ export const awardEligibleBadges = async (userId) => {
 
   await Promise.all(
     eligible.map((badge) =>
-      notifyBadgeEarned({ userId, badgeName: badge.name }).catch(() => {})
+      notifyBadgeEarned({ userId, badgeName: badge.name }).catch(() => undefined)
     )
   );
 

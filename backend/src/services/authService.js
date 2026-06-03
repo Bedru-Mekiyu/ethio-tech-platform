@@ -5,6 +5,7 @@ import User from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { getEnv } from "../config/env.js";
 import { createAssignedAvatar } from "./avatarService.js";
+import { USER_STATUS } from "../config/permissions.js";
 
 export const PUBLIC_REGISTER_ROLES = ["student"];
 
@@ -52,6 +53,7 @@ export const registerUser = async ({
     email,
     password: hashedPassword,
     role: safeRole,
+    status: USER_STATUS.ACTIVE,
     gradeLevel,
     city: city?.trim() || undefined,
     learningInterests: Array.isArray(learningInterests)
@@ -67,12 +69,24 @@ export const registerUser = async ({
   return user;
 };
 
-export const loginUser = async ({ email, password }) => {
+export const loginUser = async ({ email, password, ip }) => {
   const user = await User.findOne({ email: email.toLowerCase() }).select(
     "+password +refreshTokenHash +refreshTokenExpiresAt +loginAttempts +lockUntil"
   );
   if (!user) {
     throw new ApiError(401, "Invalid credentials");
+  }
+
+  if (user.deletedAt) {
+    throw new ApiError(401, "Account has been deleted");
+  }
+
+  if (user.status === USER_STATUS.SUSPENDED) {
+    throw new ApiError(403, "Account is suspended. Please contact support.");
+  }
+
+  if (user.status === USER_STATUS.BANNED) {
+    throw new ApiError(403, "Account has been permanently banned.");
   }
 
   if (user.lockUntil && user.lockUntil > new Date()) {
@@ -87,7 +101,7 @@ export const loginUser = async ({ email, password }) => {
   if (!isMatch) {
     user.loginAttempts = (user.loginAttempts ?? 0) + 1;
     if (user.loginAttempts >= 10) {
-      user.lockUntil = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes lockout
+      user.lockUntil = new Date(Date.now() + 30 * 60 * 1000);
     }
     await user.save();
     throw new ApiError(401, "Invalid credentials");
@@ -101,6 +115,8 @@ export const loginUser = async ({ email, password }) => {
 
   user.refreshTokenHash = hashToken(refreshToken);
   user.refreshTokenExpiresAt = new Date(Date.now() + refreshExpiryDays() * 24 * 60 * 60 * 1000);
+  user.lastLoginAt = new Date();
+  user.lastLoginIp = ip;
   await user.save();
 
   return { user, accessToken, refreshToken };
@@ -122,6 +138,14 @@ export const refreshAccessToken = async (refreshToken) => {
 
   if (user.refreshTokenExpiresAt < new Date()) {
     throw new ApiError(401, "Refresh token expired");
+  }
+
+  if (user.deletedAt) {
+    throw new ApiError(401, "Account has been deleted");
+  }
+
+  if (user.status === USER_STATUS.SUSPENDED || user.status === USER_STATUS.BANNED) {
+    throw new ApiError(403, "Account is suspended or banned");
   }
 
   const incomingHash = hashToken(refreshToken);
@@ -196,9 +220,7 @@ export const changePassword = async ({ userId, currentPassword, newPassword }) =
 
 export const logoutUser = async (userId) => {
   const user = await User.findById(userId).select("+refreshTokenHash +refreshTokenExpiresAt");
-  if (!user) {
-    return;
-  }
+  if (!user) return;
 
   user.refreshTokenHash = undefined;
   user.refreshTokenExpiresAt = undefined;

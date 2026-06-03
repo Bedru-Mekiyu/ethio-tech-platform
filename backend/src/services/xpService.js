@@ -81,13 +81,13 @@ export const grantXPWithOptions = async ({
     );
 
     await session.commitTransaction();
-    await recordDailyActivity(userId).catch(() => {});
-    await awardEligibleBadges(userId).catch(() => {});
+    await recordDailyActivity(userId).catch(() => undefined);
+    await awardEligibleBadges(userId).catch(() => undefined);
     await notifyXpEarned({
       userId,
       amount,
       reason: reason ?? "Activity completed",
-    }).catch(() => {});
+    }).catch(() => undefined);
     return { user, log };
   } catch (error) {
     await session.abortTransaction();
