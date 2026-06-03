@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock3, ClipboardList, Flame, ShieldCheck, Star, Users, Video } from "lucide-react";
+import { ArrowRight, BarChart3, Clock3, ClipboardList, Flame, ShieldCheck, Star, Users, Video } from "lucide-react";
 import { fetchMentorDashboard, type MentorDashboardData } from "@/services/dashboardService";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
@@ -158,6 +158,12 @@ export function MentorDashboardPage() {
               <Button>
                 <Clock3 size={16} />
                 Schedule session
+              </Button>
+            </Link>
+            <Link to="/mentor/analytics">
+              <Button variant="outline">
+                <BarChart3 size={16} />
+                Analytics
               </Button>
             </Link>
             <Link to="/mentor/reviews">

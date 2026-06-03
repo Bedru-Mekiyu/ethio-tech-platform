@@ -182,9 +182,18 @@ export async function fetchAdminUsers() {
   return data.data;
 }
 
-export async function fetchAdminMentorApplications() {
-  const { data } = await api.get<ApiResponse<{ applications: AdminMentorApplication[] }>>(
-    "/admin/mentor-applications"
+export async function fetchAdminMentorApplications(params?: {
+  page?: number;
+  limit?: number;
+  status?: string;
+}) {
+  const query = new URLSearchParams();
+  if (params?.page) query.set("page", String(params.page));
+  if (params?.limit) query.set("limit", String(params.limit));
+  if (params?.status) query.set("status", params.status);
+  const qs = query.toString();
+  const { data } = await api.get<ApiResponse<{ applications: AdminMentorApplication[]; pagination: { page: number; limit: number; total: number; totalPages: number } }>>(
+    `/admin/mentor-applications${qs ? `?${qs}` : ""}`
   );
   return data.data;
 }

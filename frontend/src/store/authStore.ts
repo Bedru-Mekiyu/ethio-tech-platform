@@ -1,14 +1,23 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+export type UserRole = "super_admin" | "admin" | "moderator" | "reviewer" | "support" | "mentor" | "student" | "parent";
+
+export type UserStatus = "pending" | "active" | "inactive" | "suspended" | "banned" | "rejected" | "deleted";
+
 export interface AuthUser {
   id: string;
   fullName: string;
   email: string;
-  role: "student" | "mentor" | "admin" | "parent";
+  role: UserRole;
+  status?: UserStatus;
   level?: number;
   xp?: number;
+  credits?: number;
   isVerified?: boolean;
+  mentorStatus?: "pending" | "approved" | "rejected";
+  mentorScore?: number;
+  totalSessions?: number;
   avatar?: string;
   avatarUrl?: string;
   avatarType?: "uploaded" | "default";
@@ -17,10 +26,10 @@ export interface AuthUser {
   phone?: string;
   city?: string;
   learningInterests?: string[];
-  mentorStatus?: "pending" | "approved" | "rejected";
   gradeLevel?: number;
   expertise?: string[];
   currentCompany?: string;
+  lastLoginAt?: string;
 }
 
 interface AuthState {
@@ -55,28 +64,32 @@ export const useAuthStore = create<AuthState>()(
   )
 );
 
-export function getDashboardPath(role: AuthUser["role"]): string {
-  switch (role) {
-    case "mentor":
-      return "/mentor";
-    case "admin":
-      return "/admin";
-    case "parent":
-      return "/parent";
-    default:
-      return "/app/dashboard";
-  }
+const roleDashboardMap: Record<UserRole, string> = {
+  super_admin: "/admin",
+  admin: "/admin",
+  moderator: "/admin",
+  reviewer: "/admin",
+  support: "/admin",
+  mentor: "/mentor",
+  student: "/app/dashboard",
+  parent: "/parent",
+};
+
+export function getDashboardPath(role: UserRole): string {
+  return roleDashboardMap[role] || "/app/dashboard";
 }
 
-export function getSettingsPath(role: AuthUser["role"]): string {
-  switch (role) {
-    case "mentor":
-      return "/mentor/settings";
-    case "admin":
-      return "/admin/settings";
-    case "parent":
-      return "/parent/settings";
-    default:
-      return "/app/settings";
-  }
+const roleSettingsMap: Record<UserRole, string> = {
+  super_admin: "/admin/settings",
+  admin: "/admin/settings",
+  moderator: "/admin/settings",
+  reviewer: "/admin/settings",
+  support: "/admin/settings",
+  mentor: "/mentor/settings",
+  student: "/app/settings",
+  parent: "/parent/settings",
+};
+
+export function getSettingsPath(role: UserRole): string {
+  return roleSettingsMap[role] || "/app/settings";
 }

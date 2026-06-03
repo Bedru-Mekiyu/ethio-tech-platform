@@ -20,6 +20,10 @@ import {
   Video,
   Wifi,
   WifiOff,
+  Hand,
+  Vote,
+  Link2,
+  ThumbsUp,
   type LucideIcon,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
@@ -30,7 +34,9 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/authStore";
 import { useRealtimeRoom } from "@/hooks/useRealtimeRoom";
-import { getLiveAccess, fetchSessionById } from "@/services/sessionsService";
+import { useAgoraRoom } from "@/hooks/useAgoraRoom";
+import { getLiveAccess, fetchSessionById, getAgoraConfig, getAgoraToken } from "@/services/sessionsService";
+import { api } from "@/services/api";
 import {
   createSystemEvent,
   upsertChatMessage,
@@ -41,9 +47,17 @@ import {
 } from "@/lib/realtime";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
+import { VideoGrid } from "@/features/classroom/VideoGrid";
+import { ScreenShareView } from "@/components/classroom/ScreenShareView";
+import { VideoControls } from "@/components/classroom/VideoControls";
 import { cn } from "@/lib/utils";
 
 const ClassroomScene = lazy(() => import("./ClassroomScene"));
+
+import { StudentQuestionsPanel } from "./panels/StudentQuestionsPanel";
+import { StudentPollsPanel } from "./panels/StudentPollsPanel";
+import { StudentResourcesPanel } from "./panels/StudentResourcesPanel";
+import { StudentNotesPanel } from "./panels/StudentNotesPanel";
 
 const statusMeta: Record<ConnectionStatus, { label: string; icon: LucideIcon; className: string }> = {
   connecting: { label: "Syncing", icon: Signal, className: "bg-primary/15 text-primary border-primary/30" },
@@ -53,7 +67,7 @@ const statusMeta: Record<ConnectionStatus, { label: string; icon: LucideIcon; cl
   error: { label: "Connection issue", icon: WifiOff, className: "bg-danger/15 text-danger border-danger/30" },
 };
 
-const panelTabs = ["chat", "participants", "notes"] as const;
+const panelTabs = ["chat", "participants", "questions", "polls", "resources", "notes"] as const;
 type PanelTab = (typeof panelTabs)[number];
 
 const getNetworkLabel = (quality?: RealtimeRoomState["connectionQuality"]) => {
@@ -166,6 +180,14 @@ export function ClassroomPage() {
   const [events, setEvents] = useState<RealtimeSystemEvent[]>([]);
   const [roomState, setRoomState] = useState<RealtimeRoomState | null>(null);
 
+  // New Student Interactive States
+  const [handRaised, setHandRaised] = useState(false);
+  const [classroomQuestions, setClassroomQuestions] = useState<any[]>([]);
+  const [livePolls, setLivePolls] = useState<any[]>([]);
+  const [resources, setResources] = useState<any[]>([]);
+  const [classnotes, setClassnotes] = useState<any>(null);
+  const [questionText, setQuestionText] = useState("");
+
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
     queryFn: () => fetchSessionById(sessionId!),
@@ -178,10 +200,38 @@ export function ClassroomPage() {
     enabled: !!sessionId && sessionId !== "demo",
   });
 
+  const agoraConfigQuery = useQuery({
+    queryKey: ["agora-config"],
+    queryFn: getAgoraConfig,
+    enabled: liveAccessQuery.data?.provider === "agora",
+  });
+
+  const agoraTokenQuery = useQuery({
+    queryKey: ["agora-token", sessionId],
+    queryFn: () => getAgoraToken(sessionId!),
+    enabled: !!sessionId && sessionId !== "demo" && liveAccessQuery.data?.provider === "agora" && Boolean(agoraConfigQuery.data?.enabled),
+  });
+
+  const useVideo = liveAccessQuery.data?.provider === "agora" && Boolean(agoraConfigQuery.data?.enabled) && Boolean(agoraTokenQuery.data?.rtcToken);
+
+  const agora = useAgoraRoom({
+    appId: agoraConfigQuery.data?.appId || "",
+    channel: agoraTokenQuery.data?.channelName || "",
+    token: agoraTokenQuery.data?.rtcToken || null,
+    uid: agoraTokenQuery.data?.uid,
+    onTokenWillExpire: () => {
+      if (sessionId && sessionId !== "demo") {
+        getAgoraToken(sessionId).then((newTokens) => {
+          // Token refresh would be handled by the hook in a real implementation
+        }).catch(console.error);
+      }
+    },
+  });
+
   const roomId = liveAccessQuery.data?.roomId ?? sessionQuery.data?.liveRoomId ?? `session-${sessionId ?? "demo"}`;
   const session = sessionQuery.data;
 
-  const { connectionStatus, presenceCount, connectionQuality, pendingCount, isOnline, sendMessage } =
+  const { connectionStatus, presenceCount, connectionQuality, pendingCount, isOnline, sendMessage, socketRef } =
     useRealtimeRoom({
       roomId,
       userId: user?.id,
@@ -193,6 +243,133 @@ export function ClassroomPage() {
         setEvents((prev) => [createSystemEvent(title, detail), ...prev].slice(0, 4));
       },
     });
+
+  const handleAskQuestion = (text: string) => {
+    if (!socketRef.current) return;
+    const questionId = `q-${Date.now()}`;
+    socketRef.current.emit("question:submit", { roomId, questionId, text });
+  };
+
+  const handleUpvoteQuestion = (questionId: string) => {
+    if (!socketRef.current) return;
+    socketRef.current.emit("question:upvote", { roomId, questionId });
+    // Optimistic update
+    setClassroomQuestions(prev => prev.map(q => 
+      q.questionId === questionId ? { ...q, upvoteCount: (q.upvoteCount || 0) + 1, hasUpvoted: true } : q
+    ));
+  };
+
+  const handleVotePoll = (pollId: string, optionIndex: number) => {
+    if (!socketRef.current) return;
+    socketRef.current.emit("poll:vote", { roomId, pollId, optionIndex });
+    // Optimistic update
+    setLivePolls(prev => prev.map(p => 
+      p.pollId === pollId ? { ...p, hasVoted: true } : p
+    ));
+  };
+
+  const toggleHandRaise = () => {
+    if (!socketRef.current) return;
+    if (handRaised) {
+      socketRef.current.emit("hand:lower", { roomId });
+      setHandRaised(false);
+    } else {
+      socketRef.current.emit("hand:raise", { roomId });
+      setHandRaised(true);
+    }
+  };
+
+  useEffect(() => {
+    const socket = socketRef.current;
+    if (!socket) return;
+
+    const onQuestionNew = (payload: any) => {
+      setClassroomQuestions((prev) => [payload, ...prev]);
+      setEvents((prev) => [createSystemEvent("New question", `Someone asked a question.`), ...prev].slice(0, 4));
+    };
+
+    const onQuestionUpdated = (payload: any) => {
+      setClassroomQuestions((prev) => prev.map((q) => (q.questionId === payload.questionId ? payload : q)));
+    };
+
+    const onQuestionDeleted = (payload: any) => {
+      setClassroomQuestions((prev) => prev.filter((q) => q.questionId !== payload.questionId));
+    };
+
+    const onPollCreated = (payload: any) => {
+      setLivePolls((prev) => [payload, ...prev]);
+      setEvents((prev) => [createSystemEvent("New poll", `A new poll is active.`), ...prev].slice(0, 4));
+      setActivePanel("polls");
+    };
+
+    const onPollUpdated = (payload: any) => {
+      setLivePolls((prev) => prev.map((p) => (p.pollId === payload.pollId ? payload : p)));
+    };
+
+    const onPollResults = (payload: any) => {
+      setLivePolls((prev) => prev.map((p) => (p.pollId === payload.pollId ? payload : p)));
+    };
+
+    const onHandCalledOn = (payload: any) => {
+      if (payload.userId === user?.id) {
+        setEvents((prev) => [createSystemEvent("Called on", `The mentor called on you to speak!`), ...prev].slice(0, 4));
+        setHandRaised(false);
+      }
+    };
+
+    socket.on("question:new", onQuestionNew);
+    socket.on("question:updated", onQuestionUpdated);
+    socket.on("question:deleted", onQuestionDeleted);
+    socket.on("poll:created", onPollCreated);
+    socket.on("poll:updated", onPollUpdated);
+    socket.on("poll:results", onPollResults);
+    socket.on("hand:called-on", onHandCalledOn);
+
+    const onScreenShareStarted = (payload: { roomId: string; userId: string }) => {
+      if (payload.userId !== user?.id) {
+        setEvents((prev) => [createSystemEvent("Screen Share", `Another participant started sharing their screen.`), ...prev].slice(0, 4));
+      }
+    };
+
+    const onScreenShareStopped = (payload: { roomId: string }) => {
+      setEvents((prev) => [createSystemEvent("Screen Share", `Screen sharing has ended.`), ...prev].slice(0, 4));
+    };
+
+    const onRecordingStarted = (payload: { roomId: string; by: string }) => {
+      setEvents((prev) => [createSystemEvent("Recording", `Session recording has started.`), ...prev].slice(0, 4));
+    };
+
+    const onRecordingStopped = (payload: { roomId: string }) => {
+      setEvents((prev) => [createSystemEvent("Recording", `Session recording has stopped.`), ...prev].slice(0, 4));
+    };
+
+    socket.on("video:screen-share:started", onScreenShareStarted);
+    socket.on("video:screen-share:stopped", onScreenShareStopped);
+    socket.on("video:recording:started", onRecordingStarted);
+    socket.on("video:recording:stopped", onRecordingStopped);
+
+    return () => {
+      socket.off("question:new", onQuestionNew);
+      socket.off("question:updated", onQuestionUpdated);
+      socket.off("question:deleted", onQuestionDeleted);
+      socket.off("poll:created", onPollCreated);
+      socket.off("poll:updated", onPollUpdated);
+      socket.off("poll:results", onPollResults);
+      socket.off("hand:called-on", onHandCalledOn);
+      socket.off("video:screen-share:started", onScreenShareStarted);
+      socket.off("video:screen-share:stopped", onScreenShareStopped);
+      socket.off("video:recording:started", onRecordingStarted);
+      socket.off("video:recording:stopped", onRecordingStopped);
+    };
+  }, [socketRef.current, user?.id]);
+
+  useEffect(() => {
+    if (sessionId && sessionId !== "demo") {
+      api.get(`/sessions/${sessionId}/resources`).then(res => {
+        setResources(res.data.data?.resources || []);
+      }).catch(() => undefined);
+    }
+  }, [sessionId]);
 
   const sessionTitle = session?.title ?? "Virtual classroom";
   const mentor = session?.mentor;
@@ -338,85 +515,163 @@ export function ClassroomPage() {
           id="classroom-scene"
           className="relative min-h-[26rem] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--bg-base)] shadow-[0_20px_80px_rgba(0,0,0,0.35)]"
         >
-          <Suspense
-            fallback={
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Card className="surface-panel w-full max-w-md text-center">
-                  <Skeleton className="mx-auto h-3 w-24" />
-                  <Skeleton className="mx-auto mt-4 h-10 w-56" />
-                  <Skeleton className="mx-auto mt-3 h-4 w-72 max-w-full" />
+          {useVideo ? (
+            <>
+              <div className="absolute inset-0 p-4">
+                {agora.isScreenSharing && agora.screenTrack ? (
+                  <ScreenShareView
+                    screenTrack={agora.screenTrack}
+                    presenterName="You"
+                  />
+                ) : (
+                  <VideoGrid
+                    localVideoTrack={agora.localVideoTrack}
+                    remoteUsers={agora.remoteUsers}
+                    screenTrack={null}
+                    localUserId={user?.id}
+                  />
+                )}
+              </div>
+              <div className="absolute left-4 top-4 flex max-w-[calc(100%-1rem)] flex-wrap gap-2 z-10">
+                <Badge variant="purple">Session {sessionId}</Badge>
+                <Badge className={meta.className}>
+                  <StatusIcon size={14} className="mr-1 inline" />
+                  {meta.label}
+                </Badge>
+                <Badge variant="success">
+                  <Users size={14} className="mr-1 inline" />
+                  {presenceCount} in room
+                </Badge>
+                {agora.isScreenSharing && (
+                  <Badge variant="warning">Screen Sharing</Badge>
+                )}
+              </div>
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
+                <VideoControls
+                  isAudioEnabled={agora.isAudioEnabled}
+                  isVideoEnabled={agora.isVideoEnabled}
+                  isScreenSharing={agora.isScreenSharing}
+                  isHandRaised={handRaised}
+                  onToggleAudio={() => {
+                    agora.toggleAudio();
+                    if (socketRef.current) {
+                      socketRef.current.emit("video:toggle-audio", { roomId, enabled: !agora.isAudioEnabled });
+                    }
+                  }}
+                  onToggleVideo={() => {
+                    agora.toggleVideo();
+                    if (socketRef.current) {
+                      socketRef.current.emit("video:toggle-video", { roomId, enabled: !agora.isVideoEnabled });
+                    }
+                  }}
+                  onToggleScreenShare={() => {
+                    if (agora.isScreenSharing) {
+                      agora.stopScreenShare();
+                      if (socketRef.current) {
+                        socketRef.current.emit("video:screen-share:stop", { roomId });
+                      }
+                    } else {
+                      agora.startScreenShare();
+                      if (socketRef.current) {
+                        socketRef.current.emit("video:screen-share:start", { roomId });
+                      }
+                    }
+                  }}
+                  onToggleHand={toggleHandRaise}
+                  onLeave={() => {
+                    agora.leave();
+                    navigate("/app/sessions");
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <Suspense
+                fallback={
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Card className="surface-panel w-full max-w-md text-center">
+                      <Skeleton className="mx-auto h-3 w-24" />
+                      <Skeleton className="mx-auto mt-4 h-10 w-56" />
+                      <Skeleton className="mx-auto mt-3 h-4 w-72 max-w-full" />
+                    </Card>
+                  </div>
+                }
+              >
+                <ClassroomScene />
+              </Suspense>
+
+              <div className="absolute left-4 top-4 flex max-w-[calc(100%-1rem)] flex-wrap gap-2">
+                <Badge variant="purple">Session {sessionId}</Badge>
+                <Badge className={meta.className}>
+                  <StatusIcon size={14} className="mr-1 inline" />
+                  {meta.label}
+                </Badge>
+                <Badge variant="success">
+                  <Users size={14} className="mr-1 inline" />
+                  {presenceCount} in room
+                </Badge>
+              </div>
+
+              <div className="absolute left-1/2 top-4 hidden -translate-x-1/2 md:block">
+                <Card className="surface-panel min-w-[220px] border-primary/25 p-3 text-center backdrop-blur">
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Instructor</p>
+                  <div className="mt-3 flex items-center justify-center gap-3">
+                    <Avatar src={mentor?.avatar} name={mentor?.fullName ?? "Mentor"} userId={mentor?._id} role="mentor" size="md" />
+                    <div className="text-left">
+                      <p className="text-sm font-semibold text-white">{mentor?.fullName ?? "Mentor"}</p>
+                      <p className="text-xs text-[var(--text-secondary)]">Guiding the session</p>
+                    </div>
+                  </div>
                 </Card>
               </div>
-            }
-          >
-            <ClassroomScene />
-          </Suspense>
 
-          <div className="absolute left-4 top-4 flex max-w-[calc(100%-1rem)] flex-wrap gap-2">
-            <Badge variant="purple">Session {sessionId}</Badge>
-            <Badge className={meta.className}>
-              <StatusIcon size={14} className="mr-1 inline" />
-              {meta.label}
-            </Badge>
-            <Badge variant="success">
-              <Users size={14} className="mr-1 inline" />
-              {presenceCount} in room
-            </Badge>
-          </div>
+              <div className="absolute bottom-4 left-4 right-4 space-y-3">
+                <Card className="surface-panel p-4 backdrop-blur">
+                  <div className="grid gap-3 md:grid-cols-4">
+                    <SessionBadge icon={Video} label="Mode" value={session?.classroomMode ?? "immersive-3d"} />
+                    <SessionBadge icon={Code2} label="Collab" value={session?.codeCollabEnabled ? "Enabled" : "Paused"} />
+                    <SessionBadge icon={SquareDashedMousePointer} label="Whiteboard" value={session?.whiteboardEnabled ? "Enabled" : "Paused"} />
+                    <SessionBadge icon={MonitorPlay} label="Network" value={activityLabel} />
+                  </div>
+                </Card>
 
-          <div className="absolute left-1/2 top-4 hidden -translate-x-1/2 md:block">
-            <Card className="surface-panel min-w-[220px] border-primary/25 p-3 text-center backdrop-blur">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Instructor</p>
-              <div className="mt-3 flex items-center justify-center gap-3">
-                <Avatar src={mentor?.avatar} name={mentor?.fullName ?? "Mentor"} userId={mentor?._id} role="mentor" size="md" />
-                <div className="text-left">
-                  <p className="text-sm font-semibold text-white">{mentor?.fullName ?? "Mentor"}</p>
-                  <p className="text-xs text-[var(--text-secondary)]">Guiding the session</p>
-                </div>
+                {showControls ? (
+                  <Card className="surface-panel p-3 backdrop-blur">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
+                      <Button variant={audioMuted ? "danger" : "outline"} size="sm" onClick={() => setAudioMuted((value) => !value)}>
+                        {audioMuted ? <MicOff size={16} /> : <Mic size={16} />}
+                        {audioMuted ? "Unmute" : "Mute"}
+                      </Button>
+                      <Button variant={cameraHidden ? "danger" : "outline"} size="sm" onClick={() => setCameraHidden((value) => !value)}>
+                        {cameraHidden ? <CameraOff size={16} /> : <Camera size={16} />}
+                        {cameraHidden ? "Hide camera" : "Show camera"}
+                      </Button>
+                      <Button variant={handRaised ? "primary" : "outline"} size="sm" onClick={toggleHandRaise}>
+                        <Hand size={16} />
+                        {handRaised ? "Hand Raised" : "Raise Hand"}
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => setActivePanel("participants")}>
+                        <Users size={16} />
+                        Participants
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => setActivePanel("notes")}>
+                        <NotebookPen size={16} />
+                        Notes
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => setActivePanel("chat")}>
+                        <MessagesSquare size={16} />
+                        Chat
+                      </Button>
+                      <Button variant="danger" size="sm" onClick={() => navigate("/app/sessions")}>
+                        Leave room
+                      </Button>
+                    </div>
+                  </Card>
+                ) : null}
               </div>
-            </Card>
-          </div>
-
-          <div className="absolute bottom-4 left-4 right-4 space-y-3">
-            <Card className="surface-panel p-4 backdrop-blur">
-              <div className="grid gap-3 md:grid-cols-4">
-                <SessionBadge icon={Video} label="Mode" value={session?.classroomMode ?? "immersive-3d"} />
-                <SessionBadge icon={Code2} label="Collab" value={session?.codeCollabEnabled ? "Enabled" : "Paused"} />
-                <SessionBadge icon={SquareDashedMousePointer} label="Whiteboard" value={session?.whiteboardEnabled ? "Enabled" : "Paused"} />
-                <SessionBadge icon={MonitorPlay} label="Network" value={activityLabel} />
-              </div>
-            </Card>
-
-            {showControls ? (
-              <Card className="surface-panel p-3 backdrop-blur">
-                <div className="flex flex-wrap items-center justify-center gap-2">
-                  <Button variant={audioMuted ? "danger" : "outline"} size="sm" onClick={() => setAudioMuted((value) => !value)}>
-                    {audioMuted ? <MicOff size={16} /> : <Mic size={16} />}
-                    {audioMuted ? "Unmute" : "Mute"}
-                  </Button>
-                  <Button variant={cameraHidden ? "danger" : "outline"} size="sm" onClick={() => setCameraHidden((value) => !value)}>
-                    {cameraHidden ? <CameraOff size={16} /> : <Camera size={16} />}
-                    {cameraHidden ? "Show camera" : "Hide camera"}
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => setActivePanel("participants")}>
-                    <Users size={16} />
-                    Participants
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => setActivePanel("notes")}>
-                    <NotebookPen size={16} />
-                    Notes
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => setActivePanel("chat")}>
-                    <MessagesSquare size={16} />
-                    Chat
-                  </Button>
-                  <Button variant="danger" size="sm" onClick={() => navigate("/app/sessions")}>
-                    Leave room
-                  </Button>
-                </div>
-              </Card>
-            ) : null}
-          </div>
+            </>
+          )}
         </section>
 
         {!compactScene ? (
@@ -549,6 +804,25 @@ export function ClassroomPage() {
                       />
                     )}
                   </div>
+                ) : activePanel === "questions" ? (
+                  <StudentQuestionsPanel 
+                    questions={classroomQuestions} 
+                    onAskQuestion={handleAskQuestion} 
+                    onUpvote={handleUpvoteQuestion} 
+                    currentUserId={user?.id} 
+                  />
+                ) : activePanel === "polls" ? (
+                  <StudentPollsPanel 
+                    polls={livePolls} 
+                    onVote={handleVotePoll} 
+                  />
+                ) : activePanel === "resources" ? (
+                  <StudentResourcesPanel 
+                    resources={resources} 
+                    sessionId={sessionId || ""} 
+                  />
+                ) : activePanel === "notes" ? (
+                  <StudentNotesPanel notes={classnotes} />
                 ) : (
                   <div className="space-y-3">
                     {events.length ? (
@@ -560,8 +834,8 @@ export function ClassroomPage() {
                       ))
                     ) : (
                       <EmptyState
-                        title="No session notes yet"
-                        description="Notes and highlights will appear as the classroom becomes active."
+                        title="No session events yet"
+                        description="Events and highlights will appear as the classroom becomes active."
                       />
                     )}
                   </div>

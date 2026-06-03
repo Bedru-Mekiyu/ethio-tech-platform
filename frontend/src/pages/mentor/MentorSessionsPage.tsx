@@ -231,12 +231,32 @@ export function MentorSessionsPage() {
                       </div>
                       <Badge variant={session.status === "completed" ? "success" : "purple"}>{session.status ?? "scheduled"}</Badge>
                     </div>
-                    <div className="mt-3 flex items-center justify-between text-xs text-[var(--text-secondary)]">
-                      <span>{participantCount} learners enrolled</span>
-                      {session._id ? (
-                        <Link to={`/app/classroom/${session._id}`} className="inline-flex items-center gap-1 text-primary">
-                          Launch <Video size={14} />
-                        </Link>
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+                        <span>
+                          {participantCount}
+                          {session.maxParticipants ? ` / ${session.maxParticipants} seats filled` : " learners enrolled"}
+                        </span>
+                        {session._id ? (
+                          <Link to={`/app/classroom/${session._id}`} className="inline-flex items-center gap-1 text-primary">
+                            Launch <Video size={14} />
+                          </Link>
+                        ) : null}
+                      </div>
+                      {session.maxParticipants && session.maxParticipants > 0 ? (
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                          <div
+                            className={cn(
+                              "h-full rounded-full transition-all",
+                              participantCount >= session.maxParticipants
+                                ? "bg-red-500"
+                                : participantCount / session.maxParticipants > 0.8
+                                  ? "bg-amber-500"
+                                  : "bg-primary"
+                            )}
+                            style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
+                          />
+                        </div>
                       ) : null}
                     </div>
                   </div>

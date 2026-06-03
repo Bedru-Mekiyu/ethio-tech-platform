@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2, FileCode2, Rocket, Send, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle2, FileCode2, Rocket, Send, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
 import { api } from "@/services/api";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -143,14 +144,18 @@ export function ProjectSubmitPage() {
               Choose a live assignment, attach the right links, and keep your submission clear enough for a fast review loop.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button size="lg" variant="primary" type="button">
-                <Rocket size={16} />
-                Keep building
-              </Button>
-              <Button size="lg" variant="outline" type="button">
-                <ShieldCheck size={16} />
-                Review rubric
-              </Button>
+              <Link to="/app/assignments">
+                <Button size="lg" variant="primary" type="button">
+                  <Rocket size={16} />
+                  View assignments
+                </Button>
+              </Link>
+              <Link to={selectedProject?.trackId ? `/app/tracks/${selectedProject.trackId}` : "/app/tracks"}>
+                <Button size="lg" variant="outline" type="button">
+                  <ShieldCheck size={16} />
+                  View track
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -301,20 +306,20 @@ export function ProjectSubmitPage() {
                 <p className="text-xs text-[var(--text-muted)]">Add one file per line or separate entries with commas.</p>
               </div>
 
-              {submissionMutation.isError ? (
+              {submissionMutation.isError && (
                 <p className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
                   Submission failed. Check the links and try again.
                 </p>
-              ) : null}
+              )}
 
-              {submissionMutation.isSuccess ? (
+              {submissionMutation.isSuccess && (
                 <div className="rounded-2xl border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
                   Submission sent. Your mentor can now review the build.
                 </div>
-              ) : null}
+              )}
 
               <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || submissionMutation.isPending}>
-                {isSubmitting || submissionMutation.isPending ? "Submitting…" : "Submit project"}
+                {isSubmitting || submissionMutation.isPending ? "Submitting..." : "Submit project"}
                 <Send size={16} />
               </Button>
             </form>
@@ -354,7 +359,7 @@ export function ProjectSubmitPage() {
         </div>
       </div>
 
-      {latestSubmission ? (
+      {latestSubmission && (
         <Card className="rounded-[28px] border-[var(--border)] bg-[linear-gradient(180deg,rgba(16,23,37,0.92),rgba(8,12,20,0.96))] p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -365,17 +370,22 @@ export function ProjectSubmitPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button variant="outline" type="button">
-                Open project hub
-              </Button>
-              <Button type="button">
-                <Rocket size={16} />
-                Prepare next build
-              </Button>
+              <Link to="/app/assignments">
+                <Button variant="outline" type="button">
+                  <ExternalLink size={14} className="mr-1" />
+                  View assignments
+                </Button>
+              </Link>
+              <Link to="/app/projects">
+                <Button type="button">
+                  <Rocket size={16} />
+                  Prepare next build
+                </Button>
+              </Link>
             </div>
           </div>
         </Card>
-      ) : null}
+      )}
     </div>
   );
 }
