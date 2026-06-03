@@ -1,4 +1,4 @@
-import { VideoTile } from "./VideoTile";
+import { VideoTile } from "@/components/classroom/VideoTile";
 import type { AgoraUser } from "@/hooks/useAgoraRoom";
 import type { ICameraVideoTrack, ILocalVideoTrack } from "agora-rtc-sdk-ng";
 import { cn } from "@/lib/utils";
@@ -7,7 +7,6 @@ interface VideoGridProps {
   localVideoTrack: ICameraVideoTrack | null;
   remoteUsers: AgoraUser[];
   screenTrack: ILocalVideoTrack | null;
-  localUserId?: string;
   className?: string;
 }
 
@@ -24,7 +23,6 @@ export function VideoGrid({
   localVideoTrack,
   remoteUsers,
   screenTrack,
-  localUserId,
   className,
 }: VideoGridProps) {
   const totalCount = 1 + remoteUsers.length;

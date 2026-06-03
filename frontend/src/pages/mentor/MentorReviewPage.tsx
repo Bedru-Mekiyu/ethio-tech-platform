@@ -7,10 +7,6 @@ import {
   Send,
   XCircle,
   MessageSquare,
-  Award,
-  Users,
-  Star,
-  Clock,
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

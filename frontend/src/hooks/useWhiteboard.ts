@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { api, type ApiResponse } from "@/services/api";
 
 export interface WhiteboardOp {
   opId: string;
@@ -59,16 +58,16 @@ export const useWhiteboard = ({ sessionId, socket }: UseWhiteboardOptions) => {
       setConnected(true);
     };
 
-    socket.on("whiteboard:draw", handleDraw);
-    socket.on("whiteboard:clear", handleClear);
-    socket.on("whiteboard:undo", handleUndo);
-    socket.on("whiteboard:history", handleHistory);
+    const unsubDraw = socket.on("whiteboard:draw", handleDraw);
+    const unsubClear = socket.on("whiteboard:clear", handleClear);
+    const unsubUndo = socket.on("whiteboard:undo", handleUndo);
+    const unsubHistory = socket.on("whiteboard:history", handleHistory);
 
     return () => {
-      socket.off("whiteboard:draw", handleDraw);
-      socket.off("whiteboard:clear", handleClear);
-      socket.off("whiteboard:undo", handleUndo);
-      socket.off("whiteboard:history", handleHistory);
+      unsubDraw();
+      unsubClear();
+      unsubUndo();
+      unsubHistory();
     };
   }, [socket]);
 

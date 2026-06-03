@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, RefreshCw, Activity, MessageSquare, Megaphone, Video, UserPlus, Link2, Square } from "lucide-react";
+import { ArrowLeft, RefreshCw, Activity, Megaphone, Video, Link2, Square } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -9,7 +9,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { QueryError } from "@/components/composites/QueryError";
-import { useAuthStore } from "@/store/authStore";
 
 // Socket connection
 import { acquireSocketConnection, releaseSocketConnection, getSocket } from "@/services/socket";
@@ -42,7 +41,6 @@ export default function MentorControlCenterPage() {
   usePageTitle("Mentor Control Center");
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
-  const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -97,7 +95,7 @@ export default function MentorControlCenterPage() {
     socket.on("question:new", handleOverview);
     socket.on("question:updated", handleOverview);
     socket.on("poll:updated", handleOverview);
-    socket.on("notification:mentor", (payload) => {
+    socket.on("notification:mentor", () => {
       queryClient.invalidateQueries({ queryKey: ["mentor-control", sessionId] });
     });
 
@@ -242,7 +240,7 @@ export default function MentorControlCenterPage() {
                     {(data?.participants || []).slice(0, 5).map((p) => (
                       <div key={p.id} className="flex items-center justify-between gap-3 p-2 border-b border-white/5 text-xs text-white">
                         <span>{p.name}</span>
-                        <Badge variant="outline" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">{p.role}</Badge>
+                        <Badge variant="default" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">{p.role}</Badge>
                       </div>
                     ))}
                     {(!data?.participants || data.participants.length === 0) && (

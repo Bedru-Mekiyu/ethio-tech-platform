@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
-import { FileText, Eye, History, Save, Award } from "lucide-react";
+import { FileText, Eye, History, Save } from "lucide-react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSessionNotes, updateSessionNotes, publishSessionNotes } from "@/services/mentorControlService";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -76,7 +76,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
           </Button>
           <Button
             size="sm"
-            variant={notes?.isPublished ? "success" : "primary"}
+            variant="primary"
             className="h-8 text-xs gap-1.5 text-white"
             onClick={handlePublish}
           >

@@ -8,6 +8,9 @@ export interface SessionSummary {
   liveRoomId?: string;
   maxParticipants?: number;
   isPublic?: boolean;
+  durationMinutes?: number;
+  attendeeCount?: number;
+  description?: string;
 }
 
 export interface SessionDetail extends SessionSummary {
@@ -77,7 +80,7 @@ export async function getSessionAvailability(sessionId: string) {
 
 export async function getLiveAccess(sessionId: string) {
   const { data } = await api.get<
-    ApiResponse<{ roomId: string; accessToken: string; sessionId: string; screenShareActive?: boolean; screenShareUserId?: string; recordingMode?: string }>
+    ApiResponse<{ provider?: string; roomId: string; accessToken: string; sessionId: string; screenShareActive?: boolean; screenShareUserId?: string; recordingMode?: string }>
   >(`/sessions/${sessionId}/live-access`);
   return data.data;
 }

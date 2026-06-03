@@ -3,13 +3,12 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  MessageSquare, Send, Trash2, VolumeX, ShieldAlert,
-  Megaphone, UserCheck, ShieldClose, ShieldOff, AlertCircle
+  MessageSquare, Send, Trash2, AlertCircle
 } from "lucide-react";
 import { getSocket } from "@/services/socket";
-import { deleteMessage, muteParticipant, timeoutParticipant } from "@/services/mentorControlService";
+import { deleteMessage } from "@/services/mentorControlService";
 import type { ChatMessageServerPayload } from "@/socket/contracts";
 import { useAuthStore } from "@/store/authStore";
 
@@ -62,6 +61,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
     const payload = {
       roomId: `session-${sessionId}`,
       messageId: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      clientId: crypto.randomUUID(),
       text: inputText,
       at: new Date().toISOString(),
       type: chatType,

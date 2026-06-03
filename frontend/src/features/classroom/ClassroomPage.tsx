@@ -21,9 +21,6 @@ import {
   Wifi,
   WifiOff,
   Hand,
-  Vote,
-  Link2,
-  ThumbsUp,
   type LucideIcon,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
@@ -185,8 +182,7 @@ export function ClassroomPage() {
   const [classroomQuestions, setClassroomQuestions] = useState<any[]>([]);
   const [livePolls, setLivePolls] = useState<any[]>([]);
   const [resources, setResources] = useState<any[]>([]);
-  const [classnotes, setClassnotes] = useState<any>(null);
-  const [questionText, setQuestionText] = useState("");
+  const [classnotes] = useState<any>(null);
 
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
@@ -221,7 +217,7 @@ export function ClassroomPage() {
     uid: agoraTokenQuery.data?.uid,
     onTokenWillExpire: () => {
       if (sessionId && sessionId !== "demo") {
-        getAgoraToken(sessionId).then((newTokens) => {
+        getAgoraToken(sessionId).then(() => {
           // Token refresh would be handled by the hook in a real implementation
         }).catch(console.error);
       }
@@ -331,15 +327,15 @@ export function ClassroomPage() {
       }
     };
 
-    const onScreenShareStopped = (payload: { roomId: string }) => {
+    const onScreenShareStopped = () => {
       setEvents((prev) => [createSystemEvent("Screen Share", `Screen sharing has ended.`), ...prev].slice(0, 4));
     };
 
-    const onRecordingStarted = (payload: { roomId: string; by: string }) => {
+    const onRecordingStarted = () => {
       setEvents((prev) => [createSystemEvent("Recording", `Session recording has started.`), ...prev].slice(0, 4));
     };
 
-    const onRecordingStopped = (payload: { roomId: string }) => {
+    const onRecordingStopped = () => {
       setEvents((prev) => [createSystemEvent("Recording", `Session recording has stopped.`), ...prev].slice(0, 4));
     };
 
@@ -528,7 +524,6 @@ export function ClassroomPage() {
                     localVideoTrack={agora.localVideoTrack}
                     remoteUsers={agora.remoteUsers}
                     screenTrack={null}
-                    localUserId={user?.id}
                   />
                 )}
               </div>

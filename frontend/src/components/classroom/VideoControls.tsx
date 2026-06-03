@@ -37,7 +37,7 @@ export function VideoControls({
       aria-label="Video controls"
     >
       <Button
-        variant={isAudioEnabled ? "default" : "destructive"}
+        variant={isAudioEnabled ? "primary" : "danger"}
         size="icon"
         className="h-11 w-11 rounded-full"
         onClick={onToggleAudio}
@@ -47,7 +47,7 @@ export function VideoControls({
       </Button>
 
       <Button
-        variant={isVideoEnabled ? "default" : "destructive"}
+        variant={isVideoEnabled ? "primary" : "danger"}
         size="icon"
         className="h-11 w-11 rounded-full"
         onClick={onToggleVideo}
@@ -57,7 +57,7 @@ export function VideoControls({
       </Button>
 
       <Button
-        variant={isScreenSharing ? "default" : "outline"}
+        variant={isScreenSharing ? "primary" : "outline"}
         size="icon"
         className={cn(
           "h-11 w-11 rounded-full",
@@ -70,7 +70,7 @@ export function VideoControls({
       </Button>
 
       <Button
-        variant={isHandRaised ? "default" : "outline"}
+        variant={isHandRaised ? "primary" : "outline"}
         size="icon"
         className={cn(
           "h-11 w-11 rounded-full",
@@ -85,7 +85,7 @@ export function VideoControls({
       <div className="w-px h-8 bg-gray-600 mx-1" />
 
       <Button
-        variant="destructive"
+        variant="danger"
         size="icon"
         className="h-11 w-11 rounded-full bg-red-600 hover:bg-red-700"
         onClick={onLeave}

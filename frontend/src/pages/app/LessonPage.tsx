@@ -45,8 +45,8 @@ export function LessonPage() {
     );
 
   const lesson = data;
-  const nextLessonId = (lesson as Record<string, unknown>)["nextLessonId"] as string | undefined;
-  const trackId = (lesson as Record<string, unknown>)["trackId"] as string | undefined;
+  const nextLessonId = lesson?.nextLessonId;
+  const trackId = lesson?.trackId;
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">

@@ -69,7 +69,7 @@ const BreakoutCard: React.FC<{
             </Button>
           )}
           {isHost && (
-            <Button size="sm" variant="destructive" onClick={() => onClose(breakout._id)}>
+            <Button size="sm" variant="danger" onClick={() => onClose(breakout._id)}>
               Close
             </Button>
           )}
@@ -136,7 +136,7 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({
               Create
             </Button>
             {breakouts.length > 0 && (
-              <Button size="sm" variant="destructive" onClick={closeAllBreakouts}>
+              <Button size="sm" variant="danger" onClick={closeAllBreakouts}>
                 Close All
               </Button>
             )}

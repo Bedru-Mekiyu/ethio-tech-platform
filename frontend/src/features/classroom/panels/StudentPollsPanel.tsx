@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/composites/EmptyState";
-import { Vote } from "lucide-react";
 
 interface StudentPollsPanelProps {
   polls: any[];

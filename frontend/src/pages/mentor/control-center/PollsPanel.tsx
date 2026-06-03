@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Vote, Plus, PauseCircle, PlayCircle, Eye, XCircle } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -21,6 +20,17 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
   const [pollQuestion, setPollQuestion] = useState("");
   const [pollType, setPollType] = useState<"single" | "multiple" | "true_false">("single");
   const [pollOptions, setPollOptions] = useState<string[]>(["", ""]);
+  const createDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = createDialogRef.current;
+    if (!dialog) return;
+    if (showCreate && !dialog.open) {
+      dialog.showModal();
+    } else if (!showCreate && dialog.open) {
+      dialog.close();
+    }
+  }, [showCreate]);
 
   const handleCreate = async () => {
     if (!pollQuestion.trim()) return;
@@ -74,24 +84,24 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
             <h3 className="text-sm font-semibold text-white">Live Classroom Polls</h3>
           </div>
         </div>
-        <Dialog open={showCreate} onOpenChange={setShowCreate}>
-          <DialogTrigger asChild>
-            <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg">
-              <Plus size={12} className="mr-1" /> Create Poll
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md bg-[#0B0F19] border-white/10 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-white">Create Poll</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
+        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg" onClick={() => setShowCreate(true)}>
+          <Plus size={12} className="mr-1" /> Create Poll
+        </Button>
+        <dialog
+          ref={createDialogRef}
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          onCancel={(e) => { e.preventDefault(); setShowCreate(false); }}
+        >
+          <div className="p-6">
+            <h2 className="text-lg font-semibold text-white">Create Poll</h2>
+            <div className="space-y-4 mt-4">
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Question</label>
                 <Input value={pollQuestion} onChange={(e) => setPollQuestion(e.target.value)} placeholder="Ask the class..." className="bg-white/5 border-white/5 text-white" />
               </div>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Type</label>
-                <Select value={pollType} onValueChange={(v) => setPollType(v as typeof pollType)}>
+                <Select value={pollType} onChange={(e) => setPollType(e.target.value as typeof pollType)}>
                   <SelectTrigger className="bg-white/5 border-white/5 text-white"><SelectValue /></SelectTrigger>
                   <SelectContent className="bg-[#0B0F19] border-white/10 text-white">
                     <SelectItem value="single">Single Choice</SelectItem>
@@ -124,10 +134,13 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   )}
                 </div>
               )}
-              <Button className="w-full bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!pollQuestion.trim()}>Launch Poll</Button>
+              <div className="flex justify-end gap-3 pt-2">
+                <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setShowCreate(false)}>Cancel</Button>
+                <Button className="bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!pollQuestion.trim()}>Launch Poll</Button>
+              </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </div>
+        </dialog>
       </div>
 
       {polls.length === 0 ? (

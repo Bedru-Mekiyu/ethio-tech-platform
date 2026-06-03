@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
 import { acquireSocketConnection } from "@/services/socket";
 import { useDM, type Conversation, type DMMessage } from "@/hooks/useDM";
@@ -21,10 +21,11 @@ const ConversationItem: React.FC<{
       onClick={onClick}
     >
       <div className="flex items-center gap-3">
-        <Avatar className="h-8 w-8">
-          <AvatarImage src={otherParticipant?.avatar} />
-          <AvatarFallback>{otherParticipant?.fullName?.[0] || "?"}</AvatarFallback>
-        </Avatar>
+        <Avatar
+          src={otherParticipant?.avatar}
+          name={otherParticipant?.fullName || "?"}
+          className="h-8 w-8"
+        />
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between">
             <span className="font-medium text-sm truncate">
@@ -83,7 +84,7 @@ const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({
 export const MessagesPage: React.FC = () => {
   const user = useAuthStore((s) => s.user);
   const currentUserId = user?.id || "";
-  const socket = acquireSocketConnection();
+  const socket = acquireSocketConnection() as any;
 
   const {
     conversations,
@@ -165,12 +166,11 @@ export const MessagesPage: React.FC = () => {
               >
                 ←
               </Button>
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={activeConversation?.participants[0]?.avatar} />
-                <AvatarFallback>
-                  {activeConversation?.participants[0]?.fullName?.[0] || "?"}
-                </AvatarFallback>
-              </Avatar>
+              <Avatar
+                src={activeConversation?.participants[0]?.avatar}
+                name={activeConversation?.participants[0]?.fullName || "?"}
+                className="h-8 w-8"
+              />
               <div>
                 <div className="font-medium text-sm">
                   {activeConversation?.type === "group"

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Hand, Mic, MicOff, Check, Ban } from "lucide-react";
+import { Hand, Mic, Check } from "lucide-react";
 import type { MentorControlData } from "@/services/mentorControlService";
 
 interface RaisedHandsPanelProps {
@@ -11,7 +11,7 @@ interface RaisedHandsPanelProps {
   onAction: (action: string, userId: string) => void;
 }
 
-export default function RaisedHandsPanel({ hands, sessionId, onAction }: RaisedHandsPanelProps) {
+export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelProps) {
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function RaisedHandsPanel({ hands, sessionId, onAction }: RaisedH
           <div>
             <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
               Raised Hands
-              <Badge variant="primary" className="h-5 px-1.5">{hands.length}</Badge>
+              <Badge variant="default" className="h-5 px-1.5">{hands.length}</Badge>
             </h3>
           </div>
         </div>

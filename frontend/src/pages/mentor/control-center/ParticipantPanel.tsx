@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { Search, Mic, MicOff, Shield, ShieldAlert, UserX, Ban, VolumeX, Volume2, MoreHorizontal, MessageSquare } from "lucide-react";
 import { type MentorControlData, submitStudentFeedback } from "@/services/mentorControlService";
 import { cn } from "@/lib/utils";
@@ -30,6 +30,17 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   const [professionalismScore, setProfessionalismScore] = useState<number>(5);
   const [comment, setComment] = useState("");
   const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+  const feedbackDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = feedbackDialogRef.current;
+    if (!dialog) return;
+    if (feedbackUser && !dialog.open) {
+      dialog.showModal();
+    } else if (!feedbackUser && dialog.open) {
+      dialog.close();
+    }
+  }, [feedbackUser]);
 
   const handleFeedbackSubmit = async () => {
     if (!feedbackUser || !sessionId) return;
@@ -96,7 +107,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <div>
           <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
             Active Classroom
-            <Badge variant="secondary" className="h-5 px-1.5">{participants.length} online</Badge>
+            <Badge variant="purple" className="h-5 px-1.5">{participants.length} online</Badge>
           </h3>
         </div>
         <div className="flex gap-2">
@@ -262,35 +273,26 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       )}
 
       {/* Confirmation Dialog for Destructive Actions */}
-      <Dialog open={!!confirmAction} onOpenChange={(open) => !open && setConfirmAction(null)}>
-        <DialogContent className="sm:max-w-md bg-[#0B0F19] border-white/10 text-white">
-          <DialogHeader>
-            <DialogTitle className="capitalize text-white">{confirmAction?.action} Participant</DialogTitle>
-            <DialogDescription className="text-[var(--text-secondary)]">
-              Are you sure you want to {confirmAction?.action} <strong>{confirmAction?.userName}</strong>?
-              {confirmAction?.action === "block" ? " They will be banned from this classroom and unable to rejoin." : " They will be disconnected from the live session."}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0">
-            <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setConfirmAction(null)}>
-              Cancel
-            </Button>
-            <Button variant="danger" onClick={executeConfirm}>
-              Confirm
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmDialog
+        open={!!confirmAction}
+        title={confirmAction?.action ? `${confirmAction.action.charAt(0).toUpperCase()}${confirmAction.action.slice(1)} Participant` : ""}
+        description={confirmAction ? `Are you sure you want to ${confirmAction.action} ${confirmAction.userName}?${confirmAction.action === "block" ? " They will be banned from this classroom and unable to rejoin." : " They will be disconnected from the live session."}` : ""}
+        variant="danger"
+        onCancel={() => setConfirmAction(null)}
+        onConfirm={executeConfirm}
+      />
       {/* Feedback Dialog */}
-      <Dialog open={!!feedbackUser} onOpenChange={(open) => !open && setFeedbackUser(null)}>
-        <DialogContent className="sm:max-w-md bg-[#0B0F19] border-white/10 text-white">
-          <DialogHeader>
-            <DialogTitle className="text-white">Submit Session Feedback</DialogTitle>
-            <DialogDescription className="text-[var(--text-secondary)]">
-              Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this session.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-2">
+      <dialog
+        ref={feedbackDialogRef}
+        className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+        onCancel={(e) => { e.preventDefault(); setFeedbackUser(null); }}
+      >
+        <div className="p-6">
+          <h2 className="text-lg font-semibold text-white">Submit Session Feedback</h2>
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">
+            Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this session.
+          </p>
+          <div className="space-y-4 py-4">
             <div className="grid grid-cols-3 gap-3">
               <div className="space-y-1.5">
                 <label className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Participation</label>
@@ -333,16 +335,16 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
               />
             </div>
           </div>
-          <DialogFooter className="gap-2 sm:gap-0">
+          <div className="flex justify-end gap-3">
             <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setFeedbackUser(null)} disabled={isSubmittingFeedback}>
               Cancel
             </Button>
             <Button variant="primary" onClick={handleFeedbackSubmit} disabled={isSubmittingFeedback}>
               {isSubmittingFeedback ? "Submitting..." : "Submit Feedback"}
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </div>
+        </div>
+      </dialog>
     </Card>
   );
 }

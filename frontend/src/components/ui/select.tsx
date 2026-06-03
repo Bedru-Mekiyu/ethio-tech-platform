@@ -1,18 +1,22 @@
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import { forwardRef } from "react";
+import { forwardRef, type ReactNode } from "react";
 
 export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   options?: Array<{ value: string; label: string }>;
   placeholder?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, options, placeholder, children, ...props }, ref) => {
+  ({ className, options, placeholder, children, value, onValueChange, ...props }, ref) => {
     return (
       <div className="relative group w-full">
         <select
           ref={ref}
+          value={value}
+          onChange={(e) => onValueChange?.(e.target.value)}
           className={cn(
             "h-11 w-full cursor-pointer appearance-none rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 pr-10 text-sm text-white",
             "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]",
@@ -47,3 +51,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
 Select.displayName = "Select";
 
+export function SelectContent({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
+
+export function SelectItem({ value, children }: { value: string; children: ReactNode }) {
+  return <option value={value}>{children}</option>;
+}
+
+export function SelectTrigger({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>;
+}
+
+export function SelectValue({ placeholder }: { placeholder?: string }) {
+  return <span>{placeholder}</span>;
+}

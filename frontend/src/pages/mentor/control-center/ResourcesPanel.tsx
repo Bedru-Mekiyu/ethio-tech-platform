@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Link2, Plus, Eye, Download, FileText, Globe, Video, Github, Trash2 } from "lucide-react";
+import { Link2, Plus, Eye, Download, FileText, Globe, Video, Github } from "lucide-react";
 import { getResources, createResource } from "@/services/mentorControlService";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -21,6 +20,17 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [type, setType] = useState("pdf");
+  const createDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = createDialogRef.current;
+    if (!dialog) return;
+    if (showCreate && !dialog.open) {
+      dialog.showModal();
+    } else if (!showCreate && dialog.open) {
+      dialog.close();
+    }
+  }, [showCreate]);
 
   const loadResources = async () => {
     try {
@@ -80,17 +90,17 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
             <h3 className="text-sm font-semibold text-white">Shared Class Resources</h3>
           </div>
         </div>
-        <Dialog open={showCreate} onOpenChange={setShowCreate}>
-          <DialogTrigger asChild>
-            <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg">
-              <Plus size={12} className="mr-1" /> Share Resource
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md bg-[#0B0F19] border-white/10 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-white">Share Resource</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
+        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg" onClick={() => setShowCreate(true)}>
+          <Plus size={12} className="mr-1" /> Share Resource
+        </Button>
+        <dialog
+          ref={createDialogRef}
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          onCancel={(e) => { e.preventDefault(); setShowCreate(false); }}
+        >
+          <div className="p-6">
+            <h2 className="text-lg font-semibold text-white">Share Resource</h2>
+            <div className="space-y-4 mt-4">
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Title</label>
                 <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Lecture Slides - Week 1" className="bg-white/5 border-white/5 text-white" />
@@ -105,7 +115,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
               </div>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Resource Type</label>
-                <Select value={type} onValueChange={setType}>
+                <Select value={type} onChange={(e) => setType(e.target.value)}>
                   <SelectTrigger className="bg-white/5 border-white/5 text-white"><SelectValue /></SelectTrigger>
                   <SelectContent className="bg-[#0B0F19] border-white/10 text-white">
                     <SelectItem value="pdf">PDF File</SelectItem>
@@ -117,12 +127,15 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   </SelectContent>
                 </Select>
               </div>
-              <Button className="w-full bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!title.trim() || !url.trim()}>
-                Publish Resource
-              </Button>
+              <div className="flex justify-end gap-3 pt-2">
+                <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setShowCreate(false)}>Cancel</Button>
+                <Button className="bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!title.trim() || !url.trim()}>
+                  Publish Resource
+                </Button>
+              </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </div>
+        </dialog>
       </div>
 
       {loading ? (
@@ -156,7 +169,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   <span className="flex items-center gap-0.5"><Eye size={11} /> {res.viewCount || 0}</span>
                   <span className="flex items-center gap-0.5"><Download size={11} /> {res.downloadCount || 0}</span>
                 </div>
-                <Badge variant="outline" className="text-[9px] border-white/10 uppercase font-bold text-white bg-white/5">{res.type}</Badge>
+                <Badge variant="default" className="text-[9px] border-white/10 uppercase font-bold text-white bg-white/5">{res.type}</Badge>
               </div>
             </div>
           ))}

@@ -33,3 +33,7 @@ export function CardTitle({ className, children }: { className?: string; childre
 export function CardDescription({ className, children }: { className?: string; children: React.ReactNode }) {
   return <p className={cn("mt-1 text-sm leading-relaxed text-[var(--text-secondary)]", className)}>{children}</p>;
 }
+
+export function CardContent({ className, children }: { className?: string; children: React.ReactNode }) {
+  return <div className={cn("mt-4", className)}>{children}</div>;
+}

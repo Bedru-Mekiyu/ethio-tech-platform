@@ -1,5 +1,4 @@
 import { api } from "./api";
-import type { Socket } from "socket.io-client";
 
 export interface MentorControlData {
   overview: {

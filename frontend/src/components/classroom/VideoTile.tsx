@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import type { IAgoraRTCRemoteUser, ICameraVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
+import type { IAgoraRTCRemoteUser, ICameraVideoTrack, ILocalVideoTrack, IRemoteVideoTrack } from "agora-rtc-sdk-ng";
 import { cn } from "@/lib/utils";
 
 interface VideoTileProps {
   user?: IAgoraRTCRemoteUser;
-  localVideoTrack?: ICameraVideoTrack | null;
+  localVideoTrack?: ICameraVideoTrack | ILocalVideoTrack | null;
   videoTrack?: IRemoteVideoTrack;
   label?: string;
   isLocal?: boolean;
@@ -26,14 +26,12 @@ function VideoTrackRenderer({
   useEffect(() => {
     if (!containerRef.current || !track) return;
 
-    const player = track.play(containerRef.current);
-    if (player) {
-      const videoElement = containerRef.current.querySelector("video");
-      if (videoElement) {
-        videoElement.style.width = "100%";
-        videoElement.style.height = "100%";
-        videoElement.style.objectFit = "cover";
-      }
+    track.play(containerRef.current);
+    const videoElement = containerRef.current.querySelector("video");
+    if (videoElement) {
+      videoElement.style.width = "100%";
+      videoElement.style.height = "100%";
+      videoElement.style.objectFit = "cover";
     }
 
     return () => {

@@ -3,13 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Users,
   Search,
-  Star,
   MessageSquare,
-  Award,
-  Clock,
   ChevronDown,
   ChevronUp,
-  BarChart3,
   TrendingUp,
   CalendarCheck,
   Filter,
@@ -19,7 +15,6 @@ import {
 import { api } from "@/services/api";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
@@ -172,7 +167,7 @@ function StudentRow({
           <Badge variant={
             (student.engagementScore ?? 0) >= 75 ? "success"
             : (student.engagementScore ?? 0) >= 40 ? "warning"
-            : "secondary"
+            : "purple"
           }>
             {student.engagementScore ?? 0}% Engaged
           </Badge>

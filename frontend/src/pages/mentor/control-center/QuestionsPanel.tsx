@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Select } from "@/components/ui/select";
 import { MessageSquare, ThumbsUp, Send, Archive, Pin, Star } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";

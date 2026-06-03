@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Download, RefreshCw, Plus } from "lucide-react";
+import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Download, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

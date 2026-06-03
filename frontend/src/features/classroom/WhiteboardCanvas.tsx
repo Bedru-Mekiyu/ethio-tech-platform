@@ -191,7 +191,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
         {TOOLS.map((t) => (
           <Button
             key={t.type}
-            variant={tool === t.type ? "default" : "outline"}
+            variant={tool === t.type ? "primary" : "outline"}
             size="sm"
             onClick={() => setTool(t.type)}
             aria-label={`Select ${t.icon} tool`}
@@ -226,7 +226,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
         <Button variant="outline" size="sm" onClick={undo} aria-label="Undo">
           Undo
         </Button>
-        <Button variant="destructive" size="sm" onClick={clear} aria-label="Clear board">
+        <Button variant="danger" size="sm" onClick={clear} aria-label="Clear board">
           Clear
         </Button>
       </div>

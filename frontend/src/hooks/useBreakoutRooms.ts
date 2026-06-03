@@ -61,14 +61,14 @@ export const useBreakoutRooms = ({ sessionId, socket }: UseBreakoutRoomsOptions)
       setBreakouts(prev => prev.filter(b => b._id !== breakoutId));
     };
 
-    socket.on("breakout:created", handleCreated);
-    socket.on("breakout:updated", handleUpdated);
-    socket.on("breakout:closed", handleClosed);
+    const unsubCreated = socket.on("breakout:created", handleCreated);
+    const unsubUpdated = socket.on("breakout:updated", handleUpdated);
+    const unsubClosed = socket.on("breakout:closed", handleClosed);
 
     return () => {
-      socket.off("breakout:created", handleCreated);
-      socket.off("breakout:updated", handleUpdated);
-      socket.off("breakout:closed", handleClosed);
+      unsubCreated();
+      unsubUpdated();
+      unsubClosed();
     };
   }, [socket]);
 

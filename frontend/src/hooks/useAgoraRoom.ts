@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import AgoraRTC, {
   type IAgoraRTCClient,
-  type IAgoraRTCRemoteUser,
   type IMicrophoneAudioTrack,
   type ICameraVideoTrack,
   type ILocalVideoTrack,
@@ -122,7 +121,7 @@ export function useAgoraRoom({
     try {
       setError(null);
       const client = clientRef.current;
-      const joinedUid = await client.join(channel, token || null, uid);
+      const joinedUid = await client.join(channel, token || "", uid);
       console.log("[Agora] Joined channel:", channel, "UID:", joinedUid);
 
       const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
@@ -182,10 +181,13 @@ export function useAgoraRoom({
   const startScreenShare = useCallback(async () => {
     if (!clientRef.current || isScreenSharing) return;
     try {
-      const screenVideoTrack = await AgoraRTC.createScreenVideoTrack(
+      const screenVideoTrackResult = await AgoraRTC.createScreenVideoTrack(
         { encoderConfig: "1080p_1" },
         "auto"
       );
+      const screenVideoTrack = Array.isArray(screenVideoTrackResult)
+        ? screenVideoTrackResult[0]
+        : screenVideoTrackResult;
       screenRef.current = screenVideoTrack;
       await clientRef.current.publish(screenVideoTrack);
       setIsScreenSharing(true);

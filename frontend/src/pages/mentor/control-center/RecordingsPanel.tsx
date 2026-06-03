@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Video, Plus, Eye, Play, Square, Users, CheckCircle } from "lucide-react";
+import { Video, Plus, Eye, Play, CheckCircle } from "lucide-react";
 import { getRecordings, uploadSessionRecording, publishRecording } from "@/services/mentorControlService";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -20,6 +19,17 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [durationMinutes, setDurationMinutes] = useState("");
+  const createDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = createDialogRef.current;
+    if (!dialog) return;
+    if (showCreate && !dialog.open) {
+      dialog.showModal();
+    } else if (!showCreate && dialog.open) {
+      dialog.close();
+    }
+  }, [showCreate]);
 
   const loadRecordings = async () => {
     try {
@@ -77,17 +87,17 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
             <h3 className="text-sm font-semibold text-white">Session Playback Recordings</h3>
           </div>
         </div>
-        <Dialog open={showCreate} onOpenChange={setShowCreate}>
-          <DialogTrigger asChild>
-            <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg">
-              <Plus size={12} className="mr-1" /> Add Recording
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md bg-[#0B0F19] border-white/10 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-white">Add Session Recording</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
+        <Button size="sm" className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg" onClick={() => setShowCreate(true)}>
+          <Plus size={12} className="mr-1" /> Add Recording
+        </Button>
+        <dialog
+          ref={createDialogRef}
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          onCancel={(e) => { e.preventDefault(); setShowCreate(false); }}
+        >
+          <div className="p-6">
+            <h2 className="text-lg font-semibold text-white">Add Session Recording</h2>
+            <div className="space-y-4 mt-4">
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Title</label>
                 <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Lesson 1 - Introduction to Node.js" className="bg-white/5 border-white/5 text-white" />
@@ -104,12 +114,15 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Duration (Minutes)</label>
                 <Input value={durationMinutes} type="number" onChange={(e) => setDurationMinutes(e.target.value)} placeholder="45" className="bg-white/5 border-white/5 text-white" />
               </div>
-              <Button className="w-full bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!title.trim() || !url.trim()}>
-                Save Recording
-              </Button>
+              <div className="flex justify-end gap-3 pt-2">
+                <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setShowCreate(false)}>Cancel</Button>
+                <Button className="bg-primary hover:bg-primary/95 text-white" onClick={handleCreate} disabled={!title.trim() || !url.trim()}>
+                  Save Recording
+                </Button>
+              </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </div>
+        </dialog>
       </div>
 
       {loading ? (
@@ -149,7 +162,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                 >
                   {rec.isPublished ? "Published" : "Make Private"}
                 </Button>
-                <Badge variant="outline" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">
+                <Badge variant="default" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">
                   mp4
                 </Badge>
               </div>

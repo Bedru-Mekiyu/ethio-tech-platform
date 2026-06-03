@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Bell, Volume2, VolumeX, AlertCircle, Hand, MessageSquare, Vote, DoorOpen, Users } from "lucide-react";
+import { Bell, Volume2, VolumeX, Hand, MessageSquare, Vote, DoorOpen, Users } from "lucide-react";
 import { getSocket } from "@/services/socket";
 
 interface NotificationItem {
@@ -20,7 +20,6 @@ interface NotificationsPanelProps {
 export default function NotificationsPanel({ sessionId }: NotificationsPanelProps) {
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const audioContextRef = useRef<AudioContext | null>(null);
 
   const playEventSound = (type: string) => {
     if (!soundEnabled) return;

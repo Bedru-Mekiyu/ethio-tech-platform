@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ProgressBar } from "@/components/ui/progress";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { usePageTitle } from "@/hooks/usePageTitle";

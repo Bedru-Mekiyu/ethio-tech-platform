@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Search, Filter, Clock, Users, Video, BookOpen } from "lucide-react";
+import { Search, Clock, Users, Video, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -129,7 +129,7 @@ export function SessionExplorerPage() {
       result = result.filter(
         (s) =>
           s.title.toLowerCase().includes(q) ||
-          (s as Record<string, unknown>)["description"]?.toString().toLowerCase().includes(q)
+          s.description?.toLowerCase().includes(q)
       );
     }
     return result;

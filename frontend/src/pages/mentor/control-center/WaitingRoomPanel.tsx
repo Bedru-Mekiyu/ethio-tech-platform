@@ -12,7 +12,7 @@ interface WaitingRoomPanelProps {
   onAction: (action: string, userId: string) => void;
 }
 
-export default function WaitingRoomPanel({ queue, sessionId, onAction }: WaitingRoomPanelProps) {
+export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelProps) {
   const [autoAdmit, setAutoAdmit] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const prevQueueLength = useRef(queue.length);
@@ -86,7 +86,7 @@ export default function WaitingRoomPanel({ queue, sessionId, onAction }: Waiting
           </Button>
           <Button
             size="sm"
-            variant={autoAdmit ? "success" : "outline"}
+            variant={autoAdmit ? "primary" : "outline"}
             className="h-7 text-[10px] px-2 gap-1"
             onClick={() => setAutoAdmit(!autoAdmit)}
           >

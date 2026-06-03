@@ -19,6 +19,8 @@ export interface LessonDetail {
   xpReward?: number;
   module: string;
   durationMinutes?: number;
+  nextLessonId?: string;
+  trackId?: string;
 }
 
 export interface LeaderboardEntry {

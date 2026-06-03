@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Users, DoorOpen, Clock, Activity, Flame, MessageSquare, Hand, Vote } from "lucide-react";
 import type { MentorControlData } from "@/services/mentorControlService";
 import { cn } from "@/lib/utils";
