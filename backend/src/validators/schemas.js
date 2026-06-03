@@ -227,6 +227,9 @@ export const sessionSchemas = {
     xpPerAttendee: z.number().int().nonnegative().optional(),
     whiteboardEnabled: z.boolean().optional(),
     codeCollabEnabled: z.boolean().optional(),
+    maxParticipants: z.number().int().min(0).optional(),
+    admissionMode: z.enum(["open", "waiting-room"]).optional(),
+    isPublic: z.boolean().optional(),
   }),
   update: atLeastOneField(
     z.object({
@@ -240,15 +243,42 @@ export const sessionSchemas = {
       xpPerAttendee: z.number().int().nonnegative().optional(),
       whiteboardEnabled: z.boolean().optional(),
       codeCollabEnabled: z.boolean().optional(),
-      status: z.enum(["scheduled", "live", "ended", "canceled"]).optional(),
+      maxParticipants: z.number().int().min(0).optional(),
+      admissionMode: z.enum(["open", "waiting-room"]).optional(),
+      isPublic: z.boolean().optional(),
     }),
     { message: "At least one field is required" }
   ),
+  cancel: z.object({
+    reason: z.string().trim().min(2).max(500),
+  }),
+  reschedule: z.object({
+    scheduledAt: isoDateString,
+    reason: z.string().trim().min(2).max(500),
+  }),
+  invite: z.object({
+    inviteeId: objectId,
+    method: z.enum(["direct", "cohort", "track", "mentor", "link"]).optional(),
+    message: z.string().trim().max(500).optional(),
+  }),
+  admissionAction: z.object({
+    userId: objectId,
+  }),
+  setRole: z.object({
+    userId: objectId,
+    role: z.enum(["cohost", "moderator", "participant", "observer"]),
+  }),
+  availability: z.object({
+    id: objectId,
+  }),
   feedback: z.object({
     quality: z.number().int().min(1).max(5),
     engagement: z.number().int().min(1).max(5),
     impact: z.number().int().min(1).max(5),
     comment: z.string().optional(),
+  }),
+  idParam: z.object({
+    id: objectId,
   }),
 };
 
