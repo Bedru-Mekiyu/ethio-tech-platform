@@ -88,7 +88,7 @@ const finalizeAvatarChange = async ({ req, avatarData, previousUser, previousAva
       await deleteCloudinaryAsset(previousAvatarPublicId);
     } catch (error) {
       if (avatarData.avatarPublicId) {
-        await deleteCloudinaryAsset(avatarData.avatarPublicId).catch(() => {});
+        await deleteCloudinaryAsset(avatarData.avatarPublicId).catch(() => undefined);
       }
       await User.findByIdAndUpdate(previousUser._id, {
         avatar: previousUser.avatar,
@@ -96,7 +96,7 @@ const finalizeAvatarChange = async ({ req, avatarData, previousUser, previousAva
         avatarType: previousUser.avatarType,
         avatarSource: previousUser.avatarSource,
         avatarPublicId: previousUser.avatarPublicId,
-      }).catch(() => {});
+      }).catch(() => undefined);
       logger.error("Avatar replacement cleanup failed", {
         userId: req.user._id,
         error: error instanceof Error ? error.message : String(error),

@@ -62,7 +62,7 @@ export const login = asyncHandler(async (req, res) => {
     throw new ApiError(400, "email and password are required");
   }
 
-  const { user, accessToken, refreshToken } = await loginUser({ email, password });
+  const { user, accessToken, refreshToken } = await loginUser({ email, password, ip: req.ip });
   await logAuditEvent({
     actor: user._id,
     action: "login",

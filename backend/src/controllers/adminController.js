@@ -4,11 +4,13 @@ import User from "../models/User.js";
 import Session from "../models/Session.js";
 import Hub from "../models/Hub.js";
 import XPLog from "../models/XPLog.js";
-import AuditLog from "../models/AuditLog.js";
 import Submission from "../models/Submission.js";
 import MentorApplication from "../models/MentorApplication.js";
 import ApiError from "../utils/ApiError.js";
 import { getPagination } from "../utils/pagination.js";
+import { USER_STATUS, MENTOR_STATUS } from "../config/permissions.js";
+import { notifyMentorApproved, notifyMentorRejected } from "../services/notificationService.js";
+import AdminActivityLog from "../models/AdminActivityLog.js";
 
 export const getAnalytics = asyncHandler(async (_req, res) => {
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
@@ -24,10 +26,11 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
     hubs,
     topMentors,
     xpByTrack,
+    usersByStatus,
   ] = await Promise.all([
-    User.countDocuments({ role: "student" }),
-    User.countDocuments({ role: "student", updatedAt: { $gte: sevenDaysAgo } }),
-    User.countDocuments({ role: "mentor" }),
+    User.countDocuments({ role: "student", deletedAt: null }),
+    User.countDocuments({ role: "student", updatedAt: { $gte: sevenDaysAgo }, deletedAt: null }),
+    User.countDocuments({ role: "mentor", deletedAt: null }),
     XPLog.aggregate([
       { $match: { createdAt: { $gte: thirtyDaysAgo } } },
       { $group: { _id: null, total: { $sum: "$amount" } } },
@@ -40,7 +43,7 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       .sort({ scheduledAt: 1 })
       .limit(20),
     Hub.find({ isActive: true }).select("city address capacity computersAvailable mentorInCharge"),
-    User.find({ role: "mentor" }).sort({ mentorScore: -1 }).limit(5).select("fullName mentorScore totalSessions"),
+    User.find({ role: "mentor", deletedAt: null }).sort({ mentorScore: -1 }).limit(5).select("fullName mentorScore totalSessions"),
     XPLog.aggregate([
       { $match: { sourceType: "lesson" } },
       {
@@ -86,6 +89,10 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       { $sort: { xpTotal: -1 } },
       { $limit: 4 },
     ]),
+    User.aggregate([
+      { $match: { deletedAt: null } },
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+    ]),
   ]);
 
   const sessionFillRate =
@@ -109,6 +116,7 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       xpEarned30d: xpLast30Days[0]?.total ?? 0,
       sessionFillRate,
     },
+    usersByStatus: usersByStatus.reduce((acc, s) => ({ ...acc, [s._id]: s.count }), {}),
     topMentors,
     xpByTrack,
     hubs: hubsWithAvailability,
@@ -118,14 +126,21 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
 
 export const getAuditLogs = asyncHandler(async (req, res) => {
   const { page, limit, skip } = getPagination(req.query);
+  const { action, resource, userId } = req.query;
+
+  const filter = {};
+  if (action) filter.action = action;
+  if (resource) filter.resource = resource;
+  if (userId) filter.targetUser = userId;
 
   const [logs, total] = await Promise.all([
-    AuditLog.find()
+    AdminActivityLog.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
-      .populate("actor", "fullName email role"),
-    AuditLog.countDocuments(),
+      .populate("actor", "fullName email role")
+      .populate("targetUser", "fullName email role"),
+    AdminActivityLog.countDocuments(filter),
   ]);
 
   sendResponse(res, 200, "Audit logs fetched", {
@@ -154,43 +169,84 @@ export const flagSubmission = asyncHandler(async (req, res) => {
   sendResponse(res, 200, "Submission flagged", { submission });
 });
 
-export const getMentorApplications = asyncHandler(async (_req, res) => {
-  const applications = await MentorApplication.find()
-    .sort({ updatedAt: -1 })
-    .limit(100)
-    .lean();
+export const getMentorApplications = asyncHandler(async (req, res) => {
+  const { page, limit, skip } = getPagination(req.query);
+  const { status } = req.query;
 
-  sendResponse(res, 200, "Mentor applications fetched", { applications });
+  const filter = {};
+  if (status) filter.status = status;
+
+  const [applications, total] = await Promise.all([
+    MentorApplication.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .lean(),
+    MentorApplication.countDocuments(filter),
+  ]);
+
+  sendResponse(res, 200, "Mentor applications fetched", {
+    applications,
+    pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+  });
 });
 
 export const reviewMentorApplication = asyncHandler(async (req, res) => {
   const { status, reviewedNotes } = req.body;
-  const application = await MentorApplication.findByIdAndUpdate(
-    req.params.id,
-    {
-      status,
-      reviewedAt: new Date(),
-      reviewedBy: req.user._id,
-      ...(reviewedNotes ? { reviewedNotes } : {}),
-    },
-    { new: true, runValidators: true }
-  );
-
+  const application = await MentorApplication.findById(req.params.id);
   if (!application) throw new ApiError(404, "Mentor application not found");
 
-  const mentorUserUpdate = {
-    mentorStatus: status,
-    isVerified: status === "approved",
-    expertise: application.expertise ?? [],
-    currentCompany: application.currentCompany,
-    bio: application.whyMentor,
-  };
+  const before = application.toObject();
 
-  await User.findOneAndUpdate(
-    { email: application.email.toLowerCase(), role: "mentor" },
-    mentorUserUpdate,
-    { runValidators: true }
-  );
+  application.status = status;
+  application.reviewedAt = new Date();
+  application.reviewedBy = req.user._id;
+  if (reviewedNotes !== undefined) {
+    application.reviewedNotes = reviewedNotes;
+  }
+  await application.save();
+
+  const existingUser = await User.findOne({ email: application.email.toLowerCase() });
+
+  if (status === "approved") {
+    if (existingUser) {
+      existingUser.mentorStatus = MENTOR_STATUS.APPROVED;
+      existingUser.isVerified = true;
+      existingUser.verifiedAt = new Date();
+      existingUser.verifiedBy = req.user._id;
+      existingUser.status = USER_STATUS.ACTIVE;
+      existingUser.statusChangedAt = new Date();
+      existingUser.statusChangedBy = req.user._id;
+      existingUser.expertise = application.expertise ?? [];
+      existingUser.currentCompany = application.currentCompany;
+      existingUser.bio = application.whyMentor;
+      await existingUser.save();
+      await notifyMentorApproved({ userId: existingUser._id });
+    }
+  } else if (status === "rejected") {
+    if (existingUser) {
+      existingUser.mentorStatus = MENTOR_STATUS.REJECTED;
+      existingUser.isVerified = false;
+      existingUser.status = USER_STATUS.REJECTED;
+      existingUser.statusChangedAt = new Date();
+      existingUser.statusChangedBy = req.user._id;
+      await existingUser.save();
+      await notifyMentorRejected({ userId: existingUser._id, reason: reviewedNotes });
+    }
+  }
+
+  await AdminActivityLog.create({
+    actor: req.user._id,
+    action: `mentor_application.${status}`,
+    resource: "mentor_application",
+    resourceId: application._id,
+    targetUser: existingUser?._id,
+    before: { status: before.status },
+    after: { status, reviewedNotes },
+    metadata: { email: application.email },
+    ip: req.ip,
+    userAgent: req.headers["user-agent"],
+  });
 
   sendResponse(res, 200, "Mentor application updated", { application });
 });
