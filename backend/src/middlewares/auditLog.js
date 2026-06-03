@@ -10,7 +10,7 @@ export const auditAction = (action, resource) => async (req, res, next) => {
       resourceId: req.params?.id,
       metadata: { method: req.method, path: req.originalUrl },
       ip: req.ip,
-    }).catch(() => {});
+    }).catch(() => undefined);
   });
   next();
 };

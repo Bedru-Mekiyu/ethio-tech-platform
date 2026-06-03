@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import ApiError from "../utils/ApiError.js";
 import { getEnv } from "../config/env.js";
+import { ROLE_PERMISSIONS, ROLE_HIERARCHY } from "../config/permissions.js";
 
 export const protect = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -19,6 +20,14 @@ export const protect = async (req, res, next) => {
       return next(new ApiError(401, "User no longer exists"));
     }
 
+    if (user.deletedAt) {
+      return next(new ApiError(401, "Account has been deleted"));
+    }
+
+    if (user.status === "suspended" || user.status === "banned") {
+      return next(new ApiError(403, "Account is currently suspended or banned"));
+    }
+
     req.user = user;
     next();
   } catch (_error) {
@@ -33,10 +42,51 @@ export const authorize = (...roles) => (req, res, next) => {
   next();
 };
 
+export const requirePermission = (...permissions) => (req, res, next) => {
+  if (!req.user) {
+    return next(new ApiError(401, "Not authorized"));
+  }
+
+  const userPermissions = ROLE_PERMISSIONS[req.user.role] || [];
+  const hasAllPermissions = permissions.every((p) => userPermissions.includes(p));
+
+  if (!hasAllPermissions) {
+    return next(new ApiError(403, "Forbidden: insufficient permissions"));
+  }
+  next();
+};
+
+export const requireAnyPermission = (...permissions) => (req, res, next) => {
+  if (!req.user) {
+    return next(new ApiError(401, "Not authorized"));
+  }
+
+  const userPermissions = ROLE_PERMISSIONS[req.user.role] || [];
+  const hasAnyPermission = permissions.some((p) => userPermissions.includes(p));
+
+  if (!hasAnyPermission) {
+    return next(new ApiError(403, "Forbidden: insufficient permissions"));
+  }
+  next();
+};
+
 export const requireVerifiedMentor = (req, res, next) => {
   if (req.user?.role === "mentor" && !req.user.isVerified) {
     return next(new ApiError(403, "Mentor account must be verified before using mentor tools"));
   }
+  next();
+};
 
+export const requireRoleLevel = (minimumRole) => (req, res, next) => {
+  if (!req.user) {
+    return next(new ApiError(401, "Not authorized"));
+  }
+
+  const userLevel = ROLE_HIERARCHY[req.user.role] || 0;
+  const requiredLevel = ROLE_HIERARCHY[minimumRole] || 0;
+
+  if (userLevel < requiredLevel) {
+    return next(new ApiError(403, "Forbidden: insufficient role level"));
+  }
   next();
 };

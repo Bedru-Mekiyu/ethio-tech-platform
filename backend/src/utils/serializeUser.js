@@ -1,17 +1,20 @@
 import { createAssignedAvatar, isSystemAvatarUrl } from "../services/avatarService.js";
 
-/** Shared auth/profile payload for API responses */
 export const serializeAuthUser = (user) => ({
   id: user._id?.toString?.() ?? user._id,
   fullName: user.fullName,
   email: user.email,
   role: user.role,
+  status: user.status,
   level: user.level,
   xp: user.xp,
+  credits: user.credits,
   isVerified: user.isVerified,
   mentorStatus:
     user.mentorStatus ??
     (user.role === "mentor" ? (user.isVerified ? "approved" : "pending") : undefined),
+  mentorScore: user.mentorScore ?? 0,
+  totalSessions: user.totalSessions ?? 0,
   avatar: user.avatarUrl ?? user.avatar ?? createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl,
   avatarUrl: user.avatarUrl ?? user.avatar ?? createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl,
   avatarType:
@@ -27,4 +30,5 @@ export const serializeAuthUser = (user) => ({
   gradeLevel: user.gradeLevel ?? undefined,
   expertise: user.expertise ?? undefined,
   currentCompany: user.currentCompany ?? undefined,
+  lastLoginAt: user.lastLoginAt ?? undefined,
 });
