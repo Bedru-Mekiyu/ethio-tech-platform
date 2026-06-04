@@ -42,9 +42,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks,
-        // Optimize chunk sizing for slow networks
-        // This ensures no single chunk exceeds 200 KB (gzipped)
-        inlineDynamicImports: false,
       },
     },
   },
