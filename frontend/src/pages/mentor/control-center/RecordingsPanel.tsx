@@ -156,7 +156,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
               <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
                 <Button
                   size="sm"
-                  variant={rec.isPublished ? "success" : "outline"}
+                  variant={rec.isPublished ? "primary" : "outline"}
                   className="h-7 text-[10px] px-2 text-white"
                   onClick={() => handleTogglePublish(rec._id)}
                 >

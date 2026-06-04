@@ -157,7 +157,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                           size="sm"
                           variant="ghost"
                           className="h-5 w-5 p-0 text-danger hover:bg-danger/10 rounded-md"
-                          onClick={() => handleDelete(msg.messageId)}
+                          onClick={() => msg.messageId && handleDelete(msg.messageId)}
                           title="Delete message"
                         >
                           <Trash2 size={11} />

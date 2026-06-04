@@ -75,23 +75,23 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
       playEventSound(type);
     };
 
-    socket.on("presence:join", (p) => {
+    socket.on("presence:join", () => {
       addNotification("join", `A student joined the session room`);
     });
 
-    socket.on("presence:leave", (p) => {
+    socket.on("presence:leave", () => {
       addNotification("leave", `A student disconnected from room`);
     });
 
-    socket.on("hand:raised", (p) => {
+    socket.on("hand:raised", () => {
       addNotification("hand", `Hand raised in queue`);
     });
 
-    socket.on("question:new", (p) => {
+    socket.on("question:new", () => {
       addNotification("question", `New question submitted to Q&A`);
     });
 
-    socket.on("poll:created", (p) => {
+    socket.on("poll:created", () => {
       addNotification("poll", `New poll published to session`);
     });
 

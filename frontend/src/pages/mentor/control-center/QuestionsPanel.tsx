@@ -135,7 +135,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     <Badge
                       variant={
                         q.status === "pending" ? "warning" :
-                        q.status === "answering" ? "primary" :
+                        q.status === "answering" ? "default" :
                         q.status === "answered" ? "success" : "default"
                       }
                       className="text-[9px] px-1.5 py-0"

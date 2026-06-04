@@ -22,7 +22,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const saveTimer = useRef<ReturnType<typeof setTimeout>>();
+  const saveTimer = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     if (notes?.content) setContent(notes.content);
