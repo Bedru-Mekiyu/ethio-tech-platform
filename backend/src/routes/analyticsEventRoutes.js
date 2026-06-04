@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { protect, authorize } from "../middlewares/authMiddleware.js";
-import { validateRequest } from "../middlewares/validateRequest.js";
+import validateRequest from "../middlewares/validateRequest.js";
 import { z } from "zod";
 import {
   trackAnalyticsEvent,
@@ -22,24 +22,9 @@ const trackEventSchema = z.object({
   projectSubmissionId: z.string().optional(),
 });
 
-router.post(
-  "/track",
-  protect,
-  validateRequest(trackEventSchema),
-  trackAnalyticsEvent
-);
+router.post("/track", protect, validateRequest({ body: trackEventSchema }), trackAnalyticsEvent);
 router.get("/my-summary", protect, getMyEventSummary);
-router.get(
-  "/trends",
-  protect,
-  authorize("admin", "super_admin", "mentor"),
-  getEventTrendsData
-);
-router.get(
-  "/platform",
-  protect,
-  authorize("admin", "super_admin"),
-  getPlatformEventSummaryData
-);
+router.get("/trends", protect, authorize("admin", "super_admin", "mentor"), getEventTrendsData);
+router.get("/platform", protect, authorize("admin", "super_admin"), getPlatformEventSummaryData);
 
 export default router;
