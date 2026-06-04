@@ -197,7 +197,7 @@ export default function MentorControlCenterPage() {
             <h1 className="text-xl font-bold text-white sm:text-2xl tracking-tight">Mentor OS Control Center</h1>
             <p className="text-xs text-[var(--text-secondary)] mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
           </div>
-          <Badge className="mcc-live-badge ml-3 animate-pulse" role="status" aria-live="polite" aria-label="Session is live">
+          <Badge className="mcc-live-badge ml-3 animate-pulse" aria-live="polite" aria-label="Session is live">
             <Activity size={12} className="mr-1.5" aria-hidden="true" /> LIVE
           </Badge>
         </div>
