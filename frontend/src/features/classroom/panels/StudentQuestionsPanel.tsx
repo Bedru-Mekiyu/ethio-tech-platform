@@ -9,6 +9,7 @@ interface StudentQuestionsPanelProps {
   questions: any[];
   onAskQuestion: (text: string) => void;
   onUpvote: (questionId: string) => void;
+  currentUserId?: string;
 }
 
 export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: StudentQuestionsPanelProps) {

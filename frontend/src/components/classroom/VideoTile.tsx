@@ -76,7 +76,7 @@ export function VideoTile({
       aria-label={`Video of ${displayName}${hasAudio ? "" : " (muted)"}`}
     >
       {hasVideo && activeVideoTrack ? (
-        <VideoTrackRenderer track={activeVideoTrack} />
+        <VideoTrackRenderer track={activeVideoTrack as ICameraVideoTrack | IRemoteVideoTrack} />
       ) : (
         <div className="flex items-center justify-center w-full h-full bg-gradient-to-br from-gray-800 to-gray-900">
           <span className="text-white font-semibold text-lg">
