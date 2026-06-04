@@ -1,4 +1,4 @@
-import { logger } from "../utils/logger.js";
+import { logger } from "../lib/logger.js";
 
 let ioRef = null;
 
@@ -19,8 +19,9 @@ export async function emitNotification(payload) {
     });
 
     if (ioRef) {
-      const userSockets = Array.from(ioRef.sockets.sockets.values())
-        .filter((s) => s.data.user?.id === String(payload.userId));
+      const userSockets = Array.from(ioRef.sockets.sockets.values()).filter(
+        (s) => s.data.user?.id === String(payload.userId),
+      );
 
       for (const socket of userSockets) {
         socket.emit("notification:new", {
