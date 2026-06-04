@@ -121,7 +121,7 @@ export function useAgoraRoom({
     try {
       setError(null);
       const client = clientRef.current;
-      const joinedUid = await client.join(channel, token || "", uid);
+      const joinedUid = await client.join(channel, token || "", uid != null ? String(uid) : null);
       console.log("[Agora] Joined channel:", channel, "UID:", joinedUid);
 
       const [audioTrack, videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks();
