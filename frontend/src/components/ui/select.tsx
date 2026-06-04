@@ -24,7 +24,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
             "disabled:cursor-not-allowed disabled:opacity-50",
             "aria-[invalid=true]:border-danger/50 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,75,92,0.1)]",
-            className
+            className,
           )}
           {...props}
         >
@@ -46,13 +46,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         />
       </div>
     );
-  }
+  },
 );
 
 Select.displayName = "Select";
 
-export function SelectContent({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+export function SelectContent({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>;
 }
 
 export function SelectItem({ value, children }: { value: string; children: ReactNode }) {

@@ -17,6 +17,6 @@ export function DialogFooter({ className, children }: { className?: string; chil
   return <div className={className}>{children}</div>;
 }
 
-export function DialogTrigger({ children, asChild }: { children: React.ReactNode; asChild?: boolean }) {
+export function DialogTrigger({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
