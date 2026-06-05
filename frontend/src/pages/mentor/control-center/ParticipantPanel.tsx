@@ -5,9 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
-import { Search, Mic, MicOff, Shield, ShieldAlert, UserX, Ban, VolumeX, Volume2, MoreHorizontal, MessageSquare } from "lucide-react";
+import {
+  Search,
+  Mic,
+  MicOff,
+  Shield,
+  ShieldAlert,
+  UserX,
+  Ban,
+  VolumeX,
+  Volume2,
+  MoreHorizontal,
+  MessageSquare,
+} from "lucide-react";
 import { type MentorControlData, submitStudentFeedback } from "@/services/mentorControlService";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/composites/ToastProvider";
 
 interface ParticipantPanelProps {
   participants: MentorControlData["participants"];
@@ -19,7 +32,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   const [searchTerm, setSearchTerm] = useState("");
   const [roleFilter, setRoleFilter] = useState<string>("all");
   const [menuOpenId, setMenuOpenId] = useState<string | null>(null);
-  
+
   // Destructive action state
   const [confirmAction, setConfirmAction] = useState<{ action: string; userId: string; userName: string } | null>(null);
 
@@ -31,6 +44,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   const [comment, setComment] = useState("");
   const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
   const feedbackDialogRef = useRef<HTMLDialogElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const dialog = feedbackDialogRef.current;
@@ -60,6 +74,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       setProfessionalismScore(5);
     } catch (err) {
       console.error("Failed to submit feedback", err);
+      toast.error("Failed to submit feedback");
     } finally {
       setIsSubmittingFeedback(false);
     }
@@ -107,14 +122,26 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <div>
           <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
             Active Classroom
-            <Badge variant="purple" className="h-5 px-1.5">{participants.length} online</Badge>
+            <Badge variant="purple" className="h-5 px-1.5">
+              {participants.length} online
+            </Badge>
           </h3>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5" onClick={handleMuteAll}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5"
+            onClick={handleMuteAll}
+          >
             <VolumeX size={12} /> Mute All
           </Button>
-          <Button size="sm" variant="outline" className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5" onClick={handleUnmuteAll}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5"
+            onClick={handleUnmuteAll}
+          >
             <Volume2 size={12} /> Unmute All
           </Button>
         </div>
@@ -135,12 +162,24 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           onChange={(e) => setRoleFilter(e.target.value)}
           className="h-8 rounded-lg border border-white/5 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
         >
-          <option value="all" className="bg-[#0B0F19]">All Roles</option>
-          <option value="host" className="bg-[#0B0F19]">Host</option>
-          <option value="cohost" className="bg-[#0B0F19]">Co-Host</option>
-          <option value="moderator" className="bg-[#0B0F19]">Moderator</option>
-          <option value="participant" className="bg-[#0B0F19]">Participant</option>
-          <option value="observer" className="bg-[#0B0F19]">Observer</option>
+          <option value="all" className="bg-[#0B0F19]">
+            All Roles
+          </option>
+          <option value="host" className="bg-[#0B0F19]">
+            Host
+          </option>
+          <option value="cohost" className="bg-[#0B0F19]">
+            Co-Host
+          </option>
+          <option value="moderator" className="bg-[#0B0F19]">
+            Moderator
+          </option>
+          <option value="participant" className="bg-[#0B0F19]">
+            Participant
+          </option>
+          <option value="observer" className="bg-[#0B0F19]">
+            Observer
+          </option>
         </select>
       </div>
 
@@ -157,21 +196,34 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             const canManage = !isHost && !isCohost;
 
             return (
-              <div key={p.id} className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.01] p-3 hover:bg-white/[0.03] transition-all">
+              <div
+                key={p.id}
+                className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.01] p-3 hover:bg-white/[0.03] transition-all"
+              >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="relative shrink-0">
                     <Avatar name={p.name} src={p.avatar} size="sm" className="h-9 w-9 rounded-lg" />
                     {/* Live Status indicator */}
-                    <span className={cn(
-                      "absolute -bottom-1 -right-1 block h-3 w-3 rounded-full border-2 border-[#0B0F19]",
-                      p.role === "host" ? "bg-success" : "bg-primary"
-                    )} />
+                    <span
+                      className={cn(
+                        "absolute -bottom-1 -right-1 block h-3 w-3 rounded-full border-2 border-[#0B0F19]",
+                        p.role === "host" ? "bg-success" : "bg-primary",
+                      )}
+                    />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-white truncate flex items-center gap-1.5">
                       {p.name}
-                      {isHost && <Badge variant="success" className="text-[9px] px-1 py-0 scale-90">Host</Badge>}
-                      {isCohost && <Badge variant="purple" className="text-[9px] px-1 py-0 scale-90">Co-Host</Badge>}
+                      {isHost && (
+                        <Badge variant="success" className="text-[9px] px-1 py-0 scale-90">
+                          Host
+                        </Badge>
+                      )}
+                      {isCohost && (
+                        <Badge variant="purple" className="text-[9px] px-1 py-0 scale-90">
+                          Co-Host
+                        </Badge>
+                      )}
                     </p>
                     <p className="text-[9px] text-[var(--text-muted)] mt-0.5">
                       Online: {Math.floor(p.attendanceDuration / 60)}m · {p.role}
@@ -220,21 +272,30 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                             {p.role !== "cohost" ? (
                               <button
                                 className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
-                                onClick={() => { onAction("promote", p.userId); setMenuOpenId(null); }}
+                                onClick={() => {
+                                  onAction("promote", p.userId);
+                                  setMenuOpenId(null);
+                                }}
                               >
                                 <Shield size={13} className="text-purple-400" /> Promote to Co-Host
                               </button>
                             ) : (
                               <button
                                 className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
-                                onClick={() => { onAction("demote", p.userId); setMenuOpenId(null); }}
+                                onClick={() => {
+                                  onAction("demote", p.userId);
+                                  setMenuOpenId(null);
+                                }}
                               >
                                 <ShieldAlert size={13} className="text-warning" /> Demote to Participant
                               </button>
                             )}
                             <button
                               className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
-                              onClick={() => { onAction("timeout", p.userId); setMenuOpenId(null); }}
+                              onClick={() => {
+                                onAction("timeout", p.userId);
+                                setMenuOpenId(null);
+                              }}
                             >
                               <VolumeX size={13} /> Timeout (5m)
                             </button>
@@ -275,8 +336,16 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       {/* Confirmation Dialog for Destructive Actions */}
       <ConfirmDialog
         open={!!confirmAction}
-        title={confirmAction?.action ? `${confirmAction.action.charAt(0).toUpperCase()}${confirmAction.action.slice(1)} Participant` : ""}
-        description={confirmAction ? `Are you sure you want to ${confirmAction.action} ${confirmAction.userName}?${confirmAction.action === "block" ? " They will be banned from this classroom and unable to rejoin." : " They will be disconnected from the live session."}` : ""}
+        title={
+          confirmAction?.action
+            ? `${confirmAction.action.charAt(0).toUpperCase()}${confirmAction.action.slice(1)} Participant`
+            : ""
+        }
+        description={
+          confirmAction
+            ? `Are you sure you want to ${confirmAction.action} ${confirmAction.userName}?${confirmAction.action === "block" ? " They will be banned from this classroom and unable to rejoin." : " They will be disconnected from the live session."}`
+            : ""
+        }
         variant="danger"
         onCancel={() => setConfirmAction(null)}
         onConfirm={executeConfirm}
@@ -285,12 +354,16 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       <dialog
         ref={feedbackDialogRef}
         className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
-        onCancel={(e) => { e.preventDefault(); setFeedbackUser(null); }}
+        onCancel={(e) => {
+          e.preventDefault();
+          setFeedbackUser(null);
+        }}
       >
         <div className="p-6">
           <h2 className="text-lg font-semibold text-white">Submit Session Feedback</h2>
           <p className="mt-2 text-sm text-[var(--text-secondary)]">
-            Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this session.
+            Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this
+            session.
           </p>
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-3 gap-3">
@@ -301,7 +374,11 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                   onChange={(e) => setParticipationScore(Number(e.target.value))}
                   className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
                 >
-                  {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n} / 5</option>)}
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n} className="bg-[#0B0F19]">
+                      {n} / 5
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="space-y-1.5">
@@ -311,7 +388,11 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                   onChange={(e) => setCommunicationScore(Number(e.target.value))}
                   className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
                 >
-                  {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n} / 5</option>)}
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n} className="bg-[#0B0F19]">
+                      {n} / 5
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="space-y-1.5">
@@ -321,7 +402,11 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                   onChange={(e) => setProfessionalismScore(Number(e.target.value))}
                   className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
                 >
-                  {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n} / 5</option>)}
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n} className="bg-[#0B0F19]">
+                      {n} / 5
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -336,7 +421,12 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             </div>
           </div>
           <div className="flex justify-end gap-3">
-            <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white" onClick={() => setFeedbackUser(null)} disabled={isSubmittingFeedback}>
+            <Button
+              variant="outline"
+              className="border-white/10 hover:bg-white/5 text-white"
+              onClick={() => setFeedbackUser(null)}
+              disabled={isSubmittingFeedback}
+            >
               Cancel
             </Button>
             <Button variant="primary" onClick={handleFeedbackSubmit} disabled={isSubmittingFeedback}>

@@ -4,13 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  MessageSquare, Send, Trash2, AlertCircle
-} from "lucide-react";
+import { MessageSquare, Send, Trash2, AlertCircle } from "lucide-react";
 import { getSocket } from "@/services/socket";
 import { deleteMessage } from "@/services/mentorControlService";
 import type { ChatMessageServerPayload } from "@/socket/contracts";
 import { useAuthStore } from "@/store/authStore";
+import { useToast } from "@/components/composites/ToastProvider";
+import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 
 interface ChatPanelProps {
   sessionId: string;
@@ -20,11 +20,15 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   const [messages, setMessages] = useState<ChatMessageServerPayload[]>([]);
   const [inputText, setInputText] = useState("");
   const [recipientId, setRecipientId] = useState<string>("");
-  const [chatType, setChatType] = useState<"public" | "announcement" | "direct" | "private_question" | "system">("public");
+  const [chatType, setChatType] = useState<"public" | "announcement" | "direct" | "private_question" | "system">(
+    "public",
+  );
   const [activeSubTab, setActiveSubTab] = useState<string>("public");
-  
+
   const user = useAuthStore((s) => s.user);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   useEffect(() => {
     const socket = getSocket();
@@ -76,20 +80,22 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   };
 
   const handleDelete = async (messageId: string) => {
+    setDeleteTarget(null);
     try {
       await deleteMessage(sessionId, messageId, "Moderator action");
       // Local filter just in case
       setMessages((prev) => prev.filter((m) => m.messageId !== messageId));
-      
+
       // Emit socket event to notify other clients
       getSocket()?.emit("participant:control", {
         roomId: `session-${sessionId}`,
         targetUserId: "",
         action: "message_deleted",
-        reason: messageId
+        reason: messageId,
       });
     } catch (err) {
       console.error("Delete message failed", err);
+      toast.error("Failed to delete message");
     }
   };
 
@@ -113,11 +119,21 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
 
       <Tabs value={activeSubTab} onValueChange={setActiveSubTab} className="flex-1 flex flex-col min-h-0">
         <TabsList className="mcc-tabs-list w-full shrink-0 flex overflow-x-auto">
-          <TabsTrigger value="public" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">Public</TabsTrigger>
-          <TabsTrigger value="announcements" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">Announcements</TabsTrigger>
-          <TabsTrigger value="dms" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">DMs</TabsTrigger>
-          <TabsTrigger value="questions" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">Questions</TabsTrigger>
-          <TabsTrigger value="system" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">System</TabsTrigger>
+          <TabsTrigger value="public" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">
+            Public
+          </TabsTrigger>
+          <TabsTrigger value="announcements" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">
+            Announcements
+          </TabsTrigger>
+          <TabsTrigger value="dms" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">
+            DMs
+          </TabsTrigger>
+          <TabsTrigger value="questions" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">
+            Questions
+          </TabsTrigger>
+          <TabsTrigger value="system" className="mcc-tabs-trigger flex-1 text-[11px] py-1.5">
+            System
+          </TabsTrigger>
         </TabsList>
 
         <div className="flex-1 overflow-y-auto mcc-scrollbar my-3 space-y-3 pr-1">
@@ -146,7 +162,11 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-semibold text-white">
                       {msg.author || "Participant"}
-                      {msg.announcement && <Badge variant="warning" className="text-[8px] px-1 ml-1">Ann</Badge>}
+                      {msg.announcement && (
+                        <Badge variant="warning" className="text-[8px] px-1 ml-1">
+                          Ann
+                        </Badge>
+                      )}
                     </span>
                     <div className="flex items-center gap-1.5 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
                       <span className="text-[9px] text-[var(--text-muted)]">
@@ -157,7 +177,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                           size="sm"
                           variant="ghost"
                           className="h-5 w-5 p-0 text-danger hover:bg-danger/10 rounded-md"
-                          onClick={() => msg.messageId && handleDelete(msg.messageId)}
+                          onClick={() => msg.messageId && setDeleteTarget(msg.messageId)}
                           title="Delete message"
                         >
                           <Trash2 size={11} />
@@ -179,7 +199,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         <div className="shrink-0 flex gap-2 pt-2 border-t border-white/5">
           <select
             value={chatType}
-            onChange={(e) => setChatType(e.target.value as any)}
+            onChange={(e) => setChatType(e.target.value as "public" | "announcement" | "direct" | "private_question")}
             className="h-9 rounded-xl border border-white/10 bg-[#0B0F19] px-2 text-xs text-white outline-none shrink-0"
           >
             <option value="public">Public</option>
@@ -193,7 +213,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               placeholder="Recipient User ID..."
               className="h-9 text-xs w-28 bg-white/5 border-white/5 text-white"
               value={recipientId}
-              onChange={(e) => setRecipientId(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRecipientId(e.target.value)}
             />
           )}
 
@@ -202,8 +222,8 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               chatType === "announcement"
                 ? "Send announcement to class..."
                 : chatType === "direct"
-                ? "Send direct message..."
-                : "Type chat message..."
+                  ? "Send direct message..."
+                  : "Type chat message..."
             }
             className="mcc-chat-input h-9 text-xs flex-1"
             value={inputText}
@@ -215,6 +235,16 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
           </Button>
         </div>
       </Tabs>
+
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title="Delete Message"
+        description="Are you sure you want to delete this message? This action cannot be undone."
+        confirmLabel="Delete"
+        variant="danger"
+        onConfirm={() => deleteTarget && handleDelete(deleteTarget)}
+        onCancel={() => setDeleteTarget(null)}
+      />
     </Card>
   );
 }

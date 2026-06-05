@@ -9,6 +9,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { answerQuestion, pinQuestion, archiveQuestion, setQuestionStatus } from "@/services/mentorControlService";
 import type { MentorControlData } from "@/services/mentorControlService";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/composites/ToastProvider";
 
 interface QuestionsPanelProps {
   questions: MentorControlData["questions"];
@@ -18,7 +19,9 @@ interface QuestionsPanelProps {
 export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelProps) {
   const [answerText, setAnswerText] = useState<Record<string, string>>({});
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [submittingId, setSubmittingId] = useState<string | null>(null);
 
   const sortedAndFiltered = useMemo(() => {
     let list = [...questions];
@@ -36,30 +39,42 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
   const handleAnswer = async (questionId: string) => {
     const text = answerText[questionId];
     if (!text?.trim()) return;
+    setSubmittingId(questionId);
     try {
       await answerQuestion(sessionId, questionId, text);
       setAnswerText((prev) => ({ ...prev, [questionId]: "" }));
       queryClient.invalidateQueries({ queryKey: ["mentor-control", sessionId] });
     } catch (err) {
       console.error("Answer failed", err);
+      toast.error("Failed to submit answer");
+    } finally {
+      setSubmittingId(null);
     }
   };
 
   const handlePin = async (questionId: string) => {
+    setSubmittingId(questionId);
     try {
       await pinQuestion(sessionId, questionId);
       queryClient.invalidateQueries({ queryKey: ["mentor-control", sessionId] });
     } catch (err) {
       console.error("Pin failed", err);
+      toast.error("Failed to pin question");
+    } finally {
+      setSubmittingId(null);
     }
   };
 
   const handleArchive = async (questionId: string) => {
+    setSubmittingId(questionId);
     try {
       await archiveQuestion(sessionId, questionId);
       queryClient.invalidateQueries({ queryKey: ["mentor-control", sessionId] });
     } catch (err) {
       console.error("Archive failed", err);
+      toast.error("Failed to archive question");
+    } finally {
+      setSubmittingId(null);
     }
   };
 
@@ -69,6 +84,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
       queryClient.invalidateQueries({ queryKey: ["mentor-control", sessionId] });
     } catch (err) {
       console.error("Status change failed", err);
+      toast.error("Failed to change question status");
     }
   };
 
@@ -84,12 +100,26 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="h-8 w-32 text-xs bg-white/5 border-white/5 text-white">
-            <option value="all" className="bg-[#0B0F19]">All Statuses</option>
-            <option value="pending" className="bg-[#0B0F19]">Pending</option>
-            <option value="answering" className="bg-[#0B0F19]">Answering</option>
-            <option value="answered" className="bg-[#0B0F19]">Answered</option>
-            <option value="archived" className="bg-[#0B0F19]">Archived</option>
+          <Select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="h-8 w-32 text-xs bg-white/5 border-white/5 text-white"
+          >
+            <option value="all" className="bg-[#0B0F19]">
+              All Statuses
+            </option>
+            <option value="pending" className="bg-[#0B0F19]">
+              Pending
+            </option>
+            <option value="answering" className="bg-[#0B0F19]">
+              Answering
+            </option>
+            <option value="answered" className="bg-[#0B0F19]">
+              Answered
+            </option>
+            <option value="archived" className="bg-[#0B0F19]">
+              Archived
+            </option>
           </Select>
           <span className="text-xs text-[var(--text-muted)]">
             {questions.filter((q) => q.status === "pending").length} unanswered
@@ -110,7 +140,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                 "rounded-xl border p-3.5 transition-all animate-slide-in",
                 q.isPinned
                   ? "border-primary/45 bg-primary/[0.03] shadow-[0_0_15px_rgba(99,102,241,0.05)]"
-                  : "border-white/5 bg-white/[0.01]"
+                  : "border-white/5 bg-white/[0.01]",
               )}
             >
               <div className="flex items-start gap-3">
@@ -121,6 +151,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:text-white"
                     onClick={() => handlePin(q.id)}
                     title={q.isPinned ? "Unpin question" : "Pin question"}
+                    disabled={submittingId === q.id}
                   >
                     <Pin size={14} className={q.isPinned ? "text-primary fill-primary" : "opacity-60"} />
                   </Button>
@@ -134,9 +165,13 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     <span className="text-xs font-semibold text-white">{q.studentName}</span>
                     <Badge
                       variant={
-                        q.status === "pending" ? "warning" :
-                        q.status === "answering" ? "default" :
-                        q.status === "answered" ? "success" : "default"
+                        q.status === "pending"
+                          ? "warning"
+                          : q.status === "answering"
+                            ? "default"
+                            : q.status === "answered"
+                              ? "success"
+                              : "default"
                       }
                       className="text-[9px] px-1.5 py-0"
                     >
@@ -166,8 +201,13 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                       onChange={(e) => setAnswerText((prev) => ({ ...prev, [q.id]: e.target.value }))}
                       onKeyDown={(e) => e.key === "Enter" && handleAnswer(q.id)}
                     />
-                    <Button size="sm" className="h-8 text-xs px-3" onClick={() => handleAnswer(q.id)}>
-                      <Send size={11} className="mr-1" /> Reply
+                    <Button
+                      size="sm"
+                      className="h-8 text-xs px-3"
+                      onClick={() => handleAnswer(q.id)}
+                      disabled={submittingId === q.id || !(answerText[q.id] || "").trim()}
+                    >
+                      <Send size={11} className="mr-1" /> {submittingId === q.id ? "Sending..." : "Reply"}
                     </Button>
                     <Button
                       size="sm"
@@ -175,14 +215,27 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                       className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
                       onClick={() => handleArchive(q.id)}
                       title="Archive Question"
+                      disabled={submittingId === q.id}
                     >
                       <Archive size={14} />
                     </Button>
-                    <Select value={q.status} onChange={(e) => handleStatusChange(q.id, e.target.value)} className="h-8 w-24 text-xs bg-white/5 border-white/5 text-white">
-                      <option value="pending" className="bg-[#0B0F19]">Pending</option>
-                      <option value="answering" className="bg-[#0B0F19]">Answering</option>
-                      <option value="answered" className="bg-[#0B0F19]">Answered</option>
-                      <option value="archived" className="bg-[#0B0F19]">Archived</option>
+                    <Select
+                      value={q.status}
+                      onChange={(e) => handleStatusChange(q.id, e.target.value)}
+                      className="h-8 w-24 text-xs bg-white/5 border-white/5 text-white"
+                    >
+                      <option value="pending" className="bg-[#0B0F19]">
+                        Pending
+                      </option>
+                      <option value="answering" className="bg-[#0B0F19]">
+                        Answering
+                      </option>
+                      <option value="answered" className="bg-[#0B0F19]">
+                        Answered
+                      </option>
+                      <option value="archived" className="bg-[#0B0F19]">
+                        Archived
+                      </option>
                     </Select>
                   </div>
                 </div>
