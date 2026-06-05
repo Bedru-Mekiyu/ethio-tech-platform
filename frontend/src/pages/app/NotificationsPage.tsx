@@ -1,6 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bell, CalendarClock, CheckCircle2, MessageSquareText, Rocket, Trophy } from "lucide-react";
-import { fetchMyNotifications, markNotificationRead, markAllNotificationsRead, type NotificationItem } from "@/services/notificationsService";
+import { useEffect, useState } from "react";
+import {
+  Bell,
+  CalendarClock,
+  CheckCircle2,
+  MessageSquareText,
+  Rocket,
+  Trophy,
+  Zap,
+  Shield,
+  Users,
+  Star,
+} from "lucide-react";
+import {
+  fetchMyNotifications,
+  markNotificationRead,
+  markAllNotificationsRead,
+  type NotificationItem,
+} from "@/services/notificationsService";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +25,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { getSocket } from "@/services/socket";
+import { useNotificationStore } from "@/store/notificationStore";
 
 function NotificationsSkeleton() {
   return (
@@ -29,8 +48,29 @@ function iconForType(type?: string) {
       return Rocket;
     case "badge":
       return Trophy;
+    case "xp":
+      return Zap;
     case "mentor":
       return MessageSquareText;
+    case "announcement":
+      return Bell;
+    case "account_approved":
+    case "account_rejected":
+    case "account_suspended":
+    case "account_banned":
+    case "account_deleted":
+    case "account_unsuspended":
+    case "account_reactivated":
+      return Shield;
+    case "mentor_approved":
+    case "mentor_rejected":
+      return Users;
+    case "role_changed":
+      return Star;
+    case "password_reset":
+      return Shield;
+    case "system":
+      return Bell;
     default:
       return Bell;
   }
@@ -39,26 +79,46 @@ function iconForType(type?: string) {
 export function NotificationsPage() {
   usePageTitle("Notifications");
   const queryClient = useQueryClient();
+  const [page] = useState(1);
+  const clearBadge = useNotificationStore((s) => s.clearBadge);
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ["notifications"],
-    queryFn: fetchMyNotifications,
+    queryKey: ["notifications", page],
+    queryFn: () => fetchMyNotifications(page),
   });
 
   const markRead = useMutation({
     mutationFn: markNotificationRead,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notifications"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
+      refetch();
+    },
   });
 
   const markAllRead = useMutation({
     mutationFn: markAllNotificationsRead,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notifications"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notifications"] });
+      clearBadge();
+      refetch();
+    },
   });
+
+  useEffect(() => {
+    const socket = getSocket();
+    const handleNew = () => {
+      refetch();
+    };
+    socket.on("notification:new", handleNew);
+    return () => {
+      socket.off("notification:new", handleNew);
+    };
+  }, [refetch]);
 
   const notifications = (data ?? []) as NotificationItem[];
   const unread = notifications.filter((item) => !item.isRead);
   const grouped = {
-    unread: unread.slice(0, 4),
-    recent: notifications.filter((item) => item.isRead).slice(0, 4),
+    unread: unread.slice(0, 10),
+    recent: notifications.filter((item) => item.isRead).slice(0, 10),
   };
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
@@ -80,10 +140,10 @@ export function NotificationsPage() {
       <Card className="hero-shell p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <Badge className="mb-3">Notifications</Badge>
             <h1 className="section-title text-3xl md:text-4xl">Stay synced with the learning network</h1>
             <p className="section-copy mt-3 max-w-2xl">
-              Important classroom, project, and mentor updates live here so you can respond quickly without losing focus.
+              Important classroom, project, and mentor updates live here so you can respond quickly without losing
+              focus.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -98,7 +158,6 @@ export function NotificationsPage() {
           <CardHeader className="p-0">
             <div className="flex items-center justify-between">
               <div>
-                <Badge variant="purple">Unread first</Badge>
                 <CardTitle className="mt-3">Priority updates</CardTitle>
               </div>
               {unread.length > 0 && (
@@ -185,6 +244,10 @@ export function NotificationsPage() {
               <Badge variant="purple">Mentor</Badge>
               <Badge variant="success">Project</Badge>
               <Badge variant="warning">Badge</Badge>
+              <Badge variant="default">XP</Badge>
+              <Badge variant="default">System</Badge>
+              <Badge variant="danger">Account</Badge>
+              <Badge variant="purple">Announcement</Badge>
             </div>
           </Card>
         </div>
