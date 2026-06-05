@@ -107,9 +107,7 @@ function MissionCard({
       <div className="flex items-start justify-between gap-4">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-            tone === "primary"
-              ? "bg-primary/10 text-primary"
-              : "bg-secondary/10 text-secondary"
+            tone === "primary" ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"
           }`}
         >
           <Icon size={20} />
@@ -156,15 +154,7 @@ function StatCard({
   );
 }
 
-function TimelineItem({
-  year,
-  title,
-  description,
-}: {
-  year: string;
-  title: string;
-  description: string;
-}) {
+function TimelineItem({ year, title, description }: { year: string; title: string; description: string }) {
   return (
     <div className="relative pb-10 last:pb-0">
       <span className="absolute -left-[41px] top-1 flex h-5 w-5 items-center justify-center rounded-full border border-primary/30 bg-[var(--bg-base)]">
@@ -212,28 +202,28 @@ export function AboutPage() {
       icon: Users,
       value: formatCompactCount(data?.stats.activeLearners ?? 0),
       label: "Active learners",
-      helper: "Learners currently supported by the network",
+      helper: "Currently using the platform",
       tone: "primary" as const,
     },
     {
       icon: GraduationCap,
       value: formatCompactCount(data?.stats.mentorNetwork ?? 0),
       label: "Mentors",
-      helper: "Professional guides active across the platform",
+      helper: "Active on the platform",
       tone: "purple" as const,
     },
     {
       icon: Layers3,
       value: formatCompactCount(data?.stats.trackCount ?? 0),
-      label: "Live pathways",
-      helper: "Programs available for current cohorts",
+      label: "Tracks",
+      helper: "Available to enroll in",
       tone: "success" as const,
     },
     {
       icon: ShieldCheck,
       value: `${data?.stats.approvalRate ?? 0}%`,
       label: "Approval rate",
-      helper: "Project quality signal from reviewed submissions",
+      helper: "Project submissions approved",
       tone: "warning" as const,
     },
   ];
@@ -247,13 +237,11 @@ export function AboutPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <Badge className="mb-5">{data?.hero.eyebrow ?? "About EthioTech"}</Badge>
           <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">
-            A national learning network for future builders
+            A learning network for Ethiopian students
           </p>
-          <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Empowering the Next Generation of{" "}
-            <span className="glow-text">Ethiopian Tech Leaders</span>
+          <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+            Learn software engineering with <span className="glow-text">real mentors</span>
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
             {data?.hero.description}
@@ -321,7 +309,6 @@ export function AboutPage() {
         </div>
 
         <div>
-          <Badge variant="purple">{data?.bridge.eyebrow}</Badge>
           <h2 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">{data?.bridge.title}</h2>
           <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data?.bridge.description}</p>
 
@@ -372,11 +359,9 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.25 }}
       >
         <div className="text-center">
-          <Badge className="mb-4">Our roadmap</Badge>
-          <h2 className="text-3xl font-bold md:text-4xl">A journey built in phases</h2>
+          <h2 className="text-3xl font-bold md:text-4xl">How the platform has grown</h2>
           <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
-            The platform has evolved from an idea into a scalable learning ecosystem, with each
-            phase focused on clearer progression, stronger collaboration, and broader access.
+            Each phase adds new features, content, and ways for students and mentors to connect.
           </p>
         </div>
 
@@ -389,8 +374,8 @@ export function AboutPage() {
         ) : (
           <div className="mt-12">
             <EmptyState
-              title="The roadmap is being prepared"
-              description="We are still finalizing the public milestone view for this section."
+              title="No roadmap items yet"
+              description="Milestones will appear here as the platform grows."
               actionLabel="See how it works"
               onAction={() => {
                 navigate("/how-it-works");
@@ -404,7 +389,6 @@ export function AboutPage() {
         <Card className="mx-auto max-w-7xl overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <Badge className="mb-4">Join the movement</Badge>
               <h2 className="text-3xl font-bold md:text-4xl">{data?.cta.title}</h2>
               <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data?.cta.description}</p>
             </div>

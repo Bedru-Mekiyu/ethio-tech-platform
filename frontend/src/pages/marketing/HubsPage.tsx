@@ -65,7 +65,11 @@ function HubCard({ hub }: { hub: MarketingHub }) {
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-1">
           <Badge variant={availabilityRatio >= 50 ? "success" : availabilityRatio >= 20 ? "warning" : "purple"}>
-            {availabilityRatio >= 50 ? "High availability" : availabilityRatio >= 20 ? "Moderate availability" : "Limited seats"}
+            {availabilityRatio >= 50
+              ? "High availability"
+              : availabilityRatio >= 20
+                ? "Moderate availability"
+                : "Limited seats"}
           </Badge>
           <h3 className="text-xl font-semibold text-white">{hub.city}</h3>
           <p className="text-sm text-[var(--text-secondary)]">{hub.address}</p>
@@ -127,10 +131,7 @@ function HubMarker({ hub, index }: { hub: MarketingHub; index: number }) {
     left: `${22 + fallbackCol * 14 + (fallbackRow % 2) * 3}%`,
   };
   return (
-    <div
-      className="absolute -translate-x-1/2 -translate-y-1/2"
-      style={{ top: position.top, left: position.left }}
-    >
+    <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ top: position.top, left: position.left }}>
       <div className="flex flex-col items-center gap-2">
         <div className="rounded-full border border-primary/30 bg-[rgba(8,14,24,0.96)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white shadow-lg">
           {hub.city}
@@ -183,8 +184,8 @@ export function HubsPage() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 lg:px-8">
         <EmptyState
-          title="No public hubs are available yet"
-          description="Once the hub network is published, this page will populate automatically."
+          title="No hubs available yet"
+          description="Hub locations will appear here once they are set up."
           actionLabel="Contact the team"
           onAction={() => {
             window.location.assign("/contact");
@@ -202,10 +203,7 @@ export function HubsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <Badge className="mb-5">{data.hero.eyebrow}</Badge>
-        <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-          {data.hero.title}
-        </h1>
+        <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">{data.hero.title}</h1>
         <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
           {data.hero.description}
         </p>
@@ -221,25 +219,33 @@ export function HubsPage() {
       <section className="mt-12 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/85 p-5 text-center">
           <Building2 className="mx-auto text-primary" size={18} />
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{formatCompactNumber(data.stats.hubCount)}</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">
+            {formatCompactNumber(data.stats.hubCount)}
+          </p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Hubs</p>
           <p className="mt-2 text-xs text-[var(--text-secondary)]">Community learning locations</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/85 p-5 text-center">
           <Wifi className="mx-auto text-secondary" size={18} />
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{formatCompactNumber(data.stats.availableSeats)}</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">
+            {formatCompactNumber(data.stats.availableSeats)}
+          </p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Open seats</p>
           <p className="mt-2 text-xs text-[var(--text-secondary)]">Ready for learners today</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/85 p-5 text-center">
           <MonitorSmartphone className="mx-auto text-success" size={18} />
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{formatCompactNumber(data.stats.totalSeats)}</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">
+            {formatCompactNumber(data.stats.totalSeats)}
+          </p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Seats</p>
           <p className="mt-2 text-xs text-[var(--text-secondary)]">Across the full network</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/85 p-5 text-center">
           <ShieldCheck className="mx-auto text-warning" size={18} />
-          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">{formatCompactNumber(data.stats.activeMentors)}</p>
+          <p className="mt-4 text-3xl font-semibold tracking-tight text-white">
+            {formatCompactNumber(data.stats.activeMentors)}
+          </p>
           <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Mentor hubs</p>
           <p className="mt-2 text-xs text-[var(--text-secondary)]">Supported by local mentors</p>
         </Card>
@@ -254,8 +260,7 @@ export function HubsPage() {
       >
         <div className="flex items-center justify-between gap-4">
           <div>
-            <Badge className="mb-4">Map view</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">A connected network across Ethiopia.</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Hub locations</h2>
           </div>
           <div className="flex flex-wrap gap-2">
             {data.legend.map((item) => (
@@ -278,7 +283,6 @@ export function HubsPage() {
           <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <Badge>Available locations</Badge>
                 <h3 className="mt-3 text-2xl font-semibold text-white">Find the closest learning space</h3>
               </div>
               <div className="flex gap-2">
@@ -334,7 +338,6 @@ export function HubsPage() {
       <Card className="mt-16 overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Badge className="mb-4">Expand the network</Badge>
             <h2 className="text-3xl font-bold md:text-4xl">{data.cta.title}</h2>
             <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data.cta.description}</p>
           </div>

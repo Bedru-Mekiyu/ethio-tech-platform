@@ -68,15 +68,7 @@ function MentorApplySkeleton() {
   );
 }
 
-function MetricPill({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: LucideIcon;
-  label: string;
-  value: string;
-}) {
+function MetricPill({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <Card className="flex items-center gap-3 border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
       <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -126,18 +118,18 @@ export function MentorRecruitmentPage() {
       { label: "Verified mentors", value: data?.stats.verifiedMentors ?? 0, icon: BadgeCheck },
       { label: "Live sessions", value: data?.stats.totalSessions ?? 0, icon: CalendarDays },
     ],
-    [data]
+    [data],
   );
 
   const toggleSkill = (skill: string) => {
     setExpertise((current) =>
-      current.includes(skill) ? current.filter((item) => item !== skill) : [...current, skill]
+      current.includes(skill) ? current.filter((item) => item !== skill) : [...current, skill],
     );
   };
 
   const toggleStyle = (style: MentorApplicationPayload["mentoringStyle"][number]) => {
     setMentoringStyle((current) =>
-      current.includes(style) ? current.filter((item) => item !== style) : [...current, style]
+      current.includes(style) ? current.filter((item) => item !== style) : [...current, style],
     );
   };
 
@@ -174,10 +166,7 @@ export function MentorRecruitmentPage() {
       currentRole,
       currentCompany: currentCompany || undefined,
       location: location || undefined,
-      yearsExperience:
-        yearsExperience && !Number.isNaN(parsedYearsExperience)
-          ? parsedYearsExperience
-          : undefined,
+      yearsExperience: yearsExperience && !Number.isNaN(parsedYearsExperience) ? parsedYearsExperience : undefined,
       expertise: normalizedExpertise,
       availability,
       mentoringStyle,
@@ -215,13 +204,12 @@ export function MentorRecruitmentPage() {
       >
         <div className="space-y-6">
           <div>
-            <Badge className="mb-5">Mentor application</Badge>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
               Apply to become a <span className="glow-text">Mentor</span>
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
-              Share your background, teaching style, and availability so we can match you with learners who
-              need practical guidance, not just more content.
+              Share your background, teaching style, and availability so we can match you with learners who need
+              practical guidance, not just more content.
             </p>
           </div>
 
@@ -238,21 +226,18 @@ export function MentorRecruitmentPage() {
 
           <div className="grid gap-3 md:grid-cols-3">
             <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
-              <Badge variant="purple">01</Badge>
               <h2 className="mt-3 font-semibold text-white">Professional information</h2>
               <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
                 We use your role and company to understand the perspective you bring to learners.
               </p>
             </Card>
             <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
-              <Badge variant="purple">02</Badge>
               <h2 className="mt-3 font-semibold text-white">Expertise & style</h2>
               <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
                 Choose the topics and mentoring formats that match your strengths.
               </p>
             </Card>
             <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
-              <Badge variant="purple">03</Badge>
               <h2 className="mt-3 font-semibold text-white">Review process</h2>
               <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
                 Submissions are reviewed by the team and routed to moderation for onboarding.
@@ -308,42 +293,64 @@ export function MentorRecruitmentPage() {
             <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <Badge>Application form</Badge>
                   <h2 className="mt-3 text-2xl font-semibold text-white">Tell us about your mentoring profile</h2>
                   <p className="mt-2 text-sm text-[var(--text-secondary)]">
                     This form starts a mentor application. It does not create a mentor account.
                   </p>
                 </div>
-                <Badge variant="purple">Public application</Badge>
               </div>
 
               <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <Label required>Full name</Label>
-                    <Input value={fullName} onChange={(e) => setFullName(e.target.value)} required placeholder="Amina Tesfaye" />
+                    <Input
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
+                      placeholder="Amina Tesfaye"
+                    />
                   </div>
                   <div>
                     <Label required>Email address</Label>
-                    <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required placeholder="amina@example.com" />
+                    <Input
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      required
+                      placeholder="amina@example.com"
+                    />
                   </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <Label required>Current role</Label>
-                    <Input value={currentRole} onChange={(e) => setCurrentRole(e.target.value)} required placeholder="Senior Frontend Engineer" />
+                    <Input
+                      value={currentRole}
+                      onChange={(e) => setCurrentRole(e.target.value)}
+                      required
+                      placeholder="Senior Frontend Engineer"
+                    />
                   </div>
                   <div>
                     <Label>Current company</Label>
-                    <Input value={currentCompany} onChange={(e) => setCurrentCompany(e.target.value)} placeholder="EthioTech Labs" />
+                    <Input
+                      value={currentCompany}
+                      onChange={(e) => setCurrentCompany(e.target.value)}
+                      placeholder="EthioTech Labs"
+                    />
                   </div>
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <Label>Location</Label>
-                    <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Addis Ababa, Ethiopia" />
+                    <Input
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      placeholder="Addis Ababa, Ethiopia"
+                    />
                   </div>
                   <div>
                     <Label>Years of experience</Label>
@@ -379,7 +386,9 @@ export function MentorRecruitmentPage() {
                       );
                     })}
                   </div>
-                  <p className="mt-2 text-xs text-[var(--text-muted)]">Add any extra skills separated by commas below.</p>
+                  <p className="mt-2 text-xs text-[var(--text-muted)]">
+                    Add any extra skills separated by commas below.
+                  </p>
                   <Input
                     value={expertiseInput}
                     onChange={(e) => setExpertiseInput(e.target.value)}
@@ -447,11 +456,21 @@ export function MentorRecruitmentPage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <Label>LinkedIn profile</Label>
-                    <Input value={linkedin} onChange={(e) => setLinkedin(e.target.value)} type="url" placeholder="https://linkedin.com/in/..." />
+                    <Input
+                      value={linkedin}
+                      onChange={(e) => setLinkedin(e.target.value)}
+                      type="url"
+                      placeholder="https://linkedin.com/in/..."
+                    />
                   </div>
                   <div>
                     <Label>Portfolio or website</Label>
-                    <Input value={portfolio} onChange={(e) => setPortfolio(e.target.value)} type="url" placeholder="https://..." />
+                    <Input
+                      value={portfolio}
+                      onChange={(e) => setPortfolio(e.target.value)}
+                      type="url"
+                      placeholder="https://..."
+                    />
                   </div>
                 </div>
 
@@ -469,20 +488,20 @@ export function MentorRecruitmentPage() {
                 </label>
 
                 {submissionError ? (
-                <p className="text-sm text-danger" role="alert">
-                   {submissionError}
-                </p>
+                  <p className="text-sm text-danger" role="alert">
+                    {submissionError}
+                  </p>
                 ) : null}
 
                 {mutation.isError ? (
-                <p className="text-sm text-danger" role="alert">
-                   {(mutation.error as Error)?.message || "Unable to submit the application."}
-                </p>
+                  <p className="text-sm text-danger" role="alert">
+                    {(mutation.error as Error)?.message || "Unable to submit the application."}
+                  </p>
                 ) : null}
 
                 <Button type="submit" size="lg" className="w-full" disabled={mutation.isPending || !consent}>
-                {mutation.isPending ? "Submitting..." : "Apply to become a mentor"}
-                <ArrowRight size={16} className="ml-2" />
+                  {mutation.isPending ? "Submitting..." : "Apply to become a mentor"}
+                  <ArrowRight size={16} className="ml-2" />
                 </Button>
               </form>
             </Card>
@@ -496,15 +515,21 @@ export function MentorRecruitmentPage() {
             <div className="mt-4 space-y-3">
               <div className="flex items-start gap-3">
                 <Clock3 className="mt-0.5 text-secondary" size={16} />
-                <p className="text-sm text-[var(--text-secondary)]">We review each application and check for role fit.</p>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  We review each application and check for role fit.
+                </p>
               </div>
               <div className="flex items-start gap-3">
                 <GraduationCap className="mt-0.5 text-secondary" size={16} />
-                <p className="text-sm text-[var(--text-secondary)]">Approved mentors get onboarding guidance and dashboard access.</p>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  Approved mentors get onboarding guidance and dashboard access.
+                </p>
               </div>
               <div className="flex items-start gap-3">
                 <Sparkles className="mt-0.5 text-secondary" size={16} />
-                <p className="text-sm text-[var(--text-secondary)]">You can then run sessions, review projects, and support cohorts.</p>
+                <p className="text-sm text-[var(--text-secondary)]">
+                  You can then run sessions, review projects, and support cohorts.
+                </p>
               </div>
             </div>
           </Card>

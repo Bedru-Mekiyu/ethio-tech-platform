@@ -2,14 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Trophy,
-  Users,
-  Video,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, BadgeCheck, Trophy, Users, Video, type LucideIcon } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -105,13 +98,7 @@ function MentorStatCard({
   );
 }
 
-function MentorCard({
-  mentor,
-  featured = false,
-}: {
-  mentor: MarketingMentorPageMentor;
-  featured?: boolean;
-}) {
+function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageMentor; featured?: boolean }) {
   const score = Math.min(100, mentor.mentorScore ?? 0);
 
   return (
@@ -122,15 +109,19 @@ function MentorCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="relative">
-          <Avatar src={mentor.avatar} name={mentor.fullName} userId={mentor._id} role="mentor" size={featured ? "lg" : "md"} />
+          <Avatar
+            src={mentor.avatar}
+            name={mentor.fullName}
+            userId={mentor._id}
+            role="mentor"
+            size={featured ? "lg" : "md"}
+          />
         </div>
         <Badge variant={featured ? "purple" : "default"}>{featured ? "Featured mentor" : "Mentor"}</Badge>
       </div>
 
       <div className="space-y-1">
-        <h3 className={`font-semibold text-white ${featured ? "text-2xl" : "text-lg"}`}>
-          {mentor.fullName}
-        </h3>
+        <h3 className={`font-semibold text-white ${featured ? "text-2xl" : "text-lg"}`}>{mentor.fullName}</h3>
         <p className="text-sm text-primary">{mentor.currentCompany || "Independent mentor"}</p>
         <p className="text-xs text-[var(--text-muted)]">{mentor.totalSessions ?? 0} sessions delivered</p>
       </div>
@@ -183,9 +174,7 @@ export function MentorsPage() {
     const allMentors = [...(data?.featuredMentors ?? []), ...(data?.discoverMentors ?? [])];
     return filter === "all"
       ? allMentors
-      : allMentors.filter((mentor) =>
-          (mentor.expertise ?? []).some((skill) => skill.trim().toLowerCase() === filter)
-        );
+      : allMentors.filter((mentor) => (mentor.expertise ?? []).some((skill) => skill.trim().toLowerCase() === filter));
   }, [data, filter]);
 
   const featured = data?.featuredMentors ?? [];
@@ -217,9 +206,8 @@ export function MentorsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <Badge className="mb-5">{data?.hero.eyebrow ?? "Global mentor network"}</Badge>
-        <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-          {data?.hero.title ?? "Learn from the Best in Global Technology"}
+        <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+          {data?.hero.title ?? "Learn from experienced mentors"}
         </h1>
         <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
           {data?.hero.description}
@@ -279,11 +267,10 @@ export function MentorsPage() {
       <section className="mt-16">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Featured Global Mentors</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Mentors who combine skill, clarity, and care.</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Mentors who teach with clarity and care.</h2>
             <p className="mt-4 text-[var(--text-secondary)]">
-              Start with the strongest mentors in the network, then browse the wider community by expertise
-              and teaching style.
+              Start with the strongest mentors in the network, then browse the wider community by expertise and teaching
+              style.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -313,8 +300,8 @@ export function MentorsPage() {
         ) : (
           <div className="mt-10">
             <EmptyState
-              title="Featured mentors are loading"
-              description="As mentor data becomes available, the featured section will populate automatically."
+              title="No featured mentors yet"
+              description="Mentor profiles will appear here once they join and are verified."
               actionLabel="Become a mentor"
               onAction={() => navigate("/mentor-recruitment")}
             />
@@ -325,8 +312,7 @@ export function MentorsPage() {
       <section className="mt-16">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge className="mb-4">Discover Mentors</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Explore the full mentor ecosystem.</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Browse all mentors</h2>
           </div>
           <p className="max-w-2xl text-[var(--text-secondary)]">
             Pick a specialty, scan the profiles, and connect with mentors who fit the way you want to learn.
@@ -371,7 +357,6 @@ export function MentorsPage() {
       <Card className="mt-16 relative overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Badge className="mb-4">Mentor impact</Badge>
             <h2 className="text-3xl font-bold md:text-4xl">{data?.cta.title}</h2>
             <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{data?.cta.description}</p>
           </div>

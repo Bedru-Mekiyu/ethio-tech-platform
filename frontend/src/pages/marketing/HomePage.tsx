@@ -1,15 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import {
-  ArrowRight,
-  Bot,
-  Code2,
-  Cpu,
-  MonitorPlay,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Bot, Code2, Cpu, MonitorPlay, ShieldCheck, Sparkles } from "lucide-react";
 import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Avatar } from "@/components/ui/avatar";
@@ -53,7 +45,8 @@ function getTrackMeta(track: MarketingTrack) {
   }
 
   const title = track.title.toLowerCase();
-  if (title.includes("ai") || title.includes("data")) return { icon: Bot, accent: "text-secondary", badge: "purple" as const };
+  if (title.includes("ai") || title.includes("data"))
+    return { icon: Bot, accent: "text-secondary", badge: "purple" as const };
   if (title.includes("cyber") || title.includes("security")) {
     return { icon: ShieldCheck, accent: "text-warning", badge: "warning" as const };
   }
@@ -77,7 +70,7 @@ function HomeSkeleton() {
             <Skeleton className="h-12 w-44 rounded-xl" />
           </div>
         </div>
-        <Skeleton className="aspect-[4/3] w-full rounded-[28px]" />
+        <Skeleton className="h-64 w-full rounded-[28px]" />
       </div>
       <Skeleton className="mt-10 h-32 w-full rounded-[28px]" />
       <div className="mt-16 space-y-4">
@@ -102,20 +95,11 @@ function HomeSkeleton() {
   );
 }
 
-function MarketingStat({
-  value,
-  label,
-  helper,
-}: {
-  value: string;
-  label: string;
-  helper?: string;
-}) {
+function MarketingStat({ value, label }: { value: string; label: string }) {
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/70 p-5 text-center md:border-l md:first:border-l-0 md:first:pl-0">
       <p className="text-3xl font-semibold tracking-tight text-white">{value}</p>
       <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
-      {helper ? <p className="mt-2 text-xs text-[var(--text-secondary)]">{helper}</p> : null}
     </div>
   );
 }
@@ -159,15 +143,20 @@ function MentorCard({ mentor }: { mentor: MarketingMentor }) {
   return (
     <Card className="flex h-full flex-col gap-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
       <div className="relative mx-auto">
-        <Avatar src={mentor.avatar} name={mentor.fullName} userId={mentor._id} role="mentor" size="lg" className="ring-4 ring-primary/20" />
+        <Avatar
+          src={mentor.avatar}
+          name={mentor.fullName}
+          userId={mentor._id}
+          role="mentor"
+          size="lg"
+          className="ring-4 ring-primary/20"
+        />
       </div>
 
       <div className="space-y-1">
         <h3 className="text-lg font-semibold text-white">{mentor.fullName}</h3>
         <p className="text-sm text-primary">{mentor.currentCompany || "Industry mentor"}</p>
-        <p className="text-xs text-[var(--text-muted)]">
-          {mentor.totalSessions ?? 0} sessions delivered
-        </p>
+        <p className="text-xs text-[var(--text-muted)]">{mentor.totalSessions ?? 0} sessions delivered</p>
       </div>
 
       <div className="mt-auto space-y-2">
@@ -218,41 +207,35 @@ export function HomePage() {
     {
       value: formatCompactCount(data?.stats.activeLearners ?? 0),
       label: "Active learners",
-      helper: "Growing across the network",
     },
     {
       value: formatCompactCount(data?.stats.trackCount ?? 0),
-      label: "Learning pathways",
-      helper: "Core programs in the catalog",
+      label: "Tracks",
     },
     {
       value: formatCompactCount(data?.stats.mentorNetwork ?? 0),
-      label: "Mentor network",
-      helper: "Guides from industry and academia",
+      label: "Mentors",
     },
     {
       value: `${data?.hero.topMentorScore ?? 0}%`,
       label: "Top mentor score",
-      helper: "Realtime quality signal",
     },
   ];
 
   return (
     <div>
       <motion.section
-        className="page-shell grid gap-10 pb-14 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:pt-16"
+        className="page-shell grid gap-10 pb-14 pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch lg:pt-16"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
         <div className="max-w-2xl">
-          <Badge className="mb-5">Starting January 2026</Badge>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Code the Future of <span className="glow-text">Ethiopia</span>
+          <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+            Learn software engineering with <span className="glow-text">real mentors</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
-            An immersive virtual campus for software engineering, AI, and cyber defense -
-            hands-on, gamified, and mentorship-driven from Grade 8 upward.
+            Live classrooms, structured tracks, and project-based learning for students from Grade 8 upward.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -275,8 +258,8 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_24px_120px_rgba(0,0,0,0.45)] w-full aspect-[16/10]">
+        <div className="flex items-stretch">
+          <div className="relative w-full overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_24px_120px_rgba(0,0,0,0.45)]">
             <SmartImage
               unsplashId={MEDIA_CATEGORIES.marketing.hero[0].unsplashId}
               alt={MEDIA_CATEGORIES.marketing.hero[0].alt}
@@ -307,12 +290,8 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Learning pathways</Badge>
-            <h2 className="section-title">Master the Tech of Tomorrow</h2>
-            <p className="section-copy mt-4">
-              Structured tracks from fundamentals to job-ready engineering skills, with the same
-              visual weight and clarity across every device.
-            </p>
+            <h2 className="section-title">Available tracks</h2>
+            <p className="section-copy mt-4">Structured pathways from fundamentals to job-ready skills.</p>
           </div>
           <Link to="/how-it-works">
             <Button variant="outline">View the learning flow</Button>
@@ -325,8 +304,8 @@ export function HomePage() {
           ) : (
             <div className="md:col-span-3">
               <EmptyState
-                title="Learning pathways are being prepared"
-                description="The platform is live, but the learning catalog is still warming up."
+                title="No tracks published yet"
+                description="Learning pathways will appear here once they are created."
                 actionLabel="See how it works"
                 onAction={() => navigate("/how-it-works")}
               />
@@ -344,8 +323,7 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge className="mb-4">Expert mentors</Badge>
-            <h2 className="section-title text-2xl md:text-3xl">Learn from Global Industry Leaders</h2>
+            <h2 className="section-title text-2xl md:text-3xl">Meet your mentors</h2>
           </div>
           <Link to="/mentors">
             <Button variant="outline">View all mentors</Button>
@@ -358,8 +336,8 @@ export function HomePage() {
           ) : (
             <div className="md:col-span-3">
               <EmptyState
-                title="Mentor spots are opening soon"
-                description="Mentor recruitment is active, and featured leaders will appear here once available."
+                title="No mentors added yet"
+                description="Mentor profiles will appear here once they join the platform."
                 actionLabel="Become a mentor"
                 onAction={() => navigate("/mentor-recruitment")}
               />

@@ -90,15 +90,7 @@ function StatCard({
   );
 }
 
-function FeaturePill({
-  icon: Icon,
-  title,
-  description,
-}: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}) {
+function FeaturePill({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description: string }) {
   return (
     <Card className="flex items-start gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-secondary/10 text-secondary">
@@ -112,20 +104,9 @@ function FeaturePill({
   );
 }
 
-function JourneySection({
-  eyebrow,
-  title,
-  description,
-  children,
-}: {
-  eyebrow: string;
-  title: string;
-  description: string;
-  children: ReactNode;
-}) {
+function JourneySection({ title, description, children }: { title: string; description: string; children: ReactNode }) {
   return (
     <div>
-      <Badge className="mb-4">{eyebrow}</Badge>
       <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
       <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">{description}</p>
       <div className="mt-8">{children}</div>
@@ -175,8 +156,9 @@ export function HowItWorksPage() {
   const featuredTracks = tracks.slice(0, 3);
   const totalModules = tracks.reduce((sum, track) => sum + (track.modules?.length ?? 0), 0);
   const totalLessons = tracks.reduce(
-    (sum, track) => sum + (track.modules?.reduce((lessonSum, module) => lessonSum + (module.lessons?.length ?? 0), 0) ?? 0),
-    0
+    (sum, track) =>
+      sum + (track.modules?.reduce((lessonSum, module) => lessonSum + (module.lessons?.length ?? 0), 0) ?? 0),
+    0,
   );
   const totalXp = tracks.reduce((sum, track) => sum + (track.xpReward ?? 0), 0);
   const strongestTrack = [...tracks].sort((a, b) => (b.xpReward ?? 0) - (a.xpReward ?? 0))[0];
@@ -209,13 +191,11 @@ export function HowItWorksPage() {
         animate="visible"
       >
         <div className="max-w-2xl">
-          <Badge className="mb-5">Learning journey</Badge>
-          <h1 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Build your immersive <span className="glow-text">learning plan</span>
+          <h1 className="text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+            How the learning <span className="glow-text">works</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
-            Pick a pace, compare pathways, and move into real projects with a structure that stays calm,
-            inspiring, and easy to follow.
+            Pick a pace, compare pathways, and move into real projects with mentor guidance at every step.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -230,7 +210,7 @@ export function HowItWorksPage() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
-            {["Immersive learning", "Real projects", "Level-based progress"].map((item) => (
+            {["Live sessions", "Real projects", "Level-based progress"].map((item) => (
               <span key={item} className="rounded-full border border-[var(--border)] bg-white/5 px-3 py-2">
                 {item}
               </span>
@@ -263,7 +243,6 @@ export function HowItWorksPage() {
           <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <Badge variant="purple">Your journey so far</Badge>
                 <h2 className="mt-3 text-2xl font-semibold text-white">Track your momentum</h2>
               </div>
               <div className="rounded-full border border-secondary/20 bg-secondary/10 px-3 py-1 text-xs text-secondary">
@@ -296,7 +275,6 @@ export function HowItWorksPage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <Badge className="mb-3">Where are you on your tech journey?</Badge>
                 <h3 className="text-xl font-semibold text-white">Choose the pace that fits you</h3>
               </div>
               <Sparkles className="text-primary" size={18} />
@@ -346,7 +324,6 @@ export function HowItWorksPage() {
           />
         </div>
         <JourneySection
-          eyebrow="01 · Immersive Learning"
           title="Every lesson has a clear next move."
           description="Students learn in guided sequences that keep the platform calm, focused, and easy to follow even on smaller devices."
         >
@@ -378,7 +355,6 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.25 }}
       >
         <JourneySection
-          eyebrow="02 · Build Real Projects"
           title="Progress should end in something concrete."
           description="The strongest part of the journey is not the lesson list — it is the portfolio of real work learners ship as they grow."
         >
@@ -403,8 +379,8 @@ export function HowItWorksPage() {
         <div className="order-1 lg:order-2 w-full">
           <div className="relative overflow-hidden rounded-[28px] border border-white/[0.06] shadow-[0_20px_50px_rgba(0,0,0,0.3)] aspect-[16/10] w-full">
             <SmartImage
-              unsplashId={MEDIA_CATEGORIES.community.showcase[1].unsplashId}
-              alt="Project building preview - Ethiopian developers showcasing a local fintech solution at an innovation hub"
+              unsplashId={MEDIA_CATEGORIES.community.showcase[0].unsplashId}
+              alt="Developers collaborating on a project"
               hoverEffect="zoom"
               wrapperClassName="h-full w-full border-none bg-transparent rounded-[28px] overflow-hidden"
               className="h-full w-full object-cover"
@@ -442,7 +418,6 @@ export function HowItWorksPage() {
           </Card>
         </div>
         <JourneySection
-          eyebrow="03 · Level Up & Rank"
           title="Motivation should feel earned, not noisy."
           description="XP, badges, and leaderboard movement give learners a reason to come back without turning the platform into a distraction."
         >
@@ -469,11 +444,10 @@ export function HowItWorksPage() {
       <Card className="mt-16 overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Badge className="mb-4">Start now</Badge>
-            <h2 className="text-3xl font-bold md:text-4xl">Start Your Gamified Journey Today</h2>
+            <h2 className="text-3xl font-bold md:text-4xl">Ready to start learning?</h2>
             <p className="mt-4 max-w-2xl text-[var(--text-secondary)]">
-              Once you pick a track, the platform keeps the next step obvious: continue learning, get mentor
-              feedback, and level up with real progress.
+              Once you pick a track, the platform keeps the next step obvious: continue learning, get mentor feedback,
+              and level up with real progress.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
