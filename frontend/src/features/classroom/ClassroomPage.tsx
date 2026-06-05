@@ -1,15 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Send,
-  Signal,
-  Sparkles,
-  Wifi,
-  WifiOff,
-  type LucideIcon,
-} from "lucide-react";
+import { Send, Signal, Sparkles, Wifi, WifiOff, type LucideIcon } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +22,7 @@ import {
 } from "@/lib/realtime";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
-import { JitsiMeeting } from "@/components/jitsi/JitsiMeeting";
+import { JitsiMeeting, type JitsiMeetingHandle } from "@/components/jitsi/JitsiMeeting";
 import { MeetingToolbar } from "@/components/jitsi/MeetingToolbar";
 import { MeetingHeader } from "@/components/jitsi/MeetingHeader";
 import { cn } from "@/lib/utils";
@@ -121,6 +114,7 @@ export function ClassroomPage() {
   const [jitsiVideoMuted, setJitsiVideoMuted] = useState(true);
   const [jitsiScreenSharing, setJitsiScreenSharing] = useState(false);
   const [jitsiParticipantCount] = useState(0);
+  const jitsiRef = useRef<JitsiMeetingHandle>(null);
 
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
@@ -369,6 +363,7 @@ export function ClassroomPage() {
           <div className="flex-1 relative">
             {jitsiConfigQuery.data?.enabled && jitsiTokenQuery.data ? (
               <JitsiMeeting
+                ref={jitsiRef}
                 domain={jitsiConfigQuery.data.domain}
                 roomName={jitsiTokenQuery.data.roomName}
                 token={jitsiTokenQuery.data.token}
@@ -424,9 +419,9 @@ export function ClassroomPage() {
             isVideoMuted={jitsiVideoMuted}
             isScreenSharing={jitsiScreenSharing}
             isHandRaised={handRaised}
-            onToggleAudio={() => setJitsiAudioMuted((prev) => !prev)}
-            onToggleVideo={() => setJitsiVideoMuted((prev) => !prev)}
-            onToggleScreenShare={() => setJitsiScreenSharing((prev) => !prev)}
+            onToggleAudio={() => jitsiRef.current?.toggleAudio()}
+            onToggleVideo={() => jitsiRef.current?.toggleVideo()}
+            onToggleScreenShare={() => jitsiRef.current?.toggleScreenShare()}
             onToggleHandRaise={toggleHandRaise}
             onLeave={() => navigate("/app/sessions")}
             isHost={isHost}

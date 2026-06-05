@@ -47,7 +47,7 @@ interface UseJitsiMeetOptions {
   onError?: (error: unknown) => void;
 }
 
-interface UseJitsiMeetReturn {
+export interface UseJitsiMeetReturn {
   isReady: boolean;
   isJoined: boolean;
   participantCount: number;

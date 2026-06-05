@@ -1,5 +1,5 @@
-import { useRef, useEffect } from "react";
-import { useJitsiMeet } from "@/hooks/useJitsiMeet";
+import { useRef, useEffect, forwardRef, useImperativeHandle } from "react";
+import { useJitsiMeet, type UseJitsiMeetReturn } from "@/hooks/useJitsiMeet";
 
 interface JitsiMeetingProps {
   domain: string;
@@ -22,30 +22,52 @@ interface JitsiMeetingProps {
   className?: string;
 }
 
-export function JitsiMeeting({
-  domain,
-  roomName,
-  token,
-  displayName,
-  email,
-  avatarUrl,
-  sessionId,
-  onReady,
-  onConferenceJoined,
-  onConferenceLeft,
-  onParticipantJoined,
-  onParticipantLeft,
-  onAudioMuteChanged,
-  onVideoMuteChanged,
-  onScreenShareChanged,
-  onReadyToClose,
-  onError,
-  className,
-}: JitsiMeetingProps) {
+export interface JitsiMeetingHandle {
+  toggleAudio: () => void;
+  toggleVideo: () => void;
+  toggleScreenShare: () => void;
+  raiseHand: () => void;
+  lowerHand: () => void;
+  sendChatMessage: (message: string) => void;
+  hangUp: () => void;
+  kickParticipant: (participantId: string) => void;
+  muteParticipant: (participantId: string) => void;
+  getParticipants: () => Array<{ id: string; displayName: string; role: string; isLocal: boolean }>;
+  isReady: boolean;
+  isJoined: boolean;
+  participantCount: number;
+  localAudioMuted: boolean;
+  localVideoMuted: boolean;
+  isScreenSharing: boolean;
+}
+
+export const JitsiMeeting = forwardRef<JitsiMeetingHandle, JitsiMeetingProps>(function JitsiMeeting(
+  {
+    domain,
+    roomName,
+    token,
+    displayName,
+    email,
+    avatarUrl,
+    sessionId,
+    onReady,
+    onConferenceJoined,
+    onConferenceLeft,
+    onParticipantJoined,
+    onParticipantLeft,
+    onAudioMuteChanged,
+    onVideoMuteChanged,
+    onScreenShareChanged,
+    onReadyToClose,
+    onError,
+    className,
+  },
+  ref,
+) {
   const containerRef = useRef<HTMLDivElement>(null);
   const containerId = `jitsi-container-${sessionId}`;
 
-  useJitsiMeet({
+  const jitsi = useJitsiMeet({
     domain,
     roomName,
     token,
@@ -64,6 +86,25 @@ export function JitsiMeeting({
     onReadyToClose,
     onError,
   });
+
+  useImperativeHandle(ref, () => ({
+    toggleAudio: jitsi.toggleAudio,
+    toggleVideo: jitsi.toggleVideo,
+    toggleScreenShare: jitsi.toggleScreenShare,
+    raiseHand: jitsi.raiseHand,
+    lowerHand: jitsi.lowerHand,
+    sendChatMessage: jitsi.sendChatMessage,
+    hangUp: jitsi.hangUp,
+    kickParticipant: jitsi.kickParticipant,
+    muteParticipant: jitsi.muteParticipant,
+    getParticipants: jitsi.getParticipants,
+    isReady: jitsi.isReady,
+    isJoined: jitsi.isJoined,
+    participantCount: jitsi.participantCount,
+    localAudioMuted: jitsi.localAudioMuted,
+    localVideoMuted: jitsi.localVideoMuted,
+    isScreenSharing: jitsi.isScreenSharing,
+  }), [jitsi]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -90,6 +131,6 @@ export function JitsiMeeting({
       style={{ minHeight: "400px" }}
     />
   );
-}
+});
 
-export type { JitsiMeetingProps };
+export type { UseJitsiMeetReturn };
