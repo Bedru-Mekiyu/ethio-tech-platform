@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { Outlet, NavLink, Link } from "react-router-dom";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Avatar } from "@/components/ui/avatar";
 import { RankProgress } from "@/components/composites/StatCard";
@@ -10,6 +10,9 @@ import { getRankTitle, cn } from "@/lib/utils";
 import { getSettingsPath } from "@/store/authStore";
 import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
 import { motion, AnimatePresence } from "framer-motion";
+import { logoutApi } from "@/services/authService";
+import { fetchUnreadCount } from "@/services/notificationsService";
+import { getSocket } from "@/services/socket";
 import {
   LayoutDashboard,
   BookOpen,
@@ -28,17 +31,55 @@ import {
   X,
   CalendarClock,
   Film,
+  LogOut,
+  User,
+  ChevronDown,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
 
 export function DashboardLayout({ variant = "student" }: { variant?: "student" | "mentor" | "admin" | "parent" }) {
   const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
   const notifBadge = useNotificationStore((s) => s.badge);
+  const setBadgeCount = useNotificationStore((s) => s.setBadgeCount);
   const { classroomPath, squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const accountRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) return;
+    fetchUnreadCount()
+      .then(setBadgeCount)
+      .catch(() => undefined);
+  }, [user, setBadgeCount]);
+
+  useEffect(() => {
+    const socket = getSocket();
+    const handleCount = (payload: { userId: string; count: number }) => {
+      if (payload.userId === user?.id) {
+        setBadgeCount(payload.count);
+      }
+    };
+    socket.on("notification:count", handleCount);
+    return () => {
+      socket.off("notification:count", handleCount);
+    };
+  }, [user?.id, setBadgeCount]);
+
+  const handleLogout = useCallback(async () => {
+    setAccountOpen(false);
+    try {
+      await logoutApi();
+    } finally {
+      logout();
+      navigate("/login", { replace: true });
+    }
+  }, [logout, navigate]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -77,6 +118,24 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       buttonEl?.focus();
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!accountOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) {
+        setAccountOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setAccountOpen(false);
+    };
+    window.addEventListener("mousedown", onClick);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("mousedown", onClick);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [accountOpen]);
 
   const studentNav: NavItem[] = [
     { to: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
@@ -188,22 +247,6 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           >
             <Settings size={18} /> Settings
           </Link>
-          {user && (
-            <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-              <Avatar
-                src={user.avatarUrl ?? user.avatar}
-                name={user.fullName}
-                userId={user.id}
-                role={user.role === "mentor" ? "mentor" : "student"}
-                size="md"
-                status="online"
-              />
-              <div className="overflow-hidden min-w-0">
-                <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
-                <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
-              </div>
-            </div>
-          )}
         </div>
       </aside>
 
@@ -251,22 +294,6 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 >
                   <Settings size={18} /> Settings
                 </Link>
-                {user && (
-                  <div className="flex items-center gap-3 bg-white/3 rounded-xl p-3 border border-white/5">
-                    <Avatar
-                      src={user.avatarUrl ?? user.avatar}
-                      name={user.fullName}
-                      userId={user.id}
-                      role={user.role === "mentor" ? "mentor" : "student"}
-                      size="md"
-                      status="online"
-                    />
-                    <div className="overflow-hidden min-w-0">
-                      <p className="text-sm font-semibold truncate text-white">{user.fullName}</p>
-                      <p className="text-xs capitalize truncate text-[var(--text-muted)]">{user.role}</p>
-                    </div>
-                  </div>
-                )}
               </div>
             </motion.aside>
           </>
@@ -310,9 +337,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               to={
                 variant === "mentor"
                   ? "/mentor/notifications"
-                  : variant === "student" || variant === "parent" || user?.role === "parent"
-                    ? "/app/notifications"
-                    : "/admin"
+                  : variant === "admin"
+                    ? "/admin/notifications"
+                    : "/app/notifications"
               }
               className="relative p-2 rounded-lg text-[var(--text-secondary)] hover:text-white hover:bg-white/5 transition-colors duration-200 min-w-10 min-h-10 flex items-center justify-center"
               aria-label="Notifications"
@@ -325,19 +352,65 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               )}
             </Link>
             {user && (
-              <div className="flex items-center gap-3 border-l border-[var(--border)] pl-4">
-                <Avatar
-                  src={user.avatarUrl ?? user.avatar}
-                  name={user.fullName}
-                  userId={user.id}
-                  role={user.role === "mentor" ? "mentor" : "student"}
-                  size="md"
-                  status="online"
-                />
-                <div className="hidden sm:block">
-                  <p className="text-sm font-semibold text-white leading-tight">{user.fullName}</p>
-                  <p className="text-xs capitalize text-[var(--text-muted)] mt-0.5">{user.role}</p>
-                </div>
+              <div className="relative border-l border-[var(--border)] pl-4" ref={accountRef}>
+                <button
+                  type="button"
+                  onClick={() => setAccountOpen((prev) => !prev)}
+                  className="flex items-center gap-2 min-h-10 min-w-10 rounded-xl p-1 hover:bg-white/5 transition-colors duration-200"
+                  aria-label="Account menu"
+                  aria-expanded={accountOpen}
+                >
+                  <Avatar
+                    src={user.avatarUrl ?? user.avatar}
+                    name={user.fullName}
+                    userId={user.id}
+                    role={user.role === "mentor" ? "mentor" : "student"}
+                    size="md"
+                    status="online"
+                  />
+                  <ChevronDown
+                    size={14}
+                    className={cn(
+                      "text-[var(--text-muted)] transition-transform duration-200",
+                      accountOpen && "rotate-180",
+                    )}
+                  />
+                </button>
+                {accountOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-[var(--border)] bg-[rgba(15,18,28,0.98)] shadow-2xl backdrop-blur-xl z-50 py-1">
+                    <div className="px-4 py-3 border-b border-[var(--border)]">
+                      <p className="text-sm font-semibold text-white truncate">{user.fullName}</p>
+                      <p className="text-xs text-[var(--text-muted)] truncate mt-0.5">{user.email}</p>
+                    </div>
+                    <Link
+                      to={
+                        variant === "student"
+                          ? "/app/profile"
+                          : variant === "mentor"
+                            ? "/mentor/profile"
+                            : "/admin/profile"
+                      }
+                      onClick={() => setAccountOpen(false)}
+                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-white transition-colors"
+                    >
+                      <User size={15} /> Profile
+                    </Link>
+                    <Link
+                      to={getSettingsPath(user.role)}
+                      onClick={() => setAccountOpen(false)}
+                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-white transition-colors"
+                    >
+                      <Settings size={15} /> Settings
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                    >
+                      <LogOut size={15} /> Sign out
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
