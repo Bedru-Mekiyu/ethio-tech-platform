@@ -20,26 +20,29 @@ export const MEDIA_CATEGORIES = {
         id: "hero-collaboration",
         unsplashId: "photo-1531482615713-2afd69097998",
         alt: "Young developers collaborating on a software architecture project in a modern tech workspace",
-        blurDataUrl: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4="
+        blurDataUrl:
+          "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },
       {
         id: "hero-engineering",
         unsplashId: "photo-1522071820081-009f0129c71c",
         alt: "Student engineer designing code pipelines in front of multiple screen setups with neon ambient light",
-        blurDataUrl: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4="
+        blurDataUrl:
+          "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },
       {
         id: "hero-classroom",
         unsplashId: "photo-1515187029135-18ee286d815b",
         alt: "Innovative technology laboratory workshop with team solving engineering tasks",
-        blurDataUrl: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4="
-      }
+        blurDataUrl:
+          "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
+      },
     ] as MediaAsset[],
     features: {
       realtime: "photo-1607604276583-eef5d076aa5f", // neon ambient coding space
       mentorship: "photo-1573497019940-1c28c88b4f3e", // remote meeting call
-      gamification: "photo-1634017839464-5c339ebe3cb4" // 3D abstract shapes/rewards
-    }
+      gamification: "photo-1634017839464-5c339ebe3cb4", // 3D abstract shapes/rewards
+    },
   },
   dashboard: {
     coding: [
@@ -52,12 +55,12 @@ export const MEDIA_CATEGORIES = {
         id: "dash-workspace",
         unsplashId: "photo-1555066931-4365d14bab8c",
         alt: "Sleek software engineering environment with high resolution screen arrays",
-      }
+      },
     ] as MediaAsset[],
     stats: {
       xp: "photo-1635070041078-e363dbe005cb", // grid lines glowing
-      badges: "photo-1618005182384-a83a8bd57fbe" // premium 3D mesh
-    }
+      badges: "photo-1618005182384-a83a8bd57fbe", // premium 3D mesh
+    },
   },
   mentorship: {
     sessions: [
@@ -70,8 +73,8 @@ export const MEDIA_CATEGORIES = {
         id: "mentor-collaboration",
         unsplashId: "photo-1507537297725-24a1c029d3ca",
         alt: "Global professionals talking over software mockups and system logs",
-      }
-    ] as MediaAsset[]
+      },
+    ] as MediaAsset[],
   },
   classroom: {
     immersive: [
@@ -84,8 +87,8 @@ export const MEDIA_CATEGORIES = {
         id: "class-pair-programming",
         unsplashId: "photo-1522071820081-009f0129c71c",
         alt: "Pair programming in a high-end dark-themed environment",
-      }
-    ] as MediaAsset[]
+      },
+    ] as MediaAsset[],
   },
   community: {
     showcase: [
@@ -96,11 +99,11 @@ export const MEDIA_CATEGORIES = {
       },
       {
         id: "community-pitch",
-        unsplashId: "photo-1531498860502-7c67cfd28058",
-        alt: "Ethiopian developers showcasing a local fintech solution at an innovation hub",
-      }
-    ] as MediaAsset[]
-  }
+        unsplashId: "photo-1522071820081-009f0129c71c",
+        alt: "Developers collaborating on a software project",
+      },
+    ] as MediaAsset[],
+  },
 };
 
 /**
@@ -113,7 +116,7 @@ export function getOptimizedImageUrl(
     height?: number;
     fit?: "crop" | "facearea" | "fill" | "max" | "min" | "scale";
     quality?: number;
-  } = {}
+  } = {},
 ): string {
   const { width = 800, height, fit = "crop", quality = 80 } = options;
   const baseUrl = `https://images.unsplash.com/${unsplashId}`;
@@ -121,7 +124,7 @@ export function getOptimizedImageUrl(
     auto: "format,compress",
     fit,
     w: width.toString(),
-    q: quality.toString()
+    q: quality.toString(),
   });
 
   if (height) {

@@ -5,9 +5,9 @@ import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 
 const features = [
-  { icon: Zap, label: "Live immersive classrooms", desc: "Real-time sessions with mentors" },
-  { icon: Shield, label: "Gamified XP system", desc: "Track progress with achievements" },
-  { icon: Users, label: "Global mentor network", desc: "Learn from industry engineers" },
+  { icon: Zap, label: "Live classrooms", desc: "Real-time sessions with mentors" },
+  { icon: Shield, label: "XP system", desc: "Track progress with achievements" },
+  { icon: Users, label: "Mentor network", desc: "Learn from industry engineers" },
 ] as const;
 
 export function AuthLayout() {
@@ -48,19 +48,17 @@ export function AuthLayout() {
           <div className="mt-16">
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--primary-muted)] bg-[var(--primary-subtle)] px-3 py-1">
               <Sparkles size={14} className="text-primary" />
-              <span className="text-xs font-semibold tracking-wide text-primary">
-                Ethiopia&apos;s premier tech academy
-              </span>
+              <span className="text-xs font-semibold tracking-wide text-primary">EthioTech learning platform</span>
             </div>
             <h1 className="mt-6 max-w-md text-4xl font-bold leading-[1.1] tracking-tight text-white xl:text-5xl">
               {isLogin
                 ? "Welcome back to your learning journey"
-                : "Begin your path to world-class engineering"}
+                : "Start learning software engineering with mentor support"}
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--text-secondary)]">
               {isLogin
                 ? "Your dashboard, mentors, and live sessions are waiting. Pick up right where you left off."
-                : "Join thousands of Ethiopian students and mentors building the future through immersive, gamified tech education."}
+                : "Join a community of students and mentors learning through live sessions, projects, and peer collaboration."}
             </p>
           </div>
 
@@ -82,9 +80,7 @@ export function AuthLayout() {
           </div>
         </div>
 
-        <p className="relative z-10 text-xs text-[var(--text-muted)]">
-          © {new Date().getFullYear()} EthioTech. Empowering African innovators.
-        </p>
+        <p className="relative z-10 text-xs text-[var(--text-muted)]">© {new Date().getFullYear()} EthioTech.</p>
 
         {/* Decorative grid */}
         <div
