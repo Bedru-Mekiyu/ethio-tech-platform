@@ -31,11 +31,7 @@ function ProjectsSkeleton() {
   );
 }
 
-function ProjectCard({
-  project,
-}: {
-  project: NonNullable<StudentDashboardData["assignedProjects"]>[number];
-}) {
+function ProjectCard({ project }: { project: NonNullable<StudentDashboardData["assignedProjects"]>[number] }) {
   const statusTone =
     project.category === "completed" ? "success" : project.category === "feedback" ? "purple" : "warning";
   const actionLabel =
@@ -115,10 +111,7 @@ export function AssignedProjectsPage() {
   const dashboard = data as StudentDashboardData | undefined;
   const projects = useMemo(() => dashboard?.assignedProjects ?? [], [dashboard?.assignedProjects]);
 
-  const filteredProjects = useMemo(
-    () => projects.filter((project) => project.category === tab),
-    [projects, tab]
-  );
+  const filteredProjects = useMemo(() => projects.filter((project) => project.category === tab), [projects, tab]);
 
   const counts = useMemo(
     () => ({
@@ -126,7 +119,7 @@ export function AssignedProjectsPage() {
       feedback: projects.filter((project) => project.category === "feedback").length,
       completed: projects.filter((project) => project.category === "completed").length,
     }),
-    [projects]
+    [projects],
   );
 
   if (isError) {
@@ -142,16 +135,15 @@ export function AssignedProjectsPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Assigned projects</Badge>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Build, review, and complete your project queue.</h1>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+              Build, review, and complete your project queue.
+            </h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Track active assignments, read mentor feedback, and keep your submissions moving without losing context.
             </p>
           </div>
           <Link to="/app/projects/submit">
-            <Button>
-              Submit project
-            </Button>
+            <Button>Submit project</Button>
           </Link>
         </div>
       </div>

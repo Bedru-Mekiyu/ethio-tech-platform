@@ -1,15 +1,7 @@
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import {
-  BookOpen,
-  Code2,
-  Layers3,
-  PlayCircle,
-  Rocket,
-  MessageSquareText,
-  FileCode2,
-} from "lucide-react";
+import { BookOpen, Code2, Layers3, PlayCircle, Rocket, MessageSquareText, FileCode2 } from "lucide-react";
 import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
@@ -101,7 +93,11 @@ export function CodingWorkspacePage() {
     );
   }
 
-  if (dashboardQuery.isLoading || (primaryTrackId && trackQuery.isLoading) || (primaryLessonId && lessonQuery.isLoading)) {
+  if (
+    dashboardQuery.isLoading ||
+    (primaryTrackId && trackQuery.isLoading) ||
+    (primaryLessonId && lessonQuery.isLoading)
+  ) {
     return <WorkspaceSkeleton />;
   }
 
@@ -123,7 +119,6 @@ export function CodingWorkspacePage() {
       <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="max-w-3xl space-y-4">
-            <Badge className="mb-1">Lesson workspace</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               {lesson?.title ?? primaryTrack.title ?? "Building your first React component"}
             </h1>
@@ -190,7 +185,9 @@ export function CodingWorkspacePage() {
               <div>
                 <p className="stat-label">Next step</p>
                 <p className="mt-2 text-sm text-white">
-                  {lesson?.videoUrl ? "Open the lesson video and follow along." : "Review the starter snippet and complete the task."}
+                  {lesson?.videoUrl
+                    ? "Open the lesson video and follow along."
+                    : "Review the starter snippet and complete the task."}
                 </p>
               </div>
             </div>
@@ -199,7 +196,6 @@ export function CodingWorkspacePage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <Badge variant="purple">JSX</Badge>
                 <h2 className="mt-3 text-2xl font-semibold text-white">Starter code preview</h2>
               </div>
               <Button variant="secondary" size="sm">
@@ -214,7 +210,6 @@ export function CodingWorkspacePage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <Badge variant="purple">Lesson notes</Badge>
                 <h2 className="mt-3 text-2xl font-semibold text-white">Learn, discuss, and move fast</h2>
               </div>
               <div className="flex gap-2">
@@ -228,15 +223,22 @@ export function CodingWorkspacePage() {
                 <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
                   <p className="stat-label">Lesson content</p>
                   <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-[var(--text-secondary)]">
-                    {lesson?.content || "The lesson content will guide you through the core implementation and review checkpoints."}
+                    {lesson?.content ||
+                      "The lesson content will guide you through the core implementation and review checkpoints."}
                   </p>
                 </div>
 
                 <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
                   <p className="stat-label">Discussion</p>
                   <div className="mt-4 space-y-3">
-                    {(recentSubmissions.slice(0, 3).length ? recentSubmissions.slice(0, 3) : [{ project: { title: "No discussion yet" }, status: "waiting" }]).map((entry, index) => (
-                      <div key={`${entry.project?.title ?? "note"}-${index}`} className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4">
+                    {(recentSubmissions.slice(0, 3).length
+                      ? recentSubmissions.slice(0, 3)
+                      : [{ project: { title: "No discussion yet" }, status: "waiting" }]
+                    ).map((entry, index) => (
+                      <div
+                        key={`${entry.project?.title ?? "note"}-${index}`}
+                        className="flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4"
+                      >
                         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
                           <MessageSquareText size={16} />
                         </div>
@@ -272,7 +274,8 @@ export function CodingWorkspacePage() {
                   </div>
                   <p className="mt-3 text-lg font-semibold text-white">{primaryTrack.title}</p>
                   <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                    {primaryTrack.description || "Build practical skills through compact lessons and project checkpoints."}
+                    {primaryTrack.description ||
+                      "Build practical skills through compact lessons and project checkpoints."}
                   </p>
                 </Card>
 
@@ -295,7 +298,6 @@ export function CodingWorkspacePage() {
         <div className="space-y-6">
           <Card className="overflow-hidden rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-0">
             <div className="border-b border-[var(--border)] p-5">
-              <Badge variant="purple">Workspace status</Badge>
               <h2 className="mt-3 text-xl font-semibold text-white">Your current learning rhythm</h2>
             </div>
             <div className="space-y-4 p-5">
@@ -319,7 +321,6 @@ export function CodingWorkspacePage() {
           </Card>
 
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-5">
-            <Badge variant="success">Quick access</Badge>
             <div className="mt-4 space-y-3">
               <Link to="/app/projects">
                 <Button className="w-full" variant="primary">

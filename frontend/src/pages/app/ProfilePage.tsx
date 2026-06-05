@@ -99,12 +99,7 @@ export function ProfilePage() {
   const recentActivity = dashboard?.recentXp?.slice(0, 3) ?? [];
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-6"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
       <motion.div variants={itemVariants}>
         <Card className="overflow-hidden rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-0">
           <div className="relative h-56 md:h-72 lg:h-96">
@@ -142,12 +137,22 @@ export function ProfilePage() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Profile</p>
-                  <h1 className="text-2xl font-extrabold text-white tracking-tight mt-1.5">{liveUser?.fullName ?? "Learner"}</h1>
-                  <p className="mt-1 text-sm text-[var(--text-secondary)] font-medium">{liveUser?.email ?? "No email on file"}</p>
+                  <h1 className="text-2xl font-extrabold text-white tracking-tight mt-1.5">
+                    {liveUser?.fullName ?? "Learner"}
+                  </h1>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)] font-medium">
+                    {liveUser?.email ?? "No email on file"}
+                  </p>
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <Badge variant="purple" size="sm">{getRankTitle(level)}</Badge>
-                    <Badge variant="success" size="sm">Level {level}</Badge>
-                    <Badge variant="default" size="sm">#{rank || "--"}</Badge>
+                    <Badge variant="purple" size="sm">
+                      {getRankTitle(level)}
+                    </Badge>
+                    <Badge variant="success" size="sm">
+                      Level {level}
+                    </Badge>
+                    <Badge variant="default" size="sm">
+                      #{rank || "--"}
+                    </Badge>
                   </div>
                 </div>
               </div>
@@ -160,9 +165,7 @@ export function ProfilePage() {
                   </Button>
                 </Link>
                 <Link to={getDashboardPath(liveUser?.role ?? "student")}>
-                  <Button className="font-semibold shadow-sm">
-                    Open dashboard
-                  </Button>
+                  <Button className="font-semibold shadow-sm">Open dashboard</Button>
                 </Link>
               </div>
             </div>
@@ -199,13 +202,14 @@ export function ProfilePage() {
             <div>
               <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
                 <div>
-                  <Badge variant="purple" showDot>Learning progress</Badge>
-                  <h2 className="mt-3 text-xl font-bold text-white tracking-tight">{track?.title ?? "No active track"}</h2>
+                  <h2 className="mt-3 text-xl font-bold text-white tracking-tight">
+                    {track?.title ?? "No active track"}
+                  </h2>
                 </div>
                 <Badge variant="success">{completion}% complete</Badge>
               </div>
               <ProgressBar value={completion} max={100} showGlow color="gradient" size="md" />
-              
+
               <div className="mt-6 grid gap-3 md:grid-cols-3">
                 {[
                   { label: "Lessons", value: `${track?.lessons.completed ?? 0}/${track?.lessons.total ?? 0}` },
@@ -223,16 +227,26 @@ export function ProfilePage() {
             <div className="mt-6 space-y-2.5">
               {badges.length ? (
                 badges.slice(0, 4).map((badge) => (
-                  <div key={badge._id ?? badge.name} className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/3 p-4">
+                  <div
+                    key={badge._id ?? badge.name}
+                    className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/3 p-4"
+                  >
                     <div>
                       <p className="font-semibold text-xs text-white leading-tight">{badge.name}</p>
-                      <p className="text-[10px] text-[var(--text-muted)] mt-0.5 capitalize">{badge.category ?? "achievement"}</p>
+                      <p className="text-[10px] text-[var(--text-muted)] mt-0.5 capitalize">
+                        {badge.category ?? "achievement"}
+                      </p>
                     </div>
-                    <Badge variant="success" size="sm" showDot>Earned</Badge>
+                    <Badge variant="success" size="sm" showDot>
+                      Earned
+                    </Badge>
                   </div>
                 ))
               ) : (
-                <EmptyState title="No badges yet" description="Earn your first badge by completing lessons and projects." />
+                <EmptyState
+                  title="No badges yet"
+                  description="Earn your first badge by completing lessons and projects."
+                />
               )}
             </div>
           </Card>
@@ -240,7 +254,6 @@ export function ProfilePage() {
 
         <motion.div variants={itemVariants} className="space-y-6">
           <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6">
-            <Badge variant="purple" showDot>Recent activity</Badge>
             <h2 className="mt-3.5 text-xl font-bold text-white tracking-tight">Latest momentum</h2>
             <div className="mt-4 space-y-2.5">
               {recentActivity.length ? (
@@ -259,7 +272,6 @@ export function ProfilePage() {
           </Card>
 
           <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6">
-            <Badge variant="success">Profile actions</Badge>
             <div className="mt-4.5 flex flex-col gap-2.5">
               <Link to="/app/achievements">
                 <Button className="w-full font-semibold" variant="outline">

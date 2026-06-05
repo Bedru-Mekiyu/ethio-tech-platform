@@ -68,7 +68,7 @@ export function ProjectSubmitPage() {
   const [selectedProjectId, setSelectedProjectId] = useState("");
   const selectedProject = useMemo(
     () => assignedProjects.find((project) => project.projectId === selectedProjectId) ?? assignedProjects[0],
-    [assignedProjects, selectedProjectId]
+    [assignedProjects, selectedProjectId],
   );
 
   useEffect(() => {
@@ -136,12 +136,12 @@ export function ProjectSubmitPage() {
       <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="max-w-3xl space-y-4">
-            <Badge className="mb-1">Project submission workspace</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Submit work that is ready for mentor review
             </h1>
             <p className="max-w-2xl text-[var(--text-secondary)]">
-              Choose a live assignment, attach the right links, and keep your submission clear enough for a fast review loop.
+              Choose a live assignment, attach the right links, and keep your submission clear enough for a fast review
+              loop.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/app/assignments">
@@ -166,11 +166,15 @@ export function ProjectSubmitPage() {
             </Card>
             <Card className="border-[var(--border)] bg-white/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">In feedback</p>
-              <p className="mt-2 text-2xl font-semibold text-white">{assignedProjects.filter((p) => p.category === "feedback").length}</p>
+              <p className="mt-2 text-2xl font-semibold text-white">
+                {assignedProjects.filter((p) => p.category === "feedback").length}
+              </p>
             </Card>
             <Card className="border-[var(--border)] bg-white/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Ready to ship</p>
-              <p className="mt-2 text-2xl font-semibold text-white">{assignedProjects.filter((p) => p.category === "active").length}</p>
+              <p className="mt-2 text-2xl font-semibold text-white">
+                {assignedProjects.filter((p) => p.category === "active").length}
+              </p>
             </Card>
           </div>
         </div>
@@ -181,7 +185,6 @@ export function ProjectSubmitPage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <Badge variant="purple">Choose your project</Badge>
                 <h2 className="mt-3 text-2xl font-semibold text-white">Active assignment board</h2>
               </div>
               <Badge variant="success">{Math.round(completion)}% complete</Badge>
@@ -209,7 +212,15 @@ export function ProjectSubmitPage() {
                         {project.trackTitle} · {project.difficulty ?? "guided"} · {project.xpReward ?? 0} XP
                       </p>
                     </div>
-                    <Badge variant={project.category === "completed" ? "success" : project.category === "feedback" ? "purple" : "default"}>
+                    <Badge
+                      variant={
+                        project.category === "completed"
+                          ? "success"
+                          : project.category === "feedback"
+                            ? "purple"
+                            : "default"
+                      }
+                    >
                       {project.submissionStatus}
                     </Badge>
                   </div>
@@ -228,13 +239,13 @@ export function ProjectSubmitPage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <Badge className="mb-3">Submission context</Badge>
                 <h2 className="text-2xl font-semibold text-white">{selectedProject?.title}</h2>
               </div>
               <Badge variant="purple">{selectedProject?.trackTitle ?? "Learning track"}</Badge>
             </div>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--text-secondary)]">
-              {selectedProject?.description || "Use the submission form to provide the links and files your mentor needs."}
+              {selectedProject?.description ||
+                "Use the submission form to provide the links and files your mentor needs."}
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -249,7 +260,9 @@ export function ProjectSubmitPage() {
               <Card className="border-[var(--border)] bg-white/5 p-4">
                 <p className="stat-label">Submitted</p>
                 <p className="mt-2 text-sm text-white">
-                  {selectedProject?.submittedAt ? new Date(selectedProject.submittedAt).toLocaleDateString() : "Not yet"}
+                  {selectedProject?.submittedAt
+                    ? new Date(selectedProject.submittedAt).toLocaleDateString()
+                    : "Not yet"}
                 </p>
               </Card>
             </div>
@@ -260,7 +273,6 @@ export function ProjectSubmitPage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <CardHeader className="p-0">
               <div>
-                <Badge variant="purple">Review-ready submission</Badge>
                 <CardTitle className="mt-3">Send the final build</CardTitle>
               </div>
             </CardHeader>
@@ -287,7 +299,11 @@ export function ProjectSubmitPage() {
 
               <div className="space-y-2">
                 <Label>GitHub repository</Label>
-                <Input placeholder="https://github.com/username/project" autoComplete="off" {...register("githubLink")} />
+                <Input
+                  placeholder="https://github.com/username/project"
+                  autoComplete="off"
+                  {...register("githubLink")}
+                />
                 {errors.githubLink ? <p className="text-xs text-danger">Enter a valid GitHub URL.</p> : null}
               </div>
 
@@ -303,7 +319,9 @@ export function ProjectSubmitPage() {
                   placeholder="src/App.tsx&#10;src/components/...&#10;public/index.html"
                   {...register("files")}
                 />
-                <p className="text-xs text-[var(--text-muted)]">Add one file per line or separate entries with commas.</p>
+                <p className="text-xs text-[var(--text-muted)]">
+                  Add one file per line or separate entries with commas.
+                </p>
               </div>
 
               {submissionMutation.isError && (
@@ -318,7 +336,12 @@ export function ProjectSubmitPage() {
                 </div>
               )}
 
-              <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || submissionMutation.isPending}>
+              <Button
+                type="submit"
+                className="w-full"
+                size="lg"
+                disabled={isSubmitting || submissionMutation.isPending}
+              >
                 {isSubmitting || submissionMutation.isPending ? "Submitting..." : "Submit project"}
                 <Send size={16} />
               </Button>
@@ -332,9 +355,16 @@ export function ProjectSubmitPage() {
             </div>
             <div className="mt-4 space-y-3">
               {checklist.map((item) => (
-                <div key={item.label} className="flex items-center justify-between rounded-[20px] border border-[var(--border)] bg-white/5 px-4 py-3">
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between rounded-[20px] border border-[var(--border)] bg-white/5 px-4 py-3"
+                >
                   <span className="text-sm text-white">{item.label}</span>
-                  {item.done ? <CheckCircle2 size={16} className="text-success" /> : <span className="text-xs text-[var(--text-muted)]">Pending</span>}
+                  {item.done ? (
+                    <CheckCircle2 size={16} className="text-success" />
+                  ) : (
+                    <span className="text-xs text-[var(--text-muted)]">Pending</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -346,11 +376,18 @@ export function ProjectSubmitPage() {
               <span className="text-[10px] uppercase tracking-[0.22em]">Recent submissions</span>
             </div>
             <div className="mt-4 space-y-3">
-              {(recentSubmissions.length ? recentSubmissions : [{ project: { title: "No submissions yet" }, status: "draft" }]).map((submission, index) => (
-                <div key={`${submission.project?.title ?? "submission"}-${index}`} className="rounded-[20px] border border-[var(--border)] bg-white/5 p-4">
+              {(recentSubmissions.length
+                ? recentSubmissions
+                : [{ project: { title: "No submissions yet" }, status: "draft" }]
+              ).map((submission, index) => (
+                <div
+                  key={`${submission.project?.title ?? "submission"}-${index}`}
+                  className="rounded-[20px] border border-[var(--border)] bg-white/5 p-4"
+                >
                   <p className="text-sm font-medium text-white">{submission.project?.title ?? "Untitled"}</p>
                   <p className="mt-1 text-xs text-[var(--text-muted)]">
-                    {submission.status ?? "draft"} · {submission.createdAt ? new Date(submission.createdAt).toLocaleDateString() : "Not submitted"}
+                    {submission.status ?? "draft"} ·{" "}
+                    {submission.createdAt ? new Date(submission.createdAt).toLocaleDateString() : "Not submitted"}
                   </p>
                 </div>
               ))}
@@ -363,10 +400,12 @@ export function ProjectSubmitPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[linear-gradient(180deg,rgba(16,23,37,0.92),rgba(8,12,20,0.96))] p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <Badge variant="success">Latest mentor loop</Badge>
-              <h3 className="mt-3 text-2xl font-semibold text-white">{latestSubmission.project?.title ?? "Recent project"} is already in the review queue</h3>
+              <h3 className="mt-3 text-2xl font-semibold text-white">
+                {latestSubmission.project?.title ?? "Recent project"} is already in the review queue
+              </h3>
               <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                Keep iterating from the mentor feedback above and move the next submission forward with clearer scope and cleaner delivery.
+                Keep iterating from the mentor feedback above and move the next submission forward with clearer scope
+                and cleaner delivery.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">

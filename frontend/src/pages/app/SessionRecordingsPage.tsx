@@ -1,16 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import {
-  Video,
-  Play,
-  Clock,
-  Search,
-  CalendarDays,
-  CheckCircle2,
-  Filter,
-  type LucideIcon,
-} from "lucide-react";
+import { Video, Play, Clock, Search, CalendarDays, CheckCircle2, Filter, type LucideIcon } from "lucide-react";
 import { api } from "@/services/api";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
@@ -92,7 +83,13 @@ function RecordingsSkeleton() {
   );
 }
 
-function StatCard({ label, value, icon: Icon, tone = "primary", note }: {
+function StatCard({
+  label,
+  value,
+  icon: Icon,
+  tone = "primary",
+  note,
+}: {
   label: string;
   value: string | number;
   icon: LucideIcon;
@@ -100,10 +97,13 @@ function StatCard({ label, value, icon: Icon, tone = "primary", note }: {
   note?: string;
 }) {
   const toneClass =
-    tone === "success" ? "bg-success/10 text-success"
-    : tone === "warning" ? "bg-warning/10 text-warning"
-    : tone === "secondary" ? "bg-secondary/10 text-secondary"
-    : "bg-primary/10 text-primary";
+    tone === "success"
+      ? "bg-success/10 text-success"
+      : tone === "warning"
+        ? "bg-warning/10 text-warning"
+        : tone === "secondary"
+          ? "bg-secondary/10 text-secondary"
+          : "bg-primary/10 text-primary";
 
   return (
     <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
@@ -136,10 +136,12 @@ function RecordingCard({ recording }: { recording: Recording }) {
   };
 
   return (
-    <Card className={cn(
-      "group relative overflow-hidden rounded-[22px] border-[var(--border)] bg-[var(--bg-card)] transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5",
-      isCompleted && "border-success/20"
-    )}>
+    <Card
+      className={cn(
+        "group relative overflow-hidden rounded-[22px] border-[var(--border)] bg-[var(--bg-card)] transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5",
+        isCompleted && "border-success/20",
+      )}
+    >
       {/* Thumbnail / Gradient placeholder */}
       <div className="relative h-40 overflow-hidden bg-gradient-to-br from-primary/20 via-[var(--bg-card)] to-secondary/20">
         {recording.thumbnailUrl ? (
@@ -201,9 +203,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
             {recording.title}
           </h3>
           {recording.description && (
-            <p className="mt-1.5 text-xs text-[var(--text-secondary)] line-clamp-2">
-              {recording.description}
-            </p>
+            <p className="mt-1.5 text-xs text-[var(--text-secondary)] line-clamp-2">{recording.description}</p>
           )}
         </div>
 
@@ -212,9 +212,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
             <CalendarDays size={12} />
             <span>{formatRelativeDate(recording.publishedAt)}</span>
           </div>
-          {recording.session?.title && (
-            <span className="max-w-[140px] truncate">{recording.session.title}</span>
-          )}
+          {recording.session?.title && <span className="max-w-[140px] truncate">{recording.session.title}</span>}
         </div>
 
         {watchedPercent > 0 && !isCompleted && (
@@ -224,12 +222,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
           </div>
         )}
 
-        <Button
-          className="w-full"
-          variant={isCompleted ? "outline" : "primary"}
-          size="sm"
-          onClick={handlePlay}
-        >
+        <Button className="w-full" variant={isCompleted ? "outline" : "primary"} size="sm" onClick={handlePlay}>
           <Play size={14} />
           {isCompleted ? "Rewatch" : watchedPercent > 0 ? "Continue" : "Watch Now"}
         </Button>
@@ -265,7 +258,7 @@ export function SessionRecordingsPage() {
         (r) =>
           r.title.toLowerCase().includes(q) ||
           r.description?.toLowerCase().includes(q) ||
-          r.session?.title?.toLowerCase().includes(q)
+          r.session?.title?.toLowerCase().includes(q),
       );
     }
 
@@ -298,10 +291,10 @@ export function SessionRecordingsPage() {
       <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Learning library</Badge>
             <h1 className="text-3xl font-bold text-white">Session Recordings</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
-              Rewatch past sessions at your own pace. Your progress is tracked automatically so you can pick up right where you left off.
+              Rewatch past sessions at your own pace. Your progress is tracked automatically so you can pick up right
+              where you left off.
             </p>
           </div>
           <Link to="/app/sessions">
@@ -370,7 +363,7 @@ export function SessionRecordingsPage() {
                   "rounded-full px-3 py-1.5 text-xs capitalize transition",
                   statusFilter === f
                     ? "bg-primary text-[var(--bg-base)]"
-                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white"
+                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white",
                 )}
               >
                 {f === "in-progress" ? "In Progress" : f}

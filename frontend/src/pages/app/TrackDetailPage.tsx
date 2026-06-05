@@ -32,10 +32,13 @@ export function TrackDetailPage() {
 
   const modules = data?.modules ?? [];
   const lessonCount = modules.reduce((sum, module) => sum + (module.lessons?.length ?? 0), 0);
-  const estimatedXp = (data?.xpReward ?? 0) + modules.reduce(
-    (sum, module) => sum + (module.lessons ?? []).reduce((lessonSum, lesson) => lessonSum + (lesson.xpReward ?? 0), 0),
-    0
-  );
+  const estimatedXp =
+    (data?.xpReward ?? 0) +
+    modules.reduce(
+      (sum, module) =>
+        sum + (module.lessons ?? []).reduce((lessonSum, lesson) => lessonSum + (lesson.xpReward ?? 0), 0),
+      0,
+    );
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
   if (isLoading) return <TrackDetailSkeleton />;
@@ -56,7 +59,6 @@ export function TrackDetailPage() {
       <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
           <div className="max-w-3xl space-y-4">
-            <Badge className="mb-1">Track detail</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{data.title}</h1>
             <p className="max-w-2xl text-[var(--text-secondary)]">{data.description}</p>
             <div className="flex flex-wrap gap-3">
@@ -96,7 +98,6 @@ export function TrackDetailPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Learning path</Badge>
               <CardTitle className="mt-3">Modules and lessons</CardTitle>
             </div>
             <Badge variant="success">{data.category ?? "core"}</Badge>
@@ -130,7 +131,10 @@ export function TrackDetailPage() {
                 </div>
               ))
             ) : (
-              <EmptyState title="No modules yet" description="This track will fill in as the curriculum is published." />
+              <EmptyState
+                title="No modules yet"
+                description="This track will fill in as the curriculum is published."
+              />
             )}
           </div>
         </Card>

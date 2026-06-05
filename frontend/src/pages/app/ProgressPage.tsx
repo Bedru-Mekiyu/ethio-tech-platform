@@ -32,17 +32,13 @@ export function ProgressPage() {
 
   const dashboard = dashboardQuery.data;
   const challenge = challengeQuery.data?.challenge;
-  const challengeCompleted =
-    challengeQuery.data?.completed ?? dashboard?.dailyChallengeCompleted ?? false;
+  const challengeCompleted = challengeQuery.data?.completed ?? dashboard?.dailyChallengeCompleted ?? false;
 
   return (
     <div className="page-shell space-y-6">
       <div>
-        <Badge variant="purple">Progress hub</Badge>
         <h1 className="section-title mt-3 text-3xl">Your learning momentum</h1>
-        <p className="section-copy mt-2 text-sm">
-          Streaks, daily challenges, badges, and XP in one place.
-        </p>
+        <p className="section-copy mt-2 text-sm">Streaks, daily challenges, badges, and XP in one place.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -83,11 +79,7 @@ export function ProgressPage() {
         <p className="mt-2 text-sm text-[var(--text-secondary)]">{challenge?.description}</p>
         <p className="mt-3 text-success">+{challenge?.xpReward ?? 25} XP</p>
         {!challengeCompleted && challenge ? (
-          <Button
-            className="mt-4"
-            disabled={completeMutation.isPending}
-            onClick={() => completeMutation.mutate()}
-          >
+          <Button className="mt-4" disabled={completeMutation.isPending} onClick={() => completeMutation.mutate()}>
             Claim challenge reward
           </Button>
         ) : null}

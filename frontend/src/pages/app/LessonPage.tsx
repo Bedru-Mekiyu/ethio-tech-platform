@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, CheckCircle, BookOpen, Play } from "lucide-react
 import { completeLesson, fetchLessonById } from "@/services/tracksService";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { useAuthStore } from "@/store/authStore";
@@ -59,7 +58,6 @@ export function LessonPage() {
       </Link>
 
       <div>
-        <Badge className="mb-3">Lesson</Badge>
         <h1 className="text-3xl font-bold tracking-tight text-white">{lesson?.title}</h1>
       </div>
 
@@ -102,11 +100,7 @@ export function LessonPage() {
             Lesson completed! +{lesson?.xpReward ?? 0} XP
           </div>
         ) : (
-          <Button
-            onClick={() => completeMutation.mutate()}
-            disabled={completeMutation.isPending}
-            size="lg"
-          >
+          <Button onClick={() => completeMutation.mutate()} disabled={completeMutation.isPending} size="lg">
             {completeMutation.isPending ? "Saving..." : `Mark complete (+${lesson?.xpReward ?? 0} XP)`}
           </Button>
         )}

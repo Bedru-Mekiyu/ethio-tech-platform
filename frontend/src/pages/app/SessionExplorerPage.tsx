@@ -42,10 +42,16 @@ function SessionCard({ session }: { session: SessionSummary }) {
     <Card className="flex h-full flex-col gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
-          <div className={cn(
-            "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
-            isLive ? "bg-danger/15 text-danger" : isCompleted ? "bg-success/15 text-success" : "bg-primary/15 text-primary"
-          )}>
+          <div
+            className={cn(
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
+              isLive
+                ? "bg-danger/15 text-danger"
+                : isCompleted
+                  ? "bg-success/15 text-success"
+                  : "bg-primary/15 text-primary",
+            )}
+          >
             {isLive ? <Video size={16} /> : isCompleted ? <BookOpen size={16} /> : <Clock size={16} />}
           </div>
           <Badge variant={isLive ? "warning" : isCompleted ? "success" : "default"}>
@@ -126,21 +132,20 @@ export function SessionExplorerPage() {
 
     if (search.trim()) {
       const q = search.toLowerCase();
-      result = result.filter(
-        (s) =>
-          s.title.toLowerCase().includes(q) ||
-          s.description?.toLowerCase().includes(q)
-      );
+      result = result.filter((s) => s.title.toLowerCase().includes(q) || s.description?.toLowerCase().includes(q));
     }
     return result;
   }, [sessions, filter, search]);
 
-  const counts = useMemo(() => ({
-    all: sessions.length,
-    upcoming: sessions.filter((s) => s.status === "scheduled" || s.status === "pending").length,
-    live: sessions.filter((s) => s.status === "live").length,
-    completed: sessions.filter((s) => s.status === "completed").length,
-  }), [sessions]);
+  const counts = useMemo(
+    () => ({
+      all: sessions.length,
+      upcoming: sessions.filter((s) => s.status === "scheduled" || s.status === "pending").length,
+      live: sessions.filter((s) => s.status === "live").length,
+      completed: sessions.filter((s) => s.status === "completed").length,
+    }),
+    [sessions],
+  );
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
   if (isLoading) return <SessionSearchSkeleton />;
@@ -150,10 +155,7 @@ export function SessionExplorerPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Session Explorer</Badge>
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Find and join live learning sessions.
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Find and join live learning sessions.</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Browse upcoming, live, and recorded sessions from your mentors and cohorts.
             </p>
@@ -214,7 +216,7 @@ export function SessionExplorerPage() {
               "rounded-full border px-5 py-2 text-sm transition",
               filter === value
                 ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
             )}
           >
             {filterLabels[value]} ({counts[value]})
@@ -233,7 +235,10 @@ export function SessionExplorerPage() {
           title={`No ${filterLabels[filter].toLowerCase()} found`}
           description="Try a different filter or search term."
           actionLabel="Back to all sessions"
-          onAction={() => { setFilter("all"); setSearch(""); }}
+          onAction={() => {
+            setFilter("all");
+            setSearch("");
+          }}
         />
       )}
     </div>

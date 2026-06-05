@@ -95,15 +95,7 @@ function DashboardSkeleton() {
   );
 }
 
-function StatChip({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: string;
-  icon: React.ReactNode;
-}) {
+function StatChip({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
   return (
     <motion.div
       whileHover={{ y: -3, scale: 1.01, borderColor: "rgba(0,210,255,0.2)" }}
@@ -140,8 +132,7 @@ export function StudentDashboardPage() {
   });
 
   const dashboard = data as StudentDashboardData | undefined;
-  const firstName =
-    dashboard?.user?.fullName?.split(" ")[0] ?? user?.fullName?.split(" ")[0] ?? "Learner";
+  const firstName = dashboard?.user?.fullName?.split(" ")[0] ?? user?.fullName?.split(" ")[0] ?? "Learner";
   const currentTrack = dashboard?.progressByTrack?.[0];
   const latestSubmission = dashboard?.recentSubmissions?.[0];
   const currentStreak = dashboard?.streak?.currentStreak ?? 0;
@@ -169,33 +160,24 @@ export function StudentDashboardPage() {
   const upcomingSessions = dashboard?.upcomingSessions ?? [];
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="space-y-6"
-    >
+    <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
       {/* Top Section */}
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
         <motion.div variants={cardVariants} className="h-full">
           <Card className="hero-shell relative overflow-hidden p-6 h-full border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl">
             <div className="flex flex-col h-full justify-between">
               <div>
-                <Badge className="mb-4" showDot variant="purple">Current learning path</Badge>
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="max-w-xl">
                     <h1 className="text-3xl font-extrabold text-white tracking-tight leading-tight">
                       Welcome back, {firstName}
                     </h1>
                     <p className="mt-3 text-sm text-[var(--text-secondary)] leading-relaxed">
-                      Keep your momentum going. The next milestone is close, and your mentors are already
-                      tracking your progress.
+                      Keep your momentum going. Your mentors are tracking your progress.
                     </p>
                   </div>
                   <div className="rounded-xl border border-white/5 bg-white/3 px-4 py-3 backdrop-blur-sm shadow-sm select-none">
-                    <p className="text-[10px] uppercase font-bold tracking-[0.24em] text-[var(--text-muted)]">
-                      Rank
-                    </p>
+                    <p className="text-[10px] uppercase font-bold tracking-[0.24em] text-[var(--text-muted)]">Rank</p>
                     <p className="mt-1 text-base font-bold text-primary">
                       {getRankTitle(dashboard?.user?.level ?? user?.level ?? 1)}
                     </p>
@@ -212,9 +194,7 @@ export function StudentDashboardPage() {
                         {currentTrack ? "In progress" : "Pick a track"}
                       </Badge>
                       <h2 className="text-xl font-bold text-white tracking-tight">{currentTitle}</h2>
-                      <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
-                        {currentSubtitle}
-                      </p>
+                      <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">{currentSubtitle}</p>
                     </div>
                     <div className="mt-5">
                       <div className="mb-2 flex items-center justify-between text-xs font-semibold text-[var(--text-secondary)]">
@@ -248,11 +228,7 @@ export function StudentDashboardPage() {
                       value={`#${dashboard?.leaderboardPosition ?? 0}`}
                       icon={<Trophy size={15} />}
                     />
-                    <StatChip
-                      label="Badges"
-                      value={`${recentBadges.length}`}
-                      icon={<Award size={15} />}
-                    />
+                    <StatChip label="Badges" value={`${recentBadges.length}`} icon={<Award size={15} />} />
                   </div>
                 </div>
               </div>
@@ -282,22 +258,22 @@ export function StudentDashboardPage() {
             {
               title: "Current streak",
               value: `${currentStreak} days`,
-              desc: currentStreak > 0 ? "Keep the rhythm alive." : "Start today to build momentum.",
+              desc: currentStreak > 0 ? "Keep it going." : "Start today.",
             },
             {
               title: "Recent XP",
               value: `${dashboard?.recentXp?.length ?? 0}`,
-              desc: "XP events earned from your recent tasks.",
+              desc: "XP from recent activity.",
             },
             {
               title: "Focus mode",
               value: currentTrack ? "Active" : "Ready",
-              desc: "Designed for deep work & reviews.",
+              desc: currentTrack ? "In progress." : "Pick a track to start.",
             },
             {
               title: "Sessions ready",
               value: `${upcomingSessions.length}`,
-              desc: "Live virtual classrooms available.",
+              desc: "Upcoming live sessions.",
             },
           ].map((stat, idx) => (
             <motion.div
@@ -319,14 +295,16 @@ export function StudentDashboardPage() {
           <Card className="surface-panel p-6 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl">
             <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
               <div>
-                <Badge variant="purple" showDot>Launch checklist</Badge>
                 <h2 className="mt-3.5 text-2xl font-bold text-white tracking-tight">Onboarding progress</h2>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
-                  The fastest path to a useful learning loop is track enrollment, one lesson, one project, one session, and one squad.
+                  The fastest path to a useful learning loop is track enrollment, one lesson, one project, one session,
+                  and one squad.
                 </p>
               </div>
               <div className="min-w-[185px] shrink-0 rounded-2xl border border-primary/15 bg-primary/8 p-4 backdrop-blur-sm">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">Checklist Complete</p>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                  Checklist Complete
+                </p>
                 <p className="mt-2 text-2xl font-bold text-white">
                   {onboarding?.completed ?? 0}/{onboarding?.total ?? 0}
                 </p>
@@ -340,11 +318,19 @@ export function StudentDashboardPage() {
                 return (
                   <Link key={item.key} to={item.href}>
                     <motion.div
-                      whileHover={{ x: 3, scale: 1.005, borderColor: "rgba(0,210,255,0.25)", backgroundColor: "rgba(255,255,255,0.06)" }}
+                      whileHover={{
+                        x: 3,
+                        scale: 1.005,
+                        borderColor: "rgba(0,210,255,0.25)",
+                        backgroundColor: "rgba(255,255,255,0.06)",
+                      }}
                       className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/4 p-4 transition-all duration-200 cursor-pointer"
                     >
                       <span className="flex items-center gap-3 text-xs font-semibold text-white">
-                        <Icon size={18} className={item.completed ? "text-success shrink-0" : "text-[var(--text-muted)] shrink-0"} />
+                        <Icon
+                          size={18}
+                          className={item.completed ? "text-success shrink-0" : "text-[var(--text-muted)] shrink-0"}
+                        />
                         {item.label}
                       </span>
                       <ArrowRight size={15} className="text-[var(--text-muted)] shrink-0" />
@@ -358,7 +344,6 @@ export function StudentDashboardPage() {
 
         <motion.div variants={cardVariants}>
           <Card className="surface-panel p-6 border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl">
-            <Badge variant="success" showDot>Daily challenge</Badge>
             <h2 className="mt-3.5 text-2xl font-bold text-white tracking-tight">
               {dailyChallenge?.title ?? "Build a habit today"}
             </h2>
@@ -367,7 +352,9 @@ export function StudentDashboardPage() {
                 "Complete one lesson, review one project requirement, or ask one useful question in your squad to keep your streak alive."}
             </p>
             <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white/3 p-4">
-              <p className="text-[10px] uppercase font-bold tracking-wider text-[var(--text-muted)]">Streaking Reward</p>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-[var(--text-muted)]">
+                Streaking Reward
+              </p>
               <p className="mt-2 text-lg font-bold text-success">+{dailyChallenge?.xpReward ?? 25} XP</p>
             </div>
             <div className="mt-5">
@@ -390,17 +377,19 @@ export function StudentDashboardPage() {
               ) : null}
             </div>
             <div className="mt-5 space-y-2.5">
-              {(nextActions.length ? nextActions : [{ label: "Open your learning track", href: "/app/tracks" }]).map((action) => (
-                <Link key={`${action.href}-${action.label}`} to={action.href}>
-                  <motion.div
-                    whileHover={{ scale: 1.005, borderColor: "rgba(0,210,255,0.25)" }}
-                    className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/4 px-4 py-3.5 text-xs font-semibold text-white transition-all duration-200"
-                  >
-                    {action.label}
-                    <ArrowRight size={15} className="text-primary shrink-0" />
-                  </motion.div>
-                </Link>
-              ))}
+              {(nextActions.length ? nextActions : [{ label: "Open your learning track", href: "/app/tracks" }]).map(
+                (action) => (
+                  <Link key={`${action.href}-${action.label}`} to={action.href}>
+                    <motion.div
+                      whileHover={{ scale: 1.005, borderColor: "rgba(0,210,255,0.25)" }}
+                      className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/4 px-4 py-3.5 text-xs font-semibold text-white transition-all duration-200"
+                    >
+                      {action.label}
+                      <ArrowRight size={15} className="text-primary shrink-0" />
+                    </motion.div>
+                  </Link>
+                ),
+              )}
             </div>
           </Card>
         </motion.div>
@@ -418,7 +407,10 @@ export function StudentDashboardPage() {
                     Stay connected to mentor-led sessions and collaborative classroom work.
                   </p>
                 </div>
-                <Link to="/app/sessions" className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors shrink-0">
+                <Link
+                  to="/app/sessions"
+                  className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors shrink-0"
+                >
                   View all
                 </Link>
               </CardHeader>
@@ -432,9 +424,10 @@ export function StudentDashboardPage() {
                     >
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <Badge variant="purple" size="sm" showDot>Live cohort</Badge>
                           <span className="text-[11px] text-[var(--text-muted)] font-medium">
-                            {session.scheduledAt ? timeFormatter.format(new Date(session.scheduledAt)) : "Scheduled soon"}
+                            {session.scheduledAt
+                              ? timeFormatter.format(new Date(session.scheduledAt))
+                              : "Scheduled soon"}
                           </span>
                         </div>
                         <h3 className="mt-2 text-base font-bold text-white tracking-tight">{session.title}</h3>
@@ -454,8 +447,8 @@ export function StudentDashboardPage() {
                 </div>
               ) : (
                 <EmptyState
-                  title="No live sessions scheduled"
-                  description="Your mentor or cohort will appear here as soon as sessions are published."
+                  title="No sessions scheduled"
+                  description="Sessions will appear here once your mentor publishes them."
                   actionLabel="Browse tracks"
                   onAction={() => navigate("/app/tracks")}
                 />
@@ -474,7 +467,10 @@ export function StudentDashboardPage() {
                     Recognition from lessons, projects, sessions, and XP milestones.
                   </p>
                 </div>
-                <Link to="/app/achievements" className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors shrink-0">
+                <Link
+                  to="/app/achievements"
+                  className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors shrink-0"
+                >
                   View all
                 </Link>
               </CardHeader>
@@ -499,7 +495,9 @@ export function StudentDashboardPage() {
                             {badge.category ? badge.category : "Achievement unlocked"}
                           </p>
                         </div>
-                        <Badge variant={meta.tone} size="sm" showDot>{badge.category ?? "badge"}</Badge>
+                        <Badge variant={meta.tone} size="sm" showDot>
+                          {badge.category ?? "badge"}
+                        </Badge>
                       </motion.div>
                     );
                   })}
@@ -507,7 +505,7 @@ export function StudentDashboardPage() {
               ) : (
                 <EmptyState
                   title="No badges yet"
-                  description="Finish lessons, participate in sessions, and ship projects to unlock recognition."
+                  description="Complete lessons and sessions to earn your first badge."
                   actionLabel="Open tracks"
                   onAction={() => navigate("/app/tracks")}
                 />
@@ -521,7 +519,10 @@ export function StudentDashboardPage() {
                   </div>
                   <div className="space-y-3">
                     {dashboard.recentXp.slice(0, 3).map((event, index) => (
-                      <div key={`${event.reason}-${event.createdAt}-${index}`} className="flex items-start justify-between gap-4 text-xs">
+                      <div
+                        key={`${event.reason}-${event.createdAt}-${index}`}
+                        className="flex items-start justify-between gap-4 text-xs"
+                      >
                         <div className="min-w-0">
                           <p className="font-semibold text-white leading-snug truncate">{event.reason}</p>
                           <p className="text-[10px] text-[var(--text-muted)] mt-0.5">
@@ -541,14 +542,11 @@ export function StudentDashboardPage() {
 
       {/* Community Pulse Card */}
       <motion.div variants={cardVariants}>
-        <Card className="grid gap-6 rounded-2xl border border-white/5 bg-[linear-gradient(185deg,rgba(16,23,37,0.7),rgba(8,12,20,0.85))] p-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center shadow-2xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,210,255,0.06),transparent_35%)] pointer-events-none" />
+        <Card className="grid gap-6 rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.45)] p-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center shadow-xl">
           <div className="relative">
-            <Badge variant="success" showDot>Community pulse</Badge>
-            <h3 className="mt-3.5 text-2xl font-bold text-white tracking-tight">Your squad and mentors are ready when you are.</h3>
+            <h3 className="text-xl font-bold text-white tracking-tight">Ready to join a session?</h3>
             <p className="mt-2 max-w-2xl text-xs leading-relaxed text-[var(--text-secondary)]">
-              Keep momentum with live classrooms, collaboration rooms, and mentor feedback loops that
-              stay synchronized across the platform.
+              Jump into a live classroom or check in with your squad.
             </p>
           </div>
           <div className="flex flex-wrap gap-2.5 relative z-10">
@@ -556,7 +554,9 @@ export function StudentDashboardPage() {
               <Button className="font-bold shadow-sm">Join classroom</Button>
             </Link>
             <Link to={squadPath}>
-              <Button variant="outline" className="font-bold">Open squad room</Button>
+              <Button variant="outline" className="font-bold">
+                Open squad
+              </Button>
             </Link>
           </div>
         </Card>

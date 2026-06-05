@@ -150,7 +150,8 @@ export function SquadPage() {
   const unreadCount = notificationsQuery.data?.filter((item) => !item.isRead).length ?? 0;
   const activeProjects = dashboard?.assignedProjects?.filter((project) => project.category === "active").length ?? 0;
   const feedbackReady = dashboard?.assignedProjects?.filter((project) => project.category === "feedback").length ?? 0;
-  const completedProjects = dashboard?.assignedProjects?.filter((project) => project.category === "completed").length ?? 0;
+  const completedProjects =
+    dashboard?.assignedProjects?.filter((project) => project.category === "completed").length ?? 0;
 
   const sendDraft = () => {
     const text = draft.trim();
@@ -178,13 +179,13 @@ export function SquadPage() {
         <Card className="hero-shell p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <Badge className="mb-4">News center squad</Badge>
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
                 {squadQuery.data?.name ?? "Squad"} · collaboration room
               </h1>
               <p className="mt-2 text-sm text-success">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
               <p className="mt-3 text-[var(--text-secondary)]">
-                Keep a shared pulse on mentor updates, project progress, and your realtime room without leaving the learning flow.
+                Keep a shared pulse on mentor updates, project progress, and your realtime room without leaving the
+                learning flow.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -198,7 +199,6 @@ export function SquadPage() {
         <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">News feed</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Squad activity stream</h2>
             </div>
             <Badge variant="success">{unreadCount} new</Badge>
@@ -218,7 +218,6 @@ export function SquadPage() {
         <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Live chat</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Realtime squad room</h2>
             </div>
             <Badge variant={connectionStatus === "connected" ? "success" : "warning"}>
@@ -264,7 +263,11 @@ export function SquadPage() {
                     <span>Current sprint</span>
                     <span>{dashboard?.progressByTrack?.[0]?.overallProgressPercent ?? 0}%</span>
                   </div>
-                  <ProgressBar value={dashboard?.progressByTrack?.[0]?.overallProgressPercent ?? 0} max={100} color="primary" />
+                  <ProgressBar
+                    value={dashboard?.progressByTrack?.[0]?.overallProgressPercent ?? 0}
+                    max={100}
+                    color="primary"
+                  />
                 </div>
                 <div className="mt-4 grid gap-2 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
                   <Card className="border-[var(--border)] bg-[var(--bg-card)] p-3">
@@ -298,7 +301,9 @@ export function SquadPage() {
           <div className="mt-4 grid gap-3">
             <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
               <p className="stat-label">Room members</p>
-              <p className="mt-2 text-2xl font-semibold text-white">{roomState?.connectedUserIds?.length ?? presenceCount}</p>
+              <p className="mt-2 text-2xl font-semibold text-white">
+                {roomState?.connectedUserIds?.length ?? presenceCount}
+              </p>
             </div>
             <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
               <p className="stat-label">Notifications</p>
@@ -310,7 +315,6 @@ export function SquadPage() {
         <Card className="surface-panel p-5">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Upcoming sessions</Badge>
               <h3 className="mt-3 text-xl font-semibold text-white">What is next for the squad</h3>
             </div>
             <Link to="/app/sessions" className="text-sm text-primary hover:underline">
@@ -321,7 +325,10 @@ export function SquadPage() {
           <div className="mt-4 space-y-3">
             {(dashboard?.upcomingSessions ?? []).slice(0, 3).length ? (
               (dashboard?.upcomingSessions ?? []).slice(0, 3).map((session) => (
-                <div key={session._id ?? session.title} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+                <div
+                  key={session._id ?? session.title}
+                  className="rounded-2xl border border-[var(--border)] bg-white/5 p-4"
+                >
                   <p className="text-sm font-medium text-white">{session.title}</p>
                   <p className="mt-1 text-xs text-[var(--text-muted)]">
                     {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
@@ -329,13 +336,15 @@ export function SquadPage() {
                 </div>
               ))
             ) : (
-              <EmptyState title="No upcoming sessions" description="Sessions will appear here once they are scheduled." />
+              <EmptyState
+                title="No upcoming sessions"
+                description="Sessions will appear here once they are scheduled."
+              />
             )}
           </div>
         </Card>
 
         <Card className="surface-panel p-5">
-          <Badge variant="success">Quick links</Badge>
           <div className="mt-4 space-y-3">
             <Link to="/app/projects">
               <Button className="w-full" variant="primary">

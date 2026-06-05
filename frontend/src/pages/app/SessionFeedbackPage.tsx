@@ -5,18 +5,9 @@ import { Star, ArrowLeft, CheckCircle } from "lucide-react";
 import { submitSessionFeedback } from "@/services/sessionsService";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-function StarRating({
-  value,
-  onChange,
-  label,
-}: {
-  value: number;
-  onChange: (v: number) => void;
-  label: string;
-}) {
+function StarRating({ value, onChange, label }: { value: number; onChange: (v: number) => void; label: string }) {
   const [hovered, setHovered] = useState(0);
 
   return (
@@ -39,9 +30,7 @@ function StarRating({
               size={28}
               className={cn(
                 "transition-colors",
-                (hovered || value) >= star
-                  ? "fill-warning text-warning"
-                  : "fill-transparent text-[var(--text-muted)]"
+                (hovered || value) >= star ? "fill-warning text-warning" : "fill-transparent text-[var(--text-muted)]",
               )}
             />
           </button>
@@ -61,8 +50,7 @@ export function SessionFeedbackPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: () =>
-      submitSessionFeedback(sessionId!, { quality, engagement, impact, comment }),
+    mutationFn: () => submitSessionFeedback(sessionId!, { quality, engagement, impact, comment }),
     onSuccess: () => setSubmitted(true),
   });
 
@@ -92,19 +80,13 @@ export function SessionFeedbackPage() {
 
   return (
     <div className="mx-auto max-w-lg space-y-6">
-      <Link
-        to="/app/sessions"
-        className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
-      >
+      <Link to="/app/sessions" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
         <ArrowLeft size={14} />
         Back to sessions
       </Link>
 
       <div>
-        <Badge className="mb-3">Session feedback</Badge>
-        <h1 className="text-3xl font-bold tracking-tight text-white">
-          How was the session?
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight text-white">How was the session?</h1>
         <p className="mt-2 text-[var(--text-secondary)]">
           Rate the session across three dimensions and leave any comments for your mentor.
         </p>
@@ -132,11 +114,7 @@ export function SessionFeedbackPage() {
           </div>
         )}
 
-        <Button
-          className="w-full"
-          onClick={() => mutation.mutate()}
-          disabled={mutation.isPending}
-        >
+        <Button className="w-full" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
           {mutation.isPending ? "Submitting..." : "Submit feedback"}
         </Button>
       </Card>

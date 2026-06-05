@@ -17,7 +17,9 @@ export function SessionHistoryPage() {
     queryFn: fetchSessions,
   });
 
-  const [waitlistStates, setWaitlistStates] = useState<Record<string, { loading?: boolean; onWaitlist?: boolean; position?: number; error?: string }>>({});
+  const [waitlistStates, setWaitlistStates] = useState<
+    Record<string, { loading?: boolean; onWaitlist?: boolean; position?: number; error?: string }>
+  >({});
 
   const handleJoinWaitlist = async (sessionId: string) => {
     setWaitlistStates((prev) => ({ ...prev, [sessionId]: { loading: true } }));
@@ -26,7 +28,10 @@ export function SessionHistoryPage() {
       const position = (res.data?.data as { position?: number })?.position;
       setWaitlistStates((prev) => ({ ...prev, [sessionId]: { onWaitlist: true, position, loading: false } }));
     } catch (err) {
-      setWaitlistStates((prev) => ({ ...prev, [sessionId]: { error: err instanceof Error ? err.message : "Failed to join waitlist", loading: false } }));
+      setWaitlistStates((prev) => ({
+        ...prev,
+        [sessionId]: { error: err instanceof Error ? err.message : "Failed to join waitlist", loading: false },
+      }));
     }
   };
 
@@ -36,7 +41,10 @@ export function SessionHistoryPage() {
       await api.post(`/sessions/${sessionId}/waitlist/cancel`);
       setWaitlistStates((prev) => ({ ...prev, [sessionId]: { loading: false } }));
     } catch (err) {
-      setWaitlistStates((prev) => ({ ...prev, [sessionId]: { error: err instanceof Error ? err.message : "Failed to leave waitlist", loading: false } }));
+      setWaitlistStates((prev) => ({
+        ...prev,
+        [sessionId]: { error: err instanceof Error ? err.message : "Failed to leave waitlist", loading: false },
+      }));
     }
   };
 
@@ -58,7 +66,6 @@ export function SessionHistoryPage() {
   return (
     <div className="page-shell space-y-6">
       <Card className="hero-shell p-6">
-        <Badge variant="purple">Session timeline</Badge>
         <h1 className="mt-4 text-2xl font-bold text-white md:text-3xl">Session history</h1>
         <p className="mt-2 text-sm text-[var(--text-secondary)]">
           Track your live classroom schedule and post-session feedback.
@@ -77,22 +84,24 @@ export function SessionHistoryPage() {
                 <div className="flex items-center gap-2">
                   <p className="font-semibold text-white truncate">{s.title}</p>
                   {isFull ? (
-                    <Badge variant="danger" className="shrink-0 text-[10px]">Full</Badge>
+                    <Badge variant="danger" className="shrink-0 text-[10px]">
+                      Full
+                    </Badge>
                   ) : null}
                   {wlState?.onWaitlist ? (
-                    <Badge variant="warning" className="shrink-0 text-[10px]">Waitlisted #{wlState.position}</Badge>
+                    <Badge variant="warning" className="shrink-0 text-[10px]">
+                      Waitlisted #{wlState.position}
+                    </Badge>
                   ) : null}
                 </div>
-                <p className="text-sm text-[var(--text-muted)]">
-                  {new Date(s.scheduledAt).toLocaleString()}
-                </p>
+                <p className="text-sm text-[var(--text-muted)]">{new Date(s.scheduledAt).toLocaleString()}</p>
                 {s.maxParticipants && s.maxParticipants > 0 ? (
                   <div className="mt-2 flex items-center gap-2">
                     <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-white/10">
                       <div
                         className={cn(
                           "h-full rounded-full transition-all",
-                          isFull ? "bg-red-500" : capacityPct > 80 ? "bg-amber-500" : "bg-primary"
+                          isFull ? "bg-red-500" : capacityPct > 80 ? "bg-amber-500" : "bg-primary",
                         )}
                         style={{ width: `${capacityPct}%` }}
                       />
@@ -102,15 +111,18 @@ export function SessionHistoryPage() {
                     </span>
                   </div>
                 ) : null}
-                {wlState?.error ? (
-                  <p className="mt-1 text-xs text-red-400">{wlState.error}</p>
-                ) : null}
+                {wlState?.error ? <p className="mt-1 text-xs text-red-400">{wlState.error}</p> : null}
               </div>
               <div className="flex gap-2 shrink-0">
                 <Badge variant="purple">{s.status ?? "scheduled"}</Badge>
                 {s.status === "live" || s.status === "scheduled" ? (
                   wlState?.onWaitlist ? (
-                    <Button size="sm" variant="outline" disabled={wlState.loading} onClick={() => handleCancelWaitlist(s._id)}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      disabled={wlState.loading}
+                      onClick={() => handleCancelWaitlist(s._id)}
+                    >
                       {wlState.loading ? "..." : "Leave waitlist"}
                     </Button>
                   ) : (
@@ -120,7 +132,12 @@ export function SessionHistoryPage() {
                   )
                 ) : null}
                 {isFull && !wlState?.onWaitlist && (s.status === "live" || s.status === "scheduled") ? (
-                  <Button size="sm" variant="outline" disabled={wlState?.loading} onClick={() => handleJoinWaitlist(s._id)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    disabled={wlState?.loading}
+                    onClick={() => handleJoinWaitlist(s._id)}
+                  >
                     {wlState?.loading ? "..." : "Waitlist"}
                   </Button>
                 ) : null}

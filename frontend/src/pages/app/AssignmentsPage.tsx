@@ -73,35 +73,29 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
             {typeIcons[assignment.type] ?? <FileText size={16} />}
           </div>
-          <Badge variant={status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"}>
+          <Badge
+            variant={
+              status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"
+            }
+          >
             {status}
           </Badge>
         </div>
-        <span className="text-xs text-[var(--text-muted)]">
-          {assignment.maxScore} pts
-        </span>
+        <span className="text-xs text-[var(--text-muted)]">{assignment.maxScore} pts</span>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold text-white">{assignment.title}</h3>
-        <p className="mt-1 text-sm text-[var(--text-secondary)] line-clamp-2">
-          {assignment.description}
-        </p>
+        <p className="mt-1 text-sm text-[var(--text-secondary)] line-clamp-2">{assignment.description}</p>
       </div>
 
       <div className="flex items-center gap-4 text-xs text-[var(--text-secondary)]">
         <span className="flex items-center gap-1">
           {overdue ? <AlertTriangle size={12} className="text-warning" /> : <Clock size={12} />}
-          <span className={overdue ? "text-warning font-medium" : ""}>
-            {formatDueDate(assignment.dueDate)}
-          </span>
+          <span className={overdue ? "text-warning font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
         </span>
-        {assignment.estimatedMinutes > 0 && (
-          <span>~{assignment.estimatedMinutes} min</span>
-        )}
-        {assignment.tags.length > 0 && (
-          <span className="truncate">{assignment.tags.slice(0, 2).join(", ")}</span>
-        )}
+        {assignment.estimatedMinutes > 0 && <span>~{assignment.estimatedMinutes} min</span>}
+        {assignment.tags.length > 0 && <span className="truncate">{assignment.tags.slice(0, 2).join(", ")}</span>}
       </div>
 
       {assignment.submission && (
@@ -157,16 +151,19 @@ export function AssignmentsPage() {
     return assignments.filter((a) => a.status === tab);
   }, [assignments, tab]);
 
-  const counts = useMemo(() => ({
-    all: assignments.length,
-    pending: assignments.filter((a) => a.status === "pending").length,
-    submitted: assignments.filter((a) => a.status === "submitted").length,
-    graded: assignments.filter((a) => a.status === "graded").length,
-  }), [assignments]);
+  const counts = useMemo(
+    () => ({
+      all: assignments.length,
+      pending: assignments.filter((a) => a.status === "pending").length,
+      submitted: assignments.filter((a) => a.status === "submitted").length,
+      graded: assignments.filter((a) => a.status === "graded").length,
+    }),
+    [assignments],
+  );
 
   const overdueCount = useMemo(
     () => assignments.filter((a) => isOverdue(a.dueDate) && a.status === "pending").length,
-    [assignments]
+    [assignments],
   );
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
@@ -177,7 +174,6 @@ export function AssignmentsPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Assignments</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
               Your homework, quizzes, and project deadlines.
             </h1>
@@ -185,9 +181,7 @@ export function AssignmentsPage() {
               Stay on top of due dates, submit work, and review feedback all in one place.
             </p>
           </div>
-          {overdueCount > 0 && (
-            <Badge variant="warning">{overdueCount} overdue</Badge>
-          )}
+          {overdueCount > 0 && <Badge variant="warning">{overdueCount} overdue</Badge>}
         </div>
       </div>
 
@@ -221,7 +215,7 @@ export function AssignmentsPage() {
               "rounded-full border px-5 py-2 text-sm transition",
               tab === value
                 ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
             )}
           >
             {tabLabels[value]} ({counts[value]})

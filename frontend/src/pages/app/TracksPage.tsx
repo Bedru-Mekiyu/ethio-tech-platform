@@ -119,15 +119,16 @@ function TrackStatCard({
 
 function TrackCard({ track }: { track: TrackView }) {
   const text = `${track.category ?? ""} ${track.title}`.toLowerCase();
-  const Icon = text.includes("ai") || text.includes("data")
-    ? Sparkles
-    : text.includes("cyber") || text.includes("security")
-      ? ShieldCheck
-      : text.includes("full") || text.includes("stack") || text.includes("web")
-        ? Cpu
-        : track.enrolled
-          ? GraduationCap
-          : Rocket;
+  const Icon =
+    text.includes("ai") || text.includes("data")
+      ? Sparkles
+      : text.includes("cyber") || text.includes("security")
+        ? ShieldCheck
+        : text.includes("full") || text.includes("stack") || text.includes("web")
+          ? Cpu
+          : track.enrolled
+            ? GraduationCap
+            : Rocket;
 
   const done = track.progress >= 100;
   const statusLabel = done ? "Completed" : track.enrolled ? "In progress" : "Not started";
@@ -235,7 +236,10 @@ export function TracksPage() {
         progress,
         enrolled: enrolledIds.has(track._id),
         completedLessons: progressDetail?.lessons.completed ?? 0,
-        totalLessons: progressDetail?.lessons.total ?? track.modules?.reduce((sum, module) => sum + (module.lessons?.length ?? 0), 0) ?? 0,
+        totalLessons:
+          progressDetail?.lessons.total ??
+          track.modules?.reduce((sum, module) => sum + (module.lessons?.length ?? 0), 0) ??
+          0,
       };
     });
 
@@ -292,13 +296,10 @@ export function TracksPage() {
         transition={{ duration: 0.45 }}
       >
         <div className="max-w-2xl">
-          <Badge className="mb-5">Learning tracks</Badge>
-          <h1 className="section-title text-4xl md:text-5xl lg:text-6xl">
-            Learning Tracks
-          </h1>
+          <h1 className="section-title text-4xl md:text-5xl lg:text-6xl">Learning Tracks</h1>
           <p className="section-copy mt-6 max-w-xl text-base md:text-lg">
-            Choose the path that matches your momentum, keep your current progress visible, and move
-            through each track with clear next steps.
+            Choose the path that matches your momentum, keep your current progress visible, and move through each track
+            with clear next steps.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -311,7 +312,7 @@ export function TracksPage() {
                   "rounded-full border px-4 py-2 text-sm transition",
                   filter === tab.value
                     ? "border-primary bg-primary text-[var(--bg-base)]"
-                    : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                    : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
                 )}
               >
                 {tab.label}
@@ -373,9 +374,7 @@ export function TracksPage() {
                       <PlayCircle size={20} />
                     </div>
                     <div>
-                      <p className="stat-label">
-                        Average progress
-                      </p>
+                      <p className="stat-label">Average progress</p>
                       <p className="font-semibold text-white mt-0.5">{view.averageProgress}%</p>
                     </div>
                   </div>
@@ -386,9 +385,7 @@ export function TracksPage() {
                       <Layers3 size={20} />
                     </div>
                     <div>
-                      <p className="stat-label">
-                        Total lessons
-                      </p>
+                      <p className="stat-label">Total lessons</p>
                       <p className="font-semibold text-white mt-0.5">{formatCompactNumber(view.totalLessons)}</p>
                     </div>
                   </div>
@@ -399,9 +396,7 @@ export function TracksPage() {
                       <Rocket size={20} />
                     </div>
                     <div>
-                      <p className="stat-label">
-                        Momentum
-                      </p>
+                      <p className="stat-label">Momentum</p>
                       <p className="font-semibold text-white mt-0.5">{view.streak} day streak</p>
                     </div>
                   </div>
@@ -415,11 +410,10 @@ export function TracksPage() {
       <section className="mt-12">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Your curriculum</Badge>
             <h2 className="section-title text-3xl md:text-4xl">Track your path, then keep moving.</h2>
             <p className="section-copy mt-4">
-              The cards below use real enrollment and progress data so students can immediately see what
-              they have started, what they have finished, and what still needs attention.
+              The cards below use real enrollment and progress data so students can immediately see what they have
+              started, what they have finished, and what still needs attention.
             </p>
           </div>
           <Link to="/app/notifications">
