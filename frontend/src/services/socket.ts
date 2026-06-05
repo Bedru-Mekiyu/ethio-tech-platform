@@ -1,10 +1,9 @@
 import { io, type Socket } from "socket.io-client";
 import { useAuthStore } from "@/store/authStore";
+import { useNotificationStore } from "@/store/notificationStore";
 import { getBackendOrigin } from "@/config/runtime";
-import type {
-  SocketClientToServerEvents,
-  SocketServerToClientEvents,
-} from "@/lib/realtime";
+import { fetchUnreadCount } from "./notificationsService";
+import type { SocketClientToServerEvents, SocketServerToClientEvents } from "@/lib/realtime";
 
 let socket: Socket<SocketServerToClientEvents, SocketClientToServerEvents> | null = null;
 let connectionRefCount = 0;
@@ -21,6 +20,12 @@ export function getSocket() {
       reconnectionDelayMax: 8000,
       timeout: 15000,
       auth: { token: useAuthStore.getState().accessToken },
+    });
+
+    socket.on("connect", () => {
+      fetchUnreadCount()
+        .then((count) => useNotificationStore.getState().setBadgeCount(count))
+        .catch(() => undefined);
     });
   }
   return socket;
