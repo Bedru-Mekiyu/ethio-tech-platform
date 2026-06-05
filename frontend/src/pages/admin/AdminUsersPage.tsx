@@ -9,23 +9,15 @@ import { Spinner } from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { TabsManual, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import {
-  ArrowLeft,
-  AlertTriangle,
-  Trash2,
-  RotateCcw,
-  Lock,
-  Award,
-  Activity,
-  UserCheck,
-  Users,
-} from "lucide-react";
+import { ArrowLeft, AlertTriangle, Trash2, RotateCcw, Lock, Award, Activity, UserCheck, Users } from "lucide-react";
+import { useToast } from "@/components/composites/ToastProvider";
 
 function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => void }) {
   const queryClient = useQueryClient();
   const [suspendReason, setSuspendReason] = useState("");
   const [showSuspend, setShowSuspend] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const { toast } = useToast();
 
   const suspendMutation = useMutation({
     mutationFn: () => adminUserService.suspendUser(user._id ?? "", suspendReason || undefined),
@@ -33,16 +25,25 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
       setShowSuspend(false);
     },
+    onError: () => {
+      toast.error("Failed to suspend user");
+    },
   });
 
   const reactivateMutation = useMutation({
     mutationFn: () => adminUserService.reactivateUser(user._id ?? ""),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+    onError: () => {
+      toast.error("Failed to reactivate user");
+    },
   });
 
   const verifyMutation = useMutation({
     mutationFn: () => adminUserService.verifyUser(user._id ?? ""),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+    onError: () => {
+      toast.error("Failed to verify user");
+    },
   });
 
   const deleteMutation = useMutation({
@@ -51,13 +52,19 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
       onClose();
     },
+    onError: () => {
+      toast.error("Failed to delete user");
+    },
   });
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr) return "-";
     return new Date(dateStr).toLocaleDateString("en-US", {
-      year: "numeric", month: "long", day: "numeric",
-      hour: "2-digit", minute: "2-digit",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -78,10 +85,20 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
             <h2 className="text-xl font-bold text-[var(--text-primary)]">{user.fullName}</h2>
             <p className="text-sm text-[var(--text-muted)]">{user.email}</p>
             <div className="flex gap-2 mt-2">
-              <Badge variant={user.role === "admin" || user.role === "super_admin" ? "warning" : user.role === "mentor" ? "success" : "default"}>
+              <Badge
+                variant={
+                  user.role === "admin" || user.role === "super_admin"
+                    ? "warning"
+                    : user.role === "mentor"
+                      ? "success"
+                      : "default"
+                }
+              >
                 {user.role?.replace("_", " ")}
               </Badge>
-              <Badge variant={user.status === "active" ? "success" : user.status === "suspended" ? "danger" : "default"}>
+              <Badge
+                variant={user.status === "active" ? "success" : user.status === "suspended" ? "danger" : "default"}
+              >
                 {user.status}
               </Badge>
               {user.isVerified ? (
@@ -117,7 +134,9 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
 
       <div className="grid gap-4 md:grid-cols-2 mb-6">
         <div className="space-y-3 rounded-xl border border-[var(--border)] bg-white/[0.02] p-4">
-          <h3 className="text-sm font-semibold flex items-center gap-2"><Activity size={14} /> Activity</h3>
+          <h3 className="text-sm font-semibold flex items-center gap-2">
+            <Activity size={14} /> Activity
+          </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-[var(--text-muted)]">Last login</span>
@@ -140,7 +159,9 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
           </div>
         </div>
         <div className="space-y-3 rounded-xl border border-[var(--border)] bg-white/[0.02] p-4">
-          <h3 className="text-sm font-semibold flex items-center gap-2"><Award size={14} /> Performance</h3>
+          <h3 className="text-sm font-semibold flex items-center gap-2">
+            <Award size={14} /> Performance
+          </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-[var(--text-muted)]">Attendance rate</span>
@@ -168,11 +189,7 @@ function UserDetailPanel({ user, onClose }: { user: AdminUser; onClose: () => vo
       <div className="flex flex-wrap gap-3 pt-4 border-t border-[var(--border)]">
         {user.status === "active" && (
           <>
-            <Button
-              variant="danger"
-              size="sm"
-              onClick={() => setShowSuspend(!showSuspend)}
-            >
+            <Button variant="danger" size="sm" onClick={() => setShowSuspend(!showSuspend)}>
               <AlertTriangle size={14} className="mr-2" /> Suspend
             </Button>
           </>
@@ -349,11 +366,7 @@ function DeletedUsersTable({ onSelectUser }: { onSelectUser: (user: AdminUser) =
                   </td>
                   <td className="p-4">
                     <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => restoreMutation.mutate(id)}
-                      >
+                      <Button variant="outline" size="sm" onClick={() => restoreMutation.mutate(id)}>
                         <RotateCcw size={14} className="mr-1" /> Restore
                       </Button>
                       {user.canBePermanentlyDeleted && (
@@ -379,12 +392,19 @@ function DeletedUsersTable({ onSelectUser }: { onSelectUser: (user: AdminUser) =
       </div>
       {pagination && (
         <div className="flex justify-between text-sm text-[var(--text-muted)]">
-          <span>Page {pagination.page} of {pagination.totalPages}</span>
+          <span>
+            Page {pagination.page} of {pagination.totalPages}
+          </span>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
               Previous
             </Button>
-            <Button variant="outline" size="sm" disabled={page >= (pagination.totalPages ?? 1)} onClick={() => setPage((p) => p + 1)}>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page >= (pagination.totalPages ?? 1)}
+              onClick={() => setPage((p) => p + 1)}
+            >
               Next
             </Button>
           </div>

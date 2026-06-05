@@ -1,13 +1,6 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  CheckCircle2,
-  CircleDot,
-  FileCode2,
-  Send,
-  XCircle,
-  MessageSquare,
-} from "lucide-react";
+import { CheckCircle2, CircleDot, FileCode2, Send, XCircle, MessageSquare } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,15 +9,12 @@ import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
-import {
-  fetchSubmissionQueue,
-  reviewSubmissionItem,
-  type SubmissionReviewItem,
-} from "@/services/submissionsService";
+import { fetchSubmissionQueue, reviewSubmissionItem, type SubmissionReviewItem } from "@/services/submissionsService";
 import { fetchSessions } from "@/services/sessionsService";
 import { submitStudentFeedback } from "@/services/mentorControlService";
 import { api } from "@/services/api";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/composites/ToastProvider";
 
 type ReviewFilter = "pending" | "reviewed" | "approved" | "rejected" | "all";
 
@@ -97,7 +87,7 @@ export function ReviewFocus() {
       onClick={onSelect}
       className={cn(
         "w-full rounded-[24px] border p-4 text-left transition",
-        isSelected ? "border-primary bg-primary/10" : "border-[var(--border)] bg-white/5 hover:border-primary/40"
+        isSelected ? "border-primary bg-primary/10" : "border-[var(--border)] bg-white/5 hover:border-primary/40",
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -118,7 +108,9 @@ export function ReviewFocus() {
       </div>
       <div className="mt-4 flex items-center gap-2 text-xs text-[var(--text-secondary)]">
         <CircleDot size={12} className="text-primary" />
-        <span>{submission.files?.length ?? 0} files · {submission.grade ?? 0} grade</span>
+        <span>
+          {submission.files?.length ?? 0} files · {submission.grade ?? 0} grade
+        </span>
       </div>
     </button>
   );
@@ -138,6 +130,7 @@ export function MentorReviewPage() {
   const [professionalismScore, setProfessionalismScore] = useState<number>(5);
   const [sessionComment, setSessionComment] = useState("");
   const [isSubmittingSessionFeedback, setIsSubmittingSessionFeedback] = useState(false);
+  const { toast } = useToast();
 
   // Fetch submissions queue
   const { data, isLoading, isError, error, refetch } = useQuery({
@@ -182,6 +175,7 @@ export function MentorReviewPage() {
           });
         } catch (err) {
           console.error("Session feedback submission failed", err);
+          toast.error("Failed to submit session feedback");
         } finally {
           setIsSubmittingSessionFeedback(false);
         }
@@ -204,19 +198,24 @@ export function MentorReviewPage() {
   const submissions = useMemo(() => data ?? [], [data]);
   const filtered = useMemo(
     () => (filter === "all" ? submissions : submissions.filter((item) => item.status === filter)),
-    [filter, submissions]
+    [filter, submissions],
   );
 
   const selected = filtered.find((item) => item._id === selectedId) ?? filtered[0];
 
   const currentStudentDetails = useMemo(() => {
     if (!selected?.student?._id || !studentsList) return null;
-    return studentsList.find((s: any) => String(s._id) === String(selected.student?._id));
-  }, [selected?.student?._id, studentsList]);
+    return studentsList.find((s: { _id: string }) => String(s._id) === String(selected.student?._id));
+  }, [selected, studentsList]);
 
   if (isLoading) return <ReviewSkeleton />;
   if (isError) {
-    return <QueryError message={error instanceof Error ? error.message : "Unable to load submissions."} onRetry={() => refetch()} />;
+    return (
+      <QueryError
+        message={error instanceof Error ? error.message : "Unable to load submissions."}
+        onRetry={() => refetch()}
+      />
+    );
   }
 
   if (!submissions.length) {
@@ -242,7 +241,6 @@ export function MentorReviewPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Project reviews</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Interactive project review board</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Review submissions, evaluate performance scores, and track cohort feedback stats in a calm workspace.
@@ -262,7 +260,7 @@ export function MentorReviewPage() {
               "rounded-full border px-4 py-2 text-sm transition",
               filter === option.value
                 ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
             )}
           >
             {option.label}
@@ -274,7 +272,6 @@ export function MentorReviewPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Review queue</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Submissions waiting for feedback</h2>
             </div>
             <Badge variant="success">{filtered.length} items</Badge>
@@ -302,13 +299,14 @@ export function MentorReviewPage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <Badge variant="purple">Selected submission</Badge>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{selected?.project?.title ?? "Project"}</h3>
               </div>
               <Badge variant={statusTone(selected?.status)}>{selected?.status ?? "pending"}</Badge>
             </div>
             <div className="mt-4 space-y-3 text-sm text-[var(--text-secondary)]">
-              <p>Student: <strong className="text-white">{selected?.student?.fullName ?? "Learner"}</strong></p>
+              <p>
+                Student: <strong className="text-white">{selected?.student?.fullName ?? "Learner"}</strong>
+              </p>
               <p>Track: {selected?.project?.track?.title ?? "Learning track"}</p>
               <p>XP reward: +{selected?.project?.xpReward ?? 0}</p>
               <ProgressBar value={selected?.grade ?? 72} max={100} className="mt-3" />
@@ -317,11 +315,16 @@ export function MentorReviewPage() {
 
           {/* Feedback & Review Form */}
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-            <Badge variant="success">Feedback editor</Badge>
             <div className="mt-4 space-y-4">
               <div>
                 <Label>Grade</Label>
-                <Input value={grade} onChange={(event) => setGrade(event.target.value)} type="number" min={0} max={100} />
+                <Input
+                  value={grade}
+                  onChange={(event) => setGrade(event.target.value)}
+                  type="number"
+                  min={0}
+                  max={100}
+                />
               </div>
               <div>
                 <Label>Mentor feedback</Label>
@@ -346,9 +349,13 @@ export function MentorReviewPage() {
                       onChange={(e) => setSelectedSessionId(e.target.value)}
                       className="mt-1 w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
                     >
-                      <option value="" className="bg-[#0B0F19]">-- No Session Association --</option>
+                      <option value="" className="bg-[#0B0F19]">
+                        -- No Session Association --
+                      </option>
                       {sessionsList?.map((s) => (
-                        <option key={s._id} value={s._id} className="bg-[#0B0F19]">{s.title}</option>
+                        <option key={s._id} value={s._id} className="bg-[#0B0F19]">
+                          {s.title}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -363,7 +370,11 @@ export function MentorReviewPage() {
                             onChange={(e) => setParticipationScore(Number(e.target.value))}
                             className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
                           >
-                            {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n}</option>)}
+                            {[5, 4, 3, 2, 1].map((n) => (
+                              <option key={n} value={n} className="bg-[#0B0F19]">
+                                {n}
+                              </option>
+                            ))}
                           </select>
                         </div>
                         <div className="space-y-1">
@@ -373,7 +384,11 @@ export function MentorReviewPage() {
                             onChange={(e) => setCommunicationScore(Number(e.target.value))}
                             className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
                           >
-                            {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n}</option>)}
+                            {[5, 4, 3, 2, 1].map((n) => (
+                              <option key={n} value={n} className="bg-[#0B0F19]">
+                                {n}
+                              </option>
+                            ))}
                           </select>
                         </div>
                         <div className="space-y-1">
@@ -383,7 +398,11 @@ export function MentorReviewPage() {
                             onChange={(e) => setProfessionalismScore(Number(e.target.value))}
                             className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
                           >
-                            {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n} className="bg-[#0B0F19]">{n}</option>)}
+                            {[5, 4, 3, 2, 1].map((n) => (
+                              <option key={n} value={n} className="bg-[#0B0F19]">
+                                {n}
+                              </option>
+                            ))}
                           </select>
                         </div>
                       </div>
@@ -448,26 +467,30 @@ export function MentorReviewPage() {
             </div>
             {currentStudentDetails?.feedbackHistory && currentStudentDetails.feedbackHistory.length > 0 ? (
               <div className="space-y-3 max-h-72 overflow-y-auto mcc-scrollbar pr-1">
-                {currentStudentDetails.feedbackHistory.slice(0, 4).map((fb: any, idx: number) => (
-                  <div key={idx} className="rounded-2xl border border-white/5 bg-white/[0.01] p-3 text-xs">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div>
-                        <p className="font-semibold text-white truncate max-w-[150px]">{fb.sessionTitle}</p>
-                        <p className="text-[10px] text-[var(--text-muted)]">{new Date(fb.createdAt).toLocaleDateString()}</p>
+                {currentStudentDetails.feedbackHistory
+                  .slice(0, 4)
+                  .map((fb: { score: number; comment: string; createdAt: string }, idx: number) => (
+                    <div key={idx} className="rounded-2xl border border-white/5 bg-white/[0.01] p-3 text-xs">
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                          <p className="font-semibold text-white truncate max-w-[150px]">{fb.sessionTitle}</p>
+                          <p className="text-[10px] text-[var(--text-muted)]">
+                            {new Date(fb.createdAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <div className="flex gap-1.5">
+                          <ScoreBadge score={fb.participationScore} label="PRT" />
+                          <ScoreBadge score={fb.communicationScore} label="COM" />
+                          <ScoreBadge score={fb.professionalismScore} label="PRF" />
+                        </div>
                       </div>
-                      <div className="flex gap-1.5">
-                        <ScoreBadge score={fb.participationScore} label="PRT" />
-                        <ScoreBadge score={fb.communicationScore} label="COM" />
-                        <ScoreBadge score={fb.professionalismScore} label="PRF" />
-                      </div>
+                      {fb.comment && (
+                        <p className="mt-2 text-[11px] text-[var(--text-secondary)] italic bg-white/5 rounded-xl p-2">
+                          &ldquo;{fb.comment}&rdquo;
+                        </p>
+                      )}
                     </div>
-                    {fb.comment && (
-                      <p className="mt-2 text-[11px] text-[var(--text-secondary)] italic bg-white/5 rounded-xl p-2">
-                        &ldquo;{fb.comment}&rdquo;
-                      </p>
-                    )}
-                  </div>
-                ))}
+                  ))}
               </div>
             ) : (
               <div className="text-center py-6 text-xs text-[var(--text-muted)]">
