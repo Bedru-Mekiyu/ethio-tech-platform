@@ -9,6 +9,7 @@ import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
 import { ROLES, USER_STATUS, DELETION_RETENTION_DAYS } from "../config/permissions.js";
 import {
+  notifyUser,
   notifyAccountApproved,
   notifyAccountSuspended,
   notifyAccountUnsuspended,
@@ -21,7 +22,8 @@ import {
   notifyAnnouncement,
 } from "../services/notificationService.js";
 
-const SENSITIVE_FIELDS = "-password -refreshTokenHash -refreshTokenExpiresAt -avatarPublicId -passwordResetHash -passwordResetExpiresAt -loginAttempts -lockUntil";
+const SENSITIVE_FIELDS =
+  "-password -refreshTokenHash -refreshTokenExpiresAt -avatarPublicId -passwordResetHash -passwordResetExpiresAt -loginAttempts -lockUntil";
 
 const buildUserFilter = (query) => {
   const filter = { deletedAt: null };
@@ -69,11 +71,34 @@ const buildSort = (sort) => {
   return sortMap[sort] || { createdAt: -1 };
 };
 
-const logAdminAction = async ({ actor, action, resource, resourceId, targetUser, before, after, metadata, ip, userAgent, success = true, errorMessage }) => {
+const logAdminAction = async ({
+  actor,
+  action,
+  resource,
+  resourceId,
+  targetUser,
+  before,
+  after,
+  metadata,
+  ip,
+  userAgent,
+  success = true,
+  errorMessage,
+}) => {
   try {
     return await AdminActivityLog.create({
-      actor, action, resource, resourceId, targetUser,
-      before, after, metadata, ip, userAgent, success, errorMessage,
+      actor,
+      action,
+      resource,
+      resourceId,
+      targetUser,
+      before,
+      after,
+      metadata,
+      ip,
+      userAgent,
+      success,
+      errorMessage,
     });
   } catch {
     return null;
@@ -86,12 +111,7 @@ export const getAdminUsers = asyncHandler(async (req, res) => {
   const sort = buildSort(req.query.sort);
 
   const [users, total] = await Promise.all([
-    User.find(filter)
-      .select(SENSITIVE_FIELDS)
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .lean(),
+    User.find(filter).select(SENSITIVE_FIELDS).sort(sort).skip(skip).limit(limit).lean(),
     User.countDocuments(filter),
   ]);
 
@@ -129,7 +149,19 @@ export const getAdminUserById = asyncHandler(async (req, res) => {
 });
 
 export const createUser = asyncHandler(async (req, res) => {
-  const { fullName, email, password, role, gradeLevel, city, bio, phone, expertise, currentCompany, learningInterests } = req.body;
+  const {
+    fullName,
+    email,
+    password,
+    role,
+    gradeLevel,
+    city,
+    bio,
+    phone,
+    expertise,
+    currentCompany,
+    learningInterests,
+  } = req.body;
 
   const existing = await User.findOne({ email: email.toLowerCase() });
   if (existing) throw new ApiError(409, "Email already registered");
@@ -149,7 +181,9 @@ export const createUser = asyncHandler(async (req, res) => {
     phone: phone?.trim() || undefined,
     expertise: Array.isArray(expertise) ? expertise.map((e) => e.trim()).filter(Boolean) : undefined,
     currentCompany: currentCompany?.trim() || undefined,
-    learningInterests: Array.isArray(learningInterests) ? learningInterests.map((i) => i.trim()).filter(Boolean) : undefined,
+    learningInterests: Array.isArray(learningInterests)
+      ? learningInterests.map((i) => i.trim()).filter(Boolean)
+      : undefined,
     isVerified: true,
     verifiedAt: new Date(),
     verifiedBy: req.user._id,
@@ -176,8 +210,14 @@ export const updateUser = asyncHandler(async (req, res) => {
   if (user.deletedAt) throw new ApiError(400, "Cannot update a deleted user");
 
   const allowedFields = [
-    "fullName", "bio", "phone", "city", "gradeLevel",
-    "expertise", "currentCompany", "learningInterests",
+    "fullName",
+    "bio",
+    "phone",
+    "city",
+    "gradeLevel",
+    "expertise",
+    "currentCompany",
+    "learningInterests",
   ];
 
   const before = user.toObject();
@@ -202,7 +242,8 @@ export const updateUser = asyncHandler(async (req, res) => {
   }
 
   const updated = await User.findByIdAndUpdate(req.params.id, updates, { new: true, runValidators: true })
-    .select(SENSITIVE_FIELDS).lean();
+    .select(SENSITIVE_FIELDS)
+    .lean();
 
   await logAdminAction({
     actor: req.user._id,
@@ -415,6 +456,8 @@ export const restoreUser = asyncHandler(async (req, res) => {
     userAgent: req.headers["user-agent"],
   });
 
+  await notifyAccountUnsuspended({ userId: user._id });
+
   const restored = await User.findById(user._id).select(SENSITIVE_FIELDS).lean();
   sendResponse(res, 200, "User restored successfully", { user: restored });
 });
@@ -423,9 +466,14 @@ export const permanentDeleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) throw new ApiError(404, "User not found");
   if (!user.deletedAt) {
-    const daysSinceDeletion = Math.floor((Date.now() - new Date(user.deletedAt || Date.now()).getTime()) / (24 * 60 * 60 * 1000));
+    const daysSinceDeletion = Math.floor(
+      (Date.now() - new Date(user.deletedAt || Date.now()).getTime()) / (24 * 60 * 60 * 1000),
+    );
     if (daysSinceDeletion < DELETION_RETENTION_DAYS) {
-      throw new ApiError(400, `User must be deleted for at least ${DELETION_RETENTION_DAYS} days before permanent deletion. ${DELETION_RETENTION_DAYS - daysSinceDeletion} days remaining.`);
+      throw new ApiError(
+        400,
+        `User must be deleted for at least ${DELETION_RETENTION_DAYS} days before permanent deletion. ${DELETION_RETENTION_DAYS - daysSinceDeletion} days remaining.`,
+      );
     }
   }
 
@@ -463,13 +511,20 @@ export const forceLogoutUser = asyncHandler(async (req, res) => {
     userAgent: req.headers["user-agent"],
   });
 
+  await notifyUser({
+    recipientId: user._id,
+    type: "system",
+    message: "You have been logged out by an administrator.",
+    link: "/login",
+  });
+
   sendResponse(res, 200, "User logged out of all sessions");
 });
 
 export const resetUserPassword = asyncHandler(async (req, res) => {
   const { newPassword } = req.body;
   const user = await User.findById(req.params.id).select(
-    "+password +refreshTokenHash +refreshTokenExpiresAt +passwordResetHash +passwordResetExpiresAt"
+    "+password +refreshTokenHash +refreshTokenExpiresAt +passwordResetHash +passwordResetExpiresAt",
   );
   if (!user) throw new ApiError(404, "User not found");
 
@@ -568,6 +623,7 @@ export const bulkAction = asyncHandler(async (req, res) => {
           user.refreshTokenHash = undefined;
           user.refreshTokenExpiresAt = undefined;
           await user.save();
+          await notifyAccountDeleted({ userId: user._id });
           break;
         }
         case "verify": {
@@ -575,6 +631,7 @@ export const bulkAction = asyncHandler(async (req, res) => {
           user.verifiedAt = new Date();
           user.verifiedBy = req.user._id;
           await user.save();
+          await notifyAccountApproved({ userId: user._id });
           break;
         }
       }
@@ -606,16 +663,25 @@ export const exportUsers = asyncHandler(async (req, res) => {
     .lean();
 
   const csvHeader = "Full Name,Email,Role,Status,Mentor Status,Verified,XP,Level,City,Company,Joined Date,Last Login\n";
-  const csvRows = users.map((u) => {
-    const escape = (v) => `"${(v ?? "").toString().replace(/"/g, '""')}"`;
-    return [
-      escape(u.fullName), escape(u.email), escape(u.role), escape(u.status),
-      escape(u.mentorStatus), u.isVerified ? "Yes" : "No", u.xp ?? 0, u.level ?? 1,
-      escape(u.city), escape(u.currentCompany),
-      u.createdAt ? new Date(u.createdAt).toISOString().split("T")[0] : "",
-      u.lastLoginAt ? new Date(u.lastLoginAt).toISOString().split("T")[0] : "",
-    ].join(",");
-  }).join("\n");
+  const csvRows = users
+    .map((u) => {
+      const escape = (v) => `"${(v ?? "").toString().replace(/"/g, '""')}"`;
+      return [
+        escape(u.fullName),
+        escape(u.email),
+        escape(u.role),
+        escape(u.status),
+        escape(u.mentorStatus),
+        u.isVerified ? "Yes" : "No",
+        u.xp ?? 0,
+        u.level ?? 1,
+        escape(u.city),
+        escape(u.currentCompany),
+        u.createdAt ? new Date(u.createdAt).toISOString().split("T")[0] : "",
+        u.lastLoginAt ? new Date(u.lastLoginAt).toISOString().split("T")[0] : "",
+      ].join(",");
+    })
+    .join("\n");
 
   const csv = csvHeader + csvRows;
   const filename = `users-export-${new Date().toISOString().split("T")[0]}.csv`;
@@ -679,14 +745,8 @@ export const getUserAnalytics = asyncHandler(async (req, res) => {
     returningUsers,
   ] = await Promise.all([
     User.countDocuments({ deletedAt: null }),
-    User.aggregate([
-      { $match: { deletedAt: null } },
-      { $group: { _id: "$status", count: { $sum: 1 } } },
-    ]),
-    User.aggregate([
-      { $match: { deletedAt: null } },
-      { $group: { _id: "$role", count: { $sum: 1 } } },
-    ]),
+    User.aggregate([{ $match: { deletedAt: null } }, { $group: { _id: "$status", count: { $sum: 1 } } }]),
+    User.aggregate([{ $match: { deletedAt: null } }, { $group: { _id: "$role", count: { $sum: 1 } } }]),
     User.aggregate([
       { $match: { createdAt: { $gte: today }, deletedAt: null } },
       { $group: { _id: null, count: { $sum: 1 } } },
@@ -745,10 +805,13 @@ export const getUserAnalytics = asyncHandler(async (req, res) => {
     },
     byStatus: statusCounts.reduce((acc, s) => ({ ...acc, [s._id]: s.count }), {}),
     byRole: roleCounts.reduce((acc, r) => ({ ...acc, [r._id]: r.count }), {}),
-    mentorStats: mentorStats.reduce((acc, m) => ({
-      ...acc,
-      [m._id || "unknown"]: { count: m.count, avgScore: Math.round(m.avgScore || 0) },
-    }), {}),
+    mentorStats: mentorStats.reduce(
+      (acc, m) => ({
+        ...acc,
+        [m._id || "unknown"]: { count: m.count, avgScore: Math.round(m.avgScore || 0) },
+      }),
+      {},
+    ),
   });
 });
 
@@ -769,7 +832,8 @@ export const getDeletedUsers = asyncHandler(async (req, res) => {
     ...u,
     id: u._id?.toString?.() ?? u._id,
     daysSinceDeletion: Math.floor((Date.now() - new Date(u.deletedAt).getTime()) / (24 * 60 * 60 * 1000)),
-    canBePermanentlyDeleted: Math.floor((Date.now() - new Date(u.deletedAt).getTime()) / (24 * 60 * 60 * 1000)) >= DELETION_RETENTION_DAYS,
+    canBePermanentlyDeleted:
+      Math.floor((Date.now() - new Date(u.deletedAt).getTime()) / (24 * 60 * 60 * 1000)) >= DELETION_RETENTION_DAYS,
   }));
 
   sendResponse(res, 200, "Deleted users fetched", {

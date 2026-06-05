@@ -9,7 +9,7 @@ import MentorApplication from "../models/MentorApplication.js";
 import ApiError from "../utils/ApiError.js";
 import { getPagination } from "../utils/pagination.js";
 import { USER_STATUS, MENTOR_STATUS } from "../config/permissions.js";
-import { notifyMentorApproved, notifyMentorRejected } from "../services/notificationService.js";
+import { notifyMentorApproved, notifyMentorRejected, notifyUser } from "../services/notificationService.js";
 import AdminActivityLog from "../models/AdminActivityLog.js";
 
 export const getAnalytics = asyncHandler(async (_req, res) => {
@@ -43,7 +43,10 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       .sort({ scheduledAt: 1 })
       .limit(20),
     Hub.find({ isActive: true }).select("city address capacity computersAvailable mentorInCharge"),
-    User.find({ role: "mentor", deletedAt: null }).sort({ mentorScore: -1 }).limit(5).select("fullName mentorScore totalSessions"),
+    User.find({ role: "mentor", deletedAt: null })
+      .sort({ mentorScore: -1 })
+      .limit(5)
+      .select("fullName mentorScore totalSessions"),
     XPLog.aggregate([
       { $match: { sourceType: "lesson" } },
       {
@@ -89,18 +92,13 @@ export const getAnalytics = asyncHandler(async (_req, res) => {
       { $sort: { xpTotal: -1 } },
       { $limit: 4 },
     ]),
-    User.aggregate([
-      { $match: { deletedAt: null } },
-      { $group: { _id: "$status", count: { $sum: 1 } } },
-    ]),
+    User.aggregate([{ $match: { deletedAt: null } }, { $group: { _id: "$status", count: { $sum: 1 } } }]),
   ]);
 
   const sessionFillRate =
     upcomingSessions.length === 0
       ? 0
-      : Math.round(
-          (upcomingSessions.filter((s) => s.participants?.length > 0).length / upcomingSessions.length) * 100
-        );
+      : Math.round((upcomingSessions.filter((s) => s.participants?.length > 0).length / upcomingSessions.length) * 100);
 
   const hubsWithAvailability = hubs.map((hub) => ({
     ...hub.toObject(),
@@ -163,9 +161,20 @@ export const flagSubmission = asyncHandler(async (req, res) => {
   const submission = await Submission.findByIdAndUpdate(
     req.params.id,
     { flagged: true, flagReason: reason || "Flagged by admin" },
-    { new: true }
-  );
+    { new: true },
+  ).populate("student", "fullName");
   if (!submission) throw new ApiError(404, "Submission not found");
+
+  if (submission.student?._id) {
+    await notifyUser({
+      recipientId: submission.student._id,
+      type: "system",
+      message: `Your submission has been flagged${reason ? `: ${reason}` : ""}. Please review and resubmit if needed.`,
+      link: "/app/projects",
+      createdBy: req.user._id,
+    });
+  }
+
   sendResponse(res, 200, "Submission flagged", { submission });
 });
 
@@ -177,11 +186,7 @@ export const getMentorApplications = asyncHandler(async (req, res) => {
   if (status) filter.status = status;
 
   const [applications, total] = await Promise.all([
-    MentorApplication.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .lean(),
+    MentorApplication.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
     MentorApplication.countDocuments(filter),
   ]);
 
