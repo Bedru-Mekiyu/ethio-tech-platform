@@ -3,19 +3,16 @@ import { protect } from "../middlewares/authMiddleware.js";
 import { requireSessionRole } from "../middlewares/sessionAuth.js";
 import validateRequest from "../middlewares/validateRequest.js";
 import { sessionSchemas } from "../validators/schemas.js";
-import {
-  getAgoraConfig,
-  getAgoraToken,
-  toggleScreenShare,
-  startRecording,
-  stopRecording,
-} from "../controllers/agoraController.js";
+import { getJitsiConfig, getJitsiToken, getMeetingInfo } from "../controllers/jitsiController.js";
+import { toggleScreenShare, startRecording, stopRecording } from "../controllers/sessionMediaController.js";
 
 const router = Router({ mergeParams: true });
 
-router.get("/agora-config", protect, getAgoraConfig);
+router.get("/jitsi-config", protect, getJitsiConfig);
 
-router.post("/:id/agora-token", protect, validateRequest({ params: sessionSchemas.idParam }), getAgoraToken);
+router.post("/:id/jitsi-token", protect, validateRequest({ params: sessionSchemas.idParam }), getJitsiToken);
+
+router.get("/:id/meeting-info", protect, validateRequest({ params: sessionSchemas.idParam }), getMeetingInfo);
 
 router.post(
   "/:id/screen-share",

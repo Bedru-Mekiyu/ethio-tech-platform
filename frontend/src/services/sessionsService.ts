@@ -17,6 +17,7 @@ export interface SessionDetail extends SessionSummary {
   durationMinutes?: number;
   classroomMode?: string;
   liveProvider?: string;
+  liveStartedAt?: string;
   whiteboardEnabled?: boolean;
   codeCollabEnabled?: boolean;
   screenShareActive?: boolean;
@@ -34,16 +35,16 @@ export interface SessionAvailability {
   isFull: boolean;
 }
 
-export interface AgoraTokenResponse {
-  rtcToken: string | null;
-  rtmToken: string | null;
-  channelName: string;
-  appId: string;
-  uid: string;
+export interface JitsiTokenResponse {
+  roomName: string;
+  domain: string;
+  token: string | null;
   role: string;
+  sessionId: string;
 }
 
-export interface AgoraConfigResponse {
+export interface JitsiConfigResponse {
+  domain: string;
   appId: string;
   enabled: boolean;
 }
@@ -93,14 +94,14 @@ export async function submitSessionFeedback(
   return data.data;
 }
 
-export async function getAgoraConfig() {
-  const { data } = await api.get<ApiResponse<AgoraConfigResponse>>("/sessions/agora-config");
-  return data.data as unknown as AgoraConfigResponse;
+export async function getJitsiConfig() {
+  const { data } = await api.get<ApiResponse<JitsiConfigResponse>>("/sessions/jitsi-config");
+  return data.data as unknown as JitsiConfigResponse;
 }
 
-export async function getAgoraToken(sessionId: string) {
-  const { data } = await api.post<ApiResponse<AgoraTokenResponse>>(`/sessions/${sessionId}/agora-token`);
-  return data.data as unknown as AgoraTokenResponse;
+export async function getJitsiToken(sessionId: string) {
+  const { data } = await api.post<ApiResponse<JitsiTokenResponse>>(`/sessions/${sessionId}/jitsi-token`);
+  return data.data as unknown as JitsiTokenResponse;
 }
 
 export async function toggleScreenShare(sessionId: string) {

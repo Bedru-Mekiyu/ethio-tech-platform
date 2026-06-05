@@ -3,10 +3,11 @@ import { z } from "zod";
 const objectId = z.string().regex(/^[a-f\d]{24}$/i, "Invalid ObjectId");
 const isoDateString = z.string().datetime({ offset: true });
 const httpUrl = z.string().url();
-const systemAvatarUrl = z.string().refine((value) => /^\/avatars\/[a-z0-9-]+\.svg$/i.test(value), "Invalid system avatar URL");
+const systemAvatarUrl = z
+  .string()
+  .refine((value) => /^\/avatars\/[a-z0-9-]+\.svg$/i.test(value), "Invalid system avatar URL");
 
-const atLeastOneField = (schema, message) =>
-  schema.refine((value) => Object.keys(value).length > 0, message);
+const atLeastOneField = (schema, message) => schema.refine((value) => Object.keys(value).length > 0, message);
 
 export const commonSchemas = {
   idParam: z.object({ id: objectId }),
@@ -43,7 +44,7 @@ export const userSchemas = {
       expertise: z.array(z.string().trim().min(2).max(80)).max(20).optional(),
       currentCompany: z.string().trim().min(2).max(120).optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
 };
 
@@ -115,7 +116,7 @@ export const trackSchemas = {
       estimatedWeeks: z.number().int().positive().optional(),
       isActive: z.boolean().optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
 };
 
@@ -133,7 +134,7 @@ export const moduleSchemas = {
       track: objectId.optional(),
       order: z.number().int().nonnegative().optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
 };
 
@@ -147,13 +148,15 @@ export const lessonSchemas = {
     module: objectId,
     durationMinutes: z.number().int().positive().optional(),
     order: z.number().int().nonnegative().optional(),
-    quiz: z.array(
-      z.object({
-        question: z.string().min(1),
-        options: z.array(z.string().min(1)).min(2),
-        correctIndex: z.number().int().nonnegative(),
-      })
-    ).optional(),
+    quiz: z
+      .array(
+        z.object({
+          question: z.string().min(1),
+          options: z.array(z.string().min(1)).min(2),
+          correctIndex: z.number().int().nonnegative(),
+        }),
+      )
+      .optional(),
   }),
   update: atLeastOneField(
     z.object({
@@ -165,15 +168,17 @@ export const lessonSchemas = {
       module: objectId.optional(),
       durationMinutes: z.number().int().positive().optional(),
       order: z.number().int().nonnegative().optional(),
-      quiz: z.array(
-        z.object({
-          question: z.string().min(1),
-          options: z.array(z.string().min(1)).min(2),
-          correctIndex: z.number().int().nonnegative(),
-        })
-      ).optional(),
+      quiz: z
+        .array(
+          z.object({
+            question: z.string().min(1),
+            options: z.array(z.string().min(1)).min(2),
+            correctIndex: z.number().int().nonnegative(),
+          }),
+        )
+        .optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
 };
 
@@ -197,7 +202,7 @@ export const projectSchemas = {
       githubTemplate: httpUrl.optional(),
       requirements: z.array(z.string()).optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
 };
 
@@ -221,7 +226,7 @@ export const sessionSchemas = {
     scheduledAt: isoDateString,
     durationMinutes: z.number().int().positive().optional(),
     classroomMode: z.enum(["standard", "immersive-3d"]).optional(),
-    liveProvider: z.enum(["custom", "agora", "twilio", "daily", "zoom"]).optional(),
+    liveProvider: z.enum(["custom", "jitsi", "twilio", "daily", "zoom"]).optional(),
     meetingLink: httpUrl.optional(),
     recordingUrl: httpUrl.optional(),
     xpPerAttendee: z.number().int().nonnegative().optional(),
@@ -237,7 +242,7 @@ export const sessionSchemas = {
       scheduledAt: isoDateString.optional(),
       durationMinutes: z.number().int().positive().optional(),
       classroomMode: z.enum(["standard", "immersive-3d"]).optional(),
-      liveProvider: z.enum(["custom", "agora", "twilio", "daily", "zoom"]).optional(),
+      liveProvider: z.enum(["custom", "jitsi", "twilio", "daily", "zoom"]).optional(),
       meetingLink: httpUrl.optional(),
       recordingUrl: httpUrl.optional(),
       xpPerAttendee: z.number().int().nonnegative().optional(),
@@ -247,7 +252,7 @@ export const sessionSchemas = {
       admissionMode: z.enum(["open", "waiting-room"]).optional(),
       isPublic: z.boolean().optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
   cancel: z.object({
     reason: z.string().trim().min(2).max(500),
@@ -319,7 +324,7 @@ export const hubSchemas = {
       computersAvailable: z.number().int().nonnegative().optional(),
       isActive: z.boolean().optional(),
     }),
-    { message: "At least one field is required" }
+    { message: "At least one field is required" },
   ),
   attendance: z.object({
     hubId: objectId,
@@ -377,7 +382,7 @@ export const mentorAvailabilitySchemas = {
           startMinutes: z.number().int().min(0).max(1439),
           endMinutes: z.number().int().min(1).max(1440),
           timezone: z.string().trim().max(64).optional(),
-        })
+        }),
       )
       .min(1)
       .max(21),

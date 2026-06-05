@@ -1,14 +1,7 @@
 const isProduction = process.env.NODE_ENV === "production";
 const isTest = process.env.NODE_ENV === "test";
 
-const PLACEHOLDER_PATTERNS = [
-  "change-me",
-  "changeme",
-  "placeholder",
-  "your-secret",
-  "secret-key",
-  "default",
-];
+const PLACEHOLDER_PATTERNS = ["change-me", "changeme", "placeholder", "your-secret", "secret-key", "default"];
 
 const parseOrigins = (value) =>
   value
@@ -20,9 +13,7 @@ const isPlaceholder = (value) => {
   if (!value) return false;
   const lower = value.toLowerCase();
   const stripped = lower.replace(/[-_]/g, "");
-  return PLACEHOLDER_PATTERNS.some(
-    (p) => lower.includes(p) || stripped.includes(p.replace(/[-_]/g, ""))
-  );
+  return PLACEHOLDER_PATTERNS.some((p) => lower.includes(p) || stripped.includes(p.replace(/[-_]/g, "")));
 };
 
 const requireSecret = (name, value, minLength = 16) => {
@@ -60,8 +51,9 @@ export const getEnv = () => {
     jwtRefreshDays: Number(process.env.JWT_REFRESH_DAYS || 14),
     logLevel: process.env.LOG_LEVEL || "info",
     featureAttendanceVerification: process.env.FEATURE_ATTENDANCE_VERIFICATION === "true",
-    agoraAppId: process.env.AGORA_APP_ID || "",
-    agoraAppCertificate: process.env.AGORA_APP_CERTIFICATE || "",
+    jitsiDomain: process.env.JITSI_DOMAIN || "meet.jit.si",
+    jitsiAppId: process.env.JITSI_APP_ID || "",
+    jitsiSharedSecret: process.env.JITSI_SHARED_SECRET || "",
   };
 
   if (!cached.mongoUri && !isTest) {

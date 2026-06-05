@@ -147,10 +147,6 @@ export interface SocketClientToServerEvents {
   "admission:action": (payload: { roomId: string; targetUserId: string; action: "admit" | "deny" }) => void;
   "admission:admit-all": (payload: { roomId: string }) => void;
   "mentor:request-overview": (payload: { roomId: string }) => void;
-  "video:toggle-audio": (payload: { roomId: string; enabled: boolean }) => void;
-  "video:toggle-video": (payload: { roomId: string; enabled: boolean }) => void;
-  "video:screen-share:start": (payload: { roomId: string }) => void;
-  "video:screen-share:stop": (payload: { roomId: string }) => void;
   "whiteboard:draw": (payload: {
     roomId: string;
     opId: string;
@@ -298,18 +294,6 @@ export interface SocketServerToClientEvents {
     queue: Array<{ userId: string; userName: string; joinedAt: string }>;
   }) => void;
   "notification:mentor": (payload: { roomId: string; type: string; message: string; data?: unknown }) => void;
-  "video:state": (payload: {
-    roomId: string;
-    activeSpeakers: string[];
-    screenShareUserId?: string;
-    screenShareActive: boolean;
-  }) => void;
-  "video:audio-toggled": (payload: { roomId: string; userId: string; enabled: boolean }) => void;
-  "video:video-toggled": (payload: { roomId: string; userId: string; enabled: boolean }) => void;
-  "video:screen-share:started": (payload: { roomId: string; userId: string }) => void;
-  "video:screen-share:stopped": (payload: { roomId: string }) => void;
-  "video:recording:started": (payload: { roomId: string; by: string }) => void;
-  "video:recording:stopped": (payload: { roomId: string }) => void;
   "whiteboard:draw": (payload: {
     roomId: string;
     opId: string;

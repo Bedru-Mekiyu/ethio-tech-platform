@@ -4,48 +4,51 @@ const { Schema, model } = mongoose;
 
 const urlRegex = /^https?:\/\/\S+$/;
 
-const sessionSchema = new Schema({
-  title: { type: String, required: true, trim: true },
-  mentor: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  scheduledAt: { type: Date, required: true },
-  durationMinutes: { type: Number, default: 60, min: 1 },
-  classroomMode: {
-    type: String,
-    enum: ["standard", "immersive-3d"],
-    default: "immersive-3d",
+const sessionSchema = new Schema(
+  {
+    title: { type: String, required: true, trim: true },
+    mentor: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    scheduledAt: { type: Date, required: true },
+    durationMinutes: { type: Number, default: 60, min: 1 },
+    classroomMode: {
+      type: String,
+      enum: ["standard", "immersive-3d"],
+      default: "immersive-3d",
+    },
+    liveProvider: {
+      type: String,
+      enum: ["custom", "jitsi", "twilio", "daily", "zoom"],
+      default: "jitsi",
+    },
+    liveRoomId: { type: String, trim: true },
+    whiteboardEnabled: { type: Boolean, default: true },
+    codeCollabEnabled: { type: Boolean, default: true },
+    meetingLink: { type: String, match: [urlRegex, "Invalid URL"] },
+    recordingUrl: { type: String, match: [urlRegex, "Invalid URL"] },
+    xpPerAttendee: { type: Number, default: 80, min: 0 },
+    liveStartedAt: { type: Date },
+    liveEndedAt: { type: Date },
+    maxParticipants: { type: Number, default: 100, min: 0 },
+    admissionMode: { type: String, enum: ["open", "waiting-room"], default: "open" },
+    isPublic: { type: Boolean, default: true },
+    jitsiRoomName: { type: String, trim: true },
+    recordingMode: { type: String, enum: ["none", "cloud", "local"], default: "none" },
+    screenShareActive: { type: Boolean, default: false },
+    screenShareUserId: { type: Schema.Types.ObjectId, ref: "User" },
+    whiteboardRevision: { type: Number, default: 0 },
+    cancelReason: { type: String, trim: true },
+    rescheduledFrom: { type: Date },
+    rescheduledReason: { type: String, trim: true },
+    tags: [{ type: String, trim: true }],
+    status: {
+      type: String,
+      enum: ["draft", "scheduled", "registration_closed", "live", "paused", "ended", "canceled", "rescheduled"],
+      default: "scheduled",
+    },
   },
-  liveProvider: {
-    type: String,
-    enum: ["custom", "agora", "twilio", "daily", "zoom"],
-    default: "custom",
-  },
-  liveRoomId: { type: String, trim: true },
-  whiteboardEnabled: { type: Boolean, default: true },
-  codeCollabEnabled: { type: Boolean, default: true },
-  meetingLink: { type: String, match: [urlRegex, "Invalid URL"] },
-  recordingUrl: { type: String, match: [urlRegex, "Invalid URL"] },
-  xpPerAttendee: { type: Number, default: 80, min: 0 },
-  liveStartedAt: { type: Date },
-  liveEndedAt: { type: Date },
-  maxParticipants: { type: Number, default: 100, min: 0 },
-  admissionMode: { type: String, enum: ["open", "waiting-room"], default: "open" },
-  isPublic: { type: Boolean, default: true },
-  agoraChannel: { type: String, trim: true },
-  recordingMode: { type: String, enum: ["none", "cloud", "local"], default: "none" },
-  screenShareActive: { type: Boolean, default: false },
-  screenShareUserId: { type: Schema.Types.ObjectId, ref: "User" },
-  whiteboardRevision: { type: Number, default: 0 },
-  cancelReason: { type: String, trim: true },
-  rescheduledFrom: { type: Date },
-  rescheduledReason: { type: String, trim: true },
-  tags: [{ type: String, trim: true }],
-  status: { 
-    type: String, 
-    enum: ["draft", "scheduled", "registration_closed", "live", "paused", "ended", "canceled", "rescheduled"], 
-    default: "scheduled" 
-  },
-}, { timestamps: true });
+  { timestamps: true },
+);
 
 const VALID_TRANSITIONS = {
   draft: ["scheduled", "canceled"],
