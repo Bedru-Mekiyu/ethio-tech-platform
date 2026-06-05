@@ -93,11 +93,7 @@ const payloadSize = (payload: unknown) => {
   }
 };
 
-const consumeBudget = (
-  socket: Socket,
-  bucketName: string,
-  maxEvents: number
-) => {
+const consumeBudget = (socket: Socket, bucketName: string, maxEvents: number) => {
   const now = Date.now();
   socket.data.rateLimits ??= {};
   const bucket = socket.data.rateLimits[bucketName] as { startedAt: number; count: number } | undefined;
@@ -155,7 +151,7 @@ const snapshotRoom = (io: Server, roomId: string): RoomStatePayload => {
   const state = getRoomState(roomId);
   const onlineCount = io.sockets.adapter.rooms.get(roomId)?.size ?? 0;
   const connectedUserIds = Array.from(
-    new Set([...state.connectedParticipants.values()].filter((value): value is string => Boolean(value)))
+    new Set([...state.connectedParticipants.values()].filter((value): value is string => Boolean(value))),
   );
   return {
     roomId,
@@ -184,17 +180,12 @@ const emitRoomState = (io: Server, roomId: string) => {
   io.to(roomId).emit("room:state", snapshot);
 };
 
-const updateRoomActivity = (
-  io: Server,
-  roomId: string,
-  quality?: ConnectionQuality,
-  broadcast = true
-) => {
+const updateRoomActivity = (io: Server, roomId: string, quality?: ConnectionQuality, broadcast = true) => {
   const state = getRoomState(roomId);
   state.lastActivityAt = new Date().toISOString();
   if (quality) state.connectionQuality = quality;
   if (broadcast) {
-   emitRoomState(io, roomId);
+    emitRoomState(io, roomId);
   }
 };
 
@@ -254,7 +245,7 @@ export const setupSocket = (io: Server) => {
   const sendSystemMessage = async (io: Server, roomId: string, text: string) => {
     const messageId = `system-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const at = new Date().toISOString();
-    
+
     const serverPayload: ChatMessageServerPayload = {
       roomId,
       messageId,
@@ -313,13 +304,15 @@ export const setupSocket = (io: Server) => {
         const state = getRoomState(roomId);
         state.connectedParticipants.set(socket.id, user?.id);
 
-        recordJoin(resourceId, user?.id, socket.handshake.address).then(async () => {
-          if (user?.displayName) {
-            await sendSystemMessage(io, roomId, `${user.displayName} joined the session`);
-          }
-        }).catch((err) => {
-          logger.warn("Failed to record socket join", { roomId, userId: user?.id, error: err });
-        });
+        recordJoin(resourceId, user?.id, socket.handshake.address)
+          .then(async () => {
+            if (user?.displayName) {
+              await sendSystemMessage(io, roomId, `${user.displayName} joined the session`);
+            }
+          })
+          .catch((err) => {
+            logger.warn("Failed to record socket join", { roomId, userId: user?.id, error: err });
+          });
 
         socket.to(roomId).emit("presence:join", {
           roomId,
@@ -372,13 +365,15 @@ export const setupSocket = (io: Server) => {
 
       const { type, resourceId } = parseRoomId(roomId);
       if ((type === "session" || type === "classroom") && resourceId && user?.id) {
-        recordLeave(resourceId, user.id, socket.handshake.address).then(async () => {
-          if (user?.displayName) {
-            await sendSystemMessage(io, roomId, `${user.displayName} left the session`);
-          }
-        }).catch((err) => {
-          logger.warn("Failed to record socket leave", { roomId, userId: user.id, error: err });
-        });
+        recordLeave(resourceId, user.id, socket.handshake.address)
+          .then(async () => {
+            if (user?.displayName) {
+              await sendSystemMessage(io, roomId, `${user.displayName} left the session`);
+            }
+          })
+          .catch((err) => {
+            logger.warn("Failed to record socket leave", { roomId, userId: user.id, error: err });
+          });
       }
 
       socket.to(roomId).emit("presence:leave", {
@@ -390,146 +385,164 @@ export const setupSocket = (io: Server) => {
       updateRoomActivity(io, roomId);
     });
 
-    socket.on("chat:message", async (payload: ChatMessageClientPayload, ack?: (_response: { ok: boolean; messageId?: string }) => void) => {
-      if (socket.data.roomRole === "observer") {
-        socket.emit("room:error", { roomId: payload?.roomId ?? "unknown", message: "Observers cannot send messages", code: "forbidden" });
-        ack?.({ ok: false });
-        return;
-      }
-      if (!consumeBudget(socket, "chat", CHAT_EVENTS_PER_WINDOW)) {
-        socket.emit("room:error", {
-          roomId: payload?.roomId ?? "unknown",
-          message: "Message rate limit exceeded",
-          code: "rate_limited",
-        });
-        ack?.({ ok: false });
-        return;
-      }
-
-      const sanitizedText = typeof payload?.text === "string" ? sanitizeChatText(payload.text) : "";
-      if (!isValidRoomId(payload?.roomId) || !sanitizedText) {
-        socket.emit("room:error", {
-          roomId: payload?.roomId ?? "unknown",
-          message: "Message text is required",
-          code: "invalid_message",
-        });
-        ack?.({ ok: false });
-        return;
-      }
-
-      if (sanitizedText.length > MAX_CHAT_TEXT_LENGTH) {
-        socket.emit("room:error", {
-          roomId: payload.roomId,
-          message: `Message must be ${MAX_CHAT_TEXT_LENGTH} characters or fewer`,
-          code: "message_too_long",
-        });
-        ack?.({ ok: false });
-        return;
-      }
-
-      const roomId = payload.roomId;
-      if (!joinedRooms.has(roomId)) {
-        socket.emit("room:error", {
-          roomId,
-          message: "Join the room before sending messages",
-          code: "not_in_room",
-        });
-        ack?.({ ok: false });
-        return;
-      }
-
-      if (user?.id) {
-        if (await moderationService.isUserMuted(roomId.replace("session-", ""), user.id)) {
-          socket.emit("room:error", { roomId, message: "You are muted in this session", code: "muted" });
-          ack?.({ ok: false });
-          return;
-        }
-        if (await moderationService.isUserTimedOut(user.id, roomId.replace("session-", ""))) {
-          socket.emit("room:error", { roomId, message: "You are temporarily timed out", code: "timed_out" });
-          ack?.({ ok: false });
-          return;
-        }
-        if (moderationService.checkFlood(user.id)) {
-          moderationService.timeoutUser({ sessionId: roomId.replace("session-", ""), userId: user.id, actorId: user.id, durationMinutes: 1, reason: "Flood detected", ip: socket.handshake.address }).catch(() => undefined);
-          socket.emit("room:error", { roomId, message: "Flood detected. You have been timed out for 1 minute.", code: "flood_detected" });
-          ack?.({ ok: false });
-          return;
-        }
-        if (moderationService.checkSpam(sanitizedText)) {
-          socket.emit("chat:message", {
-            roomId,
-            messageId: `spam-warning-${Date.now()}`,
-            text: "Your message was blocked by spam detection.",
-            at: new Date().toISOString(),
-            userId: "system",
-            author: "System",
-            system: true,
+    socket.on(
+      "chat:message",
+      async (payload: ChatMessageClientPayload, ack?: (_response: { ok: boolean; messageId?: string }) => void) => {
+        if (socket.data.roomRole === "observer") {
+          socket.emit("room:error", {
+            roomId: payload?.roomId ?? "unknown",
+            message: "Observers cannot send messages",
+            code: "forbidden",
           });
           ack?.({ ok: false });
           return;
         }
-      }
+        if (!consumeBudget(socket, "chat", CHAT_EVENTS_PER_WINDOW)) {
+          socket.emit("room:error", {
+            roomId: payload?.roomId ?? "unknown",
+            message: "Message rate limit exceeded",
+            code: "rate_limited",
+          });
+          ack?.({ ok: false });
+          return;
+        }
 
-      const roomState = getRoomState(roomId);
-      roomState.messageCount += 1;
-      updateRoomActivity(io, roomId);
+        const sanitizedText = typeof payload?.text === "string" ? sanitizeChatText(payload.text) : "";
+        if (!isValidRoomId(payload?.roomId) || !sanitizedText) {
+          socket.emit("room:error", {
+            roomId: payload?.roomId ?? "unknown",
+            message: "Message text is required",
+            code: "invalid_message",
+          });
+          ack?.({ ok: false });
+          return;
+        }
 
-      const isAnnouncement = payload.type === "announcement";
-      const isDirect = payload.type === "direct";
-      const isPrivateQuestion = payload.type === "private_question";
+        if (sanitizedText.length > MAX_CHAT_TEXT_LENGTH) {
+          socket.emit("room:error", {
+            roomId: payload.roomId,
+            message: `Message must be ${MAX_CHAT_TEXT_LENGTH} characters or fewer`,
+            code: "message_too_long",
+          });
+          ack?.({ ok: false });
+          return;
+        }
 
-      const serverPayload: ChatMessageServerPayload = {
-        roomId,
-        messageId: payload.messageId,
-        text: sanitizedText,
-        at: payload.at ?? new Date().toISOString(),
-        userId: user?.id,
-        author: user?.displayName ?? (user?.id ? `User ${user.id.slice(0, 6)}` : "Participant"),
-        clientId: payload.clientId,
-        type: (payload.type || "public") as ChatMessageServerPayload["type"],
-        system: false,
-        announcement: isAnnouncement,
-      };
+        const roomId = payload.roomId;
+        if (!joinedRooms.has(roomId)) {
+          socket.emit("room:error", {
+            roomId,
+            message: "Join the room before sending messages",
+            code: "not_in_room",
+          });
+          ack?.({ ok: false });
+          return;
+        }
 
-      if (isDirect) {
-        const targetSocketId = Array.from(io.sockets.adapter.rooms.get(roomId) || [])
-          .find((sid) => {
+        if (user?.id) {
+          if (await moderationService.isUserMuted(roomId.replace("session-", ""), user.id)) {
+            socket.emit("room:error", { roomId, message: "You are muted in this session", code: "muted" });
+            ack?.({ ok: false });
+            return;
+          }
+          if (await moderationService.isUserTimedOut(user.id, roomId.replace("session-", ""))) {
+            socket.emit("room:error", { roomId, message: "You are temporarily timed out", code: "timed_out" });
+            ack?.({ ok: false });
+            return;
+          }
+          if (moderationService.checkFlood(user.id)) {
+            moderationService
+              .timeoutUser({
+                sessionId: roomId.replace("session-", ""),
+                userId: user.id,
+                actorId: user.id,
+                durationMinutes: 1,
+                reason: "Flood detected",
+                ip: socket.handshake.address,
+              })
+              .catch(() => undefined);
+            socket.emit("room:error", {
+              roomId,
+              message: "Flood detected. You have been timed out for 1 minute.",
+              code: "flood_detected",
+            });
+            ack?.({ ok: false });
+            return;
+          }
+          if (moderationService.checkSpam(sanitizedText)) {
+            socket.emit("chat:message", {
+              roomId,
+              messageId: `spam-warning-${Date.now()}`,
+              text: "Your message was blocked by spam detection.",
+              at: new Date().toISOString(),
+              userId: "system",
+              author: "System",
+              system: true,
+            });
+            ack?.({ ok: false });
+            return;
+          }
+        }
+
+        const roomState = getRoomState(roomId);
+        roomState.messageCount += 1;
+        updateRoomActivity(io, roomId);
+
+        const isAnnouncement = payload.type === "announcement";
+        const isDirect = payload.type === "direct";
+        const isPrivateQuestion = payload.type === "private_question";
+
+        const serverPayload: ChatMessageServerPayload = {
+          roomId,
+          messageId: payload.messageId,
+          text: sanitizedText,
+          at: payload.at ?? new Date().toISOString(),
+          userId: user?.id,
+          author: user?.displayName ?? (user?.id ? `User ${user.id.slice(0, 6)}` : "Participant"),
+          clientId: payload.clientId,
+          type: (payload.type || "public") as ChatMessageServerPayload["type"],
+          system: false,
+          announcement: isAnnouncement,
+        };
+
+        if (isDirect) {
+          const targetSocketId = Array.from(io.sockets.adapter.rooms.get(roomId) || []).find((sid) => {
             const sock = io.sockets.sockets.get(sid);
             return sock?.data?.user?.id === payload.recipientId;
           });
-        if (targetSocketId) {
-          io.to(targetSocketId).emit("chat:message", { ...serverPayload, type: "direct" });
-        }
-        socket.emit("chat:message", { ...serverPayload, type: "direct" });
-      } else if (isPrivateQuestion) {
-        const mentorSocketId = Array.from(io.sockets.adapter.rooms.get(roomId) || [])
-          .find((sid) => {
+          if (targetSocketId) {
+            io.to(targetSocketId).emit("chat:message", { ...serverPayload, type: "direct" });
+          }
+          socket.emit("chat:message", { ...serverPayload, type: "direct" });
+        } else if (isPrivateQuestion) {
+          const mentorSocketId = Array.from(io.sockets.adapter.rooms.get(roomId) || []).find((sid) => {
             const sock = io.sockets.sockets.get(sid);
             const role = sock?.data?.roomRole || sock?.data?.user?.role;
             return role === "host" || role === "mentor";
           });
-        if (mentorSocketId) {
-          io.to(mentorSocketId).emit("chat:message", { ...serverPayload, type: "private_question" });
+          if (mentorSocketId) {
+            io.to(mentorSocketId).emit("chat:message", { ...serverPayload, type: "private_question" });
+          }
+          socket.emit("chat:message", { ...serverPayload, type: "private_question" });
+        } else {
+          io.to(roomId).emit("chat:message", serverPayload);
         }
-        socket.emit("chat:message", { ...serverPayload, type: "private_question" });
-      } else {
-        io.to(roomId).emit("chat:message", serverPayload);
-      }
 
-      ChatMessage.create({
-        roomId,
-        userId: user?.id,
-        text: sanitizeChatText(serverPayload.text).replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-        messageId: payload.messageId,
-      }).catch(() => undefined);
+        ChatMessage.create({
+          roomId,
+          userId: user?.id,
+          text: sanitizeChatText(serverPayload.text).replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+          messageId: payload.messageId,
+        }).catch(() => undefined);
 
-      const { type, resourceId } = parseRoomId(roomId);
-      if ((type === "squad" || type === "peer") && resourceId) {
-        PeerGroup.findByIdAndUpdate(resourceId, { $inc: { groupXP: 2 } }).catch(() => undefined);
-      }
+        const { type, resourceId } = parseRoomId(roomId);
+        if ((type === "squad" || type === "peer") && resourceId) {
+          PeerGroup.findByIdAndUpdate(resourceId, { $inc: { groupXP: 2 } }).catch(() => undefined);
+        }
 
-      ack?.({ ok: true, messageId: payload.messageId });
-    });
+        ack?.({ ok: true, messageId: payload.messageId });
+      },
+    );
 
     socket.on("classroom:sync", (payload: ClassroomSyncPayload) => {
       if (socket.data.roomRole === "observer") return;
@@ -562,28 +575,34 @@ export const setupSocket = (io: Server) => {
       socket.to(payload.roomId).emit("classroom:sync", payload);
     });
 
-    socket.on("room:heartbeat", (payload: HeartbeatPayload, ack?: (_response: { roomId: string; receivedAt: string; serverTime: string; lagMs: number }) => void) => {
-      if (!isValidRoomId(payload?.roomId)) return;
-      if (!consumeBudget(socket, "heartbeat", HEARTBEATS_PER_WINDOW)) return;
-      if (!joinedRooms.has(payload.roomId)) return;
-      const receivedAt = new Date().toISOString();
-      const sentAtMs = Date.parse(payload.sentAt);
-      updateRoomActivity(io, payload.roomId, payload.connectionQuality, false);
+    socket.on(
+      "room:heartbeat",
+      (
+        payload: HeartbeatPayload,
+        ack?: (_response: { roomId: string; receivedAt: string; serverTime: string; lagMs: number }) => void,
+      ) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!consumeBudget(socket, "heartbeat", HEARTBEATS_PER_WINDOW)) return;
+        if (!joinedRooms.has(payload.roomId)) return;
+        const receivedAt = new Date().toISOString();
+        const sentAtMs = Date.parse(payload.sentAt);
+        updateRoomActivity(io, payload.roomId, payload.connectionQuality, false);
 
-      const { type, resourceId } = parseRoomId(payload.roomId);
-      if ((type === "session" || type === "classroom") && resourceId && user?.id) {
-        recordHeartbeat(resourceId, user.id);
-      }
+        const { type, resourceId } = parseRoomId(payload.roomId);
+        if ((type === "session" || type === "classroom") && resourceId && user?.id) {
+          recordHeartbeat(resourceId, user.id);
+        }
 
-      const response = {
-        roomId: payload.roomId,
-        receivedAt,
-        serverTime: receivedAt,
-        lagMs: Number.isFinite(sentAtMs) ? Math.max(0, Date.now() - sentAtMs) : 0,
-      };
-      ack?.(response);
-      socket.emit("room:heartbeat:ack", response);
-    });
+        const response = {
+          roomId: payload.roomId,
+          receivedAt,
+          serverTime: receivedAt,
+          lagMs: Number.isFinite(sentAtMs) ? Math.max(0, Date.now() - sentAtMs) : 0,
+        };
+        ack?.(response);
+        socket.emit("room:heartbeat:ack", response);
+      },
+    );
 
     socket.on("room:quality", (payload: { roomId: string; connectionQuality: ConnectionQuality }) => {
       if (!isValidRoomId(payload?.roomId)) return;
@@ -719,210 +738,299 @@ export const setupSocket = (io: Server) => {
       }
     });
 
-    socket.on("poll:vote", async (payload: { roomId: string; pollId: string; optionIndex?: number; optionIndexes?: number[] }) => {
-      if (!isValidRoomId(payload?.roomId)) return;
-      if (!joinedRooms.has(payload.roomId)) return;
-      if (!user?.id) return;
-      try {
-        await pollService.votePoll({
-          pollId: payload.pollId,
-          userId: user.id,
-          optionIndexes: payload.optionIndexes ?? (payload.optionIndex !== undefined ? [payload.optionIndex] : []),
-        });
-        const pollResults = await pollService.getPollResults(payload.pollId);
-        const pPayload: PollPayload = {
-          roomId: payload.roomId,
-          pollId: payload.pollId,
-          question: pollResults.poll.question,
-          type: pollResults.poll.type,
-          status: pollResults.poll.status,
-          options: pollResults.results.map((r) => ({ text: r.text, voteCount: r.voteCount, percentage: r.percentage })),
-          totalVotes: pollResults.totalVotes,
-          at: new Date().toISOString(),
-        };
-        io.to(payload.roomId).emit("poll:updated", pPayload);
-      } catch (err) {
-        logger.warn("Poll vote failed", { error: err });
-      }
-    });
+    socket.on(
+      "poll:vote",
+      async (payload: { roomId: string; pollId: string; optionIndex?: number; optionIndexes?: number[] }) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!joinedRooms.has(payload.roomId)) return;
+        if (!user?.id) return;
+        try {
+          await pollService.votePoll({
+            pollId: payload.pollId,
+            userId: user.id,
+            optionIndexes: payload.optionIndexes ?? (payload.optionIndex !== undefined ? [payload.optionIndex] : []),
+          });
+          const pollResults = await pollService.getPollResults(payload.pollId);
+          const pPayload: PollPayload = {
+            roomId: payload.roomId,
+            pollId: payload.pollId,
+            question: pollResults.poll.question,
+            type: pollResults.poll.type,
+            status: pollResults.poll.status,
+            options: pollResults.results.map((r) => ({
+              text: r.text,
+              voteCount: r.voteCount,
+              percentage: r.percentage,
+            })),
+            totalVotes: pollResults.totalVotes,
+            at: new Date().toISOString(),
+          };
+          io.to(payload.roomId).emit("poll:updated", pPayload);
+        } catch (err) {
+          logger.warn("Poll vote failed", { error: err });
+        }
+      },
+    );
 
-    socket.on("participant:control", async (payload: { roomId: string; targetUserId: string; action: string; reason?: string }) => {
-      if (!isValidRoomId(payload?.roomId)) return;
-      if (!user?.id) return;
+    socket.on(
+      "participant:control",
+      async (payload: { roomId: string; targetUserId: string; action: string; reason?: string }) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!user?.id) return;
 
-      const sessionId = payload.roomId.replace("session-", "");
-      const actorRole = await getUserRole(user.id, sessionId);
-      if (actorRole !== "host" && actorRole !== "cohost" && actorRole !== "moderator") {
-        socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized. Emitter must be host/cohost/moderator.", code: "unauthorized" });
-        return;
-      }
-
-      const ctrlPayload: ParticipantControlPayload = {
-        roomId: payload.roomId,
-        targetUserId: payload.targetUserId,
-        action: payload.action as ParticipantControlPayload["action"],
-        performedBy: user.id,
-        at: new Date().toISOString(),
-      };
-
-      try {
-        const targetUser = await User.findById(payload.targetUserId).select("fullName");
-        const targetName = targetUser?.fullName || "Participant";
-
-        switch (payload.action) {
-          case "removed":
-            if (actorRole !== "host" && actorRole !== "cohost") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized to remove participant.", code: "unauthorized" });
-              return;
-            }
-            await moderationService.removeParticipant({
-              sessionId,
-              userId: payload.targetUserId,
-              actorId: user.id,
-              reason: payload.reason,
-              ip: socket.handshake.address,
-            });
-            await sendSystemMessage(io, payload.roomId, `${targetName} was removed from the session by ${user.displayName || "Host"}`);
-            break;
-
-          case "blocked":
-            if (actorRole !== "host" && actorRole !== "cohost") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized to block user.", code: "unauthorized" });
-              return;
-            }
-            await moderationService.blockUser({
-              sessionId,
-              userId: payload.targetUserId,
-              actorId: user.id,
-              reason: payload.reason,
-              ip: socket.handshake.address,
-            });
-            await sendSystemMessage(io, payload.roomId, `${targetName} was blocked by ${user.displayName || "Host"}`);
-            break;
-
-          case "muted":
-            await moderationService.muteUser({
-              sessionId,
-              userId: payload.targetUserId,
-              actorId: user.id,
-              durationMinutes: 1440,
-              reason: payload.reason,
-              ip: socket.handshake.address,
-            });
-            await sendSystemMessage(io, payload.roomId, `${targetName} was muted by ${user.displayName || "Moderator"}`);
-            break;
-
-          case "unmuted":
-            await moderationService.unmuteUser({
-              sessionId,
-              userId: payload.targetUserId,
-              actorId: user.id,
-              ip: socket.handshake.address,
-            });
-            await sendSystemMessage(io, payload.roomId, `${targetName} was unmuted by ${user.displayName || "Moderator"}`);
-            break;
-
-          case "promoted":
-            if (actorRole !== "host") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Only the host can promote users.", code: "unauthorized" });
-              return;
-            }
-            const pParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
-            if (pParticipant) {
-              pParticipant.role = "cohost";
-              await pParticipant.save();
-            }
-            await sendSystemMessage(io, payload.roomId, `${targetName} was promoted to cohost by ${user.displayName || "Host"}`);
-            break;
-
-          case "demoted":
-            if (actorRole !== "host") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Only the host can demote users.", code: "unauthorized" });
-              return;
-            }
-            const dParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
-            if (dParticipant) {
-              dParticipant.role = "participant";
-              await dParticipant.save();
-            }
-            await sendSystemMessage(io, payload.roomId, `${targetName} was demoted by ${user.displayName || "Host"}`);
-            break;
-
-          case "speaking_granted":
-            if (actorRole !== "host" && actorRole !== "cohost") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized to grant speaking permission.", code: "unauthorized" });
-              return;
-            }
-            const sgParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
-            if (sgParticipant) {
-              sgParticipant.speakingPermission = true;
-              sgParticipant.liveStatus = "speaking";
-              await sgParticipant.save();
-              io.to(payload.roomId).emit("participant:status", { roomId: payload.roomId, userId: payload.targetUserId, status: "speaking" });
-            }
-            await sendSystemMessage(io, payload.roomId, `${targetName} was granted speaking permission`);
-            break;
-
-          case "speaking_removed":
-            if (actorRole !== "host" && actorRole !== "cohost") {
-              socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized to revoke speaking permission.", code: "unauthorized" });
-              return;
-            }
-            const srParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
-            if (srParticipant) {
-              srParticipant.speakingPermission = false;
-              srParticipant.liveStatus = "active";
-              await srParticipant.save();
-              io.to(payload.roomId).emit("participant:status", { roomId: payload.roomId, userId: payload.targetUserId, status: "active" });
-            }
-            await sendSystemMessage(io, payload.roomId, `${targetName} speaking permission was revoked`);
-            break;
+        const sessionId = payload.roomId.replace("session-", "");
+        const actorRole = await getUserRole(user.id, sessionId);
+        if (actorRole !== "host" && actorRole !== "cohost" && actorRole !== "moderator") {
+          socket.emit("room:error", {
+            roomId: payload.roomId,
+            message: "Unauthorized. Emitter must be host/cohost/moderator.",
+            code: "unauthorized",
+          });
+          return;
         }
 
-        io.to(payload.roomId).emit("participant:control", ctrlPayload);
-      } catch (err) {
-        logger.warn("Participant control action failed", { error: err });
-      }
-    });
-
-    socket.on("admission:action", async (payload: { roomId: string; targetUserId: string; action: "admit" | "deny" }) => {
-      if (!isValidRoomId(payload?.roomId)) return;
-      if (!user?.id) return;
-      const { resourceId } = parseRoomId(payload.roomId);
-      if (!resourceId) return;
-
-      const actorRole = await getUserRole(user.id, resourceId);
-      if (actorRole !== "host" && actorRole !== "cohost") {
-        socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized. Emitter must be host/cohost.", code: "unauthorized" });
-        return;
-      }
-
-      try {
-        if (payload.action === "admit") {
-          await admissionService.admitUser({ sessionId: resourceId, userId: payload.targetUserId, actorId: user.id, ip: socket.handshake.address });
-        } else {
-          await admissionService.denyUser({ sessionId: resourceId, userId: payload.targetUserId, actorId: user.id, ip: socket.handshake.address });
-        }
-        io.to(payload.roomId).emit("admission:update", {
+        const ctrlPayload: ParticipantControlPayload = {
           roomId: payload.roomId,
-          userId: payload.targetUserId,
-          action: payload.action === "admit" ? "admitted" : "denied",
+          targetUserId: payload.targetUserId,
+          action: payload.action as ParticipantControlPayload["action"],
           performedBy: user.id,
           at: new Date().toISOString(),
-        });
-        const waitingQueue = await admissionService.getWaitingQueue(resourceId);
-        io.to(payload.roomId).emit("waiting:queue", {
-          roomId: payload.roomId,
-          queue: waitingQueue.map((w) => ({
-            userId: getRefId(w.user),
-            userName: getRefName(w.user, "Unknown"),
-            joinedAt: w.createdAt?.toISOString?.() || new Date().toISOString(),
-          })),
-        });
-      } catch (err) {
-        logger.warn("Admission action failed", { error: err });
-      }
-    });
+        };
+
+        try {
+          const targetUser = await User.findById(payload.targetUserId).select("fullName");
+          const targetName = targetUser?.fullName || "Participant";
+
+          switch (payload.action) {
+            case "removed":
+              if (actorRole !== "host" && actorRole !== "cohost") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Unauthorized to remove participant.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              await moderationService.removeParticipant({
+                sessionId,
+                userId: payload.targetUserId,
+                actorId: user.id,
+                reason: payload.reason,
+                ip: socket.handshake.address,
+              });
+              await sendSystemMessage(
+                io,
+                payload.roomId,
+                `${targetName} was removed from the session by ${user.displayName || "Host"}`,
+              );
+              break;
+
+            case "blocked":
+              if (actorRole !== "host" && actorRole !== "cohost") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Unauthorized to block user.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              await moderationService.blockUser({
+                sessionId,
+                userId: payload.targetUserId,
+                actorId: user.id,
+                reason: payload.reason,
+                ip: socket.handshake.address,
+              });
+              await sendSystemMessage(io, payload.roomId, `${targetName} was blocked by ${user.displayName || "Host"}`);
+              break;
+
+            case "muted":
+              await moderationService.muteUser({
+                sessionId,
+                userId: payload.targetUserId,
+                actorId: user.id,
+                durationMinutes: 1440,
+                reason: payload.reason,
+                ip: socket.handshake.address,
+              });
+              await sendSystemMessage(
+                io,
+                payload.roomId,
+                `${targetName} was muted by ${user.displayName || "Moderator"}`,
+              );
+              break;
+
+            case "unmuted":
+              await moderationService.unmuteUser({
+                sessionId,
+                userId: payload.targetUserId,
+                actorId: user.id,
+                ip: socket.handshake.address,
+              });
+              await sendSystemMessage(
+                io,
+                payload.roomId,
+                `${targetName} was unmuted by ${user.displayName || "Moderator"}`,
+              );
+              break;
+
+            case "promoted": {
+              if (actorRole !== "host") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Only the host can promote users.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              const pParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
+              if (pParticipant) {
+                pParticipant.role = "cohost";
+                await pParticipant.save();
+              }
+              await sendSystemMessage(
+                io,
+                payload.roomId,
+                `${targetName} was promoted to cohost by ${user.displayName || "Host"}`,
+              );
+              break;
+            }
+
+            case "demoted": {
+              if (actorRole !== "host") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Only the host can demote users.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              const dParticipant = await SessionParticipant.findOne({ session: sessionId, user: payload.targetUserId });
+              if (dParticipant) {
+                dParticipant.role = "participant";
+                await dParticipant.save();
+              }
+              await sendSystemMessage(io, payload.roomId, `${targetName} was demoted by ${user.displayName || "Host"}`);
+              break;
+            }
+
+            case "speaking_granted": {
+              if (actorRole !== "host" && actorRole !== "cohost") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Unauthorized to grant speaking permission.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              const sgParticipant = await SessionParticipant.findOne({
+                session: sessionId,
+                user: payload.targetUserId,
+              });
+              if (sgParticipant) {
+                sgParticipant.speakingPermission = true;
+                sgParticipant.liveStatus = "speaking";
+                await sgParticipant.save();
+                io.to(payload.roomId).emit("participant:status", {
+                  roomId: payload.roomId,
+                  userId: payload.targetUserId,
+                  status: "speaking",
+                });
+              }
+              await sendSystemMessage(io, payload.roomId, `${targetName} was granted speaking permission`);
+              break;
+            }
+
+            case "speaking_removed": {
+              if (actorRole !== "host" && actorRole !== "cohost") {
+                socket.emit("room:error", {
+                  roomId: payload.roomId,
+                  message: "Unauthorized to revoke speaking permission.",
+                  code: "unauthorized",
+                });
+                return;
+              }
+              const srParticipant = await SessionParticipant.findOne({
+                session: sessionId,
+                user: payload.targetUserId,
+              });
+              if (srParticipant) {
+                srParticipant.speakingPermission = false;
+                srParticipant.liveStatus = "active";
+                await srParticipant.save();
+                io.to(payload.roomId).emit("participant:status", {
+                  roomId: payload.roomId,
+                  userId: payload.targetUserId,
+                  status: "active",
+                });
+              }
+              await sendSystemMessage(io, payload.roomId, `${targetName} speaking permission was revoked`);
+              break;
+            }
+          }
+
+          io.to(payload.roomId).emit("participant:control", ctrlPayload);
+        } catch (err) {
+          logger.warn("Participant control action failed", { error: err });
+        }
+      },
+    );
+
+    socket.on(
+      "admission:action",
+      async (payload: { roomId: string; targetUserId: string; action: "admit" | "deny" }) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!user?.id) return;
+        const { resourceId } = parseRoomId(payload.roomId);
+        if (!resourceId) return;
+
+        const actorRole = await getUserRole(user.id, resourceId);
+        if (actorRole !== "host" && actorRole !== "cohost") {
+          socket.emit("room:error", {
+            roomId: payload.roomId,
+            message: "Unauthorized. Emitter must be host/cohost.",
+            code: "unauthorized",
+          });
+          return;
+        }
+
+        try {
+          if (payload.action === "admit") {
+            await admissionService.admitUser({
+              sessionId: resourceId,
+              userId: payload.targetUserId,
+              actorId: user.id,
+              ip: socket.handshake.address,
+            });
+          } else {
+            await admissionService.denyUser({
+              sessionId: resourceId,
+              userId: payload.targetUserId,
+              actorId: user.id,
+              ip: socket.handshake.address,
+            });
+          }
+          io.to(payload.roomId).emit("admission:update", {
+            roomId: payload.roomId,
+            userId: payload.targetUserId,
+            action: payload.action === "admit" ? "admitted" : "denied",
+            performedBy: user.id,
+            at: new Date().toISOString(),
+          });
+          const waitingQueue = await admissionService.getWaitingQueue(resourceId);
+          io.to(payload.roomId).emit("waiting:queue", {
+            roomId: payload.roomId,
+            queue: waitingQueue.map((w) => ({
+              userId: getRefId(w.user),
+              userName: getRefName(w.user, "Unknown"),
+              joinedAt: w.createdAt?.toISOString?.() || new Date().toISOString(),
+            })),
+          });
+        } catch (err) {
+          logger.warn("Admission action failed", { error: err });
+        }
+      },
+    );
 
     socket.on("admission:admit-all", async (payload: { roomId: string }) => {
       if (!isValidRoomId(payload?.roomId)) return;
@@ -932,7 +1040,11 @@ export const setupSocket = (io: Server) => {
 
       const actorRole = await getUserRole(user.id, resourceId);
       if (actorRole !== "host" && actorRole !== "cohost") {
-        socket.emit("room:error", { roomId: payload.roomId, message: "Unauthorized. Emitter must be host/cohost.", code: "unauthorized" });
+        socket.emit("room:error", {
+          roomId: payload.roomId,
+          message: "Unauthorized. Emitter must be host/cohost.",
+          code: "unauthorized",
+        });
         return;
       }
 
@@ -940,7 +1052,12 @@ export const setupSocket = (io: Server) => {
         const queue = await admissionService.getWaitingQueue(resourceId);
         for (const entry of queue) {
           const targetId = String(entry.user?._id || entry.user);
-          await admissionService.admitUser({ sessionId: resourceId, userId: targetId, actorId: user.id, ip: socket.handshake.address });
+          await admissionService.admitUser({
+            sessionId: resourceId,
+            userId: targetId,
+            actorId: user.id,
+            ip: socket.handshake.address,
+          });
         }
         io.to(payload.roomId).emit("admission:update", {
           roomId: payload.roomId,
@@ -994,7 +1111,7 @@ export const setupSocket = (io: Server) => {
 
       SessionParticipant.findOneAndUpdate(
         { session: resourceId, user: user.id },
-        { $set: { "metadata.audioEnabled": payload.enabled } }
+        { $set: { "metadata.audioEnabled": payload.enabled } },
       ).catch(() => undefined);
 
       io.to(payload.roomId).emit("video:audio-toggled", {
@@ -1012,7 +1129,7 @@ export const setupSocket = (io: Server) => {
 
       SessionParticipant.findOneAndUpdate(
         { session: resourceId, user: user.id },
-        { $set: { "metadata.videoEnabled": payload.enabled } }
+        { $set: { "metadata.videoEnabled": payload.enabled } },
       ).catch(() => undefined);
 
       io.to(payload.roomId).emit("video:video-toggled", {
@@ -1030,15 +1147,17 @@ export const setupSocket = (io: Server) => {
 
       Session.findOneAndUpdate(
         { _id: resourceId, status: "live" },
-        { $set: { screenShareActive: true, screenShareUserId: user.id } }
-      ).then(() => {
-        io.to(payload.roomId).emit("video:screen-share:started", {
-          roomId: payload.roomId,
-          userId: user.id,
+        { $set: { screenShareActive: true, screenShareUserId: user.id } },
+      )
+        .then(() => {
+          io.to(payload.roomId).emit("video:screen-share:started", {
+            roomId: payload.roomId,
+            userId: user.id,
+          });
+        })
+        .catch((err) => {
+          logger.warn("Screen share start failed", { error: err });
         });
-      }).catch((err) => {
-        logger.warn("Screen share start failed", { error: err });
-      });
     });
 
     socket.on("video:screen-share:stop", (payload: { roomId: string }) => {
@@ -1047,16 +1166,15 @@ export const setupSocket = (io: Server) => {
       const { resourceId } = parseRoomId(payload.roomId);
       if (!resourceId) return;
 
-      Session.findOneAndUpdate(
-        { _id: resourceId },
-        { $set: { screenShareActive: false, screenShareUserId: null } }
-      ).then(() => {
-        io.to(payload.roomId).emit("video:screen-share:stopped", {
-          roomId: payload.roomId,
+      Session.findOneAndUpdate({ _id: resourceId }, { $set: { screenShareActive: false, screenShareUserId: null } })
+        .then(() => {
+          io.to(payload.roomId).emit("video:screen-share:stopped", {
+            roomId: payload.roomId,
+          });
+        })
+        .catch((err) => {
+          logger.warn("Screen share stop failed", { error: err });
         });
-      }).catch((err) => {
-        logger.warn("Screen share stop failed", { error: err });
-      });
     });
 
     socket.on("whiteboard:draw", (payload: WhiteboardOpPayload) => {
@@ -1094,7 +1212,7 @@ export const setupSocket = (io: Server) => {
 
         const conversation = await Conversation.findById(payload.conversationId);
         if (!conversation) return;
-        if (!conversation.participants.some(p => String(p) === String(user.id))) return;
+        if (!conversation.participants.some((p) => String(p) === String(user.id))) return;
 
         const message = await DMMessage.create({
           conversationId: payload.conversationId,
@@ -1110,8 +1228,9 @@ export const setupSocket = (io: Server) => {
         });
 
         for (const participantId of conversation.participants) {
-          const participantSocket = Array.from(io.sockets.sockets.values())
-            .find(s => (s.data.user as SocketUser)?.id === String(participantId));
+          const participantSocket = Array.from(io.sockets.sockets.values()).find(
+            (s) => (s.data.user as SocketUser)?.id === String(participantId),
+          );
           if (participantSocket) {
             participantSocket.emit("dm:new", {
               conversationId: payload.conversationId,
@@ -1135,7 +1254,7 @@ export const setupSocket = (io: Server) => {
         const Conversation = (await import("../models/Conversation.js")).default;
         const conversation = await Conversation.findById(payload.conversationId);
         if (!conversation || !conversation.participants.includes(socket.data.user.id)) return;
-        
+
         for (const participantId of conversation.participants) {
           if (participantId.toString() === socket.data.user.id) continue;
           const participantSockets = await io.in(`user:${participantId}`).fetchSockets();
@@ -1148,7 +1267,9 @@ export const setupSocket = (io: Server) => {
             });
           }
         }
-      } catch {}
+      } catch {
+        /* typing indicator errors are non-critical */
+      }
     });
 
     socket.on("dm:typing-stop", async (payload: { conversationId: string }) => {
@@ -1157,7 +1278,7 @@ export const setupSocket = (io: Server) => {
         const Conversation = (await import("../models/Conversation.js")).default;
         const conversation = await Conversation.findById(payload.conversationId);
         if (!conversation || !conversation.participants.includes(socket.data.user.id)) return;
-        
+
         for (const participantId of conversation.participants) {
           if (participantId.toString() === socket.data.user.id) continue;
           const participantSockets = await io.in(`user:${participantId}`).fetchSockets();
@@ -1170,7 +1291,9 @@ export const setupSocket = (io: Server) => {
             });
           }
         }
-      } catch {}
+      } catch {
+        /* typing indicator errors are non-critical */
+      }
     });
 
     // DM Read receipts
@@ -1189,7 +1312,7 @@ export const setupSocket = (io: Server) => {
             senderId: { $ne: socket.data.user.id },
             "readBy.userId": { $ne: socket.data.user.id },
           },
-          { $push: { readBy: { userId: socket.data.user.id, readAt: now } } }
+          { $push: { readBy: { userId: socket.data.user.id, readAt: now } } },
         );
 
         if (result.modifiedCount > 0) {
@@ -1199,8 +1322,8 @@ export const setupSocket = (io: Server) => {
             "readBy.userId": socket.data.user.id,
           }).select("_id senderId");
 
-          const senderIds = [...new Set(unreadMessages.map(m => m.senderId.toString()))];
-          const messageIds = unreadMessages.map(m => m._id.toString());
+          const senderIds = [...new Set(unreadMessages.map((m) => m.senderId.toString()))];
+          const messageIds = unreadMessages.map((m) => m._id.toString());
 
           for (const senderId of senderIds) {
             const senderSockets = await io.in(`user:${senderId}`).fetchSockets();
@@ -1209,22 +1332,24 @@ export const setupSocket = (io: Server) => {
                 conversationId: payload.conversationId,
                 userId: socket.data.user.id,
                 readAt: now.toISOString(),
-                messageIds: messageIds.filter(id => 
-                  unreadMessages.some(m => m._id.toString() === id && m.senderId.toString() === senderId)
+                messageIds: messageIds.filter((id) =>
+                  unreadMessages.some((m) => m._id.toString() === id && m.senderId.toString() === senderId),
                 ),
               });
             }
           }
         }
-      } catch {}
+      } catch {
+        /* DM read receipt errors are non-critical */
+      }
     });
 
     socket.on("notification:read", async (payload: { notificationId: string }) => {
       if (!user?.id || !payload.notificationId) return;
       try {
         const { default: Notification } = await import("../models/Notification.js");
-        await Notification.findByIdAndUpdate(payload.notificationId, { read: true });
-        const unreadCount = await Notification.countDocuments({ userId: user.id, read: false });
+        await Notification.findOneAndUpdate({ _id: payload.notificationId, recipient: user.id }, { isRead: true });
+        const unreadCount = await Notification.countDocuments({ recipient: user.id, isRead: false });
         socket.emit("notification:count", { userId: user.id, count: unreadCount });
       } catch (err) {
         logger.warn("Notification read failed", { error: err });
@@ -1249,13 +1374,15 @@ export const setupSocket = (io: Server) => {
 
         const { type, resourceId } = parseRoomId(roomId);
         if ((type === "session" || type === "classroom") && resourceId && user?.id) {
-          recordLeave(resourceId, user.id, socket.handshake.address).then(async () => {
-            if (user?.displayName) {
-              await sendSystemMessage(io, roomId, `${user.displayName} left the session`);
-            }
-          }).catch((err) => {
-            logger.warn("Failed to record disconnect leave", { roomId, userId: user.id, error: err });
-          });
+          recordLeave(resourceId, user.id, socket.handshake.address)
+            .then(async () => {
+              if (user?.displayName) {
+                await sendSystemMessage(io, roomId, `${user.displayName} left the session`);
+              }
+            })
+            .catch((err) => {
+              logger.warn("Failed to record disconnect leave", { roomId, userId: user.id, error: err });
+            });
         }
 
         socket.to(roomId).emit("presence:leave", {

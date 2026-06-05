@@ -3,6 +3,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import { getPagination } from "../utils/pagination.js";
+import { emitNotification } from "../services/notificationHelper.js";
 
 export const createNotification = asyncHandler(async (req, res) => {
   const { recipient, type, message, link } = req.body;
@@ -10,8 +11,8 @@ export const createNotification = asyncHandler(async (req, res) => {
     throw new ApiError(400, "recipient, type, message are required");
   }
 
-  const notification = await Notification.create({
-    recipient,
+  const notification = await emitNotification({
+    recipientId: recipient,
     type,
     message,
     link,
@@ -26,10 +27,7 @@ export const getMyNotifications = asyncHandler(async (req, res) => {
   const filter = { recipient: req.user._id };
 
   const [notifications, total] = await Promise.all([
-    Notification.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit),
+    Notification.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
     Notification.countDocuments(filter),
   ]);
 
@@ -37,6 +35,11 @@ export const getMyNotifications = asyncHandler(async (req, res) => {
     notifications,
     pagination: { page, limit, total, pages: Math.ceil(total / limit) },
   });
+});
+
+export const getUnreadCount = asyncHandler(async (req, res) => {
+  const count = await Notification.countDocuments({ recipient: req.user._id, isRead: false });
+  sendResponse(res, 200, "Unread count fetched", { count });
 });
 
 export const markNotificationRead = asyncHandler(async (req, res) => {
@@ -48,9 +51,6 @@ export const markNotificationRead = asyncHandler(async (req, res) => {
 });
 
 export const markAllNotificationsRead = asyncHandler(async (req, res) => {
-  await Notification.updateMany(
-    { recipient: req.user._id, isRead: false },
-    { $set: { isRead: true } }
-  );
+  await Notification.updateMany({ recipient: req.user._id, isRead: false }, { $set: { isRead: true } });
   sendResponse(res, 200, "All notifications marked as read");
 });

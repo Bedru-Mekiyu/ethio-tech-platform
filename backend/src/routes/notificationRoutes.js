@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createNotification,
   getMyNotifications,
+  getUnreadCount,
   markNotificationRead,
   markAllNotificationsRead,
 } from "../controllers/notificationController.js";
@@ -13,8 +14,14 @@ const router = Router();
 
 router.use(protect);
 router.get("/me", getMyNotifications);
+router.get("/unread-count", getUnreadCount);
 router.patch("/read-all", markAllNotificationsRead);
 router.patch("/:id/read", validateRequest({ params: commonSchemas.idParam }), markNotificationRead);
-router.post("/", authorize("mentor", "admin"), validateRequest({ body: notificationSchemas.create }), createNotification);
+router.post(
+  "/",
+  authorize("mentor", "admin"),
+  validateRequest({ body: notificationSchemas.create }),
+  createNotification,
+);
 
 export default router;
