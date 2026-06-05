@@ -11,12 +11,23 @@ import { getEnv } from "../config/env.js";
 import { grantXPWithOptions } from "../services/xpService.js";
 import { batchVerifySession, grantXpToVerified } from "../services/attendanceService.js";
 import { buildLiveRoomId, generateLiveAccessToken } from "../services/liveClassroomService.js";
-import { generateRtcToken, buildChannelName, getAgoraConfigSafe } from "../services/agoraService.js";
 import { recomputeMentorContribution } from "../services/mentorScoreService.js";
-import { createInvitation, acceptInvitation, declineInvitation, getInvitationsForUser } from "../services/invitationService.js";
-import { joinWaitlist, cancelWaitlist, promoteNext, getWaitlistStatus, getWaitlistCount } from "../services/waitlistService.js";
+import {
+  createInvitation,
+  acceptInvitation,
+  declineInvitation,
+  getInvitationsForUser,
+} from "../services/invitationService.js";
+import {
+  joinWaitlist,
+  cancelWaitlist,
+  promoteNext,
+  getWaitlistStatus,
+  getWaitlistCount,
+} from "../services/waitlistService.js";
 import { addToWaitingRoom, admitUser, denyUser, getWaitingQueue } from "../services/admissionService.js";
 import sessionLock from "../services/sessionLockService.js";
+import { notifyUser, notifyManyUsers } from "../services/notificationService.js";
 
 export const createSession = asyncHandler(async (req, res) => {
   if (new Date(req.body.scheduledAt) <= new Date()) {
@@ -116,7 +127,10 @@ export const updateSession = asyncHandler(async (req, res) => {
   }
 
   if (req.body.status) {
-    throw new ApiError(400, "Use dedicated status endpoints (start/end/pause/resume/cancel/reschedule) instead of update");
+    throw new ApiError(
+      400,
+      "Use dedicated status endpoints (start/end/pause/resume/cancel/reschedule) instead of update",
+    );
   }
 
   const needsLock = req.body.scheduledAt;
@@ -126,9 +140,16 @@ export const updateSession = asyncHandler(async (req, res) => {
 
   try {
     const allowedFields = [
-      "title", "scheduledAt", "durationMinutes", "classroomMode",
-      "liveProvider", "meetingLink", "recordingUrl", "xpPerAttendee",
-      "whiteboardEnabled", "codeCollabEnabled",
+      "title",
+      "scheduledAt",
+      "durationMinutes",
+      "classroomMode",
+      "liveProvider",
+      "meetingLink",
+      "recordingUrl",
+      "xpPerAttendee",
+      "whiteboardEnabled",
+      "codeCollabEnabled",
     ];
     for (const field of allowedFields) {
       if (req.body[field] !== undefined) {
@@ -136,6 +157,17 @@ export const updateSession = asyncHandler(async (req, res) => {
       }
     }
     await session.save();
+
+    if (session.participants.length) {
+      await notifyManyUsers({
+        recipientIds: session.participants,
+        type: "session",
+        message: `Session updated: ${session.title}`,
+        link: `/sessions/${session._id}`,
+        createdBy: req.user._id,
+      });
+    }
+
     sendResponse(res, 200, "Session updated", { session });
   } finally {
     if (needsLock) sessionLock.release(session._id);
@@ -166,6 +198,16 @@ export const cancelSession = asyncHandler(async (req, res) => {
     ip: req.ip,
   });
 
+  if (session.participants.length) {
+    await notifyManyUsers({
+      recipientIds: session.participants,
+      type: "session",
+      message: `Session canceled: ${session.title}${req.body.reason ? `. Reason: ${req.body.reason}` : ""}`,
+      link: `/sessions/${session._id}`,
+      createdBy: req.user._id,
+    });
+  }
+
   sendResponse(res, 200, "Session canceled", { session });
 });
 
@@ -186,7 +228,7 @@ export const joinSession = asyncHandler(async (req, res) => {
     try {
       const User = mongoose.model("User");
       const user = await User.findById(req.user._id).select("enrolledTracks").lean();
-      const isEnrolled = user?.enrolledTracks?.some(t => String(t) === String(session.track));
+      const isEnrolled = user?.enrolledTracks?.some((t) => String(t) === String(session.track));
       if (!isEnrolled) {
         throw new ApiError(403, "You are not enrolled in the required track for this session");
       }
@@ -226,7 +268,7 @@ export const joinSession = asyncHandler(async (req, res) => {
       status: "registered",
       role: String(session.mentor) === String(req.user._id) ? "host" : "participant",
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, new: true, setDefaultsOnInsert: true },
   );
 
   await SessionAuditLog.create({
@@ -235,6 +277,14 @@ export const joinSession = asyncHandler(async (req, res) => {
     actor: req.user._id,
     targetUser: req.user._id,
     ip: req.ip,
+  });
+
+  await notifyUser({
+    recipientId: session.mentor,
+    type: "session",
+    message: `A new participant joined your session: ${session.title}`,
+    link: `/sessions/${session._id}`,
+    createdBy: req.user._id,
   });
 
   await session.populate("participants", "fullName");
@@ -279,7 +329,7 @@ export const startSession = asyncHandler(async (req, res) => {
           message: `Session is now live: ${session.title}`,
           link: `/sessions/${session._id}`,
           createdBy: req.user._id,
-        }))
+        })),
       );
     }
 
@@ -335,7 +385,7 @@ export const leaveSession = asyncHandler(async (req, res) => {
   const session = await Session.findByIdAndUpdate(
     req.params.id,
     { $pull: { participants: req.user._id } },
-    { new: true }
+    { new: true },
   ).populate("participants", "fullName");
 
   if (!session) throw new ApiError(404, "Session not found");
@@ -343,7 +393,7 @@ export const leaveSession = asyncHandler(async (req, res) => {
   await SessionParticipant.findOneAndUpdate(
     { session: session._id, user: req.user._id },
     { status: "completed", leftAt: new Date() },
-    { upsert: false }
+    { upsert: false },
   );
 
   await SessionAuditLog.create({
@@ -352,6 +402,14 @@ export const leaveSession = asyncHandler(async (req, res) => {
     actor: req.user._id,
     targetUser: req.user._id,
     ip: req.ip,
+  });
+
+  await notifyUser({
+    recipientId: session.mentor,
+    type: "session",
+    message: `A participant left your session: ${session.title}`,
+    link: `/sessions/${session._id}`,
+    createdBy: req.user._id,
   });
 
   if (session.maxParticipants > 0) {
@@ -417,7 +475,7 @@ export const endSession = asyncHandler(async (req, res) => {
           message: `Session ended: ${session.title}. XP has been processed.`,
           link: `/sessions/${session._id}`,
           createdBy: req.user._id,
-        }))
+        })),
       );
     }
 
@@ -448,7 +506,8 @@ export const resumeSession = asyncHandler(async (req, res) => {
 export const closeRegistration = asyncHandler(async (req, res) => {
   const session = await Session.findById(req.params.id);
   if (!session) throw new ApiError(404, "Session not found");
-  if (!["scheduled"].includes(session.status)) throw new ApiError(400, "Only scheduled sessions can close registration");
+  if (!["scheduled"].includes(session.status))
+    throw new ApiError(400, "Only scheduled sessions can close registration");
   session.transitionTo("registration_closed");
   await session.save();
   sendResponse(res, 200, "Registration closed", { session });
@@ -457,7 +516,8 @@ export const closeRegistration = asyncHandler(async (req, res) => {
 export const rescheduleSession = asyncHandler(async (req, res) => {
   const session = await Session.findById(req.params.id);
   if (!session) throw new ApiError(404, "Session not found");
-  if (["ended", "canceled"].includes(session.status)) throw new ApiError(400, "Cannot reschedule ended or canceled sessions");
+  if (["ended", "canceled"].includes(session.status))
+    throw new ApiError(400, "Cannot reschedule ended or canceled sessions");
 
   const { scheduledAt, reason } = req.body;
   session.rescheduledFrom = session.scheduledAt;
@@ -474,6 +534,16 @@ export const rescheduleSession = asyncHandler(async (req, res) => {
     ip: req.ip,
   });
 
+  if (session.participants.length) {
+    await notifyManyUsers({
+      recipientIds: session.participants,
+      type: "session",
+      message: `Session rescheduled: ${session.title}. New date: ${new Date(session.scheduledAt).toLocaleString()}`,
+      link: `/sessions/${session._id}`,
+      createdBy: req.user._id,
+    });
+  }
+
   sendResponse(res, 200, "Session rescheduled", { session });
 });
 
@@ -483,7 +553,7 @@ export const setParticipantRole = asyncHandler(async (req, res) => {
   if (!session) throw new ApiError(404, "Session not found");
 
   const actor = await SessionParticipant.findOne({ session: session._id, user: req.user._id }).select("role");
-  const actorRole = String(session.mentor) === String(req.user._id) ? "host" : actor?.role ?? "participant";
+  const actorRole = String(session.mentor) === String(req.user._id) ? "host" : (actor?.role ?? "participant");
 
   const validRoles = ["cohost", "moderator", "participant", "observer"];
 
@@ -735,10 +805,18 @@ export const submitSessionFeedback = asyncHandler(async (req, res) => {
       impact,
       comment,
     },
-    { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true }
+    { upsert: true, new: true, runValidators: true, setDefaultsOnInsert: true },
   );
 
   const mentorContribution = await recomputeMentorContribution(session.mentor);
+
+  await notifyUser({
+    recipientId: session.mentor,
+    type: "session",
+    message: `New feedback submitted for session: ${session.title}`,
+    link: `/sessions/${session._id}`,
+    createdBy: req.user._id,
+  });
 
   sendResponse(res, 200, "Session feedback submitted", {
     feedback,
@@ -768,9 +846,7 @@ export const getSessionFeedbackSummary = asyncHandler(async (req, res) => {
         },
       },
     ]),
-    SessionFeedback.find({ session: session._id })
-      .sort({ createdAt: -1 })
-      .populate("student", "fullName"),
+    SessionFeedback.find({ session: session._id }).sort({ createdAt: -1 }).populate("student", "fullName"),
   ]);
 
   sendResponse(res, 200, "Session feedback summary fetched", {
