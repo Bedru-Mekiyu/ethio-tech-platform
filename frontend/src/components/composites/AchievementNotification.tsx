@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Trophy, X } from "lucide-react";
 
@@ -13,48 +13,47 @@ interface NotificationPayload {
   userId: string;
   notificationId: string;
   type: string;
-  title: string;
-  body: string;
+  message: string;
   link?: string;
   at: string;
 }
 
 interface AchievementToastProps {
   socket: {
-    on: (event: string, handler: (payload: unknown) => void) => () => void;
+    on: (event: string, handler: (payload: unknown) => void) => void;
+    off: (event: string, handler: (payload: unknown) => void) => void;
   };
 }
 
 export function AchievementToast({ socket }: AchievementToastProps) {
   const [notifications, setNotifications] = useState<AchievementNotification[]>([]);
-  const cleanupRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const handleNotification = (payload: unknown) => {
       const n = payload as NotificationPayload;
-      if (n.type === "achievement" || n.type === "badge") {
+      if (n.type === "badge" || n.type === "xp") {
         const id = `ach-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        setNotifications(prev => [...prev, { id, title: n.title, body: n.body, at: n.at }]);
+        setNotifications((prev) => [...prev, { id, title: "Achievement Unlocked", body: n.message, at: n.at }]);
         setTimeout(() => {
-          setNotifications(prev => prev.filter(x => x.id !== id));
+          setNotifications((prev) => prev.filter((x) => x.id !== id));
         }, 6000);
       }
     };
 
-    cleanupRef.current = socket.on("notification:new", handleNotification);
+    socket.on("notification:new", handleNotification);
     return () => {
-      cleanupRef.current?.();
+      socket.off("notification:new", handleNotification);
     };
   }, [socket]);
 
   const dismiss = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
   return (
     <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-3 max-w-sm">
       <AnimatePresence>
-        {notifications.map(n => (
+        {notifications.map((n) => (
           <motion.div
             key={n.id}
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
