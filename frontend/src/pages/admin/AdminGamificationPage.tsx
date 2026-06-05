@@ -10,13 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { useToast } from "@/components/composites/ToastProvider";
-import {
-  Award,
-  Flame,
-  Plus,
-  Sparkles,
-  Trophy,
-} from "lucide-react";
+import { Award, Flame, Plus, Sparkles, Trophy } from "lucide-react";
 
 interface BadgeItem {
   _id: string;
@@ -117,28 +111,18 @@ export function AdminGamificationPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <Badge className="mb-3">Gamification engine</Badge>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Engagement Systems
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight">Engagement Systems</h1>
         <p className="mt-2 text-[var(--text-secondary)]">
-          Manage badges, daily challenges, and streak milestones that keep learners
-          motivated and progressing.
+          Manage badges, daily challenges, and streak milestones that keep learners motivated and progressing.
         </p>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-2">
-        <Button
-          variant={tab === "badges" ? "primary" : "outline"}
-          onClick={() => setTab("badges")}
-        >
+        <Button variant={tab === "badges" ? "primary" : "outline"} onClick={() => setTab("badges")}>
           <Award size={16} className="mr-1.5" /> Badges
         </Button>
-        <Button
-          variant={tab === "challenges" ? "primary" : "outline"}
-          onClick={() => setTab("challenges")}
-        >
+        <Button variant={tab === "challenges" ? "primary" : "outline"} onClick={() => setTab("challenges")}>
           <Flame size={16} className="mr-1.5" /> Daily Challenges
         </Button>
       </div>
@@ -211,20 +195,14 @@ export function AdminGamificationPage() {
                     <div>
                       <p className="font-semibold text-white">{badge.name}</p>
                       <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
-                        {badge.category && (
-                          <Badge variant="purple">{badge.category}</Badge>
-                        )}
+                        {badge.category && <Badge variant="purple">{badge.category}</Badge>}
                         {badge.description && <span>{badge.description}</span>}
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-semibold text-primary">
-                      {badge.xpRequired ?? 0} XP
-                    </p>
-                    {badge.xpBonus ? (
-                      <p className="text-xs text-success">+{badge.xpBonus} bonus</p>
-                    ) : null}
+                    <p className="text-sm font-semibold text-primary">{badge.xpRequired ?? 0} XP</p>
+                    {badge.xpBonus ? <p className="text-xs text-success">+{badge.xpBonus} bonus</p> : null}
                   </div>
                 </div>
               ))}
@@ -292,9 +270,7 @@ export function AdminGamificationPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-white">{ch.title}</p>
-                    {ch.description && (
-                      <p className="text-sm text-[var(--text-secondary)]">{ch.description}</p>
-                    )}
+                    {ch.description && <p className="text-sm text-[var(--text-secondary)]">{ch.description}</p>}
                   </div>
                 </div>
                 <Badge variant="success">+{ch.xpReward ?? 25} XP</Badge>
@@ -314,10 +290,7 @@ export function AdminGamificationPage() {
             </CardHeader>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {STREAK_MILESTONES.map((m) => (
-                <div
-                  key={m.days}
-                  className="rounded-2xl border border-[var(--border)] bg-white/5 p-4 text-center"
-                >
+                <div key={m.days} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4 text-center">
                   <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-warning/10 text-warning">
                     <Flame size={18} />
                   </div>

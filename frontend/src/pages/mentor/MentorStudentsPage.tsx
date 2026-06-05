@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -77,7 +78,13 @@ function MentorStudentsSkeleton() {
   );
 }
 
-function StatCard({ label, value, icon: Icon, tone = "primary", note }: {
+function StatCard({
+  label,
+  value,
+  icon: Icon,
+  tone = "primary",
+  note,
+}: {
   label: string;
   value: string | number;
   icon: LucideIcon;
@@ -85,10 +92,13 @@ function StatCard({ label, value, icon: Icon, tone = "primary", note }: {
   note?: string;
 }) {
   const toneClass =
-    tone === "success" ? "bg-success/10 text-success"
-    : tone === "warning" ? "bg-warning/10 text-warning"
-    : tone === "secondary" ? "bg-secondary/10 text-secondary"
-    : "bg-primary/10 text-primary";
+    tone === "success"
+      ? "bg-success/10 text-success"
+      : tone === "warning"
+        ? "bg-warning/10 text-warning"
+        : tone === "secondary"
+          ? "bg-secondary/10 text-secondary"
+          : "bg-primary/10 text-primary";
 
   return (
     <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
@@ -127,10 +137,12 @@ function StudentRow({
   const avgScore = student.averageScore ?? 0;
 
   return (
-    <div className={cn(
-      "rounded-[22px] border border-[var(--border)] transition-all duration-300",
-      isExpanded ? "bg-[var(--bg-card)] shadow-lg shadow-black/20" : "bg-white/5 hover:bg-white/[0.07]"
-    )}>
+    <div
+      className={cn(
+        "rounded-[22px] border border-[var(--border)] transition-all duration-300",
+        isExpanded ? "bg-[var(--bg-card)] shadow-lg shadow-black/20" : "bg-white/5 hover:bg-white/[0.07]",
+      )}
+    >
       {/* Collapsed row */}
       <button
         type="button"
@@ -156,19 +168,25 @@ function StudentRow({
             <p className="text-[10px] text-[var(--text-muted)]">Attendance</p>
           </div>
           <div className="text-center">
-            <p className={cn(
-              "text-sm font-semibold",
-              avgScore >= 4 ? "text-success" : avgScore >= 3 ? "text-warning" : "text-white"
-            )}>
+            <p
+              className={cn(
+                "text-sm font-semibold",
+                avgScore >= 4 ? "text-success" : avgScore >= 3 ? "text-warning" : "text-white",
+              )}
+            >
               {avgScore ? avgScore.toFixed(1) : "—"}
             </p>
             <p className="text-[10px] text-[var(--text-muted)]">Avg Score</p>
           </div>
-          <Badge variant={
-            (student.engagementScore ?? 0) >= 75 ? "success"
-            : (student.engagementScore ?? 0) >= 40 ? "warning"
-            : "purple"
-          }>
+          <Badge
+            variant={
+              (student.engagementScore ?? 0) >= 75
+                ? "success"
+                : (student.engagementScore ?? 0) >= 40
+                  ? "warning"
+                  : "purple"
+            }
+          >
             {student.engagementScore ?? 0}% Engaged
           </Badge>
         </div>
@@ -188,7 +206,9 @@ function StudentRow({
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {student.enrolledTracks && student.enrolledTracks.length > 0 ? (
                   student.enrolledTracks.map((track) => (
-                    <Badge key={track._id} variant="purple">{track.title}</Badge>
+                    <Badge key={track._id} variant="purple">
+                      {track.title}
+                    </Badge>
                   ))
                 ) : (
                   <span className="text-xs text-[var(--text-muted)]">No tracks</span>
@@ -206,7 +226,11 @@ function StudentRow({
               <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Last Active</p>
               <p className="mt-3 text-sm font-semibold text-white">
                 {student.lastActiveAt
-                  ? new Date(student.lastActiveAt).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })
+                  ? new Date(student.lastActiveAt).toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
                   : "Unknown"}
               </p>
               <p className="mt-1 text-xs text-[var(--text-secondary)]">
@@ -228,9 +252,7 @@ function StudentRow({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="text-sm font-medium text-white">{fb.sessionTitle}</p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {new Date(fb.createdAt).toLocaleDateString()}
-                      </p>
+                      <p className="text-xs text-[var(--text-muted)]">{new Date(fb.createdAt).toLocaleDateString()}</p>
                     </div>
                     <div className="flex gap-4">
                       <ScoreBadge score={fb.participationScore} label="Participation" />
@@ -295,7 +317,7 @@ export function MentorStudentsPage() {
         (s) =>
           s.fullName.toLowerCase().includes(q) ||
           s.email?.toLowerCase().includes(q) ||
-          s.enrolledTracks?.some((t) => t.title.toLowerCase().includes(q))
+          s.enrolledTracks?.some((t) => t.title.toLowerCase().includes(q)),
       );
     }
 
@@ -360,10 +382,10 @@ export function MentorStudentsPage() {
       <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Student management</Badge>
             <h1 className="text-3xl font-bold text-white">Your Learners</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
-              Track attendance, review engagement scores, and view feedback history for every student in your mentoring circle.
+              Track attendance, review engagement scores, and view feedback history for every student in your mentoring
+              circle.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -435,7 +457,7 @@ export function MentorStudentsPage() {
                   "rounded-full px-3 py-1.5 text-xs capitalize transition",
                   filterEngagement === f
                     ? "bg-primary text-[var(--bg-base)]"
-                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white"
+                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white",
                 )}
               >
                 {f}
@@ -456,7 +478,7 @@ export function MentorStudentsPage() {
                   "rounded-full px-3 py-1.5 text-xs transition",
                   sortBy === opt.value
                     ? "bg-primary/20 text-primary border border-primary/30"
-                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white"
+                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white",
                 )}
               >
                 {opt.label} {sortBy === opt.value && (sortDir === "asc" ? "↑" : "↓")}

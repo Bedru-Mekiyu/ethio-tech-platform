@@ -1,36 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, react-hooks/preserve-manual-memoization */
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  BarChart3,
-  BookOpen,
-  CalendarCheck,
-  Flame,
-  Star,
-  TrendingUp,
-  Users,
-  Video,
-} from "lucide-react";
+import { ArrowRight, BarChart3, BookOpen, CalendarCheck, Flame, Star, TrendingUp, Users, Video } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { QueryError } from "@/components/composites/QueryError";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useAuthStore } from "@/store/authStore";
 import { fetchMentorAnalytics } from "@/services/mentorControlService";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-} from "recharts";
+import { ResponsiveContainer, AreaChart, Area, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 /* ---------- Helper Functions ---------- */
 function formatMonthKey(key: string): string {
@@ -152,13 +132,12 @@ export function MentorAnalyticsPage() {
       <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Analytics board</Badge>
             <h1 className="text-3xl font-bold text-white tracking-tight sm:text-4xl">Mentor Insights</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
-              Understand session execution, engagement frequency, and cohort attendance metrics to maximize your student outcomes.
+              Understand session execution, engagement frequency, and cohort attendance metrics to maximize your student
+              outcomes.
             </p>
           </div>
-          <Badge variant="success">Active circles</Badge>
         </div>
       </Card>
 
@@ -231,13 +210,7 @@ export function MentorAnalyticsPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                  <XAxis
-                    dataKey="name"
-                    stroke="var(--text-muted)"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                  />
+                  <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
                   <YAxis
                     stroke="var(--text-muted)"
                     fontSize={11}
@@ -245,7 +218,10 @@ export function MentorAnalyticsPage() {
                     axisLine={false}
                     allowDecimals={false}
                   />
-                  <Tooltip content={<CustomChartTooltip unit="sessions" />} cursor={{ fill: "rgba(255,255,255,0.02)" }} />
+                  <Tooltip
+                    content={<CustomChartTooltip unit="sessions" />}
+                    cursor={{ fill: "rgba(255,255,255,0.02)" }}
+                  />
                   <Bar dataKey="sessions" fill="url(#sessionGrad)" radius={[6, 6, 0, 0]} maxBarSize={45} />
                 </BarChart>
               </ResponsiveContainer>
@@ -272,13 +248,7 @@ export function MentorAnalyticsPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                  <XAxis
-                    dataKey="name"
-                    stroke="var(--text-muted)"
-                    fontSize={11}
-                    tickLine={false}
-                    axisLine={false}
-                  />
+                  <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={11} tickLine={false} axisLine={false} />
                   <YAxis
                     stroke="var(--text-muted)"
                     fontSize={11}
@@ -311,7 +281,9 @@ export function MentorAnalyticsPage() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <h2 className="text-base font-semibold text-white">Need granular session reports?</h2>
-            <p className="text-xs text-[var(--text-secondary)] mt-1">Navigate to your sessions board to fetch analytics for specific virtual classrooms.</p>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
+              Navigate to your sessions board to fetch analytics for specific virtual classrooms.
+            </p>
           </div>
           <Link to="/mentor/sessions">
             <Button variant="outline" size="sm" className="rounded-xl border-white/10 text-white hover:bg-white/5">

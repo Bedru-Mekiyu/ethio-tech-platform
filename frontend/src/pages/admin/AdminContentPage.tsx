@@ -10,14 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { useToast } from "@/components/composites/ToastProvider";
-import {
-  BookOpen,
-  FolderOpen,
-  FileText,
-  Plus,
-  ChevronRight,
-  Search,
-} from "lucide-react";
+import { BookOpen, FolderOpen, FileText, Plus, ChevronRight, Search } from "lucide-react";
 
 interface Track {
   _id: string;
@@ -137,9 +130,7 @@ export function AdminContentPage() {
   const modules = modulesQuery.data ?? [];
   const lessons = lessonsQuery.data ?? [];
 
-  const filteredTracks = search
-    ? tracks.filter((t) => t.title.toLowerCase().includes(search.toLowerCase()))
-    : tracks;
+  const filteredTracks = search ? tracks.filter((t) => t.title.toLowerCase().includes(search.toLowerCase())) : tracks;
 
   const handleSelectTrack = (id: string) => {
     setSelectedTrackId(id);
@@ -159,13 +150,10 @@ export function AdminContentPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <Badge className="mb-3">Content management</Badge>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Curriculum Builder
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight">Curriculum Builder</h1>
         <p className="mt-2 text-[var(--text-secondary)]">
-          Manage tracks, modules, and lessons. Build the learning infrastructure
-          for Ethiopia&apos;s next generation of engineers.
+          Manage tracks, modules, and lessons. Build the learning infrastructure for Ethiopia&apos;s next generation of
+          engineers.
         </p>
       </div>
 
@@ -173,7 +161,11 @@ export function AdminContentPage() {
       <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
         <button
           type="button"
-          onClick={() => { setView("tracks"); setSelectedTrackId(null); setSelectedModuleId(null); }}
+          onClick={() => {
+            setView("tracks");
+            setSelectedTrackId(null);
+            setSelectedModuleId(null);
+          }}
           className="hover:text-white"
         >
           Tracks
@@ -183,7 +175,10 @@ export function AdminContentPage() {
             <ChevronRight size={14} />
             <button
               type="button"
-              onClick={() => { setView("modules"); setSelectedModuleId(null); }}
+              onClick={() => {
+                setView("modules");
+                setSelectedModuleId(null);
+              }}
               className="hover:text-white"
             >
               {selectedTrack.title}
@@ -214,10 +209,7 @@ export function AdminContentPage() {
                     className="pl-9"
                   />
                 </div>
-                <Button
-                  onClick={() => createTrackMutation.mutate()}
-                  disabled={createTrackMutation.isPending}
-                >
+                <Button onClick={() => createTrackMutation.mutate()} disabled={createTrackMutation.isPending}>
                   <Plus size={16} className="mr-1" /> New Track
                 </Button>
               </div>
@@ -277,10 +269,7 @@ export function AdminContentPage() {
           <CardHeader className="mb-4 p-0">
             <div className="flex items-center justify-between">
               <CardTitle>Modules in {selectedTrack?.title}</CardTitle>
-              <Button
-                onClick={() => createModuleMutation.mutate()}
-                disabled={createModuleMutation.isPending}
-              >
+              <Button onClick={() => createModuleMutation.mutate()} disabled={createModuleMutation.isPending}>
                 <Plus size={16} className="mr-1" /> New Module
               </Button>
             </div>
@@ -294,10 +283,7 @@ export function AdminContentPage() {
           )}
 
           {!modulesQuery.isLoading && modules.length === 0 && (
-            <EmptyState
-              title="No modules yet"
-              description="Add modules to organize lessons within this track."
-            />
+            <EmptyState title="No modules yet" description="Add modules to organize lessons within this track." />
           )}
 
           <div className="space-y-3">
@@ -330,10 +316,7 @@ export function AdminContentPage() {
           <CardHeader className="mb-4 p-0">
             <div className="flex items-center justify-between">
               <CardTitle>Lessons in {selectedModule?.title}</CardTitle>
-              <Button
-                onClick={() => createLessonMutation.mutate()}
-                disabled={createLessonMutation.isPending}
-              >
+              <Button onClick={() => createLessonMutation.mutate()} disabled={createLessonMutation.isPending}>
                 <Plus size={16} className="mr-1" /> New Lesson
               </Button>
             </div>

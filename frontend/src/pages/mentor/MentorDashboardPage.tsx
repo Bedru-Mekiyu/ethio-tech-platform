@@ -77,7 +77,8 @@ export function MentorDashboardPage() {
   const recentReviews = dashboard?.reviewsDone ?? [];
   const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
-  const mentorStatus = user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
+  const mentorStatus =
+    user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
 
   if (user?.role === "mentor" && mentorStatus !== "approved") {
     return (
@@ -145,12 +146,10 @@ export function MentorDashboardPage() {
       <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Mentor dashboard</Badge>
-            <h1 className="section-title">
-              Welcome back, {firstName} 👋
-            </h1>
+            <h1 className="section-title">Welcome back, {firstName} 👋</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
-              Keep your teaching rhythm visible with upcoming sessions, review momentum, and learner impact in one place.
+              Keep your teaching rhythm visible with upcoming sessions, review momentum, and learner impact in one
+              place.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -178,17 +177,38 @@ export function MentorDashboardPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <MetricCard label="Mentor score" value={mentorScore} icon={<Star size={18} />} note="Out of 100" />
-        <MetricCard label="Total sessions" value={dashboard?.mentor?.totalSessions ?? 0} icon={<Video size={18} />} note="Delivered and scheduled" />
-        <MetricCard label="Active students" value={dashboard?.activeStudents ?? 0} icon={<Users size={18} />} note="Learners in your circle" />
-        <MetricCard label="Pending reviews" value={dashboard?.pendingReviews ?? 0} icon={<ClipboardList size={18} />} tone="warning" note="Queue needs attention" />
-        <MetricCard label="Impact score" value={`${impact}%`} icon={<Flame size={18} />} tone="success" note="Quality weighted" />
+        <MetricCard
+          label="Total sessions"
+          value={dashboard?.mentor?.totalSessions ?? 0}
+          icon={<Video size={18} />}
+          note="Delivered and scheduled"
+        />
+        <MetricCard
+          label="Active students"
+          value={dashboard?.activeStudents ?? 0}
+          icon={<Users size={18} />}
+          note="Learners in your circle"
+        />
+        <MetricCard
+          label="Pending reviews"
+          value={dashboard?.pendingReviews ?? 0}
+          icon={<ClipboardList size={18} />}
+          tone="warning"
+          note="Queue needs attention"
+        />
+        <MetricCard
+          label="Impact score"
+          value={`${impact}%`}
+          icon={<Flame size={18} />}
+          tone="success"
+          note="Quality weighted"
+        />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Today&apos;s sessions</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Teaching schedule</h2>
             </div>
             <Link to="/mentor/sessions" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
@@ -204,7 +224,6 @@ export function MentorDashboardPage() {
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="purple">Live cohort</Badge>
                     <span className="text-xs text-[var(--text-muted)]">
                       {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
                     </span>
@@ -235,7 +254,6 @@ export function MentorDashboardPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between">
             <div>
-              <Badge variant="success">Your impact</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Learner trust</h2>
             </div>
             <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
@@ -262,7 +280,6 @@ export function MentorDashboardPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Recent reviews</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Project feedback queue</h2>
             </div>
             <Link to="/mentor/reviews" className="text-sm text-primary hover:underline">
@@ -287,7 +304,6 @@ export function MentorDashboardPage() {
 
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div>
-            <Badge variant="success">Mentor actions</Badge>
             <h2 className="mt-3 text-2xl font-semibold text-white">Quick commands</h2>
           </div>
           <div className="mt-5 grid gap-3">

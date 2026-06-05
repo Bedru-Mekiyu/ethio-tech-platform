@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { ShieldCheck, Sparkles, BookOpen, Bell, Users } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { fetchParentDashboard } from "@/services/parentService";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,11 +33,8 @@ export function ParentDashboardPage() {
       <Card className="hero-shell p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-3xl space-y-3">
-            <Badge variant="purple">Parent access</Badge>
             <h1 className="text-2xl font-bold md:text-3xl">Welcome back, {firstName}</h1>
-            <p className="section-copy">
-              Monitor linked learners&apos; progress, sessions, and platform activity.
-            </p>
+            <p className="section-copy">Monitor linked learners&apos; progress, sessions, and platform activity.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link to="/parent/settings">

@@ -1,17 +1,7 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fetchAdminAnalytics, type AdminAnalyticsData } from "@/services/dashboardService";
 import { StatCard } from "@/components/composites/StatCard";
 import { Badge } from "@/components/ui/badge";
@@ -22,17 +12,17 @@ import { Activity, AlertTriangle, MapPin, TrendingUp, Users, Zap } from "lucide-
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const xpTrend = [
-  { week: "W1", xp: 12000 },
-  { week: "W2", xp: 18500 },
-  { week: "W3", xp: 22100 },
-  { week: "W4", xp: 28400 },
+  { week: "W1", xp: 0 },
+  { week: "W2", xp: 0 },
+  { week: "W3", xp: 0 },
+  { week: "W4", xp: 0 },
 ];
 
 const enrollmentTrend = [
-  { month: "Jan", students: 420 },
-  { month: "Feb", students: 580 },
-  { month: "Mar", students: 710 },
-  { month: "Apr", students: 890 },
+  { month: "Jan", students: 0 },
+  { month: "Feb", students: 0 },
+  { month: "Mar", students: 0 },
+  { month: "Apr", students: 0 },
 ];
 
 function AdminSkeleton() {
@@ -60,9 +50,11 @@ export function AdminPage() {
     queryFn: fetchAdminAnalytics,
   });
 
-  const analytics = data as AdminAnalyticsData & {
-    hubs?: Array<{ city?: string; availableSeats?: number; mentorInCharge?: { fullName?: string } }>;
-  } | undefined;
+  const analytics = data as
+    | (AdminAnalyticsData & {
+        hubs?: Array<{ city?: string; availableSeats?: number; mentorInCharge?: { fullName?: string } }>;
+      })
+    | undefined;
 
   const metrics = analytics?.metrics;
   const trackData = useMemo(
@@ -70,13 +62,8 @@ export function AdminPage() {
       analytics?.xpByTrack?.map((track) => ({
         name: (track.title ?? "Track").slice(0, 12),
         xp: track.xpTotal ?? 0,
-      })) ?? [
-        { name: "Full-Stack", xp: 4200 },
-        { name: "AI/Data", xp: 3100 },
-        { name: "Cyber", xp: 2800 },
-        { name: "Cloud", xp: 1900 },
-      ],
-    [analytics?.xpByTrack]
+      })) ?? [],
+    [analytics?.xpByTrack],
   );
 
   const hubs = analytics?.hubs ?? [];
@@ -86,8 +73,8 @@ export function AdminPage() {
   if (isError) {
     return (
       <div className="space-y-6">
-        <h1 className="section-title text-2xl md:text-3xl">National learning health</h1>
-        <p className="text-[var(--text-secondary)]">Monitor learner growth, XP trends, and mentor network health.</p>
+        <h1 className="section-title text-2xl md:text-3xl">Platform overview</h1>
+        <p className="text-[var(--text-secondary)]">Unable to load analytics data.</p>
         <Button variant="outline" onClick={() => refetch()}>
           Retry
         </Button>
@@ -100,10 +87,9 @@ export function AdminPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Admin dashboard</Badge>
-            <h1 className="section-title">National Learning Health</h1>
+            <h1 className="section-title">Platform overview</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
-              Track platform-wide engagement, mentor coverage, hub availability, and upcoming learning activity from one console.
+              Monitor learners, mentors, hub availability, and upcoming sessions.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -124,7 +110,6 @@ export function AdminPage() {
         <StatCard
           label="Active learners"
           value={metrics?.activeLearners ?? 0}
-          trend="+12% vs last week"
           icon={<Activity className="text-primary" size={20} />}
         />
         <StatCard
@@ -222,7 +207,10 @@ export function AdminPage() {
           </CardHeader>
           <div className="mt-4 space-y-3">
             {(analytics?.topMentors ?? []).slice(0, 3).map((mentor, index) => (
-              <div key={mentor.fullName ?? index} className="flex items-center justify-between rounded-[22px] border border-[var(--border)] bg-white/5 p-3">
+              <div
+                key={mentor.fullName ?? index}
+                className="flex items-center justify-between rounded-[22px] border border-[var(--border)] bg-white/5 p-3"
+              >
                 <div>
                   <p className="font-medium text-white">{mentor.fullName}</p>
                   <p className="text-xs text-[var(--text-muted)]">{mentor.totalSessions ?? 0} sessions</p>
@@ -238,7 +226,6 @@ export function AdminPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6 lg:col-span-2">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Learning hubs</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Hub availability</h2>
             </div>
             <Badge variant="success">{hubs.length} active</Badge>
@@ -250,7 +237,9 @@ export function AdminPage() {
                   <MapPin size={14} className="text-primary" />
                   <p className="font-medium text-white">{hub.city ?? "Hub"}</p>
                 </div>
-                <p className="mt-2 text-xs text-[var(--text-muted)]">{hub.mentorInCharge?.fullName ?? "Mentor pending"}</p>
+                <p className="mt-2 text-xs text-[var(--text-muted)]">
+                  {hub.mentorInCharge?.fullName ?? "Mentor pending"}
+                </p>
                 <p className="mt-2 text-sm text-[var(--text-secondary)]">{hub.availableSeats ?? 0} seats open</p>
               </div>
             ))}

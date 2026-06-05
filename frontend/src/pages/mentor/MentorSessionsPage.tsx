@@ -41,7 +41,7 @@ export function MentorSessionsPage() {
   const [cursor, setCursor] = useState(new Date());
   const { data, isLoading, isError, error, refetch } = useQuery({ queryKey: ["sessions"], queryFn: fetchSessions });
 
-  const sessions = useMemo(() => ((Array.isArray(data) ? data : []) as SessionRow[]), [data]);
+  const sessions = useMemo(() => (Array.isArray(data) ? data : []) as SessionRow[], [data]);
   const filtered = useMemo(() => {
     return sessions.filter((session) => {
       const date = session.scheduledAt ? new Date(session.scheduledAt) : new Date();
@@ -54,7 +54,7 @@ export function MentorSessionsPage() {
 
   const upcoming = useMemo(
     () => filtered.filter((session) => session.scheduledAt && new Date(session.scheduledAt) >= new Date()),
-    [filtered]
+    [filtered],
   );
 
   const calendarDays = useMemo(() => {
@@ -94,7 +94,6 @@ export function MentorSessionsPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Session management</Badge>
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Session Management</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Schedule live classes, track attendance, and launch virtual classrooms from a calm schedule view.
@@ -119,7 +118,13 @@ export function MentorSessionsPage() {
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
           <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Attendance rate</p>
           <p className="mt-2 text-3xl font-semibold text-white">
-            {sessions.length ? Math.round((sessions.filter((session) => (session.participants?.length ?? 0) > 0).length / sessions.length) * 100) : 0}%
+            {sessions.length
+              ? Math.round(
+                  (sessions.filter((session) => (session.participants?.length ?? 0) > 0).length / sessions.length) *
+                    100,
+                )
+              : 0}
+            %
           </p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
@@ -138,7 +143,7 @@ export function MentorSessionsPage() {
               "rounded-full border px-4 py-2 text-sm capitalize transition",
               filter === value
                 ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
             )}
           >
             {value}
@@ -150,14 +155,21 @@ export function MentorSessionsPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Calendar</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">{monthLabel(cursor)}</h2>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() - 1, 1))}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() - 1, 1))}
+              >
                 <ChevronLeft size={16} />
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() + 1, 1))}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() + 1, 1))}
+              >
                 <ChevronRight size={16} />
               </Button>
             </div>
@@ -173,7 +185,7 @@ export function MentorSessionsPage() {
 
           <div className="mt-2 grid grid-cols-7 gap-2">
             {calendarDays.map((day, index) => {
-              const sessionsForDay = day ? sessionsByDay.get(day.toDateString()) ?? [] : [];
+              const sessionsForDay = day ? (sessionsByDay.get(day.toDateString()) ?? []) : [];
               const isToday = day ? day.toDateString() === new Date().toDateString() : false;
               return (
                 <div
@@ -181,7 +193,7 @@ export function MentorSessionsPage() {
                   className={cn(
                     "min-h-[5.25rem] rounded-2xl border p-2",
                     day ? "border-[var(--border)] bg-white/5" : "border-transparent bg-transparent",
-                    isToday && "border-primary bg-primary/10"
+                    isToday && "border-primary bg-primary/10",
                   )}
                 >
                   {day ? (
@@ -189,7 +201,10 @@ export function MentorSessionsPage() {
                       <p className="text-sm font-semibold text-white">{day.getDate()}</p>
                       <div className="mt-2 space-y-1">
                         {sessionsForDay.slice(0, 2).map((session, index) => (
-                          <div key={session._id ?? `${session.title}-${index}`} className="rounded-lg bg-secondary/15 px-2 py-1 text-[10px] text-secondary">
+                          <div
+                            key={session._id ?? `${session.title}-${index}`}
+                            className="rounded-lg bg-secondary/15 px-2 py-1 text-[10px] text-secondary"
+                          >
                             {session.title}
                           </div>
                         ))}
@@ -208,7 +223,6 @@ export function MentorSessionsPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <Badge variant="purple">Upcoming for this week</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Live session queue</h2>
             </div>
             <Link to="/app/workspace" className="text-sm text-primary hover:underline">
@@ -221,7 +235,10 @@ export function MentorSessionsPage() {
               filtered.slice(0, 5).map((session, index) => {
                 const participantCount = Array.isArray(session.participants) ? session.participants.length : 0;
                 return (
-                  <div key={session._id ?? `${session.title}-${index}`} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
+                  <div
+                    key={session._id ?? `${session.title}-${index}`}
+                    className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4"
+                  >
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div>
                         <p className="font-semibold text-white">{session.title}</p>
@@ -229,16 +246,23 @@ export function MentorSessionsPage() {
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "TBD"}
                         </p>
                       </div>
-                      <Badge variant={session.status === "completed" ? "success" : "purple"}>{session.status ?? "scheduled"}</Badge>
+                      <Badge variant={session.status === "completed" ? "success" : "purple"}>
+                        {session.status ?? "scheduled"}
+                      </Badge>
                     </div>
                     <div className="mt-3 space-y-2">
                       <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
                         <span>
                           {participantCount}
-                          {session.maxParticipants ? ` / ${session.maxParticipants} seats filled` : " learners enrolled"}
+                          {session.maxParticipants
+                            ? ` / ${session.maxParticipants} seats filled`
+                            : " learners enrolled"}
                         </span>
                         {session._id ? (
-                          <Link to={`/app/classroom/${session._id}`} className="inline-flex items-center gap-1 text-primary">
+                          <Link
+                            to={`/app/classroom/${session._id}`}
+                            className="inline-flex items-center gap-1 text-primary"
+                          >
                             Launch <Video size={14} />
                           </Link>
                         ) : null}
@@ -252,7 +276,7 @@ export function MentorSessionsPage() {
                                 ? "bg-red-500"
                                 : participantCount / session.maxParticipants > 0.8
                                   ? "bg-amber-500"
-                                  : "bg-primary"
+                                  : "bg-primary",
                             )}
                             style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
                           />

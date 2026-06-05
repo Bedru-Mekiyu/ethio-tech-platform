@@ -34,9 +34,7 @@ function HealthCard({
   return (
     <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
       <div className="flex items-start justify-between gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-          {icon}
-        </div>
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">{icon}</div>
         <Badge variant={statusVariant(status)}>{status ?? "unknown"}</Badge>
       </div>
       <p className="mt-5 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">{title}</p>
@@ -101,7 +99,6 @@ export function AdminOperationsPage() {
       <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <Badge className="mb-4">Operations</Badge>
             <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Platform Health & Audit Trail</h1>
             <p className="mt-3 text-[var(--text-secondary)]">
               Monitor readiness, realtime load, and privileged admin activity from one launch console.
@@ -154,7 +151,6 @@ export function AdminOperationsPage() {
 
       <div className="grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <Badge variant="purple">Launch controls</Badge>
           <h2 className="mt-3 text-2xl font-semibold text-white">Production readiness posture</h2>
           <div className="mt-5 space-y-3">
             {[
@@ -162,7 +158,10 @@ export function AdminOperationsPage() {
               { label: "MongoDB readiness is exposed", done: health.ready?.status === "ready" },
               { label: "Socket runtime is observable", done: typeof health.realtime?.activeSockets === "number" },
             ].map((item) => (
-              <div key={item.label} className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+              <div
+                key={item.label}
+                className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4"
+              >
                 <span className="text-sm font-medium text-white">{item.label}</span>
                 <Badge variant={item.done ? "success" : "warning"}>{item.done ? "active" : "needs data"}</Badge>
               </div>
@@ -173,7 +172,6 @@ export function AdminOperationsPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <Badge variant="success">Audit logs</Badge>
               <h2 className="mt-3 text-2xl font-semibold text-white">Recent privileged activity</h2>
             </div>
             <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
