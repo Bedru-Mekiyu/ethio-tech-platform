@@ -13,6 +13,7 @@ import {
   resetPasswordWithToken,
 } from "../services/authService.js";
 import { serializeAuthUser } from "../utils/serializeUser.js";
+import { notifyUser } from "../services/notificationService.js";
 
 export const register = asyncHandler(async (req, res) => {
   const { fullName, email, password, gradeLevel, city, learningInterests } = req.body;
@@ -145,6 +146,15 @@ export const updatePassword = asyncHandler(async (req, res) => {
     resource: "auth",
     ip: req.ip,
   });
+
+  await notifyUser({
+    recipientId: req.user._id,
+    type: "system",
+    message: "Your password was changed successfully. If you did not make this change, contact support immediately.",
+    link: "/app/settings",
+    createdBy: req.user._id,
+  });
+
   sendResponse(res, 200, "Password changed successfully");
 });
 

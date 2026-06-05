@@ -31,13 +31,12 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
   if (lastRejected && existingUser?.mentorStatus === "rejected") {
     const cooldownDays = 30;
     const daysSinceRejection = Math.floor(
-      (Date.now() - new Date(lastRejected.reviewedAt || lastRejected.createdAt).getTime()) /
-        (24 * 60 * 60 * 1000)
+      (Date.now() - new Date(lastRejected.reviewedAt || lastRejected.createdAt).getTime()) / (24 * 60 * 60 * 1000),
     );
     if (daysSinceRejection < cooldownDays) {
       throw new ApiError(
         429,
-        `You can reapply in ${cooldownDays - daysSinceRejection} days. Please review the feedback from your previous application.`
+        `You can reapply in ${cooldownDays - daysSinceRejection} days. Please review the feedback from your previous application.`,
       );
     }
   }
@@ -56,10 +55,7 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
     await existingUser.save();
   }
 
-  const admins = await User.find(
-    { role: { $in: ["admin", "super_admin"] } },
-    { _id: 1 }
-  );
+  const admins = await User.find({ role: { $in: ["admin", "super_admin"] } }, { _id: 1 });
 
   for (const admin of admins) {
     await notifyUser({
@@ -67,6 +63,15 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
       type: "mentor",
       message: `New mentor application from ${fullName} (${email})`,
       link: "/admin/moderation",
+    }).catch(() => undefined);
+  }
+
+  if (existingUser) {
+    await notifyUser({
+      recipientId: existingUser._id,
+      type: "mentor",
+      message: "Your mentor application has been received. We'll review it and get back to you soon.",
+      link: "/mentor-recruitment",
     }).catch(() => undefined);
   }
 

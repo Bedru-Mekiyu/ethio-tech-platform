@@ -11,6 +11,7 @@ import {
   getCohortAnalytics,
   bulkUpdateProgress,
 } from "../services/cohortService.js";
+import { notifyUser } from "../services/notificationService.js";
 
 export const createNewCohort = asyncHandler(async (req, res) => {
   const { name, description, track, startDate, endDate, maxStudents, tags } = req.body;
@@ -56,12 +57,30 @@ export const addStudent = asyncHandler(async (req, res) => {
   if (!userId) throw new ApiError(400, "userId is required");
 
   const cohort = await addStudentToCohort(cohortId, userId);
+
+  await notifyUser({
+    recipientId: userId,
+    type: "system",
+    message: `You have been added to cohort: ${cohort.name || "a cohort"}`,
+    link: "/app/dashboard",
+    createdBy: req.user._id,
+  });
+
   sendResponse(res, 200, "Student added", { cohort });
 });
 
 export const removeStudent = asyncHandler(async (req, res) => {
   const { cohortId, userId } = req.params;
   await removeStudentFromCohort(cohortId, userId);
+
+  await notifyUser({
+    recipientId: userId,
+    type: "system",
+    message: "You have been removed from a cohort.",
+    link: "/app/dashboard",
+    createdBy: req.user._id,
+  });
+
   sendResponse(res, 200, "Student removed");
 });
 

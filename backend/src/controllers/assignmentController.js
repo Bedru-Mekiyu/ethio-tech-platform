@@ -9,17 +9,63 @@ import {
   getStudentAssignments,
   submitAssignment,
 } from "../services/assignmentService.js";
+import { notifyManyUsers } from "../services/notificationService.js";
 
 export const createNewAssignment = asyncHandler(async (req, res) => {
-  const { title, description, instructions, track, module, lesson, dueDate, maxScore, rubric, xpReward, allowLateSubmission, latePenaltyPercent, assignedTo, assignToAll } = req.body;
+  const {
+    title,
+    description,
+    instructions,
+    track,
+    module,
+    lesson,
+    dueDate,
+    maxScore,
+    rubric,
+    xpReward,
+    allowLateSubmission,
+    latePenaltyPercent,
+    assignedTo,
+    assignToAll,
+  } = req.body;
   if (!title) throw new ApiError(400, "Title is required");
 
   const assignment = await createAssignment({
-    title, description, instructions, track, module, lesson,
-    mentor: req.user._id, dueDate, maxScore, rubric, xpReward,
-    allowLateSubmission, latePenaltyPercent, assignedTo, assignToAll,
+    title,
+    description,
+    instructions,
+    track,
+    module,
+    lesson,
+    mentor: req.user._id,
+    dueDate,
+    maxScore,
+    rubric,
+    xpReward,
+    allowLateSubmission,
+    latePenaltyPercent,
+    assignedTo,
+    assignToAll,
     status: "published",
   });
+
+  if (assignToAll && assignment.assignedStudents?.length) {
+    await notifyManyUsers({
+      recipientIds: assignment.assignedStudents,
+      type: "session",
+      message: `New assignment: ${title}`,
+      link: "/app/assignments",
+      createdBy: req.user._id,
+    });
+  } else if (assignedTo?.length) {
+    await notifyManyUsers({
+      recipientIds: assignedTo,
+      type: "session",
+      message: `New assignment: ${title}`,
+      link: "/app/assignments",
+      createdBy: req.user._id,
+    });
+  }
 
   sendResponse(res, 201, "Assignment created", { assignment });
 });
@@ -61,7 +107,10 @@ export const submitStudentWork = asyncHandler(async (req, res) => {
   const submission = await submitAssignment({
     assignmentId: req.params.id,
     studentId: req.user._id,
-    githubLink, deployedUrl, files, text,
+    githubLink,
+    deployedUrl,
+    files,
+    text,
   });
   sendResponse(res, 201, "Submission received", { submission });
 });
