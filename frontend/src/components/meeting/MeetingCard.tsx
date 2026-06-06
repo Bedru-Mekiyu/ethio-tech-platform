@@ -111,10 +111,11 @@ export function MeetingCard({
   const isCompact = variant === "compact";
   const isInline = variant === "inline";
 
+  const canManage = meeting.isHost || meeting.isAdmin;
   const canStart =
-    meeting.isHost && meeting.status !== "active" && meeting.status !== "completed" && meeting.status !== "cancelled";
-  const canEnd = meeting.isHost && meeting.status === "active";
-  const canCancel = meeting.isHost && (meeting.status === "scheduled" || meeting.status === "waiting_for_host");
+    canManage && meeting.status !== "active" && meeting.status !== "completed" && meeting.status !== "cancelled";
+  const canEnd = canManage && meeting.status === "active";
+  const canCancel = canManage && (meeting.status === "scheduled" || meeting.status === "waiting_for_host");
   const canJoin = meeting.joinable;
 
   const isDisabled = meeting.status === "cancelled" || meeting.status === "completed";
@@ -157,7 +158,10 @@ export function MeetingCard({
               {meta.label}
             </Badge>
             {meeting.presenceCount > 0 && meeting.status === "active" ? (
-              <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]">
+              <span
+                aria-label={`${meeting.presenceCount} participants`}
+                className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]"
+              >
                 <Users size={11} /> {meeting.presenceCount}
               </span>
             ) : null}
