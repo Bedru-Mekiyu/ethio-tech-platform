@@ -32,6 +32,7 @@ export interface JitsiMeetingHandle {
   hangUp: () => void;
   kickParticipant: (participantId: string) => void;
   muteParticipant: (participantId: string) => void;
+  muteAllParticipants: () => void;
   getParticipants: () => Array<{ id: string; displayName: string; role: string; isLocal: boolean }>;
   isReady: boolean;
   isJoined: boolean;
@@ -97,6 +98,7 @@ export const JitsiMeeting = forwardRef<JitsiMeetingHandle, JitsiMeetingProps>(fu
     hangUp: jitsi.hangUp,
     kickParticipant: jitsi.kickParticipant,
     muteParticipant: jitsi.muteParticipant,
+    muteAllParticipants: jitsi.muteAllParticipants,
     getParticipants: jitsi.getParticipants,
     isReady: jitsi.isReady,
     isJoined: jitsi.isJoined,
