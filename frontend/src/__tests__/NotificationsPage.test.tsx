@@ -16,6 +16,13 @@ vi.mock("@/services/socket", () => ({
     emit: vi.fn(),
     connected: true,
   })),
+  acquireSocketConnection: vi.fn(() => ({
+    on: vi.fn(),
+    off: vi.fn(),
+    emit: vi.fn(),
+    connected: true,
+  })),
+  releaseSocketConnection: vi.fn(),
 }));
 
 vi.mock("@/store/notificationStore", () => ({
@@ -40,7 +47,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const createQueryClient = () => new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
-const renderWithProviders = (component) => {
+const renderWithProviders = (component: React.ReactElement) => {
   const queryClient = createQueryClient();
   return render(React.createElement(QueryClientProvider, { client: queryClient }, component));
 };

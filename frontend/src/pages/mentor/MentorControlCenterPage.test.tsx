@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
+import { ToastProvider } from "@/components/composites/ToastProvider";
 
 vi.mock("@/services/mentorControlService", () => ({
   fetchMentorControlCenter: vi.fn().mockResolvedValue({
@@ -19,24 +20,82 @@ vi.mock("@/services/mentorControlService", () => ({
       chatActivity: 45,
     },
     participants: [
-      { id: "p1", userId: "u1", name: "Abebe", avatar: "", role: "participant", status: "active", attendanceDuration: 1500, joinedAt: new Date().toISOString(), verifiedAttendance: true },
-      { id: "p2", userId: "u2", name: "Kebede", avatar: "", role: "cohost", status: "active", attendanceDuration: 2700, joinedAt: new Date().toISOString(), verifiedAttendance: true },
+      {
+        id: "p1",
+        userId: "u1",
+        name: "Abebe",
+        avatar: "",
+        role: "participant",
+        status: "active",
+        attendanceDuration: 1500,
+        joinedAt: new Date().toISOString(),
+        verifiedAttendance: true,
+      },
+      {
+        id: "p2",
+        userId: "u2",
+        name: "Kebede",
+        avatar: "",
+        role: "cohost",
+        status: "active",
+        attendanceDuration: 2700,
+        joinedAt: new Date().toISOString(),
+        verifiedAttendance: true,
+      },
     ],
-    waitingQueue: [
-      { id: "w1", userId: "uw1", name: "Almaz", avatar: "", joinedAt: new Date().toISOString() },
-    ],
-    raisedHands: [
-      { userId: "uh1", name: "Chala", queuePosition: 1, raisedAt: new Date().toISOString() },
-    ],
+    waitingQueue: [{ id: "w1", userId: "uw1", name: "Almaz", avatar: "", joinedAt: new Date().toISOString() }],
+    raisedHands: [{ userId: "uh1", name: "Chala", queuePosition: 1, raisedAt: new Date().toISOString() }],
     questions: [
-      { id: "q1", userId: "uq1", studentName: "Bontu", text: "What is TypeScript?", status: "pending", isPinned: false, upvoteCount: 3, createdAt: new Date().toISOString() },
-      { id: "q2", userId: "uq2", studentName: "Lemma", text: "How do I use generics?", status: "answered", isPinned: true, upvoteCount: 5, reply: { text: "Generics allow you to write reusable code.", repliedBy: "mentor", repliedAt: new Date().toISOString() }, createdAt: new Date().toISOString() },
+      {
+        id: "q1",
+        userId: "uq1",
+        studentName: "Bontu",
+        text: "What is TypeScript?",
+        status: "pending",
+        isPinned: false,
+        upvoteCount: 3,
+        createdAt: new Date().toISOString(),
+      },
+      {
+        id: "q2",
+        userId: "uq2",
+        studentName: "Lemma",
+        text: "How do I use generics?",
+        status: "answered",
+        isPinned: true,
+        upvoteCount: 5,
+        reply: {
+          text: "Generics allow you to write reusable code.",
+          repliedBy: "mentor",
+          repliedAt: new Date().toISOString(),
+        },
+        createdAt: new Date().toISOString(),
+      },
     ],
     polls: [
-      { id: "poll1", question: "Best framework?", type: "single", status: "active", options: [{ index: 0, text: "React", voteCount: 5, percentage: 50 }, { index: 1, text: "Vue", voteCount: 3, percentage: 30 }, { index: 2, text: "Angular", voteCount: 2, percentage: 20 }], totalVotes: 10, createdAt: new Date().toISOString() },
+      {
+        id: "poll1",
+        question: "Best framework?",
+        type: "single",
+        status: "active",
+        options: [
+          { index: 0, text: "React", voteCount: 5, percentage: 50 },
+          { index: 1, text: "Vue", voteCount: 3, percentage: 30 },
+          { index: 2, text: "Angular", voteCount: 2, percentage: 20 },
+        ],
+        totalVotes: 10,
+        createdAt: new Date().toISOString(),
+      },
     ],
     engagementScores: [
-      { student: { _id: "s1", fullName: "Abebe", avatar: "" }, score: 85, questionsAsked: 3, pollParticipations: 2, chatMessages: 8, attendanceMs: 1800000 },
+      {
+        student: { _id: "s1", fullName: "Abebe", avatar: "" },
+        score: 85,
+        questionsAsked: 3,
+        pollParticipations: 2,
+        chatMessages: 8,
+        attendanceMs: 1800000,
+      },
     ],
   }),
   admitUser: vi.fn(),
@@ -85,12 +144,14 @@ function renderWithProviders(ui: React.ReactElement) {
   });
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={["/mentor/control-center/test-session"]}>
-        <Routes>
-          <Route path="/mentor/control-center/:sessionId" element={ui} />
-        </Routes>
-      </MemoryRouter>
-    </QueryClientProvider>
+      <ToastProvider>
+        <MemoryRouter initialEntries={["/mentor/control-center/test-session"]}>
+          <Routes>
+            <Route path="/mentor/control-center/:sessionId" element={ui} />
+          </Routes>
+        </MemoryRouter>
+      </ToastProvider>
+    </QueryClientProvider>,
   );
 }
 
@@ -206,7 +267,7 @@ describe("MentorControlCenterPage", () => {
 
   it("renders loading skeleton when data is fetching", async () => {
     vi.mocked(await import("@/services/mentorControlService")).fetchMentorControlCenter.mockImplementationOnce(
-      () => new Promise(() => {})
+      () => new Promise(() => {}),
     );
     const Page = (await import("./MentorControlCenterPage")).default;
     renderWithProviders(<Page />);
