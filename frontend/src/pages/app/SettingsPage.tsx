@@ -3,12 +3,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { LogOut, LayoutDashboard, Lock, UserCircle2, Sparkles } from "lucide-react";
-import { useAuthStore, getDashboardPath } from "@/store/authStore";
+import { LogOut, Lock, UserCircle2 } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 import { logoutApi, changePassword } from "@/services/authService";
 import { updateMyProfile, uploadAvatar, getMyProfile, getAvatarOptions, selectSystemAvatar, removeAvatar } from "@/services/userService";
 import { Avatar } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -263,7 +262,6 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     }
   };
 
-  const dashboardPath = getDashboardPath(scope);
   const profileSaving = profileForm.formState.isSubmitting || (uploadProgress !== null && uploadProgress < 100) || avatarBusy;
 
   return (
@@ -273,54 +271,23 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
       animate="visible"
       className="space-y-6"
     >
-      {/* Top Banner Settings Header */}
-      <motion.div variants={itemVariants}>
-        <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.45)] p-6 shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,210,255,0.06),transparent_35%)] pointer-events-none" />
-          <div className="relative flex flex-wrap items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <Avatar
-                src={avatarPreview ?? undefined}
-                name={user?.fullName ?? "User"}
-                userId={user?.id}
-                role={scope === "mentor" ? "mentor" : "student"}
-                size="lg"
-                status="online"
-              />
-              <div className="overflow-hidden min-w-0">
-                <h1 className="text-2xl font-extrabold text-white tracking-tight">Settings</h1>
-                <p className="text-xs text-[var(--text-secondary)] truncate font-medium mt-0.5">{user?.email}</p>
-                <div className="flex items-center gap-2 mt-2">
-                  <Badge variant="purple" size="sm" className="capitalize">
-                    {scope} workspace
-                  </Badge>
-                  {avatarFile && (
-                    <Badge variant="success" size="sm" showDot className="animate-pulse">
-                      Pending Avatar Save
-                    </Badge>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-2.5">
-              <Link to={dashboardPath}>
-                <Button variant="outline" className="font-semibold shadow-sm">
-                  <LayoutDashboard size={15} /> Dashboard
-                </Button>
-              </Link>
-              <Button variant="secondary" type="button" onClick={handleLogout} className="font-semibold">
-                <LogOut size={15} /> Sign out
-              </Button>
-            </div>
-          </div>
-          
-          {uploadProgress !== null && (
-            <div className="mt-5 max-w-md">
-              <ProgressBar value={uploadProgress} label="Uploading avatar..." showValueLabel showGlow size="sm" />
-            </div>
-          )}
-        </Card>
-      </motion.div>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-white md:text-3xl">Settings</h1>
+          <p className="mt-1 text-sm text-[var(--text-secondary)]">
+            Manage your profile, avatar, password, and preferences.
+          </p>
+        </div>
+        <Button variant="secondary" type="button" onClick={handleLogout}>
+          <LogOut size={15} /> Sign out
+        </Button>
+      </div>
+
+      {uploadProgress !== null && (
+        <div className="max-w-md">
+          <ProgressBar value={uploadProgress} label="Uploading avatar..." showValueLabel size="sm" />
+        </div>
+      )}
 
       {/* Main Grid Forms */}
       <div className="grid gap-6 lg:grid-cols-2">
@@ -430,7 +397,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                   <FormField id="expertise" label="Expertise" description="Comma-separated skills">
                     <Input id="expertise" placeholder="React, Cloud, Python" {...profileForm.register("expertise")} />
                   </FormField>
-                  <FormField id="currentCompany" label="Current company border">
+                  <FormField id="currentCompany" label="Current company">
                     <Input id="currentCompany" placeholder="EthioTelecom, Google, etc." {...profileForm.register("currentCompany")} />
                   </FormField>
                 </>
@@ -447,44 +414,35 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
         {/* Security Password Card */}
         <motion.div variants={itemVariants}>
-          <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6 h-full flex flex-col justify-between">
-            <div>
-              <CardHeader className="p-0 border-b border-white/5 pb-4 mb-4">
-                <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
-                  <Lock size={18} className="text-primary" /> Security & Password
-                </CardTitle>
-              </CardHeader>
-              
-              <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-4">
-                <FormField id="currentPassword" label="Current password" required>
-                  <PasswordInput id="currentPassword" placeholder="••••••••" autoComplete="current-password" {...passwordForm.register("currentPassword")} />
-                </FormField>
-                
-                <FormField id="newPassword" label="New password" required error={passwordForm.formState.errors.newPassword?.message}>
-                  <PasswordInput id="newPassword" placeholder="••••••••" autoComplete="new-password" {...passwordForm.register("newPassword")} />
-                </FormField>
-                
-                <FormField id="confirm" label="Confirm password" required error={passwordForm.formState.errors.confirm?.message}>
-                  <PasswordInput id="confirm" placeholder="••••••••" autoComplete="new-password" {...passwordForm.register("confirm")} />
-                </FormField>
+          <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6">
+            <CardHeader className="p-0 border-b border-white/5 pb-4 mb-4">
+              <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
+                <Lock size={18} className="text-primary" /> Security & Password
+              </CardTitle>
+            </CardHeader>
 
-                <div className="pt-4 flex flex-col gap-3">
-                  <Button type="submit" disabled={passwordForm.formState.isSubmitting} className="font-bold shadow-sm self-start">
-                    Update password
-                  </Button>
-                  <Link to="/auth/forgot-password" className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors mt-1 self-start">
-                    Forgot password?
-                  </Link>
-                </div>
-              </form>
-            </div>
-            
-            <div className="mt-8 p-4 rounded-xl border border-white/5 bg-white/3 flex items-center gap-3">
-              <Sparkles size={16} className="text-primary shrink-0 animate-pulse" />
-              <p className="text-[11px] leading-relaxed text-[var(--text-secondary)] font-medium">
-                Keep passwords unique and secure. Multi-factor checks and OAuth integrations reside under security operations.
-              </p>
-            </div>
+            <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-4">
+              <FormField id="currentPassword" label="Current password" required>
+                <PasswordInput id="currentPassword" placeholder="••••••••" autoComplete="current-password" {...passwordForm.register("currentPassword")} />
+              </FormField>
+
+              <FormField id="newPassword" label="New password" required error={passwordForm.formState.errors.newPassword?.message}>
+                <PasswordInput id="newPassword" placeholder="••••••••" autoComplete="new-password" {...passwordForm.register("newPassword")} />
+              </FormField>
+
+              <FormField id="confirm" label="Confirm password" required error={passwordForm.formState.errors.confirm?.message}>
+                <PasswordInput id="confirm" placeholder="••••••••" autoComplete="new-password" {...passwordForm.register("confirm")} />
+              </FormField>
+
+              <div className="pt-4 flex flex-col gap-3">
+                <Button type="submit" disabled={passwordForm.formState.isSubmitting} className="font-bold shadow-sm self-start">
+                  Update password
+                </Button>
+                <Link to="/auth/forgot-password" className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors mt-1 self-start">
+                  Forgot password?
+                </Link>
+              </div>
+            </form>
           </Card>
         </motion.div>
       </div>
