@@ -388,14 +388,8 @@ export function MentorStudentsPage() {
               circle.
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-              <Users size={24} />
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-white">{data?.totalStudents ?? students.length}</p>
-              <p className="text-xs text-[var(--text-muted)]">Total students</p>
-            </div>
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <Users size={24} aria-hidden="true" />
           </div>
         </div>
       </Card>
