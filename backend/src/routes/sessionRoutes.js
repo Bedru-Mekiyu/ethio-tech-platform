@@ -36,7 +36,7 @@ import { getStudentRecordings } from "../controllers/sessionRecordingController.
 import rateLimit from "express-rate-limit";
 import { authorize, protect, requireVerifiedMentor } from "../middlewares/authMiddleware.js";
 import { auditAction } from "../middlewares/auditLog.js";
-import { requireSessionRole } from "../middlewares/sessionAuth.js";
+import { requireSessionParticipant, requireSessionRole } from "../middlewares/sessionAuth.js";
 import validateRequest from "../middlewares/validateRequest.js";
 import { commonSchemas, sessionSchemas } from "../validators/schemas.js";
 
@@ -227,7 +227,7 @@ router.get(
 router.get(
   "/:id/live-access",
   protect,
-  authorize("student", "mentor", "admin"),
+  requireSessionParticipant,
   validateRequest({ params: commonSchemas.idParam }),
   getLiveSessionAccess
 );
@@ -319,6 +319,7 @@ router.post(
 router.get(
   "/:id",
   protect,
+  requireSessionParticipant,
   validateRequest({ params: commonSchemas.idParam }),
   getSessionById
 );
