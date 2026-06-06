@@ -180,17 +180,16 @@ export function SquadPage() {
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-                {squadQuery.data?.name ?? "Squad"} · collaboration room
+                {squadQuery.data?.name ?? "Squad"}
               </h1>
               <p className="mt-2 text-sm text-success">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
               <p className="mt-3 text-[var(--text-secondary)]">
-                Keep a shared pulse on mentor updates, project progress, and your realtime room without leaving the
-                learning flow.
+                Chat with your squad and see project progress in one place.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Badge variant="purple">{presenceCount} online</Badge>
-              <Badge variant={isOnline ? "success" : "warning"}>{isOnline ? "Sync live" : "Offline queue"}</Badge>
+              <Badge variant={isOnline ? "success" : "warning"}>{isOnline ? "Live" : "Reconnecting"}</Badge>
               <Badge variant="default">{connectionQuality} network</Badge>
             </div>
           </div>
@@ -199,7 +198,7 @@ export function SquadPage() {
         <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Squad activity stream</h2>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Recent updates</h2>
             </div>
             <Badge variant="success">{unreadCount} new</Badge>
           </div>
@@ -218,7 +217,7 @@ export function SquadPage() {
         <Card className="surface-panel p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Realtime squad room</h2>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Squad chat</h2>
             </div>
             <Badge variant={connectionStatus === "connected" ? "success" : "warning"}>
               {connectionStatus === "connected" ? "Connected" : "Reconnecting"}
@@ -294,8 +293,8 @@ export function SquadPage() {
           <div className="flex items-center gap-3">
             <Users className="text-primary" size={20} />
             <div>
-              <p className="stat-label">Squad pulse</p>
-              <p className="text-lg font-semibold text-white">Realtime overview</p>
+              <p className="text-lg font-semibold text-white">Squad overview</p>
+              <p className="text-sm text-[var(--text-secondary)]">Realtime room status</p>
             </div>
           </div>
           <div className="mt-4 grid gap-3">
@@ -314,9 +313,7 @@ export function SquadPage() {
 
         <Card className="surface-panel p-5">
           <div className="flex items-center justify-between gap-3">
-            <div>
-              <h3 className="mt-3 text-xl font-semibold text-white">What is next for the squad</h3>
-            </div>
+            <h3 className="text-xl font-semibold text-white">Upcoming sessions</h3>
             <Link to="/app/sessions" className="text-sm text-primary hover:underline">
               View all
             </Link>
