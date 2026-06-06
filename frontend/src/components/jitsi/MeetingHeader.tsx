@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Clock, Users, Radio } from "lucide-react";
 
 interface MeetingHeaderProps {
@@ -9,9 +10,9 @@ interface MeetingHeaderProps {
 }
 
 function formatDuration(startDate: string): string {
-  const start = new Date(startDate);
-  const now = new Date();
-  const diff = Math.floor((now.getTime() - start.getTime()) / 1000);
+  const start = new Date(startDate).getTime();
+  if (Number.isNaN(start)) return "0:00";
+  const diff = Math.max(0, Math.floor((Date.now() - start) / 1000));
   const hours = Math.floor(diff / 3600);
   const minutes = Math.floor((diff % 3600) / 60);
   const seconds = diff % 60;
@@ -23,6 +24,13 @@ function formatDuration(startDate: string): string {
 
 export function MeetingHeader({ title, status, liveStartedAt, participantCount, isRecording }: MeetingHeaderProps) {
   const isLive = status === "live";
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    if (!liveStartedAt) return;
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  }, [liveStartedAt]);
 
   return (
     <div className="flex items-center justify-between px-4 py-3 bg-[var(--bg-card)] border-b border-white/5">
@@ -43,13 +51,17 @@ export function MeetingHeader({ title, status, liveStartedAt, participantCount, 
       </div>
 
       <div className="flex items-center gap-4 text-xs text-[var(--text-secondary)]">
-        {liveStartedAt && (
-          <span className="flex items-center gap-1.5">
+        {liveStartedAt ? (
+          <span
+            className="flex items-center gap-1.5 font-mono tabular-nums"
+            aria-label="Meeting duration"
+            title="Meeting duration"
+          >
             <Clock size={12} />
             {formatDuration(liveStartedAt)}
           </span>
-        )}
-        <span className="flex items-center gap-1.5">
+        ) : null}
+        <span className="flex items-center gap-1.5" aria-label={`${participantCount} participants`}>
           <Users size={12} />
           {participantCount}
         </span>
