@@ -32,7 +32,6 @@ const sessionSchema = new Schema(
     maxParticipants: { type: Number, default: 100, min: 0 },
     admissionMode: { type: String, enum: ["open", "waiting-room"], default: "open" },
     isPublic: { type: Boolean, default: true },
-    jitsiRoomName: { type: String, trim: true },
     recordingMode: { type: String, enum: ["none", "cloud", "local"], default: "none" },
     screenShareActive: { type: Boolean, default: false },
     screenShareUserId: { type: Schema.Types.ObjectId, ref: "User" },
