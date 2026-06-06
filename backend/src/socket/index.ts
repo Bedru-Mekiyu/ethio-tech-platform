@@ -18,6 +18,7 @@ import * as questionService from "../services/sessionQuestionService.js";
 import * as pollService from "../services/sessionPollService.js";
 import * as moderationService from "../services/moderationService.js";
 import * as admissionService from "../services/admissionService.js";
+import * as engagementService from "../services/engagementService.js";
 import ChatMessage from "../models/ChatMessage.js";
 import PeerGroup from "../models/PeerGroup.js";
 import User from "../models/User.js";
@@ -30,14 +31,17 @@ import type {
   ChatMessageServerPayload,
   ClassroomSyncPayload,
   ConnectionQuality,
+  EngagementPayload,
   HandRaisePayload,
   HeartbeatPayload,
   ParticipantControlPayload,
   PollPayload,
   QuestionPayload,
   RealtimeRoomType,
+  RoomOverviewPayload,
   RoomPresencePayload,
   RoomStatePayload,
+  VideoStatePayload,
   WhiteboardOpPayload,
 } from "./contracts.js";
 
@@ -75,6 +79,7 @@ const MAX_CONNECTIONS_PER_USER = 5;
 
 const rooms = new Map<string, RoomState>();
 const userConnectionCounts = new Map<string, number>();
+const videoStateByRoom = new Map<string, VideoStatePayload>();
 
 const isValidRoomId = (roomId: unknown): roomId is string =>
   typeof roomId === "string" &&
@@ -1052,13 +1057,15 @@ export const setupSocket = (io: Server) => {
               ip: socket.handshake.address,
             });
           }
-          io.to(payload.roomId).emit("admission:update", {
+          const admissionPayload = {
             roomId: payload.roomId,
             userId: payload.targetUserId,
             action: payload.action === "admit" ? "admitted" : "denied",
             performedBy: user.id,
             at: new Date().toISOString(),
-          });
+          };
+          io.to(payload.roomId).emit("admission:update", admissionPayload);
+          io.to(`user:${payload.targetUserId}`).emit("admission:update", admissionPayload);
           const waitingQueue = await admissionService.getWaitingQueue(resourceId);
           io.to(payload.roomId).emit("waiting:queue", {
             roomId: payload.roomId,
@@ -1170,6 +1177,144 @@ export const setupSocket = (io: Server) => {
       if (socket.data.roomRole === "observer") return;
 
       socket.to(payload.roomId).emit("whiteboard:undo", payload);
+    });
+
+    const getVideoState = (roomId: string): VideoStatePayload => {
+      const existing = videoStateByRoom.get(roomId);
+      if (existing) return existing;
+      const created: VideoStatePayload = {
+        roomId,
+        activeSpeakers: [],
+        screenShareActive: false,
+      };
+      videoStateByRoom.set(roomId, created);
+      return created;
+    };
+
+    const broadcastVideoState = (roomId: string) => {
+      const state = getVideoState(roomId);
+      io.to(roomId).emit("video:state", state);
+    };
+
+    socket.on(
+      "video:toggle-audio",
+      (payload: { roomId: string; enabled: boolean }) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!user?.id) return;
+        if (!joinedRooms.has(payload.roomId)) return;
+        io.to(payload.roomId).emit("video:audio-toggled", {
+          roomId: payload.roomId,
+          userId: user.id,
+          enabled: Boolean(payload.enabled),
+        });
+        const state = getVideoState(payload.roomId);
+        state.activeSpeakers = state.activeSpeakers.filter((id) => id !== user.id);
+        if (payload.enabled) {
+          state.activeSpeakers = [...state.activeSpeakers, user.id].slice(-10);
+        }
+        broadcastVideoState(payload.roomId);
+      },
+    );
+
+    socket.on(
+      "video:toggle-video",
+      (payload: { roomId: string; enabled: boolean }) => {
+        if (!isValidRoomId(payload?.roomId)) return;
+        if (!user?.id) return;
+        if (!joinedRooms.has(payload.roomId)) return;
+        io.to(payload.roomId).emit("video:video-toggled", {
+          roomId: payload.roomId,
+          userId: user.id,
+          enabled: Boolean(payload.enabled),
+        });
+      },
+    );
+
+    socket.on("video:screen-share:start", (payload: { roomId: string }) => {
+      if (!isValidRoomId(payload?.roomId)) return;
+      if (!user?.id) return;
+      if (!joinedRooms.has(payload.roomId)) return;
+      const state = getVideoState(payload.roomId);
+      state.screenShareUserId = user.id;
+      state.screenShareActive = true;
+      io.to(payload.roomId).emit("video:screen-share:started", {
+        roomId: payload.roomId,
+        userId: user.id,
+      });
+      broadcastVideoState(payload.roomId);
+    });
+
+    socket.on("video:screen-share:stop", (payload: { roomId: string }) => {
+      if (!isValidRoomId(payload?.roomId)) return;
+      if (!user?.id) return;
+      if (!joinedRooms.has(payload.roomId)) return;
+      const state = getVideoState(payload.roomId);
+      if (state.screenShareUserId === user.id) {
+        state.screenShareUserId = undefined;
+        state.screenShareActive = false;
+      }
+      io.to(payload.roomId).emit("video:screen-share:stopped", { roomId: payload.roomId });
+      broadcastVideoState(payload.roomId);
+    });
+
+    socket.on("engagement:refresh", async (payload: { roomId: string; userId?: string }) => {
+      if (!isValidRoomId(payload?.roomId)) return;
+      if (!user?.id) return;
+      if (!joinedRooms.has(payload.roomId)) return;
+      const { resourceId } = parseRoomId(payload.roomId);
+      if (!resourceId) return;
+      const targetId = payload.userId || user.id;
+      try {
+        const { score, details } = await engagementService.calculateEngagementScore({
+          sessionId: resourceId,
+          userId: targetId,
+        });
+        const engagementPayload: EngagementPayload = {
+          roomId: payload.roomId,
+          userId: targetId,
+          score,
+          details,
+          at: new Date().toISOString(),
+        };
+        io.to(payload.roomId).emit("engagement:updated", engagementPayload);
+        if (targetId !== user.id) {
+          io.to(`user:${targetId}`).emit("engagement:updated", engagementPayload);
+        }
+      } catch (err) {
+        logger.warn("Engagement refresh failed", { error: err });
+      }
+    });
+
+    socket.on("room:request-overview", async (payload: { roomId: string }) => {
+      if (!isValidRoomId(payload?.roomId)) return;
+      if (!joinedRooms.has(payload.roomId)) return;
+      const { resourceId } = parseRoomId(payload.roomId);
+      if (!resourceId) return;
+      try {
+        const [participants, waiting, questions, raisedHands, polls, chatActivity] = await Promise.all([
+          SessionParticipant.countDocuments({ session: resourceId, status: { $in: ["joined", "active"] } }),
+          SessionParticipant.countDocuments({ session: resourceId, admissionStatus: "waiting" }),
+          SessionQuestion.countDocuments({ session: resourceId, status: "pending" }),
+          handRaiseService.getHandRaiseCount(resourceId),
+          SessionPoll.countDocuments({ session: resourceId, status: "active" }),
+          ChatMessage.countDocuments({ roomId: payload.roomId }),
+        ]);
+        const overview: RoomOverviewPayload = {
+          roomId: payload.roomId,
+          participantCount: participants,
+          waitingCount: waiting,
+          sessionDuration: "0",
+          attendancePercent: 0,
+          engagementScore: 0,
+          questionsWaiting: questions,
+          raisedHands,
+          activePolls: polls,
+          chatActivity,
+        };
+        io.to(payload.roomId).emit("room:overview", overview);
+      } catch (err) {
+        logger.warn("Overview broadcast failed", { error: err });
+      }
     });
 
     socket.on("dm:send", async (payload: { conversationId: string; text: string }) => {
