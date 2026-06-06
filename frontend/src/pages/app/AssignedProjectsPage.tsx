@@ -1,37 +1,62 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { AlertTriangle, BookOpen, CheckCircle, Clock, FileText, Upload } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { EmptyState } from "@/components/composites/EmptyState";
-import { QueryError } from "@/components/composites/QueryError";
 import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
+import { EmptyState } from "@/components/composites/EmptyState";
+import { QueryError } from "@/components/composites/QueryError";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
+import { fetchAssignments, type Assignment } from "@/services/assignmentService";
+import { cn } from "@/lib/utils";
 
-type ProjectTab = "active" | "feedback" | "completed";
+type Tab = "active" | "submitted" | "graded";
 
-const tabLabels: Record<ProjectTab, string> = {
-  active: "Active assignments",
-  feedback: "Feedback ready",
-  completed: "Completed",
+const tabLabels: Record<Tab, string> = {
+  active: "Active",
+  submitted: "Submitted",
+  graded: "Graded",
 };
+
+const assignmentTypeIcons: Record<string, React.ReactNode> = {
+  homework: <BookOpen size={16} />,
+  quiz: <FileText size={16} />,
+  project: <Upload size={16} />,
+  reading: <BookOpen size={16} />,
+  peer_review: <CheckCircle size={16} />,
+};
+
+function isOverdue(dueDate: string) {
+  return new Date(dueDate) < new Date();
+}
+
+function formatDueDate(dueDate: string) {
+  const d = new Date(dueDate);
+  const diffDays = Math.ceil((d.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+  if (diffDays < 0) return `${Math.abs(diffDays)}d overdue`;
+  if (diffDays === 0) return "Due today";
+  if (diffDays === 1) return "Due tomorrow";
+  if (diffDays <= 7) return `${diffDays}d left`;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
 
 function ProjectsSkeleton() {
   return (
     <div className="space-y-6">
-      <Skeleton className="h-28 rounded-[24px]" />
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <Skeleton className="h-72 rounded-[28px]" />
-        <Skeleton className="h-72 rounded-[28px]" />
-        <Skeleton className="h-72 rounded-[28px]" />
+      <Skeleton className="h-10 w-48" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <Skeleton key={i} className="h-56 rounded-2xl" />
+        ))}
       </div>
     </div>
   );
 }
 
-function ProjectCard({ project }: { project: NonNullable<StudentDashboardData["assignedProjects"]>[number] }) {
+function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboardData["assignedProjects"]>[number] }) {
   const statusTone =
     project.category === "completed" ? "success" : project.category === "feedback" ? "purple" : "warning";
   const actionLabel =
@@ -45,152 +70,207 @@ function ProjectCard({ project }: { project: NonNullable<StudentDashboardData["a
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary/35">
+    <Card className="flex h-full flex-col gap-3 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <Badge variant={statusTone}>{project.category}</Badge>
-          <h3 className="mt-3 text-xl font-semibold text-white">{project.title}</h3>
-          <p className="mt-1 text-sm text-[var(--text-secondary)]">{project.trackTitle}</p>
-        </div>
-        <div className="rounded-2xl border border-[var(--border)] bg-white/5 px-3 py-2 text-right">
-          <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">XP</p>
-          <p className="text-lg font-semibold text-white">+{project.xpReward ?? 0}</p>
-        </div>
+        <Badge variant={statusTone}>{project.category}</Badge>
+        <span className="text-xs text-success">+{project.xpReward ?? 0} XP</span>
       </div>
-
-      <p className="text-sm leading-6 text-[var(--text-secondary)]">
+      <div>
+        <h3 className="text-lg font-semibold text-white">{project.title}</h3>
+        <p className="text-xs text-[var(--text-secondary)]">{project.trackTitle}</p>
+      </div>
+      <p className="text-sm leading-6 text-[var(--text-secondary)] line-clamp-3">
         {project.description ?? "Project work assigned through your learning track."}
       </p>
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between stat-label">
-          <span>Momentum</span>
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
+          <span>Progress</span>
           <span>{project.completionPercent}%</span>
         </div>
         <ProgressBar value={project.completionPercent} max={100} color="primary" />
       </div>
-
-      <div className="grid gap-3 text-xs text-[var(--text-secondary)] sm:grid-cols-2">
-        <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-3">
-          <p className="uppercase tracking-[0.22em] text-[var(--text-muted)]">Status</p>
-          <p className="mt-2 text-sm text-white">{project.submissionStatus.replace("-", " ")}</p>
-        </div>
-        <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-3">
-          <p className="uppercase tracking-[0.22em] text-[var(--text-muted)]">Track</p>
-          <p className="mt-2 text-sm text-white">{project.trackTitle}</p>
-        </div>
-      </div>
-
       {project.feedback ? (
-        <p className="rounded-2xl border border-success/20 bg-success/10 p-4 text-sm leading-6 text-white">
+        <p className="rounded-2xl border border-success/20 bg-success/10 p-3 text-xs leading-5 text-white">
           {project.feedback}
         </p>
       ) : null}
-
-      <div className="mt-auto flex flex-wrap gap-3">
+      <div className="mt-auto flex flex-wrap gap-2">
         <Link to={actionRoute}>
           <Button size="sm">{actionLabel}</Button>
         </Link>
-        <Link to={project.trackId ? `/app/tracks/${project.trackId}` : "/app/tracks"}>
-          <Button size="sm" variant="outline">
-            Open track
-          </Button>
-        </Link>
+        {project.trackId ? (
+          <Link to={`/app/tracks/${project.trackId}`}>
+            <Button size="sm" variant="outline">
+              Track
+            </Button>
+          </Link>
+        ) : null}
+      </div>
+    </Card>
+  );
+}
+
+function AssignmentCard({ assignment }: { assignment: Assignment }) {
+  const status = assignment.status ?? "pending";
+  const overdue = isOverdue(assignment.dueDate) && status === "pending";
+
+  return (
+    <Card className="flex h-full flex-col gap-3 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+            {assignmentTypeIcons[assignment.type] ?? <FileText size={14} />}
+          </div>
+          <Badge
+            variant={
+              status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"
+            }
+          >
+            {status}
+          </Badge>
+        </div>
+        <span className="text-xs text-[var(--text-muted)]">{assignment.maxScore} pts</span>
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold text-white">{assignment.title}</h3>
+        <p className="mt-1 text-sm text-[var(--text-secondary)] line-clamp-2">{assignment.description}</p>
+      </div>
+      <div className="flex items-center gap-3 text-xs text-[var(--text-secondary)]">
+        <span className="flex items-center gap-1">
+          {overdue ? <AlertTriangle size={12} className="text-warning" /> : <Clock size={12} />}
+          <span className={overdue ? "text-warning font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
+        </span>
+        {assignment.estimatedMinutes > 0 ? <span>~{assignment.estimatedMinutes} min</span> : null}
+      </div>
+      {assignment.submission?.grade != null ? (
+        <p className="rounded-2xl border border-success/20 bg-success/10 p-3 text-xs text-white">
+          Grade: {assignment.submission.grade}/{assignment.maxScore}
+        </p>
+      ) : null}
+      <div className="mt-auto flex flex-wrap gap-2">
+        {status === "pending" ? (
+          <Link to={`/app/projects/submit?mode=submit&assignmentId=${assignment._id}`}>
+            <Button size="sm">
+              <Upload size={14} className="mr-1" />
+              Submit
+            </Button>
+          </Link>
+        ) : status === "graded" ? (
+          <Link to={`/app/projects/submit?mode=feedback&assignmentId=${assignment._id}`}>
+            <Button size="sm" variant="outline">
+              View feedback
+            </Button>
+          </Link>
+        ) : (
+          <Link to={`/app/projects/submit?mode=view&assignmentId=${assignment._id}`}>
+            <Button size="sm" variant="outline">
+              View submission
+            </Button>
+          </Link>
+        )}
       </div>
     </Card>
   );
 }
 
 export function AssignedProjectsPage() {
-  const [tab, setTab] = useState<ProjectTab>("active");
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const [tab, setTab] = useState<Tab>("active");
+
+  const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
   });
+  const assignmentsQuery = useQuery({
+    queryKey: ["assignments"],
+    queryFn: () => fetchAssignments(),
+  });
 
-  const dashboard = data as StudentDashboardData | undefined;
-  const projects = useMemo(() => dashboard?.assignedProjects ?? [], [dashboard?.assignedProjects]);
+  const dashboard = dashboardQuery.data as StudentDashboardData | undefined;
+  const projects = dashboard?.assignedProjects ?? [];
+  const assignments = assignmentsQuery.data ?? [];
 
-  const filteredProjects = useMemo(() => projects.filter((project) => project.category === tab), [projects, tab]);
-
-  const counts = useMemo(
-    () => ({
-      active: projects.filter((project) => project.category === "active").length,
-      feedback: projects.filter((project) => project.category === "feedback").length,
-      completed: projects.filter((project) => project.category === "completed").length,
-    }),
-    [projects],
-  );
-
-  if (isError) {
-    return <QueryError message={error instanceof Error ? error.message : undefined} onRetry={() => refetch()} />;
+  if (dashboardQuery.isError) {
+    return <QueryError onRetry={() => dashboardQuery.refetch()} />;
   }
-
-  if (isLoading) {
+  if (dashboardQuery.isLoading) {
     return <ProjectsSkeleton />;
   }
 
+  const activeProjects = projects.filter((p) => p.category === "active" || p.category === "feedback");
+  const completedProjects = projects.filter((p) => p.category === "completed");
+  const pendingAssignments = assignments.filter((a) => a.status === "pending");
+  const submittedAssignments = assignments.filter((a) => a.status === "submitted");
+  const gradedAssignments = assignments.filter((a) => a.status === "graded");
+
+  const tabItems: Record<Tab, { project: typeof projects; assignment: typeof assignments }> = {
+    active: { project: activeProjects, assignment: pendingAssignments },
+    submitted: { project: [], assignment: submittedAssignments },
+    graded: { project: completedProjects, assignment: gradedAssignments },
+  };
+  const current = tabItems[tab];
+  const total =
+    activeProjects.length +
+    pendingAssignments.length +
+    completedProjects.length +
+    submittedAssignments.length +
+    gradedAssignments.length;
+
   return (
-    <div className="space-y-8">
-      <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Build, review, and complete your project queue.
-            </h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
-              Track active assignments, read mentor feedback, and keep your submissions moving without losing context.
-            </p>
-          </div>
-          <Link to="/app/projects/submit">
-            <Button>Submit project</Button>
-          </Link>
+    <div className="page-shell space-y-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-3xl font-bold text-white">Your projects</h1>
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">
+            Track assignments, submit work, and review mentor feedback.
+          </p>
         </div>
+        <Link to="/app/projects/submit">
+          <Button>Submit project</Button>
+        </Link>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-3">
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="stat-label">Active</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{counts.active}</p>
-        </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="stat-label">Feedback ready</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{counts.feedback}</p>
-        </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="stat-label">Completed</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{counts.completed}</p>
-        </Card>
-      </div>
-
-      <div className="flex flex-wrap gap-3">
-        {(Object.keys(tabLabels) as ProjectTab[]).map((value) => (
-          <Button
-            key={value}
-            variant={tab === value ? "primary" : "outline"}
-            onClick={() => setTab(value)}
-            aria-pressed={tab === value}
+      <div className="flex flex-wrap gap-2" role="tablist">
+        {(["active", "submitted", "graded"] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            role="tab"
+            aria-selected={tab === t}
+            onClick={() => setTab(t)}
+            className={cn(
+              "rounded-full px-4 py-2 text-sm font-medium transition",
+              tab === t
+                ? "bg-primary text-[var(--bg-base)]"
+                : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
+            )}
           >
-            {tabLabels[value]} ({counts[value]})
-          </Button>
+            {tabLabels[t]}
+          </button>
         ))}
       </div>
 
-      {filteredProjects.length ? (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.projectId} project={project} />
-          ))}
-        </div>
-      ) : (
+      {total === 0 ? (
         <EmptyState
-          title={`No ${tabLabels[tab].toLowerCase()} yet`}
-          description="Projects will appear here as your track progresses and mentor feedback comes in."
+          title="No projects yet"
+          description="Enroll in a learning track to see your projects and assignments here."
           actionLabel="Browse tracks"
-          onAction={() => {
-            window.location.assign("/app/tracks");
-          }}
+          actionHref="/app/tracks"
         />
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {current.project.map((p) => (
+            <AssignedProjectCard key={p.projectId} project={p} />
+          ))}
+          {current.assignment.map((a) => (
+            <AssignmentCard key={a._id} assignment={a} />
+          ))}
+          {current.project.length === 0 && current.assignment.length === 0 ? (
+            <EmptyState
+              title={`No ${tabLabels[tab].toLowerCase()} items`}
+              description="Items will appear here as your work progresses."
+            />
+          ) : null}
+        </div>
       )}
     </div>
   );
