@@ -72,6 +72,49 @@ export const getSessionRole = async (userId, sessionId) => {
   return participant?.role ?? null;
 };
 
+export const requireSessionParticipant = async (req, res, next) => {
+  try {
+    const sessionId = req.params.id || req.params.sessionId;
+    if (!sessionId) {
+      throw new ApiError(400, "Session ID required");
+    }
+
+    const session = await Session.findById(sessionId).select("mentor");
+    if (!session) {
+      throw new ApiError(404, "Session not found");
+    }
+
+    if (String(session.mentor) === String(req.user._id)) {
+      return next();
+    }
+
+    if (req.user.role === "admin" || req.user.role === "super_admin") {
+      return next();
+    }
+
+    const participant = await SessionParticipant.findOne({
+      session: sessionId,
+      user: req.user._id,
+    }).select("_id admissionStatus blockedAt");
+
+    if (!participant) {
+      throw new ApiError(403, "You are not a participant in this session");
+    }
+
+    if (participant.admissionStatus === "denied") {
+      throw new ApiError(403, "Admission denied");
+    }
+
+    if (participant.blockedAt) {
+      throw new ApiError(403, "You have been blocked from this session");
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const ROLE_PERMISSIONS = {
   startSession: ["host", "cohost"],
   endSession: ["host", "cohost"],
