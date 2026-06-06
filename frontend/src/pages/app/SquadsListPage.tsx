@@ -29,7 +29,7 @@ export function SquadsListPage() {
       {groups.length === 0 ? (
         <EmptyState
           title="No squads yet"
-          description="Enroll in a track and join a peer group to unlock squad collaboration."
+          description="Enroll in a track to join a squad and collaborate with peers."
           actionLabel="Browse tracks"
           actionHref="/app/tracks"
         />
