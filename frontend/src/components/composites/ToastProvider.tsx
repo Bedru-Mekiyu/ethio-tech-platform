@@ -14,7 +14,7 @@ interface Toast {
   duration?: number;
 }
 
-interface ToastContextValue {
+export interface ToastApi {
   toast: (message: string, variant?: ToastVariant, duration?: number) => void;
   success: (message: string) => void;
   error: (message: string) => void;
@@ -22,9 +22,11 @@ interface ToastContextValue {
   info: (message: string) => void;
 }
 
+type ToastContextValue = ToastApi;
+
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-export function useToast() {
+export function useToast(): ToastApi {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error("useToast must be used within ToastProvider");
   return ctx;
@@ -39,7 +41,8 @@ const icons: Record<ToastVariant, typeof Info> = {
 
 const variantStyles: Record<ToastVariant, string> = {
   success: "border-success/20 bg-[rgba(46,204,113,0.12)] text-success shadow-[0_4px_20px_rgba(46,204,113,0.06)]",
-  error: "border-danger/20 bg-[rgba(255,75,92,0.12)] text-[var(--text-danger)] shadow-[0_4px_20px_rgba(255,75,92,0.06)]",
+  error:
+    "border-danger/20 bg-[rgba(255,75,92,0.12)] text-[var(--text-danger)] shadow-[0_4px_20px_rgba(255,75,92,0.06)]",
   warning: "border-warning/20 bg-[rgba(241,196,15,0.12)] text-warning shadow-[0_4px_20px_rgba(241,196,15,0.06)]",
   info: "border-primary/20 bg-[rgba(0,210,255,0.12)] text-primary shadow-[0_4px_20px_rgba(0,210,255,0.06)]",
 };
@@ -68,15 +71,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         timersRef.current.set(id, timer);
       }
     },
-    [removeToast]
+    [removeToast],
   );
 
   const ctx: ToastContextValue = {
     toast: addToast,
-    success: (msg) => addToast(msg, "success"),
-    error: (msg) => addToast(msg, "error"),
-    warning: (msg) => addToast(msg, "warning"),
-    info: (msg) => addToast(msg, "info"),
+    success: (msg: string) => addToast(msg, "success"),
+    error: (msg: string) => addToast(msg, "error"),
+    warning: (msg: string) => addToast(msg, "warning"),
+    info: (msg: string) => addToast(msg, "info"),
   };
 
   useEffect(
@@ -86,7 +89,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       }
       timersRef.current.clear();
     },
-    []
+    [],
   );
 
   return (
@@ -110,7 +113,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 transition={{ type: "spring", stiffness: 350, damping: 28 }}
                 className={cn(
                   "pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3.5 shadow-xl backdrop-blur-md select-none",
-                  variantStyles[t.variant]
+                  variantStyles[t.variant],
                 )}
               >
                 <Icon size={18} className="mt-0.5 flex-shrink-0" />
@@ -131,4 +134,3 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     </ToastContext.Provider>
   );
 }
-
