@@ -14,46 +14,43 @@ const startMemoryServer = async () => {
   return memoryServer;
 };
 
-export const connectDB = async () => {
-  try {
-    const { mongoUri, isProduction } = getEnv();
-    const explicitMongoUri = process.env.MONGO_URI || process.env.MONGODB_URL;
-    const uri = mongoUri || explicitMongoUri;
+const connectWithUri = async (uri) => {
+  await mongoose.connect(uri);
+};
 
-    if (uri) {
-      await mongoose.connect(uri);
+export const connectDB = async () => {
+  const { isProduction } = getEnv();
+  const explicitMongoUri = process.env.MONGO_URI || process.env.MONGODB_URL;
+  const uri = explicitMongoUri;
+
+  if (uri) {
+    try {
+      await connectWithUri(uri);
       console.log("✅ MongoDB connected");
       return;
-    }
-
-    if (isProduction) {
-      throw new Error("MONGO_URI is required in production");
-    }
-
-    const server = await startMemoryServer();
-    await mongoose.connect(server.getUri());
-    console.log("✅ MongoDB connected");
-  } catch (err) {
-    if (!process.env.MONGO_URI && !process.env.MONGODB_URL) {
-      try {
-        const server = await startMemoryServer();
-        await mongoose.disconnect();
-        await mongoose.connect(server.getUri());
-        console.log("✅ MongoDB connected");
-        return;
-      } catch (memoryErr) {
-        console.error(
-          "❌ DB connection failed:",
-          memoryErr instanceof Error ? memoryErr.message : String(memoryErr)
-        );
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (isProduction) {
+        console.error("❌ DB connection failed:", message);
         process.exit(1);
       }
+      console.warn(`⚠️  MongoDB URI connection failed (${message}). Falling back to in-memory database.`);
     }
+  } else if (isProduction) {
+    console.error("❌ DB connection failed: MONGO_URI is required in production");
+    process.exit(1);
+  }
 
-    console.error(
-      "❌ DB connection failed:",
-      err instanceof Error ? err.message : String(err)
-    );
+  try {
+    const server = await startMemoryServer();
+    if (mongoose.connection.readyState !== 0) {
+      await mongoose.disconnect();
+    }
+    await mongoose.connect(server.getUri());
+    console.log("✅ MongoDB connected (in-memory)");
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("❌ DB connection failed:", message);
     process.exit(1);
   }
 };

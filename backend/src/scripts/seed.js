@@ -30,306 +30,283 @@ import {
   createMentorAvailability,
   createXPLog,
 } from "./factories.js";
-import {
-  createTracksAndContent,
-  createBadgesAndLevels,
-  createDailyChallengesForMonth,
-} from "./generators.js";
-import {
-  randomInt,
-  pick,
-  pickMany,
-  batchInsert,
-  hoursAgo,
-} from "./utils.js";
+import { createTracksAndContent, createBadgesAndLevels, createDailyChallengesForMonth } from "./generators.js";
+import { randomInt, pick, pickMany, batchInsert, hoursAgo } from "./utils.js";
 import { ETHIOPIAN_CITIES } from "./datasets.js";
 
 dotenv.config();
 
-const seed = async () => {
-  try {
-    console.log("🌍 Starting comprehensive seed for Ethio Tech Platform...\n");
+export const runSeed = async ({ verbose = true } = {}) => {
+  const log = (...args) => {
+    if (verbose) console.log(...args);
+  };
 
-    await connectDB();
-    console.log("✅ Connected to MongoDB\n");
+  log("🌍 Starting comprehensive seed for Ethio Tech Platform...");
 
-    // ====== CLEAR COLLECTIONS ======
-    console.log("🗑️  Clearing existing data...");
-    const collections = [
-      "users",
-      "tracks",
-      "modules",
-      "lessons",
-      "projects",
-      "badges",
-      "levelconfigs",
-      "dailychallenges",
-      "xplogs",
-      "userstreaks",
-      "sessions",
-      "submissions",
-      "peergroups",
-      "hubs",
-      "mentoravailabilities",
-      "chatmessages",
-      "certificates",
-      "dailychallengecompletions",
-    ];
+  // ====== CLEAR COLLECTIONS ======
+  if (verbose) console.log("🗑️  Clearing existing data...");
+  const collections = [
+    "users",
+    "tracks",
+    "modules",
+    "lessons",
+    "projects",
+    "badges",
+    "levelconfigs",
+    "dailychallenges",
+    "xplogs",
+    "userstreaks",
+    "sessions",
+    "submissions",
+    "peergroups",
+    "hubs",
+    "mentoravailabilities",
+    "chatmessages",
+    "certificates",
+    "dailychallengecompletions",
+  ];
 
-    for (const collection of collections) {
-      try {
-        await mongoose.connection.collection(collection).deleteMany({});
-      } catch {
-        // Silently ignore errors
-      }
+  for (const collection of collections) {
+    try {
+      await mongoose.connection.collection(collection).deleteMany({});
+    } catch {
+      // Silently ignore errors
     }
-    console.log("✅ Data cleared\n");
+  }
+  log("✅ Data cleared");
 
-    // ====== CREATE EDUCATIONAL CONTENT ======
-    console.log("📚 Creating educational tracks and content...");
-    const tracks = await createTracksAndContent();
-    console.log(`✅ Created ${tracks.length} tracks\n`);
+  // ====== CREATE EDUCATIONAL CONTENT ======
+  log("📚 Creating educational tracks and content...");
+  const tracks = await createTracksAndContent();
+  log(`✅ Created ${tracks.length} tracks`);
 
-    // ====== CREATE BADGES & LEVELS ======
-    console.log("🏅 Creating badges and levels...");
-    const { badges, levels } = await createBadgesAndLevels();
-    console.log(`✅ Created ${badges.length} badges and ${levels.length} levels\n`);
+  // ====== CREATE BADGES & LEVELS ======
+  log("🏅 Creating badges and levels...");
+  const { badges, levels } = await createBadgesAndLevels();
+  log(`✅ Created ${badges.length} badges and ${levels.length} levels`);
 
-    // ====== CREATE DAILY CHALLENGES ======
-    console.log("⚡ Creating daily challenges...");
-    const challenges = await createDailyChallengesForMonth();
-    console.log(`✅ Created ${challenges.length} daily challenges\n`);
+  // ====== CREATE DAILY CHALLENGES ======
+  log("⚡ Creating daily challenges...");
+  const challenges = await createDailyChallengesForMonth();
+  log(`✅ Created ${challenges.length} daily challenges`);
 
-    // ====== CREATE ADMIN ======
-    console.log("👨‍💼 Creating admin...");
-    const admins = [
-      createAdmin({ firstName: "Admin", lastName: "User", email: "admin@ethiotech.com" }),
-    ];
-    const createdAdmins = await User.insertMany(admins);
-    console.log(`✅ Created admin\n`);
+  // ====== CREATE ADMIN ======
+  log("👨‍💼 Creating admin...");
+  const admins = [createAdmin({ firstName: "Admin", lastName: "User", email: "admin@ethiotech.com" })];
+  const createdAdmins = await User.insertMany(admins);
+  log(`✅ Created admin`);
 
-    // ====== CREATE MENTORS ======
-    console.log("🎓 Creating mentors...");
-    const mentorCount = 12;
-    const mentors = [];
-    for (let i = 0; i < mentorCount; i++) {
-      mentors.push(createMentor());
+  // ====== CREATE MENTORS ======
+  log("🎓 Creating mentors...");
+  const mentorCount = 12;
+  const mentors = [];
+  for (let i = 0; i < mentorCount; i++) {
+    mentors.push(createMentor());
+  }
+  const createdMentors = await User.insertMany(mentors);
+  log(`✅ Created ${createdMentors.length} mentors`);
+
+  // ====== CREATE HUBS ======
+  log("🏢 Creating hubs...");
+  const hubs = [];
+  for (let i = 0; i < Math.min(ETHIOPIAN_CITIES.length, 8); i++) {
+    const city = ETHIOPIAN_CITIES[i];
+    const mentorInCharge = i < createdMentors.length ? createdMentors[i]._id : createdMentors[0]._id;
+    hubs.push(createHub(city, mentorInCharge));
+  }
+  const createdHubs = await Hub.insertMany(hubs);
+  log(`✅ Created ${createdHubs.length} hubs`);
+
+  // ====== CREATE MENTOR AVAILABILITY ======
+  log("📅 Creating mentor availability...");
+  const availabilities = [];
+  for (const mentor of createdMentors) {
+    const slots = createMentorAvailability(mentor._id);
+    availabilities.push(...slots);
+  }
+  if (availabilities.length > 0) {
+    const availBatches = batchInsert(availabilities, 500);
+    for (const batch of availBatches) {
+      await MentorAvailability.insertMany(batch).catch(() => {});
     }
-    const createdMentors = await User.insertMany(mentors);
-    console.log(`✅ Created ${createdMentors.length} mentors\n`);
+  }
+  log(`✅ Created ${availabilities.length} availability slots`);
 
-    // ====== CREATE HUBS ======
-    console.log("🏢 Creating hubs...");
-    const hubs = [];
-    for (let i = 0; i < Math.min(ETHIOPIAN_CITIES.length, 8); i++) {
-      const city = ETHIOPIAN_CITIES[i];
-      const mentorInCharge =
-        i < createdMentors.length ? createdMentors[i]._id : createdMentors[0]._id;
-      hubs.push(createHub(city, mentorInCharge));
-    }
-    const createdHubs = await Hub.insertMany(hubs);
-    console.log(`✅ Created ${createdHubs.length} hubs\n`);
+  // ====== CREATE STUDENTS ======
+  log("👨‍🎓 Creating students...");
+  const studentCount = 45;
+  const students = [];
+  for (let i = 0; i < studentCount; i++) {
+    students.push(createStudent({ isActive: Math.random() > 0.15 }));
+  }
+  const studentBatches = batchInsert(students, 500);
+  let createdStudents = [];
+  for (const batch of studentBatches) {
+    createdStudents = createdStudents.concat(await User.insertMany(batch));
+  }
+  log(`✅ Created ${createdStudents.length} students`);
 
-    // ====== CREATE MENTOR AVAILABILITY ======
-    console.log("📅 Creating mentor availability...");
-    const availabilities = [];
-    for (const mentor of createdMentors) {
-      const slots = createMentorAvailability(mentor._id);
-      availabilities.push(...slots);
-    }
-    if (availabilities.length > 0) {
-      const availBatches = batchInsert(availabilities, 500);
-      for (const batch of availBatches) {
-        await MentorAvailability.insertMany(batch).catch(() => {});
-      }
-    }
-    console.log(`✅ Created ${availabilities.length} availability slots\n`);
+  // ====== ENROLL STUDENTS ======
+  log("📖 Enrolling students...");
+  for (const student of createdStudents) {
+    const enrolledTracks = pickMany(tracks, randomInt(1, 3));
+    student.enrolledTracks = enrolledTracks.map((t) => t._id);
+    await student.save();
+  }
+  log(`✅ Enrolled students`);
 
-    // ====== CREATE STUDENTS ======
-    console.log("👨‍🎓 Creating students...");
-    const studentCount = 45;
-    const students = [];
-    for (let i = 0; i < studentCount; i++) {
-      students.push(createStudent({ isActive: Math.random() > 0.15 }));
-    }
-    const studentBatches = batchInsert(students, 500);
-    let createdStudents = [];
-    for (const batch of studentBatches) {
-      createdStudents = createdStudents.concat(await User.insertMany(batch));
-    }
-    console.log(`✅ Created ${createdStudents.length} students\n`);
+  // ====== CREATE STREAKS ======
+  log("🔥 Creating streaks...");
+  const streaks = createdStudents.map((s) => createUserStreak(s._id, randomInt(0, 90), randomInt(0, 200)));
+  const streakBatches = batchInsert(streaks, 500);
+  for (const batch of streakBatches) {
+    await UserStreak.insertMany(batch);
+  }
+  log(`✅ Created streaks`);
 
-    // ====== ENROLL STUDENTS ======
-    console.log("📖 Enrolling students...");
-    for (const student of createdStudents) {
-      const enrolledTracks = pickMany(tracks, randomInt(1, 3));
-      student.enrolledTracks = enrolledTracks.map((t) => t._id);
-      await student.save();
+  // ====== CREATE XP LOGS ======
+  log("⭐ Creating XP logs...");
+  const xpLogs = [];
+  for (const student of createdStudents) {
+    for (let i = 0; i < randomInt(3, 15); i++) {
+      xpLogs.push(createXPLog(student._id, randomInt(25, 200), "lesson_completed", "lesson", pick(tracks)._id));
     }
-    console.log(`✅ Enrolled students\n`);
+  }
+  const xpBatches = batchInsert(xpLogs, 1000);
+  for (const batch of xpBatches) {
+    await XPLog.insertMany(batch).catch(() => {});
+  }
+  log(`✅ Created ${xpLogs.length} XP logs`);
 
-    // ====== CREATE STREAKS ======
-    console.log("🔥 Creating streaks...");
-    const streaks = createdStudents.map((s) =>
-      createUserStreak(s._id, randomInt(0, 90), randomInt(0, 200))
-    );
-    const streakBatches = batchInsert(streaks, 500);
-    for (const batch of streakBatches) {
-      await UserStreak.insertMany(batch);
-    }
-    console.log(`✅ Created streaks\n`);
-
-    // ====== CREATE XP LOGS ======
-    console.log("⭐ Creating XP logs...");
-    const xpLogs = [];
-    for (const student of createdStudents) {
-      for (let i = 0; i < randomInt(3, 15); i++) {
-        xpLogs.push(
-          createXPLog(
-            student._id,
-            randomInt(25, 200),
-            "lesson_completed",
-            "lesson",
-            pick(tracks)._id
-          )
+  // ====== CREATE SUBMISSIONS ======
+  log("📝 Creating submissions...");
+  const submissions = [];
+  const allProjects = await Project.find();
+  for (let i = 0; i < Math.min(createdStudents.length, 30); i++) {
+    const student = createdStudents[i];
+    for (let j = 0; j < randomInt(1, 3); j++) {
+      if (allProjects.length > 0) {
+        const project = pick(allProjects);
+        const status = pick(["pending", "reviewed", "approved", "rejected"]);
+        submissions.push(
+          createSubmission({
+            studentId: student._id,
+            projectId: project._id,
+            status,
+            reviewedBy: status !== "pending" ? pick(createdMentors)._id : null,
+          }),
         );
       }
     }
-    const xpBatches = batchInsert(xpLogs, 1000);
-    for (const batch of xpBatches) {
-      await XPLog.insertMany(batch).catch(() => {});
-    }
-    console.log(`✅ Created ${xpLogs.length} XP logs\n`);
+  }
+  const submissionBatches = batchInsert(submissions, 500);
+  for (const batch of submissionBatches) {
+    await Submission.insertMany(batch).catch(() => {});
+  }
+  log(`✅ Created ${submissions.length} submissions`);
 
-    // ====== CREATE SUBMISSIONS ======
-    console.log("📝 Creating submissions...");
-    const submissions = [];
-    const allProjects = await Project.find();
-    for (let i = 0; i < Math.min(createdStudents.length, 30); i++) {
-      const student = createdStudents[i];
-      for (let j = 0; j < randomInt(1, 3); j++) {
-        if (allProjects.length > 0) {
-          const project = pick(allProjects);
-          const status = pick(["pending", "reviewed", "approved", "rejected"]);
-          submissions.push(
-            createSubmission({
-              studentId: student._id,
-              projectId: project._id,
-              status,
-              reviewedBy: status !== "pending" ? pick(createdMentors)._id : null,
-            })
-          );
-        }
-      }
-    }
-    const submissionBatches = batchInsert(submissions, 500);
-    for (const batch of submissionBatches) {
-      await Submission.insertMany(batch).catch(() => {});
-    }
-    console.log(`✅ Created ${submissions.length} submissions\n`);
-
-    // ====== CREATE PEER GROUPS ======
-    console.log("👥 Creating peer groups...");
-    const peerGroups = [];
-    for (const track of tracks) {
-      for (let i = 0; i < randomInt(2, 3); i++) {
-        const memberCount = randomInt(3, 10);
-        const members = pickMany(
-          createdStudents,
-          Math.min(memberCount, createdStudents.length)
+  // ====== CREATE PEER GROUPS ======
+  log("👥 Creating peer groups...");
+  const peerGroups = [];
+  for (const track of tracks) {
+    for (let i = 0; i < randomInt(2, 3); i++) {
+      const memberCount = randomInt(3, 10);
+      const members = pickMany(createdStudents, Math.min(memberCount, createdStudents.length));
+      if (members.length > 0) {
+        peerGroups.push(
+          createPeerGroup(
+            track._id,
+            pick(members)._id,
+            members.map((m) => m._id),
+          ),
         );
-        if (members.length > 0) {
-          peerGroups.push(
-            createPeerGroup(track._id, pick(members)._id, members.map((m) => m._id))
-          );
-        }
       }
     }
-    await PeerGroup.insertMany(peerGroups);
-    console.log(`✅ Created ${peerGroups.length} peer groups\n`);
+  }
+  await PeerGroup.insertMany(peerGroups);
+  log(`✅ Created ${peerGroups.length} peer groups`);
 
-    // ====== CREATE SESSIONS ======
-    console.log("🎓 Creating sessions...");
-    const sessions = [];
-    for (const mentor of createdMentors) {
-      for (let i = 0; i < randomInt(2, 4); i++) {
-        const hoursAhead = randomInt(-48, 168);
-        let status = "scheduled";
-        if (hoursAhead < -2) status = "ended";
-        if (hoursAhead < 0 && hoursAhead > -2) status = "live";
+  // ====== CREATE SESSIONS ======
+  log("🎓 Creating sessions...");
+  const sessions = [];
+  for (const mentor of createdMentors) {
+    for (let i = 0; i < randomInt(2, 4); i++) {
+      const hoursAhead = randomInt(-48, 168);
+      let status = "scheduled";
+      if (hoursAhead < -2) status = "ended";
+      if (hoursAhead < 0 && hoursAhead > -2) status = "live";
 
-        const session = createSession({
-          mentorId: mentor._id,
-          scheduledAt: hoursAgo(-hoursAhead),
-          status,
+      const session = createSession({
+        mentorId: mentor._id,
+        scheduledAt: hoursAgo(-hoursAhead),
+        status,
+      });
+
+      if (createdStudents.length > 0) {
+        session.participants = pickMany(createdStudents, randomInt(3, Math.min(12, createdStudents.length))).map(
+          (p) => p._id,
+        );
+      }
+
+      sessions.push(session);
+    }
+  }
+  await Session.insertMany(sessions);
+  log(`✅ Created ${sessions.length} sessions`);
+
+  // ====== CREATE COMPLETIONS ======
+  log("⚡ Creating challenge completions...");
+  const completions = [];
+  const allChallenges = await DailyChallenge.find();
+  for (const student of createdStudents) {
+    for (let i = 0; i < randomInt(3, 12); i++) {
+      if (allChallenges.length > 0) {
+        completions.push({
+          user: student._id,
+          challenge: pick(allChallenges)._id,
+          completedAt: new Date(),
         });
-
-        if (createdStudents.length > 0) {
-          session.participants = pickMany(
-            createdStudents,
-            randomInt(3, Math.min(12, createdStudents.length))
-          ).map((p) => p._id);
-        }
-
-        sessions.push(session);
       }
     }
-    await Session.insertMany(sessions);
-    console.log(`✅ Created ${sessions.length} sessions\n`);
+  }
+  const completionBatches = batchInsert(completions, 1000);
+  for (const batch of completionBatches) {
+    await DailyChallengeCompletion.insertMany(batch).catch(() => {});
+  }
+  log(`✅ Created ${completions.length} completions`);
 
-    // ====== CREATE COMPLETIONS ======
-    console.log("⚡ Creating challenge completions...");
-    const completions = [];
-    const allChallenges = await DailyChallenge.find();
-    for (const student of createdStudents) {
-      for (let i = 0; i < randomInt(3, 12); i++) {
-        if (allChallenges.length > 0) {
-          completions.push({
-            user: student._id,
-            challenge: pick(allChallenges)._id,
-            completedAt: new Date(),
-          });
-        }
+  // ====== CREATE CERTIFICATES ======
+  log("🎖️  Creating certificates...");
+  const certificates = [];
+  for (let i = 0; i < Math.min(createdStudents.length, 25); i++) {
+    const student = createdStudents[i];
+    for (const track of pickMany(tracks, randomInt(1, 2))) {
+      certificates.push(createCertificate(student._id, track._id));
+    }
+  }
+  if (certificates.length > 0) {
+    await Certificate.insertMany(certificates).catch(() => {});
+  }
+  log(`✅ Created ${certificates.length} certificates`);
+
+  // ====== CREATE CHAT MESSAGES ======
+  log("💬 Creating chat messages...");
+  const chatMessages = [];
+  const rooms = tracks.slice(0, Math.min(3, tracks.length)).map((t) => `track-${t._id}`);
+  for (const room of rooms) {
+    for (let i = 0; i < randomInt(12, 35); i++) {
+      if (createdStudents.length > 0) {
+        chatMessages.push(createChatMessage(room, pick(createdStudents)._id));
       }
     }
-    const completionBatches = batchInsert(completions, 1000);
-    for (const batch of completionBatches) {
-      await DailyChallengeCompletion.insertMany(batch).catch(() => {});
-    }
-    console.log(`✅ Created ${completions.length} completions\n`);
+  }
+  const messageBatches = batchInsert(chatMessages, 500);
+  for (const batch of messageBatches) {
+    await ChatMessage.insertMany(batch).catch(() => {});
+  }
+  log(`✅ Created ${chatMessages.length} messages`);
 
-    // ====== CREATE CERTIFICATES ======
-    console.log("🎖️  Creating certificates...");
-    const certificates = [];
-    for (let i = 0; i < Math.min(createdStudents.length, 25); i++) {
-      const student = createdStudents[i];
-      for (const track of pickMany(tracks, randomInt(1, 2))) {
-        certificates.push(createCertificate(student._id, track._id));
-      }
-    }
-    if (certificates.length > 0) {
-      await Certificate.insertMany(certificates).catch(() => {});
-    }
-    console.log(`✅ Created ${certificates.length} certificates\n`);
-
-    // ====== CREATE CHAT MESSAGES ======
-    console.log("💬 Creating chat messages...");
-    const chatMessages = [];
-    const rooms = tracks.slice(0, Math.min(3, tracks.length)).map((t) => `track-${t._id}`);
-    for (const room of rooms) {
-      for (let i = 0; i < randomInt(12, 35); i++) {
-        if (createdStudents.length > 0) {
-          chatMessages.push(createChatMessage(room, pick(createdStudents)._id));
-        }
-      }
-    }
-    const messageBatches = batchInsert(chatMessages, 500);
-    for (const batch of messageBatches) {
-      await ChatMessage.insertMany(batch).catch(() => {});
-    }
-    console.log(`✅ Created ${chatMessages.length} messages\n`);
-
-    // ====== SUMMARY ======
+  if (verbose) {
     console.log("\n" + "=".repeat(70));
     console.log("✅ SEED COMPLETED SUCCESSFULLY!");
     console.log("=".repeat(70) + "\n");
@@ -350,7 +327,21 @@ const seed = async () => {
     if (createdStudents.length > 0) console.log(`  👨‍🎓 Student: ${createdStudents[0].email} / Passw0rd!\n`);
 
     console.log("🚀 Ethio Tech Platform ecosystem is ready for use!\n");
+  }
 
+  return {
+    admins: createdAdmins.length,
+    mentors: createdMentors.length,
+    students: createdStudents.length,
+    tracks: tracks.length,
+  };
+};
+
+const main = async () => {
+  try {
+    await connectDB();
+    console.log("✅ Connected to MongoDB\n");
+    await runSeed({ verbose: true });
     await mongoose.connection.close();
     process.exit(0);
   } catch (error) {
@@ -365,4 +356,7 @@ const seed = async () => {
   }
 };
 
-seed();
+const invokedDirectly = import.meta.url === `file:///${process.argv[1].replace(/\\/g, "/")}`;
+if (invokedDirectly) {
+  main();
+}

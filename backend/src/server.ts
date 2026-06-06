@@ -2,11 +2,13 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server as SocketServer } from "socket.io";
 import type { RedisClientType } from "redis";
+import mongoose from "mongoose";
 import { connectDB, stopDB } from "./config/db.js";
 import { validateEnvOnBoot, getEnv } from "./config/env.js";
 import { createApp } from "./app.js";
 import { setupSocket } from "./socket/index.js";
 import { logger } from "./lib/logger.js";
+import { runSeed } from "./scripts/seed.js";
 
 dotenv.config();
 validateEnvOnBoot();
@@ -40,6 +42,21 @@ const shutdown = async (signal: string) => {
 
 const startServer = async () => {
   await connectDB();
+
+  if (!getEnv().isProduction) {
+    const userCount = await mongoose.connection.collection("users").countDocuments();
+    if (userCount === 0) {
+      logger.info("Database is empty. Running auto-seed…");
+      try {
+        await runSeed({ verbose: true });
+        logger.info("Auto-seed completed.");
+      } catch (err) {
+        logger.error("Auto-seed failed", err);
+      }
+    } else {
+      logger.info(`Database already contains ${userCount} users; skipping auto-seed.`);
+    }
+  }
 
   const app = createApp();
   httpServer = createServer(app);
