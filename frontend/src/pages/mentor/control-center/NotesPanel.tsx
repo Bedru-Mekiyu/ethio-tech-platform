@@ -14,7 +14,7 @@ interface NotesPanelProps {
 
 export default function NotesPanel({ sessionId }: NotesPanelProps) {
   const queryClient = useQueryClient();
-  const { toast } = useToast();
+  const toast = useToast();
   const { data: notes, isLoading } = useQuery({
     queryKey: ["session-notes", sessionId],
     queryFn: () => getSessionNotes(sessionId),
@@ -126,14 +126,23 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
             {notes?.versionHistory && notes.versionHistory.length > 0 ? (
               <div className="space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
                 {notes.versionHistory.map(
-                  (version: { version: number; updatedAt: string; savedBy: string }, idx: number) => (
+                  (
+                    version: {
+                      version: number;
+                      updatedAt: string;
+                      savedBy: string;
+                      createdAt?: string;
+                      changeSummary?: string;
+                    },
+                    idx: number,
+                  ) => (
                     <div
                       key={idx}
                       className="p-2 rounded-lg border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-all text-[10px]"
                     >
                       <div className="flex justify-between text-white font-medium">
                         <span>Version {version.version}</span>
-                        <span>{new Date(version.createdAt).toLocaleTimeString()}</span>
+                        <span>{new Date(version.createdAt ?? version.updatedAt).toLocaleTimeString()}</span>
                       </div>
                       <p className="text-[var(--text-secondary)] truncate mt-1">
                         {version.changeSummary || "Auto-saved backup"}

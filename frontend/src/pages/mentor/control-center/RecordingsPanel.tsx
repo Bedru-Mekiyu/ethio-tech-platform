@@ -25,7 +25,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isToggling, setIsToggling] = useState<string | null>(null);
   const createDialogRef = useRef<HTMLDialogElement>(null);
-  const { toast } = useToast();
+  const toast = useToast();
 
   useEffect(() => {
     const dialog = createDialogRef.current;
@@ -190,48 +190,60 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </div>
       ) : (
         <div className="space-y-3 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
-          {recordings.map((rec) => (
-            <div
-              key={rec._id}
-              className="rounded-xl border border-white/5 bg-white/[0.01] p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-white/[0.03] transition-all"
-            >
-              <div className="flex items-start gap-3 min-w-0">
-                <div className="bg-[#0B0F19] p-3 border border-white/5 rounded-xl shrink-0 flex items-center justify-center text-primary">
-                  <Play size={18} className="fill-current" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white truncate">{rec.title}</p>
-                  {rec.description && (
-                    <p className="text-[10px] text-[var(--text-secondary)] mt-0.5 truncate">{rec.description}</p>
-                  )}
-                  <div className="flex items-center gap-3 mt-2 text-[9px] text-[var(--text-muted)]">
-                    {rec.durationMinutes && <span>{rec.durationMinutes} minutes</span>}
-                    <span className="flex items-center gap-0.5">
-                      <Eye size={10} /> Views: {rec.totalViews || 0}
-                    </span>
-                    <span className="flex items-center gap-0.5">
-                      <CheckCircle size={10} /> Completed: {rec.completionCount || 0}
-                    </span>
+          {recordings.map(
+            (rec: {
+              _id: string;
+              title: string;
+              url: string;
+              description?: string;
+              isPublished: boolean;
+              createdAt: string;
+              durationMinutes?: number;
+              totalViews?: number;
+              completionCount?: number;
+            }) => (
+              <div
+                key={rec._id}
+                className="rounded-xl border border-white/5 bg-white/[0.01] p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-white/[0.03] transition-all"
+              >
+                <div className="flex items-start gap-3 min-w-0">
+                  <div className="bg-[#0B0F19] p-3 border border-white/5 rounded-xl shrink-0 flex items-center justify-center text-primary">
+                    <Play size={18} className="fill-current" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-white truncate">{rec.title}</p>
+                    {rec.description && (
+                      <p className="text-[10px] text-[var(--text-secondary)] mt-0.5 truncate">{rec.description}</p>
+                    )}
+                    <div className="flex items-center gap-3 mt-2 text-[9px] text-[var(--text-muted)]">
+                      {rec.durationMinutes && <span>{rec.durationMinutes} minutes</span>}
+                      <span className="flex items-center gap-0.5">
+                        <Eye size={10} /> Views: {rec.totalViews || 0}
+                      </span>
+                      <span className="flex items-center gap-0.5">
+                        <CheckCircle size={10} /> Completed: {rec.completionCount || 0}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
-                <Button
-                  size="sm"
-                  variant={rec.isPublished ? "primary" : "outline"}
-                  className="h-7 text-[10px] px-2 text-white"
-                  onClick={() => handleTogglePublish(rec._id)}
-                  disabled={isToggling === rec._id}
-                >
-                  {rec.isPublished ? "Published" : "Publish"}
-                </Button>
-                <Badge variant="default" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">
-                  mp4
-                </Badge>
+                <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                  <Button
+                    size="sm"
+                    variant={rec.isPublished ? "primary" : "outline"}
+                    className="h-7 text-[10px] px-2 text-white"
+                    onClick={() => handleTogglePublish(rec._id)}
+                    disabled={isToggling === rec._id}
+                  >
+                    {rec.isPublished ? "Published" : "Publish"}
+                  </Button>
+                  <Badge variant="default" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">
+                    mp4
+                  </Badge>
+                </div>
               </div>
-            </div>
-          ))}
+            ),
+          )}
         </div>
       )}
     </Card>

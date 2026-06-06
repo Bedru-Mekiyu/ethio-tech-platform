@@ -25,7 +25,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
   const [type, setType] = useState("pdf");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const createDialogRef = useRef<HTMLDialogElement>(null);
-  const { toast } = useToast();
+  const toast = useToast();
 
   useEffect(() => {
     const dialog = createDialogRef.current;
@@ -194,44 +194,55 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
         </div>
       ) : (
         <div className="space-y-2.5 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
-          {resources.map((res) => (
-            <div
-              key={res._id}
-              className="rounded-xl border border-white/5 bg-white/[0.01] p-3.5 flex items-center justify-between gap-3 hover:bg-white/[0.03] transition-all"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="bg-white/5 p-2 rounded-lg shrink-0">{getResourceIcon(res.type)}</div>
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white truncate">{res.title}</p>
-                  {res.description && (
-                    <p className="text-[10px] text-[var(--text-secondary)] truncate mt-0.5">{res.description}</p>
-                  )}
-                  <p className="text-[9px] text-primary/80 mt-1 truncate hover:underline">
-                    <a href={res.url} target="_blank" rel="noopener noreferrer">
-                      {res.url}
-                    </a>
-                  </p>
+          {resources.map(
+            (res: {
+              _id: string;
+              title: string;
+              url: string;
+              description?: string;
+              type: string;
+              createdAt: string;
+              viewCount?: number;
+              downloadCount?: number;
+            }) => (
+              <div
+                key={res._id}
+                className="rounded-xl border border-white/5 bg-white/[0.01] p-3.5 flex items-center justify-between gap-3 hover:bg-white/[0.03] transition-all"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="bg-white/5 p-2 rounded-lg shrink-0">{getResourceIcon(res.type)}</div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-semibold text-white truncate">{res.title}</p>
+                    {res.description && (
+                      <p className="text-[10px] text-[var(--text-secondary)] truncate mt-0.5">{res.description}</p>
+                    )}
+                    <p className="text-[9px] text-primary/80 mt-1 truncate hover:underline">
+                      <a href={res.url} target="_blank" rel="noopener noreferrer">
+                        {res.url}
+                      </a>
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)]">
-                  <span className="flex items-center gap-0.5">
-                    <Eye size={11} /> {res.viewCount || 0}
-                  </span>
-                  <span className="flex items-center gap-0.5">
-                    <Download size={11} /> {res.downloadCount || 0}
-                  </span>
+                <div className="flex items-center gap-3 shrink-0">
+                  <div className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)]">
+                    <span className="flex items-center gap-0.5">
+                      <Eye size={11} /> {res.viewCount || 0}
+                    </span>
+                    <span className="flex items-center gap-0.5">
+                      <Download size={11} /> {res.downloadCount || 0}
+                    </span>
+                  </div>
+                  <Badge
+                    variant="default"
+                    className="text-[9px] border-white/10 uppercase font-bold text-white bg-white/5"
+                  >
+                    {res.type}
+                  </Badge>
                 </div>
-                <Badge
-                  variant="default"
-                  className="text-[9px] border-white/10 uppercase font-bold text-white bg-white/5"
-                >
-                  {res.type}
-                </Badge>
               </div>
-            </div>
-          ))}
+            ),
+          )}
         </div>
       )}
     </Card>
