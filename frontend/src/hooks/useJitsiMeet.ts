@@ -63,6 +63,7 @@ export interface UseJitsiMeetReturn {
   hangUp: () => void;
   kickParticipant: (participantId: string) => void;
   muteParticipant: (participantId: string) => void;
+  muteAllParticipants: () => void;
   getParticipants: () => JitsiParticipant[];
 }
 
@@ -84,7 +85,10 @@ export function useJitsiMeet(options: UseJitsiMeetOptions): UseJitsiMeetReturn {
   const [localVideoMuted, setLocalVideoMuted] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const callbacksRef = useRef(options);
-  callbacksRef.current = options;
+
+  useEffect(() => {
+    callbacksRef.current = options;
+  });
 
   const loadScript = useCallback((): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -146,6 +150,10 @@ export function useJitsiMeet(options: UseJitsiMeetOptions): UseJitsiMeetReturn {
 
   const muteParticipant = useCallback((participantId: string) => {
     apiRef.current?.executeCommand("muteParticipant", participantId, true);
+  }, []);
+
+  const muteAllParticipants = useCallback(() => {
+    apiRef.current?.executeCommand("muteEveryone", "moderator");
   }, []);
 
   const getParticipants = useCallback((): JitsiParticipant[] => {
@@ -311,6 +319,7 @@ export function useJitsiMeet(options: UseJitsiMeetOptions): UseJitsiMeetReturn {
     hangUp,
     kickParticipant,
     muteParticipant,
+    muteAllParticipants,
     getParticipants,
   };
 }
