@@ -12,7 +12,6 @@ import {
   Shield,
   ShieldAlert,
   UserX,
-  Ban,
   VolumeX,
   Volume2,
   MoreHorizontal,
@@ -315,12 +314,6 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                             >
                               <UserX size={13} /> Remove User
                             </button>
-                            <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-danger hover:bg-danger/10"
-                              onClick={() => triggerConfirm("block", p.userId, p.name)}
-                            >
-                              <Ban size={13} /> Block User
-                            </button>
                           </>
                         )}
                       </div>
@@ -343,7 +336,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         }
         description={
           confirmAction
-            ? `Are you sure you want to ${confirmAction.action} ${confirmAction.userName}?${confirmAction.action === "block" ? " They will be banned from this classroom and unable to rejoin." : " They will be disconnected from the live session."}`
+            ? `Are you sure you want to ${confirmAction.action} ${confirmAction.userName}? They will be disconnected from the live session.`
             : ""
         }
         variant="danger"
