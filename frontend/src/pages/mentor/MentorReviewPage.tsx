@@ -130,7 +130,7 @@ export function MentorReviewPage() {
   const [professionalismScore, setProfessionalismScore] = useState<number>(5);
   const [sessionComment, setSessionComment] = useState("");
   const [isSubmittingSessionFeedback, setIsSubmittingSessionFeedback] = useState(false);
-  const { toast } = useToast();
+  const toast = useToast();
 
   // Fetch submissions queue
   const { data, isLoading, isError, error, refetch } = useQuery({
@@ -467,21 +467,33 @@ export function MentorReviewPage() {
             </div>
             {currentStudentDetails?.feedbackHistory && currentStudentDetails.feedbackHistory.length > 0 ? (
               <div className="space-y-3 max-h-72 overflow-y-auto mcc-scrollbar pr-1">
-                {currentStudentDetails.feedbackHistory
-                  .slice(0, 4)
-                  .map((fb: { score: number; comment: string; createdAt: string }, idx: number) => (
+                {currentStudentDetails.feedbackHistory.slice(0, 4).map(
+                  (
+                    fb: {
+                      score: number;
+                      comment: string;
+                      createdAt: string;
+                      sessionTitle?: string;
+                      participationScore?: number;
+                      communicationScore?: number;
+                      professionalismScore?: number;
+                    },
+                    idx: number,
+                  ) => (
                     <div key={idx} className="rounded-2xl border border-white/5 bg-white/[0.01] p-3 text-xs">
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <div>
-                          <p className="font-semibold text-white truncate max-w-[150px]">{fb.sessionTitle}</p>
+                          <p className="font-semibold text-white truncate max-w-[150px]">
+                            {fb.sessionTitle ?? "Session review"}
+                          </p>
                           <p className="text-[10px] text-[var(--text-muted)]">
                             {new Date(fb.createdAt).toLocaleDateString()}
                           </p>
                         </div>
                         <div className="flex gap-1.5">
-                          <ScoreBadge score={fb.participationScore} label="PRT" />
-                          <ScoreBadge score={fb.communicationScore} label="COM" />
-                          <ScoreBadge score={fb.professionalismScore} label="PRF" />
+                          <ScoreBadge score={fb.participationScore ?? fb.score} label="PRT" />
+                          <ScoreBadge score={fb.communicationScore ?? fb.score} label="COM" />
+                          <ScoreBadge score={fb.professionalismScore ?? fb.score} label="PRF" />
                         </div>
                       </div>
                       {fb.comment && (
@@ -490,7 +502,8 @@ export function MentorReviewPage() {
                         </p>
                       )}
                     </div>
-                  ))}
+                  ),
+                )}
               </div>
             ) : (
               <div className="text-center py-6 text-xs text-[var(--text-muted)]">
