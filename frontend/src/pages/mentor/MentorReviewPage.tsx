@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2, CircleDot, FileCode2, Send, XCircle, MessageSquare } from "lucide-react";
+import { CheckCircle2, FileText, Send, XCircle, MessageSquare } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
@@ -67,20 +68,6 @@ function ReviewWorkspace({
   isSelected?: boolean;
   onSelect?: () => void;
 }) {
-  const snippet = `// ${submission.project?.title ?? "Project"}
-export function ReviewFocus() {
-  return (
-    <section className="rounded-3xl border border-white/10 bg-slate-950 p-6">
-      <h1 className="text-2xl font-semibold text-white">
-        ${submission.project?.title ?? "Submission"}
-      </h1>
-      <p className="mt-2 text-sm leading-6 text-slate-300">
-        Focus on clarity, accessibility, structure, and delivery.
-      </p>
-    </section>
-  );
-}`;
-
   return (
     <button
       type="button"
@@ -98,19 +85,23 @@ export function ReviewFocus() {
         <Badge variant={statusTone(submission.status)}>{submission.status ?? "pending"}</Badge>
       </div>
       <div className="mt-4 rounded-2xl border border-[var(--border)] bg-[#08101c] p-4">
-        <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
-          <FileCode2 size={14} />
-          <span>Submission context</span>
+        <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
+          <FileText size={14} />
+          <span>Submission</span>
         </div>
-        <pre className="overflow-x-auto text-xs leading-6 text-cyan-100">
-          <code>{snippet}</code>
-        </pre>
+        <p className="text-xs leading-5 text-[var(--text-secondary)]">
+          {submission.files?.length
+            ? `${submission.files.length} file${submission.files.length === 1 ? "" : "s"} attached for review.`
+            : "No files attached yet."}
+        </p>
       </div>
       <div className="mt-4 flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-        <CircleDot size={12} className="text-primary" />
-        <span>
-          {submission.files?.length ?? 0} files · {submission.grade ?? 0} grade
-        </span>
+        <span>Grade: {submission.grade ?? 0}</span>
+        {submission.createdAt ? (
+          <span className="text-[var(--text-muted)]">
+            · Submitted {new Date(submission.createdAt).toLocaleDateString()}
+          </span>
+        ) : null}
       </div>
     </button>
   );
@@ -309,7 +300,7 @@ export function MentorReviewPage() {
               </p>
               <p>Track: {selected?.project?.track?.title ?? "Learning track"}</p>
               <p>XP reward: +{selected?.project?.xpReward ?? 0}</p>
-              <ProgressBar value={selected?.grade ?? 72} max={100} className="mt-3" />
+              <ProgressBar value={selected?.grade ?? 0} max={100} className="mt-3" />
             </div>
           </Card>
 
@@ -344,20 +335,18 @@ export function MentorReviewPage() {
                 <div className="space-y-3">
                   <div>
                     <Label className="text-xs">Associate with Session</Label>
-                    <select
+                    <Select
+                      className="mt-1 h-9 text-xs"
                       value={selectedSessionId}
-                      onChange={(e) => setSelectedSessionId(e.target.value)}
-                      className="mt-1 w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
+                      onValueChange={setSelectedSessionId}
                     >
-                      <option value="" className="bg-[#0B0F19]">
-                        -- No Session Association --
-                      </option>
+                      <option value="">— No Session Association —</option>
                       {sessionsList?.map((s) => (
-                        <option key={s._id} value={s._id} className="bg-[#0B0F19]">
+                        <option key={s._id} value={s._id}>
                           {s.title}
                         </option>
                       ))}
-                    </select>
+                    </Select>
                   </div>
 
                   {selectedSessionId && (
@@ -365,45 +354,45 @@ export function MentorReviewPage() {
                       <div className="grid grid-cols-3 gap-2">
                         <div className="space-y-1">
                           <label className="text-[10px] text-[var(--text-muted)] uppercase">Participation</label>
-                          <select
-                            value={participationScore}
-                            onChange={(e) => setParticipationScore(Number(e.target.value))}
-                            className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
+                          <Select
+                            className="h-8 text-xs"
+                            value={String(participationScore)}
+                            onValueChange={(v) => setParticipationScore(Number(v))}
                           >
                             {[5, 4, 3, 2, 1].map((n) => (
-                              <option key={n} value={n} className="bg-[#0B0F19]">
+                              <option key={n} value={String(n)}>
                                 {n}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </div>
                         <div className="space-y-1">
                           <label className="text-[10px] text-[var(--text-muted)] uppercase">Communication</label>
-                          <select
-                            value={communicationScore}
-                            onChange={(e) => setCommunicationScore(Number(e.target.value))}
-                            className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
+                          <Select
+                            className="h-8 text-xs"
+                            value={String(communicationScore)}
+                            onValueChange={(v) => setCommunicationScore(Number(v))}
                           >
                             {[5, 4, 3, 2, 1].map((n) => (
-                              <option key={n} value={n} className="bg-[#0B0F19]">
+                              <option key={n} value={String(n)}>
                                 {n}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </div>
                         <div className="space-y-1">
                           <label className="text-[10px] text-[var(--text-muted)] uppercase">Professionalism</label>
-                          <select
-                            value={professionalismScore}
-                            onChange={(e) => setProfessionalismScore(Number(e.target.value))}
-                            className="w-full h-8 rounded-lg border border-white/10 bg-white/5 px-1.5 text-xs text-white outline-none"
+                          <Select
+                            className="h-8 text-xs"
+                            value={String(professionalismScore)}
+                            onValueChange={(v) => setProfessionalismScore(Number(v))}
                           >
                             {[5, 4, 3, 2, 1].map((n) => (
-                              <option key={n} value={n} className="bg-[#0B0F19]">
+                              <option key={n} value={String(n)}>
                                 {n}
                               </option>
                             ))}
-                          </select>
+                          </Select>
                         </div>
                       </div>
                       <div>
@@ -420,18 +409,20 @@ export function MentorReviewPage() {
                 </div>
               </div>
 
-              <div className="grid gap-3 pt-2">
+              <div className="flex flex-wrap gap-2 pt-2">
                 <Button
+                  size="sm"
                   onClick={() => {
                     if (!selected) return;
                     void reviewMutation.mutateAsync({ id: selected._id, status: "reviewed" });
                   }}
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
-                  <Send size={16} />
+                  <Send size={14} />
                   Save review
                 </Button>
                 <Button
+                  size="sm"
                   variant="primary"
                   onClick={() => {
                     if (!selected) return;
@@ -439,10 +430,11 @@ export function MentorReviewPage() {
                   }}
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
-                  <CheckCircle2 size={16} />
-                  Approve project
+                  <CheckCircle2 size={14} />
+                  Approve
                 </Button>
                 <Button
+                  size="sm"
                   variant="danger"
                   onClick={() => {
                     if (!selected) return;
@@ -450,8 +442,8 @@ export function MentorReviewPage() {
                   }}
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
-                  <XCircle size={16} />
-                  Reject project
+                  <XCircle size={14} />
+                  Reject
                 </Button>
               </div>
             </div>
