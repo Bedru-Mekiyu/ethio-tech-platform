@@ -27,6 +27,4 @@ const notificationPreferenceSchema = new Schema(
   { timestamps: true },
 );
 
-notificationPreferenceSchema.index({ user: 1 });
-
 export default model("NotificationPreference", notificationPreferenceSchema);

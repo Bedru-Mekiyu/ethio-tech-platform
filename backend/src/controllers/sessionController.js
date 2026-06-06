@@ -28,6 +28,14 @@ import {
 import { addToWaitingRoom, admitUser, denyUser, getWaitingQueue } from "../services/admissionService.js";
 import sessionLock from "../services/sessionLockService.js";
 import { notifyUser, notifyManyUsers } from "../services/notificationService.js";
+import { scheduleReminders, cancelReminders } from "../services/reminderService.js";
+import {
+  emitMeetingStatus,
+  emitMeetingPresence,
+  getRoomHostPresence,
+  getRoomPresenceCount,
+} from "../services/meetingService.js";
+import { getSocketIO } from "../services/notificationHelper.js";
 
 export const createSession = asyncHandler(async (req, res) => {
   if (new Date(req.body.scheduledAt) <= new Date()) {
@@ -42,6 +50,21 @@ export const createSession = asyncHandler(async (req, res) => {
   if (!session.liveRoomId) {
     session.liveRoomId = buildLiveRoomId(session._id);
     await session.save();
+  }
+
+  scheduleReminders(session._id).catch(() => undefined);
+
+  const io = getSocketIO();
+  if (io) emitMeetingStatus(io, session);
+
+  if (session.participants?.length) {
+    await notifyManyUsers({
+      recipientIds: session.participants,
+      type: "session",
+      message: `Meeting scheduled: ${session.title}`,
+      link: `/app/classroom/${session._id}`,
+      createdBy: req.user._id,
+    }).catch(() => undefined);
   }
 
   sendResponse(res, 201, "Session created", { session });
@@ -198,12 +221,17 @@ export const cancelSession = asyncHandler(async (req, res) => {
     ip: req.ip,
   });
 
+  cancelReminders(session._id).catch(() => undefined);
+
+  const io = getSocketIO();
+  if (io) emitMeetingStatus(io, session);
+
   if (session.participants.length) {
     await notifyManyUsers({
       recipientIds: session.participants,
       type: "session",
-      message: `Session canceled: ${session.title}${req.body.reason ? `. Reason: ${req.body.reason}` : ""}`,
-      link: `/sessions/${session._id}`,
+      message: `Meeting cancelled: ${session.title}${req.body.reason ? `. Reason: ${req.body.reason}` : ""}`,
+      link: `/app/dashboard`,
       createdBy: req.user._id,
     });
   }
@@ -289,6 +317,18 @@ export const joinSession = asyncHandler(async (req, res) => {
 
   await session.populate("participants", "fullName");
 
+  const io = getSocketIO();
+  if (io) {
+    const hostJoined = await getRoomHostPresence(session._id);
+    const presenceCount = await getRoomPresenceCount(session._id);
+    emitMeetingStatus(io, session, { hostJoined, presenceCount });
+    emitMeetingPresence(io, session, {
+      userId: req.user._id,
+      role: String(session.mentor) === String(req.user._id) ? "host" : "participant",
+      joined: true,
+    });
+  }
+
   sendResponse(res, 200, "Joined session", { session });
 });
 
@@ -321,13 +361,20 @@ export const startSession = asyncHandler(async (req, res) => {
     session.transitionTo("live");
     await session.save();
 
+    const io = getSocketIO();
+    if (io) {
+      const hostJoined = await getRoomHostPresence(session._id);
+      const presenceCount = await getRoomPresenceCount(session._id);
+      emitMeetingStatus(io, session, { hostJoined, presenceCount });
+    }
+
     if (session.participants.length) {
       await Notification.insertMany(
         session.participants.map((participantId) => ({
           recipient: participantId,
           type: "session",
-          message: `Session is now live: ${session.title}`,
-          link: `/sessions/${session._id}`,
+          message: `Your session has started. Click here to join: ${session.title}`,
+          link: `/app/classroom/${session._id}`,
           createdBy: req.user._id,
         })),
       );
@@ -419,6 +466,18 @@ export const leaveSession = asyncHandler(async (req, res) => {
     }
   }
 
+  const io = getSocketIO();
+  if (io) {
+    const hostJoined = await getRoomHostPresence(req.params.id);
+    const presenceCount = await getRoomPresenceCount(req.params.id);
+    emitMeetingStatus(io, session, { hostJoined, presenceCount });
+    emitMeetingPresence(io, session, {
+      userId: req.user._id,
+      role: String(session.mentor) === String(req.user._id) ? "host" : "participant",
+      joined: false,
+    });
+  }
+
   sendResponse(res, 200, "Left session", { session });
 });
 
@@ -447,6 +506,8 @@ export const endSession = asyncHandler(async (req, res) => {
     session.transitionTo("ended");
     await session.save();
 
+    cancelReminders(session._id).catch(() => undefined);
+
     const env = getEnv();
     if (env.featureAttendanceVerification) {
       await batchVerifySession(session._id);
@@ -467,13 +528,16 @@ export const endSession = asyncHandler(async (req, res) => {
 
     await recomputeMentorContribution(session.mentor);
 
+    const io = getSocketIO();
+    if (io) emitMeetingStatus(io, session);
+
     if (session.participants.length) {
       await Notification.insertMany(
         session.participants.map((participantId) => ({
           recipient: participantId,
           type: "session",
-          message: `Session ended: ${session.title}. XP has been processed.`,
-          link: `/sessions/${session._id}`,
+          message: `Session ended: ${session.title}. Leave feedback when you can.`,
+          link: `/app/sessions/${session._id}/feedback`,
           createdBy: req.user._id,
         })),
       );
