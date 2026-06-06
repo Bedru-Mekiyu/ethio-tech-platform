@@ -47,6 +47,7 @@ import assignmentRoutes from "./assignmentRoutes.js";
 import calendarRoutes from "./calendarRoutes.js";
 import recommendationRoutes from "./recommendationRoutes.js";
 import { globalRateLimit } from "../services/rateLimitService.js";
+import meetingRoutes from "./meetingRoutes.js";
 
 const router = Router();
 
@@ -98,5 +99,6 @@ router.use("/cohorts", cohortRoutes);
 router.use("/assignments", assignmentRoutes);
 router.use("/calendar", calendarRoutes);
 router.use("/recommendations", recommendationRoutes);
+router.use("/meetings", meetingRoutes);
 
 export default router;

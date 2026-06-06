@@ -402,3 +402,12 @@ export const certificateSchemas = {
     certificateUrl: httpUrl.optional(),
   }),
 };
+
+export const meetingSchemas = {
+  forceEnd: z
+    .object({
+      reason: z.string().trim().min(2).max(500).optional(),
+    })
+    .optional()
+    .default({}),
+};
