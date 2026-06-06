@@ -265,6 +265,8 @@ export interface SocketClientToServerEvents {
   "video:toggle-video": (_payload: { roomId: string; enabled: boolean }) => void;
   "video:screen-share:start": (_payload: { roomId: string }) => void;
   "video:screen-share:stop": (_payload: { roomId: string }) => void;
+  "engagement:refresh": (_payload: { roomId: string; userId?: string }) => void;
+  "room:request-overview": (_payload: { roomId: string }) => void;
   "whiteboard:draw": (_payload: WhiteboardOpPayload) => void;
   "whiteboard:clear": (_payload: { roomId: string }) => void;
   "whiteboard:undo": (_payload: { roomId: string }) => void;
@@ -314,8 +316,6 @@ export interface SocketServerToClientEvents {
   "video:video-toggled": (_payload: { roomId: string; userId: string; enabled: boolean }) => void;
   "video:screen-share:started": (_payload: { roomId: string; userId: string }) => void;
   "video:screen-share:stopped": (_payload: { roomId: string }) => void;
-  "video:recording:started": (_payload: { roomId: string; by: string }) => void;
-  "video:recording:stopped": (_payload: { roomId: string }) => void;
   "whiteboard:draw": (_payload: WhiteboardOpPayload) => void;
   "whiteboard:clear": (_payload: { roomId: string }) => void;
   "whiteboard:history": (_payload: { roomId: string; ops: WhiteboardOpPayload[] }) => void;
