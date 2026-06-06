@@ -1,20 +1,29 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/authStore";
-import { fetchSessionById, getJitsiConfig, getJitsiToken } from "@/services/sessionsService";
+import { useToast } from "@/components/composites/ToastProvider";
+import {
+  endSession,
+  fetchSessionById,
+  getJitsiConfig,
+  getJitsiToken,
+} from "@/services/sessionsService";
 import { QueryError } from "@/components/composites/QueryError";
 import { JitsiMeeting, type JitsiMeetingHandle } from "@/components/jitsi/JitsiMeeting";
 import { MeetingToolbar } from "@/components/jitsi/MeetingToolbar";
 import { MeetingHeader } from "@/components/jitsi/MeetingHeader";
 import { MeetingStatusBanner } from "@/components/meeting/MeetingStatusBanner";
 import { useMeetingStatus } from "@/hooks/useMeetingStatus";
+import { toMeetingStatus } from "@/lib/sessionStatus";
 
 export function ClassroomPage() {
   const navigate = useNavigate();
   const { sessionId } = useParams<{ sessionId: string }>();
   const user = useAuthStore((s) => s.user);
+  const queryClient = useQueryClient();
+  const toast = useToast();
   const jitsiRef = useRef<JitsiMeetingHandle>(null);
 
   const [handRaised, setHandRaised] = useState(false);
@@ -50,6 +59,21 @@ export function ClassroomPage() {
       !!sessionId && sessionId !== "demo" && Boolean(jitsiConfigQuery.data?.enabled) && meetingStatus === "active",
   });
 
+  const endMutation = useMutation({
+    mutationFn: () => endSession(sessionId!),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["session", sessionId] });
+      queryClient.invalidateQueries({ queryKey: ["sessions"] });
+      queryClient.invalidateQueries({ queryKey: ["meeting"] });
+      toast.success("Meeting ended");
+      navigate("/app/sessions");
+    },
+    onError: (err: unknown) => {
+      const message = err instanceof Error ? err.message : "Failed to end meeting";
+      toast.error(message);
+    },
+  });
+
   const session = sessionQuery.data;
   const sessionTitle = session?.title ?? meeting?.title ?? "Virtual classroom";
 
@@ -81,11 +105,30 @@ export function ClassroomPage() {
 
   const isMentor = user?.id && session?.mentor?._id ? user.id === session.mentor._id : false;
   const isAdmin = user?.role === "admin" || user?.role === "super_admin";
-  const isHost = isMentor || isAdmin;
+  const isHostFromToken = jitsiTokenQuery.data?.role === "moderator";
+  const isHost = isHostFromToken || isMentor || isAdmin;
 
   const jitsiReady = jitsiConfigQuery.data?.enabled && jitsiTokenQuery.data && meetingStatus === "active";
 
   const classroomHref = `/app/classroom/${sessionId ?? ""}`;
+
+  const handleLeave = () => {
+    jitsiRef.current?.hangUp();
+    navigate("/app/sessions");
+  };
+
+  const handleEndMeeting = () => {
+    if (typeof window !== "undefined") {
+      const confirmed = window.confirm("End the meeting for everyone? Participants will be disconnected.");
+      if (!confirmed) return;
+    }
+    endMutation.mutate();
+  };
+
+  const handleMuteAll = () => {
+    jitsiRef.current?.muteAllParticipants();
+    toast.success("Requested to mute all participants");
+  };
 
   return (
     <div className="flex h-screen flex-col bg-[#0B0F19]">
@@ -96,7 +139,11 @@ export function ClassroomPage() {
             ? "live"
             : meetingStatus === "completed"
               ? "ended"
-              : (session?.status ?? "scheduled")
+              : meetingStatus === "cancelled"
+                ? "canceled"
+                : session?.status === "live" || session?.status === "paused"
+                  ? "live"
+                  : toMeetingStatus(session?.status ?? "scheduled")
         }
         liveStartedAt={session?.liveStartedAt}
         participantCount={presenceCount}
@@ -175,9 +222,12 @@ export function ClassroomPage() {
           }
           setHandRaised((prev) => !prev);
         }}
-        onLeave={() => navigate("/app/sessions")}
+        onLeave={handleLeave}
         isHost={isHost}
         disabled={meetingStatus !== "active"}
+        onMuteAll={isHost ? handleMuteAll : undefined}
+        onEndMeeting={isHost ? handleEndMeeting : undefined}
+        isEndingMeeting={endMutation.isPending}
       />
     </div>
   );
