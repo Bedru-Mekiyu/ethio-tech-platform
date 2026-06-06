@@ -26,11 +26,14 @@ import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
+import { MeetingCard } from "@/components/meeting/MeetingCard";
+import { useMeetings } from "@/hooks/useMeetings";
 import { getRankTitle } from "@/lib/utils";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { motion } from "framer-motion";
 import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
+import type { MeetingViewModel } from "@/lib/realtime";
 
 const timeFormatter = new Intl.DateTimeFormat("en-US", {
   weekday: "short",
@@ -123,6 +126,13 @@ export function StudentDashboardPage() {
     enabled: !!user,
   });
 
+  const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
+  const waitingForHostCount = upcomingMeetings.filter((m: MeetingViewModel) => m.status === "waiting_for_host").length;
+  const readyMeetings = upcomingMeetings.filter(
+    (m: MeetingViewModel) => m.status === "scheduled" || m.status === "waiting_for_host" || m.status === "active",
+  );
+  const readyCount = readyMeetings.length;
+
   const completeChallengeMutation = useMutation({
     mutationFn: completeDailyChallenge,
     onSuccess: () => {
@@ -158,6 +168,7 @@ export function StudentDashboardPage() {
 
   const recentBadges = dashboard?.user?.badges ?? [];
   const upcomingSessions = dashboard?.upcomingSessions ?? [];
+  void upcomingSessions;
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
@@ -272,8 +283,11 @@ export function StudentDashboardPage() {
             },
             {
               title: "Sessions ready",
-              value: `${upcomingSessions.length}`,
-              desc: "Upcoming live sessions.",
+              value: `${readyCount}`,
+              desc:
+                waitingForHostCount > 0
+                  ? `${waitingForHostCount} waiting for mentor to start`
+                  : "Upcoming live sessions.",
             },
           ].map((stat, idx) => (
             <motion.div
@@ -415,34 +429,10 @@ export function StudentDashboardPage() {
                 </Link>
               </CardHeader>
 
-              {upcomingSessions.length ? (
+              {upcomingMeetings.length ? (
                 <div className="space-y-3">
-                  {upcomingSessions.slice(0, 3).map((session, index) => (
-                    <div
-                      key={session._id ?? `${session.title}-${index}`}
-                      className="flex flex-col gap-4 rounded-xl border border-[var(--border)] bg-white/3 p-4 md:flex-row md:items-center md:justify-between"
-                    >
-                      <div className="min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-[11px] text-[var(--text-muted)] font-medium">
-                            {session.scheduledAt
-                              ? timeFormatter.format(new Date(session.scheduledAt))
-                              : "Scheduled soon"}
-                          </span>
-                        </div>
-                        <h3 className="mt-2 text-base font-bold text-white tracking-tight">{session.title}</h3>
-                        <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                          {session.status === "live" ? "Mentor is already online." : "Join when the room opens."}
-                        </p>
-                      </div>
-                      {session._id ? (
-                        <Link to={`/app/classroom/${session._id}`} className="shrink-0">
-                          <Button size="sm" className="w-full md:w-auto font-semibold shadow-sm">
-                            Join now
-                          </Button>
-                        </Link>
-                      ) : null}
-                    </div>
+                  {upcomingMeetings.slice(0, 3).map((meeting) => (
+                    <MeetingCard key={meeting.id || meeting.sessionId} meeting={meeting} variant="full" />
                   ))}
                 </div>
               ) : (

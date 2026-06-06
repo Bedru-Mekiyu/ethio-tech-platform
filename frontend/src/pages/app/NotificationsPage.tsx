@@ -24,6 +24,9 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
+import { MeetingCard } from "@/components/meeting/MeetingCard";
+import { useMeetings } from "@/hooks/useMeetings";
+import type { MeetingViewModel } from "@/lib/realtime";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { getSocket } from "@/services/socket";
 import { useNotificationStore } from "@/store/notificationStore";
@@ -121,6 +124,26 @@ export function NotificationsPage() {
     recent: notifications.filter((item) => item.isRead).slice(0, 10),
   };
 
+  const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
+  const meetingByLink = new Map<string, MeetingViewModel>();
+  upcomingMeetings.forEach((m) => {
+    if (m.joinHref) meetingByLink.set(m.joinHref, m);
+  });
+
+  const extractSessionId = (link?: string | null): string | null => {
+    if (!link) return null;
+    const match = link.match(/\/app\/classroom\/([^/?#]+)/);
+    return match ? match[1] : null;
+  };
+
+  const meetingForNotification = (n: NotificationItem): MeetingViewModel | null => {
+    const fromLink = n.link ? meetingByLink.get(n.link) : undefined;
+    if (fromLink) return fromLink;
+    const sessionId = extractSessionId(n.link);
+    if (!sessionId) return null;
+    return upcomingMeetings.find((m) => m.id === sessionId || m.sessionId === sessionId) ?? null;
+  };
+
   if (isError) return <QueryError onRetry={() => refetch()} />;
   if (isLoading) return <NotificationsSkeleton />;
 
@@ -177,6 +200,40 @@ export function NotificationsPage() {
             {grouped.unread.length ? (
               grouped.unread.map((notification) => {
                 const Icon = iconForType(notification.type);
+                const meeting = meetingForNotification(notification);
+                if (meeting) {
+                  return (
+                    <div key={notification._id} className="space-y-3">
+                      <div className="rounded-[24px] border border-primary/20 bg-primary/5 p-4">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                            <Icon size={18} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="font-medium text-white">{notification.message}</p>
+                              <Badge variant="warning">New</Badge>
+                            </div>
+                            <p className="mt-2 text-xs text-[var(--text-muted)]">
+                              {new Date(notification.createdAt).toLocaleString()}
+                            </p>
+                            <div className="mt-4 flex flex-wrap gap-3">
+                              {notification.link ? (
+                                <a href={notification.link} className="text-sm text-primary hover:underline">
+                                  Open item
+                                </a>
+                              ) : null}
+                              <Button size="sm" variant="outline" onClick={() => markRead.mutate(notification._id)}>
+                                Mark read
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <MeetingCard meeting={meeting} variant="inline" />
+                    </div>
+                  );
+                }
                 return (
                   <div key={notification._id} className="rounded-[24px] border border-primary/20 bg-primary/5 p-4">
                     <div className="flex items-start gap-4">

@@ -42,6 +42,8 @@ import EngagementPanel from "./control-center/EngagementPanel";
 import ResourcesPanel from "./control-center/ResourcesPanel";
 import RecordingsPanel from "./control-center/RecordingsPanel";
 import NotificationsPanel from "./control-center/NotificationsPanel";
+import { MeetingStatusBanner } from "@/components/meeting/MeetingStatusBanner";
+import { useMeetingStatus } from "@/hooks/useMeetingStatus";
 
 // Styling
 import "./control-center/MentorControlCenter.css";
@@ -52,7 +54,7 @@ export default function MentorControlCenterPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("overview");
-  const { toast } = useToast();
+  const toast = useToast();
 
   // Keyboard shortcuts for tab navigation
   const TAB_KEYS: Record<string, string> = {
@@ -105,6 +107,12 @@ export default function MentorControlCenterPage() {
     enabled: !!sessionId,
     refetchInterval: 15000,
   });
+
+  const {
+    status: meetingStatus,
+    presenceCount,
+    meeting,
+  } = useMeetingStatus({ sessionId: sessionId ?? null, enabled: !!sessionId });
 
   useEffect(() => {
     if (!sessionId) return;
@@ -261,6 +269,40 @@ export default function MentorControlCenterPage() {
         >
           <RefreshCw size={13} className="mr-1.5" aria-hidden="true" /> Refresh Dashboard
         </Button>
+      </div>
+
+      <MeetingStatusBanner
+        status={meetingStatus}
+        meeting={meeting}
+        joinHref={sessionId ? `/app/classroom/${sessionId}` : null}
+      />
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">Waiting students</p>
+          <p className="mt-2 text-2xl font-bold text-white">
+            {meetingStatus === "waiting_for_host" || meetingStatus === "scheduled" ? Math.max(0, presenceCount) : 0}
+          </p>
+          <p className="mt-1 text-xs text-[var(--text-secondary)]">
+            {meetingStatus === "waiting_for_host"
+              ? "Students are ready for you to start the session."
+              : meetingStatus === "scheduled"
+                ? "No one waiting yet — start when you're ready."
+                : "Session is no longer in pre-meeting state."}
+          </p>
+        </Card>
+        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">
+            In-room participants
+          </p>
+          <p className="mt-2 text-2xl font-bold text-white">{overview?.liveParticipants ?? 0}</p>
+          <p className="mt-1 text-xs text-[var(--text-secondary)]">Active learners in the live classroom.</p>
+        </Card>
+        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">Meeting status</p>
+          <p className="mt-2 text-2xl font-bold text-white capitalize">{meetingStatus.replace("_", " ")}</p>
+          <p className="mt-1 text-xs text-[var(--text-secondary)]">Live status propagated to all dashboards.</p>
+        </Card>
       </div>
 
       {/* Grid of counters */}

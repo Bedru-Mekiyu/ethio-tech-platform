@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ArrowRight, BarChart3, Clock3, ClipboardList, Flame, ShieldCheck, Star, Users, Video } from "lucide-react";
 import { fetchMentorDashboard, type MentorDashboardData } from "@/services/dashboardService";
+import { cancelSession, startSession, endSession } from "@/services/sessionsService";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
+import { MeetingCard } from "@/components/meeting/MeetingCard";
+import { useMeetings } from "@/hooks/useMeetings";
+import type { MeetingViewModel } from "@/lib/realtime";
 import { getRankTitle } from "@/lib/utils";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -66,19 +70,63 @@ function MetricCard({
 export function MentorDashboardPage() {
   usePageTitle("Mentor Dashboard");
   const user = useAuthStore((s) => s.user);
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["dashboard", "mentor"],
     queryFn: fetchMentorDashboard,
     enabled: !!user,
   });
+  const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
   const dashboard = data as MentorDashboardData | undefined;
   const firstName = dashboard?.mentor?.fullName?.split(" ")[0] ?? user?.fullName?.split(" ")[0] ?? "Mentor";
   const upcomingSessions = dashboard?.upcomingSessions ?? dashboard?.mySessions ?? [];
   const recentReviews = dashboard?.reviewsDone ?? [];
   const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
+  const waitingStudents = upcomingMeetings.filter(
+    (m: MeetingViewModel) =>
+      m.status === "waiting_for_host" || (m.status === "scheduled" && m.startsInMs != null && m.startsInMs <= 0),
+  ).length;
+  void waitingStudents;
   const mentorStatus =
     user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
+
+  const startMutation = useMutation({
+    mutationFn: startSession,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboard", "mentor"] });
+      queryClient.invalidateQueries({ queryKey: ["meeting"] });
+      queryClient.invalidateQueries({ queryKey: ["meetings"] });
+    },
+  });
+
+  const endMutation = useMutation({
+    mutationFn: endSession,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboard", "mentor"] });
+      queryClient.invalidateQueries({ queryKey: ["meeting"] });
+      queryClient.invalidateQueries({ queryKey: ["meetings"] });
+    },
+  });
+
+  const cancelMutation = useMutation({
+    mutationFn: ({ id, reason }: { id: string; reason: string }) => cancelSession(id, reason),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboard", "mentor"] });
+      queryClient.invalidateQueries({ queryKey: ["meeting"] });
+      queryClient.invalidateQueries({ queryKey: ["meetings"] });
+    },
+  });
+
+  const handleStart = (m: MeetingViewModel) => startMutation.mutate(m.id);
+  const handleEnd = (m: MeetingViewModel) => endMutation.mutate(m.id);
+  const handleCancel = (m: MeetingViewModel) => {
+    if (typeof window !== "undefined") {
+      const reason = window.prompt("Reason for cancellation?", "Mentor cancelled the session");
+      if (!reason) return;
+      cancelMutation.mutate({ id: m.id, reason });
+    }
+  };
 
   if (user?.role === "mentor" && mentorStatus !== "approved") {
     return (
@@ -217,37 +265,52 @@ export function MentorDashboardPage() {
           </div>
 
           <div className="mt-5 space-y-3">
-            {upcomingSessions.slice(0, 3).map((session, index) => (
-              <div
-                key={session._id ?? `${session.title}-${index}`}
-                className="flex flex-col gap-4 rounded-[22px] border border-[var(--border)] bg-white/5 p-4 md:flex-row md:items-center md:justify-between"
-              >
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-xs text-[var(--text-muted)]">
-                      {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
-                    </span>
+            {upcomingMeetings.length ? (
+              upcomingMeetings
+                .slice(0, 3)
+                .map((meeting) => (
+                  <MeetingCard
+                    key={meeting.id || meeting.sessionId}
+                    meeting={meeting}
+                    variant="full"
+                    onStart={handleStart}
+                    onEnd={handleEnd}
+                    onCancel={handleCancel}
+                    startLoading={startMutation.isPending}
+                    endLoading={endMutation.isPending}
+                  />
+                ))
+            ) : upcomingSessions.length ? (
+              upcomingSessions.slice(0, 3).map((session, index) => (
+                <div
+                  key={session._id ?? `${session.title}-${index}`}
+                  className="flex flex-col gap-4 rounded-[22px] border border-[var(--border)] bg-white/5 p-4 md:flex-row md:items-center md:justify-between"
+                >
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs text-[var(--text-muted)]">
+                        {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
+                      </span>
+                    </div>
+                    <h3 className="mt-2 text-lg font-semibold text-white">{session.title}</h3>
+                    <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                      {session.status === "live" ? "Mentor is already online." : "Join when the room opens."}
+                    </p>
                   </div>
-                  <h3 className="mt-2 text-lg font-semibold text-white">{session.title}</h3>
-                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                    {session.status === "live" ? "Mentor is already online." : "Join when the room opens."}
-                  </p>
+                  {session._id ? (
+                    <Link to={`/app/classroom/${session._id}`}>
+                      <Button size="sm" variant="outline">
+                        Enter room
+                      </Button>
+                    </Link>
+                  ) : null}
                 </div>
-                {session._id ? (
-                  <Link to={`/app/classroom/${session._id}`}>
-                    <Button size="sm" variant="outline">
-                      Enter room
-                    </Button>
-                  </Link>
-                ) : null}
-              </div>
-            ))}
-
-            {!upcomingSessions.length ? (
+              ))
+            ) : (
               <div className="py-6">
                 <p className="text-sm text-[var(--text-muted)]">No upcoming mentor sessions yet.</p>
               </div>
-            ) : null}
+            )}
           </div>
         </Card>
 

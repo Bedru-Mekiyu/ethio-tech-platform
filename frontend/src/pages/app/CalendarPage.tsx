@@ -8,6 +8,9 @@ import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MeetingCard } from "@/components/meeting/MeetingCard";
+import { useMeetings } from "@/hooks/useMeetings";
+import type { MeetingViewModel } from "@/lib/realtime";
 import {
   fetchCalendarEvents,
   syncSessionsToCalendar,
@@ -59,7 +62,18 @@ export function CalendarPage() {
     queryFn: () => fetchCalendarEvents({ start: startOfMonth, end: endOfMonth }),
   });
 
+  const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
+
   const events = useMemo(() => data ?? [], [data]);
+
+  const meetingById = useMemo(() => {
+    const map = new Map<string, MeetingViewModel>();
+    upcomingMeetings.forEach((m) => {
+      if (m.id) map.set(m.id, m);
+      if (m.sessionId) map.set(m.sessionId, m);
+    });
+    return map;
+  }, [upcomingMeetings]);
 
   const eventsByDate = useMemo(() => {
     const map = new Map<string, CalendarEvent[]>();
@@ -208,36 +222,42 @@ export function CalendarPage() {
 
           {selectedEvents.length > 0 ? (
             <div className="space-y-3">
-              {selectedEvents.map((event) => (
-                <Card key={event._id} className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <Badge
-                        variant={
-                          event.type === "deadline" ? "warning" : event.type === "session" ? undefined : "purple"
-                        }
-                      >
-                        {event.type}
-                      </Badge>
-                      <h4 className="mt-2 font-medium text-white">{event.title}</h4>
-                      {event.description && (
-                        <p className="mt-1 text-xs text-[var(--text-secondary)] line-clamp-2">{event.description}</p>
-                      )}
+              {selectedEvents.map((event) => {
+                const meeting = event.sessionId ? meetingById.get(event.sessionId) : null;
+                if (event.type === "session" && meeting) {
+                  return <MeetingCard key={event._id} meeting={meeting} variant="compact" />;
+                }
+                return (
+                  <Card key={event._id} className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <Badge
+                          variant={
+                            event.type === "deadline" ? "warning" : event.type === "session" ? undefined : "purple"
+                          }
+                        >
+                          {event.type}
+                        </Badge>
+                        <h4 className="mt-2 font-medium text-white">{event.title}</h4>
+                        {event.description && (
+                          <p className="mt-1 text-xs text-[var(--text-secondary)] line-clamp-2">{event.description}</p>
+                        )}
+                      </div>
+                      <span className="text-xs text-[var(--text-muted)]">
+                        {new Date(event.start).toLocaleTimeString("en-US", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </span>
                     </div>
-                    <span className="text-xs text-[var(--text-muted)]">
-                      {new Date(event.start).toLocaleTimeString("en-US", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                  </div>
-                  {event.sessionId && (
-                    <Link to={`/app/sessions`} className="mt-3 inline-flex text-xs text-primary hover:underline">
-                      View session
-                    </Link>
-                  )}
-                </Card>
-              ))}
+                    {event.sessionId && (
+                      <Link to={`/app/sessions`} className="mt-3 inline-flex text-xs text-primary hover:underline">
+                        View session
+                      </Link>
+                    )}
+                  </Card>
+                );
+              })}
             </div>
           ) : selectedDate ? (
             <Card className="border-[var(--border)] bg-[var(--bg-card)] p-5">
@@ -255,31 +275,37 @@ export function CalendarPage() {
                 .filter((e) => new Date(e.start) >= new Date())
                 .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
                 .slice(0, 5)
-                .map((event) => (
-                  <div
-                    key={event._id}
-                    className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-3"
-                  >
+                .map((event) => {
+                  const meeting = event.sessionId ? meetingById.get(event.sessionId) : null;
+                  if (event.type === "session" && meeting) {
+                    return <MeetingCard key={event._id} meeting={meeting} variant="compact" />;
+                  }
+                  return (
                     <div
-                      className={cn(
-                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-semibold",
-                        EVENT_COLORS[event.type] ?? "bg-white/5 text-[var(--text-muted)]",
-                      )}
+                      key={event._id}
+                      className="flex items-center gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-3"
                     >
-                      {new Date(event.start).getDate()}
+                      <div
+                        className={cn(
+                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-semibold",
+                          EVENT_COLORS[event.type] ?? "bg-white/5 text-[var(--text-muted)]",
+                        )}
+                      >
+                        {new Date(event.start).getDate()}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-medium text-white">{event.title}</p>
+                        <p className="text-xs text-[var(--text-muted)]">
+                          {new Date(event.start).toLocaleDateString("en-US", {
+                            weekday: "short",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-white">{event.title}</p>
-                      <p className="text-xs text-[var(--text-muted)]">
-                        {new Date(event.start).toLocaleDateString("en-US", {
-                          weekday: "short",
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               {events.filter((e) => new Date(e.start) >= new Date()).length === 0 && (
                 <p className="text-sm text-[var(--text-secondary)]">No upcoming events.</p>
               )}
