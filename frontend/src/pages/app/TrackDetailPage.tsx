@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, BookOpen, Layers3, Rocket, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Layers3, Rocket } from "lucide-react";
 import { fetchTrackById } from "@/services/tracksService";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -147,7 +147,7 @@ export function TrackDetailPage() {
             </div>
             <h2 className="mt-3 text-2xl font-semibold text-white">{data.title}</h2>
             <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-              Built for steady progress with project checkpoints, mentor support, and visible XP growth.
+              Built for steady progress with project checkpoints and mentor support.
             </p>
             <div className="mt-5">
               <div className="mb-2 flex items-center justify-between text-sm text-[var(--text-secondary)]">
@@ -155,25 +155,6 @@ export function TrackDetailPage() {
                 <span>{modules.length ? 100 : 0}%</span>
               </div>
               <ProgressBar value={modules.length ? 100 : 0} className="h-2.5" />
-            </div>
-          </Card>
-
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-            <div className="flex items-center gap-2 text-[var(--text-muted)]">
-              <Sparkles size={14} />
-              <span className="text-[10px] uppercase tracking-[0.22em]">Next move</span>
-            </div>
-            <h3 className="mt-3 text-xl font-semibold text-white">Move from lesson to project</h3>
-            <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-              Once you finish the lessons, ship a project and let the mentor review loop unlock the next step.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link to="/app/projects/submit">
-                <Button>Submit capstone</Button>
-              </Link>
-              <Link to="/app/tracks">
-                <Button variant="outline">Back to tracks</Button>
-              </Link>
             </div>
           </Card>
         </div>
