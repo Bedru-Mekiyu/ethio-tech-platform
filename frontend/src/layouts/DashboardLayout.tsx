@@ -181,6 +181,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/admin/moderation", label: "Moderation", icon: <FileCheck size={18} /> },
     { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
     { to: "/admin/gamification", label: "Gamification", icon: <Trophy size={18} /> },
+    { to: "/admin/meetings", label: "Meetings", icon: <Video size={18} /> },
     { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
   ];
 

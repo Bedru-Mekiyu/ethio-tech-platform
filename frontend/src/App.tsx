@@ -131,6 +131,9 @@ const AdminContentPage = lazy(() =>
 const AdminGamificationPage = lazy(() =>
   import("@/pages/admin/AdminGamificationPage").then((module) => ({ default: module.AdminGamificationPage })),
 );
+const AdminMeetingsPage = lazy(() =>
+  import("@/pages/admin/AdminMeetingsPage").then((module) => ({ default: module.AdminMeetingsPage })),
+);
 const TrackDetailPage = lazy(() =>
   import("@/pages/app/TrackDetailPage").then((module) => ({ default: module.TrackDetailPage })),
 );
@@ -359,6 +362,7 @@ export default function App() {
                     <Route path="operations" element={<AdminOperationsPage />} />
                     <Route path="content" element={<AdminContentPage />} />
                     <Route path="gamification" element={<AdminGamificationPage />} />
+                    <Route path="meetings" element={<AdminMeetingsPage />} />
                     <Route path="notifications" element={<NotificationsPage />} />
                     <Route path="settings" element={<SettingsPage scope="admin" />} />
                   </Route>
