@@ -136,9 +136,7 @@ export function ProjectSubmitPage() {
       <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="max-w-3xl space-y-4">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-              Submit work that is ready for mentor review
-            </h1>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Submit a project</h1>
             <p className="max-w-2xl text-[var(--text-secondary)]">
               Choose a live assignment, attach the right links, and keep your submission clear enough for a fast review
               loop.
