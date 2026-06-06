@@ -410,10 +410,9 @@ export function TracksPage() {
       <section className="mt-12">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <h2 className="section-title text-3xl md:text-4xl">Track your path, then keep moving.</h2>
+            <h2 className="section-title text-3xl md:text-4xl">Your tracks</h2>
             <p className="section-copy mt-4">
-              The cards below use real enrollment and progress data so students can immediately see what they have
-              started, what they have finished, and what still needs attention.
+              See what you have started, what you have finished, and what still needs attention.
             </p>
           </div>
           <Link to="/app/notifications">
