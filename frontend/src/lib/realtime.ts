@@ -4,6 +4,59 @@ export type ConnectionQuality = "excellent" | "good" | "fair" | "poor" | "offlin
 
 export type MessageType = "public" | "announcement" | "direct" | "private_question" | "system";
 
+export type MeetingStatus = "scheduled" | "waiting_for_host" | "active" | "completed" | "cancelled";
+
+export interface MeetingStatusChangedPayload {
+  sessionId: string;
+  status: MeetingStatus;
+  hostJoined: boolean;
+  presenceCount: number;
+  startsInMs?: number | null;
+  endsAt?: string | null;
+  title?: string;
+  scheduledAt?: string;
+  at: string;
+}
+
+export interface MeetingPresencePayload {
+  sessionId: string;
+  userId?: string | null;
+  role: "host" | "participant" | string;
+  joined: boolean;
+  at: string;
+}
+
+export interface MeetingViewModel {
+  id: string;
+  sessionId: string;
+  title: string;
+  mentorId: string | null;
+  mentorName: string;
+  mentorAvatar: string | null;
+  studentId: string | null;
+  studentName: string;
+  participantIds?: string[];
+  scheduledAt: string;
+  durationMinutes: number;
+  status: MeetingStatus;
+  hostJoined: boolean;
+  presenceCount: number;
+  startsInMs: number | null;
+  endsAt: string | null;
+  liveRoomId: string | null;
+  classroomMode?: string;
+  liveProvider?: string;
+  joinable: boolean;
+  isHost: boolean;
+  isAdmin: boolean;
+  isParticipant: boolean;
+  joinHref: string;
+  cancelReason?: string | null;
+  rescheduledFrom?: string | null;
+  liveStartedAt?: string | null;
+  liveEndedAt?: string | null;
+}
+
 export type ParticipantStatus = "active" | "idle" | "disconnected" | "reconnected" | "speaking" | "hand_raised";
 
 export interface RealtimeRoomState {
@@ -353,6 +406,8 @@ export interface SocketServerToClientEvents {
     at: string;
   }) => void;
   "notification:count": (payload: { userId: string; count: number }) => void;
+  "meeting:status-changed": (payload: MeetingStatusChangedPayload) => void;
+  "meeting:presence": (payload: MeetingPresencePayload) => void;
 }
 
 export const createMessageId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;

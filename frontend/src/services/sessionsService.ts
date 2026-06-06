@@ -23,7 +23,14 @@ export interface SessionDetail extends SessionSummary {
   screenShareActive?: boolean;
   screenShareUserId?: string;
   recordingMode?: string;
-  mentor?: { _id?: string; fullName?: string; avatar?: string; role?: string; mentorScore?: number; totalSessions?: number };
+  mentor?: {
+    _id?: string;
+    fullName?: string;
+    avatar?: string;
+    role?: string;
+    mentorScore?: number;
+    totalSessions?: number;
+  };
   participants?: Array<{ _id?: string; fullName?: string; avatar?: string; role?: string; level?: number }>;
 }
 
@@ -74,6 +81,30 @@ export async function cancelSession(sessionId: string, reason: string) {
   return data.data.session;
 }
 
+export async function startSession(sessionId: string) {
+  const { data } = await api.post<ApiResponse<{ session: SessionDetail }>>(`/sessions/${sessionId}/start`);
+  return data.data.session;
+}
+
+export async function endSession(sessionId: string) {
+  const { data } = await api.post<ApiResponse<{ session: SessionDetail }>>(`/sessions/${sessionId}/end`);
+  return data.data.session;
+}
+
+export async function joinLiveSession(sessionId: string) {
+  const { data } = await api.post<ApiResponse<{ joined: boolean; presenceCount: number }>>(
+    `/sessions/${sessionId}/join`,
+  );
+  return data.data;
+}
+
+export async function leaveLiveSession(sessionId: string) {
+  const { data } = await api.post<ApiResponse<{ left: boolean; presenceCount: number }>>(
+    `/sessions/${sessionId}/leave`,
+  );
+  return data.data;
+}
+
 export async function getSessionAvailability(sessionId: string) {
   const { data } = await api.get<ApiResponse<SessionAvailability>>(`/sessions/${sessionId}/availability`);
   return data.data as unknown as SessionAvailability;
@@ -81,14 +112,22 @@ export async function getSessionAvailability(sessionId: string) {
 
 export async function getLiveAccess(sessionId: string) {
   const { data } = await api.get<
-    ApiResponse<{ provider?: string; roomId: string; accessToken: string; sessionId: string; screenShareActive?: boolean; screenShareUserId?: string; recordingMode?: string }>
+    ApiResponse<{
+      provider?: string;
+      roomId: string;
+      accessToken: string;
+      sessionId: string;
+      screenShareActive?: boolean;
+      screenShareUserId?: string;
+      recordingMode?: string;
+    }>
   >(`/sessions/${sessionId}/live-access`);
   return data.data;
 }
 
 export async function submitSessionFeedback(
   sessionId: string,
-  payload: { quality: number; engagement: number; impact: number; comment?: string }
+  payload: { quality: number; engagement: number; impact: number; comment?: string },
 ) {
   const { data } = await api.post(`/sessions/${sessionId}/feedback`, payload);
   return data.data;
@@ -106,7 +145,7 @@ export async function getJitsiToken(sessionId: string) {
 
 export async function toggleScreenShare(sessionId: string) {
   const { data } = await api.post<ApiResponse<{ screenShareActive: boolean; screenShareUserId?: string }>>(
-    `/sessions/${sessionId}/screen-share`
+    `/sessions/${sessionId}/screen-share`,
   );
   return data.data;
 }
