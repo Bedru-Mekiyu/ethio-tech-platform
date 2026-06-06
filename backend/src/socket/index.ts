@@ -7,6 +7,12 @@ import { canUserJoinRoom, parseRoomId } from "./roomAuth.js";
 import { recordJoin, recordHeartbeat, recordLeave } from "../services/attendanceService.js";
 import { validateLiveAccessToken } from "../services/liveClassroomService.js";
 import { setSocketIO } from "../services/notificationHelper.js";
+import {
+  emitMeetingPresence,
+  emitMeetingStatus,
+  getRoomHostPresence,
+  getRoomPresenceCount,
+} from "../services/meetingService.js";
 import * as handRaiseService from "../services/handRaiseService.js";
 import * as questionService from "../services/sessionQuestionService.js";
 import * as pollService from "../services/sessionPollService.js";
@@ -321,6 +327,23 @@ export const setupSocket = (io: Server) => {
           at: new Date().toISOString(),
         });
         updateRoomActivity(io, roomId);
+
+        (async () => {
+          try {
+            const session = await Session.findById(resourceId);
+            if (!session) return;
+            const hostJoined = await getRoomHostPresence(resourceId);
+            const presenceCount = await getRoomPresenceCount(resourceId);
+            emitMeetingStatus(io, session, { hostJoined, presenceCount });
+            emitMeetingPresence(io, session, {
+              userId: user?.id,
+              role: String(session.mentor) === String(user?.id) ? "host" : "participant",
+              joined: true,
+            });
+          } catch (err) {
+            logger.warn("Failed to broadcast meeting status on join", { roomId, error: err });
+          }
+        })();
         return;
       }
 
@@ -383,6 +406,25 @@ export const setupSocket = (io: Server) => {
         at: new Date().toISOString(),
       });
       updateRoomActivity(io, roomId);
+
+      (async () => {
+        try {
+          if (resourceId) {
+            const session = await Session.findById(resourceId);
+            if (!session) return;
+            const hostJoined = await getRoomHostPresence(resourceId);
+            const presenceCount = await getRoomPresenceCount(resourceId);
+            emitMeetingStatus(io, session, { hostJoined, presenceCount });
+            emitMeetingPresence(io, session, {
+              userId: user?.id,
+              role: String(session.mentor) === String(user?.id) ? "host" : "participant",
+              joined: false,
+            });
+          }
+        } catch (err) {
+          logger.warn("Failed to broadcast meeting status on leave", { roomId, error: err });
+        }
+      })();
     });
 
     socket.on(
@@ -1318,6 +1360,25 @@ export const setupSocket = (io: Server) => {
           at: new Date().toISOString(),
         });
         updateRoomActivity(io, roomId);
+
+        (async () => {
+          try {
+            if (resourceId) {
+              const session = await Session.findById(resourceId);
+              if (!session) return;
+              const hostJoined = await getRoomHostPresence(resourceId);
+              const presenceCount = await getRoomPresenceCount(resourceId);
+              emitMeetingStatus(io, session, { hostJoined, presenceCount });
+              emitMeetingPresence(io, session, {
+                userId: user?.id,
+                role: String(session.mentor) === String(user?.id) ? "host" : "participant",
+                joined: false,
+              });
+            }
+          } catch (err) {
+            logger.warn("Failed to broadcast meeting status on disconnect", { roomId, error: err });
+          }
+        })();
       }
       joinedRooms.clear();
       logger.info("Socket disconnected", { socketId: socket.id, userId: user?.id });

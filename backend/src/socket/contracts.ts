@@ -8,6 +8,28 @@ export type QuestionStatus = "pending" | "answering" | "answered" | "archived";
 export type PollStatus = "active" | "closed" | "results_published";
 export type MessageType = "public" | "announcement" | "direct" | "private_question" | "system";
 
+export type MeetingStatus = "scheduled" | "waiting_for_host" | "active" | "completed" | "cancelled";
+
+export interface MeetingStatusPayload {
+  sessionId: string;
+  status: MeetingStatus;
+  hostJoined: boolean;
+  presenceCount: number;
+  startsInMs?: number | null;
+  endsAt?: string | null;
+  title?: string;
+  scheduledAt?: string;
+  at: string;
+}
+
+export interface MeetingPresencePayload {
+  sessionId: string;
+  userId?: string | null;
+  role: "host" | "participant" | string;
+  joined: boolean;
+  at: string;
+}
+
 export interface RoomPresencePayload {
   roomId: string;
   count: number;
@@ -76,7 +98,15 @@ export interface HeartbeatAckPayload {
 export interface ParticipantControlPayload {
   roomId: string;
   targetUserId: string;
-  action: "muted" | "unmuted" | "removed" | "blocked" | "promoted" | "demoted" | "speaking_granted" | "speaking_removed";
+  action:
+    | "muted"
+    | "unmuted"
+    | "removed"
+    | "blocked"
+    | "promoted"
+    | "demoted"
+    | "speaking_granted"
+    | "speaking_removed";
   performedBy: string;
   at: string;
 }
@@ -215,7 +245,10 @@ export interface ReadReceiptPayload {
 export interface SocketClientToServerEvents {
   "join-room": (_roomId: string) => void;
   "leave-room": (_roomId: string) => void;
-  "chat:message": (_payload: ChatMessageClientPayload, _ack?: (_response: { ok: boolean; messageId?: string }) => void) => void;
+  "chat:message": (
+    _payload: ChatMessageClientPayload,
+    _ack?: (_response: { ok: boolean; messageId?: string }) => void,
+  ) => void;
   "classroom:sync": (_payload: ClassroomSyncPayload) => void;
   "room:heartbeat": (_payload: HeartbeatPayload, _ack?: (_response: HeartbeatAckPayload) => void) => void;
   "room:quality": (_payload: { roomId: string; connectionQuality: ConnectionQuality }) => void;
@@ -257,7 +290,10 @@ export interface SocketServerToClientEvents {
   "hand:raised": (_payload: HandRaisePayload) => void;
   "hand:lowered": (_payload: HandRaisePayload) => void;
   "hand:called-on": (_payload: HandRaisePayload) => void;
-  "hand:queue": (_payload: { roomId: string; queue: Array<{ userId: string; userName: string; queuePosition: number }> }) => void;
+  "hand:queue": (_payload: {
+    roomId: string;
+    queue: Array<{ userId: string; userName: string; queuePosition: number }>;
+  }) => void;
   "question:new": (_payload: QuestionPayload) => void;
   "question:updated": (_payload: QuestionPayload) => void;
   "question:deleted": (_payload: { roomId: string; questionId: string }) => void;
@@ -268,7 +304,10 @@ export interface SocketServerToClientEvents {
   "participant:control": (_payload: ParticipantControlPayload) => void;
   "participant:status": (_payload: { roomId: string; userId: string; status: ParticipantStatus }) => void;
   "admission:update": (_payload: AdmissionPayload) => void;
-  "waiting:queue": (_payload: { roomId: string; queue: Array<{ userId: string; userName: string; joinedAt: string }> }) => void;
+  "waiting:queue": (_payload: {
+    roomId: string;
+    queue: Array<{ userId: string; userName: string; joinedAt: string }>;
+  }) => void;
   "notification:mentor": (_payload: { roomId: string; type: string; message: string; data?: unknown }) => void;
   "video:state": (_payload: VideoStatePayload) => void;
   "video:audio-toggled": (_payload: { roomId: string; userId: string; enabled: boolean }) => void;
@@ -290,5 +329,6 @@ export interface SocketServerToClientEvents {
   "dm:read-receipt": (_payload: ReadReceiptPayload) => void;
   "notification:new": (_payload: NotificationPayload) => void;
   "notification:count": (_payload: { userId: string; count: number }) => void;
+  "meeting:status-changed": (_payload: MeetingStatusPayload) => void;
+  "meeting:presence": (_payload: MeetingPresencePayload) => void;
 }
-
