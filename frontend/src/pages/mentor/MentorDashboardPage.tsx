@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowRight, BarChart3, Clock3, ClipboardList, Flame, ShieldCheck, Star, Users, Video } from "lucide-react";
+import { ArrowRight, BarChart3, Clock3, ClipboardList, ShieldCheck, Star, Users, Video } from "lucide-react";
 import { fetchMentorDashboard, type MentorDashboardData } from "@/services/dashboardService";
 import { cancelSession, startSession, endSession } from "@/services/sessionsService";
 import { useAuthStore } from "@/store/authStore";
@@ -13,21 +13,19 @@ import { QueryError } from "@/components/composites/QueryError";
 import { MeetingCard } from "@/components/meeting/MeetingCard";
 import { useMeetings } from "@/hooks/useMeetings";
 import type { MeetingViewModel } from "@/lib/realtime";
-import { getRankTitle } from "@/lib/utils";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 function MentorDashboardSkeleton() {
   return (
     <div className="space-y-6">
       <Skeleton className="h-36 rounded-[28px]" />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <Skeleton className="h-24 rounded-[24px]" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Skeleton className="h-24 rounded-[24px]" />
         <Skeleton className="h-24 rounded-[24px]" />
         <Skeleton className="h-24 rounded-[24px]" />
         <Skeleton className="h-24 rounded-[24px]" />
       </div>
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         <Skeleton className="h-72 rounded-[28px]" />
         <Skeleton className="h-72 rounded-[28px]" />
       </div>
@@ -83,11 +81,6 @@ export function MentorDashboardPage() {
   const recentReviews = dashboard?.reviewsDone ?? [];
   const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
-  const waitingStudents = upcomingMeetings.filter(
-    (m: MeetingViewModel) =>
-      m.status === "waiting_for_host" || (m.status === "scheduled" && m.startsInMs != null && m.startsInMs <= 0),
-  ).length;
-  void waitingStudents;
   const mentorStatus =
     user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
 
@@ -223,7 +216,7 @@ export function MentorDashboardPage() {
         </div>
       </Card>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <MetricCard label="Mentor score" value={mentorScore} icon={<Star size={18} />} note="Out of 100" />
         <MetricCard
           label="Total sessions"
@@ -243,13 +236,6 @@ export function MentorDashboardPage() {
           icon={<ClipboardList size={18} />}
           tone="warning"
           note="Queue needs attention"
-        />
-        <MetricCard
-          label="Impact score"
-          value={`${impact}%`}
-          icon={<Flame size={18} />}
-          tone="success"
-          note="Quality weighted"
         />
       </div>
 
@@ -317,10 +303,10 @@ export function MentorDashboardPage() {
         <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Learner trust</h2>
+              <h2 className="mt-3 text-2xl font-semibold text-white">Your teaching score</h2>
             </div>
             <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
-              {getRankTitle(Math.max(1, Math.round(mentorScore / 10)))}
+              {mentorScore >= 80 ? "Top rated" : mentorScore >= 50 ? "Established" : "Building"}
             </div>
           </div>
           <div className="mt-6 grid place-items-center">
@@ -339,55 +325,32 @@ export function MentorDashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Project feedback queue</h2>
-            </div>
-            <Link to="/mentor/reviews" className="text-sm text-primary hover:underline">
-              Open queue
-            </Link>
-          </div>
-          <div className="mt-5 space-y-3">
-            {recentReviews.slice(0, 3).map((review, i) => (
-              <div key={i} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-medium text-white">{review.project?.title ?? "Project review"}</p>
-                  <Badge variant="success">{review.status ?? "reviewed"}</Badge>
-                </div>
-                <p className="mt-1 text-xs text-[var(--text-muted)]">
-                  {review.updatedAt ? new Date(review.updatedAt).toLocaleString() : "Recent"}
-                </p>
-              </div>
-            ))}
-            {!recentReviews.length && <p className="text-sm text-[var(--text-muted)]">No reviewed submissions yet.</p>}
-          </div>
-        </Card>
-
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+      <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
+        <div className="flex items-center justify-between gap-3">
           <div>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Quick commands</h2>
+            <h2 className="mt-3 text-2xl font-semibold text-white">Project feedback queue</h2>
           </div>
-          <div className="mt-5 grid gap-3">
-            <Link to="/mentor/sessions">
-              <Button className="w-full" variant="primary">
-                <Clock3 size={16} /> Schedule session
-              </Button>
-            </Link>
-            <Link to="/mentor/reviews">
-              <Button className="w-full" variant="secondary">
-                <ClipboardList size={16} /> Review submissions
-              </Button>
-            </Link>
-            <Link to={upcomingSessions[0]?._id ? `/app/classroom/${upcomingSessions[0]._id}` : "/mentor/sessions"}>
-              <Button className="w-full" variant="outline">
-                <Video size={16} /> Enter virtual classroom
-              </Button>
-            </Link>
-          </div>
-        </Card>
-      </div>
+          <Link to="/mentor/reviews" className="text-sm text-primary hover:underline">
+            Open queue
+          </Link>
+        </div>
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          {recentReviews.slice(0, 3).map((review, i) => (
+            <div key={i} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="font-medium text-white">{review.project?.title ?? "Project review"}</p>
+                <Badge variant="success">{review.status ?? "reviewed"}</Badge>
+              </div>
+              <p className="mt-1 text-xs text-[var(--text-muted)]">
+                {review.updatedAt ? new Date(review.updatedAt).toLocaleString() : "Recent"}
+              </p>
+            </div>
+          ))}
+          {!recentReviews.length && (
+            <p className="col-span-full text-sm text-[var(--text-muted)]">No reviewed submissions yet.</p>
+          )}
+        </div>
+      </Card>
     </div>
   );
 }
