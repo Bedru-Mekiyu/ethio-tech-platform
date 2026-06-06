@@ -64,7 +64,7 @@ export function LessonPage() {
       <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
         <div className="prose prose-invert max-w-none">
           <p className="whitespace-pre-wrap text-[var(--text-secondary)] leading-7">
-            {lesson?.content || "Lesson content will appear here. Follow along with your mentor and squad."}
+            {lesson?.content || "No content has been published for this lesson yet."}
           </p>
         </div>
 
