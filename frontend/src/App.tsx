@@ -72,7 +72,6 @@ const SquadsListPage = lazy(() =>
 const CertificatesPage = lazy(() =>
   import("@/pages/app/CertificatesPage").then((module) => ({ default: module.CertificatesPage })),
 );
-const RoadmapPage = lazy(() => import("@/pages/app/RoadmapPage").then((module) => ({ default: module.RoadmapPage })));
 const MentorAvailabilityPage = lazy(() =>
   import("@/pages/mentor/MentorAvailabilityPage").then((module) => ({ default: module.MentorAvailabilityPage })),
 );
@@ -85,9 +84,6 @@ const SettingsPage = lazy(() =>
 const TracksPage = lazy(() => import("@/pages/app/TracksPage").then((module) => ({ default: module.TracksPage })));
 const AssignedProjectsPage = lazy(() =>
   import("@/pages/app/AssignedProjectsPage").then((module) => ({ default: module.AssignedProjectsPage })),
-);
-const AchievementsPage = lazy(() =>
-  import("@/pages/app/AchievementsPage").then((module) => ({ default: module.AchievementsPage })),
 );
 const ProfilePage = lazy(() => import("@/pages/app/ProfilePage").then((module) => ({ default: module.ProfilePage })));
 const ProjectSubmitPage = lazy(() =>
@@ -138,17 +134,11 @@ const TrackDetailPage = lazy(() =>
   import("@/pages/app/TrackDetailPage").then((module) => ({ default: module.TrackDetailPage })),
 );
 const LessonPage = lazy(() => import("@/pages/app/LessonPage").then((module) => ({ default: module.LessonPage })));
-const XpHistoryPage = lazy(() =>
-  import("@/pages/app/XpHistoryPage").then((module) => ({ default: module.XpHistoryPage })),
-);
 const NotificationsPage = lazy(() =>
   import("@/pages/app/NotificationsPage").then((module) => ({ default: module.NotificationsPage })),
 );
 const SessionHistoryPage = lazy(() =>
   import("@/pages/app/SessionHistoryPage").then((module) => ({ default: module.SessionHistoryPage })),
-);
-const SessionRecordingsPage = lazy(() =>
-  import("@/pages/app/SessionRecordingsPage").then((module) => ({ default: module.SessionRecordingsPage })),
 );
 const SessionFeedbackPage = lazy(() =>
   import("@/pages/app/SessionFeedbackPage").then((module) => ({ default: module.SessionFeedbackPage })),
@@ -162,20 +152,11 @@ const ParentDashboardPage = lazy(() =>
 const CodingWorkspacePage = lazy(() =>
   import("@/pages/app/CodingWorkspacePage").then((module) => ({ default: module.CodingWorkspacePage })),
 );
-const AssignmentsPage = lazy(() =>
-  import("@/pages/app/AssignmentsPage").then((module) => ({ default: module.AssignmentsPage })),
-);
 const CalendarPage = lazy(() =>
   import("@/pages/app/CalendarPage").then((module) => ({ default: module.CalendarPage })),
 );
-const SessionExplorerPage = lazy(() =>
-  import("@/pages/app/SessionExplorerPage").then((module) => ({ default: module.SessionExplorerPage })),
-);
 const MentorDirectoryPage = lazy(() =>
   import("@/pages/app/MentorDirectoryPage").then((module) => ({ default: module.default })),
-);
-const CertificatePreviewPage = lazy(() =>
-  import("@/pages/app/CertificatePreviewPage").then((module) => ({ default: module.default })),
 );
 const BlogPage = lazy(() => import("@/pages/marketing/BlogPage").then((module) => ({ default: module.BlogPage })));
 const PartnersPage = lazy(() =>
@@ -286,23 +267,16 @@ export default function App() {
                     <Route path="projects" element={<AssignedProjectsPage />} />
                     <Route path="tracks/:trackId" element={<TrackDetailPage />} />
                     <Route path="lessons/:lessonId" element={<LessonPage />} />
-                    <Route path="xp" element={<XpHistoryPage />} />
                     <Route path="notifications" element={<NotificationsPage />} />
                     <Route path="sessions" element={<SessionHistoryPage />} />
                     <Route path="sessions/:sessionId/feedback" element={<SessionFeedbackPage />} />
                     <Route path="messages" element={<MessagesPage />} />
-                    <Route path="recordings" element={<SessionRecordingsPage />} />
                     <Route path="workspace" element={<CodingWorkspacePage />} />
-                    <Route path="assignments" element={<AssignmentsPage />} />
                     <Route path="calendar" element={<CalendarPage />} />
-                    <Route path="explore-sessions" element={<SessionExplorerPage />} />
                     <Route path="mentors" element={<MentorDirectoryPage />} />
-                    <Route path="certificates" element={<CertificatePreviewPage />} />
-                    <Route path="achievements" element={<AchievementsPage />} />
+                    <Route path="certificates" element={<CertificatesPage />} />
                     <Route path="progress" element={<ProgressPage />} />
                     <Route path="squads" element={<SquadsListPage />} />
-                    <Route path="certificates" element={<CertificatesPage />} />
-                    <Route path="roadmap" element={<RoadmapPage />} />
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="projects/submit" element={<ProjectSubmitPage />} />
                     <Route path="squads/:id" element={<SquadPage />} />
