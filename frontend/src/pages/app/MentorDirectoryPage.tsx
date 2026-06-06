@@ -3,6 +3,7 @@ import { Users } from "lucide-react";
 import { MentorDirectory } from "@/components/composites/MentorDirectory";
 import { api } from "@/services/api";
 import type { ApiResponse } from "@/services/api";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface Mentor {
   _id: string;
@@ -16,6 +17,7 @@ interface Mentor {
 }
 
 export default function MentorDirectoryPage() {
+  usePageTitle("Mentors");
   const { data: mentors = [], isLoading } = useQuery<Mentor[]>({
     queryKey: ["mentors", "directory"],
     queryFn: async () => {
@@ -25,25 +27,23 @@ export default function MentorDirectoryPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center">
-              <Users className="w-5 h-5 text-white" />
-            </div>
-            <h1 className="text-2xl font-bold text-white">Mentor Directory</h1>
-          </div>
-          <p className="text-sm text-gray-400">Find and connect with expert mentors</p>
+    <div className="space-y-6">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20">
+          <Users className="h-5 w-5" />
+        </span>
+        <div>
+          <h1 className="text-2xl font-bold text-white">Mentors</h1>
+          <p className="text-sm text-[var(--text-secondary)]">Find and connect with expert mentors.</p>
         </div>
-        <MentorDirectory
-          mentors={mentors}
-          loading={isLoading}
-          onStartConversation={(mentorId) => {
-            window.location.href = `/app/messages?start=${mentorId}`;
-          }}
-        />
       </div>
+      <MentorDirectory
+        mentors={mentors}
+        loading={isLoading}
+        onStartConversation={(mentorId) => {
+          window.location.href = `/app/messages?start=${mentorId}`;
+        }}
+      />
     </div>
   );
 }
