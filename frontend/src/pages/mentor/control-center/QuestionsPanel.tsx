@@ -19,7 +19,7 @@ interface QuestionsPanelProps {
 export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelProps) {
   const [answerText, setAnswerText] = useState<Record<string, string>>({});
   const queryClient = useQueryClient();
-  const { toast } = useToast();
+  const toast = useToast();
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [submittingId, setSubmittingId] = useState<string | null>(null);
 

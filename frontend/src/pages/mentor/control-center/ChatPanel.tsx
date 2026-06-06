@@ -27,7 +27,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
 
   const user = useAuthStore((s) => s.user);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const toast = useToast();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   useEffect(() => {

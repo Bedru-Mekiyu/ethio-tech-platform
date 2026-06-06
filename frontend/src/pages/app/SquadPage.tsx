@@ -105,7 +105,7 @@ export function SquadPage() {
 
   const notificationsQuery = useQuery({
     queryKey: ["notifications", "me"],
-    queryFn: fetchMyNotifications,
+    queryFn: () => fetchMyNotifications(),
   });
 
   const dashboardQuery = useQuery({

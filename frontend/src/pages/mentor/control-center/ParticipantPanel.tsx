@@ -44,7 +44,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   const [comment, setComment] = useState("");
   const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
   const feedbackDialogRef = useRef<HTMLDialogElement>(null);
-  const { toast } = useToast();
+  const toast = useToast();
 
   useEffect(() => {
     const dialog = feedbackDialogRef.current;

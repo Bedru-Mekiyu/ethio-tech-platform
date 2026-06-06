@@ -17,7 +17,7 @@ interface PollsPanelProps {
 
 export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
   const queryClient = useQueryClient();
-  const { toast } = useToast();
+  const toast = useToast();
   const [showCreate, setShowCreate] = useState(false);
   const [pollQuestion, setPollQuestion] = useState("");
   const [pollType, setPollType] = useState<"single" | "multiple" | "true_false">("single");

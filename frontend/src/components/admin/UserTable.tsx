@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import { Tooltip } from "@/components/ui/tooltip";
+import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
+import { EmptyState } from "@/components/composites/EmptyState";
+import { useToast } from "@/components/composites/ToastProvider";
 import {
   Search,
   ChevronLeft,
@@ -21,6 +24,8 @@ import {
   Filter,
   RefreshCw,
   Users,
+  UserMinus,
+  X,
 } from "lucide-react";
 
 const ROLE_VARIANTS: Record<string, "warning" | "purple" | "success" | "default" | "danger"> = {
@@ -64,6 +69,7 @@ interface UserTableProps {
 
 export function UserTable({ onSelectUser, showActions = true }: UserTableProps) {
   const queryClient = useQueryClient();
+  const toast = useToast();
   const [page, setPage] = useState(1);
   const [limit] = useState(20);
   const [search, setSearch] = useState("");
@@ -73,6 +79,8 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
   const [sort, setSort] = useState("newest");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [deleteTarget, setDeleteTarget] = useState<AdminUser | null>(null);
+  const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
   const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { data, isLoading, isError, refetch } = useQuery({
@@ -90,26 +98,62 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => adminUserService.softDelete(id),
-    onSuccess: () => {
+    onSuccess: (_, id) => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      setSelectedIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
+      toast.success("User deleted. You can restore them within 30 days.");
+    },
+    onError: () => toast.error("Failed to delete user"),
+  });
+
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (ids: string[]) => adminUserService.bulkAction({ action: "soft_delete", userIds: ids }),
+    onSuccess: (result) => {
       queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
       setSelectedIds(new Set());
+      setBulkDeleteOpen(false);
+      const failed = result.failed?.length ?? 0;
+      const success = result.success?.length ?? 0;
+      if (failed === 0) {
+        toast.success(`${success} user${success === 1 ? "" : "s"} deleted`);
+      } else if (success === 0) {
+        toast.error(`Failed to delete ${failed} user${failed === 1 ? "" : "s"}`);
+      } else {
+        toast.warning(`Deleted ${success}, ${failed} failed`);
+      }
     },
+    onError: () => toast.error("Bulk delete failed"),
   });
 
   const suspendMutation = useMutation({
-    mutationFn: ({ id, reason }: { id: string; reason?: string }) =>
-      adminUserService.suspendUser(id, reason),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+    mutationFn: ({ id, reason }: { id: string; reason?: string }) => adminUserService.suspendUser(id, reason),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      toast.success("User suspended");
+    },
+    onError: () => toast.error("Failed to suspend user"),
   });
 
   const reactivateMutation = useMutation({
     mutationFn: (id: string) => adminUserService.reactivateUser(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      toast.success("User reactivated");
+    },
+    onError: () => toast.error("Failed to reactivate user"),
   });
 
   const verifyMutation = useMutation({
     mutationFn: (id: string) => adminUserService.verifyUser(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "users"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      toast.success("User verified");
+    },
+    onError: () => toast.error("Failed to verify user"),
   });
 
   const items = useMemo(() => data?.items ?? [], [data?.items]);
@@ -117,17 +161,14 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
   const totalPages = pagination?.totalPages ?? 1;
   const allSelected = items.length > 0 && items.every((item) => selectedIds.has(item._id ?? ""));
 
-  const handleSearch = useCallback(
-    (value: string) => {
-      setSearchInput(value);
-      if (searchTimeout.current) clearTimeout(searchTimeout.current);
-      searchTimeout.current = setTimeout(() => {
-        setSearch(value);
-        setPage(1);
-      }, 400);
-    },
-    []
-  );
+  const handleSearch = useCallback((value: string) => {
+    setSearchInput(value);
+    if (searchTimeout.current) clearTimeout(searchTimeout.current);
+    searchTimeout.current = setTimeout(() => {
+      setSearch(value);
+      setPage(1);
+    }, 400);
+  }, []);
 
   const toggleSelect = useCallback((id: string) => {
     setSelectedIds((prev) => {
@@ -146,6 +187,8 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
     }
   }, [allSelected, items]);
 
+  const clearSelection = useCallback(() => setSelectedIds(new Set()), []);
+
   const formatDate = (dateStr?: string) => {
     if (!dateStr) return "-";
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -161,7 +204,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         <AlertTriangle size={40} className="text-warning" />
         <p className="text-[var(--text-secondary)]">Failed to load users</p>
         <Button variant="outline" onClick={() => refetch()}>
-          Retry
+          <RefreshCw size={16} className="mr-2" /> Retry
         </Button>
       </div>
     );
@@ -169,6 +212,33 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
 
   return (
     <div className="space-y-6">
+      {selectedIds.size > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/30 bg-primary/8 px-4 py-3 shadow-[var(--shadow-sm)]">
+          <div className="flex items-center gap-2 text-sm">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-[var(--text-inverse)]">
+              {selectedIds.size}
+            </span>
+            <span className="font-medium text-[var(--text-primary)]">
+              {selectedIds.size === 1 ? "user" : "users"} selected
+            </span>
+            <Button variant="ghost" size="sm" onClick={clearSelection} className="ml-2 h-7 px-2">
+              <X size={14} className="mr-1" /> Clear
+            </Button>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={() => setBulkDeleteOpen(true)}
+              loading={bulkDeleteMutation.isPending}
+            >
+              <UserMinus size={14} className="mr-2" />
+              Delete selected
+            </Button>
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3">
           <div className="relative flex-1 max-w-md">
@@ -191,7 +261,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             <Filter size={16} className="mr-2" />
             Filters
             {(roleFilter || statusFilter) && (
-              <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+              <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-[var(--text-inverse)]">
                 {(roleFilter ? 1 : 0) + (statusFilter ? 1 : 0)}
               </span>
             )}
@@ -201,19 +271,19 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
           </Button>
         </div>
         <div className="flex items-center gap-3">
-          {selectedIds.size > 0 && (
-            <span className="text-sm text-[var(--text-secondary)]">
-              {selectedIds.size} selected
-            </span>
-          )}
           <select
             className="h-10 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
             value={sort}
-            onChange={(e) => { setSort(e.target.value); setPage(1); }}
+            onChange={(e) => {
+              setSort(e.target.value);
+              setPage(1);
+            }}
             aria-label="Sort users"
           >
             {SORT_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
             ))}
           </select>
           <Button
@@ -241,7 +311,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             <select
               className="h-9 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 text-sm"
               value={roleFilter}
-              onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
+              onChange={(e) => {
+                setRoleFilter(e.target.value);
+                setPage(1);
+              }}
               aria-label="Filter by role"
             >
               <option value="">All roles</option>
@@ -259,7 +332,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             <select
               className="h-9 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 text-sm"
               value={statusFilter}
-              onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
+              onChange={(e) => {
+                setStatusFilter(e.target.value);
+                setPage(1);
+              }}
               aria-label="Filter by status"
             >
               <option value="">All statuses</option>
@@ -276,7 +352,11 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => { setRoleFilter(""); setStatusFilter(""); setPage(1); }}
+                onClick={() => {
+                  setRoleFilter("");
+                  setStatusFilter("");
+                  setPage(1);
+                }}
               >
                 Clear filters
               </Button>
@@ -294,7 +374,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-[var(--border)]"
+                  className="h-4 w-4 rounded border-[var(--border)] accent-primary"
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
@@ -306,7 +386,11 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <th className="p-4 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">Joined</th>
               <th className="p-4 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">Last Login</th>
               <th className="p-4 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">Verified</th>
-              {showActions && <th className="w-20 p-4 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">Actions</th>}
+              {showActions && (
+                <th className="w-20 p-4 text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -320,10 +404,14 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               </tr>
             ) : items.length === 0 ? (
               <tr>
-                <td colSpan={showActions ? 10 : 9} className="p-20 text-center text-[var(--text-muted)]">
-                  <Users size={40} className="mx-auto mb-4 opacity-40" />
-                  <p>No users found</p>
-                  <p className="mt-1 text-sm">Try adjusting your search or filters.</p>
+                <td colSpan={showActions ? 10 : 9} className="p-0">
+                  <EmptyState
+                    eyebrow="Directory"
+                    title="No users found"
+                    description="Try adjusting your search or filters to see more results."
+                    illustration={<Users size={26} className="text-[var(--text-secondary)] opacity-80" />}
+                    className="rounded-none border-0 bg-transparent py-16"
+                  />
                 </td>
               </tr>
             ) : (
@@ -341,7 +429,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         type="checkbox"
                         checked={selectedIds.has(id)}
                         onChange={() => toggleSelect(id)}
-                        className="h-4 w-4 rounded border-[var(--border)]"
+                        className="h-4 w-4 rounded border-[var(--border)] accent-primary"
                         aria-label={`Select ${user.fullName}`}
                       />
                     </td>
@@ -349,46 +437,31 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                       <div className="flex items-center gap-3">
                         <div className="h-9 w-9 flex-shrink-0 overflow-hidden rounded-full bg-white/10">
                           {user.avatarUrl ? (
-                            <img
-                              src={user.avatarUrl}
-                              alt=""
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                            />
+                            <img src={user.avatarUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
                           ) : (
                             <div className="flex h-full w-full items-center justify-center text-sm font-medium text-[var(--text-muted)]">
                               {user.fullName.charAt(0).toUpperCase()}
                             </div>
                           )}
                         </div>
-                        <div>
-                          <p className="font-medium text-[var(--text-primary)]">{user.fullName}</p>
-                          <p className="text-xs text-[var(--text-muted)]">{user.email}</p>
+                        <div className="min-w-0">
+                          <p className="font-medium text-[var(--text-primary)] truncate">{user.fullName}</p>
+                          <p className="text-xs text-[var(--text-muted)] truncate">{user.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="p-4">
-                      <Badge variant={ROLE_VARIANTS[user.role] || "default"}>
-                        {user.role?.replace("_", " ")}
-                      </Badge>
+                      <Badge variant={ROLE_VARIANTS[user.role] || "default"}>{user.role?.replace("_", " ")}</Badge>
                     </td>
                     <td className="p-4">
                       <Badge variant={STATUS_VARIANTS[user.status ?? ""] || "default"}>
                         {user.status ?? "unknown"}
                       </Badge>
                     </td>
-                    <td className="p-4 text-sm text-[var(--text-secondary)]">
-                      {(user.xp ?? 0).toLocaleString()}
-                    </td>
-                    <td className="p-4 text-sm text-[var(--text-secondary)]">
-                      {user.currentCompany || "-"}
-                    </td>
-                    <td className="p-4 text-sm text-[var(--text-secondary)]">
-                      {formatDate(user.createdAt)}
-                    </td>
-                    <td className="p-4 text-sm text-[var(--text-secondary)]">
-                      {formatDate(user.lastLoginAt)}
-                    </td>
+                    <td className="p-4 text-sm text-[var(--text-secondary)]">{(user.xp ?? 0).toLocaleString()}</td>
+                    <td className="p-4 text-sm text-[var(--text-secondary)]">{user.currentCompany || "-"}</td>
+                    <td className="p-4 text-sm text-[var(--text-secondary)]">{formatDate(user.createdAt)}</td>
+                    <td className="p-4 text-sm text-[var(--text-secondary)]">{formatDate(user.lastLoginAt)}</td>
                     <td className="p-4">
                       {user.isVerified ? (
                         <CheckCircle size={16} className="text-success" />
@@ -446,11 +519,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           <Tooltip content="Delete user">
                             <button
                               className="rounded-lg p-2 transition-colors hover:bg-red-500/10 hover:text-red-500"
-                              onClick={() => {
-                                if (window.confirm(`Delete ${user.fullName}? This can be undone.`)) {
-                                  deleteMutation.mutate(id);
-                                }
-                              }}
+                              onClick={() => setDeleteTarget(user)}
                               aria-label={`Delete ${user.fullName}`}
                             >
                               <Trash2 size={14} />
@@ -509,6 +578,34 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
           </Button>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={!!deleteTarget}
+        title={`Delete ${deleteTarget?.fullName ?? "user"}?`}
+        description="The user will be soft-deleted and can be restored within 30 days from the Deleted Users tab."
+        confirmLabel="Delete user"
+        variant="danger"
+        loading={deleteMutation.isPending}
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={() => {
+          if (deleteTarget) {
+            const id = deleteTarget._id ?? deleteTarget.id ?? "";
+            deleteMutation.mutate(id);
+            setDeleteTarget(null);
+          }
+        }}
+      />
+
+      <ConfirmDialog
+        open={bulkDeleteOpen}
+        title={`Delete ${selectedIds.size} user${selectedIds.size === 1 ? "" : "s"}?`}
+        description="All selected users will be soft-deleted. You can restore them within 30 days from the Deleted Users tab."
+        confirmLabel={`Delete ${selectedIds.size}`}
+        variant="danger"
+        loading={bulkDeleteMutation.isPending}
+        onCancel={() => setBulkDeleteOpen(false)}
+        onConfirm={() => bulkDeleteMutation.mutate(Array.from(selectedIds))}
+      />
     </div>
   );
 }
