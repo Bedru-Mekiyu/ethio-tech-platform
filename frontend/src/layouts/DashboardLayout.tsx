@@ -18,22 +18,20 @@ import {
   BookOpen,
   FolderKanban,
   Users,
-  Trophy,
   MessageSquare,
-  Award,
   Settings,
   Bell,
   Video,
-  FileCheck,
   BarChart3,
-  Activity,
   Menu,
   X,
-  CalendarClock,
-  Film,
   LogOut,
   User,
   ChevronDown,
+  CalendarClock,
+  FileCheck,
+  Trophy,
+  Activity,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
@@ -43,7 +41,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const logout = useAuthStore((s) => s.logout);
   const notifBadge = useNotificationStore((s) => s.badge);
   const setBadgeCount = useNotificationStore((s) => s.setBadgeCount);
-  const { classroomPath, squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
+  const { squadPath } = useQuickNavLinks({ enabled: variant === "student" || variant === "mentor" });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const accountRef = useRef<HTMLDivElement>(null);
@@ -138,23 +136,13 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   }, [accountOpen]);
 
   const studentNav: NavItem[] = [
-    { to: "/app/dashboard", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-    { to: "/app/tracks", label: "Learning Tracks", icon: <BookOpen size={18} /> },
-    { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
+    { to: "/app/dashboard", label: "Home", icon: <LayoutDashboard size={18} /> },
+    { to: "/app/tracks", label: "Tracks", icon: <BookOpen size={18} /> },
     { to: "/app/projects", label: "Projects", icon: <FolderKanban size={18} /> },
-    { to: "/app/assignments", label: "Assignments", icon: <FileCheck size={18} /> },
-    { to: "/app/squads", label: "Squads", icon: <MessageSquare size={18} /> },
-    { to: classroomPath, label: "Virtual Class", icon: <Video size={18} /> },
-    { to: "/app/explore-sessions", label: "Explore Sessions", icon: <Video size={18} /> },
-    { to: "/app/calendar", label: "Calendar", icon: <CalendarClock size={18} /> },
-    { to: "/app/workspace", label: "Workspace", icon: <Activity size={18} /> },
-    { to: "/app/notifications", label: "Notifications", icon: <Bell size={18} /> },
-    { to: "/app/mentors", label: "Mentors", icon: <Users size={18} /> },
-    { to: "/app/certificates", label: "Certificates", icon: <Award size={18} /> },
-    { to: "/app/achievements", label: "Achievements", icon: <Award size={18} /> },
     { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
-    { to: "/app/recordings", label: "Recordings", icon: <Film size={18} /> },
-    { to: "/leaderboard", label: "Leaderboard", icon: <Trophy size={18} /> },
+    { to: "/app/squads", label: "Squads", icon: <MessageSquare size={18} /> },
+    { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
+    { to: "/app/mentors", label: "Mentors", icon: <Users size={18} /> },
   ];
 
   const mentorNav: NavItem[] = [
@@ -168,8 +156,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   ];
 
   const parentNav: NavItem[] = [
-    { to: "/parent", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-    { to: "/app/dashboard", label: "Progress", icon: <BarChart3 size={18} /> },
+    { to: "/parent", label: "Home", icon: <LayoutDashboard size={18} /> },
+    { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
     { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
     { to: "/app/notifications", label: "Notifications", icon: <Bell size={18} /> },
     { to: "/contact", label: "Support", icon: <MessageSquare size={18} /> },
@@ -430,8 +418,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             ? [
                 { to: "/app/dashboard", label: "Home", icon: <LayoutDashboard size={18} /> },
                 { to: "/app/tracks", label: "Tracks", icon: <BookOpen size={18} /> },
+                { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
                 { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
-                { to: "/app/notifications", label: "Alerts", icon: <Bell size={18} /> },
               ]
             : nav.slice(0, 4)
           ).map((item) => (
