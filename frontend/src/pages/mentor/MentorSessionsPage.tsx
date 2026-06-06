@@ -1,14 +1,16 @@
-import { useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Plus, Video } from "lucide-react";
-import { fetchSessions } from "@/services/sessionsService";
+import { Calendar, ChevronLeft, ChevronRight, Video, X } from "lucide-react";
+import { createSession, fetchSessions } from "@/services/sessionsService";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
+import { useToast } from "@/components/composites/ToastProvider";
 import { cn } from "@/lib/utils";
 
 type SessionRow = {
@@ -39,7 +41,56 @@ function monthLabel(date: Date) {
 export function MentorSessionsPage() {
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
   const [cursor, setCursor] = useState(new Date());
+  const [createOpen, setCreateOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const queryClient = useQueryClient();
+  const toast = useToast();
   const { data, isLoading, isError, error, refetch } = useQuery({ queryKey: ["sessions"], queryFn: fetchSessions });
+
+  const [defaultScheduledAt] = useState(() => {
+    const d = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    const pad = (n: number) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  });
+
+  const createMutation = useMutation({
+    mutationFn: createSession,
+    onSuccess: (session) => {
+      queryClient.invalidateQueries({ queryKey: ["sessions"] });
+      toast.success(`Session "${session.title ?? "Untitled"}" created`);
+      setCreateOpen(false);
+    },
+    onError: (err: unknown) => {
+      toast.error(err instanceof Error ? err.message : "Failed to create session");
+    },
+  });
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (createOpen && !dialog.open) dialog.showModal();
+    if (!createOpen && dialog.open) dialog.close();
+  }, [createOpen]);
+
+  const handleCreateSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const title = String(formData.get("title") ?? "").trim();
+    const scheduledAt = String(formData.get("scheduledAt") ?? "").trim();
+    const durationMinutes = Number(formData.get("durationMinutes") ?? 60);
+    const description = String(formData.get("description") ?? "").trim();
+    if (!title || !scheduledAt) {
+      toast.error("Title and date are required");
+      return;
+    }
+    createMutation.mutate({
+      title,
+      scheduledAt: new Date(scheduledAt).toISOString(),
+      durationMinutes,
+      description: description || undefined,
+    });
+  };
 
   const sessions = useMemo(() => (Array.isArray(data) ? data : []) as SessionRow[], [data]);
   const filtered = useMemo(() => {
@@ -54,6 +105,11 @@ export function MentorSessionsPage() {
 
   const upcoming = useMemo(
     () => filtered.filter((session) => session.scheduledAt && new Date(session.scheduledAt) >= new Date()),
+    [filtered],
+  );
+
+  const past = useMemo(
+    () => filtered.filter((session) => session.scheduledAt && new Date(session.scheduledAt) < new Date()),
     [filtered],
   );
 
@@ -99,8 +155,8 @@ export function MentorSessionsPage() {
               Schedule live classes, track attendance, and launch virtual classrooms from a calm schedule view.
             </p>
           </div>
-          <Button>
-            <Plus size={16} />
+          <Button onClick={() => setCreateOpen(true)}>
+            <Calendar size={16} />
             Create new session
           </Button>
         </div>
@@ -112,11 +168,15 @@ export function MentorSessionsPage() {
           <p className="mt-2 text-3xl font-semibold text-white">{upcoming.length}</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Past sessions</p>
+          <p className="mt-2 text-3xl font-semibold text-white">{past.length}</p>
+        </Card>
+        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
           <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Total sessions</p>
           <p className="mt-2 text-3xl font-semibold text-white">{sessions.length}</p>
         </Card>
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Attendance rate</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Fill rate</p>
           <p className="mt-2 text-3xl font-semibold text-white">
             {sessions.length
               ? Math.round(
@@ -126,10 +186,7 @@ export function MentorSessionsPage() {
               : 0}
             %
           </p>
-        </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Focus mode</p>
-          <p className="mt-2 text-3xl font-semibold text-white">On</p>
+          <p className="mt-1 text-[10px] text-[var(--text-muted)]">Sessions with enrolled learners</p>
         </Card>
       </div>
 
@@ -292,6 +349,79 @@ export function MentorSessionsPage() {
           </div>
         </Card>
       </div>
+
+      {createOpen ? (
+        <dialog
+          ref={dialogRef}
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-0 text-white shadow-xl backdrop:bg-black/60"
+        >
+          <form onSubmit={handleCreateSubmit} className="p-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="text-lg font-semibold">Create new session</h2>
+                <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                  Schedule a live classroom. You can fine-tune registration and reminders afterwards.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCreateOpen(false)}
+                className="text-[var(--text-muted)] hover:text-white"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="mt-5 space-y-3">
+              <label className="block">
+                <span className="text-xs text-[var(--text-secondary)]">Title</span>
+                <Input name="title" required maxLength={120} className="mt-1" placeholder="Intro to React Hooks" />
+              </label>
+              <label className="block">
+                <span className="text-xs text-[var(--text-secondary)]">Scheduled at</span>
+                <Input
+                  name="scheduledAt"
+                  type="datetime-local"
+                  required
+                  className="mt-1"
+                  defaultValue={defaultScheduledAt}
+                />
+              </label>
+              <label className="block">
+                <span className="text-xs text-[var(--text-secondary)]">Duration (minutes)</span>
+                <Input
+                  name="durationMinutes"
+                  type="number"
+                  min={15}
+                  max={600}
+                  step={15}
+                  defaultValue={60}
+                  className="mt-1"
+                />
+              </label>
+              <label className="block">
+                <span className="text-xs text-[var(--text-secondary)]">Description (optional)</span>
+                <Input name="description" maxLength={500} className="mt-1" placeholder="What will learners cover?" />
+              </label>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setCreateOpen(false)}
+                disabled={createMutation.isPending}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" disabled={createMutation.isPending}>
+                {createMutation.isPending ? "Creating…" : "Create session"}
+              </Button>
+            </div>
+          </form>
+        </dialog>
+      ) : null}
     </div>
   );
 }
