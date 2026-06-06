@@ -141,7 +141,7 @@ export function CodingWorkspacePage() {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 xl:w-[28rem]">
+          <div className="grid gap-3 grid-cols-1 sm:grid-cols-3 xl:w-[28rem]">
             <Card className="border-[var(--border)] bg-white/5 p-4">
               <p className="text-[10px] uppercase tracking-[0.24em] text-[var(--text-muted)]">Track</p>
               <p className="mt-2 text-lg font-semibold text-white">{primaryTrack.title}</p>
@@ -210,7 +210,7 @@ export function CodingWorkspacePage() {
           <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h2 className="mt-3 text-2xl font-semibold text-white">Learn, discuss, and move fast</h2>
+                <h2 className="mt-3 text-2xl font-semibold text-white">Lesson notes and discussion</h2>
               </div>
               <div className="flex gap-2">
                 <Badge variant="success">{recentSubmissions.length} recent submissions</Badge>
@@ -284,11 +284,11 @@ export function CodingWorkspacePage() {
                     <FileCode2 size={14} />
                     <span className="text-xs uppercase tracking-[0.22em]">Resources</span>
                   </div>
-                  <div className="mt-4 space-y-3 text-sm text-[var(--text-secondary)]">
-                    <p>• Follow the starter snippet and keep components accessible.</p>
-                    <p>• Save drafts locally while reviewing the lesson.</p>
-                    <p>• Open the project hub when you’re ready to submit work.</p>
-                  </div>
+                  <ul className="mt-4 space-y-2 text-sm text-[var(--text-secondary)] list-disc pl-5">
+                    <li>Follow the starter snippet and keep components accessible.</li>
+                    <li>Save drafts locally while reviewing the lesson.</li>
+                    <li>Open the project hub when you’re ready to submit work.</li>
+                  </ul>
                 </Card>
               </div>
             </div>
