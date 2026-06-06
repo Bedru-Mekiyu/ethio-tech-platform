@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Bell,
   CalendarClock,
@@ -125,10 +125,13 @@ export function NotificationsPage() {
   };
 
   const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
-  const meetingByLink = new Map<string, MeetingViewModel>();
-  upcomingMeetings.forEach((m) => {
-    if (m.joinHref) meetingByLink.set(m.joinHref, m);
-  });
+  const meetingByLink = useMemo(() => {
+    const map = new Map<string, MeetingViewModel>();
+    upcomingMeetings.forEach((m) => {
+      if (m.joinHref) map.set(m.joinHref, m);
+    });
+    return map;
+  }, [upcomingMeetings]);
 
   const extractSessionId = (link?: string | null): string | null => {
     if (!link) return null;
@@ -136,13 +139,16 @@ export function NotificationsPage() {
     return match ? match[1] : null;
   };
 
-  const meetingForNotification = (n: NotificationItem): MeetingViewModel | null => {
-    const fromLink = n.link ? meetingByLink.get(n.link) : undefined;
-    if (fromLink) return fromLink;
-    const sessionId = extractSessionId(n.link);
-    if (!sessionId) return null;
-    return upcomingMeetings.find((m) => m.id === sessionId || m.sessionId === sessionId) ?? null;
-  };
+  const meetingForNotification = useCallback(
+    (n: NotificationItem): MeetingViewModel | null => {
+      const fromLink = n.link ? meetingByLink.get(n.link) : undefined;
+      if (fromLink) return fromLink;
+      const sessionId = extractSessionId(n.link);
+      if (!sessionId) return null;
+      return upcomingMeetings.find((m) => m.id === sessionId || m.sessionId === sessionId) ?? null;
+    },
+    [meetingByLink, upcomingMeetings],
+  );
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
   if (isLoading) return <NotificationsSkeleton />;
@@ -163,10 +169,9 @@ export function NotificationsPage() {
       <Card className="hero-shell p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="section-title text-3xl md:text-4xl">Stay synced with the learning network</h1>
+            <h1 className="section-title text-3xl md:text-4xl">Notifications</h1>
             <p className="section-copy mt-3 max-w-2xl">
-              Important classroom, project, and mentor updates live here so you can respond quickly without losing
-              focus.
+              Classroom, project, and mentor updates so you can respond quickly.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
@@ -288,23 +293,6 @@ export function NotificationsPage() {
               ) : (
                 <p className="text-sm text-[var(--text-secondary)]">No recent read items yet.</p>
               )}
-            </div>
-          </Card>
-
-          <Card className="surface-panel p-6">
-            <div className="flex items-center gap-2 text-[var(--text-muted)]">
-              <Bell size={14} />
-              <span className="text-[10px] uppercase tracking-[0.22em]">Notification types</span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Badge variant="default">Session</Badge>
-              <Badge variant="purple">Mentor</Badge>
-              <Badge variant="success">Project</Badge>
-              <Badge variant="warning">Badge</Badge>
-              <Badge variant="default">XP</Badge>
-              <Badge variant="default">System</Badge>
-              <Badge variant="danger">Account</Badge>
-              <Badge variant="purple">Announcement</Badge>
             </div>
           </Card>
         </div>
