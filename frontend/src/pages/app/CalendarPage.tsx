@@ -110,24 +110,22 @@ export function CalendarPage() {
 
   return (
     <div className="space-y-8">
-      <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Calendar</h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
-              See your upcoming events at a glance and export to your personal calendar.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="outline" size="sm" onClick={handleSync}>
-              <RefreshCw size={14} className="mr-1" />
-              Sync sessions
-            </Button>
-            <Button variant="outline" size="sm" onClick={downloadCalendarFile}>
-              <Download size={14} className="mr-1" />
-              Export ICS
-            </Button>
-          </div>
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Calendar</h1>
+          <p className="mt-2 text-[var(--text-secondary)]">
+            See your upcoming events and export to your personal calendar.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" size="sm" onClick={handleSync}>
+            <RefreshCw size={14} className="mr-1" />
+            Sync sessions
+          </Button>
+          <Button variant="outline" size="sm" onClick={downloadCalendarFile}>
+            <Download size={14} className="mr-1" />
+            Export ICS
+          </Button>
         </div>
       </div>
 
@@ -135,7 +133,9 @@ export function CalendarPage() {
         <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
           <div className="flex items-center justify-between">
             <button
+              type="button"
               onClick={prevMonth}
+              aria-label="Previous month"
               className="rounded-xl border border-[var(--border)] bg-white/5 p-2 text-[var(--text-secondary)] hover:text-white transition"
             >
               <ChevronLeft size={16} />
@@ -144,12 +144,19 @@ export function CalendarPage() {
               <h2 className="text-xl font-semibold text-white">
                 {currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
               </h2>
-              <button onClick={goToday} className="mt-1 text-xs text-primary hover:underline">
+              <button
+                type="button"
+                onClick={goToday}
+                aria-label="Jump to today"
+                className="mt-1 text-xs text-primary hover:underline"
+              >
                 Today
               </button>
             </div>
             <button
+              type="button"
               onClick={nextMonth}
+              aria-label="Next month"
               className="rounded-xl border border-[var(--border)] bg-white/5 p-2 text-[var(--text-secondary)] hover:text-white transition"
             >
               <ChevronRight size={16} />
@@ -181,7 +188,7 @@ export function CalendarPage() {
                   type="button"
                   onClick={() => setSelectedDate(dateStr)}
                   className={cn(
-                    "relative flex h-12 flex-col items-center justify-center rounded-xl text-sm transition",
+                    "relative flex h-14 flex-col items-center justify-center rounded-xl text-sm transition",
                     isSelected && "bg-primary/20 border border-primary",
                     isToday && !isSelected && "ring-2 ring-primary/50",
                     !isSelected && !isToday && "hover:bg-white/5",
@@ -190,7 +197,7 @@ export function CalendarPage() {
                   <span className={cn("font-medium", isToday ? "text-primary" : "text-white")}>{day}</span>
                   {dayEvents.length > 0 && (
                     <div className="absolute bottom-1 flex gap-0.5">
-                      {dayEvents.slice(0, 3).map((ev, idx) => (
+                      {dayEvents.slice(0, 2).map((ev, idx) => (
                         <span
                           key={idx}
                           className={cn("h-1 w-1 rounded-full", EVENT_COLORS[ev.type] ?? "bg-white/40")}
@@ -269,7 +276,7 @@ export function CalendarPage() {
             </Card>
           )}
 
-          <Card className="border-[var(--border)] bg-[var(--bg-card)] p-5">
+          <Card className="border-[var(--border)] bg-[var(--bg-card)] p-5 hidden lg:block">
             <div className="mt-4 space-y-3">
               {events
                 .filter((e) => new Date(e.start) >= new Date())
