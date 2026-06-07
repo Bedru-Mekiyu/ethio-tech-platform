@@ -15,7 +15,7 @@ describe("avatar system", () => {
   it("builds a stable fallback chain", () => {
     const chain = buildAvatarFallbackChain("student-seed", "student");
 
-    expect(chain).toHaveLength(3);
+    expect(chain).toHaveLength(4);
     expect(new Set(chain).size).toBe(chain.length);
     expect(chain[0]).toMatch(/^\/avatars\/student-/);
   });
@@ -24,4 +24,3 @@ describe("avatar system", () => {
     expect(getSystemAvatarById("mentor-01")?.url).toBe("/avatars/mentor-01.svg");
   });
 });
-
