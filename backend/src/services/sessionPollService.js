@@ -1,5 +1,4 @@
 import SessionPoll from "../models/SessionPoll.js";
-import SessionAuditLog from "../models/SessionAuditLog.js";
 
 export const createPoll = async ({ sessionId, userId, question, type, options }) => {
   let pollOptions;
@@ -111,9 +110,7 @@ export const publishResults = async (pollId) => {
 export const getSessionPolls = async (sessionId, includeClosed = false) => {
   const filter = { session: sessionId };
   if (!includeClosed) filter.status = "active";
-  return SessionPoll.find(filter)
-    .populate("createdBy", "fullName")
-    .sort({ createdAt: -1 });
+  return SessionPoll.find(filter).populate("createdBy", "fullName").sort({ createdAt: -1 });
 };
 
 export const getPollResults = async (pollId) => {

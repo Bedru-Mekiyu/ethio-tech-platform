@@ -1,5 +1,4 @@
 import asyncHandler from "../utils/asyncHandler.js";
-import ApiError from "../utils/ApiError.js";
 import { sendResponse } from "../utils/apiResponse.js";
 import { getLatestSnapshot } from "../services/whiteboardService.js";
 

@@ -89,7 +89,7 @@ describe("attendanceService", () => {
       expect(SessionParticipant.findOneAndUpdate).toHaveBeenCalledWith(
         expect.objectContaining({ session: "session-1", user: "user-1" }),
         expect.any(Object),
-        expect.objectContaining({ upsert: true, new: true })
+        expect.objectContaining({ upsert: true, new: true }),
       );
     });
 
@@ -100,7 +100,7 @@ describe("attendanceService", () => {
         expect.objectContaining({
           session: "session-1",
           actor: "new-user",
-        })
+        }),
       );
     });
   });
@@ -129,23 +129,21 @@ describe("attendanceService", () => {
         expect.objectContaining({ session: "session-1", user: "user-1" }),
         expect.objectContaining({
           $set: expect.objectContaining({ status: "completed" }),
-        })
+        }),
       );
     });
 
     it("should create an audit log for user_left", async () => {
       const SessionAuditLog = (await import("../models/SessionAuditLog.js")).default;
       await attendanceService.recordLeave("session-1", "user-1", "127.0.0.1");
-      expect(SessionAuditLog.create).toHaveBeenCalledWith(
-        expect.objectContaining({ action: "user_left" })
-      );
+      expect(SessionAuditLog.create).toHaveBeenCalledWith(expect.objectContaining({ action: "user_left" }));
     });
   });
 
   describe("verifyAttendance", () => {
     it("should return false if no session or participant found", async () => {
       const Session = (await import("../models/Session.js")).default;
-      (Session.findById as any).mockResolvedValueOnce(null);
+      vi.mocked(Session.findById).mockResolvedValueOnce(null);
       const result = await attendanceService.verifyAttendance("session-x", "user-x");
       expect(result).toBe(false);
     });
@@ -156,12 +154,12 @@ describe("attendanceService", () => {
 
       const now = new Date();
       const startTime = new Date(now.getTime() - 60 * 60_000); // 1 hour ago
-      (Session.findById as any).mockResolvedValueOnce({
+      vi.mocked(Session.findById).mockResolvedValueOnce({
         _id: "s1",
         liveStartedAt: startTime,
         liveEndedAt: now,
       });
-      (SessionParticipant.findOne as any).mockResolvedValueOnce({
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce({
         totalPresenceMs: 45 * 60_000, // 45 minutes of a 60 minute session (>50%)
       });
 
@@ -176,12 +174,12 @@ describe("attendanceService", () => {
       const Session = (await import("../models/Session.js")).default;
 
       const now = new Date();
-      (Session.findById as any).mockResolvedValueOnce({
+      vi.mocked(Session.findById).mockResolvedValueOnce({
         _id: "s1",
         liveStartedAt: new Date(now.getTime() - 90 * 60_000),
         liveEndedAt: now,
       });
-      (SessionParticipant.find as any).mockResolvedValueOnce([
+      vi.mocked(SessionParticipant.find).mockResolvedValueOnce([
         { _id: "p1", user: "u1", totalPresenceMs: 60 * 60_000 },
         { _id: "p2", user: "u2", totalPresenceMs: 10 * 60_000 },
       ]);
@@ -193,7 +191,7 @@ describe("attendanceService", () => {
 
     it("should return empty if session has no liveStartedAt", async () => {
       const Session = (await import("../models/Session.js")).default;
-      (Session.findById as any).mockResolvedValueOnce({ _id: "s2", liveStartedAt: null });
+      vi.mocked(Session.findById).mockResolvedValueOnce({ _id: "s2", liveStartedAt: null });
       const results = await attendanceService.batchVerifySession("s2");
       expect(results).toEqual([]);
     });
@@ -245,7 +243,7 @@ describe("moderationService", () => {
       const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
       const ModerationLog = (await import("../models/ModerationLog.js")).default;
 
-      (SessionParticipant.findOne as any).mockResolvedValueOnce({
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce({
         metadata: {},
         save: vi.fn().mockResolvedValue(true),
       });
@@ -261,14 +259,12 @@ describe("moderationService", () => {
 
       expect(result.muted).toBe(true);
       expect(result.expiresAt).toBeInstanceOf(Date);
-      expect(ModerationLog.create).toHaveBeenCalledWith(
-        expect.objectContaining({ action: "user_muted" })
-      );
+      expect(ModerationLog.create).toHaveBeenCalledWith(expect.objectContaining({ action: "user_muted" }));
     });
 
     it("should throw if participant not found", async () => {
       const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
-      (SessionParticipant.findOne as any).mockResolvedValueOnce(null);
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce(null);
 
       await expect(
         moderationService.muteUser({
@@ -278,7 +274,7 @@ describe("moderationService", () => {
           durationMinutes: 5,
           reason: "Test mute",
           ip: "127.0.0.1",
-        })
+        }),
       ).rejects.toThrow("User not in session");
     });
   });
@@ -298,7 +294,7 @@ describe("moderationService", () => {
       expect(result.removed).toBe(true);
       expect(SessionParticipant.findOneAndUpdate).toHaveBeenCalledWith(
         { session: "s1", user: "u1" },
-        expect.objectContaining({ status: "completed" })
+        expect.objectContaining({ status: "completed" }),
       );
     });
   });
@@ -308,7 +304,7 @@ describe("moderationService", () => {
       const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
       const ModerationLog = (await import("../models/ModerationLog.js")).default;
 
-      (SessionParticipant.findOne as any).mockResolvedValueOnce({
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce({
         metadata: {},
         save: vi.fn().mockResolvedValue(true),
       });
@@ -322,9 +318,7 @@ describe("moderationService", () => {
       });
 
       expect(result.blocked).toBe(true);
-      expect(ModerationLog.create).toHaveBeenCalledWith(
-        expect.objectContaining({ action: "user_blocked" })
-      );
+      expect(ModerationLog.create).toHaveBeenCalledWith(expect.objectContaining({ action: "user_blocked" }));
     });
   });
 
@@ -341,9 +335,7 @@ describe("moderationService", () => {
       });
 
       expect(result.deleted).toBe(true);
-      expect(ModerationLog.create).toHaveBeenCalledWith(
-        expect.objectContaining({ action: "message_deleted" })
-      );
+      expect(ModerationLog.create).toHaveBeenCalledWith(expect.objectContaining({ action: "message_deleted" }));
     });
   });
 
@@ -366,7 +358,7 @@ describe("moderationService", () => {
           action: "abuse_reported",
           actor: "reporter",
           targetUser: "u-offender",
-        })
+        }),
       );
     });
   });
@@ -375,7 +367,7 @@ describe("moderationService", () => {
     it("should timeout a user with expiry", async () => {
       const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
 
-      (SessionParticipant.findOne as any).mockResolvedValueOnce({
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce({
         metadata: {},
         save: vi.fn().mockResolvedValue(true),
       });

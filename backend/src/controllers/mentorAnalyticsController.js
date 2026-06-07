@@ -4,7 +4,6 @@ import SessionFeedback from "../models/SessionFeedback.js";
 import SessionQuestion from "../models/SessionQuestion.js";
 import SessionPoll from "../models/SessionPoll.js";
 import EngagementScore from "../models/EngagementScore.js";
-import User from "../models/User.js";
 import ChatMessage from "../models/ChatMessage.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { sendResponse } from "../utils/apiResponse.js";
@@ -73,11 +72,12 @@ export const getMentorAnalytics = asyncHandler(async (req, res) => {
   }, new Set()).size;
 
   const feedback = feedbackSummary[0] || { avgQuality: 0, avgEngagement: 0, avgImpact: 0, feedbackCount: 0 };
-  const avgRating = Number(((feedback.avgQuality + feedback.avgEngagement + feedback.avgImpact) / 3 * 20).toFixed(1));
+  const avgRating = Number((((feedback.avgQuality + feedback.avgEngagement + feedback.avgImpact) / 3) * 20).toFixed(1));
   const participantData = participants[0] || { totalParticipants: 0, verifiedAttendance: 0, totalPresenceMs: 0 };
-  const attendanceRate = participantData.totalParticipants > 0
-    ? Math.round((participantData.verifiedAttendance / participantData.totalParticipants) * 100)
-    : 0;
+  const attendanceRate =
+    participantData.totalParticipants > 0
+      ? Math.round((participantData.verifiedAttendance / participantData.totalParticipants) * 100)
+      : 0;
   const engagement = engagementSummary[0] || { avgScore: 0, totalStudents: 0 };
 
   const sessionsByMonth = allSessions.reduce((acc, s) => {
@@ -139,9 +139,8 @@ export const getMentorSessionAnalytics = asyncHandler(async (req, res) => {
   const verifiedCount = participants.filter((p) => p.verifiedAttendance).length;
   const totalPresenceMs = participants.reduce((sum, p) => sum + (p.totalPresenceMs || 0), 0);
   const avgPresenceMs = participantCount > 0 ? totalPresenceMs / participantCount : 0;
-  const engagementAvg = engagementScores.length > 0
-    ? engagementScores.reduce((sum, e) => sum + e.score, 0) / engagementScores.length
-    : 0;
+  const engagementAvg =
+    engagementScores.length > 0 ? engagementScores.reduce((sum, e) => sum + e.score, 0) / engagementScores.length : 0;
 
   sendResponse(res, 200, "Session analytics", {
     session: {
@@ -149,9 +148,10 @@ export const getMentorSessionAnalytics = asyncHandler(async (req, res) => {
       title: session.title,
       status: session.status,
       duration: session.durationMinutes,
-      liveDuration: session.liveStartedAt && session.liveEndedAt
-        ? Math.round((new Date(session.liveEndedAt) - new Date(session.liveStartedAt)) / 60000)
-        : null,
+      liveDuration:
+        session.liveStartedAt && session.liveEndedAt
+          ? Math.round((new Date(session.liveEndedAt) - new Date(session.liveStartedAt)) / 60000)
+          : null,
       scheduledAt: session.scheduledAt,
     },
     participants: {
@@ -182,9 +182,12 @@ export const getMentorSessionAnalytics = asyncHandler(async (req, res) => {
     },
     feedback: {
       total: feedback.length,
-      avgQuality: feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.quality, 0) / feedback.length).toFixed(1)) : 0,
-      avgEngagement: feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.engagement, 0) / feedback.length).toFixed(1)) : 0,
-      avgImpact: feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.impact, 0) / feedback.length).toFixed(1)) : 0,
+      avgQuality:
+        feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.quality, 0) / feedback.length).toFixed(1)) : 0,
+      avgEngagement:
+        feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.engagement, 0) / feedback.length).toFixed(1)) : 0,
+      avgImpact:
+        feedback.length > 0 ? Number((feedback.reduce((s, f) => s + f.impact, 0) / feedback.length).toFixed(1)) : 0,
     },
   });
 });
@@ -199,25 +202,29 @@ export const getMentorControlCenterData = asyncHandler(async (req, res) => {
     return sendResponse(res, 403, "Access denied");
   }
 
-  const [participants, waitingQueue, questions, polls, engagementSummary, raisedHands, chatActivity] = await Promise.all([
-    SessionParticipant.find({ session: sessionId })
-      .populate("user", "fullName avatar role")
-      .sort({ status: 1, joinedAt: -1 })
-      .lean(),
-    SessionParticipant.find({ session: sessionId, admissionStatus: "waiting" })
-      .populate("user", "fullName avatar role")
-      .sort({ createdAt: 1 })
-      .lean(),
-    SessionQuestion.find({ session: sessionId, status: { $ne: "archived" } })
-      .sort({ isPinned: -1, upvoteCount: -1, createdAt: 1 }),
-    SessionPoll.find({ session: sessionId, status: "active" }),
-    EngagementScore.aggregate([
-      { $match: { session: sessionId } },
-      { $group: { _id: null, avgScore: { $avg: "$score" }, total: { $sum: 1 } } },
-    ]),
-    (await import("../services/handRaiseService.js")).getRaisedHandsQueue(sessionId),
-    ChatMessage.countDocuments({ roomId: { $in: [`session-${sessionId}`, `classroom-${sessionId}`] } }),
-  ]);
+  const [participants, waitingQueue, questions, polls, engagementSummary, raisedHands, chatActivity] =
+    await Promise.all([
+      SessionParticipant.find({ session: sessionId })
+        .populate("user", "fullName avatar role")
+        .sort({ status: 1, joinedAt: -1 })
+        .lean(),
+      SessionParticipant.find({ session: sessionId, admissionStatus: "waiting" })
+        .populate("user", "fullName avatar role")
+        .sort({ createdAt: 1 })
+        .lean(),
+      SessionQuestion.find({ session: sessionId, status: { $ne: "archived" } }).sort({
+        isPinned: -1,
+        upvoteCount: -1,
+        createdAt: 1,
+      }),
+      SessionPoll.find({ session: sessionId, status: "active" }),
+      EngagementScore.aggregate([
+        { $match: { session: sessionId } },
+        { $group: { _id: null, avgScore: { $avg: "$score" }, total: { $sum: 1 } } },
+      ]),
+      (await import("../services/handRaiseService.js")).getRaisedHandsQueue(sessionId),
+      ChatMessage.countDocuments({ roomId: { $in: [`session-${sessionId}`, `classroom-${sessionId}`] } }),
+    ]);
 
   const liveDuration = session.liveStartedAt
     ? Math.round((Date.now() - new Date(session.liveStartedAt).getTime()) / 1000)
@@ -225,9 +232,7 @@ export const getMentorControlCenterData = asyncHandler(async (req, res) => {
 
   const liveParticipants = participants.filter((p) => ["joined", "active"].includes(p.status));
   const verifiedCount = participants.filter((p) => p.verifiedAttendance).length;
-  const attendancePercent = participants.length > 0
-    ? Math.round((verifiedCount / participants.length) * 100)
-    : 0;
+  const attendancePercent = participants.length > 0 ? Math.round((verifiedCount / participants.length) * 100) : 0;
 
   const engSummary = engagementSummary[0] || { avgScore: 0, total: 0 };
 
@@ -314,7 +319,7 @@ export const getCohortAnalytics = asyncHandler(async (req, res) => {
   if (trackId) sessionFilter.track = trackId;
 
   const sessions = await Session.find(sessionFilter).lean();
-  const sessionIds = sessions.map(s => s._id);
+  const sessionIds = sessions.map((s) => s._id);
 
   const participantStats = await SessionParticipant.aggregate([
     { $match: { session: { $in: sessionIds } } },
@@ -358,7 +363,7 @@ export const getCohortAnalytics = asyncHandler(async (req, res) => {
       acc[track] = { sessions: 0, totalParticipants: 0, avgAttendanceRate: 0 };
     }
     acc[track].sessions += 1;
-    const pStats = participantStats.find(p => String(p._id) === String(s._id));
+    const pStats = participantStats.find((p) => String(p._id) === String(s._id));
     if (pStats) {
       acc[track].totalParticipants += pStats.totalParticipants;
     }
@@ -371,8 +376,8 @@ export const getCohortAnalytics = asyncHandler(async (req, res) => {
       acc[month] = { count: 0, participants: 0, engagement: 0 };
     }
     acc[month].count += 1;
-    const pStats = participantStats.find(p => String(p._id) === String(s._id));
-    const eStats = engagementStats.find(e => String(e._id) === String(s._id));
+    const pStats = participantStats.find((p) => String(p._id) === String(s._id));
+    const eStats = engagementStats.find((e) => String(e._id) === String(s._id));
     if (pStats) acc[month].participants += pStats.totalParticipants;
     if (eStats) acc[month].engagement += eStats.avgScore;
     return acc;
@@ -383,22 +388,36 @@ export const getCohortAnalytics = asyncHandler(async (req, res) => {
       totalSessions: sessions.length,
       totalTracks: Object.keys(trackStats).length,
       sessions: participantStats.reduce((sum, p) => sum + p.totalParticipants, 0),
-      avgAttendance: participantStats.length > 0
-        ? Math.round(participantStats.reduce((sum, p) => sum + (p.totalParticipants > 0 ? (p.verifiedAttendance / p.totalParticipants) * 100 : 0), 0) / participantStats.length)
-        : 0,
-      avgEngagement: engagementStats.length > 0
-        ? Math.round(engagementStats.reduce((sum, e) => sum + e.avgScore, 0) / engagementStats.length)
-        : 0,
-      avgFeedbackRating: feedbackStats.length > 0
-        ? Number((feedbackStats.reduce((sum, f) => sum + (f.avgQuality + f.avgEngagement + f.avgImpact) / 3, 0) / feedbackStats.length * 20).toFixed(1))
-        : 0,
+      avgAttendance:
+        participantStats.length > 0
+          ? Math.round(
+              participantStats.reduce(
+                (sum, p) => sum + (p.totalParticipants > 0 ? (p.verifiedAttendance / p.totalParticipants) * 100 : 0),
+                0,
+              ) / participantStats.length,
+            )
+          : 0,
+      avgEngagement:
+        engagementStats.length > 0
+          ? Math.round(engagementStats.reduce((sum, e) => sum + e.avgScore, 0) / engagementStats.length)
+          : 0,
+      avgFeedbackRating:
+        feedbackStats.length > 0
+          ? Number(
+              (
+                (feedbackStats.reduce((sum, f) => sum + (f.avgQuality + f.avgEngagement + f.avgImpact) / 3, 0) /
+                  feedbackStats.length) *
+                20
+              ).toFixed(1),
+            )
+          : 0,
     },
     byTrack: trackStats,
     byMonth: sessionsByMonth,
-    sessions: sessions.map(s => {
-      const pStats = participantStats.find(p => String(p._id) === String(s._id));
-      const eStats = engagementStats.find(e => String(e._id) === String(s._id));
-      const fStats = feedbackStats.find(f => String(f._id) === String(s._id));
+    sessions: sessions.map((s) => {
+      const pStats = participantStats.find((p) => String(p._id) === String(s._id));
+      const eStats = engagementStats.find((e) => String(e._id) === String(s._id));
+      const fStats = feedbackStats.find((f) => String(f._id) === String(s._id));
       return {
         id: s._id,
         title: s.title,
@@ -406,9 +425,12 @@ export const getCohortAnalytics = asyncHandler(async (req, res) => {
         status: s.status,
         track: s.track,
         participants: pStats?.totalParticipants || 0,
-        attendanceRate: pStats?.totalParticipants > 0 ? Math.round((pStats.verifiedAttendance / pStats.totalParticipants) * 100) : 0,
+        attendanceRate:
+          pStats?.totalParticipants > 0 ? Math.round((pStats.verifiedAttendance / pStats.totalParticipants) * 100) : 0,
         avgEngagement: eStats ? Math.round(eStats.avgScore) : 0,
-        avgFeedback: fStats ? Number(((fStats.avgQuality + fStats.avgEngagement + fStats.avgImpact) / 3 * 20).toFixed(1)) : null,
+        avgFeedback: fStats
+          ? Number((((fStats.avgQuality + fStats.avgEngagement + fStats.avgImpact) / 3) * 20).toFixed(1))
+          : null,
       };
     }),
   });
@@ -419,17 +441,21 @@ export const getStudentProgress = asyncHandler(async (req, res) => {
   const mentorId = req.user._id;
 
   const sessions = await Session.find({ mentor: mentorId }).lean();
-  const sessionIds = sessions.map(s => s._id);
+  const sessionIds = sessions.map((s) => s._id);
 
   const studentParticipation = await SessionParticipant.find({
     session: { $in: sessionIds },
     user: studentId,
-  }).populate("session", "title scheduledAt status").lean();
+  })
+    .populate("session", "title scheduledAt status")
+    .lean();
 
   const engagementScores = await EngagementScore.find({
     session: { $in: sessionIds },
     student: studentId,
-  }).populate("session", "title scheduledAt").lean();
+  })
+    .populate("session", "title scheduledAt")
+    .lean();
 
   const feedback = await SessionFeedback.find({
     session: { $in: sessionIds },
@@ -437,13 +463,13 @@ export const getStudentProgress = asyncHandler(async (req, res) => {
   }).lean();
 
   const totalSessions = studentParticipation.length;
-  const attendedSessions = studentParticipation.filter(p => p.verifiedAttendance).length;
-  const avgPresence = totalSessions > 0
-    ? studentParticipation.reduce((sum, p) => sum + (p.totalPresenceMs || 0), 0) / totalSessions / 60000
-    : 0;
-  const avgEngagement = engagementScores.length > 0
-    ? engagementScores.reduce((sum, e) => sum + e.score, 0) / engagementScores.length
-    : 0;
+  const attendedSessions = studentParticipation.filter((p) => p.verifiedAttendance).length;
+  const avgPresence =
+    totalSessions > 0
+      ? studentParticipation.reduce((sum, p) => sum + (p.totalPresenceMs || 0), 0) / totalSessions / 60000
+      : 0;
+  const avgEngagement =
+    engagementScores.length > 0 ? engagementScores.reduce((sum, e) => sum + e.score, 0) / engagementScores.length : 0;
 
   sendResponse(res, 200, "Student progress", {
     studentId,
@@ -455,13 +481,13 @@ export const getStudentProgress = asyncHandler(async (req, res) => {
       avgEngagement: Math.round(avgEngagement),
       feedbackCount: feedback.length,
     },
-    sessions: studentParticipation.map(p => ({
+    sessions: studentParticipation.map((p) => ({
       session: p.session,
       status: p.status,
       verifiedAttendance: p.verifiedAttendance,
       presenceMinutes: Math.round((p.totalPresenceMs || 0) / 60000),
     })),
-    engagement: engagementScores.map(e => ({
+    engagement: engagementScores.map((e) => ({
       session: e.session,
       score: e.score,
       details: e.details,
@@ -471,13 +497,10 @@ export const getStudentProgress = asyncHandler(async (req, res) => {
 
 export const exportAnalyticsCSV = asyncHandler(async (req, res) => {
   const mentorId = req.user._id;
-  const sessions = await Session.find({ mentor: mentorId })
-    .populate("track", "title")
-    .sort({ scheduledAt: -1 })
-    .lean();
+  const sessions = await Session.find({ mentor: mentorId }).populate("track", "title").sort({ scheduledAt: -1 }).lean();
 
   const participantStats = await SessionParticipant.aggregate([
-    { $match: { session: { $in: sessions.map(s => s._id) } } },
+    { $match: { session: { $in: sessions.map((s) => s._id) } } },
     {
       $group: {
         _id: "$session",
@@ -488,7 +511,7 @@ export const exportAnalyticsCSV = asyncHandler(async (req, res) => {
   ]);
 
   const engagementStats = await EngagementScore.aggregate([
-    { $match: { session: { $in: sessions.map(s => s._id) } } },
+    { $match: { session: { $in: sessions.map((s) => s._id) } } },
     {
       $group: {
         _id: "$session",
@@ -498,7 +521,7 @@ export const exportAnalyticsCSV = asyncHandler(async (req, res) => {
   ]);
 
   const feedbackStats = await SessionFeedback.aggregate([
-    { $match: { session: { $in: sessions.map(s => s._id) } } },
+    { $match: { session: { $in: sessions.map((s) => s._id) } } },
     {
       $group: {
         _id: "$session",
@@ -509,13 +532,22 @@ export const exportAnalyticsCSV = asyncHandler(async (req, res) => {
   ]);
 
   const csvRows = [
-    ["Session Title", "Scheduled At", "Status", "Track", "Participants", "Attendance %", "Engagement Score", "Avg Quality Rating"],
+    [
+      "Session Title",
+      "Scheduled At",
+      "Status",
+      "Track",
+      "Participants",
+      "Attendance %",
+      "Engagement Score",
+      "Avg Quality Rating",
+    ],
   ];
 
   for (const session of sessions) {
-    const pStats = participantStats.find(p => String(p._id) === String(session._id));
-    const eStats = engagementStats.find(e => String(e._id) === String(session._id));
-    const fStats = feedbackStats.find(f => String(f._id) === String(session._id));
+    const pStats = participantStats.find((p) => String(p._id) === String(session._id));
+    const eStats = engagementStats.find((e) => String(e._id) === String(session._id));
+    const fStats = feedbackStats.find((f) => String(f._id) === String(session._id));
 
     csvRows.push([
       session.title || "",
@@ -523,15 +555,20 @@ export const exportAnalyticsCSV = asyncHandler(async (req, res) => {
       session.status || "",
       session.track?.title || "",
       String(pStats?.totalParticipants || 0),
-      String(pStats?.totalParticipants > 0 ? Math.round((pStats.verifiedAttendance / pStats.totalParticipants) * 100) : 0),
+      String(
+        pStats?.totalParticipants > 0 ? Math.round((pStats.verifiedAttendance / pStats.totalParticipants) * 100) : 0,
+      ),
       String(Math.round(eStats?.avgScore || 0)),
       fStats?.avgQuality ? String(Number((fStats.avgQuality * 20).toFixed(1))) : "",
     ]);
   }
 
-  const csv = csvRows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
+  const csv = csvRows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
 
   res.setHeader("Content-Type", "text/csv");
-  res.setHeader("Content-Disposition", `attachment; filename="mentor-analytics-${new Date().toISOString().slice(0, 10)}.csv"`);
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="mentor-analytics-${new Date().toISOString().slice(0, 10)}.csv"`,
+  );
   res.send(csv);
 });

@@ -1,5 +1,3 @@
-import { createHash } from "crypto";
-
 const rateLimitBuckets = new Map();
 const CLEANUP_INTERVAL_MS = 60 * 1000;
 
@@ -33,6 +31,7 @@ export const rateLimit = (type = "api", options = {}) => {
   const limits = { ...DEFAULT_LIMITS[type], ...options };
 
   return (req, res, next) => {
+    const now = Date.now();
     const clientKey = getClientKey(req);
     const bucketKey = `${type}:${clientKey}`;
     const bucket = getBucket(bucketKey, limits.windowMs, limits.max);

@@ -5,7 +5,7 @@ import SessionAuditLog from "../models/SessionAuditLog.js";
 
 const SPAM_PATTERNS = [
   /(https?:\/\/[^\s]+){3,}/gi,
-  /(\b\w+\b\s*\1\s*){5,}/gi,
+  /(\b\w+\b)(\s+\1){4,}/gi,
   /[A-Z\s]{20,}/g,
   /(\b(buy|cheap|click|free|money|offer|price|subscribe|win)\b.*){3,}/gi,
 ];
@@ -13,8 +13,6 @@ const SPAM_PATTERNS = [
 const FLOOD_WINDOW_MS = 5000;
 const FLOOD_MAX_MESSAGES = 5;
 const messageTimestamps = new Map();
-
-let timeoutTimestamps = new Map();
 
 export const checkSpam = (text) => {
   for (const pattern of SPAM_PATTERNS) {
@@ -140,7 +138,7 @@ export const timeoutUser = async ({ sessionId, userId, actorId, durationMinutes,
 export const removeParticipant = async ({ sessionId, userId, actorId, reason, ip }) => {
   await SessionParticipant.findOneAndUpdate(
     { session: sessionId, user: userId },
-    { status: "completed", leftAt: new Date() }
+    { status: "completed", leftAt: new Date() },
   );
   await ModerationLog.create({
     session: sessionId,

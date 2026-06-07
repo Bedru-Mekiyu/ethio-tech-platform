@@ -103,7 +103,7 @@ describe("engagementService", () => {
 
     it("should return 0 if participant not found", async () => {
       const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
-      (SessionParticipant.findOne as any).mockResolvedValueOnce(null);
+      vi.mocked(SessionParticipant.findOne).mockResolvedValueOnce(null);
 
       const result = await engagementService.calculateEngagementScore({
         sessionId: "s-none",
@@ -120,9 +120,9 @@ describe("engagementService", () => {
       const HandRaise = (await import("../models/HandRaise.js")).default;
 
       // Give massive activity counts to exceed 100
-      (SessionQuestion.countDocuments as any).mockResolvedValueOnce(20);
-      (ChatMessage.countDocuments as any).mockResolvedValueOnce(50);
-      (HandRaise.countDocuments as any).mockResolvedValueOnce(10);
+      vi.mocked(SessionQuestion.countDocuments).mockResolvedValueOnce(20);
+      vi.mocked(ChatMessage.countDocuments).mockResolvedValueOnce(50);
+      vi.mocked(HandRaise.countDocuments).mockResolvedValueOnce(10);
 
       const result = await engagementService.calculateEngagementScore({
         sessionId: "s1",
@@ -147,7 +147,7 @@ describe("engagementService", () => {
           questionsAsked: expect.any(Number),
           lastCalculatedAt: expect.any(Date),
         }),
-        { upsert: true, new: true }
+        { upsert: true, new: true },
       );
     });
   });
@@ -173,7 +173,7 @@ describe("engagementService", () => {
 
     it("should return zeros if no data is available", async () => {
       const EngagementScore = (await import("../models/EngagementScore.js")).default;
-      (EngagementScore.aggregate as any).mockResolvedValueOnce([]);
+      vi.mocked(EngagementScore.aggregate).mockResolvedValueOnce([]);
 
       const summary = await engagementService.getSessionEngagementSummary("s-empty");
       expect(summary.avgScore).toBe(0);
@@ -194,9 +194,10 @@ describe("engagementService", () => {
 
     it("should calculate engagement if not found and return result", async () => {
       const EngagementScore = (await import("../models/EngagementScore.js")).default;
-      (EngagementScore.findOne as any)
+      vi.mocked(EngagementScore.findOne)
         .mockResolvedValueOnce(null) // first call: not found
-        .mockResolvedValueOnce({    // second call after calculation
+        .mockResolvedValueOnce({
+          // second call after calculation
           session: "s1",
           student: "u-new",
           score: 45,

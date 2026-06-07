@@ -1,6 +1,5 @@
 import BreakoutRoom from "../models/BreakoutRoom.js";
 import BreakoutAssignment from "../models/BreakoutAssignment.js";
-import SessionParticipant from "../models/SessionParticipant.js";
 
 export const createBreakout = async ({ sessionId, parentRoomId, name, maxParticipants, timerSeconds, createdBy }) => {
   const breakout = await BreakoutRoom.create({
@@ -28,13 +27,13 @@ export const assignToBreakout = async ({ breakoutId, userId, movedBy }) => {
   await BreakoutAssignment.findOneAndUpdate(
     { breakoutRoomId: breakoutId, userId },
     { breakoutRoomId: breakoutId, userId, movedBy, movedAt: new Date() },
-    { upsert: true }
+    { upsert: true },
   );
 
   return { assigned: true };
 };
 
-export const bulkAssign = async ({ sessionId, assignments, movedBy }) => {
+export const bulkAssign = async ({ sessionId: _sessionId, assignments, movedBy }) => {
   const results = [];
   for (const { breakoutId, userId } of assignments) {
     try {
@@ -47,12 +46,8 @@ export const bulkAssign = async ({ sessionId, assignments, movedBy }) => {
   return results;
 };
 
-export const closeBreakout = async ({ breakoutId, movedBy }) => {
-  const breakout = await BreakoutRoom.findByIdAndUpdate(
-    breakoutId,
-    { status: "closed" },
-    { new: true }
-  );
+export const closeBreakout = async ({ breakoutId, movedBy: _movedBy }) => {
+  const breakout = await BreakoutRoom.findByIdAndUpdate(breakoutId, { status: "closed" }, { new: true });
 
   if (breakout) {
     await BreakoutAssignment.deleteMany({ breakoutRoomId: breakoutId });
@@ -80,9 +75,11 @@ export const getActiveBreakouts = async (sessionId) => {
 };
 
 export const getBreakoutParticipants = async (breakoutId) => {
-  const assignments = await BreakoutAssignment.find({ breakoutRoomId: breakoutId })
-    .populate("userId", "fullName avatar");
-  return assignments.map(a => a.userId);
+  const assignments = await BreakoutAssignment.find({ breakoutRoomId: breakoutId }).populate(
+    "userId",
+    "fullName avatar",
+  );
+  return assignments.map((a) => a.userId);
 };
 
 export const startBreakoutTimer = async (breakoutId) => {

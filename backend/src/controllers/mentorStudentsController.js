@@ -2,7 +2,6 @@ import Session from "../models/Session.js";
 import SessionParticipant from "../models/SessionParticipant.js";
 import EngagementScore from "../models/EngagementScore.js";
 import MentorStudentFeedback from "../models/MentorStudentFeedback.js";
-import User from "../models/User.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { sendResponse } from "../utils/apiResponse.js";
 
@@ -106,13 +105,16 @@ export const getMentorStudents = asyncHandler(async (req, res) => {
     const engagementScore = engData && engData.count > 0 ? Math.round(engData.total / engData.count) : 0;
     const feedbackHistory = feedbackByStudent.get(uid) || [];
 
-    const avgFeedbackScore = feedbackHistory.length > 0
-      ? feedbackHistory.reduce((s, f) => s + (f.participationScore + f.communicationScore + f.professionalismScore) / 3, 0) / feedbackHistory.length
-      : 0;
+    const avgFeedbackScore =
+      feedbackHistory.length > 0
+        ? feedbackHistory.reduce(
+            (s, f) => s + (f.participationScore + f.communicationScore + f.professionalismScore) / 3,
+            0,
+          ) / feedbackHistory.length
+        : 0;
 
-    const attendanceRate = student.totalSessions > 0
-      ? Math.round((student.sessionsAttended / student.totalSessions) * 100)
-      : 0;
+    const attendanceRate =
+      student.totalSessions > 0 ? Math.round((student.sessionsAttended / student.totalSessions) * 100) : 0;
 
     totalEngagement += engagementScore;
     totalAttendanceRate += attendanceRate;
