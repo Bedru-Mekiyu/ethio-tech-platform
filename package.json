@@ -17,6 +17,9 @@
     "lint": "npm run lint -w frontend && npm run lint -w backend",
     "prepare": "husky || true"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.61.1"
+  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "prettier --write",
