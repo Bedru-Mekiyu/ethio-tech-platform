@@ -16,7 +16,7 @@ import validateRequest from "../middlewares/validateRequest.js";
 import { avatarSchemas, userSchemas } from "../validators/schemas.js";
 import ApiError from "../utils/ApiError.js";
 import multer from "multer";
-import { validateAvatarFile, avatarUploadRateLimit } from "../middlewares/avatarValidation.ts";
+import { validateAvatarFile, avatarUploadRateLimit } from "../middlewares/avatarValidation.js";
 
 const router = Router();
 
