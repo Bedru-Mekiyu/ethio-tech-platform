@@ -28,9 +28,7 @@ export const useBreakoutRooms = ({ sessionId, socket }: UseBreakoutRoomsOptions)
   const fetchBreakouts = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await api.get<ApiResponse<{ breakouts: BreakoutRoom[] }>>(
-        `/sessions/${sessionId}/breakouts`
-      );
+      const { data } = await api.get<ApiResponse<{ breakouts: BreakoutRoom[] }>>(`/sessions/${sessionId}/breakouts`);
       setBreakouts(data.data.breakouts || []);
     } catch {
       // silently fail
@@ -40,25 +38,24 @@ export const useBreakoutRooms = ({ sessionId, socket }: UseBreakoutRoomsOptions)
   }, [sessionId]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchBreakouts();
   }, [fetchBreakouts]);
 
   useEffect(() => {
     const handleCreated = (payload: unknown) => {
       const breakout = payload as BreakoutRoom;
-      setBreakouts(prev => [...prev, breakout]);
+      setBreakouts((prev) => [...prev, breakout]);
     };
 
     const handleUpdated = (payload: unknown) => {
       const breakout = payload as BreakoutRoom;
-      setBreakouts(prev =>
-        prev.map(b => (b._id === breakout._id ? { ...b, ...breakout } : b))
-      );
+      setBreakouts((prev) => prev.map((b) => (b._id === breakout._id ? { ...b, ...breakout } : b)));
     };
 
     const handleClosed = (payload: unknown) => {
       const { breakoutId } = payload as { breakoutId: string };
-      setBreakouts(prev => prev.filter(b => b._id !== breakoutId));
+      setBreakouts((prev) => prev.filter((b) => b._id !== breakoutId));
     };
 
     const unsubCreated = socket.on("breakout:created", handleCreated);
@@ -74,33 +71,31 @@ export const useBreakoutRooms = ({ sessionId, socket }: UseBreakoutRoomsOptions)
 
   const createBreakout = useCallback(
     async (name: string, maxParticipants?: number, timerSeconds?: number) => {
-      const { data } = await api.post<ApiResponse<{ breakout: BreakoutRoom }>>(
-        `/sessions/${sessionId}/breakouts`,
-        { name, maxParticipants, timerSeconds }
-      );
+      const { data } = await api.post<ApiResponse<{ breakout: BreakoutRoom }>>(`/sessions/${sessionId}/breakouts`, {
+        name,
+        maxParticipants,
+        timerSeconds,
+      });
       const breakout = data.data.breakout;
-      setBreakouts(prev => [...prev, breakout]);
+      setBreakouts((prev) => [...prev, breakout]);
       return breakout;
     },
-    [sessionId]
+    [sessionId],
   );
 
   const assignParticipant = useCallback(
     async (breakoutId: string, userId: string) => {
-      await api.post(
-        `/sessions/${sessionId}/breakouts/${breakoutId}/assign`,
-        { userId }
-      );
+      await api.post(`/sessions/${sessionId}/breakouts/${breakoutId}/assign`, { userId });
     },
-    [sessionId]
+    [sessionId],
   );
 
   const closeBreakout = useCallback(
     async (breakoutId: string) => {
       await api.post(`/sessions/${sessionId}/breakouts/${breakoutId}/close`);
-      setBreakouts(prev => prev.filter(b => b._id !== breakoutId));
+      setBreakouts((prev) => prev.filter((b) => b._id !== breakoutId));
     },
-    [sessionId]
+    [sessionId],
   );
 
   const closeAllBreakouts = useCallback(async () => {
@@ -111,14 +106,12 @@ export const useBreakoutRooms = ({ sessionId, socket }: UseBreakoutRoomsOptions)
   const startTimer = useCallback(
     async (breakoutId: string) => {
       const { data } = await api.post<ApiResponse<{ breakout: BreakoutRoom }>>(
-        `/sessions/${sessionId}/breakouts/${breakoutId}/timer`
+        `/sessions/${sessionId}/breakouts/${breakoutId}/timer`,
       );
       const breakout = data.data.breakout;
-      setBreakouts(prev =>
-        prev.map(b => (b._id === breakout._id ? { ...b, ...breakout } : b))
-      );
+      setBreakouts((prev) => prev.map((b) => (b._id === breakout._id ? { ...b, ...breakout } : b)));
     },
-    [sessionId]
+    [sessionId],
   );
 
   return {

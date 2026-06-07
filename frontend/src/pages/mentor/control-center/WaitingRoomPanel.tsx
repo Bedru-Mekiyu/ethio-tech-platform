@@ -20,6 +20,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
   // Play Programmatic Web Audio API chime when queue increases
   const playChime = () => {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
@@ -31,7 +32,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
       osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
       osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.08); // E5
       osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.16); // G5
-      osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.24); // C6
+      osc.frequency.setValueAtTime(1046.5, ctx.currentTime + 0.24); // C6
 
       gain.gain.setValueAtTime(0.12, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
@@ -70,7 +71,9 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
           <div>
             <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
               Waiting Room
-              <Badge variant="warning" className="h-5 px-1.5">{queue.length} waiting</Badge>
+              <Badge variant="warning" className="h-5 px-1.5">
+                {queue.length} waiting
+              </Badge>
             </h3>
           </div>
         </div>
@@ -102,12 +105,17 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
           {queue.map((w) => (
-            <div key={w.id} className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all">
+            <div
+              key={w.id}
+              className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all"
+            >
               <div className="flex items-center gap-2.5 min-w-0">
                 <Avatar name={w.name} src={w.avatar} size="sm" className="h-8 w-8 rounded-lg shrink-0" />
                 <div className="min-w-0">
                   <p className="text-xs font-semibold text-white truncate">{w.name}</p>
-                  <p className="text-[9px] text-[var(--text-muted)]">Joined {new Date(w.joinedAt).toLocaleTimeString()}</p>
+                  <p className="text-[9px] text-[var(--text-muted)]">
+                    Joined {new Date(w.joinedAt).toLocaleTimeString()}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">

@@ -15,17 +15,11 @@ const ConversationItem: React.FC<{
 
   return (
     <button
-      className={`w-full text-left p-3 hover:bg-muted/50 transition-colors ${
-        isActive ? "bg-muted" : ""
-      }`}
+      className={`w-full text-left p-3 hover:bg-muted/50 transition-colors ${isActive ? "bg-muted" : ""}`}
       onClick={onClick}
     >
       <div className="flex items-center gap-3">
-        <Avatar
-          src={otherParticipant?.avatar}
-          name={otherParticipant?.fullName || "?"}
-          className="h-8 w-8"
-        />
+        <Avatar src={otherParticipant?.avatar} name={otherParticipant?.fullName || "?"} className="h-8 w-8" />
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between">
             <span className="font-medium text-sm truncate">
@@ -43,9 +37,7 @@ const ConversationItem: React.FC<{
             )}
           </div>
           {conversation.lastMessagePreview && (
-            <p className="text-xs text-muted-foreground truncate mt-0.5">
-              {conversation.lastMessagePreview}
-            </p>
+            <p className="text-xs text-muted-foreground truncate mt-0.5">{conversation.lastMessagePreview}</p>
           )}
         </div>
       </div>
@@ -53,23 +45,10 @@ const ConversationItem: React.FC<{
   );
 };
 
-const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({
-  message,
-  isOwn,
-}) => (
+const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({ message, isOwn }) => (
   <div className={`flex ${isOwn ? "justify-end" : "justify-start"} mb-2`}>
-    <div
-      className={`max-w-[70%] rounded-lg px-3 py-2 ${
-        isOwn
-          ? "bg-primary text-primary-foreground"
-          : "bg-muted"
-      }`}
-    >
-      {!isOwn && (
-        <div className="text-xs font-medium mb-1">
-          {message.senderId.fullName}
-        </div>
-      )}
+    <div className={`max-w-[70%] rounded-lg px-3 py-2 ${isOwn ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+      {!isOwn && <div className="text-xs font-medium mb-1">{message.senderId.fullName}</div>}
       <p className="text-sm">{message.text}</p>
       <div className="text-[10px] opacity-70 mt-1 text-right">
         {new Date(message.createdAt).toLocaleTimeString([], {
@@ -84,6 +63,7 @@ const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({
 export const MessagesPage: React.FC = () => {
   const user = useAuthStore((s) => s.user);
   const currentUserId = user?.id || "";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const socket = acquireSocketConnection() as any;
 
   const {
@@ -125,7 +105,7 @@ export const MessagesPage: React.FC = () => {
     setMobileShowThread(false);
   };
 
-  const activeConversation = conversations.find(c => c._id === activeConversationId);
+  const activeConversation = conversations.find((c) => c._id === activeConversationId);
 
   return (
     <div className="flex h-[calc(100vh-4rem)]">
@@ -187,21 +167,15 @@ export const MessagesPage: React.FC = () => {
               {loadingMessages ? (
                 <div className="text-sm text-muted-foreground">Loading messages...</div>
               ) : messages.length === 0 ? (
-                <div className="text-sm text-muted-foreground text-center mt-8">
-                  No messages yet. Say hello!
-                </div>
+                <div className="text-sm text-muted-foreground text-center mt-8">No messages yet. Say hello!</div>
               ) : (
                 messages.map((msg) => (
-                  <MessageBubble
-                    key={msg._id}
-                    message={msg}
-                    isOwn={msg.senderId._id === currentUserId}
-                  />
+                  <MessageBubble key={msg._id} message={msg} isOwn={msg.senderId._id === currentUserId} />
                 ))
               )}
               {typingUsers[activeConversationId || ""]?.length > 0 && (
                 <div className="px-4 py-2 text-sm text-gray-400 italic">
-                  {typingUsers[activeConversationId!].map(t => t.userName).join(", ")} 
+                  {typingUsers[activeConversationId!].map((t) => t.userName).join(", ")}
                   {typingUsers[activeConversationId!].length === 1 ? "is" : "are"} typing...
                 </div>
               )}

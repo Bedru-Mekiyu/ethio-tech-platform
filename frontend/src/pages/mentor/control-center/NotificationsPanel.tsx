@@ -24,6 +24,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
   const playEventSound = (type: string) => {
     if (!soundEnabled) return;
     try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = new AudioCtx();
@@ -31,7 +32,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
       const gain = ctx.createGain();
 
       osc.type = "sine";
-      
+
       // Different frequencies/notes for different events
       if (type === "hand") {
         osc.frequency.setValueAtTime(660, ctx.currentTime); // E5
@@ -146,7 +147,11 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
           <div>
             <h3 className="text-sm font-semibold text-white flex items-center gap-2">
               Real-time Alerts
-              {unreadCount > 0 && <Badge variant="danger" className="h-5 px-1.5">{unreadCount}</Badge>}
+              {unreadCount > 0 && (
+                <Badge variant="danger" className="h-5 px-1.5">
+                  {unreadCount}
+                </Badge>
+              )}
             </h3>
           </div>
         </div>
@@ -186,14 +191,10 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
                 n.read ? "border-white/5 bg-white/[0.01]" : "border-primary/20 bg-primary/[0.01]"
               }`}
             >
-              <div className="bg-white/5 p-1.5 rounded-lg shrink-0 mt-0.5">
-                {getNotifIcon(n.type)}
-              </div>
+              <div className="bg-white/5 p-1.5 rounded-lg shrink-0 mt-0.5">{getNotifIcon(n.type)}</div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs text-white font-medium leading-normal">{n.message}</p>
-                <p className="text-[9px] text-[var(--text-secondary)] mt-1">
-                  {n.timestamp.toLocaleTimeString()}
-                </p>
+                <p className="text-[9px] text-[var(--text-secondary)] mt-1">{n.timestamp.toLocaleTimeString()}</p>
               </div>
             </div>
           ))
