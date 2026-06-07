@@ -1,8 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/composites/EmptyState";
 
+interface PollOption {
+  text: string;
+  percentage?: number;
+}
+
+interface Poll {
+  pollId: string;
+  question: string;
+  status: string;
+  options: PollOption[];
+  hasVoted?: boolean;
+  totalVotes?: number;
+}
+
 interface StudentPollsPanelProps {
-  polls: any[];
+  polls: Poll[];
   onVote: (pollId: string, optionIndex: number) => void;
 }
 
@@ -20,7 +34,7 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
               <div key={poll.pollId} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4 space-y-4">
                 <p className="font-medium text-white">{poll.question}</p>
                 <div className="space-y-2">
-                  {poll.options.map((option: any, index: number) => (
+                  {poll.options.map((option: PollOption, index: number) => (
                     <Button
                       key={index}
                       variant="outline"
@@ -49,12 +63,18 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
           <div className="space-y-4">
             <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Previous Polls</h4>
             {closedPolls.map((poll) => (
-              <div key={poll.pollId} className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4 space-y-4 opacity-80">
+              <div
+                key={poll.pollId}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4 space-y-4 opacity-80"
+              >
                 <p className="font-medium text-white">{poll.question}</p>
                 <div className="space-y-2">
-                  {poll.options.map((option: any, index: number) => (
-                    <div key={index} className="relative overflow-hidden rounded-lg bg-[var(--bg-base)] border border-[var(--border)]">
-                      <div 
+                  {poll.options.map((option: PollOption, index: number) => (
+                    <div
+                      key={index}
+                      className="relative overflow-hidden rounded-lg bg-[var(--bg-base)] border border-[var(--border)]"
+                    >
+                      <div
                         className="absolute inset-0 bg-primary/20 transition-all duration-500"
                         style={{ width: `${option.percentage || 0}%` }}
                       />
@@ -73,10 +93,7 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
 
         {polls.length === 0 && (
           <div className="mt-8">
-            <EmptyState
-              title="No active polls"
-              description="The mentor hasn't started any polls yet."
-            />
+            <EmptyState title="No active polls" description="The mentor hasn't started any polls yet." />
           </div>
         )}
       </div>

@@ -35,7 +35,7 @@ const BreakoutCard: React.FC<{
   React.useEffect(() => {
     if (timeLeft === null || timeLeft <= 0) return;
     const timer = setInterval(() => {
-      setTimeLeft(prev => (prev !== null && prev > 0 ? prev - 1 : 0));
+      setTimeLeft((prev) => (prev !== null && prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
   }, [timeLeft]);
@@ -53,9 +53,7 @@ const BreakoutCard: React.FC<{
       <CardContent className="pt-0">
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
           <span>Status: {breakout.status}</span>
-          {timeLeft !== null && timeLeft > 0 && (
-            <span className="font-mono text-primary">{formatTime(timeLeft)}</span>
-          )}
+          {timeLeft !== null && timeLeft > 0 && <span className="font-mono text-primary">{formatTime(timeLeft)}</span>}
         </div>
         <div className="flex gap-1">
           {breakout.status !== "closed" && (
@@ -79,18 +77,14 @@ const BreakoutCard: React.FC<{
   );
 };
 
-export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({
-  sessionId,
-  isHost,
-}) => {
-  const {
-    breakouts,
-    loading,
-    createBreakout,
-    closeBreakout,
-    closeAllBreakouts,
-    startTimer,
-  } = useBreakoutRooms({ sessionId, socket: {} as any });
+export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({ sessionId, isHost }) => {
+  const { breakouts, loading, createBreakout, closeBreakout, closeAllBreakouts, startTimer } = useBreakoutRooms({
+    sessionId,
+    socket: {
+      emit: () => {},
+      on: () => () => {},
+    },
+  });
 
   const [newName, setNewName] = useState("");
   const [maxP, setMaxP] = useState(10);
@@ -147,9 +141,7 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({
         <div className="text-xs text-muted-foreground">Loading...</div>
       ) : (
         <div className="flex flex-col gap-1">
-          {breakouts.length === 0 && (
-            <div className="text-xs text-muted-foreground">No breakout rooms</div>
-          )}
+          {breakouts.length === 0 && <div className="text-xs text-muted-foreground">No breakout rooms</div>}
           {breakouts.map((b) => (
             <BreakoutCard
               key={b._id}

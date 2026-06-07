@@ -32,14 +32,16 @@ export function Tabs({
   value,
   children,
 }: TabsProps) {
-  if (items) {
-    const [activeTab, setActiveTab] = useState(defaultValue || items[0]?.value || "");
-    const baseId = useId();
-    const tabListRef = useRef<HTMLDivElement>(null);
+  const [tabState, setTabState] = useState(defaultValue);
+  const tabId = useId();
+  const tabRef = useRef<HTMLDivElement>(null);
 
-    const handleTabChange = (value: string) => {
-      setActiveTab(value);
-      onValueChange?.(value);
+  if (items) {
+    const activeTab = tabState || items[0]?.value || "";
+
+    const setActiveTab = (v: string) => {
+      setTabState(v);
+      onValueChange?.(v);
     };
 
     const activeItem = items.find((item) => item.value === activeTab);
@@ -64,25 +66,23 @@ export function Tabs({
 
       e.preventDefault();
       const nextValue = enabledItems[nextIndex].value;
-      handleTabChange(nextValue);
+      setActiveTab(nextValue);
 
-      const buttons = tabListRef.current?.querySelectorAll<HTMLButtonElement>("button[role='tab']");
-      const nextButton = Array.from(buttons || []).find(
-        (btn) => btn.getAttribute("data-value") === nextValue
-      );
+      const buttons = tabRef.current?.querySelectorAll<HTMLButtonElement>("button[role='tab']");
+      const nextButton = Array.from(buttons || []).find((btn) => btn.getAttribute("data-value") === nextValue);
       nextButton?.focus();
     };
 
     return (
       <div className={cn("space-y-4", className)}>
         <div
-          ref={tabListRef}
+          ref={tabRef}
           onKeyDown={handleKeyDown}
           className={cn(
             "flex items-center",
             variant === "pill"
               ? "gap-2 rounded-full border border-white/10 bg-white/5 p-1"
-              : "gap-6 border-b border-white/10 pb-0"
+              : "gap-6 border-b border-white/10 pb-0",
           )}
           role="tablist"
         >
@@ -95,27 +95,25 @@ export function Tabs({
                 role="tab"
                 data-value={item.value}
                 aria-selected={isActive}
-                aria-controls={`tab-content-${baseId}-${item.value}`}
-                id={`tab-trigger-${baseId}-${item.value}`}
+                aria-controls={`tab-content-${tabId}-${item.value}`}
+                id={`tab-trigger-${tabId}-${item.value}`}
                 disabled={item.disabled}
-                onClick={() => handleTabChange(item.value)}
+                onClick={() => setActiveTab(item.value)}
                 className={cn(
                   "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
                   variant === "pill"
                     ? "min-h-10 rounded-full px-4 py-2 text-[var(--text-secondary)] hover:text-white"
                     : "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white",
                   isActive && (variant === "pill" ? "text-[var(--bg-base)]" : "text-primary"),
-                  triggerClassName
+                  triggerClassName,
                 )}
               >
                 {isActive && (
                   <motion.span
-                    layoutId={`active-indicator-${baseId}`}
+                    layoutId={`active-indicator-${tabId}`}
                     className={cn(
                       "absolute inset-0 -z-10",
-                      variant === "pill"
-                        ? "rounded-full bg-primary"
-                        : "border-b-2 border-primary"
+                      variant === "pill" ? "rounded-full bg-primary" : "border-b-2 border-primary",
                     )}
                     style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -129,10 +127,13 @@ export function Tabs({
 
         {activeItem ? (
           <div
-            id={`tab-content-${baseId}-${activeTab}`}
+            id={`tab-content-${tabId}-${activeTab}`}
             role="tabpanel"
-            aria-labelledby={`tab-trigger-${baseId}-${activeTab}`}
-            className={cn("fade-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl", contentClassName)}
+            aria-labelledby={`tab-trigger-${tabId}-${activeTab}`}
+            className={cn(
+              "fade-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl",
+              contentClassName,
+            )}
           >
             {activeItem.content}
           </div>
@@ -142,20 +143,17 @@ export function Tabs({
   }
 
   const isControlled = value !== undefined;
-  const [localValue, setLocalValue] = useState(defaultValue);
-  const activeVal = isControlled ? value : localValue;
+  const activeVal = isControlled ? value : tabState;
 
   const setValue = (val: string) => {
     if (!isControlled) {
-      setLocalValue(val);
+      setTabState(val);
     }
     onValueChange?.(val);
   };
 
-  const tabsId = useId();
-
   return (
-    <TabsContext.Provider value={{ value: activeVal, setValue, variant, tabsId }}>
+    <TabsContext.Provider value={{ value: activeVal, setValue, variant, tabsId: tabId }}>
       <div className={cn("space-y-4", className)}>{children}</div>
     </TabsContext.Provider>
   );
@@ -236,7 +234,7 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
         variant === "pill"
           ? "gap-2 rounded-full border border-white/10 bg-white/5 p-1"
           : "gap-6 border-b border-white/10 pb-0",
-        className
+        className,
       )}
       role="tablist"
     >
@@ -271,7 +269,7 @@ export function TabsTrigger({
           ? "min-h-10 rounded-full px-4 py-2 text-[var(--text-secondary)] hover:text-white"
           : "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white",
         isActive && (variant === "pill" ? "text-[var(--bg-base)]" : "text-primary"),
-        className
+        className,
       )}
       {...props}
     >
@@ -280,9 +278,7 @@ export function TabsTrigger({
           layoutId={`active-indicator-${tabsId}`}
           className={cn(
             "absolute inset-0 -z-10",
-            variant === "pill"
-              ? "rounded-full bg-primary"
-              : "border-b-2 border-primary"
+            variant === "pill" ? "rounded-full bg-primary" : "border-b-2 border-primary",
           )}
           style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -293,7 +289,15 @@ export function TabsTrigger({
   );
 }
 
-export function TabsContent({ value, children, className }: { value: string; children: ReactNode; className?: string }) {
+export function TabsContent({
+  value,
+  children,
+  className,
+}: {
+  value: string;
+  children: ReactNode;
+  className?: string;
+}) {
   const ctx = useContext(TabsContext);
   const isActive = ctx?.value === value;
   const tabsId = ctx?.tabsId || "manual-tab";
@@ -305,10 +309,12 @@ export function TabsContent({ value, children, className }: { value: string; chi
       id={`tab-content-${tabsId}-${value}`}
       role="tabpanel"
       aria-labelledby={`tab-trigger-${tabsId}-${value}`}
-      className={cn("fade-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl", className)}
+      className={cn(
+        "fade-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-xl",
+        className,
+      )}
     >
       {children}
     </div>
   );
 }
-

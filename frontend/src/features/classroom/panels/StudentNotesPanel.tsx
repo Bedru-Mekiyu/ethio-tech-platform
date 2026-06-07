@@ -1,8 +1,14 @@
 import { EmptyState } from "@/components/composites/EmptyState";
 import { Sparkles } from "lucide-react";
 
+interface SessionNote {
+  summary?: string;
+  actionItems?: string[];
+  keyTakeaways?: string[];
+}
+
 interface StudentNotesPanelProps {
-  notes: any;
+  notes: SessionNote;
 }
 
 export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {

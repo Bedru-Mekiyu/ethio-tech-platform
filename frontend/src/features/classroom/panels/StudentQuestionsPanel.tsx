@@ -5,8 +5,17 @@ import { EmptyState } from "@/components/composites/EmptyState";
 import { ThumbsUp, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+interface Question {
+  questionId: string;
+  text: string;
+  userName: string;
+  status: string;
+  upvoteCount?: number;
+  hasUpvoted?: boolean;
+}
+
 interface StudentQuestionsPanelProps {
-  questions: any[];
+  questions: Question[];
   onAskQuestion: (text: string) => void;
   onUpvote: (questionId: string) => void;
   currentUserId?: string;
@@ -22,8 +31,8 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
     setDraft("");
   };
 
-  const pendingQuestions = questions.filter(q => q.status === "pending" || q.status === "answering");
-  const answeredQuestions = questions.filter(q => q.status === "answered");
+  const pendingQuestions = questions.filter((q) => q.status === "pending" || q.status === "answering");
+  const answeredQuestions = questions.filter((q) => q.status === "answered");
 
   return (
     <div className="flex flex-col h-full space-y-4">
@@ -38,27 +47,25 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
           <Send size={16} />
         </Button>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto space-y-4">
         {pendingQuestions.length > 0 && (
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Up Next</h4>
             {pendingQuestions.map((q) => (
-              <div key={q.questionId} className={cn(
-                "rounded-2xl border border-[var(--border)] p-3",
-                q.status === "answering" ? "bg-primary/10 border-primary/30" : "bg-white/5"
-              )}>
+              <div
+                key={q.questionId}
+                className={cn(
+                  "rounded-2xl border border-[var(--border)] p-3",
+                  q.status === "answering" ? "bg-primary/10 border-primary/30" : "bg-white/5",
+                )}
+              >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
                     <p className="text-sm text-white">{q.text}</p>
                     <p className="mt-1 text-xs text-[var(--text-muted)]">{q.userName}</p>
                   </div>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="h-8 px-2 gap-1"
-                    onClick={() => onUpvote(q.questionId)}
-                  >
+                  <Button variant="outline" size="sm" className="h-8 px-2 gap-1" onClick={() => onUpvote(q.questionId)}>
                     <ThumbsUp size={14} className={q.hasUpvoted ? "text-primary" : ""} />
                     <span>{q.upvoteCount || 0}</span>
                   </Button>
@@ -88,10 +95,7 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
 
         {questions.length === 0 && (
           <div className="mt-8">
-            <EmptyState
-              title="No questions yet"
-              description="Be the first to ask the mentor a question."
-            />
+            <EmptyState title="No questions yet" description="Be the first to ask the mentor a question." />
           </div>
         )}
       </div>

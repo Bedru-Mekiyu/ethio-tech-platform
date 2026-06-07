@@ -3,18 +3,36 @@ import { EmptyState } from "@/components/composites/EmptyState";
 import { Download, Link2, FileText, Video, ImageIcon, FileArchive } from "lucide-react";
 import { api } from "@/services/api";
 
+interface Resource {
+  _id?: string;
+  id?: string;
+  title?: string;
+  name?: string;
+  type?: string;
+  fileType?: string;
+  size?: string;
+  url: string;
+}
+
 interface StudentResourcesPanelProps {
-  resources: any[];
+  resources: Resource[];
   sessionId: string;
 }
 
 const getResourceIcon = (type: string) => {
   switch (type?.toLowerCase()) {
-    case 'pdf': case 'document': return <FileText size={16} />;
-    case 'video': return <Video size={16} />;
-    case 'image': return <ImageIcon size={16} />;
-    case 'archive': case 'zip': return <FileArchive size={16} />;
-    default: return <Link2 size={16} />;
+    case "pdf":
+    case "document":
+      return <FileText size={16} />;
+    case "video":
+      return <Video size={16} />;
+    case "image":
+      return <ImageIcon size={16} />;
+    case "archive":
+    case "zip":
+      return <FileArchive size={16} />;
+    default:
+      return <Link2 size={16} />;
   }
 };
 
@@ -35,7 +53,10 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
       <div className="flex-1 overflow-y-auto space-y-3">
         {resources.length > 0 ? (
           resources.map((resource) => (
-            <div key={resource._id || resource.id} className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4">
+            <div
+              key={resource._id || resource.id}
+              className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4"
+            >
               <div className="flex items-center gap-3 min-w-0">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-primary">
                   {getResourceIcon(resource.type || resource.fileType)}

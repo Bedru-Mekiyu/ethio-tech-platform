@@ -12,7 +12,7 @@ interface RaisedHandsPanelProps {
 }
 
 export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelProps) {
-  const [now, setNow] = useState(Date.now());
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
     const timer = setInterval(() => setNow(Date.now()), 15000);
@@ -37,7 +37,9 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
           <div>
             <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
               Raised Hands
-              <Badge variant="default" className="h-5 px-1.5">{hands.length}</Badge>
+              <Badge variant="default" className="h-5 px-1.5">
+                {hands.length}
+              </Badge>
             </h3>
           </div>
         </div>
@@ -60,7 +62,10 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
           {hands.map((h, i) => (
-            <div key={h.userId} className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all">
+            <div
+              key={h.userId}
+              className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all"
+            >
               <div className="flex items-center gap-2.5 min-w-0">
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] font-bold text-primary">
                   {h.queuePosition || i + 1}
