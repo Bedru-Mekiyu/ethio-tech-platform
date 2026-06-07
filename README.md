@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  <img src="frontend/src/assets/hero.png" alt="EthioTech Platform" width="100%" />
+  <img src="screenshots/presentation.png" alt="EthioTech Platform Presentation" width="100%" />
 </p>
 
 <h1 align="center">EthioTech Platform</h1>
