@@ -61,7 +61,7 @@ const VALID_TRANSITIONS = {
 };
 
 sessionSchema.pre("save", function (next) {
-  if (this.isModified("status")) {
+  if (this.isModified("status") && !this.isNew) {
     const prevStatus = this._original?.status;
     if (!prevStatus) {
       return next(new Error("Use transitionTo() to change session status"));

@@ -7,6 +7,9 @@ import mongoose from "mongoose";
 
 const JWT_SECRET = "test-secret";
 const LIVE_CLASSROOM_SECRET = "test-live-secret";
+const VALID_USER_ID = "507f1f77bcf86cd799439011";
+const VALID_USER_ID2 = "507f1f77bcf86cd799439012";
+const VALID_SESSION_ID = "507f1f77bcf86cd799439013";
 
 let httpServer: ReturnType<typeof createServer>;
 let ioServer: Server;
@@ -37,7 +40,7 @@ vi.mock("../models/User.js", () => ({
 vi.mock("../models/SessionParticipant.js", () => ({
   default: {
     countDocuments: vi.fn().mockResolvedValue(0),
-    findOne: vi.fn().mockResolvedValue(null),
+    findOne: vi.fn().mockReturnValue({ select: vi.fn().mockResolvedValue(null) }),
     findOneAndUpdate: vi.fn().mockResolvedValue({}),
     create: vi.fn().mockResolvedValue({}),
   },
@@ -58,7 +61,24 @@ vi.mock("../models/SessionPoll.js", () => ({
 vi.mock("../models/ChatMessage.js", () => ({
   default: {
     create: vi.fn().mockResolvedValue({}),
-    find: vi.fn().mockReturnValue({ sort: vi.fn().mockReturnThis(), limit: vi.fn().mockReturnThis(), lean: vi.fn().mockResolvedValue([]) }),
+    find: vi
+      .fn()
+      .mockReturnValue({
+        sort: vi.fn().mockReturnThis(),
+        limit: vi.fn().mockReturnThis(),
+        lean: vi.fn().mockResolvedValue([]),
+      }),
+    countDocuments: vi.fn().mockResolvedValue(0),
+  },
+}));
+
+vi.mock("../models/Session.js", () => ({
+  default: {
+    findById: vi.fn().mockReturnValue({
+      select: vi
+        .fn()
+        .mockResolvedValue({ mentor: VALID_USER_ID, admissionMode: "waiting-room", title: "Test Session" }),
+    }),
   },
 }));
 
@@ -87,14 +107,16 @@ vi.mock("../services/handRaiseService.js", () => ({
 }));
 
 vi.mock("../services/sessionQuestionService.js", () => ({
-  createQuestion: vi.fn().mockImplementation(({ text }) => Promise.resolve({
-    _id: new mongoose.Types.ObjectId(),
-    text,
-    status: "pending",
-    upvoteCount: 0,
-    isPinned: false,
-    student: { _id: "student1", fullName: "Student" },
-  })),
+  createQuestion: vi.fn().mockImplementation(({ text }) =>
+    Promise.resolve({
+      _id: new mongoose.Types.ObjectId(),
+      text,
+      status: "pending",
+      upvoteCount: 0,
+      isPinned: false,
+      student: { _id: "student1", fullName: "Student" },
+    }),
+  ),
   upvoteQuestion: vi.fn().mockResolvedValue({ upvoteCount: 1, upvoted: true }),
   getSessionQuestions: vi.fn().mockResolvedValue([]),
 }));
@@ -150,7 +172,13 @@ function createClient(token: string) {
     const sock = Client(getConnectUrl(), {
       transports: ["websocket"],
       forceNew: true,
-      auth: { token, liveAccessToken: jwt.sign({ type: "live-classroom", userId: "test-user", sessionId: "test-session" }, LIVE_CLASSROOM_SECRET) },
+      auth: {
+        token,
+        liveAccessToken: jwt.sign(
+          { type: "live-classroom", userId: VALID_USER_ID, sessionId: VALID_SESSION_ID },
+          LIVE_CLASSROOM_SECRET,
+        ),
+      },
     });
     sock.on("connect", () => resolve(sock));
     sock.on("connect_error", reject);
@@ -160,18 +188,18 @@ function createClient(token: string) {
 
 describe("Socket Workflow Tests", () => {
   it("should connect with valid JWT token and join a room", async () => {
-    const token = jwt.sign({ id: "test-user", role: "mentor" }, JWT_SECRET);
+    const token = jwt.sign({ id: VALID_USER_ID, role: "mentor" }, JWT_SECRET);
     clientSocket = await createClient(token);
     expect(clientSocket.connected).toBe(true);
     await new Promise<void>((resolve) => {
-      clientSocket.emit("join-room", "session-test-session");
+      clientSocket.emit("join-room", `session-${VALID_SESSION_ID}`);
       clientSocket.on("room:state", () => resolve());
       setTimeout(resolve, 500);
     });
   });
 
   it("should reject connection with invalid token", async () => {
-    const token = jwt.sign({ id: "test-user", role: "mentor" }, "wrong-secret");
+    const token = jwt.sign({ id: VALID_USER_ID, role: "mentor" }, "wrong-secret");
     try {
       clientSocket2 = await createClient(token);
       expect(true).toBe(false);
@@ -182,12 +210,12 @@ describe("Socket Workflow Tests", () => {
 
   it("should join a room and receive presence", () => {
     return new Promise<void>((done) => {
-      const token = jwt.sign({ id: "test-user-2", role: "student" }, JWT_SECRET);
+      const token = jwt.sign({ id: VALID_USER_ID2, role: "student" }, JWT_SECRET);
       createClient(token).then((sock) => {
         clientSocket2 = sock;
-        sock.emit("join-room", "session-test-session");
+        sock.emit("join-room", `session-${VALID_SESSION_ID}`);
         sock.on("room:state", (payload) => {
-          expect(payload.roomId).toBe("session-test-session");
+          expect(payload.roomId).toBe(`session-${VALID_SESSION_ID}`);
           done();
         });
       });
@@ -196,9 +224,9 @@ describe("Socket Workflow Tests", () => {
 
   it("should emit hand:raised event", () => {
     return new Promise<void>((done, reject) => {
-      clientSocket.emit("hand:raise", { roomId: "session-test-session" });
+      clientSocket.emit("hand:raise", { roomId: `session-${VALID_SESSION_ID}` });
       clientSocket.on("hand:raised", (payload) => {
-        expect(payload.roomId).toBe("session-test-session");
+        expect(payload.roomId).toBe(`session-${VALID_SESSION_ID}`);
         done();
       });
       setTimeout(() => reject(new Error("Hand raise timed out")), 3000);
@@ -208,7 +236,7 @@ describe("Socket Workflow Tests", () => {
   it("should emit question:new event", () => {
     return new Promise<void>((done, reject) => {
       clientSocket.emit("question:submit", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         questionId: "q1",
         text: "What is an API?",
       });
@@ -230,7 +258,7 @@ describe("Socket Workflow Tests", () => {
       };
       clientSocket.on("admission:update", handler);
       clientSocket.emit("admission:action", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         targetUserId: "student-to-admit",
         action: "admit",
       });
@@ -246,7 +274,7 @@ describe("Socket Workflow Tests", () => {
         done();
       };
       clientSocket.on("admission:update", handler);
-      clientSocket.emit("admission:admit-all", { roomId: "session-test-session" });
+      clientSocket.emit("admission:admit-all", { roomId: `session-${VALID_SESSION_ID}` });
       setTimeout(() => reject(new Error("Admit-all timed out")), 3000);
     });
   });
@@ -254,11 +282,11 @@ describe("Socket Workflow Tests", () => {
   it("should emit participant:control event", () => {
     return new Promise<void>((done, reject) => {
       clientSocket.emit("participant:control", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         targetUserId: "user-to-remove",
         action: "removed",
       });
-      clientSocket.on("participant:control", (payload) => {
+      clientSocket.once("participant:control", (payload) => {
         expect(payload.action).toBe("removed");
         expect(payload.targetUserId).toBe("user-to-remove");
         done();
@@ -269,9 +297,9 @@ describe("Socket Workflow Tests", () => {
 
   it("should emit room:overview on mentor request", () => {
     return new Promise<void>((done, reject) => {
-      clientSocket.emit("mentor:request-overview", { roomId: "session-test-session" });
+      clientSocket.emit("mentor:request-overview", { roomId: `session-${VALID_SESSION_ID}` });
       clientSocket.on("room:overview", (payload) => {
-        expect(payload.roomId).toBe("session-test-session");
+        expect(payload.roomId).toBe(`session-${VALID_SESSION_ID}`);
         done();
       });
       setTimeout(() => reject(new Error("Room overview timed out")), 3000);
@@ -280,9 +308,9 @@ describe("Socket Workflow Tests", () => {
 
   it("should leave room on leave-room event", () => {
     return new Promise<void>((done) => {
-      clientSocket.emit("leave-room", "session-test-session");
+      clientSocket.emit("leave-room", `session-${VALID_SESSION_ID}`);
       setTimeout(() => {
-        clientSocket.emit("join-room", "session-test-session");
+        clientSocket.emit("join-room", `session-${VALID_SESSION_ID}`);
         setTimeout(done, 200);
       }, 100);
     });
@@ -290,59 +318,71 @@ describe("Socket Workflow Tests", () => {
 
   it("should send and receive chat messages", () => {
     return new Promise<void>((done, reject) => {
-      clientSocket.emit("chat:message", {
-        roomId: "session-test-session",
-        messageId: "chat-1",
-        text: "Hello everyone!",
-        at: new Date().toISOString(),
-      }, (ack: { ok: boolean }) => {
-        if (ack.ok) {
-          done();
-        } else {
-          reject(new Error("Chat ack returned ok: false"));
-        }
-      });
+      clientSocket.emit(
+        "chat:message",
+        {
+          roomId: `session-${VALID_SESSION_ID}`,
+          messageId: "chat-1",
+          text: "Hello everyone!",
+          at: new Date().toISOString(),
+        },
+        (ack: { ok: boolean }) => {
+          if (ack.ok) {
+            done();
+          } else {
+            reject(new Error("Chat ack returned ok: false"));
+          }
+        },
+      );
       setTimeout(() => reject(new Error("Chat test timed out")), 3000);
     });
   });
 
   it("should handle chat with announcement type", () => {
     return new Promise<void>((done, reject) => {
-      clientSocket.emit("chat:message", {
-        roomId: "session-test-session",
-        messageId: "announce-1",
-        text: "Important announcement!",
-        at: new Date().toISOString(),
-        type: "announcement",
-      }, (ack: { ok: boolean }) => {
-        if (ack.ok) {
-          done();
-        } else {
-          reject(new Error("Chat announcement ack returned ok: false"));
-        }
-      });
+      clientSocket.emit(
+        "chat:message",
+        {
+          roomId: `session-${VALID_SESSION_ID}`,
+          messageId: "announce-1",
+          text: "Important announcement!",
+          at: new Date().toISOString(),
+          type: "announcement",
+        },
+        (ack: { ok: boolean }) => {
+          if (ack.ok) {
+            done();
+          } else {
+            reject(new Error("Chat announcement ack returned ok: false"));
+          }
+        },
+      );
       setTimeout(() => reject(new Error("Chat announcement test timed out")), 3000);
     });
   });
 
   it("should respond to room:heartbeat with ack", () => {
     return new Promise<void>((done) => {
-      clientSocket.emit("room:heartbeat", {
-        roomId: "session-test-session",
-        sentAt: new Date().toISOString(),
-        connectionQuality: "good",
-      }, (ack: { roomId: string; lagMs: number }) => {
-        expect(ack.roomId).toBe("session-test-session");
-        expect(ack.lagMs).toBeGreaterThanOrEqual(0);
-        done();
-      });
+      clientSocket.emit(
+        "room:heartbeat",
+        {
+          roomId: `session-${VALID_SESSION_ID}`,
+          sentAt: new Date().toISOString(),
+          connectionQuality: "good",
+        },
+        (ack: { roomId: string; lagMs: number }) => {
+          expect(ack.roomId).toBe(`session-${VALID_SESSION_ID}`);
+          expect(ack.lagMs).toBeGreaterThanOrEqual(0);
+          done();
+        },
+      );
     });
   });
 
   it("should handle room:quality updates", () => {
     return new Promise<void>((done) => {
       clientSocket.emit("room:quality", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         connectionQuality: "excellent",
       });
       setTimeout(done, 100);
@@ -352,7 +392,7 @@ describe("Socket Workflow Tests", () => {
   it("should handle speaking permission control event", () => {
     return new Promise<void>((done) => {
       clientSocket.emit("participant:control", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         targetUserId: "student-speaker",
         action: "grant-speaking",
       });
@@ -369,7 +409,7 @@ describe("Socket Workflow Tests", () => {
   it("should handle poll vote submission via socket", () => {
     return new Promise<void>((done) => {
       clientSocket.emit("poll:vote", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         pollId: "poll-1",
         optionIndex: 0,
       });
@@ -384,13 +424,13 @@ describe("Socket Workflow Tests", () => {
 
   it("should handle reconnection join gracefully", async () => {
     // Disconnect and reconnect
-    clientSocket.emit("leave-room", "session-test-session");
+    clientSocket.emit("leave-room", `session-${VALID_SESSION_ID}`);
     await new Promise<void>((resolve) => setTimeout(resolve, 200));
-    
+
     return new Promise<void>((done) => {
-      clientSocket.emit("join-room", "session-test-session");
+      clientSocket.emit("join-room", `session-${VALID_SESSION_ID}`);
       clientSocket.on("room:state", (payload) => {
-        expect(payload.roomId).toBe("session-test-session");
+        expect(payload.roomId).toBe(`session-${VALID_SESSION_ID}`);
         done();
       });
       setTimeout(() => done(), 2000);
@@ -405,7 +445,7 @@ describe("Socket Workflow Tests", () => {
         return;
       }
       clientSocket2.emit("participant:control", {
-        roomId: "session-test-session",
+        roomId: `session-${VALID_SESSION_ID}`,
         targetUserId: "user-to-remove",
         action: "removed",
       });
@@ -419,9 +459,9 @@ describe("Socket Workflow Tests", () => {
 
   it("should handle hand:lower event", () => {
     return new Promise<void>((done) => {
-      clientSocket.emit("hand:lower", { roomId: "session-test-session" });
+      clientSocket.emit("hand:lower", { roomId: `session-${VALID_SESSION_ID}` });
       clientSocket.on("hand:lowered", (payload) => {
-        expect(payload.roomId).toBe("session-test-session");
+        expect(payload.roomId).toBe(`session-${VALID_SESSION_ID}`);
         done();
       });
       setTimeout(() => done(), 2000);
