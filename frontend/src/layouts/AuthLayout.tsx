@@ -1,6 +1,6 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
-import { ArrowLeft, Sparkles, Shield, Zap, Users } from "lucide-react";
+import { Sparkles, Shield, Zap, Users } from "lucide-react";
 import { SmartImage } from "@/components/ui/smart-image";
 import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 
@@ -98,29 +98,11 @@ export function AuthLayout() {
         {/* Mobile header */}
         <div className="mb-8 flex w-full max-w-md items-center justify-between lg:hidden">
           <Logo />
-          <Link
-            to="/"
-            className="flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition hover:border-[var(--border-strong)] hover:text-white"
-          >
-            <ArrowLeft size={14} />
-            Home
-          </Link>
         </div>
 
         <main id="main-content" className="w-full max-w-md">
           <Outlet />
         </main>
-
-        {/* Desktop back link */}
-        <div className="mt-8 hidden lg:block">
-          <Link
-            to="/"
-            className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] transition hover:text-white"
-          >
-            <ArrowLeft size={14} />
-            Back to homepage
-          </Link>
-        </div>
       </div>
     </div>
   );
