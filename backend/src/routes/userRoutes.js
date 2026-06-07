@@ -16,6 +16,7 @@ import validateRequest from "../middlewares/validateRequest.js";
 import { avatarSchemas, userSchemas } from "../validators/schemas.js";
 import ApiError from "../utils/ApiError.js";
 import multer from "multer";
+import { validateAvatarFile, avatarUploadRateLimit } from "../middlewares/avatarValidation.ts";
 
 const router = Router();
 
@@ -37,8 +38,12 @@ router.get("/me", getMe);
 router.get("/me/avatars", getAvatarLibrary);
 router.get("/me/avatar/sign", getAvatarUploadSignature);
 router.patch("/me", validateRequest({ body: userSchemas.updateProfile }), updateMyProfile);
-router.post("/me/avatar", upload.single("avatar"), uploadMyAvatar);
-router.patch("/me/avatar/default/:avatarId", validateRequest({ params: avatarSchemas.avatarIdParam }), selectSystemAvatar);
+router.post("/me/avatar", avatarUploadRateLimit, upload.single("avatar"), validateAvatarFile, uploadMyAvatar);
+router.patch(
+  "/me/avatar/default/:avatarId",
+  validateRequest({ params: avatarSchemas.avatarIdParam }),
+  selectSystemAvatar,
+);
 router.delete("/me/avatar", removeMyAvatar);
 router.post("/me/enroll/:trackId", authorize("student"), enrollTrack);
 router.get("/:id", authorize("admin", "mentor"), getUserById);

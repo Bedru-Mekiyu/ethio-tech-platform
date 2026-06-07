@@ -9,6 +9,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "seed": "tsx src/scripts/seed.js",
+    "upload:avatars": "tsx src/scripts/upload-system-avatars.js",
     "test": "vitest run",
     "lint": "eslint src --ext .js,.ts"
   },
@@ -23,6 +24,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "express-rate-limit": "^7.5.0",
+    "file-type": "^22.0.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.0",
@@ -39,6 +41,7 @@
     "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/file-type": "^10.6.0",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.10",
     "@types/supertest": "^6.0.2",

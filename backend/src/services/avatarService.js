@@ -62,27 +62,47 @@ const rolePriority = {
 
 export const SYSTEM_AVATAR_ROLES = ["student", "mentor"];
 
-export const buildSystemAvatarUrl = (avatarId) => `${SYSTEM_AVATAR_BASE_PATH}/${avatarId}.svg`;
+const isCloudinaryConfigured = () =>
+  process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
-export const getSystemAvatarCatalog = () =>
+const buildCloudinarySystemAvatarUrl = (avatarId, transformations = {}) => {
+  if (!isCloudinaryConfigured()) return null;
+  const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`;
+  const trans = ["f_auto", "q_auto", ...Object.entries(transformations).map(([k, v]) => `${k}_${v}`)].join(",");
+  return `${base}/${trans}/avatars/system/${avatarId}.svg`;
+};
+
+export const buildSystemAvatarUrl = (avatarId, options = {}) => {
+  const { cloudinary = true, width, height } = options;
+  if (cloudinary && isCloudinaryConfigured()) {
+    return buildCloudinarySystemAvatarUrl(avatarId, { w: width, h: height, c: "fill", g: "face" });
+  }
+  return `${SYSTEM_AVATAR_BASE_PATH}/${avatarId}.svg`;
+};
+
+export const getSystemAvatarCatalog = (options = {}) =>
   AVATAR_LIBRARY.map((avatar) => ({
     ...avatar,
-    url: buildSystemAvatarUrl(avatar.id),
+    url: buildSystemAvatarUrl(avatar.id, options),
   }));
 
-export const getSystemAvatarCatalogForRole = (role) => {
+export const getSystemAvatarCatalogForRole = (role, options = {}) => {
   const priorities = rolePriority[role] ?? ["student", "mentor"];
-  const catalog = getSystemAvatarCatalog().filter((avatar) => priorities.includes(avatar.role));
-  return catalog.length ? catalog : getSystemAvatarCatalog();
+  const catalog = getSystemAvatarCatalog(options).filter((avatar) => priorities.includes(avatar.role));
+  return catalog.length ? catalog : getSystemAvatarCatalog(options);
 };
 
 export const isSystemAvatarUrl = (value) =>
-  typeof value === "string" && (value.startsWith("/avatars/") || /^https?:\/\/[^/]+\/avatars\//.test(value));
+  typeof value === "string" &&
+  (value.startsWith("/avatars/") ||
+    /^https?:\/\/res\.cloudinary\.com\/[^/]+\/image\/upload\/.*\/avatars\/system\//.test(value) ||
+    /^https?:\/\/[^/]+\/avatars\//.test(value));
 
-export const getSystemAvatarById = (avatarId) => getSystemAvatarCatalog().find((avatar) => avatar.id === avatarId) ?? null;
+export const getSystemAvatarById = (avatarId, options = {}) =>
+  getSystemAvatarCatalog(options).find((avatar) => avatar.id === avatarId) ?? null;
 
-export const pickSystemAvatar = (role = "student", seed) => {
-  const catalog = getSystemAvatarCatalogForRole(role);
+export const pickSystemAvatar = (role = "student", seed, options = {}) => {
+  const catalog = getSystemAvatarCatalogForRole(role, options);
   if (catalog.length === 0) {
     throw new Error("No system avatars are configured");
   }
@@ -97,10 +117,10 @@ export const pickSystemAvatar = (role = "student", seed) => {
   return catalog[index];
 };
 
-export const pickAlternateSystemAvatar = (role = "student", excludeIds = [], seed) => {
-  const catalog = getSystemAvatarCatalogForRole(role).filter((avatar) => !excludeIds.includes(avatar.id));
+export const pickAlternateSystemAvatar = (role = "student", excludeIds = [], seed, options = {}) => {
+  const catalog = getSystemAvatarCatalogForRole(role, options).filter((avatar) => !excludeIds.includes(avatar.id));
   if (catalog.length === 0) {
-    return pickSystemAvatar(role, seed);
+    return pickSystemAvatar(role, seed, options);
   }
 
   if (seed) {
@@ -113,18 +133,31 @@ export const pickAlternateSystemAvatar = (role = "student", excludeIds = [], see
   return catalog[index];
 };
 
-export const getFallbackAvatarChain = ({ role = "student", seed, currentAvatarUrl } = {}) => {
-  const primary = pickSystemAvatar(role, seed);
-  const backup = pickAlternateSystemAvatar(role, [primary.id], `${seed ?? currentAvatarUrl ?? role}`);
-  const tertiary = pickAlternateSystemAvatar(role, [primary.id, backup.id], `${seed ?? currentAvatarUrl ?? `${role}:secondary`}`);
+export const getFallbackAvatarChain = ({ role = "student", seed, currentAvatarUrl, count = 4, options = {} } = {}) => {
+  const primary = pickSystemAvatar(role, seed, options);
+  const backup = pickAlternateSystemAvatar(role, [primary.id], `${seed ?? currentAvatarUrl ?? role}`, options);
+  const tertiary = pickAlternateSystemAvatar(
+    role,
+    [primary.id, backup.id],
+    `${seed ?? currentAvatarUrl ?? `${role}:secondary`}`,
+    options,
+  );
+  const quaternary = pickAlternateSystemAvatar(
+    role,
+    [primary.id, backup.id, tertiary.id],
+    `${seed ?? currentAvatarUrl ?? `${role}:tertiary`}`,
+    options,
+  );
 
-  return [primary, backup, tertiary]
+  const avatars = [primary, backup, tertiary, quaternary].filter(Boolean);
+  return avatars
     .map((avatar) => avatar.url)
-    .filter((url, index, list) => list.indexOf(url) === index);
+    .filter((url, index, list) => list.indexOf(url) === index)
+    .slice(0, count);
 };
 
-export const createAssignedAvatar = ({ role = "student", seed } = {}) => {
-  const avatar = pickSystemAvatar(role, seed);
+export const createAssignedAvatar = ({ role = "student", seed, options = {} } = {}) => {
+  const avatar = pickSystemAvatar(role, seed, options);
   return {
     avatarUrl: avatar.url,
     avatarType: "default",
@@ -133,10 +166,14 @@ export const createAssignedAvatar = ({ role = "student", seed } = {}) => {
   };
 };
 
-export const normalizeAvatarUrl = (user) => {
+export const normalizeAvatarUrl = (user, options = {}) => {
   const url = user.avatarUrl || user.avatar || null;
   if (url) return url;
-  return createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl;
+  return createAssignedAvatar({
+    role: user.role,
+    seed: user._id?.toString?.() ?? user.email ?? user.fullName,
+    options,
+  }).avatarUrl;
 };
 
 export const getCloudinaryPublicIdFromUrl = (url) => {
@@ -147,4 +184,11 @@ export const getCloudinaryPublicIdFromUrl = (url) => {
   const match = url.match(/\/upload\/(?:v\d+\/)?(.+?)(?:\.[a-z0-9]+)?$/i);
   if (!match) return null;
   return decodeURIComponent(match[1]);
+};
+
+export const buildCloudinaryAvatarUrl = (publicId, transformations = {}) => {
+  if (!isCloudinaryConfigured() || !publicId) return null;
+  const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`;
+  const trans = ["f_auto", "q_auto", ...Object.entries(transformations).map(([k, v]) => `${k}_${v}`)].join(",");
+  return `${base}/${trans}/${publicId}`;
 };
