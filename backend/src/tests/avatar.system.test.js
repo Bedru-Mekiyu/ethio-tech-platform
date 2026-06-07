@@ -93,9 +93,9 @@ describe("avatar system", () => {
     usersDb.splice(0, usersDb.length);
     process.env.JWT_SECRET = "test-jwt-secret-min-16-chars";
     process.env.JWT_REFRESH_SECRET = "test-refresh-secret-min-16";
-    process.env.CLOUDINARY_CLOUD_NAME = "demo";
-    process.env.CLOUDINARY_API_KEY = "demo";
-    process.env.CLOUDINARY_API_SECRET = "demo";
+    delete process.env.CLOUDINARY_CLOUD_NAME;
+    delete process.env.CLOUDINARY_API_KEY;
+    delete process.env.CLOUDINARY_API_SECRET;
   });
 
   it("assigns a system avatar when registering a user", async () => {
@@ -143,6 +143,10 @@ describe("avatar system", () => {
   });
 
   it("uploads a replacement avatar and deletes the previous Cloudinary asset", async () => {
+    process.env.CLOUDINARY_CLOUD_NAME = "demo";
+    process.env.CLOUDINARY_API_KEY = "demo";
+    process.env.CLOUDINARY_API_SECRET = "demo";
+
     const existing = await User.create({
       fullName: "Avatar Replace",
       email: "replace@example.com",
