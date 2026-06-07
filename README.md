@@ -5,7 +5,7 @@
 <h1 align="center">EthioTech Platform</h1>
 
 <p align="center">
-  <strong>Empowering the next generation of Ethiopian technology leaders through immersive, gamified education and world-class mentorship.</strong>
+  <strong>Ethiopia's hands-on platform for learning tech skills through live mentorship, real projects, and a community that believes in you.</strong>
 </p>
 
 <p align="center">
@@ -13,40 +13,41 @@
   <a href="#architecture">Architecture</a> •
   <a href="#getting-started">Getting Started</a> •
   <a href="#api-reference">API</a> •
-  <a href="#socket-events">Socket Events</a> •
-  <a href="#rbac">RBAC</a> •
   <a href="#deployment">Deployment</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License" />
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT" />
   <img src="https://img.shields.io/badge/Node.js-22+-339933?logo=nodedotjs" alt="Node.js" />
   <img src="https://img.shields.io/badge/React-19+-61dafb?logo=react" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-5.8+-3178c6?logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/MongoDB-Atlas-047edb?logo=mongodb" alt="MongoDB Atlas" />
   <img src="https://img.shields.io/badge/Socket.io-4-010101?logo=socket.io" alt="Socket.io" />
+  <img src="https://img.shields.io/badge/Jitsi-Meet-97979A?logo=jitsi" alt="Jitsi" />
+</p>
+
+<p align="center">
+  <b>49 database models</b> • <b>46 API controllers</b> • <b>25+ realtime events</b> • <b>20 test files</b>
 </p>
 
 ---
 
-## Why EthioTech Exists
+## The Problem
 
-**Ethiopia stands at a pivotal moment in its technological evolution.** With over 70% of its population under 30, the country possesses an extraordinary demographic dividend — yet this potential remains largely untapped.
+**Ethiopia has the talent. But the system is failing them.**
 
-**The reality facing Ethiopian youth today:**
+- **70%** of Ethiopians are under 30 — one of the youngest populations in the world
+- Universities teach theory, but graduates lack **practical, job-ready skills**
+- Outside Addis Ababa, students have **no connection** to the tech ecosystem
+- The best engineers **leave** — Ethiopia loses its brightest to opportunities abroad
+- Women face **additional barriers** entering and staying in tech
+- Quality tech education costs more than most families can afford
 
-- **Education Gap**: Universities teach theory, but graduates lack practical, job-ready skills
-- **Mentorship Void**: No access to experienced engineers who can guide career paths
-- **Geographic Isolation**: Talent outside Addis Ababa lacks connection to the tech ecosystem
-- **Brain Drain**: The brightest minds leave for opportunities abroad
-- **Gender Disparity**: Women face additional barriers entering tech fields
-- **Economic Barriers**: Quality tech education is inaccessible to most families
+**This is not just an education gap. It is a national development crisis.**
 
-**This isn't just an education problem — it's a national development crisis.**
-
-EthioTech Platform exists to democratize access, bridge the mentorship gap, build local capacity, and prove that with the right support, Ethiopian talent can compete on the global stage.
+EthioTech exists to fix this. We give every Ethiopian student — regardless of where they live, their gender, or their family's income — access to practical tech education, real mentorship, and a community that helps them grow.
 
 ---
 
@@ -54,10 +55,65 @@ EthioTech Platform exists to democratize access, bridge the mentorship gap, buil
 
 | Aspect | Details |
 |--------|---------|
-| **Mission** | Empower Ethiopian technology leaders through immersive, gamified education and world-class mentorship |
-| **Vision** | Become Africa's leading technology education platform |
-| **Target Users** | Students (Grade 8+), Mentors, Educators, Schools, Employers |
-| **Philosophy** | Learn by building, community-driven, mentorship-first, gamification, accessibility, local context |
+| **Mission** | Give every Ethiopian student practical tech skills through live mentorship and hands-on projects |
+| **Vision** | Become Africa's most trusted tech education platform |
+| **Users** | Students (Grade 8+), Mentors (2+ years experience), Admins, Parents, Schools |
+| **How it works** | Structured tracks → Live mentor sessions → Hands-on projects → Certificates → Career |
+| **Cost** | Completely free. Non-commercial, impact-driven. |
+
+---
+
+## Who This Is For
+
+<details>
+<summary><b>Students</b> — Learn by building with expert guidance</summary>
+
+| Feature | Description |
+|---------|-------------|
+| Learning Tracks | Web Dev, Mobile, Data Science, DevOps, UI/UX — beginner to intermediate |
+| Live Sessions | Join scheduled classes with video, chat, polls, Q&A, and whiteboard |
+| XP & Levels | Earn 25-200 XP per lesson, climb from Novice to Expert (50 levels) |
+| Achievements | Badges, daily streaks, challenges, and leaderboards |
+| Projects | Submit assignments, get rubric-based feedback, peer reviews |
+| Squads | Study groups of 4-8 students with shared goals |
+| Code Workspace | Built-in coding environment, no setup needed |
+| Progress Analytics | Track attendance, engagement, skill growth |
+| Certificates | Completion certificates for tracks and courses |
+| Calendar | Monthly view, ICS export, session sync |
+| Direct Messages | Real-time DMs with read receipts |
+| Student Notes | Personal notes per session |
+</details>
+
+<details>
+<summary><b>Mentors</b> — Teach, guide, and shape Ethiopia's tech future</summary>
+
+| Feature | Description |
+|---------|-------------|
+| Mentor Dashboard | Session queue, student submissions, performance metrics |
+| Session Management | Create, schedule, start, and end live sessions |
+| Control Center | 13-panel real-time command center: chat, polls, Q&A, hand raises, engagement, notes, resources, recordings, participants, waiting room |
+| Student Management | Track progress, give feedback, review submissions |
+| Analytics | Cohort analytics, CSV export, engagement scores |
+| Availability | Set time slots for student booking |
+| Project Reviews | Rubric-based scoring with feedback |
+| Mentor Score | Performance rating (0-1000) based on sessions, feedback, and reviews |
+| Application System | Apply with credentials, admin verification, approval workflow |
+</details>
+
+<details>
+<summary><b>Admins</b> — Operate and grow the platform</summary>
+
+| Feature | Description |
+|---------|-------------|
+| Analytics Dashboard | User growth, engagement, platform health metrics |
+| User Management | View, suspend, ban, restore users with audit trail |
+| Content Management | Create tracks, modules, lessons |
+| Moderation | Content moderation, report handling, chat moderation |
+| Mentor Approval | Review applications, verify credentials, approve/reject |
+| Gamification Config | Manage badges, levels, daily challenges |
+| Audit Logging | Admin activity logs, session audit logs |
+| RBAC | 7 roles, 30+ granular permissions |
+</details>
 
 ---
 
@@ -65,126 +121,152 @@ EthioTech Platform exists to democratize access, bridge the mentorship gap, buil
 
 ### Student Experience
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Learning Tracks | Complete | Structured curriculum: Web Dev, Mobile, Data Science, DevOps, UI/UX |
-| XP & Levels | Complete | 25-200 XP per lesson, 50 levels (Novice → Expert) |
-| Achievements | Complete | Badges, streaks, daily challenges, leaderboards |
-| Dashboards | Complete | Personalized dashboard with progress, challenges, upcoming sessions |
-| Live Sessions | Complete | Join scheduled sessions with video, chat, Q&A, polls |
-| Assignments | Complete | Homework, quizzes, projects, peer reviews with due dates and rubrics |
-| Calendar | Complete | Monthly view, event dots, ICS export, session sync |
-| Session Explorer | Complete | Search, filter (all/upcoming/live/completed), session cards |
-| Progress Analytics | Complete | Track progress, attendance rate, engagement scores |
-| Direct Messages | Complete | Real-time DMs with conversations, read receipts |
-| Notifications | Complete | Real-time push notifications with badge count |
-| Certificates | Complete | Track completion certificates |
-| Squads | Complete | Peer groups of 4-8 students with shared goals |
-| Code Workspace | Complete | Built-in coding environment |
-| Student Notes | Complete | Personal notes per session |
+| Feature | Description |
+|---------|-------------|
+| Learning Tracks | Structured curriculum: Web Dev, Mobile, Data Science, DevOps, UI/UX |
+| XP & Levels | 25-200 XP per lesson, 50 levels (Novice to Expert) |
+| Achievements | Badges, streaks, daily challenges, leaderboards |
+| Dashboards | Personalized view with progress, challenges, upcoming sessions |
+| Live Sessions | Video, chat, Q&A, polls, whiteboard, breakout rooms |
+| Assignments | Homework, quizzes, projects, peer reviews with rubrics |
+| Calendar | Monthly view, event dots, ICS export, session sync |
+| Session Explorer | Search, filter (all/upcoming/live/completed), session cards |
+| Progress Analytics | Track progress, attendance rate, engagement scores |
+| Direct Messages | Real-time DMs with conversations, read receipts |
+| Notifications | Real-time push notifications with badge count |
+| Certificates | Track completion certificates |
+| Squads | Peer groups of 4-8 students with shared goals |
+| Code Workspace | Built-in coding environment |
+| Student Notes | Personal notes per session |
 
 ### Mentor Experience
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Mentor Dashboard | Complete | Session queue, student submissions, performance metrics |
-| Session Management | Complete | Create, schedule, start, end sessions |
-| Control Center | Complete | 13-panel real-time control: chat, polls, Q&A, hand raises, engagement, notes, resources, recordings, participants, waiting room |
-| Student Management | Complete | View students, track progress, give feedback |
-| Analytics | Complete | Cohort analytics, student progress, CSV export |
-| Availability | Complete | Set available time slots for booking |
-| Project Reviews | Complete | Review submissions with rubric scoring |
-| Scoring | Complete | Mentor score (0-1000) based on performance |
-| Application System | Complete | Apply, credential verification, admin approval workflow |
+| Feature | Description |
+|---------|-------------|
+| Mentor Dashboard | Session queue, student submissions, performance metrics |
+| Session Management | Create, schedule, start, end sessions |
+| Control Center | 13-panel real-time control: chat, polls, Q&A, hand raises, engagement, notes, resources, recordings, participants, waiting room |
+| Student Management | View students, track progress, give feedback |
+| Analytics | Cohort analytics, student progress, CSV export |
+| Availability | Set available time slots for booking |
+| Project Reviews | Review submissions with rubric scoring |
+| Scoring | Mentor score (0-1000) based on performance |
+| Application System | Apply, credential verification, admin approval workflow |
 
 ### Administrator Experience
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Analytics Dashboard | Complete | User growth, engagement, platform health |
-| User Management | Complete | View, suspend, ban, restore users |
-| Content Management | Complete | Create tracks, modules, lessons |
-| Moderation | Complete | Content moderation, report handling, chat moderation |
-| Mentor Approval | Complete | Review applications, verify credentials, approve/reject |
-| Gamification Config | Complete | Manage badges, levels, daily challenges |
-| Audit Logging | Complete | Admin activity logs, session audit logs |
-| RBAC | Complete | 7 roles, 30+ granular permissions |
+| Feature | Description |
+|---------|-------------|
+| Analytics Dashboard | User growth, engagement, platform health |
+| User Management | View, suspend, ban, restore users |
+| Content Management | Create tracks, modules, lessons |
+| Moderation | Content moderation, report handling, chat moderation |
+| Mentor Approval | Review applications, verify credentials, approve/reject |
+| Gamification Config | Manage badges, levels, daily challenges |
+| Audit Logging | Admin activity logs, session audit logs |
+| RBAC | 7 roles, 30+ granular permissions |
 
-### Realtime Systems
+### Realtime Classroom
 
-| Feature | Status | Description |
-|---------|--------|-------------|
-| Live Chat | Complete | Socket.io-powered, track rooms, squads, DMs |
-| Video/Audio | Complete | Agora RTC SDK integration, screen sharing |
-| Collaborative Whiteboard | Complete | Konva-based: pen, line, rect, circle, text, eraser, undo, history |
-| Breakout Rooms | Complete | Create rooms, bulk assign students, timers |
-| Hand Raises | Complete | Queue management, called-on flow |
-| Live Polls | Complete | Single/multiple/true-false, real-time voting |
-| Q&A System | Complete | Submit, upvote, pin, answer, archive |
-| Presence Tracking | Complete | Heartbeat-based attendance verification |
-| Notifications | Complete | Real-time notification delivery via Socket.io |
-| Engagement Scoring | Complete | Composite score from questions, polls, chat, attendance |
+| Feature | Description |
+|---------|-------------|
+| Live Chat | Socket.io-powered chat for tracks, squads, DMs |
+| Video/Audio | Jitsi Meet integration with screen sharing |
+| Collaborative Whiteboard | Konva-based: pen, line, rect, circle, text, eraser, undo, history |
+| Breakout Rooms | Create rooms, bulk assign students, timers |
+| Hand Raises | Queue management, called-on flow |
+| Live Polls | Single/multiple/true-false, real-time voting |
+| Q&A System | Submit, upvote, pin, answer, archive |
+| Presence Tracking | Heartbeat-based attendance verification |
+| Notifications | Real-time delivery via Socket.io |
+| Engagement Scoring | Composite score from questions, polls, chat, attendance |
 
 ---
 
 ## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────────┐
-│                        Client Layer                               │
-│  React 19 • TypeScript 5.8 • Vite 8 • Tailwind CSS 4            │
-│  Zustand • TanStack Query • Socket.io • Framer Motion            │
-│  Agora RTC SDK • React Three Fiber • Konva                       │
-└─────────────────────────────┬────────────────────────────────────┘
-                              │ HTTPS / WebSocket
-                              ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                       API Gateway                                 │
-│  Express 4 • JWT Auth • Rate Limiting • Zod Validation           │
-│  Helmet • CORS • Compression • Request Logging                    │
-└──────────┬──────────────────┬──────────────────┬─────────────────┘
-           │                  │                  │
-           ▼                  ▼                  ▼
-┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐
-│   Socket.io      │ │   REST API       │ │   MongoDB        │
-│   Server         │ │   Controllers    │ │   Atlas          │
-│   (1182 lines)   │ │   (46 files)     │ │   (49 models)    │
-│   25+ events     │ │   (45 routes)    │ │                  │
-└──────────────────┘ └──────────────────┘ └──────────────────┘
-           │                  │                  │
-           ▼                  ▼                  ▼
-┌──────────────────────────────────────────────────────────────────┐
-│                    External Services                              │
-│  Agora (Video) • Cloudinary (Images) • Render (Deployment)       │
-└──────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TB
+    subgraph Client["Client Layer"]
+        REACT["React 19 + TypeScript"]
+        VITE["Vite 8 + Tailwind 4"]
+        ZUSTAND["Zustand + TanStack Query"]
+        FIBER["React Three Fiber"]
+    end
+
+    subgraph Gateway["API Gateway"]
+        EXPRESS["Express 4"]
+        JWT["JWT Auth"]
+        RATE["Rate Limiting"]
+        ZOD["Zod Validation"]
+        HELMET["Helmet Security"]
+    end
+
+    subgraph Realtime["Realtime Layer"]
+        SOCKET["Socket.io Server"]
+        ROOM["Room Management"]
+        WHITEBOARD["Collaborative Whiteboard"]
+        PRESENCE["Presence Tracking"]
+    end
+
+    subgraph Services["Business Logic"]
+        SESSIONS["Session Management"]
+        MENTORSHIP["Mentorship System"]
+        GAMIFICATION["XP / Badges / Levels"]
+        LEARNING["Tracks / Modules / Lessons"]
+        NOTIFICATIONS["Push Notifications"]
+        ANALYTICS["Engagement & Analytics"]
+    end
+
+    subgraph Data["Data Layer"]
+        MONGO["MongoDB Atlas"]
+        REDIS["Redis Adapter"]
+        MONGO_MEM["MongoDB Memory Server"]
+    end
+
+    subgraph External["External Services"]
+        JITSI["Jitsi Meet"]
+        CLOUDINARY["Cloudinary"]
+        RENDER["Render Deployment"]
+    end
+
+    Client -->|HTTPS + WebSocket| Gateway
+    Client -->|WebSocket| Realtime
+    Gateway --> Services
+    Realtime --> Services
+    Services --> Data
+    Realtime -.-> REDIS
+    Services --> External
+    Client --> External
 ```
 
 ### Frontend Structure
 
 ```
 frontend/src/
-├── App.tsx                    # Root router (348 lines, 60+ routes)
+├── App.tsx                    # Root router (364 lines, 60+ routes)
 ├── pages/
-│   ├── marketing/             # 12 public pages (Home, About, FAQ, etc.)
+│   ├── marketing/             # 20 public pages (Home, About, FAQ, Blog, etc.)
 │   ├── auth/                  # Login, Register, Forgot/Reset Password
-│   ├── app/                   # 22 student pages (Dashboard, Tracks, Lessons, etc.)
+│   ├── app/                   # 18 student pages (Dashboard, Tracks, Lessons, etc.)
 │   ├── mentor/                # 7 mentor pages + 13 control center panels
-│   ├── admin/                 # 6 admin pages
+│   ├── admin/                 # 8 admin pages
 │   └── parent/                # Parent dashboard
 ├── features/
-│   ├── classroom/             # ClassroomPage, VideoGrid, Whiteboard, Breakout
-│   └── messages/              # MessagesPage (DMs)
+│   ├── classroom/             # ClassroomPage, Whiteboard, Breakout
+│   └── meetings/              # Meeting status management
 ├── components/
-│   ├── ui/                    # 26 design system primitives
+│   ├── ui/                    # Design system (20+ primitives)
+│   ├── jitsi/                 # JitsiMeeting, MeetingHeader, MeetingToolbar
 │   ├── composites/            # ErrorBoundary, EmptyState, Toast, etc.
-│   ├── classroom/             # VideoTile, VideoControls, ScreenShareView
-│   └── brand/                 # Logo
-├── services/                  # 22 API service files (flat)
-├── hooks/                     # 9 custom hooks
+│   └── meeting/               # MeetingStatusBanner
+├── services/                  # 23 API service files
+├── hooks/                     # 12 custom hooks
 ├── store/                     # authStore, notificationStore, avatarRegistry
 ├── layouts/                   # MarketingLayout, AuthLayout, DashboardLayout, ClassroomLayout
 ├── routes/                    # ProtectedRoute, GuestRoute, MentorToolsRoute
-├── lib/                       # realtime.ts, monitoring.ts, utils.ts, image.ts
+├── lib/                       # realtime.ts, monitoring.ts, utils.ts
+├── socket/                    # Socket.io client connection
 ├── config/                    # runtime.ts, avatarLibrary.ts, mediaConfig.ts
 └── styles/                    # tokens.css (design system)
 ```
@@ -196,17 +278,18 @@ backend/src/
 ├── app.ts                     # Express app factory (middleware stack)
 ├── server.ts                  # HTTP + Socket.io server entry
 ├── config/
-│   ├── env.js                 # Env validation (JWT, Mongo, CORS, Agora)
+│   ├── env.js                 # Environment validation
 │   ├── db.js                  # Mongoose connection + MemoryServer fallback
-│   ├── permissions.js         # RBAC: 7 roles, 30+ permissions
-│   └── agora.js               # Agora video config
+│   ├── permissions.js         # RBAC: 7 roles, 35+ permissions
+│   ├── agora.js               # Agora video config
+│   └── jitsi.js               # Jitsi Meet config
 ├── models/                    # 49 Mongoose models
-├── controllers/               # 46 route handlers
-├── services/                  # 34 business logic modules
-├── routes/                    # 45 route files + index aggregator
-├── middlewares/                # 8 middleware (auth, session, error, validation, etc.)
+├── controllers/               # 50 route handlers
+├── services/                  # 37 business logic modules
+├── routes/                    # 50 route files + index aggregator
+├── middlewares/                # 9 middleware (auth, session, error, validation, etc.)
 ├── socket/
-│   ├── index.ts               # Socket.io engine (1182 lines, 25+ events)
+│   ├── index.ts               # Socket.io engine (1535 lines, 25+ events)
 │   ├── contracts.ts           # TypeScript interfaces for all events
 │   └── roomAuth.js            # Room-level authorization
 ├── validators/                # Zod schemas
@@ -215,31 +298,86 @@ backend/src/
 └── tests/                     # 20 test files
 ```
 
-### Database (49 Collections)
+### Database Model Map (49 Collections)
 
-| Domain | Collections |
-|--------|------------|
-| **Core** | User, Track, Module, Lesson, Project, Submission, Assignment |
-| **Sessions** | Session, SessionParticipant, SessionFeedback, SessionRecording, SessionResource, SessionPoll, SessionQuestion, SessionNote, SessionAuditLog |
-| **Mentorship** | MentorApplication, MentorAvailability, MentorStudentFeedback |
-| **Gamification** | Badge, LevelConfig, XPLog, UserStreak, DailyChallenge, DailyChallengeCompletion, Certificate |
-| **Community** | PeerGroup, Hub, HubAttendance, ChatMessage, DMMessage, Conversation |
-| **Classroom** | WhiteboardSnapshot, BreakoutRoom, BreakoutAssignment, HandRaise, EngagementScore |
-| **Operations** | Notification, ReminderJob, Invitation, WaitlistEntry, ModerationLog, AuditLog, AdminActivityLog |
-| **Progress** | StudentProgress, LessonProgress, CalendarEvent |
+```mermaid
+erDiagram
+    User ||--o{ Session : "mentor"
+    User ||--o{ SessionParticipant : "participant"
+    User ||--o{ Badge : "owns"
+    User ||--o{ Certificate : "owns"
+    User ||--o{ XPLog : "has"
+    User ||--o{ UserStreak : "has"
+    User ||--o{ MentorApplication : "submits"
+    User ||--o{ Conversation : "participates"
+    User ||--o{ DMMessage : "sends"
+    User ||--o{ Notification : "receives"
+    User ||--o{ StudentProgress : "tracks"
+    User ||--o{ PeerGroup : "member_of"
+
+    Session ||--o{ SessionParticipant : "includes"
+    Session ||--o{ SessionPoll : "has"
+    Session ||--o{ SessionQuestion : "has"
+    Session ||--o{ SessionResource : "contains"
+    Session ||--o{ SessionRecording : "recorded"
+    Session ||--o{ SessionFeedback : "receives"
+    Session ||--o{ SessionNote : "has"
+    Session ||--o{ SessionAuditLog : "audited"
+    Session ||--o{ HandRaise : "manages"
+    Session ||--o{ BreakoutRoom : "contains"
+    Session ||--o{ EngagementScore : "tracks"
+
+    Track ||--o{ Module : "contains"
+    Module ||--o{ Lesson : "contains"
+    Lesson ||--o{ LessonProgress : "tracks"
+    Track ||--o{ Project : "has"
+    Project ||--o{ Submission : "has"
+    Submission ||--o{ Assignment : "evaluates"
+
+    PeerGroup ||--o{ BreakoutAssignment : "assigned"
+    Hub ||--o{ HubAttendance : "tracks"
+
+    AdminActivityLog ||--o{ AuditLog : "extends"
+```
 
 ### Authentication Flow
 
 ```
-Login → Access Token (1d) + Refresh Token (14d, httpOnly cookie)
+Login  →  Access Token (1 day) + Refresh Token (14 days, httpOnly cookie)
   │
-  ├─ API Request → Bearer token → JWT verify → req.user
+  ├── API Request  →  Bearer token  →  JWT verify  →  req.user
   │
-  ├─ Refresh → Verify refresh hash → Token rotation → New pair
-  │              └─ Reuse detection → Wipe all tokens → Force re-login
+  ├── Refresh  →  Verify refresh hash  →  Token rotation  →  New pair
+  │                  └── Reuse detection  →  Wipe all tokens  →  Force re-login
   │
-  └─ Socket → handshake.auth.token → JWT verify → socket.data.user
+  └── Socket  →  handshake.auth.token  →  JWT verify  →  socket.data.user
 ```
+
+### RBAC Role Hierarchy
+
+```
+super_admin (100)  →  admin (80)  →  moderator (60)  →  reviewer (50)
+                                                         →  support (40)
+                                                         →  mentor (30)
+                                                         →  student (10)
+```
+
+| Permission | super_admin | admin | moderator | reviewer | support | mentor | student |
+|------------|:-----------:|:-----:|:---------:|:--------:|:-------:|:------:|:-------:|
+| `user.create` | ✅ | ✅ | — | — | — | — | — |
+| `user.edit` | ✅ | ✅ | ✅ | — | ✅ | — | — |
+| `user.delete` | ✅ | ✅ | — | — | — | — | — |
+| `user.suspend` | ✅ | ✅ | ✅ | — | — | — | — |
+| `user.ban` | ✅ | ✅ | — | — | — | — | — |
+| `user.verify` | ✅ | ✅ | — | — | — | — | — |
+| `user.change_role` | ✅ | ✅ | — | — | — | — | — |
+| `mentor.approve` | ✅ | ✅ | — | — | — | — | — |
+| `session.manage` | ✅ | ✅ | — | — | — | ✅ | — |
+| `analytics.view` | ✅ | ✅ | ✅ | ✅ | — | ✅ | — |
+| `content.manage` | ✅ | ✅ | ✅ | ✅ | — | — | — |
+| `gamification.manage` | ✅ | ✅ | — | — | — | — | — |
+
+Full permissions matrix: 35+ permissions across 7 roles. See `backend/src/config/permissions.js` for the complete list.
 
 ---
 
@@ -250,19 +388,17 @@ Login → Access Token (1d) + Refresh Token (14d, httpOnly cookie)
 - **Node.js** 22+ ([download](https://nodejs.org))
 - **npm** 10+ (comes with Node.js)
 - **MongoDB** — [local](https://www.mongodb.com/docs/manual/installation/) or [Atlas free tier](https://www.mongodb.com/cloud/atlas)
-- **Git** ([download](https://git-scm.com))
+- **Docker** (optional, for local MongoDB)
 
-### Installation
+### Setup (3 steps)
 
 ```bash
+# 1. Clone and install
 git clone https://github.com/Bedru-Mekiyu/ethio-tech-platform.git
 cd ethio-tech-platform
 npm install
-```
 
-### Environment Setup
-
-```bash
+# 2. Configure environment
 cp .env.example .env
 cp frontend/.env.example frontend/.env
 ```
@@ -277,24 +413,31 @@ JWT_SECRET=dev-secret-at-least-16-chars
 JWT_REFRESH_SECRET=dev-refresh-secret-16-chars
 LIVE_CLASSROOM_SECRET=dev-classroom-secret-16-chars
 CORS_ORIGIN=http://localhost:5173
-LOG_LEVEL=info
 ```
 
-### Start MongoDB
+### Run
 
 ```bash
+# Start MongoDB (Docker)
 docker compose up -d mongo
-```
 
-### Seed Database (Optional)
-
-```bash
+# Seed the database (optional)
 npm run seed -w backend
+
+# Start dev servers (backend + frontend)
+npm run dev
 ```
 
-Creates: 1 admin, 12 mentors, 45 students, 8 hubs, tracks with modules/lessons, badges, levels, daily challenges, sessions, peer groups, certificates.
+### Verify It Works
 
-**Default credentials:**
+| Service | URL | Check |
+|---------|-----|-------|
+| Frontend | http://localhost:5173 | Landing page loads |
+| Backend API | http://localhost:5000/api/v1 | Returns JSON |
+| Health Check | http://localhost:5000/health | `{"status":"OK"}` |
+| Realtime | http://localhost:5000/health/realtime | `{"status":"OK"}` |
+
+### Default Accounts
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -302,17 +445,7 @@ Creates: 1 admin, 12 mentors, 45 students, 8 hubs, tracks with modules/lessons, 
 | Mentor | mentor@ethiotech.com | Passw0rd! |
 | Student | student@ethiotech.com | Passw0rd! |
 
-### Run Development Servers
-
-```bash
-npm run dev
-```
-
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:5000/api/v1 |
-| Health Check | http://localhost:5000/health |
+The seed creates: 1 admin, 12 mentors, 45 students, 8 hubs, tracks with modules/lessons, badges, levels, daily challenges, sessions, peer groups, and certificates.
 
 ---
 
@@ -333,6 +466,9 @@ npm run dev
 | `FEATURE_ATTENDANCE_VERIFICATION` | No | `false` | Enable heartbeat-based attendance |
 | `AGORA_APP_ID` | No | — | Agora video app ID |
 | `AGORA_APP_CERTIFICATE` | No | — | Agora video certificate |
+| `JITSI_DOMAIN` | No | — | Jitsi Meet domain |
+| `JITSI_APP_ID` | No | — | Jitsi app ID |
+| `JITSI_SHARED_SECRET` | No | — | Jitsi JWT shared secret |
 | `CLOUDINARY_CLOUD_NAME` | No | — | Cloudinary cloud name |
 | `CLOUDINARY_API_KEY` | No | — | Cloudinary API key |
 | `CLOUDINARY_API_SECRET` | No | — | Cloudinary API secret |
@@ -345,7 +481,7 @@ npm run dev
 
 ## Development Commands
 
-### Root (Monorepo)
+### Root Monorepo
 
 ```bash
 npm run dev              # Start backend + frontend concurrently
@@ -358,7 +494,7 @@ npm run test            # Run all tests
 npm run seed            # Seed MongoDB
 ```
 
-### Backend
+### Backend Only
 
 ```bash
 cd backend
@@ -368,9 +504,10 @@ npm run start           # Run compiled output
 npm run seed            # Seed database
 npm run test            # Run Vitest
 npm run typecheck       # Type checking
+npm run upload:avatars  # Upload system avatars
 ```
 
-### Frontend
+### Frontend Only
 
 ```bash
 cd frontend
@@ -417,6 +554,9 @@ Base URL: `http://localhost:5000/api/v1`
 | POST | `/sessions/:sessionId/join` | Join session |
 | POST | `/sessions/:sessionId/start` | Start session (host) |
 | POST | `/sessions/:sessionId/end` | End session (host) |
+| POST | `/sessions/:sessionId/pause` | Pause session |
+| POST | `/sessions/:sessionId/resume` | Resume session |
+| POST | `/sessions/:sessionId/cancel` | Cancel session |
 
 ### Assignments
 
@@ -443,6 +583,7 @@ Base URL: `http://localhost:5000/api/v1`
 | GET | `/badges` | List all badges |
 | GET | `/streak` | Get daily streak |
 | POST | `/streak/ping` | Record daily activity |
+| GET | `/leaderboard` | View leaderboard |
 
 ### Admin
 
@@ -469,29 +610,16 @@ Base URL: `http://localhost:5000/api/v1`
 | GET | `/mentor/sessions` | List mentor's sessions |
 | POST | `/mentor/availability` | Set availability |
 
-### Other
+### Real-time (Socket.io Events)
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/health` | Health check |
-| GET | `/health/ready` | Readiness check |
-| GET | `/notifications/me` | Get notifications |
-| POST | `/dm/conversations` | Create DM conversation |
-| GET | `/dm/conversations` | List conversations |
-| POST | `/dm/:conversationId/messages` | Send DM |
-
----
-
-## Socket Events
-
-### Client → Server
+**Client to Server (18 events):**
 
 | Event | Payload | Description |
 |-------|---------|-------------|
-| `join-room` | `roomId: string` | Join a real-time room |
-| `leave-room` | `roomId: string` | Leave a room |
-| `chat:message` | `{ roomId, messageId, text, at, type?, recipientId? }` | Send chat message |
-| `room:heartbeat` | `{ roomId, sentAt, connectionQuality? }` | Send presence heartbeat |
+| `join-room` | `roomId` | Join a real-time room |
+| `leave-room` | `roomId` | Leave a room |
+| `chat:message` | `{ roomId, messageId, text, at }` | Send chat message |
+| `room:heartbeat` | `{ roomId, sentAt, connectionQuality }` | Send presence heartbeat |
 | `hand:raise` | `{ roomId }` | Raise hand |
 | `hand:lower` | `{ roomId }` | Lower hand |
 | `question:submit` | `{ roomId, questionId, text }` | Submit question |
@@ -499,22 +627,20 @@ Base URL: `http://localhost:5000/api/v1`
 | `poll:vote` | `{ roomId, pollId, optionIndex }` | Vote on poll |
 | `participant:control` | `{ roomId, targetUserId, action, reason? }` | Control participant |
 | `admission:action` | `{ roomId, targetUserId, action }` | Admit/deny user |
-| `admission:admit-all` | `{ roomId }` | Admit all waiting |
 | `whiteboard:draw` | `{ roomId, opId, type, points?, color?, width? }` | Draw on whiteboard |
 | `dm:send` | `{ conversationId, text }` | Send DM |
 | `dm:typing-start` | `{ conversationId }` | Start typing indicator |
 | `dm:typing-stop` | `{ conversationId }` | Stop typing indicator |
 | `dm:read` | `{ conversationId }` | Mark messages as read |
 
-### Server → Client
+**Server to Client (18 events):**
 
 | Event | Payload | Description |
 |-------|---------|-------------|
-| `presence:join` | `{ roomId, userId?, socketId, at }` | User joined |
-| `presence:leave` | `{ roomId, userId?, socketId, at }` | User left |
+| `presence:join` | `{ roomId, userId, socketId, at }` | User joined |
+| `presence:leave` | `{ roomId, userId, socketId, at }` | User left |
 | `room:presence` | `{ roomId, count, updatedAt }` | Presence count update |
 | `room:state` | `{ roomId, roomType, onlineCount, ... }` | Full room state |
-| `room:overview` | `{ roomId, participantCount, ... }` | Session overview |
 | `chat:message` | `{ roomId, messageId, text, userId, author, ... }` | New chat message |
 | `hand:raised` | `{ roomId, userId, userName, status, ... }` | Hand raised |
 | `hand:called-on` | `{ roomId, userId, userName, ... }` | Called on student |
@@ -527,61 +653,8 @@ Base URL: `http://localhost:5000/api/v1`
 | `dm:read-receipt` | `{ conversationId, userId, readAt, messageIds }` | Read receipt |
 | `notification:new` | `{ userId, type, title, body, link?, at }` | New notification |
 | `notification:count` | `{ userId, count }` | Unread count |
-
----
-
-## RBAC
-
-### Role Hierarchy
-
-```
-super_admin (100) → admin (80) → moderator (60) → reviewer (50) → support (40) → mentor (30) → student (10)
-```
-
-### Permissions Matrix
-
-| Permission | super_admin | admin | moderator | reviewer | support | mentor | student |
-|------------|:-----------:|:-----:|:---------:|:--------:|:-------:|:------:|:-------:|
-| `user.create` | ✅ | ✅ | — | — | — | — | — |
-| `user.edit` | ✅ | ✅ | ✅ | — | ✅ | — | — |
-| `user.delete` | ✅ | ✅ | — | — | — | — | — |
-| `user.soft_delete` | ✅ | ✅ | — | — | — | — | — |
-| `user.restore` | ✅ | ✅ | — | — | — | — | — |
-| `user.suspend` | ✅ | ✅ | ✅ | — | — | — | — |
-| `user.ban` | ✅ | ✅ | — | — | — | — | — |
-| `user.reactivate` | ✅ | ✅ | ✅ | — | — | — | — |
-| `user.verify` | ✅ | ✅ | — | — | — | — | — |
-| `user.reset_password` | ✅ | ✅ | — | — | ✅ | — | — |
-| `user.force_logout` | ✅ | ✅ | — | — | — | — | — |
-| `user.change_role` | ✅ | ✅ | — | — | — | — | — |
-| `user.export` | ✅ | ✅ | — | — | — | — | — |
-| `user.view_sensitive` | ✅ | ✅ | ✅ | ✅ | ✅ | — | — |
-| `mentor.approve` | ✅ | ✅ | — | — | — | — | — |
-| `mentor.reject` | ✅ | ✅ | — | — | — | — | — |
-| `mentor.view_applications` | ✅ | ✅ | ✅ | ✅ | — | — | — |
-| `session.manage` | ✅ | ✅ | — | — | — | ✅ | — |
-| `session.moderate` | ✅ | — | ✅ | — | — | — | — |
-| `analytics.view` | ✅ | ✅ | ✅ | ✅ | — | ✅ | — |
-| `analytics.export` | ✅ | ✅ | — | — | — | — | — |
-| `audit.view` | ✅ | ✅ | ✅ | — | — | — | — |
-| `audit.export` | ✅ | ✅ | — | — | — | — | — |
-| `content.manage` | ✅ | ✅ | ✅ | ✅ | — | — | — |
-| `gamification.manage` | ✅ | ✅ | — | — | — | — | — |
-| `bulk.actions` | ✅ | ✅ | — | — | — | — | — |
-| `announcement.send` | ✅ | ✅ | — | — | — | — | — |
-| `settings.manage` | ✅ | ✅ | — | — | — | — | — |
-
-### Role Summary
-
-| Role | Level | Permissions |
-|------|-------|-------------|
-| `super_admin` | 100 | 28/28 — Full platform control |
-| `admin` | 80 | 27/28 — Full admin minus session moderation |
-| `moderator` | 60 | 9/28 — Content and session moderation |
-| `reviewer` | 50 | 4/28 — Read-only content review |
-| `support` | 40 | 3/28 — User support (edit, view, reset password) |
-| `mentor` | 30 | 2/28 — Session management, analytics view |
-| `student` | 10 | 0/28 — No admin permissions |
+| `meeting:status-changed` | `{ sessionId, status, hostJoined, presenceCount }` | Meeting status update |
+| `meeting:presence` | `{ sessionId, userId, role, joined }` | Meeting presence update |
 
 ---
 
@@ -590,25 +663,23 @@ super_admin (100) → admin (80) → moderator (60) → reviewer (50) → suppor
 | Layer | Implementation |
 |-------|---------------|
 | **Authentication** | JWT (access 1d + refresh 14d), token rotation with reuse detection |
-| **Authorization** | RBAC with 7 roles, 30+ permissions, `protect` + `authorize` + `requirePermission` middleware |
-| **Rate Limiting** | Global (200/15min), Auth (10/15min), DM (30/min), Analytics (20/5min) |
-| **Input Validation** | Zod schemas on all endpoints, MongoDB operator rejection |
-| **Headers** | Helmet.js (XSS, CSP, HSTS, etc.) |
+| **Authorization** | RBAC with 7 roles, 35+ permissions, `protect` + `authorize` + `requirePermission` middleware |
+| **Rate Limiting** | Global (200/15min), Auth (10/15min), DM (30/min), Analytics (20/5min), Admin (5-30/min per action) |
+| **Input Validation** | Zod schemas on all endpoints, MongoDB operator injection rejection |
+| **Headers** | Helmet.js (XSS, CSP, HSTS, content security policy) |
 | **Password** | bcrypt with salt rounds |
-| **Session Auth** | `requireSessionRole` for host/cohost actions |
-| **Audit Logging** | Admin activity logs, session audit logs |
-| **Socket Security** | JWT auth on connect, per-user connection limit (5), room-level auth |
+| **Session Auth** | `requireSessionRole` for host/cohost actions with role-based room access |
+| **Audit Logging** | Admin activity logs + session audit logs with before/after state |
+| **Socket Security** | JWT auth on connect, per-user connection limit (5), room-level authorization |
+| **Rate Limiting** | Socket-level rate limiting: 12 chat events/10s, 45 sync events/10s, 10 heartbeats/10s |
+| **Input Sanitization** | Chat text sanitization, payload size limits (32KB), room ID validation with regex |
 
 ---
 
 ## User Lifecycle
 
-Users transition through these states:
-
 ```
 pending → active → inactive → suspended → banned
-    ↓         ↓         ↓           ↓
-    ↓         ↓         ↓           ↓
     ↓         ↓         ↓           ↓
     ↓         ↓         ↓           ↓
 rejected   deleted   restored   reactivated
@@ -631,7 +702,7 @@ rejected   deleted   restored   reactivated
 1. **Application Submission** — Mentor submits credentials, expertise, bio
 2. **Duplicate Check** — System checks for existing applications or 30-day cooldown
 3. **Admin Review** — Admin views application, verifies credentials
-4. **Decision** — Approve (role upgraded to `mentor`) or Reject (with reason)
+4. **Decision** — Approve (role upgraded to `mentor`) or Reject (with reason) or Request Changes
 5. **Notification** — User notified of decision via in-app notification
 6. **Rejection Cooldown** — 30-day wait before reapplying
 
@@ -647,38 +718,6 @@ When `FEATURE_ATTENDANCE_VERIFICATION=true`:
 4. **Leave** — Student leaves, total presence calculated
 5. **Verification** — Attendance verified if presence >= 50% of session duration OR >= 30 minutes
 6. **XP Grant** — Verified attendees receive XP bonus
-
----
-
-## Audit Logging
-
-Two audit log systems:
-
-### AdminActivityLog
-- Tracks admin actions: user.create, user.suspend, user.ban, etc.
-- Fields: actor, action, resource, resourceId, before/after state, ip, userAgent
-
-### SessionAuditLog
-- Tracks session lifecycle: created, started, ended, user_joined, user_left
-- Fields: session, actor, action, details, ip
-
----
-
-## Monitoring
-
-### Health Endpoints
-
-```
-GET /health           → 200 — Basic health with mission tagline
-GET /health/ready     → 200/503 — Database connectivity check
-GET /health/realtime  → 200 — Socket.io stats (dev only)
-```
-
-### Logging
-
-- Winston structured JSON logging
-- Log level controlled by `LOG_LEVEL` env var
-- Slow request logging (>=500ms) in app.ts
 
 ---
 
@@ -705,6 +744,17 @@ npm run test -w frontend            # Frontend only
 | Avatar | `avatar.system.test.js` |
 | Meeting | `attendance.test.ts`, `env-security.test.ts`, `live-token.test.ts`, `session-state.test.ts` |
 | Admin | `admin.user-management.test.js` |
+| Notifications | `notification.test.js`, `notification-triggers.test.js`, `socket-notification.test.js` |
+
+### Frontend Tests
+
+| Category | Tests |
+|----------|-------|
+| Meeting | `useMeetingStatus.test.ts`, `meetingStatus.test.ts` |
+| Auth | `authStore.test.ts` |
+| Mentor | `MentorControlCenterPage.test.tsx` |
+| Admin | `AdminMeetingsPage.test.tsx` |
+| UI | `smart-image.test.tsx`, `avatar.test.tsx` |
 
 ---
 
@@ -740,13 +790,28 @@ npm run test -w frontend            # Frontend only
 openssl rand -base64 32
 ```
 
+### Health Checks
+
+```
+GET /health           → 200 — Basic health with mission tagline
+GET /health/ready     → 200/503 — Database connectivity check
+GET /health/realtime  → 200 — Socket.io stats (dev only)
+```
+
+### Logging
+
+- Winston structured JSON logging
+- Log level controlled by `LOG_LEVEL` env var
+- Slow request logging (>=500ms) in app.ts
+- Request ID attached to every request for tracing
+
 ---
 
 ## Contributing
 
-We welcome contributions from developers, designers, mentors, and anyone passionate about our mission.
+We welcome contributions from developers, designers, mentors, and anyone who believes in our mission.
 
-### Quick Start
+### Quick Start for Contributors
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/ethio-tech-platform.git
@@ -779,7 +844,7 @@ refactor(api): extract user service from controller
 test(learning): add unit tests for XP calculation
 ```
 
-### Pull Request Process
+### Pull Request Checklist
 
 1. Create branch from `main`
 2. Make changes with tests
@@ -788,11 +853,31 @@ test(learning): add unit tests for XP calculation
 5. Link related issues
 6. Add screenshots for UI changes
 
+### Adding a Feature
+
+To add a new feature to the platform, follow this pattern:
+
+```
+backend/
+  routes/        → Create route file with endpoint definitions
+  controllers/   → Create controller with request handling
+  services/      → Create service with business logic
+  models/        → Create MongoDB model
+  validators/    → Add Zod validation schema
+  tests/         → Add test file
+
+frontend/
+  pages/         → Add page component
+  services/      → Add API service call
+  components/    → Add UI components
+  hooks/         → Add custom hooks if needed
+```
+
 ---
 
 ## Roadmap
 
-### Phase 1: Foundation (Complete)
+### Phase 1: Foundation ✓ (Complete)
 
 - User authentication and authorization
 - Student, mentor, admin roles with RBAC
@@ -803,22 +888,22 @@ test(learning): add unit tests for XP calculation
 - Discussion forums and peer groups
 - Mentorship system with application workflow
 - Admin dashboard with user management
-- Agora video/audio classroom
+- Jitsi video/audio classroom
 - Collaborative whiteboard (Konva)
 - Breakout rooms
-- Direct messaging
+- Direct messaging with read receipts
 - Assignments, calendar, session explorer
 - 49 MongoDB models, 46 controllers, 34 services
 
 ### Phase 2: Scale (Q3 2026)
 
 - Redis for caching and rate limiting
-- Socket.io Redis adapter for horizontal scaling
 - Email notification system
 - Calendar integration (Google Calendar, Outlook)
 - Timezone handling
-- Session recording with Agora
+- Session recording with Jitsi
 - Mobile responsive optimizations
+- Performance monitoring and alerting
 
 ### Phase 3: Intelligence (Q4 2026)
 
@@ -827,6 +912,7 @@ test(learning): add unit tests for XP calculation
 - Smart content suggestions
 - Advanced analytics with cohort comparison
 - Mentor matching algorithm
+- Automated skill assessments
 
 ### Phase 4: Ecosystem (2027)
 
@@ -847,17 +933,29 @@ A: Yes. Completely free for students and mentors. Non-commercial, impact-driven 
 **Q: Do I need prior coding experience?**
 A: No. Beginner tracks start from scratch. Tracks range from beginner to intermediate.
 
-**Q: How long to complete a track?**
+**Q: How long does it take to complete a track?**
 A: Beginner tracks: 2-3 months (10-15 hrs/week). Advanced tracks: 4-6 months.
 
 **Q: Can I become a mentor?**
 A: Apply through the platform. Requires 2+ years professional experience, technical assessment, and interview.
 
-**Q: What tech stack is used?**
-A: React 19, TypeScript, Vite, Tailwind CSS, Node.js, Express, MongoDB, Socket.io, Agora RTC.
+**Q: What tech stack does the platform use?**
+A: React 19, TypeScript, Vite, Tailwind CSS 4, Node.js 22, Express 4, MongoDB 8, Socket.io 4, Jitsi Meet.
+
+**Q: Can I contribute to the project?**
+A: Yes! See the [Contributing](#contributing) section. We welcome developers, designers, and writers.
 
 **Q: Can I use this for my own project?**
 A: Yes. MIT License — free for commercial and personal use.
+
+**Q: How do I report a security issue?**
+A: Email the maintainers directly. Do not open a public issue.
+
+**Q: Is there a mobile app?**
+A: Not yet. Web-only currently. Mobile apps (React Native) are planned for Phase 4.
+
+**Q: What languages are supported?**
+A: English currently. Amharic, Oromo, and Tigrinya support are planned.
 
 ---
 
@@ -879,7 +977,7 @@ Built with care in **Addis Ababa** for **Ethiopia** and the world.
 
 Inspired by [freeCodeCamp](https://www.freecodecamp.org/), [Khan Academy](https://www.khanacademy.org/), and the African tech ecosystem.
 
-**The future of African tech starts here. Build it with us.**
+**The future of Ethiopian tech starts here. Build it with us.**
 
 ---
 
