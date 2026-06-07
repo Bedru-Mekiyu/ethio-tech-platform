@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils";
-import { Upload, X } from "lucide-react";
+import { Upload, X, Camera } from "lucide-react";
 import { forwardRef, useRef, useState } from "react";
 
-export interface FileInputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+export interface FileInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
   label?: string;
   description?: string;
   error?: string;
   maxSize?: number;
   preview?: boolean;
   onFileSelect?: (file: File | null) => void;
+  capture?: "environment" | "user";
 }
 
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
@@ -23,10 +23,11 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       preview = false,
       onFileSelect,
       accept = "image/*",
+      capture,
       id,
       ...props
     },
-    ref
+    ref,
   ) => {
     const internalRef = useRef<HTMLInputElement | null>(null);
     const fileRef = ref || internalRef;
@@ -70,6 +71,8 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       onFileSelect?.(null);
     };
 
+    const isImageAccept = accept === "image/*" || accept.startsWith("image/");
+
     return (
       <div className="flex flex-col gap-2">
         {label && (
@@ -84,6 +87,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
             id={inputId}
             type="file"
             accept={accept}
+            capture={isImageAccept ? capture : undefined}
             className="sr-only"
             onChange={handleFileChange}
             {...props}
@@ -106,9 +110,10 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               dragOver && "border-primary/60 bg-primary/5",
               error && "border-danger/40",
               fileName && "border-primary/60 bg-primary/5",
-              className
+              className,
             )}
           >
+            {isImageAccept && !fileName && <Camera size={24} className="text-[var(--text-muted)]" />}
             <Upload size={24} className="text-[var(--text-muted)]" />
             {fileName ? (
               <div className="space-y-1">
@@ -117,11 +122,9 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
               </div>
             ) : (
               <div className="space-y-1">
-                <p className="text-sm font-medium text-white">
-                  Click to upload or drag and drop
-                </p>
+                <p className="text-sm font-medium text-white">Click to upload or drag and drop</p>
                 <p className="text-xs text-[var(--text-secondary)]">
-                  {accept === "image/*" ? "PNG, JPG up to " : "Files up to "}
+                  {accept === "image/*" ? "PNG, JPG, WEBP up to " : "Files up to "}
                   {maxSize ? `${(maxSize / 1024 / 1024).toFixed(1)}MB` : "any size"}
                 </p>
               </div>
@@ -150,24 +153,18 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         {fileName && !preview && (
           <div className="flex items-center justify-between rounded-lg bg-[var(--bg-elevated)]/50 px-3 py-2">
             <p className="text-sm text-[var(--text-secondary)]">{fileName}</p>
-            <button
-              type="button"
-              onClick={handleClear}
-              className="text-xs text-primary hover:underline"
-            >
+            <button type="button" onClick={handleClear} className="text-xs text-primary hover:underline">
               Clear
             </button>
           </div>
         )}
 
-        {description && (
-          <p className="text-xs text-[var(--text-secondary)]">{description}</p>
-        )}
+        {description && <p className="text-xs text-[var(--text-secondary)]">{description}</p>}
 
         {error && <p className="text-xs text-danger">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
 FileInput.displayName = "FileInput";
