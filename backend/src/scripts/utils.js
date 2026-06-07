@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { logger } from "../lib/logger.ts";
+import { logger } from "../lib/logger.js";
 
 dotenv.config();
 
@@ -63,9 +63,7 @@ export function pickMany(arr, count) {
 }
 
 export function randomDate(startDate, endDate) {
-  return new Date(
-    startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime())
-  );
+  return new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
 }
 
 export function daysAgo(days) {
