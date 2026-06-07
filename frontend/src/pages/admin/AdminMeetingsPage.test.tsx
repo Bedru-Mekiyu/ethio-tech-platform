@@ -2,7 +2,6 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
 
 vi.mock("@/services/meetingsService", () => ({
   fetchAdminMeetings: vi.fn(),
@@ -72,7 +71,7 @@ describe("AdminMeetingsPage", () => {
   it("renders the four tabs", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting()],
-      pagination: { page: 1, perPage: 20, total: 1, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 1, pages: 1 },
     });
     renderPage();
     await waitFor(() => {
@@ -86,7 +85,7 @@ describe("AdminMeetingsPage", () => {
   it("shows meeting card when meeting is loaded", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting({ status: "active", hostJoined: true, presenceCount: 4 })],
-      pagination: { page: 1, perPage: 20, total: 1, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 1, pages: 1 },
     });
     renderPage();
     await waitFor(() => {
@@ -101,7 +100,7 @@ describe("AdminMeetingsPage", () => {
   it("shows empty state when no meetings match tab", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting({ status: "cancelled" })],
-      pagination: { page: 1, perPage: 20, total: 1, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 1, pages: 1 },
     });
     renderPage();
     await waitFor(() => {
@@ -116,7 +115,7 @@ describe("AdminMeetingsPage", () => {
   it("filters meetings by selected tab", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting({ id: "s1", status: "active", hostJoined: true }), meeting({ id: "s2", status: "scheduled" })],
-      pagination: { page: 1, perPage: 20, total: 2, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 2, pages: 1 },
     });
     renderPage();
     await waitFor(() => {
@@ -135,9 +134,9 @@ describe("AdminMeetingsPage", () => {
   it("triggers forceEnd mutation when admin clicks force end", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting({ status: "active", hostJoined: true })],
-      pagination: { page: 1, perPage: 20, total: 1, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 1, pages: 1 },
     });
-    vi.mocked(meetingsService.forceEndMeeting).mockResolvedValue({});
+    vi.mocked(meetingsService.forceEndMeeting).mockResolvedValue({ session: { _id: "s1", status: "completed" } });
     const promptSpy = vi.spyOn(window, "prompt").mockReturnValue("Admin ended the meeting");
 
     renderPage();
@@ -159,7 +158,7 @@ describe("AdminMeetingsPage", () => {
   it("does not call forceEnd if admin cancels prompt", async () => {
     vi.mocked(meetingsService.fetchAdminMeetings).mockResolvedValue({
       meetings: [meeting({ status: "active", hostJoined: true })],
-      pagination: { page: 1, perPage: 20, total: 1, hasMore: false },
+      pagination: { page: 1, limit: 20, total: 1, pages: 1 },
     });
     const promptSpy = vi.spyOn(window, "prompt").mockReturnValue(null);
 

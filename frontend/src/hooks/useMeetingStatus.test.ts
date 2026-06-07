@@ -71,7 +71,13 @@ describe("useMeetingStatus", () => {
   it("returns scheduled status for future meeting", async () => {
     vi.mocked(meetingsService.fetchMeetingStatus).mockResolvedValue({
       meeting: baseMeetingPayload,
-      canJoin: true,
+      sessionId: "s1",
+      status: "scheduled",
+      hostJoined: false,
+      presenceCount: 0,
+      startsInMs: 3600000,
+      endsAt: "2099-06-06T13:00:00Z",
+      joinable: true,
     });
     const { result } = renderHook(() => useMeetingStatus({ sessionId: "s1" }), {
       wrapper: createWrapper(),
@@ -91,7 +97,13 @@ describe("useMeetingStatus", () => {
   it("updates status on socket event", async () => {
     vi.mocked(meetingsService.fetchMeetingStatus).mockResolvedValue({
       meeting: baseMeetingPayload,
-      canJoin: true,
+      sessionId: "s1",
+      status: "scheduled",
+      hostJoined: false,
+      presenceCount: 0,
+      startsInMs: 3600000,
+      endsAt: "2099-06-06T13:00:00Z",
+      joinable: true,
     });
     const { result } = renderHook(() => useMeetingStatus({ sessionId: "s1" }), {
       wrapper: createWrapper(),
@@ -122,7 +134,13 @@ describe("useMeetingStatus", () => {
   it("ignores socket events for other sessionIds", async () => {
     vi.mocked(meetingsService.fetchMeetingStatus).mockResolvedValue({
       meeting: baseMeetingPayload,
-      canJoin: true,
+      sessionId: "s1",
+      status: "scheduled",
+      hostJoined: false,
+      presenceCount: 0,
+      startsInMs: 3600000,
+      endsAt: "2099-06-06T13:00:00Z",
+      joinable: true,
     });
     const { result } = renderHook(() => useMeetingStatus({ sessionId: "s1" }), {
       wrapper: createWrapper(),
