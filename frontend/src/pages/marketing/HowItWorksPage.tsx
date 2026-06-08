@@ -202,11 +202,16 @@ export function HowItWorksPage() {
             <Link to="/register">
               <Button size="lg">Start learning</Button>
             </Link>
-            <Link to="/how-it-works#tracks">
-              <Button variant="outline" size="lg">
-                Explore tracks
-              </Button>
-            </Link>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => {
+                const el = document.getElementById("tracks");
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Explore tracks
+            </Button>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">

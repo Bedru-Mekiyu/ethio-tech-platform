@@ -7,10 +7,12 @@ import { useLocation } from "react-router-dom";
  * This satisfies Accessibility Requirement AC1.
  */
 export function useFocusOnRouteChange() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // Scroll window to top on route changes
+    // Don't scroll to top when a hash anchor is present — let it scroll naturally
+    if (hash) return;
+
     window.scrollTo(0, 0);
 
     const mainContent = document.getElementById("main-content");
@@ -24,5 +26,5 @@ export function useFocusOnRouteChange() {
       // Style cleanup (typically CSS handles outline: none on focus when tabIndex is -1)
       mainContent.style.outline = "none";
     }
-  }, [pathname]);
+  }, [pathname, hash]);
 }
