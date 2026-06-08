@@ -239,7 +239,7 @@ export function HowItWorksPage() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div id="tracks" className="space-y-4">
           <Card className="rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(12,18,30,0.98),rgba(6,10,18,0.98))] p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
