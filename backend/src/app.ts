@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import mongoose from "mongoose";
 import path from "path";
+import { fileURLToPath } from "url";
 import type { Server as SocketServer } from "socket.io";
 import apiRouter from "./routes/index.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
@@ -13,6 +14,9 @@ import { rejectMongoOperators } from "./middlewares/inputSecurity.js";
 import { attachRequestId } from "./middlewares/requestId.js";
 import { logger } from "./lib/logger.js";
 import { getEnv } from "./config/env.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const createApp = () => {
   const app = express();
@@ -39,7 +43,7 @@ export const createApp = () => {
   app.use(attachRequestId);
   app.use(
     "/avatars",
-    express.static(path.resolve(process.cwd(), "public", "avatars"), {
+    express.static(path.resolve(__dirname, "../public/avatars"), {
       maxAge: env.isProduction ? "30d" : 0,
       immutable: env.isProduction,
       setHeaders: (res) => {
@@ -125,7 +129,7 @@ export const createApp = () => {
   app.use("/api/v1", apiRouter);
 
   if (env.isProduction) {
-    const frontendDist = path.resolve(process.cwd(), "..", "frontend", "dist");
+    const frontendDist = path.resolve(__dirname, "../../frontend/dist");
 
     app.use(express.static(frontendDist, { maxAge: "30d", immutable: true }));
 
