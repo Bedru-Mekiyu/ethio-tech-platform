@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ethio-tech-api
+    name: ethio-tech-platform
     env: node
     region: ohio
     buildCommand: npm run build -w backend
@@ -20,7 +20,7 @@ services:
         sync: false
 
   - type: static
-    name: ethio-tech-frontend
+    name: ethio-tech-hub
     env: static
     region: ohio
     buildCommand: npm run build -w frontend
