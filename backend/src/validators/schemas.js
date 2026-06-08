@@ -344,7 +344,7 @@ export const mentorApplicationSchemas = {
     expertise: z.array(z.string().min(2)).min(2),
     availability: z.enum(["weeknights", "weekends", "flexible", "ad-hoc"]).optional(),
     mentoringStyle: z.array(z.enum(["live-sessions", "project-reviews", "office-hours", "cohort-support"])).min(1),
-    whyMentor: z.string().min(20),
+    whyMentor: z.string().min(10),
     linkedin: z.string().url().optional(),
     portfolio: z.string().url().optional(),
     consent: z.literal(true),

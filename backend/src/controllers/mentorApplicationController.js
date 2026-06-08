@@ -29,7 +29,7 @@ export const submitMentorApplication = asyncHandler(async (req, res) => {
   }).sort({ createdAt: -1 });
 
   if (lastRejected && existingUser?.mentorStatus === "rejected") {
-    const cooldownDays = 30;
+    const cooldownDays = 7;
     const daysSinceRejection = Math.floor(
       (Date.now() - new Date(lastRejected.reviewedAt || lastRejected.createdAt).getTime()) / (24 * 60 * 60 * 1000),
     );

@@ -151,8 +151,8 @@ export function MentorRecruitmentPage() {
       setSubmissionError("Please choose at least one mentoring style.");
       return;
     }
-    if (whyMentor.trim().length < 20) {
-      setSubmissionError("Tell us more about your motivation (minimum 20 characters).");
+    if (whyMentor.trim().length < 10) {
+      setSubmissionError("Tell us more about your motivation (minimum 10 characters).");
       return;
     }
     if (!consent) {
@@ -495,7 +495,9 @@ export function MentorRecruitmentPage() {
 
                 {mutation.isError ? (
                   <p className="text-sm text-danger" role="alert">
-                    {(mutation.error as Error)?.message || "Unable to submit the application."}
+                    {(mutation.error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
+                      (mutation.error as Error)?.message ||
+                      "Unable to submit the application."}
                   </p>
                 ) : null}
 

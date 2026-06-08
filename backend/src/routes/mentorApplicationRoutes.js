@@ -8,7 +8,7 @@ const router = Router();
 
 const mentorApplicationLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 3,
+  max: 20,
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many applications. Please try again later." },
