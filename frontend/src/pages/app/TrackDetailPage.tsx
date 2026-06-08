@@ -49,7 +49,7 @@ export function TrackDetailPage() {
         title="Track not found"
         description="The learning pathway may have moved or is not available yet."
         actionLabel="Browse tracks"
-        onAction={() => window.location.assign("/app/tracks")}
+        actionHref="/app/tracks"
       />
     );
   }

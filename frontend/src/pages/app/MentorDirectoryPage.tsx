@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { Users } from "lucide-react";
 import { MentorDirectory } from "@/components/composites/MentorDirectory";
 import { api } from "@/services/api";
@@ -17,6 +18,7 @@ interface Mentor {
 }
 
 export default function MentorDirectoryPage() {
+  const navigate = useNavigate();
   usePageTitle("Mentors");
   const { data: mentors = [], isLoading } = useQuery<Mentor[]>({
     queryKey: ["mentors", "directory"],
@@ -40,9 +42,7 @@ export default function MentorDirectoryPage() {
       <MentorDirectory
         mentors={mentors}
         loading={isLoading}
-        onStartConversation={(mentorId) => {
-          window.location.href = `/app/messages?start=${mentorId}`;
-        }}
+        onStartConversation={(mentorId) => navigate(`/app/messages?start=${mentorId}`)}
       />
     </div>
   );

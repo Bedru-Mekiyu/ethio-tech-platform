@@ -159,7 +159,7 @@ export function NotificationsPage() {
         title="All caught up"
         description="Session updates, mentor feedback, and badge alerts will appear here."
         actionLabel="Open dashboard"
-        onAction={() => window.location.assign("/app/dashboard")}
+        actionHref="/app/dashboard"
       />
     );
   }

@@ -116,7 +116,7 @@ export function ProjectSubmitPage() {
         title="No assigned projects yet"
         description="Join a track first so the project workspace can unlock the next build step."
         actionLabel="Browse tracks"
-        onAction={() => window.location.assign("/app/tracks")}
+        actionHref="/app/tracks"
       />
     );
   }
