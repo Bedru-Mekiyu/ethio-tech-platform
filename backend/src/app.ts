@@ -108,19 +108,35 @@ export const createApp = () => {
     });
   });
 
-  app.get("/", (_req, res) => {
-    res.status(200).json({
-      success: true,
-      message: "Ethio Tech Platform API",
-      docs: "/health",
-      api: "/api/v1",
-      timestamp: new Date().toISOString(),
+  if (!env.isProduction) {
+    app.get("/", (_req, res) => {
+      res.status(200).json({
+        success: true,
+        message: "Ethio Tech Platform API",
+        docs: "/health",
+        api: "/api/v1",
+        timestamp: new Date().toISOString(),
+      });
     });
-  });
+  }
 
   // Keep both prefixed and unprefixed API paths working for deployed clients.
   app.use(apiRouter);
   app.use("/api/v1", apiRouter);
+
+  if (env.isProduction) {
+    const frontendDist = path.resolve(process.cwd(), "..", "frontend", "dist");
+
+    app.use(express.static(frontendDist, { maxAge: "30d", immutable: true }));
+
+    app.use((req, res, next) => {
+      if (req.path.startsWith("/api/") || req.path === "/api") {
+        return next();
+      }
+      res.sendFile(path.join(frontendDist, "index.html"));
+    });
+  }
+
   app.use(notFound);
   app.use(errorHandler);
 
