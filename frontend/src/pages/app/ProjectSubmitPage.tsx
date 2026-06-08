@@ -142,7 +142,7 @@ export function ProjectSubmitPage() {
               loop.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/app/assignments">
+              <Link to="/app/projects">
                 <Button size="lg" variant="primary" type="button">
                   <Rocket size={16} />
                   View assignments
@@ -407,7 +407,7 @@ export function ProjectSubmitPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/app/assignments">
+              <Link to="/app/projects">
                 <Button variant="outline" type="button">
                   <ExternalLink size={14} className="mr-1" />
                   View assignments

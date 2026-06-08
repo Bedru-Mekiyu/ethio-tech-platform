@@ -281,6 +281,7 @@ export default function App() {
                     <Route path="projects/submit" element={<ProjectSubmitPage />} />
                     <Route path="squads/:id" element={<SquadPage />} />
                     <Route path="settings" element={<SettingsPage scope="student" />} />
+                    <Route path="*" element={<NotFoundPage />} />
                   </Route>
                   <Route
                     path="/parent"
@@ -292,6 +293,7 @@ export default function App() {
                   >
                     <Route index element={<ParentDashboardPage />} />
                     <Route path="settings" element={<SettingsPage scope="parent" />} />
+                    <Route path="*" element={<NotFoundPage />} />
                   </Route>
                   <Route
                     path="/mentor"
@@ -311,6 +313,7 @@ export default function App() {
                       <Route path="analytics" element={<MentorAnalyticsPage />} />
                       <Route path="settings" element={<SettingsPage scope="mentor" />} />
                     </Route>
+                    <Route path="profile" element={<ProfilePage />} />
                     <Route
                       path="control-center/:sessionId"
                       element={
@@ -321,6 +324,7 @@ export default function App() {
                     >
                       <Route index element={<MentorControlCenterPage />} />
                     </Route>
+                    <Route path="*" element={<NotFoundPage />} />
                   </Route>
                   <Route
                     path="/admin"
@@ -339,6 +343,8 @@ export default function App() {
                     <Route path="meetings" element={<AdminMeetingsPage />} />
                     <Route path="notifications" element={<NotificationsPage />} />
                     <Route path="settings" element={<SettingsPage scope="admin" />} />
+                    <Route path="profile" element={<ProfilePage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                   </Route>
                   <Route
                     path="/app/classroom/:sessionId"
