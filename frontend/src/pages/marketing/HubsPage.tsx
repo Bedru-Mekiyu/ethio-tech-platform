@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Building2, MapPin, MonitorSmartphone, ShieldCheck, Users, Wifi } from "lucide-react";
@@ -145,6 +145,7 @@ function HubMarker({ hub, index }: { hub: MarketingHub; index: number }) {
 }
 
 export function HubsPage() {
+  const navigate = useNavigate();
   const reduceMotion = useReducedMotion();
   const [filter, setFilter] = useState<"all" | "high" | "limited">("all");
   const { data, isLoading, isError, error, refetch } = useQuery<MarketingHubsData>({
@@ -188,7 +189,7 @@ export function HubsPage() {
           description="Hub locations will appear here once they are set up."
           actionLabel="Contact the team"
           onAction={() => {
-            window.location.assign("/contact");
+            navigate("/contact");
           }}
         />
       </div>

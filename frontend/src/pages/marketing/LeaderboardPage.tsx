@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Crown, Medal, Sparkles, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -142,6 +142,7 @@ function RankCard({
 }
 
 export function LeaderboardPage() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<LeaderboardTab>("students");
   const [limit, setLimit] = useState(10);
   const currentUserId = useAuthStore((s) => s.user?.id);
@@ -267,7 +268,7 @@ export function LeaderboardPage() {
             description="Once activity starts, the hall of fame will populate automatically."
             actionLabel="Join the platform"
             onAction={() => {
-              window.location.assign("/register");
+              navigate("/register");
             }}
           />
         </div>
