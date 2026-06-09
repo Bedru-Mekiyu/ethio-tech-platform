@@ -231,6 +231,21 @@ export function AdminContentPage() {
     onError: () => toast.error("Failed to delete lesson"),
   });
 
+  // --- Error messages ---
+  const queryErrorMessage = (err: unknown): string => {
+    if (typeof err === "object" && err) {
+      const e = err as { response?: { status?: number; data?: { message?: string } }; message?: string; code?: string };
+      const status = e.response?.status;
+      if (status === 401) return "Authentication required. Please log in again.";
+      if (status === 403) return "Permission denied. You don\u2019t have access to this resource.";
+      if (status === 404) return "Endpoint not found.";
+      if (status && status >= 500) return "Server error. Please try again later.";
+      if (e.code === "ERR_NETWORK") return "Cannot connect to server. Check your connection.";
+      return e.response?.data?.message ?? e.message ?? "Something went wrong loading this page.";
+    }
+    return "Something went wrong loading this page.";
+  };
+
   // --- Derived data ---
   const tracks = tracksQuery.data ?? [];
   const modules = modulesQuery.data ?? [];
@@ -302,6 +317,7 @@ export function AdminContentPage() {
           tracks={filteredTracks}
           isLoading={tracksQuery.isLoading}
           isError={tracksQuery.isError}
+          errorMessage={queryErrorMessage(tracksQuery.error)}
           onRetry={() => tracksQuery.refetch()}
           onSelectTrack={(id) => {
             setSelectedTrackId(id);
@@ -322,6 +338,7 @@ export function AdminContentPage() {
           modules={modules}
           isLoading={modulesQuery.isLoading}
           isError={modulesQuery.isError}
+          errorMessage={queryErrorMessage(modulesQuery.error)}
           onRetry={() => modulesQuery.refetch()}
           onSelectModule={(id) => {
             setSelectedModuleId(id);
@@ -340,6 +357,7 @@ export function AdminContentPage() {
           lessons={lessons}
           isLoading={lessonsQuery.isLoading}
           isError={lessonsQuery.isError}
+          errorMessage={queryErrorMessage(lessonsQuery.error)}
           onRetry={() => lessonsQuery.refetch()}
           onCreate={() => setLessonForm({ open: true, lesson: null })}
           onEdit={(lesson) => setLessonForm({ open: true, lesson })}
@@ -405,6 +423,7 @@ function TracksView({
   tracks,
   isLoading,
   isError,
+  errorMessage,
   onRetry,
   onSelectTrack,
   onCreate,
@@ -416,6 +435,7 @@ function TracksView({
   tracks: Track[];
   isLoading: boolean;
   isError: boolean;
+  errorMessage?: string;
   onRetry: () => void;
   onSelectTrack: (id: string) => void;
   onCreate: () => void;
@@ -457,7 +477,7 @@ function TracksView({
         </div>
       )}
 
-      {isError && <QueryError onRetry={onRetry} />}
+      {isError && <QueryError message={errorMessage} onRetry={onRetry} />}
 
       {!isLoading && !isError && tracks.length === 0 && (
         <EmptyState
@@ -543,6 +563,7 @@ function ModulesView({
   modules,
   isLoading,
   isError,
+  errorMessage,
   onRetry,
   onSelectModule,
   onCreate,
@@ -554,6 +575,7 @@ function ModulesView({
   modules: Module[];
   isLoading: boolean;
   isError: boolean;
+  errorMessage?: string;
   onRetry: () => void;
   onSelectModule: (id: string) => void;
   onCreate: () => void;
@@ -589,7 +611,7 @@ function ModulesView({
         </div>
       )}
 
-      {isError && <QueryError onRetry={onRetry} />}
+      {isError && <QueryError message={errorMessage} onRetry={onRetry} />}
 
       {!isLoading && !isError && modules.length === 0 && (
         <EmptyState
@@ -658,6 +680,7 @@ function LessonsView({
   lessons,
   isLoading,
   isError,
+  errorMessage,
   onRetry,
   onCreate,
   onEdit,
@@ -668,6 +691,7 @@ function LessonsView({
   lessons: Lesson[];
   isLoading: boolean;
   isError: boolean;
+  errorMessage?: string;
   onRetry: () => void;
   onCreate: () => void;
   onEdit: (lesson: Lesson) => void;
@@ -702,7 +726,7 @@ function LessonsView({
         </div>
       )}
 
-      {isError && <QueryError onRetry={onRetry} />}
+      {isError && <QueryError message={errorMessage} onRetry={onRetry} />}
 
       {!isLoading && !isError && lessons.length === 0 && (
         <EmptyState

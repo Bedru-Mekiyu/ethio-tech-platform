@@ -24,7 +24,7 @@ export const getTracks = asyncHandler(async (req, res) => {
   ]);
 
   sendResponse(res, 200, "Tracks fetched", {
-    items,
+    tracks: items,
     pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
   });
 });

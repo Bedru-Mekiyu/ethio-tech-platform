@@ -14,8 +14,8 @@ const router = Router();
 
 router.get("/", getModules);
 router.get("/:id", validateRequest({ params: commonSchemas.idParam }), getModuleById);
-router.post("/", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ body: moduleSchemas.create }), createModule);
-router.patch("/:id", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: moduleSchemas.update }), updateModule);
-router.delete("/:id", protect, authorize("admin"), validateRequest({ params: commonSchemas.idParam }), deleteModule);
+router.post("/", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ body: moduleSchemas.create }), createModule);
+router.patch("/:id", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: moduleSchemas.update }), updateModule);
+router.delete("/:id", protect, authorize("admin", "super_admin"), validateRequest({ params: commonSchemas.idParam }), deleteModule);
 
 export default router;

@@ -19,9 +19,9 @@ router.get("/", getLessons);
 router.get("/me/progress", protect, authorize("student"), getMyLessonProgress);
 router.get("/me/progress/summary", protect, authorize("student"), getMyLessonProgressSummary);
 router.get("/:id", validateRequest({ params: commonSchemas.idParam }), getLessonById);
-router.post("/", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ body: lessonSchemas.create }), createLesson);
-router.patch("/:id", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: lessonSchemas.update }), updateLesson);
-router.delete("/:id", protect, authorize("admin"), validateRequest({ params: commonSchemas.idParam }), deleteLesson);
+router.post("/", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ body: lessonSchemas.create }), createLesson);
+router.patch("/:id", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: lessonSchemas.update }), updateLesson);
+router.delete("/:id", protect, authorize("admin", "super_admin"), validateRequest({ params: commonSchemas.idParam }), deleteLesson);
 router.post("/:id/complete", protect, authorize("student"), validateRequest({ params: commonSchemas.idParam }), completeLesson);
 
 export default router;

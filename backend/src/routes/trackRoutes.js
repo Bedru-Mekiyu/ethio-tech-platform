@@ -14,8 +14,8 @@ const router = Router();
 
 router.get("/", getTracks);
 router.get("/:id", validateRequest({ params: commonSchemas.idParam }), getTrackById);
-router.post("/", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ body: trackSchemas.create }), createTrack);
-router.patch("/:id", protect, authorize("admin", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: trackSchemas.update }), updateTrack);
-router.delete("/:id", protect, authorize("admin"), validateRequest({ params: commonSchemas.idParam }), deleteTrack);
+router.post("/", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ body: trackSchemas.create }), createTrack);
+router.patch("/:id", protect, authorize("admin", "super_admin", "moderator", "reviewer", "mentor"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: trackSchemas.update }), updateTrack);
+router.delete("/:id", protect, authorize("admin", "super_admin"), validateRequest({ params: commonSchemas.idParam }), deleteTrack);
 
 export default router;
