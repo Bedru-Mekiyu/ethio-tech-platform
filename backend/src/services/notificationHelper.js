@@ -13,6 +13,19 @@ export function getSocketIO() {
 export async function emitNotification(payload) {
   try {
     const { default: Notification } = await import("../models/Notification.js");
+    const { default: NotificationPreference } = await import("../models/NotificationPreference.js");
+
+    const prefType = payload.type === "mentor_approved" || payload.type === "mentor_rejected"
+      ? payload.type
+      : payload.type === "account_approved" || payload.type === "account_created"
+        ? "account_approved"
+        : payload.type;
+
+    const prefs = await NotificationPreference.findOne({ user: payload.recipientId }).lean();
+    if (prefs?.preferences && prefs.preferences[prefType] === false) {
+      return null;
+    }
+
     const notification = await Notification.create({
       recipient: payload.recipientId,
       type: payload.type,

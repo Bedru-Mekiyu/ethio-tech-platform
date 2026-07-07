@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { FormField, fieldAriaProps } from "@/components/ui/form-field";
 import { login } from "@/services/authService";
-import { useAuthStore, getDashboardPath } from "@/store/authStore";
+import { useAuthStore, getPostLoginPath } from "@/store/authStore";
 import { useToast } from "@/components/composites/ToastProvider";
 
 const schema = z.object({
@@ -56,7 +56,7 @@ export function LoginPage() {
       const result = await login(data.email, data.password);
       setAuth(result.user, result.accessToken);
       const from = (location.state as { from?: { pathname: string } })?.from?.pathname;
-      navigate(from ?? getDashboardPath(result.user.role));
+      navigate(from ?? getPostLoginPath(result.user.role, result.authFlags));
     } catch {
       setError("Invalid email or password. Please try again.");
     }

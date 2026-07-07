@@ -11,6 +11,18 @@ import {
   approveApplication,
   rejectApplication,
   requestChanges,
+  getApplicationDetail,
+  getApplicationAuditLog,
+  startReview,
+  provisionApplication,
+  resendApplicationCredentials,
+  resetApplicationPassword,
+  archiveApplication,
+  suspendMentor,
+  reactivateMentor,
+  deactivateMentor,
+  removeMentorRole,
+  getLoginHistory,
 } from "../controllers/adminMentorController.js";
 import { protect, authorize, requirePermission } from "../middlewares/authMiddleware.js";
 import { auditAction } from "../middlewares/auditLog.js";
@@ -41,6 +53,32 @@ router.get("/mentor-applications/rejected", requirePermission(PERMISSIONS.MENTOR
 router.get("/mentor-applications/changes-requested", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("changes-requested"));
 router.get("/mentor-applications/archived", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("archived"));
 
+router.get(
+  "/mentor-applications/:id",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  validateRequest({ params: commonSchemas.idParam }),
+  getApplicationDetail
+);
+router.get(
+  "/mentor-applications/:id/audit-log",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  validateRequest({ params: commonSchemas.idParam }),
+  getApplicationAuditLog
+);
+router.get(
+  "/mentor-applications/:id/login-history",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  validateRequest({ params: commonSchemas.idParam }),
+  getLoginHistory
+);
+
+router.post(
+  "/mentor-applications/:id/start-review",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("start_mentor_review", "mentor_application"),
+  startReview
+);
 router.post(
   "/mentor-applications/:id/approve",
   requirePermission(PERMISSIONS.MENTOR_APPROVE),
@@ -61,6 +99,62 @@ router.post(
   validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.requestChangesMentor }),
   auditAction("request_mentor_changes", "mentor_application"),
   requestChanges
+);
+router.post(
+  "/mentor-applications/:id/provision",
+  requirePermission(PERMISSIONS.MENTOR_PROVISION),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("provision_mentor", "mentor_application"),
+  provisionApplication
+);
+router.post(
+  "/mentor-applications/:id/resend-credentials",
+  requirePermission(PERMISSIONS.MENTOR_RESEND_CREDENTIALS),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("resend_mentor_credentials", "mentor_application"),
+  resendApplicationCredentials
+);
+router.post(
+  "/mentor-applications/:id/reset-password",
+  requirePermission(PERMISSIONS.USER_RESET_PASSWORD),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("reset_mentor_password", "mentor_application"),
+  resetApplicationPassword
+);
+router.post(
+  "/mentor-applications/:id/archive",
+  requirePermission(PERMISSIONS.MENTOR_ARCHIVE),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("archive_mentor_application", "mentor_application"),
+  archiveApplication
+);
+router.post(
+  "/mentor-applications/:id/suspend",
+  requirePermission(PERMISSIONS.MENTOR_SUSPEND),
+  validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.mentorActionReason }),
+  auditAction("suspend_mentor", "mentor_application"),
+  suspendMentor
+);
+router.post(
+  "/mentor-applications/:id/reactivate",
+  requirePermission(PERMISSIONS.MENTOR_SUSPEND),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("reactivate_mentor", "mentor_application"),
+  reactivateMentor
+);
+router.post(
+  "/mentor-applications/:id/deactivate",
+  requirePermission(PERMISSIONS.MENTOR_SUSPEND),
+  validateRequest({ params: commonSchemas.idParam }),
+  auditAction("deactivate_mentor", "mentor_application"),
+  deactivateMentor
+);
+router.post(
+  "/mentor-applications/:id/remove-role",
+  requirePermission(PERMISSIONS.USER_CHANGE_ROLE),
+  validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.mentorActionReason }),
+  auditAction("remove_mentor_role", "mentor_application"),
+  removeMentorRole
 );
 
 router.use(adminUserRoutes);

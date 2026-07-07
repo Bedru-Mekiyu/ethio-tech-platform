@@ -63,6 +63,9 @@ const ForgotPasswordPage = lazy(() =>
 const ResetPasswordPage = lazy(() =>
   import("@/pages/auth/ResetPasswordPage").then((module) => ({ default: module.ResetPasswordPage })),
 );
+const ActivateAccountPage = lazy(() =>
+  import("@/pages/auth/ActivateAccountPage").then((module) => ({ default: module.ActivateAccountPage })),
+);
 const ProgressPage = lazy(() =>
   import("@/pages/app/ProgressPage").then((module) => ({ default: module.ProgressPage })),
 );
@@ -92,6 +95,11 @@ const ProjectSubmitPage = lazy(() =>
 const SquadPage = lazy(() => import("@/pages/app/SquadPage").then((module) => ({ default: module.SquadPage })));
 const MentorDashboardPage = lazy(() =>
   import("@/pages/mentor/MentorDashboardPage").then((module) => ({ default: module.MentorDashboardPage })),
+);
+const MentorOnboardingPage = lazy(() =>
+  import("@/pages/mentor/MentorOnboardingPage").then((module) => ({
+    default: module.MentorOnboardingPage,
+  })),
 );
 const MentorSessionsPage = lazy(() =>
   import("@/pages/mentor/MentorSessionsPage").then((module) => ({ default: module.MentorSessionsPage })),
@@ -250,6 +258,7 @@ export default function App() {
                     <Route path="register" element={<RegisterPage />} />
                     <Route path="auth/forgot-password" element={<ForgotPasswordPage />} />
                     <Route path="auth/reset-password" element={<ResetPasswordPage />} />
+                    <Route path="auth/activate" element={<ActivateAccountPage />} />
                   </Route>
                   <Route
                     path="/app"
@@ -304,6 +313,7 @@ export default function App() {
                     }
                   >
                     <Route index element={<MentorDashboardPage />} />
+                    <Route path="onboarding" element={<MentorOnboardingPage />} />
                     <Route element={<MentorToolsRoute />}>
                       <Route path="sessions" element={<MentorSessionsPage />} />
                       <Route path="reviews" element={<MentorReviewPage />} />

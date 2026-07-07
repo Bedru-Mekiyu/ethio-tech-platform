@@ -66,6 +66,16 @@ const mentorApplicationSchema = new Schema({
     reviewedAt: { type: Date },
   }],
   previousApplicationId: { type: Schema.Types.ObjectId, ref: "MentorApplication" },
+  userId: { type: Schema.Types.ObjectId, ref: "User", index: true },
+  provisionedAt: { type: Date },
+  provisionedBy: { type: Schema.Types.ObjectId, ref: "User" },
+  credentialsSentAt: { type: Date },
+  credentialsDeliveryMethod: {
+    type: String,
+    enum: ["email", "activation_link", "manual"],
+  },
+  reviewStartedAt: { type: Date },
+  reviewStartedBy: { type: Schema.Types.ObjectId, ref: "User" },
 }, { timestamps: true });
 
 mentorApplicationSchema.index({ email: 1, status: 1 });

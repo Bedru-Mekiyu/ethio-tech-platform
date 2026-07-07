@@ -14,7 +14,7 @@ export const protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, getEnv().jwtSecret);
-    const user = await User.findById(decoded.id).select("-password");
+    const user = await User.findById(decoded.id).select("-password +mustChangePassword");
 
     if (!user) {
       return next(new ApiError(401, "User no longer exists"));
@@ -33,6 +33,27 @@ export const protect = async (req, res, next) => {
   } catch (_error) {
     next(new ApiError(401, "Invalid or expired token"));
   }
+};
+
+export const optionalProtect = async (req, _res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next();
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, getEnv().jwtSecret);
+    const user = await User.findById(decoded.id).select("-password");
+    if (user && !user.deletedAt && user.status !== "suspended" && user.status !== "banned") {
+      req.user = user;
+    }
+  } catch {
+    // ignore invalid optional token
+  }
+
+  next();
 };
 
 export const authorize = (...roles) => (req, res, next) => {
@@ -73,6 +94,29 @@ export const requireAnyPermission = (...permissions) => (req, res, next) => {
 export const requireVerifiedMentor = (req, res, next) => {
   if (req.user?.role === "mentor" && !req.user.isVerified) {
     return next(new ApiError(403, "Mentor account must be verified before using mentor tools"));
+  }
+  next();
+};
+
+export const requireMentorOnboardingComplete = (req, res, next) => {
+  if (req.user?.role !== "mentor") return next();
+  if (req.user.mustChangePassword) {
+    return next(new ApiError(403, "Password change required before accessing mentor tools"));
+  }
+  if (!req.user.onboardingCompletedAt) {
+    return next(new ApiError(403, "Please complete mentor onboarding before accessing mentor tools"));
+  }
+  if (req.user.mentorAccountStatus === "suspended" || req.user.mentorAccountStatus === "disabled") {
+    return next(new ApiError(403, "Mentor account is not active"));
+  }
+  next();
+};
+
+export const requireActiveMentorAccount = (req, res, next) => {
+  if (req.user?.role !== "mentor") return next();
+  const inactive = ["suspended", "disabled", "archived", "rejected"];
+  if (inactive.includes(req.user.mentorAccountStatus)) {
+    return next(new ApiError(403, "Mentor account is not active"));
   }
   next();
 };

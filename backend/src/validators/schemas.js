@@ -96,6 +96,27 @@ export const authSchemas = {
       .regex(/[A-Za-z]/, "Password must include a letter")
       .regex(/\d/, "Password must include a number"),
   }),
+  activate: z.object({
+    token: z.string().min(20).max(200),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+  }),
+  firstLoginChangePassword: z.object({
+    currentPassword: z.string().min(1).max(128),
+    newPassword: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+  }),
+  onboardingStep: z.object({
+    step: z.enum(["photoUploaded", "profileCompleted", "availabilitySet"]),
+  }),
 };
 
 export const trackSchemas = {
@@ -334,6 +355,22 @@ export const hubSchemas = {
 };
 
 export const mentorApplicationSchemas = {
+  resubmit: z.object({
+    fullName: z.string().min(2).optional(),
+    whyMentor: z.string().min(10).optional(),
+    currentRole: z.string().min(2).optional(),
+    currentCompany: z.string().min(2).optional(),
+    location: z.string().min(2).optional(),
+    yearsExperience: z.coerce.number().int().min(0).max(60).optional(),
+    expertise: z.array(z.string().min(2)).min(2).optional(),
+    availability: z.enum(["weeknights", "weekends", "flexible", "ad-hoc"]).optional(),
+    mentoringStyle: z
+      .array(z.enum(["live-sessions", "project-reviews", "office-hours", "cohort-support"]))
+      .min(1)
+      .optional(),
+    linkedin: z.string().url().optional(),
+    portfolio: z.string().url().optional(),
+  }),
   create: z.object({
     fullName: z.string().min(2),
     email: z.string().email(),

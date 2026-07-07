@@ -79,6 +79,10 @@ export const adminUserSchemas = {
   requestChangesMentor: z.object({
     reviewNotes: z.string().trim().min(2).max(2000),
   }),
+
+  mentorActionReason: z.object({
+    reason: z.string().trim().max(500).optional(),
+  }).optional(),
 };
 
 export const mentorApplicationUpdateSchemas = {

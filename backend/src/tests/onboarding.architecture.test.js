@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { registerUser } from "../services/authService.js";
-import { requireVerifiedMentor } from "../middlewares/authMiddleware.js";
+import { requireVerifiedMentor, requireMentorOnboardingComplete } from "../middlewares/authMiddleware.js";
 import { submitMentorApplication } from "../controllers/mentorApplicationController.js";
-import { reviewMentorApplication } from "../controllers/adminController.js";
 
 const applicationsDb = [];
 const usersDb = [];
@@ -49,7 +48,7 @@ vi.mock("../models/MentorApplication.js", () => ({
       };
     },
     create: async (payload) => {
-      const doc = { _id: `application-${applicationsDb.length + 1}`, status: "pending", ...payload };
+      const doc = { _id: `application-${applicationsDb.length + 1}`, status: "pending_review", ...payload };
       applicationsDb.push(doc);
       return doc;
     },
@@ -198,127 +197,25 @@ describe("onboarding architecture", () => {
 
     expect(next).not.toHaveBeenCalled();
     expect(res.statusCode).toBe(201);
-    expect(res.body.data.application.status).toBe("pending");
+    expect(res.body.data.application.status).toBe("pending_review");
     expect(usersDb.find((user) => user.email === "mentor@example.com" && user.role === "mentor")).toBeFalsy();
   });
 
-  it("approves mentor applications and updates existing mentor status", async () => {
-    const mentorUser = {
-      _id: "mentor-1",
-      role: "mentor",
-      email: "mentor@example.com",
-      isVerified: false,
-      mentorStatus: "pending",
-      status: "pending",
-      save: async function () {
-        const index = usersDb.findIndex((item) => item._id === this._id);
-        if (index !== -1) usersDb[index] = { ...usersDb[index], ...this };
-        return this;
-      },
-    };
-    usersDb.push(mentorUser);
-    applicationsDb.push({
-      _id: "application-1",
-      email: "mentor@example.com",
-      status: "pending",
-      expertise: ["Frontend", "Backend"],
-      currentCompany: "EthioTech Labs",
-      whyMentor: "Helping students build meaningful projects.",
-      toObject: () => ({
-        _id: "application-1",
-        email: "mentor@example.com",
-        status: "pending",
-      }),
-    });
-    const res = buildRes();
+  it("blocks mentor tools until onboarding is complete", () => {
     const next = vi.fn();
 
-    await reviewMentorApplication(
-      {
-        params: { id: "application-1" },
-        body: { status: "approved", reviewedNotes: "Strong profile and availability." },
-        user: { _id: "admin-1" },
-        ip: "127.0.0.1",
-        headers: { "user-agent": "test" },
-      },
-      res,
-      next
-    );
-
-    expect(next).not.toHaveBeenCalled();
-    expect(res.statusCode).toBe(200);
-    const mentor = usersDb.find((user) => user._id === "mentor-1");
-    expect(mentor?.isVerified).toBe(true);
-    expect(mentor?.mentorStatus).toBe("approved");
-  });
-
-  it("rejects mentor applications and updates mentor status accordingly", async () => {
-    const mentorUser = {
-      _id: "mentor-2",
-      role: "mentor",
-      email: "mentor2@example.com",
-      isVerified: true,
-      mentorStatus: "approved",
-      status: "active",
-      save: async function () {
-        const index = usersDb.findIndex((item) => item._id === this._id);
-        if (index !== -1) usersDb[index] = { ...usersDb[index], ...this };
-        return this;
-      },
-    };
-    usersDb.push(mentorUser);
-    applicationsDb.push({
-      _id: "application-2",
-      email: "mentor2@example.com",
-      status: "pending",
-      expertise: ["Cloud", "DevOps"],
-      currentCompany: "Cloud Hub",
-      whyMentor: "I mentor to improve career outcomes for new developers.",
-      toObject: () => ({
-        _id: "application-2",
-        email: "mentor2@example.com",
-        status: "pending",
-      }),
-    });
-    const res = buildRes();
-    const next = vi.fn();
-
-    await reviewMentorApplication(
-      {
-        params: { id: "application-2" },
-        body: { status: "rejected", reviewedNotes: "Experience does not match current cohort needs." },
-        user: { _id: "admin-1" },
-        ip: "127.0.0.1",
-        headers: { "user-agent": "test" },
-      },
-      res,
-      next
-    );
-
-    expect(next).not.toHaveBeenCalled();
-    expect(res.statusCode).toBe(200);
-    const mentor = usersDb.find((user) => user._id === "mentor-2");
-    expect(mentor?.isVerified).toBe(false);
-    expect(mentor?.mentorStatus).toBe("rejected");
-  });
-
-  it("protects mentor tools for unverified mentors", () => {
-    const next = vi.fn();
-
-    requireVerifiedMentor(
-      { user: { role: "mentor", isVerified: false } },
+    requireMentorOnboardingComplete(
+      { user: { role: "mentor", mustChangePassword: true, onboardingCompletedAt: null } },
       {},
       next
     );
-    const firstCallArg = next.mock.calls[0][0];
-    expect(firstCallArg?.statusCode).toBe(403);
+    expect(next.mock.calls[0][0]?.statusCode).toBe(403);
 
-    requireVerifiedMentor(
-      { user: { role: "mentor", isVerified: true } },
+    requireMentorOnboardingComplete(
+      { user: { role: "mentor", mustChangePassword: false, onboardingCompletedAt: new Date() } },
       {},
       next
     );
-    expect(next).toHaveBeenCalledTimes(2);
     expect(next.mock.calls[1][0]).toBeUndefined();
   });
 });

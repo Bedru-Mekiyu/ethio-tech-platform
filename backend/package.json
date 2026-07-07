@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "seed": "tsx src/scripts/seed.js",
     "upload:avatars": "tsx src/scripts/upload-system-avatars.js",
+    "migrate:approved-mentors": "tsx src/scripts/migrate-approved-mentors.js",
     "test": "vitest run",
     "lint": "eslint src --ext .js,.ts"
   },
@@ -29,6 +30,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.0",
     "multer": "^2.1.1",
+    "nodemailer": "^6.10.0",
     "rate-limit-redis": "^4.3.1",
     "redis": "^5.12.1",
     "socket.io": "^4.8.1",

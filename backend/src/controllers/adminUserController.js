@@ -7,7 +7,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { getPagination } from "../utils/pagination.js";
 import { sanitizeOptionalText } from "../utils/sanitize.js";
-import { ROLES, USER_STATUS, DELETION_RETENTION_DAYS } from "../config/permissions.js";
+import { ROLES, USER_STATUS, DELETION_RETENTION_DAYS, MENTOR_ACCOUNT_STATUS } from "../config/permissions.js";
 import {
   notifyUser,
   notifyAccountApproved,
@@ -571,6 +571,7 @@ export const bulkAction = asyncHandler(async (req, res) => {
       switch (action) {
         case "approve": {
           if (user.mentorStatus === "pending" || user.status === USER_STATUS.PENDING) {
+            user.role = user.role === ROLES.MENTOR ? user.role : ROLES.MENTOR;
             user.mentorStatus = "approved";
             user.isVerified = true;
             user.verifiedAt = new Date();
@@ -578,6 +579,7 @@ export const bulkAction = asyncHandler(async (req, res) => {
             user.status = USER_STATUS.ACTIVE;
             user.statusChangedAt = new Date();
             user.statusChangedBy = req.user._id;
+            user.mentorAccountStatus = user.mentorAccountStatus || MENTOR_ACCOUNT_STATUS.ACTIVE;
             await user.save();
             await notifyMentorApproved({ userId: user._id });
           }

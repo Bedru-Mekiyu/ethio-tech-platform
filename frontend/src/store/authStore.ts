@@ -15,7 +15,18 @@ export interface AuthUser {
   xp?: number;
   credits?: number;
   isVerified?: boolean;
-  mentorStatus?: "pending" | "approved" | "rejected";
+  mentorStatus?: "pending" | "approved" | "rejected" | "changes_requested" | "archived";
+  mentorAccountStatus?: string;
+  mustChangePassword?: boolean;
+  onboardingCompleted?: boolean;
+  onboardingSteps?: {
+    passwordChanged?: boolean;
+    termsAccepted?: boolean;
+    profileCompleted?: boolean;
+    photoUploaded?: boolean;
+    availabilitySet?: boolean;
+  };
+  termsAcceptedAt?: string;
   mentorScore?: number;
   totalSessions?: number;
   avatar?: string;
@@ -77,6 +88,24 @@ const roleDashboardMap: Record<UserRole, string> = {
 
 export function getDashboardPath(role: UserRole): string {
   return roleDashboardMap[role] || "/app/dashboard";
+}
+
+export interface AuthFlags {
+  requiresPasswordChange?: boolean;
+  requiresTermsAcceptance?: boolean;
+  requiresOnboarding?: boolean;
+}
+
+export function getPostLoginPath(role: UserRole, authFlags?: AuthFlags): string {
+  if (
+    role === "mentor" &&
+    (authFlags?.requiresPasswordChange ||
+      authFlags?.requiresTermsAcceptance ||
+      authFlags?.requiresOnboarding)
+  ) {
+    return "/mentor/onboarding";
+  }
+  return getDashboardPath(role);
 }
 
 const roleSettingsMap: Record<UserRole, string> = {

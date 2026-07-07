@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
-import { ROLES, USER_STATUS, MENTOR_STATUS, VALID_STATUS_TRANSITIONS } from "../config/permissions.js";
+import {
+  ROLES,
+  USER_STATUS,
+  MENTOR_STATUS,
+  MENTOR_ACCOUNT_STATUS,
+  VALID_STATUS_TRANSITIONS,
+} from "../config/permissions.js";
 
 const { Schema, model } = mongoose;
 
@@ -64,6 +70,25 @@ const userSchema = new Schema({
   mentorStatus: {
     type: String,
     enum: Object.values(MENTOR_STATUS),
+  },
+  mentorAccountStatus: {
+    type: String,
+    enum: Object.values(MENTOR_ACCOUNT_STATUS),
+  },
+  linkedApplicationId: { type: Schema.Types.ObjectId, ref: "MentorApplication" },
+  mustChangePassword: { type: Boolean, default: false, select: false },
+  passwordChangedAt: { type: Date },
+  credentialsExpiresAt: { type: Date },
+  activationTokenHash: { type: String, select: false },
+  activationTokenExpiresAt: { type: Date, select: false },
+  termsAcceptedAt: { type: Date },
+  onboardingCompletedAt: { type: Date },
+  onboardingSteps: {
+    passwordChanged: { type: Boolean, default: false },
+    termsAccepted: { type: Boolean, default: false },
+    profileCompleted: { type: Boolean, default: false },
+    photoUploaded: { type: Boolean, default: false },
+    availabilitySet: { type: Boolean, default: false },
   },
   mentorScore: { type: Number, default: 0, min: 0 },
   totalSessions: { type: Number, default: 0, min: 0 },
@@ -135,6 +160,8 @@ userSchema.index({ mentorScore: -1, totalSessions: -1 });
 userSchema.index({ fullName: 1 });
 userSchema.index({ fullName: "text", email: "text" });
 userSchema.index({ mentorStatus: 1, status: 1 });
+userSchema.index({ mentorAccountStatus: 1 });
+userSchema.index({ linkedApplicationId: 1 }, { sparse: true });
 userSchema.index({ status: 1, createdAt: -1 });
 userSchema.index({ lastLoginAt: -1 });
 userSchema.index({ deletedAt: 1 }, { sparse: true });

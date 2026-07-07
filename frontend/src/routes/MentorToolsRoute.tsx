@@ -27,5 +27,15 @@ export function MentorToolsRoute() {
     return <Navigate to="/mentor" replace state={{ from: location }} />;
   }
 
+  const needsOnboarding =
+    user.mustChangePassword ||
+    !user.onboardingCompleted ||
+    (user.mentorAccountStatus &&
+      !["active", "activated"].includes(user.mentorAccountStatus));
+
+  if (needsOnboarding && !location.pathname.startsWith("/mentor/onboarding")) {
+    return <Navigate to="/mentor/onboarding" replace state={{ from: location }} />;
+  }
+
   return <Outlet />;
 }

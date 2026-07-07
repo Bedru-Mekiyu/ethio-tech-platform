@@ -11,7 +11,15 @@ import {
   registerUser,
   requestPasswordReset,
   resetPasswordWithToken,
+  activateAccountWithToken,
+  firstLoginChangePassword,
+  acceptTerms,
+  getOnboardingStatus,
+  completeOnboarding,
+  updateOnboardingStep,
+  createAuthSession,
 } from "../services/authService.js";
+import { notifyProfileIncomplete } from "../services/notificationService.js";
 import { serializeAuthUser } from "../utils/serializeUser.js";
 import { notifyUser } from "../services/notificationService.js";
 
@@ -63,7 +71,7 @@ export const login = asyncHandler(async (req, res) => {
     throw new ApiError(400, "email and password are required");
   }
 
-  const { user, accessToken, refreshToken } = await loginUser({ email, password, ip: req.ip });
+  const { user, accessToken, refreshToken, authFlags } = await loginUser({ email, password, ip: req.ip });
   await logAuditEvent({
     actor: user._id,
     action: "login",
@@ -71,11 +79,16 @@ export const login = asyncHandler(async (req, res) => {
     ip: req.ip,
   });
 
+  if (user.role === "mentor" && authFlags.requiresOnboarding) {
+    await notifyProfileIncomplete({ userId: user._id }).catch(() => undefined);
+  }
+
   res.cookie("refreshToken", refreshToken, getCookieOptions());
 
   sendResponse(res, 200, "Login successful", {
     accessToken,
     user: serializeAuthUser(user),
+    authFlags,
   });
 });
 
@@ -159,5 +172,88 @@ export const updatePassword = asyncHandler(async (req, res) => {
 });
 
 export const me = asyncHandler(async (req, res) => {
-  sendResponse(res, 200, "Profile fetched", { user: serializeAuthUser(req.user) });
+  sendResponse(res, 200, "Profile fetched", {
+    user: serializeAuthUser(req.user),
+    authFlags: {
+      requiresPasswordChange: Boolean(req.user.mustChangePassword),
+      requiresTermsAcceptance: req.user.role === "mentor" && !req.user.termsAcceptedAt,
+      requiresOnboarding: req.user.role === "mentor" && !req.user.onboardingCompletedAt,
+    },
+    onboarding: getOnboardingStatus(req.user),
+  });
+});
+
+export const activate = asyncHandler(async (req, res) => {
+  const { token, password } = req.body;
+  const user = await activateAccountWithToken({ token, password });
+  await logAuditEvent({
+    actor: user._id,
+    action: "mentor.activated",
+    resource: "auth",
+    ip: req.ip,
+  });
+
+  const { accessToken, refreshToken, authFlags } = await createAuthSession(user, req.ip);
+  res.cookie("refreshToken", refreshToken, getCookieOptions());
+
+  sendResponse(res, 200, "Account activated successfully", {
+    accessToken,
+    user: serializeAuthUser(user),
+    authFlags,
+  });
+});
+
+export const firstLoginPassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const user = await firstLoginChangePassword({
+    userId: req.user._id,
+    currentPassword,
+    newPassword,
+  });
+  await logAuditEvent({
+    actor: user._id,
+    action: "mentor.password_changed",
+    resource: "auth",
+    ip: req.ip,
+  });
+  sendResponse(res, 200, "Password updated", {
+    user: serializeAuthUser(user),
+    onboarding: getOnboardingStatus(user),
+  });
+});
+
+export const acceptTermsHandler = asyncHandler(async (req, res) => {
+  const user = await acceptTerms(req.user._id);
+  sendResponse(res, 200, "Terms accepted", {
+    user: serializeAuthUser(user),
+    onboarding: getOnboardingStatus(user),
+  });
+});
+
+export const onboardingStatus = asyncHandler(async (req, res) => {
+  sendResponse(res, 200, "Onboarding status", {
+    onboarding: getOnboardingStatus(req.user),
+  });
+});
+
+export const completeOnboardingHandler = asyncHandler(async (req, res) => {
+  const user = await completeOnboarding(req.user._id);
+  await logAuditEvent({
+    actor: user._id,
+    action: "mentor.onboarding_completed",
+    resource: "auth",
+    ip: req.ip,
+  });
+  sendResponse(res, 200, "Onboarding completed", {
+    user: serializeAuthUser(user),
+    onboarding: getOnboardingStatus(user),
+  });
+});
+
+export const updateOnboardingStepHandler = asyncHandler(async (req, res) => {
+  const { step } = req.body;
+  const user = await updateOnboardingStep(req.user._id, step, true);
+  sendResponse(res, 200, "Onboarding step updated", {
+    onboarding: getOnboardingStatus(user),
+  });
 });

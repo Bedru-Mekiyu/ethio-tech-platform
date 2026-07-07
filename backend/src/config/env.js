@@ -54,6 +54,13 @@ export const getEnv = () => {
     jitsiDomain: process.env.JITSI_DOMAIN || "meet.jit.si",
     jitsiAppId: process.env.JITSI_APP_ID || "",
     jitsiSharedSecret: process.env.JITSI_SHARED_SECRET || "",
+    smtpHost: process.env.SMTP_HOST || "",
+    smtpPort: Number(process.env.SMTP_PORT || 587),
+    smtpUser: process.env.SMTP_USER || "",
+    smtpPass: process.env.SMTP_PASS || "",
+    smtpFrom: process.env.SMTP_FROM || "",
+    appUrl: process.env.APP_URL || "http://localhost:5173",
+    credentialsExpiryHours: Number(process.env.CREDENTIALS_EXPIRY_HOURS || 24),
   };
 
   if (!cached.mongoUri && !isTest) {

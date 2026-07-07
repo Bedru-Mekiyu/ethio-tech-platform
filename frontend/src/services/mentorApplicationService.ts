@@ -1,4 +1,5 @@
 import { api, type ApiResponse } from "@/services/api";
+import type { AuthUser } from "@/store/authStore";
 
 export interface MentorApplication {
   _id: string;
@@ -18,6 +19,7 @@ export interface MentorApplication {
   documents?: Array<{ name: string; url: string }>;
   socialLinks?: { github?: string; twitter?: string; website?: string };
   status: "pending_review" | "approved" | "rejected" | "changes_requested" | "archived";
+  userId?: string;
   reviewedBy?: string;
   reviewedAt?: string;
   reviewedNotes?: string;
@@ -28,6 +30,10 @@ export interface MentorApplication {
     reviewedBy?: string;
     reviewedAt: string;
   }>;
+  provisionedAt?: string;
+  credentialsSentAt?: string;
+  credentialsDeliveryMethod?: string;
+  reviewStartedAt?: string;
   previousApplicationId?: string;
   createdAt?: string;
   updatedAt?: string;
@@ -39,6 +45,31 @@ export interface QueueStats {
   rejected: number;
   changesRequested: number;
   archived: number;
+}
+
+export interface ApplicationDetail {
+  application: MentorApplication;
+  user: AuthUser | null;
+  teaching: {
+    sessions: Array<{ title?: string; scheduledAt?: string; status?: string }>;
+    studentsCount: number;
+    totalSessions: number;
+  };
+  credentialsStatus: {
+    sentAt?: string;
+    deliveryMethod?: string;
+    provisionedAt?: string;
+  };
+}
+
+export interface AuditLogEntry {
+  _id: string;
+  action: string;
+  actor?: { fullName?: string; email?: string };
+  metadata?: Record<string, unknown>;
+  before?: Record<string, unknown>;
+  after?: Record<string, unknown>;
+  createdAt: string;
 }
 
 interface Pagination {
@@ -98,6 +129,20 @@ export async function fetchQueueStats() {
   return data.data.stats;
 }
 
+export async function fetchApplicationDetail(id: string) {
+  const { data } = await api.get<ApiResponse<ApplicationDetail>>(
+    `/admin/mentor-applications/${id}`
+  );
+  return data.data;
+}
+
+export async function fetchApplicationAuditLog(id: string, page = 1) {
+  const { data } = await api.get<
+    ApiResponse<{ logs: AuditLogEntry[]; pagination: Pagination }>
+  >(`/admin/mentor-applications/${id}/audit-log?page=${page}&limit=20`);
+  return data.data;
+}
+
 export async function approveApplication(id: string, reviewNotes?: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
     `/admin/mentor-applications/${id}/approve`,
@@ -119,5 +164,54 @@ export async function requestChanges(id: string, reviewNotes: string) {
     `/admin/mentor-applications/${id}/request-changes`,
     { reviewNotes }
   );
+  return data.data;
+}
+
+export async function startReview(id: string) {
+  const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
+    `/admin/mentor-applications/${id}/start-review`
+  );
+  return data.data;
+}
+
+export async function provisionApplication(id: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/provision`);
+  return data.data;
+}
+
+export async function resendCredentials(id: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/resend-credentials`);
+  return data.data;
+}
+
+export async function resetMentorPassword(id: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/reset-password`);
+  return data.data;
+}
+
+export async function archiveApplication(id: string) {
+  const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
+    `/admin/mentor-applications/${id}/archive`
+  );
+  return data.data;
+}
+
+export async function suspendMentor(id: string, reason?: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/suspend`, { reason });
+  return data.data;
+}
+
+export async function reactivateMentor(id: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/reactivate`);
+  return data.data;
+}
+
+export async function deactivateMentor(id: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/deactivate`);
+  return data.data;
+}
+
+export async function removeMentorRole(id: string, reason?: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/remove-role`, { reason });
   return data.data;
 }

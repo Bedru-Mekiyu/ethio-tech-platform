@@ -136,12 +136,57 @@ export const notifyRoleChanged = async ({ userId, newRole }) => {
   });
 };
 
-export const notifyMentorApproved = async ({ userId }) => {
+export const notifyMentorApproved = async ({ userId, link }) => {
   return notifyUser({
     recipientId: userId,
     type: "mentor_approved",
     message: "Congratulations! Your mentor application has been approved.",
-    link: "/mentor",
+    link: link ?? "/mentor/onboarding",
+  });
+};
+
+export const notifyMentorReviewStarted = async ({ userId }) => {
+  return notifyUser({
+    recipientId: userId,
+    type: "mentor",
+    message: "Your mentor application is now under active review.",
+    link: "/mentor-recruitment",
+  });
+};
+
+export const notifyAccountCreated = async ({ userId, link }) => {
+  return notifyUser({
+    recipientId: userId,
+    type: "account_approved",
+    message: "Your mentor account has been created. Activate it to get started.",
+    link: link ?? "/auth/activate",
+  });
+};
+
+export const notifyCredentialsSent = async ({ userId, link }) => {
+  return notifyUser({
+    recipientId: userId,
+    type: "verification",
+    message: "Your mentor account credentials are ready. Use the activation link to set your password.",
+    link: link ?? "/login",
+  });
+};
+
+export const notifyProfileIncomplete = async ({ userId }) => {
+  return notifyUser({
+    recipientId: userId,
+    type: "mentor",
+    message: "Please complete your mentor profile to unlock all mentor tools.",
+    link: "/mentor/onboarding",
+  });
+};
+
+export const notifyMentorApplicationReceived = async ({ userId }) => {
+  return notifyUser({
+    recipientId: userId,
+    type: "mentor",
+    message: "Your mentor application has been received. We'll review it and get back to you soon.",
+    link: "/mentor-recruitment",
   });
 };
 

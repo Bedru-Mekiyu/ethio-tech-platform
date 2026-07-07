@@ -15,6 +15,7 @@ import {
   requestChanges,
   type MentorApplication,
 } from "@/services/mentorApplicationService";
+import { MentorDetailsDrawer } from "@/components/admin/MentorDetailsDrawer";
 import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
 
 type QueueTab = "pending" | "approved" | "rejected" | "changes-requested" | "archived";
@@ -174,6 +175,7 @@ function RequestChangesModal({
 
 function ApplicationCard({
   application,
+  onOpen,
   onApprove,
   onReject,
   onRequestChanges,
@@ -181,6 +183,7 @@ function ApplicationCard({
   onReviewNotesChange,
 }: {
   application: MentorApplication;
+  onOpen: (id: string) => void;
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
   onRequestChanges: (id: string) => void;
@@ -188,9 +191,19 @@ function ApplicationCard({
   onReviewNotesChange: (id: string, value: string) => void;
 }) {
   const isPending = application.status === "pending_review";
+  const canAct =
+    application.status === "pending_review" || application.status === "changes_requested";
 
   return (
-    <Card className="space-y-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
+    <Card
+      className="space-y-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-5 cursor-pointer hover:border-primary/40 transition-colors"
+      onClick={() => onOpen(application._id)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") onOpen(application._id);
+      }}
+    >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h3 className="text-lg font-semibold text-white">{application.fullName}</h3>
@@ -270,9 +283,9 @@ function ApplicationCard({
         </div>
       )}
 
-      {isPending && (
+      {canAct && (
         <>
-          <div>
+          <div onClick={(e) => e.stopPropagation()}>
             <p className="mb-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
               Review notes
             </p>
@@ -284,15 +297,20 @@ function ApplicationCard({
               aria-label="Review notes"
             />
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3" onClick={(e) => e.stopPropagation()}>
             <Button size="sm" variant="primary" onClick={() => onApprove(application._id)}>
               Approve
             </Button>
             <Button size="sm" variant="danger" onClick={() => onReject(application._id)}>
               Reject
             </Button>
-            <Button size="sm" variant="outline" onClick={() => onRequestChanges(application._id)}>
-              Request Changes
+            {isPending && (
+              <Button size="sm" variant="outline" onClick={() => onRequestChanges(application._id)}>
+                Request Changes
+              </Button>
+            )}
+            <Button size="sm" variant="outline" onClick={() => onOpen(application._id)}>
+              View details
             </Button>
           </div>
         </>
@@ -310,6 +328,7 @@ export function AdminModerationPage() {
   const [reviewNotes, setReviewNotes] = useState<Record<string, string>>({});
   const [rejectTarget, setRejectTarget] = useState<string | null>(null);
   const [requestChangesTarget, setRequestChangesTarget] = useState<string | null>(null);
+  const [drawerId, setDrawerId] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
   const statsQuery = useQuery({
@@ -453,6 +472,7 @@ export function AdminModerationPage() {
                 onReviewNotesChange={(id, value) =>
                   setReviewNotes((prev) => ({ ...prev, [id]: value }))
                 }
+                onOpen={setDrawerId}
                 onApprove={(id) => approveMutation.mutate(id)}
                 onReject={(id) => setRejectTarget(id)}
                 onRequestChanges={(id) => setRequestChangesTarget(id)}
@@ -519,6 +539,12 @@ export function AdminModerationPage() {
           }
         }}
         loading={requestChangesMutation.isPending}
+      />
+
+      <MentorDetailsDrawer
+        applicationId={drawerId}
+        onClose={() => setDrawerId(null)}
+        onUpdated={() => invalidateAll()}
       />
     </div>
   );

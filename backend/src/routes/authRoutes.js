@@ -9,6 +9,12 @@ import {
   register,
   resetPassword,
   updatePassword,
+  activate,
+  firstLoginPassword,
+  acceptTermsHandler,
+  onboardingStatus,
+  completeOnboardingHandler,
+  updateOnboardingStepHandler,
 } from "../controllers/authController.js";
 import { protect } from "../middlewares/authMiddleware.js";
 import validateRequest from "../middlewares/validateRequest.js";
@@ -53,8 +59,24 @@ router.post("/login", loginLimiter, validateRequest({ body: authSchemas.login })
 router.post("/refresh", authLimiter, refresh);
 router.post("/forgot-password", forgotLimiter, validateRequest({ body: authSchemas.forgotPassword }), forgotPassword);
 router.post("/reset-password", forgotLimiter, validateRequest({ body: authSchemas.resetPassword }), resetPassword);
+router.post("/activate", forgotLimiter, validateRequest({ body: authSchemas.activate }), activate);
 router.post("/logout", protect, logout);
 router.patch("/password", protect, validateRequest({ body: authSchemas.changePassword }), updatePassword);
+router.post(
+  "/first-login/change-password",
+  protect,
+  validateRequest({ body: authSchemas.firstLoginChangePassword }),
+  firstLoginPassword
+);
+router.post("/accept-terms", protect, acceptTermsHandler);
+router.get("/onboarding-status", protect, onboardingStatus);
+router.post("/onboarding/complete", protect, completeOnboardingHandler);
+router.post(
+  "/onboarding/step",
+  protect,
+  validateRequest({ body: authSchemas.onboardingStep }),
+  updateOnboardingStepHandler
+);
 router.get("/me", protect, me);
 
 export default router;

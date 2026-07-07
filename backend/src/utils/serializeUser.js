@@ -13,6 +13,11 @@ export const serializeAuthUser = (user) => ({
   mentorStatus:
     user.mentorStatus ??
     (user.role === "mentor" ? (user.isVerified ? "approved" : "pending") : undefined),
+  mentorAccountStatus: user.mentorAccountStatus ?? undefined,
+  mustChangePassword: Boolean(user.mustChangePassword),
+  onboardingCompleted: Boolean(user.onboardingCompletedAt),
+  onboardingSteps: user.onboardingSteps ?? undefined,
+  termsAcceptedAt: user.termsAcceptedAt ?? undefined,
   mentorScore: user.mentorScore ?? 0,
   totalSessions: user.totalSessions ?? 0,
   avatar: user.avatarUrl ?? user.avatar ?? createAssignedAvatar({ role: user.role, seed: user._id?.toString?.() ?? user.email ?? user.fullName }).avatarUrl,
