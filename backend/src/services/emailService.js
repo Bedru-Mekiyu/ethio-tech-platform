@@ -96,4 +96,30 @@ export const sendMentorChangesRequestedEmail = async ({ to, fullName, notes }) =
   return sendEmail({ to, subject, html });
 };
 
-export { isEmailConfigured };
+export const sendAccountSuspendedEmail = async ({ to, fullName, reason }) => {
+  const subject = "Account Suspended";
+  const html = `
+    <h2>Hello, ${fullName}</h2>
+    <p>Your mentor account has been suspended.</p>
+    ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ""}
+    <p>If you believe this was in error, please contact support.</p>
+  `;
+  return sendEmail({ to, subject, html });
+};
+
+export const sendPasswordResetByAdminEmail = async ({ to, fullName, loginUrl }) => {
+  const subject = "Password Reset — Mentor Account";
+  const html = `
+    <h2>Hello, ${fullName}</h2>
+    <p>An administrator has reset your password. You will need to set a new password on your next login.</p>
+    <p><a href="${loginUrl}">Sign in to your account</a></p>
+    <p>If you did not request this, please contact support immediately.</p>
+  `;
+  return sendEmail({ to, subject, html });
+};
+
+export {
+  isEmailConfigured,
+  sendAccountSuspendedEmail,
+  sendPasswordResetByAdminEmail,
+};

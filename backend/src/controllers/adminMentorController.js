@@ -19,6 +19,8 @@ import {
   notifyUser,
   notifyAccountSuspended,
   notifyAccountUnsuspended,
+  notifyPasswordReset,
+  notifyCredentialsSent,
 } from "../services/notificationService.js";
 import { provisionOnApproval, regenerateCredentials } from "../services/mentorProvisioningService.js";
 import { deliverCredentials, resendCredentials as resendCreds } from "../services/credentialDeliveryService.js";
@@ -26,7 +28,10 @@ import { serializeAuthUser } from "../utils/serializeUser.js";
 import {
   sendMentorRejectedEmail,
   sendMentorChangesRequestedEmail,
+  sendAccountSuspendedEmail,
+  sendPasswordResetByAdminEmail,
 } from "../services/emailService.js";
+import { buildLoginUrl } from "../services/credentialDeliveryService.js";
 
 const QUEUE_MAP = {
   pending: "pending_review",
@@ -211,7 +216,9 @@ export const approveApplication = asyncHandler(async (req, res) => {
   application.status = APPLICATION_STATUS.APPROVED;
   application.reviewedBy = req.user._id;
   application.reviewedAt = new Date();
-  application.reviewedNotes = req.body.reviewNotes || application.reviewedNotes;
+  if (req.body.reviewNotes) {
+    application.reviewNotes = req.body.reviewNotes;
+  }
   await application.save();
 
   const provisioning = await provisionOnApproval({
@@ -327,6 +334,7 @@ export const resendApplicationCredentials = asyncHandler(async (req, res) => {
   if (!user) throw new ApiError(404, "No linked user account found");
 
   const delivery = await resendCreds({ user, application, actorId: req.user._id });
+  await notifyCredentialsSent({ userId: user._id, link: buildLoginUrl() }).catch(() => undefined);
 
   await logAction({
     actor: req.user._id,
@@ -351,6 +359,12 @@ export const resetApplicationPassword = asyncHandler(async (req, res) => {
 
   const { activationToken, tempPassword } = await regenerateCredentials(user._id, req.user._id);
   const delivery = await resendCreds({ user, application, actorId: req.user._id });
+  await sendPasswordResetByAdminEmail({
+    to: user.email,
+    fullName: user.fullName,
+    loginUrl: buildLoginUrl(),
+  }).catch(() => undefined);
+  await notifyPasswordReset({ userId: user._id }).catch(() => undefined);
 
   await logAction({
     actor: req.user._id,
@@ -417,6 +431,11 @@ export const suspendMentor = asyncHandler(async (req, res) => {
   await user.save();
 
   await notifyAccountSuspended({ userId: user._id, reason });
+  await sendAccountSuspendedEmail({
+    to: user.email,
+    fullName: user.fullName,
+    reason: reason || undefined,
+  }).catch(() => undefined);
 
   await logAction({
     actor: req.user._id,
@@ -508,10 +527,12 @@ export const removeMentorRole = asyncHandler(async (req, res) => {
   if (!user) throw new ApiError(404, "No linked user account found");
 
   const beforeRole = user.role;
-  user.role = "student";
+  user.role = ROLES.STUDENT;
   user.mentorStatus = MENTOR_STATUS.ARCHIVED;
   user.mentorAccountStatus = MENTOR_ACCOUNT_STATUS.ARCHIVED;
   user.isVerified = false;
+  user.refreshTokenHash = undefined;
+  user.refreshTokenExpiresAt = undefined;
   await user.save();
 
   await logAction({
@@ -521,7 +542,7 @@ export const removeMentorRole = asyncHandler(async (req, res) => {
     resourceId: application._id,
     targetUser: user._id,
     before: { role: beforeRole },
-    after: { role: "student" },
+    after: { role: ROLES.STUDENT },
     metadata: { reason },
     ip: req.ip,
     userAgent: req.headers["user-agent"],

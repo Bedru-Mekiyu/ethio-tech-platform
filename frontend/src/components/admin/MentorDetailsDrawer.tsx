@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, Monitor, Smartphone, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/authStore";
 import {
   fetchApplicationDetail,
+  fetchLoginHistory,
   approveApplication,
   rejectApplication,
   requestChanges,
@@ -119,9 +120,16 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
 
   if (!applicationId) return null;
 
+  const loginHistoryQuery = useQuery({
+    queryKey: ["admin", "mentor-login-history", applicationId],
+    queryFn: () => fetchLoginHistory(applicationId!),
+    enabled: Boolean(applicationId),
+  });
+
   const detail = detailQuery.data;
   const app = detail?.application;
   const linkedUser = detail?.user;
+  const loginHistory = loginHistoryQuery.data;
 
   const statusBadge = (status: MentorApplication["status"]) => {
     const variant =
@@ -227,8 +235,19 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
         aria-modal="true"
         aria-label="Mentor application details"
       >
-        <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4">
-          <div>
+        <div className="flex items-center gap-4 border-b border-[var(--border)] px-6 py-4">
+          {linkedUser?.avatarUrl ? (
+            <img
+              src={linkedUser.avatarUrl}
+              alt={app?.fullName ?? "Mentor"}
+              className="h-14 w-14 rounded-full border border-[var(--border)] bg-white/5 object-cover"
+            />
+          ) : (
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border)] bg-primary/10 text-lg font-bold text-primary">
+              {(app?.fullName ?? "?").charAt(0).toUpperCase()}
+            </div>
+          )}
+          <div className="flex-1">
             <h2 className="text-lg font-semibold text-white">{app?.fullName ?? "Application"}</h2>
             <p className="text-sm text-[var(--text-muted)]">{app?.email}</p>
           </div>
@@ -336,10 +355,84 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
 
               <section className="space-y-2 text-sm">
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Login history
+                </h3>
+                {linkedUser ? (
+                  <>
+                    <p>
+                      <span className="text-[var(--text-muted)]">Last login: </span>
+                      {linkedUser.lastLoginAt
+                        ? new Date(linkedUser.lastLoginAt).toLocaleString()
+                        : "Never"}
+                    </p>
+                    {loginHistory?.lastLoginIp && (
+                      <p>
+                        <span className="text-[var(--text-muted)]">Last IP: </span>
+                        {loginHistory.lastLoginIp}
+                      </p>
+                    )}
+                    <p>
+                      <span className="text-[var(--text-muted)]">Active sessions: </span>
+                      {loginHistory?.activeSessions ?? 0}
+                    </p>
+                    {(loginHistory?.devices ?? []).length > 0 && (
+                      <div className="space-y-2 pt-1">
+                        <p className="text-xs text-[var(--text-muted)]">Registered devices:</p>
+                        {loginHistory!.devices!.map((device, i) => (
+                          <div key={i} className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/5 p-2">
+                            {device.type === "mobile" ? (
+                              <Smartphone size={14} className="mt-0.5 text-[var(--text-muted)]" />
+                            ) : (
+                              <Monitor size={14} className="mt-0.5 text-[var(--text-muted)]" />
+                            )}
+                            <div className="flex-1 text-xs">
+                              <p className="text-[var(--text-secondary)]">{device.type}</p>
+                              {device.ip && <p className="text-[var(--text-muted)]">{device.ip}</p>}
+                              {device.lastUsedAt && (
+                                <p className="text-[var(--text-muted)]">
+                                  Last used: {new Date(device.lastUsedAt).toLocaleDateString()}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-[var(--text-secondary)]">No account activity yet.</p>
+                )}
+              </section>
+
+              <section className="space-y-2 text-sm">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                   Teaching
                 </h3>
-                <p>Sessions: {detail?.teaching.totalSessions ?? 0}</p>
-                <p>Students: {detail?.teaching.studentsCount ?? 0}</p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-lg border border-[var(--border)] bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{detail?.teaching.totalSessions ?? 0}</p>
+                    <p className="text-xs text-[var(--text-muted)]">Sessions</p>
+                  </div>
+                  <div className="rounded-lg border border-[var(--border)] bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{detail?.teaching.studentsCount ?? 0}</p>
+                    <p className="text-xs text-[var(--text-muted)]">Students</p>
+                  </div>
+                </div>
+                {(detail?.teaching.sessions ?? []).length > 0 && (
+                  <div className="space-y-2 pt-1">
+                    <p className="text-xs text-[var(--text-muted)]">Recent sessions:</p>
+                    {detail!.teaching.sessions.slice(0, 5).map((session, i) => (
+                      <div key={i} className="flex items-center justify-between rounded-lg border border-[var(--border)] bg-white/5 px-3 py-2">
+                        <span className="truncate text-sm text-[var(--text-secondary)]">
+                          {session.title ?? "Untitled session"}
+                        </span>
+                        <Badge variant={session.status === "completed" ? "success" : session.status === "cancelled" ? "warning" : "default"}>
+                          {session.status ?? "scheduled"}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
 
               {canReview && isAdmin && (

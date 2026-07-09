@@ -5,6 +5,7 @@ import {
   MENTOR_STATUS,
   MENTOR_ACCOUNT_STATUS,
   VALID_STATUS_TRANSITIONS,
+  VALID_MENTOR_ACCOUNT_TRANSITIONS,
 } from "../config/permissions.js";
 
 const { Schema, model } = mongoose;
@@ -148,6 +149,25 @@ userSchema.methods.transitionTo = function (newStatus, { reason, changedBy } = {
   this.statusReason = reason || undefined;
   this.statusChangedAt = new Date();
   this.statusChangedBy = changedBy;
+  return this;
+};
+
+userSchema.methods.canTransitionMentorAccount = function (newStatus) {
+  if (!this.mentorAccountStatus) return true;
+  const allowed = VALID_MENTOR_ACCOUNT_TRANSITIONS[this.mentorAccountStatus] || [];
+  return allowed.includes(newStatus);
+};
+
+userSchema.methods.transitionMentorAccount = function (newStatus, { reason, changedBy } = {}) {
+  if (!this.canTransitionMentorAccount(newStatus)) {
+    throw new Error(
+      `Cannot transition mentor account from ${this.mentorAccountStatus} to ${newStatus}`
+    );
+  }
+  this.mentorAccountStatus = newStatus;
+  if (reason) this.statusReason = reason;
+  if (changedBy) this.statusChangedBy = changedBy;
+  this.statusChangedAt = new Date();
   return this;
 };
 

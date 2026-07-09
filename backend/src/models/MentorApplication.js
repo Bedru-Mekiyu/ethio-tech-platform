@@ -57,7 +57,6 @@ const mentorApplicationSchema = new Schema({
   },
   reviewedBy: { type: Schema.Types.ObjectId, ref: "User" },
   reviewedAt: { type: Date },
-  reviewedNotes: { type: String, trim: true },
   reviewNotes: { type: String, trim: true },
   rejectionReason: { type: String, trim: true },
   rejectionHistory: [{

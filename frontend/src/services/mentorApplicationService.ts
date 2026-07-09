@@ -22,7 +22,6 @@ export interface MentorApplication {
   userId?: string;
   reviewedBy?: string;
   reviewedAt?: string;
-  reviewedNotes?: string;
   reviewNotes?: string;
   rejectionReason?: string;
   rejectionHistory?: Array<{
@@ -140,6 +139,25 @@ export async function fetchApplicationAuditLog(id: string, page = 1) {
   const { data } = await api.get<
     ApiResponse<{ logs: AuditLogEntry[]; pagination: Pagination }>
   >(`/admin/mentor-applications/${id}/audit-log?page=${page}&limit=20`);
+  return data.data;
+}
+
+export interface LoginHistory {
+  lastLoginAt?: string;
+  lastLoginIp?: string;
+  devices?: Array<{
+    type: "web" | "mobile" | "desktop";
+    userAgent?: string;
+    ip?: string;
+    lastUsedAt?: string;
+  }>;
+  activeSessions: number;
+}
+
+export async function fetchLoginHistory(id: string) {
+  const { data } = await api.get<ApiResponse<LoginHistory>>(
+    `/admin/mentor-applications/${id}/login-history`
+  );
   return data.data;
 }
 
