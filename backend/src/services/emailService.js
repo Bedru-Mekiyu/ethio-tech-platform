@@ -2,7 +2,7 @@ import { getEnv } from "../config/env.js";
 
 let transporter = null;
 
-const isEmailConfigured = () => {
+export const isEmailConfigured = () => {
   const env = getEnv();
   return Boolean(env.smtpHost && env.smtpFrom);
 };
@@ -116,10 +116,4 @@ export const sendPasswordResetByAdminEmail = async ({ to, fullName, loginUrl }) 
     <p>If you did not request this, please contact support immediately.</p>
   `;
   return sendEmail({ to, subject, html });
-};
-
-export {
-  isEmailConfigured,
-  sendAccountSuspendedEmail,
-  sendPasswordResetByAdminEmail,
 };
