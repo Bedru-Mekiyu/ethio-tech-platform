@@ -92,7 +92,7 @@ vi.mock("@/components/composites/ToastProvider", () => ({
   }),
 }));
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
@@ -167,7 +167,7 @@ describe("MentorDetailsDrawer", () => {
   });
 
   it("displays login history with devices", async () => {
-    const fetchLoginHistory = (await import("@/services/mentorApplicationService")).fetchLoginHistory;
+    const fetchLoginHistory = (await import("@/services/mentorApplicationService")).fetchLoginHistory as unknown as ReturnType<typeof vi.fn>;
     fetchLoginHistory.mockResolvedValue(mockLoginHistoryWithDevices);
 
     const { MentorDetailsDrawer } = await import("@/components/admin/MentorDetailsDrawer");

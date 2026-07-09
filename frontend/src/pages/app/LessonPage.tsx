@@ -27,8 +27,8 @@ export function LessonPage() {
     onSuccess: async (result) => {
       setCompleted(true);
       if ((result as { alreadyCompleted?: boolean }).alreadyCompleted) return;
-      const user = await fetchMe();
-      setUser(user);
+      const me = await fetchMe();
+      setUser(me.user);
       queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
     },
   });
