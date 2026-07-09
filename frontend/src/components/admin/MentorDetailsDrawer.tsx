@@ -118,13 +118,13 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
     },
   });
 
-  if (!applicationId) return null;
-
   const loginHistoryQuery = useQuery({
     queryKey: ["admin", "mentor-login-history", applicationId],
     queryFn: () => fetchLoginHistory(applicationId!),
     enabled: Boolean(applicationId),
   });
+
+  if (!applicationId) return null;
 
   const detail = detailQuery.data;
   const app = detail?.application;
@@ -143,8 +143,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
     return <Badge variant={variant}>{status.replace(/_/g, " ")}</Badge>;
   };
 
-  const canReview =
-    app?.status === "pending_review" || app?.status === "changes_requested";
+  const canReview = app?.status === "pending_review" || app?.status === "changes_requested";
   const needsProvision = app?.status === "approved" && !linkedUser;
   const canManageAccount = Boolean(linkedUser);
 
@@ -276,9 +275,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
               </div>
 
               <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Application
-                </h3>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Application</h3>
                 <p>
                   <span className="text-[var(--text-muted)]">Role: </span>
                   {app.currentRole}
@@ -315,9 +312,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
               </section>
 
               <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Account
-                </h3>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Account</h3>
                 {linkedUser ? (
                   <>
                     <p>
@@ -330,9 +325,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                     </p>
                     <p>
                       <span className="text-[var(--text-muted)]">Last login: </span>
-                      {linkedUser.lastLoginAt
-                        ? new Date(linkedUser.lastLoginAt).toLocaleString()
-                        : "Never"}
+                      {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
                     </p>
                     {detail?.credentialsStatus.provisionedAt && (
                       <p>
@@ -361,9 +354,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                   <>
                     <p>
                       <span className="text-[var(--text-muted)]">Last login: </span>
-                      {linkedUser.lastLoginAt
-                        ? new Date(linkedUser.lastLoginAt).toLocaleString()
-                        : "Never"}
+                      {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
                     </p>
                     {loginHistory?.lastLoginIp && (
                       <p>
@@ -379,7 +370,10 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                       <div className="space-y-2 pt-1">
                         <p className="text-xs text-[var(--text-muted)]">Registered devices:</p>
                         {loginHistory!.devices!.map((device, i) => (
-                          <div key={i} className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/5 p-2">
+                          <div
+                            key={i}
+                            className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/5 p-2"
+                          >
                             {device.type === "mobile" ? (
                               <Smartphone size={14} className="mt-0.5 text-[var(--text-muted)]" />
                             ) : (
@@ -405,9 +399,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
               </section>
 
               <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Teaching
-                </h3>
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Teaching</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-lg border border-[var(--border)] bg-white/5 p-3 text-center">
                     <p className="text-2xl font-bold text-white">{detail?.teaching.totalSessions ?? 0}</p>
@@ -422,11 +414,22 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                   <div className="space-y-2 pt-1">
                     <p className="text-xs text-[var(--text-muted)]">Recent sessions:</p>
                     {detail!.teaching.sessions.slice(0, 5).map((session, i) => (
-                      <div key={i} className="flex items-center justify-between rounded-lg border border-[var(--border)] bg-white/5 px-3 py-2">
+                      <div
+                        key={i}
+                        className="flex items-center justify-between rounded-lg border border-[var(--border)] bg-white/5 px-3 py-2"
+                      >
                         <span className="truncate text-sm text-[var(--text-secondary)]">
                           {session.title ?? "Untitled session"}
                         </span>
-                        <Badge variant={session.status === "completed" ? "success" : session.status === "cancelled" ? "warning" : "default"}>
+                        <Badge
+                          variant={
+                            session.status === "completed"
+                              ? "success"
+                              : session.status === "cancelled"
+                                ? "warning"
+                                : "default"
+                          }
+                        >
                           {session.status ?? "scheduled"}
                         </Badge>
                       </div>
