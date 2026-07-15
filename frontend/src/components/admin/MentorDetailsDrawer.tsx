@@ -227,7 +227,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
 
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-black/50" onClick={onClose} aria-hidden="true" />
+      <div className="fixed inset-0 z-40 bg-black/50" onClick={onClose} aria-hidden="true" />
       <aside
         className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-[var(--border)] bg-[var(--bg)] shadow-2xl"
         role="dialog"
