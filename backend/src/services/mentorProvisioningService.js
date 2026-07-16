@@ -12,8 +12,7 @@ import {
 } from "../config/permissions.js";
 import { getEnv } from "../config/env.js";
 
-const hashToken = (token) =>
-  crypto.createHash("sha256").update(token).digest("hex");
+const hashToken = (token) => crypto.createHash("sha256").update(token).digest("hex");
 
 export const generateSecurePassword = () => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%";
@@ -65,15 +64,16 @@ export const upgradeExistingUser = async (user, application, actorId) => {
   return { user, accountCreated: false, roleUpgraded: previousRole !== ROLES.MENTOR };
 };
 
-export const createMentorUser = async (application, actorId) => {
-  const email = application.email.toLowerCase();
+export const createMentorUser = async (application, actorId, password, customEmail) => {
+  const email = (customEmail || application.email).toLowerCase();
   const existing = await User.findOne({ email });
   if (existing) {
     throw new ApiError(409, "User already exists with this email");
   }
 
-  const tempPassword = generateSecurePassword();
-  const hashedPassword = await bcrypt.hash(tempPassword, 10);
+  const useCustomPassword = Boolean(password);
+  const actualPassword = useCustomPassword ? password : generateSecurePassword();
+  const hashedPassword = await bcrypt.hash(actualPassword, 10);
   const avatar = createAssignedAvatar({ role: ROLES.MENTOR, seed: email });
 
   const user = await User.create({
@@ -85,12 +85,12 @@ export const createMentorUser = async (application, actorId) => {
     statusChangedAt: new Date(),
     statusChangedBy: actorId,
     mentorStatus: MENTOR_STATUS.APPROVED,
-    mentorAccountStatus: MENTOR_ACCOUNT_STATUS.INVITED,
+    mentorAccountStatus: useCustomPassword ? MENTOR_ACCOUNT_STATUS.ACTIVE : MENTOR_ACCOUNT_STATUS.INVITED,
     isVerified: true,
     verifiedAt: new Date(),
     verifiedBy: actorId,
-    mustChangePassword: true,
-    credentialsExpiresAt: getCredentialsExpiryDate(),
+    mustChangePassword: !useCustomPassword,
+    credentialsExpiresAt: useCustomPassword ? undefined : getCredentialsExpiryDate(),
     expertise: application.expertise ?? [],
     currentCompany: application.currentCompany,
     bio: application.whyMentor,
@@ -102,7 +102,7 @@ export const createMentorUser = async (application, actorId) => {
     avatarSource: avatar.avatarSource,
     avatarPublicId: avatar.avatarPublicId,
     onboardingSteps: {
-      passwordChanged: false,
+      passwordChanged: useCustomPassword,
       termsAccepted: false,
       profileCompleted: false,
       photoUploaded: false,
@@ -110,7 +110,12 @@ export const createMentorUser = async (application, actorId) => {
     },
   });
 
-  return { user, accountCreated: true, roleUpgraded: false, tempPassword };
+  return {
+    user,
+    accountCreated: true,
+    roleUpgraded: false,
+    tempPassword: useCustomPassword ? undefined : actualPassword,
+  };
 };
 
 export const setActivationToken = async (user) => {
@@ -122,13 +127,17 @@ export const setActivationToken = async (user) => {
   return token;
 };
 
-export const provisionOnApproval = async ({ application, actorId }) => {
-  let user = await User.findOne({ email: application.email.toLowerCase() });
+export const provisionOnApproval = async ({ application, actorId, password, email }) => {
+  const targetEmail = (email || application.email).toLowerCase();
+  let user = await User.findOne({ email: targetEmail });
   let accountCreated = false;
   let roleUpgraded = false;
   let tempPassword;
 
   if (user) {
+    if (targetEmail !== application.email.toLowerCase()) {
+      throw new ApiError(409, "A user with this email already exists");
+    }
     if (user.role === ROLES.MENTOR && user.mentorStatus === MENTOR_STATUS.APPROVED) {
       syncApplicationToUser(user, application);
       user.mentorAccountStatus = user.mentorAccountStatus || MENTOR_ACCOUNT_STATUS.ACTIVE;
@@ -139,7 +148,7 @@ export const provisionOnApproval = async ({ application, actorId }) => {
     user = result.user;
     roleUpgraded = result.roleUpgraded;
   } else {
-    const result = await createMentorUser(application, actorId);
+    const result = await createMentorUser(application, actorId, password, email);
     user = result.user;
     accountCreated = result.accountCreated;
     tempPassword = result.tempPassword;
@@ -155,7 +164,7 @@ export const provisionOnApproval = async ({ application, actorId }) => {
 
 export const regenerateCredentials = async (userId, actorId) => {
   const user = await User.findById(userId).select(
-    "+password +activationTokenHash +activationTokenExpiresAt +mustChangePassword"
+    "+password +activationTokenHash +activationTokenExpiresAt +mustChangePassword",
   );
   if (!user) throw new ApiError(404, "User not found");
   if (user.role !== ROLES.MENTOR) {

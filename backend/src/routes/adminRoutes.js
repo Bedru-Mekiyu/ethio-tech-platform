@@ -1,10 +1,5 @@
 import { Router } from "express";
-import {
-  flagSubmission,
-  getAnalytics,
-  getAuditLogs,
-  getModerationQueue,
-} from "../controllers/adminController.js";
+import { flagSubmission, getAnalytics, getAuditLogs, getModerationQueue } from "../controllers/adminController.js";
 import {
   getQueueApplications,
   getQueueStats,
@@ -43,106 +38,126 @@ router.post(
   "/moderation/:id/flag",
   authorize("admin", "super_admin", "moderator"),
   auditAction("flag_submission", "submission"),
-  flagSubmission
+  flagSubmission,
 );
 
 router.get("/mentor-applications/stats", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueStats);
-router.get("/mentor-applications/pending", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("pending"));
-router.get("/mentor-applications/approved", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("approved"));
-router.get("/mentor-applications/rejected", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("rejected"));
-router.get("/mentor-applications/changes-requested", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("changes-requested"));
-router.get("/mentor-applications/archived", requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS), getQueueApplications("archived"));
+router.get(
+  "/mentor-applications/pending",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  getQueueApplications("pending"),
+);
+router.get(
+  "/mentor-applications/approved",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  getQueueApplications("approved"),
+);
+router.get(
+  "/mentor-applications/rejected",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  getQueueApplications("rejected"),
+);
+router.get(
+  "/mentor-applications/changes-requested",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  getQueueApplications("changes-requested"),
+);
+router.get(
+  "/mentor-applications/archived",
+  requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
+  getQueueApplications("archived"),
+);
 
 router.get(
   "/mentor-applications/:id",
   requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
   validateRequest({ params: commonSchemas.idParam }),
-  getApplicationDetail
+  getApplicationDetail,
 );
 router.get(
   "/mentor-applications/:id/audit-log",
   requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
   validateRequest({ params: commonSchemas.idParam }),
-  getApplicationAuditLog
+  getApplicationAuditLog,
 );
 router.get(
   "/mentor-applications/:id/login-history",
   requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
   validateRequest({ params: commonSchemas.idParam }),
-  getLoginHistory
+  getLoginHistory,
 );
 
 router.post(
   "/mentor-applications/:id/start-review",
   requirePermission(PERMISSIONS.MENTOR_VIEW_APPLICATIONS),
   validateRequest({ params: commonSchemas.idParam }),
-  startReview
+  startReview,
 );
 router.post(
   "/mentor-applications/:id/approve",
   requirePermission(PERMISSIONS.MENTOR_APPROVE),
   validateRequest({ params: commonSchemas.idParam }),
-  approveApplication
+  approveApplication,
 );
 router.post(
   "/mentor-applications/:id/reject",
   requirePermission(PERMISSIONS.MENTOR_REJECT),
   validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.rejectMentor }),
-  rejectApplication
+  rejectApplication,
 );
 router.post(
   "/mentor-applications/:id/request-changes",
   requirePermission(PERMISSIONS.MENTOR_REQUEST_CHANGES),
   validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.requestChangesMentor }),
-  requestChanges
+  requestChanges,
 );
 router.post(
   "/mentor-applications/:id/provision",
   requirePermission(PERMISSIONS.MENTOR_PROVISION),
-  validateRequest({ params: commonSchemas.idParam }),
-  provisionApplication
+  validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.provision }),
+  provisionApplication,
 );
 router.post(
   "/mentor-applications/:id/resend-credentials",
   requirePermission(PERMISSIONS.MENTOR_RESEND_CREDENTIALS),
   validateRequest({ params: commonSchemas.idParam }),
-  resendApplicationCredentials
+  resendApplicationCredentials,
 );
 router.post(
   "/mentor-applications/:id/reset-password",
   requirePermission(PERMISSIONS.USER_RESET_PASSWORD),
   validateRequest({ params: commonSchemas.idParam }),
-  resetApplicationPassword
+  resetApplicationPassword,
 );
 router.post(
   "/mentor-applications/:id/archive",
   requirePermission(PERMISSIONS.MENTOR_ARCHIVE),
   validateRequest({ params: commonSchemas.idParam }),
-  archiveApplication
+  archiveApplication,
 );
 router.post(
   "/mentor-applications/:id/suspend",
   requirePermission(PERMISSIONS.MENTOR_SUSPEND),
   validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.mentorActionReason }),
-  suspendMentor
+  suspendMentor,
 );
 router.post(
   "/mentor-applications/:id/reactivate",
   requirePermission(PERMISSIONS.MENTOR_SUSPEND),
   validateRequest({ params: commonSchemas.idParam }),
-  reactivateMentor
+  reactivateMentor,
 );
 router.post(
   "/mentor-applications/:id/deactivate",
   requirePermission(PERMISSIONS.MENTOR_SUSPEND),
   validateRequest({ params: commonSchemas.idParam }),
-  deactivateMentor
+  deactivateMentor,
 );
 router.post(
   "/mentor-applications/:id/remove-role",
   requirePermission(PERMISSIONS.USER_CHANGE_ROLE),
   validateRequest({ params: commonSchemas.idParam, body: adminUserSchemas.mentorActionReason }),
-  removeMentorRole
+  removeMentorRole,
 );
 
 router.use(adminUserRoutes);

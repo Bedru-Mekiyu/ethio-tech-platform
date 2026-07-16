@@ -301,13 +301,9 @@ export const provisionApplication = asyncHandler(async (req, res) => {
     throw new ApiError(409, "Mentor account already provisioned");
   }
 
-  const provisioning = await provisionOnApproval({ application, actorId: req.user._id });
-  const delivery = await deliverCredentials({
-    user: provisioning.user,
-    application,
-    actorId: req.user._id,
-    tempPassword: provisioning.tempPassword,
-  });
+  const { email, password } = req.body;
+
+  const provisioning = await provisionOnApproval({ application, actorId: req.user._id, password, email });
 
   await logAction({
     actor: req.user._id,
@@ -322,7 +318,11 @@ export const provisionApplication = asyncHandler(async (req, res) => {
 
   sendResponse(res, 200, "Account provisioned", {
     user: serializeAuthUser(provisioning.user),
-    provisioning: { ...provisioning, delivery },
+    provisioning: {
+      accountCreated: provisioning.accountCreated,
+      roleUpgraded: provisioning.roleUpgraded,
+      alreadyProvisioned: provisioning.alreadyProvisioned,
+    },
   });
 });
 

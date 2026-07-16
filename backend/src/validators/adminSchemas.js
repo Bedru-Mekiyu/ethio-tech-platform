@@ -27,16 +27,18 @@ export const adminUserSchemas = {
     learningInterests: z.array(z.string().trim().min(2).max(80)).max(12).optional(),
   }),
 
-  update: z.object({
-    fullName: z.string().trim().min(2).max(120).optional(),
-    bio: z.string().max(1000).optional(),
-    phone: z.string().trim().max(40).optional(),
-    city: z.string().trim().min(2).max(120).optional(),
-    gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
-    expertise: z.array(z.string().trim().min(2).max(80)).max(20).optional(),
-    currentCompany: z.string().trim().min(2).max(120).optional(),
-    learningInterests: z.array(z.string().trim().min(2).max(80)).max(12).optional(),
-  }).refine((data) => Object.keys(data).length > 0, "At least one field is required"),
+  update: z
+    .object({
+      fullName: z.string().trim().min(2).max(120).optional(),
+      bio: z.string().max(1000).optional(),
+      phone: z.string().trim().max(40).optional(),
+      city: z.string().trim().min(2).max(120).optional(),
+      gradeLevel: z.coerce.number().int().min(8).max(12).optional(),
+      expertise: z.array(z.string().trim().min(2).max(80)).max(20).optional(),
+      currentCompany: z.string().trim().min(2).max(120).optional(),
+      learningInterests: z.array(z.string().trim().min(2).max(80)).max(12).optional(),
+    })
+    .refine((data) => Object.keys(data).length > 0, "At least one field is required"),
 
   changeRole: z.object({
     role: z.enum(Object.values(ROLES)),
@@ -80,9 +82,21 @@ export const adminUserSchemas = {
     reviewNotes: z.string().trim().min(2).max(2000),
   }),
 
-  mentorActionReason: z.object({
-    reason: z.string().trim().max(500).optional(),
-  }).optional(),
+  mentorActionReason: z
+    .object({
+      reason: z.string().trim().max(500).optional(),
+    })
+    .optional(),
+
+  provision: z.object({
+    email: z.string().trim().toLowerCase().email(),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128)
+      .regex(/[A-Za-z]/, "Password must include a letter")
+      .regex(/\d/, "Password must include a number"),
+  }),
 };
 
 export const mentorApplicationUpdateSchemas = {

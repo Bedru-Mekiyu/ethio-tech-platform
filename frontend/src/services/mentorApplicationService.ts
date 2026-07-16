@@ -112,33 +112,29 @@ function buildQuery(params?: QueueFilterParams): string {
 
 export async function fetchQueueApplications(
   queue: "pending" | "approved" | "rejected" | "changes-requested" | "archived",
-  params?: QueueFilterParams
+  params?: QueueFilterParams,
 ) {
   const qs = buildQuery(params);
-  const { data } = await api.get<
-    ApiResponse<{ applications: MentorApplication[]; pagination: Pagination }>
-  >(`/admin/mentor-applications/${queue}${qs}`);
+  const { data } = await api.get<ApiResponse<{ applications: MentorApplication[]; pagination: Pagination }>>(
+    `/admin/mentor-applications/${queue}${qs}`,
+  );
   return data.data;
 }
 
 export async function fetchQueueStats() {
-  const { data } = await api.get<ApiResponse<{ stats: QueueStats }>>(
-    "/admin/mentor-applications/stats"
-  );
+  const { data } = await api.get<ApiResponse<{ stats: QueueStats }>>("/admin/mentor-applications/stats");
   return data.data.stats;
 }
 
 export async function fetchApplicationDetail(id: string) {
-  const { data } = await api.get<ApiResponse<ApplicationDetail>>(
-    `/admin/mentor-applications/${id}`
-  );
+  const { data } = await api.get<ApiResponse<ApplicationDetail>>(`/admin/mentor-applications/${id}`);
   return data.data;
 }
 
 export async function fetchApplicationAuditLog(id: string, page = 1) {
-  const { data } = await api.get<
-    ApiResponse<{ logs: AuditLogEntry[]; pagination: Pagination }>
-  >(`/admin/mentor-applications/${id}/audit-log?page=${page}&limit=20`);
+  const { data } = await api.get<ApiResponse<{ logs: AuditLogEntry[]; pagination: Pagination }>>(
+    `/admin/mentor-applications/${id}/audit-log?page=${page}&limit=20`,
+  );
   return data.data;
 }
 
@@ -155,16 +151,14 @@ export interface LoginHistory {
 }
 
 export async function fetchLoginHistory(id: string) {
-  const { data } = await api.get<ApiResponse<LoginHistory>>(
-    `/admin/mentor-applications/${id}/login-history`
-  );
+  const { data } = await api.get<ApiResponse<LoginHistory>>(`/admin/mentor-applications/${id}/login-history`);
   return data.data;
 }
 
 export async function approveApplication(id: string, reviewNotes?: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
     `/admin/mentor-applications/${id}/approve`,
-    { reviewNotes }
+    { reviewNotes },
   );
   return data.data;
 }
@@ -172,7 +166,7 @@ export async function approveApplication(id: string, reviewNotes?: string) {
 export async function rejectApplication(id: string, rejectionReason: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
     `/admin/mentor-applications/${id}/reject`,
-    { rejectionReason }
+    { rejectionReason },
   );
   return data.data;
 }
@@ -180,20 +174,20 @@ export async function rejectApplication(id: string, rejectionReason: string) {
 export async function requestChanges(id: string, reviewNotes: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
     `/admin/mentor-applications/${id}/request-changes`,
-    { reviewNotes }
+    { reviewNotes },
   );
   return data.data;
 }
 
 export async function startReview(id: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
-    `/admin/mentor-applications/${id}/start-review`
+    `/admin/mentor-applications/${id}/start-review`,
   );
   return data.data;
 }
 
-export async function provisionApplication(id: string) {
-  const { data } = await api.post(`/admin/mentor-applications/${id}/provision`);
+export async function provisionApplication(id: string, email: string, password: string) {
+  const { data } = await api.post(`/admin/mentor-applications/${id}/provision`, { email, password });
   return data.data;
 }
 
@@ -209,7 +203,7 @@ export async function resetMentorPassword(id: string) {
 
 export async function archiveApplication(id: string) {
   const { data } = await api.post<ApiResponse<{ application: MentorApplication }>>(
-    `/admin/mentor-applications/${id}/archive`
+    `/admin/mentor-applications/${id}/archive`,
   );
   return data.data;
 }

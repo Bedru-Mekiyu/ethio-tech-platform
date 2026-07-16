@@ -23,6 +23,7 @@ import {
   type MentorApplication,
 } from "@/services/mentorApplicationService";
 import { MentorActionConfirmDialog } from "@/components/admin/MentorActionConfirmDialog";
+import { ProvisionAccountDialog } from "@/components/admin/ProvisionAccountDialog";
 import { MentorAuditTimeline } from "@/components/admin/MentorAuditTimeline";
 import { useToast } from "@/components/composites/ToastProvider";
 
@@ -30,7 +31,6 @@ type ConfirmAction =
   | "approve"
   | "reject"
   | "request-changes"
-  | "provision"
   | "resend"
   | "reset-password"
   | "archive"
@@ -52,6 +52,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
   const [reviewNotes, setReviewNotes] = useState("");
   const [confirmAction, setConfirmAction] = useState<ConfirmAction | null>(null);
   const [reason, setReason] = useState("");
+  const [provisionDialogOpen, setProvisionDialogOpen] = useState(false);
 
   const isAdmin = user?.role === "admin" || user?.role === "super_admin";
 
@@ -79,8 +80,6 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
           return rejectApplication(applicationId, reason);
         case "request-changes":
           return requestChanges(applicationId, reason);
-        case "provision":
-          return provisionApplication(applicationId);
         case "resend":
           return resendCredentials(applicationId);
         case "reset-password":
@@ -99,14 +98,45 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
           throw new Error("Unknown action");
       }
     },
-    onSuccess: async () => {
-      toast.success("Action completed successfully");
+    onSuccess: async (_result: unknown) => {
+      const wasResend = confirmAction === "resend";
+      const delivery = (_result as Record<string, unknown>)?.delivery as
+        | { emailSent?: boolean; activationUrl?: string; deliveryMethod?: string }
+        | undefined;
+
+      if (wasResend && delivery) {
+        if (delivery.emailSent) {
+          toast.success("Credentials resent successfully. Check the mentor's email.");
+        } else if (delivery.activationUrl) {
+          toast.success(`Email not sent (SMTP not configured). Activation link: ${delivery.activationUrl}`);
+        } else {
+          toast.success("Credentials regenerated but email could not be sent. Check SMTP configuration.");
+        }
+      } else {
+        toast.success("Action completed successfully");
+      }
+
       setConfirmAction(null);
       setReason("");
       await invalidate();
     },
     onError: () => {
       toast.error("Action failed. Check permissions and try again.");
+    },
+  });
+
+  const provisionMutation = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) => {
+      if (!applicationId) throw new Error("No application");
+      return provisionApplication(applicationId, email, password);
+    },
+    onSuccess: async () => {
+      toast.success("Mentor account created successfully");
+      setProvisionDialogOpen(false);
+      await invalidate();
+    },
+    onError: () => {
+      toast.error("Failed to create account. Check permissions and try again.");
     },
   });
 
@@ -174,11 +204,6 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
       description: "The applicant will be asked to update and resubmit.",
       confirmLabel: "Send request",
       requireReason: true,
-    },
-    provision: {
-      title: "Create mentor account",
-      description: "Provision an account for this approved application.",
-      confirmLabel: "Create account",
     },
     resend: {
       title: "Resend credentials",
@@ -491,7 +516,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                 </>
               )}
               {needsProvision && (
-                <Button size="sm" variant="primary" onClick={() => setConfirmAction("provision")}>
+                <Button size="sm" variant="primary" onClick={() => setProvisionDialogOpen(true)}>
                   Create account
                 </Button>
               )}
@@ -548,6 +573,14 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
           onConfirm={() => confirmAction && mutation.mutate(confirmAction)}
         />
       )}
+
+      <ProvisionAccountDialog
+        open={provisionDialogOpen}
+        defaultEmail={app?.email ?? ""}
+        loading={provisionMutation.isPending}
+        onClose={() => setProvisionDialogOpen(false)}
+        onConfirm={(email, password) => provisionMutation.mutate({ email, password })}
+      />
     </>
   );
 }
