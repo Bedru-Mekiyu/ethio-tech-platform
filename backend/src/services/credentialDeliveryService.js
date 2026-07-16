@@ -1,19 +1,7 @@
 import { getEnv } from "../config/env.js";
-import {
-  isEmailConfigured,
-  sendMentorApprovedEmail,
-  sendMentorCredentialsEmail,
-} from "./emailService.js";
-import {
-  setActivationToken,
-  markCredentialsDelivered,
-  CREDENTIALS_DELIVERY,
-} from "./mentorProvisioningService.js";
-import {
-  notifyMentorApproved,
-  notifyAccountCreated,
-  notifyCredentialsSent,
-} from "./notificationService.js";
+import { isEmailConfigured, sendMentorApprovedEmail, sendMentorCredentialsEmail } from "./emailService.js";
+import { setActivationToken, markCredentialsDelivered, CREDENTIALS_DELIVERY } from "./mentorProvisioningService.js";
+import { notifyMentorApproved, notifyAccountCreated, notifyCredentialsSent } from "./notificationService.js";
 
 export const buildActivationUrl = (token) => {
   const base = getEnv().appUrl.replace(/\/$/, "");
@@ -25,7 +13,7 @@ export const buildLoginUrl = () => {
   return `${base}/login`;
 };
 
-export const deliverCredentials = async ({ user, application, actorId, tempPassword }) => {
+export const deliverCredentials = async ({ user, application, _actorId, tempPassword }) => {
   const activationToken = await setActivationToken(user);
   const activationUrl = buildActivationUrl(activationToken);
   const loginUrl = buildLoginUrl();
@@ -66,7 +54,7 @@ export const deliverCredentials = async ({ user, application, actorId, tempPassw
   return response;
 };
 
-export const resendCredentials = async ({ user, application, actorId }) => {
+export const resendCredentials = async ({ user, application, _actorId }) => {
   const activationToken = await setActivationToken(user);
   const activationUrl = buildActivationUrl(activationToken);
   const loginUrl = buildLoginUrl();
@@ -79,6 +67,7 @@ export const resendCredentials = async ({ user, application, actorId }) => {
       to: user.email,
       fullName: user.fullName,
       loginUrl,
+      activationUrl,
     });
     if (emailResult.sent) {
       deliveryMethod = CREDENTIALS_DELIVERY.EMAIL;

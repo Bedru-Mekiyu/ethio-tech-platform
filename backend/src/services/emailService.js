@@ -56,12 +56,14 @@ export const sendMentorApprovedEmail = async ({ to, fullName, loginUrl, activati
   return sendEmail({ to, subject, html });
 };
 
-export const sendMentorCredentialsEmail = async ({ to, fullName, loginUrl }) => {
+export const sendMentorCredentialsEmail = async ({ to, fullName, loginUrl, activationUrl }) => {
   const subject = "Your Mentor Account Is Ready";
   const html = `
     <h2>Hello, ${fullName}!</h2>
     <p>Your mentor account credentials have been regenerated.</p>
-    <p>Please use the activation link sent separately or sign in at: <a href="${loginUrl}">${loginUrl}</a></p>
+    <p><a href="${activationUrl}">Activate your account and set your password</a></p>
+    <p>Or sign in at: <a href="${loginUrl}">${loginUrl}</a></p>
+    <p>This activation link expires in 24 hours.</p>
   `;
   return sendEmail({ to, subject, html });
 };

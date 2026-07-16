@@ -6,12 +6,7 @@ import User from "../models/User.js";
 import AdminActivityLog from "../models/AdminActivityLog.js";
 import Session from "../models/Session.js";
 import { getPagination } from "../utils/pagination.js";
-import {
-  USER_STATUS,
-  MENTOR_STATUS,
-  MENTOR_ACCOUNT_STATUS,
-  APPLICATION_STATUS,
-} from "../config/permissions.js";
+import { ROLES, USER_STATUS, MENTOR_STATUS, MENTOR_ACCOUNT_STATUS, APPLICATION_STATUS } from "../config/permissions.js";
 import {
   notifyMentorRejected,
   notifyMentorChangesRequested,
@@ -162,7 +157,12 @@ export const getApplicationAuditLog = asyncHandler(async (req, res) => {
   };
 
   const [logs, total] = await Promise.all([
-    AdminActivityLog.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).populate("actor", "fullName email").lean(),
+    AdminActivityLog.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("actor", "fullName email")
+      .lean(),
     AdminActivityLog.countDocuments(filter),
   ]);
 
@@ -334,7 +334,9 @@ export const resendApplicationCredentials = asyncHandler(async (req, res) => {
   if (!user) throw new ApiError(404, "No linked user account found");
 
   const delivery = await resendCreds({ user, application, actorId: req.user._id });
-  await notifyCredentialsSent({ userId: user._id, link: buildLoginUrl() }).catch(() => undefined);
+  await notifyCredentialsSent({ userId: user._id, link: delivery.activationUrl || buildLoginUrl() }).catch(
+    () => undefined,
+  );
 
   await logAction({
     actor: req.user._id,
@@ -357,7 +359,7 @@ export const resetApplicationPassword = asyncHandler(async (req, res) => {
   const user = await getLinkedUser(application);
   if (!user) throw new ApiError(404, "No linked user account found");
 
-  const { activationToken, tempPassword } = await regenerateCredentials(user._id, req.user._id);
+  const { activationToken } = await regenerateCredentials(user._id, req.user._id);
   const delivery = await resendCreds({ user, application, actorId: req.user._id });
   await sendPasswordResetByAdminEmail({
     to: user.email,
