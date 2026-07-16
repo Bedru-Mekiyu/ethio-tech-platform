@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,6 @@ import {
   requestChanges,
   type MentorApplication,
 } from "@/services/mentorApplicationService";
-import { MentorDetailsDrawer } from "@/components/admin/MentorDetailsDrawer";
 import { MentorActionConfirmDialog } from "@/components/admin/MentorActionConfirmDialog";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 
@@ -224,7 +224,7 @@ export function AdminModerationPage() {
     id: string;
   } | null>(null);
   const [pageActionReason, setPageActionReason] = useState("");
-  const [drawerId, setDrawerId] = useState<string | null>(null);
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const statsQuery = useQuery({
@@ -364,19 +364,10 @@ export function AdminModerationPage() {
                 application={application}
                 reviewNotes={reviewNotes[application._id] ?? ""}
                 onReviewNotesChange={(id, value) => setReviewNotes((prev) => ({ ...prev, [id]: value }))}
-                onOpen={setDrawerId}
-                onApprove={(id) => {
-                  setDrawerId(null);
-                  setPageAction({ type: "approve", id });
-                }}
-                onReject={(id) => {
-                  setDrawerId(null);
-                  setPageAction({ type: "reject", id });
-                }}
-                onRequestChanges={(id) => {
-                  setDrawerId(null);
-                  setPageAction({ type: "request-changes", id });
-                }}
+                onOpen={(id) => navigate(`/admin/moderation/${id}`)}
+                onApprove={(id) => setPageAction({ type: "approve", id })}
+                onReject={(id) => setPageAction({ type: "reject", id })}
+                onRequestChanges={(id) => setPageAction({ type: "request-changes", id })}
               />
             ))}
           </div>
@@ -456,12 +447,6 @@ export function AdminModerationPage() {
           }}
         />
       )}
-
-      <MentorDetailsDrawer
-        applicationId={drawerId}
-        onClose={() => setDrawerId(null)}
-        onUpdated={() => invalidateAll()}
-      />
     </div>
   );
 }

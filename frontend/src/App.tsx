@@ -126,6 +126,9 @@ const AdminUsersPage = lazy(() =>
 const AdminModerationPage = lazy(() =>
   import("@/pages/admin/AdminModerationPage").then((module) => ({ default: module.AdminModerationPage })),
 );
+const AdminMentorDetailPage = lazy(() =>
+  import("@/pages/admin/AdminMentorDetailPage").then((module) => ({ default: module.AdminMentorDetailPage })),
+);
 const AdminOperationsPage = lazy(() =>
   import("@/pages/admin/AdminOperationsPage").then((module) => ({ default: module.AdminOperationsPage })),
 );
@@ -347,6 +350,7 @@ export default function App() {
                     <Route index element={<AdminPage />} />
                     <Route path="users" element={<AdminUsersPage />} />
                     <Route path="moderation" element={<AdminModerationPage />} />
+                    <Route path="moderation/:id" element={<AdminMentorDetailPage />} />
                     <Route path="operations" element={<AdminOperationsPage />} />
                     <Route path="content" element={<AdminContentPage />} />
                     <Route path="gamification" element={<AdminGamificationPage />} />
