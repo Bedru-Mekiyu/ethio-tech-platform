@@ -16,7 +16,8 @@ import {
   type MentorApplication,
 } from "@/services/mentorApplicationService";
 import { MentorDetailsDrawer } from "@/components/admin/MentorDetailsDrawer";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import { MentorActionConfirmDialog } from "@/components/admin/MentorActionConfirmDialog";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 type QueueTab = "pending" | "approved" | "rejected" | "changes-requested" | "archived";
 
@@ -42,133 +43,11 @@ function StatCard({ label, count, active }: { label: string; count: number; acti
   return (
     <div
       className={`rounded-xl border px-4 py-3 transition-colors ${
-        active
-          ? "border-primary bg-primary/5"
-          : "border-[var(--border)] bg-[var(--bg-card)]/50"
+        active ? "border-primary bg-primary/5" : "border-[var(--border)] bg-[var(--bg-card)]/50"
       }`}
     >
       <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">{label}</p>
       <p className="mt-1 text-2xl font-bold text-white">{count}</p>
-    </div>
-  );
-}
-
-function RejectModal({
-  open,
-  onClose,
-  onConfirm,
-  loading,
-}: {
-  open: boolean;
-  onClose: () => void;
-  onConfirm: (reason: string) => void;
-  loading: boolean;
-}) {
-  const [reason, setReason] = useState("");
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Reject application"
-    >
-      <div
-        className="w-full max-w-lg rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">Reject Application</h2>
-          <button onClick={onClose} className="text-[var(--text-muted)] hover:text-white" aria-label="Close">
-            <X size={20} />
-          </button>
-        </div>
-        <p className="mb-4 text-sm text-[var(--text-secondary)]">
-          Provide a reason for rejection. The applicant will be notified.
-        </p>
-        <textarea
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
-          placeholder="Enter rejection reason..."
-          className="min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary resize-y"
-          aria-label="Rejection reason"
-        />
-        <div className="mt-4 flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => onConfirm(reason)}
-            disabled={!reason.trim() || loading}
-          >
-            {loading ? "Rejecting..." : "Reject"}
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function RequestChangesModal({
-  open,
-  onClose,
-  onConfirm,
-  loading,
-}: {
-  open: boolean;
-  onClose: () => void;
-  onConfirm: (notes: string) => void;
-  loading: boolean;
-}) {
-  const [notes, setNotes] = useState("");
-
-  if (!open) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Request changes"
-    >
-      <div
-        className="w-full max-w-lg rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">Request Changes</h2>
-          <button onClick={onClose} className="text-[var(--text-muted)] hover:text-white" aria-label="Close">
-            <X size={20} />
-          </button>
-        </div>
-        <p className="mb-4 text-sm text-[var(--text-secondary)]">
-          Provide notes on what changes are needed. The applicant will be notified.
-        </p>
-        <textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          placeholder="Describe what needs to be changed..."
-          className="min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary resize-y"
-          aria-label="Change request notes"
-        />
-        <div className="mt-4 flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => onConfirm(notes)}
-            disabled={!notes.trim() || loading}
-          >
-            {loading ? "Sending..." : "Request Changes"}
-          </Button>
-        </div>
-      </div>
     </div>
   );
 }
@@ -191,8 +70,7 @@ function ApplicationCard({
   onReviewNotesChange: (id: string, value: string) => void;
 }) {
   const isPending = application.status === "pending_review";
-  const canAct =
-    application.status === "pending_review" || application.status === "changes_requested";
+  const canAct = application.status === "pending_review" || application.status === "changes_requested";
 
   return (
     <Card
@@ -213,12 +91,17 @@ function ApplicationCard({
           </p>
           <p className="text-xs text-[var(--text-muted)]">{application.email}</p>
         </div>
-        <Badge variant={
-          application.status === "approved" ? "success"
-            : application.status === "rejected" ? "warning"
-              : application.status === "changes_requested" ? "purple"
-                : "default"
-        }>
+        <Badge
+          variant={
+            application.status === "approved"
+              ? "success"
+              : application.status === "rejected"
+                ? "warning"
+                : application.status === "changes_requested"
+                  ? "purple"
+                  : "default"
+          }
+        >
           {application.status.replace(/_/g, " ")}
         </Badge>
       </div>
@@ -233,7 +116,12 @@ function ApplicationCard({
       {application.linkedin && (
         <p className="text-sm">
           <span className="text-[var(--text-muted)]">LinkedIn: </span>
-          <a href={application.linkedin} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+          <a
+            href={application.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
             {application.linkedin}
           </a>
         </p>
@@ -241,7 +129,12 @@ function ApplicationCard({
       {application.portfolio && (
         <p className="text-sm">
           <span className="text-[var(--text-muted)]">Portfolio: </span>
-          <a href={application.portfolio} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+          <a
+            href={application.portfolio}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
             {application.portfolio}
           </a>
         </p>
@@ -253,7 +146,9 @@ function ApplicationCard({
 
       <div className="flex flex-wrap gap-2">
         {(application.expertise ?? []).slice(0, 8).map((skill) => (
-          <Badge key={skill} variant="purple">{skill}</Badge>
+          <Badge key={skill} variant="purple">
+            {skill}
+          </Badge>
         ))}
       </div>
 
@@ -286,9 +181,7 @@ function ApplicationCard({
       {canAct && (
         <>
           <div onClick={(e) => e.stopPropagation()}>
-            <p className="mb-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">
-              Review notes
-            </p>
+            <p className="mb-2 text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Review notes</p>
             <textarea
               value={reviewNotes}
               onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
@@ -326,8 +219,11 @@ export function AdminModerationPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [reviewNotes, setReviewNotes] = useState<Record<string, string>>({});
-  const [rejectTarget, setRejectTarget] = useState<string | null>(null);
-  const [requestChangesTarget, setRequestChangesTarget] = useState<string | null>(null);
+  const [pageAction, setPageAction] = useState<{
+    type: "approve" | "reject" | "request-changes";
+    id: string;
+  } | null>(null);
+  const [pageActionReason, setPageActionReason] = useState("");
   const [drawerId, setDrawerId] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
@@ -369,29 +265,29 @@ export function AdminModerationPage() {
   };
 
   const approveMutation = useMutation({
-    mutationFn: (id: string) =>
-      approveApplication(id, reviewNotes[id]?.trim() || undefined),
+    mutationFn: (id: string) => approveApplication(id, reviewNotes[id]?.trim() || undefined),
     onSuccess: async () => {
+      setPageAction(null);
       setReviewNotes({});
       await invalidateAll();
     },
   });
 
   const rejectMutation = useMutation({
-    mutationFn: ({ id, reason }: { id: string; reason: string }) =>
-      rejectApplication(id, reason),
+    mutationFn: ({ id, reason }: { id: string; reason: string }) => rejectApplication(id, reason),
     onSuccess: async () => {
-      setRejectTarget(null);
+      setPageAction(null);
+      setPageActionReason("");
       setReviewNotes({});
       await invalidateAll();
     },
   });
 
   const requestChangesMutation = useMutation({
-    mutationFn: ({ id, notes }: { id: string; notes: string }) =>
-      requestChanges(id, notes),
+    mutationFn: ({ id, notes }: { id: string; notes: string }) => requestChanges(id, notes),
     onSuccess: async () => {
-      setRequestChangesTarget(null);
+      setPageAction(null);
+      setPageActionReason("");
       setReviewNotes({});
       await invalidateAll();
     },
@@ -409,7 +305,7 @@ export function AdminModerationPage() {
       { key: "changes-requested" as QueueTab, count: stats?.changesRequested ?? 0 },
       { key: "archived" as QueueTab, count: stats?.archived ?? 0 },
     ],
-    [stats]
+    [stats],
   );
 
   if (isError) return <QueryError onRetry={() => applicationsQuery.refetch()} />;
@@ -425,12 +321,7 @@ export function AdminModerationPage() {
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {tabs.map(({ key, count }) => (
-          <StatCard
-            key={key}
-            label={QUEUE_LABELS[key]}
-            count={count}
-            active={tab === key}
-          />
+          <StatCard key={key} label={QUEUE_LABELS[key]} count={count} active={tab === key} />
         ))}
       </div>
 
@@ -439,7 +330,10 @@ export function AdminModerationPage() {
           <Button
             key={key}
             variant={tab === key ? "primary" : "outline"}
-            onClick={() => { setTab(key); setPage(1); }}
+            onClick={() => {
+              setTab(key);
+              setPage(1);
+            }}
             aria-pressed={tab === key}
           >
             {QUEUE_LABELS[key]} ({count})
@@ -469,37 +363,36 @@ export function AdminModerationPage() {
                 key={application._id}
                 application={application}
                 reviewNotes={reviewNotes[application._id] ?? ""}
-                onReviewNotesChange={(id, value) =>
-                  setReviewNotes((prev) => ({ ...prev, [id]: value }))
-                }
+                onReviewNotesChange={(id, value) => setReviewNotes((prev) => ({ ...prev, [id]: value }))}
                 onOpen={setDrawerId}
-                onApprove={(id) => approveMutation.mutate(id)}
-                onReject={(id) => setRejectTarget(id)}
-                onRequestChanges={(id) => setRequestChangesTarget(id)}
+                onApprove={(id) => {
+                  setDrawerId(null);
+                  setPageAction({ type: "approve", id });
+                }}
+                onReject={(id) => {
+                  setDrawerId(null);
+                  setPageAction({ type: "reject", id });
+                }}
+                onRequestChanges={(id) => {
+                  setDrawerId(null);
+                  setPageAction({ type: "request-changes", id });
+                }}
               />
             ))}
           </div>
           {applicationsQuery.data.pagination && (
             <div className="flex items-center justify-between pt-4">
               <p className="text-sm text-[var(--text-muted)]">
-                Page {applicationsQuery.data.pagination.page} of{" "}
-                {applicationsQuery.data.pagination.totalPages}
+                Page {applicationsQuery.data.pagination.page} of {applicationsQuery.data.pagination.totalPages}
               </p>
               <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={page <= 1}
-                  onClick={() => setPage((p) => p - 1)}
-                >
+                <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
                   <ChevronLeft size={16} />
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  disabled={
-                    page >= (applicationsQuery.data.pagination.totalPages ?? 1)
-                  }
+                  disabled={page >= (applicationsQuery.data.pagination.totalPages ?? 1)}
                   onClick={() => setPage((p) => p + 1)}
                 >
                   <ChevronRight size={16} />
@@ -519,27 +412,50 @@ export function AdminModerationPage() {
         />
       )}
 
-      <RejectModal
-        open={rejectTarget !== null}
-        onClose={() => setRejectTarget(null)}
-        onConfirm={(reason) => {
-          if (rejectTarget) {
-            rejectMutation.mutate({ id: rejectTarget, reason });
+      {pageAction && (
+        <MentorActionConfirmDialog
+          open
+          title={
+            pageAction.type === "approve"
+              ? "Approve Application"
+              : pageAction.type === "reject"
+                ? "Reject Application"
+                : "Request Changes"
           }
-        }}
-        loading={rejectMutation.isPending}
-      />
-
-      <RequestChangesModal
-        open={requestChangesTarget !== null}
-        onClose={() => setRequestChangesTarget(null)}
-        onConfirm={(notes) => {
-          if (requestChangesTarget) {
-            requestChangesMutation.mutate({ id: requestChangesTarget, notes });
+          description={
+            pageAction.type === "approve"
+              ? "This will provision a mentor account and send activation credentials."
+              : pageAction.type === "reject"
+                ? "The applicant will be notified with your reason."
+                : "The applicant will be asked to update and resubmit."
           }
-        }}
-        loading={requestChangesMutation.isPending}
-      />
+          confirmLabel={
+            pageAction.type === "approve" ? "Approve" : pageAction.type === "reject" ? "Reject" : "Send Request"
+          }
+          confirmVariant={pageAction.type === "reject" ? "danger" : "primary"}
+          requireReason={pageAction.type !== "approve"}
+          reason={pageActionReason}
+          onReasonChange={setPageActionReason}
+          loading={
+            (pageAction.type === "approve" && approveMutation.isPending) ||
+            (pageAction.type === "reject" && rejectMutation.isPending) ||
+            (pageAction.type === "request-changes" && requestChangesMutation.isPending)
+          }
+          onClose={() => {
+            setPageAction(null);
+            setPageActionReason("");
+          }}
+          onConfirm={() => {
+            if (pageAction.type === "approve") {
+              approveMutation.mutate(pageAction.id);
+            } else if (pageAction.type === "reject") {
+              rejectMutation.mutate({ id: pageAction.id, reason: pageActionReason });
+            } else {
+              requestChangesMutation.mutate({ id: pageAction.id, notes: pageActionReason });
+            }
+          }}
+        />
+      )}
 
       <MentorDetailsDrawer
         applicationId={drawerId}
