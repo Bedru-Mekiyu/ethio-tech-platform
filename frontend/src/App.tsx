@@ -85,6 +85,9 @@ const SettingsPage = lazy(() =>
   import("@/pages/app/SettingsPage").then((module) => ({ default: module.SettingsPage })),
 );
 const TracksPage = lazy(() => import("@/pages/app/TracksPage").then((module) => ({ default: module.TracksPage })));
+const MarketingTracksPage = lazy(() =>
+  import("@/pages/marketing/TracksPage").then((module) => ({ default: module.TracksPage })),
+);
 const AssignedProjectsPage = lazy(() =>
   import("@/pages/app/AssignedProjectsPage").then((module) => ({ default: module.AssignedProjectsPage })),
 );
@@ -246,6 +249,8 @@ export default function App() {
                     <Route path="events" element={<EventsPage />} />
                     <Route path="privacy" element={<PrivacyPage />} />
                     <Route path="terms" element={<TermsPage />} />
+                    <Route path="tracks" element={<MarketingTracksPage />} />
+                    <Route path="tracks/:trackId" element={<MarketingTracksPage />} />
                     <Route path="blog" element={<BlogPage />} />
                     <Route path="partners" element={<PartnersPage />} />
                     <Route path="donate" element={<DonationPage />} />

@@ -47,9 +47,15 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const createQueryClient = () => new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
+import { MemoryRouter } from "react-router-dom";
+
 const renderWithProviders = (component: React.ReactElement) => {
   const queryClient = createQueryClient();
-  return render(React.createElement(QueryClientProvider, { client: queryClient }, component));
+  return render(
+    <MemoryRouter>
+      <QueryClientProvider client={queryClient}>{component}</QueryClientProvider>
+    </MemoryRouter>,
+  );
 };
 
 describe("NotificationsPage", () => {

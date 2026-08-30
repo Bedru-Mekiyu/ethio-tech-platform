@@ -99,9 +99,10 @@ export interface AdminAnalyticsData {
     xpEarned30d?: number;
     sessionFillRate?: number;
   };
-  topMentors?: Array<{ fullName?: string; mentorScore?: number; totalSessions?: number }>;
-  xpByTrack?: Array<{ title?: string; xpTotal?: number }>;
-  upcomingSessions?: Array<{ title?: string; scheduledAt?: string; status?: string }>;
+  usersByStatus?: Record<string, number>;
+  topMentors?: Array<{ fullName?: string; mentorScore?: number; totalSessions?: number; expertise?: string }>;
+  xpByTrack?: Array<{ title?: string; category?: string; xpTotal?: number }>;
+  upcomingSessions?: Array<{ title?: string; scheduledAt?: string; status?: string; participants?: unknown[] }>;
 }
 
 export interface AdminMentorApplication {
@@ -130,8 +131,9 @@ export interface AdminAuditLog {
   action: string;
   resource: string;
   resourceId?: string;
-  actor?: { fullName?: string; email?: string; role?: string };
-  metadata?: { method?: string; path?: string };
+  targetUser?: { _id?: string; fullName?: string; email?: string; role?: string };
+  actor?: { _id?: string; fullName?: string; email?: string; role?: string };
+  metadata?: Record<string, unknown> & { method?: string; path?: string; reason?: string; details?: unknown };
   ip?: string;
   createdAt?: string;
 }
@@ -182,8 +184,19 @@ export async function fetchAdminUsers() {
   return data.data;
 }
 
-export async function fetchAdminAuditLogs() {
-  const { data } = await api.get<ApiResponse<{ logs: AdminAuditLog[] }>>("/admin/audit-logs");
+export async function fetchAdminAuditLogs(params?: {
+  action?: string;
+  resource?: string;
+  userId?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const { data } = await api.get<
+    ApiResponse<{
+      logs: AdminAuditLog[];
+      pagination?: { page: number; limit: number; total: number; pages: number };
+    }>
+  >("/admin/audit-logs", { params });
   return data.data;
 }
 

@@ -381,7 +381,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                               className={cn(
                                 "group rounded-2xl border p-3 text-left transition",
                                 selected
-                                  ? "border-primary bg-primary/10 shadow-[0_0_0_1px_rgba(0,210,255,0.2)]"
+                                  ? "border-primary bg-primary/10 shadow-[0_0_0_1px_rgba(99,102,241,0.3)]"
                                   : "border-[var(--border)] bg-white/3 hover:border-primary/40 hover:bg-primary/5",
                               )}
                             >

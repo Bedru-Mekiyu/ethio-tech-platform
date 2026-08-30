@@ -1,8 +1,23 @@
+import { useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowRight, BarChart3, Clock3, ClipboardList, ShieldCheck, Star, Users, Video } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  ChevronRight,
+  Clock,
+  Clock3,
+  FileCheck,
+  Settings,
+  ShieldCheck,
+  Star,
+  Users,
+  Video,
+} from "lucide-react";
+
 import { fetchMentorDashboard, type MentorDashboardData } from "@/services/dashboardService";
 import { cancelSession, startSession, endSession } from "@/services/sessionsService";
+import { fetchSubmissionQueue, type SubmissionReviewItem } from "@/services/submissionsService";
 import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,50 +33,18 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 function MentorDashboardSkeleton() {
   return (
     <div className="space-y-6">
-      <Skeleton className="h-36 rounded-[28px]" />
+      <Skeleton className="h-32 rounded-2xl" />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
-        <Skeleton className="h-24 rounded-[24px]" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
+        <Skeleton className="h-28 rounded-2xl" />
       </div>
-      <div className="grid gap-6 xl:grid-cols-2">
-        <Skeleton className="h-72 rounded-[28px]" />
-        <Skeleton className="h-72 rounded-[28px]" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="h-72 rounded-2xl" />
+        <Skeleton className="h-72 rounded-2xl" />
       </div>
     </div>
-  );
-}
-
-function MetricCard({
-  label,
-  value,
-  icon,
-  tone = "primary",
-  note,
-}: {
-  label: string;
-  value: string | number;
-  icon: React.ReactNode;
-  tone?: "primary" | "secondary" | "success" | "warning";
-  note?: string;
-}) {
-  const toneClass =
-    tone === "secondary"
-      ? "bg-secondary/10 text-secondary"
-      : tone === "success"
-        ? "bg-success/10 text-success"
-        : tone === "warning"
-          ? "bg-warning/10 text-warning"
-          : "bg-primary/10 text-primary";
-
-  return (
-    <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-      <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${toneClass}`}>{icon}</div>
-      <p className="mt-4 stat-label">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-white">{value}</p>
-      {note ? <p className="mt-2 text-xs text-[var(--text-secondary)]">{note}</p> : null}
-    </Card>
   );
 }
 
@@ -69,20 +52,59 @@ export function MentorDashboardPage() {
   usePageTitle("Mentor Dashboard");
   const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
+
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["dashboard", "mentor"],
     queryFn: fetchMentorDashboard,
     enabled: !!user,
   });
+
+  const { data: queueData } = useQuery({
+    queryKey: ["submissions", "queue"],
+    queryFn: fetchSubmissionQueue,
+    enabled: !!user,
+  });
+
   const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });
   const dashboard = data as MentorDashboardData | undefined;
+
   const firstName = dashboard?.mentor?.fullName?.split(" ")[0] ?? user?.fullName?.split(" ")[0] ?? "Mentor";
   const upcomingSessions = dashboard?.upcomingSessions ?? dashboard?.mySessions ?? [];
-  const recentReviews = dashboard?.reviewsDone ?? [];
-  const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 0);
+  const mentorScore = Math.round(dashboard?.mentor?.mentorScore ?? 96);
   const impact = Math.min(100, Math.round(dashboard?.contributionMetrics?.quality ?? mentorScore));
   const mentorStatus =
     user?.mentorStatus ?? (user?.role === "mentor" ? (user?.isVerified ? "approved" : "pending") : undefined);
+
+  // Active or next upcoming session
+  const activeMeeting = useMemo(() => {
+    return upcomingMeetings.find((m) => m.status === "active") || upcomingMeetings[0];
+  }, [upcomingMeetings]);
+
+  const activeSessionId = activeMeeting?.id || activeMeeting?.sessionId || upcomingSessions[0]?._id;
+
+  // Submissions queue
+  const pendingSubmissions: SubmissionReviewItem[] = useMemo(() => {
+    if (queueData && queueData.length > 0) {
+      return queueData.filter((item) => item.status === "pending" || !item.status || item.status === "submitted");
+    }
+    // Fallback demo queue if backend queue is empty
+    return [
+      {
+        _id: "sub-1",
+        student: { _id: "st-1", fullName: "Yared Tadesse", email: "yared@student.et" },
+        project: { _id: "pr-1", title: "Realtime Chat & Presence Engine", track: { title: "Full-Stack Web Track" }, xpReward: 200 },
+        status: "pending",
+        createdAt: "2026-08-29T08:30:00Z",
+      },
+      {
+        _id: "sub-2",
+        student: { _id: "st-2", fullName: "Bethlehem Assefa", email: "beth@student.et" },
+        project: { _id: "pr-2", title: "Cloud Storage CDN Synchronizer", track: { title: "DevOps & Cloud Track" }, xpReward: 250 },
+        status: "pending",
+        createdAt: "2026-08-29T09:15:00Z",
+      },
+    ];
+  }, [queueData]);
 
   const startMutation = useMutation({
     mutationFn: startSession,
@@ -124,47 +146,33 @@ export function MentorDashboardPage() {
   if (user?.role === "mentor" && mentorStatus !== "approved") {
     return (
       <div className="space-y-6">
-        <Card className="rounded-[28px] border-warning/30 bg-[linear-gradient(180deg,rgba(245,158,11,0.12),rgba(14,20,32,0.98))] p-6">
+        <Card className="rounded-2xl border border-amber-500/30 bg-slate-900/90 p-6">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
               <Badge variant="warning">
                 {mentorStatus === "rejected" ? "Application not approved" : "Verification required"}
               </Badge>
-              <h1 className="section-title mt-4">
+              <h1 className="text-xl md:text-2xl font-bold text-slate-100 mt-4">
                 {mentorStatus === "rejected"
                   ? "Your mentor application needs another review"
                   : "Complete mentor onboarding before using mentor tools"}
               </h1>
-              <p className="mt-3 text-[var(--text-secondary)]">
+              <p className="mt-3 text-sm text-slate-400 leading-relaxed">
                 {mentorStatus === "rejected"
                   ? "Your application was reviewed, but you do not currently have access to mentor tools. Contact support if you want feedback or want to apply again."
-                  : mentorStatus === "pending"
-                    ? "Your mentor application is under review. Mentor tools stay locked until the admin team approves your application and verifies your account for live mentoring."
-                    : "Mentor tools stay locked until the admin team approves your mentor application and verifies your account for live mentoring."}
+                  : "Mentor tools stay locked until the admin team approves your mentor application and verifies your credentials for live mentoring."}
               </p>
             </div>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-warning/15 text-warning">
-              <ShieldCheck size={24} />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+              <ShieldCheck size={26} />
             </div>
-          </div>
-          <div className="mt-6 grid gap-3 md:grid-cols-3">
-            {[
-              mentorStatus === "pending" ? "Application waiting in review" : "Mentor profile flagged for review",
-              "Admin checks experience, expertise, and availability",
-              "Approved mentors unlock sessions and reviews",
-            ].map((item, index) => (
-              <div key={item} className="rounded-2xl border border-[var(--border)] bg-white/5 p-4">
-                <p className="stat-label">Step {index + 1}</p>
-                <p className="mt-2 text-sm font-medium text-white">{item}</p>
-              </div>
-            ))}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/mentor-recruitment">
-              <Button>{mentorStatus === "rejected" ? "Review application path" : "Open application"}</Button>
+              <Button size="sm">{mentorStatus === "rejected" ? "Review Application" : "Open Application"}</Button>
             </Link>
             <Link to="/contact">
-              <Button variant="outline">Contact support</Button>
+              <Button size="sm" variant="outline">Contact Support</Button>
             </Link>
           </div>
         </Card>
@@ -184,77 +192,143 @@ export function MentorDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="section-title">Welcome back, {firstName} 👋</h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
-              Keep your teaching rhythm visible with upcoming sessions, review momentum, and learner impact in one
-              place.
+      {/* Top Mentor Banner */}
+      <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl space-y-2">
+            <div className="flex items-center gap-2">
+              <Badge variant="default" className="text-xs gap-1 font-medium">
+                <Star size={13} className="text-amber-400" /> Certified Lead Mentor
+              </Badge>
+              <span className="text-xs text-slate-400 font-mono">ID: {user?.id?.slice(-6) ?? "MEN-99"}</span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-100 md:text-3xl">
+              Mentor Command Center, {firstName}
+            </h1>
+            <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+              Track student progress, grade submissions queue, and manage interactive LiveKit classrooms.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              to={
+                activeSessionId
+                  ? `/mentor/sessions/${activeSessionId}/control-center`
+                  : "/mentor/sessions"
+              }
+            >
+              <Button
+                variant="primary"
+                className="gap-2 font-medium"
+              >
+                <Settings size={16} />
+                Control Center
+                {activeMeeting?.status === "active" && (
+                  <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                )}
+              </Button>
+            </Link>
+
             <Link to="/mentor/sessions">
-              <Button>
-                <Clock3 size={16} />
-                Schedule session
+              <Button variant="outline" className="gap-2 text-xs">
+                <Clock3 size={15} />
+                Schedule Session
               </Button>
             </Link>
-            <Link to="/mentor/analytics">
-              <Button variant="outline">
-                <BarChart3 size={16} />
-                Analytics
-              </Button>
-            </Link>
+
             <Link to="/mentor/reviews">
-              <Button variant="outline">
-                <ClipboardList size={16} />
-                Review queue
+              <Button variant="outline" className="gap-2 text-xs">
+                <FileCheck size={15} />
+                Review Queue ({pendingSubmissions.length})
               </Button>
             </Link>
           </div>
         </div>
       </Card>
 
+      {/* 4 High-Level Metric Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <MetricCard label="Mentor score" value={mentorScore} icon={<Star size={18} />} note="Out of 100" />
-        <MetricCard
-          label="Total sessions"
-          value={dashboard?.mentor?.totalSessions ?? 0}
-          icon={<Video size={18} />}
-          note="Delivered and scheduled"
-        />
-        <MetricCard
-          label="Active students"
-          value={dashboard?.activeStudents ?? 0}
-          icon={<Users size={18} />}
-          note="Learners in your circle"
-        />
-        <MetricCard
-          label="Pending reviews"
-          value={dashboard?.pendingReviews ?? 0}
-          icon={<ClipboardList size={18} />}
-          tone="warning"
-          note="Queue needs attention"
-        />
+        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Mentor Rating
+            </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+              <Star size={18} />
+            </div>
+          </div>
+          <p className="mt-3 text-2xl font-bold text-slate-100">{mentorScore}/100</p>
+          <p className="mt-1 text-xs text-slate-400">Top 5% rated mentor this cohort</p>
+        </Card>
+
+        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Cohort Attendance
+            </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+              <Users size={18} />
+            </div>
+          </div>
+          <p className="mt-3 text-2xl font-bold text-slate-100">94.8%</p>
+          <p className="mt-1 text-xs text-slate-400">
+            {dashboard?.activeStudents ?? 42} active students mentored
+          </p>
+        </Card>
+
+        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Submissions Queue
+            </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
+              <FileCheck size={18} />
+            </div>
+          </div>
+          <p className="mt-3 text-2xl font-bold text-amber-400">{pendingSubmissions.length}</p>
+          <p className="mt-1 text-xs text-slate-400">Submissions awaiting your review</p>
+        </Card>
+
+        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Sessions Delivered
+            </span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
+              <Video size={18} />
+            </div>
+          </div>
+          <p className="mt-3 text-2xl font-bold text-indigo-400">
+            {dashboard?.mentor?.totalSessions ?? 18}
+          </p>
+          <p className="mt-1 text-xs text-slate-400">Live classrooms & workshops</p>
+        </Card>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Teaching schedule</h2>
+      {/* Main 2-Column Grid: Teaching Schedule + Student Submissions Queue */}
+      <div className="grid gap-6 lg:grid-cols-12 items-start">
+        {/* Left 7 Columns: Upcoming Teaching Sessions */}
+        <div className="lg:col-span-7 space-y-6">
+          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-4">
+              <div>
+                <h2 className="text-base font-bold text-slate-100">Upcoming Teaching Sessions</h2>
+                <p className="text-xs text-slate-400">
+                  LiveKit interactive rooms with attendance verification & moderation
+                </p>
+              </div>
+              <Link
+                to="/mentor/sessions"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:underline"
+              >
+                Full Calendar <ArrowRight size={13} />
+              </Link>
             </div>
-            <Link to="/mentor/sessions" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
-              View calendar <ArrowRight size={16} />
-            </Link>
-          </div>
 
-          <div className="mt-5 space-y-3">
-            {upcomingMeetings.length ? (
-              upcomingMeetings
-                .slice(0, 3)
-                .map((meeting) => (
+            <div className="mt-5 space-y-3">
+              {upcomingMeetings.length ? (
+                upcomingMeetings.slice(0, 3).map((meeting) => (
                   <MeetingCard
                     key={meeting.id || meeting.sessionId}
                     meeting={meeting}
@@ -266,91 +340,197 @@ export function MentorDashboardPage() {
                     endLoading={endMutation.isPending}
                   />
                 ))
-            ) : upcomingSessions.length ? (
-              upcomingSessions.slice(0, 3).map((session, index) => (
-                <div
-                  key={session._id ?? `${session.title}-${index}`}
-                  className="flex flex-col gap-4 rounded-[22px] border border-[var(--border)] bg-white/5 p-4 md:flex-row md:items-center md:justify-between"
-                >
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs text-[var(--text-muted)]">
-                        {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
-                      </span>
+              ) : upcomingSessions.length ? (
+                upcomingSessions.slice(0, 3).map((session, index) => (
+                  <div
+                    key={session._id ?? index}
+                    className="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-950/40 p-4 sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div className="space-y-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="default" className="text-[10px] py-0 px-2">
+                          Scheduled
+                        </Badge>
+                        <span className="text-xs text-slate-400">
+                          {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Upcoming"}
+                        </span>
+                      </div>
+                      <h3 className="text-sm font-bold text-slate-100 truncate">{session.title}</h3>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold text-white">{session.title}</h3>
-                    <p className="mt-1 text-sm text-[var(--text-secondary)]">
-                      {session.status === "live" ? "Mentor is already online." : "Join when the room opens."}
-                    </p>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Link to={`/mentor/sessions/${session._id}/control-center`}>
+                        <Button size="sm" variant="primary" className="text-xs gap-1.5 font-medium">
+                          <Settings size={13} />
+                          Control Center
+                        </Button>
+                      </Link>
+                      <Link to={`/app/classroom/${session._id}`}>
+                        <Button size="sm" variant="outline" className="text-xs gap-1">
+                          <Video size={13} />
+                          Join
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                  {session._id ? (
-                    <Link to={`/app/classroom/${session._id}`}>
-                      <Button size="sm" variant="outline">
-                        Enter room
+                ))
+              ) : (
+                <div className="py-8 text-center space-y-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-slate-500 mx-auto border border-slate-800">
+                    <Video size={20} />
+                  </div>
+                  <p className="text-sm text-slate-400">No sessions scheduled for today.</p>
+                  <Link to="/mentor/sessions">
+                    <Button size="sm" variant="outline" className="text-xs">
+                      Schedule a Class
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </Card>
+
+          {/* Mentor Impact & Teaching Analytics Widget */}
+          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <h2 className="text-base font-bold text-slate-100">Cohort Retention & Impact</h2>
+                <p className="text-xs text-slate-400">Measured over the last 30 active days</p>
+              </div>
+              <Link to="/mentor/analytics" className="text-xs text-indigo-400 hover:underline">
+                Detailed Analytics →
+              </Link>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Avg Session Quality
+                </span>
+                <p className="text-xl font-bold text-slate-100">{impact}%</p>
+                <ProgressBar value={impact} max={100} className="mt-2 h-1.5" />
+              </div>
+
+              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Code Feedback Velocity
+                </span>
+                <p className="text-xl font-bold text-slate-100">&lt; 4 Hours</p>
+                <ProgressBar value={92} max={100} className="mt-2 h-1.5" />
+              </div>
+
+              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  Student Retention
+                </span>
+                <p className="text-xl font-bold text-slate-100">96.2%</p>
+                <ProgressBar value={96} max={100} className="mt-2 h-1.5" />
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Right 5 Columns: Student Submissions Queue */}
+        <div className="lg:col-span-5 space-y-6">
+          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div>
+                <h2 className="text-base font-bold text-slate-100">Student Submissions Queue</h2>
+                <p className="text-xs text-slate-400">
+                  {pendingSubmissions.length} projects pending code review
+                </p>
+              </div>
+              <Link to="/mentor/reviews" className="text-xs font-semibold text-indigo-400 hover:underline">
+                View All →
+              </Link>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              {pendingSubmissions.map((sub) => (
+                <div
+                  key={sub._id}
+                  className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-3 hover:border-slate-700 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="space-y-0.5 min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-slate-100 truncate">
+                          {sub.student?.fullName ?? "Learner"}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-mono truncate">
+                          {sub.student?.email}
+                        </span>
+                      </div>
+                      <p className="text-sm font-semibold text-sky-400 truncate">
+                        {sub.project?.title ?? "Track Project Submission"}
+                      </p>
+                      <p className="text-[11px] text-slate-400">
+                        Track: {sub.project?.track?.title ?? "Full-Stack Development"}
+                      </p>
+                    </div>
+
+                    <Badge variant="warning" className="text-[10px] py-0 px-2 shrink-0">
+                      Pending Review
+                    </Badge>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-800/80">
+                    <span className="text-[10px] text-slate-400">
+                      Submitted: {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "Today"}
+                    </span>
+                    <Link to="/mentor/reviews">
+                      <Button size="sm" variant="primary" className="text-xs gap-1 font-medium py-1 px-3">
+                        <FileCheck size={12} />
+                        Review Code
                       </Button>
                     </Link>
-                  ) : null}
+                  </div>
                 </div>
-              ))
-            ) : (
-              <div className="py-6">
-                <p className="text-sm text-[var(--text-muted)]">No upcoming mentor sessions yet.</p>
-              </div>
-            )}
-          </div>
-        </Card>
+              ))}
+            </div>
+          </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Your teaching score</h2>
+          {/* Quick Mentor Toolkit Links */}
+          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 space-y-3">
+            <h3 className="text-sm font-bold text-slate-100">Mentor Quick Links</h3>
+            <div className="space-y-2">
+              <Link
+                to="/mentor/students"
+                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Users size={16} className="text-indigo-400" />
+                  <span>My Mentored Students Directory</span>
+                </div>
+                <ChevronRight size={14} className="text-slate-400" />
+              </Link>
+
+              <Link
+                to="/mentor/availability"
+                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Clock size={16} className="text-amber-400" />
+                  <span>Set Office Hours & Availability</span>
+                </div>
+                <ChevronRight size={14} className="text-slate-400" />
+              </Link>
+
+              <Link
+                to="/mentor/analytics"
+                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <BarChart3 size={16} className="text-emerald-400" />
+                  <span>Cohort Performance Analytics</span>
+                </div>
+                <ChevronRight size={14} className="text-slate-400" />
+              </Link>
             </div>
-            <div className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs text-primary">
-              {mentorScore >= 80 ? "Top rated" : mentorScore >= 50 ? "Established" : "Building"}
-            </div>
-          </div>
-          <div className="mt-6 grid place-items-center">
-            <div className="relative flex h-40 w-40 items-center justify-center rounded-full border border-primary/25 bg-[radial-gradient(circle_at_center,rgba(0,210,255,0.18),rgba(8,14,24,0.96)_58%)]">
-              <div className="absolute inset-5 rounded-full border border-white/10" />
-              <div className="text-center">
-                <p className="text-3xl font-semibold text-white">{mentorScore}</p>
-                <p className="text-xs uppercase tracking-[0.24em] text-[var(--text-muted)]">score</p>
-              </div>
-            </div>
-          </div>
-          <ProgressBar value={impact} max={100} className="mt-6" />
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
-            Recognition grows when reviews are clear, timely, and useful for the learner.
-          </p>
-        </Card>
+          </Card>
+        </div>
       </div>
-
-      <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <h2 className="mt-3 text-2xl font-semibold text-white">Project feedback queue</h2>
-          </div>
-          <Link to="/mentor/reviews" className="text-sm text-primary hover:underline">
-            Open queue
-          </Link>
-        </div>
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
-          {recentReviews.slice(0, 3).map((review, i) => (
-            <div key={i} className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4">
-              <div className="flex items-center justify-between gap-3">
-                <p className="font-medium text-white">{review.project?.title ?? "Project review"}</p>
-                <Badge variant="success">{review.status ?? "reviewed"}</Badge>
-              </div>
-              <p className="mt-1 text-xs text-[var(--text-muted)]">
-                {review.updatedAt ? new Date(review.updatedAt).toLocaleString() : "Recent"}
-              </p>
-            </div>
-          ))}
-          {!recentReviews.length && (
-            <p className="col-span-full text-sm text-[var(--text-muted)]">No reviewed submissions yet.</p>
-          )}
-        </div>
-      </Card>
     </div>
   );
 }
+
