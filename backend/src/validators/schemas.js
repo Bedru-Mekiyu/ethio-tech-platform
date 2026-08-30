@@ -352,6 +352,30 @@ export const hubSchemas = {
     studentId: objectId,
     date: isoDateString,
   }),
+  book: z
+    .object({
+      hubId: objectId.optional(),
+      hub: objectId.optional(),
+      date: z.string().min(1).refine((val) => !isNaN(Date.parse(val)), "Invalid date format"),
+      timeSlot: z.enum(["morning", "afternoon", "fullday"]),
+      workstationNumber: z.number().int().positive().optional(),
+      purpose: z.string().trim().min(2).max(500).optional(),
+    })
+    .refine((data) => Boolean(data.hubId || data.hub), {
+      message: "hubId or hub is required",
+      path: ["hubId"],
+    }),
+  checkin: z
+    .object({
+      passCode: z.string().trim().min(2).max(64).optional(),
+      bookingId: objectId.optional(),
+    })
+    .refine((data) => Boolean(data.passCode || data.bookingId), {
+      message: "Either passCode or bookingId must be provided",
+    }),
+  availabilityQuery: z.object({
+    date: z.string().min(1).refine((val) => !isNaN(Date.parse(val)), "Invalid date format").optional(),
+  }),
 };
 
 export const mentorApplicationSchemas = {
