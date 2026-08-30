@@ -11,17 +11,43 @@ import {
 } from "../services/calendarService.js";
 
 export const listEvents = asyncHandler(async (req, res) => {
-  const { startDate, endDate } = req.query;
+  const startDate = req.query.startDate || req.query.start;
+  const endDate = req.query.endDate || req.query.end;
   const events = await getStudentEvents(req.user._id, startDate, endDate);
   sendResponse(res, 200, "Events", { events });
 });
 
 export const createNewEvent = asyncHandler(async (req, res) => {
-  const { title, description, startAt, endAt, type, color, isAllDay } = req.body;
-  if (!title || !startAt) throw new ApiError(400, "Title and startAt are required");
+  const {
+    title,
+    description,
+    startAt,
+    endAt,
+    start,
+    end,
+    type,
+    status,
+    color,
+    isAllDay,
+    allDay,
+    targetTrack,
+    capstoneProject,
+  } = req.body;
+  const effectiveStart = startAt || start;
+  const effectiveEnd = endAt || end;
+  if (!title || !effectiveStart) throw new ApiError(400, "Title and start time are required");
 
   const event = await createEvent({
-    title, description, startAt, endAt, type, color, isAllDay,
+    title,
+    description,
+    startAt: new Date(effectiveStart),
+    endAt: effectiveEnd ? new Date(effectiveEnd) : undefined,
+    type: type || "custom",
+    status: status || "pending",
+    color: color || "#6366F1",
+    isAllDay: Boolean(isAllDay ?? allDay),
+    targetTrack,
+    capstoneProject,
     createdBy: req.user._id,
     attendees: [req.user._id],
   });
@@ -30,7 +56,11 @@ export const createNewEvent = asyncHandler(async (req, res) => {
 });
 
 export const updateEventDetails = asyncHandler(async (req, res) => {
-  const event = await updateEvent(req.params.id, req.user._id, req.body);
+  const updates = { ...req.body };
+  if (updates.start && !updates.startAt) updates.startAt = new Date(updates.start);
+  if (updates.end && !updates.endAt) updates.endAt = new Date(updates.end);
+
+  const event = await updateEvent(req.params.id, req.user._id, updates);
   if (!event) throw new ApiError(404, "Event not found");
   sendResponse(res, 200, "Event updated", { event });
 });
@@ -68,7 +98,7 @@ export const exportICS = asyncHandler(async (req, res) => {
       `SUMMARY:${event.title}`,
       event.description ? `DESCRIPTION:${event.description.replace(/\n/g, "\\n")}` : "",
       `UID:${Date.now()}-${Math.random().toString(36).slice(2)}@ethiotech`,
-      "END:VEVENT"
+      "END:VEVENT",
     );
   }
 
