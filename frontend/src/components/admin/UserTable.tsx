@@ -36,6 +36,7 @@ const ROLE_VARIANTS: Record<string, "warning" | "purple" | "success" | "default"
   support: "default",
   mentor: "success",
   student: "default",
+  parent: "purple",
 };
 
 const STATUS_VARIANTS: Record<string, "success" | "warning" | "danger" | "default" | "purple"> = {
@@ -318,13 +319,13 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               aria-label="Filter by role"
             >
               <option value="">All roles</option>
-              <option value="super_admin">Super Admin</option>
+              <option value="student">Student</option>
+              <option value="mentor">Mentor</option>
               <option value="admin">Admin</option>
+              <option value="parent">Parent</option>
               <option value="moderator">Moderator</option>
               <option value="reviewer">Reviewer</option>
-              <option value="support">Support</option>
-              <option value="mentor">Mentor</option>
-              <option value="student">Student</option>
+              <option value="super_admin">Super Admin</option>
             </select>
           </div>
           <div className="flex flex-col gap-1">

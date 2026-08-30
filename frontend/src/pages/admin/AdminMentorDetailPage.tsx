@@ -1,7 +1,29 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, ExternalLink, Monitor, Smartphone } from "lucide-react";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Monitor,
+  Smartphone,
+  Sliders,
+  Calendar,
+  Video,
+  Copy,
+  Check,
+  Sparkles,
+  CheckCircle2,
+  XCircle,
+  Clock,
+  Briefcase,
+  Users,
+  Shield,
+  FileText,
+  AlertTriangle,
+  RefreshCw,
+  Mail,
+  UserCheck,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -41,6 +63,71 @@ type ConfirmAction =
   | "deactivate"
   | "remove-role";
 
+export interface RubricScores {
+  experience: number;
+  techStack: number;
+  commitment: number;
+  motivation: number;
+}
+
+export function calculateRubricScore(scores: RubricScores) {
+  const total = scores.experience + scores.techStack + scores.commitment + scores.motivation;
+  const max = 20;
+  const percentage = Math.round((total / max) * 100);
+
+  let recommendation = "Strong Recommend";
+  let variant: "success" | "purple" | "warning" | "default" = "success";
+
+  if (percentage >= 85) {
+    recommendation = "Strong Recommend";
+    variant = "success";
+  } else if (percentage >= 70) {
+    recommendation = "Recommend";
+    variant = "purple";
+  } else if (percentage >= 50) {
+    recommendation = "Needs Interview / Info";
+    variant = "warning";
+  } else {
+    recommendation = "Below Threshold";
+    variant = "default";
+  }
+
+  return { total, max, percentage, recommendation, variant };
+}
+
+function autoEvaluateApplication(app: MentorApplication): RubricScores {
+  const yrs = app.yearsExperience ?? 0;
+  let expScore = 1;
+  if (yrs >= 7) expScore = 5;
+  else if (yrs >= 5) expScore = 4;
+  else if (yrs >= 3) expScore = 3;
+  else if (yrs >= 1) expScore = 2;
+
+  const expertiseCount = (app.expertise ?? []).length;
+  let techScore = Math.min(5, Math.max(2, Math.ceil(expertiseCount / 2)));
+  if (app.currentRole && app.currentRole.length > 5) {
+    techScore = Math.min(5, techScore + 1);
+  }
+
+  let comScore = 3;
+  if (app.availability === "flexible") comScore = 5;
+  else if (app.availability === "weekends" || app.availability === "weeknights") comScore = 4;
+  else if (app.availability === "ad-hoc") comScore = 3;
+
+  const motivationLen = (app.whyMentor ?? "").trim().length;
+  let motScore = 2;
+  if (motivationLen > 250) motScore = 5;
+  else if (motivationLen > 120) motScore = 4;
+  else if (motivationLen > 50) motScore = 3;
+
+  return {
+    experience: expScore,
+    techStack: techScore,
+    commitment: comScore,
+    motivation: motScore,
+  };
+}
+
 export function AdminMentorDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -51,18 +138,37 @@ export function AdminMentorDetailPage() {
   const [confirmAction, setConfirmAction] = useState<ConfirmAction | null>(null);
   const [reason, setReason] = useState("");
   const [provisionDialogOpen, setProvisionDialogOpen] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedTemplate, setCopiedTemplate] = useState(false);
+  const [activeTab, setActiveTab] = useState<"application" | "rubric" | "account" | "teaching" | "audit">("application");
+
+  const [rubricScores, setRubricScores] = useState<RubricScores>({
+    experience: 4,
+    techStack: 4,
+    commitment: 4,
+    motivation: 4,
+  });
 
   const isAdmin = user?.role === "admin" || user?.role === "super_admin";
 
   const detailQuery = useQuery({
     queryKey: ["admin", "mentor-application", id],
-    queryFn: () => fetchApplicationDetail(id!),
+    queryFn: async () => {
+      const data = await fetchApplicationDetail(id!);
+      if (data?.application) {
+        setRubricScores(autoEvaluateApplication(data.application));
+        if (data.application.reviewNotes) {
+          setReviewNotes(data.application.reviewNotes);
+        }
+      }
+      return data;
+    },
     enabled: Boolean(id),
   });
 
   usePageTitle(
     detailQuery.data?.application?.fullName
-      ? `${detailQuery.data.application.fullName} - Mentor Detail`
+      ? `${detailQuery.data.application.fullName} - Mentor Screening & Detail`
       : "Mentor Detail",
   );
 
@@ -146,7 +252,7 @@ export function AdminMentorDetailPage() {
   const startReviewMutation = useMutation({
     mutationFn: () => startReview(id!),
     onSuccess: async () => {
-      toast.success("Review started");
+      toast.success("Review status updated to In-Review");
       await invalidate();
     },
   });
@@ -161,6 +267,57 @@ export function AdminMentorDetailPage() {
   const app = detail?.application;
   const linkedUser = detail?.user;
   const loginHistory = loginHistoryQuery.data;
+
+  const rubric = useMemo(() => calculateRubricScore(rubricScores), [rubricScores]);
+
+  const meetingUrl = id ? `https://meet.ethiotech.org/screening/${id}` : "";
+  const gcalTitle = encodeURIComponent(`Ethio-Tech Mentor Screening: ${app?.fullName ?? "Applicant"}`);
+  const gcalDetails = encodeURIComponent(
+    `Mentor Screening Interview for Ethio-Tech Platform.\n\nApplicant: ${app?.fullName ?? ""}\nEmail: ${app?.email ?? ""}\nCurrent Role: ${app?.currentRole ?? ""}\nMeeting Link: ${meetingUrl}`,
+  );
+  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&details=${gcalDetails}`;
+
+  const emailTemplate = `Subject: Ethio-Tech Mentor Application - Interview Invitation
+
+Hi ${app?.fullName ?? "Applicant"},
+
+Thank you for applying to become a mentor on the Ethio-Tech platform!
+
+We reviewed your background as a ${app?.currentRole ?? "Software Engineer"} and would love to schedule a quick 30-minute screening conversation to discuss cohort mentorship opportunities and answer any questions you may have.
+
+Screening Meeting Room: ${meetingUrl}
+
+Please reply with your preferred availability (EAT timezone) or confirm if you can join during one of our upcoming screening slots.
+
+Best regards,
+Ethio-Tech Mentorship Team`;
+
+  const copyToClipboard = async (text: string, isLink: boolean) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      if (isLink) {
+        setCopiedLink(true);
+        setTimeout(() => setCopiedLink(false), 2000);
+      } else {
+        setCopiedTemplate(true);
+        setTimeout(() => setCopiedTemplate(false), 2000);
+      }
+      toast.success("Copied to clipboard!");
+    } catch {
+      toast.error("Failed to copy");
+    }
+  };
+
+  const applyRubricToNotes = () => {
+    const summary = `[Rubric Evaluation: ${rubric.percentage}% (${rubric.total}/${rubric.max} pts - ${rubric.recommendation})]
+• Experience: ${rubricScores.experience}/5
+• Tech Stack Fit: ${rubricScores.techStack}/5
+• Time Commitment: ${rubricScores.commitment}/5
+• Mentoring Philosophy: ${rubricScores.motivation}/5`;
+
+    setReviewNotes((prev) => (prev ? `${prev}\n\n${summary}` : summary));
+    toast.success("Rubric feedback added to review notes");
+  };
 
   const statusBadge = (status: MentorApplication["status"]) => {
     const variant =
@@ -264,332 +421,645 @@ export function AdminMentorDetailPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <Button variant="outline" size="sm" onClick={() => navigate("/admin/moderation")}>
-          <ArrowLeft size={16} className="mr-1" />
-          Back
-        </Button>
-        <h1 className="text-2xl font-bold md:text-3xl">{app?.fullName ?? "Mentor Detail"}</h1>
+      {/* Top Header */}
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <Button variant="outline" size="sm" onClick={() => navigate("/admin/moderation")}>
+            <ArrowLeft size={16} className="mr-1.5" /> Back to Queue
+          </Button>
+          <div className="h-6 w-px bg-[var(--border)]" />
+          <h1 className="text-2xl font-bold text-white md:text-3xl">{app?.fullName ?? "Mentor Detail"}</h1>
+          {app && (
+            <Badge variant={rubric.variant} className="text-xs py-1 px-2.5">
+              {rubric.percentage}% Match
+            </Badge>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={() => invalidate()} className="gap-1.5">
+            <RefreshCw size={14} /> Refresh
+          </Button>
+        </div>
       </div>
 
       {detailQuery.isLoading ? (
         <div className="space-y-4">
-          <Skeleton className="h-24 w-full rounded-xl" />
-          <Skeleton className="h-40 w-full rounded-xl" />
-          <Skeleton className="h-60 w-full rounded-xl" />
+          <Skeleton className="h-28 w-full rounded-2xl" />
+          <Skeleton className="h-44 w-full rounded-2xl" />
+          <Skeleton className="h-64 w-full rounded-2xl" />
         </div>
       ) : app ? (
         <div className="grid gap-6 lg:grid-cols-3">
+          {/* Main Content Area */}
           <div className="space-y-6 lg:col-span-2">
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6">
-              <div className="flex items-start gap-4">
-                {linkedUser?.avatarUrl ? (
-                  <img
-                    src={linkedUser.avatarUrl}
-                    alt={app.fullName}
-                    className="h-16 w-16 rounded-full border border-[var(--border)] bg-white/5 object-cover"
-                  />
-                ) : (
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--border)] bg-primary/10 text-2xl font-bold text-primary">
-                    {app.fullName.charAt(0).toUpperCase()}
-                  </div>
-                )}
-                <div className="flex-1">
-                  <h2 className="text-xl font-semibold text-white">{app.fullName}</h2>
-                  <p className="text-sm text-[var(--text-muted)]">{app.email}</p>
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    {statusBadge(app.status)}
-                    {linkedUser?.mentorAccountStatus && (
-                      <Badge variant="purple">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
-                    )}
+            {/* Applicant Profile Card */}
+            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/70 p-6 shadow-sm">
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div className="flex items-start gap-4">
+                  {linkedUser?.avatarUrl ? (
+                    <img
+                      src={linkedUser.avatarUrl}
+                      alt={app.fullName}
+                      className="h-16 w-16 rounded-2xl border border-[var(--border)] bg-white/5 object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-2xl font-bold text-primary">
+                      {app.fullName.charAt(0).toUpperCase()}
+                    </div>
+                  )}
+                  <div>
+                    <h2 className="text-xl font-bold text-white">{app.fullName}</h2>
+                    <p className="text-sm text-[var(--text-secondary)]">
+                      {app.currentRole}
+                      {app.currentCompany ? ` • ${app.currentCompany}` : ""}
+                    </p>
+                    <p className="text-xs text-[var(--text-muted)] mt-0.5">{app.email}</p>
+                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                      {statusBadge(app.status)}
+                      {linkedUser?.mentorAccountStatus && (
+                        <Badge variant="purple">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
+                      )}
+                      <Badge variant="default">{app.location ?? "Ethiopia / Remote"}</Badge>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </section>
 
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Application</h3>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <p className="text-xs text-[var(--text-muted)]">Current Role</p>
-                  <p className="text-sm text-white">
-                    {app.currentRole}
-                    {app.currentCompany ? ` at ${app.currentCompany}` : ""}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs text-[var(--text-muted)]">Experience</p>
-                  <p className="text-sm text-white">{app.yearsExperience ?? 0} years</p>
-                </div>
-                <div>
-                  <p className="text-xs text-[var(--text-muted)]">Location</p>
-                  <p className="text-sm text-white">{app.location ?? "Not provided"}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-[var(--text-muted)]">Availability</p>
-                  <p className="text-sm capitalize text-white">{app.availability ?? "Not provided"}</p>
-                </div>
-                <div>
-                  <p className="text-xs text-[var(--text-muted)]">Mentoring Style</p>
-                  <p className="text-sm text-white">{(app.mentoringStyle ?? []).join(", ") || "Not provided"}</p>
-                </div>
-              </div>
-              <div>
-                <p className="text-xs text-[var(--text-muted)]">Why Mentor?</p>
-                <p className="mt-1 rounded-xl border border-[var(--border)] bg-white/5 p-3 text-sm leading-6 text-[var(--text-secondary)]">
-                  {app.whyMentor}
-                </p>
-              </div>
-              <div>
-                <p className="mb-2 text-xs text-[var(--text-muted)]">Expertise</p>
                 <div className="flex flex-wrap gap-2">
-                  {(app.expertise ?? []).map((skill) => (
-                    <Badge key={skill} variant="purple">
-                      {skill}
-                    </Badge>
-                  ))}
+                  {app.linkedin && (
+                    <a
+                      href={app.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline bg-primary/5 px-2.5 py-1.5 rounded-lg border border-primary/20"
+                    >
+                      LinkedIn <ExternalLink size={12} />
+                    </a>
+                  )}
+                  {app.portfolio && (
+                    <a
+                      href={app.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline bg-primary/5 px-2.5 py-1.5 rounded-lg border border-primary/20"
+                    >
+                      Portfolio <ExternalLink size={12} />
+                    </a>
+                  )}
                 </div>
               </div>
-              {app.linkedin && (
-                <a
-                  href={app.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                >
-                  LinkedIn <ExternalLink size={14} />
-                </a>
-              )}
-              {app.portfolio && (
-                <a
-                  href={app.portfolio}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-primary hover:underline ml-4"
-                >
-                  Portfolio <ExternalLink size={14} />
-                </a>
-              )}
             </section>
 
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Account</h3>
-              {linkedUser ? (
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)]">User ID</p>
-                    <p className="text-sm text-white">{linkedUser.id}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)]">Role</p>
-                    <p className="text-sm text-white">{linkedUser.role}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)]">Last login</p>
-                    <p className="text-sm text-white">
-                      {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
-                    </p>
-                  </div>
-                  {detail?.credentialsStatus.provisionedAt && (
-                    <div>
-                      <p className="text-xs text-[var(--text-muted)]">Provisioned</p>
-                      <p className="text-sm text-white">
-                        {new Date(detail.credentialsStatus.provisionedAt).toLocaleString()}
-                      </p>
-                    </div>
-                  )}
-                  {detail?.credentialsStatus.sentAt && (
-                    <div>
-                      <p className="text-xs text-[var(--text-muted)]">Credentials sent</p>
-                      <p className="text-sm text-white">
-                        {detail.credentialsStatus.deliveryMethod ?? "sent"}{" "}
-                        {new Date(detail.credentialsStatus.sentAt).toLocaleString()}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <p className="text-sm text-[var(--text-secondary)]">No linked user account yet.</p>
-              )}
-            </section>
+            {/* Navigation Tabs */}
+            <div className="flex flex-wrap gap-2 border-b border-[var(--border)] pb-3">
+              {[
+                { key: "application", label: "Application & Profile", icon: <Briefcase size={15} /> },
+                { key: "rubric", label: "Evaluation Rubric & Interview", icon: <Sliders size={15} /> },
+                { key: "account", label: "Account & Credentials", icon: <Shield size={15} /> },
+                { key: "teaching", label: "Teaching & Sessions", icon: <Users size={15} /> },
+                { key: "audit", label: "Audit Timeline", icon: <Clock size={15} /> },
+              ].map((t) => (
+                <Button
+                  key={t.key}
+                  variant={activeTab === t.key ? "primary" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveTab(t.key as typeof activeTab)}
+                  className="gap-1.5 text-xs"
+                >
+                  {t.icon} {t.label}
+                </Button>
+              ))}
+            </div>
 
-            {linkedUser && (
-              <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Login history
-                </h3>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)]">Last login</p>
-                    <p className="text-sm text-white">
-                      {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
-                    </p>
-                  </div>
-                  {loginHistory?.lastLoginIp && (
+            {/* Tab 1: Application Profile */}
+            {activeTab === "application" && (
+              <div className="space-y-6">
+                <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                    Application Overview
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs text-[var(--text-muted)]">Last IP</p>
-                      <p className="text-sm text-white">{loginHistory.lastLoginIp}</p>
+                      <p className="text-xs text-[var(--text-muted)]">Current Position</p>
+                      <p className="text-sm font-medium text-white">
+                        {app.currentRole}
+                        {app.currentCompany ? ` at ${app.currentCompany}` : ""}
+                      </p>
                     </div>
-                  )}
-                  <div>
-                    <p className="text-xs text-[var(--text-muted)]">Active sessions</p>
-                    <p className="text-sm text-white">{loginHistory?.activeSessions ?? 0}</p>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)]">Experience</p>
+                      <p className="text-sm font-medium text-white">{app.yearsExperience ?? 0} years</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)]">Location</p>
+                      <p className="text-sm font-medium text-white">{app.location ?? "Not provided"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)]">Availability</p>
+                      <p className="text-sm capitalize font-medium text-white">{app.availability ?? "Flexible"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)]">Mentoring Style</p>
+                      <p className="text-sm font-medium text-white">
+                        {(app.mentoringStyle ?? []).join(", ") || "Live Sessions & Reviews"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-[var(--text-muted)]">Application Date</p>
+                      <p className="text-sm font-medium text-white">
+                        {app.createdAt ? new Date(app.createdAt).toLocaleDateString() : "Recently"}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {(loginHistory?.devices ?? []).length > 0 && (
-                  <div className="space-y-2">
-                    <p className="text-xs text-[var(--text-muted)]">Registered devices:</p>
-                    {loginHistory!.devices!.map((device, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/5 p-3"
-                      >
-                        {device.type === "mobile" ? (
-                          <Smartphone size={16} className="mt-0.5 text-[var(--text-muted)]" />
-                        ) : (
-                          <Monitor size={16} className="mt-0.5 text-[var(--text-muted)]" />
-                        )}
-                        <div className="flex-1 text-sm">
-                          <p className="text-[var(--text-secondary)]">{device.type}</p>
-                          {device.ip && <p className="text-xs text-[var(--text-muted)]">{device.ip}</p>}
-                          {device.lastUsedAt && (
-                            <p className="text-xs text-[var(--text-muted)]">
-                              Last used: {new Date(device.lastUsedAt).toLocaleDateString()}
-                            </p>
-                          )}
+
+                  <div>
+                    <p className="text-xs text-[var(--text-muted)] mb-1">Why do you want to mentor on Ethio-Tech?</p>
+                    <div className="rounded-xl border border-[var(--border)] bg-white/5 p-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      {app.whyMentor || "No statement provided."}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="mb-2 text-xs text-[var(--text-muted)] font-semibold uppercase tracking-wider">
+                      Specialized Skills & Tech Stack
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {(app.expertise ?? []).map((skill) => (
+                        <Badge key={skill} variant="purple" className="text-xs">
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {app.rejectionReason && (
+                  <section className="rounded-2xl border border-red-500/20 bg-red-500/5 p-4 text-sm">
+                    <p className="font-semibold text-red-400">Previous Rejection Reason</p>
+                    <p className="mt-1 text-[var(--text-secondary)]">{app.rejectionReason}</p>
+                  </section>
+                )}
+              </div>
+            )}
+
+            {/* Tab 2: Evaluation Rubric & Interview */}
+            {activeTab === "rubric" && (
+              <div className="space-y-6">
+                <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-6">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <h3 className="text-base font-bold text-white">Structured Evaluation Rubric</h3>
+                      <p className="text-xs text-[var(--text-muted)]">
+                        Evaluate candidate across standard screening dimensions.
+                      </p>
+                    </div>
+                    <Badge variant={rubric.variant} className="text-sm py-1.5 px-3">
+                      {rubric.percentage}% - {rubric.recommendation}
+                    </Badge>
+                  </div>
+
+                  {/* 4 Rubric Criteria */}
+                  <div className="space-y-4">
+                    {[
+                      {
+                        key: "experience" as keyof RubricScores,
+                        title: "1. Years of Experience",
+                        desc: "Relevance of professional engineering experience.",
+                        labels: ["< 1 yr (1★)", "1-2 yrs (2★)", "3-4 yrs (3★)", "5-7 yrs (4★)", "8+ yrs (5★)"],
+                      },
+                      {
+                        key: "techStack" as keyof RubricScores,
+                        title: "2. Tech Stack & Curriculum Match",
+                        desc: "Alignment with open frontend, backend, AI, or cloud tracks.",
+                        labels: ["Low match (1★)", "Basic match (2★)", "Good match (3★)", "Strong match (4★)", "Expert lead (5★)"],
+                      },
+                      {
+                        key: "commitment" as keyof RubricScores,
+                        title: "3. Time Commitment & Availability",
+                        desc: "Capacity to lead live sessions, project reviews, or office hours.",
+                        labels: ["Unclear (1★)", "1-2 hrs/wk (2★)", "3-5 hrs/wk (3★)", "5-10 hrs/wk (4★)", "10+ hrs/wk (5★)"],
+                      },
+                      {
+                        key: "motivation" as keyof RubricScores,
+                        title: "4. Motivation & Communication",
+                        desc: "Pedagogical clarity, empathy, and commitment to Ethiopian student success.",
+                        labels: ["Minimal (1★)", "Acceptable (2★)", "Good (3★)", "Very strong (4★)", "Inspirational (5★)"],
+                      },
+                    ].map((c) => (
+                      <div key={c.key} className="rounded-xl border border-[var(--border)] bg-white/[0.02] p-4 space-y-2">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="font-semibold text-white">{c.title}</span>
+                          <span className="font-mono text-xs font-bold text-primary">
+                            {rubricScores[c.key]}/5 ({c.labels[rubricScores[c.key] - 1]})
+                          </span>
+                        </div>
+                        <p className="text-xs text-[var(--text-muted)]">{c.desc}</p>
+                        <div className="grid grid-cols-5 gap-2 pt-1">
+                          {[1, 2, 3, 4, 5].map((v) => (
+                            <button
+                              key={v}
+                              type="button"
+                              onClick={() => setRubricScores((prev) => ({ ...prev, [c.key]: v }))}
+                              className={`rounded-lg border py-2 text-xs font-medium transition-all ${
+                                rubricScores[c.key] === v
+                                  ? "border-primary bg-primary text-black font-bold shadow-xs"
+                                  : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:bg-white/10"
+                              }`}
+                            >
+                              {v} ★
+                            </button>
+                          ))}
                         </div>
                       </div>
                     ))}
                   </div>
+
+                  <div className="flex justify-end">
+                    <Button variant="primary" size="sm" onClick={applyRubricToNotes} className="gap-2">
+                      <Sparkles size={14} /> Generate Review Notes from Rubric
+                    </Button>
+                  </div>
+                </section>
+
+                {/* Direct Interview Scheduling Section */}
+                <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar size={18} className="text-primary" />
+                    <h3 className="text-base font-bold text-white">Screening Interview & Calendar</h3>
+                  </div>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="space-y-2 rounded-xl border border-[var(--border)] bg-white/[0.02] p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                        Dedicated Video Room
+                      </p>
+                      <input
+                        type="text"
+                        readOnly
+                        value={meetingUrl}
+                        className="w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-xs font-mono text-[var(--text-primary)]"
+                      />
+                      <div className="flex gap-2 pt-1">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => copyToClipboard(meetingUrl, true)}
+                          className="flex-1 text-xs gap-1"
+                        >
+                          {copiedLink ? <Check size={13} className="text-success" /> : <Copy size={13} />}
+                          {copiedLink ? "Copied" : "Copy Link"}
+                        </Button>
+                        <a href={meetingUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
+                          <Button size="sm" variant="primary" className="w-full text-xs gap-1">
+                            <Video size={13} /> Launch Room
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 rounded-xl border border-[var(--border)] bg-white/[0.02] p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                        Calendar Invite
+                      </p>
+                      <p className="text-xs text-[var(--text-secondary)]">
+                        Schedule directly on Google Calendar with prefilled agenda and meeting link.
+                      </p>
+                      <div className="pt-2">
+                        <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
+                          <Button size="sm" variant="outline" className="w-full text-xs gap-1.5">
+                            <Calendar size={14} /> Schedule on Google Calendar
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 pt-2">
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                        Email Invite Template
+                      </p>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => copyToClipboard(emailTemplate, false)}
+                        className="h-6 text-xs text-primary gap-1"
+                      >
+                        {copiedTemplate ? <Check size={12} className="text-success" /> : <Copy size={12} />}
+                        {copiedTemplate ? "Copied" : "Copy Template"}
+                      </Button>
+                    </div>
+                    <textarea
+                      readOnly
+                      value={emailTemplate}
+                      className="min-h-[100px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-xs font-mono text-[var(--text-secondary)] leading-relaxed"
+                    />
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* Tab 3: Account & Credentials */}
+            {activeTab === "account" && (
+              <div className="space-y-6">
+                <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                    Linked User Account
+                  </h3>
+                  {linkedUser ? (
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">User ID</p>
+                        <p className="text-sm font-mono text-white">{linkedUser.id}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">Role</p>
+                        <p className="text-sm text-white capitalize">{linkedUser.role}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">Last Login</p>
+                        <p className="text-sm text-white">
+                          {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never logged in"}
+                        </p>
+                      </div>
+                      {detail?.credentialsStatus.provisionedAt && (
+                        <div>
+                          <p className="text-xs text-[var(--text-muted)]">Provisioned At</p>
+                          <p className="text-sm text-white">
+                            {new Date(detail.credentialsStatus.provisionedAt).toLocaleString()}
+                          </p>
+                        </div>
+                      )}
+                      {detail?.credentialsStatus.sentAt && (
+                        <div>
+                          <p className="text-xs text-[var(--text-muted)]">Credentials Status</p>
+                          <p className="text-sm text-white">
+                            Sent via {detail.credentialsStatus.deliveryMethod ?? "email"} on{" "}
+                            {new Date(detail.credentialsStatus.sentAt).toLocaleString()}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="rounded-xl border border-dashed border-[var(--border)] p-6 text-center">
+                      <p className="text-sm text-[var(--text-secondary)]">No active user account provisioned yet.</p>
+                      <p className="text-xs text-[var(--text-muted)] mt-1">
+                        Once approved, you can create credentials or provision automatically.
+                      </p>
+                    </div>
+                  )}
+                </section>
+
+                {linkedUser && (
+                  <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                      Security & Login History
+                    </h3>
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">Active Sessions</p>
+                        <p className="text-xl font-bold text-white">{loginHistory?.activeSessions ?? 0}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">Last IP Address</p>
+                        <p className="text-sm font-mono text-white">{loginHistory?.lastLoginIp ?? "N/A"}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-[var(--text-muted)]">Registered Devices</p>
+                        <p className="text-xl font-bold text-white">{loginHistory?.devices?.length ?? 0}</p>
+                      </div>
+                    </div>
+
+                    {(loginHistory?.devices ?? []).length > 0 && (
+                      <div className="space-y-2 pt-2">
+                        {loginHistory!.devices!.map((device, i) => (
+                          <div
+                            key={i}
+                            className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/5 p-3 text-xs"
+                          >
+                            <div className="flex items-center gap-2.5">
+                              {device.type === "mobile" ? <Smartphone size={16} /> : <Monitor size={16} />}
+                              <div>
+                                <span className="font-medium text-white capitalize">{device.type}</span>
+                                {device.ip && <span className="text-[var(--text-muted)] ml-2">({device.ip})</span>}
+                              </div>
+                            </div>
+                            {device.lastUsedAt && (
+                              <span className="text-[var(--text-muted)]">
+                                {new Date(device.lastUsedAt).toLocaleDateString()}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </section>
+                )}
+              </div>
+            )}
+
+            {/* Tab 4: Teaching */}
+            {activeTab === "teaching" && (
+              <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-6">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Teaching Metrics & Cohort Activity
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-5 text-center">
+                    <p className="text-4xl font-bold text-white">{detail?.teaching.totalSessions ?? 0}</p>
+                    <p className="text-xs text-[var(--text-muted)] mt-1 uppercase tracking-wider">Total Sessions</p>
+                  </div>
+                  <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-5 text-center">
+                    <p className="text-4xl font-bold text-white">{detail?.teaching.studentsCount ?? 0}</p>
+                    <p className="text-xs text-[var(--text-muted)] mt-1 uppercase tracking-wider">Mentees Guided</p>
+                  </div>
+                </div>
+
+                {(detail?.teaching.sessions ?? []).length > 0 ? (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold text-[var(--text-muted)]">Recent Sessions:</p>
+                    {detail!.teaching.sessions.slice(0, 8).map((session, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/5 px-4 py-3 text-sm"
+                      >
+                        <span className="text-white font-medium">{session.title ?? "Untitled Session"}</span>
+                        <Badge
+                          variant={
+                            session.status === "completed"
+                              ? "success"
+                              : session.status === "cancelled"
+                                ? "warning"
+                                : "default"
+                          }
+                        >
+                          {session.status ?? "scheduled"}
+                        </Badge>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-[var(--text-muted)]">No cohort sessions recorded yet.</p>
                 )}
               </section>
             )}
 
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Teaching</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-[var(--border)] bg-white/5 p-4 text-center">
-                  <p className="text-3xl font-bold text-white">{detail?.teaching.totalSessions ?? 0}</p>
-                  <p className="text-xs text-[var(--text-muted)]">Sessions</p>
-                </div>
-                <div className="rounded-xl border border-[var(--border)] bg-white/5 p-4 text-center">
-                  <p className="text-3xl font-bold text-white">{detail?.teaching.studentsCount ?? 0}</p>
-                  <p className="text-xs text-[var(--text-muted)]">Students</p>
-                </div>
-              </div>
-              {(detail?.teaching.sessions ?? []).length > 0 && (
-                <div className="space-y-2">
-                  <p className="text-xs text-[var(--text-muted)]">Recent sessions:</p>
-                  {detail!.teaching.sessions.slice(0, 5).map((session, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/5 px-4 py-3"
-                    >
-                      <span className="text-sm text-[var(--text-secondary)]">
-                        {session.title ?? "Untitled session"}
-                      </span>
-                      <Badge
-                        variant={
-                          session.status === "completed"
-                            ? "success"
-                            : session.status === "cancelled"
-                              ? "warning"
-                              : "default"
-                        }
-                      >
-                        {session.status ?? "scheduled"}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
+            {/* Tab 5: Audit Timeline */}
+            {activeTab === "audit" && (
+              <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-4">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Application Audit Trail
+                </h3>
+                {id && <MentorAuditTimeline applicationId={id} />}
+              </section>
+            )}
 
+            {/* Review Notes Box */}
             {canReview && isAdmin && (
-              <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6">
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Review notes
+              <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6 space-y-3">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Review & Feedback Notes
                 </label>
                 <textarea
                   value={reviewNotes}
                   onChange={(e) => setReviewNotes(e.target.value)}
-                  className="min-h-[100px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-sm outline-none focus:border-primary resize-y"
-                  placeholder="Optional approval notes or internal feedback"
+                  className="min-h-[100px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary resize-y"
+                  placeholder="Enter approval notes, onboarding instructions, or specific changes requested..."
                 />
               </section>
             )}
-
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-6">
-              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                Audit timeline
-              </h3>
-              {id && <MentorAuditTimeline applicationId={id} />}
-            </section>
           </div>
 
+          {/* Right Action Sidebar */}
           <div className="space-y-4 lg:col-span-1">
             {isAdmin && app && (
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/50 p-5 space-y-3 sticky top-6">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Actions</h3>
-                <div className="flex flex-col gap-2">
+              <div className="sticky top-6 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/70 p-5 space-y-4 shadow-sm">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                    Quick Actions
+                  </h3>
+                  {statusBadge(app.status)}
+                </div>
+
+                <div className="flex flex-col gap-2.5">
                   {app.status === "pending_review" && (
                     <Button
                       size="sm"
                       variant="outline"
                       onClick={() => startReviewMutation.mutate()}
                       disabled={startReviewMutation.isPending}
+                      className="w-full gap-2"
                     >
-                      Start review
+                      <Clock size={15} /> Mark In-Review
                     </Button>
                   )}
+
                   {canReview && (
                     <>
-                      <Button size="sm" onClick={() => setConfirmAction("approve")}>
-                        Approve
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        onClick={() => setConfirmAction("approve")}
+                        className="w-full gap-2"
+                      >
+                        <CheckCircle2 size={15} /> Approve Application
                       </Button>
-                      <Button size="sm" variant="danger" onClick={() => setConfirmAction("reject")}>
-                        Reject
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => setConfirmAction("reject")}
+                        className="w-full gap-2"
+                      >
+                        <XCircle size={15} /> Reject Application
                       </Button>
                       {app.status === "pending_review" && (
-                        <Button size="sm" variant="outline" onClick={() => setConfirmAction("request-changes")}>
-                          Request changes
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setConfirmAction("request-changes")}
+                          className="w-full gap-2"
+                        >
+                          <FileText size={15} /> Request Changes / Info
                         </Button>
                       )}
                     </>
                   )}
+
                   {needsProvision && (
-                    <Button size="sm" variant="primary" onClick={() => setProvisionDialogOpen(true)}>
-                      Create account
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      onClick={() => setProvisionDialogOpen(true)}
+                      className="w-full gap-2"
+                    >
+                      <UserCheck size={15} /> Provision Mentor Account
                     </Button>
                   )}
+
                   {canManageAccount && (
                     <>
-                      <Button size="sm" variant="outline" onClick={() => setConfirmAction("resend")}>
-                        Resend credentials
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setConfirmAction("resend")}
+                        className="w-full gap-2"
+                      >
+                        <Mail size={15} /> Resend Credentials
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => setConfirmAction("reset-password")}>
-                        Reset password
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setConfirmAction("reset-password")}
+                        className="w-full gap-2"
+                      >
+                        <Shield size={15} /> Reset Password
                       </Button>
                       {linkedUser?.mentorAccountStatus === "suspended" ? (
-                        <Button size="sm" variant="outline" onClick={() => setConfirmAction("reactivate")}>
-                          Reactivate
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setConfirmAction("reactivate")}
+                          className="w-full gap-2 text-success"
+                        >
+                          <RefreshCw size={15} /> Reactivate Mentor
                         </Button>
                       ) : (
-                        <Button size="sm" variant="outline" onClick={() => setConfirmAction("suspend")}>
-                          Suspend
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setConfirmAction("suspend")}
+                          className="w-full gap-2 text-warning"
+                        >
+                          <AlertTriangle size={15} /> Suspend Mentor
                         </Button>
                       )}
-                      <Button size="sm" variant="outline" onClick={() => setConfirmAction("deactivate")}>
-                        Deactivate
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setConfirmAction("deactivate")}
+                        className="w-full gap-2"
+                      >
+                        Deactivate Account
                       </Button>
-                      <Button size="sm" variant="danger" onClick={() => setConfirmAction("remove-role")}>
-                        Remove role
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => setConfirmAction("remove-role")}
+                        className="w-full gap-2"
+                      >
+                        Remove Mentor Role
                       </Button>
                     </>
                   )}
+
                   {["approved", "rejected", "changes_requested"].includes(app.status) && (
-                    <Button size="sm" variant="outline" onClick={() => setConfirmAction("archive")}>
-                      Archive
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setConfirmAction("archive")}
+                      className="w-full"
+                    >
+                      Archive Application
                     </Button>
                   )}
                 </div>
@@ -606,6 +1076,7 @@ export function AdminMentorDetailPage() {
         </div>
       )}
 
+      {/* Confirmation Dialogs */}
       {activeConfirm && (
         <MentorActionConfirmDialog
           open
@@ -625,6 +1096,7 @@ export function AdminMentorDetailPage() {
         />
       )}
 
+      {/* Account Provisioning Dialog */}
       <ProvisionAccountDialog
         open={provisionDialogOpen}
         defaultEmail={app?.email ?? ""}
