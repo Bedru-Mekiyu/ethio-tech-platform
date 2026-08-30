@@ -8,8 +8,7 @@ import Submission from "../models/Submission.js";
 import MentorApplication from "../models/MentorApplication.js";
 import ApiError from "../utils/ApiError.js";
 import { getPagination } from "../utils/pagination.js";
-import { USER_STATUS, MENTOR_STATUS } from "../config/permissions.js";
-import { notifyMentorApproved, notifyMentorRejected, notifyUser } from "../services/notificationService.js";
+import { notifyUser } from "../services/notificationService.js";
 import AdminActivityLog from "../models/AdminActivityLog.js";
 
 export const getAnalytics = asyncHandler(async (_req, res) => {
