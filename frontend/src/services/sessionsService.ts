@@ -42,6 +42,21 @@ export interface SessionAvailability {
   isFull: boolean;
 }
 
+export interface LiveKitTokenResponse {
+  token: string;
+  url: string;
+  roomName: string;
+  role: string;
+  identity: string;
+  name: string;
+  sessionId: string;
+}
+
+export interface LiveKitConfigResponse {
+  url: string;
+  enabled: boolean;
+}
+
 export interface JitsiTokenResponse {
   roomName: string;
   domain: string;
@@ -146,12 +161,32 @@ export async function submitSessionFeedback(
   return data.data;
 }
 
+export async function getLiveKitConfig() {
+  const { data } = await api.get<ApiResponse<LiveKitConfigResponse>>("/sessions/livekit-config");
+  return data.data as unknown as LiveKitConfigResponse;
+}
+
+export async function getLiveKitToken(sessionId: string) {
+  const { data } = await api.post<ApiResponse<LiveKitTokenResponse>>(`/sessions/${sessionId}/livekit-token`);
+  return data.data as unknown as LiveKitTokenResponse;
+}
+
+export async function muteLiveKitParticipant(sessionId: string, payload: { identity: string; trackSid: string; muted?: boolean }) {
+  const { data } = await api.post(`/sessions/${sessionId}/mute-participant`, payload);
+  return data.data;
+}
+
+export async function kickLiveKitParticipant(sessionId: string, payload: { identity: string }) {
+  const { data } = await api.post(`/sessions/${sessionId}/remove-participant`, payload);
+  return data.data;
+}
+
 export async function getJitsiConfig() {
-  const { data } = await api.get<ApiResponse<JitsiConfigResponse>>("/sessions/jitsi-config");
+  const { data } = await api.get<ApiResponse<JitsiConfigResponse>>("/sessions/livekit-config");
   return data.data as unknown as JitsiConfigResponse;
 }
 
 export async function getJitsiToken(sessionId: string) {
-  const { data } = await api.post<ApiResponse<JitsiTokenResponse>>(`/sessions/${sessionId}/jitsi-token`);
+  const { data } = await api.post<ApiResponse<JitsiTokenResponse>>(`/sessions/${sessionId}/livekit-token`);
   return data.data as unknown as JitsiTokenResponse;
 }

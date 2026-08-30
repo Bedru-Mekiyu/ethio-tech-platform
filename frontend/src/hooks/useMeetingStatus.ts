@@ -45,7 +45,7 @@ const computeFallback = (sessionId?: string | null, hostJoined = false): Partial
   endsAt: null,
   liveRoomId: null,
   classroomMode: "immersive-3d",
-  liveProvider: "jitsi",
+  liveProvider: "livekit",
   joinable: false,
   isHost: false,
   isAdmin: false,
