@@ -156,7 +156,7 @@ export const toMeetingViewModel = (session, { hostJoined = false, presenceCount 
     endsAt: computeEndsAt(session),
     liveRoomId: session.liveRoomId ?? null,
     classroomMode: session.classroomMode ?? "immersive-3d",
-    liveProvider: session.liveProvider ?? "jitsi",
+    liveProvider: session.liveProvider ?? "livekit",
     joinable,
     isHost,
     isAdmin,

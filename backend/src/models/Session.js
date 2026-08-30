@@ -18,8 +18,8 @@ const sessionSchema = new Schema(
     },
     liveProvider: {
       type: String,
-      enum: ["custom", "jitsi", "twilio", "daily", "zoom"],
-      default: "jitsi",
+      enum: ["livekit", "custom", "jitsi", "twilio", "daily", "zoom"],
+      default: "livekit",
     },
     liveRoomId: { type: String, trim: true },
     whiteboardEnabled: { type: Boolean, default: true },
