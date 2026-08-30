@@ -19,10 +19,12 @@ declare module "lucide-react" {
   export const Ban: IconComponent;
   export const BarChart3: IconComponent;
   export const Bell: IconComponent;
+  export const Bold: IconComponent;
   export const Bot: IconComponent;
   export const BookMarked: IconComponent;
   export const BookOpen: IconComponent;
   export const BookOpenCheck: IconComponent;
+  export const Briefcase: IconComponent;
   export const Building2: IconComponent;
   export const Calendar: IconComponent;
   export const CalendarCheck: IconComponent;
@@ -33,6 +35,7 @@ declare module "lucide-react" {
   export const Check: IconComponent;
   export const CheckCircle: IconComponent;
   export const CheckCircle2: IconComponent;
+  export const CheckSquare: IconComponent;
   export const ChevronDown: IconComponent;
   export const ChevronLeft: IconComponent;
   export const ChevronRight: IconComponent;
@@ -46,6 +49,9 @@ declare module "lucide-react" {
   export const Code: IconComponent;
   export const Code2: IconComponent;
   export const Coffee: IconComponent;
+  export const Columns: IconComponent;
+  export const Columns2: IconComponent;
+  export const Columns3: IconComponent;
   export const Compass: IconComponent;
   export const Contact: IconComponent;
   export const Copy: IconComponent;
@@ -88,6 +94,9 @@ declare module "lucide-react" {
   export const HardDrive: IconComponent;
   export const Hash: IconComponent;
   export const Headphones: IconComponent;
+  export const Heading1: IconComponent;
+  export const Heading2: IconComponent;
+  export const Heading3: IconComponent;
   export const Heart: IconComponent;
   export const HeartPulse: IconComponent;
   export const HelpCircle: IconComponent;
@@ -98,6 +107,7 @@ declare module "lucide-react" {
   export const ImageIcon: IconComponent;
   export const Inbox: IconComponent;
   export const Info: IconComponent;
+  export const Italic: IconComponent;
   export const Key: IconComponent;
   export const KeyRound: IconComponent;
   export const Laptop2: IconComponent;
@@ -105,11 +115,14 @@ declare module "lucide-react" {
   export const Layers3: IconComponent;
   export const Layout: IconComponent;
   export const LayoutDashboard: IconComponent;
+  export const LayoutGrid: IconComponent;
   export const Lightbulb: IconComponent;
   export const Link: IconComponent;
   export const Link2: IconComponent;
   export const Linkedin: IconComponent;
   export const List: IconComponent;
+  export const ListChecks: IconComponent;
+  export const ListOrdered: IconComponent;
   export const Loader2: IconComponent;
   export const Lock: IconComponent;
   export const LockKeyhole: IconComponent;
@@ -164,6 +177,7 @@ declare module "lucide-react" {
   export const Podcast: IconComponent;
   export const Printer: IconComponent;
   export const Puzzle: IconComponent;
+  export const Quote: IconComponent;
   export const Radio: IconComponent;
   export const RadioTower: IconComponent;
   export const RefreshCcw: IconComponent;
@@ -189,6 +203,8 @@ declare module "lucide-react" {
   export const Signal: IconComponent;
   export const SkipBack: IconComponent;
   export const SkipForward: IconComponent;
+  export const Sliders: IconComponent;
+  export const SlidersHorizontal: IconComponent;
   export const Smartphone: IconComponent;
   export const Smile: IconComponent;
   export const Sparkles: IconComponent;
@@ -197,7 +213,9 @@ declare module "lucide-react" {
   export const Star: IconComponent;
   export const Stethoscope: IconComponent;
   export const Store: IconComponent;
+  export const Strikethrough: IconComponent;
   export const Syringe: IconComponent;
+  export const Table: IconComponent;
   export const Tablet: IconComponent;
   export const Tag: IconComponent;
   export const Target: IconComponent;

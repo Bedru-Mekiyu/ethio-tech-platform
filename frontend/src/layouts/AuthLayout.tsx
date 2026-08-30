@@ -25,8 +25,8 @@ export function AuthLayout() {
 
       {/* ── Ambient Background ── */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-[30%] -top-[20%] h-[70vh] w-[70vh] rounded-full bg-[radial-gradient(circle,rgba(0,210,255,0.1),transparent_60%)] blur-3xl" />
-        <div className="absolute -bottom-[10%] -right-[20%] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(circle,rgba(123,97,255,0.08),transparent_60%)] blur-3xl" />
+        <div className="absolute -left-[30%] -top-[20%] h-[70vh] w-[70vh] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.12),transparent_60%)] blur-3xl" />
+        <div className="absolute -bottom-[10%] -right-[20%] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_60%)] blur-3xl" />
       </div>
 
       {/* ── Left Brand Panel (desktop) ── */}

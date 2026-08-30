@@ -42,7 +42,7 @@ export function RankProgress({ level, xp, nextXp = 5000 }: { level: number; xp: 
       </div>
       <div className="h-2 overflow-hidden rounded-full bg-white/10">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-[#c084fc] transition-[width] duration-500 ease-out"
+          className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
           style={{ width: `${pct}%` }}
         />
       </div>

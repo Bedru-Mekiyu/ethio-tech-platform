@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export interface BadgeProps {
   className?: string;
-  variant?: "default" | "success" | "warning" | "purple" | "danger";
+  variant?: "default" | "success" | "warning" | "purple" | "danger" | "cyan";
   size?: "sm" | "md";
   showDot?: boolean;
   children: React.ReactNode;
@@ -10,30 +10,32 @@ export interface BadgeProps {
 
 export function Badge({ className, variant = "default", size = "md", showDot = false, children }: BadgeProps) {
   const variants = {
-    default: "border-primary/20 bg-primary/8 text-primary hover:bg-primary/12",
-    success: "border-success/20 bg-success/8 text-success hover:bg-success/12",
-    warning: "border-warning/20 bg-warning/8 text-warning hover:bg-warning/12",
-    purple: "border-secondary/20 bg-secondary/8 text-secondary hover:bg-secondary/12",
-    danger: "border-danger/20 bg-danger/8 text-danger hover:bg-danger/12",
+    default: "border-[#334155]/60 bg-[#1E293B]/60 text-slate-300 hover:bg-[#1E293B] hover:text-white",
+    success: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/15",
+    warning: "border-amber-500/20 bg-amber-500/10 text-amber-400 hover:bg-amber-500/15",
+    purple: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/15",
+    danger: "border-rose-500/20 bg-rose-500/10 text-rose-400 hover:bg-rose-500/15",
+    cyan: "border-[#334155]/60 bg-[#1E293B]/60 text-slate-300 hover:bg-[#1E293B] hover:text-white",
   };
 
   const sizes = {
-    sm: "px-2 py-0.5 text-[10px] gap-1 tracking-[0.1em]",
-    md: "px-3 py-1 text-[11px] gap-1.5 tracking-[0.12em]",
+    sm: "px-2 py-0.5 text-[10px] gap-1 font-medium",
+    md: "px-2.5 py-0.5 text-xs gap-1.5 font-medium",
   };
 
   const dotColors = {
-    default: "bg-primary shadow-[0_0_8px_rgba(0,210,255,0.6)]",
-    success: "bg-success shadow-[0_0_8px_rgba(46,204,113,0.6)]",
-    warning: "bg-warning shadow-[0_0_8px_rgba(241,196,15,0.6)]",
-    purple: "bg-secondary shadow-[0_0_8px_rgba(123,97,255,0.6)]",
-    danger: "bg-danger shadow-[0_0_8px_rgba(255,75,92,0.6)]",
+    default: "bg-slate-400",
+    success: "bg-emerald-400",
+    warning: "bg-amber-400",
+    purple: "bg-indigo-400",
+    danger: "bg-rose-400",
+    cyan: "bg-slate-400",
   };
 
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full border font-semibold uppercase backdrop-blur-[2px] transition-colors duration-200",
+        "inline-flex items-center rounded-full border transition-colors duration-150 select-none",
         variants[variant],
         sizes[size],
         className,
@@ -44,3 +46,4 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
     </span>
   );
 }
+

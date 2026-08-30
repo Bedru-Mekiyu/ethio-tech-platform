@@ -40,11 +40,11 @@ const icons: Record<ToastVariant, typeof Info> = {
 };
 
 const variantStyles: Record<ToastVariant, string> = {
-  success: "border-success/20 bg-[rgba(46,204,113,0.12)] text-success shadow-[0_4px_20px_rgba(46,204,113,0.06)]",
+  success: "border-success/25 bg-success/10 text-success shadow-[0_4px_20px_rgba(16,185,129,0.1)]",
   error:
-    "border-danger/20 bg-[rgba(255,75,92,0.12)] text-[var(--text-danger)] shadow-[0_4px_20px_rgba(255,75,92,0.06)]",
-  warning: "border-warning/20 bg-[rgba(241,196,15,0.12)] text-warning shadow-[0_4px_20px_rgba(241,196,15,0.06)]",
-  info: "border-primary/20 bg-[rgba(0,210,255,0.12)] text-primary shadow-[0_4px_20px_rgba(0,210,255,0.06)]",
+    "border-danger/25 bg-danger/10 text-[var(--text-danger)] shadow-[0_4px_20px_rgba(239,68,68,0.1)]",
+  warning: "border-warning/25 bg-warning/10 text-warning shadow-[0_4px_20px_rgba(245,158,11,0.1)]",
+  info: "border-primary/25 bg-primary/10 text-primary shadow-[0_4px_20px_rgba(99,102,241,0.1)]",
 };
 
 let nextId = 0;

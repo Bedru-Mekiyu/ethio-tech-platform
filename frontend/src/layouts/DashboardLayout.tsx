@@ -186,7 +186,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           cn(
             "group relative flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200 select-none border border-transparent",
             isActive
-              ? "bg-primary/8 text-primary shadow-[inset_0_1px_0_rgba(0,210,255,0.06),0_4px_12px_rgba(0,210,255,0.04)] border-primary/20"
+              ? "bg-primary/10 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_4px_12px_rgba(99,102,241,0.08)] border-primary/25"
               : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
           )
         }
@@ -439,7 +439,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   {isActive && (
                     <motion.span
                       layoutId="active-bottom-bar-indicator"
-                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_8px_rgba(0,210,255,0.8)]"
+                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_8px_rgba(99,102,241,0.6)]"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}

@@ -4,7 +4,7 @@ export interface ProgressBarProps {
   value: number;
   max?: number;
   className?: string;
-  color?: "primary" | "success" | "purple" | "danger" | "gradient";
+  color?: "primary" | "success" | "purple" | "danger" | "gradient" | "cyan";
   showGlow?: boolean;
   label?: string;
   showValueLabel?: boolean;
@@ -31,18 +31,20 @@ export function ProgressBar({
 
   const colors = {
     primary: "bg-primary",
-    success: "bg-success",
-    purple: "bg-secondary",
-    danger: "bg-danger",
-    gradient: "bg-gradient-to-r from-primary via-secondary to-[#c084fc]",
+    success: "bg-emerald-500",
+    purple: "bg-indigo-500",
+    danger: "bg-rose-500",
+    cyan: "bg-indigo-500",
+    gradient: "bg-primary",
   };
 
   const glows = {
-    primary: "shadow-[0_0_12px_rgba(0,210,255,0.4)]",
-    success: "shadow-[0_0_12px_rgba(46,204,113,0.4)]",
-    purple: "shadow-[0_0_12px_rgba(123,97,255,0.4)]",
-    danger: "shadow-[0_0_12px_rgba(255,75,92,0.4)]",
-    gradient: "shadow-[0_0_16px_rgba(0,210,255,0.35)]",
+    primary: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
+    success: "shadow-[0_0_8px_rgba(16,185,129,0.25)]",
+    purple: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
+    danger: "shadow-[0_0_8px_rgba(239,68,68,0.25)]",
+    cyan: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
+    gradient: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
   };
 
   return (
@@ -76,4 +78,3 @@ export function ProgressBar({
     </div>
   );
 }
-

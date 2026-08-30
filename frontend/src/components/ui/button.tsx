@@ -4,26 +4,26 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "./spinner";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 rounded-xl border border-transparent font-medium tracking-[0.01em] transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]",
+  "relative inline-flex items-center justify-center gap-2 rounded-xl border border-transparent font-medium tracking-[0.01em] transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer",
   {
     variants: {
       variant: {
         primary:
-          "bg-primary text-[var(--text-inverse)] shadow-[0_1px_2px_rgba(0,0,0,0.2),0_8px_24px_rgba(0,210,255,0.25)] hover:bg-[var(--primary-hover)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_12px_32px_rgba(0,210,255,0.32)] hover:-translate-y-px",
+          "bg-primary text-white shadow-sm border border-indigo-400/20 hover:bg-[var(--primary-hover)] active:scale-[0.98]",
         secondary:
-          "border-secondary/40 bg-secondary/10 text-white hover:border-secondary/60 hover:bg-secondary/18 hover:-translate-y-px",
+          "border border-[#334155]/80 bg-[#1E293B]/80 text-white hover:border-slate-500 hover:bg-[#334155] active:scale-[0.98]",
         outline:
-          "border-[var(--border-strong)] bg-transparent text-[var(--text-primary)] hover:border-primary/50 hover:bg-[var(--primary-subtle)] hover:text-primary",
+          "border border-[#1E293B] bg-transparent text-[var(--text-primary)] hover:border-[#334155] hover:bg-white/[0.04] active:scale-[0.98]",
         ghost:
-          "bg-transparent text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
+          "bg-transparent text-[var(--text-secondary)] hover:bg-white/[0.06] hover:text-white active:scale-[0.98]",
         danger:
-          "bg-danger text-white shadow-[0_1px_2px_rgba(0,0,0,0.2),0_8px_24px_rgba(255,75,92,0.2)] hover:brightness-110 hover:-translate-y-px",
+          "bg-danger text-white shadow-sm border border-rose-400/20 hover:bg-[var(--danger-hover)] active:scale-[0.98]",
       },
       size: {
         sm: "h-8 px-3 text-xs rounded-lg gap-1.5",
-        md: "h-10 px-4 text-sm",
-        lg: "h-12 px-6 text-sm font-semibold",
-        icon: "h-10 w-10 p-0",
+        md: "h-10 px-4 text-sm rounded-xl",
+        lg: "h-12 px-6 text-sm font-semibold rounded-xl",
+        icon: "h-10 w-10 p-0 rounded-xl",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },
@@ -58,3 +58,4 @@ export function Button({ className, variant, size, loading, children, disabled, 
 }
 
 export { buttonVariants };
+

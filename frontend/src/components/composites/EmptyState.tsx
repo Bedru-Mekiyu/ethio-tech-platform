@@ -45,7 +45,7 @@ export function EmptyState({
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/3 border border-white/5 shadow-md text-[var(--text-muted)] mt-2 select-none relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+        <div className="absolute inset-0 bg-primary/5" />
         {illustration ?? <Inbox size={26} className="text-[var(--text-secondary)] opacity-80" />}
       </motion.div>
 
