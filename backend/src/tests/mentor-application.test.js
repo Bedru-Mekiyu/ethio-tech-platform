@@ -3,7 +3,6 @@ import { submitMentorApplication } from "../controllers/mentorApplicationControl
 import { APPLICATION_STATUS } from "../config/permissions.js";
 
 const applicationsDb = [];
-const usersDb = [];
 
 const buildQuery = (result) => ({
   sort: () => buildQuery(result),

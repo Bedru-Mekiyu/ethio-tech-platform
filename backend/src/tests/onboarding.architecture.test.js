@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { registerUser } from "../services/authService.js";
-import { requireVerifiedMentor, requireMentorOnboardingComplete } from "../middlewares/authMiddleware.js";
+import { requireMentorOnboardingComplete } from "../middlewares/authMiddleware.js";
 import { submitMentorApplication } from "../controllers/mentorApplicationController.js";
 
 const applicationsDb = [];

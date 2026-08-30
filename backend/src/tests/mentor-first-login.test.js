@@ -19,23 +19,37 @@ vi.mock("../models/User.js", () => ({
       const chain = {
         select: async () => {
           if (query.activationTokenHash) {
-            return (
-              usersDb.find(
-                (u) =>
-                  u.activationTokenHash === query.activationTokenHash &&
-                  u.activationTokenExpiresAt > new Date()
-              ) ?? null
+            const found = usersDb.find(
+              (u) =>
+                u.activationTokenHash === query.activationTokenHash &&
+                u.activationTokenExpiresAt > new Date()
             );
+            if (!found) return null;
+            const doc = {
+              ...found,
+              save: async function () {
+                const idx = usersDb.findIndex((u) => u._id === this._id);
+                if (idx !== -1) usersDb[idx] = { ...usersDb[idx], ...this };
+                return this;
+              },
+            };
+            return doc;
           }
           return null;
         },
       };
       return chain;
     },
-    findById: async (id) => {
+    findById: (id) => {
       const found = usersDb.find((u) => u._id === id);
-      if (!found) return null;
-      return {
+      if (!found) {
+        return {
+          select: () => Promise.resolve(null),
+          exec: () => Promise.resolve(null),
+          then: (onfulfill) => Promise.resolve(null).then(onfulfill),
+        };
+      }
+      const doc = {
         ...found,
         save: async function () {
           const idx = usersDb.findIndex((u) => u._id === this._id);
@@ -43,6 +57,12 @@ vi.mock("../models/User.js", () => ({
           return this;
         },
       };
+      const query = {
+        select: () => Promise.resolve(doc),
+        exec: () => Promise.resolve(doc),
+        then: (onfulfill) => Promise.resolve(doc).then(onfulfill),
+      };
+      return Object.assign(query, doc);
     },
   },
 }));

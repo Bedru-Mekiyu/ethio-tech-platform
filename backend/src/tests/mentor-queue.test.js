@@ -189,6 +189,14 @@ vi.mock("../models/User.js", () => ({
   },
 }));
 
+vi.mock("../models/NotificationPreference.js", () => ({
+  default: {
+    findOne: () => ({
+      lean: async () => null,
+    }),
+  },
+}));
+
 vi.mock("../models/Notification.js", () => ({
   default: {
     create: async (payload) => {

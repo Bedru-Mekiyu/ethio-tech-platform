@@ -33,7 +33,7 @@ async function migrateApprovedMentors() {
       ? await User.findById(application.userId)
       : await User.findOne({ email });
 
-    let action = "skipped";
+    let action;
 
     if (!user) {
       action = dryRun ? "would_provision" : "provisioned";

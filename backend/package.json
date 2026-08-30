@@ -11,7 +11,7 @@
     "seed": "tsx src/scripts/seed.js",
     "upload:avatars": "tsx src/scripts/upload-system-avatars.js",
     "migrate:approved-mentors": "tsx src/scripts/migrate-approved-mentors.js",
-    "test": "vitest run",
+    "test": "node --max-old-space-size=8192 ../node_modules/vitest/vitest.mjs run",
     "lint": "eslint src --ext .js,.ts"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "file-type": "^22.0.1",
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
+    "livekit-server-sdk": "^2.18.0",
     "mongoose": "^8.9.0",
     "multer": "^2.1.1",
     "nodemailer": "^6.10.0",
