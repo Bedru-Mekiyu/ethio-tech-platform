@@ -1,17 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { fetchAdminAnalytics, type AdminAnalyticsData } from "@/services/dashboardService";
 import { StatCard } from "@/components/composites/StatCard";
 import { Badge } from "@/components/ui/badge";
@@ -62,14 +52,10 @@ function CustomChartTooltip({ active, payload, label, unit = "" }: CustomChartTo
         <div className="mt-1.5 space-y-1">
           {payload.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: item.color || "#6366F1" }}
-              />
+              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#6366F1" }} />
               <span className="text-zinc-400">{item.name || item.dataKey}:</span>
               <span className="font-bold text-white">
-                {typeof item.value === "number" ? item.value.toLocaleString() : item.value}{" "}
-                {unit}
+                {typeof item.value === "number" ? item.value.toLocaleString() : item.value} {unit}
               </span>
             </div>
           ))}
@@ -267,10 +253,13 @@ export function AdminPage() {
       <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-6 text-center">
         <Sparkles className="mx-auto text-red-400" size={30} />
         <h1 className="mt-3 text-lg font-bold text-white">Unable to load analytics</h1>
-        <p className="mt-1 text-xs text-zinc-400">
-          Could not establish connection to the analytics telemetry stream.
-        </p>
-        <Button variant="outline" size="sm" className="mt-4 border-red-500/30 text-red-300 text-xs" onClick={() => refetch()}>
+        <p className="mt-1 text-xs text-zinc-400">Could not establish connection to the analytics telemetry stream.</p>
+        <Button
+          variant="outline"
+          size="sm"
+          className="mt-4 border-red-500/30 text-red-300 text-xs"
+          onClick={() => refetch()}
+        >
           <RefreshCw size={13} className="mr-1.5" />
           Retry Connection
         </Button>
@@ -295,11 +284,10 @@ export function AdminPage() {
                 v2.4 Telemetry
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-              Platform Analytics & Growth
-            </h1>
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Platform Analytics & Growth</h1>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and gamification XP velocity.
+              Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and
+              gamification XP velocity.
             </p>
           </div>
 
@@ -384,9 +372,7 @@ export function AdminPage() {
               <button
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "weekly"
-                    ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-zinc-400 hover:text-white"
+                  xpTimeView === "weekly" ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Weekly Volume
@@ -394,9 +380,7 @@ export function AdminPage() {
               <button
                 onClick={() => setXpTimeView("cumulative")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "cumulative"
-                    ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-zinc-400 hover:text-white"
+                  xpTimeView === "cumulative" ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Cumulative
@@ -427,10 +411,7 @@ export function AdminPage() {
                 />
                 <Tooltip
                   content={
-                    <CustomChartTooltip
-                      unit="XP"
-                      label={xpTimeView === "weekly" ? "Weekly XP" : "Cumulative XP"}
-                    />
+                    <CustomChartTooltip unit="XP" label={xpTimeView === "weekly" ? "Weekly XP" : "Cumulative XP"} />
                   }
                 />
                 <Area
@@ -456,7 +437,9 @@ export function AdminPage() {
               <TrendingUp size={14} className="text-sky-400" />
               <CardTitle className="text-sm font-semibold text-white">Cohort Growth & Admissions</CardTitle>
             </div>
-            <CardDescription className="text-xs text-zinc-400">Monthly student admissions vs active learners</CardDescription>
+            <CardDescription className="text-xs text-zinc-400">
+              Monthly student admissions vs active learners
+            </CardDescription>
           </CardHeader>
 
           <div className="mt-4 h-64">
@@ -466,20 +449,8 @@ export function AdminPage() {
                 <XAxis dataKey="month" stroke="#71717A" fontSize={10} tickLine={false} />
                 <YAxis stroke="#71717A" fontSize={10} tickLine={false} />
                 <Tooltip content={<CustomChartTooltip unit="students" />} />
-                <Bar
-                  dataKey="students"
-                  name="Total Admitted"
-                  fill="#6366F1"
-                  radius={[4, 4, 0, 0]}
-                  maxBarSize={28}
-                />
-                <Bar
-                  dataKey="active"
-                  name="Active Monthly"
-                  fill="#38BDF8"
-                  radius={[4, 4, 0, 0]}
-                  maxBarSize={28}
-                />
+                <Bar dataKey="students" name="Total Admitted" fill="#6366F1" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="active" name="Active Monthly" fill="#38BDF8" radius={[4, 4, 0, 0]} maxBarSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -495,7 +466,9 @@ export function AdminPage() {
               <Layers size={15} className="text-indigo-400" />
               <div>
                 <CardTitle className="text-sm font-semibold text-white">Track Performance & XP Distribution</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">Curriculum engagement across disciplines</CardDescription>
+                <CardDescription className="text-xs text-zinc-400">
+                  Curriculum engagement across disciplines
+                </CardDescription>
               </div>
             </div>
             <Badge variant="purple" size="sm">
@@ -532,10 +505,12 @@ export function AdminPage() {
               <Award size={15} className="text-amber-400" />
               <div>
                 <CardTitle className="text-sm font-semibold text-white">Top Diaspora Mentors</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">Highest rated guides by sessions & feedback</CardDescription>
+                <CardDescription className="text-xs text-zinc-400">
+                  Highest rated guides by sessions & feedback
+                </CardDescription>
               </div>
             </div>
-            <Link to="/admin/mentors/applications">
+            <Link to="/admin/moderation">
               <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-indigo-400 hover:text-indigo-300">
                 View All <ChevronRight size={12} />
               </Button>
@@ -594,7 +569,9 @@ export function AdminPage() {
               <MapPin size={15} className="text-emerald-400" />
               <div>
                 <CardTitle className="text-sm font-semibold text-white">Regional Hub Capacity & Hardware</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">Physical computing centers across Ethiopia</CardDescription>
+                <CardDescription className="text-xs text-zinc-400">
+                  Physical computing centers across Ethiopia
+                </CardDescription>
               </div>
             </div>
             <Badge variant="success" size="sm" showDot>
@@ -629,7 +606,9 @@ export function AdminPage() {
                   {/* Seat Progress Bar */}
                   <div className="mt-3 space-y-1">
                     <div className="flex justify-between text-[11px] text-zinc-400">
-                      <span>Seats ({occupied}/{capacity})</span>
+                      <span>
+                        Seats ({occupied}/{capacity})
+                      </span>
                       <span className="font-medium text-emerald-400">{available} open</span>
                     </div>
                     <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
@@ -675,68 +654,74 @@ export function AdminPage() {
           </div>
 
           <div className="mt-4 space-y-2.5">
-            {upcomingSessions.length > 0 ? (
-              upcomingSessions.slice(0, 4).map((session, index) => (
-                <div
-                  key={session.title ?? index}
-                  className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="font-semibold text-white text-xs truncate">{session.title}</p>
-                    <Badge variant={session.status === "live" ? "success" : "purple"} size="sm" showDot={session.status === "live"}>
-                      {session.status ?? "scheduled"}
-                    </Badge>
+            {upcomingSessions.length > 0
+              ? upcomingSessions.slice(0, 4).map((session, index) => (
+                  <div
+                    key={session.title ?? index}
+                    className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-semibold text-white text-xs truncate">{session.title}</p>
+                      <Badge
+                        variant={session.status === "live" ? "success" : "purple"}
+                        size="sm"
+                        showDot={session.status === "live"}
+                      >
+                        {session.status ?? "scheduled"}
+                      </Badge>
+                    </div>
+                    <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-400">
+                      <Clock size={11} />
+                      <span>
+                        {session.scheduledAt
+                          ? new Date(session.scheduledAt).toLocaleString(undefined, {
+                              month: "short",
+                              day: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : "Scheduled soon"}
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-400">
-                    <Clock size={11} />
-                    <span>
-                      {session.scheduledAt
-                        ? new Date(session.scheduledAt).toLocaleString(undefined, {
-                            month: "short",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "Scheduled soon"}
-                    </span>
+                ))
+              : [
+                  {
+                    title: "Cloud Native Microservices with Go",
+                    status: "scheduled",
+                    time: "Tomorrow, 4:00 PM EAT",
+                  },
+                  {
+                    title: "AI Model Deployment on Edge",
+                    status: "live",
+                    time: "In progress now",
+                  },
+                  {
+                    title: "React 19 & Web Architecture",
+                    status: "scheduled",
+                    time: "Friday, 6:00 PM EAT",
+                  },
+                ].map((sess, i) => (
+                  <div
+                    key={i}
+                    className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-semibold text-white text-xs truncate">{sess.title}</p>
+                      <Badge
+                        variant={sess.status === "live" ? "success" : "purple"}
+                        size="sm"
+                        showDot={sess.status === "live"}
+                      >
+                        {sess.status}
+                      </Badge>
+                    </div>
+                    <p className="mt-1.5 text-[11px] text-zinc-400 flex items-center gap-1.5">
+                      <Clock size={11} />
+                      {sess.time}
+                    </p>
                   </div>
-                </div>
-              ))
-            ) : (
-              [
-                {
-                  title: "Cloud Native Microservices with Go",
-                  status: "scheduled",
-                  time: "Tomorrow, 4:00 PM EAT",
-                },
-                {
-                  title: "AI Model Deployment on Edge",
-                  status: "live",
-                  time: "In progress now",
-                },
-                {
-                  title: "React 19 & Web Architecture",
-                  status: "scheduled",
-                  time: "Friday, 6:00 PM EAT",
-                },
-              ].map((sess, i) => (
-                <div
-                  key={i}
-                  className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="font-semibold text-white text-xs truncate">{sess.title}</p>
-                    <Badge variant={sess.status === "live" ? "success" : "purple"} size="sm" showDot={sess.status === "live"}>
-                      {sess.status}
-                    </Badge>
-                  </div>
-                  <p className="mt-1.5 text-[11px] text-zinc-400 flex items-center gap-1.5">
-                    <Clock size={11} />
-                    {sess.time}
-                  </p>
-                </div>
-              ))
-            )}
+                ))}
           </div>
         </Card>
       </div>

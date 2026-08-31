@@ -375,7 +375,9 @@ export function CalendarPage() {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Study Planner & Calendar</h1>
-              <Badge variant="purple" size="sm">Live Planner</Badge>
+              <Badge variant="purple" size="sm">
+                Live Planner
+              </Badge>
             </div>
             <p className="text-xs text-zinc-400 max-w-2xl leading-relaxed">
               Coordinate study blocks, live mentorship sessions, capstone milestones, and physical tech hub visits.
@@ -442,14 +444,9 @@ export function CalendarPage() {
               <div className="flex items-baseline gap-2">
                 <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                   {sprintStats.completedHours}
-                  <span className="text-sm font-normal text-zinc-400">
-                    {" "}
-                    / {sprintStats.targetHours} hrs completed
-                  </span>
+                  <span className="text-sm font-normal text-zinc-400"> / {sprintStats.targetHours} hrs completed</span>
                 </h2>
-                <span className="text-xs font-medium text-indigo-400">
-                  ({sprintStats.progressPercent}% of target)
-                </span>
+                <span className="text-xs font-medium text-indigo-400">({sprintStats.progressPercent}% of target)</span>
               </div>
               <p className="text-xs text-zinc-400 mt-0.5">
                 {sprintStats.completedCount} of {sprintStats.totalCount} blocks completed this week.
@@ -804,7 +801,7 @@ export function CalendarPage() {
                         {(event.type === "session" || event.sessionId) && (
                           <div className="mt-3 border-t border-slate-800 pt-3">
                             <Link
-                              to={`/app/live/${event.sessionId || meeting?.id || "demo-room"}`}
+                              to={`/app/classroom/${event.sessionId || meeting?.id || "demo-room"}`}
                               className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-500 transition shadow-sm"
                             >
                               <Video size={14} />
@@ -917,7 +914,7 @@ export function CalendarPage() {
 
                           {(ev.type === "session" || ev.sessionId) && (
                             <Link
-                              to={`/app/live/${ev.sessionId || "demo-room"}`}
+                              to={`/app/classroom/${ev.sessionId || "demo-room"}`}
                               onClick={(e) => e.stopPropagation()}
                               className="mt-1 flex items-center justify-center gap-1 rounded bg-blue-600/80 px-2 py-1 text-[10px] font-semibold text-white hover:bg-blue-600"
                             >
@@ -1078,7 +1075,7 @@ export function CalendarPage() {
                     <div className="flex items-center gap-2 self-end sm:self-center">
                       {isMeeting && (
                         <Link
-                          to={`/app/live/${event.sessionId || "demo-room"}`}
+                          to={`/app/classroom/${event.sessionId || "demo-room"}`}
                           className="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-blue-500 transition shadow-sm"
                         >
                           <Video size={13} />

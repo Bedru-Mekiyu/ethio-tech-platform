@@ -281,13 +281,13 @@ export function StudentDashboardPage() {
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
-                  <Link to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/coding-workspace"}>
+                  <Link to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/workspace"}>
                     <Button size="sm" className="gap-1 font-medium">
                       <Play size={13} className="fill-current" />
                       Resume Lesson
                     </Button>
                   </Link>
-                  <Link to="/app/coding-workspace">
+                  <Link to="/app/workspace">
                     <Button size="sm" variant="outline" className="gap-1 text-xs">
                       <Code2 size={13} />
                       IDE
@@ -406,7 +406,7 @@ export function StudentDashboardPage() {
 
           {/* Quick Platform Navigation Shortcuts */}
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link to="/app/coding-workspace" className="group">
+            <Link to="/app/workspace" className="group">
               <Card className="h-full rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 transition-all hover:border-zinc-700">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
                   <Code2 size={16} />

@@ -92,14 +92,24 @@ export function MentorDashboardPage() {
       {
         _id: "sub-1",
         student: { _id: "st-1", fullName: "Yared Tadesse", email: "yared@student.et" },
-        project: { _id: "pr-1", title: "Realtime Chat & Presence Engine", track: { title: "Full-Stack Web Track" }, xpReward: 200 },
+        project: {
+          _id: "pr-1",
+          title: "Realtime Chat & Presence Engine",
+          track: { title: "Full-Stack Web Track" },
+          xpReward: 200,
+        },
         status: "pending",
         createdAt: "2026-08-29T08:30:00Z",
       },
       {
         _id: "sub-2",
         student: { _id: "st-2", fullName: "Bethlehem Assefa", email: "beth@student.et" },
-        project: { _id: "pr-2", title: "Cloud Storage CDN Synchronizer", track: { title: "DevOps & Cloud Track" }, xpReward: 250 },
+        project: {
+          _id: "pr-2",
+          title: "Cloud Storage CDN Synchronizer",
+          track: { title: "DevOps & Cloud Track" },
+          xpReward: 250,
+        },
         status: "pending",
         createdAt: "2026-08-29T09:15:00Z",
       },
@@ -172,7 +182,9 @@ export function MentorDashboardPage() {
               <Button size="sm">{mentorStatus === "rejected" ? "Review Application" : "Open Application"}</Button>
             </Link>
             <Link to="/contact">
-              <Button size="sm" variant="outline">Contact Support</Button>
+              <Button size="sm" variant="outline">
+                Contact Support
+              </Button>
             </Link>
           </div>
         </Card>
@@ -197,7 +209,10 @@ export function MentorDashboardPage() {
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <Badge variant="default" className="text-[11px] gap-1 font-medium bg-indigo-500/10 text-indigo-400 border-indigo-500/20">
+              <Badge
+                variant="default"
+                className="text-[11px] gap-1 font-medium bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+              >
                 <Star size={12} className="text-amber-400" /> Lead Mentor
               </Badge>
               <span className="text-xs text-zinc-500 font-mono">ID: {user?.id?.slice(-6) ?? "MEN-99"}</span>
@@ -211,17 +226,8 @@ export function MentorDashboardPage() {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            <Link
-              to={
-                activeSessionId
-                  ? `/mentor/sessions/${activeSessionId}/control-center`
-                  : "/mentor/sessions"
-              }
-            >
-              <Button
-                variant="primary"
-                className="gap-2 text-xs font-medium"
-              >
+            <Link to={activeSessionId ? `/mentor/control-center/${activeSessionId}` : "/mentor/sessions"}>
+              <Button variant="primary" className="gap-2 text-xs font-medium">
                 <Settings size={14} />
                 Control Center
                 {activeMeeting?.status === "active" && (
@@ -251,9 +257,7 @@ export function MentorDashboardPage() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
-              Mentor Rating
-            </span>
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Mentor Rating</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
               <Star size={15} />
             </div>
@@ -264,24 +268,18 @@ export function MentorDashboardPage() {
 
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
-              Cohort Attendance
-            </span>
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Cohort Attendance</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <Users size={15} />
             </div>
           </div>
           <p className="mt-2 text-xl font-bold text-white">94.8%</p>
-          <p className="mt-0.5 text-xs text-zinc-400">
-            {dashboard?.activeStudents ?? 42} active students
-          </p>
+          <p className="mt-0.5 text-xs text-zinc-400">{dashboard?.activeStudents ?? 42} active students</p>
         </Card>
 
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
-              Submissions Queue
-            </span>
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Submissions Queue</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
               <FileCheck size={15} />
             </div>
@@ -292,16 +290,12 @@ export function MentorDashboardPage() {
 
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
-              Sessions Delivered
-            </span>
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Sessions Delivered</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
               <Video size={15} />
             </div>
           </div>
-          <p className="mt-2 text-xl font-bold text-indigo-400">
-            {dashboard?.mentor?.totalSessions ?? 18}
-          </p>
+          <p className="mt-2 text-xl font-bold text-indigo-400">{dashboard?.mentor?.totalSessions ?? 18}</p>
           <p className="mt-0.5 text-xs text-zinc-400">Live classrooms delivered</p>
         </Card>
       </div>
@@ -314,9 +308,7 @@ export function MentorDashboardPage() {
             <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-white">Upcoming Teaching Sessions</h2>
-                <p className="text-xs text-zinc-400">
-                  LiveKit interactive rooms with attendance verification
-                </p>
+                <p className="text-xs text-zinc-400">LiveKit interactive rooms with attendance verification</p>
               </div>
               <Link
                 to="/mentor/sessions"
@@ -328,18 +320,20 @@ export function MentorDashboardPage() {
 
             <div className="mt-4 space-y-3">
               {upcomingMeetings.length ? (
-                upcomingMeetings.slice(0, 3).map((meeting) => (
-                  <MeetingCard
-                    key={meeting.id || meeting.sessionId}
-                    meeting={meeting}
-                    variant="full"
-                    onStart={handleStart}
-                    onEnd={handleEnd}
-                    onCancel={handleCancel}
-                    startLoading={startMutation.isPending}
-                    endLoading={endMutation.isPending}
-                  />
-                ))
+                upcomingMeetings
+                  .slice(0, 3)
+                  .map((meeting) => (
+                    <MeetingCard
+                      key={meeting.id || meeting.sessionId}
+                      meeting={meeting}
+                      variant="full"
+                      onStart={handleStart}
+                      onEnd={handleEnd}
+                      onCancel={handleCancel}
+                      startLoading={startMutation.isPending}
+                      endLoading={endMutation.isPending}
+                    />
+                  ))
               ) : upcomingSessions.length ? (
                 upcomingSessions.slice(0, 3).map((session, index) => (
                   <div
@@ -359,7 +353,7 @@ export function MentorDashboardPage() {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <Link to={`/mentor/sessions/${session._id}/control-center`}>
+                      <Link to={`/mentor/control-center/${session._id}`}>
                         <Button size="sm" variant="primary" className="text-xs gap-1.5 font-medium">
                           <Settings size={12} />
                           Control Center
@@ -412,17 +406,13 @@ export function MentorDashboardPage() {
               </div>
 
               <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-                  Feedback Velocity
-                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Feedback Velocity</span>
                 <p className="text-lg font-bold text-white">&lt; 4 Hours</p>
                 <ProgressBar value={92} max={100} className="mt-1.5 h-1" />
               </div>
 
               <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-                  Student Retention
-                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Student Retention</span>
                 <p className="text-lg font-bold text-white">96.2%</p>
                 <ProgressBar value={96} max={100} className="mt-1.5 h-1" />
               </div>
@@ -436,9 +426,7 @@ export function MentorDashboardPage() {
             <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-white">Student Submissions Queue</h2>
-                <p className="text-xs text-zinc-400">
-                  {pendingSubmissions.length} projects pending code review
-                </p>
+                <p className="text-xs text-zinc-400">{pendingSubmissions.length} projects pending code review</p>
               </div>
               <Link to="/mentor/reviews" className="text-xs font-medium text-indigo-400 hover:underline">
                 View All →
@@ -457,9 +445,7 @@ export function MentorDashboardPage() {
                         <span className="text-xs font-semibold text-white truncate">
                           {sub.student?.fullName ?? "Learner"}
                         </span>
-                        <span className="text-[10px] text-zinc-500 font-mono truncate">
-                          {sub.student?.email}
-                        </span>
+                        <span className="text-[10px] text-zinc-500 font-mono truncate">{sub.student?.email}</span>
                       </div>
                       <p className="text-xs font-medium text-indigo-400 truncate">
                         {sub.project?.title ?? "Track Project Submission"}
@@ -533,4 +519,3 @@ export function MentorDashboardPage() {
     </div>
   );
 }
-
