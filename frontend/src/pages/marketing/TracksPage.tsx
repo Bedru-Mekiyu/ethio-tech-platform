@@ -144,15 +144,21 @@ export function TracksPage() {
               </Card>
               <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
                 <p className="text-xl font-bold text-indigo-400">{totalCapstones}+</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Real Capstones</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                  Real Capstones
+                </p>
               </Card>
               <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
                 <p className="text-xl font-bold text-white">{totalLiveHours}+</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Live & Mentor Hrs</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                  Live & Mentor Hrs
+                </p>
               </Card>
               <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
                 <p className="text-xl font-bold text-emerald-400">100%</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Free for Learners</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                  Free for Learners
+                </p>
               </Card>
             </motion.div>
           </div>
@@ -579,7 +585,13 @@ export function TracksPage() {
       {/* CTA Footer Banner */}
       <section className="relative overflow-hidden border-t border-[#27272A] bg-[#0E0E11] py-14 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Ready to Begin Your Technical Journey?</h2>
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+            <Sparkles size={12} />
+            <span>100% Free Tuition-Free Scholarship Model</span>
+          </div>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+            Ready to Begin Your Technical Journey?
+          </h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Join hundreds of Ethiopian students and developers learning together, building real projects, and advancing
             their careers.
@@ -587,7 +599,7 @@ export function TracksPage() {
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <Link to="/register">
               <Button size="md" className="font-medium">
-                Join EthioTech for Free
+                Enroll in a Track (Free)
                 <ArrowRight size={14} className="ml-1.5" />
               </Button>
             </Link>
@@ -596,6 +608,17 @@ export function TracksPage() {
                 How It Works
               </Button>
             </Link>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 pt-3 text-[11px] text-zinc-400">
+            <span className="flex items-center gap-1">
+              <CheckCircle2 size={12} className="text-emerald-400" /> No credit card required
+            </span>
+            <span className="flex items-center gap-1">
+              <CheckCircle2 size={12} className="text-emerald-400" /> 6 Physical regional hubs
+            </span>
+            <span className="flex items-center gap-1">
+              <CheckCircle2 size={12} className="text-emerald-400" /> Verifiable on-chain certs
+            </span>
           </div>
         </div>
       </section>

@@ -1,8 +1,9 @@
+import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function QueryError({
-  message = "Something went wrong loading this page.",
+  message = "Something went wrong loading this view.",
   onRetry,
   className,
 }: {
@@ -12,14 +13,20 @@ export function QueryError({
 }) {
   return (
     <div
-      className={cn("surface-panel p-6", className)}
+      className={cn("rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 text-center space-y-3", className)}
       role="alert"
       aria-live="assertive"
     >
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-danger">Unable to load data</p>
-      <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{message}</p>
+      <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-rose-500/10 text-rose-400 border border-rose-500/20">
+        <AlertTriangle size={18} />
+      </div>
+      <div className="space-y-1">
+        <p className="text-xs font-semibold uppercase tracking-wider text-rose-400">Unable to Load Data</p>
+        <p className="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">{message}</p>
+      </div>
       {onRetry ? (
-        <Button className="mt-5" variant="outline" onClick={onRetry}>
+        <Button size="sm" variant="outline" onClick={onRetry} className="gap-1.5 text-xs text-zinc-300">
+          <RefreshCw size={13} />
           Try again
         </Button>
       ) : null}

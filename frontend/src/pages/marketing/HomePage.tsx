@@ -558,11 +558,13 @@ export function HomePage() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
           <div className="space-y-8">
-            {/* Pill Eyebrow */}
+            {/* Pill Eyebrow with Live Platform Pulse */}
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-1 backdrop-blur-md">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-              <span className="text-xs font-medium tracking-wide text-indigo-400">
-                Pan-Ethiopian Engineering Platform
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs font-medium tracking-wide text-indigo-300">
+                Pan-Ethiopian Engineering Platform ·{" "}
+                <strong className="text-white font-mono">{formatCompactCount(activeLearnersCount)}+</strong> Active
+                Learners
               </span>
             </div>
 
@@ -612,9 +614,26 @@ export function HomePage() {
               </Link>
             </div>
 
+            {/* Mentors & Hiring Partners Trust Band right below CTAs */}
+            <div className="pt-2 border-t border-[#27272A]/80 space-y-2">
+              <p className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold">
+                Mentors & Hiring Pipelines From Leading Teams
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                {["Google", "Microsoft", "AWS", "Safaricom", "Chapa", "CBE", "AAU"].map((partner) => (
+                  <span
+                    key={partner}
+                    className="inline-flex items-center rounded-md border border-[#27272A] bg-[#141418] px-2.5 py-0.5 font-mono text-[11px] font-medium text-zinc-300 transition-colors hover:border-zinc-700 hover:text-white"
+                  >
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {/* Trust Points Badges */}
-            <div className="pt-2">
-              <p className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold mb-3">
+            <div className="pt-1">
+              <p className="text-[11px] uppercase tracking-wider text-zinc-500 font-semibold mb-2.5">
                 Proven Platform Architecture
               </p>
               <div className="flex flex-wrap gap-2">
@@ -1324,7 +1343,9 @@ export function HomePage() {
 
           <div className="flex gap-2.5">
             <Link to="/mentors">
-              <Button variant="outline" size="sm">View All Mentors</Button>
+              <Button variant="outline" size="sm">
+                View All Mentors
+              </Button>
             </Link>
             <Link to="/mentor-recruitment">
               <Button size="sm">Become a Mentor</Button>
@@ -1344,13 +1365,7 @@ export function HomePage() {
               <Card className="flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 transition-all duration-150 hover:border-zinc-700">
                 <div>
                   <div className="flex items-start gap-3.5">
-                    <Avatar
-                      src=""
-                      name={mentor.name}
-                      userId={mentor.id}
-                      role="mentor"
-                      size="md"
-                    />
+                    <Avatar src="" name={mentor.name} userId={mentor.id} role="mentor" size="md" />
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-1.5">
                         <h3 className="font-semibold text-white text-sm">{mentor.name}</h3>

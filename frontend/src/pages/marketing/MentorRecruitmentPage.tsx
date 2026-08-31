@@ -381,6 +381,18 @@ export function MentorRecruitmentPage() {
                     Access to built-in LiveKit video rooms, automated code review dashboards, and calendar booking.
                   </p>
                 </div>
+
+                {/* Live Mentor Guild Credibility Quote */}
+                <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3.5 space-y-2">
+                  <p className="text-xs italic text-zinc-300 leading-relaxed">
+                    &ldquo;Reviewing PRs from students in Jimma and Bahir Dar is the most impactful engineering service
+                    I do all week.&rdquo;
+                  </p>
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="font-semibold text-white">Selamawit T.</span>
+                    <span className="text-indigo-400 font-mono">Staff SRE @ Google</span>
+                  </div>
+                </div>
               </div>
             </div>
 

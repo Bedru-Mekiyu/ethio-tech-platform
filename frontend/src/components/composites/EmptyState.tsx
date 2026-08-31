@@ -31,43 +31,34 @@ export function EmptyState({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "surface-panel flex flex-col items-center justify-center gap-4.5 px-6 py-12 text-center shadow-inner",
-        className
+        "rounded-xl border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center gap-3.5 px-6 py-10 text-center shadow-md",
+        className,
       )}
       role="status"
     >
-      <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-0.5 text-[9px] font-bold uppercase tracking-[0.24em] text-primary select-none">
+      <span className="rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-400 select-none">
         {eyebrow}
       </span>
 
-      <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/3 border border-white/5 shadow-md text-[var(--text-muted)] mt-2 select-none relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-primary/5" />
-        {illustration ?? <Inbox size={26} className="text-[var(--text-secondary)] opacity-80" />}
-      </motion.div>
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#141418] border border-[#27272A] text-zinc-500 select-none relative">
+        {illustration ?? <Inbox size={22} className="text-zinc-400" />}
+      </div>
 
-      <div className="max-w-md space-y-2 mt-1">
-        <h3 className="text-lg font-bold text-white tracking-tight leading-snug">{title}</h3>
-        {description && (
-          <p className="text-xs text-[var(--text-secondary)] leading-relaxed max-w-sm mx-auto font-medium">
-            {description}
-          </p>
-        )}
+      <div className="max-w-md space-y-1">
+        <h3 className="text-sm font-semibold text-white tracking-tight">{title}</h3>
+        {description && <p className="text-xs text-zinc-400 leading-relaxed max-w-sm mx-auto">{description}</p>}
       </div>
 
       {actionLabel && (
-        <div className="mt-2.5">
+        <div className="mt-1">
           {actionHref ? (
             <Link to={actionHref} className="inline-flex">
-              <Button size="md" className="font-semibold shadow-sm">
+              <Button size="sm" className="font-medium text-xs">
                 {actionLabel}
               </Button>
             </Link>
           ) : (
-            <Button size="md" onClick={onAction} className="font-semibold shadow-sm">
+            <Button size="sm" onClick={onAction} className="font-medium text-xs">
               {actionLabel}
             </Button>
           )}
