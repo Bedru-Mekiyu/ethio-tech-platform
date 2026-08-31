@@ -278,25 +278,29 @@ const ETHIOPIAN_DEMOGRAPHIC_FACTS = [
   {
     metric: "70%+",
     label: "Youth Population",
-    description: "Over 90 million Ethiopians are under 30 years old, representing Africa's fastest-growing demographic dividend.",
+    description:
+      "Over 90 million Ethiopians are under 30 years old, representing Africa's fastest-growing demographic dividend.",
     icon: Users,
   },
   {
     metric: "100k+",
     label: "Annual STEM Graduates",
-    description: "50+ public universities graduate tens of thousands of engineers annually, yet face critical shortage of practical labs.",
+    description:
+      "50+ public universities graduate tens of thousands of engineers annually, yet face critical shortage of practical labs.",
     icon: GraduationCap,
   },
   {
     metric: "14+",
     label: "Regional Universities Linked",
-    description: "Bridging the regional digital divide between Addis Ababa and universities in Hawassa, Jimma, Bahir Dar, Mekelle, and Dire Dawa.",
+    description:
+      "Bridging the regional digital divide between Addis Ababa and universities in Hawassa, Jimma, Bahir Dar, Mekelle, and Dire Dawa.",
     icon: MapPinned,
   },
   {
     metric: "$0",
     label: "Tuition or Subscription Fees",
-    description: "Fully subsidized non-profit model guaranteeing equal access to all students regardless of economic background.",
+    description:
+      "Fully subsidized non-profit model guaranteeing equal access to all students regardless of economic background.",
     icon: Users,
   },
 ];
@@ -486,34 +490,28 @@ export function AboutPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        {/* Subtle glow background */}
-        <div className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-80 w-full max-w-3xl -translate-x-1/2 rounded-full bg-primary/10 blur-[100px]" />
-
         <div className="mx-auto max-w-4xl text-center">
-          <Badge variant="default" size="md" showDot className="mb-4">
-            The Ethiopian Software Engineering Movement
-          </Badge>
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Democratizing elite tech education with the{" "}
-            <span className="text-primary">
-              PISTELS
-            </span>{" "}
-            framework
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-400 mb-4">
+            <Sparkles size={12} />
+            <span>The Ethiopian Software Engineering Movement</span>
+          </div>
+          <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl text-white">
+            Democratizing elite tech education with the <span className="text-indigo-400">PISTELS</span> framework
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-[var(--text-secondary)] md:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
             {data?.hero.description ||
               "EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects."}
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3.5">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="bg-primary text-black font-bold">
+              <Button size="lg" className="font-medium">
                 Join as Student <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button variant="outline" size="lg" className="border-slate-800 bg-slate-900/60 hover:border-slate-700 text-white">
-                <Users className="mr-2 h-4 w-4 text-primary" /> Become a Mentor
+              <Button variant="outline" size="lg">
+                <Users className="mr-2 h-4 w-4 text-indigo-400" /> Become a Mentor
               </Button>
             </Link>
             <Button
@@ -523,25 +521,27 @@ export function AboutPage() {
                 const el = document.getElementById("pistels-framework");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-[var(--text-secondary)] hover:text-white"
+              className="text-zinc-400 hover:text-white"
             >
               Explore PISTELS Ideology
             </Button>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-[var(--text-secondary)]">
-            {(data?.hero.highlights ?? [
-              "100% Free & Open Source",
-              "WebRTC Sub-150ms Live Labs",
-              "Diaspora Mentor Network",
-              "Offline-First Mesh Sync",
-              "Verifiable Proof-of-Work",
-            ]).map((item) => (
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-zinc-400">
+            {(
+              data?.hero.highlights ?? [
+                "100% Free & Open Source",
+                "WebRTC Sub-150ms Live Labs",
+                "Diaspora Mentor Network",
+                "Offline-First Mesh Sync",
+                "Verifiable Proof-of-Work",
+              ]
+            ).map((item) => (
               <span
                 key={item}
-                className="flex items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-1.5 text-xs text-[var(--text-secondary)]"
+                className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-xs text-zinc-300"
               >
-                <Sparkles className="h-3 w-3 text-primary" />
+                <Sparkles className="h-3 w-3 text-indigo-400" />
                 {item}
               </span>
             ))}
@@ -557,18 +557,18 @@ export function AboutPage() {
             return (
               <Card
                 key={stat.label}
-                className="relative overflow-hidden border-slate-800 bg-slate-900/70 p-5 transition-all duration-200 hover:border-slate-700"
+                className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                    <Icon size={20} />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                    <Icon size={18} />
                   </div>
                   <div>
-                    <p className="text-2xl font-extrabold tracking-tight text-white">{stat.value}</p>
-                    <p className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold">{stat.label}</p>
+                    <p className="text-2xl font-bold tracking-tight text-white">{stat.value}</p>
+                    <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">{stat.label}</p>
                   </div>
                 </div>
-                <p className="mt-2.5 text-xs text-[var(--text-secondary)]">{stat.helper}</p>
+                <p className="mt-2 text-xs text-zinc-400">{stat.helper}</p>
               </Card>
             );
           })}
@@ -584,15 +584,16 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <Badge variant="default" size="md" showDot className="mb-3">
-            National Context & Strategic Imperative
-          </Badge>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Unlocking Ethiopia’s <span className="glow-text text-primary">Demographic Dividend</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <span>National Context & Strategic Imperative</span>
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            Unlocking Ethiopia’s <span className="text-indigo-400">Demographic Dividend</span>
           </h2>
-          <p className="mt-3 text-base leading-relaxed text-[var(--text-secondary)]">
+          <p className="mt-3 text-base leading-relaxed text-zinc-400">
             With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
-            EthioTech provides the production-grade tooling and mentorship needed to bridge academic theory with industry demands.
+            EthioTech provides the production-grade tooling and mentorship needed to bridge academic theory with
+            industry demands.
           </p>
         </div>
 
@@ -603,14 +604,14 @@ export function AboutPage() {
             return (
               <Card
                 key={fact.label}
-                className="border-slate-800 bg-slate-900/60 p-5 transition duration-200 hover:border-slate-700"
+                className="border-[#27272A] bg-[#0E0E11] p-5 transition duration-150 hover:border-zinc-700"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
                   <Icon size={18} />
                 </div>
-                <p className="mt-3.5 text-2xl font-extrabold text-white">{fact.metric}</p>
-                <h3 className="mt-1 text-sm font-semibold text-white">{fact.label}</h3>
-                <p className="mt-2 text-xs leading-5 text-[var(--text-secondary)]">{fact.description}</p>
+                <p className="mt-3 text-2xl font-bold text-white">{fact.metric}</p>
+                <h3 className="mt-0.5 text-sm font-semibold text-white">{fact.label}</h3>
+                <p className="mt-1.5 text-xs leading-5 text-zinc-400">{fact.description}</p>
               </Card>
             );
           })}
@@ -619,17 +620,17 @@ export function AboutPage() {
         {/* Regional Divide vs Scaled Solution */}
         <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-center">
           <div className="space-y-4">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-              <div className="flex items-center gap-2.5 text-rose-400">
-                <Flame size={20} />
-                <h3 className="text-lg font-bold text-white">The Theory vs. Practice Chasm</h3>
+            <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6">
+              <div className="flex items-center gap-2 text-rose-400">
+                <Flame size={18} />
+                <h3 className="text-base font-semibold text-white">The Theory vs. Practice Chasm</h3>
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+              <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
                 Most university students graduate having completed blackboard algorithms and single-page textbook
-                projects. Real software engineering requires git branching workflows, automated CI/CD pipelines,
-                Docker containers, and high-availability system architecture.
+                projects. Real software engineering requires git branching workflows, automated CI/CD pipelines, Docker
+                containers, and high-availability system architecture.
               </p>
-              <div className="mt-3.5 space-y-2 text-xs text-[var(--text-secondary)]">
+              <div className="mt-3 space-y-1.5 text-xs text-zinc-400">
                 <div className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
                   <span>Academic labs lack continuous deployment and cloud credits.</span>
@@ -645,31 +646,39 @@ export function AboutPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-              <div className="flex items-center gap-2.5 text-emerald-400">
-                <ShieldCheck size={20} />
-                <h3 className="text-lg font-bold text-white">How EthioTech Solves This</h3>
+            <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6">
+              <div className="flex items-center gap-2 text-emerald-400">
+                <ShieldCheck size={18} />
+                <h3 className="text-base font-semibold text-white">How EthioTech Solves This</h3>
               </div>
-              <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
-                EthioTech provides a continuous software development lifecycle right in the browser and across
-                our physical regional hubs. Students push real code, receive automated CI test feedback in
-                seconds, and review code with senior mentors.
+              <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
+                EthioTech provides a continuous software development lifecycle right in the browser and across our
+                physical regional hubs. Students push real code, receive automated CI test feedback in seconds, and
+                review code with senior mentors.
               </p>
-              <div className="mt-3.5 flex flex-wrap gap-2">
-                <Badge variant="success" size="sm">100% Practical Labs</Badge>
-                <Badge variant="success" size="sm">Automated CI Pipelines</Badge>
-                <Badge variant="success" size="sm">Production Git Pull Requests</Badge>
-                <Badge variant="success" size="sm">Verifiable Skill Passports</Badge>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                <Badge variant="success" size="sm">
+                  100% Practical Labs
+                </Badge>
+                <Badge variant="success" size="sm">
+                  Automated CI Pipelines
+                </Badge>
+                <Badge variant="success" size="sm">
+                  Production Git Pull Requests
+                </Badge>
+                <Badge variant="success" size="sm">
+                  Verifiable Skill Passports
+                </Badge>
               </div>
             </div>
           </div>
 
           {/* Regional Solutions Cards */}
           <div className="space-y-3.5">
-            <h3 className="text-lg font-bold text-white">Overcoming the Regional Digital Divide</h3>
-            <p className="text-xs text-[var(--text-secondary)]">
-              We design specifically for Ethiopian infrastructure, ensuring learners in every region
-              enjoy an uncompromising learning experience.
+            <h3 className="text-base font-semibold text-white">Overcoming the Regional Digital Divide</h3>
+            <p className="text-xs text-zinc-400">
+              We design specifically for Ethiopian infrastructure, ensuring learners in every region enjoy an
+              uncompromising learning experience.
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {REGIONAL_DIVIDE_SOLUTIONS.map((sol) => {
@@ -677,19 +686,19 @@ export function AboutPage() {
                 return (
                   <Card
                     key={sol.title}
-                    className="border-slate-800 bg-slate-900/60 p-4 transition-all duration-200 hover:border-slate-700"
+                    className="border-[#27272A] bg-[#0E0E11] p-4 transition-all duration-150 hover:border-zinc-700"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-800 text-primary border border-slate-700">
-                        <Icon size={16} />
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                        <Icon size={15} />
                       </div>
                       <Badge variant="default" size="sm">
                         {sol.tag}
                       </Badge>
                     </div>
-                    <h4 className="mt-2.5 text-xs font-semibold text-white">{sol.title}</h4>
-                    <p className="mt-1 text-[11px] text-[var(--text-muted)]">{sol.subtitle}</p>
-                    <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-secondary)]">{sol.description}</p>
+                    <h4 className="mt-2 text-xs font-semibold text-white">{sol.title}</h4>
+                    <p className="mt-0.5 text-[11px] text-zinc-500">{sol.subtitle}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-zinc-400">{sol.description}</p>
                   </Card>
                 );
               })}
@@ -699,19 +708,18 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── The PISTELS Framework (Core Pedagogical Backbone) ─── */}
-      <section id="pistels-framework" className="relative border-y border-slate-800 bg-slate-950/40 py-16">
+      <section id="pistels-framework" className="relative border-y border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="default" size="md" showDot className="mb-3">
-              Core Pedagogical Backbone
-            </Badge>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl">
-              The <span className="text-primary">PISTELS</span>{" "}
-              Ideology
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+              <span>Core Pedagogical Backbone</span>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              The <span className="text-indigo-400">PISTELS</span> Ideology
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-[var(--text-secondary)]">
-              Our 7-pillar methodology engineered to systematically develop collaborative software engineers
-              capable of shipping at high technical standards.
+            <p className="mt-3 text-base leading-relaxed text-zinc-400">
+              Our 7-pillar methodology engineered to systematically develop collaborative software engineers capable of
+              shipping at high technical standards.
             </p>
           </div>
 
@@ -724,15 +732,15 @@ export function AboutPage() {
                   key={pillar.shortKey}
                   type="button"
                   onClick={() => setActivePillarIndex(idx)}
-                  className={`group relative flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-semibold transition-all duration-200 ${
+                  className={`group relative flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? "border-primary bg-primary/15 text-white shadow-md shadow-primary/10"
-                      : "border-slate-800 bg-slate-900/60 text-[var(--text-secondary)] hover:border-slate-700 hover:text-white"
+                      ? "border-indigo-500/40 bg-indigo-500/15 text-white"
+                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
                   <span
-                    className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-black ${
-                      isActive ? "bg-primary text-black" : "bg-slate-800 text-slate-300"
+                    className={`flex h-5 w-5 items-center justify-center rounded text-xs font-bold ${
+                      isActive ? "bg-indigo-500 text-white" : "bg-[#141418] text-zinc-300"
                     }`}
                   >
                     {pillar.letter === "S2" ? "S" : pillar.letter}
@@ -748,42 +756,42 @@ export function AboutPage() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activePillar.shortKey}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80 shadow-xl"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-lg"
               >
                 <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-12 lg:items-center">
                   {/* Left Column: Narrative & Mechanisms */}
-                  <div className="space-y-5 lg:col-span-7">
+                  <div className="space-y-4 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                        <activePillar.icon size={22} />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                        <activePillar.icon size={20} />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
                             Pillar {activePillarIndex + 1} of 7
                           </span>
                           <Badge variant="default" size="sm">
                             {activePillar.badge}
                           </Badge>
                         </div>
-                        <h3 className="text-xl font-extrabold text-white md:text-2xl">{activePillar.name}</h3>
+                        <h3 className="text-xl font-bold text-white md:text-2xl">{activePillar.name}</h3>
                       </div>
                     </div>
 
-                    <p className="text-sm font-medium text-primary">{activePillar.tagline}</p>
-                    <p className="text-xs leading-relaxed text-[var(--text-secondary)]">{activePillar.philosophy}</p>
+                    <p className="text-sm font-medium text-indigo-400">{activePillar.tagline}</p>
+                    <p className="text-xs leading-relaxed text-zinc-400">{activePillar.philosophy}</p>
 
                     <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                         Core Architecture & Mechanics
                       </h4>
-                      <ul className="mt-2.5 space-y-2">
+                      <ul className="mt-2 space-y-1.5">
                         {activePillar.mechanisms.map((mech) => (
-                          <li key={mech} className="flex items-start gap-2.5 text-xs text-slate-200">
+                          <li key={mech} className="flex items-start gap-2 text-xs text-zinc-200">
                             <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
                             <span>{mech}</span>
                           </li>
@@ -791,26 +799,28 @@ export function AboutPage() {
                       </ul>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-950/60 p-3.5">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
-                        <Trophy size={18} />
+                    <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                        <Trophy size={16} />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] font-semibold">{activePillar.keyMetric.label}</p>
-                        <p className="text-lg font-bold text-white">{activePillar.keyMetric.value}</p>
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                          {activePillar.keyMetric.label}
+                        </p>
+                        <p className="text-base font-bold text-white">{activePillar.keyMetric.value}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Right Column: Code & Interactive Architecture */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="overflow-hidden rounded-xl border border-slate-800 bg-black/80 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/60 px-3.5 py-2">
-                        <div className="flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-                          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
-                          <span className="ml-2 text-xs font-mono text-[var(--text-muted)]">
+                    <div className="overflow-hidden rounded-lg border border-[#27272A] bg-black/60 shadow-inner">
+                      <div className="flex items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="ml-2 text-xs font-mono text-zinc-500">
                             {activePillar.shortKey}-architecture.ts
                           </span>
                         </div>
@@ -818,12 +828,12 @@ export function AboutPage() {
                           PISTELS Spec
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-3.5 text-xs font-mono leading-relaxed text-slate-300">
+                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
                         <code>{activePillar.codeSnippet}</code>
                       </pre>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+                    <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>Click any pillar above to inspect mechanics</span>
                       <Button
                         variant="ghost"
@@ -831,7 +841,7 @@ export function AboutPage() {
                         onClick={() => {
                           setActivePillarIndex((prev) => (prev + 1) % PISTELS_PILLARS.length);
                         }}
-                        className="text-primary hover:text-white"
+                        className="text-indigo-400 hover:text-white"
                       >
                         Next Pillar <ArrowRight size={13} className="ml-1" />
                       </Button>
@@ -851,22 +861,22 @@ export function AboutPage() {
                 <Card
                   key={pillar.shortKey}
                   onClick={() => setActivePillarIndex(idx)}
-                  className={`cursor-pointer border p-3.5 transition-all duration-200 hover:-translate-y-0.5 ${
+                  className={`cursor-pointer border p-3.5 transition-all duration-150 ${
                     isSelected
-                      ? "border-primary bg-primary/10 shadow-sm"
-                      : "border-slate-800 bg-slate-900/60 hover:border-slate-700"
+                      ? "border-indigo-500/40 bg-indigo-500/10 shadow-xs"
+                      : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-800 text-primary border border-slate-700">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
                       <Icon size={14} />
                     </div>
-                    <span className="text-xs font-bold font-mono text-primary">
+                    <span className="text-xs font-bold font-mono text-indigo-400">
                       {pillar.letter === "S2" ? "S" : pillar.letter}
                     </span>
                   </div>
-                  <h4 className="mt-2 text-xs font-bold text-white">{pillar.name}</h4>
-                  <p className="mt-1 text-[11px] text-[var(--text-secondary)] line-clamp-2">{pillar.tagline}</p>
+                  <h4 className="mt-2 text-xs font-semibold text-white">{pillar.name}</h4>
+                  <p className="mt-0.5 text-[11px] text-zinc-400 line-clamp-2">{pillar.tagline}</p>
                 </Card>
               );
             })}
@@ -883,29 +893,29 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.25 }}
       >
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-slate-800 bg-slate-900/70 p-6 transition-all hover:border-slate-700">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
             <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                <Target size={22} />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <Target size={20} />
               </div>
               <Badge variant="default">Our Purpose</Badge>
             </div>
-            <h3 className="mt-5 text-xl font-bold text-white">{data?.mission.title ?? "Our Mission"}</h3>
-            <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+            <h3 className="mt-4 text-lg font-bold text-white">{data?.mission.title ?? "Our Mission"}</h3>
+            <p className="mt-2 text-xs leading-relaxed text-zinc-400">
               {data?.mission.description ??
                 "To democratize software engineering education for every Ethiopian youth through free, open, and production-grade experiential learning, powered by low-latency tooling and global diaspora mentorship."}
             </p>
           </Card>
 
-          <Card className="border-slate-800 bg-slate-900/70 p-6 transition-all hover:border-slate-700">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
             <div className="flex items-center justify-between">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                <Compass size={22} />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <Compass size={20} />
               </div>
               <Badge variant="default">Our Horizon</Badge>
             </div>
-            <h3 className="mt-5 text-xl font-bold text-white">{data?.vision.title ?? "Our Vision"}</h3>
-            <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+            <h3 className="mt-4 text-lg font-bold text-white">{data?.vision.title ?? "Our Vision"}</h3>
+            <p className="mt-2 text-xs leading-relaxed text-zinc-400">
               {data?.vision.description ??
                 "To establish Ethiopia as Africa's preeminent sovereign software and artificial intelligence talent powerhouse, placing 100,000+ certified engineers into high-growth pan-African companies and global distributed engineering teams by 2030."}
             </p>
@@ -915,12 +925,12 @@ export function AboutPage() {
         {/* Visual Community Showcase */}
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="relative">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl border border-slate-800 shadow-xl">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-[#27272A] shadow-lg">
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
                 alt="EthioTech immersive learning environment preview - student programmer at work"
                 hoverEffect="glow"
-                wrapperClassName="h-full w-full border-none bg-transparent rounded-2xl overflow-hidden"
+                wrapperClassName="h-full w-full border-none bg-transparent rounded-xl overflow-hidden"
                 className="h-full w-full object-cover"
                 width={1000}
                 quality={85}
@@ -929,45 +939,49 @@ export function AboutPage() {
           </div>
 
           <div>
-            <Badge variant="default" size="sm" className="mb-2">
-              National Impact Model
-            </Badge>
-            <h3 className="text-2xl font-bold leading-tight md:text-3xl text-white">{data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}</h3>
-            <p className="mt-3 text-xs leading-relaxed text-[var(--text-secondary)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2">
+              <span>National Impact Model</span>
+            </div>
+            <h3 className="text-2xl font-bold leading-tight md:text-3xl text-white">
+              {data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}
+            </h3>
+            <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
               {data?.bridge.description ??
                 "EthioTech operates as an open-impact digital public good. We bridge the structural divide by linking university classrooms directly to diaspora tech leads and production codebases."}
             </p>
 
-            <div className="mt-5 space-y-2.5">
-              {(data?.bridge.bullets ?? [
-                "Zero-cost access: No tuition, no upfront fees, and no income-share agreements.",
-                "Live pair programming with diaspora leads at top global tech companies.",
-                "Physical Regional Hubs with reliable power and internet across 6 university cities.",
-              ]).map((bullet, index) => {
+            <div className="mt-4 space-y-2">
+              {(
+                data?.bridge.bullets ?? [
+                  "Zero-cost access: No tuition, no upfront fees, and no income-share agreements.",
+                  "Live pair programming with diaspora leads at top global tech companies.",
+                  "Physical Regional Hubs with reliable power and internet across 6 university cities.",
+                ]
+              ).map((bullet, index) => {
                 const icons = [Sparkles, ShieldCheck, MapPinned];
                 const Icon = icons[index] ?? Sparkles;
                 return (
                   <div
                     key={bullet}
-                    className="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-3.5 transition hover:border-slate-700"
+                    className="flex items-start gap-2.5 rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 transition hover:border-zinc-700"
                   >
-                    <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <Icon size={15} />
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                      <Icon size={14} />
                     </div>
-                    <p className="text-xs leading-relaxed text-[var(--text-secondary)]">{bullet}</p>
+                    <p className="text-xs leading-relaxed text-zinc-300">{bullet}</p>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2.5">
               <Link to="/how-it-works">
-                <Button variant="outline" size="sm" className="border-slate-800 text-white hover:border-primary">
-                  See the 5-Stage Journey <ArrowRight size={14} className="ml-2" />
+                <Button variant="outline" size="sm">
+                  See the 5-Stage Journey <ArrowRight size={13} className="ml-1.5" />
                 </Button>
               </Link>
               <Link to="/hubs">
-                <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
+                <Button variant="ghost" size="sm" className="text-indigo-400 hover:text-white">
                   Explore Regional Hubs
                 </Button>
               </Link>
@@ -985,11 +999,11 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <Badge variant="default" size="md" showDot className="mb-3">
-            Trajectory & Execution
-          </Badge>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">Platform Roadmap & Milestones</h2>
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <span>Trajectory & Execution</span>
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Platform Roadmap & Milestones</h2>
+          <p className="mt-3 text-sm text-zinc-400">
             Our multi-year blueprint scaling Ethiopia's digital software engineering infrastructure.
           </p>
 
@@ -999,10 +1013,10 @@ export function AboutPage() {
               <button
                 key={filterKey}
                 onClick={() => setRoadmapFilter(filterKey)}
-                className={`rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
+                className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                   roadmapFilter === filterKey
-                    ? "bg-primary text-black"
-                    : "border border-slate-800 bg-slate-900/60 text-[var(--text-secondary)] hover:border-slate-700 hover:text-white"
+                    ? "border border-indigo-500 bg-indigo-600 text-white"
+                    : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                 }`}
               >
                 {filterKey === "all" ? "All Phases" : filterKey.replace("-", " ")}
@@ -1011,40 +1025,44 @@ export function AboutPage() {
           </div>
         </div>
 
-        <div className="mt-10 space-y-4">
+        <div className="mt-8 space-y-3">
           {filteredRoadmap.map((item) => {
             const statusConfig = {
               completed: { badge: "Completed", variant: "success" as const, dotColor: "bg-emerald-400" },
-              "in-progress": { badge: "Current Phase", variant: "default" as const, dotColor: "bg-primary animate-pulse" },
-              planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-slate-400" },
+              "in-progress": {
+                badge: "Current Phase",
+                variant: "default" as const,
+                dotColor: "bg-indigo-400 animate-pulse",
+              },
+              planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-zinc-500" },
             }[item.status];
 
             return (
               <Card
                 key={item.phase}
-                className="overflow-hidden border-slate-800 bg-slate-900/70 p-6 transition-all duration-200 hover:border-slate-700"
+                className="overflow-hidden border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <span className={`h-2.5 w-2.5 rounded-full ${statusConfig.dotColor}`} />
-                    <span className="text-xs font-bold uppercase tracking-widest text-primary">{item.phase}</span>
+                  <div className="flex items-center gap-2">
+                    <span className={`h-2 w-2 rounded-full ${statusConfig.dotColor}`} />
+                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">{item.phase}</span>
                     <Badge variant={statusConfig.variant} size="sm">
                       {statusConfig.badge}
                     </Badge>
                   </div>
-                  <span className="text-xs font-mono text-[var(--text-muted)]">{item.year}</span>
+                  <span className="text-xs font-mono text-zinc-500">{item.year}</span>
                 </div>
 
-                <h3 className="mt-3 text-lg font-bold text-white">{item.title}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-[var(--text-secondary)]">{item.description}</p>
+                <h3 className="mt-2 text-base font-bold text-white">{item.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-zinc-400">{item.description}</p>
 
-                <div className="mt-4">
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                <div className="mt-3.5">
+                  <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                     Key Deliverables & Milestones
                   </h4>
-                  <div className="mt-2.5 grid gap-2 sm:grid-cols-2">
+                  <div className="mt-2 grid gap-2 sm:grid-cols-2">
                     {item.deliverables.map((deliv) => (
-                      <div key={deliv} className="flex items-start gap-2 text-xs text-slate-300">
+                      <div key={deliv} className="flex items-start gap-2 text-xs text-zinc-300">
                         <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
                         <span>{deliv}</span>
                       </div>
@@ -1058,52 +1076,50 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── Governance, Transparency & Open Impact Model ─── */}
-      <section className="border-t border-slate-800 bg-slate-950/40 py-16">
+      <section className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="default" size="md" showDot className="mb-3">
-              Institutional Trust
-            </Badge>
-            <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              Governance & Open Impact Model
-            </h2>
-            <p className="mt-3 text-sm text-[var(--text-secondary)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+              <span>Institutional Trust</span>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Governance & Open Impact Model</h2>
+            <p className="mt-3 text-sm text-zinc-400">
               EthioTech is operated as a transparent, non-profit digital public good dedicated to long-term national
               capacity building.
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <Card className="border-slate-800 bg-slate-900/60 p-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                <BookOpen size={20} />
+            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <BookOpen size={18} />
               </div>
-              <h3 className="mt-3.5 text-base font-bold text-white">100% Open Source Syllabus</h3>
-              <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+              <h3 className="mt-3 text-sm font-semibold text-white">100% Open Source Syllabus</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
                 All curriculum outlines, project boilerplate repositories, and testing suites are published under open
                 permissive licenses (MIT / CC-BY-4.0). Any university or student can inspect or fork improvements.
               </p>
             </Card>
 
-            <Card className="border-slate-800 bg-slate-900/60 p-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                <ShieldCheck size={20} />
+            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <ShieldCheck size={18} />
               </div>
-              <h3 className="mt-3.5 text-base font-bold text-white">Ethical Philanthropic Model</h3>
-              <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
+              <h3 className="mt-3 text-sm font-semibold text-white">Ethical Philanthropic Model</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
                 We operate free from extractive investor incentives. Funding is derived exclusively from diaspora tech
                 philanthropy, educational grants, and CSR partnerships. No student is ever charged tuition.
               </p>
             </Card>
 
-            <Card className="border-slate-800 bg-slate-900/60 p-5">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-primary border border-slate-700">
-                <ShieldCheck size={20} />
+            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <ShieldCheck size={18} />
               </div>
-              <h3 className="mt-3.5 text-base font-bold text-white">Transparent Impact Auditing</h3>
-              <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
-                We maintain a telemetry reporting system documenting active cohorts, PR merge volumes, mentor
-                volunteer hours, and verified career placements. Every metric is audited and verifiable.
+              <h3 className="mt-3 text-sm font-semibold text-white">Transparent Impact Auditing</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+                We maintain a telemetry reporting system documenting active cohorts, PR merge volumes, mentor volunteer
+                hours, and verified career placements. Every metric is audited and verifiable.
               </p>
             </Card>
           </div>
@@ -1112,34 +1128,34 @@ export function AboutPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-20 pt-8 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-slate-800 bg-slate-900/80 p-8 md:p-12 shadow-xl">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 shadow-lg">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <Badge variant="default" size="sm" className="mb-3">
-                Join the Movement
-              </Badge>
-              <h2 className="text-2xl font-extrabold text-white md:text-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
+                <span>Join the Movement</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
                 Ready to transform your engineering trajectory?
               </h2>
-              <p className="mt-3 max-w-2xl text-xs leading-relaxed text-[var(--text-secondary)] sm:text-sm">
+              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
                 Whether you are a university student eager to build production systems or a seasoned diaspora engineer
                 ready to guide the next generation, EthioTech is your platform.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+            <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto bg-primary text-black font-bold">
+                <Button size="lg" className="w-full sm:w-auto font-medium">
                   Join as Student
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto border-slate-700 text-white hover:border-primary">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   Become a Mentor
                 </Button>
               </Link>
               <Link to="/how-it-works">
-                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-primary hover:bg-primary/10">
-                  Explore Learning Flow <ArrowRight size={16} className="ml-2" />
+                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                  Explore Learning Flow <ArrowRight size={15} className="ml-1.5" />
                 </Button>
               </Link>
             </div>

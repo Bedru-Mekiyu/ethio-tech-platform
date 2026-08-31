@@ -487,26 +487,22 @@ export function HowItWorksPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-96 w-full max-w-4xl -translate-x-1/2 rounded-full bg-secondary/10 blur-[120px]" />
-
         <div className="mx-auto max-w-4xl text-center">
-          <Badge variant="purple" size="md" showDot className="mb-4">
-            The 5-Stage Engineering Engine
-          </Badge>
-          <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            How aspiring engineers become{" "}
-            <span className="text-primary">
-              production-ready
-            </span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-4">
+            <Sparkles size={12} />
+            <span>The 5-Stage Engineering Engine</span>
+          </div>
+          <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl text-white">
+            How aspiring engineers become <span className="text-indigo-400">production-ready</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[var(--text-secondary)] md:text-lg">
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg font-normal">
             From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
             and verified career placement. Explore the full architecture of how EthioTech works.
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="shadow-lg shadow-primary/20">
+              <Button size="lg" className="font-medium">
                 Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -517,13 +513,12 @@ export function HowItWorksPage() {
                 const el = document.getElementById("learner-lifecycle");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="border-primary/40 hover:bg-primary/10"
             >
               Explore the 5 Stages
             </Button>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-2 text-xs text-[var(--text-secondary)]">
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-zinc-400">
             {[
               "Sub-150ms WebRTC Labs",
               "Production Git PRs",
@@ -533,9 +528,9 @@ export function HowItWorksPage() {
             ].map((item) => (
               <span
                 key={item}
-                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5"
+                className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-zinc-300"
               >
-                <Sparkles className="h-3 w-3 text-secondary" />
+                <Sparkles className="h-3 w-3 text-indigo-400" />
                 {item}
               </span>
             ))}
@@ -544,62 +539,60 @@ export function HowItWorksPage() {
 
         {/* Live Catalog Momentum Metrics */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-5 text-center transition hover:border-primary/40">
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Layers3 size={20} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Layers3 size={18} />
             </div>
             <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(tracks.length || 4)}</p>
-            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">Core Tech Tracks</p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">Fullstack, AI, Cloud, Mobile</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Fullstack, AI, Cloud, Mobile</p>
           </Card>
 
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-5 text-center transition hover:border-secondary/40">
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
-              <BookOpen size={20} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <BookOpen size={18} />
             </div>
             <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalModules || 36)}</p>
-            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">Interactive Modules</p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">Structured knowledge blocks</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Structured knowledge blocks</p>
           </Card>
 
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-5 text-center transition hover:border-success/40">
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-success/10 text-success">
-              <Code2 size={20} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Code2 size={18} />
             </div>
             <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalLessons || 180)}</p>
-            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">Hands-on Labs</p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">Real git repos & tests</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Real git repos & tests</p>
           </Card>
 
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-5 text-center transition hover:border-warning/40">
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-warning/10 text-warning">
-              <Sparkles size={20} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Sparkles size={18} />
             </div>
             <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalXp || 24000)}</p>
-            <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">XP Catalog</p>
-            <p className="mt-1 text-xs text-[var(--text-secondary)]">Earned through verified PRs</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Earned through verified PRs</p>
           </Card>
         </div>
       </motion.section>
 
       {/* ─── 5-Stage Interactive Learner Lifecycle ─── */}
-      <section id="learner-lifecycle" className="border-t border-white/10 bg-white/[0.015] py-20">
+      <section id="learner-lifecycle" className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="default" size="md" showDot className="mb-3">
-              Step-by-Step Flow
-            </Badge>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl">
-              The 5-Stage Learner Lifecycle
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+              <span>Step-by-Step Flow</span>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">The 5-Stage Learner Lifecycle</h2>
+            <p className="mt-3 text-base leading-relaxed text-zinc-400 font-normal">
               Click through each stage to explore how we guide learners from diagnostic calibration to verified career
               placement.
             </p>
           </div>
 
           {/* Stepper Stage Selector */}
-          <div className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-5 md:gap-3">
+          <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-5 md:gap-3">
             {LIFECYCLE_STAGES.map((stage, idx) => {
               const isActive = idx === activeStageIndex;
               const Icon = stage.icon;
@@ -608,48 +601,45 @@ export function HowItWorksPage() {
                   key={stage.id}
                   type="button"
                   onClick={() => setActiveStageIndex(idx)}
-                  className={`group relative flex flex-col items-start rounded-2xl border p-4 text-left transition-all duration-200 ${
+                  className={`group relative flex flex-col items-start rounded-lg border p-3.5 text-left transition-all duration-150 ${
                     isActive
-                      ? "border-primary bg-primary/10 shadow-lg shadow-primary/20"
-                      : "border-white/10 bg-[var(--bg-card)]/80 hover:border-white/25 hover:bg-white/5"
+                      ? "border-indigo-500/40 bg-indigo-500/15 text-white"
+                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
                   <div className="flex w-full items-center justify-between">
                     <span
-                      className={`flex h-7 w-7 items-center justify-center rounded-xl text-xs font-black ${
-                        isActive ? "bg-primary text-black" : "bg-white/10 text-[var(--text-secondary)]"
+                      className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
+                        isActive ? "bg-indigo-500 text-white" : "bg-[#141418] text-zinc-400"
                       }`}
                     >
                       {stage.step}
                     </span>
-                    <Icon
-                      size={18}
-                      className={isActive ? "text-primary" : "text-[var(--text-muted)] group-hover:text-white"}
-                    />
+                    <Icon size={16} className={isActive ? "text-indigo-400" : "text-zinc-500 group-hover:text-white"} />
                   </div>
-                  <p className="mt-3 text-xs font-bold text-white line-clamp-1">{stage.shortTitle}</p>
-                  <span className="mt-1 text-[10px] text-[var(--text-muted)]">{stage.badge}</span>
+                  <p className="mt-2.5 text-xs font-semibold text-white line-clamp-1">{stage.shortTitle}</p>
+                  <span className="mt-0.5 text-[10px] text-zinc-500">{stage.badge}</span>
                 </button>
               );
             })}
           </div>
 
           {/* Active Stage Detailed Breakdown */}
-          <div className="mt-8">
+          <div className="mt-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStage.id}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden rounded-3xl border border-primary/25 bg-[var(--bg-card)]/95 shadow-2xl backdrop-blur-xl"
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-lg"
               >
-                <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-12 lg:items-center">
+                <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-12 lg:items-center">
                   {/* Left: Narrative, Deliverables & Tools */}
-                  <div className="space-y-6 lg:col-span-7">
+                  <div className="space-y-4 lg:col-span-7">
                     <div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2">
                         <Badge variant="purple" size="sm">
                           Stage {currentStage.step} of 5
                         </Badge>
@@ -657,70 +647,68 @@ export function HowItWorksPage() {
                           {currentStage.badge}
                         </Badge>
                       </div>
-                      <h3 className="mt-3 text-2xl font-extrabold text-white md:text-3xl">{currentStage.title}</h3>
-                      <p className="mt-1 text-sm font-medium text-primary">{currentStage.subtitle}</p>
+                      <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">{currentStage.title}</h3>
+                      <p className="mt-0.5 text-xs font-medium text-indigo-400">{currentStage.subtitle}</p>
                     </div>
 
-                    <p className="text-sm leading-7 text-[var(--text-secondary)]">{currentStage.overview}</p>
+                    <p className="text-xs leading-relaxed text-zinc-400">{currentStage.overview}</p>
 
                     <div>
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)]">
+                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                         Key Deliverables & Milestones
                       </h4>
-                      <ul className="mt-3 space-y-2.5">
+                      <ul className="mt-2 space-y-1.5">
                         {currentStage.keyDeliverables.map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                          <li key={item} className="flex items-start gap-2 text-xs text-zinc-300">
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-2 pt-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                    <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                         Platform Tools:
                       </span>
                       {currentStage.toolsUsed.map((tool) => (
                         <span
                           key={tool}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[var(--text-secondary)]"
+                          className="rounded border border-[#27272A] bg-[#141418] px-2 py-0.5 text-[10px] text-zinc-400"
                         >
                           {tool}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <Trophy size={20} />
+                    <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                        <Trophy size={16} />
                       </div>
                       <div>
-                        <p className="text-xs uppercase tracking-wider text-[var(--text-muted)]">
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
                           {currentStage.telemetryMetric.label}
                         </p>
-                        <p className="text-xl font-bold text-white">{currentStage.telemetryMetric.value}</p>
+                        <p className="text-base font-bold text-white">{currentStage.telemetryMetric.value}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Right: Code Simulation & Step Action */}
-                  <div className="space-y-4 lg:col-span-5">
-                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/70 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-2.5">
-                        <div className="flex items-center gap-2">
-                          <span className="h-3 w-3 rounded-full bg-red-500/80" />
-                          <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                          <span className="h-3 w-3 rounded-full bg-green-500/80" />
-                          <span className="ml-2 text-xs font-mono text-[var(--text-muted)]">
-                            {currentStage.codeMock.filename}
-                          </span>
+                  <div className="space-y-3 lg:col-span-5">
+                    <div className="overflow-hidden rounded-lg border border-[#27272A] bg-black/60 shadow-inner">
+                      <div className="flex items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
+                          <span className="ml-2 text-xs font-mono text-zinc-500">{currentStage.codeMock.filename}</span>
                         </div>
                         <Badge variant="purple" size="sm">
                           Telemetry Live
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-4 text-xs font-mono leading-6 text-cyan-200/90">
+                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
                         <code>{currentStage.codeMock.code}</code>
                       </pre>
                     </div>
@@ -731,20 +719,18 @@ export function HowItWorksPage() {
                         size="sm"
                         disabled={activeStageIndex === 0}
                         onClick={() => setActiveStageIndex((prev) => Math.max(0, prev - 1))}
-                        className="text-[var(--text-secondary)] hover:text-white disabled:opacity-30"
+                        className="text-zinc-400 hover:text-white disabled:opacity-30"
                       >
                         Previous Stage
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() =>
-                          setActiveStageIndex((prev) => (prev + 1) % LIFECYCLE_STAGES.length)
-                        }
-                        className="text-primary hover:text-white"
+                        onClick={() => setActiveStageIndex((prev) => (prev + 1) % LIFECYCLE_STAGES.length)}
+                        className="text-indigo-400 hover:text-white"
                       >
                         {activeStageIndex === LIFECYCLE_STAGES.length - 1 ? "Replay Lifecycle" : "Next Stage"}
-                        <ArrowRight size={14} className="ml-1" />
+                        <ArrowRight size={13} className="ml-1" />
                       </Button>
                     </div>
                   </div>
@@ -757,23 +743,23 @@ export function HowItWorksPage() {
 
       {/* ─── 3-Way Persona Experience Breakdown ─── */}
       <motion.section
-        className="mx-auto max-w-7xl px-4 py-20 lg:px-8"
+        className="mx-auto max-w-7xl px-4 py-16 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <Badge variant="purple" size="md" showDot className="mb-3">
-            Ecosystem Experience
-          </Badge>
-          <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">What It Looks Like For You</h2>
-          <p className="mt-4 text-base text-[var(--text-secondary)]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <span>Ecosystem Experience</span>
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">What It Looks Like For You</h2>
+          <p className="mt-3 text-base text-zinc-400">
             Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
           </p>
 
           {/* Role Tabs */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-wrap justify-center gap-2">
             {ROLE_PERSONAS.map((persona) => {
               const isActive = persona.id === activeRole;
               const Icon = persona.icon;
@@ -781,13 +767,13 @@ export function HowItWorksPage() {
                 <button
                   key={persona.id}
                   onClick={() => setActiveRole(persona.id)}
-                  className={`flex items-center gap-2.5 rounded-full border px-5 py-2.5 text-sm font-bold transition-all ${
+                  className={`flex items-center gap-2 rounded-md border px-4 py-2 text-xs font-semibold transition-all ${
                     isActive
-                      ? "border-primary bg-primary text-black shadow-lg shadow-primary/20"
-                      : "border-white/10 bg-white/5 text-[var(--text-secondary)] hover:border-white/20 hover:text-white"
+                      ? "border-indigo-500 bg-indigo-600 text-white"
+                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
-                  <Icon size={16} />
+                  <Icon size={14} />
                   <span>{persona.title}</span>
                 </button>
               );
@@ -796,56 +782,54 @@ export function HowItWorksPage() {
         </div>
 
         {/* Selected Role Card Breakdown */}
-        <div className="mt-12">
+        <div className="mt-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentRoleData.id}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="rounded-3xl border border-white/10 bg-[var(--bg-card)]/90 p-8 shadow-xl md:p-10"
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 shadow-lg md:p-8"
             >
-              <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-primary">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
                     {currentRoleData.eyebrow}
                   </span>
-                  <h3 className="mt-1 text-2xl font-extrabold text-white md:text-3xl">{currentRoleData.title}</h3>
+                  <h3 className="mt-0.5 text-xl font-bold text-white md:text-2xl">{currentRoleData.title}</h3>
                 </div>
                 <Badge variant="purple" size="md">
                   {currentRoleData.badge}
                 </Badge>
               </div>
 
-              <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--text-secondary)]">
-                {currentRoleData.description}
-              </p>
+              <p className="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-400">{currentRoleData.description}</p>
 
-              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {currentRoleData.keyBenefits.map((benefit) => {
                   const Icon = benefit.icon;
                   return (
                     <div
                       key={benefit.title}
-                      className="flex items-start gap-4 rounded-2xl border border-white/5 bg-white/[0.03] p-5 transition hover:border-primary/30"
+                      className="flex items-start gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-4 transition hover:border-zinc-700"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                        <Icon size={20} />
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                        <Icon size={16} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white">{benefit.title}</h4>
-                        <p className="mt-1 text-xs leading-6 text-[var(--text-secondary)]">{benefit.desc}</p>
+                        <h4 className="font-semibold text-xs text-white">{benefit.title}</h4>
+                        <p className="mt-0.5 text-[11px] leading-relaxed text-zinc-400">{benefit.desc}</p>
                       </div>
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-8 flex justify-end">
+              <div className="mt-6 flex justify-end">
                 <Link to={currentRoleData.ctaLink}>
-                  <Button size="lg" className="shadow-lg shadow-primary/20">
-                    {currentRoleData.ctaLabel} <ArrowRight size={16} className="ml-2" />
+                  <Button size="md">
+                    {currentRoleData.ctaLabel} <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </Link>
               </div>
@@ -855,19 +839,21 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── Featured Track Pathways ─── */}
-      <section className="border-t border-white/10 bg-white/[0.01] py-20">
+      <section className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge variant="default" size="md" showDot className="mb-3">
-              Curriculum Architecture
-            </Badge>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">Choose Your Engineering Pathway</h2>
-            <p className="mt-4 text-base text-[var(--text-secondary)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+              <span>Curriculum Architecture</span>
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              Choose Your Engineering Pathway
+            </h2>
+            <p className="mt-3 text-base text-zinc-400">
               Hyper-focused tracks designed to build the exact capabilities global and African employers demand.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {(featuredTracks.length > 0
               ? featuredTracks
               : [
@@ -893,78 +879,88 @@ export function HowItWorksPage() {
                     moduleCount: 7,
                   },
                 ]
-            ).map((track) => (
-              <Card
-                key={track._id || track.title}
-                className="flex flex-col justify-between border-[var(--border)] bg-[var(--bg-card)]/90 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <Badge variant="purple" size="sm">
-                      {("modules" in track && Array.isArray((track as any).modules) ? (track as any).modules.length : (track as any).moduleCount ?? 6)} Modules
-                    </Badge>
-                    <span className="flex items-center gap-1 text-xs font-bold text-primary">
-                      <Sparkles size={13} /> {track.xpReward ?? 6000} XP
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-xl font-bold text-white">{track.title}</h3>
-                  <p className="mt-2 text-xs leading-6 text-[var(--text-secondary)]">
-                    {track.description || "Comprehensive hands-on curriculum with real project checkpoints."}
-                  </p>
-                </div>
+            ).map((track) => {
+              const moduleCount =
+                "modules" in track && Array.isArray(track.modules)
+                  ? track.modules.length
+                  : "moduleCount" in track && typeof track.moduleCount === "number"
+                    ? track.moduleCount
+                    : 6;
 
-                <div className="mt-6 pt-4 border-t border-white/5">
-                  <Link to="/register">
-                    <Button variant="outline" className="w-full justify-between">
-                      Enroll in Track <ArrowRight size={14} />
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
-            ))}
+              return (
+                <Card
+                  key={track._id || track.title}
+                  className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-6 transition-all duration-150 hover:border-zinc-700"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <Badge variant="purple" size="sm">
+                        {moduleCount} Modules
+                      </Badge>
+                      <span className="flex items-center gap-1 text-xs font-semibold text-indigo-400">
+                        <Sparkles size={12} /> {track.xpReward ?? 6000} XP
+                      </span>
+                    </div>
+                    <h3 className="mt-3 text-lg font-bold text-white">{track.title}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+                      {track.description || "Comprehensive hands-on curriculum with real project checkpoints."}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-3.5 border-t border-[#27272A]">
+                    <Link to="/register">
+                      <Button variant="outline" size="sm" className="w-full justify-between">
+                        <span>Enroll in Track</span>
+                        <ArrowRight size={13} />
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ─── Interactive Filterable FAQ ─── */}
       <motion.section
-        className="mx-auto max-w-5xl px-4 py-20 lg:px-8"
+        className="mx-auto max-w-5xl px-4 py-16 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <Badge variant="purple" size="md" showDot className="mb-3">
-            Got Questions?
-          </Badge>
-          <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">Frequently Asked Questions</h2>
-          <p className="mt-4 text-base text-[var(--text-secondary)]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <span>Got Questions?</span>
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Frequently Asked Questions</h2>
+          <p className="mt-3 text-base text-zinc-400">
             Everything you need to know about our pedagogy, time requirements, mentorship, and certification.
           </p>
 
           {/* Search & Category Filter */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-y-3">
             <div className="relative mx-auto max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={16} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" size={15} />
               <input
                 type="text"
                 placeholder="Search questions (e.g. internet, cost, mentor, hiring)..."
                 value={faqSearchQuery}
                 onChange={(e) => setFaqSearchQuery(e.target.value)}
-                className="w-full rounded-full border border-white/10 bg-[var(--bg-card)] py-2.5 pl-10 pr-4 text-xs text-white placeholder-[var(--text-muted)] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full rounded-lg border border-[#27272A] bg-[#0E0E11] py-2 pl-9 pr-3 text-xs text-white placeholder-zinc-500 focus:border-indigo-500 focus:outline-none"
               />
             </div>
 
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-1.5">
               {(["all", "students", "mentors", "partners"] as const).map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setFaqCategory(cat)}
-                  className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider transition ${
+                  className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                     faqCategory === cat
-                      ? "bg-primary text-black"
-                      : "border border-white/10 bg-white/5 text-[var(--text-secondary)] hover:text-white"
+                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
                   {cat === "all" ? "All Questions" : cat}
@@ -975,24 +971,24 @@ export function HowItWorksPage() {
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="mt-12 space-y-3">
+        <div className="mt-8 space-y-2.5">
           {filteredFaqs.length > 0 ? (
             filteredFaqs.map((faq, idx) => {
               const isExpanded = expandedFaqIndex === idx;
               return (
                 <Card
                   key={faq.question}
-                  className="overflow-hidden border-[var(--border)] bg-[var(--bg-card)]/90 transition-all hover:border-primary/30"
+                  className="overflow-hidden border-[#27272A] bg-[#0E0E11] transition-all hover:border-zinc-700"
                 >
                   <button
                     type="button"
                     onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                    className="flex w-full items-center justify-between gap-4 p-5 text-left text-white"
+                    className="flex w-full items-center justify-between gap-4 p-4 text-left text-white"
                   >
-                    <span className="text-base font-bold">{faq.question}</span>
+                    <span className="text-sm font-semibold">{faq.question}</span>
                     <ChevronDown
-                      size={18}
-                      className={`shrink-0 text-primary transition-transform duration-200 ${
+                      size={16}
+                      className={`shrink-0 text-indigo-400 transition-transform duration-150 ${
                         isExpanded ? "rotate-180" : ""
                       }`}
                     />
@@ -1003,9 +999,9 @@ export function HowItWorksPage() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.15 }}
                       >
-                        <div className="border-t border-white/5 px-5 pb-5 pt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                        <div className="border-t border-[#27272A] px-4 pb-4 pt-2.5 text-xs leading-relaxed text-zinc-400">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -1015,7 +1011,7 @@ export function HowItWorksPage() {
               );
             })
           ) : (
-            <div className="text-center py-12 text-[var(--text-secondary)]">
+            <div className="text-center py-12 text-zinc-500 text-xs">
               No matching questions found. Try searching for something else.
             </div>
           )}
@@ -1024,22 +1020,22 @@ export function HowItWorksPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-24 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-primary/25 bg-[linear-gradient(135deg,rgba(99,102,241,0.12),rgba(139,92,246,0.08))] p-8 md:p-12 shadow-2xl">
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 shadow-lg">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <Badge variant="default" size="sm" className="mb-3">
-                Start Today
-              </Badge>
-              <h2 className="text-3xl font-extrabold text-white md:text-4xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
+                <span>Start Today</span>
+              </div>
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
                 Ready to accelerate your software engineering journey?
               </h2>
-              <p className="mt-4 max-w-2xl text-base text-[var(--text-secondary)]">
+              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
                 Enroll in a track, meet your squad, and begin building production systems with real diaspora mentors.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+            <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto shadow-lg shadow-primary/20">
+                <Button size="lg" className="w-full sm:w-auto font-medium">
                   Join a Learning Track
                 </Button>
               </Link>
@@ -1049,12 +1045,8 @@ export function HowItWorksPage() {
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  className="w-full sm:w-auto text-primary hover:bg-primary/10 hover:text-primary"
-                >
-                  Explore Mentorship <ArrowRight size={16} className="ml-2" />
+                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                  Explore Mentorship <ArrowRight size={15} className="ml-1.5" />
                 </Button>
               </Link>
             </div>
