@@ -21,10 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Label, Textarea } from "@/components/ui/input";
-import {
-  submitMentorApplication,
-  type MentorApplicationPayload,
-} from "@/services/marketingService";
+import { submitMentorApplication, type MentorApplicationPayload } from "@/services/marketingService";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -46,9 +43,17 @@ const skillOptions = [
 
 const mentoringStyles = [
   { value: "live-sessions", label: "Live 1-on-1 Office Hours", desc: "Weekly scheduled video mentoring & bug triage" },
-  { value: "project-reviews", label: "Async Code & PR Reviews", desc: "Review student GitHub submissions at your own pace" },
+  {
+    value: "project-reviews",
+    label: "Async Code & PR Reviews",
+    desc: "Review student GitHub submissions at your own pace",
+  },
   { value: "office-hours", label: "Group Cohort Masterclasses", desc: "Lead quarterly 60-minute technical deep dives" },
-  { value: "cohort-support", label: "Capstone Defense Panel", desc: "Evaluate and grade graduating student architectures" },
+  {
+    value: "cohort-support",
+    label: "Capstone Defense Panel",
+    desc: "Evaluate and grade graduating student architectures",
+  },
 ] as const;
 
 const availabilityOptions = [
@@ -213,34 +218,33 @@ export function MentorRecruitmentPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-24">
+    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-[var(--text-primary)]">
       {/* ─── Hero Section ─── */}
       <motion.section
-        className="mx-auto max-w-4xl text-center space-y-6"
+        className="mx-auto max-w-4xl text-center space-y-5"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-          <Sparkles size={14} />
+        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+          <Sparkles size={13} />
           <span>Senior Engineering Guild Membership</span>
         </div>
 
-        <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
-          Give Back. Shape Ethiopia&apos;s Next Generation of{" "}
-          <span className="glow-text text-primary">Tech Leaders</span>
+        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-indigo-400">Tech Leaders</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-[var(--text-secondary)] md:text-xl">
-          Join a prestigious guild of senior software engineers, architects, and product leaders. Share practical
-          industry wisdom, bridge the digital divide, and discover top technical talent.
+        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+          Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom,
+          bridge the digital divide, and discover top technical talent.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-4 pt-2">
+        <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
-            <Button size="lg" className="shadow-lg shadow-primary/20">
+            <Button size="lg" className="font-medium">
               Complete Mentor Application (5 Min)
-              <ArrowRight size={18} className="ml-2" />
+              <ArrowRight size={15} className="ml-2" />
             </Button>
           </a>
           <a href="#onboarding-process">
@@ -251,47 +255,45 @@ export function MentorRecruitmentPage() {
         </div>
 
         {/* Requirements Strip */}
-        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-[var(--text-secondary)]">
-          <span className="flex items-center gap-1.5 font-semibold text-white">
-            <ShieldCheck size={16} className="text-primary" /> Requirement: 2+ Years Senior Experience
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
+          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
+            <ShieldCheck size={15} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
           </span>
-          <span className="flex items-center gap-1.5 font-semibold text-white">
-            <Clock size={16} className="text-secondary" /> Commitment: 2–4 Hours / Week
+          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
+            <Clock size={15} className="text-indigo-400" /> Commitment: 2–4 Hours / Week
           </span>
-          <span className="flex items-center gap-1.5 font-semibold text-white">
-            <Award size={16} className="text-success" /> Verified Digital Leadership Badge
+          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
+            <Award size={15} className="text-emerald-400" /> Verified Leadership Badge
           </span>
         </div>
       </motion.section>
 
       {/* ─── Benefits of Mentoring Section ─── */}
-      <section className="space-y-10">
-        <div className="mx-auto max-w-3xl text-center space-y-3">
+      <section className="space-y-8">
+        <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Why Mentor With Us</Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
             Benefits of Joining the Mentor Guild
           </h2>
-          <p className="text-[var(--text-secondary)]">
+          <p className="text-xs text-zinc-400">
             Mentoring is high-leverage impact for the student and meaningful professional elevation for you.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {MENTOR_BENEFITS.map((benefit, idx) => {
             const Icon = benefit.icon;
             return (
               <Card
                 key={idx}
-                className="flex flex-col justify-between border-[var(--border)] bg-[var(--bg-card)]/90 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-primary/40 shadow-lg"
+                className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700 shadow-md"
               >
                 <div>
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary border border-primary/20">
-                    <Icon size={20} />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                    <Icon size={18} />
                   </div>
-                  <h3 className="mt-5 font-bold text-white text-base">{benefit.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
-                    {benefit.description}
-                  </p>
+                  <h3 className="mt-4 font-semibold text-white text-sm">{benefit.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">{benefit.description}</p>
                 </div>
               </Card>
             );
@@ -300,36 +302,32 @@ export function MentorRecruitmentPage() {
       </section>
 
       {/* ─── 4-Step Frictionless Onboarding Process ─── */}
-      <section id="onboarding-process" className="space-y-10 scroll-mt-16">
-        <div className="mx-auto max-w-3xl text-center space-y-3">
+      <section id="onboarding-process" className="space-y-8 scroll-mt-16">
+        <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Streamlined Process</Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
             The 4-Step Mentor Onboarding Journey
           </h2>
-          <p className="text-[var(--text-secondary)]">
-            We value your time. Our onboarding is designed to get you matched and coaching with minimal administrative overhead.
+          <p className="text-xs text-zinc-400">
+            We value your time. Our onboarding is designed to get you matched and coaching with minimal administrative
+            overhead.
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {ONBOARDING_STEPS.map((step) => {
             const Icon = step.icon;
             return (
-              <Card
-                key={step.step}
-                className="flex flex-col justify-between border-[var(--border)] bg-[var(--bg-card)]/95 p-6"
-              >
+              <Card key={step.step} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5">
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-secondary/10 text-secondary border border-secondary/20">
-                      <Icon size={18} />
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                      <Icon size={16} />
                     </div>
-                    <span className="text-2xl font-black text-white/20">{step.step}</span>
+                    <span className="text-xl font-bold font-mono text-zinc-600">{step.step}</span>
                   </div>
-                  <h3 className="mt-5 font-bold text-white text-base">{step.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-secondary)]">
-                    {step.description}
-                  </p>
+                  <h3 className="mt-4 font-semibold text-white text-sm">{step.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-400">{step.description}</p>
                 </div>
               </Card>
             );
@@ -339,49 +337,47 @@ export function MentorRecruitmentPage() {
 
       {/* ─── Interactive Application Form & Guidelines ─── */}
       <section id="mentor-form" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-primary/30 bg-[linear-gradient(180deg,rgba(11,18,32,0.98),rgba(6,10,20,0.98))] p-8 md:p-12 shadow-2xl">
-          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+        <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 md:p-10 shadow-lg">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
             {/* Left: Expectations & Guidelines */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-semibold text-primary">
-                <ShieldCheck size={14} />
+            <div className="space-y-5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+                <ShieldCheck size={13} />
                 <span>Mentor Application</span>
               </div>
 
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-                Join the Guild
-              </h2>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Join the Guild</h2>
 
-              <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+              <p className="text-xs leading-relaxed text-zinc-400">
                 Tell us about your professional background, technical strengths, and preferred mentoring schedule.
                 Applications are reviewed by the Guild Admissions Committee within 2–3 business days.
               </p>
 
               {/* Stats Summary */}
-              <div className="space-y-3 pt-2">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-1">
+              <div className="space-y-2.5 pt-1">
+                <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
                   <p className="text-xs font-semibold text-white flex items-center gap-2">
-                    <Clock3 size={15} className="text-primary" /> Flexible Weekly Commitment
+                    <Clock3 size={14} className="text-indigo-400" /> Flexible Weekly Commitment
                   </p>
-                  <p className="text-xs text-[var(--text-secondary)]">
+                  <p className="text-xs text-zinc-400">
                     Allocate 2 to 4 hours per week for asynchronous PR reviews or weekend 1-on-1 office hours.
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-1">
+                <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
                   <p className="text-xs font-semibold text-white flex items-center gap-2">
-                    <Award size={15} className="text-secondary" /> Senior Experience Requirement
+                    <Award size={14} className="text-indigo-400" /> Senior Experience Requirement
                   </p>
-                  <p className="text-xs text-[var(--text-secondary)]">
+                  <p className="text-xs text-zinc-400">
                     Minimum 2+ years of professional industry experience in engineering, product, or data.
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-1">
+                <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
                   <p className="text-xs font-semibold text-white flex items-center gap-2">
-                    <Trophy size={15} className="text-success" /> Tooling & Platform Provided
+                    <Trophy size={14} className="text-emerald-400" /> Tooling & Platform Provided
                   </p>
-                  <p className="text-xs text-[var(--text-secondary)]">
+                  <p className="text-xs text-zinc-400">
                     Access to built-in LiveKit video rooms, automated code review dashboards, and calendar booking.
                   </p>
                 </div>
@@ -391,32 +387,33 @@ export function MentorRecruitmentPage() {
             {/* Right: Application Form */}
             <div>
               {mutation.isSuccess ? (
-                <div className="rounded-2xl border border-success/30 bg-success/10 p-8 text-center space-y-4">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-success/20 text-success border border-success/40">
-                    <CheckCircle2 size={32} />
+                <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-6 text-center space-y-3">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    <CheckCircle2 size={24} />
                   </div>
                   <Badge variant="success">Application Received</Badge>
-                  <h3 className="text-2xl font-bold text-white">
-                    Thank you, {fullName || "Fellow Engineer"}!
-                  </h3>
-                  <p className="text-sm leading-relaxed text-[var(--text-secondary)] max-w-md mx-auto">
-                    Your mentor application has been securely submitted to the Guild Admissions Committee. We will review
-                    your background and follow up at <strong className="text-white">{email}</strong> within 48 business hours.
+                  <h3 className="text-xl font-bold text-white">Thank you, {fullName || "Fellow Engineer"}!</h3>
+                  <p className="text-xs leading-relaxed text-zinc-400 max-w-md mx-auto">
+                    Your mentor application has been securely submitted to the Guild Admissions Committee. We will
+                    review your background and follow up at <strong className="text-white">{email}</strong> within 48
+                    business hours.
                   </p>
-                  <div className="pt-4 flex justify-center gap-3">
+                  <div className="pt-3 flex justify-center gap-3">
                     <Link to="/mentors">
-                      <Button variant="outline">Browse Mentor Directory</Button>
+                      <Button variant="outline" size="sm">
+                        Browse Mentor Directory
+                      </Button>
                     </Link>
                     <Link to="/about">
-                      <Button variant="ghost" className="text-primary hover:bg-primary/10">
+                      <Button variant="ghost" size="sm" className="text-indigo-400 hover:text-white">
                         Learn About EthioTech
                       </Button>
                     </Link>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
+                <form onSubmit={handleSubmit} className="space-y-3.5">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <div>
                       <Label required>Full Name</Label>
                       <Input
@@ -438,7 +435,7 @@ export function MentorRecruitmentPage() {
                     </div>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <div>
                       <Label required>Current Professional Role</Label>
                       <Input
@@ -458,7 +455,7 @@ export function MentorRecruitmentPage() {
                     </div>
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <div>
                       <Label required>Years of Professional Experience (Min 2+)</Label>
                       <Input
@@ -483,10 +480,10 @@ export function MentorRecruitmentPage() {
 
                   {/* Technical Expertise Domains */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-[var(--text-muted)]">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
                       Primary Technical Domains
                     </Label>
-                    <div className="flex flex-wrap gap-2 mt-2">
+                    <div className="flex flex-wrap gap-1.5 mt-1.5">
                       {skillOptions.map((skill) => {
                         const active = expertise.includes(skill);
                         return (
@@ -494,10 +491,10 @@ export function MentorRecruitmentPage() {
                             key={skill}
                             type="button"
                             onClick={() => toggleSkill(skill)}
-                            className={`rounded-xl border px-3 py-1.5 text-xs font-semibold transition ${
+                            className={`rounded-md border px-2.5 py-1 text-xs font-medium transition ${
                               active
-                                ? "border-primary bg-primary text-[var(--bg-base)]"
-                                : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                                ? "border-indigo-500 bg-indigo-600 text-white"
+                                : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                             }`}
                           >
                             {skill}
@@ -509,10 +506,10 @@ export function MentorRecruitmentPage() {
 
                   {/* Mentoring Format Preferences */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-[var(--text-muted)]">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
                       Preferred Mentoring Formats
                     </Label>
-                    <div className="grid gap-2 sm:grid-cols-2 mt-2">
+                    <div className="grid gap-2 sm:grid-cols-2 mt-1.5">
                       {mentoringStyles.map((style) => {
                         const active = mentoringStyle.includes(style.value);
                         return (
@@ -520,14 +517,14 @@ export function MentorRecruitmentPage() {
                             key={style.value}
                             type="button"
                             onClick={() => toggleStyle(style.value)}
-                            className={`rounded-xl border p-3 text-left transition ${
+                            className={`rounded-lg border p-2.5 text-left transition ${
                               active
-                                ? "border-secondary bg-secondary/15 text-white"
-                                : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                                ? "border-indigo-500 bg-indigo-500/15 text-white"
+                                : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                             }`}
                           >
-                            <p className="text-xs font-bold text-white">{style.label}</p>
-                            <p className="text-[11px] text-[var(--text-muted)] mt-0.5">{style.desc}</p>
+                            <p className="text-xs font-semibold text-white">{style.label}</p>
+                            <p className="text-[10px] text-zinc-500 mt-0.5">{style.desc}</p>
                           </button>
                         );
                       })}
@@ -536,19 +533,19 @@ export function MentorRecruitmentPage() {
 
                   {/* Weekly Availability */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-[var(--text-muted)]">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
                       Weekly Time Availability
                     </Label>
-                    <div className="grid gap-2 sm:grid-cols-4 mt-2">
+                    <div className="grid gap-2 sm:grid-cols-4 mt-1.5">
                       {availabilityOptions.map((opt) => (
                         <button
                           key={opt.value}
                           type="button"
                           onClick={() => setAvailability(opt.value)}
-                          className={`rounded-xl border p-2.5 text-center text-xs font-semibold transition ${
+                          className={`rounded-md border p-2 text-center text-xs font-medium transition ${
                             availability === opt.value
-                              ? "border-primary bg-primary/20 text-primary"
-                              : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:border-primary/40 hover:text-white"
+                              ? "border-indigo-500 bg-indigo-600 text-white"
+                              : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                           }`}
                         >
                           {opt.label}
@@ -569,7 +566,7 @@ export function MentorRecruitmentPage() {
                     />
                   </div>
 
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <div>
                       <Label>LinkedIn Profile URL</Label>
                       <Input
@@ -591,26 +588,24 @@ export function MentorRecruitmentPage() {
                   </div>
 
                   {/* Consent Checkbox */}
-                  <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-3.5 text-xs text-[var(--text-secondary)] cursor-pointer">
+                  <label className="flex items-start gap-2.5 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-xs text-zinc-400 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
                       required
-                      className="mt-0.5 h-4 w-4 rounded border-[var(--border)] bg-[var(--bg-elevated)] text-primary"
+                      className="mt-0.5 h-4 w-4 rounded border-[#27272A] bg-[#0E0E11] text-indigo-600"
                     />
                     <span>
-                      I confirm that I have 2+ years of professional industry experience and commit to providing respectful,
-                      constructive guidance to learners.
+                      I confirm that I have 2+ years of professional industry experience and commit to providing
+                      respectful, constructive guidance to learners.
                     </span>
                   </label>
 
-                  {submissionError && (
-                    <p className="text-xs text-danger font-medium">{submissionError}</p>
-                  )}
+                  {submissionError && <p className="text-xs text-rose-400 font-medium">{submissionError}</p>}
 
                   {mutation.isError && (
-                    <p className="text-xs text-danger font-medium">
+                    <p className="text-xs text-rose-400 font-medium">
                       {(mutation.error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
                         (mutation.error as Error)?.message ||
                         "Unable to submit mentor application. Please verify your details."}
@@ -620,11 +615,11 @@ export function MentorRecruitmentPage() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full"
+                    className="w-full font-medium"
                     disabled={mutation.isPending || !consent}
                   >
                     {mutation.isPending ? "Submitting Application..." : "Submit Application to Mentor Guild"}
-                    <ArrowRight size={16} className="ml-2" />
+                    <ArrowRight size={15} className="ml-2" />
                   </Button>
                 </form>
               )}
@@ -634,27 +629,22 @@ export function MentorRecruitmentPage() {
       </section>
 
       {/* ─── Testimonials from Active Mentors ─── */}
-      <section className="space-y-10">
-        <div className="mx-auto max-w-3xl text-center space-y-3">
+      <section className="space-y-8">
+        <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Guild Voices</Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
             Hear From Our Active Senior Mentors
           </h2>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {TESTIMONIALS.map((t, idx) => (
-            <Card
-              key={idx}
-              className="flex flex-col justify-between border-[var(--border)] bg-[var(--bg-card)]/95 p-6 space-y-4"
-            >
-              <p className="text-sm leading-relaxed text-[var(--text-secondary)] italic">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="pt-4 border-t border-white/10">
-                <p className="font-bold text-white text-sm">{t.author}</p>
-                <p className="text-xs text-primary font-medium">{t.role}</p>
-                <p className="text-xs text-[var(--text-muted)] mt-0.5">{t.company}</p>
+            <Card key={idx} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 space-y-3">
+              <p className="text-xs leading-relaxed text-zinc-300 italic">&ldquo;{t.quote}&rdquo;</p>
+              <div className="pt-3 border-t border-[#27272A]">
+                <p className="font-semibold text-white text-xs">{t.author}</p>
+                <p className="text-xs text-indigo-400 font-medium">{t.role}</p>
+                <p className="text-[11px] text-zinc-500 mt-0.5">{t.company}</p>
               </div>
             </Card>
           ))}
@@ -662,19 +652,19 @@ export function MentorRecruitmentPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border-primary/20 bg-[linear-gradient(135deg,rgba(0,210,255,0.12),rgba(123,97,255,0.08))] p-8 md:p-10 text-center space-y-6">
-        <div className="mx-auto max-w-2xl space-y-3">
-          <h2 className="text-3xl font-bold text-white md:text-4xl">
-            Questions About Mentoring?
-          </h2>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 text-center space-y-5 shadow-lg">
+        <div className="mx-auto max-w-2xl space-y-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-white">Questions About Mentoring?</h2>
+          <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Reach out directly to our Guild Admissions Coordinator for questions regarding scheduling, honorariums, or
             curriculum tracks.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-3">
           <a href="#mentor-form">
-            <Button size="lg">Apply to Join the Guild</Button>
+            <Button size="lg" className="font-medium">
+              Apply to Join the Guild
+            </Button>
           </a>
           <Link to="/mentors">
             <Button variant="outline" size="lg">
@@ -682,7 +672,7 @@ export function MentorRecruitmentPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="lg" className="text-primary hover:bg-primary/10 hover:text-primary">
+            <Button variant="ghost" size="lg" className="text-indigo-400 hover:text-white">
               Contact Guild Lead
             </Button>
           </Link>
