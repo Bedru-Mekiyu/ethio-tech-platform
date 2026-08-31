@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
@@ -112,7 +111,7 @@ describe("AdminContentPage Master-Detail CMS", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    (api.get as any).mockImplementation((url: string) => {
+    (api.get as import("vitest").Mock).mockImplementation((url: string) => {
       if (url.startsWith("/tracks")) {
         return Promise.resolve({ data: { tracks: mockTracks } });
       }
@@ -128,11 +127,11 @@ describe("AdminContentPage Master-Detail CMS", () => {
       return Promise.resolve({ data: {} });
     });
 
-    (api.post as any).mockImplementation((_url: string, payload: any) =>
+    (api.post as import("vitest").Mock).mockImplementation((_url: string, payload: unknown) =>
       Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...payload } } } }),
     );
-    (api.patch as any).mockResolvedValue({ data: { data: { success: true } } });
-    (api.delete as any).mockResolvedValue({ data: { success: true } });
+    (api.patch as import("vitest").Mock).mockResolvedValue({ data: { data: { success: true } } });
+    (api.delete as import("vitest").Mock).mockResolvedValue({ data: { success: true } });
   });
 
   it("renders the 3-pane master-detail layout and track list", async () => {

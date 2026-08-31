@@ -92,9 +92,23 @@ export function ContentEditorPane({
   const [isDirty, setIsDirty] = useState(false);
 
   // Sync state with selected entities
-  useEffect(() => {
+  const [prevSelection, setPrevSelection] = useState(selection);
+  const [prevTrack, setPrevTrack] = useState(selectedTrack);
+  const [prevModule, setPrevModule] = useState(selectedModule);
+  const [prevLesson, setPrevLesson] = useState(selectedLesson);
+
+  if (
+    selection !== prevSelection ||
+    selectedTrack !== prevTrack ||
+    selectedModule !== prevModule ||
+    selectedLesson !== prevLesson
+  ) {
+    setPrevSelection(selection);
+    setPrevTrack(selectedTrack);
+    setPrevModule(selectedModule);
+    setPrevLesson(selectedLesson);
+
     if (selection.type === "track" && selectedTrack) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTrackTitle(selectedTrack.title || "");
       setTrackDescription(selectedTrack.description || "");
       setTrackCategory(selectedTrack.category || "web");
@@ -111,11 +125,8 @@ export function ContentEditorPane({
       setTrackIsActive(true);
       setIsDirty(false);
     }
-  }, [selection, selectedTrack]);
 
-  useEffect(() => {
     if (selection.type === "module" && selectedModule) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setModuleTitle(selectedModule.title || "");
       setModuleDescription(selectedModule.description || "");
       setModuleOrder(selectedModule.order ?? 1);
@@ -126,11 +137,8 @@ export function ContentEditorPane({
       setModuleOrder(1);
       setIsDirty(false);
     }
-  }, [selection, selectedModule]);
 
-  useEffect(() => {
     if (selection.type === "lesson" && selectedLesson) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLessonTitle(selectedLesson.title || "");
       setLessonSummary(selectedLesson.summary || "");
       setLessonContent(selectedLesson.content || "");
@@ -161,7 +169,7 @@ export function ContentEditorPane({
       setLessonQuiz([]);
       setIsDirty(false);
     }
-  }, [selection, selectedLesson]);
+  }
 
   // Handle Save
   const handleSave = useCallback(() => {
@@ -247,7 +255,6 @@ export function ContentEditorPane({
   // Reset / Discard changes
   const handleDiscard = () => {
     if (selection.type === "track" && selectedTrack) {
-       
       setTrackTitle(selectedTrack.title || "");
       setTrackDescription(selectedTrack.description || "");
       setTrackCategory(selectedTrack.category || "web");
@@ -255,12 +262,10 @@ export function ContentEditorPane({
       setTrackEstimatedWeeks(selectedTrack.estimatedWeeks ?? 12);
       setTrackIsActive(selectedTrack.isActive !== false);
     } else if (selection.type === "module" && selectedModule) {
-       
       setModuleTitle(selectedModule.title || "");
       setModuleDescription(selectedModule.description || "");
       setModuleOrder(selectedModule.order ?? 1);
     } else if (selection.type === "lesson" && selectedLesson) {
-       
       setLessonTitle(selectedLesson.title || "");
       setLessonSummary(selectedLesson.summary || "");
       setLessonContent(selectedLesson.content || "");

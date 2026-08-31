@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { LiveKitHeader } from "@/components/livekit/LiveKitHeader";
@@ -141,7 +140,7 @@ describe("LiveKit Classroom UI Suite", () => {
         isMicrophoneEnabled: true,
         isCameraEnabled: true,
         metadata: JSON.stringify({ role: "student" }),
-      } as any;
+      } as unknown as import("livekit-client").Participant;
 
       const mockRemote = {
         sid: "p_remote",
@@ -150,7 +149,7 @@ describe("LiveKit Classroom UI Suite", () => {
         isMicrophoneEnabled: false,
         isCameraEnabled: true,
         metadata: JSON.stringify({ role: "host", handRaised: true }),
-      } as any;
+      } as unknown as import("livekit-client").Participant;
 
       render(
         <LiveKitParticipantsDrawer

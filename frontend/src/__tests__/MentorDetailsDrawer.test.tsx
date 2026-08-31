@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
@@ -105,8 +104,12 @@ function renderWithClient(ui: React.ReactElement) {
 describe("MentorDetailsDrawer", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(mentorApplicationService.fetchApplicationDetail).mockResolvedValue(mockDetailData as any);
-    vi.mocked(mentorApplicationService.fetchLoginHistory).mockResolvedValue(mockLoginHistory as any);
+    vi.mocked(mentorApplicationService.fetchApplicationDetail).mockResolvedValue(
+      mockDetailData as unknown as Awaited<ReturnType<typeof mentorApplicationService.fetchApplicationDetail>>,
+    );
+    vi.mocked(mentorApplicationService.fetchLoginHistory).mockResolvedValue(
+      mockLoginHistory as unknown as Awaited<ReturnType<typeof mentorApplicationService.fetchLoginHistory>>,
+    );
   });
 
   it("renders mentor application details when opened", async () => {
@@ -163,7 +166,9 @@ describe("MentorDetailsDrawer", () => {
   });
 
   it("displays login history with devices", async () => {
-    vi.mocked(mentorApplicationService.fetchLoginHistory).mockResolvedValue(mockLoginHistoryWithDevices as any);
+    vi.mocked(mentorApplicationService.fetchLoginHistory).mockResolvedValue(
+      mockLoginHistoryWithDevices as unknown as Awaited<ReturnType<typeof mentorApplicationService.fetchLoginHistory>>,
+    );
 
     renderWithClient(
       React.createElement(MentorDetailsDrawer, {
