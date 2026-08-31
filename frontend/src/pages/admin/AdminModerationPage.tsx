@@ -53,7 +53,7 @@ const QUEUE_LABELS: Record<QueueTab, string> = {
   archived: "Archived Applications",
 };
 
-export const REJECTION_REASONS = [
+const REJECTION_REASONS = [
   "Experience level does not meet current cohort requirements (minimum 2 years needed).",
   "Primary tech stack does not match open mentorship tracks for this cohort.",
   "Weekly availability is below platform minimum (3+ hours/week required).",
@@ -61,27 +61,27 @@ export const REJECTION_REASONS = [
   "Application lacked specific motivation and mentoring methodology details.",
 ];
 
-export const REQUEST_INFO_TEMPLATES = [
+const REQUEST_INFO_TEMPLATES = [
   "Please provide a link to your active GitHub, portfolio, or recent production projects.",
   "Please clarify your weekly available hours and preferred time slots (EAT timezone).",
   "Please elaborate on your previous experience mentoring or coaching junior developers.",
   "Please update your current role, company, and primary tech stack specialization.",
 ];
 
-export interface RubricScores {
+interface RubricScores {
   experience: number; // 1-5
   techStack: number; // 1-5
   commitment: number; // 1-5
   motivation: number; // 1-5
 }
 
-export function calculateRubricScore(scores: RubricScores) {
+function calculateRubricScore(scores: RubricScores) {
   const total = scores.experience + scores.techStack + scores.commitment + scores.motivation;
   const max = 20;
   const percentage = Math.round((total / max) * 100);
 
-  let recommendation = "Strong Recommend";
-  let variant: "success" | "purple" | "warning" | "default" = "success";
+  let recommendation: string;
+  let variant: "success" | "purple" | "warning" | "default";
 
   if (percentage >= 85) {
     recommendation = "Strong Recommend";
@@ -100,7 +100,7 @@ export function calculateRubricScore(scores: RubricScores) {
   return { total, max, percentage, recommendation, variant };
 }
 
-export function autoEvaluateApplication(app: MentorApplication): RubricScores {
+function autoEvaluateApplication(app: MentorApplication): RubricScores {
   // Experience score: 1-5 based on years
   const yrs = app.yearsExperience ?? 0;
   let expScore = 1;
@@ -412,18 +412,17 @@ interface RubricModalProps {
 }
 
 function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalProps) {
-  const [scores, setScores] = useState<RubricScores>({
-    experience: 3,
-    techStack: 3,
-    commitment: 3,
-    motivation: 3,
-  });
+  const [prevAppId, setPrevAppId] = useState<string | undefined>(application?._id);
+  const [scores, setScores] = useState<RubricScores>(() =>
+    application
+      ? autoEvaluateApplication(application)
+      : { experience: 3, techStack: 3, commitment: 3, motivation: 3 }
+  );
 
-  useEffect(() => {
-    if (application) {
-      setScores(autoEvaluateApplication(application));
-    }
-  }, [application]);
+  if (application && application._id !== prevAppId) {
+    setPrevAppId(application._id);
+    setScores(autoEvaluateApplication(application));
+  }
 
   if (!application) return null;
 

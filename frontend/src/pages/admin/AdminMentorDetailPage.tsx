@@ -64,20 +64,20 @@ type ConfirmAction =
   | "deactivate"
   | "remove-role";
 
-export interface RubricScores {
+interface RubricScores {
   experience: number;
   techStack: number;
   commitment: number;
   motivation: number;
 }
 
-export function calculateRubricScore(scores: RubricScores) {
+function calculateRubricScore(scores: RubricScores) {
   const total = scores.experience + scores.techStack + scores.commitment + scores.motivation;
   const max = 20;
   const percentage = Math.round((total / max) * 100);
 
-  let recommendation = "Strong Recommend";
-  let variant: "success" | "purple" | "warning" | "default" = "success";
+  let recommendation: string;
+  let variant: "success" | "purple" | "warning" | "default";
 
   if (percentage >= 85) {
     recommendation = "Strong Recommend";
