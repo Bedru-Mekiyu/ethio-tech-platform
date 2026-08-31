@@ -567,13 +567,13 @@ export function HomePage() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl lg:text-6xl text-white">
+            <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
               Building Ethiopia&apos;s Tech Future with{" "}
               <span className="text-indigo-400">Hands-On Live Mentorship</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg leading-relaxed text-zinc-400 max-w-2xl font-normal">
+            <p className="text-xs sm:text-sm leading-relaxed text-zinc-400 max-w-2xl font-normal">
               Empowering youth from Grade 8 to university graduates with live senior engineering mentors, in-browser
               cloud sandboxes, collaborative 4-peer squads, and direct hiring pathways to top tech firms worldwide.
             </p>
@@ -765,7 +765,7 @@ export function HomePage() {
         <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 md:p-8">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
             <div className="text-center">
-              <p className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">
                 {formatCompactCount(activeLearnersCount)}+
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-400">
@@ -775,13 +775,13 @@ export function HomePage() {
             </div>
 
             <div className="text-center">
-              <p className="text-3xl font-bold tracking-tight text-white md:text-4xl">45,000+</p>
+              <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">45,000+</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-400">Mentorship Hours</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">1-on-1 & Live Cohort Sessions</p>
             </div>
 
             <div className="text-center">
-              <p className="text-3xl font-bold tracking-tight text-white md:text-4xl">6 Hubs</p>
+              <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">6 Hubs</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-400">
                 Regional Innovation Hubs
               </p>
@@ -789,7 +789,7 @@ export function HomePage() {
             </div>
 
             <div className="text-center">
-              <p className="text-3xl font-bold tracking-tight text-white md:text-4xl">{approvalRate}%</p>
+              <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">{approvalRate}%</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-indigo-400">Capstone Approval</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">Audited Production Projects</p>
             </div>
@@ -813,10 +813,10 @@ export function HomePage() {
             <Sparkles size={12} />
             <span>Platform Capabilities</span>
           </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-4 text-xl font-bold tracking-tight text-white sm:text-2xl">
             Everything You Need to Master <span className="text-indigo-400">Production Software</span>
           </h2>
-          <p className="mt-3 text-base leading-relaxed text-zinc-400 font-normal">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             Purpose-built for Ethiopian engineers. Zero friction, instant cloud sandboxes, adaptive live classrooms, and
             peer sprint squads that turn curious students into high-earning developers.
           </p>
@@ -1053,10 +1053,10 @@ export function HomePage() {
             <Compass size={12} />
             <span>The PISTELS Framework</span>
           </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-4 text-xl font-bold tracking-tight text-white sm:text-2xl">
             7 Pillars Engineered for <span className="text-indigo-400">Engineering Mastery</span>
           </h2>
-          <p className="mt-3 text-base leading-relaxed text-zinc-400 font-normal">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             PISTELS is our proprietary pedagogical framework designed to bridge the gap between academic theory and the
             requirements of modern software engineering.
           </p>
@@ -1110,12 +1110,12 @@ export function HomePage() {
                       {activePillar.letter}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white sm:text-2xl">{activePillar.name}</h3>
+                      <h3 className="text-lg font-bold text-white sm:text-xl">{activePillar.name}</h3>
                       <p className="text-xs font-medium text-indigo-400">{activePillar.tagline}</p>
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed text-zinc-400">{activePillar.description}</p>
+                  <p className="text-xs sm:text-sm leading-relaxed text-zinc-400">{activePillar.description}</p>
 
                   <div className="space-y-2 pt-1">
                     {activePillar.highlights.map((highlight) => (
@@ -1164,18 +1164,18 @@ export function HomePage() {
               <BookOpen size={12} />
               <span>Job-Ready Curricula</span>
             </div>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-xl font-bold tracking-tight text-white sm:text-2xl">
               Engineered for <span className="text-indigo-400">High-Demand Tech Careers</span>
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-400 font-normal sm:text-base">
+            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Structured step-by-step pathways taking learners from foundational coding to shipping production systems.
             </p>
           </div>
 
           <Link to="/tracks">
-            <Button variant="outline">
+            <Button variant="outline" size="sm">
               <span>View All Tracks</span>
-              <ArrowRight size={15} className="ml-2" />
+              <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </Link>
         </div>
@@ -1217,12 +1217,12 @@ export function HomePage() {
             const Icon = track.icon;
             return (
               <motion.div key={track.id} variants={itemVariants} className="h-full">
-                <Card className="group flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] p-6 transition-all duration-150 hover:border-zinc-700">
+                <Card className="group flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 transition-all duration-150 hover:border-zinc-700">
                   <div>
                     {/* Header Top Bar */}
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A] transition-colors">
-                        <Icon size={18} className="text-indigo-400" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A] transition-colors">
+                        <Icon size={16} className="text-indigo-400" />
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Badge variant="default" size="sm">
@@ -1235,11 +1235,11 @@ export function HomePage() {
                     </div>
 
                     {/* Track Title & Description */}
-                    <div className="mt-4 space-y-1">
+                    <div className="mt-3.5 space-y-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
                         {track.categoryLabel}
                       </span>
-                      <h3 className="text-lg font-bold leading-snug text-white group-hover:text-indigo-400 transition-colors">
+                      <h3 className="text-sm font-bold leading-snug text-white group-hover:text-indigo-400 transition-colors">
                         {track.title}
                       </h3>
                       <p className="text-xs leading-relaxed text-zinc-400">{track.description}</p>
@@ -1258,7 +1258,7 @@ export function HomePage() {
                     </div>
 
                     {/* Capstone Projects Highlight */}
-                    <div className="mt-4 rounded-lg border border-[#27272A] bg-black/40 p-3 space-y-1">
+                    <div className="mt-3.5 rounded-lg border border-[#27272A] bg-black/40 p-3 space-y-1">
                       <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
                         <Award size={12} className="text-indigo-400" />
                         <span>Shipped Capstone Projects</span>
@@ -1275,7 +1275,7 @@ export function HomePage() {
                   </div>
 
                   {/* Card Bottom Meta & CTA */}
-                  <div className="mt-5 border-t border-[#27272A] pt-3.5 flex items-center justify-between">
+                  <div className="mt-4 border-t border-[#27272A] pt-3 flex items-center justify-between">
                     <div className="text-xs text-zinc-500">
                       <span className="font-semibold text-white">{track.liveSessions}</span> Live Sessions •{" "}
                       <span className="font-semibold text-indigo-400">{track.xpReward} XP</span>
@@ -1313,10 +1313,10 @@ export function HomePage() {
               <Award size={12} />
               <span>World-Class Mentors</span>
             </div>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-3 text-xl font-bold tracking-tight text-white sm:text-2xl">
               Learn From <span className="text-indigo-400">Global & Local Leaders</span>
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-400 font-normal">
+            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Direct access to Ethiopian staff engineers, architects, and technical founders from Silicon Valley,
               Europe, and leading local African enterprises.
             </p>
@@ -1324,10 +1324,10 @@ export function HomePage() {
 
           <div className="flex gap-2.5">
             <Link to="/mentors">
-              <Button variant="outline">View All Mentors</Button>
+              <Button variant="outline" size="sm">View All Mentors</Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button>Become a Mentor</Button>
+              <Button size="sm">Become a Mentor</Button>
             </Link>
           </div>
         </div>
@@ -1341,7 +1341,7 @@ export function HomePage() {
         >
           {FEATURED_MENTORS.map((mentor) => (
             <motion.div key={mentor.id} variants={itemVariants} className="h-full">
-              <Card className="flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] p-6 transition-all duration-150 hover:border-zinc-700">
+              <Card className="flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 transition-all duration-150 hover:border-zinc-700">
                 <div>
                   <div className="flex items-start gap-3.5">
                     <Avatar
@@ -1349,24 +1349,23 @@ export function HomePage() {
                       name={mentor.name}
                       userId={mentor.id}
                       role="mentor"
-                      size="lg"
-                      className="ring-1 ring-indigo-500/30"
+                      size="md"
                     />
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-1.5">
-                        <h3 className="font-semibold text-white text-base">{mentor.name}</h3>
+                        <h3 className="font-semibold text-white text-sm">{mentor.name}</h3>
                         <ShieldCheck size={13} className="text-indigo-400 shrink-0" />
                       </div>
                       <p className="text-xs font-medium text-indigo-400">{mentor.role}</p>
-                      <p className="text-xs text-zinc-500">
+                      <p className="text-[11px] text-zinc-500">
                         {mentor.company} • {mentor.location}
                       </p>
                     </div>
                   </div>
 
-                  <p className="mt-3.5 text-xs italic leading-relaxed text-zinc-400">&ldquo;{mentor.quote}&rdquo;</p>
+                  <p className="mt-3 text-xs italic leading-relaxed text-zinc-400">&ldquo;{mentor.quote}&rdquo;</p>
 
-                  <div className="mt-3.5 flex flex-wrap gap-1">
+                  <div className="mt-3 flex flex-wrap gap-1">
                     {mentor.expertise.map((exp) => (
                       <span
                         key={exp}
@@ -1378,7 +1377,7 @@ export function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-5 border-t border-[#27272A] pt-3.5 flex items-center justify-between text-xs">
+                <div className="mt-4 border-t border-[#27272A] pt-3 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                     <Star size={13} fill="currentColor" />
                     <span>{mentor.score}% Rating</span>
@@ -1409,11 +1408,11 @@ export function HomePage() {
                 <span>Nationwide Physical Reach</span>
               </div>
 
-              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 6 Regional Hubs Powering <span className="text-indigo-400">Equal Access</span>
               </h2>
 
-              <p className="text-sm leading-relaxed text-zinc-400 font-normal">
+              <p className="text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
                 Geographic location should never limit talent. EthioTech operates physical access centers across major
                 Ethiopian cities, equipped with enterprise gigabit fiber, power backup, high-end workstations, and
                 on-site community leads.
@@ -1449,7 +1448,7 @@ export function HomePage() {
 
             {/* Visual Callout Box */}
             <div className="relative rounded-lg border border-[#27272A] bg-[#141418] p-5 space-y-3">
-              <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+              <h3 className="text-xs sm:text-sm font-semibold text-white flex items-center gap-2">
                 <Building2 size={15} className="text-indigo-400" />
                 <span>Community & In-Person Hackathons</span>
               </h3>
@@ -1495,16 +1494,16 @@ export function HomePage() {
           9. HIGH-CONVERSION BOTTOM HERO CTA BANNER
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-20">
-        <div className="relative overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] p-8 md:p-10 shadow-lg">
+        <div className="relative overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-2.5">
               <span className="inline-block rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
                 Next Cohort Starting Soon
               </span>
-              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Ready to Build the Future of <span className="text-indigo-400">Ethiopian Tech?</span>
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-400 max-w-xl">
+              <p className="text-xs sm:text-sm leading-relaxed text-zinc-400 max-w-xl">
                 Join thousands of young developers mastering real-world software engineering with live senior
                 mentorship, cloud sandboxes, and collaborative squads.
               </p>
@@ -1512,18 +1511,18 @@ export function HomePage() {
 
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto font-medium">
+                <Button size="md" className="w-full sm:w-auto font-medium">
                   <span>Start Coding Free</span>
-                  <ArrowRight size={15} className="ml-2" />
+                  <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button variant="outline" size="md" className="w-full sm:w-auto">
                   Join as Senior Mentor
                 </Button>
               </Link>
               <Link to="/partners">
-                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-zinc-400 hover:text-white">
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-zinc-400 hover:text-white">
                   Partner with Us
                 </Button>
               </Link>

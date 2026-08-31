@@ -492,23 +492,23 @@ export function HowItWorksPage() {
             <Sparkles size={12} />
             <span>The 5-Stage Engineering Engine</span>
           </div>
-          <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl text-white">
+          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
             How aspiring engineers become <span className="text-indigo-400">production-ready</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
             and verified career placement. Explore the full architecture of how EthioTech works.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="font-medium">
+              <Button size="md" className="font-medium">
                 Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button
               variant="outline"
-              size="lg"
+              size="md"
               onClick={() => {
                 const el = document.getElementById("learner-lifecycle");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -539,39 +539,39 @@ export function HowItWorksPage() {
 
         {/* Live Catalog Momentum Metrics */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
-              <Layers3 size={18} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Layers3 size={16} />
             </div>
-            <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(tracks.length || 4)}</p>
-            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
+            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(tracks.length || 4)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
             <p className="mt-0.5 text-xs text-zinc-400">Fullstack, AI, Cloud, Mobile</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
-              <BookOpen size={18} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <BookOpen size={16} />
             </div>
-            <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalModules || 36)}</p>
-            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
+            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalModules || 36)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
             <p className="mt-0.5 text-xs text-zinc-400">Structured knowledge blocks</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
-              <Code2 size={18} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Code2 size={16} />
             </div>
-            <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalLessons || 180)}</p>
-            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
+            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalLessons || 180)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
             <p className="mt-0.5 text-xs text-zinc-400">Real git repos & tests</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
-              <Sparkles size={18} />
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <Sparkles size={16} />
             </div>
-            <p className="mt-3 text-2xl font-bold text-white">{formatCompactNumber(totalXp || 24000)}</p>
-            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
+            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalXp || 24000)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
             <p className="mt-0.5 text-xs text-zinc-400">Earned through verified PRs</p>
           </Card>
         </div>
@@ -584,8 +584,8 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
               <span>Step-by-Step Flow</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">The 5-Stage Learner Lifecycle</h2>
-            <p className="mt-3 text-base leading-relaxed text-zinc-400 font-normal">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">The 5-Stage Learner Lifecycle</h2>
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Click through each stage to explore how we guide learners from diagnostic calibration to verified career
               placement.
             </p>

@@ -218,25 +218,25 @@ export function PartnersPage() {
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Empowering Ethiopia&apos;s Digital Economy Through{" "}
           <span className="text-indigo-400">Strategic Alliances</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
           We partner with forward-thinking tech employers, universities, multilateral development agencies, and
           government bodies to build a sovereign, world-class technical workforce across Ethiopia.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#partner-inquiry">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Initiate Partnership
-              <ArrowRight size={15} className="ml-2" />
+              <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#frameworks">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Explore Frameworks
             </Button>
           </a>
@@ -244,25 +244,25 @@ export function PartnersPage() {
 
         {/* Stats Strip */}
         <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-indigo-400 font-mono md:text-3xl">94%</p>
-            <p className="mt-1 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Placement Rate</p>
-            <p className="mt-0.5 text-[11px] text-zinc-400">Within 90 days of graduation</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-indigo-400 font-mono md:text-2xl">94%</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Placement Rate</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Within 90 days</p>
           </Card>
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-white font-mono md:text-3xl">35+</p>
-            <p className="mt-1 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Partner Entities</p>
-            <p className="mt-0.5 text-[11px] text-zinc-400">Academic, corporate & NGO</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-white font-mono md:text-2xl">35+</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Partner Entities</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Academic & NGO</p>
           </Card>
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-emerald-400 font-mono md:text-3xl">6</p>
-            <p className="mt-1 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
-            <p className="mt-0.5 text-[11px] text-zinc-400">Across Ethiopia&apos;s corridors</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-emerald-400 font-mono md:text-2xl">6</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
+            <p className="mt-0.5 text-xs text-zinc-400">Across Ethiopia</p>
           </Card>
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-white font-mono md:text-3xl">10K+</p>
-            <p className="mt-1 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Engineers Target</p>
-            <p className="mt-0.5 text-[11px] text-zinc-400">Practical mastery by 2026</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-white font-mono md:text-2xl">10K+</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Engineers Target</p>
+            <p className="mt-0.5 text-xs text-zinc-400">By 2026</p>
           </Card>
         </div>
       </motion.section>
@@ -271,7 +271,7 @@ export function PartnersPage() {
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Collaboration Pillars</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Tailored Frameworks for Every Stakeholder
           </h2>
           <p className="text-xs text-zinc-400">

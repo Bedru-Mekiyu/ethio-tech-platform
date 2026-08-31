@@ -27,11 +27,11 @@ export function CardHeader({ className, children }: { className?: string; childr
 }
 
 export function CardTitle({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <h3 className={cn("text-lg font-semibold tracking-tight text-white", className)}>{children}</h3>;
+  return <h3 className={cn("text-sm font-semibold tracking-tight text-white", className)}>{children}</h3>;
 }
 
 export function CardDescription({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <p className={cn("mt-1 text-sm leading-relaxed text-[var(--text-secondary)]", className)}>{children}</p>;
+  return <p className={cn("mt-0.5 text-xs leading-relaxed text-zinc-400", className)}>{children}</p>;
 }
 
 export function CardContent({ className, children }: { className?: string; children: React.ReactNode }) {

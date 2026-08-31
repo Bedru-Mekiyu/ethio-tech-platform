@@ -495,35 +495,35 @@ export function AboutPage() {
             <Sparkles size={12} />
             <span>The Ethiopian Software Engineering Movement</span>
           </div>
-          <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl text-white">
+          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
             Democratizing elite tech education with the <span className="text-indigo-400">PISTELS</span> framework
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             {data?.hero.description ||
               "EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects."}
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="font-medium">
+              <Button size="md" className="font-medium">
                 Join as Student <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="md">
                 <Users className="mr-2 h-4 w-4 text-indigo-400" /> Become a Mentor
               </Button>
             </Link>
             <Button
               variant="ghost"
-              size="lg"
+              size="md"
               onClick={() => {
                 const el = document.getElementById("pistels-framework");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
               className="text-zinc-400 hover:text-white"
             >
-              Explore PISTELS Ideology
+              Explore the PISTELS Pillars
             </Button>
           </div>
 

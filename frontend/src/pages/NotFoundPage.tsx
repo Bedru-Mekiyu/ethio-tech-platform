@@ -115,39 +115,39 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
-        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-primary">404</p>
-          <h1 className="mt-3 text-3xl font-bold text-white">Page not found</h1>
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center">
+          <p className="text-xs uppercase tracking-wider text-indigo-400 font-semibold">404</p>
+          <h1 className="mt-2 text-xl font-bold tracking-tight text-white">Page not found</h1>
+          <p className="mt-1.5 text-xs text-zinc-400">
             The page you requested does not exist or has moved.
           </p>
 
           {import.meta.env.DEV && (
-            <p className="mt-3 text-xs text-[var(--text-muted)] break-all font-mono">
+            <p className="mt-3 text-[11px] text-zinc-500 break-all font-mono">
               {location.pathname}
             </p>
           )}
 
           {recovery && (
-            <div className="mt-6 rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
-              <p className="text-sm text-[var(--text-secondary)]">
+            <div className="mt-5 rounded-lg border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-2.5">
+              <p className="text-xs text-zinc-400">
                 Redirecting to{" "}
-                <span className="font-medium text-primary">{recovery}</span> in{" "}
+                <span className="font-medium text-indigo-400">{recovery}</span> in{" "}
                 <span className="font-semibold text-white">{countdown}</span>s...
               </p>
             </div>
           )}
 
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <div className="mt-6 flex flex-wrap justify-center gap-2.5">
             {canGoBack && (
-              <Button variant="outline" onClick={() => navigate(-1)}>
-                <ArrowLeft size={15} className="mr-1.5" />
+              <Button variant="outline" size="sm" onClick={() => navigate(-1)}>
+                <ArrowLeft size={14} className="mr-1.5" />
                 Return to previous page
               </Button>
             )}
             <Link to={user ? (user.role === "mentor" ? "/mentor" : user.role === "admin" || user.role === "super_admin" || user.role === "moderator" || user.role === "reviewer" || user.role === "support" ? "/admin" : user.role === "parent" ? "/parent" : "/app/dashboard") : "/"}>
-              <Button>
-                <Home size={15} className="mr-1.5" />
+              <Button size="sm">
+                <Home size={14} className="mr-1.5" />
                 Go home
               </Button>
             </Link>

@@ -355,11 +355,11 @@ export function MentorsPage() {
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Learn From Senior Engineers Shaping <span className="text-indigo-400">Global & African Tech</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
           Connect with senior software architects, engineering leads, and technical founders from Google, Safaricom,
           Ethio Telecom, CBE, Chapa, and Gebeya who provide structured 1-on-1 guidance, live architectural reviews, and
           career sponsorship.
@@ -367,13 +367,13 @@ export function MentorsPage() {
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Link to="/mentor-recruitment">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Apply to Become a Mentor
-              <ArrowRight size={15} className="ml-2" />
+              <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </Link>
           <a href="#mentor-directory">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Browse Mentor Directory
             </Button>
           </a>
@@ -382,13 +382,13 @@ export function MentorsPage() {
         {/* Requirements & Commitment Callout Strip */}
         <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <ShieldCheck size={15} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
+            <ShieldCheck size={14} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={15} className="text-indigo-400" /> Commitment: 2–4 Hours / Week (Flexible)
+            <Clock size={14} className="text-indigo-400" /> Commitment: 2–4 Hours / Week (Flexible)
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Trophy size={15} className="text-emerald-400" /> Verified Leadership Credentials
+            <Trophy size={14} className="text-emerald-400" /> Verified Leadership Credentials
           </span>
         </div>
       </motion.section>
@@ -429,7 +429,7 @@ export function MentorsPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Structured Learning</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             How Mentorship Works at EthioTech
           </h2>
           <p className="text-xs text-zinc-400">

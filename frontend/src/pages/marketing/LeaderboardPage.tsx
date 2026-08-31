@@ -96,8 +96,8 @@ function RankCard({
     <Card
       className={cn(
         "relative flex h-full flex-col items-center text-center transition-transform duration-200",
-        featured ? "border-primary/70 md:-mt-10 glow-border" : "border-[var(--border)]",
-        "bg-[var(--bg-card)]",
+        featured ? "border-indigo-500/50 md:-mt-4" : "border-[#27272A]",
+        "bg-[#0E0E11]",
       )}
     >
       <div
@@ -192,15 +192,15 @@ export function LeaderboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
       <div className="text-center">
-        <h1 className="text-3xl font-bold md:text-4xl">
-          Global <span className="glow-text">Rankings</span>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          Global Rankings
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-[var(--text-secondary)]">
+        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-400">
           Compete, mentor, and collaborate with community peers. Rankings update with live platform activity.
         </p>
       </div>
 
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
         {tabs.map((item) => (
           <button
             key={item.id}
@@ -208,44 +208,44 @@ export function LeaderboardPage() {
             onClick={() => setTab(item.id)}
             aria-pressed={tab === item.id}
             className={cn(
-              "rounded-full border px-5 py-3 text-left transition",
+              "rounded-lg border px-4 py-2 text-left transition text-xs",
               tab === item.id
-                ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
+                ? "border-indigo-500 bg-indigo-600 text-white font-semibold"
+                : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
             )}
           >
-            <span className="block text-sm font-semibold">{item.label}</span>
-            <span className="block text-xs opacity-80">{item.description}</span>
+            <span className="block font-semibold">{item.label}</span>
+            <span className="block text-[10px] opacity-75">{item.description}</span>
           </button>
         ))}
       </div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-3">
-        <Card className="p-4">
-          <div className="flex items-center gap-2 text-[var(--text-muted)]">
-            <Users size={14} />
-            <span className="text-[10px] uppercase tracking-[0.22em]">{statLabel(tab)}</span>
+      <div className="mt-8 grid gap-3 sm:grid-cols-3">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
+            <Users size={13} />
+            <span className="text-[10px] uppercase tracking-wider font-semibold">{statLabel(tab)}</span>
           </div>
-          <p className="mt-3 text-2xl font-semibold text-white">{rows.length}</p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">Visible from the live rankings feed</p>
+          <p className="mt-2 text-xl font-bold text-white">{rows.length}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-400">Visible from live rankings</p>
         </Card>
-        <Card className="p-4">
-          <div className="flex items-center gap-2 text-[var(--text-muted)]">
-            <Sparkles size={14} />
-            <span className="text-[10px] uppercase tracking-[0.22em]">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
+            <Sparkles size={13} />
+            <span className="text-[10px] uppercase tracking-wider font-semibold">
               {tab === "mentors" ? "Top score" : "Top XP"}
             </span>
           </div>
-          <p className="mt-3 text-2xl font-semibold text-white">{podiumText(tab, topRank)}</p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">Current leader of the board</p>
+          <p className="mt-2 text-xl font-bold text-indigo-400">{podiumText(tab, topRank)}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-400">Current cohort leader</p>
         </Card>
-        <Card className="p-4">
-          <div className="flex items-center gap-2 text-[var(--text-muted)]">
-            <Medal size={14} />
-            <span className="text-[10px] uppercase tracking-[0.22em]">Average</span>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
+            <Medal size={13} />
+            <span className="text-[10px] uppercase tracking-wider font-semibold">Average</span>
           </div>
-          <p className="mt-3 text-2xl font-semibold text-white">{podiumText(tab, averageRank)}</p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">Healthy competition across the cohort</p>
+          <p className="mt-2 text-xl font-bold text-white">{podiumText(tab, averageRank)}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-400">Cohort average</p>
         </Card>
       </div>
 

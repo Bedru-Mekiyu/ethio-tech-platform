@@ -115,7 +115,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.05 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight"
             >
               Master In-Demand Tech with <br className="hidden sm:inline" />
               <span className="text-indigo-400">Production Capstones</span> & Mentorship
@@ -125,7 +125,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="mx-auto max-w-2xl text-base md:text-lg text-zinc-400 leading-relaxed font-normal"
+              className="mx-auto max-w-2xl text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal"
             >
               Forget static video tutorials. Build distributed cloud systems, real-time mobile apps, fraud detection
               engines, and hardened cybersecurity architectures with live code reviews.
@@ -138,21 +138,21 @@ export function TracksPage() {
               transition={{ duration: 0.45, delay: 0.15 }}
               className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4"
             >
-              <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-                <p className="text-2xl font-bold text-white">6</p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
+              <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+                <p className="text-xl font-bold text-white">6</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
               </Card>
-              <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-                <p className="text-2xl font-bold text-indigo-400">{totalCapstones}+</p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Real Capstones</p>
+              <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+                <p className="text-xl font-bold text-indigo-400">{totalCapstones}+</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Real Capstones</p>
               </Card>
-              <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-                <p className="text-2xl font-bold text-white">{totalLiveHours}+</p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Live & Mentor Hrs</p>
+              <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+                <p className="text-xl font-bold text-white">{totalLiveHours}+</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Live & Mentor Hrs</p>
               </Card>
-              <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-                <p className="text-2xl font-bold text-emerald-400">100%</p>
-                <p className="mt-1 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Free for Learners</p>
+              <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+                <p className="text-xl font-bold text-emerald-400">100%</p>
+                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Free for Learners</p>
               </Card>
             </motion.div>
           </div>

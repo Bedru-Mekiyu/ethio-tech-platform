@@ -232,8 +232,8 @@ export function ProgressPage() {
       {/* Top Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-100 md:text-3xl">Progress & Mastery Hub</h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <h1 className="text-xl font-bold tracking-tight text-white md:text-2xl">Progress & Mastery Hub</h1>
+          <p className="mt-0.5 text-xs text-zinc-400">
             Track your skill mastery, verified credentials, achievement badges, and project portfolio.
           </p>
         </div>

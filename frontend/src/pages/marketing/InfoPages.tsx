@@ -21,34 +21,34 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
       <div className="max-w-3xl">
-        <h1 className="text-3xl font-bold">{title}</h1>
-        <p className="mt-4 text-[var(--text-secondary)]">{intro}</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">{title}</h1>
+        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400">{intro}</p>
         {(primary || secondary) && (
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-2.5">
             {primary && (
               <Link to={primary.to}>
-                <Button>{primary.label}</Button>
+                <Button size="sm">{primary.label}</Button>
               </Link>
             )}
             {secondary && (
               <Link to={secondary.to}>
-                <Button variant="outline">{secondary.label}</Button>
+                <Button variant="outline" size="sm">{secondary.label}</Button>
               </Link>
             )}
           </div>
         )}
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {sections.map((section) => (
-          <Card key={section.title} className="h-full">
-            <h2 className="text-lg font-semibold">{section.title}</h2>
-            <p className="mt-3 text-sm text-[var(--text-secondary)]">{section.body}</p>
+          <Card key={section.title} className="h-full border-[#27272A] bg-[#0E0E11] p-5">
+            <h2 className="text-sm font-semibold text-white">{section.title}</h2>
+            <p className="mt-2 text-xs leading-relaxed text-zinc-400">{section.body}</p>
             {section.bullets && (
-              <ul className="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
+              <ul className="mt-3 space-y-1.5 text-xs text-zinc-400">
                 {section.bullets.map((bullet) => (
                   <li key={bullet} className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary" />
+                    <span className="mt-1.5 h-1 w-1 rounded-full bg-indigo-400 shrink-0" />
                     <span>{bullet}</span>
                   </li>
                 ))}

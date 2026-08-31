@@ -231,24 +231,24 @@ export function MentorRecruitmentPage() {
           <span>Senior Engineering Guild Membership</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-indigo-400">Tech Leaders</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
           Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom,
           bridge the digital divide, and discover top technical talent.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Complete Mentor Application (5 Min)
-              <ArrowRight size={15} className="ml-2" />
+              <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#onboarding-process">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               View Onboarding Process
             </Button>
           </a>
@@ -257,13 +257,13 @@ export function MentorRecruitmentPage() {
         {/* Requirements Strip */}
         <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <ShieldCheck size={15} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
+            <ShieldCheck size={14} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={15} className="text-indigo-400" /> Commitment: 2–4 Hours / Week
+            <Clock size={14} className="text-indigo-400" /> Commitment: 2–4 Hours / Week
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Award size={15} className="text-emerald-400" /> Verified Leadership Badge
+            <Award size={14} className="text-emerald-400" /> Verified Leadership Badge
           </span>
         </div>
       </motion.section>
@@ -272,7 +272,7 @@ export function MentorRecruitmentPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Why Mentor With Us</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Benefits of Joining the Mentor Guild
           </h2>
           <p className="text-xs text-zinc-400">
@@ -305,7 +305,7 @@ export function MentorRecruitmentPage() {
       <section id="onboarding-process" className="space-y-8 scroll-mt-16">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Streamlined Process</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             The 4-Step Mentor Onboarding Journey
           </h2>
           <p className="text-xs text-zinc-400">

@@ -184,10 +184,10 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
         onClick={() => isMobile && setMobileOpen(false)}
         className={({ isActive }) =>
           cn(
-            "group relative flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors duration-200 select-none border border-transparent",
+            "group relative flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium transition-colors duration-150 select-none border border-transparent",
             isActive
-              ? "bg-primary/10 text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_4px_12px_rgba(99,102,241,0.08)] border-primary/25"
-              : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
+              ? "bg-indigo-500/10 text-indigo-400 font-semibold border-indigo-500/25 shadow-xs"
+              : "text-zinc-400 hover:bg-[#141418] hover:text-white",
           )
         }
       >
@@ -195,15 +195,15 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           <>
             {isActive && (
               <motion.div
-                layoutId={isMobile ? "active-mobile-drawer-glow" : "active-sidebar-glow"}
-                className="absolute left-0 top-2.5 bottom-2.5 w-1 rounded-r-full bg-primary"
+                layoutId={isMobile ? "active-mobile-drawer-indicator" : "active-sidebar-indicator"}
+                className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-indigo-500"
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}
             <span
               className={cn(
-                "transition-transform duration-200 group-hover:scale-110",
-                isActive ? "text-primary" : "text-[var(--text-muted)] group-hover:text-white",
+                "transition-transform duration-150",
+                isActive ? "text-indigo-400" : "text-zinc-500 group-hover:text-white",
               )}
             >
               {item.icon}

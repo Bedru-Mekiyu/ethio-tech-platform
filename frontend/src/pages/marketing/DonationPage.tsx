@@ -207,11 +207,11 @@ export function DonationPage() {
           <span>Transparent Impact Philanthropy</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Empower Ethiopian Talent Through <span className="text-indigo-400">Sovereign Education</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
           Every dollar or birr directly funds student scholarship passes, solar-powered regional tech hubs, and hardware
           distribution to gifted learners across Ethiopia with 100% transparent milestone verification.
         </p>
@@ -233,7 +233,7 @@ export function DonationPage() {
       <section id="donate-now" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Direct Impact Model</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Choose Your Student Sponsorship Tier
           </h2>
           <p className="text-xs text-zinc-400">

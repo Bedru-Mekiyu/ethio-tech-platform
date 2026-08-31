@@ -398,18 +398,18 @@ export function HubsPage() {
           <span>Regional Physical Tech Infrastructure</span>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl text-white leading-tight">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Physical Tech Hubs <span className="text-indigo-400">Across Ethiopia</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
           Book dedicated high-spec developer workstations, consult in-person with on-duty mentors, access local offline
           caching servers, and check in physically to earn XP across 6 national innovation corridors.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Button
-            size="lg"
+            size="md"
             className="font-medium"
             onClick={() => {
               setActiveTab("directory");
@@ -418,38 +418,38 @@ export function HubsPage() {
             }}
           >
             Explore 6 Regional Hubs
-            <ArrowRight size={15} className="ml-2" />
+            <ArrowRight size={14} className="ml-1.5" />
           </Button>
 
-          <Button variant="outline" size="lg" onClick={() => setActiveTab("passes")}>
-            <TicketIcon size={15} className="mr-2 text-indigo-400" />
+          <Button variant="outline" size="md" onClick={() => setActiveTab("passes")}>
+            <TicketIcon size={14} className="mr-1.5 text-indigo-400" />
             My Active Passes ({myBookings.length})
           </Button>
         </div>
 
         {/* Key Metrics Strip */}
         <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-indigo-400">6</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Regional Hubs</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-indigo-400">6</p>
+            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Regional Hubs</p>
             <p className="mt-0.5 text-xs text-zinc-400">Active national nodes</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-white">{totalWorkstations}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Workstations</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-white">{totalWorkstations}</p>
+            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Workstations</p>
             <p className="mt-0.5 text-xs text-zinc-400">Dual-screen & GPU rigs</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-emerald-400">{totalOpenSeats}</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Available Today</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-emerald-400">{totalOpenSeats}</p>
+            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Available Today</p>
             <p className="mt-0.5 text-xs text-zinc-400">Instant reservation</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center">
-            <p className="text-2xl font-bold text-white">100% Free</p>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Community Access</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
+            <p className="text-xl font-bold text-white">100% Free</p>
+            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Community Access</p>
             <p className="mt-0.5 text-xs text-zinc-400">+50 XP per check-in</p>
           </Card>
         </div>
