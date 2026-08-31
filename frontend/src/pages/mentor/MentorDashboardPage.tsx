@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -53,7 +54,7 @@ export function MentorDashboardPage() {
   const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["dashboard", "mentor"],
     queryFn: fetchMentorDashboard,
     enabled: !!user,
@@ -193,17 +194,23 @@ export function MentorDashboardPage() {
   }
 
   if (isLoading) return <MentorDashboardSkeleton />;
+
   if (isError) {
     return (
-      <QueryError
-        message={error instanceof Error ? error.message : "Unable to load mentor dashboard."}
-        onRetry={() => refetch()}
-      />
+      <div className="space-y-6">
+        <h1 className="text-2xl font-bold text-white">Mentor Command Center</h1>
+        <QueryError message="Could not load your dashboard." onRetry={() => refetch()} />
+      </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="space-y-8"
+    >
       {/* Top Mentor Banner */}
       <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -516,6 +523,6 @@ export function MentorDashboardPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

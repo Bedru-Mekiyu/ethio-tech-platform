@@ -242,25 +242,48 @@ export function MentorRecruitmentPage() {
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
-            <Button size="md" className="font-medium">
+            <Button
+              size="md"
+              className="font-medium bg-indigo-600 hover:bg-indigo-500 text-white border-0 transition-transform hover:scale-105 active:scale-95"
+            >
               Complete Mentor Application (5 Min)
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#onboarding-process">
-            <Button variant="outline" size="md">
+            <Button
+              variant="outline"
+              size="md"
+              className="border-zinc-700 bg-transparent hover:bg-zinc-800 transition-transform hover:scale-105 active:scale-95"
+            >
               View Onboarding Process
             </Button>
           </a>
         </div>
 
+        {/* Enhanced Trust Signals */}
+        <div className="pt-2 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-medium">
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 size={14} className="text-emerald-400" />
+            <span>Identity Verified via LinkedIn</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Trophy size={14} className="text-amber-400" />
+            <span>Top 5% of Applicant Engineers Selected</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <Users size={14} className="text-indigo-400" />
+            <span>Join 50+ Active Tech Leads</span>
+          </div>
+        </div>
+
         {/* Requirements Strip */}
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
+        <div className="rounded-xl border border-[#27272A] bg-gradient-to-r from-[#0E0E11] to-[#141418] p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400 shadow-md">
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
             <ShieldCheck size={14} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={14} className="text-indigo-400" /> Commitment: 2–4 Hours / Week
+            <Clock size={14} className="text-indigo-400" /> Flexible Commitment: 2-4 Hours / Week
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
             <Award size={14} className="text-emerald-400" /> Verified Leadership Badge

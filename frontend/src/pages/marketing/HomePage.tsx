@@ -18,7 +18,6 @@ import {
   MapPin,
   Building2,
   Globe,
-  Play,
   Check,
   Star,
   Compass,
@@ -28,6 +27,7 @@ import {
   Smartphone,
   ChevronRight,
 } from "lucide-react";
+import { LivePlatformPulse } from "@/components/composites/LivePlatformPulse";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -557,61 +557,73 @@ export function HomePage() {
       >
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
-          <div className="space-y-8">
-            {/* Pill Eyebrow with Live Platform Pulse */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-1 backdrop-blur-md">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-medium tracking-wide text-indigo-300">
-                Pan-Ethiopian Engineering Platform ·{" "}
-                <strong className="text-white font-mono">{formatCompactCount(activeLearnersCount)}+</strong> Active
-                Learners
-              </span>
-            </div>
+          <div className="space-y-6">
+            <LivePlatformPulse />
 
             {/* Main Headline */}
-            <h1 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
-              Building Ethiopia&apos;s Tech Future with{" "}
-              <span className="text-indigo-400">Hands-On Live Mentorship</span>
+            <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-white">
+              Building Ethiopia&apos;s Tech Future with <span className="text-indigo-400">Live Mentorship</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-sm leading-relaxed text-zinc-400 max-w-2xl font-normal">
-              Empowering youth from Grade 8 to university graduates with live senior engineering mentors, in-browser
-              cloud sandboxes, collaborative 4-peer squads, and direct hiring pathways to top tech firms worldwide.
+            <p className="text-sm sm:text-base leading-relaxed text-zinc-400 max-w-2xl font-normal">
+              Empowering youth with senior engineering mentors, in-browser cloud sandboxes, 4-peer agile squads, and
+              direct hiring pathways. Verified by {formatCompactCount(activeLearnersCount)}+ active learners.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
-            <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-2">
+              <Link to="/register" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full gap-2 font-medium bg-indigo-600 hover:bg-indigo-500 text-white border-0"
+                >
+                  <span>Start Coding Free</span>
+                  <ArrowRight size={16} />
+                </Button>
+              </Link>
               <Button
-                size="md"
-                className="gap-2 font-medium"
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto gap-2 font-medium border-zinc-700 bg-transparent hover:bg-zinc-800"
                 onClick={() => {
                   const el = document.getElementById("curriculum-section");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
               >
+                <Compass size={16} />
                 <span>Explore Curriculum</span>
-                <ArrowRight size={15} />
               </Button>
+            </div>
 
-              <Button
-                variant="outline"
-                size="md"
-                onClick={() => {
-                  const el = document.getElementById("feature-showcase");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                <Play size={14} className="mr-1.5 text-indigo-400" />
-                <span>Try Live Demo</span>
-              </Button>
-
-              <Link to="/mentor-recruitment">
-                <Button variant="ghost" size="md" className="text-zinc-400 hover:text-white">
-                  <Users size={14} className="mr-1.5 text-indigo-400" />
-                  <span>Apply as Mentor</span>
-                </Button>
-              </Link>
+            {/* Trust Signals */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center lg:items-start gap-4">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="inline-block h-8 w-8 rounded-full border-2 border-[#0E0E11] bg-zinc-800 overflow-hidden"
+                  >
+                    <img
+                      src={`https://i.pravatar.cc/100?img=${i + 10}`}
+                      alt="Student"
+                      className="h-full w-full object-cover opacity-80"
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col items-center sm:items-start">
+                <div className="flex items-center gap-1 text-emerald-400">
+                  <Star size={12} fill="currentColor" />
+                  <Star size={12} fill="currentColor" />
+                  <Star size={12} fill="currentColor" />
+                  <Star size={12} fill="currentColor" />
+                  <Star size={12} fill="currentColor" />
+                </div>
+                <p className="text-[11px] text-zinc-500 font-medium mt-0.5">
+                  {approvalRate}% placement & satisfaction rate
+                </p>
+              </div>
             </div>
 
             {/* Mentors & Hiring Partners Trust Band right below CTAs */}
@@ -1509,41 +1521,53 @@ export function HomePage() {
           9. HIGH-CONVERSION BOTTOM HERO CTA BANNER
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-20">
-        <div className="relative overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div className="space-y-2.5">
-              <span className="inline-block rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
-                Next Cohort Starting Soon
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+          className="relative overflow-hidden rounded-2xl border border-indigo-500/20 bg-gradient-to-b from-[#0E0E11] to-[#0A0A0C] p-8 sm:p-12 shadow-2xl"
+        >
+          {/* Subtle glow effect */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
+
+          <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="space-y-4">
+              <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-400">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Applications Open
               </span>
-              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
                 Ready to Build the Future of <span className="text-indigo-400">Ethiopian Tech?</span>
               </h2>
-              <p className="text-xs sm:text-sm leading-relaxed text-zinc-400 max-w-xl">
-                Join thousands of young developers mastering real-world software engineering with live senior
-                mentorship, cloud sandboxes, and collaborative squads.
+              <p className="text-sm leading-relaxed text-zinc-400 max-w-xl">
+                Join {formatCompactCount(activeLearnersCount)}+ developers mastering real-world software engineering
+                with live senior mentorship, cloud sandboxes, and direct hiring pathways.
               </p>
             </div>
 
-            <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
-              <Link to="/register">
-                <Button size="md" className="w-full sm:w-auto font-medium">
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+              <Link to="/register" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto font-medium bg-indigo-600 hover:bg-indigo-500 text-white border-0 transition-transform hover:scale-105 active:scale-95"
+                >
                   <span>Start Coding Free</span>
-                  <ArrowRight size={14} className="ml-1.5" />
+                  <ArrowRight size={16} className="ml-1.5" />
                 </Button>
               </Link>
-              <Link to="/mentor-recruitment">
-                <Button variant="outline" size="md" className="w-full sm:w-auto">
-                  Join as Senior Mentor
-                </Button>
-              </Link>
-              <Link to="/partners">
-                <Button variant="ghost" size="md" className="w-full sm:w-auto text-zinc-400 hover:text-white">
-                  Partner with Us
+              <Link to="/mentor-recruitment" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto border-zinc-700 bg-transparent hover:bg-[#141418] transition-transform hover:scale-105 active:scale-95"
+                >
+                  Join as Mentor
                 </Button>
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );

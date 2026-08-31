@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BookOpen,
@@ -131,7 +132,12 @@ export function StudentDashboardPage() {
   const currentDayIndex = (new Date().getDay() + 6) % 7; // Monday = 0
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      className="space-y-6 text-[var(--text-primary)]"
+    >
       {/* Top Welcome Bar */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
@@ -574,6 +580,6 @@ export function StudentDashboardPage() {
           </Card>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

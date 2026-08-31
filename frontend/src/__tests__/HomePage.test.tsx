@@ -72,7 +72,7 @@ describe("HomePage Component Suite", () => {
     );
 
     const headline = await screen.findByRole("heading", {
-      name: /Building Ethiopia's Tech Future with Hands-On Live Mentorship/i,
+      name: /Building Ethiopia's Tech Future with Live Mentorship/i,
     });
     expect(headline).toBeDefined();
 
