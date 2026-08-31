@@ -753,8 +753,8 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
             <span>Ecosystem Experience</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">What It Looks Like For You</h2>
-          <p className="mt-3 text-base text-zinc-400">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">What It Looks Like For You</h2>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
           </p>
 
@@ -845,10 +845,10 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
               <span>Curriculum Architecture</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               Choose Your Engineering Pathway
             </h2>
-            <p className="mt-3 text-base text-zinc-400">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Hyper-focused tracks designed to build the exact capabilities global and African employers demand.
             </p>
           </div>
@@ -901,7 +901,7 @@ export function HowItWorksPage() {
                         <Sparkles size={12} /> {track.xpReward ?? 6000} XP
                       </span>
                     </div>
-                    <h3 className="mt-3 text-lg font-bold text-white">{track.title}</h3>
+                    <h3 className="mt-3 text-sm font-bold text-white">{track.title}</h3>
                     <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
                       {track.description || "Comprehensive hands-on curriculum with real project checkpoints."}
                     </p>
@@ -934,8 +934,8 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Frequently Asked Questions</h2>
-          <p className="mt-3 text-base text-zinc-400">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Frequently Asked Questions</h2>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             Everything you need to know about our pedagogy, time requirements, mentorship, and certification.
           </p>
 
@@ -985,9 +985,9 @@ export function HowItWorksPage() {
                     onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
                     className="flex w-full items-center justify-between gap-4 p-4 text-left text-white"
                   >
-                    <span className="text-sm font-semibold">{faq.question}</span>
+                    <span className="text-xs sm:text-sm font-semibold">{faq.question}</span>
                     <ChevronDown
-                      size={16}
+                      size={15}
                       className={`shrink-0 text-indigo-400 transition-transform duration-150 ${
                         isExpanded ? "rotate-180" : ""
                       }`}
@@ -1020,33 +1020,33 @@ export function HowItWorksPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-24 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 shadow-lg">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
                 <span>Start Today</span>
               </div>
-              <h2 className="text-2xl font-bold text-white md:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Ready to accelerate your software engineering journey?
               </h2>
-              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
+              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
                 Enroll in a track, meet your squad, and begin building production systems with real diaspora mentors.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto font-medium">
+                <Button size="md" className="w-full sm:w-auto font-medium">
                   Join a Learning Track
                 </Button>
               </Link>
               <Link to="/leaderboard">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button variant="outline" size="md" className="w-full sm:w-auto">
                   See Learner Growth
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-indigo-400 hover:text-white">
-                  Explore Mentorship <ArrowRight size={15} className="ml-1.5" />
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                  Explore Mentorship <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>
             </div>

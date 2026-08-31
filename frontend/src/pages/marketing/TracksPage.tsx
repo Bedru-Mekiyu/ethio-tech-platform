@@ -530,7 +530,7 @@ export function TracksPage() {
       <section className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               Why EthioTech Tracks Are Built Differently
             </h2>
             <p className="text-xs md:text-sm text-zinc-400">
@@ -579,20 +579,20 @@ export function TracksPage() {
       {/* CTA Footer Banner */}
       <section className="relative overflow-hidden border-t border-[#27272A] bg-[#0E0E11] py-14 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Ready to Begin Your Technical Journey?</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Ready to Begin Your Technical Journey?</h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Join hundreds of Ethiopian students and developers learning together, building real projects, and advancing
             their careers.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <Link to="/register">
-              <Button size="lg" className="font-medium">
+              <Button size="md" className="font-medium">
                 Join EthioTech for Free
-                <ArrowRight size={15} className="ml-2" />
+                <ArrowRight size={14} className="ml-1.5" />
               </Button>
             </Link>
             <Link to="/how-it-works">
-              <Button size="lg" variant="outline">
+              <Button size="md" variant="outline">
                 How It Works
               </Button>
             </Link>

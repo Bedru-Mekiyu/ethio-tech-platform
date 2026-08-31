@@ -129,8 +129,8 @@ function RankCard({
           </span>
         ) : null}
       </div>
-      <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
-      <p className="text-sm text-primary">{subtitle}</p>
+      <h3 className="mt-3 text-sm font-semibold text-white">{title}</h3>
+      <p className="text-xs text-indigo-400 font-medium">{subtitle}</p>
       <div className="mt-3 flex flex-wrap justify-center gap-2">
         <Badge variant={featured ? "purple" : "default"}>{podiumText(tab, metric)}</Badge>
         <Badge variant={featured ? "success" : "purple"}>{featured ? "Top ranked" : "Rising"}</Badge>

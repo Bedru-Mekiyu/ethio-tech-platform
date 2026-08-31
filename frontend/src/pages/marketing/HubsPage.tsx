@@ -487,7 +487,7 @@ export function HubsPage() {
         <section className="space-y-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
             <Badge variant="purple">Arrival Verification</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Digital Hub Passes & Physical Check-In</h2>
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Digital Hub Passes & Physical Check-In</h2>
             <p className="text-xs text-zinc-400">
               Present your digital pass QR code at the hub front reception, or enter your pass code to verify attendance
               and claim your +50 XP reward.
@@ -657,7 +657,7 @@ export function HubsPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <Badge variant="purple">Regional Network</Badge>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">Ethiopian Innovation Corridors</h2>
+                <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl mt-1">Ethiopian Innovation Corridors</h2>
                 <p className="text-xs text-zinc-400 mt-0.5">
                   Explore real-time workstation availability, offline caching nodes, and on-duty mentor schedules.
                 </p>
@@ -956,7 +956,7 @@ export function HubsPage() {
           <section className="space-y-8">
             <div className="mx-auto max-w-3xl text-center space-y-2">
               <Badge variant="default">Resilient Offline Design</Badge>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Engineered for High-Reliability Local Operations
               </h2>
               <p className="text-xs text-zinc-400">

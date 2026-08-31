@@ -579,9 +579,9 @@ export function HomePage() {
             </p>
 
             {/* Primary & Secondary Action CTAs */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
               <Button
-                size="lg"
+                size="md"
                 className="gap-2 font-medium"
                 onClick={() => {
                   const el = document.getElementById("curriculum-section");
@@ -589,24 +589,24 @@ export function HomePage() {
                 }}
               >
                 <span>Explore Curriculum</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </Button>
 
               <Button
                 variant="outline"
-                size="lg"
+                size="md"
                 onClick={() => {
                   const el = document.getElementById("feature-showcase");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                <Play size={15} className="mr-2 text-indigo-400" />
+                <Play size={14} className="mr-1.5 text-indigo-400" />
                 <span>Try Live Demo</span>
               </Button>
 
               <Link to="/mentor-recruitment">
-                <Button variant="ghost" size="lg" className="text-zinc-400 hover:text-white">
-                  <Users size={15} className="mr-2 text-indigo-400" />
+                <Button variant="ghost" size="md" className="text-zinc-400 hover:text-white">
+                  <Users size={14} className="mr-1.5 text-indigo-400" />
                   <span>Apply as Mentor</span>
                 </Button>
               </Link>
@@ -863,7 +863,7 @@ export function HomePage() {
                   <span>{activeTabDetails.badge}</span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white sm:text-3xl leading-tight">{activeTabDetails.tagline}</h3>
+                <h3 className="text-xl font-bold text-white sm:text-2xl leading-tight">{activeTabDetails.tagline}</h3>
 
                 <p className="text-sm leading-relaxed text-zinc-400">{activeTabDetails.description}</p>
 
@@ -1483,7 +1483,7 @@ export function HomePage() {
                 className="rounded-lg border border-[#27272A] bg-[#0E0E11] px-3.5 py-2 text-center transition-colors hover:border-zinc-700"
               >
                 <p className="text-xs font-semibold text-white">{p.name}</p>
-                <p className="text-[10px] text-indigo-400">{p.category}</p>
+                <p className="text-[10px] text-zinc-500">{p.category}</p>
               </div>
             ))}
           </div>

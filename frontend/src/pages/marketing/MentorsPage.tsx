@@ -461,7 +461,7 @@ export function MentorsPage() {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <Badge variant="default">Directory</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mt-1">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl mt-1">
               Browse the Mentor Directory
             </h2>
             <p className="text-xs text-zinc-400 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
@@ -537,28 +537,28 @@ export function MentorsPage() {
       </section>
 
       {/* ─── Bottom CTA Banner ─── */}
-      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 text-center space-y-5 shadow-lg">
+      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center space-y-4 shadow-lg">
         <div className="mx-auto max-w-2xl space-y-2">
           <Badge variant="purple">Join the Guild</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Are You a Senior Engineer or Tech Leader?</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Are You a Senior Engineer or Tech Leader?</h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Dedicate 2–4 hours per week to shape Ethiopia&apos;s next generation of software engineers. Benefit from
             leadership credentials, direct talent scouting, and an elite diaspora peer network.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5">
           <Link to="/mentor-recruitment">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Apply to Become a Mentor
             </Button>
           </Link>
           <Link to="/how-it-works">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Explore Mentorship Journey
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="lg" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
               Talk to Guild Coordinator
             </Button>
           </Link>

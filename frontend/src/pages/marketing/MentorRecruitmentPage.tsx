@@ -614,12 +614,12 @@ export function MentorRecruitmentPage() {
 
                   <Button
                     type="submit"
-                    size="lg"
+                    size="md"
                     className="w-full font-medium"
                     disabled={mutation.isPending || !consent}
                   >
                     {mutation.isPending ? "Submitting Application..." : "Submit Application to Mentor Guild"}
-                    <ArrowRight size={15} className="ml-2" />
+                    <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </form>
               )}
@@ -632,7 +632,7 @@ export function MentorRecruitmentPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Guild Voices</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Hear From Our Active Senior Mentors
           </h2>
         </div>
@@ -652,27 +652,27 @@ export function MentorRecruitmentPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 text-center space-y-5 shadow-lg">
+      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center space-y-4 shadow-lg">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Questions About Mentoring?</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Questions About Mentoring?</h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Reach out directly to our Guild Admissions Coordinator for questions regarding scheduling, honorariums, or
             curriculum tracks.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#mentor-form">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Apply to Join the Guild
             </Button>
           </a>
           <Link to="/mentors">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               View Mentor Directory
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="lg" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
               Contact Guild Lead
             </Button>
           </Link>

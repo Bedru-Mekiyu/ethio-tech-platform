@@ -714,10 +714,10 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
               <span>Core Pedagogical Backbone</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               The <span className="text-indigo-400">PISTELS</span> Ideology
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-zinc-400">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Our 7-pillar methodology engineered to systematically develop collaborative software engineers capable of
               shipping at high technical standards.
             </p>
@@ -942,7 +942,7 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2">
               <span>National Impact Model</span>
             </div>
-            <h3 className="text-2xl font-bold leading-tight md:text-3xl text-white">
+            <h3 className="text-xl font-bold leading-tight sm:text-2xl text-white">
               {data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}
             </h3>
             <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
@@ -1002,8 +1002,8 @@ export function AboutPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
             <span>Trajectory & Execution</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Platform Roadmap & Milestones</h2>
-          <p className="mt-3 text-sm text-zinc-400">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Platform Roadmap & Milestones</h2>
+          <p className="mt-2 text-xs sm:text-sm text-zinc-400 font-normal">
             Our multi-year blueprint scaling Ethiopia's digital software engineering infrastructure.
           </p>
 
@@ -1082,8 +1082,8 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
               <span>Institutional Trust</span>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">Governance & Open Impact Model</h2>
-            <p className="mt-3 text-sm text-zinc-400">
+            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Governance & Open Impact Model</h2>
+            <p className="mt-2 text-xs sm:text-sm text-zinc-400 font-normal">
               EthioTech is operated as a transparent, non-profit digital public good dedicated to long-term national
               capacity building.
             </p>
@@ -1128,34 +1128,34 @@ export function AboutPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-20 pt-8 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 shadow-lg">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
                 <span>Join the Movement</span>
               </div>
-              <h2 className="text-2xl font-bold text-white md:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Ready to transform your engineering trajectory?
               </h2>
-              <p className="mt-2 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
+              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
                 Whether you are a university student eager to build production systems or a seasoned diaspora engineer
                 ready to guide the next generation, EthioTech is your platform.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="lg" className="w-full sm:w-auto font-medium">
+                <Button size="md" className="w-full sm:w-auto font-medium">
                   Join as Student
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button variant="outline" size="md" className="w-full sm:w-auto">
                   Become a Mentor
                 </Button>
               </Link>
               <Link to="/how-it-works">
-                <Button variant="ghost" size="lg" className="w-full sm:w-auto text-indigo-400 hover:text-white">
-                  Explore Learning Flow <ArrowRight size={15} className="ml-1.5" />
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                  Explore Learning Flow <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>
             </div>

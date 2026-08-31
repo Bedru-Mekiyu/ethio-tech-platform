@@ -429,7 +429,7 @@ export function PartnersPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Institutional Voices</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Trusted by Leaders Across the Ecosystem
           </h2>
           <p className="text-xs text-zinc-400">
@@ -461,7 +461,7 @@ export function PartnersPage() {
                 <span>Institutional Relations</span>
               </div>
 
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Let&apos;s Build Together</h2>
+              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Let&apos;s Build Together</h2>
 
               <p className="text-xs leading-relaxed text-zinc-400">
                 Submit your partnership requirements. Our Institutional Alliances team will prepare a tailored
@@ -628,9 +628,9 @@ export function PartnersPage() {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full font-medium" disabled={isSubmitting}>
+                  <Button type="submit" size="md" className="w-full font-medium" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting Inquiry..." : "Submit Institutional Partnership Inquiry"}
-                    <ArrowRight size={15} className="ml-2" />
+                    <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </form>
               )}
@@ -643,7 +643,7 @@ export function PartnersPage() {
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Institutional FAQ</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Frequently Asked Questions</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Frequently Asked Questions</h2>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
@@ -657,29 +657,29 @@ export function PartnersPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 text-center space-y-5 shadow-lg">
+      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center space-y-4 shadow-lg">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Ready to shape Ethiopia&apos;s digital workforce?
           </h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Download our institutional partnership one-pager or connect directly with our partnerships lead.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#partner-inquiry">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Initiate Collaboration
             </Button>
           </a>
           <Link to="/how-it-works">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Explore Learning Engine
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="lg" className="text-indigo-400 hover:text-white">
-              Contact Platform Team
+            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
+              Contact Leadership
             </Button>
           </Link>
         </div>

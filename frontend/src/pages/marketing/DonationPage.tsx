@@ -666,7 +666,7 @@ export function DonationPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="success">Hardware Drive</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
             Donate Laptops & Regional Hub Equipment
           </h2>
           <p className="text-xs text-zinc-400">
@@ -750,7 +750,7 @@ export function DonationPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Zero Overhead Waste</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Transparent Fund Allocation</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Transparent Fund Allocation</h2>
           <p className="text-xs text-zinc-400">
             We publish quarterly audited reports. Our platform core is independently underwritten so that 100% of your
             gift directly fuels student learning.
@@ -774,7 +774,7 @@ export function DonationPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Donor Honor Roll</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Donor Recognition & Stewardship</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Donor Recognition & Stewardship</h2>
           <p className="text-xs text-zinc-400">
             We honor every patron who invests in the next generation of Ethiopian builders.
           </p>
@@ -865,27 +865,27 @@ export function DonationPage() {
       )}
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-8 md:p-10 text-center space-y-5 shadow-lg">
+      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center space-y-4 shadow-lg">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">Have Questions About Institutional Grants?</h2>
+          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Have Questions About Institutional Grants?</h2>
           <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
             Our Philanthropy & Grants Committee is available to review multi-year scholarship endowments, CSR budgets,
             and 501(c)(3) fiscal sponsorships.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#donate-now">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Sponsor a Student Today
             </Button>
           </a>
           <Link to="/partners">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Explore Partner Frameworks
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="lg" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
               Contact Grants Committee
             </Button>
           </Link>
