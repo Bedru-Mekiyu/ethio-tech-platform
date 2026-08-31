@@ -190,13 +190,13 @@ function MentorStatCard({
   tone?: "primary" | "purple" | "success" | "warning";
 }) {
   return (
-    <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700 shadow-md">
-      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-indigo-400">
-        <Icon size={16} />
+    <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center transition hover:border-zinc-700 shadow-md">
+      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-indigo-400">
+        <Icon size={15} />
       </div>
-      <p className="mt-3 text-2xl font-bold tracking-tight text-white font-mono">{value}</p>
+      <p className="mt-2 text-xl font-bold tracking-tight text-white font-mono">{value}</p>
       <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-zinc-500">{label}</p>
-      <p className="mt-0.5 text-[11px] text-zinc-400">{helper}</p>
+      <p className="mt-0.5 text-xs text-zinc-400">{helper}</p>
     </Card>
   );
 }

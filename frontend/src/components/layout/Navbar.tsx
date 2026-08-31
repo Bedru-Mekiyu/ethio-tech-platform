@@ -12,13 +12,10 @@ export interface NavItem {
 }
 
 const MARKETING_NAV_ITEMS: NavItem[] = [
-  { to: "/", label: "Home" },
   { to: "/tracks", label: "Tracks" },
-  { to: "/how-it-works", label: "Programs" },
+  { to: "/how-it-works", label: "How It Works" },
   { to: "/mentors", label: "Mentors" },
   { to: "/hubs", label: "Hubs" },
-  { to: "/leaderboard", label: "Leaderboard" },
-  { to: "/community", label: "Community" },
   { to: "/about", label: "About" },
 ];
 
