@@ -93,21 +93,21 @@ function StatCard({
 }) {
   const toneClass =
     tone === "success"
-      ? "bg-success/10 text-success"
+      ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
       : tone === "warning"
-        ? "bg-warning/10 text-warning"
+        ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
         : tone === "secondary"
-          ? "bg-secondary/10 text-secondary"
-          : "bg-primary/10 text-primary";
+          ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+          : "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20";
 
   return (
-    <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-      <div className={`flex h-11 w-11 items-center justify-center rounded-2xl ${toneClass}`}>
-        <Icon size={18} />
+    <Card className="border border-[#27272A] bg-[#0E0E11] p-4">
+      <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${toneClass}`}>
+        <Icon size={15} />
       </div>
-      <p className="mt-4 text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
-      <p className="mt-2 text-2xl font-semibold text-white">{value}</p>
-      {note && <p className="mt-2 text-xs text-[var(--text-secondary)]">{note}</p>}
+      <p className="mt-3 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">{label}</p>
+      <p className="mt-1 text-xl font-bold text-white font-mono">{value}</p>
+      {note && <p className="mt-0.5 text-xs text-zinc-400">{note}</p>}
     </Card>
   );
 }

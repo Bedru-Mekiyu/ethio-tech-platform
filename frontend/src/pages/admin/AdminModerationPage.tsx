@@ -140,14 +140,14 @@ function StatCard({ label, count, active, onClick }: { label: string; count: num
       role="button"
       tabIndex={0}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
-      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-200 ${
+      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 ${
         active
-          ? "border-primary bg-primary/10 shadow-[0_0_15px_rgba(20,184,166,0.15)] ring-1 ring-primary/40"
-          : "border-[var(--border)] bg-[var(--bg-card)]/70 hover:border-primary/30 hover:bg-[var(--bg-card)]"
+          ? "border-indigo-500 bg-indigo-500/10 shadow-sm"
+          : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
       }`}
     >
-      <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">{label}</p>
-      <p className="mt-2 text-2xl font-bold text-white">{count}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{label}</p>
+      <p className="mt-1.5 text-xl font-bold text-white font-mono">{count}</p>
     </div>
   );
 }

@@ -29,20 +29,22 @@ export function ParentDashboardPage() {
   }
 
   return (
-    <div className="page-shell space-y-8">
-      <Card className="hero-shell p-6">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="max-w-3xl space-y-3">
-            <h1 className="text-2xl font-bold md:text-3xl">Welcome back, {firstName}</h1>
-            <p className="section-copy">Monitor linked learners&apos; progress, sessions, and platform activity.</p>
+    <div className="space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="max-w-3xl space-y-1">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Welcome back, {firstName}</h1>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Monitor linked learners&apos; progress, milestone completion, and platform learning engagement.
+            </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             <Link to="/parent/settings">
-              <Button variant="outline">Account settings</Button>
+              <Button variant="outline" size="sm" className="text-xs">Account settings</Button>
             </Link>
             <Link to="/app/notifications">
-              <Button variant="secondary">
-                <Bell size={16} /> Notifications
+              <Button variant="secondary" size="sm" className="gap-1 text-xs">
+                <Bell size={13} /> Notifications
               </Button>
             </Link>
           </div>
@@ -57,60 +59,62 @@ export function ParentDashboardPage() {
           onAction={() => navigate("/contact")}
         />
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3.5 md:grid-cols-2 xl:grid-cols-3">
           {learners.map((learner) => (
-            <Card key={learner.id} className="surface-panel p-6">
-              <div className="flex items-center gap-3">
-                <Users className="text-primary" size={18} />
-                <p className="font-semibold text-white">{learner.fullName}</p>
+            <Card key={learner.id} className="border-[#27272A] bg-[#0E0E11] p-4.5">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                  <Users size={15} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{learner.fullName}</p>
+                  <p className="text-[11px] text-zinc-500">Level {learner.level ?? 1} · {learner.xp ?? 0} XP</p>
+                </div>
               </div>
-              <div className="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
-                <p>
-                  Level {learner.level ?? 1} · {learner.xp ?? 0} XP
-                </p>
-                <p>
-                  Lessons completed: {learner.lessonsCompleted} · Projects approved: {learner.approvedProjects}/
-                  {learner.submissions}
-                </p>
-                <p>Enrolled tracks: {learner.enrolledTrackCount}</p>
+              <div className="mt-3.5 space-y-1.5 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-xs text-zinc-400">
+                <p>Lessons completed: <span className="font-semibold text-white">{learner.lessonsCompleted}</span></p>
+                <p>Projects approved: <span className="font-semibold text-emerald-400">{learner.approvedProjects}</span> / {learner.submissions}</p>
+                <p>Enrolled tracks: <span className="font-semibold text-white">{learner.enrolledTrackCount}</span></p>
               </div>
-              <Link to="/app/dashboard" className="mt-4 inline-block text-sm text-primary hover:underline">
-                View learning hub
-              </Link>
+              <div className="mt-3 pt-2 border-t border-[#27272A]">
+                <Link to="/app/dashboard" className="text-xs font-medium text-indigo-400 hover:underline">
+                  View Learning Hub →
+                </Link>
+              </div>
             </Card>
           ))}
         </div>
       )}
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card className="surface-panel p-6">
-          <div className="flex items-center gap-3">
-            <ShieldCheck className="text-primary" size={18} />
-            <p className="font-semibold">Access status</p>
+      <div className="grid gap-3.5 md:grid-cols-3">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4.5">
+          <div className="flex items-center gap-2 text-indigo-400">
+            <ShieldCheck size={16} />
+            <p className="text-xs font-semibold text-white">Access Status</p>
           </div>
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
-            Parent accounts use role-based access and short-lived tokens.
+          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+            Parent accounts use role-based access and short-lived tokens for secure family oversight.
           </p>
         </Card>
-        <Card className="surface-panel p-6">
-          <div className="flex items-center gap-3">
-            <BookOpen className="text-secondary" size={18} />
-            <p className="font-semibold">Progress</p>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4.5">
+          <div className="flex items-center gap-2 text-indigo-400">
+            <BookOpen size={16} />
+            <p className="text-xs font-semibold text-white">Live Progress</p>
           </div>
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
-            Lesson completion and project approvals update as learners work.
+          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+            Lesson completion and project approvals update dynamically as learners work through tracks.
           </p>
         </Card>
-        <Card className="surface-panel p-6">
-          <div className="flex items-center gap-3">
-            <Sparkles className="text-warning" size={18} />
-            <p className="font-semibold">Support</p>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4.5">
+          <div className="flex items-center gap-2 text-amber-400">
+            <Sparkles size={16} />
+            <p className="text-xs font-semibold text-white">Support & Inquiries</p>
           </div>
-          <p className="mt-3 text-sm text-[var(--text-secondary)]">
-            Need to link another learner? Contact the platform team.
+          <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+            Need to link another student? Our team is available 24/7.
           </p>
-          <Link to="/contact" className="mt-3 inline-block text-sm text-primary hover:underline">
-            Get help
+          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-indigo-400 hover:underline">
+            Contact Support →
           </Link>
         </Card>
       </div>

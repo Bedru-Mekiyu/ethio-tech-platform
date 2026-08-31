@@ -90,34 +90,34 @@ function ScheduleRow({
   const capacityPct = max ? Math.min(100, (participantCount / max) * 100) : 0;
 
   return (
-    <Card className="flex flex-wrap items-center justify-between gap-4 border-[var(--border)] bg-[var(--bg-card)]/95 p-4">
+    <Card className="flex flex-wrap items-center justify-between gap-4 border-[#27272A] bg-[#0E0E11] p-4">
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <p className="truncate font-semibold text-white">{session.title}</p>
+          <p className="truncate font-semibold text-white text-sm">{session.title}</p>
           {isLive ? (
-            <Badge variant="warning" className="shrink-0">
+            <Badge variant="warning" size="sm" className="shrink-0">
               Live
             </Badge>
           ) : null}
           {isFull && !isLive ? (
-            <Badge variant="danger" className="shrink-0">
+            <Badge variant="danger" size="sm" className="shrink-0">
               Full
             </Badge>
           ) : null}
         </div>
-        <p className="text-sm text-[var(--text-muted)]">{new Date(session.scheduledAt).toLocaleString()}</p>
+        <p className="text-xs text-zinc-400 mt-0.5">{new Date(session.scheduledAt).toLocaleString()}</p>
         {max > 0 ? (
           <div className="mt-2 flex items-center gap-2">
-            <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-white/10">
+            <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-[#141418] border border-[#27272A]">
               <div
                 className={cn(
                   "h-full rounded-full",
-                  isFull ? "bg-red-500" : capacityPct > 80 ? "bg-amber-500" : "bg-primary",
+                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-indigo-500",
                 )}
                 style={{ width: `${capacityPct}%` }}
               />
             </div>
-            <span className="text-[10px] text-[var(--text-muted)]">
+            <span className="text-[10px] text-zinc-500">
               {participantCount}/{max}
             </span>
           </div>
@@ -126,21 +126,21 @@ function ScheduleRow({
       <div className="flex shrink-0 gap-2">
         {isLive ? (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm">Join</Button>
+            <Button size="sm" className="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-medium">Join Live</Button>
           </Link>
         ) : isEnded ? (
           <Link to={`/app/sessions/${session._id}/feedback`}>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" className="text-xs">
               Feedback
             </Button>
           </Link>
         ) : isFull ? (
-          <Button size="sm" variant="outline" disabled={isWaitlisting} onClick={onWaitlist}>
+          <Button size="sm" variant="outline" className="text-xs" disabled={isWaitlisting} onClick={onWaitlist}>
             {isWaitlisting ? "…" : "Join waitlist"}
           </Button>
         ) : (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm">Open</Button>
+            <Button size="sm" variant="outline" className="text-xs">Open</Button>
           </Link>
         )}
       </div>
@@ -166,31 +166,31 @@ function RecordingCard({ recording }: { recording: Recording }) {
   };
 
   return (
-    <Card className="overflow-hidden border-[var(--border)] bg-[var(--bg-card)]">
-      <div className="relative h-32 bg-gradient-to-br from-primary/20 via-[var(--bg-card)] to-secondary/20">
+    <Card className="overflow-hidden border-[#27272A] bg-[#0E0E11]">
+      <div className="relative h-28 bg-[#141418] border-b border-[#27272A]">
         {recording.thumbnailUrl ? (
           <img src={recording.thumbnailUrl} alt="" className="h-full w-full object-cover" />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <Video size={36} className="text-primary/30" />
+            <Video size={30} className="text-zinc-600" />
           </div>
         )}
         {recording.durationMinutes ? (
-          <div className="absolute bottom-2 right-2 rounded-md bg-black/70 px-1.5 py-0.5 text-xs text-white">
+          <div className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-[10px] text-zinc-300 font-mono">
             {formatDuration(recording.durationMinutes)}
           </div>
         ) : null}
       </div>
-      <div className="p-4">
-        <h3 className="line-clamp-2 font-semibold text-white">{recording.title}</h3>
-        <div className="mt-2 flex items-center gap-3 text-xs text-[var(--text-muted)]">
+      <div className="p-3.5">
+        <h3 className="line-clamp-2 font-semibold text-white text-xs">{recording.title}</h3>
+        <div className="mt-2 flex items-center gap-3 text-[11px] text-zinc-400">
           <span className="flex items-center gap-1">
-            <CalendarDays size={12} /> {formatRelativeDate(recording.publishedAt)}
+            <CalendarDays size={11} className="text-zinc-500" /> {formatRelativeDate(recording.publishedAt)}
           </span>
           {watchedPercent > 0 && !isCompleted ? <span>{watchedPercent}% watched</span> : null}
         </div>
-        <Button className="mt-3 w-full" size="sm" variant={isCompleted ? "outline" : "primary"} onClick={handlePlay}>
-          <Play size={14} />
+        <Button className="mt-3 w-full text-xs" size="sm" variant={isCompleted ? "outline" : "primary"} onClick={handlePlay}>
+          <Play size={12} className="mr-1" />
           {isCompleted ? "Rewatch" : watchedPercent > 0 ? "Continue" : "Watch"}
         </Button>
       </div>

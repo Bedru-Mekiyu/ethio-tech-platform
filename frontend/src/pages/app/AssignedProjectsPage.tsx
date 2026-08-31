@@ -70,37 +70,40 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col gap-3 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
-      <div className="flex items-start justify-between gap-3">
-        <Badge variant={statusTone}>{project.category}</Badge>
-        <span className="text-xs text-success">+{project.xpReward ?? 0} XP</span>
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-        <p className="text-xs text-[var(--text-secondary)]">{project.trackTitle}</p>
-      </div>
-      <p className="text-sm leading-6 text-[var(--text-secondary)] line-clamp-3">
-        {project.description ?? "Project work assigned through your learning track."}
-      </p>
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-          <span>Progress</span>
-          <span>{project.completionPercent}%</span>
+    <Card className="flex h-full flex-col justify-between gap-3 border-[#27272A] bg-[#0E0E11] p-4.5">
+      <div className="space-y-2.5">
+        <div className="flex items-start justify-between gap-3">
+          <Badge variant={statusTone} size="sm">{project.category}</Badge>
+          <span className="text-xs font-semibold text-emerald-400">+{project.xpReward ?? 0} XP</span>
         </div>
-        <ProgressBar value={project.completionPercent} max={100} color="primary" />
-      </div>
-      {project.feedback ? (
-        <p className="rounded-2xl border border-success/20 bg-success/10 p-3 text-xs leading-5 text-white">
-          {project.feedback}
+        <div>
+          <h3 className="text-sm font-semibold text-white">{project.title}</h3>
+          <p className="text-[11px] text-zinc-400 mt-0.5">{project.trackTitle}</p>
+        </div>
+        <p className="text-xs leading-relaxed text-zinc-400 line-clamp-3">
+          {project.description ?? "Project work assigned through your learning track."}
         </p>
-      ) : null}
-      <div className="mt-auto flex flex-wrap gap-2">
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs text-zinc-400">
+            <span>Progress</span>
+            <span className="font-semibold text-white">{project.completionPercent}%</span>
+          </div>
+          <ProgressBar value={project.completionPercent} max={100} color="primary" className="h-1.5" />
+        </div>
+        {project.feedback ? (
+          <p className="rounded-lg border border-emerald-500/20 bg-emerald-950/20 p-2.5 text-xs leading-relaxed text-zinc-300">
+            {project.feedback}
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#27272A]">
         <Link to={actionRoute}>
-          <Button size="sm">{actionLabel}</Button>
+          <Button size="sm" className="text-xs">{actionLabel}</Button>
         </Link>
         {project.trackId ? (
           <Link to={`/app/tracks/${project.trackId}`}>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" className="text-xs">
               Track
             </Button>
           </Link>
@@ -115,55 +118,59 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const overdue = isOverdue(assignment.dueDate) && status === "pending";
 
   return (
-    <Card className="flex h-full flex-col gap-3 border-[var(--border)] bg-[var(--bg-card)]/95 p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
-            {assignmentTypeIcons[assignment.type] ?? <FileText size={14} />}
+    <Card className="flex h-full flex-col justify-between gap-3 border-[#27272A] bg-[#0E0E11] p-4.5">
+      <div className="space-y-2.5">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#141418] text-indigo-400 border border-[#27272A]">
+              {assignmentTypeIcons[assignment.type] ?? <FileText size={13} />}
+            </div>
+            <Badge
+              size="sm"
+              variant={
+                status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"
+              }
+            >
+              {status}
+            </Badge>
           </div>
-          <Badge
-            variant={
-              status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"
-            }
-          >
-            {status}
-          </Badge>
+          <span className="text-xs text-zinc-500 font-mono">{assignment.maxScore} pts</span>
         </div>
-        <span className="text-xs text-[var(--text-muted)]">{assignment.maxScore} pts</span>
+        <div>
+          <h3 className="text-sm font-semibold text-white">{assignment.title}</h3>
+          <p className="mt-0.5 text-xs text-zinc-400 line-clamp-2 leading-relaxed">{assignment.description}</p>
+        </div>
+        <div className="flex items-center gap-3 text-xs text-zinc-400">
+          <span className="flex items-center gap-1">
+            {overdue ? <AlertTriangle size={12} className="text-amber-400" /> : <Clock size={12} className="text-zinc-500" />}
+            <span className={overdue ? "text-amber-400 font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
+          </span>
+          {assignment.estimatedMinutes > 0 ? <span>~{assignment.estimatedMinutes} min</span> : null}
+        </div>
+        {assignment.submission?.grade != null ? (
+          <p className="rounded-lg border border-emerald-500/20 bg-emerald-950/20 p-2.5 text-xs text-white">
+            Grade: {assignment.submission.grade}/{assignment.maxScore}
+          </p>
+        ) : null}
       </div>
-      <div>
-        <h3 className="text-lg font-semibold text-white">{assignment.title}</h3>
-        <p className="mt-1 text-sm text-[var(--text-secondary)] line-clamp-2">{assignment.description}</p>
-      </div>
-      <div className="flex items-center gap-3 text-xs text-[var(--text-secondary)]">
-        <span className="flex items-center gap-1">
-          {overdue ? <AlertTriangle size={12} className="text-warning" /> : <Clock size={12} />}
-          <span className={overdue ? "text-warning font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
-        </span>
-        {assignment.estimatedMinutes > 0 ? <span>~{assignment.estimatedMinutes} min</span> : null}
-      </div>
-      {assignment.submission?.grade != null ? (
-        <p className="rounded-2xl border border-success/20 bg-success/10 p-3 text-xs text-white">
-          Grade: {assignment.submission.grade}/{assignment.maxScore}
-        </p>
-      ) : null}
-      <div className="mt-auto flex flex-wrap gap-2">
+
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#27272A]">
         {status === "pending" ? (
           <Link to={`/app/projects/submit?mode=submit&assignmentId=${assignment._id}`}>
-            <Button size="sm">
-              <Upload size={14} className="mr-1" />
+            <Button size="sm" className="text-xs">
+              <Upload size={13} className="mr-1" />
               Submit
             </Button>
           </Link>
         ) : status === "graded" ? (
           <Link to={`/app/projects/submit?mode=feedback&assignmentId=${assignment._id}`}>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" className="text-xs">
               View feedback
             </Button>
           </Link>
         ) : (
           <Link to={`/app/projects/submit?mode=view&assignmentId=${assignment._id}`}>
-            <Button size="sm" variant="outline">
+            <Button size="sm" variant="outline" className="text-xs">
               View submission
             </Button>
           </Link>
