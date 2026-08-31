@@ -63,8 +63,6 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   background-color: var(--bg-base);
-  background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.05), transparent 70%);
-  background-attachment: fixed;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -90,7 +88,7 @@ img {
 }
 
 ::selection {
-  background: rgba(79, 70, 229, 0.35);
+  background: rgba(99, 102, 241, 0.35);
   color: #ffffff;
 }
 
@@ -111,50 +109,44 @@ img {
 }
 
 .text-gradient-primary {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 /* ─── Modern Glassmorphism & Surface Utilities ─── */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(14, 14, 17, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .glow-border {
-  box-shadow: var(--shadow-glow);
+  border-color: var(--border-strong);
 }
 
 .card-surface {
-  background: #0F172A;
+  background: #0e0e11;
   border: 1px solid var(--border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
 }
 
 .surface-panel {
   border: 1px solid var(--border);
-  border-radius: var(--radius-2xl);
-  background: #0F172A;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
+  background: #0e0e11;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-shell {
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-3xl);
-  background: #0F172A;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: #0e0e11;
   box-shadow: var(--shadow-panel);
 }
 
@@ -235,74 +227,149 @@ dialog {
 
 /* ─── Keyframes ─── */
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-out {
-  from { opacity: 1; }
-  to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes zoom-in-95 {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translate3d(0, var(--space-4), 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--space-4), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes slide-down {
-  from { opacity: 0; transform: translate3d(0, calc(-1 * var(--space-4)), 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+  from {
+    opacity: 0;
+    transform: translate3d(0, calc(-1 * var(--space-4)), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes slide-in-from-right {
-  from { opacity: 0; transform: translate3d(var(--space-5), 0, 0); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translate3d(var(--space-5), 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slide-in-from-left {
-  from { opacity: 0; transform: translate3d(calc(-1 * var(--space-5)), 0, 0); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translate3d(calc(-1 * var(--space-5)), 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translate3d(0, var(--space-3), 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--space-3), 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(79, 70, 229, 0.1); }
-  50% { box-shadow: 0 0 16px rgba(79, 70, 229, 0.2); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(79, 70, 229, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(79, 70, 229, 0.2);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
 }
 
 /* ─── Animation Classes ─── */
@@ -364,9 +431,10 @@ dialog {
 
 /* ─── Interactive Utilities ─── */
 .hover-lift {
-  transition: transform var(--motion-base) var(--ease-out),
-              box-shadow var(--motion-base) var(--ease-out),
-              border-color var(--motion-base) var(--ease-out);
+  transition:
+    transform var(--motion-base) var(--ease-out),
+    box-shadow var(--motion-base) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out);
 }
 
 .hover-lift:hover {
@@ -388,7 +456,9 @@ dialog {
 
 /* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

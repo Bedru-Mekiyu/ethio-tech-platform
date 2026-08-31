@@ -10,12 +10,12 @@ export interface BadgeProps {
 
 export function Badge({ className, variant = "default", size = "md", showDot = false, children }: BadgeProps) {
   const variants = {
-    default: "border-[#334155]/60 bg-[#1E293B]/60 text-slate-300 hover:bg-[#1E293B] hover:text-white",
+    default: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
     success: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/15",
     warning: "border-amber-500/20 bg-amber-500/10 text-amber-400 hover:bg-amber-500/15",
     purple: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/15",
     danger: "border-rose-500/20 bg-rose-500/10 text-rose-400 hover:bg-rose-500/15",
-    cyan: "border-[#334155]/60 bg-[#1E293B]/60 text-slate-300 hover:bg-[#1E293B] hover:text-white",
+    cyan: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
   };
 
   const sizes = {
@@ -24,12 +24,12 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
   };
 
   const dotColors = {
-    default: "bg-slate-400",
+    default: "bg-zinc-400",
     success: "bg-emerald-400",
     warning: "bg-amber-400",
     purple: "bg-indigo-400",
     danger: "bg-rose-400",
-    cyan: "bg-slate-400",
+    cyan: "bg-zinc-400",
   };
 
   return (
@@ -46,4 +46,3 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
     </span>
   );
 }
-

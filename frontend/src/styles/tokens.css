@@ -1,99 +1,99 @@
 :root {
-  /* ─── Modern Sleek Monochromatic Palette (Apple / Vercel / Linear Aesthetic) ─── */
-  --bg-base: #090D16;
-  --bg-elevated: #0F172A;
-  --bg-card: #0F172A;
-  --bg-card-hover: #1E293B;
-  --bg-surface: rgba(15, 23, 42, 0.75);
-  --bg-surface-strong: rgba(15, 23, 42, 0.95);
-  --bg-overlay: rgba(9, 13, 22, 0.8);
-  --bg-input: #0F172A;
+  /* ─── Minimal Dark Theme (Linear / Vercel / Raycast Aesthetic) ─── */
+  --bg-base: #050507;
+  --bg-elevated: #0e0e11;
+  --bg-card: #0e0e11;
+  --bg-card-hover: #16161a;
+  --bg-surface: rgba(14, 14, 17, 0.7);
+  --bg-surface-strong: rgba(14, 14, 17, 0.95);
+  --bg-overlay: rgba(0, 0, 0, 0.75);
+  --bg-input: #0e0e11;
 
-  /* ─── Primary Brand Accent (Clean Indigo) ─── */
-  --primary: #4F46E5;
-  --primary-hover: #4338CA;
-  --primary-light: #6366F1;
-  --primary-muted: rgba(79, 70, 229, 0.12);
-  --primary-subtle: rgba(79, 70, 229, 0.06);
+  /* ─── Single Brand Accent Color (Electric Indigo) ─── */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: #818cf8;
+  --primary-muted: rgba(99, 102, 241, 0.1);
+  --primary-subtle: rgba(99, 102, 241, 0.05);
 
-  /* Functional Fallback Aliases Mapped to Indigo / Slate ─── */
-  --secondary: #4F46E5;
-  --secondary-hover: #4338CA;
-  --secondary-muted: rgba(79, 70, 229, 0.12);
-  --secondary-subtle: rgba(79, 70, 229, 0.06);
+  /* Fallback aliases strictly mapped to primary & neutral zinc ─── */
+  --secondary: #6366f1;
+  --secondary-hover: #4f46e5;
+  --secondary-muted: rgba(99, 102, 241, 0.1);
+  --secondary-subtle: rgba(99, 102, 241, 0.05);
 
-  --accent: #4F46E5;
-  --accent-hover: #4338CA;
-  --accent-muted: rgba(79, 70, 229, 0.12);
-  --accent-subtle: rgba(79, 70, 229, 0.06);
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-muted: rgba(99, 102, 241, 0.1);
+  --accent-subtle: rgba(99, 102, 241, 0.05);
 
-  --indigo: #4F46E5;
-  --indigo-hover: #4338CA;
-  --cyan: #6366F1;
-  --cyan-hover: #4F46E5;
-  --cyan-muted: rgba(99, 102, 241, 0.12);
-  --violet: #4F46E5;
-  --violet-hover: #4338CA;
+  --indigo: #6366f1;
+  --indigo-hover: #4f46e5;
+  --cyan: #6366f1;
+  --cyan-hover: #4f46e5;
+  --cyan-muted: rgba(99, 102, 241, 0.1);
+  --violet: #6366f1;
+  --violet-hover: #4f46e5;
 
-  /* ─── Feedback & Status Colors (Functional & Semantic) ─── */
-  --success: #10B981;
-  --success-muted: rgba(16, 185, 129, 0.12);
-  --warning: #F59E0B;
-  --warning-muted: rgba(245, 158, 11, 0.12);
-  --danger: #EF4444;
-  --danger-hover: #DC2626;
-  --danger-muted: rgba(239, 68, 68, 0.12);
+  /* ─── Semantic Status Colors (Functional Only) ─── */
+  --success: #10b981;
+  --success-muted: rgba(16, 185, 129, 0.1);
+  --warning: #f59e0b;
+  --warning-muted: rgba(245, 158, 11, 0.1);
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-muted: rgba(239, 68, 68, 0.1);
 
-  /* ─── Typography Colors ─── */
-  --text-primary: #F8FAFC;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
-  --text-danger: #EF4444;
-  --text-inverse: #FFFFFF;
+  /* ─── High-Contrast Typography ─── */
+  --text-primary: #ededed;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-danger: #ef4444;
+  --text-inverse: #050507;
 
-  /* ─── Neutral Slate Borders ─── */
-  --border: #1E293B;
-  --border-strong: #334155;
-  --border-focus: #4F46E5;
-  --border-glass: rgba(255, 255, 255, 0.06);
+  /* ─── Subtle Zinc Hairline Borders ─── */
+  --border: #27272a;
+  --border-strong: #3f3f46;
+  --border-focus: #6366f1;
+  --border-glass: rgba(255, 255, 255, 0.08);
 
   /* ─── Glassmorphism Defaults ─── */
-  --glass-bg: rgba(15, 23, 42, 0.75);
-  --glass-border: #1E293B;
-  --glass-blur: blur(16px);
+  --glass-bg: rgba(14, 14, 17, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(12px);
 
   /* ─── Spacing Scale (4px base) ─── */
   --space-px: 1px;
   --space-0: 0;
-  --space-0-5: 0.125rem;  /* 2px */
-  --space-1: 0.25rem;     /* 4px */
-  --space-1-5: 0.375rem;  /* 6px */
-  --space-2: 0.5rem;      /* 8px */
-  --space-2-5: 0.625rem;  /* 10px */
-  --space-3: 0.75rem;     /* 12px */
-  --space-3-5: 0.875rem;  /* 14px */
-  --space-4: 1rem;        /* 16px */
-  --space-5: 1.25rem;     /* 20px */
-  --space-6: 1.5rem;      /* 24px */
-  --space-7: 1.75rem;     /* 28px */
-  --space-8: 2rem;        /* 32px */
-  --space-10: 2.5rem;     /* 40px */
-  --space-12: 3rem;       /* 48px */
-  --space-14: 3.5rem;     /* 56px */
-  --space-16: 4rem;       /* 64px */
-  --space-20: 5rem;       /* 80px */
-  --space-24: 6rem;       /* 96px */
+  --space-0-5: 0.125rem; /* 2px */
+  --space-1: 0.25rem; /* 4px */
+  --space-1-5: 0.375rem; /* 6px */
+  --space-2: 0.5rem; /* 8px */
+  --space-2-5: 0.625rem; /* 10px */
+  --space-3: 0.75rem; /* 12px */
+  --space-3-5: 0.875rem; /* 14px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-7: 1.75rem; /* 28px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-14: 3.5rem; /* 56px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
 
   /* ─── Typography Scale ─── */
-  --text-xs: 0.75rem;     /* 12px */
-  --text-sm: 0.875rem;    /* 14px */
-  --text-base: 1rem;      /* 16px */
-  --text-lg: 1.125rem;    /* 18px */
-  --text-xl: 1.25rem;     /* 20px */
-  --text-2xl: 1.5rem;     /* 24px */
-  --text-3xl: 1.875rem;   /* 30px */
-  --text-4xl: 2.25rem;    /* 36px */
-  --text-5xl: 3rem;       /* 48px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
 
   --leading-none: 1;
   --leading-tight: 1.15;
@@ -110,35 +110,35 @@
   --tracking-widest: 0.2em;
 
   /* ─── Font ─── */
-  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* ─── Border Radius ─── */
   --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
-  --radius-3xl: 32px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 28px;
   --radius-full: 9999px;
 
-  /* ─── Shadow Depth & Ambient Lighting System (Restrained & Purposeful) ─── */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.45);
-  --shadow-xl: 0 20px 32px rgba(0, 0, 0, 0.5);
-  --shadow-2xl: 0 28px 48px rgba(0, 0, 0, 0.6);
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-panel: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px #1E293B;
-  --shadow-glow: 0 0 16px rgba(79, 70, 229, 0.15);
-  --shadow-glow-sm: 0 0 8px rgba(79, 70, 229, 0.1);
-  --shadow-glow-lg: 0 0 28px rgba(79, 70, 229, 0.2);
-  --shadow-glow-cyan: 0 0 16px rgba(79, 70, 229, 0.15);
-  --shadow-glow-purple: 0 0 16px rgba(79, 70, 229, 0.15);
-  --shadow-glow-violet: 0 0 16px rgba(79, 70, 229, 0.15);
-  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px #334155;
-  --shadow-input-focus: 0 0 0 2px rgba(79, 70, 229, 0.25);
+  /* ─── Restrained Shadows & Elevation ─── */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 32px rgba(0, 0, 0, 0.7);
+  --shadow-2xl: 0 28px 48px rgba(0, 0, 0, 0.8);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-panel: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px #27272a;
+  --shadow-glow: none;
+  --shadow-glow-sm: none;
+  --shadow-glow-lg: none;
+  --shadow-glow-cyan: none;
+  --shadow-glow-purple: none;
+  --shadow-glow-violet: none;
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px #3f3f46;
+  --shadow-input-focus: 0 0 0 2px rgba(99, 102, 241, 0.3);
 
   /* ─── Z-Index Scale ─── */
   --z-base: 0;
@@ -167,14 +167,16 @@
 
   --transition-colors: color, background-color, border-color, text-decoration-color, fill, stroke;
   --transition-transform: transform;
-  --transition-all: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  --transition-all:
+    color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
 
   /* ─── Focus Ring ─── */
-  --focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px rgba(79, 70, 229, 0.4);
+  --focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px rgba(99, 102, 241, 0.5);
   --focus-ring-inset: inset 0 0 0 2px var(--primary);
 
   /* ─── Content Width ─── */
-  --content-max: 80rem;    /* 1280px */
+  --content-max: 80rem; /* 1280px */
   --content-narrow: 42rem; /* 672px */
-  --content-wide: 96rem;   /* 1536px */
+  --content-wide: 96rem; /* 1536px */
 }
