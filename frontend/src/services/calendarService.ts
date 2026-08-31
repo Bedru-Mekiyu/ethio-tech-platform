@@ -146,7 +146,12 @@ function normalizeEvent(event: Record<string, unknown>): CalendarEvent {
     relatedAssignment: event.relatedAssignment as CalendarEvent["relatedAssignment"],
     location: typeof event.location === "string" ? event.location : undefined,
     url: typeof event.url === "string" ? event.url : undefined,
-    reminder: typeof event.reminder === "number" ? event.reminder : undefined,
+    reminder:
+      typeof event.reminder === "object" && event.reminder !== null
+        ? (event.reminder as { enabled: boolean; minutesBefore: number })
+        : typeof event.reminder === "number"
+          ? { enabled: true, minutesBefore: event.reminder }
+          : undefined,
     createdBy: typeof event.createdBy === "string" ? event.createdBy : undefined,
     createdAt: typeof event.createdAt === "string" ? event.createdAt : undefined,
     updatedAt: typeof event.updatedAt === "string" ? event.updatedAt : undefined,
