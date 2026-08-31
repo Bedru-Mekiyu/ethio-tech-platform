@@ -1,11 +1,4 @@
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState, useCallback } from "react";
 import {
   Room,
   RoomEvent,
@@ -50,7 +43,9 @@ export interface LiveKitMeetingProps {
 
   // Active side panel state passed from parent
   activePanel?: "none" | "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout";
-  onTogglePanel?: (panel: "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout") => void;
+  onTogglePanel?: (
+    panel: "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout",
+  ) => void;
 
   // Badge counts
   unreadChatCount?: number;
@@ -113,7 +108,10 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [activeSpeaker, setActiveSpeaker] = useState<Participant | null>(null);
   const [pinnedParticipantId, setPinnedParticipantId] = useState<string | null>(null);
-  const [screenShareTrack, setScreenShareTrack] = useState<{ participant: Participant; track: TrackPublication } | null>(null);
+  const [screenShareTrack, setScreenShareTrack] = useState<{
+    participant: Participant;
+    track: TrackPublication;
+  } | null>(null);
 
   const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
@@ -122,6 +120,7 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
 
   const [layout, setLayout] = useState<"grid" | "speaker">("grid");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const settingsModalRef = useRef<import("./LiveKitDeviceSettingsModal").DeviceSettingsModalRef>(null);
   const [isParticipantsDrawerOpen, setIsParticipantsDrawerOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
@@ -462,8 +461,15 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
 
   // Decide prominent hero tile for Spotlight/Speaker View
   const heroTile = screenShareTrack
-    ? { participant: screenShareTrack.participant, isLocal: screenShareTrack.participant.sid === localParticipant?.sid, isScreenShare: true }
-    : pinnedParticipant || (activeSpeaker ? { participant: activeSpeaker, isLocal: activeSpeaker.sid === localParticipant?.sid } : allTiles[0]);
+    ? {
+        participant: screenShareTrack.participant,
+        isLocal: screenShareTrack.participant.sid === localParticipant?.sid,
+        isScreenShare: true,
+      }
+    : pinnedParticipant ||
+      (activeSpeaker
+        ? { participant: activeSpeaker, isLocal: activeSpeaker.sid === localParticipant?.sid }
+        : allTiles[0]);
 
   const secondaryTiles = allTiles.filter((t) => t.participant.sid !== heroTile?.participant.sid);
 
@@ -587,7 +593,10 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
         unreadQaCount={unreadQaCount}
         activePollCount={activePollCount}
         participantCount={allTiles.length}
-        onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenSettings={() => {
+          setIsSettingsOpen(true);
+          void settingsModalRef.current?.loadDevices();
+        }}
         onLeave={hangUp}
         onEndMeeting={isHost ? onEndMeeting : undefined}
         onMuteAll={isHost ? () => void muteAllParticipants() : undefined}
@@ -605,9 +614,7 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
           isHost={isHost}
           onMuteParticipant={(p) => void muteParticipant(p.identity)}
           onKickParticipant={(p) => void kickParticipant(p.identity)}
-          onPinParticipant={(p) =>
-            setPinnedParticipantId((curr) => (curr === p.identity ? null : p.identity))
-          }
+          onPinParticipant={(p) => setPinnedParticipantId((curr) => (curr === p.identity ? null : p.identity))}
           onMuteAll={() => void muteAllParticipants()}
           onLowerAllHands={() => setIsHandRaised(false)}
           pinnedParticipantId={pinnedParticipantId}
@@ -616,6 +623,7 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
 
       {/* Device Settings Modal */}
       <LiveKitDeviceSettingsModal
+        ref={settingsModalRef}
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
         room={room}

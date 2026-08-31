@@ -16,6 +16,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
   const [videoEnabled, setVideoEnabled] = useState(true);
   const [audioLevel, setAudioLevel] = useState(0);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const settingsModalRef = useRef<import("./LiveKitDeviceSettingsModal").DeviceSettingsModalRef>(null);
   const [permissionError, setPermissionError] = useState<string | null>(null);
 
   // Initialize media devices preview
@@ -42,7 +43,8 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
         }
 
         // Setup audio level analyzer
-        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+        const AudioContextClass =
+          window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         if (AudioContextClass) {
           audioCtx = new AudioContextClass();
           analyser = audioCtx.createAnalyser();
@@ -162,7 +164,10 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
 
                 <button
                   type="button"
-                  onClick={() => setIsSettingsOpen(true)}
+                  onClick={() => {
+                    setIsSettingsOpen(true);
+                    void settingsModalRef.current?.loadDevices();
+                  }}
                   className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-all"
                   title="Device Settings"
                 >
@@ -184,9 +189,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               )}
             </div>
 
-            {permissionError && (
-              <p className="mt-3 text-xs text-amber-400/90 text-center">{permissionError}</p>
-            )}
+            {permissionError && <p className="mt-3 text-xs text-amber-400/90 text-center">{permissionError}</p>}
           </div>
 
           {/* Right Column: Session Info & CTA */}
@@ -196,13 +199,13 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                 <Radio className="h-3.5 w-3.5 text-violet-400 animate-pulse" />
                 <span>Ready to Join</span>
               </div>
-              <h2 className="text-xl md:text-2xl font-bold text-white leading-tight">
-                {sessionTitle}
-              </h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white leading-tight">{sessionTitle}</h2>
               {mentorName && (
                 <div className="mt-2 flex items-center gap-2 text-xs text-slate-400">
                   <Shield className="h-3.5 w-3.5 text-violet-400" />
-                  <span>Hosted by <strong className="text-slate-200">{mentorName}</strong></span>
+                  <span>
+                    Hosted by <strong className="text-slate-200">{mentorName}</strong>
+                  </span>
                 </div>
               )}
             </div>
@@ -250,6 +253,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
       </div>
 
       <LiveKitDeviceSettingsModal
+        ref={settingsModalRef}
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
       />
