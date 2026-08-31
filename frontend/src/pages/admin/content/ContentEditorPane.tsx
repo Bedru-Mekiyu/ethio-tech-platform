@@ -24,15 +24,7 @@ import { VideoEmbedPreview } from "./VideoEmbedPreview";
 import { CodeSandboxStarterEditor } from "./CodeSandboxStarterEditor";
 import { QuizEditor } from "./QuizEditor";
 import { CapstoneProjectEditor } from "./CapstoneProjectEditor";
-import type {
-  Track,
-  Module,
-  Lesson,
-  CapstoneProjectItem,
-  ContentSelection,
-  LessonType,
-  QuizQuestion,
-} from "./types";
+import type { Track, Module, Lesson, CapstoneProjectItem, ContentSelection, LessonType, QuizQuestion } from "./types";
 import { TRACK_CATEGORY_OPTIONS, LESSON_TYPES } from "./types";
 import { cn } from "@/lib/utils";
 
@@ -102,6 +94,7 @@ export function ContentEditorPane({
   // Sync state with selected entities
   useEffect(() => {
     if (selection.type === "track" && selectedTrack) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTrackTitle(selectedTrack.title || "");
       setTrackDescription(selectedTrack.description || "");
       setTrackCategory(selectedTrack.category || "web");
@@ -122,6 +115,7 @@ export function ContentEditorPane({
 
   useEffect(() => {
     if (selection.type === "module" && selectedModule) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setModuleTitle(selectedModule.title || "");
       setModuleDescription(selectedModule.description || "");
       setModuleOrder(selectedModule.order ?? 1);
@@ -136,6 +130,7 @@ export function ContentEditorPane({
 
   useEffect(() => {
     if (selection.type === "lesson" && selectedLesson) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLessonTitle(selectedLesson.title || "");
       setLessonSummary(selectedLesson.summary || "");
       setLessonContent(selectedLesson.content || "");
@@ -152,7 +147,9 @@ export function ContentEditorPane({
     } else if (selection.type === "new-lesson") {
       setLessonTitle("");
       setLessonSummary("");
-      setLessonContent("# Lesson Overview\n\nExplain the key concepts and mental model for this topic.\n\n## Objectives\n- Learn foundational concepts\n- Complete hands-on challenges\n");
+      setLessonContent(
+        "# Lesson Overview\n\nExplain the key concepts and mental model for this topic.\n\n## Objectives\n- Learn foundational concepts\n- Complete hands-on challenges\n",
+      );
       setLessonType("concept");
       setLessonVideoUrl("");
       setLessonCodeSandboxUrl("");
@@ -250,6 +247,7 @@ export function ContentEditorPane({
   // Reset / Discard changes
   const handleDiscard = () => {
     if (selection.type === "track" && selectedTrack) {
+       
       setTrackTitle(selectedTrack.title || "");
       setTrackDescription(selectedTrack.description || "");
       setTrackCategory(selectedTrack.category || "web");
@@ -257,10 +255,12 @@ export function ContentEditorPane({
       setTrackEstimatedWeeks(selectedTrack.estimatedWeeks ?? 12);
       setTrackIsActive(selectedTrack.isActive !== false);
     } else if (selection.type === "module" && selectedModule) {
+       
       setModuleTitle(selectedModule.title || "");
       setModuleDescription(selectedModule.description || "");
       setModuleOrder(selectedModule.order ?? 1);
     } else if (selection.type === "lesson" && selectedLesson) {
+       
       setLessonTitle(selectedLesson.title || "");
       setLessonSummary(selectedLesson.summary || "");
       setLessonContent(selectedLesson.content || "");
@@ -292,7 +292,8 @@ export function ContentEditorPane({
               {isEditingTrack && <BookOpen size={14} className="text-primary shrink-0" />}
               {isEditingModule && <FolderOpen size={14} className="text-secondary shrink-0" />}
               {isEditingLesson && <FileText size={14} className="text-emerald-400 shrink-0" />}
-              {isEditingTrack && (selection.type === "new-track" ? "Tracks / New Track" : (selectedTrack?.title || "Track Configuration"))}
+              {isEditingTrack &&
+                (selection.type === "new-track" ? "Tracks / New Track" : selectedTrack?.title || "Track Configuration")}
               {isEditingModule && (
                 <>
                   <span className="text-[var(--text-muted)]">{selectedTrack?.title}</span>
@@ -330,13 +331,7 @@ export function ContentEditorPane({
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
             {isDirty && (
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={handleDiscard}
-                className="h-8 gap-1 text-xs"
-              >
+              <Button type="button" variant="outline" size="sm" onClick={handleDiscard} className="h-8 gap-1 text-xs">
                 <RotateCcw size={13} /> Discard
               </Button>
             )}
@@ -526,7 +521,7 @@ export function ContentEditorPane({
                     "flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all",
                     trackIsActive
                       ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400"
-                      : "border-amber-500/40 bg-amber-500/10 text-amber-400"
+                      : "border-amber-500/40 bg-amber-500/10 text-amber-400",
                   )}
                 >
                   <span className={cn("h-2 w-2 rounded-full", trackIsActive ? "bg-emerald-400" : "bg-amber-400")} />
@@ -694,7 +689,7 @@ export function ContentEditorPane({
                           "flex flex-col items-start rounded-xl border p-2.5 text-left transition-all",
                           isSelected
                             ? "border-primary/60 bg-primary/10 shadow-sm ring-1 ring-primary/40 text-white"
-                            : "border-[var(--border)] bg-white/[0.02] text-slate-300 hover:bg-white/5"
+                            : "border-[var(--border)] bg-white/[0.02] text-slate-300 hover:bg-white/5",
                         )}
                       >
                         <div className="flex items-center gap-1.5 mb-1">
@@ -705,9 +700,7 @@ export function ContentEditorPane({
                           {lt.value === "project" && <Award size={14} className="text-primary" />}
                           <span className="text-xs font-semibold leading-none">{lt.label}</span>
                         </div>
-                        <span className="text-[10px] text-[var(--text-muted)] line-clamp-2">
-                          {lt.description}
-                        </span>
+                        <span className="text-[10px] text-[var(--text-muted)] line-clamp-2">{lt.description}</span>
                       </button>
                     );
                   })}
@@ -717,7 +710,10 @@ export function ContentEditorPane({
               {/* Numeric Meta Fields */}
               <div className="grid gap-4 sm:grid-cols-3 pt-1">
                 <div className="space-y-1.5">
-                  <label htmlFor="lesson-edit-duration" className="flex items-center gap-1 text-xs font-medium text-white">
+                  <label
+                    htmlFor="lesson-edit-duration"
+                    className="flex items-center gap-1 text-xs font-medium text-white"
+                  >
                     <Clock size={13} className="text-primary" />
                     Estimated Duration (Minutes)
                   </label>

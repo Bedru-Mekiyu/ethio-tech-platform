@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import React from "react";
@@ -98,9 +99,7 @@ function renderWithClient(ui: React.ReactElement) {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  return render(
-    React.createElement(QueryClientProvider, { client: queryClient }, ui)
-  );
+  return render(React.createElement(QueryClientProvider, { client: queryClient }, ui));
 }
 
 describe("MentorDetailsDrawer", () => {
@@ -119,7 +118,7 @@ describe("MentorDetailsDrawer", () => {
         applicationId: "app-1",
         onClose,
         onUpdated,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -137,7 +136,7 @@ describe("MentorDetailsDrawer", () => {
         applicationId: "app-1",
         onClose: vi.fn(),
         onUpdated: vi.fn(),
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -154,7 +153,7 @@ describe("MentorDetailsDrawer", () => {
         applicationId: "app-1",
         onClose: vi.fn(),
         onUpdated: vi.fn(),
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -171,7 +170,7 @@ describe("MentorDetailsDrawer", () => {
         applicationId: "app-history-1",
         onClose: vi.fn(),
         onUpdated: vi.fn(),
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -185,7 +184,7 @@ describe("MentorDetailsDrawer", () => {
         applicationId: "app-1",
         onClose: vi.fn(),
         onUpdated: vi.fn(),
-      })
+      }),
     );
 
     await waitFor(() => {

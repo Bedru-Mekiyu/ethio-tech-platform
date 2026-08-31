@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
@@ -28,9 +29,7 @@ const mockTracks = [
     isActive: true,
     xpReward: 600,
     estimatedWeeks: 14,
-    modules: [
-      { _id: "mod-1", title: "React Fundamentals", lessons: [{ _id: "les-1" }] },
-    ],
+    modules: [{ _id: "mod-1", title: "React Fundamentals", lessons: [{ _id: "les-1" }] }],
   },
   {
     _id: "track-2",
@@ -105,7 +104,7 @@ const renderAdminContentPage = () => {
           <AdminContentPage />
         </ToastProvider>
       </QueryClientProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -130,7 +129,7 @@ describe("AdminContentPage Master-Detail CMS", () => {
     });
 
     (api.post as any).mockImplementation((_url: string, payload: any) =>
-      Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...payload } } } })
+      Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...payload } } } }),
     );
     (api.patch as any).mockResolvedValue({ data: { data: { success: true } } });
     (api.delete as any).mockResolvedValue({ data: { success: true } });

@@ -66,13 +66,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
         quoteLines.push(lines[i].replace(/^>\s?/, ""));
         i++;
       }
-      nodes.push(
-        <CalloutBlock
-          key={`callout-${nodes.length}`}
-          type={alertType}
-          content={quoteLines.join(" ")}
-        />,
-      );
+      nodes.push(<CalloutBlock key={`callout-${nodes.length}`} type={alertType} content={quoteLines.join(" ")} />);
       continue;
     }
 
@@ -108,7 +102,10 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     // Headings
     if (line.startsWith("# ")) {
       nodes.push(
-        <h1 key={`h1-${nodes.length}`} className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-6 mb-3 border-b border-white/10 pb-2">
+        <h1
+          key={`h1-${nodes.length}`}
+          className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-6 mb-3 border-b border-white/10 pb-2"
+        >
           {renderInlineMarkdown(line.slice(2))}
         </h1>,
       );
@@ -117,7 +114,10 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     }
     if (line.startsWith("## ")) {
       nodes.push(
-        <h2 key={`h2-${nodes.length}`} className="text-xl sm:text-2xl font-semibold tracking-tight text-white mt-5 mb-2.5">
+        <h2
+          key={`h2-${nodes.length}`}
+          className="text-xl sm:text-2xl font-semibold tracking-tight text-white mt-5 mb-2.5"
+        >
           {renderInlineMarkdown(line.slice(3))}
         </h2>,
       );
@@ -338,9 +338,7 @@ function CalloutBlock({ type, content }: { type: string; content: string }) {
         {style.icon}
         <span className="text-xs font-bold uppercase tracking-wider text-white">{style.label}</span>
       </div>
-      <div className={cn("text-xs sm:text-sm leading-relaxed", style.text)}>
-        {renderInlineMarkdown(content)}
-      </div>
+      <div className={cn("text-xs sm:text-sm leading-relaxed", style.text)}>{renderInlineMarkdown(content)}</div>
     </div>
   );
 }
@@ -421,7 +419,7 @@ function renderInlineMarkdown(text: string): ReactNode {
       .sort((a, b) => a.index - b.index);
 
     if (candidates.length === 0) {
-      parts.push(<span key={keyIdx++}>{remaining}</span>);
+      parts.push(<span key={keyIdx}>{remaining}</span>);
       break;
     }
 

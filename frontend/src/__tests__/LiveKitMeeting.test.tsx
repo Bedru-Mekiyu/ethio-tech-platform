@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { LiveKitHeader } from "@/components/livekit/LiveKitHeader";
@@ -31,13 +32,7 @@ describe("LiveKit Classroom UI Suite", () => {
 
     it("triggers layout switch on button click", () => {
       const onChangeLayout = vi.fn();
-      render(
-        <LiveKitHeader
-          title="Python Advanced Masterclass"
-          layout="grid"
-          onChangeLayout={onChangeLayout}
-        />,
-      );
+      render(<LiveKitHeader title="Python Advanced Masterclass" layout="grid" onChangeLayout={onChangeLayout} />);
 
       const spotlightBtn = screen.getByTitle("Speaker / Spotlight View");
       fireEvent.click(spotlightBtn);
@@ -121,13 +116,7 @@ describe("LiveKit Classroom UI Suite", () => {
   describe("LiveKitLobby", () => {
     it("renders pre-join lobby and handles Join Classroom CTA", () => {
       const onJoin = vi.fn();
-      render(
-        <LiveKitLobby
-          sessionTitle="Frontend System Design"
-          mentorName="Kebede Michael"
-          onJoin={onJoin}
-        />,
-      );
+      render(<LiveKitLobby sessionTitle="Frontend System Design" mentorName="Kebede Michael" onJoin={onJoin} />);
 
       expect(screen.getByText("Frontend System Design")).toBeTruthy();
       expect(screen.getByText("Kebede Michael")).toBeTruthy();
@@ -187,12 +176,7 @@ describe("LiveKit Classroom UI Suite", () => {
   describe("LiveKitDeviceSettingsModal", () => {
     it("renders device configuration modal", () => {
       const onClose = vi.fn();
-      render(
-        <LiveKitDeviceSettingsModal
-          isOpen={true}
-          onClose={onClose}
-        />,
-      );
+      render(<LiveKitDeviceSettingsModal isOpen={true} onClose={onClose} />);
 
       expect(screen.getByText("Device & Audio Settings")).toBeTruthy();
       expect(screen.getByText("Microphone")).toBeTruthy();

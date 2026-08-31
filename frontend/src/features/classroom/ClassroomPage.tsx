@@ -25,17 +25,7 @@ import { StudentPollsPanel } from "./panels/StudentPollsPanel";
 import { StudentNotesPanel } from "./panels/StudentNotesPanel";
 import { StudentResourcesPanel } from "./panels/StudentResourcesPanel";
 
-import {
-  MessageSquare,
-  HelpCircle,
-  BarChart3,
-  FileText,
-  Folder,
-  Layers,
-  X,
-  Send,
-  Sparkles,
-} from "lucide-react";
+import { MessageSquare, HelpCircle, BarChart3, FileText, Folder, Layers, X, Send, Sparkles } from "lucide-react";
 
 interface ChatMsg {
   id: string;
@@ -278,7 +268,9 @@ export function ClassroomPage() {
 
   const handleEndMeeting = () => {
     if (typeof window !== "undefined") {
-      const confirmed = window.confirm("End the meeting for everyone? All participants will be disconnected and attendance XP awarded.");
+      const confirmed = window.confirm(
+        "End the meeting for everyone? All participants will be disconnected and attendance XP awarded.",
+      );
       if (!confirmed) return;
     }
     endMutation.mutate();
@@ -297,12 +289,12 @@ export function ClassroomPage() {
   const socketAdapter = useMemo(
     () => ({
       emit: (event: string, payload: unknown) => {
-        (socketRef.current as unknown as Record<string, Function>)?.emit?.(event, payload);
+        (socketRef.current as unknown as Record<string, (...args: unknown[]) => unknown>)?.emit?.(event, payload);
       },
       on: (event: string, handler: (payload: unknown) => void) => {
-        (socketRef.current as unknown as Record<string, Function>)?.on?.(event, handler);
+        (socketRef.current as unknown as Record<string, (...args: unknown[]) => unknown>)?.on?.(event, handler);
         return () => {
-          (socketRef.current as unknown as Record<string, Function>)?.off?.(event, handler);
+          (socketRef.current as unknown as Record<string, (...args: unknown[]) => unknown>)?.off?.(event, handler);
         };
       },
     }),
@@ -329,9 +321,7 @@ export function ClassroomPage() {
   }
 
   const livekitReady = Boolean(
-    livekitConfigQuery.data?.enabled &&
-    livekitTokenQuery.data?.token &&
-    (meetingStatus === "active" || isHost),
+    livekitConfigQuery.data?.enabled && livekitTokenQuery.data?.token && (meetingStatus === "active" || isHost),
   );
 
   const classroomHref = `/app/classroom/${sessionId ?? ""}`;
@@ -341,12 +331,7 @@ export function ClassroomPage() {
       {/* Top Meeting Status Banner */}
       {meetingStatus !== "active" && (
         <div className="border-b border-white/5 bg-[#101726]/80 px-4 py-2.5 md:px-6">
-          <MeetingStatusBanner
-            status={meetingStatus}
-            meeting={meeting}
-            joinHref={classroomHref}
-            joinable={joinable}
-          />
+          <MeetingStatusBanner status={meetingStatus} meeting={meeting} joinHref={classroomHref} joinable={joinable} />
         </div>
       )}
 
@@ -433,7 +418,10 @@ export function ClassroomPage() {
 
         {/* Real-time Side Dock Panel */}
         {activePanel !== "none" && activePanel !== "whiteboard" && activePanel !== "participants" && (
-          <aside aria-label="Classroom side panel" className="flex w-80 md:w-96 flex-col border-l border-white/10 bg-[#0F172A] shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200 z-30">
+          <aside
+            aria-label="Classroom side panel"
+            className="flex w-80 md:w-96 flex-col border-l border-white/10 bg-[#0F172A] shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200 z-30"
+          >
             {/* Panel Header */}
             <div className="flex h-14 items-center justify-between border-b border-white/10 px-4">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
@@ -490,9 +478,7 @@ export function ClassroomPage() {
                         >
                           {!msg.isSystem && (
                             <div className="flex items-center justify-between gap-2 mb-1">
-                              <span className="font-semibold text-slate-300 text-[11px] truncate">
-                                {msg.author}
-                              </span>
+                              <span className="font-semibold text-slate-300 text-[11px] truncate">{msg.author}</span>
                               <span className="text-[9px] text-slate-500 font-mono">
                                 {new Date(msg.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                               </span>
@@ -568,16 +554,10 @@ export function ClassroomPage() {
                 <StudentNotesPanel notes={{ summary: session?.title, actionItems: [], keyTakeaways: [] }} />
               )}
 
-              {activePanel === "resources" && (
-                <StudentResourcesPanel resources={[]} sessionId={sessionId || "demo"} />
-              )}
+              {activePanel === "resources" && <StudentResourcesPanel resources={[]} sessionId={sessionId || "demo"} />}
 
               {activePanel === "breakout" && (
-                <BreakoutPanel
-                  sessionId={sessionId || "demo"}
-                  isHost={isHost}
-                  socket={socketAdapter}
-                />
+                <BreakoutPanel sessionId={sessionId || "demo"} isHost={isHost} socket={socketAdapter} />
               )}
             </div>
           </aside>

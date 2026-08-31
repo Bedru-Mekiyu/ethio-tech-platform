@@ -17,8 +17,8 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
 
     // YouTube
     const ytMatch =
-      trimmed.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i) ||
-      trimmed.match(/youtube\.com\/shorts\/([^"&?\/\s]{11})/i);
+      trimmed.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i) ||
+      trimmed.match(/youtube\.com\/shorts\/([^"&?/\s]{11})/i);
     if (ytMatch) {
       return {
         embedUrl: `https://www.youtube-nocookie.com/embed/${ytMatch[1]}`,
@@ -27,7 +27,9 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
     }
 
     // Vimeo
-    const vimeoMatch = trimmed.match(/vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/i);
+    const vimeoMatch = trimmed.match(
+      /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/i,
+    );
     if (vimeoMatch && vimeoMatch[3]) {
       return {
         embedUrl: `https://player.vimeo.com/video/${vimeoMatch[3]}`,
@@ -101,7 +103,8 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
       </div>
 
       <p className="text-xs text-[var(--text-secondary)]">
-        Supports YouTube, Vimeo, Loom, or direct HTTPS video streams. Automatically converts share links to responsive iframe embeds.
+        Supports YouTube, Vimeo, Loom, or direct HTTPS video streams. Automatically converts share links to responsive
+        iframe embeds.
       </p>
 
       {/* Video Preview Player */}
@@ -123,11 +126,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
           </div>
           <div className="relative aspect-video w-full">
             {platform === "HTML5 Video" ? (
-              <video
-                src={embedUrl}
-                controls
-                className="h-full w-full object-cover"
-              />
+              <video src={embedUrl} controls className="h-full w-full object-cover" />
             ) : (
               <iframe
                 src={embedUrl}

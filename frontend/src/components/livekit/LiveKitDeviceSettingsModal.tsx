@@ -63,6 +63,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       void loadDevices();
     } else {
       if (previewStream) {
@@ -87,7 +88,9 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
           audio: { deviceId: { exact: selectedAudioInput } },
         });
 
-        audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+        audioContext = new (
+          window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+        )();
         analyser = audioContext.createAnalyser();
         analyser.fftSize = 256;
         microphone = audioContext.createMediaStreamSource(stream);
