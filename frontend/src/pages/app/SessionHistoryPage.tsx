@@ -249,44 +249,45 @@ export function SessionHistoryPage() {
     return <QueryError onRetry={() => sessionsQuery.refetch()} />;
   }
 
-  const tabClass = (active: boolean) =>
-    cn(
-      "rounded-full px-4 py-2 text-sm font-medium transition",
-      active ? "bg-primary text-[var(--bg-base)]" : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
-    );
-
   return (
-    <div className="page-shell space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-white">Sessions</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Join live classes, manage waitlists, and rewatch past recordings.
+    <div className="page-shell space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Live Sessions & Archives</h1>
+        <p className="mt-0.5 text-xs text-zinc-400">
+          Join live cohort classes, manage seat waitlists, and rewatch past archived recordings.
         </p>
-      </div>
+      </Card>
 
-      <div className="flex flex-wrap items-center gap-2" role="tablist">
-        {(["schedule", "recordings"] as const).map((t) => (
-          <button
-            key={t}
-            type="button"
-            role="tab"
-            aria-selected={tab === t}
-            onClick={() => setTab(t)}
-            className={tabClass(tab === t)}
-          >
-            {t === "schedule" ? "Schedule" : "Recordings"}
-          </button>
-        ))}
-      </div>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center rounded-lg border border-[#27272A] bg-[#0E0E11] p-1 w-fit" role="tablist">
+          {(["schedule", "recordings"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              role="tab"
+              aria-selected={tab === t}
+              onClick={() => setTab(t)}
+              className={cn(
+                "rounded-md px-3.5 py-1 text-xs font-medium transition",
+                tab === t
+                  ? "bg-indigo-600 text-white shadow-sm"
+                  : "text-zinc-400 hover:text-white",
+              )}
+            >
+              {t === "schedule" ? "Schedule" : "Recordings"}
+            </button>
+          ))}
+        </div>
 
-      <div className="relative max-w-sm">
-        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
-        <Input
-          placeholder={tab === "schedule" ? "Search sessions…" : "Search recordings…"}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="pl-10"
-        />
+        <div className="relative w-full sm:w-64">
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Input
+            placeholder={tab === "schedule" ? "Search sessions…" : "Search recordings…"}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9 bg-[#141418] border-[#27272A] text-xs h-8 text-white"
+          />
+        </div>
       </div>
 
       {tab === "schedule" && (

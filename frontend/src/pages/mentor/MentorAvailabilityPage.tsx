@@ -51,12 +51,12 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
 
   return (
     <div>
-      <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1">{label}</label>
+      <label className="block text-xs font-medium text-zinc-400 mb-1">{label}</label>
       <div className="flex gap-1.5">
         <select
           value={hour}
           onChange={(e) => setHour(Number(e.target.value))}
-          className="h-9 rounded-xl border border-white/10 bg-[#0B0F19] px-2 text-xs text-white outline-none"
+          className="h-8 rounded-lg border border-[#27272A] bg-[#141418] px-2 text-xs text-white outline-none"
         >
           {HOURS.map((h) => (
             <option key={h} value={h}>
@@ -64,11 +64,11 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
             </option>
           ))}
         </select>
-        <span className="self-center text-xs text-[var(--text-muted)]">:</span>
+        <span className="self-center text-xs text-zinc-500">:</span>
         <select
           value={minute}
           onChange={(e) => setMinute(Number(e.target.value))}
-          className="h-9 rounded-xl border border-white/10 bg-[#0B0F19] px-2 text-xs text-white outline-none"
+          className="h-8 rounded-lg border border-[#27272A] bg-[#141418] px-2 text-xs text-white outline-none"
         >
           {MINUTES.map((m) => (
             <option key={m} value={m}>
@@ -79,7 +79,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
-          className="h-9 rounded-xl border border-white/10 bg-[#0B0F19] px-2 text-xs text-white outline-none"
+          className="h-8 rounded-lg border border-[#27272A] bg-[#141418] px-2 text-xs text-white outline-none"
         >
           <option value="AM">AM</option>
           <option value="PM">PM</option>
@@ -131,38 +131,40 @@ export function MentorAvailabilityPage() {
   const slots = data ?? [];
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-white">Availability</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Set weekly windows when students can request sessions.
-        </p>
-      </div>
+    <div className="space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="space-y-1">
+          <h1 className="text-xl font-bold text-white tracking-tight sm:text-2xl">Mentor Availability & Office Hours</h1>
+          <p className="text-xs text-zinc-400 leading-relaxed">
+            Set weekly recurring windows when students can book 1-on-1 consultations and project reviews.
+          </p>
+        </div>
+      </Card>
 
-      <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-        <CardHeader className="p-0">
-          <CardTitle className="flex items-center justify-between">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <CardHeader className="p-0 border-b border-[#27272A] pb-3.5">
+          <CardTitle className="flex items-center justify-between text-sm font-semibold text-white">
             <span className="flex items-center gap-2">
-              <CalendarClock size={18} /> Weekly slots
+              <CalendarClock size={15} className="text-indigo-400" /> Weekly Availability Slots
             </span>
-            <Button size="sm" variant="outline" onClick={() => setShowForm(!showForm)} className="h-8 gap-1.5 text-xs">
-              <Plus size={14} /> Add slot
+            <Button size="sm" variant="outline" onClick={() => setShowForm(!showForm)} className="h-7 gap-1 text-xs font-medium">
+              <Plus size={13} /> Add Slot
             </Button>
           </CardTitle>
         </CardHeader>
 
         {isLoading ? (
-          <p className="mt-4 text-sm text-[var(--text-muted)]">Loading...</p>
+          <p className="mt-4 text-xs text-zinc-500">Loading availability...</p>
         ) : (
           <ul className="mt-4 space-y-2">
             {slots.map((slot, index) => (
               <li
                 key={`${slot.dayOfWeek}-${index}`}
-                className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3"
+                className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] px-3.5 py-2.5"
               >
-                <div className="flex items-center gap-3 text-sm text-white">
-                  <span className="inline-block w-24 font-medium">{DAYS[slot.dayOfWeek]}</span>
-                  <span className="text-[var(--text-muted)]">
+                <div className="flex items-center gap-3 text-xs text-white">
+                  <span className="inline-block w-24 font-semibold text-zinc-300">{DAYS[slot.dayOfWeek]}</span>
+                  <span className="text-zinc-400 font-mono">
                     {formatTime(slot.startMinutes)} — {formatTime(slot.endMinutes)}
                   </span>
                 </div>
@@ -170,15 +172,15 @@ export function MentorAvailabilityPage() {
                   size="sm"
                   variant="ghost"
                   onClick={() => handleRemove(index)}
-                  className="h-7 w-7 p-0 text-[var(--text-muted)] hover:text-red-400"
+                  className="h-7 w-7 p-0 text-zinc-500 hover:text-red-400 hover:bg-transparent"
                 >
-                  <Trash2 size={14} />
+                  <Trash2 size={13} />
                 </Button>
               </li>
             ))}
             {!slots.length ? (
-              <li className="py-4 text-center text-sm text-[var(--text-secondary)]">
-                No slots configured. Click "Add slot" to get started.
+              <li className="py-4 text-center text-xs text-zinc-500">
+                No slots configured. Click &quot;Add Slot&quot; to configure your office hours.
               </li>
             ) : null}
           </ul>
@@ -186,15 +188,15 @@ export function MentorAvailabilityPage() {
       </Card>
 
       {showForm && (
-        <Card className="rounded-[24px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <p className="text-sm font-medium text-white">New availability slot</p>
-          <div className="mt-4 space-y-4">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">New Availability Slot</p>
+          <div className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1">Day</label>
+              <label className="block text-xs font-medium text-zinc-400 mb-1">Day of Week</label>
               <select
                 value={draft.dayOfWeek}
                 onChange={(e) => setDraft((s) => ({ ...s, dayOfWeek: Number(e.target.value) }))}
-                className="h-9 w-full rounded-xl border border-white/10 bg-[#0B0F19] px-3 text-xs text-white outline-none"
+                className="h-8 w-full rounded-lg border border-[#27272A] bg-[#141418] px-2.5 text-xs text-white outline-none"
               >
                 {DAYS.map((day, i) => (
                   <option key={i} value={i}>
@@ -203,31 +205,35 @@ export function MentorAvailabilityPage() {
                 ))}
               </select>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               <TimePicker
                 value={draft.startMinutes}
                 onChange={(m) => setDraft((s) => ({ ...s, startMinutes: m }))}
-                label="Start time"
+                label="Start Time"
               />
               <TimePicker
                 value={draft.endMinutes}
                 onChange={(m) => setDraft((s) => ({ ...s, endMinutes: m }))}
-                label="End time"
+                label="End Time"
               />
             </div>
             {draft.endMinutes <= draft.startMinutes && (
               <p className="text-xs text-amber-400">End time must be after start time.</p>
             )}
           </div>
-          <div className="mt-4 flex gap-2">
+          <div className="flex gap-2 pt-2 border-t border-[#27272A]">
             <Button
+              size="sm"
               disabled={saveMutation.isPending || draft.endMinutes <= draft.startMinutes}
               onClick={() => saveMutation.mutate([...slots, draft])}
+              className="text-xs font-medium"
             >
-              {saveMutation.isPending ? "Saving..." : "Save slot"}
+              {saveMutation.isPending ? "Saving..." : "Save Slot"}
             </Button>
             <Button
               variant="outline"
+              size="sm"
+              className="text-xs"
               onClick={() => {
                 setShowForm(false);
                 setDraft({ dayOfWeek: 1, startMinutes: 540, endMinutes: 1020 });

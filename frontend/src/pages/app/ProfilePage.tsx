@@ -58,9 +58,9 @@ export function ProfilePage() {
   const badges = dashboard?.user?.badges ?? [];
 
   return (
-    <div className="space-y-6">
-      <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
-        <div className="flex flex-wrap items-center gap-5">
+    <div className="space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-wrap items-center gap-4 sm:gap-5">
           <div className="relative shrink-0">
             <Avatar
               src={liveUser?.avatarUrl ?? liveUser?.avatar}
@@ -72,54 +72,54 @@ export function ProfilePage() {
             <Link
               to={getSettingsPath(liveUser?.role ?? "student")}
               aria-label="Change avatar in settings"
-              className="absolute inset-0 flex items-center justify-center rounded-full bg-black/40 opacity-0 hover:opacity-100 transition-opacity"
+              className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 hover:opacity-100 transition-opacity"
             >
-              <Camera className="text-white" size={18} />
+              <Camera className="text-white" size={16} />
             </Link>
           </div>
           <div className="min-w-0 flex-1">
-            <h1 className="text-2xl font-bold text-white md:text-3xl">{liveUser?.fullName ?? "Learner"}</h1>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">{liveUser?.email}</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Badge variant="purple">{getRankTitle(level)}</Badge>
-              <Badge variant="default">Level {level}</Badge>
-              <Badge variant="success">{xp.toLocaleString()} XP</Badge>
+            <h1 className="text-xl font-bold text-white sm:text-2xl">{liveUser?.fullName ?? "Learner"}</h1>
+            <p className="mt-0.5 text-xs text-zinc-400">{liveUser?.email}</p>
+            <div className="mt-2.5 flex flex-wrap gap-1.5">
+              <Badge variant="purple" size="sm">{getRankTitle(level)}</Badge>
+              <Badge variant="default" size="sm">Level {level}</Badge>
+              <Badge variant="success" size="sm">{xp.toLocaleString()} XP</Badge>
             </div>
           </div>
           <Link to={getSettingsPath(liveUser?.role ?? "student")}>
-            <Button variant="outline">
-              <Edit3 size={15} /> Edit profile
+            <Button variant="outline" size="sm" className="text-xs text-zinc-300 gap-1.5">
+              <Edit3 size={13} /> Edit Profile
             </Button>
           </Link>
         </div>
       </Card>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-white">{track?.title ?? "Current track"}</h2>
-            <Link to="/app/tracks" className="text-sm text-primary hover:underline">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3">
+            <h2 className="text-sm font-semibold text-white">{track?.title ?? "Current Track"}</h2>
+            <Link to="/app/tracks" className="text-xs text-indigo-400 hover:underline">
               {track ? "View track" : "Browse tracks"}
             </Link>
           </div>
           {track ? (
             <>
               <ProgressBar value={completion} max={100} className="mt-4" />
-              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+              <p className="mt-2 text-xs text-zinc-400">
                 {completion}% complete · {track.lessons.completed}/{track.lessons.total} lessons
               </p>
             </>
           ) : (
-            <p className="mt-3 text-sm text-[var(--text-secondary)]">
+            <p className="mt-3 text-xs text-zinc-400">
               Enroll in a track to see your progress here.
             </p>
           )}
         </Card>
 
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-white">Achievements</h2>
-            <Link to="/app/progress" className="text-sm text-primary hover:underline">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3">
+            <h2 className="text-sm font-semibold text-white">Recent Achievements</h2>
+            <Link to="/app/progress" className="text-xs text-indigo-400 hover:underline">
               View all
             </Link>
           </div>
@@ -128,12 +128,12 @@ export function ProfilePage() {
               {badges.slice(0, 4).map((badge) => (
                 <div
                   key={badge._id ?? badge.name}
-                  className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white/3 p-3"
+                  className="flex items-center gap-2.5 rounded-lg border border-[#27272A] bg-[#141418] p-2.5"
                 >
-                  <Award size={16} className="text-primary shrink-0" />
+                  <Award size={14} className="text-indigo-400 shrink-0" />
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-white truncate">{badge.name}</p>
-                    <p className="text-xs text-[var(--text-muted)] capitalize">{badge.category ?? "achievement"}</p>
+                    <p className="text-xs font-medium text-white truncate">{badge.name}</p>
+                    <p className="text-[10px] text-zinc-500 capitalize">{badge.category ?? "achievement"}</p>
                   </div>
                 </div>
               ))}
@@ -147,17 +147,17 @@ export function ProfilePage() {
         </Card>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3.5 sm:grid-cols-2">
         <Link to="/app/certificates" className="block">
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-5 transition hover:border-primary/40">
-            <p className="text-sm text-[var(--text-secondary)]">Certificates</p>
-            <p className="mt-1 text-white">View earned certificates →</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 transition hover:border-zinc-700 shadow-sm">
+            <p className="text-xs text-zinc-400">Certificates</p>
+            <p className="mt-0.5 text-xs font-medium text-white">View earned certificates →</p>
           </Card>
         </Link>
         <Link to="/app/settings" className="block">
-          <Card className="border-[var(--border)] bg-[var(--bg-card)]/95 p-5 transition hover:border-primary/40">
-            <p className="text-sm text-[var(--text-secondary)]">Settings</p>
-            <p className="mt-1 text-white">Manage account & privacy →</p>
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 transition hover:border-zinc-700 shadow-sm">
+            <p className="text-xs text-zinc-400">Settings</p>
+            <p className="mt-0.5 text-xs font-medium text-white">Manage account & privacy →</p>
           </Card>
         </Link>
       </div>

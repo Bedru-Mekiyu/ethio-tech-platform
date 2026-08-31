@@ -81,18 +81,17 @@ export function RegisterPage() {
   };
 
   return (
-    <motion.div initial="hidden" animate="show">
-      <motion.div variants={fadeUp} custom={0} className="space-y-3">
-        <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          <Sparkles size={12} />
-          Student registration
-        </span>
-        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-          Build your tech future with EthioTech
+    <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
+      <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-medium text-indigo-400">
+          <Sparkles size={11} />
+          <span>Student Registration</span>
+        </div>
+        <h2 className="text-xl font-bold tracking-tight text-white">
+          Create Student Account
         </h2>
-        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-          Join a mission-driven learning platform designed for Grade 8 students, high school learners, and
-          future university engineers.
+        <p className="text-xs text-zinc-400">
+          Join hands-on software engineering tracks with senior mentor support.
         </p>
       </motion.div>
 
@@ -103,11 +102,12 @@ export function RegisterPage() {
         className="mt-6 space-y-4"
         noValidate
       >
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           <FormField id="firstName" label="First name" error={errors.firstName?.message}>
             <Input
               autoComplete="given-name"
               placeholder="Abel"
+              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
               {...fieldAriaProps("firstName", errors.firstName?.message)}
               {...register("firstName")}
             />
@@ -116,6 +116,7 @@ export function RegisterPage() {
             <Input
               autoComplete="family-name"
               placeholder="Kebede"
+              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
               {...fieldAriaProps("lastName", errors.lastName?.message)}
               {...register("lastName")}
             />
@@ -127,30 +128,35 @@ export function RegisterPage() {
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
+            className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
             {...fieldAriaProps("email", errors.email?.message)}
             {...register("email")}
           />
         </FormField>
 
-        <FormField id="password" label="Password" error={errors.password?.message} description="Min 8 chars with letters and numbers">
-          <PasswordInput
-            autoComplete="new-password"
-            placeholder="Create a strong password"
-            {...fieldAriaProps("password", errors.password?.message)}
-            {...register("password")}
-          />
-        </FormField>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <FormField id="password" label="Password" error={errors.password?.message} description="Min 8 chars, letters & numbers">
+            <PasswordInput
+              autoComplete="new-password"
+              placeholder="Create password"
+              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
+              {...fieldAriaProps("password", errors.password?.message)}
+              {...register("password")}
+            />
+          </FormField>
 
-        <FormField id="confirmPassword" label="Confirm password" error={errors.confirmPassword?.message}>
-          <PasswordInput
-            autoComplete="new-password"
-            placeholder="Re-enter your password"
-            {...fieldAriaProps("confirmPassword", errors.confirmPassword?.message)}
-            {...register("confirmPassword")}
-          />
-        </FormField>
+          <FormField id="confirmPassword" label="Confirm password" error={errors.confirmPassword?.message}>
+            <PasswordInput
+              autoComplete="new-password"
+              placeholder="Confirm password"
+              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
+              {...fieldAriaProps("confirmPassword", errors.confirmPassword?.message)}
+              {...register("confirmPassword")}
+            />
+          </FormField>
+        </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2">
           <FormField id="gradeLevel" label="Grade level (optional)" error={errors.gradeLevel?.message}>
             <Select
               {...register("gradeLevel", {
@@ -158,8 +164,9 @@ export function RegisterPage() {
               })}
               id="gradeLevel"
               defaultValue=""
+              className="text-xs bg-[#141418] border-[#27272A] text-white"
             >
-              <option value="">Select your grade</option>
+              <option value="">Select grade level</option>
               {[8, 9, 10, 11, 12].map((g) => (
                 <option key={g} value={g}>
                   Grade {g}
@@ -171,7 +178,8 @@ export function RegisterPage() {
           <FormField id="city" label="City (optional)" error={errors.city?.message}>
             <Input
               autoComplete="address-level2"
-              placeholder="Addis Ababa"
+              placeholder="e.g. Addis Ababa"
+              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
               {...fieldAriaProps("city", errors.city?.message)}
               {...register("city")}
             />
@@ -182,10 +190,11 @@ export function RegisterPage() {
           id="learningInterests"
           label="Learning interests (optional)"
           error={errors.learningInterests?.message}
-          description="Separate interests with commas (for example: Web, AI, Cybersecurity)"
+          description="e.g. Fullstack Web, Mobile Apps, Cloud Architecture"
         >
           <Input
-            placeholder="Web Development, AI, Mobile Apps"
+            placeholder="Web, Mobile, AI, Cloud"
+            className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
             {...fieldAriaProps("learningInterests", errors.learningInterests?.message)}
             {...register("learningInterests")}
           />
@@ -195,37 +204,40 @@ export function RegisterPage() {
           <motion.div
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-start gap-3 rounded-xl border border-danger/30 bg-[var(--danger-muted)] px-4 py-3"
+            className="flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5"
             role="alert"
           >
-            <AlertCircle size={16} className="mt-0.5 flex-shrink-0 text-danger" />
-            <p className="text-sm text-danger">{error}</p>
+            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-red-400" />
+            <p className="text-xs text-red-400">{error}</p>
           </motion.div>
         ) : null}
 
-        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-          {isSubmitting ? "Creating account…" : "Create student account"}
-          {!isSubmitting && <ArrowRight size={16} />}
+        <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
+          {isSubmitting ? "Creating account…" : "Create Student Account"}
+          {!isSubmitting && <ArrowRight size={14} className="ml-1" />}
         </Button>
       </motion.form>
 
-      <motion.div variants={fadeUp} custom={2} className="mt-6 rounded-2xl border border-[var(--border)] bg-white/[0.03] p-4">
-        <p className="text-sm text-[var(--text-secondary)]">
+      <motion.div variants={fadeUp} custom={2} className="mt-5 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
+        <p className="text-xs text-zinc-400">
           Want to mentor students?{" "}
-          <Link to="/mentor-recruitment" className="font-semibold text-primary transition hover:text-[var(--primary-hover)]">
-            Become a Mentor →
+          <Link to="/mentor-recruitment" className="font-medium text-indigo-400 hover:text-indigo-300 ml-1">
+            Apply as Mentor →
           </Link>
         </p>
       </motion.div>
 
-      <motion.div variants={fadeUp} custom={3} className="mt-8 text-center">
-        <Link
-          to="/login"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-[var(--primary-hover)]"
-        >
-          Already have an account? Sign in
-          <ArrowRight size={14} />
-        </Link>
+      <motion.div variants={fadeUp} custom={3} className="mt-5 border-t border-[#27272A] pt-4 text-center">
+        <p className="text-xs text-zinc-400">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-medium text-indigo-400 transition hover:text-indigo-300 ml-1 inline-flex items-center gap-1"
+          >
+            Sign in
+            <ArrowRight size={12} />
+          </Link>
+        </p>
       </motion.div>
     </motion.div>
   );

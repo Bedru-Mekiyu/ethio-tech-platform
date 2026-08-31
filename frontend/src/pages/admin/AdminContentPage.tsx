@@ -421,30 +421,30 @@ export function AdminContentPage() {
     deleteCapstoneMutation.isPending;
 
   return (
-    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden">
+    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-[var(--text-primary)]">
       {/* Top Banner Bar */}
-      <div className="border-b border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] px-6 py-4 shrink-0">
+      <div className="border-b border-[#27272A] bg-[#0E0E11] px-5 py-3.5 shrink-0">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                 Curriculum Content Studio
               </h1>
             </div>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-              Master-detail hierarchical architect for learning tracks, modules, video lectures, and live code labs.
+            <p className="text-xs text-zinc-400 mt-0.5">
+              Master-detail hierarchical architect for learning tracks, modules, video lectures, and code labs.
             </p>
           </div>
 
           {/* Mobile Tab Switcher */}
-          <div className="flex sm:hidden items-center rounded-xl bg-black/40 p-1 border border-white/10 text-xs">
+          <div className="flex sm:hidden items-center rounded-lg bg-[#141418] p-1 border border-[#27272A] text-xs">
             <button
               type="button"
               onClick={() => setMobileTab("tracks")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
-                mobileTab === "tracks" ? "bg-primary text-white" : "text-[var(--text-muted)]"
+                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
+                mobileTab === "tracks" ? "bg-indigo-600 text-white" : "text-zinc-400"
               )}
             >
               Tracks
@@ -453,8 +453,8 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("tree")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
-                mobileTab === "tree" ? "bg-primary text-white" : "text-[var(--text-muted)]"
+                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
+                mobileTab === "tree" ? "bg-indigo-600 text-white" : "text-zinc-400"
               )}
             >
               Curriculum
@@ -463,8 +463,8 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("editor")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
-                mobileTab === "editor" ? "bg-primary text-white" : "text-[var(--text-muted)]"
+                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
+                mobileTab === "editor" ? "bg-indigo-600 text-white" : "text-zinc-400"
               )}
             >
               Editor

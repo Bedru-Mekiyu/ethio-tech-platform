@@ -43,26 +43,26 @@ export function ForgotPasswordPage() {
   };
 
   return (
-    <motion.div initial="hidden" animate="show">
+    <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] transition hover:text-white"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition hover:text-white"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={13} />
           Back to sign in
         </Link>
       </motion.div>
 
       {/* Icon + Header */}
-      <motion.div variants={fadeUp} custom={1} className="mt-6">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-white/[0.03]">
-          <KeyRound size={22} className="text-primary" />
+      <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-500/20 bg-indigo-500/10 text-indigo-400">
+          <KeyRound size={16} />
         </div>
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Reset your password</h1>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-          Enter your account email and we&apos;ll send you instructions to reset your password.
+        <h1 className="text-xl font-bold tracking-tight text-white pt-2">Reset Password</h1>
+        <p className="text-xs leading-relaxed text-zinc-400">
+          Enter your account email to receive reset instructions.
         </p>
       </motion.div>
 
@@ -71,17 +71,17 @@ export function ForgotPasswordPage() {
         variants={fadeUp}
         custom={2}
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-8 space-y-5"
+        className="mt-6 space-y-4"
         noValidate
       >
         <FormField id="email" label="Email address" error={errors.email?.message}>
           <div className="relative">
             <Mail
-              size={16}
-              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+              size={15}
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-zinc-500"
             />
             <Input
-              className="pl-11"
+              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -91,8 +91,8 @@ export function ForgotPasswordPage() {
           </div>
         </FormField>
 
-        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-          {isSubmitting ? "Sending…" : "Send reset link"}
+        <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
+          {isSubmitting ? "Sending instructions…" : "Send Reset Link"}
         </Button>
       </motion.form>
 
@@ -102,24 +102,24 @@ export function ForgotPasswordPage() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 flex items-start gap-3 rounded-xl border border-success/30 bg-[var(--success-muted)] px-4 py-3"
+            className="mt-5 flex items-start gap-2.5 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-2.5"
           >
-            <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-success" />
-            <p className="text-sm text-success">{message}</p>
+            <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0 text-emerald-400" />
+            <p className="text-xs text-emerald-300">{message}</p>
           </motion.div>
         ) : null}
       </div>
 
       {/* Dev token (only in development) */}
       {import.meta.env.DEV && devToken ? (
-        <div className="mt-4 rounded-xl border border-warning/30 bg-[var(--warning-muted)] p-4 text-sm text-warning">
-          <p className="font-medium">Dev reset token:</p>
-          <code className="mt-1 block break-all text-xs">{devToken}</code>
+        <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-500/10 p-3 text-xs text-amber-300">
+          <p className="font-semibold">Development reset token:</p>
+          <code className="mt-1 block break-all font-mono text-[10px] text-amber-200">{devToken}</code>
           <Link
             to={`/auth/reset-password?token=${devToken}`}
-            className="mt-2 inline-block text-sm font-medium underline"
+            className="mt-2 inline-block text-xs font-medium text-amber-400 underline"
           >
-            Open reset form →
+            Continue with token →
           </Link>
         </div>
       ) : null}

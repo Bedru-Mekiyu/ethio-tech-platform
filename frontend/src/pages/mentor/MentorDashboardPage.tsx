@@ -193,24 +193,24 @@ export function MentorDashboardPage() {
   return (
     <div className="space-y-6">
       {/* Top Mentor Banner */}
-      <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl space-y-2">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <Badge variant="default" className="text-xs gap-1 font-medium">
-                <Star size={13} className="text-amber-400" /> Certified Lead Mentor
+              <Badge variant="default" className="text-[11px] gap-1 font-medium bg-indigo-500/10 text-indigo-400 border-indigo-500/20">
+                <Star size={12} className="text-amber-400" /> Lead Mentor
               </Badge>
-              <span className="text-xs text-slate-400 font-mono">ID: {user?.id?.slice(-6) ?? "MEN-99"}</span>
+              <span className="text-xs text-zinc-500 font-mono">ID: {user?.id?.slice(-6) ?? "MEN-99"}</span>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-100 md:text-3xl">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               Mentor Command Center, {firstName}
             </h1>
-            <p className="text-xs md:text-sm text-slate-400 leading-relaxed">
+            <p className="text-xs text-zinc-400 leading-relaxed">
               Track student progress, grade submissions queue, and manage interactive LiveKit classrooms.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <Link
               to={
                 activeSessionId
@@ -220,26 +220,26 @@ export function MentorDashboardPage() {
             >
               <Button
                 variant="primary"
-                className="gap-2 font-medium"
+                className="gap-2 text-xs font-medium"
               >
-                <Settings size={16} />
+                <Settings size={14} />
                 Control Center
                 {activeMeeting?.status === "active" && (
-                  <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 )}
               </Button>
             </Link>
 
             <Link to="/mentor/sessions">
               <Button variant="outline" className="gap-2 text-xs">
-                <Clock3 size={15} />
+                <Clock3 size={14} />
                 Schedule Session
               </Button>
             </Link>
 
             <Link to="/mentor/reviews">
               <Button variant="outline" className="gap-2 text-xs">
-                <FileCheck size={15} />
+                <FileCheck size={14} />
                 Review Queue ({pendingSubmissions.length})
               </Button>
             </Link>
@@ -248,61 +248,61 @@ export function MentorDashboardPage() {
       </Card>
 
       {/* 4 High-Level Metric Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
               Mentor Rating
             </span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
-              <Star size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <Star size={15} />
             </div>
           </div>
-          <p className="mt-3 text-2xl font-bold text-slate-100">{mentorScore}/100</p>
-          <p className="mt-1 text-xs text-slate-400">Top 5% rated mentor this cohort</p>
+          <p className="mt-2 text-xl font-bold text-white">{mentorScore}/100</p>
+          <p className="mt-0.5 text-xs text-zinc-400">Top 5% rated mentor</p>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
               Cohort Attendance
             </span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
-              <Users size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <Users size={15} />
             </div>
           </div>
-          <p className="mt-3 text-2xl font-bold text-slate-100">94.8%</p>
-          <p className="mt-1 text-xs text-slate-400">
-            {dashboard?.activeStudents ?? 42} active students mentored
+          <p className="mt-2 text-xl font-bold text-white">94.8%</p>
+          <p className="mt-0.5 text-xs text-zinc-400">
+            {dashboard?.activeStudents ?? 42} active students
           </p>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
               Submissions Queue
             </span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-400">
-              <FileCheck size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              <FileCheck size={15} />
             </div>
           </div>
-          <p className="mt-3 text-2xl font-bold text-amber-400">{pendingSubmissions.length}</p>
-          <p className="mt-1 text-xs text-slate-400">Submissions awaiting your review</p>
+          <p className="mt-2 text-xl font-bold text-amber-400">{pendingSubmissions.length}</p>
+          <p className="mt-0.5 text-xs text-zinc-400">Awaiting code review</p>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
               Sessions Delivered
             </span>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
-              <Video size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <Video size={15} />
             </div>
           </div>
-          <p className="mt-3 text-2xl font-bold text-indigo-400">
+          <p className="mt-2 text-xl font-bold text-indigo-400">
             {dashboard?.mentor?.totalSessions ?? 18}
           </p>
-          <p className="mt-1 text-xs text-slate-400">Live classrooms & workshops</p>
+          <p className="mt-0.5 text-xs text-zinc-400">Live classrooms delivered</p>
         </Card>
       </div>
 
@@ -310,23 +310,23 @@ export function MentorDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-12 items-start">
         {/* Left 7 Columns: Upcoming Teaching Sessions */}
         <div className="lg:col-span-7 space-y-6">
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-            <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-4">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+            <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
               <div>
-                <h2 className="text-base font-bold text-slate-100">Upcoming Teaching Sessions</h2>
-                <p className="text-xs text-slate-400">
-                  LiveKit interactive rooms with attendance verification & moderation
+                <h2 className="text-sm font-semibold text-white">Upcoming Teaching Sessions</h2>
+                <p className="text-xs text-zinc-400">
+                  LiveKit interactive rooms with attendance verification
                 </p>
               </div>
               <Link
                 to="/mentor/sessions"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-400 hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-medium text-indigo-400 hover:underline"
               >
-                Full Calendar <ArrowRight size={13} />
+                Full Calendar <ArrowRight size={12} />
               </Link>
             </div>
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-4 space-y-3">
               {upcomingMeetings.length ? (
                 upcomingMeetings.slice(0, 3).map((meeting) => (
                   <MeetingCard
@@ -344,30 +344,30 @@ export function MentorDashboardPage() {
                 upcomingSessions.slice(0, 3).map((session, index) => (
                   <div
                     key={session._id ?? index}
-                    className="flex flex-col gap-3 rounded-xl border border-slate-800 bg-slate-950/40 p-4 sm:flex-row sm:items-center sm:justify-between"
+                    className="flex flex-col gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3.5 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <div className="space-y-1 min-w-0">
+                    <div className="space-y-0.5 min-w-0">
                       <div className="flex items-center gap-2">
-                        <Badge variant="default" className="text-[10px] py-0 px-2">
+                        <Badge variant="default" className="text-[10px] py-0 px-1.5">
                           Scheduled
                         </Badge>
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-zinc-400">
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Upcoming"}
                         </span>
                       </div>
-                      <h3 className="text-sm font-bold text-slate-100 truncate">{session.title}</h3>
+                      <h3 className="text-xs font-semibold text-white truncate">{session.title}</h3>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
                       <Link to={`/mentor/sessions/${session._id}/control-center`}>
                         <Button size="sm" variant="primary" className="text-xs gap-1.5 font-medium">
-                          <Settings size={13} />
+                          <Settings size={12} />
                           Control Center
                         </Button>
                       </Link>
                       <Link to={`/app/classroom/${session._id}`}>
                         <Button size="sm" variant="outline" className="text-xs gap-1">
-                          <Video size={13} />
+                          <Video size={12} />
                           Join
                         </Button>
                       </Link>
@@ -375,13 +375,13 @@ export function MentorDashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="py-8 text-center space-y-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-slate-500 mx-auto border border-slate-800">
-                    <Video size={20} />
+                <div className="py-8 text-center space-y-2.5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-zinc-500 mx-auto border border-[#27272A]">
+                    <Video size={18} />
                   </div>
-                  <p className="text-sm text-slate-400">No sessions scheduled for today.</p>
+                  <p className="text-xs text-zinc-400">No sessions scheduled for today.</p>
                   <Link to="/mentor/sessions">
-                    <Button size="sm" variant="outline" className="text-xs">
+                    <Button size="sm" variant="outline" className="text-xs font-medium">
                       Schedule a Class
                     </Button>
                   </Link>
@@ -391,40 +391,40 @@ export function MentorDashboardPage() {
           </Card>
 
           {/* Mentor Impact & Teaching Analytics Widget */}
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+            <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
               <div>
-                <h2 className="text-base font-bold text-slate-100">Cohort Retention & Impact</h2>
-                <p className="text-xs text-slate-400">Measured over the last 30 active days</p>
+                <h2 className="text-sm font-semibold text-white">Cohort Retention & Impact</h2>
+                <p className="text-xs text-zinc-400">Measured over the last 30 active days</p>
               </div>
-              <Link to="/mentor/analytics" className="text-xs text-indigo-400 hover:underline">
+              <Link to="/mentor/analytics" className="text-xs font-medium text-indigo-400 hover:underline">
                 Detailed Analytics →
               </Link>
             </div>
 
-            <div className="mt-5 grid gap-4 sm:grid-cols-3">
-              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
                   Avg Session Quality
                 </span>
-                <p className="text-xl font-bold text-slate-100">{impact}%</p>
-                <ProgressBar value={impact} max={100} className="mt-2 h-1.5" />
+                <p className="text-lg font-bold text-white">{impact}%</p>
+                <ProgressBar value={impact} max={100} className="mt-1.5 h-1" />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                  Code Feedback Velocity
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                  Feedback Velocity
                 </span>
-                <p className="text-xl font-bold text-slate-100">&lt; 4 Hours</p>
-                <ProgressBar value={92} max={100} className="mt-2 h-1.5" />
+                <p className="text-lg font-bold text-white">&lt; 4 Hours</p>
+                <ProgressBar value={92} max={100} className="mt-1.5 h-1" />
               </div>
 
-              <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
                   Student Retention
                 </span>
-                <p className="text-xl font-bold text-slate-100">96.2%</p>
-                <ProgressBar value={96} max={100} className="mt-2 h-1.5" />
+                <p className="text-lg font-bold text-white">96.2%</p>
+                <ProgressBar value={96} max={100} className="mt-1.5 h-1" />
               </div>
             </div>
           </Card>
@@ -432,54 +432,54 @@ export function MentorDashboardPage() {
 
         {/* Right 5 Columns: Student Submissions Queue */}
         <div className="lg:col-span-5 space-y-6">
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+            <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
               <div>
-                <h2 className="text-base font-bold text-slate-100">Student Submissions Queue</h2>
-                <p className="text-xs text-slate-400">
+                <h2 className="text-sm font-semibold text-white">Student Submissions Queue</h2>
+                <p className="text-xs text-zinc-400">
                   {pendingSubmissions.length} projects pending code review
                 </p>
               </div>
-              <Link to="/mentor/reviews" className="text-xs font-semibold text-indigo-400 hover:underline">
+              <Link to="/mentor/reviews" className="text-xs font-medium text-indigo-400 hover:underline">
                 View All →
               </Link>
             </div>
 
-            <div className="mt-4 space-y-3">
+            <div className="mt-4 space-y-2.5">
               {pendingSubmissions.map((sub) => (
                 <div
                   key={sub._id}
-                  className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-3 hover:border-slate-700 transition-colors"
+                  className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-2.5 hover:border-zinc-700 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-0.5 min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-slate-100 truncate">
+                        <span className="text-xs font-semibold text-white truncate">
                           {sub.student?.fullName ?? "Learner"}
                         </span>
-                        <span className="text-[10px] text-slate-400 font-mono truncate">
+                        <span className="text-[10px] text-zinc-500 font-mono truncate">
                           {sub.student?.email}
                         </span>
                       </div>
-                      <p className="text-sm font-semibold text-sky-400 truncate">
+                      <p className="text-xs font-medium text-indigo-400 truncate">
                         {sub.project?.title ?? "Track Project Submission"}
                       </p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-zinc-400">
                         Track: {sub.project?.track?.title ?? "Full-Stack Development"}
                       </p>
                     </div>
 
-                    <Badge variant="warning" className="text-[10px] py-0 px-2 shrink-0">
-                      Pending Review
+                    <Badge variant="warning" className="text-[10px] py-0 px-1.5 shrink-0">
+                      Pending
                     </Badge>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-800/80">
-                    <span className="text-[10px] text-slate-400">
+                  <div className="flex items-center justify-between pt-2 border-t border-[#27272A]">
+                    <span className="text-[10px] text-zinc-500">
                       Submitted: {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "Today"}
                     </span>
                     <Link to="/mentor/reviews">
-                      <Button size="sm" variant="primary" className="text-xs gap-1 font-medium py-1 px-3">
+                      <Button size="sm" variant="primary" className="text-xs gap-1 font-medium py-1 px-2.5">
                         <FileCheck size={12} />
                         Review Code
                       </Button>
@@ -491,40 +491,40 @@ export function MentorDashboardPage() {
           </Card>
 
           {/* Quick Mentor Toolkit Links */}
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 space-y-3">
-            <h3 className="text-sm font-bold text-slate-100">Mentor Quick Links</h3>
-            <div className="space-y-2">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-4 space-y-2.5">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider">Mentor Quick Links</h3>
+            <div className="space-y-1.5">
               <Link
                 to="/mentor/students"
-                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+                className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
               >
-                <div className="flex items-center gap-2.5">
-                  <Users size={16} className="text-indigo-400" />
-                  <span>My Mentored Students Directory</span>
+                <div className="flex items-center gap-2">
+                  <Users size={14} className="text-indigo-400" />
+                  <span>My Students Directory</span>
                 </div>
-                <ChevronRight size={14} className="text-slate-400" />
+                <ChevronRight size={13} className="text-zinc-500" />
               </Link>
 
               <Link
                 to="/mentor/availability"
-                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+                className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
               >
-                <div className="flex items-center gap-2.5">
-                  <Clock size={16} className="text-amber-400" />
+                <div className="flex items-center gap-2">
+                  <Clock size={14} className="text-amber-400" />
                   <span>Set Office Hours & Availability</span>
                 </div>
-                <ChevronRight size={14} className="text-slate-400" />
+                <ChevronRight size={13} className="text-zinc-500" />
               </Link>
 
               <Link
                 to="/mentor/analytics"
-                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition-colors"
+                className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
               >
-                <div className="flex items-center gap-2.5">
-                  <BarChart3 size={16} className="text-emerald-400" />
+                <div className="flex items-center gap-2">
+                  <BarChart3 size={14} className="text-emerald-400" />
                   <span>Cohort Performance Analytics</span>
                 </div>
-                <ChevronRight size={14} className="text-slate-400" />
+                <ChevronRight size={13} className="text-zinc-500" />
               </Link>
             </div>
           </Card>

@@ -78,24 +78,24 @@ export function ActivateAccountPage() {
   }
 
   return (
-    <motion.div initial="hidden" animate="show">
+    <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] transition hover:text-white"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition hover:text-white"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={13} />
           Back to sign in
         </Link>
       </motion.div>
 
-      <motion.div variants={fadeUp} custom={1} className="mt-6">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-white/[0.03]">
-          <ShieldCheck size={22} className="text-primary" />
+      <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-500/20 bg-indigo-500/10 text-indigo-400">
+          <ShieldCheck size={16} />
         </div>
-        <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Activate your mentor account</h1>
-        <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-          Set a secure password to complete activation and begin onboarding.
+        <h1 className="text-xl font-bold tracking-tight text-white pt-2">Activate Mentor Account</h1>
+        <p className="text-xs leading-relaxed text-zinc-400">
+          Set a secure password to complete activation and access the mentor console.
         </p>
       </motion.div>
 
@@ -103,13 +103,14 @@ export function ActivateAccountPage() {
         variants={fadeUp}
         custom={2}
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-8 space-y-5"
+        className="mt-6 space-y-4"
         noValidate
       >
-        <FormField id="password" label="Password" error={errors.password?.message}>
+        <FormField id="password" label="Password" error={errors.password?.message} description="Min 8 chars, letters & numbers">
           <PasswordInput
             autoComplete="new-password"
-            placeholder="Create a strong password"
+            placeholder="Create strong password"
+            className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
             {...fieldAriaProps("password", errors.password?.message)}
             {...register("password")}
           />
@@ -118,7 +119,8 @@ export function ActivateAccountPage() {
         <FormField id="confirm" label="Confirm password" error={errors.confirm?.message}>
           <PasswordInput
             autoComplete="new-password"
-            placeholder="Repeat your password"
+            placeholder="Re-enter password"
+            className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />
@@ -126,16 +128,16 @@ export function ActivateAccountPage() {
 
         {error ? (
           <div
-            className="flex items-start gap-3 rounded-xl border border-danger/30 bg-[var(--danger-muted)] px-4 py-3"
+            className="flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5"
             role="alert"
           >
-            <AlertCircle size={16} className="mt-0.5 flex-shrink-0 text-danger" />
-            <p className="text-sm text-danger">{error}</p>
+            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-red-400" />
+            <p className="text-xs text-red-400">{error}</p>
           </div>
         ) : null}
 
-        <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-          {isSubmitting ? "Activating…" : "Activate account"}
+        <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
+          {isSubmitting ? "Activating account…" : "Activate Account"}
         </Button>
       </motion.form>
     </motion.div>

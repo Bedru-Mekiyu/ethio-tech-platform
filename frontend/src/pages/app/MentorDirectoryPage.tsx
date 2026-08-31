@@ -17,6 +17,8 @@ interface Mentor {
   studentCount?: number;
 }
 
+import { Card } from "@/components/ui/card";
+
 export default function MentorDirectoryPage() {
   const navigate = useNavigate();
   usePageTitle("Mentors");
@@ -29,16 +31,18 @@ export default function MentorDirectoryPage() {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/20">
-          <Users className="h-5 w-5" />
-        </span>
-        <div>
-          <h1 className="text-2xl font-bold text-white">Mentors</h1>
-          <p className="text-sm text-[var(--text-secondary)]">Find and connect with expert mentors.</p>
+    <div className="space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <Users className="h-4 w-4" />
+          </span>
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Mentor Directory</h1>
+            <p className="text-xs text-zinc-400 mt-0.5">Find and connect with industry engineering mentors across Ethiopia and worldwide.</p>
+          </div>
         </div>
-      </div>
+      </Card>
       <MentorDirectory
         mentors={mentors}
         loading={isLoading}

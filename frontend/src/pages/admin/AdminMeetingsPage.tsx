@@ -113,30 +113,29 @@ export function AdminMeetingsPage() {
   };
 
   return (
-    <div className="page-shell space-y-6">
-      <Card className="hero-shell p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <Badge variant="purple">Meetings</Badge>
-            <h1 className="section-title mt-3 text-3xl md:text-4xl">Meetings control room</h1>
-            <p className="section-copy mt-2 text-sm">
+    <div className="page-shell space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="max-w-2xl space-y-1">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Live Sessions Control Center</h1>
+            <p className="text-xs text-zinc-400 leading-relaxed">
               One unified view of scheduled, live, completed, and cancelled sessions across the platform.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="default">{counts.scheduled} scheduled</Badge>
-            <Badge variant="success" showDot={counts.active > 0}>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <Badge variant="default" size="sm">{counts.scheduled} scheduled</Badge>
+            <Badge variant="success" size="sm" showDot={counts.active > 0}>
               {counts.active} live
             </Badge>
-            <Badge variant="default">{counts.completed} completed</Badge>
-            <Badge variant="danger">{counts.cancelled} cancelled</Badge>
+            <Badge variant="default" size="sm">{counts.completed} completed</Badge>
+            <Badge variant="danger" size="sm">{counts.cancelled} cancelled</Badge>
           </div>
         </div>
       </Card>
 
-      <Card className="surface-panel p-4">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-3.5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {TABS.map((entry) => {
               const Icon = entry.icon;
               const isActive = entry.key === tab;
@@ -146,39 +145,39 @@ export function AdminMeetingsPage() {
                   type="button"
                   onClick={() => setTab(entry.key)}
                   className={cn(
-                    "inline-flex items-center gap-2 rounded-xl border px-3.5 py-1.5 text-xs font-semibold transition-colors",
+                    "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-medium transition-colors",
                     isActive
-                      ? "border-primary/40 bg-primary/12 text-primary"
-                      : "border-[var(--border)] bg-white/5 text-[var(--text-secondary)] hover:bg-white/10",
+                      ? "border-indigo-500 bg-indigo-600 text-white"
+                      : "border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                   )}
                   data-testid={`admin-meetings-tab-${entry.key}`}
                 >
-                  <Icon size={14} />
+                  <Icon size={12} />
                   {entry.label}
-                  <span className="text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                  <span className="text-[10px] uppercase font-bold text-zinc-400">
                     {counts[entry.key]}
                   </span>
                 </button>
               );
             })}
           </div>
-          <div className="relative w-full max-w-sm">
+          <div className="relative w-full max-w-xs">
             <Search
-              size={14}
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]"
+              size={12}
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"
             />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search meetings by title, mentor, or student…"
-              className="w-full rounded-xl border border-[var(--border)] bg-white/3 py-2 pl-9 pr-3 text-xs font-semibold text-white placeholder:text-[var(--text-muted)] focus:border-primary/40 focus:outline-none focus:ring-2 focus:ring-primary/15"
+              placeholder="Search by title, mentor, or student…"
+              className="w-full rounded-md border border-[#27272A] bg-[#141418] py-1.5 pl-8 pr-3 text-xs font-medium text-white placeholder:text-zinc-500 focus:border-indigo-500 focus:outline-none"
             />
           </div>
         </div>
       </Card>
 
       {filtered.length ? (
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-3.5 lg:grid-cols-2">
           {filtered.map((meeting) => (
             <AdminMeetingTile
               key={meeting.id || meeting.sessionId}
@@ -214,9 +213,9 @@ interface AdminMeetingTileProps {
 
 function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeetingTileProps) {
   return (
-    <div className="space-y-3 rounded-[24px] border border-[var(--border)] bg-[rgba(16,20,28,0.45)] p-4 shadow-md">
-      <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
-        <Activity size={12} className="text-primary" />
+    <div className="space-y-3 rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
+      <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-wider text-zinc-500">
+        <Activity size={11} className="text-indigo-400" />
         <span>Session · {meeting.id?.slice(-6) || meeting.sessionId?.slice(-6) || "—"}</span>
         {meeting.status === "active" ? (
           <Badge variant="success" size="sm" showDot>
@@ -224,7 +223,7 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
           </Badge>
         ) : meeting.status === "waiting_for_host" ? (
           <Badge variant="warning" size="sm">
-            <Clock size={11} /> Waiting host
+            <Clock size={10} className="mr-0.5" /> Waiting host
           </Badge>
         ) : meeting.status === "scheduled" ? (
           <Badge variant="default" size="sm">
@@ -241,36 +240,36 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
         )}
       </div>
       <MeetingCard meeting={meeting} variant="full" />
-      <div className="grid grid-cols-2 gap-2 text-[11px] text-[var(--text-secondary)]">
-        <div className="rounded-xl border border-[var(--border)] bg-white/3 px-3 py-2">
-          <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--text-muted)]">Starts</p>
+      <div className="grid grid-cols-2 gap-2 text-xs text-zinc-400">
+        <div className="rounded-lg border border-[#27272A] bg-[#141418] px-3 py-2">
+          <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Starts</p>
           <p className="mt-0.5 text-xs font-semibold text-white">{formatDateTime(meeting.scheduledAt)}</p>
           {meeting.startsInMs != null && meeting.status !== "completed" && meeting.status !== "cancelled" ? (
-            <p className="text-[10px] text-primary">In {formatCountdown(meeting.startsInMs)}</p>
+            <p className="text-[10px] text-indigo-400">In {formatCountdown(meeting.startsInMs)}</p>
           ) : null}
         </div>
-        <div className="rounded-xl border border-[var(--border)] bg-white/3 px-3 py-2">
-          <p className="text-[9px] uppercase tracking-[0.18em] text-[var(--text-muted)]">Presence</p>
+        <div className="rounded-lg border border-[#27272A] bg-[#141418] px-3 py-2">
+          <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Presence</p>
           <p className="mt-0.5 text-xs font-semibold text-white">{meeting.presenceCount} in room</p>
-          <p className="text-[10px] text-[var(--text-muted)]">
+          <p className="text-[10px] text-zinc-500">
             {meeting.isHost ? "Mentor is host" : "Mentor attached"}
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <a href={meeting.joinHref || "#"} className="text-[11px] font-semibold text-primary hover:underline">
-          Open classroom →
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#27272A] pt-2.5">
+        <a href={meeting.joinHref || "#"} className="text-xs font-medium text-indigo-400 hover:underline">
+          Open Classroom →
         </a>
         {meeting.status !== "completed" && meeting.status !== "cancelled" ? (
           <Button
             size="sm"
             variant="danger"
-            className="font-semibold"
+            className="text-xs h-7 gap-1 font-medium"
             onClick={() => onForceEnd(meeting)}
             loading={forceEndLoading}
             data-testid="admin-meetings-force-end"
           >
-            <Shield size={14} /> Force end
+            <Shield size={12} /> Force End
           </Button>
         ) : null}
       </div>

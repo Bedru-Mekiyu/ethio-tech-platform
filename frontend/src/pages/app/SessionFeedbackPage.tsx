@@ -56,21 +56,25 @@ export function SessionFeedbackPage() {
 
   if (submitted) {
     return (
-      <div className="mx-auto max-w-lg space-y-6 py-8">
-        <Card className="flex flex-col items-center gap-4 p-8 text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/15">
-            <CheckCircle size={32} className="text-success" />
+      <div className="mx-auto max-w-lg space-y-6 py-8 text-[var(--text-primary)]">
+        <Card className="flex flex-col items-center gap-4 p-6 sm:p-8 text-center border-[#27272A] bg-[#0E0E11] rounded-xl shadow-sm">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">
+            <CheckCircle size={24} />
           </div>
-          <h1 className="text-2xl font-bold text-white">Thank you for your feedback!</h1>
-          <p className="text-[var(--text-secondary)]">
-            Your input helps mentors improve future sessions. We appreciate your time.
+          <h1 className="text-xl font-bold text-white">Thank you for your feedback!</h1>
+          <p className="text-xs text-zinc-400 max-w-md">
+            Your input directly helps mentors optimize future sessions and peer reviews.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2.5 pt-2">
             <Link to="/app/sessions">
-              <Button>Back to sessions</Button>
+              <Button size="sm" className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+                Back to Sessions
+              </Button>
             </Link>
             <Link to="/app/dashboard">
-              <Button variant="outline">Dashboard</Button>
+              <Button size="sm" variant="outline" className="text-xs text-zinc-300">
+                Dashboard
+              </Button>
             </Link>
           </div>
         </Card>
@@ -79,43 +83,48 @@ export function SessionFeedbackPage() {
   }
 
   return (
-    <div className="mx-auto max-w-lg space-y-6">
-      <Link to="/app/sessions" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
-        <ArrowLeft size={14} />
+    <div className="mx-auto max-w-lg space-y-6 text-[var(--text-primary)]">
+      <Link to="/app/sessions" className="inline-flex items-center gap-1.5 text-xs text-indigo-400 hover:underline">
+        <ArrowLeft size={13} />
         Back to sessions
       </Link>
 
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">How was the session?</h1>
-        <p className="mt-2 text-[var(--text-secondary)]">
-          Rate the session across three dimensions and leave any comments for your mentor.
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
+        <h1 className="text-xl font-bold tracking-tight text-white">Session Review & Feedback</h1>
+        <p className="mt-0.5 text-xs text-zinc-400">
+          Rate the session across three dimensions and leave comments for your mentor.
         </p>
-      </div>
+      </Card>
 
-      <Card className="space-y-6 p-6">
+      <Card className="space-y-5 p-5 sm:p-6 border-[#27272A] bg-[#0E0E11] rounded-xl shadow-sm">
         <StarRating value={quality} onChange={setQuality} label="Content Quality" />
         <StarRating value={engagement} onChange={setEngagement} label="Engagement" />
         <StarRating value={impact} onChange={setImpact} label="Learning Impact" />
 
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-white">Comments (optional)</label>
+        <div className="space-y-1.5">
+          <label className="text-xs font-medium text-zinc-300">Comments (optional)</label>
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="What worked well? What could be improved?"
             rows={4}
-            className="w-full rounded-2xl border border-[var(--border)] bg-white/5 px-4 py-3 text-sm text-white placeholder:text-[var(--text-muted)] focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30 resize-none"
+            className="w-full rounded-lg border border-[#27272A] bg-[#141418] px-3.5 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 resize-none"
           />
         </div>
 
         {mutation.isError && (
-          <div className="rounded-2xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+          <div className="rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
             Failed to submit feedback. Please try again.
           </div>
         )}
 
-        <Button className="w-full" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
-          {mutation.isPending ? "Submitting..." : "Submit feedback"}
+        <Button
+          size="sm"
+          className="w-full text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white"
+          onClick={() => mutation.mutate()}
+          disabled={mutation.isPending}
+        >
+          {mutation.isPending ? "Submitting..." : "Submit Feedback"}
         </Button>
       </Card>
     </div>

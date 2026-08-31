@@ -4,6 +4,7 @@ import { adminUserService, type AdminUser, type AdminUserAnalytics } from "@/ser
 import { UserTable } from "@/components/admin/UserTable";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { useToast } from "@/components/composites/ToastProvider";
@@ -665,74 +666,76 @@ export function AdminUsersPage() {
   const verifiedPercent = totalUsers > 0 ? Math.round((verifiedUsers / totalUsers) * 100) : 0;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 text-[var(--text-primary)]">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold md:text-3xl text-white">User Management</h1>
-          <p className="mt-1 text-sm text-[var(--text-secondary)]">
-            Search, filter, and execute quick administrative actions across all platform roles.
-          </p>
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">User Management Directory</h1>
+            <p className="mt-0.5 text-xs text-zinc-400">
+              Search, filter, and execute administrative actions across all platform roles and accounts.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+                queryClient.invalidateQueries({ queryKey: ["admin", "users", "analytics"] });
+              }}
+              className="text-xs text-zinc-300 hover:text-white"
+            >
+              <RefreshCw size={12} className="mr-1" /> Refresh
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => adminUserService.exportUsers({})}
+              className="text-xs text-zinc-300 hover:text-white"
+            >
+              <Download size={12} className="mr-1" /> Export CSV
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
-              queryClient.invalidateQueries({ queryKey: ["admin", "users", "analytics"] });
-            }}
-            className="gap-1.5"
-          >
-            <RefreshCw size={14} /> Refresh
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => adminUserService.exportUsers({})}
-            className="gap-1.5"
-          >
-            <Download size={14} /> Export Directory
-          </Button>
-        </div>
-      </div>
+      </Card>
 
       {/* Analytics Overview Ribbon */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
-          <p className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold">Total Users</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{totalUsers.toLocaleString()}</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">{activeUsers} active</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Total Users</p>
+          <p className="mt-1 text-xl font-bold text-white">{totalUsers.toLocaleString()}</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">{activeUsers} active</p>
         </div>
 
-        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-4">
-          <p className="text-xs uppercase tracking-wider text-primary font-semibold">Students</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{studentCount.toLocaleString()}</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">Learner accounts</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-indigo-400 font-semibold">Students</p>
+          <p className="mt-1 text-xl font-bold text-white">{studentCount.toLocaleString()}</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">Learners</p>
         </div>
 
-        <div className="rounded-2xl border border-success/20 bg-success/5 p-4">
-          <p className="text-xs uppercase tracking-wider text-success font-semibold">Mentors</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{mentorCount.toLocaleString()}</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">Active guides</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">Mentors</p>
+          <p className="mt-1 text-xl font-bold text-white">{mentorCount.toLocaleString()}</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">Active guides</p>
         </div>
 
-        <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-4">
-          <p className="text-xs uppercase tracking-wider text-purple-400 font-semibold">Parents</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{parentCount.toLocaleString()}</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">Family accounts</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-purple-400 font-semibold">Parents</p>
+          <p className="mt-1 text-xl font-bold text-white">{parentCount.toLocaleString()}</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">Family accounts</p>
         </div>
 
-        <div className="rounded-2xl border border-warning/20 bg-warning/5 p-4">
-          <p className="text-xs uppercase tracking-wider text-warning font-semibold">Admins & Staff</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{adminCount.toLocaleString()}</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">Platform ops</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold">Admins & Staff</p>
+          <p className="mt-1 text-xl font-bold text-white">{adminCount.toLocaleString()}</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">Platform ops</p>
         </div>
 
-        <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-4">
-          <p className="text-xs uppercase tracking-wider text-cyan-400 font-semibold">Verified Rate</p>
-          <p className="mt-1.5 text-2xl font-bold text-white">{verifiedPercent}%</p>
-          <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">{verifiedUsers} verified</p>
+        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
+          <p className="text-[10px] uppercase tracking-wider text-sky-400 font-semibold">Verified Rate</p>
+          <p className="mt-1 text-xl font-bold text-white">{verifiedPercent}%</p>
+          <p className="text-[11px] text-zinc-400 mt-0.5">{verifiedUsers} verified</p>
         </div>
       </div>
 

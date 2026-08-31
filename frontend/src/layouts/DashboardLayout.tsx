@@ -215,26 +215,26 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     ));
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg-base)]">
+    <div className="flex min-h-screen bg-[#050507]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-black"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to main content
       </a>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.96)] p-5 lg:flex">
+      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[#27272A] bg-[#0E0E11] p-5 lg:flex">
         <Logo to="/" />
         <nav className="mt-8 flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
           {renderNavItems(false)}
         </nav>
-        <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+        <div className="mt-4 flex flex-col gap-3 border-t border-[#27272A] pt-4">
           <Link
             to={getSettingsPath(user?.role ?? variant)}
-            className="flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors duration-200 border border-transparent hover:bg-white/5"
+            className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-white transition-colors duration-200 border border-transparent hover:bg-[#141418] hover:border-[#27272A]"
           >
-            <Settings size={18} /> Settings
+            <Settings size={15} /> Settings
           </Link>
         </div>
       </aside>
@@ -248,7 +248,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[4px] lg:hidden"
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[4px] lg:hidden"
             />
             <motion.aside
               ref={drawerRef}
@@ -257,7 +257,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 26, stiffness: 220 }}
-              className="fixed inset-y-0 left-0 z-50 flex w-66 flex-col border-r border-[var(--border)] bg-[rgba(11,14,20,0.98)] p-5 lg:hidden shadow-2xl"
+              className="fixed inset-y-0 left-0 z-50 flex w-66 flex-col border-r border-[#27272A] bg-[#0E0E11] p-5 lg:hidden shadow-2xl"
               role="dialog"
               aria-label="Navigation Menu"
             >
@@ -267,21 +267,21 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="p-1 rounded-lg hover:bg-white/5 text-[var(--text-secondary)] hover:text-white transition-colors duration-200 min-h-10 min-w-10 flex items-center justify-center"
+                  className="p-1 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-colors duration-200 min-h-9 min-w-9 flex items-center justify-center"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               </div>
               <nav className="flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
                 {renderNavItems(true)}
               </nav>
-              <div className="mt-4 flex flex-col gap-3 border-t border-[var(--border)] pt-4">
+              <div className="mt-4 flex flex-col gap-3 border-t border-[#27272A] pt-4">
                 <Link
                   to={getSettingsPath(user?.role ?? variant)}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3.5 rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] hover:text-white transition-colors duration-200 border border-transparent hover:bg-white/5"
+                  className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-white transition-colors duration-200 border border-transparent hover:bg-[#141418] hover:border-[#27272A]"
                 >
-                  <Settings size={18} /> Settings
+                  <Settings size={15} /> Settings
                 </Link>
               </div>
             </motion.aside>
@@ -291,37 +291,37 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col pb-20 lg:pb-0">
-        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[rgba(5,10,20,0.7)] px-4 py-4.5 backdrop-blur-xl lg:px-8">
+        <header className="flex items-center justify-between gap-4 border-b border-[#27272A] bg-[#0E0E11]/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <button
               ref={openButtonRef}
               type="button"
-              className="min-h-11 min-w-11 rounded-xl border border-[var(--border)] p-2.5 lg:hidden flex items-center justify-center hover:bg-white/5 text-white transition-colors duration-200"
+              className="min-h-9 min-w-9 rounded-lg border border-[#27272A] p-2 lg:hidden flex items-center justify-center hover:bg-[#141418] text-white transition-colors duration-200"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav-drawer"
             >
-              <Menu size={20} />
+              <Menu size={18} />
             </button>
             {variant === "parent" ? (
-              <div className="flex items-center gap-3">
-                <Badge variant="purple" showDot>
-                  Family workspace
+              <div className="flex items-center gap-2">
+                <Badge variant="purple" size="sm" showDot>
+                  Family Workspace
                 </Badge>
-                <span className="text-sm font-medium text-[var(--text-secondary)]">Parent view</span>
+                <span className="text-xs font-medium text-zinc-400">Parent View</span>
               </div>
             ) : (
-              <div className="flex items-center gap-4">
-                <span className="hidden text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] sm:inline">
-                  Current rank
+              <div className="flex items-center gap-3">
+                <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:inline">
+                  Rank
                 </span>
-                <span className="font-semibold text-primary">{getRankTitle(user?.level ?? 1)}</span>
+                <span className="text-xs font-bold text-indigo-400">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
             )}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link
               to={
                 variant === "mentor"
@@ -330,22 +330,22 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                     ? "/admin/notifications"
                     : "/app/notifications"
               }
-              className="relative p-2 rounded-lg text-[var(--text-secondary)] hover:text-white hover:bg-white/5 transition-colors duration-200 min-w-10 min-h-10 flex items-center justify-center"
+              className="relative p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-[#141418] transition-colors duration-200 min-w-9 min-h-9 flex items-center justify-center border border-transparent hover:border-[#27272A]"
               aria-label="Notifications"
             >
-              <Bell size={20} />
+              <Bell size={18} />
               {notifBadge.count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold text-white">
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[9px] font-bold text-white">
                   {notifBadge.count > 99 ? "99+" : notifBadge.count}
                 </span>
               )}
             </Link>
             {user && (
-              <div className="relative border-l border-[var(--border)] pl-4" ref={accountRef}>
+              <div className="relative border-l border-[#27272A] pl-3" ref={accountRef}>
                 <button
                   type="button"
                   onClick={() => setAccountOpen((prev) => !prev)}
-                  className="flex items-center gap-2 min-h-10 min-w-10 rounded-xl p-1 hover:bg-white/5 transition-colors duration-200"
+                  className="flex items-center gap-2 min-h-9 rounded-lg p-1 hover:bg-[#141418] transition-colors duration-200"
                   aria-label="Account menu"
                   aria-expanded={accountOpen}
                 >
@@ -354,22 +354,22 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                     name={user.fullName}
                     userId={user.id}
                     role={user.role === "mentor" ? "mentor" : "student"}
-                    size="md"
+                    size="sm"
                     status="online"
                   />
                   <ChevronDown
-                    size={14}
+                    size={12}
                     className={cn(
-                      "text-[var(--text-muted)] transition-transform duration-200",
+                      "text-zinc-500 transition-transform duration-200",
                       accountOpen && "rotate-180",
                     )}
                   />
                 </button>
                 {accountOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-[var(--border)] bg-[rgba(15,18,28,0.98)] shadow-2xl backdrop-blur-xl z-50 py-1">
-                    <div className="px-4 py-3 border-b border-[var(--border)]">
-                      <p className="text-sm font-semibold text-white truncate">{user.fullName}</p>
-                      <p className="text-xs text-[var(--text-muted)] truncate mt-0.5">{user.email}</p>
+                  <div className="absolute right-0 top-full mt-2 w-52 rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-2xl backdrop-blur-xl z-50 py-1">
+                    <div className="px-3.5 py-2.5 border-b border-[#27272A]">
+                      <p className="text-xs font-semibold text-white truncate">{user.fullName}</p>
+                      <p className="text-[11px] text-zinc-500 truncate mt-0.5">{user.email}</p>
                     </div>
                     <Link
                       to={
@@ -380,23 +380,23 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                             : "/admin/profile"
                       }
                       onClick={() => setAccountOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-zinc-300 hover:bg-[#141418] hover:text-white transition-colors"
                     >
-                      <User size={15} /> Profile
+                      <User size={13} /> Profile
                     </Link>
                     <Link
                       to={getSettingsPath(user.role)}
                       onClick={() => setAccountOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:bg-white/5 hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-zinc-300 hover:bg-[#141418] hover:text-white transition-colors"
                     >
-                      <Settings size={15} /> Settings
+                      <Settings size={13} /> Settings
                     </Link>
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                      className="flex w-full items-center gap-2.5 px-3.5 py-2 text-xs text-red-400 hover:bg-red-500/10 transition-colors border-t border-[#27272A]"
                     >
-                      <LogOut size={15} /> Sign out
+                      <LogOut size={13} /> Sign out
                     </button>
                   </div>
                 )}
@@ -411,7 +411,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
         {/* Mobile bottom nav with sliding layout indicator */}
         <nav
-          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[var(--border)] bg-[rgba(11,14,20,0.96)] pb-[env(safe-area-inset-bottom)] lg:hidden backdrop-blur-xl"
+          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[#27272A] bg-[#0E0E11]/95 pb-[env(safe-area-inset-bottom)] lg:hidden backdrop-blur-md"
           aria-label="Mobile navigation"
         >
           {(variant === "student"

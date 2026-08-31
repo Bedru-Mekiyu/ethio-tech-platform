@@ -1257,30 +1257,30 @@ export function CodingWorkspacePage() {
   return (
     <div
       className={cn(
-        "flex flex-col bg-[#070B14] text-slate-200 antialiased font-sans border border-slate-800/80 rounded-xl shadow-2xl overflow-hidden",
+        "flex flex-col bg-[#050507] text-zinc-200 antialiased font-sans border border-[#27272A] rounded-xl shadow-xl overflow-hidden",
         isFullScreen
           ? "fixed inset-0 z-50 rounded-none border-0 h-screen w-screen"
           : "h-[calc(100vh-8.5rem)] min-h-[660px]",
       )}
     >
       {/* ─── TOP TOOLBAR (High-density IDE Navigation) ────────────────────────── */}
-      <header className="flex h-12 flex-none items-center justify-between border-b border-slate-800/90 bg-[#0A0F1D] px-3 sm:px-4 select-none">
+      <header className="flex h-11 flex-none items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 sm:px-4 select-none">
         {/* Left: Breadcrumbs & Active Tab */}
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="text-slate-500 hidden md:inline">workspace</span>
-            <span className="text-slate-600 hidden md:inline">/</span>
-            <span className="text-slate-400 hidden sm:inline">src</span>
-            <span className="text-slate-600 hidden sm:inline">/</span>
-            <div className="flex items-center gap-1.5 rounded-md bg-slate-800/90 px-2.5 py-1 text-xs font-medium text-cyan-300 border border-slate-700/60">
-              <FileCode size={13} className={langMeta.accentColor} />
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          <div className="flex items-center gap-1.5 text-xs font-mono">
+            <span className="text-zinc-500 hidden md:inline">workspace</span>
+            <span className="text-zinc-600 hidden md:inline">/</span>
+            <span className="text-zinc-400 hidden sm:inline">src</span>
+            <span className="text-zinc-600 hidden sm:inline">/</span>
+            <div className="flex items-center gap-1.5 rounded-md bg-[#141418] px-2 py-0.5 text-xs font-medium text-indigo-300 border border-[#27272A]">
+              <FileCode size={12} className="text-indigo-400" />
               <span>{currentTemplate.fileName}</span>
             </div>
           </div>
 
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-400 border-l border-slate-800 pl-3">
-            <span className="text-slate-500 font-sans">Track:</span>
-            <span className="text-slate-300 font-medium truncate max-w-[200px]">
+          <div className="hidden xl:flex items-center gap-1.5 text-xs text-zinc-400 border-l border-[#27272A] pl-2.5">
+            <span className="text-zinc-500 font-sans">Track:</span>
+            <span className="text-zinc-300 font-medium truncate max-w-[200px]">
               {lesson?.title || primaryTrack?.title || "Full-Stack Web Development"}
             </span>
           </div>
@@ -1289,35 +1289,35 @@ export function CodingWorkspacePage() {
         {/* Center: Language & Template Selectors */}
         <div className="flex items-center gap-2">
           {/* Language Selector */}
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-800 bg-[#060911] px-2.5 py-1">
-            <span className="text-[11px] font-semibold text-slate-500 font-mono">Lang</span>
+          <div className="flex items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 py-0.5">
+            <span className="text-[10px] font-semibold text-zinc-500 font-mono">Lang</span>
             <select
               value={language}
               onChange={(e) => handleLanguageChange(e.target.value as SupportedLanguage)}
-              className="bg-transparent text-xs font-semibold text-cyan-300 focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-medium text-white focus:outline-none cursor-pointer"
             >
-              <option value="react" className="bg-slate-900 text-white">React (TSX)</option>
-              <option value="typescript" className="bg-slate-900 text-white">TypeScript</option>
-              <option value="javascript" className="bg-slate-900 text-white">JavaScript</option>
-              <option value="python" className="bg-slate-900 text-white">Python 3</option>
-              <option value="go" className="bg-slate-900 text-white">Go</option>
-              <option value="rust" className="bg-slate-900 text-white">Rust</option>
+              <option value="react" className="bg-[#141418] text-white">React (TSX)</option>
+              <option value="typescript" className="bg-[#141418] text-white">TypeScript</option>
+              <option value="javascript" className="bg-[#141418] text-white">JavaScript</option>
+              <option value="python" className="bg-[#141418] text-white">Python 3</option>
+              <option value="go" className="bg-[#141418] text-white">Go</option>
+              <option value="rust" className="bg-[#141418] text-white">Rust</option>
             </select>
           </div>
 
           {/* Starter Template Preset */}
-          <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-800 bg-[#060911] px-2.5 py-1">
-            <span className="text-[11px] font-semibold text-slate-500 font-mono">Preset</span>
+          <div className="hidden sm:flex items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 py-0.5">
+            <span className="text-[10px] font-semibold text-zinc-500 font-mono">Preset</span>
             <select
               value={selectedTemplateId}
               onChange={(e) => {
                 const found = TEMPLATES[language]?.find((t) => t.id === e.target.value);
                 if (found) handleSelectTemplate(found);
               }}
-              className="bg-transparent text-xs font-semibold text-slate-200 focus:outline-none cursor-pointer max-w-[150px] lg:max-w-[200px] truncate"
+              className="bg-transparent text-xs font-medium text-zinc-300 focus:outline-none cursor-pointer max-w-[150px] lg:max-w-[200px] truncate"
             >
               {TEMPLATES[language]?.map((tmpl) => (
-                <option key={tmpl.id} value={tmpl.id} className="bg-slate-900 text-white">
+                <option key={tmpl.id} value={tmpl.id} className="bg-[#141418] text-white">
                   {tmpl.name}
                 </option>
               ))}
@@ -1326,15 +1326,15 @@ export function CodingWorkspacePage() {
         </div>
 
         {/* Right: Actions (Reset, Copy, Fullscreen, Run, Submit) */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5">
           {/* Reset Code */}
           <button
             type="button"
             onClick={handleResetCode}
             title="Reset code boilerplate"
-            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white hover:border-zinc-700 transition"
           >
-            <RotateCcw size={13} />
+            <RotateCcw size={12} />
           </button>
 
           {/* Copy Code */}
@@ -1342,9 +1342,9 @@ export function CodingWorkspacePage() {
             type="button"
             onClick={handleCopyCode}
             title="Copy code to clipboard"
-            className="flex h-7 items-center gap-1 rounded-md border border-slate-800 bg-slate-900/60 px-2 text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="flex h-7 items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 text-xs text-zinc-400 hover:text-white hover:border-zinc-700 transition"
           >
-            {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+            {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
             <span className="hidden sm:inline text-[11px]">{copied ? "Copied" : "Copy"}</span>
           </button>
 
@@ -1353,22 +1353,22 @@ export function CodingWorkspacePage() {
             type="button"
             onClick={() => setIsFullScreen(!isFullScreen)}
             title={isFullScreen ? "Exit Fullscreen" : "Fullscreen IDE"}
-            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-800 bg-slate-900/60 text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white hover:border-zinc-700 transition"
           >
-            {isFullScreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
+            {isFullScreen ? <Minimize2 size={12} /> : <Maximize2 size={12} />}
           </button>
 
-          <div className="h-4 w-px bg-slate-800 mx-0.5" />
+          <div className="h-4 w-px bg-[#27272A] mx-0.5" />
 
           {/* Primary Run Code Button */}
           <Button
             size="sm"
             onClick={handleRunCode}
             disabled={isRunning}
-            className="h-7 gap-1.5 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-semibold text-xs px-3 shadow-md shadow-cyan-500/10 border-0"
+            className="h-7 gap-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
           >
-            <Play size={12} className={cn("fill-current", isRunning && "animate-spin")} />
-            <span>{isRunning ? "Running..." : "Run Code"}</span>
+            <Play size={11} className={cn("fill-current", isRunning && "animate-spin")} />
+            <span>{isRunning ? "Running..." : "Run"}</span>
             <span className="hidden md:inline font-mono text-[10px] opacity-75 ml-0.5">⌘↵</span>
           </Button>
 
@@ -1377,9 +1377,9 @@ export function CodingWorkspacePage() {
             size="sm"
             onClick={handleSubmitSolution}
             disabled={isSubmitting}
-            className="h-7 gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-3 border-0 shadow-sm"
+            className="h-7 gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
           >
-            <Send size={12} className={cn(isSubmitting && "animate-pulse")} />
+            <Send size={11} className={cn(isSubmitting && "animate-pulse")} />
             <span className="hidden sm:inline">
               {submittedSuccess ? "Submitted ✓" : "Submit"}
             </span>

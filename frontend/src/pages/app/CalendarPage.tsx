@@ -368,101 +368,99 @@ export function CalendarPage() {
   if (isLoading) return <CalendarSkeleton />;
 
   return (
-    <div className="space-y-8 text-white">
-      {/* Top Header & Action Controls */}
-      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">Study Planner & Calendar</h1>
-            <span className="rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-0.5 text-xs font-semibold text-indigo-400">
-              Sprint v2.4
-            </span>
+    <div className="space-y-6 text-[var(--text-primary)]">
+      {/* Top Header */}
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Study Planner & Calendar</h1>
+              <Badge variant="purple" size="sm">Live Planner</Badge>
+            </div>
+            <p className="text-xs text-zinc-400 max-w-2xl leading-relaxed">
+              Coordinate study blocks, live mentorship sessions, capstone milestones, and physical tech hub visits.
+            </p>
           </div>
-          <p className="mt-1.5 text-sm text-[var(--text-secondary)] max-w-2xl">
-            Coordinate focused study blocks, WebRTC live mentorship sessions, capstone milestones, and regional tech hub
-            visits.
-          </p>
+
+          {/* Global Action Buttons */}
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => syncMutation.mutate()}
+              disabled={syncMutation.isPending}
+              className="text-xs text-zinc-300"
+            >
+              <RefreshCw size={12} className={cn("mr-1", syncMutation.isPending && "animate-spin")} />
+              {syncMutation.isPending ? "Syncing..." : "Sync Sessions"}
+            </Button>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => downloadCalendarFile()}
+              className="text-xs text-zinc-300"
+            >
+              <Download size={12} className="mr-1" />
+              Export ICS
+            </Button>
+
+            <Button
+              size="sm"
+              onClick={() => openAddModal("study_block")}
+              className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white"
+            >
+              <Plus size={13} className="mr-1" />
+              Schedule Block
+            </Button>
+          </div>
         </div>
-
-        {/* Global Action Buttons */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => syncMutation.mutate()}
-            disabled={syncMutation.isPending}
-            className="border-[#1E293B] bg-[#0F172A] text-slate-200 hover:bg-[#1E293B]"
-          >
-            <RefreshCw size={14} className={cn("mr-1.5", syncMutation.isPending && "animate-spin")} />
-            {syncMutation.isPending ? "Syncing..." : "Sync Sessions"}
-          </Button>
-
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => downloadCalendarFile()}
-            className="border-[#1E293B] bg-[#0F172A] text-slate-200 hover:bg-[#1E293B]"
-          >
-            <Download size={14} className="mr-1.5" />
-            Export ICS
-          </Button>
-
-          <Button
-            size="sm"
-            onClick={() => openAddModal("study_block")}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-md shadow-indigo-600/25"
-          >
-            <Plus size={15} className="mr-1" />
-            Schedule Block
-          </Button>
-        </div>
-      </div>
+      </Card>
 
       {syncFeedback && (
-        <div className="flex items-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3 text-xs text-emerald-400">
-          <Check size={16} />
+        <div className="flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-2.5 text-xs text-emerald-400">
+          <Check size={14} />
           <span>{syncFeedback}</span>
         </div>
       )}
 
       {/* Study Sprint & Habit Tracker Widget */}
-      <Card className="relative overflow-hidden rounded-[24px] border border-[#1E293B] bg-gradient-to-br from-[#090D16] via-[#0F172A] to-[#0A1020] p-6 shadow-xl">
-        <div className="relative z-10 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-3 max-w-xl">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-bold text-amber-400">
-                <Flame size={14} className="fill-amber-400" />
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
+        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="space-y-2.5 max-w-xl">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-amber-400">
+                <Flame size={12} className="fill-amber-400" />
                 {sprintStats.streakDays}-Day Study Streak
               </span>
-              <span className="rounded-full border border-slate-700 bg-slate-800/80 px-3 py-1 text-xs font-medium text-slate-300">
-                Active Weekly Sprint
+              <span className="rounded-full border border-[#27272A] bg-[#141418] px-2.5 py-0.5 text-[11px] font-medium text-zinc-400">
+                Weekly Sprint
               </span>
             </div>
 
             <div>
               <div className="flex items-baseline gap-2">
-                <h2 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
+                <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
                   {sprintStats.completedHours}
-                  <span className="text-base font-normal text-slate-400">
+                  <span className="text-sm font-normal text-zinc-400">
                     {" "}
                     / {sprintStats.targetHours} hrs completed
                   </span>
                 </h2>
-                <span className="text-xs font-semibold text-indigo-400">
+                <span className="text-xs font-medium text-indigo-400">
                   ({sprintStats.progressPercent}% of target)
                 </span>
               </div>
-              <p className="text-xs text-[var(--text-secondary)] mt-0.5">
-                {sprintStats.completedCount} of {sprintStats.totalCount} scheduled blocks completed this week. Keep the
-                momentum high!
+              <p className="text-xs text-zinc-400 mt-0.5">
+                {sprintStats.completedCount} of {sprintStats.totalCount} blocks completed this week.
               </p>
             </div>
 
             {/* Progress bar */}
-            <div className="space-y-1.5">
-              <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-800">
+            <div className="space-y-1">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-[#141418] border border-[#27272A]">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-blue-500 to-emerald-400 transition-all duration-500"
+                  className="h-full rounded-full bg-indigo-600 transition-all duration-500"
                   style={{ width: `${sprintStats.progressPercent}%` }}
                 />
               </div>
@@ -472,47 +470,48 @@ export function CalendarPage() {
           {/* Quick Stats Grid & Action */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-2.5 text-center">
-                <span className="text-xs text-indigo-400 font-medium">Study Blocks</span>
-                <p className="text-lg font-bold text-white">{sprintStats.studyBlockCount}</p>
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-center">
+                <span className="text-[10px] text-indigo-400 font-medium uppercase">Study</span>
+                <p className="text-base font-bold text-white mt-0.5">{sprintStats.studyBlockCount}</p>
               </div>
-              <div className="rounded-xl border border-blue-500/20 bg-blue-500/5 p-2.5 text-center">
-                <span className="text-xs text-blue-400 font-medium">Live Sessions</span>
-                <p className="text-lg font-bold text-white">{sprintStats.sessionCount}</p>
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-center">
+                <span className="text-[10px] text-sky-400 font-medium uppercase">Sessions</span>
+                <p className="text-base font-bold text-white mt-0.5">{sprintStats.sessionCount}</p>
               </div>
-              <div className="rounded-xl border border-rose-500/20 bg-rose-500/5 p-2.5 text-center">
-                <span className="text-xs text-rose-400 font-medium">Deadlines</span>
-                <p className="text-lg font-bold text-white">{sprintStats.deadlineCount}</p>
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-center">
+                <span className="text-[10px] text-rose-400 font-medium uppercase">Deadlines</span>
+                <p className="text-base font-bold text-white mt-0.5">{sprintStats.deadlineCount}</p>
               </div>
-              <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-2.5 text-center">
-                <span className="text-xs text-amber-400 font-medium">Hub Visits</span>
-                <p className="text-lg font-bold text-white">{sprintStats.hubVisitCount}</p>
+              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-center">
+                <span className="text-[10px] text-amber-400 font-medium uppercase">Hubs</span>
+                <p className="text-base font-bold text-white mt-0.5">{sprintStats.hubVisitCount}</p>
               </div>
             </div>
 
             <Button
+              size="sm"
               onClick={() => openAddModal("study_block")}
-              className="h-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-semibold shadow-lg shadow-indigo-600/30 px-5 py-3 whitespace-nowrap"
+              className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white"
             >
-              <Plus size={16} className="mr-1.5" />+ Add Study Block
+              <Plus size={13} className="mr-1" /> Add Study Block
             </Button>
           </div>
         </div>
       </Card>
 
       {/* View Switcher & Period Controls */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-[#1E293B] pb-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[#27272A] pb-3.5">
         {/* View Mode Tabs */}
-        <div className="flex items-center rounded-xl border border-[#1E293B] bg-[#0F172A] p-1">
+        <div className="flex items-center rounded-lg border border-[#27272A] bg-[#0E0E11] p-1">
           <button
             type="button"
             onClick={() => setViewMode("month")}
             className={cn(
-              "flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition",
-              viewMode === "month" ? "bg-indigo-600 text-white shadow-sm" : "text-slate-400 hover:text-white",
+              "flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition",
+              viewMode === "month" ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:text-white",
             )}
           >
-            <LayoutGrid size={14} />
+            <LayoutGrid size={12} />
             Month Grid
           </button>
           <button

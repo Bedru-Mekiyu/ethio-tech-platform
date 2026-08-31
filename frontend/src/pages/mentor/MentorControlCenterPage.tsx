@@ -363,36 +363,36 @@ export default function MentorControlCenterPage() {
   const overview = data?.overview;
 
   return (
-    <div className="mcc-container p-4 sm:p-6 space-y-6" role="main" aria-label="Mentor Control Center">
+    <div className="mcc-container p-4 sm:p-6 space-y-5 text-[var(--text-primary)]" role="main" aria-label="Mentor Control Center">
       {/* Header section */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-white/5 pb-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[#27272A] pb-4">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
-            className="h-9 w-9 p-0 rounded-xl hover:bg-white/5 text-white"
+            className="h-8 w-8 p-0 rounded-lg hover:bg-zinc-800 text-white"
             onClick={() => navigate(-1)}
             aria-label="Go back"
             title="Go back (Esc)"
           >
-            <ArrowLeft size={18} aria-hidden="true" />
+            <ArrowLeft size={16} aria-hidden="true" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-white sm:text-2xl tracking-tight">Mentor OS Control Center</h1>
-            <p className="text-xs text-[var(--text-secondary)] mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
+            <h1 className="text-xl font-bold text-white tracking-tight sm:text-2xl">Mentor OS Control Center</h1>
+            <p className="text-xs text-zinc-400 mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
           </div>
-          <Badge className="mcc-live-badge ml-3 animate-pulse" aria-live="polite" aria-label="Session is live">
-            <Activity size={12} className="mr-1.5" aria-hidden="true" /> LIVE
+          <Badge className="mcc-live-badge ml-2 animate-pulse" size="sm" aria-live="polite" aria-label="Session is live">
+            <Activity size={11} className="mr-1" aria-hidden="true" /> LIVE
           </Badge>
         </div>
         <Button
           size="sm"
           variant="outline"
-          className="h-9 text-xs border-white/10 hover:bg-white/5 text-white rounded-xl"
+          className="h-8 text-xs text-zinc-300 hover:text-white rounded-lg"
           onClick={() => refetch()}
           aria-label="Refresh dashboard data"
         >
-          <RefreshCw size={13} className="mr-1.5" aria-hidden="true" /> Refresh Dashboard
+          <RefreshCw size={12} className="mr-1.5" aria-hidden="true" /> Refresh Dashboard
         </Button>
       </div>
 
@@ -403,30 +403,30 @@ export default function MentorControlCenterPage() {
       />
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">Waiting students</p>
-          <p className="mt-2 text-2xl font-bold text-white">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Waiting students</p>
+          <p className="mt-1.5 text-xl font-bold text-white">
             {meetingStatus === "waiting_for_host" || meetingStatus === "scheduled" ? Math.max(0, presenceCount) : 0}
           </p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">
+          <p className="mt-0.5 text-xs text-zinc-400">
             {meetingStatus === "waiting_for_host"
-              ? "Students are ready for you to start the session."
+              ? "Students are ready for you to start."
               : meetingStatus === "scheduled"
-                ? "No one waiting yet — start when you're ready."
-                : "Session is no longer in pre-meeting state."}
+                ? "No one waiting yet."
+                : "Session in progress."}
           </p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
             In-room participants
           </p>
-          <p className="mt-2 text-2xl font-bold text-white">{overview?.liveParticipants ?? 0}</p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">Active learners in the live classroom.</p>
+          <p className="mt-1.5 text-xl font-bold text-white">{overview?.liveParticipants ?? 0}</p>
+          <p className="mt-0.5 text-xs text-zinc-400">Active learners in the live classroom.</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/80 p-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">Meeting status</p>
-          <p className="mt-2 text-2xl font-bold text-white capitalize">{meetingStatus.replace("_", " ")}</p>
-          <p className="mt-1 text-xs text-[var(--text-secondary)]">Live status propagated to all dashboards.</p>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Meeting status</p>
+          <p className="mt-1.5 text-xl font-bold text-indigo-400 capitalize">{meetingStatus.replace("_", " ")}</p>
+          <p className="mt-0.5 text-xs text-zinc-400">Live status synchronized across all devices.</p>
         </Card>
       </div>
 

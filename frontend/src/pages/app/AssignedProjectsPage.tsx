@@ -216,20 +216,24 @@ export function AssignedProjectsPage() {
     gradedAssignments.length;
 
   return (
-    <div className="page-shell space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-3xl font-bold text-white">Your projects</h1>
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">
-            Track assignments, submit work, and review mentor feedback.
-          </p>
+    <div className="page-shell space-y-6 text-[var(--text-primary)]">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Assigned Projects & Tasks</h1>
+            <p className="mt-0.5 text-xs text-zinc-400">
+              Track assignments, submit milestone repositories, and review mentor feedback.
+            </p>
+          </div>
+          <Link to="/app/projects/submit">
+            <Button size="sm" className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+              Submit Project
+            </Button>
+          </Link>
         </div>
-        <Link to="/app/projects/submit">
-          <Button>Submit project</Button>
-        </Link>
-      </div>
+      </Card>
 
-      <div className="flex flex-wrap gap-2" role="tablist">
+      <div className="flex items-center rounded-lg border border-[#27272A] bg-[#0E0E11] p-1 w-fit" role="tablist">
         {(["active", "submitted", "graded"] as const).map((t) => (
           <button
             key={t}
@@ -238,10 +242,10 @@ export function AssignedProjectsPage() {
             aria-selected={tab === t}
             onClick={() => setTab(t)}
             className={cn(
-              "rounded-full px-4 py-2 text-sm font-medium transition",
+              "rounded-md px-3.5 py-1 text-xs font-medium transition",
               tab === t
-                ? "bg-primary text-[var(--bg-base)]"
-                : "text-[var(--text-secondary)] hover:bg-white/5 hover:text-white",
+                ? "bg-indigo-600 text-white shadow-sm"
+                : "text-zinc-400 hover:text-white",
             )}
           >
             {tabLabels[t]}
@@ -257,7 +261,7 @@ export function AssignedProjectsPage() {
           actionHref="/app/tracks"
         />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
           {current.project.map((p) => (
             <AssignedProjectCard key={p.projectId} project={p} />
           ))}

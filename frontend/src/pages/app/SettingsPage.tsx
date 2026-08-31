@@ -286,18 +286,20 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
   return (
     <>
-      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold text-white md:text-3xl">Settings</h1>
-            <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              Manage your profile, avatar, password, and preferences.
-            </p>
+      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6 text-[var(--text-primary)]">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Account Settings</h1>
+              <p className="mt-0.5 text-xs text-zinc-400">
+                Manage your personal profile, avatar, credentials, and notifications.
+              </p>
+            </div>
+            <Button variant="secondary" size="sm" type="button" onClick={handleLogout} className="text-xs gap-1.5 text-zinc-300">
+              <LogOut size={13} /> Sign Out
+            </Button>
           </div>
-          <Button variant="secondary" type="button" onClick={handleLogout}>
-            <LogOut size={15} /> Sign out
-          </Button>
-        </div>
+        </Card>
 
         {uploadProgress !== null && (
           <div className="max-w-md">
@@ -309,15 +311,15 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Profile Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6">
-              <CardHeader className="p-0 border-b border-white/5 pb-4 mb-4">
-                <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
-                  <UserCircle2 size={18} className="text-primary" /> Personal Profile
+            <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-sm p-5 sm:p-6">
+              <CardHeader className="p-0 border-b border-[#27272A] pb-3 mb-4">
+                <CardTitle className="text-sm font-semibold text-white flex items-center gap-2">
+                  <UserCircle2 size={15} className="text-indigo-400" /> Personal Profile
                 </CardTitle>
               </CardHeader>
 
-              <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-4">
-                <div className="p-4 rounded-xl border border-white/5 bg-white/3 flex flex-col gap-4">
+              <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-3.5">
+                <div className="p-3.5 rounded-lg border border-[#27272A] bg-[#141418] flex flex-col gap-3">
                   <FileInput
                     label="Profile photo"
                     accept="image/jpeg,image/png,image/webp"
@@ -467,8 +469,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                 ) : null}
 
                 <div className="pt-2">
-                  <Button type="submit" disabled={profileSaving} className="font-bold shadow-sm">
-                    {profileSaving ? "Saving changes…" : "Save profile"}
+                  <Button type="submit" size="sm" disabled={profileSaving} className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+                    {profileSaving ? "Saving changes…" : "Save Profile"}
                   </Button>
                 </div>
               </form>
@@ -477,20 +479,21 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
           {/* Security Password Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-white/5 bg-[rgba(16,20,28,0.4)] shadow-xl p-6">
-              <CardHeader className="p-0 border-b border-white/5 pb-4 mb-4">
-                <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
-                  <Lock size={18} className="text-primary" /> Security & Password
+            <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-sm p-5 sm:p-6">
+              <CardHeader className="p-0 border-b border-[#27272A] pb-3 mb-4">
+                <CardTitle className="text-sm font-semibold text-white flex items-center gap-2">
+                  <Lock size={15} className="text-indigo-400" /> Security & Password
                 </CardTitle>
               </CardHeader>
 
-              <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-4">
+              <form onSubmit={passwordForm.handleSubmit(onPasswordSubmit)} className="space-y-3.5">
                 <FormField id="currentPassword" label="Current password" required>
                   <PasswordInput
                     id="currentPassword"
                     placeholder="••••••••"
                     autoComplete="current-password"
                     {...passwordForm.register("currentPassword")}
+                    className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
                   />
                 </FormField>
 
@@ -505,6 +508,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     placeholder="••••••••"
                     autoComplete="new-password"
                     {...passwordForm.register("newPassword")}
+                    className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
                   />
                 </FormField>
 
@@ -519,20 +523,22 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     placeholder="••••••••"
                     autoComplete="new-password"
                     {...passwordForm.register("confirm")}
+                    className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
                   />
                 </FormField>
 
-                <div className="pt-4 flex flex-col gap-3">
+                <div className="pt-2 flex flex-col gap-2">
                   <Button
                     type="submit"
+                    size="sm"
                     disabled={passwordForm.formState.isSubmitting}
-                    className="font-bold shadow-sm self-start"
+                    className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white self-start"
                   >
-                    Update password
+                    {passwordForm.formState.isSubmitting ? "Updating…" : "Update Password"}
                   </Button>
                   <Link
                     to="/auth/forgot-password"
-                    className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline transition-colors mt-1 self-start"
+                    className="text-xs text-indigo-400 hover:underline self-start mt-0.5"
                   >
                     Forgot password?
                   </Link>

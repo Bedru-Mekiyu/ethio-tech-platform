@@ -103,7 +103,7 @@ export function TrackDetailPage() {
   const firstLessonId = modules[0]?.lessons?.[0]?._id;
 
   return (
-    <div className="page-shell py-8 space-y-8">
+    <div className="page-shell py-6 space-y-6 text-[var(--text-primary)]">
       {/* Capstone Preview Modal */}
       <CapstonePreviewModal
         project={selectedCapstone}
@@ -118,62 +118,62 @@ export function TrackDetailPage() {
       <div>
         <Link
           to="/app/tracks"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:underline"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={13} />
           Back to all tracks
         </Link>
       </div>
 
       {/* Hero Banner Card */}
-      <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 sm:p-8">
-        <div className="flex flex-col gap-8 xl:flex-row xl:items-center xl:justify-between">
-          <div className="max-w-3xl space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <Badge variant="default" className="text-xs">{data.category ?? "Core Track"}</Badge>
-              <Badge variant="default" className="text-xs">{data.difficulty ?? "Intermediate"}</Badge>
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+          <div className="max-w-3xl space-y-3">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <Badge variant="default" size="sm">{data.category ?? "Core Track"}</Badge>
+              <Badge variant="default" size="sm">{data.difficulty ?? "Intermediate"}</Badge>
               {data.marketDemand && (
-                <Badge variant="success" className="text-xs font-medium">
-                  <Sparkles size={12} className="mr-1 inline" />
+                <Badge variant="success" size="sm">
+                  <Sparkles size={11} className="mr-1 inline" />
                   {data.marketDemand.rating} Demand
                 </Badge>
               )}
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-100">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               {data.title}
             </h1>
-            <p className="text-sm md:text-base leading-relaxed text-slate-400">
+            <p className="text-xs leading-relaxed text-zinc-400">
               {data.tagline || data.description}
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               {firstLessonId ? (
                 <Link to={`/app/lessons/${firstLessonId}`}>
-                  <Button size="lg" className="gap-2 font-medium">
-                    <Rocket size={18} />
+                  <Button size="sm" className="gap-1.5 text-xs font-medium">
+                    <Rocket size={14} />
                     Start / Resume Track
                   </Button>
                 </Link>
               ) : (
                 <Link to="/app/workspace">
-                  <Button size="lg" className="gap-2 font-medium">
-                    <Rocket size={18} />
+                  <Button size="sm" className="gap-1.5 text-xs font-medium">
+                    <Rocket size={14} />
                     Open Workspace
                   </Button>
                 </Link>
               )}
 
               <Link to="/app/workspace">
-                <Button variant="outline" size="lg" className="gap-2 text-xs">
-                  <Code2 size={18} />
-                  Open Coding Lab
+                <Button variant="outline" size="sm" className="gap-1.5 text-xs text-zinc-300">
+                  <Code2 size={14} />
+                  Coding Lab
                 </Button>
               </Link>
 
               <Link to="/app/mentors">
-                <Button variant="secondary" size="lg" className="gap-2 text-xs">
-                  <GraduationCap size={18} />
+                <Button variant="secondary" size="sm" className="gap-1.5 text-xs text-zinc-300">
+                  <GraduationCap size={14} />
                   Book Mentor
                 </Button>
               </Link>
@@ -181,55 +181,55 @@ export function TrackDetailPage() {
           </div>
 
           {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 xl:w-[28rem] rounded-xl border border-slate-800 bg-slate-950/40 p-4">
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Clock size={11} className="text-indigo-400" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Clock size={10} className="text-indigo-400" />
                 Duration
               </p>
-              <p className="text-lg font-bold text-slate-100">{data.estimatedWeeks ?? 12} Weeks</p>
+              <p className="text-sm font-bold text-white">{data.estimatedWeeks ?? 12} Weeks</p>
             </div>
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Video size={11} className="text-indigo-400" />
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Video size={10} className="text-indigo-400" />
                 Live Sessions
               </p>
-              <p className="text-lg font-bold text-slate-100">{data.liveSessionsCount ?? 20}</p>
+              <p className="text-sm font-bold text-white">{data.liveSessionsCount ?? 20}</p>
             </div>
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <GraduationCap size={11} className="text-emerald-400" />
-                1:1 Mentorship
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <GraduationCap size={10} className="text-emerald-400" />
+                Mentorship
               </p>
-              <p className="text-lg font-bold text-slate-100">{data.mentorshipHours ?? 30} Hrs</p>
+              <p className="text-sm font-bold text-white">{data.mentorshipHours ?? 30} Hrs</p>
             </div>
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Layers size={11} className="text-indigo-400" />
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Layers size={10} className="text-indigo-400" />
                 Modules
               </p>
-              <p className="text-lg font-bold text-slate-100">{modules.length}</p>
+              <p className="text-sm font-bold text-white">{modules.length}</p>
             </div>
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <BookOpen size={11} className="text-indigo-400" />
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <BookOpen size={10} className="text-indigo-400" />
                 Lessons
               </p>
-              <p className="text-lg font-bold text-slate-100">{lessonCount}</p>
+              <p className="text-sm font-bold text-white">{lessonCount}</p>
             </div>
-            <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                <Award size={11} className="text-amber-400" />
+            <div className="space-y-0.5">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Award size={10} className="text-amber-400" />
                 Total XP
               </p>
-              <p className="text-lg font-bold text-slate-100">+{estimatedXp} XP</p>
+              <p className="text-sm font-bold text-white">+{estimatedXp} XP</p>
             </div>
           </div>
         </div>
       </Card>
 
       {/* Interactive Tabs Header */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-800/80 pb-3">
+      <div className="flex flex-wrap gap-1.5 border-b border-[#27272A] pb-3">
         {[
           { key: "curriculum", label: "Modules & Lessons", icon: BookOpen },
           { key: "capstones", label: "Capstone Projects", icon: Code2 },
@@ -245,13 +245,13 @@ export function TrackDetailPage() {
               type="button"
               onClick={() => setActiveTab(tab.key as DetailTab)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs md:text-sm font-medium transition-colors",
+                "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
                 active
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-slate-400 hover:bg-slate-800/60 hover:text-slate-200"
+                  ? "bg-indigo-600 text-white"
+                  : "text-zinc-400 hover:bg-[#141418] hover:text-white"
               )}
             >
-              <TabIcon size={15} />
+              <TabIcon size={13} />
               {tab.label}
             </button>
           );

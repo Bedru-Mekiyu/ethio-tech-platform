@@ -146,38 +146,38 @@ export function MentorSessionsPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div className="rounded-[28px] border border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Session Management</h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
+    <div className="space-y-6 text-[var(--text-primary)]">
+      <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Session Management</h1>
+            <p className="text-xs text-zinc-400 leading-relaxed">
               Schedule live classes, track attendance, and launch virtual classrooms from a calm schedule view.
             </p>
           </div>
-          <Button onClick={() => setCreateOpen(true)}>
-            <Calendar size={16} />
-            Create new session
+          <Button onClick={() => setCreateOpen(true)} className="gap-1.5 text-xs font-medium shrink-0">
+            <Calendar size={14} />
+            Create Session
           </Button>
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Upcoming sessions</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{upcoming.length}</p>
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Upcoming sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-white">{upcoming.length}</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Past sessions</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{past.length}</p>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Past sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-white">{past.length}</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Total sessions</p>
-          <p className="mt-2 text-3xl font-semibold text-white">{sessions.length}</p>
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Total sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-white">{sessions.length}</p>
         </Card>
-        <Card className="border-[var(--border)] bg-[var(--bg-card)]/90 p-4">
-          <p className="text-xs uppercase tracking-[0.22em] text-[var(--text-muted)]">Fill rate</p>
-          <p className="mt-2 text-3xl font-semibold text-white">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Fill rate</p>
+          <p className="mt-1.5 text-xl font-bold text-emerald-400">
             {sessions.length
               ? Math.round(
                   (sessions.filter((session) => (session.participants?.length ?? 0) > 0).length / sessions.length) *
@@ -186,21 +186,21 @@ export function MentorSessionsPage() {
               : 0}
             %
           </p>
-          <p className="mt-1 text-[10px] text-[var(--text-muted)]">Sessions with enrolled learners</p>
+          <p className="mt-0.5 text-[10px] text-zinc-500">Enrolled learners ratio</p>
         </Card>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-2">
         {(["all", "upcoming", "past"] as const).map((value) => (
           <button
             key={value}
             type="button"
             onClick={() => setFilter(value)}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm capitalize transition",
+              "rounded-md border px-3 py-1 text-xs capitalize transition-all font-medium",
               filter === value
-                ? "border-primary bg-primary text-[var(--bg-base)]"
-                : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-secondary)] hover:border-primary/40 hover:text-white",
+                ? "border-indigo-500 bg-indigo-600 text-white"
+                : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
             )}
           >
             {value}
@@ -209,38 +209,40 @@ export function MentorSessionsPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <div className="flex items-center justify-between gap-3">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
             <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">{monthLabel(cursor)}</h2>
+              <h2 className="text-sm font-semibold text-white">{monthLabel(cursor)}</h2>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5">
               <Button
                 variant="outline"
                 size="sm"
+                className="h-8 w-8 p-0"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() - 1, 1))}
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={14} />
               </Button>
               <Button
                 variant="outline"
                 size="sm"
+                className="h-8 w-8 p-0"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() + 1, 1))}
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={14} />
               </Button>
             </div>
           </div>
 
-          <div className="mt-5 grid grid-cols-7 gap-2 text-center text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+          <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] uppercase font-semibold tracking-wider text-zinc-500">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <div key={day} className="py-2">
+              <div key={day} className="py-1">
                 {day}
               </div>
             ))}
           </div>
 
-          <div className="mt-2 grid grid-cols-7 gap-2">
+          <div className="mt-2 grid grid-cols-7 gap-1.5">
             {calendarDays.map((day, index) => {
               const sessionsForDay = day ? (sessionsByDay.get(day.toDateString()) ?? []) : [];
               const isToday = day ? day.toDateString() === new Date().toDateString() : false;
@@ -248,25 +250,25 @@ export function MentorSessionsPage() {
                 <div
                   key={day ? day.toDateString() : `blank-${index}`}
                   className={cn(
-                    "min-h-[5.25rem] rounded-2xl border p-2",
-                    day ? "border-[var(--border)] bg-white/5" : "border-transparent bg-transparent",
-                    isToday && "border-primary bg-primary/10",
+                    "min-h-[4.75rem] rounded-lg border p-1.5 transition-colors",
+                    day ? "border-[#27272A] bg-[#141418]" : "border-transparent bg-transparent",
+                    isToday && "border-indigo-500/40 bg-indigo-500/10",
                   )}
                 >
                   {day ? (
                     <>
-                      <p className="text-sm font-semibold text-white">{day.getDate()}</p>
-                      <div className="mt-2 space-y-1">
+                      <p className="text-xs font-semibold text-zinc-300">{day.getDate()}</p>
+                      <div className="mt-1 space-y-1">
                         {sessionsForDay.slice(0, 2).map((session, index) => (
                           <div
                             key={session._id ?? `${session.title}-${index}`}
-                            className="rounded-lg bg-secondary/15 px-2 py-1 text-[10px] text-secondary"
+                            className="rounded bg-indigo-500/15 px-1.5 py-0.5 text-[9px] font-medium text-indigo-300 truncate"
                           >
                             {session.title}
                           </div>
                         ))}
                         {sessionsForDay.length > 2 ? (
-                          <p className="text-[10px] text-[var(--text-muted)]">+{sessionsForDay.length - 2} more</p>
+                          <p className="text-[9px] text-zinc-500">+{sessionsForDay.length - 2} more</p>
                         ) : null}
                       </div>
                     </>
@@ -277,38 +279,39 @@ export function MentorSessionsPage() {
           </div>
         </Card>
 
-        <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-          <div className="flex items-center justify-between gap-3">
+        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+          <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
             <div>
-              <h2 className="mt-3 text-2xl font-semibold text-white">Live session queue</h2>
+              <h2 className="text-sm font-semibold text-white">Live Session Queue</h2>
+              <p className="text-xs text-zinc-400">Scheduled interactive classrooms</p>
             </div>
-            <Link to="/app/workspace" className="text-sm text-primary hover:underline">
-              Open workspace
+            <Link to="/app/workspace" className="text-xs font-medium text-indigo-400 hover:underline">
+              Open workspace →
             </Link>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div className="mt-4 space-y-2.5">
             {filtered.slice(0, 5).length ? (
               filtered.slice(0, 5).map((session, index) => {
                 const participantCount = Array.isArray(session.participants) ? session.participants.length : 0;
                 return (
                   <div
                     key={session._id ?? `${session.title}-${index}`}
-                    className="rounded-[22px] border border-[var(--border)] bg-white/5 p-4"
+                    className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 hover:border-zinc-700 transition-colors"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div>
-                        <p className="font-semibold text-white">{session.title}</p>
-                        <p className="text-xs text-[var(--text-muted)]">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-white truncate">{session.title}</p>
+                        <p className="text-[11px] text-zinc-400">
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "TBD"}
                         </p>
                       </div>
-                      <Badge variant={session.status === "completed" ? "success" : "purple"}>
+                      <Badge variant={session.status === "completed" ? "success" : "purple"} size="sm">
                         {session.status ?? "scheduled"}
                       </Badge>
                     </div>
-                    <div className="mt-3 space-y-2">
-                      <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">
+                    <div className="mt-2.5 space-y-1.5">
+                      <div className="flex items-center justify-between text-[11px] text-zinc-400">
                         <span>
                           {participantCount}
                           {session.maxParticipants
@@ -318,14 +321,14 @@ export function MentorSessionsPage() {
                         {session._id ? (
                           <Link
                             to={`/app/classroom/${session._id}`}
-                            className="inline-flex items-center gap-1 text-primary"
+                            className="inline-flex items-center gap-1 font-medium text-indigo-400 hover:text-indigo-300"
                           >
-                            Launch <Video size={14} />
+                            Launch Room <Video size={12} />
                           </Link>
                         ) : null}
                       </div>
                       {session.maxParticipants && session.maxParticipants > 0 ? (
-                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                        <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
                           <div
                             className={cn(
                               "h-full rounded-full transition-all",
@@ -333,7 +336,7 @@ export function MentorSessionsPage() {
                                 ? "bg-red-500"
                                 : participantCount / session.maxParticipants > 0.8
                                   ? "bg-amber-500"
-                                  : "bg-primary",
+                                  : "bg-indigo-500",
                             )}
                             style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
                           />
@@ -353,43 +356,43 @@ export function MentorSessionsPage() {
       {createOpen ? (
         <dialog
           ref={dialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-0 text-white shadow-xl backdrop:bg-black/60"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-xl border border-[#27272A] bg-[#0E0E11] p-0 text-white shadow-2xl backdrop:bg-black/60"
         >
-          <form onSubmit={handleCreateSubmit} className="p-6">
-            <div className="flex items-start justify-between">
+          <form onSubmit={handleCreateSubmit} className="p-6 space-y-4">
+            <div className="flex items-start justify-between border-b border-[#27272A] pb-3">
               <div>
-                <h2 className="text-lg font-semibold">Create new session</h2>
-                <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                  Schedule a live classroom. You can fine-tune registration and reminders afterwards.
+                <h2 className="text-sm font-bold text-white">Create New Session</h2>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  Schedule a live classroom session for your cohort.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setCreateOpen(false)}
-                className="text-[var(--text-muted)] hover:text-white"
+                className="text-zinc-500 hover:text-white"
                 aria-label="Close"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            <div className="mt-5 space-y-3">
+            <div className="space-y-3">
               <label className="block">
-                <span className="text-xs text-[var(--text-secondary)]">Title</span>
-                <Input name="title" required maxLength={120} className="mt-1" placeholder="Intro to React Hooks" />
+                <span className="text-xs text-zinc-400">Title</span>
+                <Input name="title" required maxLength={120} className="mt-1 text-xs bg-[#141418] border-[#27272A] text-white" placeholder="e.g. Intro to Microservices & Docker" />
               </label>
               <label className="block">
-                <span className="text-xs text-[var(--text-secondary)]">Scheduled at</span>
+                <span className="text-xs text-zinc-400">Scheduled At</span>
                 <Input
                   name="scheduledAt"
                   type="datetime-local"
                   required
-                  className="mt-1"
+                  className="mt-1 text-xs bg-[#141418] border-[#27272A] text-white"
                   defaultValue={defaultScheduledAt}
                 />
               </label>
               <label className="block">
-                <span className="text-xs text-[var(--text-secondary)]">Duration (minutes)</span>
+                <span className="text-xs text-zinc-400">Duration (minutes)</span>
                 <Input
                   name="durationMinutes"
                   type="number"
@@ -397,26 +400,28 @@ export function MentorSessionsPage() {
                   max={600}
                   step={15}
                   defaultValue={60}
-                  className="mt-1"
+                  className="mt-1 text-xs bg-[#141418] border-[#27272A] text-white"
                 />
               </label>
               <label className="block">
-                <span className="text-xs text-[var(--text-secondary)]">Description (optional)</span>
-                <Input name="description" maxLength={500} className="mt-1" placeholder="What will learners cover?" />
+                <span className="text-xs text-zinc-400">Description (optional)</span>
+                <Input name="description" maxLength={500} className="mt-1 text-xs bg-[#141418] border-[#27272A] text-white" placeholder="What will learners build?" />
               </label>
             </div>
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="flex justify-end gap-2 pt-3 border-t border-[#27272A]">
               <Button
                 type="button"
                 variant="outline"
+                size="sm"
                 onClick={() => setCreateOpen(false)}
                 disabled={createMutation.isPending}
+                className="text-xs"
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Creating…" : "Create session"}
+              <Button type="submit" size="sm" disabled={createMutation.isPending} className="text-xs font-medium">
+                {createMutation.isPending ? "Creating…" : "Create Session"}
               </Button>
             </div>
           </form>

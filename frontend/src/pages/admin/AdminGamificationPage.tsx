@@ -569,62 +569,64 @@ export function AdminGamificationPage() {
   const activeMultiplierCount = multiplierRules.filter((r) => r.isActive).length;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 text-[var(--text-primary)]">
       {/* Hero Header */}
-      <div className="rounded-[28px] border border-primary/30 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6 md:p-8 shadow-xl relative overflow-hidden">
-        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="space-y-1.5 max-w-2xl">
             <div className="flex items-center gap-2">
-              <Badge variant="purple" className="gap-1.5 px-3 py-1">
-                <Sparkles size={13} /> Level 1-100 Progression Engine
-              </Badge>
-              <Badge variant="success" className="gap-1.5 px-3 py-1">
-                <Zap size={13} /> {activeMultiplierCount} Active Multipliers
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-medium text-indigo-400">
+                <Sparkles size={11} /> Level 1-100 Progression Engine
+              </span>
+              <Badge variant="success" size="sm" className="gap-1">
+                <Zap size={11} /> {activeMultiplierCount} Active Multipliers
               </Badge>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
               Gamification & Engagement Portal
             </h1>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-              Design category-driven achievement badges, XP bonus multipliers, daily streak challenges, and tier icon rewards to accelerate learner retention.
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Design category-driven achievement badges, XP bonus multipliers, daily streak challenges, and tier rewards.
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <Button variant="outline" onClick={() => setCreateChallengeOpen(true)} className="gap-2">
-              <Plus size={16} /> New Daily Quest
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" size="sm" onClick={() => setCreateChallengeOpen(true)} className="text-xs gap-1.5">
+              <Plus size={13} /> New Daily Quest
             </Button>
-            <Button variant="primary" onClick={() => setCreateBadgeOpen(true)} className="gap-2 shadow-lg">
-              <Award size={16} /> Create Badge
+            <Button variant="primary" size="sm" onClick={() => setCreateBadgeOpen(true)} className="text-xs gap-1.5 font-medium">
+              <Award size={13} /> Create Badge
             </Button>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Main Mode Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
-        <div className="flex gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
+        <div className="flex flex-wrap gap-1.5">
           <Button
+            size="sm"
             variant={activeMainTab === "badges" ? "primary" : "outline"}
             onClick={() => setActiveMainTab("badges")}
-            className="gap-2"
+            className="text-xs gap-1.5 font-medium"
           >
-            <Award size={16} /> Achievement Badges ({allBadges.length})
+            <Award size={13} /> Badges ({allBadges.length})
           </Button>
           <Button
+            size="sm"
             variant={activeMainTab === "challenges" ? "primary" : "outline"}
             onClick={() => setActiveMainTab("challenges")}
-            className="gap-2"
+            className="text-xs gap-1.5 font-medium"
           >
-            <Flame size={16} /> Quests & Streak Challenges ({allChallenges.length})
+            <Flame size={13} /> Quests & Streaks ({allChallenges.length})
           </Button>
           <Button
+            size="sm"
             variant={activeMainTab === "multipliers" ? "primary" : "outline"}
             onClick={() => setActiveMainTab("multipliers")}
-            className="gap-2"
+            className="text-xs gap-1.5 font-medium"
           >
-            <Zap size={16} /> XP Multipliers & Rules ({multiplierRules.length})
+            <Zap size={13} /> Multipliers & Rules ({multiplierRules.length})
           </Button>
         </div>
 
@@ -635,9 +637,9 @@ export function AdminGamificationPage() {
             badgesQuery.refetch();
             challengesQuery.refetch();
           }}
-          className="gap-1.5"
+          className="text-xs gap-1 text-zinc-400 hover:text-white"
         >
-          <RefreshCw size={14} /> Refresh
+          <RefreshCw size={12} /> Refresh
         </Button>
       </div>
 

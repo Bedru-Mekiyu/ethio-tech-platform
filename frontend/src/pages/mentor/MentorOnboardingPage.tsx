@@ -141,121 +141,137 @@ export function MentorOnboardingPage() {
   const stepIndex = STEPS.findIndex((s) => s.id === activeStep);
 
   return (
-    <div className="mx-auto max-w-2xl space-y-8 px-4 py-10">
-      <div>
-        <h1 className="text-3xl font-bold text-white">Mentor onboarding</h1>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">
-          Complete these steps to unlock mentor tools and start teaching.
+    <div className="mx-auto max-w-xl space-y-6 px-4 py-8 text-[var(--text-primary)]">
+      <div className="space-y-1">
+        <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Mentor Onboarding</h1>
+        <p className="text-xs text-zinc-400 leading-relaxed">
+          Complete these setup steps to activate your mentor console and interactive tools.
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {STEPS.map((step, index) => {
           const done = index < stepIndex;
           const current = step.id === activeStep;
           return (
             <div
               key={step.id}
-              className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs ${
+              className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium ${
                 current
-                  ? "border-primary bg-primary/10 text-primary"
+                  ? "border-indigo-500 bg-indigo-500/10 text-indigo-400"
                   : done
-                    ? "border-success/30 text-success"
-                    : "border-[var(--border)] text-[var(--text-muted)]"
+                    ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/5"
+                    : "border-[#27272A] bg-[#141418] text-zinc-500"
               }`}
             >
-              {done ? <CheckCircle2 size={14} /> : null}
+              {done ? <CheckCircle2 size={12} /> : null}
               {step.label}
             </div>
           );
         })}
       </div>
 
-      <Card className="space-y-5 border-[var(--border)] bg-[var(--bg-card)] p-6">
+      <Card className="space-y-4 border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 rounded-xl shadow-xl">
         {activeStep === "password" && (
           <>
-            <h2 className="text-lg font-semibold text-white">Set your password</h2>
-            <FormField id="currentPassword" label="Current / temporary password">
-              <PasswordInput value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+            <div className="space-y-0.5">
+              <h2 className="text-sm font-bold text-white">Set Your Permanent Password</h2>
+              <p className="text-xs text-zinc-400">Replace your temporary activation password with a secure one.</p>
+            </div>
+            <FormField id="currentPassword" label="Temporary Password">
+              <PasswordInput value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className="text-xs bg-[#141418] border-[#27272A] text-white" />
             </FormField>
-            <FormField id="newPassword" label="New password">
-              <PasswordInput value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+            <FormField id="newPassword" label="New Password">
+              <PasswordInput value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="text-xs bg-[#141418] border-[#27272A] text-white" />
             </FormField>
             <Button
+              size="sm"
+              className="text-xs font-medium"
               onClick={() => passwordMutation.mutate()}
               disabled={passwordMutation.isPending || !currentPassword || !newPassword}
             >
-              Continue
+              Continue to Terms
             </Button>
           </>
         )}
 
         {activeStep === "terms" && (
           <>
-            <h2 className="text-lg font-semibold text-white">Accept mentor terms</h2>
-            <label className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+            <div className="space-y-0.5">
+              <h2 className="text-sm font-bold text-white">Accept Mentor Terms</h2>
+              <p className="text-xs text-zinc-400">Review ethical teaching standards and student safety policies.</p>
+            </div>
+            <label className="flex items-start gap-2.5 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-xs text-zinc-300">
               <input
                 type="checkbox"
                 checked={termsChecked}
                 onChange={(e) => setTermsChecked(e.target.checked)}
-                className="mt-1"
+                className="mt-0.5"
               />
-              I agree to the platform mentor code of conduct, session quality standards, and student safety policies.
+              <span>I agree to the platform mentor code of conduct, session quality standards, and student safety policies.</span>
             </label>
-            <Button onClick={() => termsMutation.mutate()} disabled={!termsChecked || termsMutation.isPending}>
-              Accept and continue
+            <Button size="sm" className="text-xs font-medium" onClick={() => termsMutation.mutate()} disabled={!termsChecked || termsMutation.isPending}>
+              Accept and Continue
             </Button>
           </>
         )}
 
         {activeStep === "profile" && (
           <>
-            <h2 className="text-lg font-semibold text-white">Complete your profile</h2>
-            <FormField id="bio" label="Bio">
+            <div className="space-y-0.5">
+              <h2 className="text-sm font-bold text-white">Complete Your Mentor Profile</h2>
+              <p className="text-xs text-zinc-400">Let students know about your professional background and areas of expertise.</p>
+            </div>
+            <FormField id="bio" label="Professional Bio">
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="min-h-[100px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-sm outline-none focus:border-primary"
+                className="min-h-[80px] w-full rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs text-white outline-none focus:border-indigo-500"
               />
             </FormField>
-            <FormField id="company" label="Current company">
-              <Input value={company} onChange={(e) => setCompany(e.target.value)} />
+            <FormField id="company" label="Current Company / Organization">
+              <Input value={company} onChange={(e) => setCompany(e.target.value)} className="text-xs bg-[#141418] border-[#27272A] text-white" />
             </FormField>
             <FormField id="expertise" label="Expertise (comma-separated, min 2)">
-              <Input value={expertise} onChange={(e) => setExpertise(e.target.value)} />
+              <Input value={expertise} onChange={(e) => setExpertise(e.target.value)} className="text-xs bg-[#141418] border-[#27272A] text-white" />
             </FormField>
-            <Button onClick={() => profileMutation.mutate()} disabled={profileMutation.isPending}>
-              Save profile
+            <Button size="sm" className="text-xs font-medium" onClick={() => profileMutation.mutate()} disabled={profileMutation.isPending}>
+              Save Profile
             </Button>
           </>
         )}
 
         {activeStep === "photo" && (
           <>
-            <h2 className="text-lg font-semibold text-white">Upload a profile photo</h2>
+            <div className="space-y-0.5">
+              <h2 className="text-sm font-bold text-white">Upload Profile Photo</h2>
+              <p className="text-xs text-zinc-400">Add a clear profile picture for students to recognize you.</p>
+            </div>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setAvatarFile(e.target.files?.[0] ?? null)}
-              className="text-sm text-[var(--text-secondary)]"
+              className="text-xs text-zinc-400 file:mr-3 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-[#141418] file:text-zinc-200 hover:file:bg-zinc-800"
             />
-            <Button onClick={() => photoMutation.mutate()} disabled={!avatarFile || photoMutation.isPending}>
-              Upload photo
+            <Button size="sm" className="text-xs font-medium" onClick={() => photoMutation.mutate()} disabled={!avatarFile || photoMutation.isPending}>
+              Upload Photo
             </Button>
           </>
         )}
 
         {activeStep === "availability" && (
           <>
-            <h2 className="text-lg font-semibold text-white">Set teaching availability</h2>
-            <p className="text-sm text-[var(--text-secondary)]">
-              Add at least one weekly window. You can refine this later in mentor settings.
-            </p>
-            <FormField id="day" label="Day of week">
+            <div className="space-y-0.5">
+              <h2 className="text-sm font-bold text-white">Set Teaching Availability</h2>
+              <p className="text-xs text-zinc-400">
+                Add at least one weekly window. You can refine this later in mentor availability settings.
+              </p>
+            </div>
+            <FormField id="day" label="Day of Week">
               <select
                 value={dayOfWeek}
                 onChange={(e) => setDayOfWeek(Number(e.target.value))}
-                className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 text-sm outline-none"
+                className="h-8 w-full rounded-lg border border-[#27272A] bg-[#141418] px-2.5 text-xs text-white outline-none"
               >
                 {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map(
                   (day, i) => (
@@ -266,28 +282,29 @@ export function MentorOnboardingPage() {
                 )}
               </select>
             </FormField>
-            <p className="text-xs text-[var(--text-muted)]">Default slot: 6:00 PM – 8:00 PM</p>
-            <div className="flex gap-3">
-              <Button onClick={() => availabilityMutation.mutate()} disabled={availabilityMutation.isPending}>
-                Save availability
+            <p className="text-[11px] text-zinc-500">Default recurring slot: 6:00 PM – 8:00 PM</p>
+            <div className="flex gap-2.5 pt-2">
+              <Button size="sm" variant="outline" className="text-xs" onClick={() => availabilityMutation.mutate()} disabled={availabilityMutation.isPending}>
+                Save Availability
               </Button>
               {onboarding?.profileCompleted &&
                 onboarding.photoUploaded &&
                 onboarding.availabilitySet && (
                   <Button
+                    size="sm"
                     variant="primary"
                     onClick={() => completeMutation.mutate()}
                     disabled={completeMutation.isPending}
-                    className="gap-2"
+                    className="gap-1.5 text-xs font-medium"
                   >
-                    Finish onboarding <ChevronRight size={16} />
+                    Finish Onboarding <ChevronRight size={13} />
                   </Button>
                 )}
             </div>
           </>
         )}
 
-        {error ? <p className="text-sm text-danger">{error}</p> : null}
+        {error ? <p className="text-xs text-red-400">{error}</p> : null}
       </Card>
     </div>
   );

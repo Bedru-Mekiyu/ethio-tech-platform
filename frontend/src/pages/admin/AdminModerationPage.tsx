@@ -902,21 +902,23 @@ export function AdminModerationPage() {
   if (isError) return <QueryError onRetry={() => applicationsQuery.refetch()} />;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 text-[var(--text-primary)]">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="space-y-1.5">
-          <h1 className="text-2xl font-bold md:text-3xl text-white">Mentor Moderation & Screening</h1>
-          <p className="max-w-2xl text-sm text-[var(--text-secondary)]">
-            Evaluate applicant rubrics, schedule screening interviews, and bulk manage platform mentor onboarding.
-          </p>
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-1">
+            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Mentor Moderation & Screening</h1>
+            <p className="max-w-2xl text-xs text-zinc-400 leading-relaxed">
+              Evaluate applicant rubrics, schedule screening interviews, and manage platform mentor onboarding.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => invalidateAll()} className="text-xs text-zinc-300 hover:text-white">
+              <RefreshCw size={12} className="mr-1" /> Refresh
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => invalidateAll()} className="gap-1.5">
-            <RefreshCw size={14} /> Refresh
-          </Button>
-        </div>
-      </div>
+      </Card>
 
       {/* Queue Stat Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
@@ -937,56 +939,56 @@ export function AdminModerationPage() {
 
       {/* Bulk Actions Banner */}
       {selectedIds.size > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/40 bg-primary/10 px-5 py-3.5 shadow-lg">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-4 py-2.5">
           <div className="flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-black">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
-            <span className="text-sm font-semibold text-white">
+            <span className="text-xs font-semibold text-white">
               {selectedIds.size === 1 ? "application" : "applications"} selected
             </span>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setSelectedIds(new Set())}
-              className="ml-2 h-7 px-2 text-xs text-[var(--text-muted)] hover:text-white"
+              className="text-xs text-zinc-400 hover:text-white h-7 px-2"
             >
-              Clear
+              Deselect All
             </Button>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             <Button
-              size="sm"
-              variant="primary"
-              onClick={() => setPageAction({ type: "bulk-approve" })}
-              className="gap-1.5"
-            >
-              <CheckCircle2 size={14} /> Bulk Approve ({selectedIds.size})
-            </Button>
-            <Button
-              size="sm"
-              variant="danger"
-              onClick={() => setPageAction({ type: "bulk-reject" })}
-              className="gap-1.5"
-            >
-              <XCircle size={14} /> Bulk Reject ({selectedIds.size})
-            </Button>
-            <Button
-              size="sm"
               variant="outline"
-              onClick={() => setPageAction({ type: "bulk-request" })}
-              className="gap-1.5"
-            >
-              <FileText size={14} /> Request Info ({selectedIds.size})
-            </Button>
-            <Button
               size="sm"
-              variant="outline"
               onClick={exportSelectedApplications}
-              className="gap-1.5"
+              className="text-xs h-7 text-zinc-300"
             >
-              <Download size={14} /> Export
+              <Download size={11} className="mr-1" /> Export JSON
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setPageAction({ type: "bulk-approve" })}
+              className="text-xs h-7 gap-1"
+            >
+              <CheckCircle2 size={12} /> Approve All
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={() => setPageAction({ type: "bulk-reject" })}
+              className="text-xs h-7 gap-1"
+            >
+              <XCircle size={12} /> Reject All
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPageAction({ type: "bulk-request" })}
+              className="text-xs h-7 gap-1"
+            >
+              <FileText size={12} /> Request Info
             </Button>
           </div>
         </div>

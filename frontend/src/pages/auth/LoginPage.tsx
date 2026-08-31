@@ -63,14 +63,14 @@ export function LoginPage() {
   };
 
   return (
-    <motion.div initial="hidden" animate="show">
+    <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
       {/* Header */}
-      <motion.div variants={fadeUp} custom={0} className="space-y-2">
-        <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-          Welcome back
+      <motion.div variants={fadeUp} custom={0} className="space-y-1 text-center sm:text-left">
+        <h2 className="text-xl font-bold tracking-tight text-white">
+          Sign In
         </h2>
-        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-          Sign in to continue your learning journey.
+        <p className="text-xs text-zinc-400">
+          Enter your credentials to access your engineering workspace.
         </p>
       </motion.div>
 
@@ -79,17 +79,17 @@ export function LoginPage() {
         variants={fadeUp}
         custom={1}
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-8 space-y-5"
+        className="mt-6 space-y-4"
         noValidate
       >
         <FormField id="email" label="Email address" error={errors.email?.message}>
           <div className="relative">
             <Mail
-              size={16}
-              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+              size={15}
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-zinc-500"
             />
             <Input
-              className="pl-11"
+              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-indigo-500"
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
@@ -102,12 +102,12 @@ export function LoginPage() {
         <FormField id="password" label="Password" error={errors.password?.message}>
           <div className="relative">
             <LockKeyhole
-              size={16}
-              className="pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 text-[var(--text-muted)]"
+              size={15}
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-zinc-500"
             />
             <PasswordInput
               wrapperClassName="w-full"
-              className="pl-11"
+              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-indigo-500"
               placeholder="••••••••"
               autoComplete="current-password"
               {...fieldAriaProps("password", errors.password?.message)}
@@ -119,7 +119,7 @@ export function LoginPage() {
         <div className="flex items-center justify-end">
           <Link
             to="/auth/forgot-password"
-            className="text-sm font-medium text-[var(--text-secondary)] transition hover:text-primary"
+            className="text-xs font-medium text-zinc-400 transition hover:text-white"
           >
             Forgot password?
           </Link>
@@ -129,46 +129,36 @@ export function LoginPage() {
           <motion.div
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-start gap-3 rounded-xl border border-danger/30 bg-[var(--danger-muted)] px-4 py-3"
+            className="flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5"
             role="alert"
           >
-            <AlertCircle size={16} className="mt-0.5 flex-shrink-0 text-danger" />
-            <p className="text-sm text-danger">{error}</p>
+            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-red-400" />
+            <p className="text-xs text-red-400">{error}</p>
           </motion.div>
         ) : null}
 
         <Button
           type="submit"
-          className="w-full"
-          size="lg"
+          className="w-full font-medium"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Signing in…" : "Sign in"}
-          {!isSubmitting && <ArrowRight size={16} />}
+          {isSubmitting ? "Signing in…" : "Sign in to Platform"}
+          {!isSubmitting && <ArrowRight size={14} className="ml-1" />}
         </Button>
       </motion.form>
 
       {/* Footer */}
-      <motion.div variants={fadeUp} custom={2} className="mt-8">
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-[var(--border)]" />
-          </div>
-          <div className="relative flex justify-center text-xs">
-            <span className="bg-[var(--bg-base)] px-3 text-[var(--text-muted)]">
-              New to EthioTech?
-            </span>
-          </div>
-        </div>
-        <div className="mt-6 text-center">
+      <motion.div variants={fadeUp} custom={2} className="mt-6 border-t border-[#27272A] pt-5 text-center">
+        <p className="text-xs text-zinc-400">
+          New to EthioTech?{" "}
           <Link
             to="/register"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-[var(--primary-hover)]"
+            className="font-medium text-indigo-400 transition hover:text-indigo-300 ml-1 inline-flex items-center gap-1"
           >
-            Create your free account
-            <ArrowRight size={14} />
+            Create free account
+            <ArrowRight size={12} />
           </Link>
-        </div>
+        </p>
       </motion.div>
     </motion.div>
   );

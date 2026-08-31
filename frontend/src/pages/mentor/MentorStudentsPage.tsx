@@ -112,16 +112,6 @@ function StatCard({
   );
 }
 
-function ScoreBadge({ score, label }: { score: number; label: string }) {
-  const color = score >= 4 ? "text-success" : score >= 3 ? "text-warning" : "text-danger";
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <span className={cn("text-lg font-bold", color)}>{score.toFixed(1)}</span>
-      <span className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">{label}</span>
-    </div>
-  );
-}
-
 function StudentRow({
   student,
   isExpanded,
@@ -139,44 +129,44 @@ function StudentRow({
   return (
     <div
       className={cn(
-        "rounded-[22px] border border-[var(--border)] transition-all duration-300",
-        isExpanded ? "bg-[var(--bg-card)] shadow-lg shadow-black/20" : "bg-white/5 hover:bg-white/[0.07]",
+        "rounded-lg border border-[#27272A] transition-all",
+        isExpanded ? "bg-[#0E0E11] shadow-lg" : "bg-[#0E0E11] hover:border-zinc-700",
       )}
     >
       {/* Collapsed row */}
       <button
         type="button"
-        className="flex w-full items-center gap-4 p-4 text-left"
+        className="flex w-full items-center gap-3.5 p-3.5 text-left"
         onClick={onToggle}
         aria-expanded={isExpanded}
       >
-        <Avatar src={student.avatar} name={student.fullName} userId={student._id} role="student" size="md" />
+        <Avatar src={student.avatar} name={student.fullName} userId={student._id} role="student" size="sm" />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium text-white">{student.fullName}</p>
-          <p className="mt-0.5 text-xs text-[var(--text-muted)]">
+          <p className="truncate text-xs font-semibold text-white">{student.fullName}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-400">
             Level {student.level ?? 1} · {student.xp ?? 0} XP
           </p>
         </div>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-5 md:flex">
           <div className="text-center">
-            <p className="text-sm font-semibold text-white">{student.sessionsAttended ?? 0}</p>
-            <p className="text-[10px] text-[var(--text-muted)]">Sessions</p>
+            <p className="text-xs font-semibold text-white">{student.sessionsAttended ?? 0}</p>
+            <p className="text-[10px] text-zinc-500">Sessions</p>
           </div>
           <div className="text-center">
-            <p className="text-sm font-semibold text-white">{attendanceRate}%</p>
-            <p className="text-[10px] text-[var(--text-muted)]">Attendance</p>
+            <p className="text-xs font-semibold text-white">{attendanceRate}%</p>
+            <p className="text-[10px] text-zinc-500">Attendance</p>
           </div>
           <div className="text-center">
             <p
               className={cn(
-                "text-sm font-semibold",
-                avgScore >= 4 ? "text-success" : avgScore >= 3 ? "text-warning" : "text-white",
+                "text-xs font-semibold",
+                avgScore >= 4 ? "text-emerald-400" : avgScore >= 3 ? "text-amber-400" : "text-white",
               )}
             >
               {avgScore ? avgScore.toFixed(1) : "—"}
             </p>
-            <p className="text-[10px] text-[var(--text-muted)]">Avg Score</p>
+            <p className="text-[10px] text-zinc-500">Avg Score</p>
           </div>
           <Badge
             variant={
@@ -186,45 +176,46 @@ function StudentRow({
                   ? "warning"
                   : "purple"
             }
+            size="sm"
           >
             {student.engagementScore ?? 0}% Engaged
           </Badge>
         </div>
 
-        <div className="shrink-0 text-[var(--text-muted)]">
-          {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        <div className="shrink-0 text-zinc-500">
+          {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </button>
 
       {/* Expanded detail */}
       {isExpanded && (
-        <div className="border-t border-[var(--border)] p-5 space-y-5 animate-in fade-in duration-300">
+        <div className="border-t border-[#27272A] p-4 space-y-4">
           {/* Quick stats grid */}
           <div className="grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4">
-              <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Tracks Enrolled</p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
+            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Tracks Enrolled</p>
+              <div className="mt-1.5 flex flex-wrap gap-1">
                 {student.enrolledTracks && student.enrolledTracks.length > 0 ? (
                   student.enrolledTracks.map((track) => (
-                    <Badge key={track._id} variant="purple">
+                    <Badge key={track._id} variant="purple" size="sm">
                       {track.title}
                     </Badge>
                   ))
                 ) : (
-                  <span className="text-xs text-[var(--text-muted)]">No tracks</span>
+                  <span className="text-xs text-zinc-500">No tracks</span>
                 )}
               </div>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4">
-              <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Attendance Rate</p>
-              <ProgressBar value={attendanceRate} max={100} className="mt-3" />
-              <p className="mt-2 text-sm font-semibold text-white">
+            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Attendance Rate</p>
+              <ProgressBar value={attendanceRate} max={100} className="mt-2 h-1" />
+              <p className="mt-1.5 text-xs font-semibold text-white">
                 {student.sessionsAttended ?? 0} / {student.totalSessions ?? 0} sessions
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4">
-              <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Last Active</p>
-              <p className="mt-3 text-sm font-semibold text-white">
+            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Last Active</p>
+              <p className="mt-1.5 text-xs font-semibold text-white">
                 {student.lastActiveAt
                   ? new Date(student.lastActiveAt).toLocaleDateString(undefined, {
                       month: "short",
@@ -233,7 +224,7 @@ function StudentRow({
                     })
                   : "Unknown"}
               </p>
-              <p className="mt-1 text-xs text-[var(--text-secondary)]">
+              <p className="mt-0.5 text-[10px] text-zinc-500">
                 {student.lastActiveAt
                   ? `${Math.round((Date.now() - Date.parse(student.lastActiveAt)) / (1000 * 60 * 60 * 24))} days ago`
                   : "—"}
@@ -243,51 +234,36 @@ function StudentRow({
 
           {/* Feedback history */}
           {student.feedbackHistory && student.feedbackHistory.length > 0 ? (
-            <div className="space-y-3">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">
+            <div className="space-y-2">
+              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                 Feedback History
               </h4>
               {student.feedbackHistory.slice(0, 5).map((fb, idx) => (
-                <div key={idx} className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-white">{fb.sessionTitle}</p>
-                      <p className="text-xs text-[var(--text-muted)]">{new Date(fb.createdAt).toLocaleDateString()}</p>
-                    </div>
-                    <div className="flex gap-4">
-                      <ScoreBadge score={fb.participationScore} label="Participation" />
-                      <ScoreBadge score={fb.communicationScore} label="Communication" />
-                      <ScoreBadge score={fb.professionalismScore} label="Professionalism" />
-                    </div>
+                <div key={idx} className="rounded-lg border border-[#27272A] bg-[#141418] p-3 space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-white">{fb.sessionTitle}</span>
+                    <span className="text-[10px] text-zinc-500">{new Date(fb.createdAt).toLocaleDateString()}</span>
                   </div>
-                  {fb.comment && (
-                    <p className="mt-3 rounded-xl bg-white/5 p-3 text-sm text-[var(--text-secondary)] italic">
-                      &ldquo;{fb.comment}&rdquo;
-                    </p>
-                  )}
+                  {fb.comment && <p className="text-xs text-zinc-400">{fb.comment}</p>}
                 </div>
               ))}
             </div>
-          ) : (
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-base)] p-4 text-center">
-              <p className="text-sm text-[var(--text-muted)]">No feedback records for this student yet.</p>
-            </div>
-          )}
+          ) : null}
         </div>
       )}
     </div>
   );
 }
 
-/* ---------- Sort options ---------- */
-type SortField = "name" | "sessions" | "engagement" | "score" | "lastActive";
-const sortOptions: Array<{ label: string; value: SortField }> = [
-  { label: "Name", value: "name" },
-  { label: "Sessions", value: "sessions" },
-  { label: "Engagement", value: "engagement" },
-  { label: "Avg Score", value: "score" },
-  { label: "Last Active", value: "lastActive" },
-];
+const sortOptions = [
+  { value: "name", label: "Name" },
+  { value: "sessions", label: "Sessions" },
+  { value: "engagement", label: "Engagement" },
+  { value: "score", label: "Score" },
+  { value: "lastActive", label: "Recent" },
+] as const;
+
+type SortField = (typeof sortOptions)[number]["value"];
 
 /* ---------- Main Page ---------- */
 export function MentorStudentsPage() {
@@ -377,25 +353,24 @@ export function MentorStudentsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[var(--text-primary)]">
       {/* Header */}
-      <Card className="overflow-hidden rounded-[28px] border-primary/20 bg-[linear-gradient(180deg,rgba(14,20,32,0.98),rgba(7,12,20,0.98))] p-6">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl font-bold text-white">Your Learners</h1>
-            <p className="mt-3 text-[var(--text-secondary)]">
-              Track attendance, review engagement scores, and view feedback history for every student in your mentoring
-              circle.
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <h1 className="text-xl font-bold text-white tracking-tight sm:text-2xl">Your Learners Directory</h1>
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-            <Users size={24} aria-hidden="true" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
+            <Users size={18} aria-hidden="true" />
           </div>
         </div>
       </Card>
 
       {/* Summary stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           label="Total Students"
           value={data?.totalStudents ?? students.length}
@@ -426,21 +401,21 @@ export function MentorStudentsPage() {
       </div>
 
       {/* Filters & Search */}
-      <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-5">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative max-w-sm flex-1">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
             <Input
               placeholder="Search by name, email, or track..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
+              className="pl-9 text-xs bg-[#141418] border-[#27272A] text-white"
             />
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1.5">
-              <Filter size={14} className="text-[var(--text-muted)]" />
-              <span className="text-xs text-[var(--text-muted)]">Engagement:</span>
+            <div className="flex items-center gap-1">
+              <Filter size={12} className="text-zinc-500" />
+              <span className="text-[11px] text-zinc-500">Engagement:</span>
             </div>
             {(["all", "high", "medium", "low"] as const).map((f) => (
               <button
@@ -448,20 +423,20 @@ export function MentorStudentsPage() {
                 type="button"
                 onClick={() => setFilterEngagement(f)}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-xs capitalize transition",
+                  "rounded px-2.5 py-1 text-[11px] capitalize transition font-medium",
                   filterEngagement === f
-                    ? "bg-primary text-[var(--bg-base)]"
-                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white",
+                    ? "bg-indigo-600 text-white"
+                    : "border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                 )}
               >
                 {f}
               </button>
             ))}
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="flex items-center gap-1.5">
-              <ArrowUpDown size={14} className="text-[var(--text-muted)]" />
-              <span className="text-xs text-[var(--text-muted)]">Sort:</span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <div className="flex items-center gap-1">
+              <ArrowUpDown size={12} className="text-zinc-500" />
+              <span className="text-[11px] text-zinc-500">Sort:</span>
             </div>
             {sortOptions.map((opt) => (
               <button
@@ -469,10 +444,10 @@ export function MentorStudentsPage() {
                 type="button"
                 onClick={() => toggleSort(opt.value)}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-xs transition",
+                  "rounded px-2.5 py-1 text-[11px] transition font-medium",
                   sortBy === opt.value
-                    ? "bg-primary/20 text-primary border border-primary/30"
-                    : "border border-[var(--border)] text-[var(--text-secondary)] hover:text-white",
+                    ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30"
+                    : "border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                 )}
               >
                 {opt.label} {sortBy === opt.value && (sortDir === "asc" ? "↑" : "↓")}
@@ -483,7 +458,7 @@ export function MentorStudentsPage() {
       </Card>
 
       {/* Student list */}
-      <div className="space-y-3">
+      <div className="space-y-2.5">
         {filtered.length > 0 ? (
           filtered.map((student) => (
             <StudentRow
@@ -494,7 +469,7 @@ export function MentorStudentsPage() {
             />
           ))
         ) : (
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-8">
+          <Card className="border-[#27272A] bg-[#0E0E11] p-8 text-center">
             <EmptyState
               title={search ? "No students match your search" : "No students yet"}
               description={

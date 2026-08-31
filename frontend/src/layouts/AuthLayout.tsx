@@ -15,24 +15,18 @@ export function AuthLayout() {
   const isLogin = location.pathname === "/login";
 
   return (
-    <div className="relative flex min-h-screen overflow-hidden bg-[var(--bg-base)]">
+    <div className="relative flex min-h-screen overflow-hidden bg-[#050507] text-[var(--text-primary)]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-black"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to main content
       </a>
 
-      {/* ── Ambient Background ── */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-[30%] -top-[20%] h-[70vh] w-[70vh] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.12),transparent_60%)] blur-3xl" />
-        <div className="absolute -bottom-[10%] -right-[20%] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_60%)] blur-3xl" />
-      </div>
-
       {/* ── Left Brand Panel (desktop) ── */}
-      <div className="relative hidden w-[48%] flex-col justify-between overflow-hidden border-r border-white/5 bg-[var(--bg-card)]/10 p-10 lg:flex xl:p-14">
+      <div className="relative hidden w-[46%] flex-col justify-between overflow-hidden border-r border-[#27272A] bg-[#0E0E11] p-10 lg:flex xl:p-12">
         {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0 opacity-[0.06] mix-blend-luminosity pointer-events-none">
+        <div className="absolute inset-0 z-0 opacity-[0.04] mix-blend-luminosity pointer-events-none">
           <SmartImage
             unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
             alt=""
@@ -41,60 +35,50 @@ export function AuthLayout() {
             width={1000}
             quality={85}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-base)] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E11] via-transparent to-transparent" />
         </div>
         <div className="relative z-10">
           <Logo />
-          <div className="mt-16">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--primary-muted)] bg-[var(--primary-subtle)] px-3 py-1">
-              <Sparkles size={14} className="text-primary" />
-              <span className="text-xs font-semibold tracking-wide text-primary">EthioTech learning platform</span>
+          <div className="mt-12">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+              <Sparkles size={12} className="text-indigo-400" />
+              <span>Pan-Ethiopian Engineering Platform</span>
             </div>
-            <h1 className="mt-6 max-w-md text-4xl font-bold leading-[1.1] tracking-tight text-white xl:text-5xl">
+            <h1 className="mt-5 max-w-md text-2xl font-bold leading-tight tracking-tight text-white xl:text-3xl">
               {isLogin
-                ? "Welcome back to your learning journey"
-                : "Start learning software engineering with mentor support"}
+                ? "Welcome back to your engineering workspace"
+                : "Start learning software engineering with verified mentorship"}
             </h1>
-            <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--text-secondary)]">
+            <p className="mt-3 max-w-md text-xs leading-relaxed text-zinc-400 sm:text-sm">
               {isLogin
-                ? "Your dashboard, mentors, and live sessions are waiting. Pick up right where you left off."
-                : "Join a community of students and mentors learning through live sessions, projects, and peer collaboration."}
+                ? "Your active tracks, code sandboxes, squad sessions, and regional hub passes are ready."
+                : "Join high school students and university engineers mastering practical web, mobile, AI, and cloud architectures."}
             </p>
           </div>
 
-          <div className="mt-12 space-y-4">
+          <div className="mt-8 space-y-3">
             {features.map(({ icon: Icon, label, desc }) => (
               <div
                 key={label}
-                className="flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-white/[0.03] p-4 backdrop-blur-sm transition-colors duration-200 hover:border-[var(--border-strong)] hover:bg-white/[0.05]"
+                className="flex items-center gap-3.5 rounded-lg border border-[#27272A] bg-[#141418] p-3.5 transition-colors duration-150 hover:border-zinc-700"
               >
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--primary-muted)] text-primary">
-                  <Icon size={18} />
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                  <Icon size={15} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{label}</p>
-                  <p className="mt-0.5 text-sm text-[var(--text-muted)]">{desc}</p>
+                  <p className="text-xs font-semibold text-white">{label}</p>
+                  <p className="text-[11px] text-zinc-400">{desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="relative z-10 text-xs text-[var(--text-muted)]">© {new Date().getFullYear()} EthioTech.</p>
-
-        {/* Decorative grid */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        <p className="relative z-10 text-[11px] text-zinc-500">© {new Date().getFullYear()} EthioTech Platform.</p>
       </div>
 
       {/* ── Right Form Panel ── */}
-      <div className="relative flex flex-1 flex-col items-center justify-center px-5 py-10 lg:px-12">
+      <div className="relative flex flex-1 flex-col items-center justify-center px-5 py-10 lg:px-12 bg-[#050507]">
         {/* Mobile header */}
         <div className="mb-8 flex w-full max-w-md items-center justify-between lg:hidden">
           <Logo />

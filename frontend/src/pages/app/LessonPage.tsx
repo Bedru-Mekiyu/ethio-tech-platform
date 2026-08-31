@@ -74,69 +74,71 @@ export function LessonPage() {
   const trackId = lesson?.trackId;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6">
+    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6 text-[var(--text-primary)]">
       {/* Navigation Breadcrumb */}
       <div className="flex items-center justify-between">
         <Link
           to={trackId ? `/app/tracks/${trackId}` : "/app/tracks"}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:underline"
         >
-          <ArrowLeft size={14} />
+          <ArrowLeft size={13} />
           Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
         </Link>
 
         {lesson?.durationMinutes && (
-          <span className="text-xs text-[var(--text-muted)] flex items-center gap-1">
-            <Clock size={13} className="text-primary" />
-            {lesson.durationMinutes} min read & lab
+          <span className="text-xs text-zinc-400 flex items-center gap-1">
+            <Clock size={12} className="text-indigo-400" />
+            {lesson.durationMinutes} min
           </span>
         )}
       </div>
 
       {/* Lesson Header Card */}
-      <div className="space-y-3">
-        <div className="flex flex-wrap items-center gap-2">
-          {lesson?.moduleTitle && (
-            <Badge variant="default" className="text-xs flex items-center gap-1">
-              <Layers size={11} className="text-indigo-400" />
-              {lesson.moduleTitle}
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="space-y-2.5">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {lesson?.moduleTitle && (
+              <Badge variant="default" size="sm" className="flex items-center gap-1">
+                <Layers size={10} className="text-indigo-400" />
+                {lesson.moduleTitle}
+              </Badge>
+            )}
+            {lesson?.type && (
+              <Badge variant="default" size="sm" className="uppercase">
+                {lesson.type.replace("-", " ")}
+              </Badge>
+            )}
+            <Badge variant="success" size="sm" className="font-medium">
+              +{lesson?.xpReward ?? 50} XP
             </Badge>
+          </div>
+
+          <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+            {lesson?.title}
+          </h1>
+
+          {lesson?.summary && (
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              {lesson.summary}
+            </p>
           )}
-          {lesson?.type && (
-            <Badge variant="default" className="text-xs uppercase">
-              {lesson.type.replace("-", " ")}
-            </Badge>
-          )}
-          <Badge variant="success" className="text-xs font-medium">
-            +{lesson?.xpReward ?? 50} XP
-          </Badge>
         </div>
-
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-100">
-          {lesson?.title}
-        </h1>
-
-        {lesson?.summary && (
-          <p className="text-sm md:text-base text-slate-400 leading-relaxed">
-            {lesson.summary}
-          </p>
-        )}
-      </div>
+      </Card>
 
       {/* Main Content Card */}
-      <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 sm:p-8 space-y-6">
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 space-y-5">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
-          <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-4">
-            <p className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
-              <Sparkles size={13} />
+          <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+              <Sparkles size={11} />
               Lesson Prerequisites
             </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
+            <div className="mt-1.5 flex flex-wrap gap-1">
               {lesson.prerequisites.map((req) => (
                 <span
                   key={req}
-                  className="rounded-lg border border-slate-800 bg-slate-900 px-2.5 py-1 text-xs text-slate-300"
+                  className="rounded-md border border-[#27272A] bg-[#0E0E11] px-2 py-0.5 text-[11px] text-zinc-300"
                 >
                   {req}
                 </span>
@@ -146,7 +148,7 @@ export function LessonPage() {
         )}
 
         {/* Text / Markdown Content */}
-        <div className="prose prose-invert max-w-none text-sm md:text-base leading-relaxed text-slate-300">
+        <div className="prose prose-invert max-w-none text-xs md:text-sm leading-relaxed text-zinc-300">
           <p className="whitespace-pre-wrap">
             {lesson?.content || "No detailed text has been published for this lesson yet."}
           </p>
@@ -154,10 +156,10 @@ export function LessonPage() {
 
         {/* Starter Code Lab Box */}
         {lesson?.starterCode && (
-          <div className="space-y-2 pt-4 border-t border-slate-800">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <div className="space-y-2 pt-3 border-t border-[#27272A]">
+            <div className="flex items-center justify-between text-xs text-zinc-400">
               <span className="font-mono flex items-center gap-1.5">
-                <Code2 size={14} className="text-indigo-400" />
+                <Code2 size={13} className="text-indigo-400" />
                 Hands-On Code Sandbox Snippet
               </span>
               <button
@@ -165,12 +167,12 @@ export function LessonPage() {
                 onClick={() => handleCopyStarter(lesson.starterCode!)}
                 className="inline-flex items-center gap-1 text-indigo-400 hover:underline text-xs"
               >
-                {copiedCode ? <Check size={13} /> : <Copy size={13} />}
-                {copiedCode ? "Copied to clipboard" : "Copy code"}
+                {copiedCode ? <Check size={12} /> : <Copy size={12} />}
+                {copiedCode ? "Copied" : "Copy"}
               </button>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#090d16] p-4 sm:p-5 font-mono text-xs text-slate-200">
+            <div className="overflow-x-auto rounded-lg border border-[#27272A] bg-[#141418] p-3.5 font-mono text-xs text-zinc-200">
               <pre>
                 <code>{lesson.starterCode}</code>
               </pre>
@@ -180,29 +182,29 @@ export function LessonPage() {
 
         {/* Challenge Task Box */}
         {lesson?.challengeTask && (
-          <div className="rounded-xl border border-amber-500/30 bg-slate-950/50 p-5 space-y-2">
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-              <Sparkles size={14} />
+          <div className="rounded-lg border border-amber-500/30 bg-[#141418] p-4 space-y-1.5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <Sparkles size={12} />
               Interactive Challenge Task
             </p>
-            <p className="text-sm text-slate-100 font-medium">{lesson.challengeTask}</p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-white font-medium">{lesson.challengeTask}</p>
+            <p className="text-[11px] text-zinc-400">
               Test your solution locally or in the integrated coding workspace.
             </p>
           </div>
         )}
 
         {/* Video / Sandbox Links */}
-        <div className="flex flex-wrap gap-3 pt-2">
+        <div className="flex flex-wrap gap-2 pt-1">
           {lesson?.videoUrl && (
             <a
               href={lesson.videoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/40 px-4 py-2.5 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#141418] px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition"
             >
-              <Play size={15} className="text-indigo-400" />
-              Open Video Workshop
+              <Play size={12} className="text-indigo-400" />
+              Video Workshop
             </a>
           )}
 
@@ -211,10 +213,10 @@ export function LessonPage() {
               href={lesson.codeSandboxUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/40 px-4 py-2.5 text-xs font-medium text-slate-200 hover:bg-slate-800/60 transition"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#141418] px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition"
             >
-              <BookOpen size={15} className="text-indigo-400" />
-              Open Interactive Sandbox
+              <BookOpen size={12} className="text-indigo-400" />
+              Interactive Sandbox
             </a>
           )}
 

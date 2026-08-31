@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthStore } from "@/store/authStore";
 import {
@@ -420,67 +421,69 @@ Ethio-Tech Mentorship Team`;
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-[var(--text-primary)]">
       {/* Top Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" onClick={() => navigate("/admin/moderation")}>
-            <ArrowLeft size={16} className="mr-1.5" /> Back to Queue
-          </Button>
-          <div className="h-6 w-px bg-[var(--border)]" />
-          <h1 className="text-2xl font-bold text-white md:text-3xl">{app?.fullName ?? "Mentor Detail"}</h1>
-          {app && (
-            <Badge variant={rubric.variant} className="text-xs py-1 px-2.5">
-              {rubric.percentage}% Match
-            </Badge>
-          )}
-        </div>
+      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin/moderation")} className="text-xs text-zinc-300">
+              <ArrowLeft size={13} className="mr-1" /> Back to Queue
+            </Button>
+            <div className="h-5 w-px bg-[#27272A]" />
+            <h1 className="text-xl font-bold text-white sm:text-2xl">{app?.fullName ?? "Mentor Detail"}</h1>
+            {app && (
+              <Badge variant={rubric.variant} size="sm">
+                {rubric.percentage}% Match
+              </Badge>
+            )}
+          </div>
 
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => invalidate()} className="gap-1.5">
-            <RefreshCw size={14} /> Refresh
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => invalidate()} className="text-xs text-zinc-300 hover:text-white">
+              <RefreshCw size={12} className="mr-1" /> Refresh
+            </Button>
+          </div>
         </div>
-      </div>
+      </Card>
 
       {detailQuery.isLoading ? (
         <div className="space-y-4">
-          <Skeleton className="h-28 w-full rounded-2xl" />
-          <Skeleton className="h-44 w-full rounded-2xl" />
-          <Skeleton className="h-64 w-full rounded-2xl" />
+          <Skeleton className="h-24 w-full rounded-xl" />
+          <Skeleton className="h-36 w-full rounded-xl" />
+          <Skeleton className="h-48 w-full rounded-xl" />
         </div>
       ) : app ? (
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Main Content Area */}
           <div className="space-y-6 lg:col-span-2">
             {/* Applicant Profile Card */}
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]/70 p-6 shadow-sm">
+            <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
               <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3.5">
                   {linkedUser?.avatarUrl ? (
                     <img
                       src={linkedUser.avatarUrl}
                       alt={app.fullName}
-                      className="h-16 w-16 rounded-2xl border border-[var(--border)] bg-white/5 object-cover"
+                      className="h-12 w-12 rounded-xl border border-[#27272A] bg-[#141418] object-cover"
                     />
                   ) : (
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-2xl font-bold text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-xl font-bold text-indigo-400">
                       {app.fullName.charAt(0).toUpperCase()}
                     </div>
                   )}
                   <div>
-                    <h2 className="text-xl font-bold text-white">{app.fullName}</h2>
-                    <p className="text-sm text-[var(--text-secondary)]">
+                    <h2 className="text-base font-bold text-white">{app.fullName}</h2>
+                    <p className="text-xs text-zinc-400">
                       {app.currentRole}
                       {app.currentCompany ? ` • ${app.currentCompany}` : ""}
                     </p>
-                    <p className="text-xs text-[var(--text-muted)] mt-0.5">{app.email}</p>
-                    <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <p className="text-[11px] text-zinc-500 mt-0.5">{app.email}</p>
+                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                       {statusBadge(app.status)}
                       {linkedUser?.mentorAccountStatus && (
-                        <Badge variant="purple">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
+                        <Badge variant="purple" size="sm">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
                       )}
-                      <Badge variant="default">{app.location ?? "Ethiopia / Remote"}</Badge>
+                      <Badge variant="default" size="sm">{app.location ?? "Ethiopia / Remote"}</Badge>
                     </div>
                   </div>
                 </div>
@@ -491,9 +494,9 @@ Ethio-Tech Mentorship Team`;
                       href={app.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline bg-primary/5 px-2.5 py-1.5 rounded-lg border border-primary/20"
+                      className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:underline bg-indigo-500/5 px-2.5 py-1 rounded-md border border-indigo-500/20"
                     >
-                      LinkedIn <ExternalLink size={12} />
+                      LinkedIn <ExternalLink size={11} />
                     </a>
                   )}
                   {app.portfolio && (
@@ -501,17 +504,17 @@ Ethio-Tech Mentorship Team`;
                       href={app.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline bg-primary/5 px-2.5 py-1.5 rounded-lg border border-primary/20"
+                      className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:underline bg-indigo-500/5 px-2.5 py-1 rounded-md border border-indigo-500/20"
                     >
-                      Portfolio <ExternalLink size={12} />
+                      Portfolio <ExternalLink size={11} />
                     </a>
                   )}
                 </div>
               </div>
-            </section>
+            </Card>
 
             {/* Navigation Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-[var(--border)] pb-3">
+            <div className="flex flex-wrap gap-1.5 border-b border-[#27272A] pb-3">
               {[
                 { key: "application", label: "Application & Profile", icon: <Briefcase size={15} /> },
                 { key: "rubric", label: "Evaluation Rubric & Interview", icon: <Sliders size={15} /> },
