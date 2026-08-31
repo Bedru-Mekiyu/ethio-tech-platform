@@ -76,7 +76,7 @@ describe("HomePage Component Suite", () => {
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Pan-Ethiopian Tech Learning & Mentorship Ecosystem/i)).toBeDefined();
+    expect(screen.getByText(/Pan-Ethiopian Engineering Platform/i)).toBeDefined();
     expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
     expect(screen.getByRole("button", { name: /Try Live Demo/i })).toBeDefined();
     expect(screen.getByRole("button", { name: /Apply as Mentor/i })).toBeDefined();

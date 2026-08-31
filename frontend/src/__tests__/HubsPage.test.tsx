@@ -28,7 +28,7 @@ describe("HubsPage Component Suite", () => {
             <HubsPage />
           </MemoryRouter>
         </ToastProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     expect(await screen.findByText(/Physical Tech Hubs/i)).toBeDefined();
@@ -51,7 +51,7 @@ describe("HubsPage Component Suite", () => {
             <HubsPage />
           </MemoryRouter>
         </ToastProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     const hawassaFilter = await screen.findByRole("button", { name: "Hawassa" });
@@ -70,7 +70,7 @@ describe("HubsPage Component Suite", () => {
             <HubsPage />
           </MemoryRouter>
         </ToastProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // Click "Book a Desk" on one of the cards
@@ -127,10 +127,10 @@ describe("HubsPage Component Suite", () => {
             <HubsPage />
           </MemoryRouter>
         </ToastProvider>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
-    const passesTab = await screen.findByRole("button", { name: /Digital Hub Passes/i });
+    const passesTab = await screen.findByRole("button", { name: /Digital Passes/i });
     fireEvent.click(passesTab);
 
     expect(screen.getByText(/Digital Hub Passes & Physical Check-In/i)).toBeDefined();
