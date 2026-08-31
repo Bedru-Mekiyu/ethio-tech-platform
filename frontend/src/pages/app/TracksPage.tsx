@@ -66,17 +66,6 @@ function formatCompactNumber(value: number) {
   }).format(value);
 }
 
-function getTrackIcon(categoryKey?: string, title?: string): LucideIcon {
-  const text = `${categoryKey ?? ""} ${title ?? ""}`.toLowerCase();
-  if (text.includes("ai") || text.includes("data")) return Sparkles;
-  if (text.includes("cyber") || text.includes("security")) return ShieldCheck;
-  if (text.includes("cloud") || text.includes("devops")) return Rocket;
-  if (text.includes("mobile") || text.includes("react native") || text.includes("flutter")) return Smartphone;
-  if (text.includes("design") || text.includes("ux") || text.includes("ui")) return Layers3;
-  if (text.includes("full") || text.includes("web") || text.includes("stack")) return Cpu;
-  return Layers3;
-}
-
 function TracksSkeleton() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 space-y-8">
@@ -136,6 +125,18 @@ function TrackStatCard({
   );
 }
 
+function TrackIcon({ categoryKey, title, size = 20 }: { categoryKey?: string; title?: string; size?: number }) {
+  const text = `${categoryKey ?? ""} ${title ?? ""}`.toLowerCase();
+  if (text.includes("ai") || text.includes("data")) return <Sparkles size={size} />;
+  if (text.includes("cyber") || text.includes("security")) return <ShieldCheck size={size} />;
+  if (text.includes("cloud") || text.includes("devops")) return <Rocket size={size} />;
+  if (text.includes("mobile") || text.includes("react native") || text.includes("flutter"))
+    return <Smartphone size={size} />;
+  if (text.includes("design") || text.includes("ux") || text.includes("ui")) return <Layers3 size={size} />;
+  if (text.includes("full") || text.includes("web") || text.includes("stack")) return <Cpu size={size} />;
+  return <Layers3 size={size} />;
+}
+
 function StudentTrackCard({
   track,
   onPreviewCapstone,
@@ -143,7 +144,6 @@ function StudentTrackCard({
   track: EnrichedTrackView;
   onPreviewCapstone: (capstone: CapstoneProject, trackTitle: string, trackId: string) => void;
 }) {
-  const Icon = getTrackIcon(track.categoryKey, track.title);
   const done = track.progress >= 100;
   const statusLabel = done ? "Completed" : track.enrolled ? "In Progress" : "Available";
   const actionLabel = done ? "Review Track" : track.enrolled ? "Resume Track" : "Start Learning";
@@ -154,11 +154,9 @@ function StudentTrackCard({
       <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-800 bg-slate-950/40 p-5">
         <div className="flex items-start justify-between gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-indigo-400 border border-slate-800">
-            <Icon size={20} />
+            <TrackIcon categoryKey={track.categoryKey} title={track.title} size={20} />
           </div>
-          <Badge variant={done ? "success" : track.enrolled ? "default" : "default"}>
-            {statusLabel}
-          </Badge>
+          <Badge variant={done ? "success" : track.enrolled ? "default" : "default"}>{statusLabel}</Badge>
         </div>
 
         <div className="mt-4 space-y-1">
@@ -231,9 +229,7 @@ function StudentTrackCard({
       {/* Action / Next Step Column */}
       <div className="flex flex-col justify-between gap-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-4 lg:pt-0 lg:pl-6">
         <div className="space-y-1.5">
-          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Status & Mentorship
-          </p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Status & Mentorship</p>
           <p className="text-xs text-slate-400 leading-relaxed">
             {done
               ? "All milestones completed! Review capstones or explore another track."
@@ -382,9 +378,7 @@ export function TracksPage() {
               <Sparkles size={13} />
               Career-Aligned Engineering Curriculum
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
-              Learning Pathways
-            </h1>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white">Learning Pathways</h1>
             <p className="text-sm md:text-base text-[var(--text-secondary)] mt-1 max-w-2xl">
               Choose your engineering pathway, track your milestones, and build production-grade capstone projects with
               direct mentor reviews.
@@ -454,7 +448,7 @@ export function TracksPage() {
                   "rounded-xl px-4 py-2 text-xs md:text-sm font-medium transition-colors",
                   statusFilter === tab.value
                     ? "bg-indigo-600 text-white shadow-sm"
-                    : "border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                    : "border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200",
                 )}
               >
                 {tab.label}
@@ -495,7 +489,7 @@ export function TracksPage() {
                 "rounded-xl px-3 py-1.5 text-xs transition-colors",
                 categoryFilter === cat.key
                   ? "bg-slate-800 text-slate-100 font-semibold border border-slate-700"
-                  : "bg-slate-950/40 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-slate-800/60"
+                  : "bg-slate-950/40 text-slate-400 hover:bg-slate-900 hover:text-slate-200 border border-slate-800/60",
               )}
             >
               {cat.label}

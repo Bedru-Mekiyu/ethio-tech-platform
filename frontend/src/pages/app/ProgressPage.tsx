@@ -118,14 +118,53 @@ export function ProgressPage() {
 
   const mappedBadges = useMemo(() => {
     // If backend returns empty badge catalog, fallback to rich default catalog
-    const baseBadges = badges.length > 0 ? badges : [
-      { _id: "b1", name: "First Code Commit", description: "Ran your first sandbox snippet", xpRequired: 50, category: "coding" },
-      { _id: "b2", name: "Streak Flame Master", description: "Maintained a 7-day learning streak", xpRequired: 250, category: "streak" },
-      { _id: "b3", name: "Classroom MVP", description: "Participated actively in a live LiveKit session", xpRequired: 500, category: "live" },
-      { _id: "b4", name: "Full-Stack Ship Master", description: "Successfully reviewed and merged project", xpRequired: 1000, category: "project" },
-      { _id: "b5", name: "Squad Pillar", description: "Assisted peers in community squad forum", xpRequired: 1500, category: "community" },
-      { _id: "b6", name: "Algorithm Ace", description: "Solved 10 algorithm optimization challenges", xpRequired: 2000, category: "algo" },
-    ];
+    const baseBadges =
+      badges.length > 0
+        ? badges
+        : [
+            {
+              _id: "b1",
+              name: "First Code Commit",
+              description: "Ran your first sandbox snippet",
+              xpRequired: 50,
+              category: "coding",
+            },
+            {
+              _id: "b2",
+              name: "Streak Flame Master",
+              description: "Maintained a 7-day learning streak",
+              xpRequired: 250,
+              category: "streak",
+            },
+            {
+              _id: "b3",
+              name: "Classroom MVP",
+              description: "Participated actively in a live LiveKit session",
+              xpRequired: 500,
+              category: "live",
+            },
+            {
+              _id: "b4",
+              name: "Full-Stack Ship Master",
+              description: "Successfully reviewed and merged project",
+              xpRequired: 1000,
+              category: "project",
+            },
+            {
+              _id: "b5",
+              name: "Squad Pillar",
+              description: "Assisted peers in community squad forum",
+              xpRequired: 1500,
+              category: "community",
+            },
+            {
+              _id: "b6",
+              name: "Algorithm Ace",
+              description: "Solved 10 algorithm optimization challenges",
+              xpRequired: 2000,
+              category: "algo",
+            },
+          ];
 
     return baseBadges.map((b) => ({
       ...b,
@@ -193,32 +232,30 @@ export function ProgressPage() {
       {/* Top Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-100 md:text-3xl">
-            Progress & Mastery Hub
-          </h1>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-100 md:text-3xl">Progress & Mastery Hub</h1>
           <p className="mt-1 text-sm text-slate-400">
             Track your skill mastery, verified credentials, achievement badges, and project portfolio.
           </p>
         </div>
 
         {/* Global Progress Badges */}
-        <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-3.5 py-2">
-            <ShieldCheck className="text-indigo-400" size={16} />
-            <span className="text-sm font-semibold text-slate-100">{overallReadiness}%</span>
-            <span className="text-xs text-slate-400">Job Readiness</span>
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+            <ShieldCheck className="text-indigo-400" size={14} />
+            <span className="text-xs font-semibold text-white">{overallReadiness}%</span>
+            <span className="text-[11px] text-zinc-500">Job Readiness</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-3.5 py-2">
-            <Zap className="text-emerald-400" size={16} />
-            <span className="text-sm font-semibold text-slate-100">{userXp.toLocaleString()}</span>
-            <span className="text-xs text-slate-400">XP</span>
+          <div className="flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+            <Zap className="text-emerald-400" size={14} />
+            <span className="text-xs font-semibold text-white">{userXp.toLocaleString()}</span>
+            <span className="text-[11px] text-zinc-500">XP</span>
           </div>
         </div>
       </div>
 
       {/* Tabs Navigation */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-800/80 pb-3" role="tablist">
+      <div className="flex flex-wrap gap-1.5 border-b border-[#27272A] pb-2.5" role="tablist">
         {(
           [
             { id: "overview", label: "Overview & Streak", icon: Flame },
@@ -238,13 +275,11 @@ export function ProgressPage() {
               aria-selected={active}
               onClick={() => setTab(t.id)}
               className={cn(
-                "flex items-center gap-2 rounded-xl px-4 py-2 text-xs md:text-sm font-medium transition-colors",
-                active
-                  ? "bg-indigo-600 text-white shadow-sm"
-                  : "text-slate-400 hover:bg-slate-800/60 hover:text-slate-200",
+                "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+                active ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:bg-[#141418] hover:text-white",
               )}
             >
-              <Icon size={15} />
+              <Icon size={14} />
               {t.label}
             </button>
           );
@@ -253,76 +288,80 @@ export function ProgressPage() {
 
       {/* ─── TAB 1: OVERVIEW & STATS ─── */}
       {tab === "overview" && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* 3 Metric Cards */}
-          <div className="grid gap-4 sm:grid-cols-3">
-            <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-md">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  Active Streak
-                </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/10 text-amber-400">
-                  <Flame size={18} />
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Active Streak</span>
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#141418] text-amber-400 border border-[#27272A]">
+                  <Flame size={15} />
                 </div>
               </div>
-              <p className="mt-3 text-2xl font-bold text-slate-100">{dashboard?.streak?.currentStreak ?? 5}d</p>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-2 text-xl font-bold font-mono text-white">{dashboard?.streak?.currentStreak ?? 5}d</p>
+              <p className="mt-0.5 text-[11px] text-zinc-400">
                 Best: {dashboard?.streak?.longestStreak ?? 14} days · Streak shield active
               </p>
             </Card>
 
-            <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+            <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-md">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Total Experience
                 </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
-                  <Zap size={18} />
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#141418] text-emerald-400 border border-[#27272A]">
+                  <Zap size={15} />
                 </div>
               </div>
-              <p className="mt-3 text-2xl font-bold text-slate-100">{userXp.toLocaleString()}</p>
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-2 text-xl font-bold font-mono text-white">{userXp.toLocaleString()}</p>
+              <p className="mt-0.5 text-[11px] text-zinc-400">
                 Level {userLevel} · {nextMilestone.xp - userXp} XP to next rank
               </p>
             </Card>
 
-            <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+            <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-md">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Leaderboard Rank
                 </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
-                  <Trophy size={18} />
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <Trophy size={15} />
                 </div>
               </div>
-              <p className="mt-3 text-2xl font-bold text-indigo-400">#{dashboard?.leaderboardPosition ?? 12}</p>
-              <Link to="/leaderboard" className="mt-1 inline-block text-xs text-indigo-400 hover:underline">
+              <p className="mt-2 text-xl font-bold font-mono text-indigo-400">
+                #{dashboard?.leaderboardPosition ?? 12}
+              </p>
+              <Link to="/leaderboard" className="mt-0.5 inline-block text-xs text-indigo-400 hover:underline">
                 View Global Standings →
               </Link>
             </Card>
           </div>
 
           {/* Active Track Progress Card */}
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+          <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-400">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
                   Current Curriculum Track
                 </span>
-                <h2 className="mt-1 text-lg font-bold text-slate-100">
+                <h2 className="mt-0.5 text-base font-bold text-white">
                   {currentTrack?.title ?? "Full-Stack Web Development Track"}
                 </h2>
               </div>
               <Link
                 to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/tracks"}
-                className="text-xs font-semibold text-indigo-400 hover:underline"
+                className="text-xs font-medium text-indigo-400 hover:underline"
               >
                 Open Track Dashboard →
               </Link>
             </div>
 
-            <ProgressBar value={currentTrack?.overallProgressPercent ?? 45} max={100} className="mt-4 h-2" />
-            <div className="mt-2 flex items-center justify-between text-xs text-slate-400">
+            <ProgressBar
+              value={currentTrack?.overallProgressPercent ?? 45}
+              max={100}
+              className="mt-3.5 h-1.5 bg-[#27272A]"
+            />
+            <div className="mt-2 flex items-center justify-between text-xs text-zinc-400">
               <span>{currentTrack?.overallProgressPercent ?? 45}% Completed</span>
               <span>
                 {currentTrack?.lessons.completed ?? 6} of {currentTrack?.lessons.total ?? 14} lessons verified
@@ -331,20 +370,24 @@ export function ProgressPage() {
           </Card>
 
           {/* Next Milestone Track */}
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
+          <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-slate-100">Next Engineering Milestone</h2>
-                <p className="text-xs text-slate-400">{nextMilestone.note}</p>
+                <h2 className="text-sm font-bold text-white">Next Engineering Milestone</h2>
+                <p className="text-xs text-zinc-400">{nextMilestone.note}</p>
               </div>
               <span className="text-xs font-mono font-bold text-indigo-400">
                 {userXp} / {nextMilestone.xp} XP
               </span>
             </div>
-            <ProgressBar value={Math.min(userXp, nextMilestone.xp)} max={nextMilestone.xp} className="mt-4 h-2" />
-            <div className="mt-3 flex items-center justify-between text-xs text-slate-200">
-              <span className="font-semibold text-sky-400">{nextMilestone.label}</span>
-              <span className="text-slate-400">Target: {nextMilestone.xp} XP</span>
+            <ProgressBar
+              value={Math.min(userXp, nextMilestone.xp)}
+              max={nextMilestone.xp}
+              className="mt-3.5 h-1.5 bg-[#27272A]"
+            />
+            <div className="mt-2.5 flex items-center justify-between text-xs text-zinc-300">
+              <span className="font-semibold text-indigo-400">{nextMilestone.label}</span>
+              <span className="text-zinc-500">Target: {nextMilestone.xp} XP</span>
             </div>
           </Card>
         </div>
@@ -352,54 +395,45 @@ export function ProgressPage() {
 
       {/* ─── TAB 2: SKILL MASTERY RADAR & BREAKDOWN ─── */}
       {tab === "mastery" && (
-        <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-5">
+          <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-100">Engineering Competency Breakdown</h2>
-                <p className="text-xs text-slate-400">
+                <h2 className="text-base font-bold text-white">Engineering Competency Breakdown</h2>
+                <p className="text-xs text-zinc-400">
                   Evaluated automatically through coding challenges, test suite runs, and mentor code reviews.
                 </p>
               </div>
-              <div className="flex items-center gap-3 rounded-xl border border-indigo-500/20 bg-indigo-500/10 px-4 py-2">
-                <ShieldCheck size={20} className="text-indigo-400" />
+              <div className="flex items-center gap-2.5 rounded-lg border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-1.5">
+                <ShieldCheck size={18} className="text-indigo-400" />
                 <div>
-                  <p className="text-xs font-bold text-slate-200">Overall Readiness</p>
-                  <p className="text-base font-bold text-indigo-400">{overallReadiness}%</p>
+                  <p className="text-[10px] uppercase tracking-wider font-semibold text-zinc-400">Overall Readiness</p>
+                  <p className="text-sm font-bold font-mono text-indigo-400">{overallReadiness}%</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <div className="mt-5 grid gap-3 md:grid-cols-2">
               {SKILL_CATEGORIES.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="rounded-xl border border-slate-800 bg-slate-950/40 p-4 space-y-3"
-                >
+                <div key={skill.name} className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{skill.icon}</span>
-                      <span className="text-sm font-semibold text-slate-100">{skill.name}</span>
+                      <span className="text-sm">{skill.icon}</span>
+                      <span className="text-xs font-semibold text-white">{skill.name}</span>
                     </div>
                     <Badge
-                      variant={
-                        skill.tier === "Master"
-                          ? "purple"
-                          : skill.tier === "Advanced"
-                            ? "success"
-                            : "default"
-                      }
-                      className="text-[10px] py-0 px-2"
+                      variant={skill.tier === "Master" ? "purple" : skill.tier === "Advanced" ? "success" : "default"}
+                      size="sm"
                     >
                       {skill.tier}
                     </Badge>
                   </div>
 
-                  <ProgressBar value={skill.level} max={100} className="h-2" />
+                  <ProgressBar value={skill.level} max={100} className="h-1.5 bg-[#27272A]" />
 
-                  <div className="flex items-center justify-between text-xs text-slate-400">
+                  <div className="flex items-center justify-between text-[11px] text-zinc-400">
                     <span>{skill.level}% Mastery</span>
-                    <span className="font-mono text-sky-400">{skill.xp} XP Earned</span>
+                    <span className="font-mono text-indigo-400">{skill.xp} XP Earned</span>
                   </div>
                 </div>
               ))}
@@ -410,9 +444,9 @@ export function ProgressPage() {
 
       {/* ─── TAB 3: ACHIEVEMENT BADGES ─── */}
       {tab === "badges" && (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {(["all", "earned", "locked"] as const).map((f) => (
               <button
                 key={f}
@@ -420,10 +454,10 @@ export function ProgressPage() {
                 aria-pressed={badgeFilter === f}
                 onClick={() => setBadgeFilter(f)}
                 className={cn(
-                  "rounded-xl border px-4 py-1.5 text-xs font-semibold transition-all",
+                  "rounded-md border px-3 py-1 text-xs font-medium transition-all",
                   badgeFilter === f
-                    ? "border-indigo-500 bg-indigo-500/10 text-indigo-400 shadow-sm"
-                    : "border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200",
+                    ? "border-indigo-500 bg-indigo-600 text-white shadow-sm"
+                    : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
                 )}
               >
                 {f.charAt(0).toUpperCase() + f.slice(1)} (
@@ -438,37 +472,33 @@ export function ProgressPage() {
           </div>
 
           {/* Badges Grid */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {filteredBadges.map((b) => (
               <Card
                 key={b._id}
                 className={cn(
-                  "flex items-start gap-4 rounded-2xl border p-4 transition-all",
-                  b.earned
-                    ? "border-slate-700/80 bg-slate-900/90 shadow-sm"
-                    : "border-slate-800 bg-slate-950/40 opacity-60",
+                  "flex items-start gap-3 rounded-xl border p-3.5 transition-all shadow-md",
+                  b.earned ? "border-[#27272A] bg-[#0E0E11]" : "border-[#27272A] bg-[#0E0E11] opacity-50",
                 )}
               >
                 <div
                   className={cn(
-                    "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl",
+                    "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border",
                     b.earned
-                      ? "bg-indigo-500/15 text-indigo-400 border border-indigo-500/20"
-                      : "bg-slate-900 text-slate-500 border border-slate-800",
+                      ? "bg-[#141418] text-indigo-400 border-[#27272A]"
+                      : "bg-[#0E0E11] text-zinc-600 border-[#27272A]",
                   )}
                 >
-                  {b.earned ? <BadgeCheck size={24} /> : <Lock size={20} />}
+                  {b.earned ? <BadgeCheck size={20} /> : <Lock size={16} />}
                 </div>
 
-                <div className="min-w-0 flex-1 space-y-1">
+                <div className="min-w-0 flex-1 space-y-0.5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-slate-100 truncate">{b.name}</h3>
-                    {b.earned && (
-                      <span className="text-[10px] font-bold text-emerald-400 uppercase">Earned</span>
-                    )}
+                    <h3 className="text-xs font-semibold text-white truncate">{b.name}</h3>
+                    {b.earned && <span className="text-[10px] font-bold text-emerald-400 uppercase">Earned</span>}
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed">{b.description}</p>
-                  <p className="text-[11px] font-semibold text-sky-400">
+                  <p className="text-[11px] text-zinc-400 leading-relaxed">{b.description}</p>
+                  <p className="text-[10px] font-medium text-indigo-400">
                     {b.earned ? "✓ Unlocked" : `${b.xpRequired ?? 50} XP required`}
                   </p>
                 </div>
@@ -477,33 +507,29 @@ export function ProgressPage() {
           </div>
 
           {/* Milestones Road */}
-          <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6">
-            <h2 className="text-base font-bold text-slate-100">Career Milestones Road</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
+            <h2 className="text-sm font-bold text-white">Career Milestones Road</h2>
+            <div className="mt-3.5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
               {MILESTONES.map((m) => {
                 const complete = userXp >= m.xp;
                 return (
                   <div
                     key={m.label}
                     className={cn(
-                      "rounded-xl border p-4 space-y-2 transition-all",
-                      complete
-                        ? "border-indigo-500/30 bg-indigo-500/10"
-                        : "border-slate-800 bg-slate-950/40 opacity-70",
+                      "rounded-lg border p-3 space-y-1.5 transition-all",
+                      complete ? "border-indigo-500/20 bg-indigo-500/10" : "border-[#27272A] bg-[#141418] opacity-60",
                     )}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-bold text-slate-100">{m.label}</span>
+                      <span className="text-xs font-semibold text-white">{m.label}</span>
                       {complete ? (
-                        <CheckCircle2 size={16} className="text-emerald-400" />
+                        <CheckCircle2 size={14} className="text-emerald-400" />
                       ) : (
-                        <Rocket size={16} className="text-slate-500" />
+                        <Rocket size={14} className="text-zinc-600" />
                       )}
                     </div>
-                    <p className="text-xs text-slate-400 leading-relaxed">{m.note}</p>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                      {m.xp} XP
-                    </p>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed">{m.note}</p>
+                    <p className="text-[10px] font-mono font-semibold text-zinc-500">{m.xp} XP</p>
                   </div>
                 );
               })}
@@ -514,22 +540,20 @@ export function ProgressPage() {
 
       {/* ─── TAB 4: PORTFOLIO & CERTIFICATES ─── */}
       {tab === "portfolio" && (
-        <div className="space-y-8">
+        <div className="space-y-6">
           {/* Verified Certificates Section */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-100">Verified Track Certificates</h2>
-                <p className="text-xs text-slate-400">
-                  Verifiable completion credentials issued upon track graduation.
-                </p>
+                <h2 className="text-base font-bold text-white">Verified Track Certificates</h2>
+                <p className="text-xs text-zinc-400">Verifiable completion credentials issued upon track graduation.</p>
               </div>
-              <Badge variant="default" className="gap-1 text-xs">
-                <Award size={13} /> {certificates.length || 1} Issued
+              <Badge variant="default" size="sm" className="gap-1">
+                <Award size={12} /> {certificates.length || 1} Issued
               </Badge>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               {(certificates.length > 0
                 ? certificates
                 : [
@@ -544,44 +568,44 @@ export function ProgressPage() {
               ).map((cert) => (
                 <Card
                   key={cert._id}
-                  className="relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/90 p-6"
+                  className="relative overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-400 border border-indigo-500/20">
-                        <Award size={24} />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                        <Award size={20} />
                       </div>
                       <div>
-                        <Badge variant="success" className="text-[10px] py-0 px-2 font-medium">
+                        <Badge variant="success" size="sm" className="font-medium">
                           Verified & Signed
                         </Badge>
-                        <h3 className="mt-1 text-base font-bold text-slate-100">
+                        <h3 className="mt-0.5 text-sm font-semibold text-white">
                           {cert.track?.title ?? "Full-Stack Development Track"}
                         </h3>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-5 space-y-1.5 border-t border-slate-800 pt-4 text-xs text-slate-400">
+                  <div className="mt-4 space-y-1 border-t border-[#27272A] pt-3 text-xs text-zinc-400">
                     <div className="flex justify-between">
                       <span>Credential ID:</span>
-                      <span className="font-mono font-semibold text-slate-200">
+                      <span className="font-mono font-semibold text-zinc-200">
                         {cert.serialNumber ?? "CERT-ET-2026-9482"}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Issued to:</span>
-                      <span className="text-slate-200 font-medium">{user?.fullName ?? "Learner"}</span>
+                      <span className="text-zinc-200 font-medium">{user?.fullName ?? "Learner"}</span>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-center gap-3">
-                    <Button size="sm" variant="primary" className="gap-1.5 text-xs font-medium">
-                      <Download size={13} />
+                  <div className="mt-4 flex items-center gap-2">
+                    <Button size="sm" variant="primary" className="gap-1 text-xs font-medium">
+                      <Download size={12} />
                       Download Certificate PDF
                     </Button>
-                    <Button size="sm" variant="outline" className="gap-1.5 text-xs">
-                      <ExternalLink size={13} />
+                    <Button size="sm" variant="outline" className="gap-1 text-xs">
+                      <ExternalLink size={12} />
                       Verify Credential
                     </Button>
                   </div>
@@ -591,47 +615,47 @@ export function ProgressPage() {
           </div>
 
           {/* Completed Projects Portfolio */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
-              <h2 className="text-lg font-bold text-slate-100">Completed Project Portfolio</h2>
-              <p className="text-xs text-slate-400">
+              <h2 className="text-base font-bold text-white">Completed Project Portfolio</h2>
+              <p className="text-xs text-zinc-400">
                 Projects built in your track and evaluated by mentor code reviewers.
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 md:grid-cols-2">
               {portfolioProjects.map((p, idx) => (
                 <Card
                   key={p.projectId || idx}
-                  className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 space-y-4"
+                  className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 space-y-3 shadow-md"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
                         {p.trackTitle}
                       </span>
-                      <h3 className="mt-1 text-base font-bold text-slate-100">{p.title}</h3>
+                      <h3 className="mt-0.5 text-sm font-semibold text-white">{p.title}</h3>
                     </div>
-                    <Badge variant="success" className="text-[10px] py-0.5 px-2 font-medium">
+                    <Badge variant="success" size="sm" className="font-medium">
                       Grade: {p.grade ?? 95}/100
                     </Badge>
                   </div>
 
                   {p.feedback && (
-                    <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-3 text-xs text-slate-400 italic">
+                    <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs text-zinc-400 italic">
                       "{p.feedback}"
                     </div>
                   )}
 
-                  <div className="flex items-center gap-3 pt-2 border-t border-slate-800/80">
+                  <div className="flex items-center gap-3 pt-2 border-t border-[#27272A]">
                     {p.githubLink && (
                       <a
                         href={p.githubLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-400 hover:text-slate-100 transition-colors"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-zinc-400 hover:text-white transition-colors"
                       >
-                        <Github size={14} /> Repository
+                        <Github size={13} /> Repository
                       </a>
                     )}
                     {p.deployedUrl && (
@@ -639,9 +663,9 @@ export function ProgressPage() {
                         href={p.deployedUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:underline ml-auto"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-indigo-400 hover:underline ml-auto"
                       >
-                        <ExternalLink size={14} /> Live Demo
+                        <ExternalLink size={13} /> Live Demo
                       </a>
                     )}
                   </div>
@@ -654,34 +678,34 @@ export function ProgressPage() {
 
       {/* ─── TAB 5: XP HISTORY ─── */}
       {tab === "activity" && (
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-slate-100">Experience Point Log</h2>
-            <p className="text-xs text-slate-400">{xpLogs.length} events logged</p>
+            <h2 className="text-sm font-bold text-white">Experience Point Log</h2>
+            <p className="text-xs text-zinc-500">{xpLogs.length} events logged</p>
           </div>
 
           {historyQuery.isLoading ? (
-            <Skeleton className="h-48 w-full rounded-2xl" />
+            <Skeleton className="h-48 w-full rounded-xl" />
           ) : xpLogs.length === 0 ? (
             <EmptyState
               title="No XP recorded yet"
               description="Complete lessons, run code sandbox tests, and attend live sessions to earn XP."
             />
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {xpLogs.map((log) => (
                 <Card
                   key={log._id}
-                  className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/80 p-4"
+                  className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 shadow-sm"
                 >
-                  <div className="space-y-1">
-                    <p className="text-sm font-semibold text-slate-100">{log.reason ?? "XP Reward"}</p>
-                    <p className="text-xs text-slate-400">
+                  <div className="space-y-0.5">
+                    <p className="text-xs font-medium text-white">{log.reason ?? "XP Reward"}</p>
+                    <p className="text-[11px] text-zinc-500">
                       {new Date(log.createdAt).toLocaleString()}
                       {log.sourceType ? ` · Source: ${log.sourceType}` : ""}
                     </p>
                   </div>
-                  <span className="text-base font-bold text-emerald-400">+{log.amount} XP</span>
+                  <span className="text-xs font-bold font-mono text-emerald-400">+{log.amount} XP</span>
                 </Card>
               ))}
             </div>
@@ -691,4 +715,3 @@ export function ProgressPage() {
     </div>
   );
 }
-
