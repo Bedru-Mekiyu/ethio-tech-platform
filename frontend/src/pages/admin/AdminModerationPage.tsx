@@ -53,21 +53,6 @@ const QUEUE_LABELS: Record<QueueTab, string> = {
   archived: "Archived Applications",
 };
 
-const REJECTION_REASONS = [
-  "Experience level does not meet current cohort requirements (minimum 2 years needed).",
-  "Primary tech stack does not match open mentorship tracks for this cohort.",
-  "Weekly availability is below platform minimum (3+ hours/week required).",
-  "Incomplete portfolio or unverifiable technical experience.",
-  "Application lacked specific motivation and mentoring methodology details.",
-];
-
-const REQUEST_INFO_TEMPLATES = [
-  "Please provide a link to your active GitHub, portfolio, or recent production projects.",
-  "Please clarify your weekly available hours and preferred time slots (EAT timezone).",
-  "Please elaborate on your previous experience mentoring or coaching junior developers.",
-  "Please update your current role, company, and primary tech stack specialization.",
-];
-
 interface RubricScores {
   experience: number; // 1-5
   techStack: number; // 1-5
