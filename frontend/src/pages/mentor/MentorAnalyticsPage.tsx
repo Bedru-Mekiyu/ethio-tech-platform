@@ -39,7 +39,7 @@ function MetricCard({
   return (
     <Card className="border-[#27272A] bg-[#0E0E11] p-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">{icon}</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">{icon}</div>
         <div>
           <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">{label}</p>
           <p className="text-xl font-bold text-white mt-0.5">{value}</p>
@@ -56,7 +56,7 @@ function CustomChartTooltip({ active, payload, label, unit = "" }: any) {
     return (
       <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-2.5 shadow-xl">
         <p className="text-xs font-semibold text-white">{label}</p>
-        <p className="mt-0.5 text-xs text-indigo-400 font-bold">
+        <p className="mt-0.5 text-xs text-violet-400 font-bold">
           {payload[0].value} {unit}
         </p>
       </div>

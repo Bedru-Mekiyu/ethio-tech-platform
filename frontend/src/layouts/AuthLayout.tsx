@@ -18,7 +18,7 @@ export function AuthLayout() {
     <div className="relative flex min-h-screen overflow-hidden bg-[#050507] text-[var(--text-primary)]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to main content
       </a>
@@ -40,8 +40,8 @@ export function AuthLayout() {
         <div className="relative z-10">
           <Logo />
           <div className="mt-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
-              <Sparkles size={12} className="text-indigo-400" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
+              <Sparkles size={12} className="text-violet-400" />
               <span>Pan-Ethiopian Engineering Platform</span>
             </div>
             <h1 className="mt-5 max-w-md text-2xl font-bold leading-tight tracking-tight text-white xl:text-3xl">
@@ -62,7 +62,7 @@ export function AuthLayout() {
                 key={label}
                 className="flex items-center gap-3.5 rounded-lg border border-[#27272A] bg-[#141418] p-3.5 transition-colors duration-150 hover:border-zinc-700"
               >
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-violet-500/10 text-violet-400 border border-violet-500/20">
                   <Icon size={15} />
                 </div>
                 <div>

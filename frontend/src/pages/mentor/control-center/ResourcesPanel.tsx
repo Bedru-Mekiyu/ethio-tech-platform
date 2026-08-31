@@ -80,7 +80,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
       case "doc":
         return <FileText size={16} className="text-red-400" />;
       case "video":
-        return <Video size={16} className="text-indigo-400" />;
+        return <Video size={16} className="text-violet-400" />;
       case "github":
         return <Github size={16} className="text-white" />;
       case "slide":

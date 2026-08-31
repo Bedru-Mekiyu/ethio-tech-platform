@@ -145,7 +145,7 @@ export function MentorAvailabilityPage() {
         <CardHeader className="p-0 border-b border-[#27272A] pb-3.5">
           <CardTitle className="flex items-center justify-between text-sm font-semibold text-white">
             <span className="flex items-center gap-2">
-              <CalendarClock size={15} className="text-indigo-400" /> Weekly Availability Slots
+              <CalendarClock size={15} className="text-violet-400" /> Weekly Availability Slots
             </span>
             <Button size="sm" variant="outline" onClick={() => setShowForm(!showForm)} className="h-7 gap-1 text-xs font-medium">
               <Plus size={13} /> Add Slot

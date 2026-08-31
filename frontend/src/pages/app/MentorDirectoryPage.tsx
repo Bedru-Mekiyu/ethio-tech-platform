@@ -34,7 +34,7 @@ export default function MentorDirectoryPage() {
     <div className="space-y-6 text-[var(--text-primary)]">
       <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
         <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
             <Users className="h-4 w-4" />
           </span>
           <div>

@@ -67,7 +67,7 @@ export function SessionFeedbackPage() {
           </p>
           <div className="flex flex-wrap gap-2.5 pt-2">
             <Link to="/app/sessions">
-              <Button size="sm" className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+              <Button size="sm" className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white">
                 Back to Sessions
               </Button>
             </Link>
@@ -84,7 +84,7 @@ export function SessionFeedbackPage() {
 
   return (
     <div className="mx-auto max-w-lg space-y-6 text-[var(--text-primary)]">
-      <Link to="/app/sessions" className="inline-flex items-center gap-1.5 text-xs text-indigo-400 hover:underline">
+      <Link to="/app/sessions" className="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:underline">
         <ArrowLeft size={13} />
         Back to sessions
       </Link>
@@ -108,7 +108,7 @@ export function SessionFeedbackPage() {
             onChange={(e) => setComment(e.target.value)}
             placeholder="What worked well? What could be improved?"
             rows={4}
-            className="w-full rounded-lg border border-[#27272A] bg-[#141418] px-3.5 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 resize-none"
+            className="w-full rounded-lg border border-[#27272A] bg-[#141418] px-3.5 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500/30 resize-none"
           />
         </div>
 
@@ -120,7 +120,7 @@ export function SessionFeedbackPage() {
 
         <Button
           size="sm"
-          className="w-full text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white"
+          className="w-full text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white"
           onClick={() => mutation.mutate()}
           disabled={mutation.isPending}
         >

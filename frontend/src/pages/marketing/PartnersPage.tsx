@@ -213,14 +213,14 @@ export function PartnersPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
           <Sparkles size={13} />
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
           Empowering Ethiopia&apos;s Digital Economy Through{" "}
-          <span className="text-indigo-400">Strategic Alliances</span>
+          <span className="text-violet-400">Strategic Alliances</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
@@ -245,7 +245,7 @@ export function PartnersPage() {
         {/* Stats Strip */}
         <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
           <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
-            <p className="text-xl font-bold text-indigo-400 font-mono md:text-2xl">94%</p>
+            <p className="text-xl font-bold text-violet-400 font-mono md:text-2xl">94%</p>
             <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Placement Rate</p>
             <p className="mt-0.5 text-xs text-zinc-400">Within 90 days</p>
           </Card>
@@ -292,7 +292,7 @@ export function PartnersPage() {
                 onClick={() => setSelectedPillar(framework.id)}
                 className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-medium transition-all ${
                   isSelected
-                    ? "border-indigo-500 bg-indigo-600 text-white"
+                    ? "border-violet-500 bg-violet-600 text-white"
                     : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                 }`}
               >
@@ -314,7 +314,7 @@ export function PartnersPage() {
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <activeFramework.icon size={20} />
                   </div>
                   <div>
@@ -366,7 +366,7 @@ export function PartnersPage() {
 
                 <div className="space-y-3 rounded-lg border border-[#27272A] bg-[#0E0E11] p-4">
                   <h4 className="text-xs font-semibold text-white flex items-center gap-1.5">
-                    <Zap size={14} className="text-indigo-400" />
+                    <Zap size={14} className="text-violet-400" />
                     Ready to collaborate?
                   </h4>
                   <p className="text-xs text-zinc-400 leading-relaxed">
@@ -411,7 +411,7 @@ export function PartnersPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                       <Icon size={16} />
                     </div>
                     <span className="text-xl font-bold font-mono text-zinc-600">{step.step}</span>
@@ -443,7 +443,7 @@ export function PartnersPage() {
               <p className="text-xs leading-relaxed text-zinc-300 italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="mt-4 pt-3 border-t border-[#27272A]">
                 <p className="font-semibold text-white text-xs">{t.author}</p>
-                <p className="text-xs text-indigo-400 font-medium">{t.role}</p>
+                <p className="text-xs text-violet-400 font-medium">{t.role}</p>
                 <p className="text-[11px] text-zinc-500 mt-0.5">{t.organization}</p>
               </div>
             </Card>
@@ -456,7 +456,7 @@ export function PartnersPage() {
         <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 md:p-10 shadow-lg">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
                 <Mail size={13} />
                 <span>Institutional Relations</span>
               </div>
@@ -470,7 +470,7 @@ export function PartnersPage() {
 
               <div className="space-y-3 pt-1">
                 <div className="flex items-center gap-3 text-xs text-zinc-400">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Mail size={14} />
                   </div>
                   <div>
@@ -480,7 +480,7 @@ export function PartnersPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs text-zinc-400">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Phone size={14} />
                   </div>
                   <div>
@@ -511,7 +511,7 @@ export function PartnersPage() {
                   <p className="text-xs leading-relaxed text-zinc-400 max-w-md mx-auto">
                     Thank you, <strong className="text-white">{contactName || "partner"}</strong> from{" "}
                     <strong className="text-white">{orgName || "your organization"}</strong>. Our institutional team has
-                    received your inquiry for <strong className="text-indigo-400">{inquiryType}</strong> and will follow
+                    received your inquiry for <strong className="text-violet-400">{inquiryType}</strong> and will follow
                     up within 24 hours.
                   </p>
                   <Button
@@ -544,7 +544,7 @@ export function PartnersPage() {
                           onClick={() => setInquiryType(f.id)}
                           className={`rounded-md border px-2.5 py-1.5 text-xs font-medium transition ${
                             inquiryType === f.id
-                              ? "border-indigo-500 bg-indigo-600 text-white"
+                              ? "border-violet-500 bg-violet-600 text-white"
                               : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                           }`}
                         >
@@ -678,7 +678,7 @@ export function PartnersPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-violet-400 hover:text-white">
               Contact Leadership
             </Button>
           </Link>

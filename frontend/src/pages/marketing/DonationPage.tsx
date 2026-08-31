@@ -202,13 +202,13 @@ export function DonationPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
           <Heart size={13} />
           <span>Transparent Impact Philanthropy</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-          Empower Ethiopian Talent Through <span className="text-indigo-400">Sovereign Education</span>
+          Empower Ethiopian Talent Through <span className="text-violet-400">Sovereign Education</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
@@ -221,7 +221,7 @@ export function DonationPage() {
             <ShieldCheck size={13} className="text-emerald-400" /> 100% Auditable Milestones
           </span>
           <span className="rounded-md border border-[#27272A] bg-[#0E0E11] px-3 py-1 text-xs text-zinc-400 font-medium flex items-center gap-1.5">
-            <Zap size={13} className="text-indigo-400" /> $50 Sponsors 1 Full Year
+            <Zap size={13} className="text-violet-400" /> $50 Sponsors 1 Full Year
           </span>
           <span className="rounded-md border border-[#27272A] bg-[#0E0E11] px-3 py-1 text-xs text-zinc-400 font-medium flex items-center gap-1.5">
             <Laptop2 size={13} className="text-zinc-300" /> Hardware Donation Drive Active
@@ -250,7 +250,7 @@ export function DonationPage() {
               onClick={() => setFrequency("one-time")}
               className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                 frequency === "one-time"
-                  ? "border border-indigo-500 bg-indigo-600 text-white"
+                  ? "border border-violet-500 bg-violet-600 text-white"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -261,7 +261,7 @@ export function DonationPage() {
               onClick={() => setFrequency("monthly")}
               className={`rounded-md px-3 py-1 text-xs font-medium flex items-center gap-1.5 transition ${
                 frequency === "monthly"
-                  ? "border border-indigo-500 bg-indigo-600 text-white"
+                  ? "border border-violet-500 bg-violet-600 text-white"
                   : "text-zinc-400 hover:text-white"
               }`}
             >
@@ -281,7 +281,7 @@ export function DonationPage() {
                   onClick={() => setCurrency(c)}
                   className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
                     currency === c
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -307,7 +307,7 @@ export function DonationPage() {
                 }}
                 className={`relative cursor-pointer flex flex-col justify-between p-5 transition-all duration-150 rounded-xl ${
                   isSelected
-                    ? "border-indigo-500 bg-[#141418] shadow-md shadow-indigo-500/10"
+                    ? "border-violet-500 bg-[#141418] shadow-md shadow-violet-500/10"
                     : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
                 }`}
               >
@@ -316,12 +316,12 @@ export function DonationPage() {
                     <Badge variant={isSelected ? "default" : "cyan"} size="sm">
                       {tier.highlight}
                     </Badge>
-                    {isSelected && <CheckCircle2 size={16} className="text-indigo-400" />}
+                    {isSelected && <CheckCircle2 size={16} className="text-violet-400" />}
                   </div>
 
                   <div>
                     <h3 className="text-base font-bold text-white">{tier.title}</h3>
-                    <p className="text-[11px] text-indigo-400 font-medium mt-0.5">{tier.tagline}</p>
+                    <p className="text-[11px] text-violet-400 font-medium mt-0.5">{tier.tagline}</p>
                   </div>
 
                   <div className="py-1">
@@ -363,7 +363,7 @@ export function DonationPage() {
                 <h3 className="text-xl font-bold text-white">Contribution Summary</h3>
                 <p className="text-xs text-zinc-400 mt-0.5">
                   You are sponsoring{" "}
-                  <strong className="text-indigo-400">
+                  <strong className="text-violet-400">
                     {frequency === "monthly" ? "monthly ongoing" : "one-time"}
                   </strong>{" "}
                   technical scholarships with 100% direct allocation.
@@ -417,7 +417,7 @@ export function DonationPage() {
                   type="checkbox"
                   checked={isAnonymous}
                   onChange={(e) => setIsAnonymous(e.target.checked)}
-                  className="h-4 w-4 rounded border-[#27272A] bg-[#0E0E11] text-indigo-600"
+                  className="h-4 w-4 rounded border-[#27272A] bg-[#0E0E11] text-violet-600"
                 />
                 <span>Make my donation anonymous on the public Wall of Gratitude</span>
               </label>
@@ -432,7 +432,7 @@ export function DonationPage() {
                   onClick={() => setPaymentTab("local")}
                   className={`rounded-md py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "local"
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -443,7 +443,7 @@ export function DonationPage() {
                   onClick={() => setPaymentTab("international")}
                   className={`rounded-md py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "international"
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -454,7 +454,7 @@ export function DonationPage() {
                   onClick={() => setPaymentTab("crypto")}
                   className={`rounded-md py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "crypto"
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -465,7 +465,7 @@ export function DonationPage() {
                   onClick={() => setPaymentTab("wire")}
                   className={`rounded-md py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "wire"
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "text-zinc-400 hover:text-white"
                   }`}
                 >
@@ -497,18 +497,18 @@ export function DonationPage() {
                     <div className="space-y-3 text-xs">
                       <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 space-y-1.5">
                         <p className="font-semibold text-white text-xs flex items-center gap-1.5">
-                          <Smartphone className="text-indigo-400 inline" size={14} /> Telebirr / CBE Birr Quick Rails
+                          <Smartphone className="text-violet-400 inline" size={14} /> Telebirr / CBE Birr Quick Rails
                         </p>
                         <p className="text-zinc-400 text-[11px]">
                           Send directly via Telebirr Merchant Code or CBE Birr Account:
                         </p>
                         <div className="font-mono bg-[#141418] p-2 rounded border border-[#27272A] text-zinc-200 text-[11px] space-y-0.5">
                           <p>
-                            Telebirr Merchant ID: <strong className="text-indigo-400">884920</strong> (EthioTech
+                            Telebirr Merchant ID: <strong className="text-violet-400">884920</strong> (EthioTech
                             Foundation)
                           </p>
                           <p>
-                            CBE Birr / Account: <strong className="text-indigo-400">1000482910482</strong> (EthioTech
+                            CBE Birr / Account: <strong className="text-violet-400">1000482910482</strong> (EthioTech
                             Education)
                           </p>
                         </div>
@@ -545,7 +545,7 @@ export function DonationPage() {
                     <div className="space-y-3 text-xs">
                       <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 space-y-1.5">
                         <p className="font-semibold text-white text-xs flex items-center gap-1.5">
-                          <CreditCard className="text-indigo-400 inline" size={14} /> Credit / Debit Card (Stripe /
+                          <CreditCard className="text-violet-400 inline" size={14} /> Credit / Debit Card (Stripe /
                           PayPal)
                         </p>
                         <p className="text-zinc-400 text-[11px]">
@@ -585,7 +585,7 @@ export function DonationPage() {
                     <div className="space-y-3 text-xs">
                       <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 space-y-1.5">
                         <p className="font-semibold text-white text-xs flex items-center gap-1.5">
-                          <CreditCard className="text-indigo-400 inline" size={14} /> Non-Profit Treasury (USDC / USDT /
+                          <CreditCard className="text-violet-400 inline" size={14} /> Non-Profit Treasury (USDC / USDT /
                           ETH)
                         </p>
                         <p className="text-zinc-400 text-[11px]">
@@ -596,7 +596,7 @@ export function DonationPage() {
                           <button
                             type="button"
                             onClick={() => handleCopyCrypto("0x742d35Cc6634C0532925a3b844Bc454e4438f44e")}
-                            className="ml-2 text-indigo-400 hover:text-white"
+                            className="ml-2 text-violet-400 hover:text-white"
                           >
                             {copiedAddress ? (
                               <CheckCircle2 size={14} className="text-emerald-400" />
@@ -632,16 +632,16 @@ export function DonationPage() {
                         </p>
                         <div className="font-mono bg-[#141418] p-2.5 rounded border border-[#27272A] text-zinc-200 space-y-1 text-[11px] leading-relaxed">
                           <p>
-                            Bank: <strong className="text-indigo-400">Commercial Bank of Ethiopia (CBE)</strong>
+                            Bank: <strong className="text-violet-400">Commercial Bank of Ethiopia (CBE)</strong>
                           </p>
                           <p>
-                            SWIFT Code: <strong className="text-indigo-400">CBETETAA</strong>
+                            SWIFT Code: <strong className="text-violet-400">CBETETAA</strong>
                           </p>
                           <p>
                             Beneficiary: <strong className="text-white">EthioTech Digital Platform Foundation</strong>
                           </p>
                           <p>
-                            Account Number (USD): <strong className="text-indigo-400">1000-8849-2910</strong>
+                            Account Number (USD): <strong className="text-violet-400">1000-8849-2910</strong>
                           </p>
                         </div>
                       </div>
@@ -679,7 +679,7 @@ export function DonationPage() {
           {ACCEPTED_HARDWARE.map((item, idx) => (
             <Card key={idx} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
               <div>
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                   <Laptop2 size={18} />
                 </div>
                 <h3 className="mt-3.5 font-semibold text-white text-sm">{item.item}</h3>
@@ -729,7 +729,7 @@ export function DonationPage() {
               </h4>
               <div className="grid grid-cols-2 gap-2.5">
                 <div className="p-3 rounded-lg bg-[#0E0E11] border border-[#27272A] text-center">
-                  <p className="text-xl font-bold text-indigo-400 font-mono">320+</p>
+                  <p className="text-xl font-bold text-violet-400 font-mono">320+</p>
                   <p className="text-[9px] uppercase text-zinc-500 font-semibold mt-0.5">Laptops Deployed</p>
                 </div>
                 <div className="p-3 rounded-lg bg-[#0E0E11] border border-[#27272A] text-center">
@@ -885,7 +885,7 @@ export function DonationPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-violet-400 hover:text-white">
               Contact Grants Committee
             </Button>
           </Link>

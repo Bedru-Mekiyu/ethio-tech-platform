@@ -142,7 +142,7 @@ function StatCard({ label, count, active, onClick }: { label: string; count: num
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
       className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 ${
         active
-          ? "border-indigo-500 bg-indigo-500/10 shadow-sm"
+          ? "border-violet-500 bg-violet-500/10 shadow-sm"
           : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
       }`}
     >
@@ -923,9 +923,9 @@ export function AdminModerationPage() {
 
       {/* Bulk Actions Banner */}
       {selectedIds.size > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-lg border border-indigo-500/40 bg-indigo-500/10 px-4 py-2.5">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-lg border border-violet-500/40 bg-violet-500/10 px-4 py-2.5">
           <div className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-violet-600 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
             <span className="text-xs font-semibold text-white">

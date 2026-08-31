@@ -218,7 +218,7 @@ export function MentorDashboardPage() {
             <div className="flex items-center gap-2">
               <Badge
                 variant="default"
-                className="text-[11px] gap-1 font-medium bg-indigo-500/10 text-indigo-400 border-indigo-500/20"
+                className="text-[11px] gap-1 font-medium bg-violet-500/10 text-violet-400 border-violet-500/20"
               >
                 <Star size={12} className="text-amber-400" /> Lead Mentor
               </Badge>
@@ -298,11 +298,11 @@ export function MentorDashboardPage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Sessions Delivered</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
               <Video size={15} />
             </div>
           </div>
-          <p className="mt-2 text-xl font-bold text-indigo-400">{dashboard?.mentor?.totalSessions ?? 18}</p>
+          <p className="mt-2 text-xl font-bold text-violet-400">{dashboard?.mentor?.totalSessions ?? 18}</p>
           <p className="mt-0.5 text-xs text-zinc-400">Live classrooms delivered</p>
         </Card>
       </div>
@@ -319,7 +319,7 @@ export function MentorDashboardPage() {
               </div>
               <Link
                 to="/mentor/sessions"
-                className="inline-flex items-center gap-1 text-xs font-medium text-indigo-400 hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-medium text-violet-400 hover:underline"
               >
                 Full Calendar <ArrowRight size={12} />
               </Link>
@@ -398,7 +398,7 @@ export function MentorDashboardPage() {
                 <h2 className="text-sm font-semibold text-white">Cohort Retention & Impact</h2>
                 <p className="text-xs text-zinc-400">Measured over the last 30 active days</p>
               </div>
-              <Link to="/mentor/analytics" className="text-xs font-medium text-indigo-400 hover:underline">
+              <Link to="/mentor/analytics" className="text-xs font-medium text-violet-400 hover:underline">
                 Detailed Analytics →
               </Link>
             </div>
@@ -435,7 +435,7 @@ export function MentorDashboardPage() {
                 <h2 className="text-sm font-semibold text-white">Student Submissions Queue</h2>
                 <p className="text-xs text-zinc-400">{pendingSubmissions.length} projects pending code review</p>
               </div>
-              <Link to="/mentor/reviews" className="text-xs font-medium text-indigo-400 hover:underline">
+              <Link to="/mentor/reviews" className="text-xs font-medium text-violet-400 hover:underline">
                 View All →
               </Link>
             </div>
@@ -454,7 +454,7 @@ export function MentorDashboardPage() {
                         </span>
                         <span className="text-[10px] text-zinc-500 font-mono truncate">{sub.student?.email}</span>
                       </div>
-                      <p className="text-xs font-medium text-indigo-400 truncate">
+                      <p className="text-xs font-medium text-violet-400 truncate">
                         {sub.project?.title ?? "Track Project Submission"}
                       </p>
                       <p className="text-[11px] text-zinc-400">
@@ -492,7 +492,7 @@ export function MentorDashboardPage() {
                 className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <Users size={14} className="text-indigo-400" />
+                  <Users size={14} className="text-violet-400" />
                   <span>My Students Directory</span>
                 </div>
                 <ChevronRight size={13} className="text-zinc-500" />

@@ -444,7 +444,7 @@ export function AdminContentPage() {
               onClick={() => setMobileTab("tracks")}
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "tracks" ? "bg-indigo-600 text-white" : "text-zinc-400"
+                mobileTab === "tracks" ? "bg-violet-600 text-white" : "text-zinc-400"
               )}
             >
               Tracks
@@ -454,7 +454,7 @@ export function AdminContentPage() {
               onClick={() => setMobileTab("tree")}
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "tree" ? "bg-indigo-600 text-white" : "text-zinc-400"
+                mobileTab === "tree" ? "bg-violet-600 text-white" : "text-zinc-400"
               )}
             >
               Curriculum
@@ -464,7 +464,7 @@ export function AdminContentPage() {
               onClick={() => setMobileTab("editor")}
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "editor" ? "bg-indigo-600 text-white" : "text-zinc-400"
+                mobileTab === "editor" ? "bg-violet-600 text-white" : "text-zinc-400"
               )}
             >
               Editor

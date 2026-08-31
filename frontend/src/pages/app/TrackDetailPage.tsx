@@ -118,7 +118,7 @@ export function TrackDetailPage() {
       <div>
         <Link
           to="/app/tracks"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-violet-400 hover:underline"
         >
           <ArrowLeft size={13} />
           Back to all tracks
@@ -184,14 +184,14 @@ export function TrackDetailPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
-                <Clock size={10} className="text-indigo-400" />
+                <Clock size={10} className="text-violet-400" />
                 Duration
               </p>
               <p className="text-sm font-bold text-white">{data.estimatedWeeks ?? 12} Weeks</p>
             </div>
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
-                <Video size={10} className="text-indigo-400" />
+                <Video size={10} className="text-violet-400" />
                 Live Sessions
               </p>
               <p className="text-sm font-bold text-white">{data.liveSessionsCount ?? 20}</p>
@@ -205,14 +205,14 @@ export function TrackDetailPage() {
             </div>
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
-                <Layers size={10} className="text-indigo-400" />
+                <Layers size={10} className="text-violet-400" />
                 Modules
               </p>
               <p className="text-sm font-bold text-white">{modules.length}</p>
             </div>
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
-                <BookOpen size={10} className="text-indigo-400" />
+                <BookOpen size={10} className="text-violet-400" />
                 Lessons
               </p>
               <p className="text-sm font-bold text-white">{lessonCount}</p>
@@ -247,7 +247,7 @@ export function TrackDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
                 active
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-violet-600 text-white"
                   : "text-zinc-400 hover:bg-[#141418] hover:text-white"
               )}
             >
@@ -284,7 +284,7 @@ export function TrackDetailPage() {
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-violet-400">
                             Module {mIdx + 1}
                           </span>
                           <h3 className="text-base font-bold text-slate-100 mt-1">{module.title}</h3>
@@ -305,7 +305,7 @@ export function TrackDetailPage() {
                             className="group/les flex items-center justify-between rounded-xl border border-slate-800/80 bg-slate-900/60 px-4 py-3 transition hover:border-slate-700 hover:bg-slate-900"
                           >
                             <div className="flex items-center gap-3">
-                              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-950 text-xs font-mono text-slate-400 group-hover/les:text-indigo-400">
+                              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-950 text-xs font-mono text-slate-400 group-hover/les:text-violet-400">
                                 {mIdx + 1}.{lIdx + 1}
                               </span>
                               <div>
@@ -326,7 +326,7 @@ export function TrackDetailPage() {
                                   {lesson.durationMinutes} min
                                 </span>
                               )}
-                              <span className="inline-flex items-center gap-1 rounded-lg bg-indigo-500/10 px-2.5 py-1 text-xs font-semibold text-indigo-400">
+                              <span className="inline-flex items-center gap-1 rounded-lg bg-violet-500/10 px-2.5 py-1 text-xs font-semibold text-violet-400">
                                 +{lesson.xpReward ?? 50} XP
                                 <ArrowRight size={13} />
                               </span>
@@ -370,12 +370,12 @@ export function TrackDetailPage() {
                               {capstone.difficulty}
                             </Badge>
                             <span className="text-xs text-slate-400 flex items-center gap-1">
-                              <Clock size={12} className="text-indigo-400" />
+                              <Clock size={12} className="text-violet-400" />
                               ~{capstone.estimatedHours} build hours
                             </span>
                           </div>
                           <h3 className="text-lg font-bold text-slate-100 mt-2">{capstone.title}</h3>
-                          <p className="text-xs text-indigo-400 font-medium mt-0.5">{capstone.tagline}</p>
+                          <p className="text-xs text-violet-400 font-medium mt-0.5">{capstone.tagline}</p>
                         </div>
 
                         <Button
@@ -395,13 +395,13 @@ export function TrackDetailPage() {
                       {/* Architecture highlights */}
                       <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4 space-y-2">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-slate-200 flex items-center gap-1.5">
-                          <Cpu size={14} className="text-indigo-400" />
+                          <Cpu size={14} className="text-violet-400" />
                           Key Architectural Highlights
                         </h4>
                         <ul className="space-y-1.5">
                           {capstone.architectureHighlights.map((hl, idx) => (
                             <li key={idx} className="text-xs text-slate-400 flex items-start gap-2">
-                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-violet-400 flex-shrink-0" />
                               <span>{hl}</span>
                             </li>
                           ))}
@@ -416,7 +416,7 @@ export function TrackDetailPage() {
                             <button
                               type="button"
                               onClick={() => handleCopySnippet(capstone.previewSnippet!.code, capstone.id)}
-                              className="inline-flex items-center gap-1 text-indigo-400 hover:underline"
+                              className="inline-flex items-center gap-1 text-violet-400 hover:underline"
                             >
                               {copiedCodeId === capstone.id ? <Check size={13} /> : <Copy size={13} />}
                               {copiedCodeId === capstone.id ? "Copied" : "Copy Code"}
@@ -466,7 +466,7 @@ export function TrackDetailPage() {
 
               {/* Tooling chips */}
               <div className="space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-violet-400 flex items-center gap-1.5">
                   <Layers3 size={14} />
                   Tooling & Framework Ecosystem
                 </h3>
@@ -498,7 +498,7 @@ export function TrackDetailPage() {
                       <ul className="space-y-1.5">
                         {group.skills.map((skill) => (
                           <li key={skill} className="text-xs text-slate-400 flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
                             <span>{skill}</span>
                           </li>
                         ))}
@@ -525,7 +525,7 @@ export function TrackDetailPage() {
                 <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-5 space-y-2">
                   <div className="flex items-center justify-between">
                     <Badge variant="success">{data.marketDemand.rating} Demand Rating</Badge>
-                    <span className="text-xs font-semibold text-indigo-400">{data.marketDemand.growthMetric}</span>
+                    <span className="text-xs font-semibold text-violet-400">{data.marketDemand.growthMetric}</span>
                   </div>
                   <p className="text-sm text-slate-200 font-medium">{data.marketDemand.summary}</p>
                   <p className="text-xs text-slate-400">
@@ -587,7 +587,7 @@ export function TrackDetailPage() {
                     key={req.skill}
                     className="flex items-start gap-4 rounded-xl border border-slate-800 bg-slate-950/40 p-5"
                   >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 flex-shrink-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 flex-shrink-0">
                       <CheckCircle2 size={18} />
                     </div>
                     <div>
@@ -613,7 +613,7 @@ export function TrackDetailPage() {
           {/* Progress & Snapshot Widget */}
           <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-5">
             <div className="flex items-center gap-2 text-slate-400">
-              <Layers size={15} className="text-indigo-400" />
+              <Layers size={15} className="text-violet-400" />
               <span className="text-[10px] font-bold uppercase tracking-wider">Track Milestone Progress</span>
             </div>
 
@@ -636,7 +636,7 @@ export function TrackDetailPage() {
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-slate-400">Capstone Checkpoints</span>
-                <span className="font-semibold text-indigo-400">{data.capstones?.length ?? 2} Projects</span>
+                <span className="font-semibold text-violet-400">{data.capstones?.length ?? 2} Projects</span>
               </div>
             </div>
 
@@ -662,7 +662,7 @@ export function TrackDetailPage() {
           {/* Mentorship Support Card */}
           <Card className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400">
                 <GraduationCap size={20} />
               </div>
               <div>

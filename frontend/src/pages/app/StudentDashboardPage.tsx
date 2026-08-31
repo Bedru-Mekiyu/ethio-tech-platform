@@ -165,7 +165,7 @@ export function StudentDashboardPage() {
 
           <Link to="/leaderboard">
             <div className="flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#0E0E11] px-3 py-1.5 hover:border-zinc-700 transition-colors">
-              <Trophy className="text-indigo-400" size={14} />
+              <Trophy className="text-violet-400" size={14} />
               <span className="text-xs font-semibold text-white">#{data?.leaderboardPosition ?? "12"}</span>
               <span className="text-[11px] text-zinc-500">Rank</span>
             </div>
@@ -248,7 +248,7 @@ export function StudentDashboardPage() {
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                     Active Track
                   </span>
                   <Badge variant="default" size="sm">
@@ -273,7 +273,7 @@ export function StudentDashboardPage() {
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-semibold text-indigo-400 uppercase tracking-wider">Next Up</span>
+                    <span className="text-[10px] font-semibold text-violet-400 uppercase tracking-wider">Next Up</span>
                     <span className="text-[11px] text-zinc-500">· ~20 mins</span>
                   </div>
                   <p className="text-xs font-semibold text-white truncate">
@@ -309,7 +309,7 @@ export function StudentDashboardPage() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Building2 size={13} />
                   </div>
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
@@ -414,10 +414,10 @@ export function StudentDashboardPage() {
           <div className="grid gap-3 sm:grid-cols-3">
             <Link to="/app/workspace" className="group">
               <Card className="h-full rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 transition-all hover:border-zinc-700">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                   <Code2 size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-violet-400 transition-colors">
                   Coding Workspace
                 </h3>
                 <p className="mt-0.5 text-[11px] text-zinc-400">
@@ -428,10 +428,10 @@ export function StudentDashboardPage() {
 
             <Link to="/app/projects" className="group">
               <Card className="h-full rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 transition-all hover:border-zinc-700">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                   <BookOpen size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-violet-400 transition-colors">
                   Project Portfolio
                 </h3>
                 <p className="mt-0.5 text-[11px] text-zinc-400">
@@ -442,10 +442,10 @@ export function StudentDashboardPage() {
 
             <Link to="/app/progress" className="group">
               <Card className="h-full rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 transition-all hover:border-zinc-700">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                   <Trophy size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-white group-hover:text-violet-400 transition-colors">
                   Progress & Badges
                 </h3>
                 <p className="mt-0.5 text-[11px] text-zinc-400">
@@ -505,7 +505,7 @@ export function StudentDashboardPage() {
           <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <Target size={14} className="text-indigo-400" />
+                <Target size={14} className="text-violet-400" />
                 <h3 className="text-xs font-semibold text-white">Daily Challenge</h3>
               </div>
               {dailyChallengeCompleted ? (
@@ -547,12 +547,12 @@ export function StudentDashboardPage() {
           <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <Users size={14} className="text-indigo-400" />
+                <Users size={14} className="text-violet-400" />
                 <h3 className="text-xs font-semibold text-white">Squad Activity</h3>
               </div>
               <Link
                 to={squadPath || "/app/squads"}
-                className="text-xs text-indigo-400 hover:underline flex items-center gap-1"
+                className="text-xs text-violet-400 hover:underline flex items-center gap-1"
               >
                 Open Hub <ArrowRight size={11} />
               </Link>
@@ -572,7 +572,7 @@ export function StudentDashboardPage() {
               </p>
               <div className="mt-2.5 flex items-center justify-between border-t border-[#27272A] pt-2 text-xs text-zinc-400">
                 <span>4 active discussions</span>
-                <Link to={squadPath || "/app/squads"} className="text-indigo-400 hover:text-white transition-colors">
+                <Link to={squadPath || "/app/squads"} className="text-violet-400 hover:text-white transition-colors">
                   Join Chat →
                 </Link>
               </div>

@@ -186,7 +186,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           cn(
             "group relative flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium transition-colors duration-150 select-none border border-transparent",
             isActive
-              ? "bg-indigo-500/10 text-indigo-400 font-semibold border-indigo-500/25 shadow-xs"
+              ? "bg-violet-500/10 text-violet-400 font-semibold border-violet-500/25 shadow-xs"
               : "text-zinc-400 hover:bg-[#141418] hover:text-white",
           )
         }
@@ -196,14 +196,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             {isActive && (
               <motion.div
                 layoutId={isMobile ? "active-mobile-drawer-indicator" : "active-sidebar-indicator"}
-                className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-indigo-500"
+                className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-violet-500"
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}
             <span
               className={cn(
                 "transition-transform duration-150",
-                isActive ? "text-indigo-400" : "text-zinc-500 group-hover:text-white",
+                isActive ? "text-violet-400" : "text-zinc-500 group-hover:text-white",
               )}
             >
               {item.icon}
@@ -218,7 +218,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     <div className="flex min-h-screen bg-[#050507]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to main content
       </a>
@@ -316,7 +316,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:inline">
                   Rank
                 </span>
-                <span className="text-xs font-bold text-indigo-400">{getRankTitle(user?.level ?? 1)}</span>
+                <span className="text-xs font-bold text-violet-400">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
             )}

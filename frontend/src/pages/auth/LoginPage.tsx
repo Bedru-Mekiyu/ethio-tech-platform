@@ -89,7 +89,7 @@ export function LoginPage() {
               className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-zinc-500"
             />
             <Input
-              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-indigo-500"
+              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
@@ -107,7 +107,7 @@ export function LoginPage() {
             />
             <PasswordInput
               wrapperClassName="w-full"
-              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-indigo-500"
+              className="pl-10 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500 focus-visible:ring-violet-500"
               placeholder="••••••••"
               autoComplete="current-password"
               {...fieldAriaProps("password", errors.password?.message)}
@@ -153,7 +153,7 @@ export function LoginPage() {
           New to EthioTech?{" "}
           <Link
             to="/register"
-            className="font-medium text-indigo-400 transition hover:text-indigo-300 ml-1 inline-flex items-center gap-1"
+            className="font-medium text-violet-400 transition hover:text-violet-300 ml-1 inline-flex items-center gap-1"
           >
             Create free account
             <ArrowRight size={12} />

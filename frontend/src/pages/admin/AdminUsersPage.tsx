@@ -709,7 +709,7 @@ export function AdminUsersPage() {
         </div>
 
         <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-indigo-400 font-semibold">Students</p>
+          <p className="text-[10px] uppercase tracking-wider text-violet-400 font-semibold">Students</p>
           <p className="mt-1 text-xl font-bold text-white">{studentCount.toLocaleString()}</p>
           <p className="text-[11px] text-zinc-400 mt-0.5">Learners</p>
         </div>

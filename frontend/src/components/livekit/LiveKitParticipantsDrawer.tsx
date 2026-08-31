@@ -56,7 +56,7 @@ export function LiveKitParticipantsDrawer({
       {/* Header */}
       <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
         <div className="flex items-center gap-2.5">
-          <div className="rounded-lg bg-indigo-500/20 p-2 text-indigo-400">
+          <div className="rounded-lg bg-violet-500/20 p-2 text-violet-400">
             <Users className="h-4 w-4" />
           </div>
           <div>
@@ -82,7 +82,7 @@ export function LiveKitParticipantsDrawer({
             placeholder="Search participants..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-slate-900/80 pl-9 pr-4 py-2 text-xs text-white placeholder:text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-xl border border-white/10 bg-slate-900/80 pl-9 pr-4 py-2 text-xs text-white placeholder:text-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
           />
         </div>
       </div>
@@ -117,7 +117,7 @@ export function LiveKitParticipantsDrawer({
                 <div
                   className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-semibold text-xs text-white shadow-sm ${
                     isParticipantHost
-                      ? "bg-gradient-to-tr from-indigo-600 to-violet-500 ring-1 ring-indigo-400/30"
+                      ? "bg-gradient-to-tr from-violet-600 to-violet-500 ring-1 ring-violet-400/30"
                       : "bg-gradient-to-tr from-slate-700 to-slate-800 text-slate-200"
                   }`}
                 >
@@ -135,7 +135,7 @@ export function LiveKitParticipantsDrawer({
                   </div>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     {isParticipantHost ? (
-                      <span className="inline-flex items-center gap-0.5 rounded bg-indigo-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-indigo-300 uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-0.5 rounded bg-violet-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-violet-300 uppercase tracking-wider">
                         <Shield className="h-2.5 w-2.5" /> Mentor
                       </span>
                     ) : (

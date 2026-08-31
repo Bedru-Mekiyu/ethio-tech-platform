@@ -111,7 +111,7 @@ export function ResetPasswordPage() {
 
       {/* Icon + Header */}
       <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-500/20 bg-indigo-500/10 text-indigo-400">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-violet-500/20 bg-violet-500/10 text-violet-400">
           <ShieldCheck size={16} />
         </div>
         <h1 className="text-xl font-bold tracking-tight text-white pt-2">Set New Password</h1>

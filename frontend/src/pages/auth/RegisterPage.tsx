@@ -83,7 +83,7 @@ export function RegisterPage() {
   return (
     <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-medium text-indigo-400">
+        <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-[11px] font-medium text-violet-400">
           <Sparkles size={11} />
           <span>Student Registration</span>
         </div>
@@ -221,7 +221,7 @@ export function RegisterPage() {
       <motion.div variants={fadeUp} custom={2} className="mt-5 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
         <p className="text-xs text-zinc-400">
           Want to mentor students?{" "}
-          <Link to="/mentor-recruitment" className="font-medium text-indigo-400 hover:text-indigo-300 ml-1">
+          <Link to="/mentor-recruitment" className="font-medium text-violet-400 hover:text-violet-300 ml-1">
             Apply as Mentor →
           </Link>
         </p>
@@ -232,7 +232,7 @@ export function RegisterPage() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-medium text-indigo-400 transition hover:text-indigo-300 ml-1 inline-flex items-center gap-1"
+            className="font-medium text-violet-400 transition hover:text-violet-300 ml-1 inline-flex items-center gap-1"
           >
             Sign in
             <ArrowRight size={12} />

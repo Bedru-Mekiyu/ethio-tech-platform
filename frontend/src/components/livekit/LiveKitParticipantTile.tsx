@@ -176,7 +176,7 @@ export function LiveKitParticipantTile({
             className={`relative flex items-center justify-center rounded-2xl shadow-xl transition-transform duration-300 ${
               isSpeaking ? "scale-105 ring-4 ring-emerald-500/40" : ""
             } ${aspectRatio === "video" ? "h-20 w-20 md:h-24 md:w-24 text-2xl md:text-3xl" : "h-16 w-16 text-xl"} font-bold text-white bg-gradient-to-tr ${
-              isHost ? "from-indigo-600 to-violet-500" : "from-emerald-600 to-teal-500"
+              isHost ? "from-violet-600 to-violet-500" : "from-emerald-600 to-teal-500"
             }`}
           >
             {avatarUrl ? (
@@ -210,7 +210,7 @@ export function LiveKitParticipantTile({
 
         {/* Screen Share Pill */}
         {isScreenShare && (
-          <div className="flex items-center gap-1.5 rounded-full bg-indigo-500/90 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg">
+          <div className="flex items-center gap-1.5 rounded-full bg-violet-500/90 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg">
             <Monitor className="h-3.5 w-3.5" />
             <span>Screen Share</span>
           </div>
@@ -232,7 +232,7 @@ export function LiveKitParticipantTile({
               }}
               className={`pointer-events-auto rounded-lg p-1.5 backdrop-blur-md transition-all ${
                 isPinned
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-violet-600 text-white"
                   : "bg-black/50 text-slate-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
               }`}
               title={isPinned ? "Unpin participant" : "Pin participant"}
@@ -248,7 +248,7 @@ export function LiveKitParticipantTile({
         <div className="flex items-center gap-2 rounded-xl bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs text-white max-w-[80%] border border-white/5">
           <span className="truncate font-medium">{displayName} {isLocal && "(You)"}</span>
           {isHost && (
-            <span className="rounded-md bg-indigo-500/30 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-300 uppercase tracking-wider">
+            <span className="rounded-md bg-violet-500/30 px-1.5 py-0.5 text-[10px] font-semibold text-violet-300 uppercase tracking-wider">
               {role === "admin" ? "Admin" : "Mentor"}
             </span>
           )}

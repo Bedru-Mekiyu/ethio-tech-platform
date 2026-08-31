@@ -112,7 +112,7 @@ function ScheduleRow({
               <div
                 className={cn(
                   "h-full rounded-full",
-                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-indigo-500",
+                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-violet-500",
                 )}
                 style={{ width: `${capacityPct}%` }}
               />
@@ -270,7 +270,7 @@ export function SessionHistoryPage() {
               className={cn(
                 "rounded-md px-3.5 py-1 text-xs font-medium transition",
                 tab === t
-                  ? "bg-indigo-600 text-white shadow-sm"
+                  ? "bg-violet-600 text-white shadow-sm"
                   : "text-zinc-400 hover:text-white",
               )}
             >

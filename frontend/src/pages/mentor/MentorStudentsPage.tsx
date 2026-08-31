@@ -97,8 +97,8 @@ function StatCard({
       : tone === "warning"
         ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
         : tone === "secondary"
-          ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
-          : "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20";
+          ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
+          : "bg-violet-500/10 text-violet-400 border border-violet-500/20";
 
   return (
     <Card className="border border-[#27272A] bg-[#0E0E11] p-4">
@@ -363,7 +363,7 @@ export function MentorStudentsPage() {
               Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20 shrink-0">
             <Users size={18} aria-hidden="true" />
           </div>
         </div>
@@ -425,7 +425,7 @@ export function MentorStudentsPage() {
                 className={cn(
                   "rounded px-2.5 py-1 text-[11px] capitalize transition font-medium",
                   filterEngagement === f
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-violet-600 text-white"
                     : "border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                 )}
               >
@@ -446,7 +446,7 @@ export function MentorStudentsPage() {
                 className={cn(
                   "rounded px-2.5 py-1 text-[11px] transition font-medium",
                   sortBy === opt.value
-                    ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30"
+                    ? "bg-violet-500/20 text-violet-400 border border-violet-500/30"
                     : "border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                 )}
               >

@@ -76,10 +76,12 @@ describe("HomePage Component Suite", () => {
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Pan-Ethiopian Engineering Platform/i)).toBeDefined();
+    expect(screen.getByText(/Empowering youth with senior engineering mentors/i)).toBeDefined();
     expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Try Live Demo/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Apply as Mentor/i })).toBeDefined();
+    expect(screen.getByRole("button", { name: /Start Coding Free/i })).toBeDefined();
+    
+    // Check for the LivePlatformPulse text (just one of the fake events to ensure it renders)
+    expect(screen.getByText(/Addis Ababa Hub started a live session/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {

@@ -92,7 +92,7 @@ export function LiveKitHeader({
       <div className="flex items-center gap-2 md:gap-3">
         {/* Participant Count */}
         <div className="flex items-center gap-1.5 rounded-xl bg-slate-900/80 border border-white/5 px-3 py-1.5 text-xs font-medium text-slate-300">
-          <Users className="h-3.5 w-3.5 text-indigo-400" />
+          <Users className="h-3.5 w-3.5 text-violet-400" />
           <span>{participantCount}</span>
         </div>
 
@@ -102,7 +102,7 @@ export function LiveKitHeader({
             type="button"
             onClick={() => onChangeLayout("grid")}
             className={`rounded-lg p-1.5 transition-colors ${
-              layout === "grid" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+              layout === "grid" ? "bg-violet-600 text-white" : "text-slate-400 hover:text-white"
             }`}
             title="Grid View"
           >
@@ -112,7 +112,7 @@ export function LiveKitHeader({
             type="button"
             onClick={() => onChangeLayout("speaker")}
             className={`rounded-lg p-1.5 transition-colors ${
-              layout === "speaker" ? "bg-indigo-600 text-white" : "text-slate-400 hover:text-white"
+              layout === "speaker" ? "bg-violet-600 text-white" : "text-slate-400 hover:text-white"
             }`}
             title="Speaker / Spotlight View"
           >

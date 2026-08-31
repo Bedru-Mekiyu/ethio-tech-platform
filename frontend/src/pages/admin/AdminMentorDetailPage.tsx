@@ -467,7 +467,7 @@ Ethio-Tech Mentorship Team`;
                       className="h-12 w-12 rounded-xl border border-[#27272A] bg-[#141418] object-cover"
                     />
                   ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-xl font-bold text-indigo-400">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-violet-500/30 bg-violet-500/10 text-xl font-bold text-violet-400">
                       {app.fullName.charAt(0).toUpperCase()}
                     </div>
                   )}
@@ -494,7 +494,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:underline bg-indigo-500/5 px-2.5 py-1 rounded-md border border-indigo-500/20"
+                      className="inline-flex items-center gap-1 text-xs text-violet-400 hover:underline bg-violet-500/5 px-2.5 py-1 rounded-md border border-violet-500/20"
                     >
                       LinkedIn <ExternalLink size={11} />
                     </a>
@@ -504,7 +504,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-indigo-400 hover:underline bg-indigo-500/5 px-2.5 py-1 rounded-md border border-indigo-500/20"
+                      className="inline-flex items-center gap-1 text-xs text-violet-400 hover:underline bg-violet-500/5 px-2.5 py-1 rounded-md border border-violet-500/20"
                     >
                       Portfolio <ExternalLink size={11} />
                     </a>

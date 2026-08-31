@@ -276,7 +276,7 @@ export function AdminPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-medium text-indigo-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-[11px] font-medium text-violet-400">
                 <Radio size={11} className="animate-pulse text-emerald-400" />
                 Command Center
               </span>
@@ -300,7 +300,7 @@ export function AdminPage() {
               disabled={isFetching}
               className="text-xs text-zinc-300 hover:text-white"
             >
-              <RefreshCw size={12} className={isFetching ? "animate-spin text-indigo-400 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={isFetching ? "animate-spin text-violet-400 mr-1" : "mr-1"} />
               Sync
             </Button>
             <Link to="/admin/operations">
@@ -337,7 +337,7 @@ export function AdminPage() {
           label="Total Students"
           value={totalStudents.toLocaleString()}
           sub="Enrolled across 5 career tracks"
-          icon={<Users className="text-indigo-400" size={18} />}
+          icon={<Users className="text-violet-400" size={18} />}
         />
         <StatCard
           label="Diaspora Mentors"
@@ -360,7 +360,7 @@ export function AdminPage() {
           <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-[#27272A] pb-3.5">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles size={14} className="text-indigo-400" />
+                <Sparkles size={14} className="text-violet-400" />
                 <CardTitle className="text-sm font-semibold text-white">XP Gamification Growth</CardTitle>
               </div>
               <CardDescription className="text-xs text-zinc-400 mt-0.5">
@@ -372,7 +372,7 @@ export function AdminPage() {
               <button
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "weekly" ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                  xpTimeView === "weekly" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Weekly Volume
@@ -380,7 +380,7 @@ export function AdminPage() {
               <button
                 onClick={() => setXpTimeView("cumulative")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "cumulative" ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                  xpTimeView === "cumulative" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Cumulative
@@ -463,7 +463,7 @@ export function AdminPage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
           <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
             <div className="flex items-center gap-2">
-              <Layers size={15} className="text-indigo-400" />
+              <Layers size={15} className="text-violet-400" />
               <div>
                 <CardTitle className="text-sm font-semibold text-white">Track Performance & XP Distribution</CardTitle>
                 <CardDescription className="text-xs text-zinc-400">
@@ -483,13 +483,13 @@ export function AdminPage() {
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-white">{track.name}</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-indigo-400">{track.xp.toLocaleString()} XP</span>
+                    <span className="font-bold text-violet-400">{track.xp.toLocaleString()} XP</span>
                     <span className="text-[11px] text-zinc-500">({track.percentage}%)</span>
                   </div>
                 </div>
                 <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
                   <div
-                    className="h-full rounded-full bg-indigo-500 transition-all duration-500"
+                    className="h-full rounded-full bg-violet-500 transition-all duration-500"
                     style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
                   />
                 </div>
@@ -511,7 +511,7 @@ export function AdminPage() {
               </div>
             </div>
             <Link to="/admin/moderation">
-              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-indigo-400 hover:text-indigo-300">
+              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-violet-400 hover:text-violet-300">
                 View All <ChevronRight size={12} />
               </Button>
             </Link>
@@ -640,14 +640,14 @@ export function AdminPage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
           <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
             <div className="flex items-center gap-2">
-              <Video size={15} className="text-indigo-400" />
+              <Video size={15} className="text-violet-400" />
               <div>
                 <CardTitle className="text-sm font-semibold text-white">Upcoming Sessions</CardTitle>
                 <CardDescription className="text-xs text-zinc-400">Live cohorts schedule</CardDescription>
               </div>
             </div>
             <Link to="/admin/meetings">
-              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-indigo-400 hover:text-indigo-300">
+              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-violet-400 hover:text-violet-300">
                 All <ExternalLink size={11} />
               </Button>
             </Link>

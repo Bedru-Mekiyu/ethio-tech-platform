@@ -105,7 +105,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400"
+              className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400"
             >
               <Sparkles size={13} />
               Industry-Standard Technical Curriculum
@@ -118,7 +118,7 @@ export function TracksPage() {
               className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight"
             >
               Master In-Demand Tech with <br className="hidden sm:inline" />
-              <span className="text-indigo-400">Production Capstones</span> & Mentorship
+              <span className="text-violet-400">Production Capstones</span> & Mentorship
             </motion.h1>
 
             <motion.p
@@ -143,7 +143,7 @@ export function TracksPage() {
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
               </Card>
               <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
-                <p className="text-xl font-bold text-indigo-400">{totalCapstones}+</p>
+                <p className="text-xl font-bold text-violet-400">{totalCapstones}+</p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
                   Real Capstones
                 </p>
@@ -178,7 +178,7 @@ export function TracksPage() {
                 placeholder="Search tracks, tooling, capstone projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 h-10 bg-[#0E0E11] border-[#27272A] text-xs rounded-lg text-white placeholder:text-zinc-500 focus:border-indigo-500"
+                className="pl-9 h-10 bg-[#0E0E11] border-[#27272A] text-xs rounded-lg text-white placeholder:text-zinc-500 focus:border-violet-500"
               />
               {searchQuery && (
                 <button
@@ -205,7 +205,7 @@ export function TracksPage() {
                   className={cn(
                     "rounded-md px-3 py-1 text-xs font-medium transition",
                     selectedDifficulty === diff
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
                   )}
                 >
@@ -225,7 +225,7 @@ export function TracksPage() {
                 className={cn(
                   "rounded-md px-3 py-1 text-xs font-medium transition",
                   selectedCategory === cat.key
-                    ? "border border-indigo-500 bg-indigo-600 text-white"
+                    ? "border border-violet-500 bg-violet-600 text-white"
                     : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
                 )}
               >
@@ -274,14 +274,14 @@ export function TracksPage() {
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
                         <div>
                           <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Clock size={11} className="text-indigo-400" />
+                            <Clock size={11} className="text-violet-400" />
                             Duration
                           </p>
                           <p className="mt-0.5 font-bold text-white text-xs">{track.estimatedWeeks} Weeks</p>
                         </div>
                         <div>
                           <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Video size={11} className="text-indigo-400" />
+                            <Video size={11} className="text-violet-400" />
                             Live Sessions
                           </p>
                           <p className="mt-0.5 font-bold text-white text-xs">{track.liveSessionsCount} Workshops</p>
@@ -305,7 +305,7 @@ export function TracksPage() {
                       {/* Practical Capstones Showcase */}
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                          <h3 className="text-[10px] font-semibold uppercase tracking-wider text-violet-400 flex items-center gap-1.5">
                             <Code2 size={13} />
                             Practical Capstone Projects
                           </h3>
@@ -330,11 +330,11 @@ export function TracksPage() {
                                 <Badge variant="default" size="sm">
                                   {capstone.difficulty}
                                 </Badge>
-                                <span className="text-[10px] text-indigo-400 flex items-center gap-1">
+                                <span className="text-[10px] text-violet-400 flex items-center gap-1">
                                   View Code <ArrowRight size={11} />
                                 </span>
                               </div>
-                              <h4 className="mt-1.5 text-xs font-semibold text-white group-hover/cap:text-indigo-400 transition line-clamp-1">
+                              <h4 className="mt-1.5 text-xs font-semibold text-white group-hover/cap:text-violet-400 transition line-clamp-1">
                                 {capstone.title}
                               </h4>
                               <p className="mt-0.5 text-[11px] text-zinc-400 line-clamp-2 leading-relaxed">
@@ -393,7 +393,7 @@ export function TracksPage() {
                           hoverEffect="zoom"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#050507]/95 via-[#050507]/40 to-transparent p-4 flex flex-col justify-end">
-                          <p className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                             Market Insight
                           </p>
                           <p className="text-xs font-semibold text-white mt-0.5">{track.marketDemand.growthMetric}</p>
@@ -406,7 +406,7 @@ export function TracksPage() {
                       {/* Career Outcomes Preview */}
                       <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3 space-y-2">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                          <GraduationCap size={13} className="text-indigo-400" />
+                          <GraduationCap size={13} className="text-violet-400" />
                           Target Career Outcomes
                         </p>
                         <div className="space-y-1.5">
@@ -428,7 +428,7 @@ export function TracksPage() {
                         <ul className="space-y-1">
                           {track.prerequisites.map((req) => (
                             <li key={req.skill} className="text-xs text-zinc-400 flex items-center gap-2">
-                              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 shrink-0" />
+                              <span className="h-1.5 w-1.5 rounded-full bg-violet-500 shrink-0" />
                               <span className="font-medium text-zinc-200">{req.skill}</span>
                               <span className="text-[10px] text-zinc-500">({req.level})</span>
                             </li>
@@ -484,7 +484,7 @@ export function TracksPage() {
                           >
                             <div className="flex items-start justify-between gap-2">
                               <div>
-                                <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                                <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                                   Module {mIdx + 1}
                                 </span>
                                 <h4 className="text-xs font-semibold text-white mt-0.5">{module.title}</h4>
@@ -503,7 +503,7 @@ export function TracksPage() {
                                   <span className="text-zinc-300 truncate">
                                     {mIdx + 1}.{lIdx + 1} {lesson.title}
                                   </span>
-                                  <span className="text-[10px] text-indigo-400 font-medium shrink-0 ml-2 font-mono">
+                                  <span className="text-[10px] text-violet-400 font-medium shrink-0 ml-2 font-mono">
                                     +{lesson.xpReward} XP ({lesson.durationMinutes}m)
                                   </span>
                                 </div>
@@ -547,7 +547,7 @@ export function TracksPage() {
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             <Card className="border-[#27272A] bg-[#0E0E11] p-5 space-y-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <Code2 size={18} />
               </div>
               <h3 className="text-sm font-semibold text-white">Production-Grade Capstones</h3>
@@ -558,7 +558,7 @@ export function TracksPage() {
             </Card>
 
             <Card className="border-[#27272A] bg-[#0E0E11] p-5 space-y-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <Video size={18} />
               </div>
               <h3 className="text-sm font-semibold text-white">Live Socratic Mentorship</h3>
@@ -569,7 +569,7 @@ export function TracksPage() {
             </Card>
 
             <Card className="border-[#27272A] bg-[#0E0E11] p-5 space-y-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <Award size={18} />
               </div>
               <h3 className="text-sm font-semibold text-white">Verified Skill Credentials</h3>
@@ -585,7 +585,7 @@ export function TracksPage() {
       {/* CTA Footer Banner */}
       <section className="relative overflow-hidden border-t border-[#27272A] bg-[#0E0E11] py-14 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
             <Sparkles size={12} />
             <span>100% Free Tuition-Free Scholarship Model</span>
           </div>

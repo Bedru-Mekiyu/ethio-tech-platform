@@ -150,7 +150,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                 return (
                   <div key={msg.messageId} className="flex items-center gap-2 justify-center py-1">
                     <span className="text-[10px] text-[var(--text-secondary)] bg-white/5 border border-white/5 px-2 py-0.5 rounded-full flex items-center gap-1">
-                      <AlertCircle size={10} className="text-indigo-400" />
+                      <AlertCircle size={10} className="text-violet-400" />
                       {msg.text}
                     </span>
                   </div>

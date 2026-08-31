@@ -199,7 +199,7 @@ export function MentorSessionsPage() {
             className={cn(
               "rounded-md border px-3 py-1 text-xs capitalize transition-all font-medium",
               filter === value
-                ? "border-indigo-500 bg-indigo-600 text-white"
+                ? "border-violet-500 bg-violet-600 text-white"
                 : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
             )}
           >
@@ -252,7 +252,7 @@ export function MentorSessionsPage() {
                   className={cn(
                     "min-h-[4.75rem] rounded-lg border p-1.5 transition-colors",
                     day ? "border-[#27272A] bg-[#141418]" : "border-transparent bg-transparent",
-                    isToday && "border-indigo-500/40 bg-indigo-500/10",
+                    isToday && "border-violet-500/40 bg-violet-500/10",
                   )}
                 >
                   {day ? (
@@ -262,7 +262,7 @@ export function MentorSessionsPage() {
                         {sessionsForDay.slice(0, 2).map((session, index) => (
                           <div
                             key={session._id ?? `${session.title}-${index}`}
-                            className="rounded bg-indigo-500/15 px-1.5 py-0.5 text-[9px] font-medium text-indigo-300 truncate"
+                            className="rounded bg-violet-500/15 px-1.5 py-0.5 text-[9px] font-medium text-violet-300 truncate"
                           >
                             {session.title}
                           </div>
@@ -285,7 +285,7 @@ export function MentorSessionsPage() {
               <h2 className="text-sm font-semibold text-white">Live Session Queue</h2>
               <p className="text-xs text-zinc-400">Scheduled interactive classrooms</p>
             </div>
-            <Link to="/app/workspace" className="text-xs font-medium text-indigo-400 hover:underline">
+            <Link to="/app/workspace" className="text-xs font-medium text-violet-400 hover:underline">
               Open workspace →
             </Link>
           </div>
@@ -321,7 +321,7 @@ export function MentorSessionsPage() {
                         {session._id ? (
                           <Link
                             to={`/app/classroom/${session._id}`}
-                            className="inline-flex items-center gap-1 font-medium text-indigo-400 hover:text-indigo-300"
+                            className="inline-flex items-center gap-1 font-medium text-violet-400 hover:text-violet-300"
                           >
                             Launch Room <Video size={12} />
                           </Link>
@@ -336,7 +336,7 @@ export function MentorSessionsPage() {
                                 ? "bg-red-500"
                                 : participantCount / session.maxParticipants > 0.8
                                   ? "bg-amber-500"
-                                  : "bg-indigo-500",
+                                  : "bg-violet-500",
                             )}
                             style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
                           />

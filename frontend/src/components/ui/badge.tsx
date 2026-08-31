@@ -13,7 +13,7 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
     default: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
     success: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/15",
     warning: "border-amber-500/20 bg-amber-500/10 text-amber-400 hover:bg-amber-500/15",
-    purple: "border-indigo-500/20 bg-indigo-500/10 text-indigo-300 hover:bg-indigo-500/15",
+    purple: "border-violet-500/20 bg-violet-500/10 text-violet-300 hover:bg-violet-500/15",
     danger: "border-rose-500/20 bg-rose-500/10 text-rose-400 hover:bg-rose-500/15",
     cyan: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
   };
@@ -27,7 +27,7 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
     default: "bg-zinc-400",
     success: "bg-emerald-400",
     warning: "bg-amber-400",
-    purple: "bg-indigo-400",
+    purple: "bg-violet-400",
     danger: "bg-rose-400",
     cyan: "bg-zinc-400",
   };

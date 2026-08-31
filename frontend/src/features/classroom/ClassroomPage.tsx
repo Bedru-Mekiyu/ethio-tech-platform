@@ -243,6 +243,7 @@ export function ClassroomPage() {
   // Scroll chat to bottom on new messages
   useEffect(() => {
     if (activePanel === "chat") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUnreadChatCount(0);
       chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }
@@ -296,12 +297,12 @@ export function ClassroomPage() {
   const socketAdapter = useMemo(
     () => ({
       emit: (event: string, payload: unknown) => {
-        (socketRef.current as any)?.emit(event, payload);
+        (socketRef.current as unknown as Record<string, Function>)?.emit?.(event, payload);
       },
       on: (event: string, handler: (payload: unknown) => void) => {
-        (socketRef.current as any)?.on(event, handler);
+        (socketRef.current as unknown as Record<string, Function>)?.on?.(event, handler);
         return () => {
-          (socketRef.current as any)?.off(event, handler);
+          (socketRef.current as unknown as Record<string, Function>)?.off?.(event, handler);
         };
       },
     }),
@@ -320,7 +321,7 @@ export function ClassroomPage() {
     return (
       <div className="flex h-screen items-center justify-center bg-[#0B0F19]">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-indigo-500 border-t-transparent" />
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-violet-500 border-t-transparent" />
           <p className="text-sm text-slate-400">Loading interactive classroom...</p>
         </div>
       </div>
@@ -358,7 +359,7 @@ export function ClassroomPage() {
             <div className="relative flex flex-1 flex-col bg-slate-950">
               <div className="flex items-center justify-between border-b border-white/10 bg-slate-900/80 px-4 py-2">
                 <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                  <Sparkles className="h-4 w-4 text-indigo-400" />
+                  <Sparkles className="h-4 w-4 text-violet-400" />
                   <span>Collaborative Whiteboard</span>
                 </div>
                 <button
@@ -401,7 +402,7 @@ export function ClassroomPage() {
             /* Waiting / Scheduled State Screen */
             <div className="flex h-full items-center justify-center bg-[#0B0F19] px-6 text-center">
               <div className="max-w-md rounded-3xl border border-white/10 bg-slate-900/50 p-8 backdrop-blur-xl">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600/20 text-indigo-400">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-600/20 text-violet-400">
                   <Sparkles className="h-7 w-7" />
                 </div>
                 <h2 className="text-lg font-bold text-white">
@@ -436,12 +437,12 @@ export function ClassroomPage() {
             {/* Panel Header */}
             <div className="flex h-14 items-center justify-between border-b border-white/10 px-4">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-300">
-                {activePanel === "chat" && <MessageSquare className="h-4 w-4 text-indigo-400" />}
-                {activePanel === "qa" && <HelpCircle className="h-4 w-4 text-indigo-400" />}
-                {activePanel === "polls" && <BarChart3 className="h-4 w-4 text-indigo-400" />}
-                {activePanel === "notes" && <FileText className="h-4 w-4 text-indigo-400" />}
-                {activePanel === "resources" && <Folder className="h-4 w-4 text-indigo-400" />}
-                {activePanel === "breakout" && <Layers className="h-4 w-4 text-indigo-400" />}
+                {activePanel === "chat" && <MessageSquare className="h-4 w-4 text-violet-400" />}
+                {activePanel === "qa" && <HelpCircle className="h-4 w-4 text-violet-400" />}
+                {activePanel === "polls" && <BarChart3 className="h-4 w-4 text-violet-400" />}
+                {activePanel === "notes" && <FileText className="h-4 w-4 text-violet-400" />}
+                {activePanel === "resources" && <Folder className="h-4 w-4 text-violet-400" />}
+                {activePanel === "breakout" && <Layers className="h-4 w-4 text-violet-400" />}
                 <span>
                   {activePanel === "chat"
                     ? "Live Chat"
@@ -481,9 +482,9 @@ export function ClassroomPage() {
                           key={msg.id}
                           className={`rounded-xl p-2.5 text-xs ${
                             msg.isSystem
-                              ? "bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-center font-medium"
+                              ? "bg-violet-500/10 text-violet-300 border border-violet-500/20 text-center font-medium"
                               : msg.userId === user?.id
-                                ? "bg-indigo-600/30 border border-indigo-500/30 text-slate-100 ml-4"
+                                ? "bg-violet-600/30 border border-violet-500/30 text-slate-100 ml-4"
                                 : "bg-slate-900/80 border border-white/5 text-slate-200 mr-4"
                           }`}
                         >
@@ -511,12 +512,12 @@ export function ClassroomPage() {
                       placeholder="Send a message..."
                       value={chatDraft}
                       onChange={(e) => setChatDraft(e.target.value)}
-                      className="flex-1 rounded-xl border border-white/10 bg-slate-900/90 px-3.5 py-2 text-xs text-white placeholder:text-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      className="flex-1 rounded-xl border border-white/10 bg-slate-900/90 px-3.5 py-2 text-xs text-white placeholder:text-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
                     />
                     <button
                       type="submit"
                       disabled={!chatDraft.trim()}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 disabled:opacity-40 transition-colors"
+                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 text-white hover:bg-violet-500 disabled:opacity-40 transition-colors"
                     >
                       <Send className="h-4 w-4" />
                     </button>

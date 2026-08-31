@@ -425,7 +425,7 @@ export default function MentorControlCenterPage() {
         </Card>
         <Card className="border-[#27272A] bg-[#0E0E11] p-4">
           <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Meeting status</p>
-          <p className="mt-1.5 text-xl font-bold text-indigo-400 capitalize">{meetingStatus.replace("_", " ")}</p>
+          <p className="mt-1.5 text-xl font-bold text-violet-400 capitalize">{meetingStatus.replace("_", " ")}</p>
           <p className="mt-0.5 text-xs text-zinc-400">Live status synchronized across all devices.</p>
         </Card>
       </div>

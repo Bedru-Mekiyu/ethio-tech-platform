@@ -488,12 +488,12 @@ export function HowItWorksPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-4">
             <Sparkles size={12} />
             <span>The 5-Stage Engineering Engine</span>
           </div>
           <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
-            How aspiring engineers become <span className="text-indigo-400">production-ready</span>
+            How aspiring engineers become <span className="text-violet-400">production-ready</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
@@ -530,7 +530,7 @@ export function HowItWorksPage() {
                 key={item}
                 className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-zinc-300"
               >
-                <Sparkles className="h-3 w-3 text-indigo-400" />
+                <Sparkles className="h-3 w-3 text-violet-400" />
                 {item}
               </span>
             ))}
@@ -540,7 +540,7 @@ export function HowItWorksPage() {
         {/* Live Catalog Momentum Metrics */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
               <Layers3 size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(tracks.length || 4)}</p>
@@ -549,7 +549,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
               <BookOpen size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalModules || 36)}</p>
@@ -558,7 +558,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
               <Code2 size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalLessons || 180)}</p>
@@ -567,7 +567,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
               <Sparkles size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalXp || 24000)}</p>
@@ -581,7 +581,7 @@ export function HowItWorksPage() {
       <section id="learner-lifecycle" className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
               <span>Step-by-Step Flow</span>
             </div>
             <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">The 5-Stage Learner Lifecycle</h2>
@@ -603,19 +603,19 @@ export function HowItWorksPage() {
                   onClick={() => setActiveStageIndex(idx)}
                   className={`group relative flex flex-col items-start rounded-lg border p-3.5 text-left transition-all duration-150 ${
                     isActive
-                      ? "border-indigo-500/40 bg-indigo-500/15 text-white"
+                      ? "border-violet-500/40 bg-violet-500/15 text-white"
                       : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
                   <div className="flex w-full items-center justify-between">
                     <span
                       className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
-                        isActive ? "bg-indigo-500 text-white" : "bg-[#141418] text-zinc-400"
+                        isActive ? "bg-violet-500 text-white" : "bg-[#141418] text-zinc-400"
                       }`}
                     >
                       {stage.step}
                     </span>
-                    <Icon size={16} className={isActive ? "text-indigo-400" : "text-zinc-500 group-hover:text-white"} />
+                    <Icon size={16} className={isActive ? "text-violet-400" : "text-zinc-500 group-hover:text-white"} />
                   </div>
                   <p className="mt-2.5 text-xs font-semibold text-white line-clamp-1">{stage.shortTitle}</p>
                   <span className="mt-0.5 text-[10px] text-zinc-500">{stage.badge}</span>
@@ -648,7 +648,7 @@ export function HowItWorksPage() {
                         </Badge>
                       </div>
                       <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">{currentStage.title}</h3>
-                      <p className="mt-0.5 text-xs font-medium text-indigo-400">{currentStage.subtitle}</p>
+                      <p className="mt-0.5 text-xs font-medium text-violet-400">{currentStage.subtitle}</p>
                     </div>
 
                     <p className="text-xs leading-relaxed text-zinc-400">{currentStage.overview}</p>
@@ -682,7 +682,7 @@ export function HowItWorksPage() {
                     </div>
 
                     <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
                         <Trophy size={16} />
                       </div>
                       <div>
@@ -727,7 +727,7 @@ export function HowItWorksPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setActiveStageIndex((prev) => (prev + 1) % LIFECYCLE_STAGES.length)}
-                        className="text-indigo-400 hover:text-white"
+                        className="text-violet-400 hover:text-white"
                       >
                         {activeStageIndex === LIFECYCLE_STAGES.length - 1 ? "Replay Lifecycle" : "Next Stage"}
                         <ArrowRight size={13} className="ml-1" />
@@ -750,7 +750,7 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
             <span>Ecosystem Experience</span>
           </div>
           <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">What It Looks Like For You</h2>
@@ -769,7 +769,7 @@ export function HowItWorksPage() {
                   onClick={() => setActiveRole(persona.id)}
                   className={`flex items-center gap-2 rounded-md border px-4 py-2 text-xs font-semibold transition-all ${
                     isActive
-                      ? "border-indigo-500 bg-indigo-600 text-white"
+                      ? "border-violet-500 bg-violet-600 text-white"
                       : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
@@ -794,7 +794,7 @@ export function HowItWorksPage() {
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-violet-400">
                     {currentRoleData.eyebrow}
                   </span>
                   <h3 className="mt-0.5 text-xl font-bold text-white md:text-2xl">{currentRoleData.title}</h3>
@@ -814,7 +814,7 @@ export function HowItWorksPage() {
                       key={benefit.title}
                       className="flex items-start gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-4 transition hover:border-zinc-700"
                     >
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
                         <Icon size={16} />
                       </div>
                       <div>
@@ -842,7 +842,7 @@ export function HowItWorksPage() {
       <section className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
               <span>Curriculum Architecture</span>
             </div>
             <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
@@ -897,7 +897,7 @@ export function HowItWorksPage() {
                       <Badge variant="purple" size="sm">
                         {moduleCount} Modules
                       </Badge>
-                      <span className="flex items-center gap-1 text-xs font-semibold text-indigo-400">
+                      <span className="flex items-center gap-1 text-xs font-semibold text-violet-400">
                         <Sparkles size={12} /> {track.xpReward ?? 6000} XP
                       </span>
                     </div>
@@ -931,7 +931,7 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
             <span>Got Questions?</span>
           </div>
           <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Frequently Asked Questions</h2>
@@ -948,7 +948,7 @@ export function HowItWorksPage() {
                 placeholder="Search questions (e.g. internet, cost, mentor, hiring)..."
                 value={faqSearchQuery}
                 onChange={(e) => setFaqSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-[#27272A] bg-[#0E0E11] py-2 pl-9 pr-3 text-xs text-white placeholder-zinc-500 focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-lg border border-[#27272A] bg-[#0E0E11] py-2 pl-9 pr-3 text-xs text-white placeholder-zinc-500 focus:border-violet-500 focus:outline-none"
               />
             </div>
 
@@ -959,7 +959,7 @@ export function HowItWorksPage() {
                   onClick={() => setFaqCategory(cat)}
                   className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                     faqCategory === cat
-                      ? "border border-indigo-500 bg-indigo-600 text-white"
+                      ? "border border-violet-500 bg-violet-600 text-white"
                       : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
@@ -988,7 +988,7 @@ export function HowItWorksPage() {
                     <span className="text-xs sm:text-sm font-semibold">{faq.question}</span>
                     <ChevronDown
                       size={15}
-                      className={`shrink-0 text-indigo-400 transition-transform duration-150 ${
+                      className={`shrink-0 text-violet-400 transition-transform duration-150 ${
                         isExpanded ? "rotate-180" : ""
                       }`}
                     />
@@ -1023,7 +1023,7 @@ export function HowItWorksPage() {
         <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2.5">
                 <span>Start Today</span>
               </div>
               <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
@@ -1045,7 +1045,7 @@ export function HowItWorksPage() {
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-violet-400 hover:text-white">
                   Explore Mentorship <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>

@@ -141,7 +141,7 @@ export function ProjectSubmitPage() {
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
               <Link to="/app/projects">
-                <Button size="sm" variant="primary" type="button" className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white gap-1.5">
+                <Button size="sm" variant="primary" type="button" className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white gap-1.5">
                   <Rocket size={13} />
                   View Assignments
                 </Button>
@@ -195,7 +195,7 @@ export function ProjectSubmitPage() {
                   }}
                   className={`rounded-lg border p-3.5 text-left transition ${
                     project.projectId === selectedProjectId
-                      ? "border-indigo-500 bg-indigo-500/10 text-white"
+                      ? "border-violet-500 bg-violet-500/10 text-white"
                       : "border-[#27272A] bg-[#141418] hover:border-zinc-700 text-zinc-300"
                   }`}
                 >

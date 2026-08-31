@@ -241,7 +241,7 @@ export function ProgressPage() {
         {/* Global Progress Badges */}
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
-            <ShieldCheck className="text-indigo-400" size={14} />
+            <ShieldCheck className="text-violet-400" size={14} />
             <span className="text-xs font-semibold text-white">{overallReadiness}%</span>
             <span className="text-[11px] text-zinc-500">Job Readiness</span>
           </div>
@@ -276,7 +276,7 @@ export function ProgressPage() {
               onClick={() => setTab(t.id)}
               className={cn(
                 "flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
-                active ? "bg-indigo-600 text-white shadow-sm" : "text-zinc-400 hover:bg-[#141418] hover:text-white",
+                active ? "bg-violet-600 text-white shadow-sm" : "text-zinc-400 hover:bg-[#141418] hover:text-white",
               )}
             >
               <Icon size={14} />
@@ -324,14 +324,14 @@ export function ProgressPage() {
                 <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Leaderboard Rank
                 </span>
-                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#141418] text-violet-400 border border-[#27272A]">
                   <Trophy size={15} />
                 </div>
               </div>
-              <p className="mt-2 text-xl font-bold font-mono text-indigo-400">
+              <p className="mt-2 text-xl font-bold font-mono text-violet-400">
                 #{dashboard?.leaderboardPosition ?? 12}
               </p>
-              <Link to="/leaderboard" className="mt-0.5 inline-block text-xs text-indigo-400 hover:underline">
+              <Link to="/leaderboard" className="mt-0.5 inline-block text-xs text-violet-400 hover:underline">
                 View Global Standings →
               </Link>
             </Card>
@@ -341,7 +341,7 @@ export function ProgressPage() {
           <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                   Current Curriculum Track
                 </span>
                 <h2 className="mt-0.5 text-base font-bold text-white">
@@ -350,7 +350,7 @@ export function ProgressPage() {
               </div>
               <Link
                 to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/tracks"}
-                className="text-xs font-medium text-indigo-400 hover:underline"
+                className="text-xs font-medium text-violet-400 hover:underline"
               >
                 Open Track Dashboard →
               </Link>
@@ -376,7 +376,7 @@ export function ProgressPage() {
                 <h2 className="text-sm font-bold text-white">Next Engineering Milestone</h2>
                 <p className="text-xs text-zinc-400">{nextMilestone.note}</p>
               </div>
-              <span className="text-xs font-mono font-bold text-indigo-400">
+              <span className="text-xs font-mono font-bold text-violet-400">
                 {userXp} / {nextMilestone.xp} XP
               </span>
             </div>
@@ -386,7 +386,7 @@ export function ProgressPage() {
               className="mt-3.5 h-1.5 bg-[#27272A]"
             />
             <div className="mt-2.5 flex items-center justify-between text-xs text-zinc-300">
-              <span className="font-semibold text-indigo-400">{nextMilestone.label}</span>
+              <span className="font-semibold text-violet-400">{nextMilestone.label}</span>
               <span className="text-zinc-500">Target: {nextMilestone.xp} XP</span>
             </div>
           </Card>
@@ -404,11 +404,11 @@ export function ProgressPage() {
                   Evaluated automatically through coding challenges, test suite runs, and mentor code reviews.
                 </p>
               </div>
-              <div className="flex items-center gap-2.5 rounded-lg border border-indigo-500/20 bg-indigo-500/10 px-3.5 py-1.5">
-                <ShieldCheck size={18} className="text-indigo-400" />
+              <div className="flex items-center gap-2.5 rounded-lg border border-violet-500/20 bg-violet-500/10 px-3.5 py-1.5">
+                <ShieldCheck size={18} className="text-violet-400" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-semibold text-zinc-400">Overall Readiness</p>
-                  <p className="text-sm font-bold font-mono text-indigo-400">{overallReadiness}%</p>
+                  <p className="text-sm font-bold font-mono text-violet-400">{overallReadiness}%</p>
                 </div>
               </div>
             </div>
@@ -433,7 +433,7 @@ export function ProgressPage() {
 
                   <div className="flex items-center justify-between text-[11px] text-zinc-400">
                     <span>{skill.level}% Mastery</span>
-                    <span className="font-mono text-indigo-400">{skill.xp} XP Earned</span>
+                    <span className="font-mono text-violet-400">{skill.xp} XP Earned</span>
                   </div>
                 </div>
               ))}
@@ -456,7 +456,7 @@ export function ProgressPage() {
                 className={cn(
                   "rounded-md border px-3 py-1 text-xs font-medium transition-all",
                   badgeFilter === f
-                    ? "border-indigo-500 bg-indigo-600 text-white shadow-sm"
+                    ? "border-violet-500 bg-violet-600 text-white shadow-sm"
                     : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
                 )}
               >
@@ -485,7 +485,7 @@ export function ProgressPage() {
                   className={cn(
                     "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border",
                     b.earned
-                      ? "bg-[#141418] text-indigo-400 border-[#27272A]"
+                      ? "bg-[#141418] text-violet-400 border-[#27272A]"
                       : "bg-[#0E0E11] text-zinc-600 border-[#27272A]",
                   )}
                 >
@@ -498,7 +498,7 @@ export function ProgressPage() {
                     {b.earned && <span className="text-[10px] font-bold text-emerald-400 uppercase">Earned</span>}
                   </div>
                   <p className="text-[11px] text-zinc-400 leading-relaxed">{b.description}</p>
-                  <p className="text-[10px] font-medium text-indigo-400">
+                  <p className="text-[10px] font-medium text-violet-400">
                     {b.earned ? "✓ Unlocked" : `${b.xpRequired ?? 50} XP required`}
                   </p>
                 </div>
@@ -517,7 +517,7 @@ export function ProgressPage() {
                     key={m.label}
                     className={cn(
                       "rounded-lg border p-3 space-y-1.5 transition-all",
-                      complete ? "border-indigo-500/20 bg-indigo-500/10" : "border-[#27272A] bg-[#141418] opacity-60",
+                      complete ? "border-violet-500/20 bg-violet-500/10" : "border-[#27272A] bg-[#141418] opacity-60",
                     )}
                   >
                     <div className="flex items-center justify-between">
@@ -572,7 +572,7 @@ export function ProgressPage() {
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                         <Award size={20} />
                       </div>
                       <div>
@@ -631,7 +631,7 @@ export function ProgressPage() {
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                         {p.trackTitle}
                       </span>
                       <h3 className="mt-0.5 text-sm font-semibold text-white">{p.title}</h3>
@@ -663,7 +663,7 @@ export function ProgressPage() {
                         href={p.deployedUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-medium text-indigo-400 hover:underline ml-auto"
+                        className="inline-flex items-center gap-1 text-xs font-medium text-violet-400 hover:underline ml-auto"
                       >
                         <ExternalLink size={13} /> Live Demo
                       </a>

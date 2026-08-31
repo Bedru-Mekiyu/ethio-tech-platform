@@ -314,7 +314,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-[#27272A] pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-white flex items-center gap-2">
-                  <UserCircle2 size={15} className="text-indigo-400" /> Personal Profile
+                  <UserCircle2 size={15} className="text-violet-400" /> Personal Profile
                 </CardTitle>
               </CardHeader>
 
@@ -469,7 +469,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                 ) : null}
 
                 <div className="pt-2">
-                  <Button type="submit" size="sm" disabled={profileSaving} className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+                  <Button type="submit" size="sm" disabled={profileSaving} className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white">
                     {profileSaving ? "Saving changes…" : "Save Profile"}
                   </Button>
                 </div>
@@ -482,7 +482,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-[#27272A] pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-white flex items-center gap-2">
-                  <Lock size={15} className="text-indigo-400" /> Security & Password
+                  <Lock size={15} className="text-violet-400" /> Security & Password
                 </CardTitle>
               </CardHeader>
 
@@ -532,13 +532,13 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     type="submit"
                     size="sm"
                     disabled={passwordForm.formState.isSubmitting}
-                    className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white self-start"
+                    className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white self-start"
                   >
                     {passwordForm.formState.isSubmitting ? "Updating…" : "Update Password"}
                   </Button>
                   <Link
                     to="/auth/forgot-password"
-                    className="text-xs text-indigo-400 hover:underline self-start mt-0.5"
+                    className="text-xs text-violet-400 hover:underline self-start mt-0.5"
                   >
                     Forgot password?
                   </Link>

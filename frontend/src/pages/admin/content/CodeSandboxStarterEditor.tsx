@@ -15,7 +15,7 @@ const TEMPLATES: Array<{ label: string; lang: string; code: string }> = [
   {
     label: "TypeScript / React",
     lang: "typescript",
-    code: `import { useState } from "react";\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <main className="p-8 font-sans max-w-md mx-auto">\n      <h1 className="text-2xl font-bold">Interactive Lab</h1>\n      <p className="mt-2 text-slate-600">Complete the implementation below:</p>\n      <button\n        onClick={() => setCount((c) => c + 1)}\n        className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg"\n      >\n        Count: {count}\n      </button>\n    </main>\n  );\n}`,
+    code: `import { useState } from "react";\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <main className="p-8 font-sans max-w-md mx-auto">\n      <h1 className="text-2xl font-bold">Interactive Lab</h1>\n      <p className="mt-2 text-slate-600">Complete the implementation below:</p>\n      <button\n        onClick={() => setCount((c) => c + 1)}\n        className="mt-4 px-4 py-2 bg-violet-600 text-white rounded-lg"\n      >\n        Count: {count}\n      </button>\n    </main>\n  );\n}`,
   },
   {
     label: "Node.js / Express API",
@@ -25,7 +25,7 @@ const TEMPLATES: Array<{ label: string; lang: string; code: string }> = [
   {
     label: "Python / Data Science",
     lang: "python",
-    code: `import numpy as np\nimport pandas as pd\n\ndef analyze_telemetry(data_records):\n    \"\"\"\n    Analyze Ethiopian agricultural sensor telemetry.\n    Calculate moving averages and identify soil anomalies.\n    \"\"\"\n    df = pd.DataFrame(data_records)\n    # TODO: Calculate soil moisture index\n    return df.describe()\n\nif __name__ == "__main__":\n    sample_data = [{"sensor_id": 101, "moisture": 42.5}]\n    print(analyze_telemetry(sample_data))`,
+    code: `import numpy as np\nimport pandas as pd\n\ndef analyze_telemetry(data_records):\n    """\n    Analyze Ethiopian agricultural sensor telemetry.\n    Calculate moving averages and identify soil anomalies.\n    """\n    df = pd.DataFrame(data_records)\n    # TODO: Calculate soil moisture index\n    return df.describe()\n\nif __name__ == "__main__":\n    sample_data = [{"sensor_id": 101, "moisture": 42.5}]\n    print(analyze_telemetry(sample_data))`,
   },
 ];
 

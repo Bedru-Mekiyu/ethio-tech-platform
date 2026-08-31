@@ -147,7 +147,7 @@ export function AdminMeetingsPage() {
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-medium transition-colors",
                     isActive
-                      ? "border-indigo-500 bg-indigo-600 text-white"
+                      ? "border-violet-500 bg-violet-600 text-white"
                       : "border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white",
                   )}
                   data-testid={`admin-meetings-tab-${entry.key}`}
@@ -170,7 +170,7 @@ export function AdminMeetingsPage() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search by title, mentor, or student…"
-              className="w-full rounded-md border border-[#27272A] bg-[#141418] py-1.5 pl-8 pr-3 text-xs font-medium text-white placeholder:text-zinc-500 focus:border-indigo-500 focus:outline-none"
+              className="w-full rounded-md border border-[#27272A] bg-[#141418] py-1.5 pl-8 pr-3 text-xs font-medium text-white placeholder:text-zinc-500 focus:border-violet-500 focus:outline-none"
             />
           </div>
         </div>
@@ -215,7 +215,7 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
   return (
     <div className="space-y-3 rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
       <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-wider text-zinc-500">
-        <Activity size={11} className="text-indigo-400" />
+        <Activity size={11} className="text-violet-400" />
         <span>Session · {meeting.id?.slice(-6) || meeting.sessionId?.slice(-6) || "—"}</span>
         {meeting.status === "active" ? (
           <Badge variant="success" size="sm" showDot>
@@ -245,7 +245,7 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
           <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Starts</p>
           <p className="mt-0.5 text-xs font-semibold text-white">{formatDateTime(meeting.scheduledAt)}</p>
           {meeting.startsInMs != null && meeting.status !== "completed" && meeting.status !== "cancelled" ? (
-            <p className="text-[10px] text-indigo-400">In {formatCountdown(meeting.startsInMs)}</p>
+            <p className="text-[10px] text-violet-400">In {formatCountdown(meeting.startsInMs)}</p>
           ) : null}
         </div>
         <div className="rounded-lg border border-[#27272A] bg-[#141418] px-3 py-2">
@@ -257,7 +257,7 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#27272A] pt-2.5">
-        <a href={meeting.joinHref || "#"} className="text-xs font-medium text-indigo-400 hover:underline">
+        <a href={meeting.joinHref || "#"} className="text-xs font-medium text-violet-400 hover:underline">
           Open Classroom →
         </a>
         {meeting.status !== "completed" && meeting.status !== "cancelled" ? (

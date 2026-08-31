@@ -32,9 +32,9 @@ export function ProgressBar({
   const colors = {
     primary: "bg-primary",
     success: "bg-emerald-500",
-    purple: "bg-indigo-500",
+    purple: "bg-violet-500",
     danger: "bg-rose-500",
-    cyan: "bg-indigo-500",
+    cyan: "bg-violet-500",
     gradient: "bg-primary",
   };
 

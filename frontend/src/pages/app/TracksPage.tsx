@@ -104,9 +104,9 @@ function TrackStatCard({
 }) {
   const toneClass =
     tone === "primary"
-      ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+      ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
       : tone === "purple"
-        ? "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+        ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
         : tone === "success"
           ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
           : "bg-amber-500/10 text-amber-400 border border-amber-500/20";
@@ -153,7 +153,7 @@ function StudentTrackCard({
       {/* Icon & Category Indicator */}
       <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#27272A] bg-[#141418] p-4">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0E0E11] text-indigo-400 border border-[#27272A]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0E0E11] text-violet-400 border border-[#27272A]">
             <TrackIcon categoryKey={track.categoryKey} title={track.title} size={18} />
           </div>
           <Badge variant={done ? "success" : track.enrolled ? "default" : "default"}>{statusLabel}</Badge>
@@ -174,17 +174,17 @@ function StudentTrackCard({
           <Badge variant="default">{track.category ?? "Engineering"}</Badge>
           <Badge variant="default">{track.difficulty ?? "Intermediate"}</Badge>
           <span className="text-xs text-zinc-400 flex items-center gap-1">
-            <Clock size={11} className="text-indigo-400" />
+            <Clock size={11} className="text-violet-400" />
             {track.estimatedWeeks ?? 12} Weeks
           </span>
           <span className="text-xs text-zinc-400 flex items-center gap-1">
-            <Video size={11} className="text-indigo-400" />
+            <Video size={11} className="text-violet-400" />
             {track.liveSessionsCount ?? 20} Workshops
           </span>
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-base font-bold text-white group-hover:text-indigo-400 transition-colors">
+          <h2 className="text-base font-bold text-white group-hover:text-violet-400 transition-colors">
             {track.title}
           </h2>
           <p className="text-xs leading-relaxed text-zinc-400 max-w-3xl">
@@ -205,7 +205,7 @@ function StudentTrackCard({
         {track.capstones && track.capstones.length > 0 && (
           <div className="pt-0.5">
             <div className="flex items-center gap-1.5 text-xs text-zinc-400 mb-1.5">
-              <Code2 size={12} className="text-indigo-400" />
+              <Code2 size={12} className="text-violet-400" />
               <span className="font-semibold uppercase tracking-wider text-[9px] text-zinc-500">Capstone Projects:</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -216,9 +216,9 @@ function StudentTrackCard({
                   onClick={() => onPreviewCapstone(cap, track.title, track._id)}
                   className="inline-flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#141418] px-2.5 py-1 text-xs text-zinc-300 transition hover:border-zinc-700 hover:text-white"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
                   <span>{cap.title}</span>
-                  <span className="text-[10px] text-indigo-400 underline ml-1">Inspect</span>
+                  <span className="text-[10px] text-violet-400 underline ml-1">Inspect</span>
                 </button>
               ))}
             </div>
@@ -374,7 +374,7 @@ export function TracksPage() {
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-2.5 py-0.5 text-xs font-semibold text-indigo-400 mb-1.5">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-xs font-semibold text-violet-400 mb-1.5">
               <Sparkles size={12} />
               Career-Aligned Engineering Curriculum
             </div>
@@ -447,7 +447,7 @@ export function TracksPage() {
                 className={cn(
                   "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
                   statusFilter === tab.value
-                    ? "bg-indigo-600 text-white font-semibold"
+                    ? "bg-violet-600 text-white font-semibold"
                     : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
                 )}
               >
@@ -464,7 +464,7 @@ export function TracksPage() {
               placeholder="Search tracks or tools..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8.5 h-9 bg-[#0E0E11] border-[#27272A] text-xs rounded-lg focus:border-indigo-500 text-zinc-200"
+              className="pl-8.5 h-9 bg-[#0E0E11] border-[#27272A] text-xs rounded-lg focus:border-violet-500 text-zinc-200"
             />
             {searchQuery && (
               <button

@@ -210,7 +210,7 @@ export function NotificationsPage() {
                     <div key={notification._id} className="space-y-2">
                       <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
                         <div className="flex items-start gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                             <Icon size={14} />
                           </div>
                           <div className="min-w-0 flex-1">
@@ -223,7 +223,7 @@ export function NotificationsPage() {
                             </p>
                             <div className="mt-2.5 flex flex-wrap gap-2">
                               {notification.link ? (
-                                <a href={notification.link} className="text-xs text-indigo-400 hover:underline">
+                                <a href={notification.link} className="text-xs text-violet-400 hover:underline">
                                   Open item →
                                 </a>
                               ) : null}
@@ -241,7 +241,7 @@ export function NotificationsPage() {
                 return (
                   <div key={notification._id} className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
                     <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                         <Icon size={14} />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -254,7 +254,7 @@ export function NotificationsPage() {
                         </p>
                         <div className="mt-2.5 flex flex-wrap gap-2">
                           {notification.link ? (
-                            <a href={notification.link} className="text-xs text-indigo-400 hover:underline">
+                            <a href={notification.link} className="text-xs text-violet-400 hover:underline">
                               Open item →
                             </a>
                           ) : null}

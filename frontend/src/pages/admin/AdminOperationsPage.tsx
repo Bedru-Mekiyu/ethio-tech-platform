@@ -206,7 +206,7 @@ export function AdminOperationsPage() {
         name: "Socket.IO Gateway Cluster",
         category: "Real-Time Event Broker",
         status: health.realtime?.status === "OK" ? "operational" : "operational",
-        icon: <Radio className="text-indigo-400" size={22} />,
+        icon: <Radio className="text-violet-400" size={22} />,
         versionOrRegion: `Uptime: ${uptimeHours}h ${uptimeMins}m`,
         latency: "12 ms",
         throughput: `${activeSockets} Sockets`,
@@ -399,7 +399,7 @@ export function AdminOperationsPage() {
               disabled={healthQuery.isFetching}
               className="text-xs text-zinc-300 hover:text-white"
             >
-              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-indigo-400 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-violet-400 mr-1" : "mr-1"} />
               Refresh
             </Button>
           </div>
@@ -408,7 +408,7 @@ export function AdminOperationsPage() {
         {/* Diagnostic Utility Buttons Bar */}
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-[#27272A] pt-3.5">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 mr-1 flex items-center gap-1">
-            <Terminal size={12} className="text-indigo-400" />
+            <Terminal size={12} className="text-violet-400" />
             Quick Ops:
           </span>
           <Button
@@ -447,7 +447,7 @@ export function AdminOperationsPage() {
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold text-white flex items-center gap-1.5">
-              <Server className="text-indigo-400" size={15} />
+              <Server className="text-violet-400" size={15} />
               Microservices Health Grid
             </h2>
             <p className="text-xs text-zinc-400">
@@ -474,7 +474,7 @@ export function AdminOperationsPage() {
               >
                 <div>
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-indigo-400">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-violet-400">
                       {svc.icon}
                     </div>
                     <Badge variant={svc.status === "operational" ? "success" : "warning"} size="sm" showDot>
@@ -528,7 +528,7 @@ export function AdminOperationsPage() {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                 Memory Allocation
               </span>
-              <Cpu size={14} className="text-indigo-400" />
+              <Cpu size={14} className="text-violet-400" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-white">86.4 MB</span>
@@ -537,7 +537,7 @@ export function AdminOperationsPage() {
             <div className="mt-2.5 space-y-1">
               <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
                 <div
-                  className="h-full rounded-full bg-indigo-500 transition-all duration-500"
+                  className="h-full rounded-full bg-violet-500 transition-all duration-500"
                   style={{ width: "67.5%" }}
                 />
               </div>
@@ -593,7 +593,7 @@ export function AdminOperationsPage() {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                 Security Shield
               </span>
-              <ShieldCheck size={14} className="text-indigo-400" />
+              <ShieldCheck size={14} className="text-violet-400" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-white">99.98%</span>
@@ -612,7 +612,7 @@ export function AdminOperationsPage() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between border-b border-[#27272A] pb-3.5">
           <div>
             <div className="flex items-center gap-2">
-              <FileClock size={15} className="text-indigo-400" />
+              <FileClock size={15} className="text-violet-400" />
               <CardTitle className="text-sm font-semibold text-white">Privileged Security Audit Stream</CardTitle>
             </div>
             <CardDescription className="text-xs text-zinc-400 mt-0.5">
@@ -646,7 +646,7 @@ export function AdminOperationsPage() {
               placeholder="Search action, actor, resource ID, or IP..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8 w-full rounded-md border border-[#27272A] bg-[#0E0E11] pl-8 pr-3 text-xs text-white placeholder:text-zinc-500 focus:border-indigo-500 focus:outline-none"
+              className="h-8 w-full rounded-md border border-[#27272A] bg-[#0E0E11] pl-8 pr-3 text-xs text-white placeholder:text-zinc-500 focus:border-violet-500 focus:outline-none"
             />
           </div>
 
@@ -654,7 +654,7 @@ export function AdminOperationsPage() {
           <div className="flex flex-wrap items-center gap-2">
             {/* Category Filter */}
             <div className="flex items-center gap-1 text-xs text-zinc-400">
-              <Filter size={12} className="text-indigo-400" />
+              <Filter size={12} className="text-violet-400" />
               <span className="text-[11px]">Category:</span>
               <select
                 aria-label="Filter Audit Logs by Category"
@@ -722,7 +722,7 @@ export function AdminOperationsPage() {
                   <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
                     {/* Left: Action & Resource */}
                     <div className="flex items-start gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#0E0E11] text-indigo-400 shrink-0">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#0E0E11] text-violet-400 shrink-0">
                         {log.action.includes("FLAG") ? (
                           <ShieldAlert size={14} className="text-rose-400" />
                         ) : log.action.includes("APPROVE") ? (
@@ -730,7 +730,7 @@ export function AdminOperationsPage() {
                         ) : log.action.includes("CACHE") ? (
                           <Zap size={14} className="text-amber-400" />
                         ) : (
-                          <Shield size={14} className="text-indigo-400" />
+                          <Shield size={14} className="text-violet-400" />
                         )}
                       </div>
                       <div>
@@ -839,7 +839,7 @@ export function AdminOperationsPage() {
           </div>
         ) : (
           <div className="mt-4 rounded-lg border border-dashed border-[#27272A] p-6 text-center">
-            <ShieldCheck className="mx-auto text-indigo-400" size={28} />
+            <ShieldCheck className="mx-auto text-violet-400" size={28} />
             <h3 className="mt-2 text-xs font-semibold text-white">No audit records match filters</h3>
             <p className="mt-0.5 text-xs text-zinc-500">
               Try adjusting your search query or reset category and role filters.

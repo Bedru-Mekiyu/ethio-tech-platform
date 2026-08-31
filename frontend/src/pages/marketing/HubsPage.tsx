@@ -195,7 +195,7 @@ function DigitalPassQRCode({ passCode, size = 160 }: { passCode: string; size?: 
           ),
         )}
       </svg>
-      <div className="absolute flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-sm border border-white">
+      <div className="absolute flex h-7 w-7 items-center justify-center rounded-lg bg-violet-600 text-white shadow-sm border border-white">
         <Sparkles size={14} className="text-white" />
       </div>
     </div>
@@ -393,13 +393,13 @@ export function HubsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
-          <Globe size={13} className="text-indigo-400" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
+          <Globe size={13} className="text-violet-400" />
           <span>Regional Physical Tech Infrastructure</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-          Physical Tech Hubs <span className="text-indigo-400">Across Ethiopia</span>
+          Physical Tech Hubs <span className="text-violet-400">Across Ethiopia</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
@@ -422,7 +422,7 @@ export function HubsPage() {
           </Button>
 
           <Button variant="outline" size="md" onClick={() => setActiveTab("passes")}>
-            <TicketIcon size={14} className="mr-1.5 text-indigo-400" />
+            <TicketIcon size={14} className="mr-1.5 text-violet-400" />
             My Active Passes ({myBookings.length})
           </Button>
         </div>
@@ -430,7 +430,7 @@ export function HubsPage() {
         {/* Key Metrics Strip */}
         <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
           <Card className="border-[#27272A] bg-[#0E0E11] p-3 text-center">
-            <p className="text-xl font-bold text-indigo-400">6</p>
+            <p className="text-xl font-bold text-violet-400">6</p>
             <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Regional Hubs</p>
             <p className="mt-0.5 text-xs text-zinc-400">Active national nodes</p>
           </Card>
@@ -462,7 +462,7 @@ export function HubsPage() {
             type="button"
             onClick={() => setActiveTab("directory")}
             className={`flex items-center gap-2 rounded-md px-4 py-1.5 text-xs font-semibold transition ${
-              activeTab === "directory" ? "bg-indigo-600 text-white" : "text-zinc-400 hover:text-white"
+              activeTab === "directory" ? "bg-violet-600 text-white" : "text-zinc-400 hover:text-white"
             }`}
           >
             <Building2 size={14} />
@@ -473,7 +473,7 @@ export function HubsPage() {
             type="button"
             onClick={() => setActiveTab("passes")}
             className={`flex items-center gap-2 rounded-md px-4 py-1.5 text-xs font-semibold transition ${
-              activeTab === "passes" ? "bg-indigo-600 text-white" : "text-zinc-400 hover:text-white"
+              activeTab === "passes" ? "bg-violet-600 text-white" : "text-zinc-400 hover:text-white"
             }`}
           >
             <TicketIcon size={14} />
@@ -497,7 +497,7 @@ export function HubsPage() {
           {/* Quick Code Entry Check-In Card */}
           <Card className="mx-auto max-w-xl border-[#27272A] bg-[#0E0E11] p-6 shadow-lg space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                 <QrCodeIcon size={18} />
               </div>
               <div>
@@ -577,7 +577,7 @@ export function HubsPage() {
                             <h4 className="text-base font-bold text-white mt-1">{booking.hubCity} Tech Hub</h4>
                             <p className="text-xs text-zinc-400">{booking.visitDate}</p>
                           </div>
-                          <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-indigo-400">
+                          <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-violet-400">
                             <TicketIcon size={16} />
                           </div>
                         </div>
@@ -588,18 +588,18 @@ export function HubsPage() {
                             <button
                               type="button"
                               onClick={() => handleCopyCode(booking.passCode)}
-                              className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
+                              className="text-violet-400 hover:text-violet-300 flex items-center gap-1"
                             >
                               {copiedCode ? <Check size={11} /> : <Copy size={11} />}
                               <span>{copiedCode ? "Copied" : "Copy"}</span>
                             </button>
                           </div>
-                          <p className="text-base font-bold text-indigo-300 tracking-wider">{booking.passCode}</p>
+                          <p className="text-base font-bold text-violet-300 tracking-wider">{booking.passCode}</p>
                         </div>
 
                         <div className="space-y-1 text-xs text-zinc-300">
                           <div className="flex items-center gap-2">
-                            <Clock size={13} className="text-indigo-400 shrink-0" />
+                            <Clock size={13} className="text-violet-400 shrink-0" />
                             <span>{booking.slotTimeRange}</span>
                           </div>
                           <div className="flex items-center gap-2">
@@ -622,7 +622,7 @@ export function HubsPage() {
                           className="flex-1 text-xs"
                           onClick={() => setViewingPass(booking)}
                         >
-                          <QrCodeIcon size={13} className="mr-1.5 text-indigo-400" />
+                          <QrCodeIcon size={13} className="mr-1.5 text-violet-400" />
                           View QR Pass
                         </Button>
 
@@ -670,7 +670,7 @@ export function HubsPage() {
                   onClick={() => setSelectedCity("all")}
                   className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
                     selectedCity === "all"
-                      ? "border-indigo-500 bg-indigo-600 text-white"
+                      ? "border-violet-500 bg-violet-600 text-white"
                       : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
@@ -683,7 +683,7 @@ export function HubsPage() {
                     onClick={() => setSelectedCity(hub.city)}
                     className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
                       selectedCity.toLowerCase() === hub.city.toLowerCase()
-                        ? "border-indigo-500 bg-indigo-500/20 text-indigo-300"
+                        ? "border-violet-500 bg-violet-500/20 text-violet-300"
                         : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                     }`}
                   >
@@ -719,8 +719,8 @@ export function HubsPage() {
                           <span
                             className={`rounded px-1.5 py-0.5 text-[9px] font-semibold tracking-wider uppercase transition shadow-sm ${
                               isSelected
-                                ? "bg-indigo-600 text-white"
-                                : "bg-[#0E0E11] text-zinc-300 border border-[#27272A] group-hover:border-indigo-400"
+                                ? "bg-violet-600 text-white"
+                                : "bg-[#0E0E11] text-zinc-300 border border-[#27272A] group-hover:border-violet-400"
                             }`}
                           >
                             {hub.city}
@@ -729,8 +729,8 @@ export function HubsPage() {
                             <span
                               className={`flex h-5 w-5 items-center justify-center rounded-full border transition ${
                                 isSelected
-                                  ? "bg-indigo-600 text-white border-indigo-400"
-                                  : "bg-[#0E0E11] text-indigo-400 border-indigo-500/40 group-hover:bg-indigo-600 group-hover:text-white"
+                                  ? "bg-violet-600 text-white border-violet-400"
+                                  : "bg-[#0E0E11] text-violet-400 border-violet-500/40 group-hover:bg-violet-600 group-hover:text-white"
                               }`}
                             >
                               <MapPin size={10} />
@@ -771,7 +771,7 @@ export function HubsPage() {
                         onClick={() => setSelectedCity(hub.city)}
                         className={`cursor-pointer rounded-lg border p-3 transition ${
                           isSelected
-                            ? "border-indigo-500/50 bg-indigo-500/10"
+                            ? "border-violet-500/50 bg-violet-500/10"
                             : "border-[#27272A] bg-[#141418] hover:border-zinc-700"
                         }`}
                       >
@@ -793,7 +793,7 @@ export function HubsPage() {
 
                         <div className="mt-2 flex items-center justify-between pt-2 border-t border-[#27272A] text-[10px] text-zinc-400">
                           <span className="flex items-center gap-1.5 text-zinc-300">
-                            <Users size={11} className="text-indigo-400" />
+                            <Users size={11} className="text-violet-400" />
                             Lead: {hub.mentorLead}
                           </span>
                           <span className="flex items-center gap-1 text-emerald-400">
@@ -865,9 +865,9 @@ export function HubsPage() {
                           {hub.region}
                         </Badge>
                         <h4 className="text-xl font-bold text-white mt-1">{hub.city}</h4>
-                        <p className="text-xs text-indigo-400 font-medium">{hub.district}</p>
+                        <p className="text-xs text-violet-400 font-medium">{hub.district}</p>
                       </div>
-                      <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-indigo-400">
+                      <div className="rounded-lg border border-[#27272A] bg-[#141418] p-2 text-violet-400">
                         <Building2 size={18} />
                       </div>
                     </div>
@@ -894,7 +894,7 @@ export function HubsPage() {
                     {/* Technical Specs */}
                     <div className="space-y-1 text-xs text-zinc-400 pt-2 border-t border-[#27272A]">
                       <div className="flex items-center gap-2">
-                        <Wifi size={12} className="text-indigo-400 shrink-0" />
+                        <Wifi size={12} className="text-violet-400 shrink-0" />
                         <span className="truncate">{hub.connectionType}</span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -920,7 +920,7 @@ export function HubsPage() {
                         </Badge>
                       </div>
                       <p className="font-semibold text-white text-xs">{hub.mentorLead}</p>
-                      <p className="text-[10px] text-indigo-400">{hub.mentorRole}</p>
+                      <p className="text-[10px] text-violet-400">{hub.mentorRole}</p>
                     </div>
                   </div>
 
@@ -939,7 +939,7 @@ export function HubsPage() {
                         }
                       }}
                     >
-                      <QrCodeIcon size={12} className="mr-1 text-indigo-400" />
+                      <QrCodeIcon size={12} className="mr-1 text-violet-400" />
                       Check In (+50 XP)
                     </Button>
 
@@ -969,7 +969,7 @@ export function HubsPage() {
                 const Icon = pillar.icon;
                 return (
                   <Card key={idx} className="border-[#27272A] bg-[#0E0E11] p-5 transition hover:border-zinc-700">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                       <Icon size={18} />
                     </div>
                     <h4 className="mt-3 font-semibold text-white text-sm">{pillar.title}</h4>
@@ -1041,7 +1041,7 @@ export function HubsPage() {
                         onClick={() => setSelectedSlot(slotKey)}
                         className={`rounded-lg border p-3 text-left transition ${
                           isSelected
-                            ? "border-indigo-500 bg-indigo-500/15 text-white"
+                            ? "border-violet-500 bg-violet-500/15 text-white"
                             : "border-[#27272A] bg-[#141418] text-zinc-300 hover:border-zinc-700"
                         }`}
                       >
@@ -1052,7 +1052,7 @@ export function HubsPage() {
                           </span>
                         </div>
                         <p className="text-[11px] text-zinc-400 mt-1 flex items-center gap-1">
-                          <Clock size={11} className="text-indigo-400" />
+                          <Clock size={11} className="text-violet-400" />
                           {cfg.timeRange}
                         </p>
                       </button>
@@ -1076,12 +1076,12 @@ export function HubsPage() {
                         onClick={() => setSelectedWorkstation(wsKey)}
                         className={`rounded-lg border p-3 text-left transition ${
                           isSelected
-                            ? "border-indigo-500 bg-indigo-500/15 text-white"
+                            ? "border-violet-500 bg-violet-500/15 text-white"
                             : "border-[#27272A] bg-[#141418] text-zinc-300 hover:border-zinc-700"
                         }`}
                       >
                         <p className="font-semibold text-xs text-white">{ws.label}</p>
-                        <p className="text-[10px] text-indigo-300 font-mono mt-0.5">{ws.spec}</p>
+                        <p className="text-[10px] text-violet-300 font-mono mt-0.5">{ws.spec}</p>
                       </button>
                     );
                   })}
@@ -1100,7 +1100,7 @@ export function HubsPage() {
                     onClick={() => setSelectedMentorId("")}
                     className={`rounded-lg border p-2.5 text-left transition ${
                       selectedMentorId === ""
-                        ? "border-indigo-500 bg-indigo-500/15 text-white"
+                        ? "border-violet-500 bg-violet-500/15 text-white"
                         : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700"
                     }`}
                   >
@@ -1117,12 +1117,12 @@ export function HubsPage() {
                         onClick={() => setSelectedMentorId(mentor.id)}
                         className={`rounded-lg border p-2.5 text-left transition ${
                           isSelected
-                            ? "border-indigo-500 bg-indigo-500/15 text-white"
+                            ? "border-violet-500 bg-violet-500/15 text-white"
                             : "border-[#27272A] bg-[#141418] text-zinc-300 hover:border-zinc-700"
                         }`}
                       >
                         <p className="font-medium text-xs text-white">{mentor.name}</p>
-                        <p className="text-[10px] text-indigo-300 line-clamp-1">{mentor.role}</p>
+                        <p className="text-[10px] text-violet-300 line-clamp-1">{mentor.role}</p>
                         <p className="text-[9px] text-zinc-400 mt-1 line-clamp-1">{mentor.specialties.join(", ")}</p>
                       </button>
                     );
@@ -1230,7 +1230,7 @@ export function HubsPage() {
                 </div>
                 <p className="text-xs text-zinc-400 leading-relaxed max-w-xs mx-auto">
                   Welcome to <strong className="text-white">{viewingPass.hubCity} Tech Hub</strong>. Connect to the
-                  local Wi-Fi network <code className="text-indigo-300 font-mono">EthioTech-Hub-LAN</code> for offline
+                  local Wi-Fi network <code className="text-violet-300 font-mono">EthioTech-Hub-LAN</code> for offline
                   cache acceleration.
                 </p>
                 <Button
@@ -1263,7 +1263,7 @@ export function HubsPage() {
                 <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3 flex items-center justify-between font-mono">
                   <div className="text-left">
                     <p className="text-[10px] uppercase text-zinc-500 tracking-wider">Pass Code</p>
-                    <p className="text-base font-bold text-indigo-300 tracking-wider">{viewingPass.passCode}</p>
+                    <p className="text-base font-bold text-violet-300 tracking-wider">{viewingPass.passCode}</p>
                   </div>
                   <Button
                     variant="outline"
@@ -1288,7 +1288,7 @@ export function HubsPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-zinc-500">Time Slot:</span>
-                    <span className="text-indigo-300 font-medium">{viewingPass.slotTimeRange}</span>
+                    <span className="text-violet-300 font-medium">{viewingPass.slotTimeRange}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-zinc-500">Workstation:</span>

@@ -63,7 +63,7 @@ export function ParentDashboardPage() {
           {learners.map((learner) => (
             <Card key={learner.id} className="border-[#27272A] bg-[#0E0E11] p-4.5">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
                   <Users size={15} />
                 </div>
                 <div>
@@ -77,7 +77,7 @@ export function ParentDashboardPage() {
                 <p>Enrolled tracks: <span className="font-semibold text-white">{learner.enrolledTrackCount}</span></p>
               </div>
               <div className="mt-3 pt-2 border-t border-[#27272A]">
-                <Link to="/app/dashboard" className="text-xs font-medium text-indigo-400 hover:underline">
+                <Link to="/app/dashboard" className="text-xs font-medium text-violet-400 hover:underline">
                   View Learning Hub →
                 </Link>
               </div>
@@ -88,7 +88,7 @@ export function ParentDashboardPage() {
 
       <div className="grid gap-3.5 md:grid-cols-3">
         <Card className="border-[#27272A] bg-[#0E0E11] p-4.5">
-          <div className="flex items-center gap-2 text-indigo-400">
+          <div className="flex items-center gap-2 text-violet-400">
             <ShieldCheck size={16} />
             <p className="text-xs font-semibold text-white">Access Status</p>
           </div>
@@ -97,7 +97,7 @@ export function ParentDashboardPage() {
           </p>
         </Card>
         <Card className="border-[#27272A] bg-[#0E0E11] p-4.5">
-          <div className="flex items-center gap-2 text-indigo-400">
+          <div className="flex items-center gap-2 text-violet-400">
             <BookOpen size={16} />
             <p className="text-xs font-semibold text-white">Live Progress</p>
           </div>
@@ -113,7 +113,7 @@ export function ParentDashboardPage() {
           <p className="mt-2 text-xs leading-relaxed text-zinc-400">
             Need to link another student? Our team is available 24/7.
           </p>
-          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-indigo-400 hover:underline">
+          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-violet-400 hover:underline">
             Contact Support →
           </Link>
         </Card>

@@ -122,7 +122,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#141418] text-indigo-400 border border-[#27272A]">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#141418] text-violet-400 border border-[#27272A]">
               {assignmentTypeIcons[assignment.type] ?? <FileText size={13} />}
             </div>
             <Badge
@@ -233,7 +233,7 @@ export function AssignedProjectsPage() {
             </p>
           </div>
           <Link to="/app/projects/submit">
-            <Button size="sm" className="text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white">
+            <Button size="sm" className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white">
               Submit Project
             </Button>
           </Link>
@@ -251,7 +251,7 @@ export function AssignedProjectsPage() {
             className={cn(
               "rounded-md px-3.5 py-1 text-xs font-medium transition",
               tab === t
-                ? "bg-indigo-600 text-white shadow-sm"
+                ? "bg-violet-600 text-white shadow-sm"
                 : "text-zinc-400 hover:text-white",
             )}
           >

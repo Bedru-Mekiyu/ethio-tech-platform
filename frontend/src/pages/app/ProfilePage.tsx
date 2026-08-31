@@ -98,7 +98,7 @@ export function ProfilePage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3">
             <h2 className="text-sm font-semibold text-white">{track?.title ?? "Current Track"}</h2>
-            <Link to="/app/tracks" className="text-xs text-indigo-400 hover:underline">
+            <Link to="/app/tracks" className="text-xs text-violet-400 hover:underline">
               {track ? "View track" : "Browse tracks"}
             </Link>
           </div>
@@ -119,7 +119,7 @@ export function ProfilePage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3">
             <h2 className="text-sm font-semibold text-white">Recent Achievements</h2>
-            <Link to="/app/progress" className="text-xs text-indigo-400 hover:underline">
+            <Link to="/app/progress" className="text-xs text-violet-400 hover:underline">
               View all
             </Link>
           </div>
@@ -130,7 +130,7 @@ export function ProfilePage() {
                   key={badge._id ?? badge.name}
                   className="flex items-center gap-2.5 rounded-lg border border-[#27272A] bg-[#141418] p-2.5"
                 >
-                  <Award size={14} className="text-indigo-400 shrink-0" />
+                  <Award size={14} className="text-violet-400 shrink-0" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-medium text-white truncate">{badge.name}</p>
                     <p className="text-[10px] text-zinc-500 capitalize">{badge.category ?? "achievement"}</p>

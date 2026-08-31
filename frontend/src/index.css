@@ -19,7 +19,6 @@
   --color-accent-muted: var(--accent-muted);
   --color-accent-subtle: var(--accent-subtle);
   --color-cyan: var(--cyan);
-  --color-indigo: var(--indigo);
   --color-violet: var(--violet);
   --color-success: var(--success);
   --color-warning: var(--warning);
@@ -88,7 +87,7 @@ img {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
+  background: rgba(139, 92, 246, 0.35);
   color: #ffffff;
 }
 
@@ -322,10 +321,10 @@ dialog {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 8px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.1);
   }
   50% {
-    box-shadow: 0 0 16px rgba(79, 70, 229, 0.2);
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.2);
   }
 }
 

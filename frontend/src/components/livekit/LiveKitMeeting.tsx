@@ -427,7 +427,7 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
           <button
             type="button"
             onClick={() => void connectToRoom()}
-            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-600/25"
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-2.5 text-xs font-semibold text-white hover:bg-violet-500 transition-colors shadow-lg shadow-violet-600/25"
           >
             <RefreshCw className="h-4 w-4" /> Try Reconnecting
           </button>

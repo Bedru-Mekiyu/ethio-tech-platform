@@ -125,7 +125,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
       case "hand":
         return <Hand size={14} className="text-primary" />;
       case "question":
-        return <MessageSquare size={14} className="text-indigo-400" />;
+        return <MessageSquare size={14} className="text-violet-400" />;
       case "poll":
         return <Vote size={14} className="text-purple-400" />;
       case "waiting":

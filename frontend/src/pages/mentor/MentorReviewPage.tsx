@@ -74,7 +74,7 @@ function ReviewWorkspace({
       onClick={onSelect}
       className={cn(
         "w-full rounded-lg border p-3.5 text-left transition-all",
-        isSelected ? "border-indigo-500 bg-indigo-500/10 shadow-sm" : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700",
+        isSelected ? "border-violet-500 bg-violet-500/10 shadow-sm" : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700",
       )}
     >
       <div className="flex items-start justify-between gap-2">
@@ -250,7 +250,7 @@ export function MentorReviewPage() {
             className={cn(
               "rounded px-3 py-1 text-xs transition font-medium capitalize",
               filter === option.value
-                ? "border border-indigo-500 bg-indigo-600 text-white"
+                ? "border border-violet-500 bg-violet-600 text-white"
                 : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:text-white",
             )}
           >
@@ -457,7 +457,7 @@ export function MentorReviewPage() {
           {/* Student Feedback History */}
           <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
             <div className="flex items-center gap-2 mb-3">
-              <div className="bg-indigo-500/10 p-1.5 rounded-lg text-indigo-400 border border-indigo-500/20">
+              <div className="bg-violet-500/10 p-1.5 rounded-lg text-violet-400 border border-violet-500/20">
                 <MessageSquare size={14} />
               </div>
               <h4 className="text-xs font-semibold text-white">Learner Feedback History</h4>

@@ -48,7 +48,7 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
               <ul className="mt-3 space-y-1.5 text-xs text-zinc-400">
                 {section.bullets.map((bullet) => (
                   <li key={bullet} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-indigo-400 shrink-0" />
+                    <span className="mt-1.5 h-1 w-1 rounded-full bg-violet-400 shrink-0" />
                     <span>{bullet}</span>
                   </li>
                 ))}

@@ -191,7 +191,7 @@ function MentorStatCard({
 }) {
   return (
     <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center transition hover:border-zinc-700 shadow-md">
-      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-indigo-400">
+      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-violet-400">
         <Icon size={15} />
       </div>
       <p className="mt-2 text-xl font-bold tracking-tight text-white font-mono">{value}</p>
@@ -223,9 +223,9 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
             <div>
               <div className="flex items-center gap-1">
                 <h3 className={`font-semibold text-white ${featured ? "text-sm" : "text-xs"}`}>{mentor.fullName}</h3>
-                {mentor.isVerified && <BadgeCheck size={14} className="text-indigo-400 shrink-0" />}
+                {mentor.isVerified && <BadgeCheck size={14} className="text-violet-400 shrink-0" />}
               </div>
-              <p className="text-[11px] font-medium text-indigo-400 mt-0.5">
+              <p className="text-[11px] font-medium text-violet-400 mt-0.5">
                 {mentor.currentCompany || "Senior Tech Leader"}
               </p>
             </div>
@@ -350,13 +350,13 @@ export function MentorsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
           <Sparkles size={13} />
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-          Learn From Senior Engineers Shaping <span className="text-indigo-400">Global & African Tech</span>
+          Learn From Senior Engineers Shaping <span className="text-violet-400">Global & African Tech</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
@@ -382,10 +382,10 @@ export function MentorsPage() {
         {/* Requirements & Commitment Callout Strip */}
         <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <ShieldCheck size={14} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
+            <ShieldCheck size={14} className="text-violet-400" /> Requirement: 2+ Years Senior Experience
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={14} className="text-indigo-400" /> Commitment: 2–4 Hours / Week (Flexible)
+            <Clock size={14} className="text-violet-400" /> Commitment: 2–4 Hours / Week (Flexible)
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
             <Trophy size={14} className="text-emerald-400" /> Verified Leadership Credentials
@@ -444,7 +444,7 @@ export function MentorsPage() {
             return (
               <Card key={idx} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Icon size={18} />
                   </div>
                   <h3 className="mt-4 font-semibold text-white text-sm">{pillar.title}</h3>
@@ -488,7 +488,7 @@ export function MentorsPage() {
               onClick={() => setSelectedDomain(domain.value)}
               className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
                 selectedDomain === domain.value
-                  ? "border-indigo-500 bg-indigo-600 text-white"
+                  ? "border-violet-500 bg-violet-600 text-white"
                   : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
               }`}
             >
@@ -558,7 +558,7 @@ export function MentorsPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-violet-400 hover:text-white">
               Talk to Guild Coordinator
             </Button>
           </Link>

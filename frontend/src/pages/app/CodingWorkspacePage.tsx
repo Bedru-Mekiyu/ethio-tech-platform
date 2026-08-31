@@ -429,7 +429,7 @@ export function TelemetryGauge() {
         </div>
         <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-center">
           <p className="text-[10px] text-slate-400 uppercase">CPU Load</p>
-          <p className="text-lg font-bold text-indigo-300 mt-1">{cpuUsage}<span className="text-xs font-normal text-slate-400">%</span></p>
+          <p className="text-lg font-bold text-violet-300 mt-1">{cpuUsage}<span className="text-xs font-normal text-slate-400">%</span></p>
         </div>
         <div className="p-3 bg-slate-950/60 rounded-lg border border-slate-800 text-center">
           <p className="text-[10px] text-slate-400 uppercase">Memory</p>
@@ -1272,8 +1272,8 @@ export function CodingWorkspacePage() {
             <span className="text-zinc-600 hidden md:inline">/</span>
             <span className="text-zinc-400 hidden sm:inline">src</span>
             <span className="text-zinc-600 hidden sm:inline">/</span>
-            <div className="flex items-center gap-1.5 rounded-md bg-[#141418] px-2 py-0.5 text-xs font-medium text-indigo-300 border border-[#27272A]">
-              <FileCode size={12} className="text-indigo-400" />
+            <div className="flex items-center gap-1.5 rounded-md bg-[#141418] px-2 py-0.5 text-xs font-medium text-violet-300 border border-[#27272A]">
+              <FileCode size={12} className="text-violet-400" />
               <span>{currentTemplate.fileName}</span>
             </div>
           </div>
@@ -1365,7 +1365,7 @@ export function CodingWorkspacePage() {
             size="sm"
             onClick={handleRunCode}
             disabled={isRunning}
-            className="h-7 gap-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
+            className="h-7 gap-1 bg-violet-600 hover:bg-violet-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
           >
             <Play size={11} className={cn("fill-current", isRunning && "animate-spin")} />
             <span>{isRunning ? "Running..." : "Run"}</span>
@@ -1924,7 +1924,7 @@ export function CodingWorkspacePage() {
                             </div>
                             <div className="p-2 bg-slate-950 rounded border border-slate-800">
                               <p className="text-[10px] text-slate-500">CPU</p>
-                              <p className="text-sm font-bold text-indigo-300">14%</p>
+                              <p className="text-sm font-bold text-violet-300">14%</p>
                             </div>
                             <div className="p-2 bg-slate-950 rounded border border-slate-800">
                               <p className="text-[10px] text-slate-500">Memory</p>

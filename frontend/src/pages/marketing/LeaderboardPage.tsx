@@ -96,7 +96,7 @@ function RankCard({
     <Card
       className={cn(
         "relative flex h-full flex-col items-center text-center transition-transform duration-200",
-        featured ? "border-indigo-500/50 md:-mt-4" : "border-[#27272A]",
+        featured ? "border-violet-500/50 md:-mt-4" : "border-[#27272A]",
         "bg-[#0E0E11]",
       )}
     >
@@ -130,7 +130,7 @@ function RankCard({
         ) : null}
       </div>
       <h3 className="mt-3 text-sm font-semibold text-white">{title}</h3>
-      <p className="text-xs text-indigo-400 font-medium">{subtitle}</p>
+      <p className="text-xs text-violet-400 font-medium">{subtitle}</p>
       <div className="mt-3 flex flex-wrap justify-center gap-2">
         <Badge variant={featured ? "purple" : "default"}>{podiumText(tab, metric)}</Badge>
         <Badge variant={featured ? "success" : "purple"}>{featured ? "Top ranked" : "Rising"}</Badge>
@@ -210,7 +210,7 @@ export function LeaderboardPage() {
             className={cn(
               "rounded-lg border px-4 py-2 text-left transition text-xs",
               tab === item.id
-                ? "border-indigo-500 bg-indigo-600 text-white font-semibold"
+                ? "border-violet-500 bg-violet-600 text-white font-semibold"
                 : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
             )}
           >
@@ -236,7 +236,7 @@ export function LeaderboardPage() {
               {tab === "mentors" ? "Top score" : "Top XP"}
             </span>
           </div>
-          <p className="mt-2 text-xl font-bold text-indigo-400">{podiumText(tab, topRank)}</p>
+          <p className="mt-2 text-xl font-bold text-violet-400">{podiumText(tab, topRank)}</p>
           <p className="mt-0.5 text-[11px] text-zinc-400">Current cohort leader</p>
         </Card>
         <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">

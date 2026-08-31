@@ -158,7 +158,7 @@ export function MentorOnboardingPage() {
               key={step.id}
               className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium ${
                 current
-                  ? "border-indigo-500 bg-indigo-500/10 text-indigo-400"
+                  ? "border-violet-500 bg-violet-500/10 text-violet-400"
                   : done
                     ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/5"
                     : "border-[#27272A] bg-[#141418] text-zinc-500"
@@ -226,7 +226,7 @@ export function MentorOnboardingPage() {
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="min-h-[80px] w-full rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs text-white outline-none focus:border-indigo-500"
+                className="min-h-[80px] w-full rounded-lg border border-[#27272A] bg-[#141418] p-2.5 text-xs text-white outline-none focus:border-violet-500"
               />
             </FormField>
             <FormField id="company" label="Current Company / Organization">

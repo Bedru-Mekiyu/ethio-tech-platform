@@ -79,7 +79,7 @@ export function LessonPage() {
       <div className="flex items-center justify-between">
         <Link
           to={trackId ? `/app/tracks/${trackId}` : "/app/tracks"}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-400 hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-violet-400 hover:underline"
         >
           <ArrowLeft size={13} />
           Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
@@ -87,7 +87,7 @@ export function LessonPage() {
 
         {lesson?.durationMinutes && (
           <span className="text-xs text-zinc-400 flex items-center gap-1">
-            <Clock size={12} className="text-indigo-400" />
+            <Clock size={12} className="text-violet-400" />
             {lesson.durationMinutes} min
           </span>
         )}
@@ -99,7 +99,7 @@ export function LessonPage() {
           <div className="flex flex-wrap items-center gap-1.5">
             {lesson?.moduleTitle && (
               <Badge variant="default" size="sm" className="flex items-center gap-1">
-                <Layers size={10} className="text-indigo-400" />
+                <Layers size={10} className="text-violet-400" />
                 {lesson.moduleTitle}
               </Badge>
             )}
@@ -130,7 +130,7 @@ export function LessonPage() {
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
           <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-violet-400 flex items-center gap-1.5">
               <Sparkles size={11} />
               Lesson Prerequisites
             </p>
@@ -159,13 +159,13 @@ export function LessonPage() {
           <div className="space-y-2 pt-3 border-t border-[#27272A]">
             <div className="flex items-center justify-between text-xs text-zinc-400">
               <span className="font-mono flex items-center gap-1.5">
-                <Code2 size={13} className="text-indigo-400" />
+                <Code2 size={13} className="text-violet-400" />
                 Hands-On Code Sandbox Snippet
               </span>
               <button
                 type="button"
                 onClick={() => handleCopyStarter(lesson.starterCode!)}
-                className="inline-flex items-center gap-1 text-indigo-400 hover:underline text-xs"
+                className="inline-flex items-center gap-1 text-violet-400 hover:underline text-xs"
               >
                 {copiedCode ? <Check size={12} /> : <Copy size={12} />}
                 {copiedCode ? "Copied" : "Copy"}
@@ -203,7 +203,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#141418] px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition"
             >
-              <Play size={12} className="text-indigo-400" />
+              <Play size={12} className="text-violet-400" />
               Video Workshop
             </a>
           )}
@@ -215,7 +215,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#141418] px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition"
             >
-              <BookOpen size={12} className="text-indigo-400" />
+              <BookOpen size={12} className="text-violet-400" />
               Interactive Sandbox
             </a>
           )}

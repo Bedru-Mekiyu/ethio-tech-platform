@@ -491,12 +491,12 @@ export function AboutPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-400 mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-400 mb-4">
             <Sparkles size={12} />
             <span>The Ethiopian Software Engineering Movement</span>
           </div>
           <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
-            Democratizing elite tech education with the <span className="text-indigo-400">PISTELS</span> framework
+            Democratizing elite tech education with the <span className="text-violet-400">PISTELS</span> framework
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
             {data?.hero.description ||
@@ -511,7 +511,7 @@ export function AboutPage() {
             </Link>
             <Link to="/mentor-recruitment">
               <Button variant="outline" size="md">
-                <Users className="mr-2 h-4 w-4 text-indigo-400" /> Become a Mentor
+                <Users className="mr-2 h-4 w-4 text-violet-400" /> Become a Mentor
               </Button>
             </Link>
             <Button
@@ -541,7 +541,7 @@ export function AboutPage() {
                 key={item}
                 className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-xs text-zinc-300"
               >
-                <Sparkles className="h-3 w-3 text-indigo-400" />
+                <Sparkles className="h-3 w-3 text-violet-400" />
                 {item}
               </span>
             ))}
@@ -560,7 +560,7 @@ export function AboutPage() {
                 className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Icon size={18} />
                   </div>
                   <div>
@@ -584,11 +584,11 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
             <span>National Context & Strategic Imperative</span>
           </div>
           <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Unlocking Ethiopia’s <span className="text-indigo-400">Demographic Dividend</span>
+            Unlocking Ethiopia’s <span className="text-violet-400">Demographic Dividend</span>
           </h2>
           <p className="mt-3 text-base leading-relaxed text-zinc-400">
             With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
@@ -606,7 +606,7 @@ export function AboutPage() {
                 key={fact.label}
                 className="border-[#27272A] bg-[#0E0E11] p-5 transition duration-150 hover:border-zinc-700"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                   <Icon size={18} />
                 </div>
                 <p className="mt-3 text-2xl font-bold text-white">{fact.metric}</p>
@@ -689,7 +689,7 @@ export function AboutPage() {
                     className="border-[#27272A] bg-[#0E0E11] p-4 transition-all duration-150 hover:border-zinc-700"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                         <Icon size={15} />
                       </div>
                       <Badge variant="default" size="sm">
@@ -711,11 +711,11 @@ export function AboutPage() {
       <section id="pistels-framework" className="relative border-y border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
               <span>Core Pedagogical Backbone</span>
             </div>
             <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-              The <span className="text-indigo-400">PISTELS</span> Ideology
+              The <span className="text-violet-400">PISTELS</span> Ideology
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
               Our 7-pillar methodology engineered to systematically develop collaborative software engineers capable of
@@ -734,13 +734,13 @@ export function AboutPage() {
                   onClick={() => setActivePillarIndex(idx)}
                   className={`group relative flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? "border-indigo-500/40 bg-indigo-500/15 text-white"
+                      ? "border-violet-500/40 bg-violet-500/15 text-white"
                       : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                   }`}
                 >
                   <span
                     className={`flex h-5 w-5 items-center justify-center rounded text-xs font-bold ${
-                      isActive ? "bg-indigo-500 text-white" : "bg-[#141418] text-zinc-300"
+                      isActive ? "bg-violet-500 text-white" : "bg-[#141418] text-zinc-300"
                     }`}
                   >
                     {pillar.letter === "S2" ? "S" : pillar.letter}
@@ -766,12 +766,12 @@ export function AboutPage() {
                   {/* Left Column: Narrative & Mechanisms */}
                   <div className="space-y-4 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                         <activePillar.icon size={20} />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-400">
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                             Pillar {activePillarIndex + 1} of 7
                           </span>
                           <Badge variant="default" size="sm">
@@ -782,7 +782,7 @@ export function AboutPage() {
                       </div>
                     </div>
 
-                    <p className="text-sm font-medium text-indigo-400">{activePillar.tagline}</p>
+                    <p className="text-sm font-medium text-violet-400">{activePillar.tagline}</p>
                     <p className="text-xs leading-relaxed text-zinc-400">{activePillar.philosophy}</p>
 
                     <div>
@@ -800,7 +800,7 @@ export function AboutPage() {
                     </div>
 
                     <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
                         <Trophy size={16} />
                       </div>
                       <div>
@@ -841,7 +841,7 @@ export function AboutPage() {
                         onClick={() => {
                           setActivePillarIndex((prev) => (prev + 1) % PISTELS_PILLARS.length);
                         }}
-                        className="text-indigo-400 hover:text-white"
+                        className="text-violet-400 hover:text-white"
                       >
                         Next Pillar <ArrowRight size={13} className="ml-1" />
                       </Button>
@@ -863,15 +863,15 @@ export function AboutPage() {
                   onClick={() => setActivePillarIndex(idx)}
                   className={`cursor-pointer border p-3.5 transition-all duration-150 ${
                     isSelected
-                      ? "border-indigo-500/40 bg-indigo-500/10 shadow-xs"
+                      ? "border-violet-500/40 bg-violet-500/10 shadow-xs"
                       : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                       <Icon size={14} />
                     </div>
-                    <span className="text-xs font-bold font-mono text-indigo-400">
+                    <span className="text-xs font-bold font-mono text-violet-400">
                       {pillar.letter === "S2" ? "S" : pillar.letter}
                     </span>
                   </div>
@@ -895,7 +895,7 @@ export function AboutPage() {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <Target size={20} />
               </div>
               <Badge variant="default">Our Purpose</Badge>
@@ -909,7 +909,7 @@ export function AboutPage() {
 
           <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <Compass size={20} />
               </div>
               <Badge variant="default">Our Horizon</Badge>
@@ -939,7 +939,7 @@ export function AboutPage() {
           </div>
 
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2">
               <span>National Impact Model</span>
             </div>
             <h3 className="text-xl font-bold leading-tight sm:text-2xl text-white">
@@ -965,7 +965,7 @@ export function AboutPage() {
                     key={bullet}
                     className="flex items-start gap-2.5 rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 transition hover:border-zinc-700"
                   >
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-indigo-500/10 text-indigo-400">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-violet-500/10 text-violet-400">
                       <Icon size={14} />
                     </div>
                     <p className="text-xs leading-relaxed text-zinc-300">{bullet}</p>
@@ -981,7 +981,7 @@ export function AboutPage() {
                 </Button>
               </Link>
               <Link to="/hubs">
-                <Button variant="ghost" size="sm" className="text-indigo-400 hover:text-white">
+                <Button variant="ghost" size="sm" className="text-violet-400 hover:text-white">
                   Explore Regional Hubs
                 </Button>
               </Link>
@@ -999,7 +999,7 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
             <span>Trajectory & Execution</span>
           </div>
           <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Platform Roadmap & Milestones</h2>
@@ -1015,7 +1015,7 @@ export function AboutPage() {
                 onClick={() => setRoadmapFilter(filterKey)}
                 className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                   roadmapFilter === filterKey
-                    ? "border border-indigo-500 bg-indigo-600 text-white"
+                    ? "border border-violet-500 bg-violet-600 text-white"
                     : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
                 }`}
               >
@@ -1032,7 +1032,7 @@ export function AboutPage() {
               "in-progress": {
                 badge: "Current Phase",
                 variant: "default" as const,
-                dotColor: "bg-indigo-400 animate-pulse",
+                dotColor: "bg-violet-400 animate-pulse",
               },
               planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-zinc-500" },
             }[item.status];
@@ -1045,7 +1045,7 @@ export function AboutPage() {
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <span className={`h-2 w-2 rounded-full ${statusConfig.dotColor}`} />
-                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">{item.phase}</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-violet-400">{item.phase}</span>
                     <Badge variant={statusConfig.variant} size="sm">
                       {statusConfig.badge}
                     </Badge>
@@ -1079,7 +1079,7 @@ export function AboutPage() {
       <section className="border-t border-[#27272A] bg-[#050507] py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
               <span>Institutional Trust</span>
             </div>
             <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Governance & Open Impact Model</h2>
@@ -1091,7 +1091,7 @@ export function AboutPage() {
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <BookOpen size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-white">100% Open Source Syllabus</h3>
@@ -1102,7 +1102,7 @@ export function AboutPage() {
             </Card>
 
             <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <ShieldCheck size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-white">Ethical Philanthropic Model</h3>
@@ -1113,7 +1113,7 @@ export function AboutPage() {
             </Card>
 
             <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                 <ShieldCheck size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-white">Transparent Impact Auditing</h3>
@@ -1131,7 +1131,7 @@ export function AboutPage() {
         <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400 mb-2.5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2.5">
                 <span>Join the Movement</span>
               </div>
               <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
@@ -1154,7 +1154,7 @@ export function AboutPage() {
                 </Button>
               </Link>
               <Link to="/how-it-works">
-                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-400 hover:text-white">
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-violet-400 hover:text-white">
                   Explore Learning Flow <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>

@@ -240,7 +240,7 @@ export function SquadPage() {
                   onKeyDown={(event) => event.key === "Enter" && sendDraft()}
                   className="bg-[#0E0E11] border-[#27272A] text-xs h-8"
                 />
-                <Button type="button" size="sm" onClick={sendDraft} aria-label="Send squad update" className="h-8 px-3 bg-indigo-600 hover:bg-indigo-500">
+                <Button type="button" size="sm" onClick={sendDraft} aria-label="Send squad update" className="h-8 px-3 bg-violet-600 hover:bg-violet-500">
                   <Send size={13} />
                 </Button>
               </div>
@@ -288,7 +288,7 @@ export function SquadPage() {
       <div className="space-y-6">
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 shadow-sm">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">
               <Users size={15} />
             </span>
             <div>
@@ -313,7 +313,7 @@ export function SquadPage() {
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Upcoming Sessions</h3>
-            <Link to="/app/sessions" className="text-xs text-indigo-400 hover:underline">
+            <Link to="/app/sessions" className="text-xs text-violet-400 hover:underline">
               View all
             </Link>
           </div>
@@ -342,7 +342,7 @@ export function SquadPage() {
 
         <Card className="border-[#27272A] bg-[#0E0E11] p-5 shadow-sm space-y-2">
           <Link to="/app/projects">
-            <Button className="w-full text-xs font-medium bg-indigo-600 hover:bg-indigo-500 text-white" size="sm">
+            <Button className="w-full text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white" size="sm">
               Open Projects Hub
             </Button>
           </Link>

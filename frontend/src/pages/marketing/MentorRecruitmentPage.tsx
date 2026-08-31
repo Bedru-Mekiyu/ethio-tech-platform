@@ -226,13 +226,13 @@ export function MentorRecruitmentPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
           <Sparkles size={13} />
           <span>Senior Engineering Guild Membership</span>
         </div>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-indigo-400">Tech Leaders</span>
+          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-violet-400">Tech Leaders</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
@@ -244,7 +244,7 @@ export function MentorRecruitmentPage() {
           <a href="#mentor-form">
             <Button
               size="md"
-              className="font-medium bg-indigo-600 hover:bg-indigo-500 text-white border-0 transition-transform hover:scale-105 active:scale-95"
+              className="font-medium bg-violet-600 hover:bg-violet-500 text-white border-0 transition-transform hover:scale-105 active:scale-95"
             >
               Complete Mentor Application (5 Min)
               <ArrowRight size={14} className="ml-1.5" />
@@ -272,7 +272,7 @@ export function MentorRecruitmentPage() {
             <span>Top 5% of Applicant Engineers Selected</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Users size={14} className="text-indigo-400" />
+            <Users size={14} className="text-violet-400" />
             <span>Join 50+ Active Tech Leads</span>
           </div>
         </div>
@@ -280,10 +280,10 @@ export function MentorRecruitmentPage() {
         {/* Requirements Strip */}
         <div className="rounded-xl border border-[#27272A] bg-gradient-to-r from-[#0E0E11] to-[#141418] p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400 shadow-md">
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <ShieldCheck size={14} className="text-indigo-400" /> Requirement: 2+ Years Senior Experience
+            <ShieldCheck size={14} className="text-violet-400" /> Requirement: 2+ Years Senior Experience
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={14} className="text-indigo-400" /> Flexible Commitment: 2-4 Hours / Week
+            <Clock size={14} className="text-violet-400" /> Flexible Commitment: 2-4 Hours / Week
           </span>
           <span className="flex items-center gap-1.5 font-medium text-zinc-200">
             <Award size={14} className="text-emerald-400" /> Verified Leadership Badge
@@ -312,7 +312,7 @@ export function MentorRecruitmentPage() {
                 className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700 shadow-md"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                     <Icon size={18} />
                   </div>
                   <h3 className="mt-4 font-semibold text-white text-sm">{benefit.title}</h3>
@@ -344,7 +344,7 @@ export function MentorRecruitmentPage() {
               <Card key={step.step} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5">
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-indigo-400 border border-[#27272A]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
                       <Icon size={16} />
                     </div>
                     <span className="text-xl font-bold font-mono text-zinc-600">{step.step}</span>
@@ -364,7 +364,7 @@ export function MentorRecruitmentPage() {
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
             {/* Left: Expectations & Guidelines */}
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-0.5 text-xs font-medium text-indigo-400">
+              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
                 <ShieldCheck size={13} />
                 <span>Mentor Application</span>
               </div>
@@ -380,7 +380,7 @@ export function MentorRecruitmentPage() {
               <div className="space-y-2.5 pt-1">
                 <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
                   <p className="text-xs font-semibold text-white flex items-center gap-2">
-                    <Clock3 size={14} className="text-indigo-400" /> Flexible Weekly Commitment
+                    <Clock3 size={14} className="text-violet-400" /> Flexible Weekly Commitment
                   </p>
                   <p className="text-xs text-zinc-400">
                     Allocate 2 to 4 hours per week for asynchronous PR reviews or weekend 1-on-1 office hours.
@@ -389,7 +389,7 @@ export function MentorRecruitmentPage() {
 
                 <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 space-y-1">
                   <p className="text-xs font-semibold text-white flex items-center gap-2">
-                    <Award size={14} className="text-indigo-400" /> Senior Experience Requirement
+                    <Award size={14} className="text-violet-400" /> Senior Experience Requirement
                   </p>
                   <p className="text-xs text-zinc-400">
                     Minimum 2+ years of professional industry experience in engineering, product, or data.
@@ -406,14 +406,14 @@ export function MentorRecruitmentPage() {
                 </div>
 
                 {/* Live Mentor Guild Credibility Quote */}
-                <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 p-3.5 space-y-2">
+                <div className="rounded-lg border border-violet-500/20 bg-violet-500/5 p-3.5 space-y-2">
                   <p className="text-xs italic text-zinc-300 leading-relaxed">
                     &ldquo;Reviewing PRs from students in Jimma and Bahir Dar is the most impactful engineering service
                     I do all week.&rdquo;
                   </p>
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="font-semibold text-white">Selamawit T.</span>
-                    <span className="text-indigo-400 font-mono">Staff SRE @ Google</span>
+                    <span className="text-violet-400 font-mono">Staff SRE @ Google</span>
                   </div>
                 </div>
               </div>
@@ -440,7 +440,7 @@ export function MentorRecruitmentPage() {
                       </Button>
                     </Link>
                     <Link to="/about">
-                      <Button variant="ghost" size="sm" className="text-indigo-400 hover:text-white">
+                      <Button variant="ghost" size="sm" className="text-violet-400 hover:text-white">
                         Learn About EthioTech
                       </Button>
                     </Link>
@@ -528,7 +528,7 @@ export function MentorRecruitmentPage() {
                             onClick={() => toggleSkill(skill)}
                             className={`rounded-md border px-2.5 py-1 text-xs font-medium transition ${
                               active
-                                ? "border-indigo-500 bg-indigo-600 text-white"
+                                ? "border-violet-500 bg-violet-600 text-white"
                                 : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                             }`}
                           >
@@ -554,7 +554,7 @@ export function MentorRecruitmentPage() {
                             onClick={() => toggleStyle(style.value)}
                             className={`rounded-lg border p-2.5 text-left transition ${
                               active
-                                ? "border-indigo-500 bg-indigo-500/15 text-white"
+                                ? "border-violet-500 bg-violet-500/15 text-white"
                                 : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                             }`}
                           >
@@ -579,7 +579,7 @@ export function MentorRecruitmentPage() {
                           onClick={() => setAvailability(opt.value)}
                           className={`rounded-md border p-2 text-center text-xs font-medium transition ${
                             availability === opt.value
-                              ? "border-indigo-500 bg-indigo-600 text-white"
+                              ? "border-violet-500 bg-violet-600 text-white"
                               : "border-[#27272A] bg-[#141418] text-zinc-400 hover:border-zinc-700 hover:text-white"
                           }`}
                         >
@@ -629,7 +629,7 @@ export function MentorRecruitmentPage() {
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
                       required
-                      className="mt-0.5 h-4 w-4 rounded border-[#27272A] bg-[#0E0E11] text-indigo-600"
+                      className="mt-0.5 h-4 w-4 rounded border-[#27272A] bg-[#0E0E11] text-violet-600"
                     />
                     <span>
                       I confirm that I have 2+ years of professional industry experience and commit to providing
@@ -678,7 +678,7 @@ export function MentorRecruitmentPage() {
               <p className="text-xs leading-relaxed text-zinc-300 italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="pt-3 border-t border-[#27272A]">
                 <p className="font-semibold text-white text-xs">{t.author}</p>
-                <p className="text-xs text-indigo-400 font-medium">{t.role}</p>
+                <p className="text-xs text-violet-400 font-medium">{t.role}</p>
                 <p className="text-[11px] text-zinc-500 mt-0.5">{t.company}</p>
               </div>
             </Card>
@@ -707,7 +707,7 @@ export function MentorRecruitmentPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-indigo-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-violet-400 hover:text-white">
               Contact Guild Lead
             </Button>
           </Link>

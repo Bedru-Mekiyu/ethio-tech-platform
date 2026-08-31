@@ -137,7 +137,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
       <div className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0F172A] p-6 shadow-2xl text-white">
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-indigo-500/20 p-2 text-indigo-400">
+            <div className="rounded-lg bg-violet-500/20 p-2 text-violet-400">
               <Mic className="h-5 w-5" />
             </div>
             <div>
@@ -164,7 +164,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
               <button
                 type="button"
                 onClick={loadDevices}
-                className="text-[11px] text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
+                className="text-[11px] text-violet-400 hover:text-violet-300 flex items-center gap-1"
               >
                 <RefreshCw className={`h-3 w-3 ${loading ? "animate-spin" : ""}`} /> Refresh
               </button>
@@ -172,7 +172,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
             <select
               value={selectedAudioInput}
               onChange={(e) => setSelectedAudioInput(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
             >
               {audioInputs.map((d) => (
                 <option key={d.deviceId} value={d.deviceId}>
@@ -202,7 +202,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
             <select
               value={selectedVideoInput}
               onChange={(e) => setSelectedVideoInput(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
             >
               {videoInputs.map((d) => (
                 <option key={d.deviceId} value={d.deviceId}>
@@ -222,7 +222,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
               <select
                 value={selectedAudioOutput}
                 onChange={(e) => setSelectedAudioOutput(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
               >
                 {audioOutputs.map((d) => (
                   <option key={d.deviceId} value={d.deviceId}>
@@ -245,7 +245,7 @@ export function LiveKitDeviceSettingsModal({ isOpen, onClose, room }: LiveKitDev
           <button
             type="button"
             onClick={handleApply}
-            className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 hover:bg-indigo-500 transition-colors"
+            className="inline-flex items-center gap-2 rounded-xl bg-violet-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-violet-500/20 hover:bg-violet-500 transition-colors"
           >
             <Check className="h-4 w-4" /> Save Preferences
           </button>
