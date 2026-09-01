@@ -128,7 +128,16 @@ describe("AdminContentPage Master-Detail CMS", () => {
     });
 
     (api.post as import("vitest").Mock).mockImplementation((_url: string, payload: unknown) =>
-      Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...payload } } } }),
+      Promise.resolve({
+        data: {
+          data: {
+            track: {
+              _id: "new-t-1",
+              ...((payload && typeof payload === "object" ? payload : {}) as Record<string, unknown>),
+            },
+          },
+        },
+      }),
     );
     (api.patch as import("vitest").Mock).mockResolvedValue({ data: { data: { success: true } } });
     (api.delete as import("vitest").Mock).mockResolvedValue({ data: { success: true } });
