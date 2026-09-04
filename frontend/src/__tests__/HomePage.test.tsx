@@ -78,8 +78,8 @@ describe("HomePage Component Suite", () => {
 
     expect(screen.getByText(/Empowering youth with senior engineering mentors/i)).toBeDefined();
     expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
-    expect(screen.getByRole("button", { name: /Start Coding Free/i })).toBeDefined();
-    
+    expect(screen.getAllByRole("button", { name: /Start Coding Free/i }).length).toBeGreaterThan(0);
+
     // Check for the LivePlatformPulse text (just one of the fake events to ensure it renders)
     expect(screen.getByText(/Addis Ababa Hub started a live session/i)).toBeDefined();
   }, 15000);
