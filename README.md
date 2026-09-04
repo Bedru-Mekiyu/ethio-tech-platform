@@ -553,7 +553,7 @@ Yes. The built-in Cloud Sandbox IDE executes in remote containerized environment
 
 ## 📄 License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for full details.
+Distributed under the **MIT License**.
 
 ---
 
