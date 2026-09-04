@@ -127,9 +127,11 @@ describe("AdminContentPage Master-Detail CMS", () => {
       return Promise.resolve({ data: {} });
     });
 
-    (api.post as import("vitest").Mock).mockImplementation((_url: string, payload: unknown) =>
-      Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...payload } } } }),
-    );
+    (api.post as import("vitest").Mock).mockImplementation((_url: string, payload: unknown) => {
+      const trackPayload = typeof payload === "object" && payload !== null ? (payload as Record<string, unknown>) : {};
+
+      return Promise.resolve({ data: { data: { track: { _id: "new-t-1", ...trackPayload } } } });
+    });
     (api.patch as import("vitest").Mock).mockResolvedValue({ data: { data: { success: true } } });
     (api.delete as import("vitest").Mock).mockResolvedValue({ data: { success: true } });
   });
