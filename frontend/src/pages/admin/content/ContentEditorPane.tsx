@@ -92,10 +92,10 @@ export function ContentEditorPane({
   const [isDirty, setIsDirty] = useState(false);
 
   // Sync state with selected entities
-  const [prevSelection, setPrevSelection] = useState(selection);
-  const [prevTrack, setPrevTrack] = useState(selectedTrack);
-  const [prevModule, setPrevModule] = useState(selectedModule);
-  const [prevLesson, setPrevLesson] = useState(selectedLesson);
+  const [prevSelection, setPrevSelection] = useState<ContentSelection | null>(null);
+  const [prevTrack, setPrevTrack] = useState<Track | null>(null);
+  const [prevModule, setPrevModule] = useState<Module | null>(null);
+  const [prevLesson, setPrevLesson] = useState<Lesson | null>(null);
 
   if (
     selection !== prevSelection ||
