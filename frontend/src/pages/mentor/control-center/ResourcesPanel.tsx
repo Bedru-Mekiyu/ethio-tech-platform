@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select } from "@/components/ui/select";
 import { Link2, Plus, Eye, Download, FileText, Globe, Video, Github } from "lucide-react";
 import { getResources, createResource } from "@/services/mentorControlService";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -148,19 +148,18 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
               </div>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Resource Type</label>
-                <Select value={type} onChange={(e) => setType(e.target.value)}>
-                  <SelectTrigger className="bg-white/5 border-white/5 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#0B0F19] border-white/10 text-white">
-                    <SelectItem value="pdf">PDF File</SelectItem>
-                    <SelectItem value="slide">Slides</SelectItem>
-                    <SelectItem value="doc">Document</SelectItem>
-                    <SelectItem value="video">Video Link</SelectItem>
-                    <SelectItem value="github">GitHub Repo</SelectItem>
-                    <SelectItem value="link">Other Web Link</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Select
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  options={[
+                    { value: "pdf", label: "PDF File" },
+                    { value: "slide", label: "Slides" },
+                    { value: "doc", label: "Document" },
+                    { value: "video", label: "Video Link" },
+                    { value: "github", label: "GitHub Repo" },
+                    { value: "link", label: "Other Web Link" },
+                  ]}
+                />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <Button
