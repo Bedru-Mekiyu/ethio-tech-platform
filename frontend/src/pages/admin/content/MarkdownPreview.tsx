@@ -75,7 +75,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <blockquote
           key={`quote-${nodes.length}`}
-          className="border-l-4 border-indigo-500 bg-indigo-50/50 pl-4 py-2 my-2 rounded-r-lg italic text-slate-700"
+          className="border-l-4 border-zinc-900 bg-zinc-50 pl-4 py-2 my-2 rounded-r-lg italic text-slate-700"
         >
           {renderInlineMarkdown(quoteLines.join(" "))}
         </blockquote>,
@@ -163,10 +163,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
         i++;
       }
       nodes.push(
-        <ul
-          key={`ul-${nodes.length}`}
-          className="my-3 space-y-1.5 pl-5 list-disc marker:text-indigo-600 text-slate-800"
-        >
+        <ul key={`ul-${nodes.length}`} className="my-3 space-y-1.5 pl-5 list-disc marker:text-zinc-900 text-slate-800">
           {listItems.map((item, idx) => (
             <li key={idx} className="leading-relaxed">
               {item.checked !== undefined ? (
@@ -175,7 +172,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
                     type="checkbox"
                     checked={item.checked}
                     readOnly
-                    className="rounded border-slate-300 bg-white text-indigo-600 focus:ring-0"
+                    className="rounded border-slate-300 bg-white text-zinc-900 focus:ring-0"
                   />
                   <span className={item.checked ? "line-through text-slate-400" : ""}>
                     {renderInlineMarkdown(item.text)}
@@ -201,7 +198,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <ol
           key={`ol-${nodes.length}`}
-          className="my-3 space-y-1.5 pl-5 list-decimal marker:text-indigo-600 font-medium text-slate-900"
+          className="my-3 space-y-1.5 pl-5 list-decimal marker:text-zinc-900 font-medium text-slate-900"
         >
           {listItems.map((item, idx) => (
             <li key={idx} className="font-normal text-slate-800">
@@ -272,8 +269,8 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
         >
           {copied ? (
             <>
-              <Check size={13} className="text-emerald-400" />
-              <span className="text-emerald-400">Copied!</span>
+              <Check size={13} className="text-zinc-400" />
+              <span className="text-zinc-400">Copied!</span>
             </>
           ) : (
             <>
@@ -295,17 +292,17 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 function CalloutBlock({ type, content }: { type: string; content: string }) {
   const styles: Record<string, { bg: string; border: string; text: string; icon: ReactNode; label: string }> = {
     NOTE: {
-      bg: "bg-blue-50/80 border-blue-200",
-      border: "border-blue-200",
-      text: "text-blue-900",
-      icon: <Info size={16} className="text-blue-600" />,
+      bg: "bg-zinc-50 border-zinc-200",
+      border: "border-zinc-200",
+      text: "text-zinc-900",
+      icon: <Info size={16} className="text-zinc-700" />,
       label: "Note",
     },
     TIP: {
-      bg: "bg-emerald-50/80 border-emerald-200",
-      border: "border-emerald-200",
-      text: "text-emerald-900",
-      icon: <Lightbulb size={16} className="text-emerald-600" />,
+      bg: "bg-zinc-50 border-zinc-300",
+      border: "border-zinc-300",
+      text: "text-zinc-900",
+      icon: <Lightbulb size={16} className="text-[#b91c1c]" />,
       label: "Tip",
     },
     WARNING: {
@@ -316,10 +313,10 @@ function CalloutBlock({ type, content }: { type: string; content: string }) {
       label: "Warning",
     },
     IMPORTANT: {
-      bg: "bg-purple-50/80 border-purple-200",
-      border: "border-purple-200",
-      text: "text-purple-900",
-      icon: <AlertCircle size={16} className="text-purple-600" />,
+      bg: "bg-zinc-100 border-zinc-300",
+      border: "border-zinc-300",
+      text: "text-zinc-900",
+      icon: <AlertCircle size={16} className="text-zinc-900" />,
       label: "Important",
     },
     CAUTION: {
@@ -434,7 +431,7 @@ function renderInlineMarkdown(text: string): ReactNode {
       parts.push(
         <code
           key={keyIdx++}
-          className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-indigo-700 font-semibold border border-slate-200"
+          className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-zinc-900 font-semibold border border-slate-200"
         >
           {first.match[2]}
         </code>,
@@ -459,7 +456,7 @@ function renderInlineMarkdown(text: string): ReactNode {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-800 transition-colors"
+          className="inline-flex items-center gap-1 font-semibold text-[#b91c1c] underline underline-offset-2 hover:text-[#991b1b] transition-colors"
         >
           {first.match[2]}
           {isExternal && <ExternalLink size={12} className="shrink-0 inline" />}

@@ -114,7 +114,7 @@ export function MentorDirectory({ mentors, loading, onStartConversation }: Mento
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.03 }}
             >
-              <Card className="h-full border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-indigo-300 hover:shadow-md">
+              <Card className="h-full border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-zinc-300 hover:shadow-md">
                 <div className="flex items-center gap-3 mb-3">
                   <Avatar
                     src={mentor.avatar}

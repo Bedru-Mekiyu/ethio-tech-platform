@@ -75,8 +75,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 cn(
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
-                    ? "text-primary font-semibold bg-indigo-50/70"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70",
+                    ? "text-zinc-900 font-semibold bg-zinc-100/80"
+                    : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100/60",
                 )
               }
             >
@@ -89,7 +89,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
         <div className="hidden items-center gap-3 md:flex">
           <Link
             to="/login"
-            className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150"
+            className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors duration-150"
           >
             Sign in
           </Link>
@@ -104,7 +104,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
         {/* Mobile Hamburger Toggle Button */}
         <button
           type="button"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileOpen}
@@ -123,7 +123,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-slate-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
+            className="border-t border-zinc-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -138,8 +138,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                     cn(
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150",
                       isActive
-                        ? "bg-indigo-50 text-primary font-semibold"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                        ? "bg-zinc-100 text-zinc-900 font-semibold"
+                        : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50",
                     )
                   }
                   onClick={() => setMobileOpen(false)}

@@ -56,7 +56,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={hour}
           onChange={(e) => setHour(Number(e.target.value))}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
         >
           {HOURS.map((h) => (
             <option key={h} value={h}>
@@ -68,7 +68,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={minute}
           onChange={(e) => setMinute(Number(e.target.value))}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
         >
           {MINUTES.map((m) => (
             <option key={m} value={m}>
@@ -79,7 +79,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
         >
           <option value="AM">AM</option>
           <option value="PM">PM</option>
@@ -147,7 +147,7 @@ export function MentorAvailabilityPage() {
         <CardHeader className="p-0 border-b border-slate-100 pb-3.5">
           <CardTitle className="flex items-center justify-between text-sm font-semibold text-slate-900">
             <span className="flex items-center gap-2">
-              <CalendarClock size={15} className="text-indigo-600" /> Weekly Availability Slots
+              <CalendarClock size={15} className="text-[#b91c1c]" /> Weekly Availability Slots
             </span>
             <Button
               size="sm"
@@ -203,7 +203,7 @@ export function MentorAvailabilityPage() {
               <select
                 value={draft.dayOfWeek}
                 onChange={(e) => setDraft((s) => ({ ...s, dayOfWeek: Number(e.target.value) }))}
-                className="h-8 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-900 outline-none focus:border-indigo-500"
+                className="h-8 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-900 outline-none focus:border-zinc-900"
               >
                 {DAYS.map((day, i) => (
                   <option key={i} value={i}>

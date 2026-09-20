@@ -28,19 +28,19 @@ import {
   X,
 } from "lucide-react";
 
-const ROLE_VARIANTS: Record<string, "warning" | "purple" | "success" | "default" | "danger"> = {
+const ROLE_VARIANTS: Record<string, "warning" | "outline" | "default" | "danger"> = {
   super_admin: "warning",
   admin: "warning",
-  moderator: "purple",
-  reviewer: "purple",
+  moderator: "outline",
+  reviewer: "outline",
   support: "default",
-  mentor: "success",
+  mentor: "outline",
   student: "default",
-  parent: "purple",
+  parent: "outline",
 };
 
-const STATUS_VARIANTS: Record<string, "success" | "warning" | "danger" | "default" | "purple"> = {
-  active: "success",
+const STATUS_VARIANTS: Record<string, "outline" | "warning" | "danger" | "default"> = {
+  active: "outline",
   pending: "warning",
   inactive: "default",
   suspended: "danger",
@@ -214,9 +214,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
   return (
     <div className="space-y-6">
       {selectedIds.size > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-indigo-200 bg-indigo-50/70 px-4 py-3 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 shadow-xs">
           <div className="flex items-center gap-2 text-sm">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
             <span className="font-medium text-slate-900">{selectedIds.size === 1 ? "user" : "users"} selected</span>
@@ -266,7 +266,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             <Filter size={16} className="mr-2" />
             Filters
             {(roleFilter || statusFilter) && (
-              <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white">
+              <span className="ml-2 flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
                 {(roleFilter ? 1 : 0) + (statusFilter ? 1 : 0)}
               </span>
             )}
@@ -283,7 +283,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
         <div className="flex items-center gap-3">
           <select
-            className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 shadow-xs"
+            className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
@@ -321,7 +321,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
           <div className="flex flex-col gap-1">
             <label className="text-xs font-medium text-slate-500">Role</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-600"
+              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900"
               value={roleFilter}
               onChange={(e) => {
                 setRoleFilter(e.target.value);
@@ -342,7 +342,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
           <div className="flex flex-col gap-1">
             <label className="text-xs font-medium text-slate-500">Status</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-600"
+              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900"
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value);
@@ -387,7 +387,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 accent-indigo-600"
+                  className="h-4 w-4 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
@@ -440,7 +440,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         type="checkbox"
                         checked={selectedIds.has(id)}
                         onChange={() => toggleSelect(id)}
-                        className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 accent-indigo-600"
+                        className="h-4 w-4 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
                         aria-label={`Select ${user.fullName}`}
                       />
                     </td>
@@ -475,7 +475,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     <td className="p-4 text-sm text-slate-500">{formatDate(user.lastLoginAt)}</td>
                     <td className="p-4">
                       {user.isVerified ? (
-                        <CheckCircle size={16} className="text-emerald-600" />
+                        <CheckCircle size={16} className="text-zinc-900" />
                       ) : (
                         <XCircle size={16} className="text-slate-400" />
                       )}
@@ -508,7 +508,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "suspended" && (
                             <Tooltip content="Reactivate user">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-emerald-50 hover:text-emerald-600"
+                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                                 onClick={() => reactivateMutation.mutate(id)}
                                 aria-label={`Reactivate ${user.fullName}`}
                               >
@@ -519,7 +519,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {!user.isVerified && (
                             <Tooltip content="Verify user">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-emerald-50 hover:text-emerald-600"
+                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                                 onClick={() => verifyMutation.mutate(id)}
                                 aria-label={`Verify ${user.fullName}`}
                               >

@@ -375,7 +375,7 @@ export function CalendarPage() {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Study Planner & Calendar</h1>
-              <Badge variant="purple" size="sm">
+              <Badge variant="outline" size="sm">
                 Live Planner
               </Badge>
             </div>
@@ -410,7 +410,7 @@ export function CalendarPage() {
             <Button
               size="sm"
               onClick={() => openAddModal("study_block")}
-              className="text-xs font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs"
+              className="text-xs font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
             >
               <Plus size={13} className="mr-1" />
               Schedule Block
@@ -420,7 +420,7 @@ export function CalendarPage() {
       </Card>
 
       {syncFeedback && (
-        <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-2.5 text-xs text-emerald-700 font-medium">
+        <div className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-100 p-2.5 text-xs text-zinc-900 font-medium">
           <Check size={14} />
           <span>{syncFeedback}</span>
         </div>
@@ -446,9 +446,7 @@ export function CalendarPage() {
                   {sprintStats.completedHours}
                   <span className="text-sm font-normal text-slate-500"> / {sprintStats.targetHours} hrs completed</span>
                 </h2>
-                <span className="text-xs font-semibold text-indigo-600">
-                  ({sprintStats.progressPercent}% of target)
-                </span>
+                <span className="text-xs font-semibold text-[#b91c1c]">({sprintStats.progressPercent}% of target)</span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
                 {sprintStats.completedCount} of {sprintStats.totalCount} blocks completed this week.
@@ -459,7 +457,7 @@ export function CalendarPage() {
             <div className="space-y-1">
               <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 border border-slate-200">
                 <div
-                  className="h-full rounded-full bg-indigo-600 transition-all duration-500"
+                  className="h-full rounded-full bg-[#b91c1c] transition-all duration-500"
                   style={{ width: `${sprintStats.progressPercent}%` }}
                 />
               </div>
@@ -470,11 +468,11 @@ export function CalendarPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
-                <span className="text-[10px] text-indigo-600 font-semibold uppercase">Study</span>
+                <span className="text-[10px] text-zinc-700 font-semibold uppercase">Study</span>
                 <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.studyBlockCount}</p>
               </div>
               <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
-                <span className="text-[10px] text-sky-600 font-semibold uppercase">Sessions</span>
+                <span className="text-[10px] text-zinc-900 font-semibold uppercase">Sessions</span>
                 <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.sessionCount}</p>
               </div>
               <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
@@ -490,7 +488,7 @@ export function CalendarPage() {
             <Button
               size="sm"
               onClick={() => openAddModal("study_block")}
-              className="text-xs font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs"
+              className="text-xs font-medium bg-zinc-900 hover:bg-zinc-800 text-white shadow-xs"
             >
               <Plus size={13} className="mr-1" /> Add Study Block
             </Button>
@@ -570,7 +568,7 @@ export function CalendarPage() {
               type="button"
               onClick={goToday}
               aria-label="Jump to today"
-              className="text-[11px] font-medium text-indigo-600 hover:underline"
+              className="text-[11px] font-medium text-[#b91c1c] hover:underline"
             >
               Jump to Today
             </button>
@@ -623,9 +621,9 @@ export function CalendarPage() {
                     className={cn(
                       "group relative flex h-20 sm:h-24 flex-col justify-between rounded-xl border p-2 text-left transition-all",
                       isSelected
-                        ? "border-indigo-600 bg-indigo-50/50 shadow-xs ring-1 ring-indigo-500"
+                        ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900"
                         : isToday
-                          ? "border-indigo-400 bg-indigo-50/20 ring-1 ring-indigo-200"
+                          ? "border-zinc-400 bg-zinc-50 ring-1 ring-zinc-300"
                           : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300",
                     )}
                   >
@@ -634,9 +632,9 @@ export function CalendarPage() {
                         className={cn(
                           "flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold",
                           isToday
-                            ? "bg-indigo-600 text-white"
+                            ? "bg-zinc-900 text-white"
                             : isSelected
-                              ? "text-indigo-600 font-bold"
+                              ? "text-zinc-900 font-bold"
                               : "text-slate-700",
                         )}
                       >
@@ -657,13 +655,13 @@ export function CalendarPage() {
                           key={ev._id}
                           className="flex items-center gap-1 truncate rounded px-1 py-0.5 text-[9px] font-medium"
                           style={{
-                            backgroundColor: `${ev.color || "#4f46e5"}15`,
-                            color: ev.color || "#4f46e5",
+                            backgroundColor: `${ev.color || "#18181b"}15`,
+                            color: ev.color || "#18181b",
                           }}
                         >
                           <span
                             className="h-1.5 w-1.5 rounded-full shrink-0"
-                            style={{ backgroundColor: ev.color || "#4f46e5" }}
+                            style={{ backgroundColor: ev.color || "#18181b" }}
                           />
                           <span className="truncate">{ev.title}</span>
                         </div>
@@ -683,7 +681,7 @@ export function CalendarPage() {
             <Card className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-start justify-between">
                 <div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600">Day Agenda</span>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-800">Day Agenda</span>
                   <h3 className="text-lg font-bold text-slate-900 mt-0.5">
                     {selectedDate
                       ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
@@ -722,10 +720,10 @@ export function CalendarPage() {
                         className={cn(
                           "relative rounded-xl border p-4 transition shadow-xs",
                           isCompleted
-                            ? "border-emerald-200 bg-emerald-50/30 opacity-75"
+                            ? "border-zinc-200 bg-zinc-50 opacity-75"
                             : "border-slate-200 bg-white hover:border-slate-300",
                         )}
-                        style={{ borderLeftColor: event.color || "#4f46e5", borderLeftWidth: "4px" }}
+                        style={{ borderLeftColor: event.color || "#18181b", borderLeftWidth: "4px" }}
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="space-y-1">
@@ -744,7 +742,7 @@ export function CalendarPage() {
                               </Badge>
 
                               {isCompleted && (
-                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+                                <span className="inline-flex items-center gap-1 rounded-full bg-zinc-100 border border-zinc-200 px-2 py-0.5 text-[10px] font-semibold text-zinc-900">
                                   <CheckCircle2 size={10} /> Completed
                                 </span>
                               )}
@@ -765,7 +763,7 @@ export function CalendarPage() {
 
                             <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-slate-500">
                               <span className="flex items-center gap-1">
-                                <CalendarIcon size={12} className="text-indigo-600" />
+                                <CalendarIcon size={12} className="text-[#b91c1c]" />
                                 {formatTime(event.start)}
                                 {event.end && ` - ${formatTime(event.end)}`}
                               </span>
@@ -791,7 +789,7 @@ export function CalendarPage() {
                               className={cn(
                                 "rounded-lg p-1.5 transition",
                                 isCompleted
-                                  ? "text-emerald-600 hover:bg-emerald-50"
+                                  ? "text-zinc-900 hover:bg-zinc-100"
                                   : "text-slate-400 hover:text-slate-700 hover:bg-slate-100",
                               )}
                             >
@@ -814,7 +812,7 @@ export function CalendarPage() {
                           <div className="mt-3 border-t border-slate-100 pt-3">
                             <Link
                               to={`/app/classroom/${event.sessionId || meeting?.id || "demo-room"}`}
-                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-indigo-600 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition shadow-xs"
+                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#b91c1c] px-3 py-2 text-xs font-semibold text-white hover:bg-[#991b1b] transition shadow-xs"
                             >
                               <Video size={14} />
                               Join Live WebRTC Room
@@ -830,7 +828,7 @@ export function CalendarPage() {
                     <Button
                       size="sm"
                       onClick={() => openAddModal("study_block", selectedDate)}
-                      className="mt-3 bg-indigo-600 hover:bg-indigo-700 text-xs text-white shadow-xs"
+                      className="mt-3 bg-[#b91c1c] hover:bg-[#991b1b] text-xs text-white shadow-xs"
                     >
                       <Plus size={13} className="mr-1" />
                       Add Study Block
@@ -861,9 +859,9 @@ export function CalendarPage() {
                   className={cn(
                     "flex flex-col justify-between rounded-xl border p-3.5 transition cursor-pointer min-h-[360px]",
                     isSelected
-                      ? "border-indigo-600 bg-indigo-50/40 ring-1 ring-indigo-500"
+                      ? "border-zinc-900 bg-zinc-100 ring-1 ring-zinc-900"
                       : isToday
-                        ? "border-indigo-300 bg-indigo-50/20"
+                        ? "border-zinc-400 bg-zinc-50"
                         : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300",
                   )}
                 >
@@ -874,7 +872,7 @@ export function CalendarPage() {
                         {dateObj.toLocaleDateString("en-US", { weekday: "short" })}
                       </span>
                       {isToday && (
-                        <span className="rounded-full bg-indigo-600 px-2 py-0.5 text-[9px] font-bold text-white">
+                        <span className="rounded-full bg-zinc-900 px-2 py-0.5 text-[9px] font-bold text-white">
                           TODAY
                         </span>
                       )}
@@ -897,10 +895,10 @@ export function CalendarPage() {
                           className={cn(
                             "rounded-xl border p-2.5 text-xs transition space-y-1.5 shadow-xs",
                             isCompleted
-                              ? "border-emerald-200 bg-emerald-50/30 opacity-75"
+                              ? "border-zinc-200 bg-zinc-50 opacity-75"
                               : "border-slate-200 bg-white hover:border-slate-300",
                           )}
-                          style={{ borderLeftColor: ev.color || "#4f46e5", borderLeftWidth: "3px" }}
+                          style={{ borderLeftColor: ev.color || "#18181b", borderLeftWidth: "3px" }}
                         >
                           <div className="flex items-start justify-between gap-1">
                             <span className="font-semibold text-slate-900 truncate text-[11px]">{ev.title}</span>
@@ -915,7 +913,7 @@ export function CalendarPage() {
                               }}
                               className={cn(
                                 "shrink-0",
-                                isCompleted ? "text-emerald-600" : "text-slate-400 hover:text-slate-700",
+                                isCompleted ? "text-zinc-900" : "text-slate-400 hover:text-slate-700",
                               )}
                             >
                               {isCompleted ? <CheckCircle2 size={13} /> : <Circle size={13} />}
@@ -928,7 +926,7 @@ export function CalendarPage() {
                             <Link
                               to={`/app/classroom/${ev.sessionId || "demo-room"}`}
                               onClick={(e) => e.stopPropagation()}
-                              className="mt-1 flex items-center justify-center gap-1 rounded bg-indigo-600 px-2 py-1 text-[10px] font-semibold text-white hover:bg-indigo-700 shadow-xs"
+                              className="mt-1 flex items-center justify-center gap-1 rounded bg-[#b91c1c] px-2 py-1 text-[10px] font-semibold text-white hover:bg-[#991b1b] shadow-xs"
                             >
                               <Video size={10} /> Join
                             </Link>
@@ -971,7 +969,7 @@ export function CalendarPage() {
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-indigo-500 focus:outline-none shadow-xs"
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-zinc-900 focus:outline-none shadow-xs"
               >
                 <option value="all">All Categories</option>
                 <option value="study_block">Study Blocks</option>
@@ -985,7 +983,7 @@ export function CalendarPage() {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-indigo-500 focus:outline-none shadow-xs"
+                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-zinc-900 focus:outline-none shadow-xs"
               >
                 <option value="all">All Statuses</option>
                 <option value="pending">Pending Only</option>
@@ -1005,7 +1003,7 @@ export function CalendarPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search agenda by title, track..."
-                className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none shadow-xs"
+                className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:border-zinc-900 focus:outline-none shadow-xs"
               />
             </div>
           </div>
@@ -1024,15 +1022,15 @@ export function CalendarPage() {
                     className={cn(
                       "flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border p-4 transition shadow-xs",
                       isCompleted
-                        ? "border-emerald-200 bg-emerald-50/30 opacity-75"
+                        ? "border-zinc-200 bg-zinc-50 opacity-75"
                         : "border-slate-200 bg-white hover:border-slate-300",
                     )}
-                    style={{ borderLeftColor: event.color || "#4f46e5", borderLeftWidth: "4px" }}
+                    style={{ borderLeftColor: event.color || "#18181b", borderLeftWidth: "4px" }}
                   >
                     {/* Left: Date Badge & Details */}
                     <div className="flex items-start gap-3.5">
                       <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-center">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-700">
                           {eventDate.toLocaleDateString("en-US", { month: "short" })}
                         </span>
                         <span className="text-sm font-extrabold text-slate-900">{eventDate.getDate()}</span>
@@ -1056,7 +1054,7 @@ export function CalendarPage() {
                           )}
 
                           {event.capstoneProject && (
-                            <span className="rounded bg-indigo-50 border border-indigo-200 px-2 py-0.5 text-[10px] text-indigo-700">
+                            <span className="rounded bg-zinc-100 border border-zinc-200 px-2 py-0.5 text-[10px] text-zinc-900">
                               {event.capstoneProject}
                             </span>
                           )}
@@ -1077,7 +1075,7 @@ export function CalendarPage() {
 
                         <div className="flex items-center gap-3 text-[11px] text-slate-500">
                           <span className="flex items-center gap-1">
-                            <CalendarIcon size={12} className="text-indigo-600" />
+                            <CalendarIcon size={12} className="text-[#b91c1c]" />
                             {eventDate.toLocaleDateString("en-US", { weekday: "short" })}, {formatTime(event.start)}{" "}
                             {event.end && ` - ${formatTime(event.end)}`}
                           </span>
@@ -1091,7 +1089,7 @@ export function CalendarPage() {
                       {isMeeting && (
                         <Link
                           to={`/app/classroom/${event.sessionId || "demo-room"}`}
-                          className="inline-flex items-center gap-1.5 rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition shadow-xs"
+                          className="inline-flex items-center gap-1.5 rounded-xl bg-[#b91c1c] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#991b1b] transition shadow-xs"
                         >
                           <Video size={13} />
                           Join Live
@@ -1110,8 +1108,8 @@ export function CalendarPage() {
                         className={cn(
                           "text-xs",
                           isCompleted
-                            ? "border-emerald-200 text-emerald-700 bg-emerald-50 hover:bg-emerald-100"
-                            : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs",
+                            ? "border-zinc-200 text-zinc-900 bg-zinc-100 hover:bg-zinc-200"
+                            : "bg-zinc-900 hover:bg-zinc-800 text-white shadow-xs",
                         )}
                       >
                         {isCompleted ? (

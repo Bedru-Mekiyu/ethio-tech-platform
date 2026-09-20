@@ -36,7 +36,15 @@ export interface CompetencyGroup {
 
 export interface ToolingItem {
   name: string;
-  category: "Runtime" | "Framework" | "Database" | "Cloud & DevOps" | "Testing & Security" | "Design & Prototyping" | "AI & ML" | "Tooling";
+  category:
+    | "Runtime"
+    | "Framework"
+    | "Database"
+    | "Cloud & DevOps"
+    | "Testing & Security"
+    | "Design & Prototyping"
+    | "AI & ML"
+    | "Tooling";
   iconName?: string;
 }
 
@@ -69,7 +77,13 @@ export interface TrackCatalogItem {
   shortTitle: string;
   tagline: string;
   description: string;
-  category: "Fullstack Web" | "Mobile Development" | "Cloud & DevOps" | "Data Science & AI" | "Cyber Security" | "UI/UX Engineering";
+  category:
+    | "Fullstack Web"
+    | "Mobile Development"
+    | "Cloud & DevOps"
+    | "Data Science & AI"
+    | "Cyber Security"
+    | "UI/UX Engineering";
   categoryKey: "web" | "mobile" | "cloud" | "ai" | "cyber" | "design";
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   estimatedWeeks: number;
@@ -91,7 +105,7 @@ export interface TrackCatalogItem {
   tooling: ToolingItem[];
   capstones: CapstoneProject[];
   modules: CatalogModule[];
-  badgeColor: "cyan" | "purple" | "success" | "warning";
+  badgeColor: "outline" | "default" | "warning";
   unsplashId: string;
 }
 
@@ -101,7 +115,8 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
     slug: "fullstack-web",
     title: "Fullstack Web Engineering",
     shortTitle: "Fullstack Web",
-    tagline: "Build enterprise React frontends, scalable Node.js microservices, and distributed cloud backends with TypeScript.",
+    tagline:
+      "Build enterprise React frontends, scalable Node.js microservices, and distributed cloud backends with TypeScript.",
     description:
       "A complete professional pathway from core JavaScript and React fundamentals to production REST/GraphQL APIs, Prisma ORM, PostgreSQL transactions, and automated CI/CD deployments. Engineered to produce job-ready software developers for high-growth tech companies.",
     category: "Fullstack Web",
@@ -113,34 +128,38 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
     totalProjectsCount: 5,
     xpReward: 3400,
     featured: true,
-    badgeColor: "cyan",
+    badgeColor: "outline",
     unsplashId: "photo-1555066931-4365d14bab8c",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+44% YoY hiring growth in Africa & Global Remote",
       salaryRange: "$35,000 - $95,000 / yr",
-      summary: "Fullstack TypeScript engineers remain the #1 most recruited software discipline across global distributed startups and African tech unicorns.",
+      summary:
+        "Fullstack TypeScript engineers remain the #1 most recruited software discipline across global distributed startups and African tech unicorns.",
       topHiringSectors: ["Fintech & Payments", "E-Commerce", "SaaS & Cloud Platforms", "HealthTech"],
     },
     targetCareerRoles: [
       {
         role: "Fullstack Software Engineer",
         type: "Primary Role",
-        description: "Design end-to-end architectures, modern client UIs, and robust server APIs with full relational data persistence.",
+        description:
+          "Design end-to-end architectures, modern client UIs, and robust server APIs with full relational data persistence.",
         averageSalary: "$55,000 - $95,000",
         skillsMatched: ["React 19", "TypeScript", "Node.js", "PostgreSQL", "Prisma"],
       },
       {
         role: "Frontend Specialist (React / Next.js)",
         type: "Alternative Track",
-        description: "Build high-performance web applications with state synchronization, accessibility, and fluid responsive design systems.",
+        description:
+          "Build high-performance web applications with state synchronization, accessibility, and fluid responsive design systems.",
         averageSalary: "$50,000 - $85,000",
         skillsMatched: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "TanStack Query"],
       },
       {
         role: "Backend & API Developer",
         type: "Specialized Focus",
-        description: "Architect scalable microservices, JWT/OAuth authentication pipelines, caching layers, and database migration routines.",
+        description:
+          "Architect scalable microservices, JWT/OAuth authentication pipelines, caching layers, and database migration routines.",
         averageSalary: "$52,000 - $90,000",
         skillsMatched: ["Node.js", "Express", "REST", "PostgreSQL", "Redis", "Docker"],
       },
@@ -165,19 +184,43 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
     competencyGroups: [
       {
         category: "Frontend Engineering",
-        skills: ["Component Architecture", "Hooks & State Machines", "TanStack Query", "Tailwind CSS", "Accessibility (a11y)"],
+        skills: [
+          "Component Architecture",
+          "Hooks & State Machines",
+          "TanStack Query",
+          "Tailwind CSS",
+          "Accessibility (a11y)",
+        ],
       },
       {
         category: "Backend & APIs",
-        skills: ["Node.js & Express", "TypeScript Strict Typing", "REST & GraphQL", "JWT/OAuth2 Auth", "Error Handling Protocols"],
+        skills: [
+          "Node.js & Express",
+          "TypeScript Strict Typing",
+          "REST & GraphQL",
+          "JWT/OAuth2 Auth",
+          "Error Handling Protocols",
+        ],
       },
       {
         category: "Databases & Data Layer",
-        skills: ["PostgreSQL Schema Modeling", "Prisma ORM", "ACID Transactions", "Indexing & Optimization", "Redis Caching"],
+        skills: [
+          "PostgreSQL Schema Modeling",
+          "Prisma ORM",
+          "ACID Transactions",
+          "Indexing & Optimization",
+          "Redis Caching",
+        ],
       },
       {
         category: "DevOps & Quality",
-        skills: ["Docker Containers", "Vitest & React Testing Library", "GitHub Actions CI/CD", "Vercel / Railway Deployment", "API Monitoring"],
+        skills: [
+          "Docker Containers",
+          "Vitest & React Testing Library",
+          "GitHub Actions CI/CD",
+          "Vercel / Railway Deployment",
+          "API Monitoring",
+        ],
       },
     ],
     tooling: [
@@ -196,7 +239,8 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
       {
         id: "ecommerce-gateway",
         title: "E-Commerce Gateway & Distributed Storefront",
-        tagline: "Production multi-vendor store with real-time inventory, Chapa/Stripe payment webhooks, and admin dashboard.",
+        tagline:
+          "Production multi-vendor store with real-time inventory, Chapa/Stripe payment webhooks, and admin dashboard.",
         description:
           "Architect an end-to-end commerce engine featuring optimistic cart mutation, order state machines, webhook idempotency, role-based vendor portals, and automatic invoice generation.",
         difficulty: "Production-Grade",
@@ -262,7 +306,8 @@ export async function processOrderCheckout(userId: string, cartItems: Array<{ pr
       {
         id: "collaborative-workspace",
         title: "Real-Time Collaborative Workspace",
-        tagline: "Live multi-user documentation editor with WebSocket synchronization, active cursor indicators, and version snapshots.",
+        tagline:
+          "Live multi-user documentation editor with WebSocket synchronization, active cursor indicators, and version snapshots.",
         description:
           "Engineer a real-time collaborative workspace utilizing WebSocket channels, operational transformation conflict resolution, user presence awareness, and markdown export.",
         difficulty: "Advanced",
@@ -316,8 +361,10 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 60,
             order: 1,
             type: "concept",
-            summary: "Understand deep TypeScript type inference, utility types, and generic constraints for robust enterprise libraries.",
-            content: "TypeScript provides static type checking that prevents runtime errors before code is pushed to production. In this lesson, we break down generics, discriminated unions, and mapped types.",
+            summary:
+              "Understand deep TypeScript type inference, utility types, and generic constraints for robust enterprise libraries.",
+            content:
+              "TypeScript provides static type checking that prevents runtime errors before code is pushed to production. In this lesson, we break down generics, discriminated unions, and mapped types.",
             starterCode: "type Result<T> = { success: true; data: T } | { success: false; error: Error };",
             challengeTask: "Write a generic API response unwrapper function with comprehensive type guards.",
           },
@@ -328,7 +375,8 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 55,
             order: 2,
             type: "hands-on",
-            summary: "Explore microtasks, macrotasks, Promise concurrency patterns (allSettled, race), and abort signals.",
+            summary:
+              "Explore microtasks, macrotasks, Promise concurrency patterns (allSettled, race), and abort signals.",
             content: "Explore how JavaScript executes asynchronous operations via the call stack and microtask queue.",
           },
           {
@@ -339,7 +387,8 @@ export function setupCollaborationRoom(io: Server) {
             order: 3,
             type: "code-lab",
             summary: "Implement composable utilities with immutable data patterns and pure transformations.",
-            content: "Build a production-grade utility kit implementing debounce, throttle, deep-clone, and pipe functions.",
+            content:
+              "Build a production-grade utility kit implementing debounce, throttle, deep-clone, and pipe functions.",
           },
         ],
       },
@@ -357,7 +406,8 @@ export function setupCollaborationRoom(io: Server) {
             order: 1,
             type: "hands-on",
             summary: "Build flexible, accessible UI components using React Context and compound slot architecture.",
-            content: "Learn how to build headless component primitives like Dropdowns, Accordions, and Modals with keyboard support.",
+            content:
+              "Learn how to build headless component primitives like Dropdowns, Accordions, and Modals with keyboard support.",
           },
           {
             _id: "les-web-202",
@@ -366,7 +416,8 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 80,
             order: 2,
             type: "code-lab",
-            summary: "Implement robust server state caching, background revalidation, mutation rollbacks, and offline buffers.",
+            summary:
+              "Implement robust server state caching, background revalidation, mutation rollbacks, and offline buffers.",
             content: "Eliminate useEffect data fetching anti-patterns with modern React Query hooks.",
           },
           {
@@ -376,7 +427,8 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 60,
             order: 3,
             type: "hands-on",
-            summary: "Use React DevTools Profiler, useMemo, useCallback, and virtualization to render 10,000+ items at 60 FPS.",
+            summary:
+              "Use React DevTools Profiler, useMemo, useCallback, and virtualization to render 10,000+ items at 60 FPS.",
             content: "Identify re-render bottlenecks and optimize render cycles across complex dashboard views.",
           },
         ],
@@ -384,7 +436,8 @@ export function setupCollaborationRoom(io: Server) {
       {
         _id: "mod-web-3",
         title: "Scalable Node.js, Express & RESTful API Engineering",
-        description: "Architect secure backend services, middleware pipelines, error standardizers, and authentication.",
+        description:
+          "Architect secure backend services, middleware pipelines, error standardizers, and authentication.",
         order: 3,
         lessons: [
           {
@@ -394,7 +447,8 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 75,
             order: 1,
             type: "hands-on",
-            summary: "Structure clean backend services separating routing, business logic, validation, and data storage.",
+            summary:
+              "Structure clean backend services separating routing, business logic, validation, and data storage.",
             content: "Build a production REST scaffolding with centralized error handling and request tracking.",
           },
           {
@@ -422,8 +476,10 @@ export function setupCollaborationRoom(io: Server) {
             xpReward: 70,
             order: 1,
             type: "concept",
-            summary: "Master 3NF schema design, foreign key constraints, B-Tree and GIN indexes, and EXPLAIN ANALYZE queries.",
-            content: "Learn how to optimize PostgreSQL queries from 2,000ms down to 12ms using targeted index structures.",
+            summary:
+              "Master 3NF schema design, foreign key constraints, B-Tree and GIN indexes, and EXPLAIN ANALYZE queries.",
+            content:
+              "Learn how to optimize PostgreSQL queries from 2,000ms down to 12ms using targeted index structures.",
           },
           {
             _id: "les-web-402",
@@ -456,34 +512,38 @@ export function setupCollaborationRoom(io: Server) {
     totalProjectsCount: 4,
     xpReward: 3000,
     featured: true,
-    badgeColor: "purple",
+    badgeColor: "outline",
     unsplashId: "photo-1526498460520-4c246339dccb",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+52% surge in mobile software demand across East Africa",
       salaryRange: "$40,000 - $88,000 / yr",
-      summary: "Mobile-first digital banking, courier dispatch, and telehealth make cross-platform mobile specialists indispensable across emerging markets.",
+      summary:
+        "Mobile-first digital banking, courier dispatch, and telehealth make cross-platform mobile specialists indispensable across emerging markets.",
       topHiringSectors: ["Fintech & Mobile Money", "Logistics & Delivery", "Telemedicine", "EdTech"],
     },
     targetCareerRoles: [
       {
         role: "React Native Mobile Engineer",
         type: "Primary Role",
-        description: "Ship native iOS and Android apps using React primitives, Reanimated gestures, and native module bridges.",
+        description:
+          "Ship native iOS and Android apps using React primitives, Reanimated gestures, and native module bridges.",
         averageSalary: "$50,000 - $90,000",
         skillsMatched: ["React Native", "Expo", "TypeScript", "Redux Toolkit", "WatermelonDB"],
       },
       {
         role: "Flutter / Dart Specialist",
         type: "Alternative Track",
-        description: "Craft pixel-perfect 60 FPS mobile interfaces and state-driven reactive apps with Flutter engine and Bloc.",
+        description:
+          "Craft pixel-perfect 60 FPS mobile interfaces and state-driven reactive apps with Flutter engine and Bloc.",
         averageSalary: "$48,000 - $85,000",
         skillsMatched: ["Flutter", "Dart", "Bloc State Management", "Firebase", "SQLite"],
       },
       {
         role: "Mobile Solutions Architect",
         type: "Specialized Focus",
-        description: "Design offline-first mobile sync protocols, encrypted on-device vaults, and push messaging infrastructure.",
+        description:
+          "Design offline-first mobile sync protocols, encrypted on-device vaults, and push messaging infrastructure.",
         averageSalary: "$60,000 - $105,000",
         skillsMatched: ["Offline Sync", "Biometric Auth", "Detox Testing", "Fastlane CI", "App Store Connect"],
       },
@@ -508,19 +568,41 @@ export function setupCollaborationRoom(io: Server) {
     competencyGroups: [
       {
         category: "Mobile UI & Gestures",
-        skills: ["React Native Paper / NativeWind", "React Navigation 6", "Reanimated 3 Animations", "Gesture Handler", "Safe Area Layouts"],
+        skills: [
+          "React Native Paper / NativeWind",
+          "React Navigation 6",
+          "Reanimated 3 Animations",
+          "Gesture Handler",
+          "Safe Area Layouts",
+        ],
       },
       {
         category: "Native Device Features",
-        skills: ["Camera & Image Picker", "Geolocation & Background GPS", "Biometrics (FaceID/Fingerprint)", "Push Notification Pipelines", "Sensors & Haptics"],
+        skills: [
+          "Camera & Image Picker",
+          "Geolocation & Background GPS",
+          "Biometrics (FaceID/Fingerprint)",
+          "Push Notification Pipelines",
+          "Sensors & Haptics",
+        ],
       },
       {
         category: "Offline Architecture & Storage",
-        skills: ["WatermelonDB / SQLite", "AsyncStorage Encrypted Key-Value", "Network Connectivity Listeners", "Sync Conflict Resolution"],
+        skills: [
+          "WatermelonDB / SQLite",
+          "AsyncStorage Encrypted Key-Value",
+          "Network Connectivity Listeners",
+          "Sync Conflict Resolution",
+        ],
       },
       {
         category: "Testing & Publishing",
-        skills: ["Detox E2E Testing", "Fastlane Build Automation", "Google Play Console Publishing", "Apple TestFlight & App Store"],
+        skills: [
+          "Detox E2E Testing",
+          "Fastlane Build Automation",
+          "Google Play Console Publishing",
+          "Apple TestFlight & App Store",
+        ],
       },
     ],
     tooling: [
@@ -537,12 +619,21 @@ export function setupCollaborationRoom(io: Server) {
       {
         id: "telemedicine-mobile",
         title: "Telemedicine & Triage Health App",
-        tagline: "Encrypted patient-doctor video consults, offline prescription cache, and automated appointment push alerts.",
+        tagline:
+          "Encrypted patient-doctor video consults, offline prescription cache, and automated appointment push alerts.",
         description:
           "Build a medical consultation app engineered for unstable network connections. Features LiveKit WebRTC video integration, biometric fingerprint login, encrypted offline medical history, and push appointment reminders.",
         difficulty: "Production-Grade",
         estimatedHours: 40,
-        techStack: ["React Native", "Expo", "TypeScript", "LiveKit Mobile SDK", "WatermelonDB", "Node.js", "Firebase FCM"],
+        techStack: [
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "LiveKit Mobile SDK",
+          "WatermelonDB",
+          "Node.js",
+          "Firebase FCM",
+        ],
         architectureHighlights: [
           "Zero-knowledge encrypted local SQLite database for sensitive patient vitals",
           "Adaptive WebRTC video bitrate fallback for low-bandwidth 3G mobile environments",
@@ -583,7 +674,8 @@ export function useOfflineSyncEngine() {
       {
         id: "hyperlocal-dispatcher",
         title: "Hyperlocal Delivery & Courier Dispatcher",
-        tagline: "Real-time courier tracking on Mapbox, background location stream, and automated SMS pickup verifications.",
+        tagline:
+          "Real-time courier tracking on Mapbox, background location stream, and automated SMS pickup verifications.",
         description:
           "Engineer an on-demand logistics dispatch app with real-time vector map rendering, driver routing polylines, battery-efficient GPS streaming, and customer order handoff signatures.",
         difficulty: "Advanced",
@@ -635,7 +727,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
             xpReward: 60,
             order: 1,
             type: "concept",
-            summary: "Understand the React Native bridge vs the modern C++ JSI (JavaScript Interface) runtime architecture.",
+            summary:
+              "Understand the React Native bridge vs the modern C++ JSI (JavaScript Interface) runtime architecture.",
             content: "Discover how React Native renders true native UIView and android.view components at 60 FPS.",
           },
           {
@@ -645,7 +738,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
             xpReward: 55,
             order: 2,
             type: "hands-on",
-            summary: "Build dynamic layouts supporting foldables, notches, dynamic islands, and varying screen densities.",
+            summary:
+              "Build dynamic layouts supporting foldables, notches, dynamic islands, and varying screen densities.",
             content: "Master Flexbox in mobile and integrate Tailwind / NativeWind for rapid UI styling.",
           },
         ],
@@ -653,7 +747,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
       {
         _id: "mod-mob-2",
         title: "Navigation, Fluid Gestures & Reanimated 3",
-        description: "Implement native stack navigation, bottom tabs, shared element transitions, and gesture recognizers.",
+        description:
+          "Implement native stack navigation, bottom tabs, shared element transitions, and gesture recognizers.",
         order: 2,
         lessons: [
           {
@@ -713,7 +808,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
     slug: "cloud-devops",
     title: "Cloud Architecture & DevOps",
     shortTitle: "Cloud & DevOps",
-    tagline: "Master Docker containerization, Kubernetes orchestration, AWS cloud infrastructure, and automated CI/CD pipelines.",
+    tagline:
+      "Master Docker containerization, Kubernetes orchestration, AWS cloud infrastructure, and automated CI/CD pipelines.",
     description:
       "Transform into a cloud engineer capable of designing resilient distributed cloud environments. Learn Terraform Infrastructure as Code, zero-downtime canary deployments, Prometheus telemetry, and multi-region AWS architectures.",
     category: "Cloud & DevOps",
@@ -725,34 +821,38 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
     totalProjectsCount: 4,
     xpReward: 3200,
     featured: true,
-    badgeColor: "success",
+    badgeColor: "default",
     unsplashId: "photo-1618401471353-b98aedd04e11",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+65% enterprise demand for cloud automation & reliability",
       salaryRange: "$45,000 - $110,000 / yr",
-      summary: "Every scalable software platform relies on cloud infrastructure engineers to automate deployments and guarantee 99.99% uptime.",
+      summary:
+        "Every scalable software platform relies on cloud infrastructure engineers to automate deployments and guarantee 99.99% uptime.",
       topHiringSectors: ["Enterprise Banking", "Cloud Services", "Telecoms", "SaaS Infrastructure"],
     },
     targetCareerRoles: [
       {
         role: "DevOps / SRE Engineer",
         type: "Primary Role",
-        description: "Maintain high-availability infrastructure, automate continuous delivery pipelines, and lead incident response.",
+        description:
+          "Maintain high-availability infrastructure, automate continuous delivery pipelines, and lead incident response.",
         averageSalary: "$60,000 - $110,000",
         skillsMatched: ["Docker", "Kubernetes", "AWS", "Terraform", "GitHub Actions"],
       },
       {
         role: "Cloud Infrastructure Architect",
         type: "Alternative Track",
-        description: "Design fault-tolerant, multi-AZ cloud networks with secure VPCs, IAM policies, and cost-optimized compute.",
+        description:
+          "Design fault-tolerant, multi-AZ cloud networks with secure VPCs, IAM policies, and cost-optimized compute.",
         averageSalary: "$65,000 - $120,000",
         skillsMatched: ["AWS ECS/EKS", "Terraform", "CloudFront", "RDS Aurora", "Security Hardening"],
       },
       {
         role: "Build & Release Automation Specialist",
         type: "Specialized Focus",
-        description: "Construct zero-downtime blue/green deployment pipelines, container vulnerability scanners, and automated test runners.",
+        description:
+          "Construct zero-downtime canary and staged deployment pipelines, container vulnerability scanners, and automated test runners.",
         averageSalary: "$55,000 - $95,000",
         skillsMatched: ["CI/CD Pipelines", "Helm Charts", "Prometheus & Grafana", "Linux CLI", "Nginx"],
       },
@@ -777,19 +877,42 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
     competencyGroups: [
       {
         category: "Containers & Orchestration",
-        skills: ["Docker Multi-Stage Builds", "Docker Compose", "Kubernetes Deployments & Services", "Ingress Controllers", "Helm Charts"],
+        skills: [
+          "Docker Multi-Stage Builds",
+          "Docker Compose",
+          "Kubernetes Deployments & Services",
+          "Ingress Controllers",
+          "Helm Charts",
+        ],
       },
       {
         category: "Cloud Provider (AWS)",
-        skills: ["VPC & Subnet Architecture", "EC2, ECS & Lambda", "S3 & CloudFront CDN", "RDS & DynamoDB", "IAM Least-Privilege Policies"],
+        skills: [
+          "VPC & Subnet Architecture",
+          "EC2, ECS & Lambda",
+          "S3 & CloudFront CDN",
+          "RDS & DynamoDB",
+          "IAM Least-Privilege Policies",
+        ],
       },
       {
         category: "Infrastructure as Code",
-        skills: ["Terraform HCL Modules", "Remote State in S3/DynamoDB", "Resource Drift Detection", "Environment Parameterization"],
+        skills: [
+          "Terraform HCL Modules",
+          "Remote State in S3/DynamoDB",
+          "Resource Drift Detection",
+          "Environment Parameterization",
+        ],
       },
       {
         category: "CI/CD & Observability",
-        skills: ["GitHub Actions Workflows", "Trivy Container Scanning", "Prometheus Metrics & Grafana", "Structured Logging (ELK)", "Alertmanager"],
+        skills: [
+          "GitHub Actions Workflows",
+          "Trivy Container Scanning",
+          "Prometheus Metrics & Grafana",
+          "Structured Logging (ELK)",
+          "Alertmanager",
+        ],
       },
     ],
     tooling: [
@@ -807,12 +930,22 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
       {
         id: "distributed-cloud-api",
         title: "Distributed Cloud API & Auto-Scaling Cluster",
-        tagline: "Terraform-provisioned Kubernetes cluster on AWS with automated GitHub Actions CI/CD and Grafana dashboards.",
+        tagline:
+          "Terraform-provisioned Kubernetes cluster on AWS with automated GitHub Actions CI/CD and Grafana dashboards.",
         description:
           "Design and deploy a production-grade containerized cluster on AWS. Includes multi-stage optimized Docker images, zero-downtime rolling updates, SSL termination via Let's Encrypt, auto-scaling worker nodes, and live observability metrics.",
         difficulty: "Production-Grade",
         estimatedHours: 42,
-        techStack: ["Terraform", "AWS EKS", "Docker", "Kubernetes", "GitHub Actions", "Prometheus", "Grafana", "Nginx Ingress"],
+        techStack: [
+          "Terraform",
+          "AWS EKS",
+          "Docker",
+          "Kubernetes",
+          "GitHub Actions",
+          "Prometheus",
+          "Grafana",
+          "Nginx Ingress",
+        ],
         architectureHighlights: [
           "Terraform-managed multi-AZ VPC with public/private subnet topology and NAT gateways",
           "Horizontal Pod Autoscaling (HPA) responding dynamically to CPU and request traffic spikes",
@@ -853,7 +986,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
       {
         id: "serverless-transcoding",
         title: "Serverless Event-Driven Media Pipeline",
-        tagline: "S3-triggered AWS Lambda microservices for video encoding, thumbnail generation, and metadata extraction.",
+        tagline:
+          "S3-triggered AWS Lambda microservices for video encoding, thumbnail generation, and metadata extraction.",
         description:
           "Build an event-driven serverless video processing pipeline that responds to cloud storage uploads, asynchronously splits video streams into adaptive HLS resolutions, and updates database records.",
         difficulty: "Advanced",
@@ -912,7 +1046,8 @@ export async function handler(event: S3Event) {
             xpReward: 65,
             order: 2,
             type: "hands-on",
-            summary: "Shrink bloated Node and Go images from 1.2GB down to 42MB using multi-stage builds and non-root users.",
+            summary:
+              "Shrink bloated Node and Go images from 1.2GB down to 42MB using multi-stage builds and non-root users.",
             content: "Eliminate build dependencies from final runtime images for security and speed.",
           },
         ],
@@ -930,7 +1065,8 @@ export async function handler(event: S3Event) {
             xpReward: 70,
             order: 1,
             type: "hands-on",
-            summary: "Configure health checks (liveness/readiness probes) to ensure zero dropped connections during deploys.",
+            summary:
+              "Configure health checks (liveness/readiness probes) to ensure zero dropped connections during deploys.",
             content: "Write production Kubernetes YAML manifests with graceful shutdown hooks.",
           },
           {
@@ -970,7 +1106,8 @@ export async function handler(event: S3Event) {
     slug: "data-science-ai",
     title: "Data Science & Artificial Intelligence",
     shortTitle: "Data Science & AI",
-    tagline: "Build machine learning models, neural networks, data pipelines, and production AI services with Python and PyTorch.",
+    tagline:
+      "Build machine learning models, neural networks, data pipelines, and production AI services with Python and PyTorch.",
     description:
       "A rigorous, hands-on path through exploratory data analysis, feature engineering, SQL analytics, classical machine learning algorithms, deep learning neural networks, and deploying models as scalable REST APIs.",
     category: "Data Science & AI",
@@ -988,28 +1125,32 @@ export async function handler(event: S3Event) {
       rating: "Extremely High",
       growthMetric: "+68% global hiring surge for AI & Data specialists",
       salaryRange: "$45,000 - $115,000 / yr",
-      summary: "AI automation and predictive intelligence have become the fastest-growing engineering focus in modern tech.",
+      summary:
+        "AI automation and predictive intelligence have become the fastest-growing engineering focus in modern tech.",
       topHiringSectors: ["Fintech & Credit Scoring", "Healthcare AI", "Agricultural Tech", "Telecom Data Analytics"],
     },
     targetCareerRoles: [
       {
         role: "Machine Learning Engineer",
         type: "Primary Role",
-        description: "Train, optimize, and serve machine learning and deep neural network models in production cloud APIs.",
+        description:
+          "Train, optimize, and serve machine learning and deep neural network models in production cloud APIs.",
         averageSalary: "$60,000 - $115,000",
         skillsMatched: ["Python", "PyTorch", "Scikit-Learn", "FastAPI", "MLflow", "Docker"],
       },
       {
         role: "Data Scientist & Analytics Lead",
         type: "Alternative Track",
-        description: "Uncover predictive business insights, build statistical models, and design automated experimentation pipelines.",
+        description:
+          "Uncover predictive business insights, build statistical models, and design automated experimentation pipelines.",
         averageSalary: "$55,000 - $100,000",
         skillsMatched: ["Pandas", "NumPy", "Advanced SQL", "Tableau", "Hypothesis Testing"],
       },
       {
         role: "AI Application Specialist",
         type: "Specialized Focus",
-        description: "Integrate LLMs, retrieval-augmented generation (RAG) vector stores, and custom fine-tuned multilingual NLP models.",
+        description:
+          "Integrate LLMs, retrieval-augmented generation (RAG) vector stores, and custom fine-tuned multilingual NLP models.",
         averageSalary: "$62,000 - $118,000",
         skillsMatched: ["Hugging Face", "LangChain", "ChromaDB / Pinecone", "NLP", "FastAPI"],
       },
@@ -1034,19 +1175,43 @@ export async function handler(event: S3Event) {
     competencyGroups: [
       {
         category: "Data Wrangling & Analytics",
-        skills: ["Pandas & NumPy", "Advanced SQL & Window Functions", "Exploratory Data Analysis (EDA)", "Feature Engineering & Imputation", "Data Visualization (Seaborn/Plotly)"],
+        skills: [
+          "Pandas & NumPy",
+          "Advanced SQL & Window Functions",
+          "Exploratory Data Analysis (EDA)",
+          "Feature Engineering & Imputation",
+          "Data Visualization (Seaborn/Plotly)",
+        ],
       },
       {
         category: "Machine Learning Algorithms",
-        skills: ["Linear & Logistic Regression", "Random Forests & XGBoost", "Clustering & PCA", "Cross-Validation & Hyperparameter Tuning", "ROC-AUC & Precision/Recall Metrics"],
+        skills: [
+          "Linear & Logistic Regression",
+          "Random Forests & XGBoost",
+          "Clustering & PCA",
+          "Cross-Validation & Hyperparameter Tuning",
+          "ROC-AUC & Precision/Recall Metrics",
+        ],
       },
       {
         category: "Deep Learning & NLP",
-        skills: ["PyTorch Tensors & Autograd", "Convolutional Neural Networks (CNNs)", "Transformers & Attention Mechanisms", "Hugging Face Models", "Tokenization & Embeddings"],
+        skills: [
+          "PyTorch Tensors & Autograd",
+          "Convolutional Neural Networks (CNNs)",
+          "Transformers & Attention Mechanisms",
+          "Hugging Face Models",
+          "Tokenization & Embeddings",
+        ],
       },
       {
         category: "MLOps & Model Serving",
-        skills: ["FastAPI Microservice Endpoints", "Model Serialization (ONNX/Joblib)", "MLflow Experiment Tracking", "Docker Containerization", "Data Drift Monitoring"],
+        skills: [
+          "FastAPI Microservice Endpoints",
+          "Model Serialization (ONNX/Joblib)",
+          "MLflow Experiment Tracking",
+          "Docker Containerization",
+          "Data Drift Monitoring",
+        ],
       },
     ],
     tooling: [
@@ -1064,7 +1229,8 @@ export async function handler(event: S3Event) {
       {
         id: "fintech-fraud-detector",
         title: "FinTech Fraud Detector & Real-Time Risk Engine",
-        tagline: "Real-time transaction anomaly detector and credit risk scoring service powered by XGBoost and FastAPI.",
+        tagline:
+          "Real-time transaction anomaly detector and credit risk scoring service powered by XGBoost and FastAPI.",
         description:
           "Train a high-precision gradient-boosted ensemble on millions of imbalanced financial transaction records. Deploy an ultra-low latency (<20ms) inference microservice with feature drift detection and automated risk alerts.",
         difficulty: "Production-Grade",
@@ -1117,7 +1283,8 @@ def score_transaction(data: TransactionPayload):
       {
         id: "multilingual-nlp-assistant",
         title: "Amharic & Multilingual NLP Customer Assistant",
-        tagline: "Fine-tuned transformer model for sentiment classification, semantic search, and customer intent categorization.",
+        tagline:
+          "Fine-tuned transformer model for sentiment classification, semantic search, and customer intent categorization.",
         description:
           "Fine-tune a multilingual BERT transformer on local Ethiopian language customer transcripts. Implement a semantic retrieval engine with vector embeddings for instant automated customer inquiries.",
         difficulty: "Advanced",
@@ -1178,7 +1345,8 @@ class MultilingualAssistant:
             xpReward: 70,
             order: 2,
             type: "hands-on",
-            summary: "Clean, filter, and restructure complex real-world datasets with multi-indexing and groupby operations.",
+            summary:
+              "Clean, filter, and restructure complex real-world datasets with multi-indexing and groupby operations.",
             content: "Transform messy real-world CSV and SQL dumps into clean analytical dataframes.",
           },
         ],
@@ -1196,7 +1364,8 @@ class MultilingualAssistant:
             xpReward: 75,
             order: 1,
             type: "hands-on",
-            summary: "Build Scikit-Learn Pipelines incorporating imputation, one-hot encoding, and feature scaling without data leakage.",
+            summary:
+              "Build Scikit-Learn Pipelines incorporating imputation, one-hot encoding, and feature scaling without data leakage.",
             content: "Analyze confusion matrices, Precision-Recall tradeoffs, and ROC curves.",
           },
           {
@@ -1206,7 +1375,8 @@ class MultilingualAssistant:
             xpReward: 85,
             order: 2,
             type: "code-lab",
-            summary: "Tune hyperparameters using Bayesian optimization and interpret feature importance with SHAP values.",
+            summary:
+              "Tune hyperparameters using Bayesian optimization and interpret feature importance with SHAP values.",
             content: "Train industrial-grade decision tree ensembles on tabular data.",
           },
         ],
@@ -1224,7 +1394,8 @@ class MultilingualAssistant:
             xpReward: 80,
             order: 1,
             type: "code-lab",
-            summary: "Understand computational graphs, gradient descent optimizers (AdamW), and learning rate schedulers.",
+            summary:
+              "Understand computational graphs, gradient descent optimizers (AdamW), and learning rate schedulers.",
             content: "Write custom PyTorch training and validation loops with metric logging.",
           },
         ],
@@ -1236,7 +1407,8 @@ class MultilingualAssistant:
     slug: "cyber-security",
     title: "Cyber Security & Network Defense",
     shortTitle: "Cyber Security",
-    tagline: "Learn ethical hacking, application security (AppSec), penetration testing, and enterprise defensive network hardening.",
+    tagline:
+      "Learn ethical hacking, application security (AppSec), penetration testing, and enterprise defensive network hardening.",
     description:
       "A comprehensive security engineering track spanning network packet analysis, OWASP Top 10 web vulnerabilities, cryptography, threat hunting, secure coding practices, and incident response operations.",
     category: "Cyber Security",
@@ -1248,34 +1420,38 @@ class MultilingualAssistant:
     totalProjectsCount: 4,
     xpReward: 3100,
     featured: true,
-    badgeColor: "purple",
+    badgeColor: "outline",
     unsplashId: "photo-1550751827-4bd374c3f58b",
     marketDemand: {
       rating: "Extremely High",
       growthMetric: "+70% critical shortfall in certified security analysts",
       salaryRange: "$45,000 - $105,000 / yr",
-      summary: "With financial institutions and government services moving online, application security and network defense professionals are fiercely recruited.",
+      summary:
+        "With financial institutions and government services moving online, application security and network defense professionals are fiercely recruited.",
       topHiringSectors: ["Commercial Banking", "Government & Defense", "Fintech Payment Gateways", "Enterprise IT"],
     },
     targetCareerRoles: [
       {
         role: "Application Security (AppSec) Engineer",
         type: "Primary Role",
-        description: "Audit software codebases, conduct penetration testing, and build automated security guardrails into CI/CD.",
+        description:
+          "Audit software codebases, conduct penetration testing, and build automated security guardrails into CI/CD.",
         averageSalary: "$58,000 - $105,000",
         skillsMatched: ["OWASP Top 10", "Burp Suite", "SAST/DAST", "JWT Security", "Secure Coding"],
       },
       {
         role: "SOC Analyst / Incident Responder",
         type: "Alternative Track",
-        description: "Monitor SIEM telemetry, detect active network intrusions, analyze malicious payloads, and lead containment.",
+        description:
+          "Monitor SIEM telemetry, detect active network intrusions, analyze malicious payloads, and lead containment.",
         averageSalary: "$50,000 - $92,000",
         skillsMatched: ["Wireshark", "Suricata / Snort", "SIEM (Splunk/Elastic)", "Linux Forensics", "Threat Hunting"],
       },
       {
         role: "Penetration Tester / Ethical Hacker",
         type: "Specialized Focus",
-        description: "Simulate real-world adversary tactics against infrastructure, identify zero-day exposures, and author remediation guides.",
+        description:
+          "Simulate real-world adversary tactics against infrastructure, identify zero-day exposures, and author remediation guides.",
         averageSalary: "$55,000 - $100,000",
         skillsMatched: ["Kali Linux", "Metasploit", "Nmap", "Privilege Escalation", "Python Exploit Dev"],
       },
@@ -1289,7 +1465,8 @@ class MultilingualAssistant:
       {
         skill: "Linux Shell & Scripting",
         level: "Required",
-        description: "Comfortable managing permissions, processes, network sockets, and writing basic Bash/Python scripts.",
+        description:
+          "Comfortable managing permissions, processes, network sockets, and writing basic Bash/Python scripts.",
       },
       {
         skill: "Basic Web Development Concepts",
@@ -1300,19 +1477,41 @@ class MultilingualAssistant:
     competencyGroups: [
       {
         category: "Network Defense & Traffic",
-        skills: ["Wireshark Packet Analysis", "Nmap Port Auditing", "Firewall Rules & iptables", "Intrusion Detection (Snort/Suricata)", "VPN & TLS Handshakes"],
+        skills: [
+          "Wireshark Packet Analysis",
+          "Nmap Port Auditing",
+          "Firewall Rules & iptables",
+          "Intrusion Detection (Snort/Suricata)",
+          "VPN & TLS Handshakes",
+        ],
       },
       {
         category: "Application Security (AppSec)",
-        skills: ["OWASP Top 10 Mitigations", "SQL Injection & XSS Exploits", "CSRF & SSRF Protection", "Authentication Bypass Audits", "Burp Suite Interception"],
+        skills: [
+          "OWASP Top 10 Mitigations",
+          "SQL Injection & XSS Exploits",
+          "CSRF & SSRF Protection",
+          "Authentication Bypass Audits",
+          "Burp Suite Interception",
+        ],
       },
       {
         category: "Cryptography & Auth",
-        skills: ["Symmetric/Asymmetric Encryption (AES/RSA)", "Hashing & Salting (Argon2)", "PKI & Digital Signatures", "HMAC Verification"],
+        skills: [
+          "Symmetric/Asymmetric Encryption (AES/RSA)",
+          "Hashing & Salting (Argon2)",
+          "PKI & Digital Signatures",
+          "HMAC Verification",
+        ],
       },
       {
         category: "Incident Response & Forensics",
-        skills: ["Log Aggregation & SIEM", "Memory Analysis (Volatility)", "Malware Sandboxing", "Root Cause Incident Reporting"],
+        skills: [
+          "Log Aggregation & SIEM",
+          "Memory Analysis (Volatility)",
+          "Malware Sandboxing",
+          "Root Cause Incident Reporting",
+        ],
       },
     ],
     tooling: [
@@ -1329,7 +1528,8 @@ class MultilingualAssistant:
       {
         id: "incident-response-simulator",
         title: "Security Incident Response & Hardening Simulator",
-        tagline: "Sandbox enterprise environment simulating multi-vector DDoS and credential-stuffing attacks with SIEM alert rules.",
+        tagline:
+          "Sandbox enterprise environment simulating multi-vector DDoS and credential-stuffing attacks with SIEM alert rules.",
         description:
           "Build and defend an isolated enterprise architecture. Configure Snort IDS alert rules, deploy automated IP blocking triggers against brute-force attempts, and generate comprehensive forensic audit reports.",
         difficulty: "Production-Grade",
@@ -1375,7 +1575,8 @@ def monitor_auth_stream():
       {
         id: "enterprise-appsec-audit",
         title: "End-to-End Enterprise AppSec Penetration Audit",
-        tagline: "Comprehensive penetration test and remediation PRs on a live banking prototype with full OWASP coverage.",
+        tagline:
+          "Comprehensive penetration test and remediation PRs on a live banking prototype with full OWASP coverage.",
         description:
           "Perform a black-box and white-box penetration test against a mock banking portal. Exploit SQL injection, IDOR vulnerabilities, and broken access controls, authoring proof-of-concept exploits followed by hardened remediation patches.",
         difficulty: "Advanced",
@@ -1435,7 +1636,8 @@ export const loginRateLimiter = rateLimit({
             xpReward: 60,
             order: 1,
             type: "hands-on",
-            summary: "Capture and analyze live network packets to identify plaintext credentials, DNS leaks, and suspicious ARP traffic.",
+            summary:
+              "Capture and analyze live network packets to identify plaintext credentials, DNS leaks, and suspicious ARP traffic.",
             content: "Learn how to use capture and display filters to isolate anomalous network streams.",
           },
           {
@@ -1463,7 +1665,8 @@ export const loginRateLimiter = rateLimit({
             xpReward: 70,
             order: 1,
             type: "hands-on",
-            summary: "Set up Burp proxy to intercept HTTP requests, manipulate parameters, and uncover hidden API routes.",
+            summary:
+              "Set up Burp proxy to intercept HTTP requests, manipulate parameters, and uncover hidden API routes.",
             content: "Master the Burp Repeater and Intruder modules for security auditing.",
           },
           {
@@ -1473,7 +1676,8 @@ export const loginRateLimiter = rateLimit({
             xpReward: 85,
             order: 2,
             type: "code-lab",
-            summary: "Build exploit payloads in sandboxed environments and implement bulletproof defense with prepared statements and CSP.",
+            summary:
+              "Build exploit payloads in sandboxed environments and implement bulletproof defense with prepared statements and CSP.",
             content: "Analyze why sanitization alone fails and how structural separation prevents code execution.",
           },
         ],
@@ -1485,7 +1689,8 @@ export const loginRateLimiter = rateLimit({
     slug: "ui-ux-engineering",
     title: "UI/UX & Design Systems Engineering",
     shortTitle: "UI/UX Engineering",
-    tagline: "Design world-class product interfaces in Figma and build scalable, token-driven accessible design systems in React.",
+    tagline:
+      "Design world-class product interfaces in Figma and build scalable, token-driven accessible design systems in React.",
     description:
       "Bridge the gap between design and engineering. Master user research, wireframing, high-fidelity Figma components, design tokens, micro-interactions, WCAG 2.1 accessibility, and Storybook component documentation.",
     category: "UI/UX Engineering",
@@ -1497,34 +1702,38 @@ export const loginRateLimiter = rateLimit({
     totalProjectsCount: 4,
     xpReward: 2800,
     featured: true,
-    badgeColor: "cyan",
+    badgeColor: "outline",
     unsplashId: "photo-1581291518857-4e27b48ff24e",
     marketDemand: {
       rating: "High",
       growthMetric: "+38% demand for hybrid Design Technologists",
       salaryRange: "$35,000 - $82,000 / yr",
-      summary: "Modern software companies look for designers who write clean code and engineers who understand typography, color theory, and UX empathy.",
+      summary:
+        "Modern software companies look for designers who write clean code and engineers who understand typography, color theory, and UX empathy.",
       topHiringSectors: ["Product Design Studios", "Fintech & Mobile Platforms", "SaaS Startups", "Consumer Tech"],
     },
     targetCareerRoles: [
       {
         role: "UI/UX Product Designer",
         type: "Primary Role",
-        description: "Conduct user interviews, design user flows, and craft polished interactive mockups with auto-layout in Figma.",
+        description:
+          "Conduct user interviews, design user flows, and craft polished interactive mockups with auto-layout in Figma.",
         averageSalary: "$45,000 - $80,000",
         skillsMatched: ["Figma", "User Research", "Wireframing", "Prototyping", "Design Systems"],
       },
       {
         role: "Design Technologist / UI Engineer",
         type: "Alternative Track",
-        description: "Implement design tokens, accessible React component libraries, Storybook documentation, and Framer Motion micro-interactions.",
+        description:
+          "Implement design tokens, accessible React component libraries, Storybook documentation, and Framer Motion micro-interactions.",
         averageSalary: "$50,000 - $88,000",
         skillsMatched: ["React", "Storybook", "Tailwind CSS", "Design Tokens", "Radix UI", "WCAG 2.1"],
       },
       {
         role: "Accessibility & Frontend Consultant",
         type: "Specialized Focus",
-        description: "Audit web applications for keyboard navigation, screen reader compliance, color contrast ratios, and internationalization.",
+        description:
+          "Audit web applications for keyboard navigation, screen reader compliance, color contrast ratios, and internationalization.",
         averageSalary: "$48,000 - $84,000",
         skillsMatched: ["WCAG 2.1 AA/AAA", "Axe Core", "Semantic HTML", "ARIA Roles"],
       },
@@ -1549,19 +1758,39 @@ export const loginRateLimiter = rateLimit({
     competencyGroups: [
       {
         category: "Product & UX Research",
-        skills: ["User Journey Mapping", "Information Architecture", "Usability Testing & Heuristics", "Wireframing & Low-Fi Prototyping"],
+        skills: [
+          "User Journey Mapping",
+          "Information Architecture",
+          "Usability Testing & Heuristics",
+          "Wireframing & Low-Fi Prototyping",
+        ],
       },
       {
         category: "Figma & Visual Craft",
-        skills: ["Auto-Layout 5.0", "Component Variants & Properties", "Design Variables & Token Modes", "Interactive Micro-Prototypes"],
+        skills: [
+          "Auto-Layout 5.0",
+          "Component Variants & Properties",
+          "Design Variables & Token Modes",
+          "Interactive Micro-Prototypes",
+        ],
       },
       {
         category: "Design Systems & Code",
-        skills: ["Design Token Architecture (Style Dictionary)", "Headless UI Primitives (Radix)", "Tailwind Design System Tokens", "Storybook Component Specs"],
+        skills: [
+          "Design Token Architecture (Style Dictionary)",
+          "Headless UI Primitives (Radix)",
+          "Tailwind Design System Tokens",
+          "Storybook Component Specs",
+        ],
       },
       {
         category: "Motion & Accessibility",
-        skills: ["Framer Motion Springs & Layout Animations", "WCAG 2.1 AA Compliance", "Keyboard Navigation Traps", "Screen Reader ARIA"],
+        skills: [
+          "Framer Motion Springs & Layout Animations",
+          "WCAG 2.1 AA Compliance",
+          "Keyboard Navigation Traps",
+          "Screen Reader ARIA",
+        ],
       },
     ],
     tooling: [
@@ -1578,7 +1807,8 @@ export const loginRateLimiter = rateLimit({
       {
         id: "scalable-design-system",
         title: "Scalable Enterprise Design System & Component Library",
-        tagline: "Token-driven accessible React component library documented with Storybook, interactive variant states, and Figma token sync.",
+        tagline:
+          "Token-driven accessible React component library documented with Storybook, interactive variant states, and Figma token sync.",
         description:
           "Build a complete multi-brand design system from scratch. Defines semantic color tokens (light/dark/high-contrast), typographic hierarchies, button/input/modal variants, full keyboard navigation, and auto-generated Storybook docs.",
         difficulty: "Production-Grade",
@@ -1631,7 +1861,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
       {
         id: "fintech-ux-case-study",
         title: "Pan-African Micro-Savings & Investment UX",
-        tagline: "User research, wireframing, high-fidelity prototypes, and usability testing study for a multilingual financial app.",
+        tagline:
+          "User research, wireframing, high-fidelity prototypes, and usability testing study for a multilingual financial app.",
         description:
           "Conduct user interviews, design user journey maps, wireframes, and interactive mobile prototypes for an accessible savings and micro-credit app tailored for Ethiopian and East African mobile money users.",
         difficulty: "Advanced",
@@ -1681,7 +1912,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
             xpReward: 55,
             order: 1,
             type: "concept",
-            summary: "Conduct qualitative user interviews and synthesize insights into actionable empathy maps and jobs-to-be-done.",
+            summary:
+              "Conduct qualitative user interviews and synthesize insights into actionable empathy maps and jobs-to-be-done.",
             content: "Learn how to uncover core user frustrations and convert them into design opportunities.",
           },
           {
@@ -1691,7 +1923,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
             xpReward: 65,
             order: 2,
             type: "hands-on",
-            summary: "Map digital user journeys and sketch rapid low-fidelity layouts before touching high-fidelity tools.",
+            summary:
+              "Map digital user journeys and sketch rapid low-fidelity layouts before touching high-fidelity tools.",
             content: "Master information hierarchy and mental model alignment.",
           },
         ],
@@ -1709,7 +1942,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
             xpReward: 70,
             order: 1,
             type: "hands-on",
-            summary: "Build flexible components that respond perfectly across mobile, tablet, and desktop screen widths.",
+            summary:
+              "Build flexible components that respond perfectly across mobile, tablet, and desktop screen widths.",
             content: "Understand flex wrapping, absolute positioning, and min/max dimension constraints in Figma.",
           },
           {
@@ -1719,7 +1953,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ classN
             xpReward: 80,
             order: 2,
             type: "code-lab",
-            summary: "Create semantic color and spacing variables to support instant theme switching across entire page designs.",
+            summary:
+              "Create semantic color and spacing variables to support instant theme switching across entire page designs.",
             content: "Connect design variables directly with developer CSS token definitions.",
           },
         ],
@@ -1736,11 +1971,16 @@ export function getCatalogTrackByIdOrSlug(idOrSlug: string): TrackCatalogItem | 
       t.slug.toLowerCase() === normalized ||
       t.categoryKey.toLowerCase() === normalized ||
       t.shortTitle.toLowerCase().includes(normalized) ||
-      t.title.toLowerCase().includes(normalized)
+      t.title.toLowerCase().includes(normalized),
   );
 }
 
-export function enrichTrackWithCatalog(backendTrack: { _id?: string; title?: string; category?: string; [key: string]: unknown }): TrackCatalogItem {
+export function enrichTrackWithCatalog(backendTrack: {
+  _id?: string;
+  title?: string;
+  category?: string;
+  [key: string]: unknown;
+}): TrackCatalogItem {
   const match =
     (backendTrack._id && getCatalogTrackByIdOrSlug(backendTrack._id)) ||
     (backendTrack.title && getCatalogTrackByIdOrSlug(backendTrack.title)) ||

@@ -31,13 +31,13 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <Hand size={16} />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
               Raised Hands
-              <Badge variant="default" className="h-5 px-1.5 bg-indigo-50 text-indigo-700 border-indigo-200">
+              <Badge variant="outline" className="h-5 px-1.5 bg-zinc-100 text-zinc-900 border-zinc-200">
                 {hands.length}
               </Badge>
             </h3>
@@ -67,7 +67,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
               className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-2.5 hover:bg-slate-50 transition-all shadow-2xs"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 text-[10px] font-bold text-indigo-600">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-100 border border-zinc-200 text-[10px] font-bold text-zinc-900">
                   {h.queuePosition || i + 1}
                 </span>
                 <div className="min-w-0">
@@ -79,7 +79,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-[10px] px-2 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg gap-1 font-medium"
+                  className="h-7 text-[10px] px-2 text-zinc-900 hover:bg-zinc-100 rounded-lg gap-1 font-medium"
                   onClick={() => onAction("call-on", h.userId)}
                   title="Call on student"
                 >
@@ -88,7 +88,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-[10px] px-2 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg gap-1 font-medium"
+                  className="h-7 text-[10px] px-2 text-[#b91c1c] hover:bg-red-50 hover:text-[#991b1b] rounded-lg gap-1 font-medium"
                   onClick={() => onAction("speaking_granted", h.userId)}
                   title="Grant speaking permission"
                 >

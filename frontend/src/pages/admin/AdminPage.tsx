@@ -52,7 +52,7 @@ function CustomChartTooltip({ active, payload, label, unit = "" }: CustomChartTo
         <div className="mt-1.5 space-y-1">
           {payload.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#4f46e5" }} />
+              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#18181b" }} />
               <span className="text-slate-500">{item.name || item.dataKey}:</span>
               <span className="font-bold text-slate-900">
                 {typeof item.value === "number" ? item.value.toLocaleString() : item.value} {unit}
@@ -276,11 +276,11 @@ export function AdminPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700">
-                <Radio size={11} className="animate-pulse text-emerald-600" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
+                <Radio size={11} className="animate-pulse text-[#b91c1c]" />
                 Command Center
               </span>
-              <Badge variant="cyan" size="sm">
+              <Badge variant="outline" size="sm">
                 v2.4 Telemetry
               </Badge>
             </div>
@@ -300,7 +300,7 @@ export function AdminPage() {
               disabled={isFetching}
               className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
             >
-              <RefreshCw size={12} className={isFetching ? "animate-spin text-indigo-600 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={isFetching ? "animate-spin text-zinc-900 mr-1" : "mr-1"} />
               Sync
             </Button>
             <Link to="/admin/operations">
@@ -324,7 +324,7 @@ export function AdminPage() {
               </Button>
             </Link>
             <Link to="/admin/users">
-              <Button size="sm" className="text-xs gap-1 font-medium bg-indigo-600 hover:bg-indigo-700 text-white">
+              <Button size="sm" className="text-xs gap-1 font-medium bg-zinc-900 hover:bg-zinc-800 text-white">
                 <Users size={13} />
                 Users
               </Button>
@@ -339,19 +339,19 @@ export function AdminPage() {
           label="Active Learners"
           value={activeLearners.toLocaleString()}
           sub={`7-day active • ${activeRatio}% of cohort`}
-          icon={<Activity className="text-emerald-600" size={18} />}
+          icon={<Activity className="text-zinc-900" size={18} />}
         />
         <StatCard
           label="Total Students"
           value={totalStudents.toLocaleString()}
           sub="Enrolled across 5 career tracks"
-          icon={<Users className="text-indigo-600" size={18} />}
+          icon={<Users className="text-zinc-900" size={18} />}
         />
         <StatCard
           label="Diaspora Mentors"
           value={mentorCount.toLocaleString()}
           sub="Verified global industry guides"
-          icon={<GraduationCap className="text-sky-600" size={18} />}
+          icon={<GraduationCap className="text-zinc-900" size={18} />}
         />
         <StatCard
           label="30d XP Velocity"
@@ -368,7 +368,7 @@ export function AdminPage() {
           <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles size={14} className="text-indigo-600" />
+                <Sparkles size={14} className="text-zinc-900" />
                 <CardTitle className="text-sm font-semibold text-slate-900">XP Gamification Growth</CardTitle>
               </div>
               <CardDescription className="text-xs text-slate-500 mt-0.5">
@@ -381,7 +381,7 @@ export function AdminPage() {
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "weekly"
-                    ? "bg-white text-indigo-700 font-semibold shadow-xs"
+                    ? "bg-white text-zinc-900 font-semibold shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -391,7 +391,7 @@ export function AdminPage() {
                 onClick={() => setXpTimeView("cumulative")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "cumulative"
-                    ? "bg-white text-indigo-700 font-semibold shadow-xs"
+                    ? "bg-white text-zinc-900 font-semibold shadow-xs"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
@@ -405,12 +405,12 @@ export function AdminPage() {
               <AreaChart data={xpTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
                 <defs>
                   <linearGradient id="xpAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.02} />
+                    <stop offset="5%" stopColor="#18181b" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#18181b" stopOpacity={0.02} />
                   </linearGradient>
-                  <linearGradient id="cyanGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#0284c7" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#0284c7" stopOpacity={0.02} />
+                  <linearGradient id="vermilionGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#b91c1c" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#b91c1c" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="#f1f5f9" strokeDasharray="3 3" vertical={false} />
@@ -437,12 +437,12 @@ export function AdminPage() {
                   type="monotone"
                   dataKey={xpTimeView === "weekly" ? "xp" : "cumulativeXp"}
                   name="XP Earned"
-                  stroke="#4f46e5"
+                  stroke="#18181b"
                   strokeWidth={2}
                   fillOpacity={1}
-                  fill={xpTimeView === "weekly" ? "url(#xpAreaGrad)" : "url(#cyanGrad)"}
-                  dot={{ r: 3, fill: "#4f46e5", stroke: "#ffffff", strokeWidth: 2 }}
-                  activeDot={{ r: 5, fill: "#0284c7", stroke: "#ffffff", strokeWidth: 2 }}
+                  fill={xpTimeView === "weekly" ? "url(#xpAreaGrad)" : "url(#vermilionGrad)"}
+                  dot={{ r: 3, fill: "#18181b", stroke: "#ffffff", strokeWidth: 2 }}
+                  activeDot={{ r: 5, fill: "#b91c1c", stroke: "#ffffff", strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -453,7 +453,7 @@ export function AdminPage() {
         <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
           <CardHeader className="flex flex-col gap-1 p-0 border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <TrendingUp size={14} className="text-sky-600" />
+              <TrendingUp size={14} className="text-zinc-900" />
               <CardTitle className="text-sm font-semibold text-slate-900">Cohort Growth & Admissions</CardTitle>
             </div>
             <CardDescription className="text-xs text-slate-500">
@@ -477,8 +477,8 @@ export function AdminPage() {
                   content={<CustomChartTooltip unit="students" />}
                   cursor={{ fill: "rgba(241, 245, 249, 0.7)" }}
                 />
-                <Bar dataKey="students" name="Total Admitted" fill="#4f46e5" radius={[4, 4, 0, 0]} maxBarSize={28} />
-                <Bar dataKey="active" name="Active Monthly" fill="#38bdf8" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="students" name="Total Admitted" fill="#18181b" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="active" name="Active Monthly" fill="#71717a" radius={[4, 4, 0, 0]} maxBarSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -491,7 +491,7 @@ export function AdminPage() {
         <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Layers size={15} className="text-indigo-600" />
+              <Layers size={15} className="text-zinc-900" />
               <div>
                 <CardTitle className="text-sm font-semibold text-slate-900">
                   Track Performance & XP Distribution
@@ -501,7 +501,7 @@ export function AdminPage() {
                 </CardDescription>
               </div>
             </div>
-            <Badge variant="indigo" size="sm">
+            <Badge variant="outline" size="sm">
               {trackData.length} Active Tracks
             </Badge>
           </div>
@@ -513,13 +513,13 @@ export function AdminPage() {
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-900">{track.name}</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-indigo-600">{track.xp.toLocaleString()} XP</span>
+                    <span className="font-bold text-zinc-900">{track.xp.toLocaleString()} XP</span>
                     <span className="text-[11px] text-slate-500">({track.percentage}%)</span>
                   </div>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                   <div
-                    className="h-full rounded-full bg-indigo-600 transition-all duration-500"
+                    className="h-full rounded-full bg-zinc-900 transition-all duration-500"
                     style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
                   />
                 </div>
@@ -544,7 +544,7 @@ export function AdminPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                className="h-7 gap-1 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
               >
                 View All <ChevronRight size={12} />
               </Button>
@@ -584,7 +584,7 @@ export function AdminPage() {
                       </div>
                     </div>
                   </div>
-                  <Badge variant="cyan" size="sm">
+                  <Badge variant="outline" size="sm">
                     Active
                   </Badge>
                 </div>
@@ -600,7 +600,7 @@ export function AdminPage() {
         <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <MapPin size={15} className="text-emerald-600" />
+              <MapPin size={15} className="text-zinc-900" />
               <div>
                 <CardTitle className="text-sm font-semibold text-slate-900">Regional Hub Capacity & Hardware</CardTitle>
                 <CardDescription className="text-xs text-slate-500">
@@ -608,7 +608,7 @@ export function AdminPage() {
                 </CardDescription>
               </div>
             </div>
-            <Badge variant="success" size="sm" showDot>
+            <Badge variant="outline" size="sm" showDot>
               {hubs.length} Active Hubs
             </Badge>
           </div>
@@ -643,12 +643,12 @@ export function AdminPage() {
                       <span>
                         Seats ({occupied}/{capacity})
                       </span>
-                      <span className="font-medium text-emerald-600">{available} open</span>
+                      <span className="font-medium text-zinc-900">{available} open</span>
                     </div>
                     <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          occupancyPct > 80 ? "bg-amber-500" : "bg-emerald-500"
+                          occupancyPct > 80 ? "bg-amber-500" : "bg-zinc-900"
                         }`}
                         style={{ width: `${occupancyPct}%` }}
                       />
@@ -657,7 +657,7 @@ export function AdminPage() {
 
                   <div className="mt-2.5 flex items-center justify-between border-t border-slate-200/70 pt-2 text-[11px] text-slate-500">
                     <span className="flex items-center gap-1">
-                      <Monitor size={11} className="text-sky-600" />
+                      <Monitor size={11} className="text-zinc-600" />
                       {hub.computersAvailable ?? 30} PCs
                     </span>
                     <span className="truncate max-w-[120px] text-slate-600">
@@ -674,7 +674,7 @@ export function AdminPage() {
         <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Video size={15} className="text-indigo-600" />
+              <Video size={15} className="text-zinc-900" />
               <div>
                 <CardTitle className="text-sm font-semibold text-slate-900">Upcoming Sessions</CardTitle>
                 <CardDescription className="text-xs text-slate-500">Live cohorts schedule</CardDescription>
@@ -684,7 +684,7 @@ export function AdminPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                className="h-7 gap-1 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
               >
                 All <ExternalLink size={11} />
               </Button>
@@ -701,7 +701,7 @@ export function AdminPage() {
                     <div className="flex items-start justify-between gap-2">
                       <p className="font-semibold text-slate-900 text-xs truncate">{session.title}</p>
                       <Badge
-                        variant={session.status === "live" ? "success" : "indigo"}
+                        variant={session.status === "live" ? "outline" : "outline"}
                         size="sm"
                         showDot={session.status === "live"}
                       >
@@ -747,7 +747,7 @@ export function AdminPage() {
                     <div className="flex items-start justify-between gap-2">
                       <p className="font-semibold text-slate-900 text-xs truncate">{sess.title}</p>
                       <Badge
-                        variant={sess.status === "live" ? "success" : "indigo"}
+                        variant={sess.status === "live" ? "outline" : "default"}
                         size="sm"
                         showDot={sess.status === "live"}
                       >

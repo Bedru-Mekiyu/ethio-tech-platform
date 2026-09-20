@@ -23,9 +23,9 @@ export function Logo({ className, to = "/", variant = "default", subtitle }: Log
       <motion.div
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.98 }}
-        className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm transition-all duration-200 overflow-hidden border border-violet-400/30"
+        className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-white shadow-xs transition-all duration-200 overflow-hidden border border-red-800/20"
       >
-        <span className="relative z-10 text-base font-black text-white leading-none select-none tracking-tight">E</span>
+        <span className="relative z-10 text-sm font-black text-white leading-none select-none tracking-tight">E</span>
       </motion.div>
 
       {!isCompact && (

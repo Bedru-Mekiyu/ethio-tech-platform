@@ -149,7 +149,7 @@ export interface MarketingHubsData {
     highlights: string[];
   };
   hubs: MarketingHub[];
-  legend: Array<{ label: string; tone: "primary" | "purple" | "warning" }>;
+  legend: Array<{ label: string; tone: "primary" | "default" | "warning" }>;
   cta: {
     title: string;
     description: string;
@@ -197,7 +197,7 @@ export async function fetchMarketingHubs() {
 export async function submitMentorApplication(payload: MentorApplicationPayload) {
   const { data } = await api.post<ApiResponse<{ application: { _id: string; status: string } }>>(
     "/mentor-applications",
-    payload
+    payload,
   );
   return data.data;
 }

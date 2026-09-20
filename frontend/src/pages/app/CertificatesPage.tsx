@@ -51,7 +51,7 @@ export function CertificatesPage() {
             <Card key={cert._id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                     <Award size={15} />
                   </span>
                   <h3 className="text-sm font-semibold text-slate-900">{cert.track?.title ?? "Track Certificate"}</h3>
@@ -66,7 +66,7 @@ export function CertificatesPage() {
                     href={cert.certificateUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
                   >
                     Download Certificate →
                   </a>

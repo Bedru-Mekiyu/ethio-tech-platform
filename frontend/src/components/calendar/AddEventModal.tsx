@@ -45,54 +45,54 @@ const TYPE_OPTIONS: Array<{
     label: "Study Block",
     desc: "Dedicated deep-work study sprint",
     icon: BookOpen,
-    defaultColor: "#6366F1",
+    defaultColor: "#18181b",
   },
   {
     type: "session",
     label: "Live Session",
     desc: "WebRTC lecture, squad sync, or mentor meeting",
     icon: Video,
-    defaultColor: "#3B82F6",
+    defaultColor: "#b91c1c",
   },
   {
     type: "deadline",
     label: "Assignment Deadline",
     desc: "Deliverable or quiz submission cutoff",
     icon: AlertCircle,
-    defaultColor: "#EF4444",
+    defaultColor: "#b91c1c",
   },
   {
     type: "milestone",
     label: "Capstone Milestone",
     desc: "Key architectural checkpoint or MVP launch",
     icon: Award,
-    defaultColor: "#10B981",
+    defaultColor: "#27272a",
   },
   {
     type: "hub_visit",
     label: "Regional Hub Visit",
     desc: "In-person co-working at Addis, Hawassa, etc.",
     icon: MapPin,
-    defaultColor: "#F59E0B",
+    defaultColor: "#d97706",
   },
   {
     type: "custom",
     label: "Custom Reminder",
     desc: "Personal milestone or review note",
     icon: Tag,
-    defaultColor: "#8B5CF6",
+    defaultColor: "#52525b",
   },
 ];
 
 const COLOR_PRESETS = [
-  { hex: "#6366F1", label: "violet (Obsidian)" },
-  { hex: "#3B82F6", label: "Electric Blue" },
-  { hex: "#10B981", label: "Emerald Green" },
-  { hex: "#F59E0B", label: "Amber Orange" },
-  { hex: "#EF4444", label: "Rose Red" },
-  { hex: "#8B5CF6", label: "Violet Purple" },
-  { hex: "#06B6D4", label: "Cyan Sky" },
-  { hex: "#EC4899", label: "Pink Neon" },
+  { hex: "#18181b", label: "Carbon Neutral" },
+  { hex: "#b91c1c", label: "Tech Vermilion" },
+  { hex: "#d97706", label: "Muted Amber" },
+  { hex: "#71717a", label: "Zinc Muted" },
+  { hex: "#3f3f46", label: "Dark Zinc" },
+  { hex: "#991b1b", label: "Dark Crimson" },
+  { hex: "#b45309", label: "Deep Amber" },
+  { hex: "#27272a", label: "Obsidian" },
 ];
 
 export function AddEventModal({
@@ -119,7 +119,7 @@ export function AddEventModal({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState<CalendarEventType>(initialType);
-  const [selectedColor, setSelectedColor] = useState(EVENT_TYPE_COLORS[initialType]?.hex ?? "#6366F1");
+  const [selectedColor, setSelectedColor] = useState(EVENT_TYPE_COLORS[initialType]?.hex ?? "#18181b");
   const [date, setDate] = useState(() => {
     if (initialDate) return initialDate;
     const now = new Date();
@@ -237,7 +237,7 @@ export function AddEventModal({
           {/* Header */}
           <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-6 py-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200">
                 <CalendarIcon size={20} />
               </div>
               <div>
@@ -271,8 +271,8 @@ export function AddEventModal({
 
             {/* Event Title */}
             <div className="space-y-1.5">
-              <label htmlFor={titleInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-700">
-                Event Title <span className="text-indigo-600">*</span>
+              <label htmlFor={titleInputId} className="text-xs font-semibold uppercase tracking-wider text-zinc-700">
+                Event Title <span className="text-[#b91c1c]">*</span>
               </label>
               <input
                 id={titleInputId}
@@ -281,13 +281,13 @@ export function AddEventModal({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Distributed Caching & Redis Architecture Sprint"
-                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition shadow-xs"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 transition shadow-xs"
               />
             </div>
 
             {/* Event Type Selection */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">Event Category</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-zinc-700">Event Category</label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {TYPE_OPTIONS.map((opt) => {
                   const Icon = opt.icon;
@@ -299,8 +299,8 @@ export function AddEventModal({
                       onClick={() => handleTypeChange(opt.type)}
                       className={`flex flex-col items-start rounded-xl border p-2.5 text-left transition shadow-xs ${
                         isSelected
-                          ? "border-indigo-600 bg-indigo-50/60 ring-1 ring-indigo-500"
-                          : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
+                          ? "border-zinc-900 bg-zinc-100 ring-1 ring-zinc-900"
+                          : "border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -313,9 +313,9 @@ export function AddEventModal({
                         >
                           <Icon size={13} />
                         </span>
-                        <span className="text-xs font-semibold text-slate-900 truncate">{opt.label}</span>
+                        <span className="text-xs font-semibold text-zinc-900 truncate">{opt.label}</span>
                       </div>
-                      <span className="mt-1 text-[10px] text-slate-500 line-clamp-1">{opt.desc}</span>
+                      <span className="mt-1 text-[10px] text-zinc-500 line-clamp-1">{opt.desc}</span>
                     </button>
                   );
                 })}
@@ -323,22 +323,19 @@ export function AddEventModal({
             </div>
 
             {/* Date & Time Row */}
-            <div className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+            <div className="space-y-3 rounded-2xl border border-zinc-200 bg-zinc-50/60 p-4">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-800">
-                  <Clock size={14} className="text-indigo-600" />
+                <span className="flex items-center gap-1.5 text-xs font-semibold text-zinc-800">
+                  <Clock size={14} className="text-[#b91c1c]" />
                   Schedule & Timing
                 </span>
-                <label
-                  htmlFor={allDayInputId}
-                  className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer"
-                >
+                <label htmlFor={allDayInputId} className="flex items-center gap-2 text-xs text-zinc-600 cursor-pointer">
                   <input
                     id={allDayInputId}
                     type="checkbox"
                     checked={isAllDay}
                     onChange={(e) => setIsAllDay(e.target.checked)}
-                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    className="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
                   />
                   <span>All-day event</span>
                 </label>
@@ -346,7 +343,7 @@ export function AddEventModal({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="space-y-1">
-                  <label htmlFor={dateInputId} className="text-[11px] text-slate-500">
+                  <label htmlFor={dateInputId} className="text-[11px] text-zinc-500">
                     Date
                   </label>
                   <input
@@ -355,14 +352,14 @@ export function AddEventModal({
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                   />
                 </div>
 
                 {!isAllDay && (
                   <>
                     <div className="space-y-1">
-                      <label htmlFor={startInputId} className="text-[11px] text-slate-500">
+                      <label htmlFor={startInputId} className="text-[11px] text-zinc-500">
                         Start Time
                       </label>
                       <input
@@ -370,11 +367,11 @@ export function AddEventModal({
                         type="time"
                         value={startTime}
                         onChange={(e) => setStartTime(e.target.value)}
-                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                        className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label htmlFor={endInputId} className="text-[11px] text-slate-500">
+                      <label htmlFor={endInputId} className="text-[11px] text-zinc-500">
                         End Time
                       </label>
                       <input
@@ -382,7 +379,7 @@ export function AddEventModal({
                         type="time"
                         value={endTime}
                         onChange={(e) => setEndTime(e.target.value)}
-                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                        className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                       />
                     </div>
                   </>
@@ -393,11 +390,8 @@ export function AddEventModal({
             {/* Target Track & Capstone Link */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <label
-                  htmlFor={trackInputId}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-700"
-                >
-                  <Layers size={13} className="text-indigo-600" />
+                <label htmlFor={trackInputId} className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700">
+                  <Layers size={13} className="text-[#b91c1c]" />
                   Target Track
                 </label>
                 <select
@@ -407,7 +401,7 @@ export function AddEventModal({
                     setTargetTrack(e.target.value);
                     setCapstoneProject("");
                   }}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                  className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                 >
                   <option value="">General / Independent Study</option>
                   {TRACKS_CATALOG.map((track) => (
@@ -421,9 +415,9 @@ export function AddEventModal({
               <div className="space-y-1.5">
                 <label
                   htmlFor={capstoneInputId}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-700"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700"
                 >
-                  <Layers size={13} className="text-indigo-600" />
+                  <Layers size={13} className="text-[#b91c1c]" />
                   Target Capstone / Project
                 </label>
                 {availableCapstones.length > 0 ? (
@@ -431,7 +425,7 @@ export function AddEventModal({
                     id={capstoneInputId}
                     value={capstoneProject}
                     onChange={(e) => setCapstoneProject(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                   >
                     <option value="">None / Custom Scope</option>
                     {availableCapstones.map((cap) => (
@@ -447,7 +441,7 @@ export function AddEventModal({
                     value={capstoneProject}
                     onChange={(e) => setCapstoneProject(e.target.value)}
                     placeholder="e.g. Microservices Auth Gateway"
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none transition shadow-xs"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none transition shadow-xs"
                   />
                 )}
               </div>
@@ -455,7 +449,7 @@ export function AddEventModal({
 
             {/* Description & Goals */}
             <div className="space-y-1.5">
-              <label htmlFor={descInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <label htmlFor={descInputId} className="text-xs font-semibold uppercase tracking-wider text-zinc-700">
                 Description & Learning Objectives
               </label>
               <textarea
@@ -464,14 +458,14 @@ export function AddEventModal({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="What topics, code exercises, or deliverables will you complete during this block?"
-                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition resize-none shadow-xs"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 transition resize-none shadow-xs"
               />
             </div>
 
             {/* Color Accent Picker */}
             <div className="space-y-2">
-              <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
-                <Tag size={13} className="text-indigo-600" />
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700">
+                <Tag size={13} className="text-[#b91c1c]" />
                 Color Theme Tag
               </label>
               <div className="flex flex-wrap gap-2.5">
@@ -483,7 +477,7 @@ export function AddEventModal({
                     onClick={() => setSelectedColor(preset.hex)}
                     className={`h-7 w-7 rounded-full transition-transform ${
                       selectedColor === preset.hex
-                        ? "ring-2 ring-indigo-600 ring-offset-2 ring-offset-white scale-110"
+                        ? "ring-2 ring-zinc-900 ring-offset-2 ring-offset-white scale-110"
                         : "opacity-80 hover:opacity-100 hover:scale-105"
                     }`}
                     style={{ backgroundColor: preset.hex }}
@@ -493,20 +487,20 @@ export function AddEventModal({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
+            <div className="flex items-center justify-end gap-3 border-t border-zinc-100 pt-4">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
                 disabled={isSubmitting}
-                className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                className="border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs px-5"
+                className="bg-[#b91c1c] hover:bg-[#991b1b] text-white font-semibold shadow-xs px-5"
               >
                 {isSubmitting ? (
                   "Scheduling..."

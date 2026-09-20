@@ -164,11 +164,11 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
   const statusBadge = (status: MentorApplication["status"]) => {
     const variant =
       status === "approved"
-        ? "success"
+        ? "outline"
         : status === "rejected"
           ? "warning"
           : status === "changes_requested"
-            ? "purple"
+            ? "outline"
             : "default";
     return <Badge variant={variant}>{status.replace(/_/g, " ")}</Badge>;
   };
@@ -295,7 +295,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
               <div className="flex flex-wrap items-center gap-2">
                 {statusBadge(app.status)}
                 {linkedUser?.mentorAccountStatus && (
-                  <Badge variant="purple">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
+                  <Badge variant="outline">{linkedUser.mentorAccountStatus.replace(/_/g, " ")}</Badge>
                 )}
               </div>
 
@@ -319,7 +319,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {(app.expertise ?? []).map((skill) => (
-                    <Badge key={skill} variant="purple">
+                    <Badge key={skill} variant="outline">
                       {skill}
                     </Badge>
                   ))}

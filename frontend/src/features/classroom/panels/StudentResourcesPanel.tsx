@@ -58,7 +58,7 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
               className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-900">
                   {getResourceIcon(resource.type ?? resource.fileType ?? "link")}
                 </div>
                 <div className="min-w-0">
@@ -74,7 +74,7 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
                 className="shrink-0 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                 onClick={() => handleDownload(resource._id ?? resource.id ?? "", resource.url)}
               >
-                <Download size={16} className="mr-2 text-indigo-600" />
+                <Download size={16} className="mr-2 text-zinc-900" />
                 {resource.url?.startsWith("http") ? "Open" : "Download"}
               </Button>
             </div>

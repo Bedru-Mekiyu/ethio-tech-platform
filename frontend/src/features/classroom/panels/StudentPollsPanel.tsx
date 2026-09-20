@@ -41,21 +41,21 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
                     <Button
                       key={index}
                       variant="outline"
-                      className="w-full justify-start h-auto py-3 px-4 text-left whitespace-normal border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-indigo-300 text-slate-800 transition-colors"
+                      className="w-full justify-start h-auto py-3 px-4 text-left whitespace-normal border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-zinc-400 text-slate-800 transition-colors"
                       onClick={() => onVote(poll.pollId, index)}
                       disabled={poll.hasVoted}
                     >
                       <div className="flex w-full items-center justify-between gap-3">
                         <span className="font-medium text-xs text-slate-900">{option.text}</span>
                         {poll.hasVoted && (
-                          <span className="text-xs font-bold text-indigo-600">{option.percentage || 0}%</span>
+                          <span className="text-xs font-bold text-zinc-900">{option.percentage || 0}%</span>
                         )}
                       </div>
                     </Button>
                   ))}
                 </div>
                 {poll.hasVoted && (
-                  <p className="text-xs text-center text-emerald-700 font-medium">Your vote has been recorded</p>
+                  <p className="text-xs text-center text-zinc-900 font-medium">Your vote has been recorded</p>
                 )}
               </div>
             ))}
@@ -78,7 +78,7 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
                       className="relative overflow-hidden rounded-lg bg-slate-50 border border-slate-200"
                     >
                       <div
-                        className="absolute inset-0 bg-indigo-100 transition-all duration-500"
+                        className="absolute inset-0 bg-zinc-200 transition-all duration-500"
                         style={{ width: `${option.percentage || 0}%` }}
                       />
                       <div className="relative flex justify-between px-3 py-2 text-sm text-slate-900 font-medium">

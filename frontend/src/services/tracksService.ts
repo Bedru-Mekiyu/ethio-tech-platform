@@ -10,14 +10,7 @@ import {
   type ToolingItem,
 } from "@/data/tracksCatalog";
 
-export type {
-  TrackCatalogItem,
-  CapstoneProject,
-  CareerOutcome,
-  SkillPrerequisite,
-  CompetencyGroup,
-  ToolingItem,
-};
+export type { TrackCatalogItem, CapstoneProject, CareerOutcome, SkillPrerequisite, CompetencyGroup, ToolingItem };
 
 export interface TrackLessonSummary {
   _id: string;
@@ -54,7 +47,7 @@ export interface TrackSummary {
   totalProjectsCount?: number;
   xpReward?: number;
   featured?: boolean;
-  badgeColor?: "cyan" | "purple" | "success" | "warning";
+  badgeColor?: "outline" | "default" | "warning";
   unsplashId?: string;
   marketDemand?: TrackCatalogItem["marketDemand"];
   targetCareerRoles?: CareerOutcome[];
@@ -109,10 +102,7 @@ export interface PeerGroupLeaderboardEntry {
   leader?: { fullName?: string };
 }
 
-function mergeCatalogWithBackendTrack(
-  backendTrack: TrackSummary,
-  catalogItem: TrackCatalogItem
-): TrackSummary {
+function mergeCatalogWithBackendTrack(backendTrack: TrackSummary, catalogItem: TrackCatalogItem): TrackSummary {
   const backendModules = backendTrack.modules && backendTrack.modules.length > 0 ? backendTrack.modules : undefined;
 
   return {
@@ -125,29 +115,29 @@ function mergeCatalogWithBackendTrack(
     categoryKey: catalogItem.categoryKey,
     difficulty: backendTrack.difficulty || catalogItem.difficulty,
     xpReward: backendTrack.xpReward || catalogItem.xpReward,
-    modules: backendModules ?? catalogItem.modules.map((m) => ({
-      _id: m._id,
-      title: m.title,
-      description: m.description,
-      order: m.order,
-      lessons: m.lessons.map((l) => ({
-        _id: l._id,
-        title: l.title,
-        order: l.order,
-        xpReward: l.xpReward,
-        durationMinutes: l.durationMinutes,
-        type: l.type,
-        summary: l.summary,
+    modules:
+      backendModules ??
+      catalogItem.modules.map((m) => ({
+        _id: m._id,
+        title: m.title,
+        description: m.description,
+        order: m.order,
+        lessons: m.lessons.map((l) => ({
+          _id: l._id,
+          title: l.title,
+          order: l.order,
+          xpReward: l.xpReward,
+          durationMinutes: l.durationMinutes,
+          type: l.type,
+          summary: l.summary,
+        })),
       })),
-    })),
   };
 }
 
 export async function fetchTracks(): Promise<TrackSummary[]> {
   try {
-    const { data } = await api.get<
-      ApiResponse<{ items: TrackSummary[] } | { tracks: TrackSummary[] }>
-    >("/tracks");
+    const { data } = await api.get<ApiResponse<{ items: TrackSummary[] } | { tracks: TrackSummary[] }>>("/tracks");
     const payload = data.data as { items?: TrackSummary[]; tracks?: TrackSummary[] };
     const items = payload.items ?? payload.tracks ?? [];
 
@@ -160,7 +150,10 @@ export async function fetchTracks(): Promise<TrackSummary[]> {
 
     // Match backend items with catalog items, or supplement missing catalog tracks
     const matchedTracks: TrackSummary[] = items.map((track) => {
-      const match = getCatalogTrackByIdOrSlug(track._id) || getCatalogTrackByIdOrSlug(track.title) || getCatalogTrackByIdOrSlug(track.category || "");
+      const match =
+        getCatalogTrackByIdOrSlug(track._id) ||
+        getCatalogTrackByIdOrSlug(track.title) ||
+        getCatalogTrackByIdOrSlug(track.category || "");
       if (match) {
         return mergeCatalogWithBackendTrack(track, match);
       }
@@ -197,7 +190,11 @@ export async function fetchTrackById(trackId: string): Promise<TrackSummary> {
     const backendTrack = (data.data as { track: TrackSummary }).track;
 
     if (backendTrack) {
-      const match = catalogMatch || getCatalogTrackByIdOrSlug(backendTrack.title) || getCatalogTrackByIdOrSlug(backendTrack.category || "") || TRACKS_CATALOG[0];
+      const match =
+        catalogMatch ||
+        getCatalogTrackByIdOrSlug(backendTrack.title) ||
+        getCatalogTrackByIdOrSlug(backendTrack.category || "") ||
+        TRACKS_CATALOG[0];
       return mergeCatalogWithBackendTrack(backendTrack, match);
     }
   } catch {
@@ -233,9 +230,16 @@ export async function fetchLessonById(lessonId: string): Promise<LessonDetail> {
       const mod = track.modules[mIdx];
       for (let lIdx = 0; lIdx < mod.lessons.length; lIdx++) {
         const lesson = mod.lessons[lIdx];
-        if (lesson._id === lessonId || lesson.title.toLowerCase().replace(/[^a-z0-9]/g, "-").includes(lessonId.toLowerCase())) {
+        if (
+          lesson._id === lessonId ||
+          lesson.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, "-")
+            .includes(lessonId.toLowerCase())
+        ) {
           const nextLesson = mod.lessons[lIdx + 1] || track.modules[mIdx + 1]?.lessons[0];
-          const prevLesson = mod.lessons[lIdx - 1] || track.modules[mIdx - 1]?.lessons[track.modules[mIdx - 1]?.lessons.length - 1];
+          const prevLesson =
+            mod.lessons[lIdx - 1] || track.modules[mIdx - 1]?.lessons[track.modules[mIdx - 1]?.lessons.length - 1];
 
           return {
             _id: lesson._id,
@@ -293,9 +297,7 @@ export async function completeLesson(lessonId: string) {
 
 export async function fetchLeaderboard(top = 10): Promise<LeaderboardEntry[]> {
   try {
-    const { data } = await api.get<ApiResponse<{ students: LeaderboardEntry[] }>>(
-      `/leaderboard/students?top=${top}`
-    );
+    const { data } = await api.get<ApiResponse<{ students: LeaderboardEntry[] }>>(`/leaderboard/students?top=${top}`);
     const payload = data.data as { students?: LeaderboardEntry[]; leaderboard?: LeaderboardEntry[] };
     return payload.students ?? payload.leaderboard ?? [];
   } catch {
@@ -306,7 +308,7 @@ export async function fetchLeaderboard(top = 10): Promise<LeaderboardEntry[]> {
 export async function fetchMentorLeaderboard(top = 10): Promise<MentorLeaderboardEntry[]> {
   try {
     const { data } = await api.get<ApiResponse<{ mentors: MentorLeaderboardEntry[] }>>(
-      `/leaderboard/mentors?top=${top}`
+      `/leaderboard/mentors?top=${top}`,
     );
     return (data.data as { mentors?: MentorLeaderboardEntry[] }).mentors ?? [];
   } catch {
@@ -317,7 +319,7 @@ export async function fetchMentorLeaderboard(top = 10): Promise<MentorLeaderboar
 export async function fetchPeerGroupLeaderboard(top = 10): Promise<PeerGroupLeaderboardEntry[]> {
   try {
     const { data } = await api.get<ApiResponse<{ groups: PeerGroupLeaderboardEntry[] }>>(
-      `/leaderboard/peer-groups?top=${top}`
+      `/leaderboard/peer-groups?top=${top}`,
     );
     return (data.data as { groups?: PeerGroupLeaderboardEntry[] }).groups ?? [];
   } catch {
@@ -327,7 +329,12 @@ export async function fetchPeerGroupLeaderboard(top = 10): Promise<PeerGroupLead
 
 export async function fetchBadges() {
   try {
-    const { data } = await api.get<ApiResponse<{ badges: Array<{ _id: string; name: string; description?: string; category?: string; xpRequired?: number }> }>>("/badges");
+    const { data } =
+      await api.get<
+        ApiResponse<{
+          badges: Array<{ _id: string; name: string; description?: string; category?: string; xpRequired?: number }>;
+        }>
+      >("/badges");
     return (data.data as { badges?: unknown[] }).badges ?? [];
   } catch {
     return [];

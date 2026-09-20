@@ -294,9 +294,9 @@ export function ContentEditorPane({
           {/* Breadcrumb Navigation */}
           <div className="flex items-center gap-2 text-xs text-slate-500 min-w-0 flex-1">
             <span className="flex items-center gap-1 font-semibold text-slate-900 truncate">
-              {isEditingTrack && <BookOpen size={14} className="text-indigo-600 shrink-0" />}
-              {isEditingModule && <FolderOpen size={14} className="text-purple-600 shrink-0" />}
-              {isEditingLesson && <FileText size={14} className="text-emerald-600 shrink-0" />}
+              {isEditingTrack && <BookOpen size={14} className="text-zinc-900 shrink-0" />}
+              {isEditingModule && <FolderOpen size={14} className="text-zinc-900 shrink-0" />}
+              {isEditingLesson && <FileText size={14} className="text-zinc-900 shrink-0" />}
               {isEditingTrack &&
                 (selection.type === "new-track" ? "Tracks / New Track" : selectedTrack?.title || "Track Configuration")}
               {isEditingModule && (
@@ -326,7 +326,7 @@ export function ContentEditorPane({
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1 text-[10px] text-slate-500">
-                  <CheckCircle2 size={11} className="text-emerald-600" />
+                  <CheckCircle2 size={11} className="text-zinc-900" />
                   Saved
                 </span>
               )}
@@ -411,12 +411,12 @@ export function ContentEditorPane({
             <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <BookOpen size={18} className="text-indigo-600" />
+                  <BookOpen size={18} className="text-zinc-900" />
                   <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     {selection.type === "new-track" ? "Create New Track" : "Track Configuration"}
                   </h3>
                 </div>
-                <Badge variant={trackIsActive ? "success" : "warning"} showDot>
+                <Badge variant={trackIsActive ? "outline" : "warning"} showDot>
                   {trackIsActive ? "Published & Active" : "Draft (Hidden)"}
                 </Badge>
               </div>
@@ -470,7 +470,7 @@ export function ContentEditorPane({
                       setTrackCategory(e.target.value);
                       setIsDirty(true);
                     }}
-                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-zinc-400 cursor-pointer"
                   >
                     {TRACK_CATEGORY_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -506,7 +506,7 @@ export function ContentEditorPane({
                     htmlFor="track-edit-weeks"
                     className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Clock size={13} className="text-indigo-600" />
+                    <Clock size={13} className="text-zinc-600" />
                     Estimated Duration (Weeks)
                   </label>
                   <Input
@@ -540,11 +540,11 @@ export function ContentEditorPane({
                   className={cn(
                     "flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all",
                     trackIsActive
-                      ? "border-emerald-300 bg-emerald-50 text-emerald-700"
+                      ? "border-zinc-300 bg-zinc-100 text-zinc-900"
                       : "border-amber-300 bg-amber-50 text-amber-700",
                   )}
                 >
-                  <span className={cn("h-2 w-2 rounded-full", trackIsActive ? "bg-emerald-500" : "bg-amber-500")} />
+                  <span className={cn("h-2 w-2 rounded-full", trackIsActive ? "bg-zinc-900" : "bg-amber-500")} />
                   {trackIsActive ? "Published & Live" : "Draft"}
                 </button>
               </div>
@@ -571,7 +571,7 @@ export function ContentEditorPane({
           <div className="space-y-6 max-w-4xl mx-auto">
             <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
               <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                <FolderOpen size={18} className="text-purple-600" />
+                <FolderOpen size={18} className="text-zinc-900" />
                 <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                   {selection.type === "new-module" ? "Create New Module" : "Module Configuration"}
                 </h3>
@@ -589,7 +589,7 @@ export function ContentEditorPane({
                     setModuleTitle(e.target.value);
                     setIsDirty(true);
                   }}
-                  placeholder="e.g. Asynchronous Architecture & Microservices"
+                  placeholder="e.g. Module 1: Production System Architecture"
                   className="font-semibold text-base border-slate-200 bg-white text-slate-900"
                   required
                 />
@@ -619,7 +619,7 @@ export function ContentEditorPane({
                   htmlFor="mod-edit-order"
                   className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                 >
-                  <Hash size={13} className="text-indigo-600" />
+                  <Hash size={13} className="text-zinc-600" />
                   Sequence Order Index
                 </label>
                 <Input
@@ -648,13 +648,13 @@ export function ContentEditorPane({
             <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <FileText size={18} className="text-emerald-600" />
+                  <FileText size={18} className="text-zinc-900" />
                   <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     {selection.type === "new-lesson" ? "Create New Lesson" : "Lesson Editor"}
                   </h3>
                 </div>
                 {lessonType && (
-                  <Badge variant="purple" size="sm" className="uppercase">
+                  <Badge variant="outline" size="sm" className="uppercase">
                     {lessonType}
                   </Badge>
                 )}
@@ -712,16 +712,16 @@ export function ContentEditorPane({
                         className={cn(
                           "flex flex-col items-start rounded-xl border p-2.5 text-left transition-all",
                           isSelected
-                            ? "border-indigo-500 bg-indigo-50/80 shadow-xs ring-1 ring-indigo-500/30 text-indigo-950"
+                            ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900/20 text-zinc-950 font-semibold"
                             : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                         )}
                       >
                         <div className="flex items-center gap-1.5 mb-1">
-                          {lt.value === "video" && <PlayCircle size={14} className="text-purple-600" />}
-                          {lt.value === "code-lab" && <Code2 size={14} className="text-emerald-600" />}
-                          {lt.value === "concept" && <BookOpen size={14} className="text-sky-600" />}
+                          {lt.value === "video" && <PlayCircle size={14} className="text-zinc-900" />}
+                          {lt.value === "code-lab" && <Code2 size={14} className="text-zinc-900" />}
+                          {lt.value === "concept" && <BookOpen size={14} className="text-zinc-900" />}
                           {lt.value === "quiz" && <HelpCircle size={14} className="text-amber-600" />}
-                          {lt.value === "project" && <Award size={14} className="text-indigo-600" />}
+                          {lt.value === "project" && <Award size={14} className="text-[#b91c1c]" />}
                           <span className="text-xs font-semibold leading-none">{lt.label}</span>
                         </div>
                         <span className="text-[10px] text-slate-500 line-clamp-2">{lt.description}</span>
@@ -738,7 +738,7 @@ export function ContentEditorPane({
                     htmlFor="lesson-edit-duration"
                     className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Clock size={13} className="text-indigo-600" />
+                    <Clock size={13} className="text-zinc-600" />
                     Estimated Duration (Minutes)
                   </label>
                   <Input
@@ -780,7 +780,7 @@ export function ContentEditorPane({
                     htmlFor="lesson-edit-order"
                     className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Hash size={13} className="text-indigo-600" />
+                    <Hash size={13} className="text-zinc-600" />
                     Sequence Order
                   </label>
                   <Input
@@ -845,7 +845,7 @@ export function ContentEditorPane({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-900">
-                  <Sparkles size={14} className="text-indigo-600" />
+                  <Sparkles size={14} className="text-[#b91c1c]" />
                   Markdown Curriculum Content & Live Preview
                 </label>
                 <span className="text-[11px] text-slate-500">

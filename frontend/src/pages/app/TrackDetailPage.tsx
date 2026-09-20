@@ -12,7 +12,6 @@ import {
   GraduationCap,
   Layers,
   Rocket,
-  Sparkles,
   Video,
   Award,
   Copy,
@@ -118,7 +117,7 @@ export function TrackDetailPage() {
       <div>
         <Link
           to="/app/tracks"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:underline"
         >
           <ArrowLeft size={13} />
           Back to all tracks
@@ -126,7 +125,7 @@ export function TrackDetailPage() {
       </div>
 
       {/* Hero Banner Card */}
-      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-3">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -137,15 +136,14 @@ export function TrackDetailPage() {
                 {data.difficulty ?? "Intermediate"}
               </Badge>
               {data.marketDemand && (
-                <Badge variant="success" size="sm">
-                  <Sparkles size={11} className="mr-1 inline text-emerald-600" />
+                <Badge variant="default" size="sm">
                   {data.marketDemand.rating} Demand
                 </Badge>
               )}
             </div>
 
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">{data.title}</h1>
-            <p className="text-xs leading-relaxed text-slate-600">{data.tagline || data.description}</p>
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">{data.title}</h1>
+            <p className="text-xs leading-relaxed text-zinc-600">{data.tagline || data.description}</p>
 
             <div className="flex flex-wrap gap-2 pt-1">
               {firstLessonId ? (
@@ -165,14 +163,14 @@ export function TrackDetailPage() {
               )}
 
               <Link to="/app/workspace">
-                <Button variant="outline" size="sm" className="gap-1.5 text-xs text-slate-700">
+                <Button variant="outline" size="sm" className="gap-1.5 text-xs text-zinc-700">
                   <Code2 size={14} />
                   Coding Lab
                 </Button>
               </Link>
 
               <Link to="/app/mentors">
-                <Button variant="secondary" size="sm" className="gap-1.5 text-xs text-slate-700">
+                <Button variant="secondary" size="sm" className="gap-1.5 text-xs text-zinc-700">
                   <GraduationCap size={14} />
                   Book Mentor
                 </Button>
@@ -181,55 +179,55 @@ export function TrackDetailPage() {
           </div>
 
           {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-zinc-200 bg-zinc-50/70 p-3.5">
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
-                <Clock size={10} className="text-indigo-600" />
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Clock size={10} className="text-zinc-700" />
                 Duration
               </p>
-              <p className="text-sm font-bold text-slate-900">{data.estimatedWeeks ?? 12} Weeks</p>
+              <p className="text-sm font-bold text-zinc-900">{data.estimatedWeeks ?? 12} Weeks</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
-                <Video size={10} className="text-indigo-600" />
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Video size={10} className="text-zinc-700" />
                 Live Sessions
               </p>
-              <p className="text-sm font-bold text-slate-900">{data.liveSessionsCount ?? 20}</p>
+              <p className="text-sm font-bold text-zinc-900">{data.liveSessionsCount ?? 20}</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
-                <GraduationCap size={10} className="text-emerald-600" />
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <GraduationCap size={10} className="text-zinc-700" />
                 Mentorship
               </p>
-              <p className="text-sm font-bold text-slate-900">{data.mentorshipHours ?? 30} Hrs</p>
+              <p className="text-sm font-bold text-zinc-900">{data.mentorshipHours ?? 30} Hrs</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
-                <Layers size={10} className="text-indigo-600" />
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <Layers size={10} className="text-zinc-700" />
                 Modules
               </p>
-              <p className="text-sm font-bold text-slate-900">{modules.length}</p>
+              <p className="text-sm font-bold text-zinc-900">{modules.length}</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
-                <BookOpen size={10} className="text-indigo-600" />
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
+                <BookOpen size={10} className="text-zinc-700" />
                 Lessons
               </p>
-              <p className="text-sm font-bold text-slate-900">{lessonCount}</p>
+              <p className="text-sm font-bold text-zinc-900">{lessonCount}</p>
             </div>
             <div className="space-y-0.5">
-              <p className="text-[10px] uppercase tracking-wider text-slate-500 flex items-center gap-1 font-semibold">
+              <p className="text-[10px] uppercase tracking-wider text-zinc-500 flex items-center gap-1 font-semibold">
                 <Award size={10} className="text-amber-500" />
                 Total XP
               </p>
-              <p className="text-sm font-bold text-slate-900">+{estimatedXp} XP</p>
+              <p className="text-sm font-bold text-zinc-900">+{estimatedXp} XP</p>
             </div>
           </div>
         </div>
       </Card>
 
       {/* Interactive Tabs Header */}
-      <div className="flex flex-wrap gap-1.5 border-b border-slate-200 pb-3">
+      <div className="flex flex-wrap gap-1.5 border-b border-zinc-200 pb-3">
         {[
           { key: "curriculum", label: "Modules & Lessons", icon: BookOpen },
           { key: "capstones", label: "Capstone Projects", icon: Code2 },
@@ -247,8 +245,8 @@ export function TrackDetailPage() {
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors shadow-xs",
                 active
-                  ? "bg-indigo-600 text-white font-semibold"
-                  : "text-slate-600 bg-white border border-slate-200 hover:border-slate-300 hover:text-slate-900",
+                  ? "bg-zinc-900 text-white font-semibold"
+                  : "text-zinc-600 bg-white border border-zinc-200 hover:border-zinc-300 hover:text-zinc-900",
               )}
             >
               <TabIcon size={13} />
@@ -264,11 +262,11 @@ export function TrackDetailPage() {
         <div className="space-y-6">
           {/* TAB 1: CURRICULUM */}
           {activeTab === "curriculum" && (
-            <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-6 shadow-xs">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900">Modular Learning Syllabus</h2>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <h2 className="text-lg font-bold text-zinc-900">Modular Learning Syllabus</h2>
+                  <p className="text-xs text-zinc-500 mt-1">
                     Structured progression from core architecture to full production delivery.
                   </p>
                 </div>
@@ -278,46 +276,46 @@ export function TrackDetailPage() {
               <div className="space-y-4">
                 {modules.length > 0 ? (
                   modules.map((module, mIdx) => (
-                    <div key={module._id} className="rounded-xl border border-slate-200 bg-slate-50/60 p-5 space-y-4">
+                    <div key={module._id} className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-5 space-y-4">
                       <div className="flex items-start justify-between gap-3">
                         <div>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-600">
                             Module {mIdx + 1}
                           </span>
-                          <h3 className="text-base font-bold text-slate-900 mt-1">{module.title}</h3>
-                          {module.description && <p className="text-xs text-slate-600 mt-1">{module.description}</p>}
+                          <h3 className="text-base font-bold text-zinc-900 mt-1">{module.title}</h3>
+                          {module.description && <p className="text-xs text-zinc-600 mt-1">{module.description}</p>}
                         </div>
                         <Badge variant="outline" className="text-xs">
                           {module.lessons?.length ?? 0} lessons
                         </Badge>
                       </div>
 
-                      <div className="space-y-2 pt-2 border-t border-slate-200">
+                      <div className="space-y-2 pt-2 border-t border-zinc-200">
                         {(module.lessons ?? []).map((lesson, lIdx) => (
                           <Link
                             key={lesson._id}
                             to={`/app/lessons/${lesson._id}`}
-                            className="group/les flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-3 transition hover:border-slate-300 hover:shadow-xs"
+                            className="group/les flex items-center justify-between rounded-xl border border-zinc-200 bg-white px-4 py-3 transition hover:border-zinc-300 hover:shadow-xs"
                           >
                             <div className="flex items-center gap-3">
-                              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-100 text-xs font-mono text-slate-600 group-hover/les:text-indigo-600 font-medium">
+                              <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-zinc-100 text-xs font-mono text-zinc-600 group-hover/les:text-zinc-900 font-medium">
                                 {mIdx + 1}.{lIdx + 1}
                               </span>
                               <div>
-                                <p className="text-sm font-medium text-slate-800 group-hover/les:text-indigo-600 transition line-clamp-1">
+                                <p className="text-sm font-medium text-zinc-800 group-hover/les:text-zinc-900 transition line-clamp-1">
                                   {lesson.title}
                                 </p>
                                 {lesson.summary && (
-                                  <p className="text-xs text-slate-500 line-clamp-1 mt-0.5">{lesson.summary}</p>
+                                  <p className="text-xs text-zinc-500 line-clamp-1 mt-0.5">{lesson.summary}</p>
                                 )}
                               </div>
                             </div>
 
                             <div className="flex items-center gap-3 flex-shrink-0 ml-4">
                               {lesson.durationMinutes && (
-                                <span className="text-xs text-slate-500">{lesson.durationMinutes} min</span>
+                                <span className="text-xs text-zinc-500">{lesson.durationMinutes} min</span>
                               )}
-                              <span className="inline-flex items-center gap-1 rounded-lg bg-indigo-50 border border-indigo-100 px-2.5 py-1 text-xs font-semibold text-indigo-600">
+                              <span className="inline-flex items-center gap-1 rounded-lg bg-zinc-100 border border-zinc-200 px-2.5 py-1 text-xs font-semibold text-[#b91c1c]">
                                 +{lesson.xpReward ?? 50} XP
                                 <ArrowRight size={13} />
                               </span>
@@ -339,10 +337,10 @@ export function TrackDetailPage() {
 
           {/* TAB 2: CAPSTONE PROJECTS */}
           {activeTab === "capstones" && (
-            <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-6 shadow-xs">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Practical Capstone Projects</h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <h2 className="text-lg font-bold text-zinc-900">Practical Capstone Projects</h2>
+                <p className="text-xs text-zinc-500 mt-1">
                   High-impact production projects reviewed by senior engineering mentors.
                 </p>
               </div>
@@ -350,19 +348,19 @@ export function TrackDetailPage() {
               <div className="space-y-5">
                 {data.capstones && data.capstones.length > 0 ? (
                   data.capstones.map((capstone) => (
-                    <div key={capstone.id} className="rounded-xl border border-slate-200 bg-slate-50/60 p-5 space-y-4">
+                    <div key={capstone.id} className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-5 space-y-4">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
                           <div className="flex items-center gap-2">
-                            <Badge variant={capstone.difficulty === "Production-Grade" ? "success" : "outline"}>
+                            <Badge variant={capstone.difficulty === "Production-Grade" ? "default" : "outline"}>
                               {capstone.difficulty}
                             </Badge>
-                            <span className="text-xs text-slate-500 flex items-center gap-1">
-                              <Clock size={12} className="text-indigo-600" />~{capstone.estimatedHours} build hours
+                            <span className="text-xs text-zinc-500 flex items-center gap-1">
+                              <Clock size={12} className="text-zinc-700" />~{capstone.estimatedHours} build hours
                             </span>
                           </div>
-                          <h3 className="text-lg font-bold text-slate-900 mt-2">{capstone.title}</h3>
-                          <p className="text-xs text-indigo-600 font-medium mt-0.5">{capstone.tagline}</p>
+                          <h3 className="text-lg font-bold text-zinc-900 mt-2">{capstone.title}</h3>
+                          <p className="text-xs text-zinc-600 font-medium mt-0.5">{capstone.tagline}</p>
                         </div>
 
                         <Button
@@ -370,23 +368,23 @@ export function TrackDetailPage() {
                           onClick={() => setSelectedCapstone(capstone)}
                           className="gap-1.5 text-xs font-medium"
                         >
-                          <Sparkles size={14} />
+                          <Code2 size={14} />
                           Inspect Blueprint
                         </Button>
                       </div>
 
-                      <p className="text-sm text-slate-600 leading-relaxed">{capstone.description}</p>
+                      <p className="text-sm text-zinc-600 leading-relaxed">{capstone.description}</p>
 
                       {/* Architecture highlights */}
-                      <div className="rounded-xl border border-slate-200 bg-white p-4 space-y-2 shadow-xs">
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                          <Cpu size={14} className="text-indigo-600" />
+                      <div className="rounded-xl border border-zinc-200 bg-white p-4 space-y-2 shadow-xs">
+                        <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-800 flex items-center gap-1.5">
+                          <Cpu size={14} className="text-zinc-700" />
                           Key Architectural Highlights
                         </h4>
                         <ul className="space-y-1.5">
                           {capstone.architectureHighlights.map((hl, idx) => (
-                            <li key={idx} className="text-xs text-slate-600 flex items-start gap-2">
-                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-600 flex-shrink-0" />
+                            <li key={idx} className="text-xs text-zinc-600 flex items-start gap-2">
+                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-zinc-800 flex-shrink-0" />
                               <span>{hl}</span>
                             </li>
                           ))}
@@ -396,18 +394,18 @@ export function TrackDetailPage() {
                       {/* Code Snippet Preview */}
                       {capstone.previewSnippet && (
                         <div className="space-y-2">
-                          <div className="flex items-center justify-between text-xs text-slate-500">
+                          <div className="flex items-center justify-between text-xs text-zinc-500">
                             <span className="font-mono">{capstone.previewSnippet.filename}</span>
                             <button
                               type="button"
                               onClick={() => handleCopySnippet(capstone.previewSnippet!.code, capstone.id)}
-                              className="inline-flex items-center gap-1 text-indigo-600 hover:underline font-medium"
+                              className="inline-flex items-center gap-1 text-zinc-700 hover:text-zinc-900 hover:underline font-medium"
                             >
                               {copiedCodeId === capstone.id ? <Check size={13} /> : <Copy size={13} />}
                               {copiedCodeId === capstone.id ? "Copied" : "Copy Code"}
                             </button>
                           </div>
-                          <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950 p-4 font-mono text-xs text-slate-200">
+                          <div className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-4 font-mono text-xs text-zinc-200">
                             <pre>
                               <code>{capstone.previewSnippet.code}</code>
                             </pre>
@@ -417,11 +415,11 @@ export function TrackDetailPage() {
 
                       {/* Tech stack */}
                       <div className="flex flex-wrap items-center gap-2 pt-2">
-                        <span className="text-xs text-slate-500">Stack:</span>
+                        <span className="text-xs text-zinc-500">Stack:</span>
                         {capstone.techStack.map((tech) => (
                           <span
                             key={tech}
-                            className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700 border border-slate-200"
+                            className="rounded-lg bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 border border-zinc-200"
                           >
                             {tech}
                           </span>
@@ -451,7 +449,7 @@ export function TrackDetailPage() {
 
               {/* Tooling chips */}
               <div className="space-y-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-700 flex items-center gap-1.5">
                   <Layers3 size={14} />
                   Tooling & Framework Ecosystem
                 </h3>
@@ -459,29 +457,29 @@ export function TrackDetailPage() {
                   {(data.tooling ?? []).map((tool) => (
                     <div
                       key={tool.name}
-                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs"
+                      className="flex items-center justify-between rounded-xl border border-zinc-200 bg-zinc-50/60 px-3.5 py-2.5 text-xs"
                     >
-                      <span className="font-semibold text-slate-800">{tool.name}</span>
-                      <span className="text-[10px] text-slate-500">{tool.category}</span>
+                      <span className="font-semibold text-zinc-800">{tool.name}</span>
+                      <span className="text-[10px] text-zinc-500">{tool.category}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Competency groups */}
-              <div className="space-y-4 pt-4 border-t border-slate-200">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">Skill Mastery Matrix</h3>
+              <div className="space-y-4 pt-4 border-t border-zinc-200">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">Skill Mastery Matrix</h3>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {(data.competencyGroups ?? []).map((group) => (
                     <div
                       key={group.category}
-                      className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 space-y-2.5"
+                      className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 space-y-2.5"
                     >
-                      <h4 className="text-sm font-bold text-slate-900">{group.category}</h4>
+                      <h4 className="text-sm font-bold text-zinc-900">{group.category}</h4>
                       <ul className="space-y-1.5">
                         {group.skills.map((skill) => (
-                          <li key={skill} className="text-xs text-slate-600 flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
+                          <li key={skill} className="text-xs text-zinc-600 flex items-center gap-2">
+                            <span className="h-1.5 w-1.5 rounded-full bg-zinc-800" />
                             <span>{skill}</span>
                           </li>
                         ))}
@@ -495,49 +493,47 @@ export function TrackDetailPage() {
 
           {/* TAB 4: CAREER & MARKET DEMAND */}
           {activeTab === "career" && (
-            <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-6 shadow-xs">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Target Career Roles & Market Dynamics</h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <h2 className="text-lg font-bold text-zinc-900">Target Career Roles & Market Dynamics</h2>
+                <p className="text-xs text-zinc-500 mt-1">
                   Understand your hiring trajectory and compensation expectations upon completion.
                 </p>
               </div>
 
               {/* Market demand overview */}
               {data.marketDemand && (
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50/40 p-5 space-y-2">
+                <div className="rounded-xl border border-zinc-200 bg-zinc-50/70 p-5 space-y-2">
                   <div className="flex items-center justify-between">
-                    <Badge variant="success">{data.marketDemand.rating} Demand Rating</Badge>
-                    <span className="text-xs font-semibold text-indigo-600">{data.marketDemand.growthMetric}</span>
+                    <Badge variant="default">{data.marketDemand.rating} Demand Rating</Badge>
+                    <span className="text-xs font-semibold text-zinc-700">{data.marketDemand.growthMetric}</span>
                   </div>
-                  <p className="text-sm text-slate-800 font-medium">{data.marketDemand.summary}</p>
-                  <p className="text-xs text-slate-600">
-                    Estimated Compensation Range: {data.marketDemand.salaryRange}
-                  </p>
+                  <p className="text-sm text-zinc-800 font-medium">{data.marketDemand.summary}</p>
+                  <p className="text-xs text-zinc-600">Estimated Compensation Range: {data.marketDemand.salaryRange}</p>
                 </div>
               )}
 
               {/* Target career roles */}
               <div className="space-y-4">
                 {(data.targetCareerRoles ?? []).map((role) => (
-                  <div key={role.role} className="rounded-xl border border-slate-200 bg-slate-50/60 p-5 space-y-3">
+                  <div key={role.role} className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-5 space-y-3">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <Badge variant="outline" className="text-[10px]">
                           {role.type}
                         </Badge>
-                        <h3 className="text-base font-bold text-slate-900 mt-1">{role.role}</h3>
+                        <h3 className="text-base font-bold text-zinc-900 mt-1">{role.role}</h3>
                       </div>
-                      <span className="text-xs font-semibold text-emerald-600">{role.averageSalary}</span>
+                      <span className="text-xs font-semibold text-zinc-800 font-mono">{role.averageSalary}</span>
                     </div>
 
-                    <p className="text-xs text-slate-600 leading-relaxed">{role.description}</p>
+                    <p className="text-xs text-zinc-600 leading-relaxed">{role.description}</p>
 
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {role.skillsMatched.map((s) => (
                         <span
                           key={s}
-                          className="rounded-md bg-white px-2 py-0.5 text-[10px] text-slate-600 border border-slate-200 shadow-xs"
+                          className="rounded-md bg-white px-2 py-0.5 text-[10px] text-zinc-600 border border-zinc-200 shadow-xs"
                         >
                           {s}
                         </span>
@@ -551,10 +547,10 @@ export function TrackDetailPage() {
 
           {/* TAB 5: PREREQUISITES */}
           {activeTab === "prerequisites" && (
-            <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-6 shadow-xs">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Skill Prerequisites & Readiness</h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <h2 className="text-lg font-bold text-zinc-900">Skill Prerequisites & Readiness</h2>
+                <p className="text-xs text-zinc-500 mt-1">
                   Ensure you have foundational proficiency before undertaking this engineering pathway.
                 </p>
               </div>
@@ -563,19 +559,19 @@ export function TrackDetailPage() {
                 {(data.prerequisites ?? []).map((req) => (
                   <div
                     key={req.skill}
-                    className="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-5"
+                    className="flex items-start gap-4 rounded-xl border border-zinc-200 bg-zinc-50/60 p-5"
                   >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex-shrink-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200 flex-shrink-0">
                       <CheckCircle2 size={18} />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-slate-900">{req.skill}</h3>
-                        <Badge variant={req.level === "Required" ? "danger" : "outline"} className="text-[10px]">
+                        <h3 className="text-sm font-bold text-zinc-900">{req.skill}</h3>
+                        <Badge variant={req.level === "Required" ? "default" : "outline"} className="text-[10px]">
                           {req.level}
                         </Badge>
                       </div>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">{req.description}</p>
+                      <p className="text-xs text-zinc-600 mt-1 leading-relaxed">{req.description}</p>
                     </div>
                   </div>
                 ))}
@@ -587,32 +583,32 @@ export function TrackDetailPage() {
         {/* Right Column: Track Snapshot, Mentorship, Action Card */}
         <div className="space-y-6">
           {/* Progress & Snapshot Widget */}
-          <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-5 shadow-xs">
-            <div className="flex items-center gap-2 text-slate-500">
-              <Layers size={15} className="text-indigo-600" />
+          <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-5 shadow-xs">
+            <div className="flex items-center gap-2 text-zinc-500">
+              <Layers size={15} className="text-zinc-700" />
               <span className="text-[10px] font-bold uppercase tracking-wider">Track Milestone Progress</span>
             </div>
 
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500">Curriculum Completion</span>
-                <span className="font-bold text-slate-900">0%</span>
+                <span className="text-zinc-500">Curriculum Completion</span>
+                <span className="font-bold text-zinc-900">0%</span>
               </div>
-              <ProgressBar value={0} max={100} className="h-2 bg-slate-100" />
+              <ProgressBar value={0} max={100} className="h-2 bg-zinc-100" />
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-4 space-y-3">
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500">Live Sessions</span>
-                <span className="font-semibold text-slate-800">{data.liveSessionsCount ?? 20} Scheduled</span>
+                <span className="text-zinc-500">Live Sessions</span>
+                <span className="font-semibold text-zinc-800">{data.liveSessionsCount ?? 20} Scheduled</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500">Mentor Code Reviews</span>
-                <span className="font-semibold text-emerald-600">{data.mentorshipHours ?? 30} Hours Direct</span>
+                <span className="text-zinc-500">Mentor Code Reviews</span>
+                <span className="font-semibold text-zinc-800">{data.mentorshipHours ?? 30} Hours Direct</span>
               </div>
               <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-500">Capstone Checkpoints</span>
-                <span className="font-semibold text-indigo-600">{data.capstones?.length ?? 2} Projects</span>
+                <span className="text-zinc-500">Capstone Checkpoints</span>
+                <span className="font-semibold text-zinc-800">{data.capstones?.length ?? 2} Projects</span>
               </div>
             </div>
 
@@ -636,17 +632,17 @@ export function TrackDetailPage() {
           </Card>
 
           {/* Mentorship Support Card */}
-          <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-4 shadow-xs">
+          <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-4 shadow-xs">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200">
                 <GraduationCap size={20} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-900">Assigned Senior Mentors</h3>
-                <p className="text-xs text-slate-500">Available for architecture & code reviews</p>
+                <h3 className="text-sm font-bold text-zinc-900">Assigned Senior Mentors</h3>
+                <p className="text-xs text-zinc-500">Available for architecture & code reviews</p>
               </div>
             </div>
-            <p className="text-xs leading-relaxed text-slate-600">
+            <p className="text-xs leading-relaxed text-zinc-600">
               Submit your capstone code commits to receive granular line-by-line feedback and attend weekly interactive
               cohort office hours.
             </p>

@@ -2,7 +2,18 @@ export interface Track {
   _id: string;
   title: string;
   description?: string;
-  category?: "web" | "mobile" | "cloud" | "ai" | "security" | "design" | "awareness" | "beginner" | "intermediate" | "advanced" | string;
+  category?:
+    | "web"
+    | "mobile"
+    | "cloud"
+    | "ai"
+    | "security"
+    | "design"
+    | "awareness"
+    | "beginner"
+    | "intermediate"
+    | "advanced"
+    | string;
   isActive?: boolean;
   xpReward?: number;
   estimatedWeeks?: number;
@@ -76,17 +87,17 @@ export interface CategoryOption {
   value: string;
   label: string;
   iconName: string;
-  badgeColor: "cyan" | "purple" | "success" | "warning" | "default";
+  badgeColor: "outline" | "default" | "warning";
 }
 
 export const CATEGORY_FILTERS: CategoryOption[] = [
   { value: "all", label: "All Categories", iconName: "Layers", badgeColor: "default" },
-  { value: "web", label: "Web", iconName: "Globe", badgeColor: "cyan" },
-  { value: "mobile", label: "Mobile", iconName: "Smartphone", badgeColor: "purple" },
-  { value: "cloud", label: "Cloud", iconName: "Cloud", badgeColor: "success" },
+  { value: "web", label: "Web", iconName: "Globe", badgeColor: "outline" },
+  { value: "mobile", label: "Mobile", iconName: "Smartphone", badgeColor: "outline" },
+  { value: "cloud", label: "Cloud", iconName: "Cloud", badgeColor: "outline" },
   { value: "ai", label: "AI & ML", iconName: "Cpu", badgeColor: "warning" },
   { value: "security", label: "Security", iconName: "Shield", badgeColor: "default" },
-  { value: "design", label: "Design", iconName: "Palette", badgeColor: "purple" },
+  { value: "design", label: "Design", iconName: "Palette", badgeColor: "outline" },
 ];
 
 export const TRACK_CATEGORY_OPTIONS: Array<{ value: string; label: string; group: string }> = [
@@ -107,28 +118,28 @@ export const LESSON_TYPES: Array<{
   label: string;
   description: string;
   iconName: string;
-  badgeVariant: "default" | "cyan" | "purple" | "success" | "warning";
+  badgeVariant: "default" | "outline" | "warning";
 }> = [
   {
     value: "video",
     label: "Video Lecture",
     description: "Streamed lecture or guided walkthrough with rich notes",
     iconName: "PlayCircle",
-    badgeVariant: "purple",
+    badgeVariant: "outline",
   },
   {
     value: "code-lab",
     label: "Hands-on Code Lab",
     description: "Interactive coding exercises with starter sandbox code",
     iconName: "Code2",
-    badgeVariant: "success",
+    badgeVariant: "outline",
   },
   {
     value: "concept",
     label: "Concept Guide",
     description: "Comprehensive written guide, architecture diagrams & theory",
     iconName: "BookOpen",
-    badgeVariant: "cyan",
+    badgeVariant: "outline",
   },
   {
     value: "quiz",

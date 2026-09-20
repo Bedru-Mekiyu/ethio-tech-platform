@@ -122,13 +122,13 @@ export function LiveKitParticipantTile({
       case ConnectionQuality.Excellent:
         return (
           <span title="Connection: Excellent">
-            <Wifi className="h-3.5 w-3.5 text-emerald-400" />
+            <Wifi className="h-3.5 w-3.5 text-white" />
           </span>
         );
       case ConnectionQuality.Good:
         return (
           <span title="Connection: Good">
-            <Wifi className="h-3.5 w-3.5 text-teal-400" />
+            <Wifi className="h-3.5 w-3.5 text-zinc-300" />
           </span>
         );
       case ConnectionQuality.Poor:
@@ -155,7 +155,9 @@ export function LiveKitParticipantTile({
   return (
     <div
       className={`group relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-900 border transition-all duration-300 ${
-        isSpeaking ? "border-emerald-500 shadow-lg shadow-emerald-500/10 ring-2 ring-emerald-500/30" : "border-white/10 hover:border-white/20"
+        isSpeaking
+          ? "border-white shadow-lg shadow-white/10 ring-2 ring-white/30"
+          : "border-white/10 hover:border-white/20"
       } ${aspectRatio === "video" ? "aspect-video" : aspectRatio === "square" ? "aspect-square" : "h-full w-full"} ${className}`}
     >
       {/* Video Stream */}
@@ -174,9 +176,9 @@ export function LiveKitParticipantTile({
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0E1726] to-slate-950 p-4 select-none">
           <div
             className={`relative flex items-center justify-center rounded-2xl shadow-xl transition-transform duration-300 ${
-              isSpeaking ? "scale-105 ring-4 ring-emerald-500/40" : ""
+              isSpeaking ? "scale-105 ring-4 ring-white/40" : ""
             } ${aspectRatio === "video" ? "h-20 w-20 md:h-24 md:w-24 text-2xl md:text-3xl" : "h-16 w-16 text-xl"} font-bold text-white bg-gradient-to-tr ${
-              isHost ? "from-violet-600 to-violet-500" : "from-emerald-600 to-teal-500"
+              isHost ? "from-[#b91c1c] to-[#991b1b]" : "from-zinc-800 to-zinc-700"
             }`}
           >
             {avatarUrl ? (
@@ -188,9 +190,7 @@ export function LiveKitParticipantTile({
             )}
 
             {/* Speaking audio wave indicator around avatar */}
-            {isSpeaking && (
-              <span className="absolute -inset-1.5 animate-ping rounded-2xl border-2 border-emerald-400/60" />
-            )}
+            {isSpeaking && <span className="absolute -inset-1.5 animate-ping rounded-2xl border-2 border-white/60" />}
           </div>
           <p className="mt-3 text-xs md:text-sm font-medium text-slate-300 max-w-[85%] truncate text-center">
             {displayName} {isLocal && "(You)"}
@@ -210,7 +210,7 @@ export function LiveKitParticipantTile({
 
         {/* Screen Share Pill */}
         {isScreenShare && (
-          <div className="flex items-center gap-1.5 rounded-full bg-violet-500/90 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg">
+          <div className="flex items-center gap-1.5 rounded-full bg-zinc-800 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg border border-white/10">
             <Monitor className="h-3.5 w-3.5" />
             <span>Screen Share</span>
           </div>
@@ -218,9 +218,7 @@ export function LiveKitParticipantTile({
 
         <div className="flex items-center gap-1.5 ml-auto">
           {/* Connection Signal */}
-          <div className="rounded-lg bg-black/50 backdrop-blur-md p-1.5">
-            {renderQualityIcon()}
-          </div>
+          <div className="rounded-lg bg-black/50 backdrop-blur-md p-1.5">{renderQualityIcon()}</div>
 
           {/* Pin Button */}
           {onTogglePin && (
@@ -232,7 +230,7 @@ export function LiveKitParticipantTile({
               }}
               className={`pointer-events-auto rounded-lg p-1.5 backdrop-blur-md transition-all ${
                 isPinned
-                  ? "bg-violet-600 text-white"
+                  ? "bg-[#b91c1c] text-white"
                   : "bg-black/50 text-slate-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
               }`}
               title={isPinned ? "Unpin participant" : "Pin participant"}
@@ -246,9 +244,11 @@ export function LiveKitParticipantTile({
       {/* Bottom Identity & Mic Badge */}
       <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
         <div className="flex items-center gap-2 rounded-xl bg-black/60 backdrop-blur-md px-3 py-1.5 text-xs text-white max-w-[80%] border border-white/5">
-          <span className="truncate font-medium">{displayName} {isLocal && "(You)"}</span>
+          <span className="truncate font-medium">
+            {displayName} {isLocal && "(You)"}
+          </span>
           {isHost && (
-            <span className="rounded-md bg-violet-500/30 px-1.5 py-0.5 text-[10px] font-semibold text-violet-300 uppercase tracking-wider">
+            <span className="rounded-md bg-white/10 px-1.5 py-0.5 text-[10px] font-semibold text-white uppercase tracking-wider">
               {role === "admin" ? "Admin" : "Mentor"}
             </span>
           )}
@@ -256,7 +256,7 @@ export function LiveKitParticipantTile({
 
         <div
           className={`flex h-7 w-7 items-center justify-center rounded-xl backdrop-blur-md ${
-            isAudioMuted ? "bg-rose-500/80 text-white" : "bg-black/60 text-emerald-400 border border-white/5"
+            isAudioMuted ? "bg-rose-600 text-white" : "bg-black/60 text-white border border-white/5"
           }`}
           title={isAudioMuted ? "Muted" : "Unmuted"}
         >

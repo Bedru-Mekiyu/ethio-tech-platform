@@ -87,17 +87,13 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
                   <Flame
                     size={14}
                     className={
-                      es.score >= 70
-                        ? "text-amber-500 fill-amber-500"
-                        : es.score >= 40
-                          ? "text-indigo-600"
-                          : "opacity-40"
+                      es.score >= 70 ? "text-amber-500 fill-amber-500" : es.score >= 40 ? "text-zinc-700" : "opacity-40"
                     }
                   />
                   <span
                     className={cn(
                       "text-base font-bold",
-                      es.score >= 70 ? "text-amber-600" : es.score >= 40 ? "text-indigo-600" : "text-slate-500",
+                      es.score >= 70 ? "text-amber-600" : es.score >= 40 ? "text-zinc-800" : "text-slate-500",
                     )}
                   >
                     {es.score}

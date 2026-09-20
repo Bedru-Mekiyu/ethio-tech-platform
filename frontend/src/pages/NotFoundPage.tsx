@@ -127,7 +127,7 @@ export function NotFoundPage() {
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-indigo-600 font-semibold">404</p>
+          <p className="text-xs uppercase tracking-wider text-[#b91c1c] font-semibold">404</p>
           <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900">Page not found</h1>
           <p className="mt-1.5 text-xs text-slate-600">The page you requested does not exist or has moved.</p>
 
@@ -138,9 +138,9 @@ export function NotFoundPage() {
           )}
 
           {recovery && (
-            <div className="mt-5 rounded-lg border border-indigo-100 bg-indigo-50/50 px-3.5 py-2.5">
+            <div className="mt-5 rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
               <p className="text-xs text-slate-600">
-                Redirecting to <span className="font-medium text-indigo-600">{recovery}</span> in{" "}
+                Redirecting to <span className="font-medium text-zinc-900">{recovery}</span> in{" "}
                 <span className="font-semibold text-slate-900">{countdown}</span>s...
               </p>
             </div>

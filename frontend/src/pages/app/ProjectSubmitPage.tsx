@@ -198,7 +198,7 @@ export function ProjectSubmitPage() {
                   }}
                   className={`rounded-lg border p-3.5 text-left transition shadow-xs ${
                     project.projectId === selectedProjectId
-                      ? "border-indigo-500 bg-indigo-50/70 text-slate-900"
+                      ? "border-zinc-900 bg-zinc-100 text-zinc-900"
                       : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
                   }`}
                 >
@@ -214,7 +214,7 @@ export function ProjectSubmitPage() {
                         project.category === "completed"
                           ? "success"
                           : project.category === "feedback"
-                            ? "purple"
+                            ? "warning"
                             : "outline"
                       }
                       size="sm"
@@ -230,7 +230,7 @@ export function ProjectSubmitPage() {
           <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">{selectedProject?.title}</h2>
-              <Badge variant="purple" size="sm">
+              <Badge variant="outline" size="sm">
                 {selectedProject?.trackTitle ?? "Learning Track"}
               </Badge>
             </div>
@@ -276,7 +276,7 @@ export function ProjectSubmitPage() {
                     setSelectedProjectId(event.target.value);
                     setValue("projectId", event.target.value, { shouldValidate: true });
                   }}
-                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 focus:border-indigo-500 shadow-xs"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 focus:border-zinc-900 shadow-xs"
                 >
                   {assignedProjects.map((project) => (
                     <option key={project.projectId} value={project.projectId}>
@@ -293,7 +293,7 @@ export function ProjectSubmitPage() {
                   placeholder="https://github.com/username/project"
                   autoComplete="off"
                   {...register("githubLink")}
-                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 shadow-xs"
                 />
                 {errors.githubLink ? <p className="text-[11px] text-danger">Enter a valid GitHub URL.</p> : null}
               </div>
@@ -304,7 +304,7 @@ export function ProjectSubmitPage() {
                   placeholder="https://your-app.vercel.app"
                   autoComplete="off"
                   {...register("deployedUrl")}
-                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 shadow-xs"
                 />
                 {errors.deployedUrl ? <p className="text-[11px] text-danger">Enter a valid deployed URL.</p> : null}
               </div>
@@ -314,7 +314,7 @@ export function ProjectSubmitPage() {
                 <Textarea
                   placeholder="src/App.tsx&#10;src/components/...&#10;public/index.html"
                   {...register("files")}
-                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
+                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 shadow-xs"
                 />
                 <p className="text-[11px] text-slate-500">Add one file per line or separate entries with commas.</p>
               </div>
@@ -345,7 +345,7 @@ export function ProjectSubmitPage() {
 
           <Card className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
             <div className="flex items-center gap-2 text-slate-500">
-              <CheckCircle2 size={14} className="text-indigo-600" />
+              <CheckCircle2 size={14} className="text-[#b91c1c]" />
               <span className="text-[10px] uppercase tracking-wider font-semibold">Submission checklist</span>
             </div>
             <div className="mt-4 space-y-3">
@@ -356,7 +356,7 @@ export function ProjectSubmitPage() {
                 >
                   <span className="text-sm text-slate-800">{item.label}</span>
                   {item.done ? (
-                    <CheckCircle2 size={16} className="text-emerald-600" />
+                    <CheckCircle2 size={16} className="text-zinc-900" />
                   ) : (
                     <span className="text-xs text-slate-400">Pending</span>
                   )}
@@ -367,7 +367,7 @@ export function ProjectSubmitPage() {
 
           <Card className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
             <div className="flex items-center gap-2 text-slate-500">
-              <FileCode2 size={14} className="text-indigo-600" />
+              <FileCode2 size={14} className="text-[#b91c1c]" />
               <span className="text-[10px] uppercase tracking-wider font-semibold">Recent submissions</span>
             </div>
             <div className="mt-4 space-y-3">
@@ -392,7 +392,7 @@ export function ProjectSubmitPage() {
       </div>
 
       {latestSubmission && (
-        <Card className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-6 shadow-xs">
+        <Card className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 shadow-xs">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="mt-1 text-xl font-bold text-slate-900">

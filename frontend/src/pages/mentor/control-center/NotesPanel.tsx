@@ -69,7 +69,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <FileText size={16} />
           </div>
           <div>
@@ -102,7 +102,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
                 </>
               ) : (
                 <>
-                  <Save size={12} className={saving ? "animate-pulse text-indigo-600" : "text-emerald-600"} />
+                  <Save size={12} className={saving ? "animate-pulse text-zinc-600" : "text-zinc-900"} />
                   {saving ? "Saving changes..." : "Autosaved successfully"}
                 </>
               )}
@@ -114,7 +114,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
             value={content}
             onChange={(e) => handleSave(e.target.value)}
             placeholder="Write session outlines, class notes, or markdown instructions here. Autosaves automatically..."
-            className="min-h-[250px] text-sm bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="min-h-[250px] text-sm bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
           />
         </div>
 

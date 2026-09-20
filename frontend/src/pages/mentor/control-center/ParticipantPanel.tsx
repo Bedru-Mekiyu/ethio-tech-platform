@@ -121,7 +121,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <div>
           <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
             Active Classroom
-            <Badge variant="purple" className="h-5 px-1.5">
+            <Badge variant="outline" className="h-5 px-1.5">
               {participants.length} online
             </Badge>
           </h3>
@@ -159,7 +159,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-800 outline-none focus:border-indigo-500"
+          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-800 outline-none focus:border-zinc-900"
         >
           <option value="all">All Roles</option>
           <option value="host">Host</option>
@@ -171,13 +171,12 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       </div>
 
       {filteredParticipants.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No participants match search criteria</p>
+        <div className="h-40 flex items-center justify-center text-center">
+          <p className="text-xs text-slate-400">No matching participants</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
           {filteredParticipants.map((p) => {
-            // Check status dot color
             const isHost = p.role === "host";
             const isCohost = p.role === "cohost";
             const canManage = !isHost && !isCohost;
@@ -185,7 +184,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             return (
               <div
                 key={p.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-3 hover:bg-slate-50/80 transition-all shadow-2xs"
+                className="rounded-xl border border-slate-200/80 bg-white p-3 flex items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-colors"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="relative shrink-0">
@@ -194,7 +193,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     <span
                       className={cn(
                         "absolute -bottom-1 -right-1 block h-3 w-3 rounded-full border-2 border-white",
-                        p.role === "host" ? "bg-emerald-500" : "bg-indigo-500",
+                        p.role === "host" ? "bg-zinc-900" : "bg-zinc-600",
                       )}
                     />
                   </div>
@@ -202,12 +201,12 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     <p className="text-xs font-semibold text-slate-900 truncate flex items-center gap-1.5">
                       {p.name}
                       {isHost && (
-                        <Badge variant="success" className="text-[9px] px-1 py-0 scale-90">
+                        <Badge variant="outline" className="text-[9px] px-1 py-0 scale-90">
                           Host
                         </Badge>
                       )}
                       {isCohost && (
-                        <Badge variant="purple" className="text-[9px] px-1 py-0 scale-90">
+                        <Badge variant="outline" className="text-[9px] px-1 py-0 scale-90">
                           Co-Host
                         </Badge>
                       )}
@@ -264,7 +263,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                                   setMenuOpenId(null);
                                 }}
                               >
-                                <Shield size={13} className="text-purple-600" /> Promote to Co-Host
+                                <Shield size={13} className="text-zinc-700" /> Promote to Co-Host
                               </button>
                             ) : (
                               <button
@@ -293,7 +292,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                                 setMenuOpenId(null);
                               }}
                             >
-                              <MessageSquare size={13} className="text-indigo-600" /> Submit Feedback
+                              <MessageSquare size={13} className="text-[#b91c1c]" /> Submit Feedback
                             </button>
                             <div className="my-1 border-t border-slate-100" />
                             <button
@@ -355,7 +354,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 <select
                   value={participationScore}
                   onChange={(e) => setParticipationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -371,7 +370,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 <select
                   value={communicationScore}
                   onChange={(e) => setCommunicationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -387,7 +386,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 <select
                   value={professionalismScore}
                   onChange={(e) => setProfessionalismScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -403,7 +402,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add session comments or specific recommendations..."
-                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 resize-none"
+                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-zinc-900 resize-none"
               />
             </div>
           </div>

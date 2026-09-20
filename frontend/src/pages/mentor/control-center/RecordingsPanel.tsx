@@ -96,7 +96,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-purple-50 text-purple-600 border border-purple-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <Video size={16} />
           </div>
           <div>
@@ -105,7 +105,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
+          className="h-8 text-xs bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Add Recording
@@ -167,7 +167,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                   Cancel
                 </Button>
                 <Button
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                  className="bg-zinc-900 hover:bg-zinc-800 text-white"
                   onClick={handleCreate}
                   disabled={!title.trim() || !url.trim() || isSubmitting}
                 >
@@ -207,7 +207,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                 className="rounded-xl border border-slate-200/80 bg-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50 transition-all shadow-2xs"
               >
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="bg-indigo-50 p-3 border border-indigo-100 rounded-xl shrink-0 flex items-center justify-center text-indigo-600">
+                  <div className="bg-zinc-100 p-3 border border-zinc-200 rounded-xl shrink-0 flex items-center justify-center text-zinc-900">
                     <Play size={18} className="fill-current" />
                   </div>
                   <div className="min-w-0">

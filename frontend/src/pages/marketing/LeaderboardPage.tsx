@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Crown, Medal, Trophy, Users } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -95,14 +95,14 @@ function RankCard({
   return (
     <Card
       className={cn(
-        "relative flex h-full flex-col items-center text-center transition-all duration-200 bg-white",
-        featured ? "border-indigo-400 shadow-md ring-1 ring-indigo-500/20 md:-mt-4" : "border-slate-200 shadow-sm",
+        "relative flex h-full flex-col items-center text-center transition-all duration-200 bg-white p-6",
+        featured ? "border-zinc-900 shadow-sm md:-mt-2" : "border-zinc-200 shadow-xs",
       )}
     >
       <div
         className={cn(
-          "absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border text-xs font-semibold",
-          featured ? "border-indigo-200 bg-indigo-50 text-indigo-700" : "border-slate-200 bg-slate-50 text-slate-600",
+          "absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-md border text-xs font-semibold tabular-nums",
+          featured ? "border-zinc-900 bg-zinc-900 text-white" : "border-zinc-200 bg-zinc-50 text-zinc-700",
         )}
       >
         #{place}
@@ -118,22 +118,17 @@ function RankCard({
           }
           role={tab === "mentors" ? "mentor" : "student"}
           size={featured ? "lg" : "md"}
-          className={featured ? "ring-4 ring-indigo-100" : ""}
+          className={featured ? "ring-2 ring-zinc-900/10" : ""}
         />
-        {featured ? (
-          <span className="absolute -right-2 -top-1 flex h-7 w-7 items-center justify-center rounded-full border border-amber-300 bg-amber-50 text-amber-600 shadow-sm">
-            <Crown size={14} />
-          </span>
-        ) : null}
       </div>
-      <h3 className="mt-3 text-sm font-semibold text-slate-900">{title}</h3>
-      <p className="text-xs text-indigo-600 font-medium">{subtitle}</p>
-      <div className="mt-3 flex flex-wrap justify-center gap-2">
-        <Badge variant={featured ? "purple" : "default"}>{podiumText(tab, metric)}</Badge>
-        <Badge variant={featured ? "success" : "purple"}>{featured ? "Top ranked" : "Rising"}</Badge>
+      <h3 className="mt-3 text-sm font-semibold text-zinc-900">{title}</h3>
+      <p className="text-xs text-zinc-500 font-medium">{subtitle}</p>
+      <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+        <Badge variant={featured ? "default" : "outline"}>{podiumText(tab, metric)}</Badge>
+        {featured ? <Badge variant="outline">Cohort Leader</Badge> : null}
       </div>
-      <ProgressBar value={metric} max={maxValue} className="mt-4 w-full" />
-      <p className="mt-2 text-xs text-slate-500">{formatXp(metric)} total</p>
+      <ProgressBar value={metric} max={maxValue} className="mt-4 w-full" color="primary" />
+      <p className="mt-2 text-[11px] text-zinc-500 tabular-nums">{formatXp(metric)} total</p>
     </Card>
   );
 }
@@ -189,9 +184,9 @@ export function LeaderboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
       <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Global Rankings</h1>
-        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-slate-600">
-          Compete, mentor, and collaborate with community peers. Rankings update with live platform activity.
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Engineering Contributor Index</h1>
+        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-600">
+          Rankings updated continuously from verified code reviews, sprint commits, and technical capstone evaluations.
         </p>
       </div>
 
@@ -205,8 +200,8 @@ export function LeaderboardPage() {
             className={cn(
               "rounded-lg border px-4 py-2 text-left transition text-xs",
               tab === item.id
-                ? "border-indigo-600 bg-indigo-600 text-white font-semibold shadow-sm"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm",
+                ? "border-zinc-900 bg-zinc-900 text-white font-semibold shadow-xs"
+                : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 shadow-xs",
             )}
           >
             <span className="block font-semibold">{item.label}</span>
@@ -216,36 +211,34 @@ export function LeaderboardPage() {
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3">
-        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
-          <div className="flex items-center justify-center gap-1.5 text-slate-500">
+        <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
             <Users size={13} />
             <span className="text-[10px] uppercase tracking-wider font-semibold">{statLabel(tab)}</span>
           </div>
-          <p className="mt-2 text-xl font-bold text-slate-900">{rows.length}</p>
-          <p className="mt-0.5 text-[11px] text-slate-500">Visible from live rankings</p>
+          <p className="mt-2 text-xl font-bold text-zinc-900">{rows.length}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-500">Active contributors</p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
-          <div className="flex items-center justify-center gap-1.5 text-slate-500">
-            <Trophy size={13} />
+        <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
             <span className="text-[10px] uppercase tracking-wider font-semibold">
               {tab === "mentors" ? "Top score" : "Top XP"}
             </span>
           </div>
-          <p className="mt-2 text-xl font-bold text-indigo-600">{podiumText(tab, topRank)}</p>
-          <p className="mt-0.5 text-[11px] text-slate-500">Current cohort leader</p>
+          <p className="mt-2 text-xl font-bold text-[#b91c1c]">{podiumText(tab, topRank)}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-500">Cohort benchmark</p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
-          <div className="flex items-center justify-center gap-1.5 text-slate-500">
-            <Medal size={13} />
+        <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
+          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
             <span className="text-[10px] uppercase tracking-wider font-semibold">Average</span>
           </div>
-          <p className="mt-2 text-xl font-bold text-slate-900">{podiumText(tab, averageRank)}</p>
-          <p className="mt-0.5 text-[11px] text-slate-500">Cohort average</p>
+          <p className="mt-2 text-xl font-bold text-zinc-900">{podiumText(tab, averageRank)}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-500">Cohort average</p>
         </Card>
       </div>
 
       {podium.length ? (
-        <div className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
           <div className="order-2 md:order-1">
             {podium[1] ? <RankCard entry={podium[1]} place={2} tab={tab} maxValue={maxValue} /> : null}
           </div>
@@ -260,7 +253,7 @@ export function LeaderboardPage() {
         <div className="mt-12">
           <EmptyState
             title="No rankings yet"
-            description="Once activity starts, the hall of fame will populate automatically."
+            description="Once technical activity commences, contributor standings will compute automatically."
             actionLabel="Join the platform"
             onAction={() => {
               navigate("/register");
@@ -269,18 +262,18 @@ export function LeaderboardPage() {
         </div>
       )}
 
-      <Card className="mt-12 overflow-hidden border-slate-200 bg-white shadow-sm p-0">
-        <div className="border-b border-slate-200 bg-white px-5 py-4">
+      <Card className="mt-12 overflow-hidden border-zinc-200 bg-white shadow-xs p-0">
+        <div className="border-b border-zinc-200 bg-white px-5 py-4">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-indigo-600 font-semibold">Rankings</p>
-              <h2 className="text-2xl font-semibold text-slate-900">Moving up the board</h2>
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold">Standings</p>
+              <h2 className="text-xl font-semibold text-zinc-900">Ranked Engineering Directory</h2>
             </div>
             <Link
               to={tab === "students" ? "/register" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"}
-              className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
+              className="inline-flex items-center gap-2 text-sm text-zinc-700 hover:text-zinc-900 font-medium"
             >
-              Join the challenge <ArrowRight size={16} />
+              Participate in cohorts <ArrowRight size={15} />
             </Link>
           </div>
         </div>
@@ -306,16 +299,16 @@ export function LeaderboardPage() {
                     <tr
                       key={(row as LeaderboardEntry)._id ?? title ?? rank}
                       className={cn(
-                        "border-b border-slate-100 transition-colors",
-                        isMe ? "bg-indigo-50/70" : "hover:bg-slate-50",
+                        "border-b border-zinc-100 transition-colors",
+                        isMe ? "bg-zinc-100/70 font-semibold" : "hover:bg-zinc-50",
                       )}
                     >
                       <td className="px-5 py-4">
-                        <div className="flex items-center gap-2 font-bold text-slate-900">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-xs text-slate-700">
+                        <div className="flex items-center gap-2 font-bold text-zinc-900">
+                          <span className="flex h-7 w-7 items-center justify-center rounded-md border border-zinc-200 bg-zinc-50 text-xs text-zinc-700 tabular-nums">
                             #{rank}
                           </span>
-                          {isMe ? <Badge variant="success">You</Badge> : null}
+                          {isMe ? <Badge variant="default">You</Badge> : null}
                         </div>
                       </td>
                       <td className="px-5 py-4">
@@ -332,8 +325,8 @@ export function LeaderboardPage() {
                             size="sm"
                           />
                           <div>
-                            <p className="font-medium text-slate-900">{title}</p>
-                            <p className="text-xs text-slate-500">
+                            <p className="font-medium text-zinc-900">{title}</p>
+                            <p className="text-xs text-zinc-500">
                               {tab === "students"
                                 ? getRankTitle((row as LeaderboardEntry).level ?? 1)
                                 : tab === "mentors"
@@ -344,14 +337,14 @@ export function LeaderboardPage() {
                         </div>
                       </td>
                       <td className="px-5 py-4">
-                        <p className="font-medium text-slate-900">
+                        <p className="font-medium text-zinc-900 tabular-nums">
                           {tab === "students"
                             ? `Lvl ${(row as LeaderboardEntry).level ?? 1}`
                             : tab === "mentors"
                               ? `${Math.round((row as MentorLeaderboardEntry).mentorScore ?? 0)} score`
                               : `${numberFormatter((row as PeerGroupLeaderboardEntry).groupXP ?? 0)} XP`}
                         </p>
-                        <p className="text-xs text-slate-500">
+                        <p className="text-xs text-zinc-500 tabular-nums">
                           {tab === "students"
                             ? `${numberFormatter((row as LeaderboardEntry).xp ?? 0)} XP`
                             : tab === "mentors"
@@ -360,7 +353,7 @@ export function LeaderboardPage() {
                         </p>
                       </td>
                       <td className="px-5 py-4">
-                        <ProgressBar value={topValue(tab, row)} max={maxValue} color={isMe ? "success" : "primary"} />
+                        <ProgressBar value={topValue(tab, row)} max={maxValue} color="primary" />
                       </td>
                     </tr>
                   );

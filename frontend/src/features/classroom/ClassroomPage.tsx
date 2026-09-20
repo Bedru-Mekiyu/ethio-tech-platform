@@ -313,7 +313,7 @@ export function ClassroomPage() {
     return (
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
-          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-indigo-600 border-t-transparent" />
+          <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent" />
           <p className="text-sm text-slate-500 font-medium">Loading interactive classroom...</p>
         </div>
       </div>
@@ -344,7 +344,7 @@ export function ClassroomPage() {
             <div className="relative flex flex-1 flex-col bg-slate-50">
               <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2.5 shadow-xs">
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-900">
-                  <Sparkles className="h-4 w-4 text-indigo-600" />
+                  <Sparkles className="h-4 w-4 text-zinc-900" />
                   <span>Collaborative Whiteboard</span>
                 </div>
                 <button
@@ -387,7 +387,7 @@ export function ClassroomPage() {
             /* Waiting / Scheduled State Screen */
             <div className="flex h-full items-center justify-center bg-slate-50 px-6 text-center">
               <div className="max-w-md rounded-3xl border border-slate-200/80 bg-white p-8 shadow-md">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-900">
                   <Sparkles className="h-7 w-7" />
                 </div>
                 <h2 className="text-lg font-bold text-slate-900">
@@ -425,12 +425,12 @@ export function ClassroomPage() {
             {/* Panel Header */}
             <div className="flex h-14 items-center justify-between border-b border-slate-200 bg-slate-50/70 px-4">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700">
-                {activePanel === "chat" && <MessageSquare className="h-4 w-4 text-indigo-600" />}
-                {activePanel === "qa" && <HelpCircle className="h-4 w-4 text-indigo-600" />}
-                {activePanel === "polls" && <BarChart3 className="h-4 w-4 text-indigo-600" />}
-                {activePanel === "notes" && <FileText className="h-4 w-4 text-indigo-600" />}
-                {activePanel === "resources" && <Folder className="h-4 w-4 text-indigo-600" />}
-                {activePanel === "breakout" && <Layers className="h-4 w-4 text-indigo-600" />}
+                {activePanel === "chat" && <MessageSquare className="h-4 w-4 text-zinc-900" />}
+                {activePanel === "qa" && <HelpCircle className="h-4 w-4 text-zinc-900" />}
+                {activePanel === "polls" && <BarChart3 className="h-4 w-4 text-zinc-900" />}
+                {activePanel === "notes" && <FileText className="h-4 w-4 text-zinc-900" />}
+                {activePanel === "resources" && <Folder className="h-4 w-4 text-zinc-900" />}
+                {activePanel === "breakout" && <Layers className="h-4 w-4 text-zinc-900" />}
                 <span>
                   {activePanel === "chat"
                     ? "Live Chat"
@@ -470,21 +470,21 @@ export function ClassroomPage() {
                           key={msg.id}
                           className={`rounded-xl p-2.5 text-xs ${
                             msg.isSystem
-                              ? "bg-indigo-50 text-indigo-700 border border-indigo-200 text-center font-medium"
+                              ? "bg-zinc-100 text-zinc-900 border border-zinc-200 text-center font-medium"
                               : msg.userId === user?.id
-                                ? "bg-indigo-600 text-white ml-4 shadow-xs"
+                                ? "bg-zinc-900 text-white ml-4 shadow-xs"
                                 : "bg-slate-100 border border-slate-200 text-slate-800 mr-4"
                           }`}
                         >
                           {!msg.isSystem && (
                             <div className="flex items-center justify-between gap-2 mb-1">
                               <span
-                                className={`font-semibold text-[11px] truncate ${msg.userId === user?.id ? "text-indigo-100" : "text-slate-700"}`}
+                                className={`font-semibold text-[11px] truncate ${msg.userId === user?.id ? "text-zinc-200" : "text-slate-700"}`}
                               >
                                 {msg.author}
                               </span>
                               <span
-                                className={`text-[9px] font-mono ${msg.userId === user?.id ? "text-indigo-200" : "text-slate-400"}`}
+                                className={`text-[9px] font-mono ${msg.userId === user?.id ? "text-zinc-300" : "text-slate-400"}`}
                               >
                                 {new Date(msg.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                               </span>
@@ -504,12 +504,12 @@ export function ClassroomPage() {
                       placeholder="Send a message..."
                       value={chatDraft}
                       onChange={(e) => setChatDraft(e.target.value)}
-                      className="flex-1 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 shadow-xs"
+                      className="flex-1 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 shadow-xs"
                     />
                     <button
                       type="submit"
                       disabled={!chatDraft.trim()}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-40 transition-colors shadow-xs"
+                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 disabled:opacity-40 transition-colors shadow-xs"
                     >
                       <Send className="h-4 w-4" />
                     </button>

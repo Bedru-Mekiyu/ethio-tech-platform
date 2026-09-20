@@ -54,7 +54,7 @@ const BreakoutCard: React.FC<{
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
           <span>Status: {breakout.status}</span>
           {timeLeft !== null && timeLeft > 0 && (
-            <span className="font-mono font-bold text-indigo-600">{formatTime(timeLeft)}</span>
+            <span className="font-mono font-bold text-zinc-900">{formatTime(timeLeft)}</span>
           )}
         </div>
         <div className="flex gap-1.5">

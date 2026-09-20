@@ -107,7 +107,7 @@ export function ProfilePage() {
             <h2 className="text-sm font-semibold text-slate-900">{track?.title ?? "Current Track"}</h2>
             <Link
               to="/app/tracks"
-              className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+              className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
             >
               {track ? "View track" : "Browse tracks"}
             </Link>
@@ -129,7 +129,7 @@ export function ProfilePage() {
             <h2 className="text-sm font-semibold text-slate-900">Recent Achievements</h2>
             <Link
               to="/app/progress"
-              className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+              className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
             >
               View all
             </Link>
@@ -141,7 +141,7 @@ export function ProfilePage() {
                   key={badge._id ?? badge.name}
                   className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/60 p-2.5"
                 >
-                  <Award size={14} className="text-indigo-600 shrink-0" />
+                  <Award size={14} className="text-[#b91c1c] shrink-0" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs font-semibold text-slate-900 truncate">{badge.name}</p>
                     <p className="text-[10px] text-slate-400 capitalize">{badge.category ?? "achievement"}</p>
@@ -157,17 +157,17 @@ export function ProfilePage() {
 
       <div className="grid gap-3.5 sm:grid-cols-2">
         <Link to="/app/certificates" className="block group">
-          <Card className="border-slate-200 bg-white p-4 transition-all hover:border-indigo-300 hover:shadow-md shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 transition-all hover:border-zinc-400 hover:shadow-md shadow-sm">
             <p className="text-xs font-medium text-slate-500">Certificates</p>
-            <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-[#b91c1c] transition-colors">
               View earned certificates →
             </p>
           </Card>
         </Link>
         <Link to="/app/settings" className="block group">
-          <Card className="border-slate-200 bg-white p-4 transition-all hover:border-indigo-300 hover:shadow-md shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 transition-all hover:border-zinc-400 hover:shadow-md shadow-sm">
             <p className="text-xs font-medium text-slate-500">Settings</p>
-            <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-[#b91c1c] transition-colors">
               Manage account & privacy →
             </p>
           </Card>

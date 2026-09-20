@@ -150,23 +150,23 @@ export function StudentDashboardPage() {
 
         {/* Quick Stat Badges */}
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 shadow-xs">
+          <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs">
             <Flame className="text-amber-500" size={14} />
-            <span className="text-xs font-semibold text-slate-900">{currentStreak}</span>
-            <span className="text-[11px] text-slate-500">Day Streak</span>
+            <span className="text-xs font-semibold text-zinc-900">{currentStreak}</span>
+            <span className="text-[11px] text-zinc-500">Day Streak</span>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 shadow-xs">
-            <Zap className="text-emerald-600" size={14} />
-            <span className="text-xs font-semibold text-slate-900">{userXp.toLocaleString()}</span>
-            <span className="text-[11px] text-slate-500">XP (Lvl {userLevel})</span>
+          <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs">
+            <Zap className="text-[#b91c1c]" size={14} />
+            <span className="text-xs font-semibold text-zinc-900">{userXp.toLocaleString()}</span>
+            <span className="text-[11px] text-zinc-500">XP (Lvl {userLevel})</span>
           </div>
 
           <Link to="/leaderboard">
-            <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 shadow-xs hover:border-slate-300 transition-colors">
-              <Trophy className="text-indigo-600" size={14} />
-              <span className="text-xs font-semibold text-slate-900">#{data?.leaderboardPosition ?? "12"}</span>
-              <span className="text-[11px] text-slate-500">Rank</span>
+            <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs hover:border-zinc-300 transition-colors">
+              <Trophy className="text-amber-600" size={14} />
+              <span className="text-xs font-semibold text-zinc-900">#{data?.leaderboardPosition ?? "12"}</span>
+              <span className="text-[11px] text-zinc-500">Rank</span>
             </div>
           </Link>
         </div>
@@ -181,14 +181,14 @@ export function StudentDashboardPage() {
             <Card
               className={cn(
                 "rounded-xl border p-4 transition-all shadow-xs",
-                activeMeeting.status === "active" ? "border-emerald-200 bg-emerald-50/40" : "border-slate-200 bg-white",
+                activeMeeting.status === "active" ? "border-zinc-300 bg-zinc-50" : "border-zinc-200 bg-white",
               )}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
                     {activeMeeting.status === "active" ? (
-                      <Badge variant="success" size="sm" className="gap-1 font-medium">
+                      <Badge variant="default" size="sm" className="gap-1 font-medium bg-zinc-900 text-white">
                         <Radio size={11} className="animate-pulse" /> Live Session Now
                       </Badge>
                     ) : (
@@ -196,7 +196,7 @@ export function StudentDashboardPage() {
                         <Video size={11} /> Upcoming Session
                       </Badge>
                     )}
-                    <span className="text-xs text-slate-500">
+                    <span className="text-xs text-zinc-500">
                       {new Date(activeMeeting.scheduledAt).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -204,11 +204,11 @@ export function StudentDashboardPage() {
                     </span>
                   </div>
 
-                  <h2 className="text-sm font-semibold text-slate-900 truncate">
+                  <h2 className="text-sm font-semibold text-zinc-900 truncate">
                     {activeMeeting.title || "Interactive Mentor Session"}
                   </h2>
 
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-zinc-500">
                     Mentor: {activeMeeting.mentorName || "Instructor"} · Live coding & Q&A
                   </p>
                 </div>
@@ -228,7 +228,7 @@ export function StudentDashboardPage() {
                       size="sm"
                       className={cn(
                         "gap-1.5 font-medium",
-                        activeMeeting.status === "active" && "bg-emerald-600 hover:bg-emerald-500 text-white",
+                        activeMeeting.status === "active" && "bg-zinc-900 hover:bg-zinc-800 text-white",
                       )}
                     >
                       <Radio size={13} className={activeMeeting.status === "active" ? "animate-pulse" : ""} />
@@ -241,45 +241,43 @@ export function StudentDashboardPage() {
           ) : null}
 
           {/* Active Track Progress & Next Recommended Lesson */}
-          <Card className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <Card className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-600">
-                    Active Track
-                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Active Track</span>
                   <Badge variant="outline" size="sm">
                     In Progress
                   </Badge>
                 </div>
-                <h2 className="mt-1 text-base font-bold text-slate-900">{trackTitle}</h2>
-                <p className="mt-0.5 text-xs text-slate-500">
+                <h2 className="mt-1 text-base font-bold text-zinc-900">{trackTitle}</h2>
+                <p className="mt-0.5 text-xs text-zinc-500">
                   {completedLessons} of {totalLessons} lessons completed ({completion}% complete)
                 </p>
               </div>
 
               <div className="text-right">
-                <span className="text-xl font-bold font-mono text-slate-900">{completion}%</span>
+                <span className="text-xl font-bold font-mono text-zinc-900">{completion}%</span>
               </div>
             </div>
 
-            <ProgressBar value={completion} max={100} className="mt-3.5 h-1.5 bg-slate-100" />
+            <ProgressBar value={completion} max={100} className="mt-3.5 h-1.5 bg-zinc-100" />
 
             {/* Recommended Next Lesson Box */}
-            <div className="mt-4 rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
+            <div className="mt-4 rounded-lg border border-zinc-200 bg-zinc-50/70 p-3.5">
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-semibold text-indigo-600 uppercase tracking-wider">Next Up</span>
-                    <span className="text-[11px] text-slate-400">· ~20 mins</span>
+                    <span className="text-[10px] font-semibold text-zinc-600 uppercase tracking-wider">Next Up</span>
+                    <span className="text-[11px] text-zinc-400">· ~20 mins</span>
                   </div>
-                  <p className="text-xs font-semibold text-slate-900 truncate">
+                  <p className="text-xs font-semibold text-zinc-900 truncate">
                     {currentTrack?.title
                       ? `Mastering State & Event Handlers in ${currentTrack.title}`
                       : "Building Interactive Components & State Management"}
                   </p>
-                  <p className="text-[11px] text-slate-500">
-                    Earn <span className="font-semibold text-emerald-600">+50 XP</span> upon completion
+                  <p className="text-[11px] text-zinc-500">
+                    Earn <span className="font-semibold text-[#b91c1c]">+50 XP</span> upon completion
                   </p>
                 </div>
 
@@ -302,18 +300,18 @@ export function StudentDashboardPage() {
           </Card>
 
           {/* ─── Physical Hub Arrival & Access Pass Widget ─── */}
-          <Card className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+          <Card className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 border border-indigo-100">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 text-zinc-900 border border-zinc-200">
                     <Building2 size={13} />
                   </div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-700">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-700">
                     Physical Hub Arrival & Pass
                   </span>
                   {hubCheckedIn ? (
-                    <Badge variant="success" size="sm" className="font-medium">
+                    <Badge variant="default" size="sm" className="font-medium">
                       Checked In Today
                     </Badge>
                   ) : (
@@ -323,9 +321,9 @@ export function StudentDashboardPage() {
                   )}
                 </div>
 
-                <h3 className="text-sm font-semibold text-slate-900 pt-0.5">Addis Ababa Bole Tech Hub · Desk #B-14</h3>
-                <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                  <MapPin size={12} className="text-slate-400" />
+                <h3 className="text-sm font-semibold text-zinc-900 pt-0.5">Addis Ababa Bole Tech Hub · Desk #B-14</h3>
+                <p className="text-xs text-zinc-500 flex items-center gap-1.5">
+                  <MapPin size={12} className="text-zinc-400" />
                   Bole Medhanialem Tech Park, Floor 3 · Open 08:30 AM – 08:00 PM
                 </p>
               </div>
@@ -333,8 +331,8 @@ export function StudentDashboardPage() {
               {/* Hub Access Actions */}
               <div className="shrink-0 flex flex-wrap items-center gap-2">
                 {hubCheckedIn ? (
-                  <div className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
-                    <CheckCircle2 size={14} />
+                  <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-800">
+                    <CheckCircle2 size={14} className="text-zinc-700" />
                     Verified Arrival (+50 XP)
                   </div>
                 ) : (
@@ -342,7 +340,7 @@ export function StudentDashboardPage() {
                     size="sm"
                     variant="primary"
                     onClick={handleHubCheckIn}
-                    className="gap-1 font-medium bg-emerald-600 hover:bg-emerald-500 text-white"
+                    className="gap-1 font-medium bg-zinc-900 hover:bg-zinc-800 text-white"
                   >
                     <Zap size={13} />
                     Check In (+50 XP)
@@ -358,25 +356,25 @@ export function StudentDashboardPage() {
             </div>
 
             {/* Hub Hardware & Connection Specs */}
-            <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-slate-100">
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-slate-500 block">Mesh Pass ID</span>
-                <span className="font-mono text-xs font-semibold text-slate-800">PASS-ET-9482</span>
+            <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-zinc-100">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                <span className="text-[10px] font-medium text-zinc-500 block">Mesh Pass ID</span>
+                <span className="font-mono text-xs font-semibold text-zinc-800">PASS-ET-9482</span>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-slate-500 flex items-center gap-1">
-                  <Wifi size={11} className="text-emerald-600" /> Fiber WiFi
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                <span className="text-[10px] font-medium text-zinc-500 flex items-center gap-1">
+                  <Wifi size={11} className="text-zinc-700" /> Fiber WiFi
                 </span>
-                <span className="text-xs font-semibold text-slate-800">EthioTech-5G-Hub</span>
+                <span className="text-xs font-semibold text-zinc-800">EthioTech-5G-Hub</span>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-slate-500 block">Workstation</span>
-                <span className="text-xs font-semibold text-slate-800">Dual Monitor + UPS</span>
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                <span className="text-[10px] font-medium text-zinc-500 block">Workstation</span>
+                <span className="text-xs font-semibold text-zinc-800">Dual Monitor + UPS</span>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2.5 flex items-center justify-between">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-medium text-slate-500 block">QR Gate Pass</span>
-                  <span className="text-xs font-semibold text-emerald-600">Ready to Scan</span>
+                  <span className="text-[10px] font-medium text-zinc-500 block">QR Gate Pass</span>
+                  <span className="text-xs font-semibold text-zinc-800">Ready to Scan</span>
                 </div>
                 <svg
                   width={16}
@@ -387,7 +385,7 @@ export function StudentDashboardPage() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="text-slate-400"
+                  className="text-zinc-400"
                   aria-hidden="true"
                 >
                   <rect width="5" height="5" x="3" y="3" rx="1" />
@@ -410,42 +408,42 @@ export function StudentDashboardPage() {
           {/* Quick Platform Navigation Shortcuts */}
           <div className="grid gap-3 sm:grid-cols-3">
             <Link to="/app/workspace" className="group">
-              <Card className="h-full rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <Card className="h-full rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                   <Code2 size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-zinc-900 group-hover:text-zinc-700 transition-colors">
                   Coding Workspace
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 text-[11px] text-zinc-500">
                   In-browser editor, terminal runner, and multi-language presets.
                 </p>
               </Card>
             </Link>
 
             <Link to="/app/projects" className="group">
-              <Card className="h-full rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <Card className="h-full rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                   <BookOpen size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-zinc-900 group-hover:text-zinc-700 transition-colors">
                   Project Portfolio
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 text-[11px] text-zinc-500">
                   Ship real-world portfolio tasks and get mentor review code scores.
                 </p>
               </Card>
             </Link>
 
             <Link to="/app/progress" className="group">
-              <Card className="h-full rounded-xl border border-slate-200 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <Card className="h-full rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                   <Trophy size={16} />
                 </div>
-                <h3 className="mt-2.5 text-xs font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="mt-2.5 text-xs font-semibold text-zinc-900 group-hover:text-zinc-700 transition-colors">
                   Progress & Badges
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 text-[11px] text-zinc-500">
                   Skill mastery radar, verified certificates, and achievement history.
                 </p>
               </Card>
@@ -456,35 +454,35 @@ export function StudentDashboardPage() {
         {/* Right Col: Streak, Daily Challenge & Squad Activity */}
         <div className="space-y-5">
           {/* Daily XP Streak Card */}
-          <Card className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+          <Card className="rounded-xl border border-zinc-200 bg-white p-4 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-md bg-amber-50 text-amber-600 border border-amber-100">
                   <Flame size={15} />
                 </div>
                 <div>
-                  <h3 className="text-xs font-semibold text-slate-900">Daily Streak</h3>
-                  <p className="text-[10px] text-slate-500">Best: {longestStreak} days</p>
+                  <h3 className="text-xs font-semibold text-zinc-900">Daily Streak</h3>
+                  <p className="text-[10px] text-zinc-500">Best: {longestStreak} days</p>
                 </div>
               </div>
               <span className="text-base font-bold font-mono text-amber-600">{currentStreak}d</span>
             </div>
 
             {/* Weekly Streak Dots */}
-            <div className="mt-3 flex items-center justify-between rounded-lg bg-slate-50 border border-slate-200 p-2.5">
+            <div className="mt-3 flex items-center justify-between rounded-lg bg-zinc-50 border border-zinc-200 p-2.5">
               {daysOfWeek.map((day, idx) => {
                 const isActive = idx <= currentDayIndex && currentStreak > 0;
                 return (
                   <div key={idx} className="flex flex-col items-center gap-1">
-                    <span className="text-[10px] font-medium text-slate-500">{day}</span>
+                    <span className="text-[10px] font-medium text-zinc-500">{day}</span>
                     <div
                       className={cn(
                         "h-5 w-5 rounded-full flex items-center justify-center text-[9px] font-bold transition-all",
                         isActive
-                          ? "bg-amber-500 text-white font-bold"
+                          ? "bg-zinc-900 text-white font-bold"
                           : idx === currentDayIndex
-                            ? "border border-dashed border-amber-400 text-amber-600 bg-amber-50/50"
-                            : "bg-white border border-slate-200 text-slate-400",
+                            ? "border border-dashed border-zinc-400 text-zinc-800 bg-zinc-100"
+                            : "bg-white border border-zinc-200 text-zinc-400",
                       )}
                     >
                       {isActive ? "✓" : ""}
@@ -493,39 +491,39 @@ export function StudentDashboardPage() {
                 );
               })}
             </div>
-            <p className="mt-2.5 text-center text-[11px] text-slate-500">
+            <p className="mt-2.5 text-center text-[11px] text-zinc-500">
               Solve 1 challenge today to keep your streak active.
             </p>
           </Card>
 
           {/* Today's Daily Challenge Card */}
-          <Card className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+          <Card className="rounded-xl border border-zinc-200 bg-white p-4 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <Target size={14} className="text-indigo-600" />
-                <h3 className="text-xs font-semibold text-slate-900">Daily Challenge</h3>
+                <Target size={14} className="text-zinc-700" />
+                <h3 className="text-xs font-semibold text-zinc-900">Daily Challenge</h3>
               </div>
               {dailyChallengeCompleted ? (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-600">
-                  <CheckCircle2 size={13} /> Completed
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-zinc-800">
+                  <CheckCircle2 size={13} className="text-zinc-700" /> Completed
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-600">
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-[#b91c1c]">
                   <Zap size={12} /> +{dailyChallenge?.xpReward ?? 25} XP
                 </span>
               )}
             </div>
 
-            <p className="mt-2 text-xs font-medium text-slate-800">
+            <p className="mt-2 text-xs font-medium text-zinc-800">
               {dailyChallenge?.title ?? "Practice Daily Problem"}
             </p>
-            <p className="mt-0.5 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-0.5 text-xs text-zinc-500 leading-relaxed">
               {dailyChallenge?.description ??
                 "Complete one lesson quiz, submit coding task code, or ask a question in your squad."}
             </p>
 
             {dailyChallengeCompleted ? (
-              <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50 py-2 text-center text-xs font-medium text-emerald-700">
+              <div className="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 py-2 text-center text-xs font-medium text-zinc-800">
                 Challenge Reward Claimed
               </div>
             ) : (
@@ -541,37 +539,37 @@ export function StudentDashboardPage() {
           </Card>
 
           {/* Squad Activity Card */}
-          <Card className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+          <Card className="rounded-xl border border-zinc-200 bg-white p-4 shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <Users size={14} className="text-indigo-600" />
-                <h3 className="text-xs font-semibold text-slate-900">Squad Activity</h3>
+                <Users size={14} className="text-zinc-700" />
+                <h3 className="text-xs font-semibold text-zinc-900">Squad Activity</h3>
               </div>
               <Link
                 to={squadPath || "/app/squads"}
-                className="text-xs text-indigo-600 hover:text-indigo-700 hover:underline flex items-center gap-1 font-medium"
+                className="text-xs text-zinc-700 hover:text-zinc-900 hover:underline flex items-center gap-1 font-medium"
               >
                 Open Hub <ArrowRight size={11} />
               </Link>
             </div>
 
-            <div className="mt-2.5 rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+            <div className="mt-2.5 rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-800 truncate">
+                <span className="text-xs font-medium text-zinc-800 truncate">
                   {squad?.name || "Alpha Code Squad #4"}
                 </span>
                 <Badge variant="outline" size="sm">
                   {squad?.groupXP ? `${squad.groupXP.toLocaleString()} XP` : "1,420 XP"}
                 </Badge>
               </div>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-zinc-500">
                 Active peers collaborating on track milestones and live study sessions.
               </p>
-              <div className="mt-2.5 flex items-center justify-between border-t border-slate-200 pt-2 text-xs text-slate-500">
+              <div className="mt-2.5 flex items-center justify-between border-t border-zinc-200 pt-2 text-xs text-zinc-500">
                 <span>4 active discussions</span>
                 <Link
                   to={squadPath || "/app/squads"}
-                  className="text-indigo-600 font-medium hover:text-indigo-700 transition-colors"
+                  className="text-zinc-800 font-medium hover:text-zinc-900 transition-colors"
                 >
                   Join Chat →
                 </Link>

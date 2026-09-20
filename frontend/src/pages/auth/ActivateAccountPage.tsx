@@ -98,7 +98,7 @@ export function ActivateAccountPage() {
       </motion.div>
 
       <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 text-indigo-600">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-700">
           <ShieldCheck size={16} />
         </div>
         <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Activate Mentor Account</h1>
@@ -117,7 +117,7 @@ export function ActivateAccountPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Create strong password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("password", errors.password?.message)}
             {...register("password")}
           />
@@ -127,7 +127,7 @@ export function ActivateAccountPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Re-enter password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />

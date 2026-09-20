@@ -92,7 +92,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <MessageSquare size={16} />
           </div>
           <div>
@@ -128,7 +128,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
               key={q.id}
               className={cn(
                 "rounded-xl border p-3.5 transition-all shadow-2xs",
-                q.isPinned ? "border-indigo-200 bg-indigo-50/50 shadow-xs" : "border-slate-200/80 bg-white",
+                q.isPinned ? "border-zinc-300 bg-zinc-50 shadow-xs" : "border-slate-200/80 bg-white",
               )}
             >
               <div className="flex items-start gap-3">
@@ -141,7 +141,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     title={q.isPinned ? "Unpin question" : "Pin question"}
                     disabled={submittingId === q.id}
                   >
-                    <Pin size={14} className={q.isPinned ? "text-indigo-600 fill-indigo-600" : "opacity-60"} />
+                    <Pin size={14} className={q.isPinned ? "text-[#b91c1c] fill-[#b91c1c]" : "opacity-60"} />
                   </Button>
                   <span className="text-[10px] font-bold text-slate-500 flex items-center gap-0.5">
                     <ThumbsUp size={10} /> {q.upvoteCount}
@@ -158,7 +158,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                           : q.status === "answering"
                             ? "default"
                             : q.status === "answered"
-                              ? "success"
+                              ? "outline"
                               : "default"
                       }
                       className="text-[9px] px-1.5 py-0"
@@ -166,7 +166,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                       {q.status}
                     </Badge>
                     {q.isPinned && (
-                      <Badge variant="purple" className="text-[9px] px-1.5 py-0 flex items-center gap-0.5">
+                      <Badge variant="outline" className="text-[9px] px-1.5 py-0 flex items-center gap-0.5">
                         <Star size={8} className="fill-current" /> Pinned
                       </Badge>
                     )}
@@ -175,8 +175,8 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                   <p className="text-xs text-slate-700 mt-1.5 leading-relaxed">{q.text}</p>
 
                   {q.reply?.text && (
-                    <div className="mt-2.5 rounded-lg border border-indigo-100 bg-indigo-50/40 p-2.5">
-                      <p className="text-[10px] font-bold text-indigo-700">Response</p>
+                    <div className="mt-2.5 rounded-lg border border-zinc-200 bg-zinc-50 p-2.5">
+                      <p className="text-[10px] font-bold text-zinc-900">Response</p>
                       <p className="text-xs text-slate-800 mt-0.5">{q.reply.text}</p>
                     </div>
                   )}

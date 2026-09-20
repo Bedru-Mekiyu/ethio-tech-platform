@@ -77,14 +77,14 @@ function calculateRubricScore(scores: RubricScores) {
   const percentage = Math.round((total / max) * 100);
 
   let recommendation: string;
-  let variant: "success" | "purple" | "warning" | "default";
+  let variant: "outline" | "warning" | "default";
 
   if (percentage >= 85) {
     recommendation = "Strong Recommend";
-    variant = "success";
+    variant = "outline";
   } else if (percentage >= 70) {
     recommendation = "Recommend";
-    variant = "purple";
+    variant = "outline";
   } else if (percentage >= 50) {
     recommendation = "Needs Interview / Info";
     variant = "warning";
@@ -325,11 +325,11 @@ Ethio-Tech Mentorship Team`;
   const statusBadge = (status: MentorApplication["status"]) => {
     const variant =
       status === "approved"
-        ? "success"
+        ? "outline"
         : status === "rejected"
           ? "warning"
           : status === "changes_requested"
-            ? "purple"
+            ? "outline"
             : "default";
     return <Badge variant={variant}>{status.replace(/_/g, " ")}</Badge>;
   };
@@ -479,7 +479,7 @@ Ethio-Tech Mentorship Team`;
                       className="h-12 w-12 rounded-xl border border-slate-200 bg-slate-100 object-cover"
                     />
                   ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-indigo-200 bg-indigo-50 text-xl font-bold text-indigo-600">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-100 text-xl font-bold text-zinc-900">
                       {app.fullName.charAt(0).toUpperCase()}
                     </div>
                   )}
@@ -493,7 +493,7 @@ Ethio-Tech Mentorship Team`;
                     <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                       {statusBadge(app.status)}
                       {linkedUser?.mentorAccountStatus && (
-                        <Badge variant="purple" size="sm">
+                        <Badge variant="outline" size="sm">
                           {linkedUser.mentorAccountStatus.replace(/_/g, " ")}
                         </Badge>
                       )}
@@ -510,7 +510,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-indigo-600 font-medium hover:underline bg-indigo-50/50 px-2.5 py-1 rounded-md border border-indigo-200"
+                      className="inline-flex items-center gap-1 text-xs text-zinc-900 font-medium hover:underline bg-zinc-100 px-2.5 py-1 rounded-md border border-zinc-200"
                     >
                       LinkedIn <ExternalLink size={11} />
                     </a>
@@ -520,7 +520,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-indigo-600 font-medium hover:underline bg-indigo-50/50 px-2.5 py-1 rounded-md border border-indigo-200"
+                      className="inline-flex items-center gap-1 text-xs text-zinc-900 font-medium hover:underline bg-zinc-100 px-2.5 py-1 rounded-md border border-zinc-200"
                     >
                       Portfolio <ExternalLink size={11} />
                     </a>
@@ -604,7 +604,7 @@ Ethio-Tech Mentorship Team`;
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {(app.expertise ?? []).map((skill) => (
-                        <Badge key={skill} variant="purple" className="text-xs">
+                        <Badge key={skill} variant="outline" className="text-xs">
                           {skill}
                         </Badge>
                       ))}
@@ -684,7 +684,7 @@ Ethio-Tech Mentorship Team`;
                       <div key={c.key} className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 space-y-2">
                         <div className="flex items-center justify-between text-sm">
                           <span className="font-semibold text-slate-900">{c.title}</span>
-                          <span className="font-mono text-xs font-bold text-indigo-600">
+                          <span className="font-mono text-xs font-bold text-zinc-900">
                             {rubricScores[c.key]}/5 ({c.labels[rubricScores[c.key] - 1]})
                           </span>
                         </div>
@@ -697,7 +697,7 @@ Ethio-Tech Mentorship Team`;
                               onClick={() => setRubricScores((prev) => ({ ...prev, [c.key]: v }))}
                               className={`rounded-lg border py-2 text-xs font-medium transition-all ${
                                 rubricScores[c.key] === v
-                                  ? "border-indigo-600 bg-indigo-600 text-white font-bold shadow-xs"
+                                  ? "border-zinc-900 bg-zinc-900 text-white font-bold shadow-xs"
                                   : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
                               }`}
                             >
@@ -719,7 +719,7 @@ Ethio-Tech Mentorship Team`;
                 {/* Direct Interview Scheduling Section */}
                 <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-xs">
                   <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-indigo-600" />
+                    <Calendar size={18} className="text-zinc-900" />
                     <h3 className="text-base font-bold text-slate-900">Screening Interview & Calendar</h3>
                   </div>
 
@@ -741,7 +741,7 @@ Ethio-Tech Mentorship Team`;
                           onClick={() => copyToClipboard(meetingUrl, true)}
                           className="flex-1 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
                         >
-                          {copiedLink ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+                          {copiedLink ? <Check size={13} className="text-zinc-900" /> : <Copy size={13} />}
                           {copiedLink ? "Copied" : "Copy Link"}
                         </Button>
                         <a href={meetingUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
@@ -780,9 +780,9 @@ Ethio-Tech Mentorship Team`;
                         size="sm"
                         variant="ghost"
                         onClick={() => copyToClipboard(emailTemplate, false)}
-                        className="h-6 text-xs text-indigo-600 hover:text-indigo-700 gap-1"
+                        className="h-6 text-xs text-[#b91c1c] hover:text-[#991b1b] gap-1"
                       >
-                        {copiedTemplate ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
+                        {copiedTemplate ? <Check size={12} className="text-zinc-900" /> : <Copy size={12} />}
                         {copiedTemplate ? "Copied" : "Copy Template"}
                       </Button>
                     </div>
@@ -962,7 +962,7 @@ Ethio-Tech Mentorship Team`;
                 <textarea
                   value={reviewNotes}
                   onChange={(e) => setReviewNotes(e.target.value)}
-                  className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 resize-y"
+                  className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
                   placeholder="Enter approval notes, onboarding instructions, or specific changes requested..."
                 />
               </section>
@@ -1056,7 +1056,7 @@ Ethio-Tech Mentorship Team`;
                           size="sm"
                           variant="outline"
                           onClick={() => setConfirmAction("reactivate")}
-                          className="w-full gap-2 text-emerald-600 border-emerald-200 hover:bg-emerald-50"
+                          className="w-full gap-2 text-zinc-900 border-zinc-300 hover:bg-zinc-100"
                         >
                           <RefreshCw size={15} /> Reactivate Mentor
                         </Button>

@@ -427,7 +427,7 @@ export default function MentorControlCenterPage() {
         </Card>
         <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
           <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Meeting status</p>
-          <p className="mt-1.5 text-xl font-bold text-indigo-600 capitalize">{meetingStatus.replace("_", " ")}</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900 capitalize">{meetingStatus.replace("_", " ")}</p>
           <p className="mt-0.5 text-xs text-slate-500">Live status synchronized across all devices.</p>
         </Card>
       </div>
@@ -516,7 +516,7 @@ export default function MentorControlCenterPage() {
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="w-full mt-2 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                      className="w-full mt-2 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
                       onClick={() => setActiveTab("participants")}
                     >
                       View All {data.participants.length} Participants
@@ -617,8 +617,8 @@ export default function MentorControlCenterPage() {
                   ) : null}
 
                   {isLiveStatus(sessionStatus) ? (
-                    <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-emerald-700">
-                      <Activity size={11} className="mr-1.5 inline-block" /> Live now
+                    <p className="rounded-lg border border-zinc-300 bg-zinc-100 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-900">
+                      <Activity size={11} className="mr-1.5 inline-block text-[#b91c1c]" /> Live now
                     </p>
                   ) : null}
                 </Card>

@@ -111,7 +111,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   return (
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[550px] shadow-sm rounded-xl">
       <div className="flex items-center gap-2 mb-4 shrink-0">
-        <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+        <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
           <MessageSquare size={16} />
         </div>
         <h3 className="text-sm font-semibold text-slate-900">Live Moderated Chat</h3>
@@ -150,7 +150,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                 return (
                   <div key={msg.messageId} className="flex items-center gap-2 justify-center py-1">
                     <span className="text-[10px] text-slate-600 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-full flex items-center gap-1">
-                      <AlertCircle size={10} className="text-indigo-600" />
+                      <AlertCircle size={10} className="text-zinc-600" />
                       {msg.text}
                     </span>
                   </div>
@@ -200,7 +200,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
           <select
             value={chatType}
             onChange={(e) => setChatType(e.target.value as "public" | "announcement" | "direct" | "private_question")}
-            className="h-9 rounded-xl border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none shrink-0 focus:border-indigo-500"
+            className="h-9 rounded-xl border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none shrink-0 focus:border-zinc-900"
           >
             <option value="public">Public</option>
             <option value="announcement">Announce</option>
@@ -232,7 +232,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
           />
           <Button
             size="sm"
-            className="h-9 w-9 p-0 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white"
+            className="h-9 w-9 p-0 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white"
             onClick={handleSendMessage}
           >
             <Send size={14} />

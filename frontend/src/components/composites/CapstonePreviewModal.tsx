@@ -80,11 +80,11 @@ export function CapstonePreviewModal({
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
                   {trackTitle && <Badge variant="default">{trackTitle}</Badge>}
-                  <Badge variant={project.difficulty === "Production-Grade" ? "success" : "purple"}>
+                  <Badge variant={project.difficulty === "Production-Grade" ? "outline" : "default"}>
                     {project.difficulty}
                   </Badge>
                   <span className="inline-flex items-center gap-1 text-xs text-slate-500">
-                    <Clock size={13} className="text-indigo-600" />~{project.estimatedHours} build hours
+                    <Clock size={13} className="text-zinc-700" />~{project.estimatedHours} build hours
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">{project.title}</h2>
@@ -108,7 +108,7 @@ export function CapstonePreviewModal({
                 onClick={() => setActiveTab("architecture")}
                 className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
                   activeTab === "architecture"
-                    ? "bg-indigo-600 text-white shadow-xs"
+                    ? "bg-zinc-900 text-white shadow-xs"
                     : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
@@ -120,7 +120,7 @@ export function CapstonePreviewModal({
                 onClick={() => setActiveTab("code")}
                 className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
                   activeTab === "code"
-                    ? "bg-indigo-600 text-white shadow-xs"
+                    ? "bg-zinc-900 text-white shadow-xs"
                     : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
@@ -132,7 +132,7 @@ export function CapstonePreviewModal({
                 onClick={() => setActiveTab("deliverables")}
                 className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition ${
                   activeTab === "deliverables"
-                    ? "bg-indigo-600 text-white shadow-xs"
+                    ? "bg-zinc-900 text-white shadow-xs"
                     : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
@@ -147,7 +147,7 @@ export function CapstonePreviewModal({
             {activeTab === "architecture" && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-indigo-700">
+                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-900">
                     Project Blueprint & Real-World Context
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{project.description}</p>
@@ -155,13 +155,13 @@ export function CapstonePreviewModal({
 
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
                   <h4 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-                    <Cpu size={16} className="text-indigo-600" />
+                    <Cpu size={16} className="text-zinc-900" />
                     Engineering Architecture Highlights
                   </h4>
                   <ul className="mt-3 space-y-2.5">
                     {project.architectureHighlights.map((highlight, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-600 flex-shrink-0" />
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-zinc-900 flex-shrink-0" />
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -177,7 +177,7 @@ export function CapstonePreviewModal({
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-md border border-indigo-100 bg-indigo-50/80 px-2.5 py-1 text-xs font-medium text-indigo-700"
+                        className="rounded-md border border-zinc-200 bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-900"
                       >
                         {tech}
                       </span>
@@ -191,9 +191,9 @@ export function CapstonePreviewModal({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-rose-500 inline-block" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-amber-500 inline-block" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 inline-block" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-zinc-300 inline-block" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-zinc-400 inline-block" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-zinc-500 inline-block" />
                     <span className="ml-2 font-mono text-xs text-slate-600">{project.previewSnippet.filename}</span>
                   </div>
 
@@ -203,7 +203,7 @@ export function CapstonePreviewModal({
                     onClick={handleCopyCode}
                     className="h-8 gap-1.5 text-xs text-slate-600 hover:text-slate-900"
                   >
-                    {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                    {copied ? <Check size={14} className="text-zinc-900" /> : <Copy size={14} />}
                     {copied ? "Copied" : "Copy snippet"}
                   </Button>
                 </div>
@@ -219,7 +219,7 @@ export function CapstonePreviewModal({
             {activeTab === "deliverables" && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-indigo-700">
+                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-900">
                     Required Milestone Deliverables
                   </h3>
                   <p className="mt-1 text-xs text-slate-500">
@@ -230,7 +230,7 @@ export function CapstonePreviewModal({
                 <div className="grid gap-3">
                   {project.deliverables.map((item, idx) => (
                     <Card key={idx} className="flex items-start gap-3 border-slate-200 bg-slate-50 p-4 shadow-2xs">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 flex-shrink-0">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 flex-shrink-0">
                         <CheckCircle2 size={16} />
                       </div>
                       <div>

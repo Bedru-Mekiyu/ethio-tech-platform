@@ -4,7 +4,7 @@ export interface ProgressBarProps {
   value: number;
   max?: number;
   className?: string;
-  color?: "primary" | "success" | "purple" | "danger" | "gradient" | "cyan";
+  color?: "primary" | "success" | "danger" | "gradient" | "neutral";
   showGlow?: boolean;
   label?: string;
   showValueLabel?: boolean;
@@ -15,7 +15,7 @@ export function ProgressBar({
   value,
   max = 100,
   className,
-  color = "gradient",
+  color = "primary",
   showGlow = false,
   label,
   showValueLabel = false,
@@ -31,20 +31,18 @@ export function ProgressBar({
 
   const colors = {
     primary: "bg-primary",
-    success: "bg-emerald-500",
-    purple: "bg-violet-500",
-    danger: "bg-rose-500",
-    cyan: "bg-violet-500",
+    success: "bg-zinc-800",
+    danger: "bg-red-600",
     gradient: "bg-primary",
+    neutral: "bg-zinc-700",
   };
 
   const glows = {
-    primary: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
-    success: "shadow-[0_0_8px_rgba(16,185,129,0.25)]",
-    purple: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
-    danger: "shadow-[0_0_8px_rgba(239,68,68,0.25)]",
-    cyan: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
-    gradient: "shadow-[0_0_8px_rgba(79,70,229,0.25)]",
+    primary: "",
+    success: "",
+    danger: "",
+    gradient: "",
+    neutral: "",
   };
 
   return (
@@ -52,7 +50,7 @@ export function ProgressBar({
       {(label || showValueLabel) && (
         <div className="flex justify-between items-center text-xs font-medium text-[var(--text-secondary)] tracking-wide">
           {label && <span>{label}</span>}
-          {showValueLabel && <span className="text-white font-semibold tabular-nums">{pct}%</span>}
+          {showValueLabel && <span className="text-zinc-900 font-semibold tabular-nums">{pct}%</span>}
         </div>
       )}
       <div
@@ -61,16 +59,13 @@ export function ProgressBar({
         aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label || "Progress"}
-        className={cn(
-          "w-full overflow-hidden rounded-full bg-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.02)]",
-          barSizes[size]
-        )}
+        className={cn("w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-200/70", barSizes[size])}
       >
         <div
           className={cn(
             "h-full rounded-full transition-[width] duration-500 ease-out",
             colors[color],
-            showGlow && glows[color]
+            showGlow && glows[color],
           )}
           style={{ width: `${pct}%` }}
         />

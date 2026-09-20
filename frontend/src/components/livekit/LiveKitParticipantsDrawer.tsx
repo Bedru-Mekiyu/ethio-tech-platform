@@ -70,7 +70,7 @@ export function LiveKitParticipantsDrawer({
       {/* Header */}
       <div className="flex h-16 items-center justify-between border-b border-slate-200 px-5 bg-slate-50/70">
         <div className="flex items-center gap-2.5">
-          <div className="rounded-lg bg-indigo-50 p-2 text-indigo-600">
+          <div className="rounded-lg bg-zinc-100 p-2 text-zinc-900">
             <Users className="h-4 w-4" />
           </div>
           <div>
@@ -96,7 +96,7 @@ export function LiveKitParticipantsDrawer({
             placeholder="Search participants..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 shadow-xs"
+            className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 shadow-xs"
           />
         </div>
       </div>
@@ -130,7 +130,7 @@ export function LiveKitParticipantsDrawer({
               <div className="flex items-center gap-3 min-w-0">
                 <div
                   className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-semibold text-xs text-white shadow-xs ${
-                    isParticipantHost ? "bg-indigo-600 ring-2 ring-indigo-100" : "bg-slate-700 text-white"
+                    isParticipantHost ? "bg-zinc-900 ring-2 ring-zinc-200" : "bg-slate-700 text-white"
                   }`}
                 >
                   {meta.avatar ? (
@@ -147,7 +147,7 @@ export function LiveKitParticipantsDrawer({
                   </div>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     {isParticipantHost ? (
-                      <span className="inline-flex items-center gap-0.5 rounded bg-indigo-50 border border-indigo-200/60 px-1.5 py-0.2 text-[9px] font-semibold text-indigo-700 uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-0.5 rounded bg-zinc-100 border border-zinc-200 px-1.5 py-0.5 text-[9px] font-semibold text-zinc-900 uppercase tracking-wider">
                         <Shield className="h-2.5 w-2.5" /> Mentor
                       </span>
                     ) : (
@@ -173,7 +173,7 @@ export function LiveKitParticipantsDrawer({
                 </span>
 
                 <span
-                  className={`p-1 rounded-md ${isVideoMuted ? "text-slate-400" : "text-emerald-600 bg-emerald-50"}`}
+                  className={`p-1 rounded-md ${isVideoMuted ? "text-slate-400" : "text-zinc-900 bg-zinc-100"}`}
                   title={isVideoMuted ? "Camera Off" : "Camera On"}
                 >
                   {isVideoMuted ? <VideoOff className="h-3.5 w-3.5" /> : <Video className="h-3.5 w-3.5" />}

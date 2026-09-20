@@ -80,13 +80,13 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
       case "doc":
         return <FileText size={16} className="text-red-400" />;
       case "video":
-        return <Video size={16} className="text-violet-400" />;
+        return <Video size={16} className="text-zinc-700" />;
       case "github":
-        return <Github size={16} className="text-white" />;
+        return <Github size={16} className="text-zinc-900" />;
       case "slide":
         return <Globe size={16} className="text-yellow-400" />;
       default:
-        return <Globe size={16} className="text-primary" />;
+        return <Globe size={16} className="text-zinc-700" />;
     }
   };
 
@@ -94,7 +94,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <Link2 size={16} />
           </div>
           <div>
@@ -103,7 +103,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
+          className="h-8 text-xs bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Share Resource
@@ -170,7 +170,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   Cancel
                 </Button>
                 <Button
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                  className="bg-zinc-900 hover:bg-zinc-800 text-white"
                   onClick={handleCreate}
                   disabled={!title.trim() || !url.trim() || isSubmitting}
                 >
@@ -215,7 +215,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-900 truncate">{res.title}</p>
                     {res.description && <p className="text-[10px] text-slate-500 truncate mt-0.5">{res.description}</p>}
-                    <p className="text-[9px] text-indigo-600 mt-1 truncate hover:underline">
+                    <p className="text-[9px] text-[#b91c1c] mt-1 truncate hover:underline">
                       <a href={res.url} target="_blank" rel="noopener noreferrer">
                         {res.url}
                       </a>

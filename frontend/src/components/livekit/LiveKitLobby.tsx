@@ -131,7 +131,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               {/* Avatar placeholder when camera is off */}
               {(!videoEnabled || permissionError) && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-950">
-                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-violet-600/20 text-violet-400 border border-violet-500/30 shadow-2xl">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 text-white border border-white/10 shadow-2xl">
                     <UserIcon className="h-12 w-12" />
                   </div>
                   <p className="mt-4 text-xs font-medium text-slate-400">Camera is turned off</p>
@@ -144,7 +144,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                   type="button"
                   onClick={handleToggleAudio}
                   className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all ${
-                    audioEnabled ? "bg-slate-800 text-emerald-400 hover:bg-slate-700" : "bg-rose-500 text-white"
+                    audioEnabled ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-rose-600 text-white"
                   }`}
                   title={audioEnabled ? "Mute Microphone" : "Unmute Microphone"}
                 >
@@ -155,7 +155,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                   type="button"
                   onClick={handleToggleVideo}
                   className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all ${
-                    videoEnabled ? "bg-slate-800 text-sky-400 hover:bg-slate-700" : "bg-rose-500 text-white"
+                    videoEnabled ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-rose-600 text-white"
                   }`}
                   title={videoEnabled ? "Turn Off Camera" : "Turn On Camera"}
                 >
@@ -178,12 +178,9 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               {/* Mic volume meter overlay */}
               {audioEnabled && !permissionError && (
                 <div className="absolute top-4 left-4 flex items-center gap-2 rounded-xl bg-black/60 backdrop-blur-md px-3 py-1 border border-white/5">
-                  <Mic className="h-3.5 w-3.5 text-emerald-400" />
+                  <Mic className="h-3.5 w-3.5 text-white" />
                   <div className="h-1.5 w-16 rounded-full bg-slate-800 overflow-hidden">
-                    <div
-                      className="h-full bg-emerald-400 transition-all duration-75"
-                      style={{ width: `${audioLevel}%` }}
-                    />
+                    <div className="h-full bg-white transition-all duration-75" style={{ width: `${audioLevel}%` }} />
                   </div>
                 </div>
               )}
@@ -195,14 +192,14 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
           {/* Right Column: Session Info & CTA */}
           <div className="md:col-span-5 flex flex-col justify-center space-y-6">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-semibold text-violet-400 mb-3">
-                <Radio className="h-3.5 w-3.5 text-violet-400 animate-pulse" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-white mb-3">
+                <Radio className="h-3.5 w-3.5 text-white" />
                 <span>Ready to Join</span>
               </div>
               <h2 className="text-xl md:text-2xl font-bold text-white leading-tight">{sessionTitle}</h2>
               {mentorName && (
                 <div className="mt-2 flex items-center gap-2 text-xs text-slate-400">
-                  <Shield className="h-3.5 w-3.5 text-violet-400" />
+                  <Shield className="h-3.5 w-3.5 text-slate-400" />
                   <span>
                     Hosted by <strong className="text-slate-200">{mentorName}</strong>
                   </span>
@@ -213,19 +210,19 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
             <div className="rounded-2xl border border-white/5 bg-slate-950/60 p-4 space-y-2.5 text-xs text-slate-300">
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Microphone</span>
-                <span className={audioEnabled ? "text-emerald-400 font-medium" : "text-rose-400 font-medium"}>
+                <span className={audioEnabled ? "text-white font-medium" : "text-rose-400 font-medium"}>
                   {audioEnabled ? "On" : "Muted"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Camera</span>
-                <span className={videoEnabled ? "text-sky-400 font-medium" : "text-slate-400 font-medium"}>
+                <span className={videoEnabled ? "text-white font-medium" : "text-slate-400 font-medium"}>
                   {videoEnabled ? "On" : "Off"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Media Server</span>
-                <span className="text-violet-400 font-medium flex items-center gap-1">
+                <span className="text-slate-300 font-medium flex items-center gap-1">
                   <Sparkles className="h-3 w-3" /> LiveKit Ultra-Low Latency
                 </span>
               </div>
@@ -235,7 +232,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               type="button"
               disabled={isJoining}
               onClick={handleJoin}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-violet-600 to-violet-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-violet-500/25 hover:from-violet-500 hover:to-violet-500 transition-all disabled:opacity-50"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#b91c1c] px-6 py-3.5 text-sm font-semibold text-white shadow-xl hover:bg-[#991b1b] transition-all disabled:opacity-50"
             >
               {isJoining ? (
                 <>

@@ -186,8 +186,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           cn(
             "group relative flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium transition-colors duration-150 select-none border border-transparent",
             isActive
-              ? "bg-indigo-50 text-indigo-700 font-semibold border-indigo-200/60 shadow-xs"
-              : "text-slate-600 hover:bg-slate-100/70 hover:text-slate-900",
+              ? "bg-zinc-100 text-zinc-900 font-semibold border-zinc-200 shadow-xs"
+              : "text-zinc-600 hover:bg-zinc-100/60 hover:text-zinc-900",
           )
         }
       >
@@ -203,7 +203,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             <span
               className={cn(
                 "transition-transform duration-150",
-                isActive ? "text-primary" : "text-slate-400 group-hover:text-slate-700",
+                isActive ? "text-primary" : "text-zinc-400 group-hover:text-zinc-700",
               )}
             >
               {item.icon}
@@ -306,17 +306,17 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             </button>
             {variant === "parent" ? (
               <div className="flex items-center gap-2">
-                <Badge variant="purple" size="sm" showDot>
+                <Badge variant="outline" size="sm">
                   Family Workspace
                 </Badge>
-                <span className="text-xs font-medium text-slate-500">Parent View</span>
+                <span className="text-xs font-medium text-zinc-500">Parent View</span>
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:inline">
+                <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:inline">
                   Rank
                 </span>
-                <span className="text-xs font-bold text-primary">{getRankTitle(user?.level ?? 1)}</span>
+                <span className="text-xs font-bold text-zinc-900">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
             )}
@@ -330,12 +330,12 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                     ? "/admin/notifications"
                     : "/app/notifications"
               }
-              className="relative p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors duration-200 min-w-9 min-h-9 flex items-center justify-center border border-transparent hover:border-slate-200"
+              className="relative p-2 rounded-lg text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 transition-colors duration-200 min-w-9 min-h-9 flex items-center justify-center border border-transparent hover:border-zinc-200"
               aria-label="Notifications"
             >
               <Bell size={18} />
               {notifBadge.count > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[9px] font-bold text-white">
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-600 px-1 text-[9px] font-bold text-white">
                   {notifBadge.count > 99 ? "99+" : notifBadge.count}
                 </span>
               )}

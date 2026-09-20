@@ -74,13 +74,13 @@ export interface CalendarFilterParams {
 }
 
 export const EVENT_TYPE_COLORS: Record<CalendarEventType, { bg: string; text: string; border: string; hex: string }> = {
-  study_block: { bg: "bg-violet-500/15", text: "text-violet-400", border: "border-violet-500/30", hex: "#6366F1" },
-  session: { bg: "bg-blue-500/15", text: "text-blue-400", border: "border-blue-500/30", hex: "#3B82F6" },
-  deadline: { bg: "bg-rose-500/15", text: "text-rose-400", border: "border-rose-500/30", hex: "#EF4444" },
-  milestone: { bg: "bg-emerald-500/15", text: "text-emerald-400", border: "border-emerald-500/30", hex: "#10B981" },
-  hub_visit: { bg: "bg-amber-500/15", text: "text-amber-400", border: "border-amber-500/30", hex: "#F59E0B" },
-  office_hours: { bg: "bg-cyan-500/15", text: "text-cyan-400", border: "border-cyan-500/30", hex: "#06B6D4" },
-  custom: { bg: "bg-purple-500/15", text: "text-purple-400", border: "border-purple-500/30", hex: "#8B5CF6" },
+  study_block: { bg: "bg-zinc-100", text: "text-zinc-800", border: "border-zinc-300", hex: "#18181b" },
+  session: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", hex: "#b91c1c" },
+  deadline: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", hex: "#b91c1c" },
+  milestone: { bg: "bg-zinc-100", text: "text-zinc-900", border: "border-zinc-300", hex: "#27272a" },
+  hub_visit: { bg: "bg-amber-50", text: "text-amber-800", border: "border-amber-200", hex: "#d97706" },
+  office_hours: { bg: "bg-zinc-100", text: "text-zinc-800", border: "border-zinc-200", hex: "#3f3f46" },
+  custom: { bg: "bg-zinc-100", text: "text-zinc-700", border: "border-zinc-200", hex: "#52525b" },
 };
 
 function normalizeEvent(event: Record<string, unknown>): CalendarEvent {
@@ -123,7 +123,7 @@ function normalizeEvent(event: Record<string, unknown>): CalendarEvent {
         : String(event.relatedAssignment);
   }
 
-  const defaultColor = EVENT_TYPE_COLORS[rawType]?.hex ?? "#6366F1";
+  const defaultColor = EVENT_TYPE_COLORS[rawType]?.hex ?? "#18181b";
 
   return {
     _id: id,
@@ -189,7 +189,7 @@ export async function createCalendarEvent(payload: CreateCalendarEventPayload): 
     startAt: payload.start,
     endAt: payload.end || payload.start,
     isAllDay: payload.allDay ?? false,
-    color: payload.color || EVENT_TYPE_COLORS[payload.type]?.hex || "#6366F1",
+    color: payload.color || EVENT_TYPE_COLORS[payload.type]?.hex || "#18181b",
     status: payload.status || "pending",
   };
   const { data } = await api.post<ApiResponse<{ event: Record<string, unknown> }>>("/calendar/events", body);

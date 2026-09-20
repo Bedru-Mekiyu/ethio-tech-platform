@@ -36,7 +36,7 @@ export function EmptyState({
       )}
       role="status"
     >
-      <span className="rounded-full border border-indigo-500/20 bg-indigo-50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-600 select-none">
+      <span className="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-zinc-700 select-none">
         {eyebrow}
       </span>
 

@@ -165,9 +165,9 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
     user.role === "admin" || user.role === "super_admin"
       ? "warning"
       : user.role === "mentor"
-        ? "success"
+        ? "outline"
         : user.role === "parent"
-          ? "purple"
+          ? "outline"
           : "default";
 
   const statusVariant = user.status === "active" ? "success" : user.status === "suspended" ? "danger" : "default";
@@ -187,7 +187,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-slate-50/80">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-indigo-200 bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
+            <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 text-zinc-900 flex items-center justify-center font-bold text-lg">
               {user.avatarUrl ? (
                 <img src={user.avatarUrl} alt={user.fullName} className="h-full w-full object-cover" />
               ) : (
@@ -197,7 +197,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-bold text-slate-900 truncate">{user.fullName}</h2>
-                {user.isVerified && <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />}
+                {user.isVerified && <CheckCircle2 size={16} className="text-zinc-900 shrink-0" />}
               </div>
               <p className="text-xs text-slate-500 truncate">{user.email}</p>
             </div>
@@ -232,7 +232,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
               </Badge>
             )}
             {user.gradeLevel !== undefined && (
-              <Badge variant="purple" className="gap-1">
+              <Badge variant="outline" className="gap-1">
                 <GraduationCap size={12} /> Grade {user.gradeLevel}
               </Badge>
             )}
@@ -242,7 +242,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
           <div className="grid grid-cols-3 gap-2.5">
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
               <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">XP & Level</span>
-              <p className="mt-1 text-base font-bold text-indigo-600">{(user.xp ?? 0).toLocaleString()}</p>
+              <p className="mt-1 text-base font-bold text-zinc-900">{(user.xp ?? 0).toLocaleString()}</p>
               <p className="text-[10px] text-slate-500">Lvl {user.level ?? 1}</p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
@@ -262,8 +262,8 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
           </div>
 
           {/* Quick Actions Panel */}
-          <div className="space-y-2 rounded-2xl border border-indigo-100 bg-indigo-50/40 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-indigo-700">Quick Management Actions</p>
+          <div className="space-y-2 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-zinc-900">Quick Management Actions</p>
             <div className="grid grid-cols-2 gap-2 pt-1">
               {!user.isVerified ? (
                 <Button
@@ -395,7 +395,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                   <span className="text-slate-500">Expertise:</span>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {user.expertise!.map((exp) => (
-                      <Badge key={exp} variant="purple" className="text-[10px]">
+                      <Badge key={exp} variant="outline" className="text-[10px]">
                         {exp}
                       </Badge>
                     ))}
@@ -526,7 +526,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             aria-modal="true"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
                 <Key size={20} />
               </div>
               <div>
@@ -547,14 +547,14 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                   className="font-mono text-sm"
                 />
                 <Button size="sm" variant="outline" onClick={copyPassword} className="shrink-0">
-                  {copiedPassword ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                  {copiedPassword ? <Check size={14} className="text-zinc-900" /> : <Copy size={14} />}
                 </Button>
               </div>
               <div className="flex justify-between items-center pt-1">
                 <button
                   type="button"
                   onClick={generateRandomPassword}
-                  className="text-xs text-indigo-600 hover:underline flex items-center gap-1 font-medium"
+                  className="text-xs text-[#b91c1c] hover:underline flex items-center gap-1 font-medium"
                 >
                   <Sparkles size={12} /> Generate Secure Random Password
                 </button>
@@ -579,7 +579,6 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
         </>
       )}
 
-      {/* Role Change Dialog */}
       {roleChangeOpen && (
         <>
           <div
@@ -593,7 +592,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             aria-modal="true"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
                 <Shield size={20} />
               </div>
               <div>
@@ -609,7 +608,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
               <select
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
-                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               >
                 <option value="student">Student</option>
                 <option value="mentor">Mentor</option>
@@ -719,19 +718,19 @@ export function AdminUsersPage() {
         </div>
 
         <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
-          <p className="text-[10px] uppercase tracking-wider text-indigo-600 font-semibold">Students</p>
+          <p className="text-[10px] uppercase tracking-wider text-zinc-900 font-semibold">Students</p>
           <p className="mt-1 text-xl font-bold text-slate-900">{studentCount.toLocaleString()}</p>
           <p className="text-[11px] text-slate-500 mt-0.5">Learners</p>
         </div>
 
         <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
-          <p className="text-[10px] uppercase tracking-wider text-emerald-600 font-semibold">Mentors</p>
+          <p className="text-[10px] uppercase tracking-wider text-zinc-900 font-semibold">Mentors</p>
           <p className="mt-1 text-xl font-bold text-slate-900">{mentorCount.toLocaleString()}</p>
           <p className="text-[11px] text-slate-500 mt-0.5">Active guides</p>
         </div>
 
         <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
-          <p className="text-[10px] uppercase tracking-wider text-purple-600 font-semibold">Parents</p>
+          <p className="text-[10px] uppercase tracking-wider text-zinc-900 font-semibold">Parents</p>
           <p className="mt-1 text-xl font-bold text-slate-900">{parentCount.toLocaleString()}</p>
           <p className="text-[11px] text-slate-500 mt-0.5">Family accounts</p>
         </div>
@@ -743,7 +742,7 @@ export function AdminUsersPage() {
         </div>
 
         <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
-          <p className="text-[10px] uppercase tracking-wider text-sky-600 font-semibold">Verified Rate</p>
+          <p className="text-[10px] uppercase tracking-wider text-zinc-900 font-semibold">Verified Rate</p>
           <p className="mt-1 text-xl font-bold text-slate-900">{verifiedPercent}%</p>
           <p className="text-[11px] text-slate-500 mt-0.5">{verifiedUsers} verified</p>
         </div>

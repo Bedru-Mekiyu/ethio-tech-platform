@@ -5,16 +5,16 @@
 :root {
   --mcc-font: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mcc-card-bg: #ffffff;
-  --mcc-border: #e2e8f0;
-  --mcc-muted: #64748b;
-  --mcc-dark: #0f172a;
+  --mcc-border: #e4e4e7;
+  --mcc-muted: #71717a;
+  --mcc-dark: #09090b;
 }
 
 .mcc-container {
   font-family: var(--mcc-font);
-  background: #f8fafc;
+  background: #fafafa;
   min-height: 100vh;
-  color: #0f172a;
+  color: #09090b;
 }
 
 /* White Clean Cards */
@@ -28,7 +28,7 @@
 }
 
 .mcc-card:hover {
-  border-color: #cbd5e1;
+  border-color: #d4d4d8;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 }
 
@@ -37,7 +37,7 @@
   position: relative;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e4e4e7;
   border-radius: 14px;
 }
 
@@ -48,8 +48,8 @@
 
 /* Tabs Navigation Styling */
 .mcc-tabs-list {
-  background: #f1f5f9 !important;
-  border: 1px solid #e2e8f0;
+  background: #f4f4f5 !important;
+  border: 1px solid #e4e4e7;
   border-radius: 12px !important;
   padding: 4px !important;
 }
@@ -57,28 +57,28 @@
 .mcc-tabs-trigger {
   border-radius: 8px !important;
   font-weight: 500 !important;
-  color: #64748b !important;
+  color: #71717a !important;
   transition: all 0.15s ease !important;
 }
 
 .mcc-tabs-trigger:hover {
-  color: #0f172a !important;
+  color: #09090b !important;
 }
 
 .mcc-tabs-trigger[data-state="active"] {
   background: #ffffff !important;
-  color: #4f46e5 !important;
+  color: #09090b !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08) !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #e4e4e7 !important;
   font-weight: 600 !important;
 }
 
 /* Live Badge Animation */
 .mcc-live-badge {
-  background: #ecfdf5 !important;
-  border: 1px solid #a7f3d0 !important;
-  color: #059669 !important;
-  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.1) !important;
+  background: #fafafa !important;
+  border: 1px solid #e4e4e7 !important;
+  color: #09090b !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Custom Scrollbar */
@@ -92,12 +92,12 @@
 }
 
 .mcc-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #e4e4e7;
   border-radius: 8px;
 }
 
 .mcc-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #d4d4d8;
 }
 
 /* Active Status Dot Pulse */
@@ -107,11 +107,11 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #94a3b8;
+  background-color: #a1a1aa;
 }
 
 .mcc-status-dot.active {
-  background-color: #10b981;
+  background-color: #18181b;
 }
 
 .mcc-status-dot.active::after {
@@ -122,16 +122,16 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #10b981;
+  background-color: #18181b;
   animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
 .mcc-status-dot.idle {
-  background-color: #f59e0b;
+  background-color: #d97706;
 }
 
 .mcc-status-dot.speaking {
-  background-color: #6366f1;
+  background-color: #b91c1c;
 }
 
 .mcc-status-dot.speaking::after {
@@ -142,12 +142,12 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #6366f1;
+  background-color: #b91c1c;
   animation: pulse-ring 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
 .mcc-status-dot.hand_raised {
-  background-color: #3b82f6;
+  background-color: #d97706;
 }
 
 .mcc-status-dot.hand_raised::after {
@@ -158,12 +158,12 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #3b82f6;
+  background-color: #d97706;
   animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
 .mcc-status-dot.disconnected {
-  background-color: #ef4444;
+  background-color: #e11d48;
 }
 
 @keyframes pulse-ring {
@@ -196,13 +196,13 @@
 /* Chat Input Light */
 .mcc-chat-input {
   background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #e4e4e7 !important;
   border-radius: 10px !important;
-  color: #0f172a !important;
+  color: #09090b !important;
   transition: all 0.15s ease !important;
 }
 
 .mcc-chat-input:focus {
-  border-color: #6366f1 !important;
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15) !important;
+  border-color: #18181b !important;
+  box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.15) !important;
 }

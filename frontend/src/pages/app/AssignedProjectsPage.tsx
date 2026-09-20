@@ -58,7 +58,7 @@ function ProjectsSkeleton() {
 
 function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboardData["assignedProjects"]>[number] }) {
   const statusTone =
-    project.category === "completed" ? "success" : project.category === "feedback" ? "purple" : "warning";
+    project.category === "completed" ? "success" : project.category === "feedback" ? "outline" : "warning";
   const actionLabel =
     project.category === "completed"
       ? "View submission"
@@ -76,7 +76,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
           <Badge variant={statusTone} size="sm">
             {project.category}
           </Badge>
-          <span className="text-xs font-semibold text-emerald-600">+{project.xpReward ?? 0} XP</span>
+          <span className="text-xs font-bold text-[#b91c1c]">+{project.xpReward ?? 0} XP</span>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-slate-900">{project.title}</h3>
@@ -93,7 +93,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
           <ProgressBar value={project.completionPercent} max={100} color="primary" className="h-1.5" />
         </div>
         {project.feedback ? (
-          <p className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-2.5 text-xs leading-relaxed text-slate-700">
+          <p className="rounded-lg border border-zinc-200 bg-zinc-50 p-2.5 text-xs leading-relaxed text-zinc-700">
             {project.feedback}
           </p>
         ) : null}
@@ -126,13 +126,13 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 border border-indigo-100">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200">
               {assignmentTypeIcons[assignment.type] ?? <FileText size={13} />}
             </div>
             <Badge
               size="sm"
               variant={
-                status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "outline"
+                status === "graded" ? "success" : status === "submitted" ? "outline" : overdue ? "warning" : "outline"
               }
             >
               {status}
@@ -156,7 +156,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
           {assignment.estimatedMinutes > 0 ? <span>~{assignment.estimatedMinutes} min</span> : null}
         </div>
         {assignment.submission?.grade != null ? (
-          <p className="rounded-lg border border-emerald-200 bg-emerald-50 p-2.5 text-xs text-emerald-800 font-medium">
+          <p className="rounded-lg border border-zinc-200 bg-zinc-100 p-2.5 text-xs text-zinc-900 font-medium">
             Grade: {assignment.submission.grade}/{assignment.maxScore}
           </p>
         ) : null}

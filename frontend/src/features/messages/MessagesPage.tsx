@@ -16,7 +16,7 @@ const ConversationItem: React.FC<{
   return (
     <button
       className={`w-full text-left p-3.5 transition-colors border-b border-slate-100 ${
-        isActive ? "bg-white border-l-4 border-l-indigo-600 shadow-sm" : "hover:bg-slate-100/60"
+        isActive ? "bg-white border-l-4 border-l-[#b91c1c] shadow-sm" : "hover:bg-slate-100/60"
       }`}
       onClick={onClick}
     >
@@ -56,13 +56,13 @@ const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({ messa
     <div
       className={`max-w-[70%] rounded-2xl px-4 py-2.5 shadow-sm ${
         isOwn
-          ? "bg-indigo-600 text-white rounded-tr-sm"
+          ? "bg-zinc-900 text-white rounded-tr-sm"
           : "bg-slate-100 text-slate-900 border border-slate-200 rounded-tl-sm"
       }`}
     >
       {!isOwn && <div className="text-xs font-semibold mb-1 text-slate-700">{message.senderId.fullName}</div>}
       <p className="text-sm leading-relaxed">{message.text}</p>
-      <div className={`text-[10px] mt-1 text-right ${isOwn ? "text-indigo-100" : "text-slate-400"}`}>
+      <div className={`text-[10px] mt-1 text-right ${isOwn ? "text-zinc-300" : "text-slate-400"}`}>
         {new Date(message.createdAt).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",

@@ -91,12 +91,9 @@ export function CapstoneProjectEditor({
 
       {/* Editing Form */}
       {editingProject && (
-        <form
-          onSubmit={handleSave}
-          className="rounded-2xl border border-indigo-200 bg-indigo-50/40 p-5 space-y-4 shadow-sm"
-        >
-          <div className="flex items-center justify-between border-b border-indigo-100 pb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-950">
+        <form onSubmit={handleSave} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-5 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-zinc-900">
               {editingProject._id ? "Edit Capstone Project" : "New Capstone Project"}
             </span>
             <button
@@ -150,7 +147,7 @@ export function CapstoneProjectEditor({
                     difficulty: e.target.value as CapstoneProjectItem["difficulty"],
                   })
                 }
-                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-zinc-900 cursor-pointer"
               >
                 <option value="easy">Beginner / Easy</option>
                 <option value="medium">Intermediate / Medium</option>
@@ -222,7 +219,7 @@ export function CapstoneProjectEditor({
                     className="flex items-center justify-between gap-2 rounded-xl bg-white px-3 py-1.5 text-xs border border-slate-200 shadow-2xs"
                   >
                     <span className="flex items-center gap-2 text-slate-800">
-                      <CheckCircle2 size={13} className="text-emerald-600 shrink-0" />
+                      <CheckCircle2 size={13} className="text-zinc-900 shrink-0" />
                       {req}
                     </span>
                     <button
@@ -238,7 +235,7 @@ export function CapstoneProjectEditor({
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2 border-t border-indigo-100">
+          <div className="flex justify-end gap-2 pt-2 border-t border-zinc-200">
             <Button
               type="button"
               variant="outline"
@@ -274,7 +271,7 @@ export function CapstoneProjectEditor({
                   <div className="flex items-center gap-2">
                     <h4 className="text-sm font-semibold text-slate-900 truncate">{proj.title}</h4>
                     {proj.difficulty && (
-                      <Badge variant="purple" size="sm">
+                      <Badge variant="outline" size="sm">
                         {proj.difficulty}
                       </Badge>
                     )}
@@ -290,7 +287,7 @@ export function CapstoneProjectEditor({
                       href={proj.githubTemplate}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] text-indigo-600 hover:underline pt-1"
+                      className="inline-flex items-center gap-1 text-[11px] text-[#b91c1c] hover:underline pt-1"
                     >
                       <Github size={11} /> Starter Repository <ExternalLink size={10} />
                     </a>

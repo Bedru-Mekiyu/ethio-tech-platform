@@ -29,7 +29,9 @@ interface LiveKitToolbarProps {
 
   // Panel toggles
   activePanel: "none" | "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout";
-  onTogglePanel: (panel: "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout") => void;
+  onTogglePanel: (
+    panel: "chat" | "qa" | "polls" | "notes" | "resources" | "participants" | "whiteboard" | "breakout",
+  ) => void;
 
   // Counts / Badges
   unreadChatCount?: number;
@@ -69,7 +71,10 @@ export function LiveKitToolbar({
   isEndingMeeting = false,
 }: LiveKitToolbarProps) {
   return (
-    <nav aria-label="Live session control bar" className="flex h-20 items-center justify-between border-t border-white/10 bg-[#0B0F19]/95 px-4 md:px-8 backdrop-blur-2xl z-30 select-none">
+    <nav
+      aria-label="Live session control bar"
+      className="flex h-20 items-center justify-between border-t border-white/10 bg-[#0B0F19]/95 px-4 md:px-8 backdrop-blur-2xl z-30 select-none"
+    >
       {/* Left: Host quick tools or secondary shortcuts */}
       <div className="flex items-center gap-2 min-w-0">
         {isHost && onMuteAll && (
@@ -90,7 +95,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("whiteboard")}
           className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all border ${
             activePanel === "whiteboard"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Toggle Collaborative Whiteboard"
@@ -110,7 +115,7 @@ export function LiveKitToolbar({
             className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all shadow-lg ${
               isAudioMuted
                 ? "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/20 ring-2 ring-rose-500/30"
-                : "bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-white/10 hover:border-emerald-500/50"
+                : "bg-slate-800 hover:bg-slate-700 text-white border border-white/10 hover:border-white/30"
             }`}
             title={isAudioMuted ? "Unmute Microphone" : "Mute Microphone"}
           >
@@ -126,7 +131,7 @@ export function LiveKitToolbar({
             className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all shadow-lg ${
               isVideoMuted
                 ? "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/20 ring-2 ring-rose-500/30"
-                : "bg-slate-800 hover:bg-slate-700 text-sky-400 border border-white/10 hover:border-sky-500/50"
+                : "bg-slate-800 hover:bg-slate-700 text-white border border-white/10 hover:border-white/30"
             }`}
             title={isVideoMuted ? "Turn On Camera" : "Turn Off Camera"}
           >
@@ -140,7 +145,7 @@ export function LiveKitToolbar({
           onClick={onToggleScreenShare}
           className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all border ${
             isScreenSharing
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25 ring-2 ring-violet-500/30"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg ring-2 ring-[#b91c1c]/30"
               : "bg-slate-800 border-white/10 text-slate-300 hover:bg-slate-700 hover:text-white"
           }`}
           title={isScreenSharing ? "Stop Screen Share" : "Share Your Screen"}
@@ -181,14 +186,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("chat")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "chat"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Chat Messages"
         >
           <MessageSquare className="h-4 w-4" />
           {unreadChatCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-violet-500 text-[9px] font-bold text-white shadow-md">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
               {unreadChatCount > 9 ? "9+" : unreadChatCount}
             </span>
           )}
@@ -200,14 +205,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("qa")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "qa"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Questions & Answers"
         >
           <HelpCircle className="h-4 w-4" />
           {unreadQaCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-violet-500 text-[9px] font-bold text-white shadow-md">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
               {unreadQaCount}
             </span>
           )}
@@ -219,14 +224,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("polls")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "polls"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Interactive Polls"
         >
           <BarChart3 className="h-4 w-4" />
           {activePollCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[9px] font-bold text-white shadow-md animate-pulse">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
               {activePollCount}
             </span>
           )}
@@ -238,7 +243,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("notes")}
           className={`hidden md:flex relative h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "notes" || activePanel === "resources"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Session Notes & Resources"
@@ -252,7 +257,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("participants")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "participants"
-              ? "bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-500/25"
+              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
               : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Participants Roster"

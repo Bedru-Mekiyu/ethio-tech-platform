@@ -142,7 +142,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                       name={`correct-${qIndex}`}
                       checked={q.correctIndex === optIndex}
                       onChange={() => updateQuestion(qIndex, { ...q, correctIndex: optIndex })}
-                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 cursor-pointer"
+                      className="h-4 w-4 text-zinc-900 focus:ring-zinc-900 border-slate-300 cursor-pointer"
                       title="Mark as correct answer"
                     />
                     <Input
@@ -169,7 +169,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                   <button
                     type="button"
                     onClick={() => addOption(qIndex)}
-                    className="text-xs text-indigo-600 font-medium hover:underline pt-1 inline-flex items-center gap-1"
+                    className="text-xs text-[#b91c1c] font-medium hover:underline pt-1 inline-flex items-center gap-1"
                   >
                     <Plus size={12} /> Add option
                   </button>

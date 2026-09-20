@@ -158,13 +158,13 @@ export function MentorOnboardingPage() {
               key={step.id}
               className={`flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
                 current
-                  ? "border-indigo-300 bg-indigo-50 text-indigo-700 font-semibold shadow-xs"
+                  ? "border-zinc-900 bg-zinc-900 text-white font-semibold shadow-xs"
                   : done
-                    ? "border-emerald-200 text-emerald-700 bg-emerald-50"
+                    ? "border-zinc-300 text-zinc-900 bg-zinc-100"
                     : "border-slate-200 bg-slate-50 text-slate-500"
               }`}
             >
-              {done ? <CheckCircle2 size={12} className="text-emerald-600" /> : null}
+              {done ? <CheckCircle2 size={12} className="text-zinc-900" /> : null}
               {step.label}
             </div>
           );
@@ -214,7 +214,7 @@ export function MentorOnboardingPage() {
                 type="checkbox"
                 checked={termsChecked}
                 onChange={(e) => setTermsChecked(e.target.checked)}
-                className="mt-0.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                className="mt-0.5 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900"
               />
               <span>
                 I agree to the platform mentor code of conduct, session quality standards, and student safety policies.
@@ -243,7 +243,7 @@ export function MentorOnboardingPage() {
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="min-h-[80px] w-full rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="min-h-[80px] w-full rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               />
             </FormField>
             <FormField id="company" label="Current Company / Organization">
@@ -306,7 +306,7 @@ export function MentorOnboardingPage() {
               <select
                 value={dayOfWeek}
                 onChange={(e) => setDayOfWeek(Number(e.target.value))}
-                className="h-9 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="h-9 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               >
                 {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day, i) => (
                   <option key={day} value={i}>

@@ -45,15 +45,15 @@ const partnerFrameworks = [
       "Direct technical interview scheduling & rapid 14-day hiring turnaround",
       "Co-branded hackathons, engineering fellowships, and apprenticeship cohorts",
     ],
-    metrics: "94% job placement rate across hiring partners within 90 days of graduation.",
-    partnerTypes: ["Fintech & Banking", "Telecom & ISP", "Global Outsourcing", "Fast-growth Startups"],
+    metrics: "Verified GitHub repositories and automated test results provided for every candidate.",
+    partnerTypes: ["Technology Firms", "Financial Institutions", "Telecom & Infrastructure", "Engineering Startups"],
   },
   {
     id: "universities" as PartnerPillar,
     title: "Universities & TVETs",
     tagline: "Practical Engineering Lab Supplement",
     icon: GraduationCap,
-    badgeTone: "purple" as const,
+    badgeTone: "default" as const,
     badgeText: "Academic Integration",
     description:
       "Complement theoretical computer science curricula with modern, hands-on software engineering tracks, automated code assessment, and local offline lab caching.",
@@ -63,7 +63,7 @@ const partnerFrameworks = [
       "Faculty upskilling programs in modern cloud, microservices, and AI engineering",
       "Accredited micro-credentials and joint diploma verification for graduating students",
     ],
-    metrics: "Over 3,500 university students actively completing practical lab projects.",
+    metrics: "Offline-first lab infrastructure and automated programming assessments.",
     partnerTypes: ["Public Universities", "Private Colleges", "TVET Institutes", "Polytechnics"],
   },
   {
@@ -71,7 +71,7 @@ const partnerFrameworks = [
     title: "NGOs & Foundations",
     tagline: "Youth Digital Skills & Inclusion Funding",
     icon: Heart,
-    badgeTone: "success" as const,
+    badgeTone: "default" as const,
     badgeText: "Social Impact",
     description:
       "Deploy catalytic donor funding into measurable youth livelihood programs with transparent milestone tracking, gender-inclusive cohorts, and regional hub access.",
@@ -81,7 +81,7 @@ const partnerFrameworks = [
       "Hardware donation deployment (laptops, solar units) with full serial tracking",
       "Standardized Monitoring, Evaluation, and Learning (MEL) export dashboards",
     ],
-    metrics: "100% auditable fund allocation with transparent, verifiable student tracking.",
+    metrics: "Auditable milestone tracking linked directly to verified student project completion.",
     partnerTypes: ["Multilateral Donors", "Philanthropic Trusts", "Youth Development NGOs", "Diaspora Foundations"],
   },
   {
@@ -99,7 +99,7 @@ const partnerFrameworks = [
       "Civil servant digital transformation upskilling and civic tech challenge sprints",
       "Data sovereignty compliance with on-premise and hybrid educational hosting",
     ],
-    metrics: "6 regional hub nodes established across key economic corridors in Ethiopia.",
+    metrics: "Regional hub nodes established across key economic corridors in Ethiopia.",
     partnerTypes: ["Ministries & Agencies", "Regional Innovation Bureaus", "Municipal Tech Offices", "Public Schools"],
   },
 ];
@@ -109,7 +109,7 @@ const partnershipProcess = [
     step: "01",
     title: "Strategic Discovery & Needs Assessment",
     description:
-      "We conduct an institutional audit to align objectives—whether hiring 50 engineers, upskilling 1,000 university students, or funding a regional hub.",
+      "We conduct an institutional audit to align objectives—whether hiring engineers, upskilling university students, or funding a regional hub.",
     icon: Layers3,
   },
   {
@@ -135,27 +135,24 @@ const partnershipProcess = [
   },
 ];
 
-const partnerTestimonials = [
+const partnerPrinciples = [
   {
-    quote:
-      "EthioTech's graduates arrived with battle-tested experience in modern microservices and React. They contributed to our production codebase in their second week.",
-    author: "Dawit Haile",
-    role: "VP of Engineering",
-    organization: "Fintech Innovation Labs (Addis Ababa)",
+    title: "Proof-of-Work Verification",
+    description:
+      "Every graduate portfolio is backed by production Git repositories, continuous integration test passes, and mentor code review signatures.",
+    icon: ShieldCheck,
   },
   {
-    quote:
-      "The offline caching server deployed in our computer lab allowed 400+ engineering students to write and test code without relying on unpredictable internet connections.",
-    author: "Dr. Aster Tadesse",
-    role: "Dean of Computing & Informatics",
-    organization: "Regional Technology Institute",
+    title: "Zero-Bandwidth Lab Caching",
+    description:
+      "Lightweight local sync micro-servers allow campus computer labs and regional hubs to conduct full coursework without internet bottlenecks.",
+    icon: Cpu,
   },
   {
-    quote:
-      "The milestone tracking on EthioTech is unmatched. Every single dollar we grant can be traced directly to verified student project completion and certification.",
-    author: "Elena Rostova",
-    role: "Programs Director",
-    organization: "Digital Opportunity Africa Trust",
+    title: "Auditable Milestone Governance",
+    description:
+      "Institutional grant funds and sponsored cohorts are tracked against verifiable milestone completions with downloadable audit reports.",
+    icon: Layers3,
   },
 ];
 
@@ -212,19 +209,18 @@ export function PartnersPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-3 py-1 text-xs font-medium text-indigo-700">
-          <Building2 size={13} className="text-indigo-600" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
+          <Building2 size={13} className="text-zinc-700" />
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
-          Empowering Ethiopia&apos;s Digital Economy Through{" "}
-          <span className="text-indigo-600">Strategic Alliances</span>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
+          Empowering Ethiopia&apos;s Digital Economy Through <span className="text-[#b91c1c]">Strategic Alliances</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-          We partner with forward-thinking tech employers, universities, multilateral development agencies, and
-          government bodies to build a sovereign, world-class technical workforce across Ethiopia.
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+          We partner with technology employers, universities, development agencies, and public sector bodies to build a
+          sovereign, world-class technical workforce across Ethiopia.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
@@ -241,27 +237,29 @@ export function PartnersPage() {
           </a>
         </div>
 
-        {/* Stats Strip */}
+        {/* Verified Capability Anchors */}
         <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
-          <Card className="border-slate-200 bg-white p-3 text-center shadow-xs">
-            <p className="text-xl font-bold text-indigo-600 font-mono md:text-2xl">94%</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Placement Rate</p>
-            <p className="mt-0.5 text-xs text-slate-600">Within 90 days</p>
+          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
+            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">6</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
+            <p className="mt-0.5 text-xs text-zinc-600">Across Ethiopia</p>
           </Card>
-          <Card className="border-slate-200 bg-white p-3 text-center shadow-xs">
-            <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">35+</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Partner Entities</p>
-            <p className="mt-0.5 text-xs text-slate-600">Academic & NGO</p>
+          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
+            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">5</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+              Specialized Tracks
+            </p>
+            <p className="mt-0.5 text-xs text-zinc-600">Curriculum standard</p>
           </Card>
-          <Card className="border-slate-200 bg-white p-3 text-center shadow-xs">
-            <p className="text-xl font-bold text-emerald-600 font-mono md:text-2xl">6</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Regional Hubs</p>
-            <p className="mt-0.5 text-xs text-slate-600">Across Ethiopia</p>
+          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
+            <p className="text-xl font-bold text-[#b91c1c] font-mono md:text-2xl">100%</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Open Access</p>
+            <p className="mt-0.5 text-xs text-zinc-600">Free educational mission</p>
           </Card>
-          <Card className="border-slate-200 bg-white p-3 text-center shadow-xs">
-            <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">10K+</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Engineers Target</p>
-            <p className="mt-0.5 text-xs text-slate-600">By 2026</p>
+          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
+            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">Sub-Sec</p>
+            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Classroom SFU</p>
+            <p className="mt-0.5 text-xs text-zinc-600">LiveKit WebRTC</p>
           </Card>
         </div>
       </motion.section>
@@ -269,13 +267,13 @@ export function PartnersPage() {
       {/* ─── 4 Collaboration Frameworks Section ─── */}
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="purple">Collaboration Pillars</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <Badge variant="default">Collaboration Pillars</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
             Tailored Frameworks for Every Stakeholder
           </h2>
-          <p className="text-xs text-slate-600">
-            Whether you are hiring software talent, modernizing campus labs, deploying donor grants, or driving public
-            policy, we have a structured framework.
+          <p className="text-xs text-zinc-600">
+            Structured engagement frameworks designed for technical employers, academic institutions, and public
+            stakeholders.
           </p>
         </div>
 
@@ -291,8 +289,8 @@ export function PartnersPage() {
                 onClick={() => setSelectedPillar(framework.id)}
                 className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-medium transition-all ${
                   isSelected
-                    ? "border-indigo-600 bg-indigo-600 text-white shadow-xs"
-                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                    ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
+                    : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
                 }`}
               >
                 <Icon size={15} />
@@ -309,55 +307,53 @@ export function PartnersPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <Card className="border-slate-200 bg-white p-6 md:p-8 shadow-xs">
+          <Card className="border-zinc-200 bg-white p-6 md:p-8 shadow-xs">
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
                     <activeFramework.icon size={20} />
                   </div>
                   <div>
                     <Badge variant={activeFramework.badgeTone} size="sm">
                       {activeFramework.badgeText}
                     </Badge>
-                    <h3 className="text-lg font-bold text-slate-900 mt-0.5">{activeFramework.title}</h3>
+                    <h3 className="text-lg font-bold text-zinc-900 mt-0.5">{activeFramework.title}</h3>
                   </div>
                 </div>
 
-                <p className="text-xs leading-relaxed text-slate-600">{activeFramework.description}</p>
+                <p className="text-xs leading-relaxed text-zinc-600">{activeFramework.description}</p>
 
                 <div className="space-y-2">
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500">
+                  <p className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">
                     Key Value Deliverables
                   </p>
                   <ul className="space-y-1.5">
                     {activeFramework.deliverables.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-slate-700">
-                        <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-emerald-600" />
+                      <li key={item} className="flex items-start gap-2 text-xs text-zinc-700">
+                        <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-zinc-800" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex items-center gap-2.5">
-                  <Award size={18} className="text-amber-500 shrink-0" />
-                  <p className="text-xs text-slate-600 font-medium">
-                    <strong className="text-slate-900">Impact Metric:</strong> {activeFramework.metrics}
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 flex items-center gap-2.5">
+                  <Award size={18} className="text-zinc-700 shrink-0" />
+                  <p className="text-xs text-zinc-600 font-medium">
+                    <strong className="text-zinc-900">Standard:</strong> {activeFramework.metrics}
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50 p-5 space-y-4">
+              <div className="flex flex-col justify-between rounded-xl border border-zinc-200 bg-zinc-50 p-5 space-y-4">
                 <div>
-                  <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-800">
-                    Target Organizations
-                  </h4>
+                  <h4 className="text-xs uppercase tracking-wider font-semibold text-zinc-800">Target Organizations</h4>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {activeFramework.partnerTypes.map((type) => (
                       <span
                         key={type}
-                        className="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-[11px] text-slate-700 font-medium shadow-2xs"
+                        className="rounded-md border border-zinc-200 bg-white px-2.5 py-1 text-[11px] text-zinc-700 font-medium shadow-2xs"
                       >
                         {type}
                       </span>
@@ -365,12 +361,12 @@ export function PartnersPage() {
                   </div>
                 </div>
 
-                <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-4 shadow-2xs">
-                  <h4 className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
-                    <Zap size={14} className="text-indigo-600" />
+                <div className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-2xs">
+                  <h4 className="text-xs font-semibold text-zinc-900 flex items-center gap-1.5">
+                    <Zap size={14} className="text-zinc-700" />
                     Ready to collaborate?
                   </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                  <p className="text-xs text-zinc-600 leading-relaxed">
                     Set up a 20-minute alignment consultation with our institutional partnership lead to review cohort
                     timelines and resource deployment.
                   </p>
@@ -412,13 +408,13 @@ export function PartnersPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
                       <Icon size={16} />
                     </div>
-                    <span className="text-xl font-bold font-mono text-slate-300">{step.step}</span>
+                    <span className="text-xl font-bold font-mono text-zinc-400">{step.step}</span>
                   </div>
-                  <h3 className="mt-4 text-sm font-semibold text-slate-900">{step.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-600">{step.description}</p>
+                  <h3 className="mt-4 text-sm font-semibold text-zinc-900">{step.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-600">{step.description}</p>
                 </div>
               </Card>
             );
@@ -426,77 +422,79 @@ export function PartnersPage() {
         </div>
       </section>
 
-      {/* ─── Partner Testimonials & Institutional Trust ─── */}
+      {/* ─── Institutional Collaboration Principles ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="purple">Institutional Voices</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-            Trusted by Leaders Across the Ecosystem
-          </h2>
-          <p className="text-xs text-slate-600">
-            Hear from corporate executives, university deans, and development specialists accelerating impact with us.
+          <Badge variant="default">Institutional Governance</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Core Collaboration Standards</h2>
+          <p className="text-xs text-zinc-600">
+            Engineered for institutional accountability, reproducible metrics, and transparent talent development.
           </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-          {partnerTestimonials.map((t, idx) => (
-            <Card key={idx} className="flex flex-col justify-between border-slate-200 bg-white p-5 shadow-xs">
-              <p className="text-xs leading-relaxed text-slate-600 italic">&ldquo;{t.quote}&rdquo;</p>
-              <div className="mt-4 pt-3 border-t border-slate-100">
-                <p className="font-semibold text-slate-900 text-xs">{t.author}</p>
-                <p className="text-xs text-indigo-600 font-medium">{t.role}</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">{t.organization}</p>
-              </div>
-            </Card>
-          ))}
+          {partnerPrinciples.map((p, idx) => {
+            const Icon = p.icon;
+            return (
+              <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+                <div>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200 mb-3">
+                    <Icon size={16} />
+                  </div>
+                  <h3 className="text-sm font-semibold text-zinc-900">{p.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-zinc-600">{p.description}</p>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </section>
 
       {/* ─── Interactive Partnership Inquiry Form ─── */}
       <section id="partner-inquiry" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-slate-200 bg-white p-6 md:p-10 shadow-xs">
+        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 md:p-10 shadow-xs">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-3 py-1 text-xs font-medium text-indigo-700">
-                <Mail size={13} className="text-indigo-600" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
+                <Mail size={13} className="text-zinc-700" />
                 <span>Institutional Relations</span>
               </div>
 
-              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Let&apos;s Build Together</h2>
+              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Institutional Partnership</h2>
 
-              <p className="text-xs leading-relaxed text-slate-600">
-                Submit your partnership requirements. Our Institutional Alliances team will prepare a tailored
-                collaboration prospectus and schedule a discovery briefing within 24–48 business hours.
+              <p className="text-xs leading-relaxed text-zinc-600">
+                Submit your institutional requirements. Our Institutional Alliances team will prepare a tailored
+                collaboration framework and schedule a briefing within 24–48 business hours.
               </p>
 
               <div className="space-y-3 pt-1">
-                <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <div className="flex items-center gap-3 text-xs text-zinc-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
                     <Mail size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Direct Email</p>
-                    <p className="font-medium text-slate-900">partnerships@ethiotech.org</p>
+                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Direct Email</p>
+                    <p className="font-medium text-zinc-900">partnerships@ethiotech.org</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <div className="flex items-center gap-3 text-xs text-zinc-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
                     <Phone size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">HQ Hotline</p>
-                    <p className="font-medium text-slate-900">+251 11 668 5400 (Addis Ababa)</p>
+                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">HQ Hotline</p>
+                    <p className="font-medium text-zinc-900">+251 11 668 5400 (Addis Ababa)</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
+                <div className="flex items-center gap-3 text-xs text-zinc-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
                     <ShieldCheck size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Data Governance</p>
-                    <p className="font-medium text-slate-900">ISO & GDPR aligned partner privacy</p>
+                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Data Governance</p>
+                    <p className="font-medium text-zinc-900">Enterprise data privacy & audit compliant</p>
                   </div>
                 </div>
               </div>
@@ -504,16 +502,16 @@ export function PartnersPage() {
 
             <div>
               {submitted ? (
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50/50 p-6 text-center space-y-3">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">
+                <div className="rounded-xl border border-zinc-300 bg-zinc-50 p-6 text-center space-y-3">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white">
                     <CheckCircle2 size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900">Partnership Inquiry Logged</h3>
-                  <p className="text-xs leading-relaxed text-slate-600 max-w-md mx-auto">
-                    Thank you, <strong className="text-slate-900">{contactName || "partner"}</strong> from{" "}
-                    <strong className="text-slate-900">{orgName || "your organization"}</strong>. Our institutional team
-                    has received your inquiry for <strong className="text-indigo-600">{inquiryType}</strong> and will
-                    follow up within 24 hours.
+                  <h3 className="text-xl font-bold text-zinc-900">Partnership Inquiry Logged</h3>
+                  <p className="text-xs leading-relaxed text-zinc-600 max-w-md mx-auto">
+                    Thank you, <strong className="text-zinc-900">{contactName || "partner"}</strong> from{" "}
+                    <strong className="text-zinc-900">{orgName || "your organization"}</strong>. Our institutional team
+                    has received your inquiry for <strong className="text-zinc-900">{inquiryType}</strong> and will
+                    follow up within 24–48 hours.
                   </p>
                   <Button
                     variant="outline"
@@ -534,7 +532,7 @@ export function PartnersPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
                       Partnership Category
                     </Label>
                     <div className="grid grid-cols-2 gap-1.5 mt-1.5 sm:grid-cols-4">
@@ -545,8 +543,8 @@ export function PartnersPage() {
                           onClick={() => setInquiryType(f.id)}
                           className={`rounded-md border px-2.5 py-1.5 text-xs font-medium transition ${
                             inquiryType === f.id
-                              ? "border-indigo-600 bg-indigo-600 text-white shadow-xs"
-                              : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900"
+                              ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
+                              : "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
                           }`}
                         >
                           {f.badgeText}
@@ -658,13 +656,13 @@ export function PartnersPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border border-indigo-100 bg-gradient-to-b from-indigo-50/60 to-white p-6 sm:p-8 text-center space-y-4 shadow-xs">
+      <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-            Ready to shape Ethiopia&apos;s digital workforce?
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+            Institutional Technical Collaboration
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-            Download our institutional partnership one-pager or connect directly with our partnerships lead.
+          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+            Review our institutional framework documentation or connect directly with our program leadership.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-2.5">
@@ -679,7 +677,7 @@ export function PartnersPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-indigo-600 hover:text-indigo-700">
+            <Button variant="ghost" size="md" className="text-zinc-700 hover:text-zinc-900">
               Contact Leadership
             </Button>
           </Link>

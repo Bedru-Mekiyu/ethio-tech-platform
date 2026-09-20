@@ -66,14 +66,14 @@ function calculateRubricScore(scores: RubricScores) {
   const percentage = Math.round((total / max) * 100);
 
   let recommendation: string;
-  let variant: "success" | "purple" | "warning" | "default";
+  let variant: "outline" | "warning" | "default";
 
   if (percentage >= 85) {
     recommendation = "Strong Recommend";
-    variant = "success";
+    variant = "outline";
   } else if (percentage >= 70) {
     recommendation = "Recommend";
-    variant = "purple";
+    variant = "outline";
   } else if (percentage >= 50) {
     recommendation = "Needs Interview / Info";
     variant = "warning";
@@ -152,7 +152,7 @@ function StatCard({
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
       className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 shadow-xs ${
         active
-          ? "border-indigo-600 bg-indigo-50/70 text-slate-900 ring-1 ring-indigo-500/30"
+          ? "border-zinc-900 bg-zinc-100 text-slate-900 ring-1 ring-zinc-900/10"
           : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50"
       }`}
     >
@@ -197,7 +197,7 @@ function ApplicationCard({
     <Card
       className={`group relative space-y-4 rounded-2xl border p-5 transition-all duration-200 shadow-xs ${
         selected
-          ? "border-indigo-600 bg-indigo-50/30 ring-1 ring-indigo-500/40"
+          ? "border-zinc-900 bg-zinc-50 ring-1 ring-zinc-900/20"
           : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/40"
       }`}
     >
@@ -209,11 +209,11 @@ function ApplicationCard({
               e.stopPropagation();
               onToggleSelect(application._id);
             }}
-            className="mt-1 text-slate-400 hover:text-indigo-600 transition-colors"
+            className="mt-1 text-slate-400 hover:text-zinc-900 transition-colors"
             aria-label={selected ? "Deselect applicant" : "Select applicant"}
           >
             {selected ? (
-              <CheckCircle2 size={20} className="text-indigo-600" />
+              <CheckCircle2 size={20} className="text-zinc-900" />
             ) : (
               <Square size={20} className="text-slate-300 hover:text-slate-400" />
             )}
@@ -227,7 +227,7 @@ function ApplicationCard({
             className="cursor-pointer"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <h3 className="text-lg font-semibold text-slate-900 group-hover:text-[#b91c1c] transition-colors">
                 {application.fullName}
               </h3>
               <Badge variant={rubric.variant} className="text-[11px] gap-1">
@@ -246,11 +246,11 @@ function ApplicationCard({
           <Badge
             variant={
               application.status === "approved"
-                ? "success"
+                ? "outline"
                 : application.status === "rejected"
                   ? "warning"
                   : application.status === "changes_requested"
-                    ? "purple"
+                    ? "outline"
                     : "default"
             }
           >
@@ -306,7 +306,7 @@ function ApplicationCard({
             href={application.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-indigo-600 font-medium hover:underline"
+            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             LinkedIn <ExternalLink size={12} />
@@ -317,7 +317,7 @@ function ApplicationCard({
             href={application.portfolio}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-indigo-600 font-medium hover:underline"
+            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             Portfolio / GitHub <ExternalLink size={12} />
@@ -328,7 +328,7 @@ function ApplicationCard({
             href={application.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-indigo-600 font-medium hover:underline"
+            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             CV / Resume <ExternalLink size={12} />
@@ -343,7 +343,7 @@ function ApplicationCard({
 
       <div className="flex flex-wrap gap-1.5">
         {(application.expertise ?? []).slice(0, 10).map((skill) => (
-          <Badge key={skill} variant="purple" className="text-xs">
+          <Badge key={skill} variant="outline" className="text-xs">
             {skill}
           </Badge>
         ))}
@@ -357,8 +357,8 @@ function ApplicationCard({
       )}
 
       {application.reviewNotes && application.status === "changes_requested" && (
-        <div className="rounded-xl border border-purple-200 bg-purple-50/50 p-3 text-xs">
-          <p className="font-semibold text-purple-700">Requested Changes</p>
+        <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3 text-xs">
+          <p className="font-semibold text-amber-700">Requested Changes</p>
           <p className="mt-1 text-slate-700">{application.reviewNotes}</p>
         </div>
       )}
@@ -373,7 +373,7 @@ function ApplicationCard({
               value={reviewNotes}
               onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
               placeholder="Add feedback, approval remarks, or specific information requested..."
-              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 resize-y"
+              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
               aria-label="Review notes"
             />
           </div>
@@ -481,7 +481,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <Sliders size={20} className="text-indigo-600" />
+              <Sliders size={20} className="text-zinc-900" />
               <h2 className="text-xl font-bold text-slate-900">Evaluation Rubric</h2>
             </div>
             <p className="text-sm text-slate-500 mt-1">
@@ -497,11 +497,11 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
         </div>
 
         {/* Score Banner */}
-        <div className="flex items-center justify-between rounded-xl border border-indigo-100 bg-indigo-50/70 p-4">
+        <div className="flex items-center justify-between rounded-xl border border-zinc-200 bg-zinc-50 p-4">
           <div>
             <p className="text-xs uppercase tracking-wider text-slate-500">Overall Match Score</p>
             <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-3xl font-bold text-indigo-600">{result.percentage}%</span>
+              <span className="text-3xl font-bold text-zinc-900">{result.percentage}%</span>
               <span className="text-sm text-slate-500">
                 ({result.total} / {result.max} pts)
               </span>
@@ -520,7 +520,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
               <div key={c.key} className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-slate-900 text-sm">{c.title}</span>
-                  <span className="text-xs font-mono font-bold text-indigo-600">
+                  <span className="text-xs font-mono font-bold text-zinc-900">
                     {currentVal} / 5 ({c.labels[currentVal - 1]})
                   </span>
                 </div>
@@ -533,7 +533,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
                       onClick={() => setScores((prev) => ({ ...prev, [c.key]: val }))}
                       className={`flex flex-col items-center justify-center rounded-lg border py-2 px-1 text-xs transition-all ${
                         currentVal === val
-                          ? "border-indigo-600 bg-indigo-600 text-white font-bold shadow-xs"
+                          ? "border-zinc-900 bg-zinc-900 text-white font-bold shadow-xs"
                           : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
                       }`}
                     >
@@ -621,7 +621,7 @@ Ethio-Tech Mentorship Team`;
       >
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
               <Calendar size={20} />
             </div>
             <div>
@@ -658,7 +658,7 @@ Ethio-Tech Mentorship Team`;
               onClick={() => copyToClipboard(meetingUrl, true)}
               className="gap-1.5 shrink-0 border-slate-200 text-slate-700"
             >
-              {copiedLink ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+              {copiedLink ? <Check size={14} className="text-zinc-900" /> : <Copy size={14} />}
               {copiedLink ? "Copied" : "Copy"}
             </Button>
           </div>
@@ -686,9 +686,9 @@ Ethio-Tech Mentorship Team`;
               size="sm"
               variant="ghost"
               onClick={() => copyToClipboard(emailTemplate, false)}
-              className="h-7 text-xs gap-1 text-indigo-600 hover:text-indigo-700"
+              className="h-7 text-xs gap-1 text-[#b91c1c] hover:text-[#991b1b]"
             >
-              {copiedTemplate ? <Check size={13} className="text-emerald-600" /> : <Copy size={13} />}
+              {copiedTemplate ? <Check size={13} className="text-zinc-900" /> : <Copy size={13} />}
               {copiedTemplate ? "Copied" : "Copy Template"}
             </Button>
           </div>
@@ -951,9 +951,9 @@ export function AdminModerationPage() {
 
       {/* Bulk Actions Banner */}
       {selectedIds.size > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-xl border border-indigo-200 bg-indigo-50/70 px-4 py-2.5 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-2.5 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2.5 shadow-xs">
           <div className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-[10px] font-bold text-white">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
             <span className="text-xs font-semibold text-slate-900">
@@ -1016,7 +1016,7 @@ export function AdminModerationPage() {
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={`Search ${QUEUE_LABELS[tab].toLowerCase()}...`}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 shadow-xs placeholder:text-slate-400"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs placeholder:text-slate-400"
               aria-label={`Search ${QUEUE_LABELS[tab].toLowerCase()}`}
             />
           </div>
@@ -1030,7 +1030,7 @@ export function AdminModerationPage() {
                 setExpFilter(e.target.value);
                 setPage(1);
               }}
-              className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-800 outline-none focus:border-indigo-600 shadow-xs"
+              className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-800 outline-none focus:border-zinc-900 shadow-xs"
             >
               <option value="all">All Experience Levels</option>
               <option value="junior">Junior (0 - 2 yrs)</option>
@@ -1048,7 +1048,7 @@ export function AdminModerationPage() {
             className="gap-1.5 text-xs text-slate-600 hover:text-slate-900"
           >
             {allSelected ? (
-              <CheckCircle2 size={16} className="text-indigo-600" />
+              <CheckCircle2 size={16} className="text-zinc-900" />
             ) : (
               <Square size={16} className="text-slate-400" />
             )}

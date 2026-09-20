@@ -13,7 +13,7 @@ const STATUS_META: Record<
   MeetingStatus,
   {
     label: string;
-    badge: "default" | "success" | "warning" | "purple" | "danger";
+    badge: "default" | "outline" | "warning" | "danger";
     icon: LucideIcon;
     description: string;
   }
@@ -32,7 +32,7 @@ const STATUS_META: Record<
   },
   active: {
     label: "Live now",
-    badge: "success",
+    badge: "outline",
     icon: Radio,
     description: "Session is in progress",
   },
@@ -126,12 +126,12 @@ export function MeetingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "rounded-2xl border border-slate-200/80 bg-white p-4 transition-all duration-200 shadow-sm",
+        "rounded-2xl border border-zinc-200 bg-white p-4 transition-all duration-200 shadow-xs",
         isFull && "md:p-5",
         isInline && "p-3",
-        meeting.status === "active" && "border-emerald-200 bg-emerald-50/40",
+        meeting.status === "active" && "border-zinc-300 bg-zinc-50/60 ring-1 ring-zinc-900/10",
         meeting.status === "waiting_for_host" && "border-amber-200 bg-amber-50/40",
-        meeting.status === "cancelled" && "border-rose-200 bg-rose-50/20 opacity-90",
+        meeting.status === "cancelled" && "border-red-200 bg-red-50/20 opacity-90",
         className,
       )}
       data-meeting-card="true"
@@ -142,11 +142,11 @@ export function MeetingCard({
         <div
           className={cn(
             "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
-            meeting.status === "active" && "bg-emerald-100 border-emerald-200 text-emerald-600",
-            meeting.status === "waiting_for_host" && "bg-amber-100 border-amber-200 text-amber-600",
-            meeting.status === "cancelled" && "bg-rose-100 border-rose-200 text-rose-600",
+            meeting.status === "active" && "bg-zinc-900 border-zinc-900 text-white",
+            meeting.status === "waiting_for_host" && "bg-amber-100 border-amber-200 text-amber-700",
+            meeting.status === "cancelled" && "bg-red-100 border-red-200 text-red-700",
             (meeting.status === "scheduled" || meeting.status === "completed") &&
-              "bg-indigo-50 border-indigo-100 text-indigo-600",
+              "bg-zinc-100 border-zinc-200 text-zinc-700",
           )}
         >
           <Icon size={18} />

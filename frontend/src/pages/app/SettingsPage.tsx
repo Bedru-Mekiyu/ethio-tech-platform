@@ -320,7 +320,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                  <UserCircle2 size={15} className="text-indigo-600" /> Personal Profile
+                  <UserCircle2 size={15} className="text-[#b91c1c]" /> Personal Profile
                 </CardTitle>
               </CardHeader>
 
@@ -387,8 +387,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                               className={cn(
                                 "group rounded-2xl border p-3 text-left transition",
                                 selected
-                                  ? "border-indigo-600 bg-indigo-50/50 shadow-[0_0_0_1px_rgba(79,70,229,0.3)]"
-                                  : "border-slate-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/20",
+                                  ? "border-zinc-900 bg-zinc-100 shadow-sm"
+                                  : "border-slate-200 bg-white hover:border-zinc-400 hover:bg-zinc-50/50",
                               )}
                             >
                               <Avatar
@@ -492,7 +492,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
-                  <Lock size={15} className="text-indigo-600" /> Security & Password
+                  <Lock size={15} className="text-[#b91c1c]" /> Security & Password
                 </CardTitle>
               </CardHeader>
 
@@ -549,7 +549,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                   </Button>
                   <Link
                     to="/auth/forgot-password"
-                    className="text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline self-start mt-0.5"
+                    className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline self-start mt-0.5"
                   >
                     Forgot password?
                   </Link>

@@ -39,7 +39,7 @@ function MetricCard({
   return (
     <Card className="border-slate-200/80 bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100/80 shrink-0">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 shrink-0">
           {icon}
         </div>
         <div className="min-w-0">
@@ -58,7 +58,7 @@ function CustomChartTooltip({ active, payload, label, unit = "" }: any) {
     return (
       <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-lg">
         <p className="text-xs font-semibold text-slate-900">{label}</p>
-        <p className="mt-0.5 text-xs text-indigo-600 font-bold">
+        <p className="mt-0.5 text-xs text-zinc-900 font-bold">
           {payload[0].value} {unit}
         </p>
       </div>
@@ -205,8 +205,8 @@ export function MentorAnalyticsPage() {
                 <BarChart data={monthlySessionsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="sessionGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#4f46e5" stopOpacity={0.9} />
-                      <stop offset="100%" stopColor="#4f46e5" stopOpacity={0.2} />
+                      <stop offset="0%" stopColor="#18181b" stopOpacity={0.9} />
+                      <stop offset="100%" stopColor="#18181b" stopOpacity={0.2} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -243,8 +243,8 @@ export function MentorAnalyticsPage() {
                 <AreaChart data={studentGrowthData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#10b981" stopOpacity={0.3} />
-                      <stop offset="100%" stopColor="#10b981" stopOpacity={0.02} />
+                      <stop offset="0%" stopColor="#b91c1c" stopOpacity={0.25} />
+                      <stop offset="100%" stopColor="#b91c1c" stopOpacity={0.02} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
@@ -260,7 +260,7 @@ export function MentorAnalyticsPage() {
                   <Area
                     type="monotone"
                     dataKey="students"
-                    stroke="#10b981"
+                    stroke="#b91c1c"
                     strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#growthGrad)"

@@ -29,7 +29,7 @@ export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {
         {notes.summary && (
           <div className="space-y-2">
             <h4 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-              <Sparkles size={16} className="text-indigo-600" />
+              <Sparkles size={16} className="text-zinc-900" />
               Session Summary
             </h4>
             <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm text-slate-700 leading-relaxed shadow-xs">
@@ -44,7 +44,7 @@ export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {
             <ul className="space-y-2">
               {notes.keyTakeaways.map((item: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-600" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-900" />
                   <span>{item}</span>
                 </li>
               ))}

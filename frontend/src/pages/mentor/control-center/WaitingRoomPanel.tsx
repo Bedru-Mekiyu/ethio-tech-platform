@@ -120,7 +120,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-8 w-8 p-0 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg"
+                  className="h-8 w-8 p-0 text-zinc-900 hover:bg-zinc-100 rounded-lg"
                   onClick={() => onAction("admit", w.userId)}
                   title="Admit student"
                 >

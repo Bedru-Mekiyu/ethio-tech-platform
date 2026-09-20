@@ -10,7 +10,7 @@ export interface FooterProps {
 export function Footer({ className }: FooterProps) {
   return (
     <footer
-      className={cn("border-t border-slate-200 bg-slate-50 text-[var(--text-primary)] transition-colors", className)}
+      className={cn("border-t border-zinc-200 bg-zinc-50/70 text-[var(--text-primary)] transition-colors", className)}
     >
       {/* ─── Main Footer Links & Information ─── */}
       <div className="page-shell py-12 lg:py-16">
@@ -160,10 +160,10 @@ export function Footer({ className }: FooterProps) {
         </div>
 
         {/* ─── Bottom Bar ─── */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 text-xs text-slate-500 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-200 pt-8 text-xs text-zinc-500 md:flex-row">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
               <span>Platform Systems Operational</span>
             </span>
             <span>·</span>

@@ -216,7 +216,7 @@ export function NotificationsPage() {
                     <div key={notification._id} className="space-y-2">
                       <div className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50">
                         <div className="flex items-start gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                             <Icon size={14} />
                           </div>
                           <div className="min-w-0 flex-1">
@@ -233,7 +233,7 @@ export function NotificationsPage() {
                               {notification.link ? (
                                 <a
                                   href={notification.link}
-                                  className="text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+                                  className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
                                 >
                                   Open item →
                                 </a>
@@ -260,7 +260,7 @@ export function NotificationsPage() {
                     className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                         <Icon size={14} />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -277,7 +277,7 @@ export function NotificationsPage() {
                           {notification.link ? (
                             <a
                               href={notification.link}
-                              className="text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+                              className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
                             >
                               Open item →
                             </a>
@@ -305,7 +305,7 @@ export function NotificationsPage() {
         <div className="space-y-6">
           <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex items-center gap-2 text-slate-500 border-b border-slate-100 pb-3">
-              <CheckCircle2 size={13} className="text-emerald-500" />
+              <CheckCircle2 size={13} className="text-zinc-900" />
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">Recent Read Items</span>
             </div>
             <div className="mt-4 space-y-2.5">

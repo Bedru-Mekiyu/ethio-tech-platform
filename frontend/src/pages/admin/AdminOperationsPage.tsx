@@ -174,7 +174,7 @@ export function AdminOperationsPage() {
         name: "LiveKit WebRTC SFU Server",
         category: "Real-Time Media Gateway",
         status: "operational",
-        icon: <Video className="text-sky-400" size={22} />,
+        icon: <Video className="text-zinc-900" size={22} />,
         versionOrRegion: "eu-central-1 (Frankfurt Edge)",
         latency: "28 ms",
         throughput: "4.2 Mbps",
@@ -190,7 +190,7 @@ export function AdminOperationsPage() {
         name: "MongoDB Atlas Primary Cluster",
         category: "Persistence & Aggregation Store",
         status: isDbConnected ? "operational" : "warning",
-        icon: <Database className="text-emerald-400" size={22} />,
+        icon: <Database className="text-zinc-900" size={22} />,
         versionOrRegion: "Atlas M10 Dedicated (3-Node Replica)",
         latency: "3.2 ms",
         throughput: "18 / 100 Conn",
@@ -206,7 +206,7 @@ export function AdminOperationsPage() {
         name: "Socket.IO Gateway Cluster",
         category: "Real-Time Event Broker",
         status: health.realtime?.status === "OK" ? "operational" : "operational",
-        icon: <Radio className="text-violet-400" size={22} />,
+        icon: <Radio className="text-zinc-900" size={22} />,
         versionOrRegion: `Uptime: ${uptimeHours}h ${uptimeMins}m`,
         latency: "12 ms",
         throughput: `${activeSockets} Sockets`,
@@ -222,7 +222,7 @@ export function AdminOperationsPage() {
         name: "Cloud Storage & Global CDN",
         category: "Edge Content Delivery (CloudFront / Bunny)",
         status: "operational",
-        icon: <HardDrive className="text-amber-400" size={22} />,
+        icon: <HardDrive className="text-amber-500" size={22} />,
         versionOrRegion: "285 Global Edge POPs",
         latency: "14 ms",
         throughput: "99.4% Hit Ratio",
@@ -238,7 +238,7 @@ export function AdminOperationsPage() {
         name: "Redis In-Memory Key-Value Cache",
         category: "Session & Rate Limit Broker",
         status: "operational",
-        icon: <Zap className="text-violet-400" size={22} />,
+        icon: <Zap className="text-zinc-900" size={22} />,
         versionOrRegion: "Redis 7.2 In-Memory Cluster",
         latency: "0.4 ms",
         throughput: "38 MB / 512 MB",
@@ -355,17 +355,17 @@ export function AdminOperationsPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-zinc-900" />
                 </span>
                 All Systems Operational
               </span>
-              <Badge variant="cyan" size="sm">
+              <Badge variant="outline" size="sm">
                 SLA: 99.98%
               </Badge>
-              <Badge variant="purple" size="sm">
+              <Badge variant="outline" size="sm">
                 API {health.live?.version ?? "v1"}
               </Badge>
             </div>
@@ -380,7 +380,7 @@ export function AdminOperationsPage() {
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             {/* Auto-refresh interval dropdown */}
             <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-600">
-              <Clock size={12} className="text-sky-500" />
+              <Clock size={12} className="text-slate-500" />
               <span>Poll:</span>
               <select
                 aria-label="Select Telemetry Polling Interval"
@@ -414,7 +414,7 @@ export function AdminOperationsPage() {
               disabled={healthQuery.isFetching}
               className="text-xs text-slate-700 hover:text-slate-900 border-slate-200 bg-white hover:bg-slate-50"
             >
-              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-indigo-600 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-zinc-900 mr-1" : "mr-1"} />
               Refresh
             </Button>
           </div>
@@ -423,7 +423,7 @@ export function AdminOperationsPage() {
         {/* Diagnostic Utility Buttons Bar */}
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3.5">
           <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1">
-            <Terminal size={12} className="text-indigo-600" />
+            <Terminal size={12} className="text-zinc-900" />
             Quick Ops:
           </span>
           <Button
@@ -462,14 +462,14 @@ export function AdminOperationsPage() {
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
-              <Server className="text-indigo-600" size={15} />
+              <Server className="text-zinc-900" size={15} />
               Microservices Health Grid
             </h2>
             <p className="text-xs text-slate-500">
               Heartbeat monitoring across video SFU, document storage, and WebSocket gateways
             </p>
           </div>
-          <Badge variant="success" size="sm" showDot>
+          <Badge variant="outline" size="sm" showDot>
             5 of 5 Nodes Online
           </Badge>
         </div>
@@ -485,14 +485,14 @@ export function AdminOperationsPage() {
             {microservices.map((svc) => (
               <Card
                 key={svc.id}
-                className="flex flex-col justify-between rounded-xl border-slate-200/80 bg-white p-4 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md"
+                className="flex flex-col justify-between rounded-xl border-slate-200/80 bg-white p-4 shadow-sm transition-all hover:border-zinc-300 hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-indigo-600">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-zinc-900">
                       {svc.icon}
                     </div>
-                    <Badge variant={svc.status === "operational" ? "success" : "warning"} size="sm" showDot>
+                    <Badge variant={svc.status === "operational" ? "outline" : "warning"} size="sm" showDot>
                       {svc.status}
                     </Badge>
                   </div>
@@ -505,15 +505,15 @@ export function AdminOperationsPage() {
                 <div className="mt-3 space-y-1.5 border-t border-slate-100 pt-2.5">
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-500 text-[11px]">Latency:</span>
-                    <span className="font-semibold text-sky-600">{svc.latency}</span>
+                    <span className="font-semibold text-zinc-900">{svc.latency}</span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-500 text-[11px]">Load:</span>
-                    <span className="font-semibold text-emerald-600">{svc.throughput}</span>
+                    <span className="font-semibold text-zinc-900">{svc.throughput}</span>
                   </div>
                   <div className="flex items-center justify-between text-[11px] text-slate-500">
                     <span className="truncate max-w-[110px]">{svc.versionOrRegion}</span>
-                    <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
+                    <CheckCircle2 size={12} className="text-zinc-900 shrink-0" />
                   </div>
                 </div>
               </Card>
@@ -526,7 +526,7 @@ export function AdminOperationsPage() {
       <div className="space-y-3">
         <div>
           <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
-            <Activity className="text-indigo-600" size={15} />
+            <Activity className="text-zinc-900" size={15} />
             Live Resource Telemetry
           </h2>
           <p className="text-xs text-slate-500">
@@ -541,7 +541,7 @@ export function AdminOperationsPage() {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                 Memory Allocation
               </span>
-              <Cpu size={14} className="text-indigo-600" />
+              <Cpu size={14} className="text-zinc-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">86.4 MB</span>
@@ -550,13 +550,13 @@ export function AdminOperationsPage() {
             <div className="mt-2.5 space-y-1">
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
                 <div
-                  className="h-full rounded-full bg-indigo-600 transition-all duration-500"
+                  className="h-full rounded-full bg-zinc-900 transition-all duration-500"
                   style={{ width: "67.5%" }}
                 />
               </div>
               <div className="flex justify-between text-[10px] text-slate-500">
                 <span>RSS: 142 MB</span>
-                <span className="text-emerald-600 font-medium">67.5% Utilized</span>
+                <span className="text-zinc-900 font-medium">67.5% Utilized</span>
               </div>
             </div>
           </Card>
@@ -571,7 +571,7 @@ export function AdminOperationsPage() {
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">42 ms</span>
-              <span className="text-[11px] font-medium text-emerald-600">&lt;150ms SLA</span>
+              <span className="text-[11px] font-medium text-zinc-900">&lt;150ms SLA</span>
             </div>
             <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
               <span>
@@ -592,7 +592,7 @@ export function AdminOperationsPage() {
               <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                 Socket Concurrency
               </span>
-              <Wifi size={14} className="text-emerald-500" />
+              <Wifi size={14} className="text-zinc-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">{health.realtime?.activeSockets ?? 0}</span>
@@ -602,7 +602,7 @@ export function AdminOperationsPage() {
               <span>
                 Rooms: <strong className="text-slate-700">{health.realtime?.rooms ?? 0}</strong>
               </span>
-              <span className="text-emerald-600 font-medium">100% WS</span>
+              <span className="text-zinc-900 font-medium">100% WS</span>
             </div>
           </Card>
 
@@ -610,7 +610,7 @@ export function AdminOperationsPage() {
           <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Security Shield</span>
-              <ShieldCheck size={14} className="text-indigo-600" />
+              <ShieldCheck size={14} className="text-zinc-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">99.98%</span>
@@ -620,7 +620,7 @@ export function AdminOperationsPage() {
               <span>
                 Limiter: <strong className="text-slate-700">200/15m</strong>
               </span>
-              <span className="text-emerald-600 font-medium">Active</span>
+              <span className="text-zinc-900 font-medium">Active</span>
             </div>
           </Card>
         </div>
@@ -631,7 +631,7 @@ export function AdminOperationsPage() {
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 pb-3.5">
           <div>
             <div className="flex items-center gap-2">
-              <FileClock size={15} className="text-indigo-600" />
+              <FileClock size={15} className="text-zinc-900" />
               <CardTitle className="text-sm font-semibold text-slate-900">Privileged Security Audit Stream</CardTitle>
             </div>
             <CardDescription className="text-xs text-slate-500 mt-0.5">
@@ -649,7 +649,7 @@ export function AdminOperationsPage() {
               <Download size={12} />
               Export JSON
             </Button>
-            <Badge variant="purple" size="sm">
+            <Badge variant="outline" size="sm">
               {filteredLogs.length} Events
             </Badge>
           </div>
@@ -665,7 +665,7 @@ export function AdminOperationsPage() {
               placeholder="Search action, actor, resource ID, or IP..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-colors"
+              className="h-8 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 transition-colors"
             />
           </div>
 
@@ -673,13 +673,13 @@ export function AdminOperationsPage() {
           <div className="flex flex-wrap items-center gap-2">
             {/* Category Filter */}
             <div className="flex items-center gap-1 text-xs text-slate-600">
-              <Filter size={12} className="text-indigo-600" />
+              <Filter size={12} className="text-zinc-900" />
               <span className="text-[11px] font-medium">Category:</span>
               <select
                 aria-label="Filter Audit Logs by Category"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-zinc-900 cursor-pointer"
               >
                 <option value="ALL">All Categories</option>
                 <option value="USERS">Users & Roles</option>
@@ -691,13 +691,13 @@ export function AdminOperationsPage() {
 
             {/* Role Filter */}
             <div className="flex items-center gap-1 text-xs text-slate-600">
-              <Shield size={12} className="text-indigo-600" />
+              <Shield size={12} className="text-zinc-900" />
               <span className="text-[11px] font-medium">Role:</span>
               <select
                 aria-label="Filter Audit Logs by Role"
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
-                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-zinc-900 cursor-pointer"
               >
                 <option value="ALL">All Roles</option>
                 <option value="admin">Admin</option>
@@ -719,8 +719,7 @@ export function AdminOperationsPage() {
           <div className="mt-4 space-y-2.5">
             {filteredLogs.map((log) => {
               const isExpanded = expandedLogId === log._id;
-              const role = log.actor?.role?.toLowerCase() ?? "unknown";
-              const roleBadgeVariant = role === "admin" ? "purple" : role === "mentor" ? "cyan" : "default";
+              const roleBadgeVariant = "outline";
 
               const method = (log.metadata?.method as string) ?? "ACTION";
               const methodColor =
@@ -729,8 +728,8 @@ export function AdminOperationsPage() {
                   : method === "PATCH" || method === "PUT"
                     ? "border-amber-200 bg-amber-50 text-amber-700"
                     : method === "POST"
-                      ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                      : "border-sky-200 bg-sky-50 text-sky-700";
+                      ? "border-zinc-300 bg-zinc-100 text-zinc-900"
+                      : "border-slate-200 bg-slate-50 text-slate-700";
 
               return (
                 <div
@@ -740,15 +739,15 @@ export function AdminOperationsPage() {
                   <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
                     {/* Left: Action & Resource */}
                     <div className="flex items-start gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-indigo-600 shrink-0">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-zinc-900 shrink-0">
                         {log.action.includes("FLAG") ? (
                           <ShieldAlert size={14} className="text-rose-500" />
                         ) : log.action.includes("APPROVE") ? (
-                          <CheckCircle2 size={14} className="text-emerald-600" />
+                          <CheckCircle2 size={14} className="text-zinc-900" />
                         ) : log.action.includes("CACHE") ? (
                           <Zap size={14} className="text-amber-500" />
                         ) : (
-                          <Shield size={14} className="text-indigo-600" />
+                          <Shield size={14} className="text-zinc-900" />
                         )}
                       </div>
                       <div>
@@ -832,7 +831,7 @@ export function AdminOperationsPage() {
                           <Copy size={10} /> Copy JSON
                         </Button>
                       </div>
-                      <pre className="overflow-x-auto text-[10px] leading-relaxed text-emerald-400">
+                      <pre className="overflow-x-auto text-[10px] leading-relaxed text-zinc-300">
                         {JSON.stringify(
                           {
                             action: log.action,
@@ -855,7 +854,7 @@ export function AdminOperationsPage() {
           </div>
         ) : (
           <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center bg-slate-50/50">
-            <ShieldCheck className="mx-auto text-indigo-500" size={32} />
+            <ShieldCheck className="mx-auto text-zinc-900" size={32} />
             <h3 className="mt-2 text-xs font-semibold text-slate-900">No audit records match filters</h3>
             <p className="mt-0.5 text-xs text-slate-500">
               Try adjusting your search query or reset category and role filters.

@@ -15,7 +15,7 @@ const TEMPLATES: Array<{ label: string; lang: string; code: string }> = [
   {
     label: "TypeScript / React",
     lang: "typescript",
-    code: `import { useState } from "react";\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <main className="p-8 font-sans max-w-md mx-auto">\n      <h1 className="text-2xl font-bold">Interactive Lab</h1>\n      <p className="mt-2 text-slate-600">Complete the implementation below:</p>\n      <button\n        onClick={() => setCount((c) => c + 1)}\n        className="mt-4 px-4 py-2 bg-violet-600 text-white rounded-lg"\n      >\n        Count: {count}\n      </button>\n    </main>\n  );\n}`,
+    code: `import { useState } from "react";\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <main className="p-8 font-sans max-w-md mx-auto">\n      <h1 className="text-2xl font-bold">Interactive Lab</h1>\n      <p className="mt-2 text-slate-600">Complete the implementation below:</p>\n      <button\n        onClick={() => setCount((c) => c + 1)}\n        className="mt-4 px-4 py-2 bg-zinc-900 text-white rounded-lg"\n      >\n        Count: {count}\n      </button>\n    </main>\n  );\n}`,
   },
   {
     label: "Node.js / Express API",
@@ -61,7 +61,7 @@ export function CodeSandboxStarterEditor({
     <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Code2 size={18} className="text-emerald-600" />
+          <Code2 size={18} className="text-zinc-900" />
           <h3 className="text-sm font-semibold text-slate-900">Code Lab & Sandbox Environment</h3>
         </div>
         {codeSandboxUrl && (
@@ -69,7 +69,7 @@ export function CodeSandboxStarterEditor({
             href={codeSandboxUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs text-indigo-600 hover:underline"
+            className="flex items-center gap-1 text-xs text-[#b91c1c] hover:underline"
           >
             Launch Sandbox <ExternalLink size={12} />
           </a>
@@ -114,7 +114,7 @@ export function CodeSandboxStarterEditor({
               <button
                 type="button"
                 onClick={handleCopy}
-                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-indigo-600 hover:underline"
+                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-[#b91c1c] hover:underline"
               >
                 {copied ? <Check size={12} /> : <Copy size={12} />}
                 {copied ? "Copied" : "Copy"}
@@ -129,7 +129,7 @@ export function CodeSandboxStarterEditor({
           onChange={(e) => onStarterCodeChange(e.target.value)}
           placeholder="Paste or write starter boilerplate for this lesson..."
           rows={6}
-          className="font-mono text-xs leading-relaxed bg-slate-950 text-slate-200 border-slate-800 focus:border-indigo-500 focus:ring-indigo-500"
+          className="font-mono text-xs leading-relaxed bg-slate-950 text-slate-200 border-slate-800 focus:border-zinc-400 focus:ring-zinc-400"
         />
       </div>
 

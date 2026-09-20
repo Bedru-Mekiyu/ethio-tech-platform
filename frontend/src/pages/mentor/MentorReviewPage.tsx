@@ -39,18 +39,18 @@ function ReviewSkeleton() {
 function statusTone(status?: string) {
   switch (status) {
     case "approved":
-      return "success";
+      return "outline";
     case "rejected":
       return "warning";
     case "reviewed":
-      return "purple";
+      return "outline";
     default:
       return "default";
   }
 }
 
 function ScoreBadge({ score, label }: { score: number; label: string }) {
-  const color = score >= 4 ? "text-emerald-600" : score >= 3 ? "text-amber-600" : "text-rose-600";
+  const color = score >= 4 ? "text-zinc-900" : score >= 3 ? "text-amber-600" : "text-rose-600";
   return (
     <div className="flex flex-col items-center gap-0.5 bg-slate-50 border border-slate-200 rounded-lg px-2 py-0.5">
       <span className={cn("text-xs font-bold", color)}>{score.toFixed(1)}</span>
@@ -74,9 +74,7 @@ function ReviewWorkspace({
       onClick={onSelect}
       className={cn(
         "w-full rounded-xl border p-3.5 text-left transition-all",
-        isSelected
-          ? "border-indigo-600 bg-indigo-50/40 shadow-sm ring-1 ring-indigo-200"
-          : "border-slate-200 bg-white hover:border-slate-300",
+        isSelected ? "border-zinc-900 bg-zinc-100 shadow-sm" : "border-slate-200 bg-white hover:border-slate-300",
       )}
     >
       <div className="flex items-start justify-between gap-2">
@@ -258,7 +256,7 @@ export function MentorReviewPage() {
             className={cn(
               "rounded px-3 py-1 text-xs transition font-medium capitalize",
               filter === option.value
-                ? "border border-indigo-600 bg-indigo-600 text-white shadow-xs"
+                ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
                 : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
             )}
           >
@@ -469,7 +467,7 @@ export function MentorReviewPage() {
           {/* Student Feedback History */}
           <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
-              <div className="bg-indigo-50 p-1.5 rounded-lg text-indigo-600 border border-indigo-100">
+              <div className="bg-zinc-100 p-1.5 rounded-lg text-zinc-900 border border-zinc-200">
                 <MessageSquare size={14} />
               </div>
               <h4 className="text-xs font-semibold text-slate-900">Learner Feedback History</h4>

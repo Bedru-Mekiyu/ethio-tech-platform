@@ -242,7 +242,7 @@ export function MarkdownEditor({
             style={{ minHeight }}
           >
             {mode === "split" && (
-              <div className="mb-3 flex items-center justify-between border-b border-slate-200 pb-2 text-xs font-semibold uppercase tracking-wider text-indigo-600">
+              <div className="mb-3 flex items-center justify-between border-b border-slate-200 pb-2 text-xs font-semibold uppercase tracking-wider text-zinc-900">
                 <span>Live Markdown Preview</span>
                 <span className="text-[10px] text-slate-500 font-medium">Real-time render</span>
               </div>

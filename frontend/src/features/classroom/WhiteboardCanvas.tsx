@@ -10,7 +10,7 @@ interface WhiteboardCanvasProps {
   };
 }
 
-const COLORS = ["#000000", "#EF4444", "#3B82F6", "#22C55E", "#F59E0B", "#8B5CF6"];
+const COLORS = ["#000000", "#b91c1c", "#d97706", "#475569", "#71717a", "#18181b"];
 const TOOLS: Array<{ icon: string; type: WhiteboardOp["type"] }> = [
   { icon: "Pen", type: "pen" },
   { icon: "Line", type: "line" },
@@ -191,8 +191,8 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
             className="w-6 h-6 rounded-full border-2 transition-all hover:scale-105"
             style={{
               backgroundColor: c,
-              borderColor: color === c ? "#4f46e5" : "#e2e8f0",
-              boxShadow: color === c ? "0 0 0 2px rgba(79, 70, 229, 0.2)" : "none",
+              borderColor: color === c ? "#18181b" : "#e2e8f0",
+              boxShadow: color === c ? "0 0 0 2px rgba(24, 24, 27, 0.2)" : "none",
             }}
             onClick={() => setColor(c)}
             aria-label={`Select color ${c}`}
@@ -205,7 +205,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
           max="10"
           value={lineWidth}
           onChange={(e) => setLineWidth(Number(e.target.value))}
-          className="w-20 accent-indigo-600"
+          className="w-20 accent-zinc-900"
           aria-label="Line width"
         />
         <div className="w-px h-6 bg-slate-200" />

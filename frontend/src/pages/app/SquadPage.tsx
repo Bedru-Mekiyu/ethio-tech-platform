@@ -25,12 +25,12 @@ const formatTime = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
 });
 
-const notificationTone: Record<string, "default" | "purple" | "success" | "warning"> = {
-  system: "purple",
+const notificationTone: Record<string, "default" | "success" | "warning"> = {
+  system: "default",
   mentor: "success",
   project: "default",
   session: "warning",
-  badge: "purple",
+  badge: "warning",
   xp: "success",
 };
 
@@ -39,7 +39,7 @@ function NewsCard({ item }: { item: NotificationItem }) {
 
   return (
     <div className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
-      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 flex-shrink-0">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 flex-shrink-0">
         <Sparkles size={16} />
       </div>
       <div className="min-w-0 flex-1">
@@ -51,7 +51,7 @@ function NewsCard({ item }: { item: NotificationItem }) {
         {item.link ? (
           <Link
             to={item.link}
-            className="mt-2 block text-sm leading-6 text-slate-900 hover:text-indigo-600 transition-colors"
+            className="mt-2 block text-sm leading-6 text-slate-900 hover:text-[#b91c1c] transition-colors"
           >
             {item.message}
           </Link>
@@ -70,9 +70,9 @@ function MessageRow({ msg, currentUserId }: { msg: RealtimeChatMessage; currentU
       <div
         className={`max-w-[85%] rounded-xl border px-4 py-3 shadow-xs ${
           msg.system
-            ? "border-indigo-100 bg-indigo-50/70 text-slate-800"
+            ? "border-zinc-200 bg-zinc-100 text-slate-800"
             : msg.mine
-              ? "border-indigo-200 bg-indigo-50 text-slate-900"
+              ? "border-zinc-300 bg-zinc-100 text-slate-900"
               : "border-slate-200 bg-white text-slate-900"
         }`}
       >
@@ -187,13 +187,13 @@ export function SquadPage() {
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                 {squadQuery.data?.name ?? "Squad"}
               </h1>
-              <p className="text-xs text-emerald-600 font-semibold">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
+              <p className="text-xs text-[#b91c1c] font-semibold">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
               <p className="text-xs text-slate-500">
                 Chat with your squad and coordinate project progress in real time.
               </p>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              <Badge variant="purple" size="sm">
+              <Badge variant="outline" size="sm">
                 {presenceCount} online
               </Badge>
               <Badge variant={isOnline ? "success" : "warning"} size="sm">
@@ -236,7 +236,7 @@ export function SquadPage() {
           <div className="mt-4 grid gap-4 rounded-xl border border-slate-200 bg-slate-50/70 p-4 lg:grid-cols-[1fr_280px]">
             <div className="space-y-3">
               <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
-                <MessageSquare size={12} className="text-indigo-600" />
+                <MessageSquare size={12} className="text-zinc-900" />
                 <span>Room Messages</span>
               </div>
               <div className="max-h-[22rem] space-y-2.5 overflow-y-auto pr-1" aria-live="polite">
@@ -251,7 +251,7 @@ export function SquadPage() {
                   value={draft}
                   onChange={(event) => setDraft(event.target.value)}
                   onKeyDown={(event) => event.key === "Enter" && sendDraft()}
-                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 shadow-xs"
                 />
                 <Button
                   type="button"
@@ -310,7 +310,7 @@ export function SquadPage() {
       <div className="space-y-6">
         <Card className="border border-slate-200 bg-white p-5 shadow-xs">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
               <Users size={15} />
             </span>
             <div>
@@ -337,7 +337,7 @@ export function SquadPage() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Upcoming Sessions</h3>
             <Link
               to="/app/sessions"
-              className="text-xs text-indigo-600 hover:text-indigo-700 hover:underline font-medium"
+              className="text-xs text-[#b91c1c] hover:text-[#991b1b] hover:underline font-medium"
             >
               View all
             </Link>

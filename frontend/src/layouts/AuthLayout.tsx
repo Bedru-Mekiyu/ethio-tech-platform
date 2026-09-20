@@ -40,8 +40,8 @@ export function AuthLayout() {
         <div className="relative z-10">
           <Logo />
           <div className="mt-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700">
-              <Shield size={12} className="text-indigo-600" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-0.5 text-xs font-medium text-zinc-700">
+              <Shield size={12} className="text-zinc-700" />
               <span>Pan-Ethiopian Engineering Platform</span>
             </div>
             <h1 className="mt-5 max-w-md text-2xl font-bold leading-tight tracking-tight text-slate-900 xl:text-3xl">
@@ -62,7 +62,7 @@ export function AuthLayout() {
                 key={label}
                 className="flex items-center gap-3.5 rounded-lg border border-slate-200 bg-white p-3.5 transition-colors duration-150 hover:border-slate-300 shadow-xs"
               >
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 border border-indigo-200">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200">
                   <Icon size={15} />
                 </div>
                 <div>

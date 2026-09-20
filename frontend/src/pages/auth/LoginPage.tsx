@@ -83,7 +83,7 @@ export function LoginPage() {
               className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400"
             />
             <Input
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-indigo-500 shadow-xs"
+              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-zinc-900 shadow-xs"
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
@@ -101,7 +101,7 @@ export function LoginPage() {
             />
             <PasswordInput
               wrapperClassName="w-full"
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-indigo-500 shadow-xs"
+              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-zinc-900 shadow-xs"
               placeholder="••••••••"
               autoComplete="current-password"
               {...fieldAriaProps("password", errors.password?.message)}
@@ -113,7 +113,7 @@ export function LoginPage() {
         <div className="flex items-center justify-end">
           <Link
             to="/auth/forgot-password"
-            className="text-xs font-medium text-slate-500 transition hover:text-indigo-600"
+            className="text-xs font-medium text-slate-500 transition hover:text-zinc-900"
           >
             Forgot password?
           </Link>
@@ -143,7 +143,7 @@ export function LoginPage() {
           New to EthioTech?{" "}
           <Link
             to="/register"
-            className="font-semibold text-indigo-600 transition hover:text-indigo-700 ml-1 inline-flex items-center gap-1"
+            className="font-semibold text-zinc-900 transition hover:text-zinc-700 ml-1 inline-flex items-center gap-1"
           >
             Create free account
             <ArrowRight size={12} />

@@ -43,8 +43,8 @@ function getPasswordStrength(password: string): { label: string; percent: number
 
   if (score <= 2) return { label: "Weak", percent: 25, color: "#e11d48" };
   if (score <= 3) return { label: "Fair", percent: 50, color: "#f59e0b" };
-  if (score <= 4) return { label: "Good", percent: 75, color: "#4f46e5" };
-  return { label: "Strong", percent: 100, color: "#10b981" };
+  if (score <= 4) return { label: "Good", percent: 75, color: "#52525b" };
+  return { label: "Strong", percent: 100, color: "#18181b" };
 }
 
 export function ResetPasswordPage() {
@@ -119,7 +119,7 @@ export function ResetPasswordPage() {
 
       {/* Icon + Header */}
       <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 text-indigo-600">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-700">
           <ShieldCheck size={16} />
         </div>
         <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Set New Password</h1>
@@ -135,7 +135,7 @@ export function ResetPasswordPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create strong password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -167,7 +167,7 @@ export function ResetPasswordPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Re-enter password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />

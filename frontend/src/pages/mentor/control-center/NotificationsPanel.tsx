@@ -119,19 +119,19 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
   const getNotifIcon = (type: NotificationItem["type"]) => {
     switch (type) {
       case "join":
-        return <Users size={14} className="text-success" />;
+        return <Users size={14} className="text-zinc-700" />;
       case "leave":
         return <VolumeX size={14} className="text-danger" />;
       case "hand":
-        return <Hand size={14} className="text-primary" />;
+        return <Hand size={14} className="text-amber-600" />;
       case "question":
-        return <MessageSquare size={14} className="text-violet-400" />;
+        return <MessageSquare size={14} className="text-zinc-600" />;
       case "poll":
-        return <Vote size={14} className="text-purple-400" />;
+        return <Vote size={14} className="text-zinc-600" />;
       case "waiting":
         return <DoorOpen size={14} className="text-warning" />;
       default:
-        return <Bell size={14} className="text-white" />;
+        return <Bell size={14} className="text-zinc-900" />;
     }
   };
 
@@ -141,7 +141,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[500px] shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
+          <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <Bell size={16} />
           </div>
           <div>
@@ -188,7 +188,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
             <div
               key={n.id}
               className={`rounded-xl border p-3 flex items-start gap-3 transition-all shadow-2xs ${
-                n.read ? "border-slate-200/80 bg-white" : "border-indigo-200 bg-indigo-50/40"
+                n.read ? "border-slate-200/80 bg-white" : "border-zinc-300 bg-zinc-50"
               }`}
             >
               <div className="bg-slate-50 border border-slate-100 p-1.5 rounded-lg shrink-0 mt-0.5">

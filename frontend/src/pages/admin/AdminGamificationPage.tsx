@@ -124,26 +124,26 @@ const TIER_CONFIG: Record<
   },
   platinum: {
     label: "Platinum Tier",
-    border: "border-cyan-200",
-    bg: "bg-cyan-50/70",
-    text: "text-cyan-700",
-    iconColor: "text-cyan-600",
+    border: "border-zinc-300",
+    bg: "bg-zinc-100",
+    text: "text-zinc-800",
+    iconColor: "text-zinc-700",
     glow: "shadow-xs",
   },
   diamond: {
     label: "Diamond Tier",
-    border: "border-blue-200",
-    bg: "bg-blue-50/70",
-    text: "text-blue-700",
-    iconColor: "text-blue-600",
+    border: "border-zinc-400",
+    bg: "bg-zinc-100",
+    text: "text-zinc-900",
+    iconColor: "text-zinc-900",
     glow: "shadow-xs",
   },
   legendary: {
     label: "Legendary",
-    border: "border-purple-200",
-    bg: "bg-purple-50/70",
-    text: "text-purple-700",
-    iconColor: "text-purple-600",
+    border: "border-[#b91c1c]/40",
+    bg: "bg-zinc-100",
+    text: "text-[#b91c1c]",
+    iconColor: "text-[#b91c1c]",
     glow: "shadow-xs",
   },
 };
@@ -308,23 +308,30 @@ const INITIAL_MULTIPLIER_RULES: XpMultiplierRule[] = [
   },
 ];
 
-const STREAK_MILESTONES = [
-  { days: 7, xp: 50, bonusMultiplier: "1.1x", label: "7-Day Streak", tier: "bronze" as BadgeTier },
-  { days: 14, xp: 120, bonusMultiplier: "1.2x", label: "14-Day Streak", tier: "silver" as BadgeTier },
-  { days: 30, xp: 300, bonusMultiplier: "1.3x", label: "30-Day Streak", tier: "gold" as BadgeTier },
-  { days: 60, xp: 750, bonusMultiplier: "1.5x", label: "60-Day Streak", tier: "platinum" as BadgeTier },
-  { days: 100, xp: 1500, bonusMultiplier: "2.0x", label: "100-Day Champion", tier: "legendary" as BadgeTier },
+const STREAK_MILESTONES: Array<{
+  days: number;
+  xp: number;
+  bonusMultiplier: string;
+  label: string;
+  tier: BadgeTier;
+}> = [
+  { days: 3, xp: 50, bonusMultiplier: "1.05x", label: "Ignition", tier: "bronze" },
+  { days: 7, xp: 100, bonusMultiplier: "1.1x", label: "Weekly Commitment", tier: "silver" },
+  { days: 14, xp: 200, bonusMultiplier: "1.2x", label: "Fortnight Focus", tier: "gold" },
+  { days: 30, xp: 450, bonusMultiplier: "1.3x", label: "Monthly Mastery", tier: "gold" },
+  { days: 60, xp: 750, bonusMultiplier: "1.5x", label: "60-Day Streak", tier: "platinum" },
+  { days: 100, xp: 1500, bonusMultiplier: "2.0x", label: "100-Day Champion", tier: "legendary" },
 ];
 
 function BadgeTierIcon({ tier, size = 20 }: { tier?: BadgeTier | string; size?: number }) {
   const t = (tier as BadgeTier) || "bronze";
   switch (t) {
     case "legendary":
-      return <Crown size={size} className="text-purple-600" />;
+      return <Crown size={size} className="text-[#b91c1c]" />;
     case "diamond":
-      return <Sparkles size={size} className="text-blue-600" />;
+      return <Sparkles size={size} className="text-zinc-900" />;
     case "platinum":
-      return <Shield size={size} className="text-cyan-600" />;
+      return <Shield size={size} className="text-zinc-700" />;
     case "gold":
       return <Trophy size={size} className="text-amber-600" />;
     case "silver":
@@ -570,10 +577,10 @@ export function AdminGamificationPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-1.5 max-w-2xl">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700">
-                <Sparkles size={11} className="text-indigo-600" /> Level 1-100 Progression Engine
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
+                <Sparkles size={11} className="text-[#b91c1c]" /> Level 1-100 Progression Engine
               </span>
-              <Badge variant="success" size="sm" className="gap-1">
+              <Badge variant="outline" size="sm" className="gap-1">
                 <Zap size={11} /> {activeMultiplierCount} Active Multipliers
               </Badge>
             </div>
@@ -666,17 +673,17 @@ export function AdminGamificationPage() {
                   onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelectedCategory(cat.id)}
                   className={`cursor-pointer rounded-2xl border p-4 transition-all ${
                     isActive
-                      ? "border-indigo-600 bg-indigo-50/60 shadow-xs ring-1 ring-indigo-500"
-                      : "border-slate-200/80 bg-white hover:border-indigo-300 hover:bg-slate-50/50 shadow-xs"
+                      ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900"
+                      : "border-slate-200/80 bg-white hover:border-zinc-300 hover:bg-slate-50/50 shadow-xs"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div
-                      className={`flex h-9 w-9 items-center justify-center rounded-xl ${isActive ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-700"}`}
+                      className={`flex h-9 w-9 items-center justify-center rounded-xl ${isActive ? "bg-zinc-900 text-white" : "bg-slate-100 text-slate-700"}`}
                     >
                       {cat.icon}
                     </div>
-                    <Badge variant={isActive ? "success" : "default"} className="text-xs">
+                    <Badge variant={isActive ? "outline" : "default"} className="text-xs">
                       {count} {count === 1 ? "badge" : "badges"}
                     </Badge>
                   </div>
@@ -696,7 +703,7 @@ export function AdminGamificationPage() {
                 value={badgeSearch}
                 onChange={(e) => setBadgeSearch(e.target.value)}
                 placeholder="Search badges by title or criteria..."
-                className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-xs"
+                className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
               />
             </div>
 
@@ -705,7 +712,7 @@ export function AdminGamificationPage() {
               <select
                 value={tierFilter}
                 onChange={(e) => setTierFilter(e.target.value)}
-                className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-700 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-xs"
+                className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-700 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
               >
                 <option value="all">All Tiers (Bronze → Legendary)</option>
                 <option value="bronze">Bronze Tier</option>
@@ -744,7 +751,7 @@ export function AdminGamificationPage() {
                           <BadgeTierIcon tier={badge.tier} size={24} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-slate-900 text-base group-hover:text-indigo-600 transition-colors">
+                          <h4 className="font-bold text-slate-900 text-base group-hover:text-[#b91c1c] transition-colors">
                             {badge.name}
                           </h4>
                           <span className={`text-xs font-semibold uppercase tracking-wider ${tierStyle.text}`}>
@@ -761,7 +768,7 @@ export function AdminGamificationPage() {
                     <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-slate-200/80 pt-3 text-xs">
                       <div className="space-y-0.5">
                         <span className="text-slate-500">XP Threshold</span>
-                        <p className="font-mono font-bold text-indigo-600">
+                        <p className="font-mono font-bold text-zinc-900">
                           {(badge.xpRequired ?? 0).toLocaleString()} XP
                         </p>
                       </div>
@@ -769,14 +776,14 @@ export function AdminGamificationPage() {
                       {badge.xpBonus && (
                         <div className="space-y-0.5 text-right">
                           <span className="text-slate-500">Bonus Grant</span>
-                          <p className="font-mono font-bold text-emerald-600">+{badge.xpBonus} XP</p>
+                          <p className="font-mono font-bold text-zinc-900">+{badge.xpBonus} XP</p>
                         </div>
                       )}
 
                       {badge.multiplier && (
                         <div className="space-y-0.5 text-right">
                           <span className="text-slate-500">Boost</span>
-                          <p className="font-mono font-bold text-purple-600">{badge.multiplier}x</p>
+                          <p className="font-mono font-bold text-[#b91c1c]">{badge.multiplier}x</p>
                         </div>
                       )}
                     </div>
@@ -814,30 +821,30 @@ export function AdminGamificationPage() {
               {allChallenges.map((ch) => (
                 <div
                   key={ch._id}
-                  className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5 space-y-4 shadow-sm relative overflow-hidden"
+                  className="rounded-2xl border border-zinc-200 bg-zinc-50/60 p-5 space-y-4 shadow-sm relative overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
                         <Sparkles size={18} />
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-900 text-sm">{ch.title}</h4>
-                        <span className="text-[11px] text-emerald-700 capitalize font-medium">
+                        <span className="text-[11px] text-zinc-700 capitalize font-medium">
                           {ch.category?.replace(/_/g, " ") ?? "Daily Quest"}
                         </span>
                       </div>
                     </div>
-                    <Badge variant="success">+{ch.xpReward ?? 50} XP</Badge>
+                    <Badge variant="outline">+{ch.xpReward ?? 50} XP</Badge>
                   </div>
 
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {ch.description || "Complete required coding session to unlock."}
                   </p>
 
-                  <div className="flex items-center justify-between border-t border-emerald-200/70 pt-3 text-xs">
+                  <div className="flex items-center justify-between border-t border-zinc-200/70 pt-3 text-xs">
                     <span className="text-slate-500">Streak Multiplier</span>
-                    <span className="font-mono font-bold text-indigo-600">{ch.streakBonusMultiplier ?? 1.25}x</span>
+                    <span className="font-mono font-bold text-zinc-900">{ch.streakBonusMultiplier ?? 1.25}x</span>
                   </div>
                 </div>
               ))}
@@ -868,8 +875,8 @@ export function AdminGamificationPage() {
                       <Flame size={20} />
                     </div>
                     <p className="text-lg font-bold text-slate-900">{m.days} Days</p>
-                    <p className="text-xs font-mono font-bold text-emerald-600">+{m.xp} XP</p>
-                    <p className="text-[11px] text-purple-700 font-semibold">Multiplier: {m.bonusMultiplier}</p>
+                    <p className="text-xs font-mono font-bold text-zinc-900">+{m.xp} XP</p>
+                    <p className="text-[11px] text-[#b91c1c] font-semibold">Multiplier: {m.bonusMultiplier}</p>
                     <Badge variant="default" className="text-[10px]">
                       {m.label}
                     </Badge>
@@ -899,14 +906,14 @@ export function AdminGamificationPage() {
                 key={rule.id}
                 className={`rounded-2xl border p-5 space-y-4 transition-all ${
                   rule.isActive
-                    ? "border-indigo-200 bg-indigo-50/40 shadow-sm"
+                    ? "border-zinc-900 bg-zinc-100 shadow-sm"
                     : "border-slate-200 bg-white opacity-75 shadow-xs"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h4 className="font-bold text-slate-900 text-base">{rule.name}</h4>
-                    <span className="text-xs text-indigo-600 font-semibold">{rule.category}</span>
+                    <span className="text-xs text-zinc-900 font-semibold">{rule.category}</span>
                   </div>
                   <Badge variant={rule.isActive ? "success" : "default"}>{rule.isActive ? "Active" : "Inactive"}</Badge>
                 </div>
@@ -926,7 +933,7 @@ export function AdminGamificationPage() {
                       >
                         -
                       </button>
-                      <span className="font-mono text-base font-bold text-indigo-600 min-w-[36px] text-center">
+                      <span className="font-mono text-base font-bold text-zinc-900 min-w-[36px] text-center">
                         {rule.multiplier}x
                       </span>
                       <button
@@ -972,7 +979,7 @@ export function AdminGamificationPage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
                   <Award size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Create Achievement Badge</h3>
@@ -1005,7 +1012,7 @@ export function AdminGamificationPage() {
                   placeholder="Explain what project or skill is required to earn this badge..."
                   value={newBadgeDesc}
                   onChange={(e) => setNewBadgeDesc(e.target.value)}
-                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-y"
+                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
                 />
               </div>
 
@@ -1017,7 +1024,7 @@ export function AdminGamificationPage() {
                   <select
                     value={newBadgeCategory}
                     onChange={(e) => setNewBadgeCategory(e.target.value as BadgeCategory)}
-                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                   >
                     <option value="skill_mastery">Skill Mastery</option>
                     <option value="cohort_consistency">Cohort Consistency</option>
@@ -1033,7 +1040,7 @@ export function AdminGamificationPage() {
                   <select
                     value={newBadgeTier}
                     onChange={(e) => setNewBadgeTier(e.target.value as BadgeTier)}
-                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                   >
                     <option value="bronze">Bronze (Tier 1)</option>
                     <option value="silver">Silver (Tier 2)</option>
@@ -1104,7 +1111,7 @@ export function AdminGamificationPage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
                   <Flame size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-slate-900">Create Daily Quest</h3>
@@ -1137,7 +1144,7 @@ export function AdminGamificationPage() {
                   placeholder="Instructions for students to complete this quest..."
                   value={newChallengeDesc}
                   onChange={(e) => setNewChallengeDesc(e.target.value)}
-                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-y"
+                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
                 />
               </div>
 
@@ -1148,7 +1155,7 @@ export function AdminGamificationPage() {
                 <select
                   value={newChallengeCategory}
                   onChange={(e) => setNewChallengeCategory(e.target.value)}
-                  className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
                 >
                   <option value="daily_quest">Daily Coding Quest</option>
                   <option value="community_task">Community & Peer Review</option>

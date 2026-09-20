@@ -61,7 +61,7 @@ export function ForgotPasswordPage() {
 
       {/* Icon + Header */}
       <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 text-indigo-600">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-700">
           <KeyRound size={16} />
         </div>
         <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Reset Password</h1>
@@ -79,7 +79,7 @@ export function ForgotPasswordPage() {
               className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400"
             />
             <Input
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
+              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -100,10 +100,10 @@ export function ForgotPasswordPage() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-5 flex items-start gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-2.5"
+            className="mt-5 flex items-start gap-2.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5"
           >
-            <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0 text-emerald-600" />
-            <p className="text-xs text-emerald-800">{message}</p>
+            <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0 text-zinc-700" />
+            <p className="text-xs text-slate-700">{message}</p>
           </motion.div>
         ) : null}
       </div>

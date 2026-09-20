@@ -181,7 +181,7 @@ export function MentorSessionsPage() {
         </Card>
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
           <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Fill rate</p>
-          <p className="mt-1.5 text-xl font-bold text-emerald-600">
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">
             {sessions.length
               ? Math.round(
                   (sessions.filter((session) => (session.participants?.length ?? 0) > 0).length / sessions.length) *
@@ -203,7 +203,7 @@ export function MentorSessionsPage() {
             className={cn(
               "rounded-md border px-3 py-1 text-xs capitalize transition-all font-medium",
               filter === value
-                ? "border-indigo-600 bg-indigo-600 text-white shadow-xs"
+                ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
                 : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900",
             )}
           >
@@ -256,7 +256,7 @@ export function MentorSessionsPage() {
                   className={cn(
                     "min-h-[4.75rem] rounded-lg border p-1.5 transition-colors",
                     day ? "border-slate-200 bg-slate-50/50" : "border-transparent bg-transparent",
-                    isToday && "border-indigo-400 bg-indigo-50/40 ring-1 ring-indigo-200",
+                    isToday && "border-zinc-900 bg-zinc-100 ring-1 ring-zinc-300",
                   )}
                 >
                   {day ? (
@@ -266,7 +266,7 @@ export function MentorSessionsPage() {
                         {sessionsForDay.slice(0, 2).map((session, index) => (
                           <div
                             key={session._id ?? `${session.title}-${index}`}
-                            className="rounded bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 text-[9px] font-medium text-indigo-700 truncate"
+                            className="rounded bg-zinc-100 border border-zinc-200 px-1.5 py-0.5 text-[9px] font-medium text-zinc-900 truncate"
                           >
                             {session.title}
                           </div>
@@ -291,7 +291,7 @@ export function MentorSessionsPage() {
             </div>
             <Link
               to="/app/workspace"
-              className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+              className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
             >
               Open workspace →
             </Link>
@@ -328,7 +328,7 @@ export function MentorSessionsPage() {
                         {session._id ? (
                           <Link
                             to={`/app/classroom/${session._id}`}
-                            className="inline-flex items-center gap-1 font-semibold text-indigo-600 hover:text-indigo-700"
+                            className="inline-flex items-center gap-1 font-semibold text-[#b91c1c] hover:text-[#991b1b]"
                           >
                             Launch Room <Video size={12} />
                           </Link>
@@ -343,7 +343,7 @@ export function MentorSessionsPage() {
                                 ? "bg-red-500"
                                 : participantCount / session.maxParticipants > 0.8
                                   ? "bg-amber-500"
-                                  : "bg-indigo-600",
+                                  : "bg-[#b91c1c]",
                             )}
                             style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
                           />

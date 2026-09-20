@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
+  Calendar,
   ChevronRight,
   Clock,
   Clock3,
+  ExternalLink,
   FileCheck,
   Settings,
   ShieldCheck,
@@ -208,7 +210,7 @@ export function MentorDashboardPage() {
             <div className="flex items-center gap-2">
               <Badge
                 variant="outline"
-                className="text-[11px] gap-1 font-semibold bg-indigo-50 text-indigo-700 border-indigo-200"
+                className="text-[11px] gap-1 font-semibold bg-zinc-100 text-zinc-900 border-zinc-200"
               >
                 <Star size={12} className="text-amber-500 fill-amber-400" /> Lead Mentor
               </Badge>
@@ -228,7 +230,7 @@ export function MentorDashboardPage() {
                 <Settings size={14} />
                 Control Center
                 {activeMeeting?.status === "active" && (
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-[#b91c1c] animate-pulse" />
                 )}
               </Button>
             </Link>
@@ -266,7 +268,7 @@ export function MentorDashboardPage() {
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Cohort Attendance</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
               <Users size={15} />
             </div>
           </div>
@@ -277,11 +279,11 @@ export function MentorDashboardPage() {
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Submissions Queue</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
               <FileCheck size={15} />
             </div>
           </div>
-          <p className="mt-2 text-xl font-bold text-indigo-600">{pendingSubmissions.length}</p>
+          <p className="mt-2 text-xl font-bold text-zinc-900">{pendingSubmissions.length}</p>
           <p className="mt-0.5 text-xs text-slate-500">Awaiting code review</p>
         </Card>
 
@@ -290,7 +292,7 @@ export function MentorDashboardPage() {
             <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
               Sessions Delivered
             </span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-50 text-sky-600 border border-sky-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
               <Video size={15} />
             </div>
           </div>
@@ -311,7 +313,7 @@ export function MentorDashboardPage() {
               </div>
               <Link
                 to="/mentor/sessions"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
               >
                 Full Calendar <ArrowRight size={12} />
               </Link>
@@ -330,52 +332,61 @@ export function MentorDashboardPage() {
                       onEnd={handleEnd}
                       onCancel={handleCancel}
                       startLoading={startMutation.isPending}
-                      endLoading={endMutation.isPending}
                     />
                   ))
               ) : upcomingSessions.length ? (
-                upcomingSessions.slice(0, 3).map((session, index) => (
+                upcomingSessions.map((session) => (
                   <div
-                    key={session._id ?? index}
-                    className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 sm:flex-row sm:items-center sm:justify-between shadow-xs"
+                    key={session._id}
+                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
                   >
-                    <div className="space-y-0.5 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="text-[10px] py-0 px-1.5">
-                          Scheduled
-                        </Badge>
-                        <span className="text-xs text-slate-500">
-                          {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Upcoming"}
-                        </span>
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 shrink-0">
+                        <Video size={16} />
                       </div>
-                      <h3 className="text-xs font-semibold text-slate-900 truncate">{session.title}</h3>
+                      <div className="space-y-0.5 min-w-0">
+                        <p className="text-xs font-semibold text-slate-900 truncate">{session.title}</p>
+                        <div className="flex items-center gap-2 text-[11px] text-slate-500">
+                          <span className="flex items-center gap-1">
+                            <Calendar size={11} className="text-slate-400" />
+                            {new Date(session.scheduledAt).toLocaleDateString([], {
+                              month: "short",
+                              day: "numeric",
+                            })}
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <Clock3 size={11} className="text-slate-400" />
+                            {new Date(session.scheduledAt).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
                       <Link to={`/mentor/control-center/${session._id}`}>
-                        <Button size="sm" variant="primary" className="text-xs gap-1.5 font-medium">
-                          <Settings size={12} />
-                          Control Center
+                        <Button size="sm" variant="outline" className="text-xs gap-1 py-1 px-2 text-slate-700">
+                          <Settings size={12} /> Controls
                         </Button>
                       </Link>
                       <Link to={`/app/classroom/${session._id}`}>
-                        <Button size="sm" variant="outline" className="text-xs gap-1 text-slate-700">
-                          <Video size={12} />
-                          Join
+                        <Button size="sm" variant="primary" className="text-xs gap-1 py-1 px-2.5 font-medium">
+                          Launch <ExternalLink size={12} />
                         </Button>
                       </Link>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="py-8 text-center space-y-2.5">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-400 mx-auto border border-slate-200">
-                    <Video size={18} />
-                  </div>
-                  <p className="text-xs text-slate-500">No sessions scheduled for today.</p>
+                <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+                  <Clock3 size={28} className="mx-auto text-slate-300 mb-2" />
+                  <p className="text-xs text-slate-500">No upcoming live classrooms scheduled</p>
                   <Link to="/mentor/sessions">
-                    <Button size="sm" variant="outline" className="text-xs font-medium text-slate-700">
-                      Schedule a Class
+                    <Button size="sm" variant="outline" className="mt-3 text-xs">
+                      Schedule New Session
                     </Button>
                   </Link>
                 </div>
@@ -392,7 +403,7 @@ export function MentorDashboardPage() {
               </div>
               <Link
                 to="/mentor/analytics"
-                className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
               >
                 Detailed Analytics →
               </Link>
@@ -432,7 +443,7 @@ export function MentorDashboardPage() {
               </div>
               <Link
                 to="/mentor/reviews"
-                className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline"
+                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
               >
                 View All →
               </Link>
@@ -452,7 +463,7 @@ export function MentorDashboardPage() {
                         </span>
                         <span className="text-[10px] text-slate-400 font-mono truncate">{sub.student?.email}</span>
                       </div>
-                      <p className="text-xs font-semibold text-indigo-600 truncate">
+                      <p className="text-xs font-semibold text-zinc-900 truncate">
                         {sub.project?.title ?? "Track Project Submission"}
                       </p>
                       <p className="text-[11px] text-slate-500">
@@ -487,10 +498,10 @@ export function MentorDashboardPage() {
             <div className="space-y-1.5">
               <Link
                 to="/mentor/students"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:bg-slate-50 hover:text-indigo-600 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-zinc-400 hover:bg-slate-50 hover:text-zinc-900 transition-all"
               >
                 <div className="flex items-center gap-2">
-                  <Users size={14} className="text-indigo-600" />
+                  <Users size={14} className="text-zinc-900" />
                   <span>My Students Directory</span>
                 </div>
                 <ChevronRight size={13} className="text-slate-400" />
@@ -498,7 +509,7 @@ export function MentorDashboardPage() {
 
               <Link
                 to="/mentor/availability"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:bg-slate-50 hover:text-indigo-600 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-zinc-400 hover:bg-slate-50 hover:text-zinc-900 transition-all"
               >
                 <div className="flex items-center gap-2">
                   <Clock size={14} className="text-amber-500" />
@@ -509,10 +520,10 @@ export function MentorDashboardPage() {
 
               <Link
                 to="/mentor/analytics"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-indigo-300 hover:bg-slate-50 hover:text-indigo-600 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-zinc-400 hover:bg-slate-50 hover:text-zinc-900 transition-all"
               >
                 <div className="flex items-center gap-2">
-                  <BarChart3 size={14} className="text-emerald-500" />
+                  <BarChart3 size={14} className="text-zinc-900" />
                   <span>Cohort Performance Analytics</span>
                 </div>
                 <ChevronRight size={13} className="text-slate-400" />

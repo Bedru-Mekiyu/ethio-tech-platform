@@ -74,9 +74,9 @@ export function Avatar({
   };
 
   const statusColors = {
-    online: "bg-success shadow-[0_0_8px_rgba(46,204,113,0.8)]",
-    away: "bg-warning shadow-[0_0_8px_rgba(241,196,15,0.8)]",
-    offline: "bg-neutral-500 shadow-[0_0_8px_rgba(100,116,139,0.5)]",
+    online: "bg-zinc-800 ring-2 ring-white",
+    away: "bg-amber-500 ring-2 ring-white",
+    offline: "bg-zinc-400 ring-2 ring-white",
   };
 
   const resolvedAlt = alt ?? `${name}'s profile avatar`;
@@ -90,8 +90,8 @@ export function Avatar({
         sizeClass={sizes[size]}
         alt={resolvedAlt}
         className={cn(
-          "relative overflow-hidden rounded-full transition-transform duration-300 ease-out",
-          hoverZoom && "hover:scale-[1.05] hover:shadow-lg hover:shadow-primary/10",
+          "relative overflow-hidden rounded-full transition-transform duration-200 ease-out",
+          hoverZoom && "hover:scale-[1.03] hover:shadow-sm",
           className,
         )}
       />

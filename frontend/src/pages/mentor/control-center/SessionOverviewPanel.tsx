@@ -34,43 +34,43 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
       icon: Clock,
       label: "Duration",
       value: overview?.sessionDuration ? formatDuration(overview.sessionDuration) : "0m 0s",
-      color: "primary",
-      glow: "rgba(99, 102, 241, 0.12)",
+      color: "default",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
     {
       icon: Activity,
       label: "Attendance Rate",
       value: `${overview?.attendancePercent ?? 0}%`,
-      color: "purple",
-      glow: "rgba(139, 92, 246, 0.12)",
+      color: "default",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
     {
       icon: Flame,
       label: "Engagement Score",
       value: `${overview?.engagementScore ?? 0}/100`,
-      color: overview && overview.engagementScore >= 60 ? "success" : "warning",
-      glow: overview && overview.engagementScore >= 60 ? "rgba(16, 185, 129, 0.12)" : "rgba(245, 158, 11, 0.12)",
+      color: overview && overview.engagementScore >= 60 ? "vermilion" : "warning",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
     {
       icon: MessageSquare,
       label: "Questions",
       value: overview?.questionsWaiting ?? 0,
-      color: "primary",
-      glow: "rgba(99, 102, 241, 0.12)",
+      color: "default",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
     {
       icon: Hand,
       label: "Hands Up",
       value: overview?.raisedHands ?? 0,
       color: "warning",
-      glow: "rgba(245, 158, 11, 0.12)",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
     {
       icon: Vote,
       label: "Active Polls",
       value: overview?.activePolls ?? 0,
-      color: "purple",
-      glow: "rgba(139, 92, 246, 0.12)",
+      color: "default",
+      glow: "rgba(0, 0, 0, 0.04)",
     },
   ];
 
@@ -84,10 +84,9 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
               <div
                 className={cn(
                   "rounded-xl p-2.5 shrink-0",
-                  item.color === "success" && "bg-emerald-50 text-emerald-600 border border-emerald-100",
+                  item.color === "vermilion" && "bg-red-50 text-[#b91c1c] border border-red-100",
                   item.color === "warning" && "bg-amber-50 text-amber-600 border border-amber-100",
-                  item.color === "primary" && "bg-indigo-50 text-indigo-600 border border-indigo-100",
-                  item.color === "purple" && "bg-purple-50 text-purple-600 border border-purple-100",
+                  (item.color === "default" || !item.color) && "bg-zinc-100 text-zinc-900 border border-zinc-200",
                 )}
               >
                 <Icon size={20} className="shrink-0" />

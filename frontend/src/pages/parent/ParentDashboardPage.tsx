@@ -65,7 +65,7 @@ export function ParentDashboardPage() {
           {learners.map((learner) => (
             <Card key={learner.id} className="border-slate-200 bg-white p-4.5 shadow-xs hover:border-slate-300">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                   <Users size={15} />
                 </div>
                 <div>
@@ -80,15 +80,15 @@ export function ParentDashboardPage() {
                   Lessons completed: <span className="font-semibold text-slate-900">{learner.lessonsCompleted}</span>
                 </p>
                 <p>
-                  Projects approved: <span className="font-semibold text-emerald-600">{learner.approvedProjects}</span>{" "}
-                  / {learner.submissions}
+                  Projects approved: <span className="font-semibold text-zinc-900">{learner.approvedProjects}</span> /{" "}
+                  {learner.submissions}
                 </p>
                 <p>
                   Enrolled tracks: <span className="font-semibold text-slate-900">{learner.enrolledTrackCount}</span>
                 </p>
               </div>
               <div className="mt-3 pt-2 border-t border-slate-100">
-                <Link to="/app/dashboard" className="text-xs font-medium text-indigo-600 hover:text-indigo-700">
+                <Link to="/app/dashboard" className="text-xs font-medium text-[#b91c1c] hover:underline">
                   View Learning Hub →
                 </Link>
               </div>
@@ -99,7 +99,7 @@ export function ParentDashboardPage() {
 
       <div className="grid gap-3.5 md:grid-cols-3">
         <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
-          <div className="flex items-center gap-2 text-indigo-600">
+          <div className="flex items-center gap-2 text-zinc-900">
             <ShieldCheck size={16} />
             <p className="text-xs font-semibold text-slate-900">Access Status</p>
           </div>
@@ -108,7 +108,7 @@ export function ParentDashboardPage() {
           </p>
         </Card>
         <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
-          <div className="flex items-center gap-2 text-indigo-600">
+          <div className="flex items-center gap-2 text-zinc-900">
             <BookOpen size={16} />
             <p className="text-xs font-semibold text-slate-900">Live Progress</p>
           </div>
@@ -124,7 +124,7 @@ export function ParentDashboardPage() {
           <p className="mt-2 text-xs leading-relaxed text-slate-600">
             Need to link another student? Our team is available 24/7.
           </p>
-          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-indigo-600 hover:text-indigo-700">
+          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-[#b91c1c] hover:underline">
             Contact Support →
           </Link>
         </Card>

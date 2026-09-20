@@ -64,7 +64,7 @@ export function ModuleLessonTree({
   if (!track) {
     return (
       <div className="flex h-full flex-col items-center justify-center p-6 text-center text-slate-500 border-r border-slate-200/80 bg-slate-50/50">
-        <Layers size={32} className="mb-2 text-indigo-400" />
+        <Layers size={32} className="mb-2 text-zinc-400" />
         <p className="text-sm font-semibold text-slate-900">No Track Selected</p>
         <p className="mt-1 text-xs text-slate-500">
           Select a track from the sidebar to inspect and organize its curriculum hierarchy.
@@ -80,15 +80,15 @@ export function ModuleLessonTree({
   const getLessonIcon = (type?: LessonType) => {
     switch (type) {
       case "video":
-        return <PlayCircle size={14} className="text-purple-600" />;
+        return <PlayCircle size={14} className="text-zinc-900" />;
       case "code-lab":
-        return <Code2 size={14} className="text-emerald-600" />;
+        return <Code2 size={14} className="text-zinc-900" />;
       case "quiz":
         return <HelpCircle size={14} className="text-amber-600" />;
       case "project":
-        return <Award size={14} className="text-sky-600" />;
+        return <Award size={14} className="text-[#b91c1c]" />;
       default:
-        return <FileText size={14} className="text-indigo-600" />;
+        return <FileText size={14} className="text-zinc-900" />;
     }
   };
 
@@ -103,17 +103,17 @@ export function ModuleLessonTree({
             className={cn(
               "flex flex-1 items-start gap-2.5 text-left rounded-xl p-2 transition-all",
               isTrackSelected
-                ? "bg-indigo-50 border border-indigo-200 text-indigo-950 shadow-xs"
+                ? "bg-zinc-100 border border-zinc-300 text-zinc-950 shadow-xs font-semibold"
                 : "hover:bg-slate-100 border border-transparent text-slate-800",
             )}
           >
-            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
+            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-900 text-white">
               <BookOpen size={15} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600">Track Root</span>
-                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 animate-pulse" />}
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-600">Track Root</span>
+                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c] animate-pulse" />}
               </div>
               <h2 className="text-xs font-bold text-slate-900 truncate">{track.title}</h2>
               <p className="text-[11px] text-slate-500">Click to edit track metadata</p>
@@ -128,7 +128,7 @@ export function ModuleLessonTree({
         {/* Quick Stats Bar */}
         <div className="flex items-center justify-between rounded-xl bg-slate-100 px-3 py-1.5 border border-slate-200 text-[11px] text-slate-600">
           <span className="flex items-center gap-1">
-            <Layers size={12} className="text-indigo-600" /> {modules.length} Modules
+            <Layers size={12} className="text-zinc-600" /> {modules.length} Modules
           </span>
           <span>·</span>
           <span>{Object.values(lessonsByModule).reduce((sum, list) => sum + list.length, 0)} Total Lessons</span>
@@ -174,7 +174,7 @@ export function ModuleLessonTree({
                 className={cn(
                   "rounded-2xl border transition-all overflow-hidden",
                   isModSelected
-                    ? "border-purple-300 bg-purple-50/30 shadow-xs"
+                    ? "border-zinc-400 bg-zinc-50 shadow-xs"
                     : "border-slate-200/80 bg-white hover:border-slate-300 shadow-2xs",
                 )}
               >
@@ -193,7 +193,7 @@ export function ModuleLessonTree({
                       {isCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
                     </button>
 
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-purple-100 text-purple-700 shrink-0">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 shrink-0">
                       {isCollapsed ? <Folder size={14} /> : <FolderOpen size={14} />}
                     </div>
 
@@ -246,7 +246,7 @@ export function ModuleLessonTree({
                         e.stopPropagation();
                         onAddLesson(mod._id);
                       }}
-                      className="h-6 w-6 text-indigo-600 hover:bg-indigo-50"
+                      className="h-6 w-6 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
                       title="Add lesson to module"
                     >
                       <Plus size={14} />
@@ -276,7 +276,7 @@ export function ModuleLessonTree({
                         <button
                           type="button"
                           onClick={() => onAddLesson(mod._id)}
-                          className="mt-1 text-[11px] font-semibold text-indigo-600 hover:underline inline-flex items-center gap-1"
+                          className="mt-1 text-[11px] font-semibold text-[#b91c1c] hover:underline inline-flex items-center gap-1"
                         >
                           <Plus size={11} /> Add First Lesson
                         </button>
@@ -304,7 +304,7 @@ export function ModuleLessonTree({
                           className={cn(
                             "group/les flex cursor-pointer items-center justify-between gap-2 rounded-xl p-2 text-left transition-all",
                             isLessonSelected
-                              ? "bg-indigo-50 border border-indigo-200 shadow-xs text-indigo-950"
+                              ? "bg-zinc-100 border border-zinc-300 shadow-xs text-zinc-950 font-semibold"
                               : "hover:bg-slate-100 border border-transparent text-slate-700",
                           )}
                         >
@@ -321,7 +321,7 @@ export function ModuleLessonTree({
                                 <p
                                   className={cn(
                                     "text-xs truncate font-medium",
-                                    isLessonSelected ? "text-indigo-950 font-semibold" : "text-slate-800",
+                                    isLessonSelected ? "text-zinc-950 font-semibold" : "text-slate-800",
                                   )}
                                 >
                                   {lesson.title}
@@ -334,7 +334,7 @@ export function ModuleLessonTree({
                                   </span>
                                 ) : null}
                                 {lesson.xpReward ? (
-                                  <span className="text-emerald-600 font-medium">+{lesson.xpReward} XP</span>
+                                  <span className="text-zinc-900 font-medium">+{lesson.xpReward} XP</span>
                                 ) : null}
                                 {lesson.type && (
                                   <span className="uppercase text-[9px] font-medium text-slate-500">{lesson.type}</span>
@@ -394,7 +394,7 @@ export function ModuleLessonTree({
                     <button
                       type="button"
                       onClick={() => onAddLesson(mod._id)}
-                      className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-slate-200 py-1.5 text-xs text-slate-500 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
+                      className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-slate-200 py-1.5 text-xs text-slate-500 hover:border-zinc-400 hover:bg-zinc-50 hover:text-zinc-900 transition-colors"
                     >
                       <Plus size={12} /> Add Lesson
                     </button>

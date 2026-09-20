@@ -57,7 +57,7 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
                 key={q.questionId}
                 className={cn(
                   "rounded-2xl border p-3.5 transition-all shadow-xs",
-                  q.status === "answering" ? "bg-indigo-50/80 border-indigo-200" : "bg-white border-slate-200/80",
+                  q.status === "answering" ? "bg-zinc-100 border-zinc-300" : "bg-white border-slate-200/80",
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -71,15 +71,12 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
                     className="h-8 px-2.5 gap-1 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                     onClick={() => onUpvote(q.questionId)}
                   >
-                    <ThumbsUp
-                      size={14}
-                      className={q.hasUpvoted ? "text-indigo-600 fill-indigo-100" : "text-slate-400"}
-                    />
+                    <ThumbsUp size={14} className={q.hasUpvoted ? "text-zinc-900 fill-zinc-200" : "text-slate-400"} />
                     <span className="font-semibold text-xs">{q.upvoteCount || 0}</span>
                   </Button>
                 </div>
                 {q.status === "answering" && (
-                  <p className="mt-2 text-xs font-semibold text-indigo-600">Being answered live...</p>
+                  <p className="mt-2 text-xs font-semibold text-[#b91c1c]">Being answered live...</p>
                 )}
               </div>
             ))}
@@ -90,14 +87,11 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Answered</h4>
             {answeredQuestions.map((q) => (
-              <div
-                key={q.questionId}
-                className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-3.5 shadow-xs"
-              >
+              <div key={q.questionId} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-3.5 shadow-xs">
                 <p className="text-sm font-medium text-slate-900 leading-snug">{q.text}</p>
                 <div className="mt-2 flex items-center justify-between text-xs text-slate-500">
                   <span>{q.userName}</span>
-                  <span className="text-emerald-700 font-semibold">Answered</span>
+                  <span className="text-zinc-900 font-semibold">Answered</span>
                 </div>
               </div>
             ))}

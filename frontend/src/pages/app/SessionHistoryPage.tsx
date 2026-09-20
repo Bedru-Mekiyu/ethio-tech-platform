@@ -112,7 +112,7 @@ function ScheduleRow({
               <div
                 className={cn(
                   "h-full rounded-full",
-                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-indigo-600",
+                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-[#b91c1c]",
                 )}
                 style={{ width: `${capacityPct}%` }}
               />
@@ -126,7 +126,7 @@ function ScheduleRow({
       <div className="flex shrink-0 gap-2">
         {isLive ? (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium">
+            <Button size="sm" className="text-xs bg-[#b91c1c] hover:bg-[#991b1b] text-white font-medium">
               Join Live
             </Button>
           </Link>
@@ -170,7 +170,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
   };
 
   return (
-    <Card className="overflow-hidden border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all">
+    <Card className="overflow-hidden border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-zinc-400 transition-all">
       <div className="relative h-28 bg-slate-100 border-b border-slate-200">
         {recording.thumbnailUrl ? (
           <img src={recording.thumbnailUrl} alt="" className="h-full w-full object-cover" />
@@ -276,7 +276,7 @@ export function SessionHistoryPage() {
               onClick={() => setTab(t)}
               className={cn(
                 "rounded-md px-3.5 py-1 text-xs font-medium transition",
-                tab === t ? "bg-white text-indigo-600 shadow-sm font-semibold" : "text-slate-600 hover:text-slate-900",
+                tab === t ? "bg-white text-zinc-900 shadow-sm font-semibold" : "text-slate-600 hover:text-slate-900",
               )}
             >
               {t === "schedule" ? "Schedule" : "Recordings"}

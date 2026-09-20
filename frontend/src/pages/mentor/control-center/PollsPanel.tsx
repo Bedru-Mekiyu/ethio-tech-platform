@@ -97,7 +97,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-purple-50 text-purple-600 p-1.5 rounded-lg border border-purple-100">
+          <div className="bg-zinc-100 text-zinc-900 p-1.5 rounded-lg border border-zinc-200">
             <Vote size={16} />
           </div>
           <div>
@@ -106,7 +106,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
+          className="h-8 text-xs bg-zinc-900 hover:bg-zinc-800 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Create Poll
@@ -191,7 +191,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   Cancel
                 </Button>
                 <Button
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                  className="bg-zinc-900 hover:bg-zinc-800 text-white"
                   onClick={handleCreate}
                   disabled={!pollQuestion.trim() || isSubmitting}
                 >
@@ -213,7 +213,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
             <div key={poll.id} className="rounded-xl border border-slate-200/80 bg-white p-4 transition-all shadow-2xs">
               <div className="flex items-center justify-between gap-3 mb-2">
                 <p className="text-xs font-semibold text-slate-900">{poll.question}</p>
-                <Badge variant={poll.status === "active" ? "success" : "default"} className="text-[9px] px-1.5 py-0">
+                <Badge variant={poll.status === "active" ? "outline" : "default"} className="text-[9px] px-1.5 py-0">
                   {poll.status}
                 </Badge>
               </div>
@@ -224,7 +224,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                 {poll.options.map((opt) => (
                   <div key={opt.index} className="relative h-8 rounded-lg bg-slate-100 overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-indigo-100 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-zinc-200 transition-all duration-500"
                       style={{ width: `${opt.percentage}%` }}
                     />
                     <div className="relative flex items-center justify-between px-3 h-full z-10 text-xs">

@@ -20,6 +20,7 @@ export interface ToastApi {
   error: (message: string) => void;
   warning: (message: string) => void;
   info: (message: string) => void;
+  show: (opts: { type?: ToastVariant; title?: string; description?: string; duration?: number }) => void;
 }
 
 type ToastContextValue = ToastApi;
@@ -40,10 +41,10 @@ const icons: Record<ToastVariant, typeof Info> = {
 };
 
 const variantStyles: Record<ToastVariant, { container: string; icon: string }> = {
-  success: { container: "border-emerald-200 bg-white shadow-lg", icon: "text-emerald-600" },
-  error: { container: "border-rose-200 bg-white shadow-lg", icon: "text-rose-600" },
-  warning: { container: "border-amber-200 bg-white shadow-lg", icon: "text-amber-600" },
-  info: { container: "border-indigo-200 bg-white shadow-lg", icon: "text-indigo-600" },
+  success: { container: "border-zinc-800 bg-zinc-900 shadow-lg", icon: "text-white" },
+  error: { container: "border-red-700 bg-red-600 shadow-lg", icon: "text-white" },
+  warning: { container: "border-amber-700 bg-amber-600 shadow-lg", icon: "text-white" },
+  info: { container: "border-zinc-200 bg-zinc-100 shadow-lg", icon: "text-zinc-700" },
 };
 
 let nextId = 0;
@@ -73,12 +74,21 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     [removeToast],
   );
 
+  const showToast = useCallback(
+    (opts: { type?: ToastVariant; title?: string; description?: string; duration?: number }) => {
+      const msg = [opts.title, opts.description].filter(Boolean).join(" — ");
+      addToast(msg || "Notification", opts.type || "info", opts.duration);
+    },
+    [addToast],
+  );
+
   const ctx: ToastContextValue = {
     toast: addToast,
     success: (msg: string) => addToast(msg, "success"),
     error: (msg: string) => addToast(msg, "error"),
     warning: (msg: string) => addToast(msg, "warning"),
     info: (msg: string) => addToast(msg, "info"),
+    show: showToast,
   };
 
   useEffect(

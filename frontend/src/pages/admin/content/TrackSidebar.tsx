@@ -73,7 +73,7 @@ export function TrackSidebar({
       <div className="border-b border-slate-100 p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
               <BookOpen size={16} />
             </div>
             <div>
@@ -120,7 +120,7 @@ export function TrackSidebar({
                 className={cn(
                   "whitespace-nowrap rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all",
                   isSelected
-                    ? "bg-indigo-600 text-white shadow-xs"
+                    ? "bg-zinc-900 text-white shadow-xs"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900",
                 )}
               >
@@ -154,7 +154,7 @@ export function TrackSidebar({
               className={cn(
                 "rounded px-2 py-0.5 transition-colors",
                 statusFilter === "active"
-                  ? "bg-emerald-50 text-emerald-700 font-semibold shadow-xs"
+                  ? "bg-zinc-900 text-white font-semibold shadow-xs"
                   : "text-slate-600 hover:text-slate-900",
               )}
             >
@@ -217,14 +217,14 @@ export function TrackSidebar({
                 className={cn(
                   "group relative flex w-full flex-col rounded-xl border p-3 text-left transition-all",
                   isSelected
-                    ? "border-indigo-500 bg-indigo-50/50 shadow-xs ring-1 ring-indigo-500/30"
+                    ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900/20"
                     : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50 shadow-2xs",
                 )}
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 mb-1">
-                      <Badge variant={isActive ? "success" : "warning"} size="sm" showDot>
+                      <Badge variant={isActive ? "outline" : "warning"} size="sm" showDot>
                         {isActive ? "Active" : "Draft"}
                       </Badge>
                       {track.category && (
@@ -236,7 +236,7 @@ export function TrackSidebar({
                     <h3
                       className={cn(
                         "text-xs font-semibold leading-tight line-clamp-1 transition-colors",
-                        isSelected ? "text-indigo-950 font-bold" : "text-slate-800 group-hover:text-slate-900",
+                        isSelected ? "text-zinc-950 font-bold" : "text-slate-800 group-hover:text-slate-900",
                       )}
                     >
                       {track.title}
@@ -250,7 +250,7 @@ export function TrackSidebar({
 
                 <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
                   <span className="flex items-center gap-1 text-slate-700 font-medium">
-                    <Layers size={11} className="text-indigo-600" />
+                    <Layers size={11} className="text-zinc-600" />
                     {moduleCount} {moduleCount === 1 ? "module" : "mods"}
                   </span>
                   <span>·</span>

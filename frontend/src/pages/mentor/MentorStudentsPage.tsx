@@ -93,12 +93,12 @@ function StatCard({
 }) {
   const toneClass =
     tone === "success"
-      ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
+      ? "bg-zinc-100 text-zinc-900 border border-zinc-200"
       : tone === "warning"
         ? "bg-amber-50 text-amber-600 border border-amber-100"
         : tone === "secondary"
-          ? "bg-indigo-50 text-indigo-600 border border-indigo-100"
-          : "bg-indigo-50 text-indigo-600 border border-indigo-100";
+          ? "bg-zinc-100 text-zinc-900 border border-zinc-200"
+          : "bg-zinc-100 text-zinc-900 border border-zinc-200";
 
   return (
     <Card className="border border-slate-200 bg-white p-4 shadow-sm">
@@ -131,7 +131,7 @@ function StudentRow({
       className={cn(
         "rounded-xl border transition-all",
         isExpanded
-          ? "border-indigo-300 bg-white shadow-md"
+          ? "border-zinc-900 bg-white shadow-md"
           : "border-slate-200 bg-white hover:border-slate-300 shadow-sm",
       )}
     >
@@ -170,7 +170,7 @@ function StudentRow({
             <p
               className={cn(
                 "text-xs font-semibold",
-                avgScore >= 4 ? "text-emerald-600" : avgScore >= 3 ? "text-amber-600" : "text-slate-900",
+                avgScore >= 4 ? "text-zinc-900" : avgScore >= 3 ? "text-amber-600" : "text-slate-900",
               )}
             >
               {avgScore ? avgScore.toFixed(1) : "—"}
@@ -370,7 +370,7 @@ export function MentorStudentsPage() {
               Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100 shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 shrink-0">
             <Users size={18} aria-hidden="true" />
           </div>
         </div>
@@ -432,7 +432,7 @@ export function MentorStudentsPage() {
                 className={cn(
                   "rounded px-2.5 py-1 text-[11px] capitalize transition font-medium",
                   filterEngagement === f
-                    ? "bg-indigo-600 text-white shadow-xs"
+                    ? "bg-zinc-900 text-white shadow-xs"
                     : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
                 )}
               >
@@ -453,7 +453,7 @@ export function MentorStudentsPage() {
                 className={cn(
                   "rounded px-2.5 py-1 text-[11px] transition font-medium",
                   sortBy === opt.value
-                    ? "bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold"
+                    ? "bg-zinc-900 text-white border border-zinc-900 font-semibold"
                     : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
                 )}
               >

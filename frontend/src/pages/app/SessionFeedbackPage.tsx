@@ -58,7 +58,7 @@ export function SessionFeedbackPage() {
     return (
       <div className="mx-auto max-w-lg space-y-6 py-8 text-slate-900">
         <Card className="flex flex-col items-center gap-4 p-6 sm:p-8 text-center border-slate-200 bg-white rounded-xl shadow-sm">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200">
             <CheckCircle size={24} />
           </div>
           <h1 className="text-xl font-bold text-slate-900">Thank you for your feedback!</h1>
@@ -86,7 +86,7 @@ export function SessionFeedbackPage() {
     <div className="mx-auto max-w-lg space-y-6 text-slate-900">
       <Link
         to="/app/sessions"
-        className="inline-flex items-center gap-1.5 text-xs text-indigo-600 hover:text-indigo-700 hover:underline font-medium"
+        className="inline-flex items-center gap-1.5 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:underline font-medium"
       >
         <ArrowLeft size={13} />
         Back to sessions
@@ -111,7 +111,7 @@ export function SessionFeedbackPage() {
             onChange={(e) => setComment(e.target.value)}
             placeholder="What worked well? What could be improved?"
             rows={4}
-            className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 resize-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900/30 resize-none"
           />
         </div>
 

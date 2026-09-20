@@ -412,7 +412,7 @@ export function AdminContentPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="flex h-2 w-2 rounded-full bg-zinc-900" />
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum Content Studio</h1>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -428,7 +428,7 @@ export function AdminContentPage() {
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tracks"
-                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  ? "bg-zinc-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
               )}
             >
@@ -440,7 +440,7 @@ export function AdminContentPage() {
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tree"
-                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  ? "bg-zinc-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
               )}
             >
@@ -452,7 +452,7 @@ export function AdminContentPage() {
               className={cn(
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "editor"
-                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  ? "bg-zinc-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
               )}
             >

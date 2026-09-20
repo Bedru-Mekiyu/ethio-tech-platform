@@ -85,7 +85,7 @@ export function ProvisionAccountDialog({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               placeholder="mentor@example.com"
             />
           </div>
@@ -96,7 +96,7 @@ export function ProvisionAccountDialog({
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               placeholder="At least 8 characters, with letter and number"
             />
           </div>
@@ -107,7 +107,7 @@ export function ProvisionAccountDialog({
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               placeholder="Repeat the password"
             />
           </div>

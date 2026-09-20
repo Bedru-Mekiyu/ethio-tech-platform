@@ -78,7 +78,7 @@ export function LessonPage() {
       <div className="flex items-center justify-between">
         <Link
           to={trackId ? `/app/tracks/${trackId}` : "/app/tracks"}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 hover:text-indigo-700 hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
         >
           <ArrowLeft size={13} />
           Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
@@ -86,7 +86,7 @@ export function LessonPage() {
 
         {lesson?.durationMinutes && (
           <span className="text-xs text-slate-500 flex items-center gap-1">
-            <Clock size={12} className="text-indigo-600" />
+            <Clock size={12} className="text-[#b91c1c]" />
             {lesson.durationMinutes} min
           </span>
         )}
@@ -98,7 +98,7 @@ export function LessonPage() {
           <div className="flex flex-wrap items-center gap-1.5">
             {lesson?.moduleTitle && (
               <Badge variant="outline" size="sm" className="flex items-center gap-1">
-                <Layers size={10} className="text-indigo-600" />
+                <Layers size={10} className="text-[#b91c1c]" />
                 {lesson.moduleTitle}
               </Badge>
             )}
@@ -123,7 +123,7 @@ export function LessonPage() {
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
           <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-700 flex items-center gap-1.5">
               <Code2 size={11} />
               Lesson Prerequisites
             </p>
@@ -152,13 +152,13 @@ export function LessonPage() {
           <div className="space-y-2 pt-3 border-t border-slate-200">
             <div className="flex items-center justify-between text-xs text-slate-500">
               <span className="font-mono flex items-center gap-1.5">
-                <Code2 size={13} className="text-indigo-600" />
+                <Code2 size={13} className="text-[#b91c1c]" />
                 Hands-On Code Sandbox Snippet
               </span>
               <button
                 type="button"
                 onClick={() => handleCopyStarter(lesson.starterCode!)}
-                className="inline-flex items-center gap-1 text-indigo-600 hover:underline text-xs font-medium"
+                className="inline-flex items-center gap-1 text-[#b91c1c] hover:underline text-xs font-medium"
               >
                 {copiedCode ? <Check size={12} /> : <Copy size={12} />}
                 {copiedCode ? "Copied" : "Copy"}
@@ -196,7 +196,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-xs"
             >
-              <Play size={12} className="text-indigo-600" />
+              <Play size={12} className="text-[#b91c1c]" />
               Video Workshop
             </a>
           )}
@@ -208,7 +208,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-xs"
             >
-              <BookOpen size={12} className="text-indigo-600" />
+              <BookOpen size={12} className="text-[#b91c1c]" />
               Interactive Sandbox
             </a>
           )}
@@ -244,7 +244,7 @@ export function LessonPage() {
 
         <div className="flex flex-wrap items-center gap-3">
           {completed ? (
-            <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm text-emerald-700 font-medium shadow-xs">
+            <div className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm text-zinc-900 font-medium shadow-xs">
               <CheckCircle size={18} />
               Completed (+{lesson?.xpReward ?? 50} XP)
             </div>
