@@ -51,27 +51,35 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
       <div className="flex-1 overflow-y-auto space-y-4">
         {pendingQuestions.length > 0 && (
           <div className="space-y-3">
-            <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Up Next</h4>
+            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Up Next</h4>
             {pendingQuestions.map((q) => (
               <div
                 key={q.questionId}
                 className={cn(
-                  "rounded-2xl border border-[var(--border)] p-3",
-                  q.status === "answering" ? "bg-primary/10 border-primary/30" : "bg-white/5",
+                  "rounded-2xl border p-3.5 transition-all shadow-xs",
+                  q.status === "answering" ? "bg-indigo-50/80 border-indigo-200" : "bg-white border-slate-200/80",
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
-                    <p className="text-sm text-white">{q.text}</p>
-                    <p className="mt-1 text-xs text-[var(--text-muted)]">{q.userName}</p>
+                    <p className="text-sm font-medium text-slate-900 leading-snug">{q.text}</p>
+                    <p className="mt-1 text-xs text-slate-500">{q.userName}</p>
                   </div>
-                  <Button variant="outline" size="sm" className="h-8 px-2 gap-1" onClick={() => onUpvote(q.questionId)}>
-                    <ThumbsUp size={14} className={q.hasUpvoted ? "text-primary" : ""} />
-                    <span>{q.upvoteCount || 0}</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 px-2.5 gap-1 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                    onClick={() => onUpvote(q.questionId)}
+                  >
+                    <ThumbsUp
+                      size={14}
+                      className={q.hasUpvoted ? "text-indigo-600 fill-indigo-100" : "text-slate-400"}
+                    />
+                    <span className="font-semibold text-xs">{q.upvoteCount || 0}</span>
                   </Button>
                 </div>
                 {q.status === "answering" && (
-                  <p className="mt-2 text-xs font-medium text-primary">Being answered live...</p>
+                  <p className="mt-2 text-xs font-semibold text-indigo-600">Being answered live...</p>
                 )}
               </div>
             ))}
@@ -80,13 +88,16 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
 
         {answeredQuestions.length > 0 && (
           <div className="space-y-3">
-            <h4 className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Answered</h4>
+            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Answered</h4>
             {answeredQuestions.map((q) => (
-              <div key={q.questionId} className="rounded-2xl border border-[var(--border)] bg-success/5 p-3 opacity-80">
-                <p className="text-sm text-white">{q.text}</p>
-                <div className="mt-2 flex items-center justify-between text-xs text-[var(--text-muted)]">
+              <div
+                key={q.questionId}
+                className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-3.5 shadow-xs"
+              >
+                <p className="text-sm font-medium text-slate-900 leading-snug">{q.text}</p>
+                <div className="mt-2 flex items-center justify-between text-xs text-slate-500">
                   <span>{q.userName}</span>
-                  <span className="text-success font-medium">Answered</span>
+                  <span className="text-emerald-700 font-semibold">Answered</span>
                 </div>
               </div>
             ))}

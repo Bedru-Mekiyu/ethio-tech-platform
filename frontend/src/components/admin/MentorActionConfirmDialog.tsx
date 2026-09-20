@@ -42,18 +42,18 @@ export function MentorActionConfirmDialog({
       aria-label={title}
     >
       <div
-        className="w-full max-w-lg rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-xl"
+        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-semibold text-white">{title}</h2>
-        <p className="mt-2 text-sm text-[var(--text-secondary)]">{description}</p>
+        <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+        <p className="mt-2 text-sm text-slate-600">{description}</p>
 
         {requireReason && onReasonChange && (
           <textarea
             value={reason}
             onChange={(e) => onReasonChange(e.target.value)}
             placeholder={`Enter ${reasonLabel.toLowerCase()}...`}
-            className="mt-4 min-h-[100px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary resize-y"
+            className="mt-4 min-h-[100px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 resize-y"
             aria-label={reasonLabel}
           />
         )}
@@ -62,11 +62,7 @@ export function MentorActionConfirmDialog({
           <Button variant="outline" onClick={onClose} disabled={loading}>
             Cancel
           </Button>
-          <Button
-            variant={confirmVariant}
-            onClick={onConfirm}
-            disabled={!canConfirm || loading}
-          >
+          <Button variant={confirmVariant} onClick={onConfirm} disabled={!canConfirm || loading}>
             {loading ? "Processing…" : confirmLabel}
           </Button>
         </div>

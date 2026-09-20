@@ -55,7 +55,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#050507]/70 backdrop-blur-xl transition-all duration-200",
+        "sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-200",
         className,
       )}
     >
@@ -75,8 +75,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 cn(
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
-                    ? "text-white font-medium bg-white/[0.06]"
-                    : "text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]",
+                    ? "text-primary font-semibold bg-indigo-50/70"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70",
                 )
               }
             >
@@ -89,7 +89,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
         <div className="hidden items-center gap-3 md:flex">
           <Link
             to="/login"
-            className="px-3 py-1.5 text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-150"
+            className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150"
           >
             Sign in
           </Link>
@@ -104,7 +104,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
         {/* Mobile Hamburger Toggle Button */}
         <button
           type="button"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-[#27272A] bg-[#0E0E11] text-zinc-300 hover:bg-[#18181B] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileOpen}
@@ -123,7 +123,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-[#27272A] bg-[#050507]/98 px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-2xl backdrop-blur-2xl"
+            className="border-t border-slate-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -138,8 +138,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                     cn(
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150",
                       isActive
-                        ? "bg-[#18181B] text-white font-medium"
-                        : "text-zinc-400 hover:text-white hover:bg-white/[0.04]",
+                        ? "bg-indigo-50 text-primary font-semibold"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
                     )
                   }
                   onClick={() => setMobileOpen(false)}
@@ -150,10 +150,10 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             </div>
 
             {/* Mobile CTAs */}
-            <div className="border-t border-[#27272A] pt-4 flex flex-col gap-2.5">
+            <div className="border-t border-slate-200 pt-4 flex flex-col gap-2.5">
               <Link
                 to="/login"
-                className="w-full text-center py-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                className="w-full text-center py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign in

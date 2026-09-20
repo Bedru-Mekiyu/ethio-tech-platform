@@ -116,10 +116,10 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   };
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
+          <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
             Active Classroom
             <Badge variant="purple" className="h-5 px-1.5">
               {participants.length} online
@@ -130,7 +130,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           <Button
             size="sm"
             variant="outline"
-            className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5"
+            className="h-8 text-[11px] gap-1 border-slate-200 text-slate-700 hover:bg-slate-50"
             onClick={handleMuteAll}
           >
             <VolumeX size={12} /> Mute All
@@ -138,7 +138,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           <Button
             size="sm"
             variant="outline"
-            className="h-8 text-[11px] gap-1 border-white/10 hover:bg-white/5"
+            className="h-8 text-[11px] gap-1 border-slate-200 text-slate-700 hover:bg-slate-50"
             onClick={handleUnmuteAll}
           >
             <Volume2 size={12} /> Unmute All
@@ -148,10 +148,10 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       <div className="flex gap-2 mb-3">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <Input
             placeholder="Search participants..."
-            className="h-8 pl-8 text-xs bg-white/5 border-white/5 text-white"
+            className="h-8 pl-8 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -159,32 +159,20 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="h-8 rounded-lg border border-white/5 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
+          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-800 outline-none focus:border-indigo-500"
         >
-          <option value="all" className="bg-[#0B0F19]">
-            All Roles
-          </option>
-          <option value="host" className="bg-[#0B0F19]">
-            Host
-          </option>
-          <option value="cohost" className="bg-[#0B0F19]">
-            Co-Host
-          </option>
-          <option value="moderator" className="bg-[#0B0F19]">
-            Moderator
-          </option>
-          <option value="participant" className="bg-[#0B0F19]">
-            Participant
-          </option>
-          <option value="observer" className="bg-[#0B0F19]">
-            Observer
-          </option>
+          <option value="all">All Roles</option>
+          <option value="host">Host</option>
+          <option value="cohost">Co-Host</option>
+          <option value="moderator">Moderator</option>
+          <option value="participant">Participant</option>
+          <option value="observer">Observer</option>
         </select>
       </div>
 
       {filteredParticipants.length === 0 ? (
         <div className="flex-1 flex items-center justify-center py-8">
-          <p className="text-xs text-[var(--text-muted)]">No participants match search criteria</p>
+          <p className="text-xs text-slate-400">No participants match search criteria</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -197,7 +185,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             return (
               <div
                 key={p.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.01] p-3 hover:bg-white/[0.03] transition-all"
+                className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-3 hover:bg-slate-50/80 transition-all shadow-2xs"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="relative shrink-0">
@@ -205,13 +193,13 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     {/* Live Status indicator */}
                     <span
                       className={cn(
-                        "absolute -bottom-1 -right-1 block h-3 w-3 rounded-full border-2 border-[#0B0F19]",
-                        p.role === "host" ? "bg-success" : "bg-primary",
+                        "absolute -bottom-1 -right-1 block h-3 w-3 rounded-full border-2 border-white",
+                        p.role === "host" ? "bg-emerald-500" : "bg-indigo-500",
                       )}
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white truncate flex items-center gap-1.5">
+                    <p className="text-xs font-semibold text-slate-900 truncate flex items-center gap-1.5">
                       {p.name}
                       {isHost && (
                         <Badge variant="success" className="text-[9px] px-1 py-0 scale-90">
@@ -224,7 +212,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                         </Badge>
                       )}
                     </p>
-                    <p className="text-[9px] text-[var(--text-muted)] mt-0.5">
+                    <p className="text-[9px] text-slate-500 mt-0.5">
                       Online: {Math.floor(p.attendanceDuration / 60)}m · {p.role}
                     </p>
                   </div>
@@ -236,7 +224,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
+                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                         onClick={() => onAction("mute", p.userId)}
                         title="Mute student"
                       >
@@ -245,7 +233,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
+                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                         onClick={() => onAction("unmute", p.userId)}
                         title="Unmute student"
                       >
@@ -258,39 +246,39 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:bg-white/5 hover:text-white"
+                      className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                       onClick={() => setMenuOpenId(menuOpenId === p.id ? null : p.id)}
                     >
                       <MoreHorizontal size={14} />
                     </Button>
 
                     {menuOpenId === p.id && (
-                      <div className="absolute right-0 top-full z-50 mt-1 w-44 rounded-xl border border-white/10 bg-[#0B0F19]/95 backdrop-blur-md py-1.5 shadow-xl">
+                      <div className="absolute right-0 top-full z-50 mt-1 w-44 rounded-xl border border-slate-200 bg-white py-1.5 shadow-xl">
                         {!isHost && (
                           <>
                             {p.role !== "cohost" ? (
                               <button
-                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
+                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
                                 onClick={() => {
                                   onAction("promote", p.userId);
                                   setMenuOpenId(null);
                                 }}
                               >
-                                <Shield size={13} className="text-purple-400" /> Promote to Co-Host
+                                <Shield size={13} className="text-purple-600" /> Promote to Co-Host
                               </button>
                             ) : (
                               <button
-                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
+                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
                                 onClick={() => {
                                   onAction("demote", p.userId);
                                   setMenuOpenId(null);
                                 }}
                               >
-                                <ShieldAlert size={13} className="text-warning" /> Demote to Participant
+                                <ShieldAlert size={13} className="text-amber-600" /> Demote to Participant
                               </button>
                             )}
                             <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
+                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
                               onClick={() => {
                                 onAction("timeout", p.userId);
                                 setMenuOpenId(null);
@@ -299,17 +287,17 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                               <VolumeX size={13} /> Timeout (5m)
                             </button>
                             <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-white hover:bg-white/5"
+                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
                               onClick={() => {
                                 setFeedbackUser({ userId: p.userId, name: p.name });
                                 setMenuOpenId(null);
                               }}
                             >
-                              <MessageSquare size={13} className="text-primary" /> Submit Feedback
+                              <MessageSquare size={13} className="text-indigo-600" /> Submit Feedback
                             </button>
-                            <div className="my-1 border-t border-white/5" />
+                            <div className="my-1 border-t border-slate-100" />
                             <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-danger hover:bg-danger/10"
+                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-red-600 hover:bg-red-50"
                               onClick={() => triggerConfirm("remove", p.userId, p.name)}
                             >
                               <UserX size={13} /> Remove User
@@ -346,57 +334,63 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       {/* Feedback Dialog */}
       <dialog
         ref={feedbackDialogRef}
-        className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+        className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
         onCancel={(e) => {
           e.preventDefault();
           setFeedbackUser(null);
         }}
       >
         <div className="p-6">
-          <h2 className="text-lg font-semibold text-white">Submit Session Feedback</h2>
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">
+          <h2 className="text-lg font-semibold text-slate-900">Submit Session Feedback</h2>
+          <p className="mt-2 text-sm text-slate-600">
             Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this
             session.
           </p>
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-3 gap-3">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Participation</label>
+                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                  Participation
+                </label>
                 <select
                   value={participationScore}
                   onChange={(e) => setParticipationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
-                    <option key={n} value={n} className="bg-[#0B0F19]">
+                    <option key={n} value={n}>
                       {n} / 5
                     </option>
                   ))}
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Communication</label>
+                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                  Communication
+                </label>
                 <select
                   value={communicationScore}
                   onChange={(e) => setCommunicationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
-                    <option key={n} value={n} className="bg-[#0B0F19]">
+                    <option key={n} value={n}>
                       {n} / 5
                     </option>
                   ))}
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Professionalism</label>
+                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                  Professionalism
+                </label>
                 <select
                   value={professionalismScore}
                   onChange={(e) => setProfessionalismScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-white/10 bg-white/5 px-2 text-xs text-white outline-none focus:border-primary/50"
+                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-indigo-500"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
-                    <option key={n} value={n} className="bg-[#0B0F19]">
+                    <option key={n} value={n}>
                       {n} / 5
                     </option>
                   ))}
@@ -404,19 +398,19 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Comment</label>
+              <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Comment</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add session comments or specific recommendations..."
-                className="w-full min-h-20 rounded-lg border border-white/10 bg-white/5 p-2 text-xs text-white outline-none focus:border-primary/50 resize-none"
+                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 resize-none"
               />
             </div>
           </div>
           <div className="flex justify-end gap-3">
             <Button
               variant="outline"
-              className="border-white/10 hover:bg-white/5 text-white"
+              className="border-slate-200 hover:bg-slate-50 text-slate-700"
               onClick={() => setFeedbackUser(null)}
               disabled={isSubmittingFeedback}
             >

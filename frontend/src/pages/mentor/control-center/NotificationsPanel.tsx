@@ -138,14 +138,14 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-[500px] animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[500px] shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4 shrink-0">
         <div className="flex items-center gap-2">
-          <div className="bg-primary/15 text-primary p-1.5 rounded-lg border border-primary/20">
+          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
             <Bell size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
               Real-time Alerts
               {unreadCount > 0 && (
                 <Badge variant="danger" className="h-5 px-1.5">
@@ -159,7 +159,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
           <Button
             size="sm"
             variant="ghost"
-            className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:text-white"
+            className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900"
             onClick={() => setSoundEnabled(!soundEnabled)}
             title={soundEnabled ? "Mute sounds" : "Enable sounds"}
           >
@@ -169,7 +169,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
             <Button
               size="sm"
               variant="outline"
-              className="h-7 text-[10px] border-white/10 text-white hover:bg-white/5"
+              className="h-7 text-[10px] border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               onClick={markAllRead}
             >
               Clear Badge
@@ -181,20 +181,22 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
       <div className="flex-1 overflow-y-auto mcc-scrollbar space-y-2 pr-1">
         {notifications.length === 0 ? (
           <div className="h-full flex items-center justify-center text-center">
-            <p className="text-xs text-[var(--text-muted)]">No live events recorded yet</p>
+            <p className="text-xs text-slate-400">No live events recorded yet</p>
           </div>
         ) : (
           notifications.map((n) => (
             <div
               key={n.id}
-              className={`rounded-xl border p-3 flex items-start gap-3 transition-all ${
-                n.read ? "border-white/5 bg-white/[0.01]" : "border-primary/20 bg-primary/[0.01]"
+              className={`rounded-xl border p-3 flex items-start gap-3 transition-all shadow-2xs ${
+                n.read ? "border-slate-200/80 bg-white" : "border-indigo-200 bg-indigo-50/40"
               }`}
             >
-              <div className="bg-white/5 p-1.5 rounded-lg shrink-0 mt-0.5">{getNotifIcon(n.type)}</div>
+              <div className="bg-slate-50 border border-slate-100 p-1.5 rounded-lg shrink-0 mt-0.5">
+                {getNotifIcon(n.type)}
+              </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs text-white font-medium leading-normal">{n.message}</p>
-                <p className="text-[9px] text-[var(--text-secondary)] mt-1">{n.timestamp.toLocaleTimeString()}</p>
+                <p className="text-xs text-slate-800 font-medium leading-normal">{n.message}</p>
+                <p className="text-[9px] text-slate-500 mt-1">{n.timestamp.toLocaleTimeString()}</p>
               </div>
             </div>
           ))

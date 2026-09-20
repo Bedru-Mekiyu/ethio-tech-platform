@@ -8,16 +8,14 @@ function formatAction(action: string): string {
 
 function AuditItem({ log }: { log: AuditLogEntry }) {
   return (
-    <div className="relative border-l border-[var(--border)] pl-4 pb-4 last:pb-0">
-      <div className="absolute -left-1.5 top-1 h-3 w-3 rounded-full border border-primary bg-[var(--bg)]" />
-      <p className="text-sm font-medium capitalize text-white">{formatAction(log.action)}</p>
-      <p className="text-xs text-[var(--text-muted)]">
+    <div className="relative border-l border-slate-200 pl-4 pb-4 last:pb-0">
+      <div className="absolute -left-1.5 top-1 h-3 w-3 rounded-full border-2 border-indigo-600 bg-white" />
+      <p className="text-sm font-semibold capitalize text-slate-900">{formatAction(log.action)}</p>
+      <p className="text-xs text-slate-500">
         {log.actor?.fullName ?? "System"} · {new Date(log.createdAt).toLocaleString()}
       </p>
       {log.metadata && Object.keys(log.metadata).length > 0 && (
-        <p className="mt-1 text-xs text-[var(--text-secondary)]">
-          {JSON.stringify(log.metadata)}
-        </p>
+        <p className="mt-1 text-xs text-slate-600 font-mono">{JSON.stringify(log.metadata)}</p>
       )}
     </div>
   );

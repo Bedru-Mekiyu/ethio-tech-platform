@@ -100,51 +100,51 @@ const TIER_CONFIG: Record<
 > = {
   bronze: {
     label: "Bronze Tier",
-    border: "border-amber-700/50",
-    bg: "bg-amber-950/20",
-    text: "text-amber-500",
-    iconColor: "text-amber-500",
-    glow: "shadow-[0_0_15px_rgba(180,83,9,0.15)]",
+    border: "border-amber-200",
+    bg: "bg-amber-50/70",
+    text: "text-amber-700",
+    iconColor: "text-amber-600",
+    glow: "shadow-xs",
   },
   silver: {
     label: "Silver Tier",
-    border: "border-slate-400/50",
-    bg: "bg-slate-800/30",
-    text: "text-slate-300",
-    iconColor: "text-slate-300",
-    glow: "shadow-[0_0_15px_rgba(203,213,225,0.15)]",
+    border: "border-slate-200",
+    bg: "bg-slate-50/80",
+    text: "text-slate-700",
+    iconColor: "text-slate-600",
+    glow: "shadow-xs",
   },
   gold: {
     label: "Gold Tier",
-    border: "border-yellow-500/50",
-    bg: "bg-yellow-950/30",
-    text: "text-yellow-400",
-    iconColor: "text-yellow-400",
-    glow: "shadow-[0_0_20px_rgba(234,179,8,0.2)]",
+    border: "border-yellow-200",
+    bg: "bg-yellow-50/70",
+    text: "text-yellow-700",
+    iconColor: "text-yellow-600",
+    glow: "shadow-xs",
   },
   platinum: {
     label: "Platinum Tier",
-    border: "border-cyan-400/50",
-    bg: "bg-cyan-950/30",
-    text: "text-cyan-300",
-    iconColor: "text-cyan-300",
-    glow: "shadow-[0_0_20px_rgba(34,211,238,0.2)]",
+    border: "border-cyan-200",
+    bg: "bg-cyan-50/70",
+    text: "text-cyan-700",
+    iconColor: "text-cyan-600",
+    glow: "shadow-xs",
   },
   diamond: {
     label: "Diamond Tier",
-    border: "border-blue-400/60",
-    bg: "bg-blue-950/40",
-    text: "text-blue-300",
-    iconColor: "text-blue-300",
-    glow: "shadow-[0_0_25px_rgba(96,165,250,0.3)]",
+    border: "border-blue-200",
+    bg: "bg-blue-50/70",
+    text: "text-blue-700",
+    iconColor: "text-blue-600",
+    glow: "shadow-xs",
   },
   legendary: {
     label: "Legendary",
-    border: "border-purple-500/60",
-    bg: "bg-purple-950/40",
-    text: "text-purple-300",
-    iconColor: "text-purple-300",
-    glow: "shadow-[0_0_30px_rgba(168,85,247,0.35)]",
+    border: "border-purple-200",
+    bg: "bg-purple-50/70",
+    text: "text-purple-700",
+    iconColor: "text-purple-600",
+    glow: "shadow-xs",
   },
 };
 
@@ -320,18 +320,18 @@ function BadgeTierIcon({ tier, size = 20 }: { tier?: BadgeTier | string; size?: 
   const t = (tier as BadgeTier) || "bronze";
   switch (t) {
     case "legendary":
-      return <Crown size={size} className="text-purple-400" />;
+      return <Crown size={size} className="text-purple-600" />;
     case "diamond":
-      return <Sparkles size={size} className="text-blue-400" />;
+      return <Sparkles size={size} className="text-blue-600" />;
     case "platinum":
-      return <Shield size={size} className="text-cyan-400" />;
+      return <Shield size={size} className="text-cyan-600" />;
     case "gold":
-      return <Trophy size={size} className="text-yellow-400" />;
+      return <Trophy size={size} className="text-amber-600" />;
     case "silver":
-      return <Star size={size} className="text-slate-300" />;
+      return <Star size={size} className="text-slate-600" />;
     case "bronze":
     default:
-      return <Award size={size} className="text-amber-500" />;
+      return <Award size={size} className="text-amber-700" />;
   }
 }
 
@@ -533,16 +533,12 @@ export function AdminGamificationPage() {
   });
 
   const toggleMultiplier = (id: string) => {
-    setMultiplierRules((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, isActive: !r.isActive } : r)),
-    );
+    setMultiplierRules((prev) => prev.map((r) => (r.id === id ? { ...r, isActive: !r.isActive } : r)));
     toast.success("XP multiplier rule updated");
   };
 
   const updateMultiplierFactor = (id: string, value: number) => {
-    setMultiplierRules((prev) =>
-      prev.map((r) => (r.id === id ? { ...r, multiplier: value } : r)),
-    );
+    setMultiplierRules((prev) => prev.map((r) => (r.id === id ? { ...r, multiplier: value } : r)));
   };
 
   const allBadges = badgesQuery.data ?? DEFAULT_SAMPLE_BADGES;
@@ -552,8 +548,7 @@ export function AdminGamificationPage() {
   const filteredBadges = useMemo(() => {
     return allBadges.filter((badge) => {
       const matchCategory =
-        badge.category === selectedCategory ||
-        (!badge.category && selectedCategory === "skill_mastery");
+        badge.category === selectedCategory || (!badge.category && selectedCategory === "skill_mastery");
 
       const matchTier = tierFilter === "all" || badge.tier === tierFilter;
 
@@ -569,32 +564,43 @@ export function AdminGamificationPage() {
   const activeMultiplierCount = multiplierRules.filter((r) => r.isActive).length;
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
+    <div className="space-y-6 text-slate-900">
       {/* Hero Header */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-1.5 max-w-2xl">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-2.5 py-0.5 text-[11px] font-medium text-violet-400">
-                <Sparkles size={11} /> Level 1-100 Progression Engine
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700">
+                <Sparkles size={11} className="text-indigo-600" /> Level 1-100 Progression Engine
               </span>
               <Badge variant="success" size="sm" className="gap-1">
                 <Zap size={11} /> {activeMultiplierCount} Active Multipliers
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Gamification & Engagement Portal
             </h1>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Design category-driven achievement badges, XP bonus multipliers, daily streak challenges, and tier rewards.
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Design category-driven achievement badges, XP bonus multipliers, daily streak challenges, and tier
+              rewards.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline" size="sm" onClick={() => setCreateChallengeOpen(true)} className="text-xs gap-1.5">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCreateChallengeOpen(true)}
+              className="text-xs gap-1.5 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+            >
               <Plus size={13} /> New Daily Quest
             </Button>
-            <Button variant="primary" size="sm" onClick={() => setCreateBadgeOpen(true)} className="text-xs gap-1.5 font-medium">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setCreateBadgeOpen(true)}
+              className="text-xs gap-1.5 font-medium"
+            >
               <Award size={13} /> Create Badge
             </Button>
           </div>
@@ -602,7 +608,7 @@ export function AdminGamificationPage() {
       </Card>
 
       {/* Main Mode Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3.5">
         <div className="flex flex-wrap gap-1.5">
           <Button
             size="sm"
@@ -637,7 +643,7 @@ export function AdminGamificationPage() {
             badgesQuery.refetch();
             challengesQuery.refetch();
           }}
-          className="text-xs gap-1 text-zinc-400 hover:text-white"
+          className="text-xs gap-1 border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50"
         >
           <RefreshCw size={12} /> Refresh
         </Button>
@@ -660,20 +666,22 @@ export function AdminGamificationPage() {
                   onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelectedCategory(cat.id)}
                   className={`cursor-pointer rounded-2xl border p-4 transition-all ${
                     isActive
-                      ? "border-primary bg-primary/10 shadow-[0_0_20px_rgba(20,184,166,0.15)] ring-1 ring-primary/40"
-                      : "border-[var(--border)] bg-[var(--bg-card)]/70 hover:border-primary/30 hover:bg-[var(--bg-card)]"
+                      ? "border-indigo-600 bg-indigo-50/60 shadow-xs ring-1 ring-indigo-500"
+                      : "border-slate-200/80 bg-white hover:border-indigo-300 hover:bg-slate-50/50 shadow-xs"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${isActive ? "bg-primary text-black" : "bg-white/10 text-primary"}`}>
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-xl ${isActive ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-700"}`}
+                    >
                       {cat.icon}
                     </div>
                     <Badge variant={isActive ? "success" : "default"} className="text-xs">
                       {count} {count === 1 ? "badge" : "badges"}
                     </Badge>
                   </div>
-                  <h3 className="mt-3 text-base font-bold text-white">{cat.label}</h3>
-                  <p className="mt-1 text-xs text-[var(--text-muted)] line-clamp-2">{cat.desc}</p>
+                  <h3 className="mt-3 text-base font-bold text-slate-900">{cat.label}</h3>
+                  <p className="mt-1 text-xs text-slate-500 line-clamp-2">{cat.desc}</p>
                 </div>
               );
             })}
@@ -682,22 +690,22 @@ export function AdminGamificationPage() {
           {/* Search & Tier Filters Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="relative min-w-[260px] flex-1 max-w-md">
-              <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-[var(--text-muted)]" />
+              <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
                 value={badgeSearch}
                 onChange={(e) => setBadgeSearch(e.target.value)}
                 placeholder="Search badges by title or criteria..."
-                className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] pl-10 pr-4 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
+                className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-xs"
               />
             </div>
 
             <div className="flex items-center gap-2">
-              <Filter size={14} className="text-[var(--text-muted)]" />
+              <Filter size={14} className="text-slate-500" />
               <select
                 value={tierFilter}
                 onChange={(e) => setTierFilter(e.target.value)}
-                className="h-10 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary"
+                className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-700 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-xs"
               >
                 <option value="all">All Tiers (Bronze → Legendary)</option>
                 <option value="bronze">Bronze Tier</option>
@@ -726,15 +734,17 @@ export function AdminGamificationPage() {
                 return (
                   <Card
                     key={badge._id}
-                    className={`group relative rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-0.5 ${tierStyle.border} ${tierStyle.bg} ${tierStyle.glow}`}
+                    className={`group relative rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${tierStyle.border} ${tierStyle.bg} ${tierStyle.glow}`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${tierStyle.border} bg-black/40`}>
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${tierStyle.border} bg-white shadow-xs`}
+                        >
                           <BadgeTierIcon tier={badge.tier} size={24} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-white text-base group-hover:text-primary transition-colors">
+                          <h4 className="font-bold text-slate-900 text-base group-hover:text-indigo-600 transition-colors">
                             {badge.name}
                           </h4>
                           <span className={`text-xs font-semibold uppercase tracking-wider ${tierStyle.text}`}>
@@ -744,27 +754,29 @@ export function AdminGamificationPage() {
                       </div>
                     </div>
 
-                    <p className="mt-3 text-xs text-[var(--text-secondary)] leading-relaxed min-h-[36px]">
+                    <p className="mt-3 text-xs text-slate-600 leading-relaxed min-h-[36px]">
                       {badge.description || "Earned upon completing required track milestones."}
                     </p>
 
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-xs">
+                    <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-slate-200/80 pt-3 text-xs">
                       <div className="space-y-0.5">
-                        <span className="text-[var(--text-muted)]">XP Threshold</span>
-                        <p className="font-mono font-bold text-primary">{(badge.xpRequired ?? 0).toLocaleString()} XP</p>
+                        <span className="text-slate-500">XP Threshold</span>
+                        <p className="font-mono font-bold text-indigo-600">
+                          {(badge.xpRequired ?? 0).toLocaleString()} XP
+                        </p>
                       </div>
 
                       {badge.xpBonus && (
                         <div className="space-y-0.5 text-right">
-                          <span className="text-[var(--text-muted)]">Bonus Grant</span>
-                          <p className="font-mono font-bold text-success">+{badge.xpBonus} XP</p>
+                          <span className="text-slate-500">Bonus Grant</span>
+                          <p className="font-mono font-bold text-emerald-600">+{badge.xpBonus} XP</p>
                         </div>
                       )}
 
                       {badge.multiplier && (
                         <div className="space-y-0.5 text-right">
-                          <span className="text-[var(--text-muted)]">Boost</span>
-                          <p className="font-mono font-bold text-purple-400">{badge.multiplier}x</p>
+                          <span className="text-slate-500">Boost</span>
+                          <p className="font-mono font-bold text-purple-600">{badge.multiplier}x</p>
                         </div>
                       )}
                     </div>
@@ -788,8 +800,8 @@ export function AdminGamificationPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-white">Active Daily Quests</h2>
-                <p className="text-xs text-[var(--text-muted)]">
+                <h2 className="text-xl font-bold text-slate-900">Active Daily Quests</h2>
+                <p className="text-xs text-slate-500">
                   Appears directly on student learner dashboards with automated completion detection.
                 </p>
               </div>
@@ -802,28 +814,30 @@ export function AdminGamificationPage() {
               {allChallenges.map((ch) => (
                 <div
                   key={ch._id}
-                  className="rounded-2xl border border-success/30 bg-success/5 p-5 space-y-4 shadow-sm relative overflow-hidden"
+                  className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-5 space-y-4 shadow-sm relative overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success/20 text-success">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
                         <Sparkles size={18} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white text-sm">{ch.title}</h4>
-                        <span className="text-[11px] text-success capitalize">{ch.category?.replace(/_/g, " ") ?? "Daily Quest"}</span>
+                        <h4 className="font-bold text-slate-900 text-sm">{ch.title}</h4>
+                        <span className="text-[11px] text-emerald-700 capitalize font-medium">
+                          {ch.category?.replace(/_/g, " ") ?? "Daily Quest"}
+                        </span>
                       </div>
                     </div>
                     <Badge variant="success">+{ch.xpReward ?? 50} XP</Badge>
                   </div>
 
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {ch.description || "Complete required coding session to unlock."}
                   </p>
 
-                  <div className="flex items-center justify-between border-t border-success/20 pt-3 text-xs">
-                    <span className="text-[var(--text-muted)]">Streak Multiplier</span>
-                    <span className="font-mono font-bold text-primary">{ch.streakBonusMultiplier ?? 1.25}x</span>
+                  <div className="flex items-center justify-between border-t border-emerald-200/70 pt-3 text-xs">
+                    <span className="text-slate-500">Streak Multiplier</span>
+                    <span className="font-mono font-bold text-indigo-600">{ch.streakBonusMultiplier ?? 1.25}x</span>
                   </div>
                 </div>
               ))}
@@ -831,13 +845,13 @@ export function AdminGamificationPage() {
           </div>
 
           {/* Streak Milestones Progression Ribbon */}
-          <Card className="rounded-2xl border-[var(--border)] bg-[var(--bg-card)] p-6 space-y-4">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
             <CardHeader className="p-0">
               <div className="flex items-center gap-2">
-                <Flame size={20} className="text-warning" />
-                <CardTitle className="text-lg">Streak Milestone Reward Ladders</CardTitle>
+                <Flame size={20} className="text-amber-500" />
+                <CardTitle className="text-lg text-slate-900">Streak Milestone Reward Ladders</CardTitle>
               </div>
-              <p className="text-xs text-[var(--text-secondary)] mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Automated reward triggers when learners hit consecutive streak milestones.
               </p>
             </CardHeader>
@@ -848,14 +862,14 @@ export function AdminGamificationPage() {
                 return (
                   <div
                     key={m.days}
-                    className={`rounded-2xl border p-4 text-center space-y-2 ${tierStyle.border} ${tierStyle.bg}`}
+                    className={`rounded-2xl border p-4 text-center space-y-2 ${tierStyle.border} ${tierStyle.bg} shadow-xs`}
                   >
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-warning/15 text-warning">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
                       <Flame size={20} />
                     </div>
-                    <p className="text-lg font-bold text-white">{m.days} Days</p>
-                    <p className="text-xs font-mono font-bold text-success">+{m.xp} XP</p>
-                    <p className="text-[11px] text-purple-400 font-medium">Multiplier: {m.bonusMultiplier}</p>
+                    <p className="text-lg font-bold text-slate-900">{m.days} Days</p>
+                    <p className="text-xs font-mono font-bold text-emerald-600">+{m.xp} XP</p>
+                    <p className="text-[11px] text-purple-700 font-semibold">Multiplier: {m.bonusMultiplier}</p>
                     <Badge variant="default" className="text-[10px]">
                       {m.label}
                     </Badge>
@@ -872,8 +886,8 @@ export function AdminGamificationPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-bold text-white">XP Bonus Multiplier Rules</h2>
-              <p className="text-xs text-[var(--text-muted)]">
+              <h2 className="text-xl font-bold text-slate-900">XP Bonus Multiplier Rules</h2>
+              <p className="text-xs text-slate-500">
                 Dynamically scale XP minting for weekend hackathons, sprint completions, and cohort milestones.
               </p>
             </div>
@@ -885,40 +899,42 @@ export function AdminGamificationPage() {
                 key={rule.id}
                 className={`rounded-2xl border p-5 space-y-4 transition-all ${
                   rule.isActive
-                    ? "border-primary/40 bg-primary/5 shadow-md"
-                    : "border-[var(--border)] bg-[var(--bg-card)] opacity-70"
+                    ? "border-indigo-200 bg-indigo-50/40 shadow-sm"
+                    : "border-slate-200 bg-white opacity-75 shadow-xs"
                 }`}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h4 className="font-bold text-white text-base">{rule.name}</h4>
-                    <span className="text-xs text-primary font-medium">{rule.category}</span>
+                    <h4 className="font-bold text-slate-900 text-base">{rule.name}</h4>
+                    <span className="text-xs text-indigo-600 font-semibold">{rule.category}</span>
                   </div>
-                  <Badge variant={rule.isActive ? "success" : "default"}>
-                    {rule.isActive ? "Active" : "Inactive"}
-                  </Badge>
+                  <Badge variant={rule.isActive ? "success" : "default"}>{rule.isActive ? "Active" : "Inactive"}</Badge>
                 </div>
 
-                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                  {rule.description}
-                </p>
+                <p className="text-xs text-slate-600 leading-relaxed">{rule.description}</p>
 
-                <div className="flex items-center justify-between border-t border-[var(--border)] pt-3">
+                <div className="flex items-center justify-between border-t border-slate-200 pt-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-[var(--text-muted)]">Factor:</span>
+                    <span className="text-xs text-slate-500">Factor:</span>
                     <div className="flex items-center gap-1.5">
                       <button
                         type="button"
-                        onClick={() => updateMultiplierFactor(rule.id, Math.max(1.0, Math.round((rule.multiplier - 0.1) * 10) / 10))}
-                        className="flex h-6 w-6 items-center justify-center rounded border border-[var(--border)] bg-white/5 text-xs text-[var(--text-muted)] hover:text-white"
+                        onClick={() =>
+                          updateMultiplierFactor(rule.id, Math.max(1.0, Math.round((rule.multiplier - 0.1) * 10) / 10))
+                        }
+                        className="flex h-6 w-6 items-center justify-center rounded border border-slate-200 bg-white text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50 shadow-xs"
                       >
                         -
                       </button>
-                      <span className="font-mono text-base font-bold text-primary min-w-[36px] text-center">{rule.multiplier}x</span>
+                      <span className="font-mono text-base font-bold text-indigo-600 min-w-[36px] text-center">
+                        {rule.multiplier}x
+                      </span>
                       <button
                         type="button"
-                        onClick={() => updateMultiplierFactor(rule.id, Math.min(3.0, Math.round((rule.multiplier + 0.1) * 10) / 10))}
-                        className="flex h-6 w-6 items-center justify-center rounded border border-[var(--border)] bg-white/5 text-xs text-[var(--text-muted)] hover:text-white"
+                        onClick={() =>
+                          updateMultiplierFactor(rule.id, Math.min(3.0, Math.round((rule.multiplier + 0.1) * 10) / 10))
+                        }
+                        className="flex h-6 w-6 items-center justify-center rounded border border-slate-200 bg-white text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50 shadow-xs"
                       >
                         +
                       </button>
@@ -943,28 +959,35 @@ export function AdminGamificationPage() {
       {/* CREATE BADGE MODAL */}
       {createBadgeOpen && (
         <>
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs" onClick={() => setCreateBadgeOpen(false)} aria-hidden="true" />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-2xl space-y-5"
+            className="fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-xs"
+            onClick={() => setCreateBadgeOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl space-y-5"
             role="dialog"
             aria-modal="true"
             aria-label="Create Badge"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                   <Award size={20} />
                 </div>
-                <h3 className="text-lg font-bold text-white">Create Achievement Badge</h3>
+                <h3 className="text-lg font-bold text-slate-900">Create Achievement Badge</h3>
               </div>
-              <button onClick={() => setCreateBadgeOpen(false)} className="rounded-lg p-1.5 text-[var(--text-muted)] hover:text-white">
+              <button
+                onClick={() => setCreateBadgeOpen(false)}
+                className="rounded-lg p-1.5 text-slate-400 hover:text-slate-700"
+              >
                 <X size={18} />
               </button>
             </div>
 
             <div className="space-y-4 text-sm">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Badge Title
                 </label>
                 <Input
@@ -975,26 +998,26 @@ export function AdminGamificationPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Description / Unlock Criteria
                 </label>
                 <textarea
                   placeholder="Explain what project or skill is required to earn this badge..."
                   value={newBadgeDesc}
                   onChange={(e) => setNewBadgeDesc(e.target.value)}
-                  className="min-h-[70px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary resize-y"
+                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-y"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Category
                   </label>
                   <select
                     value={newBadgeCategory}
                     onChange={(e) => setNewBadgeCategory(e.target.value as BadgeCategory)}
-                    className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                   >
                     <option value="skill_mastery">Skill Mastery</option>
                     <option value="cohort_consistency">Cohort Consistency</option>
@@ -1004,13 +1027,13 @@ export function AdminGamificationPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Badge Tier
                   </label>
                   <select
                     value={newBadgeTier}
                     onChange={(e) => setNewBadgeTier(e.target.value as BadgeTier)}
-                    className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                   >
                     <option value="bronze">Bronze (Tier 1)</option>
                     <option value="silver">Silver (Tier 2)</option>
@@ -1024,27 +1047,19 @@ export function AdminGamificationPage() {
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     XP Required
                   </label>
-                  <Input
-                    type="number"
-                    value={newBadgeXp}
-                    onChange={(e) => setNewBadgeXp(e.target.value)}
-                  />
+                  <Input type="number" value={newBadgeXp} onChange={(e) => setNewBadgeXp(e.target.value)} />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Bonus XP
                   </label>
-                  <Input
-                    type="number"
-                    value={newBadgeBonus}
-                    onChange={(e) => setNewBadgeBonus(e.target.value)}
-                  />
+                  <Input type="number" value={newBadgeBonus} onChange={(e) => setNewBadgeBonus(e.target.value)} />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Multiplier
                   </label>
                   <Input
@@ -1057,7 +1072,7 @@ export function AdminGamificationPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-3 border-t border-[var(--border)]">
+            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
               <Button variant="outline" onClick={() => setCreateBadgeOpen(false)}>
                 Cancel
               </Button>
@@ -1076,28 +1091,35 @@ export function AdminGamificationPage() {
       {/* CREATE CHALLENGE MODAL */}
       {createChallengeOpen && (
         <>
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs" onClick={() => setCreateChallengeOpen(false)} aria-hidden="true" />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-2xl space-y-5"
+            className="fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-xs"
+            onClick={() => setCreateChallengeOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-xl space-y-5"
             role="dialog"
             aria-modal="true"
             aria-label="Create Daily Quest"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-success/15 text-success">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Flame size={20} />
                 </div>
-                <h3 className="text-lg font-bold text-white">Create Daily Quest</h3>
+                <h3 className="text-lg font-bold text-slate-900">Create Daily Quest</h3>
               </div>
-              <button onClick={() => setCreateChallengeOpen(false)} className="rounded-lg p-1.5 text-[var(--text-muted)] hover:text-white">
+              <button
+                onClick={() => setCreateChallengeOpen(false)}
+                className="rounded-lg p-1.5 text-slate-400 hover:text-slate-700"
+              >
                 <X size={18} />
               </button>
             </div>
 
             <div className="space-y-4 text-sm">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Quest Title
                 </label>
                 <Input
@@ -1108,25 +1130,25 @@ export function AdminGamificationPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Description
                 </label>
                 <textarea
                   placeholder="Instructions for students to complete this quest..."
                   value={newChallengeDesc}
                   onChange={(e) => setNewChallengeDesc(e.target.value)}
-                  className="min-h-[70px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] p-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary resize-y"
+                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-y"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                   Quest Category
                 </label>
                 <select
                   value={newChallengeCategory}
                   onChange={(e) => setNewChallengeCategory(e.target.value)}
-                  className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 text-xs text-[var(--text-primary)] outline-none focus:border-primary"
+                  className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 >
                   <option value="daily_quest">Daily Coding Quest</option>
                   <option value="community_task">Community & Peer Review</option>
@@ -1137,17 +1159,13 @@ export function AdminGamificationPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     XP Reward
                   </label>
-                  <Input
-                    type="number"
-                    value={newChallengeXp}
-                    onChange={(e) => setNewChallengeXp(e.target.value)}
-                  />
+                  <Input type="number" value={newChallengeXp} onChange={(e) => setNewChallengeXp(e.target.value)} />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
                     Streak Multiplier
                   </label>
                   <Input
@@ -1160,7 +1178,7 @@ export function AdminGamificationPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2.5 pt-3 border-t border-[var(--border)]">
+            <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
               <Button variant="outline" onClick={() => setCreateChallengeOpen(false)}>
                 Cancel
               </Button>

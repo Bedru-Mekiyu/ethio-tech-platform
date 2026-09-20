@@ -63,11 +63,11 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
   };
 
   return (
-    <div className="space-y-4 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 sm:p-5">
+    <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <HelpCircle size={18} className="text-amber-400" />
-          <h3 className="text-sm font-semibold text-white">Lesson Assessment Quiz</h3>
+          <HelpCircle size={18} className="text-amber-600" />
+          <h3 className="text-sm font-semibold text-slate-900">Lesson Assessment Quiz</h3>
         </div>
         <Button type="button" size="sm" onClick={addQuestion} className="gap-1.5 h-8">
           <Plus size={14} /> Add Question
@@ -75,18 +75,15 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
       </div>
 
       {questions.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-white/10 p-6 text-center text-xs text-[var(--text-muted)]">
+        <div className="rounded-xl border border-dashed border-slate-200 p-6 text-center text-xs text-slate-500 bg-slate-50/50">
           No quiz questions configured. Click &quot;Add Question&quot; to build an interactive knowledge check.
         </div>
       ) : (
         <div className="space-y-4">
           {questions.map((q, qIndex) => (
-            <div
-              key={qIndex}
-              className="rounded-xl border border-[var(--border)] bg-white/[0.03] p-4 space-y-3"
-            >
+            <div key={qIndex} className="rounded-xl border border-slate-200/90 bg-slate-50/60 p-4 space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                   Question #{qIndex + 1}
                 </span>
                 <div className="flex items-center gap-1">
@@ -96,7 +93,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                     size="icon"
                     disabled={qIndex === 0}
                     onClick={() => moveQuestion(qIndex, qIndex - 1)}
-                    className="h-7 w-7"
+                    className="h-7 w-7 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                     title="Move up"
                   >
                     <ChevronUp size={14} />
@@ -107,7 +104,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                     size="icon"
                     disabled={qIndex === questions.length - 1}
                     onClick={() => moveQuestion(qIndex, qIndex + 1)}
-                    className="h-7 w-7"
+                    className="h-7 w-7 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
                     title="Move down"
                   >
                     <ChevronDown size={14} />
@@ -117,7 +114,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                     variant="ghost"
                     size="icon"
                     onClick={() => removeQuestion(qIndex)}
-                    className="h-7 w-7 text-danger hover:bg-danger/10"
+                    className="h-7 w-7 text-rose-600 hover:bg-rose-50"
                     title="Delete question"
                   >
                     <Trash2 size={14} />
@@ -137,9 +134,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
 
               {/* Options */}
               <div className="space-y-2 pt-1">
-                <span className="text-xs text-[var(--text-muted)] block">
-                  Options (select radio for correct answer):
-                </span>
+                <span className="text-xs text-slate-500 block">Options (select radio for correct answer):</span>
                 {q.options.map((opt, optIndex) => (
                   <div key={optIndex} className="flex items-center gap-2">
                     <input
@@ -147,7 +142,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                       name={`correct-${qIndex}`}
                       checked={q.correctIndex === optIndex}
                       onChange={() => updateQuestion(qIndex, { ...q, correctIndex: optIndex })}
-                      className="h-4 w-4 text-emerald-500 focus:ring-0 cursor-pointer"
+                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-slate-300 cursor-pointer"
                       title="Mark as correct answer"
                     />
                     <Input
@@ -162,7 +157,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                         variant="ghost"
                         size="icon"
                         onClick={() => removeOption(qIndex, optIndex)}
-                        className="h-7 w-7 text-[var(--text-muted)] hover:text-danger"
+                        className="h-7 w-7 text-slate-400 hover:text-rose-600 hover:bg-rose-50"
                       >
                         <Trash2 size={13} />
                       </Button>
@@ -174,7 +169,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                   <button
                     type="button"
                     onClick={() => addOption(qIndex)}
-                    className="text-xs text-primary hover:underline pt-1 inline-flex items-center gap-1"
+                    className="text-xs text-indigo-600 font-medium hover:underline pt-1 inline-flex items-center gap-1"
                   >
                     <Plus size={12} /> Add option
                   </button>

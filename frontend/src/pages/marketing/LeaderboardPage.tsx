@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, Crown, Medal, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Crown, Medal, Trophy, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -95,17 +95,14 @@ function RankCard({
   return (
     <Card
       className={cn(
-        "relative flex h-full flex-col items-center text-center transition-transform duration-200",
-        featured ? "border-violet-500/50 md:-mt-4" : "border-[#27272A]",
-        "bg-[#0E0E11]",
+        "relative flex h-full flex-col items-center text-center transition-all duration-200 bg-white",
+        featured ? "border-indigo-400 shadow-md ring-1 ring-indigo-500/20 md:-mt-4" : "border-slate-200 shadow-sm",
       )}
     >
       <div
         className={cn(
           "absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full border text-xs font-semibold",
-          featured
-            ? "border-primary/40 bg-primary/10 text-primary"
-            : "border-[var(--border)] bg-white/5 text-[var(--text-muted)]",
+          featured ? "border-indigo-200 bg-indigo-50 text-indigo-700" : "border-slate-200 bg-slate-50 text-slate-600",
         )}
       >
         #{place}
@@ -121,22 +118,22 @@ function RankCard({
           }
           role={tab === "mentors" ? "mentor" : "student"}
           size={featured ? "lg" : "md"}
-          className={featured ? "ring-4 ring-primary/25" : ""}
+          className={featured ? "ring-4 ring-indigo-100" : ""}
         />
         {featured ? (
-          <span className="absolute -right-2 -top-1 flex h-7 w-7 items-center justify-center rounded-full border border-primary/30 bg-primary/15 text-primary">
+          <span className="absolute -right-2 -top-1 flex h-7 w-7 items-center justify-center rounded-full border border-amber-300 bg-amber-50 text-amber-600 shadow-sm">
             <Crown size={14} />
           </span>
         ) : null}
       </div>
-      <h3 className="mt-3 text-sm font-semibold text-white">{title}</h3>
-      <p className="text-xs text-violet-400 font-medium">{subtitle}</p>
+      <h3 className="mt-3 text-sm font-semibold text-slate-900">{title}</h3>
+      <p className="text-xs text-indigo-600 font-medium">{subtitle}</p>
       <div className="mt-3 flex flex-wrap justify-center gap-2">
         <Badge variant={featured ? "purple" : "default"}>{podiumText(tab, metric)}</Badge>
         <Badge variant={featured ? "success" : "purple"}>{featured ? "Top ranked" : "Rising"}</Badge>
       </div>
       <ProgressBar value={metric} max={maxValue} className="mt-4 w-full" />
-      <p className="mt-2 text-xs text-[var(--text-muted)]">{formatXp(metric)} total</p>
+      <p className="mt-2 text-xs text-slate-500">{formatXp(metric)} total</p>
     </Card>
   );
 }
@@ -192,10 +189,8 @@ export function LeaderboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
       <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-          Global Rankings
-        </h1>
-        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-400">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Global Rankings</h1>
+        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-slate-600">
           Compete, mentor, and collaborate with community peers. Rankings update with live platform activity.
         </p>
       </div>
@@ -210,8 +205,8 @@ export function LeaderboardPage() {
             className={cn(
               "rounded-lg border px-4 py-2 text-left transition text-xs",
               tab === item.id
-                ? "border-violet-500 bg-violet-600 text-white font-semibold"
-                : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
+                ? "border-indigo-600 bg-indigo-600 text-white font-semibold shadow-sm"
+                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm",
             )}
           >
             <span className="block font-semibold">{item.label}</span>
@@ -221,31 +216,31 @@ export function LeaderboardPage() {
       </div>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-3">
-        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
+        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
+          <div className="flex items-center justify-center gap-1.5 text-slate-500">
             <Users size={13} />
             <span className="text-[10px] uppercase tracking-wider font-semibold">{statLabel(tab)}</span>
           </div>
-          <p className="mt-2 text-xl font-bold text-white">{rows.length}</p>
-          <p className="mt-0.5 text-[11px] text-zinc-400">Visible from live rankings</p>
+          <p className="mt-2 text-xl font-bold text-slate-900">{rows.length}</p>
+          <p className="mt-0.5 text-[11px] text-slate-500">Visible from live rankings</p>
         </Card>
-        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
-            <Sparkles size={13} />
+        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
+          <div className="flex items-center justify-center gap-1.5 text-slate-500">
+            <Trophy size={13} />
             <span className="text-[10px] uppercase tracking-wider font-semibold">
               {tab === "mentors" ? "Top score" : "Top XP"}
             </span>
           </div>
-          <p className="mt-2 text-xl font-bold text-violet-400">{podiumText(tab, topRank)}</p>
-          <p className="mt-0.5 text-[11px] text-zinc-400">Current cohort leader</p>
+          <p className="mt-2 text-xl font-bold text-indigo-600">{podiumText(tab, topRank)}</p>
+          <p className="mt-0.5 text-[11px] text-slate-500">Current cohort leader</p>
         </Card>
-        <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-zinc-500">
+        <Card className="border-slate-200 bg-white p-4 text-center shadow-sm">
+          <div className="flex items-center justify-center gap-1.5 text-slate-500">
             <Medal size={13} />
             <span className="text-[10px] uppercase tracking-wider font-semibold">Average</span>
           </div>
-          <p className="mt-2 text-xl font-bold text-white">{podiumText(tab, averageRank)}</p>
-          <p className="mt-0.5 text-[11px] text-zinc-400">Cohort average</p>
+          <p className="mt-2 text-xl font-bold text-slate-900">{podiumText(tab, averageRank)}</p>
+          <p className="mt-0.5 text-[11px] text-slate-500">Cohort average</p>
         </Card>
       </div>
 
@@ -274,16 +269,16 @@ export function LeaderboardPage() {
         </div>
       )}
 
-      <Card className="mt-12 overflow-hidden border-[var(--border)] bg-[var(--bg-card)] p-0">
-        <div className="border-b border-[var(--border)] px-5 py-4">
+      <Card className="mt-12 overflow-hidden border-slate-200 bg-white shadow-sm p-0">
+        <div className="border-b border-slate-200 bg-white px-5 py-4">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-primary">Rankings</p>
-              <h2 className="text-2xl font-semibold text-white">Moving up the board</h2>
+              <p className="text-xs uppercase tracking-[0.24em] text-indigo-600 font-semibold">Rankings</p>
+              <h2 className="text-2xl font-semibold text-slate-900">Moving up the board</h2>
             </div>
             <Link
               to={tab === "students" ? "/register" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"}
-              className="inline-flex items-center gap-2 text-sm text-primary"
+              className="inline-flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-700 font-medium"
             >
               Join the challenge <ArrowRight size={16} />
             </Link>
@@ -292,8 +287,8 @@ export function LeaderboardPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-[760px] w-full text-left text-sm">
-            <thead className="border-b border-[var(--border)] bg-[var(--bg-elevated)]">
-              <tr className="text-[10px] uppercase tracking-[0.22em] text-[var(--text-muted)]">
+            <thead className="border-b border-slate-200 bg-slate-50">
+              <tr className="text-[10px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
                 <th className="px-5 py-4">Rank</th>
                 <th className="px-5 py-4">{tab === "teams" ? "Team" : "Member"}</th>
                 <th className="px-5 py-4">{tab === "mentors" ? "Score" : "Level & XP"}</th>
@@ -311,13 +306,13 @@ export function LeaderboardPage() {
                     <tr
                       key={(row as LeaderboardEntry)._id ?? title ?? rank}
                       className={cn(
-                        "border-b border-[var(--border)] transition-colors",
-                        isMe ? "bg-primary/10" : "hover:bg-white/5",
+                        "border-b border-slate-100 transition-colors",
+                        isMe ? "bg-indigo-50/70" : "hover:bg-slate-50",
                       )}
                     >
                       <td className="px-5 py-4">
-                        <div className="flex items-center gap-2 font-bold text-white">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-white/5 text-xs">
+                        <div className="flex items-center gap-2 font-bold text-slate-900">
+                          <span className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-xs text-slate-700">
                             #{rank}
                           </span>
                           {isMe ? <Badge variant="success">You</Badge> : null}
@@ -337,8 +332,8 @@ export function LeaderboardPage() {
                             size="sm"
                           />
                           <div>
-                            <p className="font-medium text-white">{title}</p>
-                            <p className="text-xs text-[var(--text-muted)]">
+                            <p className="font-medium text-slate-900">{title}</p>
+                            <p className="text-xs text-slate-500">
                               {tab === "students"
                                 ? getRankTitle((row as LeaderboardEntry).level ?? 1)
                                 : tab === "mentors"
@@ -349,14 +344,14 @@ export function LeaderboardPage() {
                         </div>
                       </td>
                       <td className="px-5 py-4">
-                        <p className="font-medium text-white">
+                        <p className="font-medium text-slate-900">
                           {tab === "students"
                             ? `Lvl ${(row as LeaderboardEntry).level ?? 1}`
                             : tab === "mentors"
                               ? `${Math.round((row as MentorLeaderboardEntry).mentorScore ?? 0)} score`
                               : `${numberFormatter((row as PeerGroupLeaderboardEntry).groupXP ?? 0)} XP`}
                         </p>
-                        <p className="text-xs text-[var(--text-muted)]">
+                        <p className="text-xs text-slate-500">
                           {tab === "students"
                             ? `${numberFormatter((row as LeaderboardEntry).xp ?? 0)} XP`
                             : tab === "mentors"
@@ -381,7 +376,7 @@ export function LeaderboardPage() {
           </table>
         </div>
 
-        <div className="border-t border-[var(--border)] p-4 text-center">
+        <div className="border-t border-slate-200 bg-slate-50/50 p-4 text-center">
           <Button variant="outline" onClick={() => setLimit((value) => value + 5)} disabled={activeQuery.isFetching}>
             {activeQuery.isFetching ? "Loading more…" : "Load more"}
           </Button>

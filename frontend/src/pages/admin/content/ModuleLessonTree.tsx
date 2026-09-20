@@ -63,10 +63,10 @@ export function ModuleLessonTree({
 
   if (!track) {
     return (
-      <div className="flex h-full flex-col items-center justify-center p-6 text-center text-[var(--text-muted)] border-r border-[var(--border)] bg-[var(--bg-card)]">
-        <Layers size={32} className="mb-2 text-primary/40" />
-        <p className="text-sm font-semibold text-white">No Track Selected</p>
-        <p className="mt-1 text-xs text-[var(--text-secondary)]">
+      <div className="flex h-full flex-col items-center justify-center p-6 text-center text-slate-500 border-r border-slate-200/80 bg-slate-50/50">
+        <Layers size={32} className="mb-2 text-indigo-400" />
+        <p className="text-sm font-semibold text-slate-900">No Track Selected</p>
+        <p className="mt-1 text-xs text-slate-500">
           Select a track from the sidebar to inspect and organize its curriculum hierarchy.
         </p>
       </div>
@@ -80,22 +80,22 @@ export function ModuleLessonTree({
   const getLessonIcon = (type?: LessonType) => {
     switch (type) {
       case "video":
-        return <PlayCircle size={14} className="text-purple-400" />;
+        return <PlayCircle size={14} className="text-purple-600" />;
       case "code-lab":
-        return <Code2 size={14} className="text-emerald-400" />;
+        return <Code2 size={14} className="text-emerald-600" />;
       case "quiz":
-        return <HelpCircle size={14} className="text-amber-400" />;
+        return <HelpCircle size={14} className="text-amber-600" />;
       case "project":
-        return <Award size={14} className="text-sky-400" />;
+        return <Award size={14} className="text-sky-600" />;
       default:
-        return <FileText size={14} className="text-primary" />;
+        return <FileText size={14} className="text-indigo-600" />;
     }
   };
 
   return (
-    <div className="flex h-full flex-col border-r border-[var(--border)] bg-[var(--bg-card)]">
+    <div className="flex h-full flex-col border-r border-slate-200/80 bg-white">
       {/* Track Overview Header in Middle Pane */}
-      <div className="border-b border-[var(--border)] p-4 space-y-3 bg-white/[0.01]">
+      <div className="border-b border-slate-100 p-4 space-y-3 bg-slate-50/40">
         <div className="flex items-start justify-between gap-2">
           <button
             type="button"
@@ -103,43 +103,37 @@ export function ModuleLessonTree({
             className={cn(
               "flex flex-1 items-start gap-2.5 text-left rounded-xl p-2 transition-all",
               isTrackSelected
-                ? "bg-primary/10 border border-primary/40 text-white"
-                : "hover:bg-white/5 text-slate-200"
+                ? "bg-indigo-50 border border-indigo-200 text-indigo-950 shadow-xs"
+                : "hover:bg-slate-100 border border-transparent text-slate-800",
             )}
           >
-            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/20 text-primary">
+            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600">
               <BookOpen size={15} />
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Track Root</span>
-                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />}
+                <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600">Track Root</span>
+                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 animate-pulse" />}
               </div>
-              <h2 className="text-xs font-bold text-white truncate">{track.title}</h2>
-              <p className="text-[11px] text-[var(--text-muted)]">Click to edit track metadata</p>
+              <h2 className="text-xs font-bold text-slate-900 truncate">{track.title}</h2>
+              <p className="text-[11px] text-slate-500">Click to edit track metadata</p>
             </div>
           </button>
 
-          <Button
-            size="sm"
-            onClick={onAddModule}
-            className="h-8 gap-1 px-2.5 text-xs font-semibold shrink-0 shadow-sm"
-          >
+          <Button size="sm" onClick={onAddModule} className="h-8 gap-1 px-2.5 text-xs font-semibold shrink-0 shadow-xs">
             <Plus size={14} /> Add Module
           </Button>
         </div>
 
         {/* Quick Stats Bar */}
-        <div className="flex items-center justify-between rounded-xl bg-black/40 px-3 py-1.5 border border-white/5 text-[11px] text-[var(--text-muted)]">
+        <div className="flex items-center justify-between rounded-xl bg-slate-100 px-3 py-1.5 border border-slate-200 text-[11px] text-slate-600">
           <span className="flex items-center gap-1">
-            <Layers size={12} className="text-secondary" /> {modules.length} Modules
+            <Layers size={12} className="text-indigo-600" /> {modules.length} Modules
           </span>
           <span>·</span>
-          <span>
-            {Object.values(lessonsByModule).reduce((sum, list) => sum + list.length, 0)} Total Lessons
-          </span>
+          <span>{Object.values(lessonsByModule).reduce((sum, list) => sum + list.length, 0)} Total Lessons</span>
           <span>·</span>
-          <span className="text-amber-400 font-medium">+{track.xpReward ?? 500} XP</span>
+          <span className="text-amber-600 font-semibold">+{track.xpReward ?? 500} XP</span>
         </div>
       </div>
 
@@ -153,17 +147,13 @@ export function ModuleLessonTree({
         )}
 
         {!isLoading && sortedModules.length === 0 && (
-          <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 p-4 text-center">
-            <FolderOpen size={28} className="text-[var(--text-muted)] mb-2" />
-            <p className="text-xs font-semibold text-white">No Modules Yet</p>
-            <p className="mt-1 text-[11px] text-[var(--text-muted)] max-w-xs">
+          <div className="flex h-56 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 p-4 text-center bg-slate-50/50">
+            <FolderOpen size={28} className="text-slate-400 mb-2" />
+            <p className="text-xs font-semibold text-slate-900">No Modules Yet</p>
+            <p className="mt-1 text-[11px] text-slate-500 max-w-xs">
               Every track is organized into sequential modules containing hands-on lessons and code labs.
             </p>
-            <Button
-              size="sm"
-              onClick={onAddModule}
-              className="mt-3 text-xs h-8 gap-1.5"
-            >
+            <Button size="sm" onClick={onAddModule} className="mt-3 text-xs h-8 gap-1.5">
               <Plus size={13} /> Create First Module
             </Button>
           </div>
@@ -173,9 +163,7 @@ export function ModuleLessonTree({
           sortedModules.map((mod, modIdx) => {
             const isCollapsed = Boolean(collapsedModules[mod._id]);
             const isModSelected =
-              selection.type === "module" &&
-              selection.trackId === track._id &&
-              selection.moduleId === mod._id;
+              selection.type === "module" && selection.trackId === track._id && selection.moduleId === mod._id;
 
             const lessons = lessonsByModule[mod._id] ?? [];
             const sortedLessons = [...lessons].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -186,39 +174,35 @@ export function ModuleLessonTree({
                 className={cn(
                   "rounded-2xl border transition-all overflow-hidden",
                   isModSelected
-                    ? "border-secondary/60 bg-secondary/10 shadow-[0_0_15px_rgba(139,92,246,0.12)]"
-                    : "border-[var(--border)] bg-white/[0.02] hover:border-white/20"
+                    ? "border-purple-300 bg-purple-50/30 shadow-xs"
+                    : "border-slate-200/80 bg-white hover:border-slate-300 shadow-2xs",
                 )}
               >
                 {/* Module Header Card */}
                 <div
-                  onClick={() =>
-                    onSelect({ type: "module", trackId: track._id, moduleId: mod._id })
-                  }
-                  className="group flex cursor-pointer items-center justify-between gap-2 p-3 bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                  onClick={() => onSelect({ type: "module", trackId: track._id, moduleId: mod._id })}
+                  className="group flex cursor-pointer items-center justify-between gap-2 p-3 bg-slate-50/80 hover:bg-slate-100/60 transition-colors"
                 >
                   <div className="flex items-center gap-2 min-w-0 flex-1">
                     <button
                       type="button"
                       onClick={(e) => toggleCollapse(mod._id, e)}
-                      className="flex h-6 w-6 items-center justify-center rounded-lg text-[var(--text-muted)] hover:bg-white/10 hover:text-white"
+                      className="flex h-6 w-6 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-200 hover:text-slate-900"
                       aria-label="Toggle module"
                     >
                       {isCollapsed ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
                     </button>
 
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-secondary/20 text-secondary shrink-0">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-purple-100 text-purple-700 shrink-0">
                       {isCollapsed ? <Folder size={14} /> : <FolderOpen size={14} />}
                     </div>
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-mono text-[var(--text-muted)]">
-                          M{mod.order ?? modIdx + 1}
-                        </span>
-                        <h3 className="text-xs font-semibold text-white truncate">{mod.title}</h3>
+                        <span className="text-[10px] font-mono text-slate-500">M{mod.order ?? modIdx + 1}</span>
+                        <h3 className="text-xs font-semibold text-slate-900 truncate">{mod.title}</h3>
                       </div>
-                      <p className="text-[10px] text-[var(--text-muted)]">
+                      <p className="text-[10px] text-slate-500">
                         {lessons.length} {lessons.length === 1 ? "lesson" : "lessons"}
                       </p>
                     </div>
@@ -235,7 +219,7 @@ export function ModuleLessonTree({
                         e.stopPropagation();
                         onReorderModule(mod._id, "up");
                       }}
-                      className="h-6 w-6 text-[var(--text-muted)] hover:text-white"
+                      className="h-6 w-6 text-slate-500 hover:text-slate-900 hover:bg-slate-200"
                       title="Move module up"
                     >
                       <ChevronUp size={13} />
@@ -249,7 +233,7 @@ export function ModuleLessonTree({
                         e.stopPropagation();
                         onReorderModule(mod._id, "down");
                       }}
-                      className="h-6 w-6 text-[var(--text-muted)] hover:text-white"
+                      className="h-6 w-6 text-slate-500 hover:text-slate-900 hover:bg-slate-200"
                       title="Move module down"
                     >
                       <ChevronDown size={13} />
@@ -262,7 +246,7 @@ export function ModuleLessonTree({
                         e.stopPropagation();
                         onAddLesson(mod._id);
                       }}
-                      className="h-6 w-6 text-primary hover:bg-primary/20"
+                      className="h-6 w-6 text-indigo-600 hover:bg-indigo-50"
                       title="Add lesson to module"
                     >
                       <Plus size={14} />
@@ -275,7 +259,7 @@ export function ModuleLessonTree({
                         e.stopPropagation();
                         onDeleteModule(mod);
                       }}
-                      className="h-6 w-6 text-danger hover:bg-danger/10"
+                      className="h-6 w-6 text-rose-600 hover:bg-rose-50"
                       title="Delete module"
                     >
                       <Trash2 size={13} />
@@ -285,14 +269,14 @@ export function ModuleLessonTree({
 
                 {/* Lessons Nested List */}
                 {!isCollapsed && (
-                  <div className="border-t border-white/5 bg-black/20 p-2 space-y-1.5">
+                  <div className="border-t border-slate-100 bg-slate-50/50 p-2 space-y-1.5">
                     {sortedLessons.length === 0 && (
                       <div className="py-3 text-center">
-                        <p className="text-[11px] text-[var(--text-muted)]">No lessons in this module</p>
+                        <p className="text-[11px] text-slate-500">No lessons in this module</p>
                         <button
                           type="button"
                           onClick={() => onAddLesson(mod._id)}
-                          className="mt-1 text-[11px] font-semibold text-primary hover:underline inline-flex items-center gap-1"
+                          className="mt-1 text-[11px] font-semibold text-indigo-600 hover:underline inline-flex items-center gap-1"
                         >
                           <Plus size={11} /> Add First Lesson
                         </button>
@@ -320,42 +304,40 @@ export function ModuleLessonTree({
                           className={cn(
                             "group/les flex cursor-pointer items-center justify-between gap-2 rounded-xl p-2 text-left transition-all",
                             isLessonSelected
-                              ? "bg-primary/20 border border-primary/40 shadow-sm text-white"
-                              : "hover:bg-white/5 border border-transparent text-slate-300"
+                              ? "bg-indigo-50 border border-indigo-200 shadow-xs text-indigo-950"
+                              : "hover:bg-slate-100 border border-transparent text-slate-700",
                           )}
                         >
                           <div className="flex items-center gap-2 min-w-0 flex-1">
-                            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-white/5 shrink-0">
+                            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-white border border-slate-200/70 shadow-2xs shrink-0">
                               {getLessonIcon(lesson.type)}
                             </div>
 
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-1">
-                                <span className="text-[10px] font-mono text-[var(--text-muted)]">
+                                <span className="text-[10px] font-mono text-slate-400">
                                   #{lesson.order ?? lesIdx + 1}
                                 </span>
                                 <p
                                   className={cn(
                                     "text-xs truncate font-medium",
-                                    isLessonSelected ? "text-white font-semibold" : "text-slate-200"
+                                    isLessonSelected ? "text-indigo-950 font-semibold" : "text-slate-800",
                                   )}
                                 >
                                   {lesson.title}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-2 text-[10px] text-[var(--text-muted)] mt-0.5">
+                              <div className="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
                                 {lesson.durationMinutes ? (
                                   <span className="flex items-center gap-0.5">
                                     <Clock size={10} /> {lesson.durationMinutes}m
                                   </span>
                                 ) : null}
                                 {lesson.xpReward ? (
-                                  <span className="text-emerald-400">+{lesson.xpReward} XP</span>
+                                  <span className="text-emerald-600 font-medium">+{lesson.xpReward} XP</span>
                                 ) : null}
                                 {lesson.type && (
-                                  <span className="uppercase text-[9px] text-[var(--text-muted)]">
-                                    {lesson.type}
-                                  </span>
+                                  <span className="uppercase text-[9px] font-medium text-slate-500">{lesson.type}</span>
                                 )}
                               </div>
                             </div>
@@ -372,7 +354,7 @@ export function ModuleLessonTree({
                                 e.stopPropagation();
                                 onReorderLesson(mod._id, lesson._id, "up");
                               }}
-                              className="h-5 w-5 text-[var(--text-muted)] hover:text-white"
+                              className="h-5 w-5 text-slate-400 hover:text-slate-800 hover:bg-slate-200"
                               title="Move lesson up"
                             >
                               <ChevronUp size={11} />
@@ -386,7 +368,7 @@ export function ModuleLessonTree({
                                 e.stopPropagation();
                                 onReorderLesson(mod._id, lesson._id, "down");
                               }}
-                              className="h-5 w-5 text-[var(--text-muted)] hover:text-white"
+                              className="h-5 w-5 text-slate-400 hover:text-slate-800 hover:bg-slate-200"
                               title="Move lesson down"
                             >
                               <ChevronDown size={11} />
@@ -399,7 +381,7 @@ export function ModuleLessonTree({
                                 e.stopPropagation();
                                 onDeleteLesson(lesson);
                               }}
-                              className="h-5 w-5 text-danger hover:bg-danger/10"
+                              className="h-5 w-5 text-rose-600 hover:bg-rose-50"
                               title="Delete lesson"
                             >
                               <Trash2 size={11} />
@@ -412,7 +394,7 @@ export function ModuleLessonTree({
                     <button
                       type="button"
                       onClick={() => onAddLesson(mod._id)}
-                      className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-white/10 py-1.5 text-xs text-[var(--text-muted)] hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-colors"
+                      className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-dashed border-slate-200 py-1.5 text-xs text-slate-500 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 transition-colors"
                     >
                       <Plus size={12} /> Add Lesson
                     </button>

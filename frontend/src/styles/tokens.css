@@ -56,8 +56,8 @@
   --border-glass: rgba(226, 232, 240, 0.8);
 
   /* ─── Glassmorphism Defaults ─── */
-  --glass-bg: rgba(14, 14, 17, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: #e2e8f0;
   --glass-blur: blur(12px);
 
   /* ─── Spacing Scale (4px base) ─── */
@@ -121,22 +121,22 @@
   --radius-full: 9999px;
 
   /* ─── Restrained Shadows & Elevation ─── */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.6);
-  --shadow-xl: 0 20px 32px rgba(0, 0, 0, 0.7);
-  --shadow-2xl: 0 28px 48px rgba(0, 0, 0, 0.8);
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --shadow-panel: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px #27272a;
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --shadow-panel: 0 8px 24px rgba(15, 23, 42, 0.08), 0 0 0 1px #e2e8f0;
   --shadow-glow: none;
   --shadow-glow-sm: none;
   --shadow-glow-lg: none;
   --shadow-glow-cyan: none;
   --shadow-glow-purple: none;
   --shadow-glow-violet: none;
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px #3f3f46;
-  --shadow-input-focus: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  --shadow-card-hover: 0 10px 20px -3px rgba(15, 23, 42, 0.08), 0 0 0 1px #cbd5e1;
+  --shadow-input-focus: 0 0 0 2px rgba(79, 70, 229, 0.15);
 
   /* ─── Z-Index Scale ─── */
   --z-base: 0;

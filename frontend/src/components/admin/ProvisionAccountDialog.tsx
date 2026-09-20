@@ -60,55 +60,59 @@ export function ProvisionAccountDialog({
       aria-label="Create mentor account"
     >
       <div
-        className="w-full max-w-lg rounded-2xl border border-[var(--border)] bg-[var(--bg)] p-6 shadow-xl"
+        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">Create Mentor Account</h2>
-          <button onClick={onClose} className="text-[var(--text-muted)] hover:text-white" aria-label="Close">
+          <h2 className="text-lg font-bold text-slate-900">Create Mentor Account</h2>
+          <button
+            onClick={onClose}
+            className="text-slate-400 hover:text-slate-700 transition-colors"
+            aria-label="Close"
+          >
             <X size={20} />
           </button>
         </div>
 
-        <p className="mb-5 text-sm text-[var(--text-secondary)]">
+        <p className="mb-5 text-sm text-slate-600">
           Set the email and password for the mentor account. The mentor will use these credentials to sign in.
         </p>
 
         <div className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-[var(--text-primary)]">Email</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               placeholder="mentor@example.com"
             />
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-[var(--text-primary)]">Password</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               placeholder="At least 8 characters, with letter and number"
             />
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-[var(--text-primary)]">Confirm password</label>
+            <label className="mb-1.5 block text-sm font-medium text-slate-700">Confirm password</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] px-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               placeholder="Repeat the password"
             />
           </div>
 
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="text-sm text-red-600">{error}</p>}
         </div>
 
         <div className="mt-6 flex justify-end gap-3">

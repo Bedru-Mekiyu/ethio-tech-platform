@@ -28,11 +28,11 @@ export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {
       <div className="flex-1 overflow-y-auto space-y-6">
         {notes.summary && (
           <div className="space-y-2">
-            <h4 className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Sparkles size={16} className="text-primary" />
+            <h4 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <Sparkles size={16} className="text-indigo-600" />
               Session Summary
             </h4>
-            <div className="rounded-2xl border border-[var(--border)] bg-white/5 p-4 text-sm text-[var(--text-secondary)]">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm text-slate-700 leading-relaxed shadow-xs">
               {notes.summary}
             </div>
           </div>
@@ -40,11 +40,11 @@ export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {
 
         {notes.keyTakeaways && notes.keyTakeaways.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-white">Key Takeaways</h4>
+            <h4 className="text-sm font-semibold text-slate-900">Key Takeaways</h4>
             <ul className="space-y-2">
               {notes.keyTakeaways.map((item: string, idx: number) => (
-                <li key={idx} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-600" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -54,13 +54,13 @@ export function StudentNotesPanel({ notes }: StudentNotesPanelProps) {
 
         {notes.actionItems && notes.actionItems.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold text-white">Action Items</h4>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-4">
+            <h4 className="text-sm font-semibold text-slate-900">Action Items</h4>
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
               <ul className="space-y-3">
                 {notes.actionItems.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-[var(--border)]" />
-                    <span className="text-sm text-white">{item}</span>
+                    <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-slate-300 bg-slate-50" />
+                    <span className="text-sm text-slate-800">{item}</span>
                   </li>
                 ))}
               </ul>

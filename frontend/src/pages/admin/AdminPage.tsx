@@ -47,14 +47,14 @@ interface CustomChartTooltipProps {
 function CustomChartTooltip({ active, payload, label, unit = "" }: CustomChartTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-2.5 shadow-xl">
-        <p className="text-xs font-semibold text-white">{label}</p>
+      <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-lg">
+        <p className="text-xs font-semibold text-slate-900">{label}</p>
         <div className="mt-1.5 space-y-1">
           {payload.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#6366F1" }} />
-              <span className="text-zinc-400">{item.name || item.dataKey}:</span>
-              <span className="font-bold text-white">
+              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#4f46e5" }} />
+              <span className="text-slate-500">{item.name || item.dataKey}:</span>
+              <span className="font-bold text-slate-900">
                 {typeof item.value === "number" ? item.value.toLocaleString() : item.value} {unit}
               </span>
             </div>
@@ -250,14 +250,14 @@ export function AdminPage() {
 
   if (isError) {
     return (
-      <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-6 text-center">
-        <Sparkles className="mx-auto text-red-400" size={30} />
-        <h1 className="mt-3 text-lg font-bold text-white">Unable to load analytics</h1>
-        <p className="mt-1 text-xs text-zinc-400">Could not establish connection to the analytics telemetry stream.</p>
+      <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+        <Sparkles className="mx-auto text-red-500" size={30} />
+        <h1 className="mt-3 text-lg font-bold text-slate-900">Unable to load analytics</h1>
+        <p className="mt-1 text-xs text-slate-500">Could not establish connection to the analytics telemetry stream.</p>
         <Button
           variant="outline"
           size="sm"
-          className="mt-4 border-red-500/30 text-red-300 text-xs"
+          className="mt-4 border-red-200 bg-white text-red-700 hover:bg-red-50 text-xs"
           onClick={() => refetch()}
         >
           <RefreshCw size={13} className="mr-1.5" />
@@ -270,22 +270,22 @@ export function AdminPage() {
   const activeRatio = totalStudents > 0 ? Math.round((activeLearners / totalStudents) * 100) : 0;
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
+    <div className="space-y-6">
       {/* ─── 1. Hero Platform Console Header ─── */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-[11px] font-medium text-violet-400">
-                <Radio size={11} className="animate-pulse text-emerald-400" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-0.5 text-[11px] font-medium text-indigo-700">
+                <Radio size={11} className="animate-pulse text-emerald-600" />
                 Command Center
               </span>
               <Badge variant="cyan" size="sm">
                 v2.4 Telemetry
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Platform Analytics & Growth</h1>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Analytics & Growth</h1>
+            <p className="text-xs text-slate-500 leading-relaxed">
               Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and
               gamification XP velocity.
             </p>
@@ -298,25 +298,33 @@ export function AdminPage() {
               size="sm"
               onClick={() => refetch()}
               disabled={isFetching}
-              className="text-xs text-zinc-300 hover:text-white"
+              className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
             >
-              <RefreshCw size={12} className={isFetching ? "animate-spin text-violet-400 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={isFetching ? "animate-spin text-indigo-600 mr-1" : "mr-1"} />
               Sync
             </Button>
             <Link to="/admin/operations">
-              <Button variant="outline" size="sm" className="text-xs gap-1 font-medium">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+              >
                 <Monitor size={13} />
                 Operations
               </Button>
             </Link>
             <Link to="/admin/moderation">
-              <Button variant="outline" size="sm" className="text-xs gap-1 font-medium">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+              >
                 <Award size={13} />
                 Moderation
               </Button>
             </Link>
             <Link to="/admin/users">
-              <Button size="sm" className="text-xs gap-1 font-medium">
+              <Button size="sm" className="text-xs gap-1 font-medium bg-indigo-600 hover:bg-indigo-700 text-white">
                 <Users size={13} />
                 Users
               </Button>
@@ -331,48 +339,50 @@ export function AdminPage() {
           label="Active Learners"
           value={activeLearners.toLocaleString()}
           sub={`7-day active • ${activeRatio}% of cohort`}
-          icon={<Activity className="text-emerald-400" size={18} />}
+          icon={<Activity className="text-emerald-600" size={18} />}
         />
         <StatCard
           label="Total Students"
           value={totalStudents.toLocaleString()}
           sub="Enrolled across 5 career tracks"
-          icon={<Users className="text-violet-400" size={18} />}
+          icon={<Users className="text-indigo-600" size={18} />}
         />
         <StatCard
           label="Diaspora Mentors"
           value={mentorCount.toLocaleString()}
           sub="Verified global industry guides"
-          icon={<GraduationCap className="text-sky-400" size={18} />}
+          icon={<GraduationCap className="text-sky-600" size={18} />}
         />
         <StatCard
           label="30d XP Velocity"
           value={`${xpEarned30d.toLocaleString()} XP`}
           sub={`${sessionFillRate}% session fill rate`}
-          icon={<Zap className="text-amber-400" size={18} />}
+          icon={<Zap className="text-amber-500" size={18} />}
         />
       </div>
 
       {/* ─── 3. Authentic Time-Series Charts Grid ─── */}
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Chart 1: Dynamic XP Growth Time-Series with Area Gradient */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles size={14} className="text-violet-400" />
-                <CardTitle className="text-sm font-semibold text-white">XP Gamification Growth</CardTitle>
+                <Sparkles size={14} className="text-indigo-600" />
+                <CardTitle className="text-sm font-semibold text-slate-900">XP Gamification Growth</CardTitle>
               </div>
-              <CardDescription className="text-xs text-zinc-400 mt-0.5">
+              <CardDescription className="text-xs text-slate-500 mt-0.5">
                 {xpTimeView === "weekly" ? "Weekly XP earned velocity" : "Cumulative 30-day XP trajectory"}
               </CardDescription>
             </div>
             {/* View Mode Switcher */}
-            <div className="inline-flex rounded-lg border border-[#27272A] bg-[#141418] p-0.5">
+            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
               <button
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "weekly" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                  xpTimeView === "weekly"
+                    ? "bg-white text-indigo-700 font-semibold shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 Weekly Volume
@@ -380,7 +390,9 @@ export function AdminPage() {
               <button
                 onClick={() => setXpTimeView("cumulative")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
-                  xpTimeView === "cumulative" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-400 hover:text-white"
+                  xpTimeView === "cumulative"
+                    ? "bg-white text-indigo-700 font-semibold shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 Cumulative
@@ -393,20 +405,27 @@ export function AdminPage() {
               <AreaChart data={xpTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
                 <defs>
                   <linearGradient id="xpAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366F1" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#6366F1" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.02} />
                   </linearGradient>
                   <linearGradient id="cyanGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#38BDF8" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#38BDF8" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#0284c7" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#0284c7" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid stroke="#27272A" strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="week" stroke="#71717A" fontSize={10} tickLine={false} />
-                <YAxis
-                  stroke="#71717A"
-                  fontSize={10}
+                <CartesianGrid stroke="#f1f5f9" strokeDasharray="3 3" vertical={false} />
+                <XAxis
+                  dataKey="week"
+                  stroke="#64748b"
+                  fontSize={11}
                   tickLine={false}
+                  axisLine={{ stroke: "#e2e8f0" }}
+                />
+                <YAxis
+                  stroke="#64748b"
+                  fontSize={11}
+                  tickLine={false}
+                  axisLine={false}
                   tickFormatter={(val) => `${val >= 1000 ? `${(val / 1000).toFixed(0)}k` : val}`}
                 />
                 <Tooltip
@@ -418,12 +437,12 @@ export function AdminPage() {
                   type="monotone"
                   dataKey={xpTimeView === "weekly" ? "xp" : "cumulativeXp"}
                   name="XP Earned"
-                  stroke="#6366F1"
+                  stroke="#4f46e5"
                   strokeWidth={2}
                   fillOpacity={1}
                   fill={xpTimeView === "weekly" ? "url(#xpAreaGrad)" : "url(#cyanGrad)"}
-                  dot={{ r: 3, fill: "#6366F1", stroke: "#0E0E11", strokeWidth: 2 }}
-                  activeDot={{ r: 5, fill: "#38BDF8", stroke: "#FFFFFF", strokeWidth: 2 }}
+                  dot={{ r: 3, fill: "#4f46e5", stroke: "#ffffff", strokeWidth: 2 }}
+                  activeDot={{ r: 5, fill: "#0284c7", stroke: "#ffffff", strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -431,13 +450,13 @@ export function AdminPage() {
         </Card>
 
         {/* Chart 2: Rolling 6-Month Enrollment & Cohort Growth */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-          <CardHeader className="flex flex-col gap-1 p-0 border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <CardHeader className="flex flex-col gap-1 p-0 border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <TrendingUp size={14} className="text-sky-400" />
-              <CardTitle className="text-sm font-semibold text-white">Cohort Growth & Admissions</CardTitle>
+              <TrendingUp size={14} className="text-sky-600" />
+              <CardTitle className="text-sm font-semibold text-slate-900">Cohort Growth & Admissions</CardTitle>
             </div>
-            <CardDescription className="text-xs text-zinc-400">
+            <CardDescription className="text-xs text-slate-500">
               Monthly student admissions vs active learners
             </CardDescription>
           </CardHeader>
@@ -445,12 +464,21 @@ export function AdminPage() {
           <div className="mt-4 h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={enrollmentTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-                <CartesianGrid stroke="#27272A" strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="month" stroke="#71717A" fontSize={10} tickLine={false} />
-                <YAxis stroke="#71717A" fontSize={10} tickLine={false} />
-                <Tooltip content={<CustomChartTooltip unit="students" />} />
-                <Bar dataKey="students" name="Total Admitted" fill="#6366F1" radius={[4, 4, 0, 0]} maxBarSize={28} />
-                <Bar dataKey="active" name="Active Monthly" fill="#38BDF8" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <CartesianGrid stroke="#f1f5f9" strokeDasharray="3 3" vertical={false} />
+                <XAxis
+                  dataKey="month"
+                  stroke="#64748b"
+                  fontSize={11}
+                  tickLine={false}
+                  axisLine={{ stroke: "#e2e8f0" }}
+                />
+                <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
+                <Tooltip
+                  content={<CustomChartTooltip unit="students" />}
+                  cursor={{ fill: "rgba(241, 245, 249, 0.7)" }}
+                />
+                <Bar dataKey="students" name="Total Admitted" fill="#4f46e5" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="active" name="Active Monthly" fill="#38bdf8" radius={[4, 4, 0, 0]} maxBarSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -460,18 +488,20 @@ export function AdminPage() {
       {/* ─── 4. Track Performance Matrix & Top Mentors Leaderboard ─── */}
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
         {/* Track Performance Matrix */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Layers size={15} className="text-violet-400" />
+              <Layers size={15} className="text-indigo-600" />
               <div>
-                <CardTitle className="text-sm font-semibold text-white">Track Performance & XP Distribution</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">
+                <CardTitle className="text-sm font-semibold text-slate-900">
+                  Track Performance & XP Distribution
+                </CardTitle>
+                <CardDescription className="text-xs text-slate-500">
                   Curriculum engagement across disciplines
                 </CardDescription>
               </div>
             </div>
-            <Badge variant="purple" size="sm">
+            <Badge variant="indigo" size="sm">
               {trackData.length} Active Tracks
             </Badge>
           </div>
@@ -479,17 +509,17 @@ export function AdminPage() {
           {/* Detailed Progress Bars */}
           <div className="mt-4 space-y-3">
             {trackData.map((track) => (
-              <div key={track.name} className="space-y-1 rounded-lg border border-[#27272A] bg-[#141418] p-3">
+              <div key={track.name} className="space-y-1 rounded-lg border border-slate-200/80 bg-slate-50/50 p-3">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-white">{track.name}</span>
+                  <span className="font-semibold text-slate-900">{track.name}</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-violet-400">{track.xp.toLocaleString()} XP</span>
-                    <span className="text-[11px] text-zinc-500">({track.percentage}%)</span>
+                    <span className="font-bold text-indigo-600">{track.xp.toLocaleString()} XP</span>
+                    <span className="text-[11px] text-slate-500">({track.percentage}%)</span>
                   </div>
                 </div>
-                <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                   <div
-                    className="h-full rounded-full bg-violet-500 transition-all duration-500"
+                    className="h-full rounded-full bg-indigo-600 transition-all duration-500"
                     style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
                   />
                 </div>
@@ -499,19 +529,23 @@ export function AdminPage() {
         </Card>
 
         {/* Top Mentors Leaderboard */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Award size={15} className="text-amber-400" />
+              <Award size={15} className="text-amber-500" />
               <div>
-                <CardTitle className="text-sm font-semibold text-white">Top Diaspora Mentors</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">
+                <CardTitle className="text-sm font-semibold text-slate-900">Top Diaspora Mentors</CardTitle>
+                <CardDescription className="text-xs text-slate-500">
                   Highest rated guides by sessions & feedback
                 </CardDescription>
               </div>
             </div>
             <Link to="/admin/moderation">
-              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-violet-400 hover:text-violet-300">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 gap-1 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+              >
                 View All <ChevronRight size={12} />
               </Button>
             </Link>
@@ -520,17 +554,17 @@ export function AdminPage() {
           <div className="mt-4 space-y-2.5">
             {topMentors.map((mentor, index) => {
               const rankStyles = [
-                "border-amber-500/30 bg-amber-500/10 text-amber-400",
-                "border-zinc-500/30 bg-zinc-500/10 text-zinc-300",
-                "border-amber-700/30 bg-amber-700/10 text-amber-500",
-                "border-zinc-700 bg-zinc-800/40 text-zinc-400",
+                "border-amber-200 bg-amber-50 text-amber-700",
+                "border-slate-200 bg-slate-100 text-slate-700",
+                "border-amber-300 bg-amber-100/50 text-amber-800",
+                "border-slate-200 bg-slate-50 text-slate-600",
               ];
               const badgeClass = rankStyles[index] ?? rankStyles[3];
 
               return (
                 <div
                   key={mentor.fullName ?? index}
-                  className="flex items-center justify-between rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
+                  className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                 >
                   <div className="flex items-center gap-2.5">
                     <div
@@ -539,12 +573,12 @@ export function AdminPage() {
                       #{index + 1}
                     </div>
                     <div>
-                      <p className="font-semibold text-white text-xs">{mentor.fullName}</p>
-                      <div className="flex items-center gap-2 text-[11px] text-zinc-400">
+                      <p className="font-semibold text-slate-900 text-xs">{mentor.fullName}</p>
+                      <div className="flex items-center gap-2 text-[11px] text-slate-500">
                         <span>{mentor.totalSessions ?? 0} sessions</span>
                         <span>•</span>
-                        <span className="flex items-center gap-0.5 text-amber-400">
-                          <Star size={10} className="fill-amber-400" />
+                        <span className="flex items-center gap-0.5 text-amber-600">
+                          <Star size={10} className="fill-amber-400 text-amber-500" />
                           {Math.round(mentor.mentorScore ?? 95)} score
                         </span>
                       </div>
@@ -563,13 +597,13 @@ export function AdminPage() {
       {/* ─── 5. Regional Hub Capacity & Live Upcoming Sessions ─── */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Regional Hubs Matrix */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl lg:col-span-2">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <MapPin size={15} className="text-emerald-400" />
+              <MapPin size={15} className="text-emerald-600" />
               <div>
-                <CardTitle className="text-sm font-semibold text-white">Regional Hub Capacity & Hardware</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">
+                <CardTitle className="text-sm font-semibold text-slate-900">Regional Hub Capacity & Hardware</CardTitle>
+                <CardDescription className="text-xs text-slate-500">
                   Physical computing centers across Ethiopia
                 </CardDescription>
               </div>
@@ -589,12 +623,12 @@ export function AdminPage() {
               return (
                 <div
                   key={hub.city ?? index}
-                  className="rounded-lg border border-[#27272A] bg-[#141418] p-3.5 transition-all hover:border-zinc-700"
+                  className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:border-slate-300 hover:bg-slate-50"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="font-semibold text-white text-xs">{hub.city ?? "Regional Hub"}</p>
-                      <p className="text-[11px] text-zinc-500 truncate max-w-[180px]">
+                      <p className="font-semibold text-slate-900 text-xs">{hub.city ?? "Regional Hub"}</p>
+                      <p className="text-[11px] text-slate-500 truncate max-w-[180px]">
                         {hub.address ?? "Innovation Center"}
                       </p>
                     </div>
@@ -605,28 +639,28 @@ export function AdminPage() {
 
                   {/* Seat Progress Bar */}
                   <div className="mt-3 space-y-1">
-                    <div className="flex justify-between text-[11px] text-zinc-400">
+                    <div className="flex justify-between text-[11px] text-slate-500">
                       <span>
                         Seats ({occupied}/{capacity})
                       </span>
-                      <span className="font-medium text-emerald-400">{available} open</span>
+                      <span className="font-medium text-emerald-600">{available} open</span>
                     </div>
-                    <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
-                          occupancyPct > 80 ? "bg-amber-400" : "bg-emerald-400"
+                          occupancyPct > 80 ? "bg-amber-500" : "bg-emerald-500"
                         }`}
                         style={{ width: `${occupancyPct}%` }}
                       />
                     </div>
                   </div>
 
-                  <div className="mt-2.5 flex items-center justify-between border-t border-[#27272A] pt-2 text-[11px] text-zinc-500">
+                  <div className="mt-2.5 flex items-center justify-between border-t border-slate-200/70 pt-2 text-[11px] text-slate-500">
                     <span className="flex items-center gap-1">
-                      <Monitor size={11} className="text-sky-400" />
+                      <Monitor size={11} className="text-sky-600" />
                       {hub.computersAvailable ?? 30} PCs
                     </span>
-                    <span className="truncate max-w-[120px] text-zinc-400">
+                    <span className="truncate max-w-[120px] text-slate-600">
                       {hub.mentorInCharge?.fullName ?? "Staff Mentor"}
                     </span>
                   </div>
@@ -637,17 +671,21 @@ export function AdminPage() {
         </Card>
 
         {/* Live & Upcoming Mentorship Sessions */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-          <div className="flex items-center justify-between border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Video size={15} className="text-violet-400" />
+              <Video size={15} className="text-indigo-600" />
               <div>
-                <CardTitle className="text-sm font-semibold text-white">Upcoming Sessions</CardTitle>
-                <CardDescription className="text-xs text-zinc-400">Live cohorts schedule</CardDescription>
+                <CardTitle className="text-sm font-semibold text-slate-900">Upcoming Sessions</CardTitle>
+                <CardDescription className="text-xs text-slate-500">Live cohorts schedule</CardDescription>
               </div>
             </div>
             <Link to="/admin/meetings">
-              <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs text-violet-400 hover:text-violet-300">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 gap-1 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+              >
                 All <ExternalLink size={11} />
               </Button>
             </Link>
@@ -658,19 +696,19 @@ export function AdminPage() {
               ? upcomingSessions.slice(0, 4).map((session, index) => (
                   <div
                     key={session.title ?? index}
-                    className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
+                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="font-semibold text-white text-xs truncate">{session.title}</p>
+                      <p className="font-semibold text-slate-900 text-xs truncate">{session.title}</p>
                       <Badge
-                        variant={session.status === "live" ? "success" : "purple"}
+                        variant={session.status === "live" ? "success" : "indigo"}
                         size="sm"
                         showDot={session.status === "live"}
                       >
                         {session.status ?? "scheduled"}
                       </Badge>
                     </div>
-                    <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-400">
+                    <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-slate-500">
                       <Clock size={11} />
                       <span>
                         {session.scheduledAt
@@ -704,19 +742,19 @@ export function AdminPage() {
                 ].map((sess, i) => (
                   <div
                     key={i}
-                    className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-colors hover:border-zinc-700"
+                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <p className="font-semibold text-white text-xs truncate">{sess.title}</p>
+                      <p className="font-semibold text-slate-900 text-xs truncate">{sess.title}</p>
                       <Badge
-                        variant={sess.status === "live" ? "success" : "purple"}
+                        variant={sess.status === "live" ? "success" : "indigo"}
                         size="sm"
                         showDot={sess.status === "live"}
                       >
                         {sess.status}
                       </Badge>
                     </div>
-                    <p className="mt-1.5 text-[11px] text-zinc-400 flex items-center gap-1.5">
+                    <p className="mt-1.5 text-[11px] text-slate-500 flex items-center gap-1.5">
                       <Clock size={11} />
                       {sess.time}
                     </p>

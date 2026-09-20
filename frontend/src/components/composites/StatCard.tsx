@@ -12,10 +12,10 @@ export function StatCard({
   icon?: React.ReactNode;
 }) {
   return (
-    <Card className="relative overflow-hidden border border-white/5 bg-[rgba(16,20,28,0.45)] p-5 select-none h-full">
+    <Card className="relative overflow-hidden border border-slate-200 bg-white p-5 select-none h-full shadow-xs">
       {icon && <div className="absolute right-5 top-5 text-primary opacity-80">{icon}</div>}
       <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--text-muted)]">{label}</p>
-      <p className="mt-4 text-3xl font-extrabold tracking-tight text-white">{value}</p>
+      <p className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900">{value}</p>
       {sub && <p className="mt-2 text-xs font-semibold leading-relaxed text-[var(--text-secondary)]">{sub}</p>}
     </Card>
   );
@@ -40,7 +40,7 @@ export function RankProgress({ level, xp, nextXp = 5000 }: { level: number; xp: 
           {xp.toLocaleString()} / {nextXp.toLocaleString()} XP
         </span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-white/10">
+      <div className="h-2 overflow-hidden rounded-full bg-slate-100">
         <div
           className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
           style={{ width: `${pct}%` }}

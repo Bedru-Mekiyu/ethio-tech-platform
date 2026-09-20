@@ -126,12 +126,12 @@ export function MeetingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "rounded-2xl border border-[var(--border)] bg-white/3 p-4 transition-all duration-200",
+        "rounded-2xl border border-slate-200/80 bg-white p-4 transition-all duration-200 shadow-sm",
         isFull && "md:p-5",
         isInline && "p-3",
-        meeting.status === "active" && "border-success/30 bg-success/5",
-        meeting.status === "waiting_for_host" && "border-warning/30 bg-warning/5",
-        meeting.status === "cancelled" && "border-danger/20 opacity-90",
+        meeting.status === "active" && "border-emerald-200 bg-emerald-50/40",
+        meeting.status === "waiting_for_host" && "border-amber-200 bg-amber-50/40",
+        meeting.status === "cancelled" && "border-rose-200 bg-rose-50/20 opacity-90",
         className,
       )}
       data-meeting-card="true"
@@ -142,11 +142,11 @@ export function MeetingCard({
         <div
           className={cn(
             "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
-            meeting.status === "active" && "bg-success/10 border-success/30 text-success",
-            meeting.status === "waiting_for_host" && "bg-warning/10 border-warning/30 text-warning",
-            meeting.status === "cancelled" && "bg-danger/10 border-danger/30 text-danger",
+            meeting.status === "active" && "bg-emerald-100 border-emerald-200 text-emerald-600",
+            meeting.status === "waiting_for_host" && "bg-amber-100 border-amber-200 text-amber-600",
+            meeting.status === "cancelled" && "bg-rose-100 border-rose-200 text-rose-600",
             (meeting.status === "scheduled" || meeting.status === "completed") &&
-              "bg-primary/10 border-primary/20 text-primary",
+              "bg-indigo-50 border-indigo-100 text-indigo-600",
           )}
         >
           <Icon size={18} />
@@ -160,30 +160,30 @@ export function MeetingCard({
             {meeting.presenceCount > 0 && meeting.status === "active" ? (
               <span
                 aria-label={`${meeting.presenceCount} participants`}
-                className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-semibold text-[var(--text-secondary)]"
+                className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-700"
               >
                 <Users size={11} /> {meeting.presenceCount}
               </span>
             ) : null}
             {!isCompact ? (
-              <span className="inline-flex items-center gap-1 text-[11px] text-[var(--text-muted)] font-medium">
+              <span className="inline-flex items-center gap-1 text-[11px] text-slate-500 font-medium">
                 <Clock size={11} /> {formatDateTime(meeting.scheduledAt)}
               </span>
             ) : null}
           </div>
 
-          <h3 className={cn("mt-2 font-bold text-white tracking-tight", isInline ? "text-sm" : "text-base")}>
+          <h3 className={cn("mt-2 font-bold text-slate-900 tracking-tight", isInline ? "text-sm" : "text-base")}>
             {meeting.title || "Live session"}
           </h3>
 
           {!isCompact ? (
-            <p className="mt-1 text-xs text-[var(--text-secondary)] leading-relaxed">
+            <p className="mt-1 text-xs text-slate-600 leading-relaxed">
               With <CounterpartyLabel meeting={meeting} />
               {meeting.durationMinutes ? ` · ${meeting.durationMinutes} min` : ""}
             </p>
           ) : null}
 
-          <p className="mt-1 text-[11px] font-medium text-[var(--text-muted)]">
+          <p className="mt-1 text-[11px] font-medium text-slate-500">
             <StatusHelper meeting={meeting} />
           </p>
 
@@ -198,7 +198,12 @@ export function MeetingCard({
                   </Link>
                 ) : (
                   <Link to={meeting.joinHref}>
-                    <Button size="sm" variant="outline" className="font-semibold" data-testid="meeting-open">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="font-semibold border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                      data-testid="meeting-open"
+                    >
                       Open meeting room
                     </Button>
                   </Link>
@@ -232,7 +237,7 @@ export function MeetingCard({
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="font-semibold text-[var(--text-muted)]"
+                  className="font-semibold text-slate-500 hover:text-slate-800"
                   onClick={() => onCancel?.(meeting)}
                   data-testid="meeting-cancel"
                 >
@@ -240,7 +245,7 @@ export function MeetingCard({
                 </Button>
               ) : null}
               {isDisabled ? (
-                <span className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-white/3 px-2.5 py-1 text-[11px] font-semibold text-[var(--text-muted)]">
+                <span className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-500">
                   <Circle size={10} /> Unavailable
                 </span>
               ) : null}

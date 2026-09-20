@@ -79,26 +79,24 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
       {statItems.map((item, idx) => {
         const Icon = item.icon;
         return (
-          <Card
-            key={idx}
-            className="mcc-card mcc-stat-card p-4 relative"
-            style={{ "--glow-bg": `radial-gradient(circle at 50% 50%, ${item.glow}, transparent 65%)` } as React.CSSProperties}
-          >
+          <Card key={idx} className="mcc-card mcc-stat-card border-slate-200/80 bg-white p-4 relative shadow-sm">
             <div className="card-content flex items-center gap-3">
-              <div className={cn(
-                "rounded-xl p-2.5",
-                item.color === "success" && "bg-success/10 text-success border border-success/20",
-                item.color === "warning" && "bg-warning/10 text-warning border border-warning/20",
-                item.color === "primary" && "bg-primary/10 text-primary border border-primary/20",
-                item.color === "purple" && "bg-purple-500/10 text-purple-400 border border-purple-500/20"
-              )}>
+              <div
+                className={cn(
+                  "rounded-xl p-2.5 shrink-0",
+                  item.color === "success" && "bg-emerald-50 text-emerald-600 border border-emerald-100",
+                  item.color === "warning" && "bg-amber-50 text-amber-600 border border-amber-100",
+                  item.color === "primary" && "bg-indigo-50 text-indigo-600 border border-indigo-100",
+                  item.color === "purple" && "bg-purple-50 text-purple-600 border border-purple-100",
+                )}
+              >
                 <Icon size={20} className="shrink-0" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold truncate">
+                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold truncate">
                   {item.label}
                 </p>
-                <p className="text-xl font-bold text-white mt-0.5">{item.value}</p>
+                <p className="text-xl font-bold text-slate-900 mt-0.5">{item.value}</p>
               </div>
             </div>
           </Card>

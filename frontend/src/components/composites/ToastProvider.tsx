@@ -39,12 +39,11 @@ const icons: Record<ToastVariant, typeof Info> = {
   info: Info,
 };
 
-const variantStyles: Record<ToastVariant, string> = {
-  success: "border-success/25 bg-success/10 text-success shadow-[0_4px_20px_rgba(16,185,129,0.1)]",
-  error:
-    "border-danger/25 bg-danger/10 text-[var(--text-danger)] shadow-[0_4px_20px_rgba(239,68,68,0.1)]",
-  warning: "border-warning/25 bg-warning/10 text-warning shadow-[0_4px_20px_rgba(245,158,11,0.1)]",
-  info: "border-primary/25 bg-primary/10 text-primary shadow-[0_4px_20px_rgba(99,102,241,0.1)]",
+const variantStyles: Record<ToastVariant, { container: string; icon: string }> = {
+  success: { container: "border-emerald-200 bg-white shadow-lg", icon: "text-emerald-600" },
+  error: { container: "border-rose-200 bg-white shadow-lg", icon: "text-rose-600" },
+  warning: { container: "border-amber-200 bg-white shadow-lg", icon: "text-amber-600" },
+  info: { container: "border-indigo-200 bg-white shadow-lg", icon: "text-indigo-600" },
 };
 
 let nextId = 0;
@@ -112,16 +111,16 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 exit={{ opacity: 0, scale: 0.92, y: -10 }}
                 transition={{ type: "spring", stiffness: 350, damping: 28 }}
                 className={cn(
-                  "pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3.5 shadow-xl backdrop-blur-md select-none",
-                  variantStyles[t.variant],
+                  "pointer-events-auto flex items-start gap-3 rounded-xl border px-4 py-3.5 select-none",
+                  variantStyles[t.variant].container,
                 )}
               >
-                <Icon size={18} className="mt-0.5 flex-shrink-0" />
-                <p className="flex-1 text-sm font-semibold text-white leading-relaxed">{t.message}</p>
+                <Icon size={18} className={cn("mt-0.5 flex-shrink-0", variantStyles[t.variant].icon)} />
+                <p className="flex-1 text-sm font-medium text-slate-800 leading-relaxed">{t.message}</p>
                 <button
                   type="button"
                   onClick={() => removeToast(t.id)}
-                  className="flex-shrink-0 text-white/50 hover:text-white transition-colors duration-200 p-0.5 rounded-md hover:bg-white/5"
+                  className="flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors duration-200 p-0.5 rounded-md hover:bg-slate-100"
                   aria-label="Dismiss notification"
                 >
                   <X size={15} />

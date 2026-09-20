@@ -93,81 +93,81 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
   };
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-purple-500/10 text-purple-400 p-1.5 rounded-lg border border-purple-500/20">
+          <div className="bg-purple-50 text-purple-600 border border-purple-100 p-1.5 rounded-lg">
             <Video size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Session Playback Recordings</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Session Playback Recordings</h3>
           </div>
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg"
+          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Add Recording
         </Button>
         <dialog
           ref={createDialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
           onCancel={(e) => {
             e.preventDefault();
             setShowCreate(false);
           }}
         >
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-white">Add Session Recording</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Add Session Recording</h2>
             <div className="space-y-4 mt-4">
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Title</label>
+                <label className="text-xs text-slate-600 mb-1 block">Title</label>
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Lesson 1 - Introduction to Node.js"
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Description (Optional)</label>
+                <label className="text-xs text-slate-600 mb-1 block">Description (Optional)</label>
                 <Input
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Brief summary..."
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Recording URL</label>
+                <label className="text-xs text-slate-600 mb-1 block">Recording URL</label>
                 <Input
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://youtube.com/watch?v=..."
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Duration (Minutes)</label>
+                <label className="text-xs text-slate-600 mb-1 block">Duration (Minutes)</label>
                 <Input
                   value={durationMinutes}
                   type="number"
                   onChange={(e) => setDurationMinutes(e.target.value)}
                   placeholder="45"
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <Button
                   variant="outline"
-                  className="border-white/10 hover:bg-white/5 text-white"
+                  className="border-slate-200 hover:bg-slate-50 text-slate-700"
                   onClick={() => setShowCreate(false)}
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="bg-primary hover:bg-primary/95 text-white"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
                   onClick={handleCreate}
                   disabled={!title.trim() || !url.trim() || isSubmitting}
                 >
@@ -186,7 +186,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </div>
       ) : recordings.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-[var(--text-muted)]">No recordings uploaded yet</p>
+          <p className="text-xs text-slate-400">No recordings uploaded yet</p>
         </div>
       ) : (
         <div className="space-y-3 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -204,18 +204,16 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
             }) => (
               <div
                 key={rec._id}
-                className="rounded-xl border border-white/5 bg-white/[0.01] p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-white/[0.03] transition-all"
+                className="rounded-xl border border-slate-200/80 bg-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50 transition-all shadow-2xs"
               >
                 <div className="flex items-start gap-3 min-w-0">
-                  <div className="bg-[#0B0F19] p-3 border border-white/5 rounded-xl shrink-0 flex items-center justify-center text-primary">
+                  <div className="bg-indigo-50 p-3 border border-indigo-100 rounded-xl shrink-0 flex items-center justify-center text-indigo-600">
                     <Play size={18} className="fill-current" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white truncate">{rec.title}</p>
-                    {rec.description && (
-                      <p className="text-[10px] text-[var(--text-secondary)] mt-0.5 truncate">{rec.description}</p>
-                    )}
-                    <div className="flex items-center gap-3 mt-2 text-[9px] text-[var(--text-muted)]">
+                    <p className="text-xs font-semibold text-slate-900 truncate">{rec.title}</p>
+                    {rec.description && <p className="text-[10px] text-slate-500 mt-0.5 truncate">{rec.description}</p>}
+                    <div className="flex items-center gap-3 mt-2 text-[9px] text-slate-500">
                       {rec.durationMinutes && <span>{rec.durationMinutes} minutes</span>}
                       <span className="flex items-center gap-0.5">
                         <Eye size={10} /> Views: {rec.totalViews || 0}
@@ -231,13 +229,16 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                   <Button
                     size="sm"
                     variant={rec.isPublished ? "primary" : "outline"}
-                    className="h-7 text-[10px] px-2 text-white"
+                    className="h-7 text-[10px] px-2"
                     onClick={() => handleTogglePublish(rec._id)}
                     disabled={isToggling === rec._id}
                   >
                     {rec.isPublished ? "Published" : "Publish"}
                   </Button>
-                  <Badge variant="default" className="text-[9px] border-white/10 uppercase bg-white/5 text-white">
+                  <Badge
+                    variant="default"
+                    className="text-[9px] border-slate-200 uppercase bg-slate-100 text-slate-700"
+                  >
                     mp4
                   </Badge>
                 </div>

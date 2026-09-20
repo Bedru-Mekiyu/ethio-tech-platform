@@ -8,7 +8,6 @@ import {
   Cpu,
   Layers3,
   Rocket,
-  Sparkles,
   ShieldCheck,
   Search,
   Video,
@@ -103,37 +102,35 @@ function TrackStatCard({
   tone: "primary" | "purple" | "success" | "warning";
 }) {
   const toneClass =
-    tone === "primary"
-      ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
-      : tone === "purple"
-        ? "bg-violet-500/10 text-violet-400 border border-violet-500/20"
-        : tone === "success"
-          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-          : "bg-amber-500/10 text-amber-400 border border-amber-500/20";
+    tone === "primary" || tone === "purple"
+      ? "bg-indigo-50 text-indigo-600 border border-indigo-100"
+      : tone === "success"
+        ? "bg-emerald-50 text-emerald-600 border border-emerald-100"
+        : "bg-amber-50 text-amber-600 border border-amber-100";
 
   return (
-    <Card className="border border-[#27272A] bg-[#0E0E11] p-4">
+    <Card className="border border-slate-200 bg-white p-4 shadow-xs">
       <div className="flex items-center justify-between">
         <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${toneClass}`}>
           <Icon size={15} />
         </div>
       </div>
-      <p className="mt-3 text-xl font-bold tracking-tight text-white font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-400">{label}</p>
-      <p className="mt-0.5 text-[11px] text-zinc-500">{helper}</p>
+      <p className="mt-3 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
+      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
+      <p className="mt-0.5 text-[11px] text-slate-400">{helper}</p>
     </Card>
   );
 }
 
 function TrackIcon({ categoryKey, title, size = 18 }: { categoryKey?: string; title?: string; size?: number }) {
   const text = `${categoryKey ?? ""} ${title ?? ""}`.toLowerCase();
-  if (text.includes("ai") || text.includes("data")) return <Sparkles size={size} />;
+  if (text.includes("ai") || text.includes("data")) return <Cpu size={size} />;
   if (text.includes("cyber") || text.includes("security")) return <ShieldCheck size={size} />;
   if (text.includes("cloud") || text.includes("devops")) return <Rocket size={size} />;
   if (text.includes("mobile") || text.includes("react native") || text.includes("flutter"))
     return <Smartphone size={size} />;
   if (text.includes("design") || text.includes("ux") || text.includes("ui")) return <Layers3 size={size} />;
-  if (text.includes("full") || text.includes("web") || text.includes("stack")) return <Cpu size={size} />;
+  if (text.includes("full") || text.includes("web") || text.includes("stack")) return <Code2 size={size} />;
   return <Layers3 size={size} />;
 }
 
@@ -149,45 +146,45 @@ function StudentTrackCard({
   const actionLabel = done ? "Review Track" : track.enrolled ? "Resume Track" : "Start Learning";
 
   return (
-    <Card className="group grid gap-5 border border-[#27272A] bg-[#0E0E11] p-5 transition duration-200 hover:border-zinc-700 lg:grid-cols-[160px_1fr_200px]">
+    <Card className="group grid gap-5 border border-slate-200 bg-white p-5 shadow-xs transition duration-200 hover:border-slate-300 lg:grid-cols-[160px_1fr_200px]">
       {/* Icon & Category Indicator */}
-      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-[#27272A] bg-[#141418] p-4">
+      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-slate-50/70 p-4">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0E0E11] text-violet-400 border border-[#27272A]">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-indigo-600 border border-slate-200 shadow-xs">
             <TrackIcon categoryKey={track.categoryKey} title={track.title} size={18} />
           </div>
-          <Badge variant={done ? "success" : track.enrolled ? "default" : "default"}>{statusLabel}</Badge>
+          <Badge variant={done ? "success" : track.enrolled ? "default" : "outline"}>{statusLabel}</Badge>
         </div>
 
         <div className="mt-3 space-y-0.5">
-          <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Curriculum Depth</p>
-          <p className="text-sm font-bold text-white">
+          <p className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">Curriculum Depth</p>
+          <p className="text-sm font-bold text-slate-900">
             {track.totalLessons ? `${track.completedLessons} / ${track.totalLessons} Lessons` : `${track.progress}%`}
           </p>
-          <p className="text-[11px] text-zinc-400">+{track.xpReward ?? 0} Total XP</p>
+          <p className="text-[11px] text-slate-500">+{track.xpReward ?? 0} Total XP</p>
         </div>
       </div>
 
       {/* Main Track Details */}
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-1.5">
-          <Badge variant="default">{track.category ?? "Engineering"}</Badge>
-          <Badge variant="default">{track.difficulty ?? "Intermediate"}</Badge>
-          <span className="text-xs text-zinc-400 flex items-center gap-1">
-            <Clock size={11} className="text-violet-400" />
+          <Badge variant="outline">{track.category ?? "Engineering"}</Badge>
+          <Badge variant="outline">{track.difficulty ?? "Intermediate"}</Badge>
+          <span className="text-xs text-slate-500 flex items-center gap-1">
+            <Clock size={11} className="text-indigo-600" />
             {track.estimatedWeeks ?? 12} Weeks
           </span>
-          <span className="text-xs text-zinc-400 flex items-center gap-1">
-            <Video size={11} className="text-violet-400" />
+          <span className="text-xs text-slate-500 flex items-center gap-1">
+            <Video size={11} className="text-indigo-600" />
             {track.liveSessionsCount ?? 20} Workshops
           </span>
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-base font-bold text-white group-hover:text-violet-400 transition-colors">
+          <h2 className="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
             {track.title}
           </h2>
-          <p className="text-xs leading-relaxed text-zinc-400 max-w-3xl">
+          <p className="text-xs leading-relaxed text-slate-600 max-w-3xl">
             {track.tagline || track.description || "Comprehensive hands-on curriculum built for job readiness."}
           </p>
         </div>
@@ -195,8 +192,8 @@ function StudentTrackCard({
         {/* Progress Bar */}
         <div className="space-y-1.5 max-w-xl">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-zinc-400 font-medium">Path Completion</span>
-            <span className="font-semibold text-white">{track.progress}%</span>
+            <span className="text-slate-500 font-medium">Path Completion</span>
+            <span className="font-semibold text-slate-900">{track.progress}%</span>
           </div>
           <ProgressBar value={track.progress} max={100} color={done ? "success" : "primary"} className="h-1.5" />
         </div>
@@ -204,9 +201,11 @@ function StudentTrackCard({
         {/* Capstone Quick Preview Buttons */}
         {track.capstones && track.capstones.length > 0 && (
           <div className="pt-0.5">
-            <div className="flex items-center gap-1.5 text-xs text-zinc-400 mb-1.5">
-              <Code2 size={12} className="text-violet-400" />
-              <span className="font-semibold uppercase tracking-wider text-[9px] text-zinc-500">Capstone Projects:</span>
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1.5">
+              <Code2 size={12} className="text-indigo-600" />
+              <span className="font-semibold uppercase tracking-wider text-[9px] text-slate-500">
+                Capstone Projects:
+              </span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {track.capstones.map((cap) => (
@@ -214,11 +213,11 @@ function StudentTrackCard({
                   key={cap.id}
                   type="button"
                   onClick={() => onPreviewCapstone(cap, track.title, track._id)}
-                  className="inline-flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#141418] px-2.5 py-1 text-xs text-zinc-300 transition hover:border-zinc-700 hover:text-white"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-700 transition hover:border-slate-300 hover:text-slate-900 shadow-xs"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
                   <span>{cap.title}</span>
-                  <span className="text-[10px] text-violet-400 underline ml-1">Inspect</span>
+                  <span className="text-[10px] text-indigo-600 underline ml-1 font-medium">Inspect</span>
                 </button>
               ))}
             </div>
@@ -227,17 +226,17 @@ function StudentTrackCard({
       </div>
 
       {/* Action / Next Step Column */}
-      <div className="flex flex-col justify-between gap-3 border-t lg:border-t-0 lg:border-l border-[#27272A] pt-3 lg:pt-0 lg:pl-5">
+      <div className="flex flex-col justify-between gap-3 border-t lg:border-t-0 lg:border-l border-slate-200 pt-3 lg:pt-0 lg:pl-5">
         <div className="space-y-1">
-          <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-500">Status & Mentorship</p>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500">Status & Mentorship</p>
+          <p className="text-xs text-slate-600 leading-relaxed">
             {done
               ? "All milestones completed! Review capstones or explore another track."
               : track.enrolled
                 ? "Active track. Attend upcoming live workshops & submit code checkpoints."
                 : "Available to start anytime. Includes 1:1 mentor code reviews."}
           </p>
-          <div className="text-xs font-semibold text-emerald-400 pt-0.5">
+          <div className="text-xs font-semibold text-emerald-600 pt-0.5">
             {track.mentorshipHours ?? 30} Direct Mentor Review Hours
           </div>
         </div>
@@ -374,12 +373,12 @@ export function TracksPage() {
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-xs font-semibold text-violet-400 mb-1.5">
-              <Sparkles size={12} />
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-100 bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-600 mb-1.5">
+              <Code2 size={12} />
               Career-Aligned Engineering Curriculum
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Learning Pathways</h1>
-            <p className="text-xs text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Learning Pathways</h1>
+            <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
               Choose your engineering pathway, track your milestones, and build production-grade capstone projects with
               direct mentor reviews.
             </p>
@@ -445,10 +444,10 @@ export function TracksPage() {
                 type="button"
                 onClick={() => setStatusFilter(tab.value)}
                 className={cn(
-                  "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors",
+                  "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors shadow-xs",
                   statusFilter === tab.value
-                    ? "bg-violet-600 text-white font-semibold"
-                    : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white",
+                    ? "bg-indigo-600 text-white font-semibold"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900",
                 )}
               >
                 {tab.label}
@@ -458,19 +457,19 @@ export function TracksPage() {
 
           {/* Search Input */}
           <div className="relative w-full lg:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <Input
               type="text"
               placeholder="Search tracks or tools..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8.5 h-9 bg-[#0E0E11] border-[#27272A] text-xs rounded-lg focus:border-violet-500 text-zinc-200"
+              className="pl-8.5 h-9 bg-white border-slate-300 text-xs rounded-lg focus:border-indigo-500 text-slate-900 placeholder:text-slate-400 shadow-xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-zinc-500 hover:text-zinc-200"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-600"
               >
                 Clear
               </button>
@@ -479,17 +478,17 @@ export function TracksPage() {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-[#27272A]">
+        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
           {CATEGORY_TABS.map((cat) => (
             <button
               key={cat.key}
               type="button"
               onClick={() => setCategoryFilter(cat.key)}
               className={cn(
-                "rounded-md px-2.5 py-1 text-xs transition-colors",
+                "rounded-md px-2.5 py-1 text-xs transition-colors shadow-xs",
                 categoryFilter === cat.key
-                  ? "bg-[#141418] text-white font-semibold border border-zinc-600"
-                  : "bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white border border-[#27272A]",
+                  ? "bg-slate-900 text-white font-semibold border border-slate-900"
+                  : "bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 border border-slate-200",
               )}
             >
               {cat.label}

@@ -81,8 +81,8 @@ export function Tabs({
           className={cn(
             "flex items-center",
             variant === "pill"
-              ? "gap-2 rounded-full border border-white/10 bg-white/5 p-1"
-              : "gap-6 border-b border-white/10 pb-0",
+              ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
+              : "gap-6 border-b border-slate-200 pb-0",
           )}
           role="tablist"
         >
@@ -102,9 +102,9 @@ export function Tabs({
                 className={cn(
                   "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
                   variant === "pill"
-                    ? "min-h-10 rounded-full px-4 py-2 text-[var(--text-secondary)] hover:text-white"
-                    : "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white",
-                  isActive && (variant === "pill" ? "text-[var(--bg-base)]" : "text-primary"),
+                    ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
+                    : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
+                  isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
                   triggerClassName,
                 )}
               >
@@ -113,7 +113,7 @@ export function Tabs({
                     layoutId={`active-indicator-${tabId}`}
                     className={cn(
                       "absolute inset-0 -z-10",
-                      variant === "pill" ? "rounded-full bg-primary" : "border-b-2 border-primary",
+                      variant === "pill" ? "rounded-lg bg-white shadow-xs" : "border-b-2 border-primary",
                     )}
                     style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -232,8 +232,8 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
       className={cn(
         "flex items-center",
         variant === "pill"
-          ? "gap-2 rounded-full border border-white/10 bg-white/5 p-1"
-          : "gap-6 border-b border-white/10 pb-0",
+          ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
+          : "gap-6 border-b border-slate-200 pb-0",
         className,
       )}
       role="tablist"
@@ -266,9 +266,9 @@ export function TabsTrigger({
       className={cn(
         "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
         variant === "pill"
-          ? "min-h-10 rounded-full px-4 py-2 text-[var(--text-secondary)] hover:text-white"
-          : "pb-3 pt-2 text-[var(--text-secondary)] hover:text-white",
-        isActive && (variant === "pill" ? "text-[var(--bg-base)]" : "text-primary"),
+          ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
+          : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
+        isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
         className,
       )}
       {...props}
@@ -278,7 +278,7 @@ export function TabsTrigger({
           layoutId={`active-indicator-${tabsId}`}
           className={cn(
             "absolute inset-0 -z-10",
-            variant === "pill" ? "rounded-full bg-primary" : "border-b-2 border-primary",
+            variant === "pill" ? "rounded-lg bg-white shadow-xs" : "border-b-2 border-primary",
           )}
           style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
           transition={{ type: "spring", stiffness: 380, damping: 30 }}

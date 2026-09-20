@@ -70,36 +70,40 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 border-[#27272A] bg-[#0E0E11] p-4.5">
+    <Card className="flex h-full flex-col justify-between gap-3 border border-slate-200 bg-white p-4.5 shadow-xs">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
-          <Badge variant={statusTone} size="sm">{project.category}</Badge>
-          <span className="text-xs font-semibold text-emerald-400">+{project.xpReward ?? 0} XP</span>
+          <Badge variant={statusTone} size="sm">
+            {project.category}
+          </Badge>
+          <span className="text-xs font-semibold text-emerald-600">+{project.xpReward ?? 0} XP</span>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-white">{project.title}</h3>
-          <p className="text-[11px] text-zinc-400 mt-0.5">{project.trackTitle}</p>
+          <h3 className="text-sm font-semibold text-slate-900">{project.title}</h3>
+          <p className="text-[11px] text-slate-500 mt-0.5">{project.trackTitle}</p>
         </div>
-        <p className="text-xs leading-relaxed text-zinc-400 line-clamp-3">
+        <p className="text-xs leading-relaxed text-slate-600 line-clamp-3">
           {project.description ?? "Project work assigned through your learning track."}
         </p>
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs text-zinc-400">
+          <div className="flex items-center justify-between text-xs text-slate-500">
             <span>Progress</span>
-            <span className="font-semibold text-white">{project.completionPercent}%</span>
+            <span className="font-semibold text-slate-900">{project.completionPercent}%</span>
           </div>
           <ProgressBar value={project.completionPercent} max={100} color="primary" className="h-1.5" />
         </div>
         {project.feedback ? (
-          <p className="rounded-lg border border-emerald-500/20 bg-emerald-950/20 p-2.5 text-xs leading-relaxed text-zinc-300">
+          <p className="rounded-lg border border-emerald-200 bg-emerald-50/60 p-2.5 text-xs leading-relaxed text-slate-700">
             {project.feedback}
           </p>
         ) : null}
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#27272A]">
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
         <Link to={actionRoute}>
-          <Button size="sm" className="text-xs">{actionLabel}</Button>
+          <Button size="sm" className="text-xs">
+            {actionLabel}
+          </Button>
         </Link>
         {project.trackId ? (
           <Link to={`/app/tracks/${project.trackId}`}>
@@ -118,43 +122,47 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const overdue = isOverdue(assignment.dueDate) && status === "pending";
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 border-[#27272A] bg-[#0E0E11] p-4.5">
+    <Card className="flex h-full flex-col justify-between gap-3 border border-slate-200 bg-white p-4.5 shadow-xs">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#141418] text-violet-400 border border-[#27272A]">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600 border border-indigo-100">
               {assignmentTypeIcons[assignment.type] ?? <FileText size={13} />}
             </div>
             <Badge
               size="sm"
               variant={
-                status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "default"
+                status === "graded" ? "success" : status === "submitted" ? "purple" : overdue ? "warning" : "outline"
               }
             >
               {status}
             </Badge>
           </div>
-          <span className="text-xs text-zinc-500 font-mono">{assignment.maxScore} pts</span>
+          <span className="text-xs text-slate-500 font-mono">{assignment.maxScore} pts</span>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-white">{assignment.title}</h3>
-          <p className="mt-0.5 text-xs text-zinc-400 line-clamp-2 leading-relaxed">{assignment.description}</p>
+          <h3 className="text-sm font-semibold text-slate-900">{assignment.title}</h3>
+          <p className="mt-0.5 text-xs text-slate-600 line-clamp-2 leading-relaxed">{assignment.description}</p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-zinc-400">
+        <div className="flex items-center gap-3 text-xs text-slate-500">
           <span className="flex items-center gap-1">
-            {overdue ? <AlertTriangle size={12} className="text-amber-400" /> : <Clock size={12} className="text-zinc-500" />}
-            <span className={overdue ? "text-amber-400 font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
+            {overdue ? (
+              <AlertTriangle size={12} className="text-amber-500" />
+            ) : (
+              <Clock size={12} className="text-slate-400" />
+            )}
+            <span className={overdue ? "text-amber-600 font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
           </span>
           {assignment.estimatedMinutes > 0 ? <span>~{assignment.estimatedMinutes} min</span> : null}
         </div>
         {assignment.submission?.grade != null ? (
-          <p className="rounded-lg border border-emerald-500/20 bg-emerald-950/20 p-2.5 text-xs text-white">
+          <p className="rounded-lg border border-emerald-200 bg-emerald-50 p-2.5 text-xs text-emerald-800 font-medium">
             Grade: {assignment.submission.grade}/{assignment.maxScore}
           </p>
         ) : null}
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-[#27272A]">
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
         {status === "pending" ? (
           <Link to={`/app/projects/submit?mode=submit&assignmentId=${assignment._id}`}>
             <Button size="sm" className="text-xs">
@@ -223,24 +231,27 @@ export function AssignedProjectsPage() {
     gradedAssignments.length;
 
   return (
-    <div className="page-shell space-y-6 text-[var(--text-primary)]">
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+    <div className="page-shell space-y-6 text-slate-900">
+      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Assigned Projects & Tasks</h1>
-            <p className="mt-0.5 text-xs text-zinc-400">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Assigned Projects & Tasks</h1>
+            <p className="mt-0.5 text-xs text-slate-500">
               Track assignments, submit milestone repositories, and review mentor feedback.
             </p>
           </div>
           <Link to="/app/projects/submit">
-            <Button size="sm" className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white">
+            <Button size="sm" className="text-xs font-medium">
               Submit Project
             </Button>
           </Link>
         </div>
       </Card>
 
-      <div className="flex items-center rounded-lg border border-[#27272A] bg-[#0E0E11] p-1 w-fit" role="tablist">
+      <div
+        className="flex items-center rounded-lg border border-slate-200 bg-slate-100/80 p-1 w-fit shadow-xs"
+        role="tablist"
+      >
         {(["active", "submitted", "graded"] as const).map((t) => (
           <button
             key={t}
@@ -250,9 +261,7 @@ export function AssignedProjectsPage() {
             onClick={() => setTab(t)}
             className={cn(
               "rounded-md px-3.5 py-1 text-xs font-medium transition",
-              tab === t
-                ? "bg-violet-600 text-white shadow-sm"
-                : "text-zinc-400 hover:text-white",
+              tab === t ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900",
             )}
           >
             {tabLabels[t]}

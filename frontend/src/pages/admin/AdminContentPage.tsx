@@ -7,13 +7,7 @@ import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { TrackSidebar } from "./content/TrackSidebar";
 import { ModuleLessonTree } from "./content/ModuleLessonTree";
 import { ContentEditorPane } from "./content/ContentEditorPane";
-import type {
-  Track,
-  Module,
-  Lesson,
-  CapstoneProjectItem,
-  ContentSelection,
-} from "./content/types";
+import type { Track, Module, Lesson, CapstoneProjectItem, ContentSelection } from "./content/types";
 import { cn } from "@/lib/utils";
 
 const unwrap = <T,>(payload: unknown, key: string): T => {
@@ -116,7 +110,7 @@ export function AdminContentPage() {
           } catch {
             return { modId, list: [] };
           }
-        })
+        }),
       );
       const record: Record<string, Lesson[]> = {};
       for (const item of results) {
@@ -154,10 +148,7 @@ export function AdminContentPage() {
   const saveTrackMutation = useMutation({
     mutationFn: async (payload: Partial<Track>) => {
       if (selection.type === "track" && selection.trackId) {
-        const { data } = await api.patch<ApiResponse<{ track: Track }>>(
-          `/tracks/${selection.trackId}`,
-          payload
-        );
+        const { data } = await api.patch<ApiResponse<{ track: Track }>>(`/tracks/${selection.trackId}`, payload);
         return data.data.track;
       }
       const { data } = await api.post<ApiResponse<{ track: Track }>>("/tracks", payload);
@@ -195,10 +186,7 @@ export function AdminContentPage() {
   const saveModuleMutation = useMutation({
     mutationFn: async (payload: Partial<Module>) => {
       if (selection.type === "module" && selection.moduleId) {
-        const { data } = await api.patch<ApiResponse<{ module: Module }>>(
-          `/modules/${selection.moduleId}`,
-          payload
-        );
+        const { data } = await api.patch<ApiResponse<{ module: Module }>>(`/modules/${selection.moduleId}`, payload);
         return data.data.module;
       }
       const { data } = await api.post<ApiResponse<{ module: Module }>>("/modules", payload);
@@ -265,10 +253,7 @@ export function AdminContentPage() {
   const saveLessonMutation = useMutation({
     mutationFn: async (payload: Partial<Lesson>) => {
       if (selection.type === "lesson" && selection.lessonId) {
-        const { data } = await api.patch<ApiResponse<{ lesson: Lesson }>>(
-          `/lessons/${selection.lessonId}`,
-          payload
-        );
+        const { data } = await api.patch<ApiResponse<{ lesson: Lesson }>>(`/lessons/${selection.lessonId}`, payload);
         return data.data.lesson;
       }
       const { data } = await api.post<ApiResponse<{ lesson: Lesson }>>("/lessons", payload);
@@ -421,30 +406,30 @@ export function AdminContentPage() {
     deleteCapstoneMutation.isPending;
 
   return (
-    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-[var(--text-primary)]">
+    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-slate-900 bg-slate-50/50">
       {/* Top Banner Bar */}
-      <div className="border-b border-[#27272A] bg-[#0E0E11] px-5 py-3.5 shrink-0">
+      <div className="border-b border-slate-200/80 bg-white px-5 py-3.5 shrink-0 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-                Curriculum Content Studio
-              </h1>
+              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum Content Studio</h1>
             </div>
-            <p className="text-xs text-zinc-400 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               Master-detail hierarchical architect for learning tracks, modules, video lectures, and code labs.
             </p>
           </div>
 
           {/* Mobile Tab Switcher */}
-          <div className="flex sm:hidden items-center rounded-lg bg-[#141418] p-1 border border-[#27272A] text-xs">
+          <div className="flex sm:hidden items-center rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs">
             <button
               type="button"
               onClick={() => setMobileTab("tracks")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "tracks" ? "bg-violet-600 text-white" : "text-zinc-400"
+                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                mobileTab === "tracks"
+                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  : "text-slate-600 hover:text-slate-900",
               )}
             >
               Tracks
@@ -453,8 +438,10 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("tree")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "tree" ? "bg-violet-600 text-white" : "text-zinc-400"
+                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                mobileTab === "tree"
+                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  : "text-slate-600 hover:text-slate-900",
               )}
             >
               Curriculum
@@ -463,8 +450,10 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("editor")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-md font-medium transition-all text-center",
-                mobileTab === "editor" ? "bg-violet-600 text-white" : "text-zinc-400"
+                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                mobileTab === "editor"
+                  ? "bg-indigo-600 text-white shadow-xs font-semibold"
+                  : "text-slate-600 hover:text-slate-900",
               )}
             >
               Editor
@@ -477,10 +466,7 @@ export function AdminContentPage() {
       <div className="grid grid-cols-1 md:grid-cols-12 flex-1 overflow-hidden">
         {/* Left Pane: Track Sidebar (3 Cols on desktop) */}
         <div
-          className={cn(
-            "md:col-span-3 h-full overflow-hidden",
-            mobileTab === "tracks" ? "block" : "hidden md:block"
-          )}
+          className={cn("md:col-span-3 h-full overflow-hidden", mobileTab === "tracks" ? "block" : "hidden md:block")}
         >
           <TrackSidebar
             tracks={tracks}
@@ -498,12 +484,7 @@ export function AdminContentPage() {
         </div>
 
         {/* Middle Pane: Module & Lesson Tree (4 Cols on desktop) */}
-        <div
-          className={cn(
-            "md:col-span-4 h-full overflow-hidden",
-            mobileTab === "tree" ? "block" : "hidden md:block"
-          )}
-        >
+        <div className={cn("md:col-span-4 h-full overflow-hidden", mobileTab === "tree" ? "block" : "hidden md:block")}>
           <ModuleLessonTree
             track={selectedTrack}
             modules={modules}
@@ -512,12 +493,8 @@ export function AdminContentPage() {
             onSelect={handleSelectHierarchy}
             onAddModule={handleAddModule}
             onAddLesson={handleAddLesson}
-            onDeleteModule={(mod) =>
-              setDeleteTarget({ type: "module", id: mod._id, name: mod.title })
-            }
-            onDeleteLesson={(les) =>
-              setDeleteTarget({ type: "lesson", id: les._id, name: les.title })
-            }
+            onDeleteModule={(mod) => setDeleteTarget({ type: "module", id: mod._id, name: mod.title })}
+            onDeleteLesson={(les) => setDeleteTarget({ type: "lesson", id: les._id, name: les.title })}
             onReorderModule={reorderModule}
             onReorderLesson={reorderLesson}
             isLoading={modulesQuery.isLoading}
@@ -526,10 +503,7 @@ export function AdminContentPage() {
 
         {/* Right Pane: Content Editor Pane (5 Cols on desktop) */}
         <div
-          className={cn(
-            "md:col-span-5 h-full overflow-hidden",
-            mobileTab === "editor" ? "block" : "hidden md:block"
-          )}
+          className={cn("md:col-span-5 h-full overflow-hidden", mobileTab === "editor" ? "block" : "hidden md:block")}
         >
           <ContentEditorPane
             selection={selection}
@@ -546,15 +520,9 @@ export function AdminContentPage() {
             onSaveLesson={async (data) => {
               await saveLessonMutation.mutateAsync(data);
             }}
-            onDeleteTrack={(tr) =>
-              setDeleteTarget({ type: "track", id: tr._id, name: tr.title })
-            }
-            onDeleteModule={(mod) =>
-              setDeleteTarget({ type: "module", id: mod._id, name: mod.title })
-            }
-            onDeleteLesson={(les) =>
-              setDeleteTarget({ type: "lesson", id: les._id, name: les.title })
-            }
+            onDeleteTrack={(tr) => setDeleteTarget({ type: "track", id: tr._id, name: tr.title })}
+            onDeleteModule={(mod) => setDeleteTarget({ type: "module", id: mod._id, name: mod.title })}
+            onDeleteLesson={(les) => setDeleteTarget({ type: "lesson", id: les._id, name: les.title })}
             onSaveCapstoneProject={(proj) => {
               saveCapstoneMutation.mutate(proj);
             }}

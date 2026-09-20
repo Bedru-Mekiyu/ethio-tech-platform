@@ -62,14 +62,14 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
   }, [queue, autoAdmit, soundEnabled, onAction]);
 
   return (
-    <Card className="mcc-card border-warning/20 bg-warning/[0.02] p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-warning/15 text-warning p-1.5 rounded-lg">
+          <div className="bg-amber-50 text-amber-600 border border-amber-200/60 p-1.5 rounded-lg">
             <DoorOpen size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
+            <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
               Waiting Room
               <Badge variant="warning" className="h-5 px-1.5">
                 {queue.length} waiting
@@ -81,7 +81,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
           <Button
             size="sm"
             variant="ghost"
-            className="h-8 w-8 p-0 text-[var(--text-secondary)] hover:text-white"
+            className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900"
             onClick={() => setSoundEnabled(!soundEnabled)}
             title={soundEnabled ? "Mute sounds" : "Enable sounds"}
           >
@@ -100,29 +100,27 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
 
       {queue.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-[var(--text-muted)]">No participants waiting</p>
+          <p className="text-xs text-slate-400">No participants waiting</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
           {queue.map((w) => (
             <div
               key={w.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all"
+              className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-2.5 hover:bg-slate-50 transition-all shadow-2xs"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <Avatar name={w.name} src={w.avatar} size="sm" className="h-8 w-8 rounded-lg shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white truncate">{w.name}</p>
-                  <p className="text-[9px] text-[var(--text-muted)]">
-                    Joined {new Date(w.joinedAt).toLocaleTimeString()}
-                  </p>
+                  <p className="text-xs font-semibold text-slate-900 truncate">{w.name}</p>
+                  <p className="text-[9px] text-slate-500">Joined {new Date(w.joinedAt).toLocaleTimeString()}</p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-8 w-8 p-0 text-success hover:bg-success/15 hover:text-success rounded-lg"
+                  className="h-8 w-8 p-0 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg"
                   onClick={() => onAction("admit", w.userId)}
                   title="Admit student"
                 >
@@ -131,7 +129,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-8 w-8 p-0 text-danger hover:bg-danger/15 hover:text-danger rounded-lg"
+                  className="h-8 w-8 p-0 text-red-600 hover:bg-red-50 hover:text-red-700 rounded-lg"
                   onClick={() => onAction("deny", w.userId)}
                   title="Deny student"
                 >
@@ -147,7 +145,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
         <Button
           size="sm"
           variant="outline"
-          className="w-full mt-3 h-8 text-xs border-warning/30 hover:bg-warning/10 hover:text-warning"
+          className="w-full mt-3 h-8 text-xs border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100"
           onClick={() => onAction("admit-all", "")}
         >
           <UserCheck size={13} className="mr-1.5" /> Admit All Candidates

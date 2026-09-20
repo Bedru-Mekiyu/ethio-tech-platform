@@ -69,10 +69,10 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
   const isValid = Boolean(embedUrl);
 
   return (
-    <div className="space-y-3 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4">
+    <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
-        <label htmlFor="lesson-video-url" className="flex items-center gap-2 text-sm font-medium text-white">
-          <Video size={16} className="text-purple-400" />
+        <label htmlFor="lesson-video-url" className="flex items-center gap-2 text-sm font-medium text-slate-900">
+          <Video size={16} className="text-indigo-600" />
           Video Embed / Stream URL
         </label>
         {isValid && platform && (
@@ -94,32 +94,32 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
           <button
             type="button"
             onClick={() => setShowPreview((p) => !p)}
-            className="flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-medium text-white hover:bg-white/10 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
           >
-            <Play size={13} className="text-primary" />
+            <Play size={13} className="text-indigo-600" />
             {showPreview ? "Hide Preview" : "Test Embed"}
           </button>
         )}
       </div>
 
-      <p className="text-xs text-[var(--text-secondary)]">
+      <p className="text-xs text-slate-500">
         Supports YouTube, Vimeo, Loom, or direct HTTPS video streams. Automatically converts share links to responsive
         iframe embeds.
       </p>
 
       {/* Video Preview Player */}
       {showPreview && isValid && embedUrl && (
-        <div className="mt-3 overflow-hidden rounded-2xl border border-white/10 bg-black/60 shadow-xl">
-          <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-2 text-xs text-[var(--text-muted)]">
-            <span className="font-semibold text-white flex items-center gap-1.5">
-              <Play size={12} className="text-purple-400" />
+        <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-md">
+          <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-2 text-xs text-slate-400">
+            <span className="font-semibold text-slate-100 flex items-center gap-1.5">
+              <Play size={12} className="text-indigo-400" />
               Live Video Preview ({platform})
             </span>
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-primary hover:underline"
+              className="flex items-center gap-1 text-indigo-400 hover:underline"
             >
               Open original <ExternalLink size={12} />
             </a>
@@ -141,7 +141,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
       )}
 
       {url && !isValid && (
-        <div className="flex items-center gap-2 text-xs text-amber-400">
+        <div className="flex items-center gap-2 text-xs text-amber-700 font-medium">
           <AlertCircle size={13} />
           Please enter a valid URL starting with https://
         </div>

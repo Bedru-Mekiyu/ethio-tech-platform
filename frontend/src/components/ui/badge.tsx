@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export interface BadgeProps {
   className?: string;
-  variant?: "default" | "success" | "warning" | "purple" | "danger" | "cyan";
+  variant?: "default" | "success" | "warning" | "purple" | "danger" | "cyan" | "outline" | "indigo";
   size?: "sm" | "md";
   showDot?: boolean;
   children: React.ReactNode;
@@ -10,12 +10,14 @@ export interface BadgeProps {
 
 export function Badge({ className, variant = "default", size = "md", showDot = false, children }: BadgeProps) {
   const variants = {
-    default: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
-    success: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/15",
-    warning: "border-amber-500/20 bg-amber-500/10 text-amber-400 hover:bg-amber-500/15",
-    purple: "border-violet-500/20 bg-violet-500/10 text-violet-300 hover:bg-violet-500/15",
-    danger: "border-rose-500/20 bg-rose-500/10 text-rose-400 hover:bg-rose-500/15",
-    cyan: "border-[#27272A] bg-[#141418] text-zinc-300 hover:bg-[#1E1E24] hover:text-white",
+    default: "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200/70",
+    success: "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100/70",
+    warning: "border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100/70",
+    purple: "border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100/70",
+    danger: "border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100/70",
+    cyan: "border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-100/70",
+    outline: "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
+    indigo: "border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100/70",
   };
 
   const sizes = {
@@ -24,12 +26,14 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
   };
 
   const dotColors = {
-    default: "bg-zinc-400",
-    success: "bg-emerald-400",
-    warning: "bg-amber-400",
-    purple: "bg-violet-400",
-    danger: "bg-rose-400",
-    cyan: "bg-zinc-400",
+    default: "bg-slate-500",
+    success: "bg-emerald-600",
+    warning: "bg-amber-600",
+    purple: "bg-indigo-600",
+    danger: "bg-rose-600",
+    cyan: "bg-sky-600",
+    outline: "bg-slate-400",
+    indigo: "bg-indigo-600",
   };
 
   return (

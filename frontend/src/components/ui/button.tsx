@@ -9,14 +9,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary text-white shadow-xs border border-violet-500/30 hover:bg-[var(--primary-hover)] active:scale-[0.98]",
+          "bg-primary text-white shadow-xs border border-indigo-600 hover:bg-[var(--primary-hover)] active:scale-[0.98]",
         secondary:
-          "border border-[#27272A] bg-[#141418] text-zinc-200 hover:border-zinc-700 hover:bg-[#1E1E24] active:scale-[0.98]",
+          "border border-[var(--border)] bg-white text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:bg-slate-50 hover:text-[var(--text-primary)] active:scale-[0.98] shadow-xs",
         outline:
-          "border border-[#27272A] bg-transparent text-zinc-300 hover:border-zinc-700 hover:bg-white/[0.04] hover:text-white active:scale-[0.98]",
-        ghost: "bg-transparent text-zinc-400 hover:bg-white/[0.04] hover:text-white active:scale-[0.98]",
+          "border border-[var(--border)] bg-transparent text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:bg-slate-50 hover:text-[var(--text-primary)] active:scale-[0.98]",
+        ghost:
+          "bg-transparent text-[var(--text-secondary)] hover:bg-slate-100 hover:text-[var(--text-primary)] active:scale-[0.98]",
         danger:
-          "bg-danger text-white shadow-xs border border-rose-500/30 hover:bg-[var(--danger-hover)] active:scale-[0.98]",
+          "bg-danger text-white shadow-xs border border-red-600 hover:bg-[var(--danger-hover)] active:scale-[0.98]",
       },
       size: {
         sm: "h-8 px-3 text-xs rounded-md gap-1.5",

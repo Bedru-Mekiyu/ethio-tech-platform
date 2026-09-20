@@ -22,6 +22,7 @@ import {
   Terminal,
   Trophy,
   Users,
+  Zap,
   type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -488,27 +489,28 @@ export function HowItWorksPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-4">
-            <Sparkles size={12} />
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-4">
+            <Zap size={12} />
             <span>The 5-Stage Engineering Engine</span>
           </div>
-          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
-            How aspiring engineers become <span className="text-violet-400">production-ready</span>
+          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-slate-900">
+            How aspiring engineers become <span className="text-indigo-600">production-ready</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
             and verified career placement. Explore the full architecture of how EthioTech works.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="md" className="font-medium">
+              <Button size="md" className="font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
                 Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button
               variant="outline"
               size="md"
+              className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm"
               onClick={() => {
                 const el = document.getElementById("learner-lifecycle");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -518,7 +520,7 @@ export function HowItWorksPage() {
             </Button>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-zinc-400">
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-slate-600">
             {[
               "Sub-150ms WebRTC Labs",
               "Production Git PRs",
@@ -528,9 +530,9 @@ export function HowItWorksPage() {
             ].map((item) => (
               <span
                 key={item}
-                className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-zinc-300"
+                className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-slate-700 shadow-sm"
               >
-                <Sparkles className="h-3 w-3 text-violet-400" />
+                <CheckCircle2 className="h-3 w-3 text-indigo-600" />
                 {item}
               </span>
             ))}
@@ -539,53 +541,55 @@ export function HowItWorksPage() {
 
         {/* Live Catalog Momentum Metrics */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+          <Card className="border-slate-200 bg-white p-4 text-center shadow-sm transition hover:border-slate-300">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
               <Layers3 size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(tracks.length || 4)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
-            <p className="mt-0.5 text-xs text-zinc-400">Fullstack, AI, Cloud, Mobile</p>
+            <p className="mt-2 text-xl font-bold text-slate-900">{formatCompactNumber(tracks.length || 4)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Core Tech Tracks</p>
+            <p className="mt-0.5 text-xs text-slate-600">Fullstack, AI, Cloud, Mobile</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+          <Card className="border-slate-200 bg-white p-4 text-center shadow-sm transition hover:border-slate-300">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
               <BookOpen size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalModules || 36)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
-            <p className="mt-0.5 text-xs text-zinc-400">Structured knowledge blocks</p>
+            <p className="mt-2 text-xl font-bold text-slate-900">{formatCompactNumber(totalModules || 36)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Interactive Modules</p>
+            <p className="mt-0.5 text-xs text-slate-600">Structured knowledge blocks</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+          <Card className="border-slate-200 bg-white p-4 text-center shadow-sm transition hover:border-slate-300">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
               <Code2 size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalLessons || 180)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
-            <p className="mt-0.5 text-xs text-zinc-400">Real git repos & tests</p>
+            <p className="mt-2 text-xl font-bold text-slate-900">{formatCompactNumber(totalLessons || 180)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Hands-on Labs</p>
+            <p className="mt-0.5 text-xs text-slate-600">Real git repos & tests</p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-4 text-center transition hover:border-zinc-700">
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
-              <Sparkles size={16} />
+          <Card className="border-slate-200 bg-white p-4 text-center shadow-sm transition hover:border-slate-300">
+            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
+              <Zap size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-white">{formatCompactNumber(totalXp || 24000)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
-            <p className="mt-0.5 text-xs text-zinc-400">Earned through verified PRs</p>
+            <p className="mt-2 text-xl font-bold text-slate-900">{formatCompactNumber(totalXp || 24000)}</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">XP Catalog</p>
+            <p className="mt-0.5 text-xs text-slate-600">Earned through verified PRs</p>
           </Card>
         </div>
       </motion.section>
 
       {/* ─── 5-Stage Interactive Learner Lifecycle ─── */}
-      <section id="learner-lifecycle" className="border-t border-[#27272A] bg-[#050507] py-16">
+      <section id="learner-lifecycle" className="border-t border-slate-200 bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
               <span>Step-by-Step Flow</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">The 5-Stage Learner Lifecycle</h2>
-            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              The 5-Stage Learner Lifecycle
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Click through each stage to explore how we guide learners from diagnostic calibration to verified career
               placement.
             </p>
@@ -603,22 +607,25 @@ export function HowItWorksPage() {
                   onClick={() => setActiveStageIndex(idx)}
                   className={`group relative flex flex-col items-start rounded-lg border p-3.5 text-left transition-all duration-150 ${
                     isActive
-                      ? "border-violet-500/40 bg-violet-500/15 text-white"
-                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-700 shadow-sm font-semibold"
+                      : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                   }`}
                 >
                   <div className="flex w-full items-center justify-between">
                     <span
                       className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${
-                        isActive ? "bg-violet-500 text-white" : "bg-[#141418] text-zinc-400"
+                        isActive ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-700"
                       }`}
                     >
                       {stage.step}
                     </span>
-                    <Icon size={16} className={isActive ? "text-violet-400" : "text-zinc-500 group-hover:text-white"} />
+                    <Icon
+                      size={16}
+                      className={isActive ? "text-indigo-600" : "text-slate-500 group-hover:text-slate-700"}
+                    />
                   </div>
-                  <p className="mt-2.5 text-xs font-semibold text-white line-clamp-1">{stage.shortTitle}</p>
-                  <span className="mt-0.5 text-[10px] text-zinc-500">{stage.badge}</span>
+                  <p className="mt-2.5 text-xs font-semibold text-slate-900 line-clamp-1">{stage.shortTitle}</p>
+                  <span className="mt-0.5 text-[10px] text-slate-500">{stage.badge}</span>
                 </button>
               );
             })}
@@ -633,7 +640,7 @@ export function HowItWorksPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-lg"
+                className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
               >
                 <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-12 lg:items-center">
                   {/* Left: Narrative, Deliverables & Tools */}
@@ -647,20 +654,20 @@ export function HowItWorksPage() {
                           {currentStage.badge}
                         </Badge>
                       </div>
-                      <h3 className="mt-2 text-xl font-bold text-white md:text-2xl">{currentStage.title}</h3>
-                      <p className="mt-0.5 text-xs font-medium text-violet-400">{currentStage.subtitle}</p>
+                      <h3 className="mt-2 text-xl font-bold text-slate-900 md:text-2xl">{currentStage.title}</h3>
+                      <p className="mt-0.5 text-xs font-medium text-indigo-600">{currentStage.subtitle}</p>
                     </div>
 
-                    <p className="text-xs leading-relaxed text-zinc-400">{currentStage.overview}</p>
+                    <p className="text-xs leading-relaxed text-slate-600">{currentStage.overview}</p>
 
                     <div>
-                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                         Key Deliverables & Milestones
                       </h4>
                       <ul className="mt-2 space-y-1.5">
                         {currentStage.keyDeliverables.map((item) => (
-                          <li key={item} className="flex items-start gap-2 text-xs text-zinc-300">
-                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                          <li key={item} className="flex items-start gap-2 text-xs text-slate-700">
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -668,47 +675,49 @@ export function HowItWorksPage() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                         Platform Tools:
                       </span>
                       {currentStage.toolsUsed.map((tool) => (
                         <span
                           key={tool}
-                          className="rounded border border-[#27272A] bg-[#141418] px-2 py-0.5 text-[10px] text-zinc-400"
+                          className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] text-slate-700"
                         >
                           {tool}
                         </span>
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+                    <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-700">
                         <Trophy size={16} />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                        <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           {currentStage.telemetryMetric.label}
                         </p>
-                        <p className="text-base font-bold text-white">{currentStage.telemetryMetric.value}</p>
+                        <p className="text-base font-bold text-slate-900">{currentStage.telemetryMetric.value}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Right: Code Simulation & Step Action */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="overflow-hidden rounded-lg border border-[#27272A] bg-black/60 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+                    <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950 shadow-inner">
+                      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-3 py-1.5">
                         <div className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="ml-2 text-xs font-mono text-zinc-500">{currentStage.codeMock.filename}</span>
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="ml-2 text-xs font-mono text-slate-400">
+                            {currentStage.codeMock.filename}
+                          </span>
                         </div>
                         <Badge variant="purple" size="sm">
                           Telemetry Live
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
+                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-slate-300">
                         <code>{currentStage.codeMock.code}</code>
                       </pre>
                     </div>
@@ -719,7 +728,7 @@ export function HowItWorksPage() {
                         size="sm"
                         disabled={activeStageIndex === 0}
                         onClick={() => setActiveStageIndex((prev) => Math.max(0, prev - 1))}
-                        className="text-zinc-400 hover:text-white disabled:opacity-30"
+                        className="text-slate-500 hover:text-slate-800 disabled:opacity-30"
                       >
                         Previous Stage
                       </Button>
@@ -727,7 +736,7 @@ export function HowItWorksPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setActiveStageIndex((prev) => (prev + 1) % LIFECYCLE_STAGES.length)}
-                        className="text-violet-400 hover:text-white"
+                        className="text-indigo-600 hover:text-indigo-700 font-medium"
                       >
                         {activeStageIndex === LIFECYCLE_STAGES.length - 1 ? "Replay Lifecycle" : "Next Stage"}
                         <ArrowRight size={13} className="ml-1" />
@@ -750,11 +759,11 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
             <span>Ecosystem Experience</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">What It Looks Like For You</h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">What It Looks Like For You</h2>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
           </p>
 
@@ -769,8 +778,8 @@ export function HowItWorksPage() {
                   onClick={() => setActiveRole(persona.id)}
                   className={`flex items-center gap-2 rounded-md border px-4 py-2 text-xs font-semibold transition-all ${
                     isActive
-                      ? "border-violet-500 bg-violet-600 text-white"
-                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                      ? "border-indigo-600 bg-indigo-600 text-white shadow-sm"
+                      : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                   }`}
                 >
                   <Icon size={14} />
@@ -790,21 +799,21 @@ export function HowItWorksPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 shadow-lg md:p-8"
+              className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-violet-400">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
                     {currentRoleData.eyebrow}
                   </span>
-                  <h3 className="mt-0.5 text-xl font-bold text-white md:text-2xl">{currentRoleData.title}</h3>
+                  <h3 className="mt-0.5 text-xl font-bold text-slate-900 md:text-2xl">{currentRoleData.title}</h3>
                 </div>
                 <Badge variant="purple" size="md">
                   {currentRoleData.badge}
                 </Badge>
               </div>
 
-              <p className="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-400">{currentRoleData.description}</p>
+              <p className="mt-3 max-w-3xl text-xs leading-relaxed text-slate-600">{currentRoleData.description}</p>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {currentRoleData.keyBenefits.map((benefit) => {
@@ -812,14 +821,14 @@ export function HowItWorksPage() {
                   return (
                     <div
                       key={benefit.title}
-                      className="flex items-start gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-4 transition hover:border-zinc-700"
+                      className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 transition hover:border-slate-300"
                     >
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
                         <Icon size={16} />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-xs text-white">{benefit.title}</h4>
-                        <p className="mt-0.5 text-[11px] leading-relaxed text-zinc-400">{benefit.desc}</p>
+                        <h4 className="font-semibold text-xs text-slate-900">{benefit.title}</h4>
+                        <p className="mt-0.5 text-[11px] leading-relaxed text-slate-600">{benefit.desc}</p>
                       </div>
                     </div>
                   );
@@ -828,7 +837,7 @@ export function HowItWorksPage() {
 
               <div className="mt-6 flex justify-end">
                 <Link to={currentRoleData.ctaLink}>
-                  <Button size="md">
+                  <Button size="md" className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
                     {currentRoleData.ctaLabel} <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </Link>
@@ -839,16 +848,16 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── Featured Track Pathways ─── */}
-      <section className="border-t border-[#27272A] bg-[#050507] py-16">
+      <section className="border-t border-slate-200 bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
               <span>Curriculum Architecture</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Choose Your Engineering Pathway
             </h2>
-            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Hyper-focused tracks designed to build the exact capabilities global and African employers demand.
             </p>
           </div>
@@ -890,26 +899,30 @@ export function HowItWorksPage() {
               return (
                 <Card
                   key={track._id || track.title}
-                  className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-6 transition-all duration-150 hover:border-zinc-700"
+                  className="flex flex-col justify-between border-slate-200 bg-white p-6 shadow-sm transition-all duration-150 hover:border-slate-300"
                 >
                   <div>
                     <div className="flex items-center justify-between">
                       <Badge variant="purple" size="sm">
                         {moduleCount} Modules
                       </Badge>
-                      <span className="flex items-center gap-1 text-xs font-semibold text-violet-400">
-                        <Sparkles size={12} /> {track.xpReward ?? 6000} XP
+                      <span className="flex items-center gap-1 text-xs font-semibold text-indigo-600">
+                        <Zap size={12} /> {track.xpReward ?? 6000} XP
                       </span>
                     </div>
-                    <h3 className="mt-3 text-sm font-bold text-white">{track.title}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+                    <h3 className="mt-3 text-sm font-bold text-slate-900">{track.title}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                       {track.description || "Comprehensive hands-on curriculum with real project checkpoints."}
                     </p>
                   </div>
 
-                  <div className="mt-5 pt-3.5 border-t border-[#27272A]">
+                  <div className="mt-5 pt-3.5 border-t border-slate-200">
                     <Link to="/register">
-                      <Button variant="outline" size="sm" className="w-full justify-between">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full justify-between border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                      >
                         <span>Enroll in Track</span>
                         <ArrowRight size={13} />
                       </Button>
@@ -931,24 +944,24 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Frequently Asked Questions</h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Frequently Asked Questions</h2>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             Everything you need to know about our pedagogy, time requirements, mentorship, and certification.
           </p>
 
           {/* Search & Category Filter */}
           <div className="mt-8 space-y-3">
             <div className="relative mx-auto max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" size={15} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
               <input
                 type="text"
                 placeholder="Search questions (e.g. internet, cost, mentor, hiring)..."
                 value={faqSearchQuery}
                 onChange={(e) => setFaqSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-[#27272A] bg-[#0E0E11] py-2 pl-9 pr-3 text-xs text-white placeholder-zinc-500 focus:border-violet-500 focus:outline-none"
+                className="w-full rounded-lg border border-slate-200 bg-white py-2 pl-9 pr-3 text-xs text-slate-900 placeholder-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-sm"
               />
             </div>
 
@@ -959,8 +972,8 @@ export function HowItWorksPage() {
                   onClick={() => setFaqCategory(cat)}
                   className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                     faqCategory === cat
-                      ? "border border-violet-500 bg-violet-600 text-white"
-                      : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                      ? "border border-indigo-600 bg-indigo-600 text-white font-semibold shadow-sm"
+                      : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                   }`}
                 >
                   {cat === "all" ? "All Questions" : cat}
@@ -978,17 +991,17 @@ export function HowItWorksPage() {
               return (
                 <Card
                   key={faq.question}
-                  className="overflow-hidden border-[#27272A] bg-[#0E0E11] transition-all hover:border-zinc-700"
+                  className="overflow-hidden border-slate-200 bg-white shadow-sm transition-all hover:border-slate-300"
                 >
                   <button
                     type="button"
                     onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                    className="flex w-full items-center justify-between gap-4 p-4 text-left text-white"
+                    className="flex w-full items-center justify-between gap-4 p-4 text-left text-slate-900 hover:bg-slate-50/50"
                   >
                     <span className="text-xs sm:text-sm font-semibold">{faq.question}</span>
                     <ChevronDown
                       size={15}
-                      className={`shrink-0 text-violet-400 transition-transform duration-150 ${
+                      className={`shrink-0 text-indigo-600 transition-transform duration-150 ${
                         isExpanded ? "rotate-180" : ""
                       }`}
                     />
@@ -1001,7 +1014,7 @@ export function HowItWorksPage() {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.15 }}
                       >
-                        <div className="border-t border-[#27272A] px-4 pb-4 pt-2.5 text-xs leading-relaxed text-zinc-400">
+                        <div className="border-t border-slate-200 px-4 pb-4 pt-2.5 text-xs leading-relaxed text-slate-600 bg-slate-50/40">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -1011,7 +1024,7 @@ export function HowItWorksPage() {
               );
             })
           ) : (
-            <div className="text-center py-12 text-zinc-500 text-xs">
+            <div className="text-center py-12 text-slate-500 text-xs">
               No matching questions found. Try searching for something else.
             </div>
           )}
@@ -1020,32 +1033,39 @@ export function HowItWorksPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-24 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2.5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-2.5">
                 <span>Start Today</span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                 Ready to accelerate your software engineering journey?
               </h2>
-              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
+              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
                 Enroll in a track, meet your squad, and begin building production systems with real diaspora mentors.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="md" className="w-full sm:w-auto font-medium">
+                <Button
+                  size="md"
+                  className="w-full sm:w-auto font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+                >
                   Join a Learning Track
                 </Button>
               </Link>
               <Link to="/leaderboard">
-                <Button variant="outline" size="md" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="md"
+                  className="w-full sm:w-auto border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm"
+                >
                   See Learner Growth
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="ghost" size="md" className="w-full sm:w-auto text-violet-400 hover:text-white">
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-600 hover:text-slate-900">
                   Explore Mentorship <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>

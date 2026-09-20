@@ -94,45 +94,45 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
   };
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-purple-500/10 text-purple-400 p-1.5 rounded-lg border border-purple-500/20">
+          <div className="bg-purple-50 text-purple-600 p-1.5 rounded-lg border border-purple-100">
             <Vote size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Live Classroom Polls</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Live Classroom Polls</h3>
           </div>
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg"
+          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Create Poll
         </Button>
         <dialog
           ref={createDialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
           onCancel={(e) => {
             e.preventDefault();
             setShowCreate(false);
           }}
         >
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-white">Create Poll</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Create Poll</h2>
             <div className="space-y-4 mt-4">
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Question</label>
+                <label className="text-xs text-slate-600 mb-1 block">Question</label>
                 <Input
                   value={pollQuestion}
                   onChange={(e) => setPollQuestion(e.target.value)}
                   placeholder="Ask the class..."
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Type</label>
+                <label className="text-xs text-slate-600 mb-1 block">Type</label>
                 <Select
                   value={pollType}
                   onChange={(e) => setPollType(e.target.value as typeof pollType)}
@@ -145,7 +145,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
               </div>
               {pollType !== "true_false" && (
                 <div className="space-y-2">
-                  <label className="text-xs text-[var(--text-secondary)] mb-1 block">Options</label>
+                  <label className="text-xs text-slate-600 mb-1 block">Options</label>
                   {pollOptions.map((opt, i) => (
                     <div key={i} className="flex gap-2">
                       <Input
@@ -156,13 +156,13 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                           setPollOptions(next);
                         }}
                         placeholder={`Option ${i + 1}`}
-                        className="bg-white/5 border-white/5 text-white"
+                        className="bg-white border-slate-200 text-slate-900"
                       />
                       {pollOptions.length > 2 && (
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-9 w-9 p-0 text-danger hover:bg-danger/10"
+                          className="h-9 w-9 p-0 text-red-600 hover:bg-red-50"
                           onClick={() => setPollOptions(pollOptions.filter((_, j) => j !== i))}
                         >
                           <XCircle size={14} />
@@ -174,7 +174,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="text-xs border-white/10 hover:bg-white/5 text-white"
+                      className="text-xs border-slate-200 hover:bg-slate-50 text-slate-700"
                       onClick={() => setPollOptions([...pollOptions, ""])}
                     >
                       <Plus size={12} className="mr-1" /> Add Option
@@ -185,13 +185,13 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
               <div className="flex justify-end gap-3 pt-2">
                 <Button
                   variant="outline"
-                  className="border-white/10 hover:bg-white/5 text-white"
+                  className="border-slate-200 hover:bg-slate-50 text-slate-700"
                   onClick={() => setShowCreate(false)}
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="bg-primary hover:bg-primary/95 text-white"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
                   onClick={handleCreate}
                   disabled={!pollQuestion.trim() || isSubmitting}
                 >
@@ -205,31 +205,31 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
 
       {polls.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-[var(--text-muted)]">No polls created for this session yet</p>
+          <p className="text-xs text-slate-400">No polls created for this session yet</p>
         </div>
       ) : (
         <div className="space-y-4 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
           {polls.map((poll) => (
-            <div key={poll.id} className="rounded-xl border border-white/5 bg-white/[0.01] p-4 transition-all">
+            <div key={poll.id} className="rounded-xl border border-slate-200/80 bg-white p-4 transition-all shadow-2xs">
               <div className="flex items-center justify-between gap-3 mb-2">
-                <p className="text-xs font-semibold text-white">{poll.question}</p>
+                <p className="text-xs font-semibold text-slate-900">{poll.question}</p>
                 <Badge variant={poll.status === "active" ? "success" : "default"} className="text-[9px] px-1.5 py-0">
                   {poll.status}
                 </Badge>
               </div>
-              <div className="text-[9px] text-[var(--text-secondary)] mb-3">
+              <div className="text-[9px] text-slate-500 mb-3">
                 {poll.type} · {poll.totalVotes} total responses
               </div>
               <div className="space-y-2">
                 {poll.options.map((opt) => (
-                  <div key={opt.index} className="relative h-8 rounded-lg bg-white/5 overflow-hidden">
+                  <div key={opt.index} className="relative h-8 rounded-lg bg-slate-100 overflow-hidden">
                     <div
-                      className="absolute inset-y-0 left-0 bg-primary/10 transition-all duration-500"
+                      className="absolute inset-y-0 left-0 bg-indigo-100 transition-all duration-500"
                       style={{ width: `${opt.percentage}%` }}
                     />
                     <div className="relative flex items-center justify-between px-3 h-full z-10 text-xs">
-                      <span className="text-white font-medium">{opt.text}</span>
-                      <span className="text-[var(--text-secondary)] font-semibold">
+                      <span className="text-slate-800 font-medium">{opt.text}</span>
+                      <span className="text-slate-500 font-semibold">
                         {opt.voteCount} ({opt.percentage}%)
                       </span>
                     </div>
@@ -241,7 +241,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="h-7 text-[10px] border-white/10 hover:bg-white/5 text-white"
+                    className="h-7 text-[10px] border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                     onClick={() => handleClose(poll.id)}
                     disabled={actionId === poll.id}
                   >
@@ -251,7 +251,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="h-7 text-[10px] border-white/10 hover:bg-white/5 text-white"
+                    className="h-7 text-[10px] border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                     onClick={() => handleReopen(poll.id)}
                     disabled={actionId === poll.id}
                   >
@@ -262,7 +262,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="h-7 text-[10px] border-white/10 hover:bg-white/5 text-white"
+                    className="h-7 text-[10px] border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
                     onClick={() => handlePublish(poll.id)}
                     disabled={actionId === poll.id}
                   >

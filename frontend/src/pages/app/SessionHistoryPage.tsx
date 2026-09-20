@@ -90,10 +90,10 @@ function ScheduleRow({
   const capacityPct = max ? Math.min(100, (participantCount / max) * 100) : 0;
 
   return (
-    <Card className="flex flex-wrap items-center justify-between gap-4 border-[#27272A] bg-[#0E0E11] p-4">
+    <Card className="flex flex-wrap items-center justify-between gap-4 border-slate-200 bg-white p-4 shadow-sm hover:border-slate-300 transition-all">
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <p className="truncate font-semibold text-white text-sm">{session.title}</p>
+          <p className="truncate font-semibold text-slate-900 text-sm">{session.title}</p>
           {isLive ? (
             <Badge variant="warning" size="sm" className="shrink-0">
               Live
@@ -105,19 +105,19 @@ function ScheduleRow({
             </Badge>
           ) : null}
         </div>
-        <p className="text-xs text-zinc-400 mt-0.5">{new Date(session.scheduledAt).toLocaleString()}</p>
+        <p className="text-xs text-slate-500 mt-0.5">{new Date(session.scheduledAt).toLocaleString()}</p>
         {max > 0 ? (
           <div className="mt-2 flex items-center gap-2">
-            <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-[#141418] border border-[#27272A]">
+            <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-slate-100 border border-slate-200">
               <div
                 className={cn(
                   "h-full rounded-full",
-                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-violet-500",
+                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-indigo-600",
                 )}
                 style={{ width: `${capacityPct}%` }}
               />
             </div>
-            <span className="text-[10px] text-zinc-500">
+            <span className="text-[10px] text-slate-400 font-medium">
               {participantCount}/{max}
             </span>
           </div>
@@ -126,7 +126,9 @@ function ScheduleRow({
       <div className="flex shrink-0 gap-2">
         {isLive ? (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" className="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-medium">Join Live</Button>
+            <Button size="sm" className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium">
+              Join Live
+            </Button>
           </Link>
         ) : isEnded ? (
           <Link to={`/app/sessions/${session._id}/feedback`}>
@@ -140,7 +142,9 @@ function ScheduleRow({
           </Button>
         ) : (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" variant="outline" className="text-xs">Open</Button>
+            <Button size="sm" variant="outline" className="text-xs">
+              Open
+            </Button>
           </Link>
         )}
       </div>
@@ -166,30 +170,35 @@ function RecordingCard({ recording }: { recording: Recording }) {
   };
 
   return (
-    <Card className="overflow-hidden border-[#27272A] bg-[#0E0E11]">
-      <div className="relative h-28 bg-[#141418] border-b border-[#27272A]">
+    <Card className="overflow-hidden border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all">
+      <div className="relative h-28 bg-slate-100 border-b border-slate-200">
         {recording.thumbnailUrl ? (
           <img src={recording.thumbnailUrl} alt="" className="h-full w-full object-cover" />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <Video size={30} className="text-zinc-600" />
+            <Video size={30} className="text-slate-400" />
           </div>
         )}
         {recording.durationMinutes ? (
-          <div className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-[10px] text-zinc-300 font-mono">
+          <div className="absolute bottom-2 right-2 rounded bg-slate-900/80 px-1.5 py-0.5 text-[10px] text-white font-mono">
             {formatDuration(recording.durationMinutes)}
           </div>
         ) : null}
       </div>
       <div className="p-3.5">
-        <h3 className="line-clamp-2 font-semibold text-white text-xs">{recording.title}</h3>
-        <div className="mt-2 flex items-center gap-3 text-[11px] text-zinc-400">
+        <h3 className="line-clamp-2 font-semibold text-slate-900 text-xs">{recording.title}</h3>
+        <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
           <span className="flex items-center gap-1">
-            <CalendarDays size={11} className="text-zinc-500" /> {formatRelativeDate(recording.publishedAt)}
+            <CalendarDays size={11} className="text-slate-400" /> {formatRelativeDate(recording.publishedAt)}
           </span>
           {watchedPercent > 0 && !isCompleted ? <span>{watchedPercent}% watched</span> : null}
         </div>
-        <Button className="mt-3 w-full text-xs" size="sm" variant={isCompleted ? "outline" : "primary"} onClick={handlePlay}>
+        <Button
+          className="mt-3 w-full text-xs"
+          size="sm"
+          variant={isCompleted ? "outline" : "primary"}
+          onClick={handlePlay}
+        >
           <Play size={12} className="mr-1" />
           {isCompleted ? "Rewatch" : watchedPercent > 0 ? "Continue" : "Watch"}
         </Button>
@@ -229,9 +238,7 @@ export function SessionHistoryPage() {
   const filteredRecordings = useMemo(() => {
     const q = search.toLowerCase().trim();
     if (!q) return recordings;
-    return recordings.filter(
-      (r) => r.title.toLowerCase().includes(q) || r.session?.title?.toLowerCase().includes(q),
-    );
+    return recordings.filter((r) => r.title.toLowerCase().includes(q) || r.session?.title?.toLowerCase().includes(q));
   }, [recordings, search]);
 
   const handleWaitlist = async (sessionId: string) => {
@@ -250,16 +257,16 @@ export function SessionHistoryPage() {
   }
 
   return (
-    <div className="page-shell space-y-6 text-[var(--text-primary)]">
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
-        <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Live Sessions & Archives</h1>
-        <p className="mt-0.5 text-xs text-zinc-400">
+    <div className="page-shell space-y-6 text-slate-900">
+      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Live Sessions & Archives</h1>
+        <p className="mt-0.5 text-xs text-slate-500">
           Join live cohort classes, manage seat waitlists, and rewatch past archived recordings.
         </p>
       </Card>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center rounded-lg border border-[#27272A] bg-[#0E0E11] p-1 w-fit" role="tablist">
+        <div className="flex items-center rounded-lg border border-slate-200 bg-slate-100 p-1 w-fit" role="tablist">
           {(["schedule", "recordings"] as const).map((t) => (
             <button
               key={t}
@@ -269,9 +276,7 @@ export function SessionHistoryPage() {
               onClick={() => setTab(t)}
               className={cn(
                 "rounded-md px-3.5 py-1 text-xs font-medium transition",
-                tab === t
-                  ? "bg-violet-600 text-white shadow-sm"
-                  : "text-zinc-400 hover:text-white",
+                tab === t ? "bg-white text-indigo-600 shadow-sm font-semibold" : "text-slate-600 hover:text-slate-900",
               )}
             >
               {t === "schedule" ? "Schedule" : "Recordings"}
@@ -280,12 +285,12 @@ export function SessionHistoryPage() {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <Input
             placeholder={tab === "schedule" ? "Search sessions…" : "Search recordings…"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 bg-[#141418] border-[#27272A] text-xs h-8 text-white"
+            className="pl-9 bg-white border-slate-200 text-xs h-8 text-slate-900 placeholder:text-slate-400"
           />
         </div>
       </div>

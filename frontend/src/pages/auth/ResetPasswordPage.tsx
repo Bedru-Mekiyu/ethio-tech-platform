@@ -41,10 +41,10 @@ function getPasswordStrength(password: string): { label: string; percent: number
   if (/\d/.test(password)) score++;
   if (/[^A-Za-z0-9]/.test(password)) score++;
 
-  if (score <= 2) return { label: "Weak", percent: 25, color: "var(--danger)" };
-  if (score <= 3) return { label: "Fair", percent: 50, color: "var(--warning)" };
-  if (score <= 4) return { label: "Good", percent: 75, color: "var(--primary)" };
-  return { label: "Strong", percent: 100, color: "var(--success)" };
+  if (score <= 2) return { label: "Weak", percent: 25, color: "#e11d48" };
+  if (score <= 3) return { label: "Fair", percent: 50, color: "#f59e0b" };
+  if (score <= 4) return { label: "Good", percent: 75, color: "#4f46e5" };
+  return { label: "Strong", percent: 100, color: "#10b981" };
 }
 
 export function ResetPasswordPage() {
@@ -77,13 +77,17 @@ export function ResetPasswordPage() {
 
   if (!token) {
     return (
-      <motion.div initial="hidden" animate="show">
+      <motion.div
+        initial="hidden"
+        animate="show"
+        className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-slate-900"
+      >
         <motion.div variants={fadeUp} custom={0}>
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-white/[0.03]">
-            <ShieldCheck size={22} className="text-danger" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
+            <ShieldCheck size={22} />
           </div>
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-white">Missing reset token</h1>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+          <h1 className="mt-5 text-2xl font-bold tracking-tight text-slate-900">Missing reset token</h1>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
             This link appears to be invalid or expired. Please request a new password reset.
           </p>
           <div className="mt-6">
@@ -97,12 +101,16 @@ export function ResetPasswordPage() {
   }
 
   return (
-    <motion.div initial="hidden" animate="show" className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-xl">
+    <motion.div
+      initial="hidden"
+      animate="show"
+      className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+    >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400 transition hover:text-white"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
           Back to sign in
@@ -111,29 +119,23 @@ export function ResetPasswordPage() {
 
       {/* Icon + Header */}
       <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-violet-500/20 bg-violet-500/10 text-violet-400">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 text-indigo-600">
           <ShieldCheck size={16} />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-white pt-2">Set New Password</h1>
-        <p className="text-xs leading-relaxed text-zinc-400">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Set New Password</h1>
+        <p className="text-xs leading-relaxed text-slate-500">
           Must be at least 8 characters containing letters and numbers.
         </p>
       </motion.div>
 
       {/* Form */}
-      <motion.form
-        variants={fadeUp}
-        custom={2}
-        onSubmit={handleSubmit(onSubmit)}
-        className="mt-6 space-y-4"
-        noValidate
-      >
+      <motion.form variants={fadeUp} custom={2} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
         <div>
           <FormField id="password" label="New password" error={errors.password?.message}>
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create strong password"
-              className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -145,7 +147,7 @@ export function ResetPasswordPage() {
               animate={{ opacity: 1, height: "auto" }}
               className="mt-2 space-y-1"
             >
-              <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 border border-slate-200">
                 <motion.div
                   className="h-full rounded-full"
                   style={{ backgroundColor: strength.color }}
@@ -165,7 +167,7 @@ export function ResetPasswordPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Re-enter password"
-            className="text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />
@@ -175,11 +177,11 @@ export function ResetPasswordPage() {
           <motion.div
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/10 px-3.5 py-2.5"
+            className="flex items-start gap-2.5 rounded-lg border border-rose-200 bg-rose-50 px-3.5 py-2.5"
             role="alert"
           >
-            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-red-400" />
-            <p className="text-xs text-red-400">{error}</p>
+            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-rose-600" />
+            <p className="text-xs text-rose-700">{error}</p>
           </motion.div>
         ) : null}
 

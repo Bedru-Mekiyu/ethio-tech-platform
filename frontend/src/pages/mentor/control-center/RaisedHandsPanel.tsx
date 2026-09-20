@@ -28,16 +28,16 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
   };
 
   return (
-    <Card className="mcc-card border-primary/20 bg-primary/[0.02] p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-primary/15 text-primary p-1.5 rounded-lg">
+          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
             <Hand size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white flex items-center gap-1.5">
+            <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
               Raised Hands
-              <Badge variant="default" className="h-5 px-1.5">
+              <Badge variant="default" className="h-5 px-1.5 bg-indigo-50 text-indigo-700 border-indigo-200">
                 {hands.length}
               </Badge>
             </h3>
@@ -47,7 +47,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
           <Button
             size="sm"
             variant="ghost"
-            className="h-7 text-[10px] text-[var(--text-secondary)] hover:text-white"
+            className="h-7 text-[10px] text-slate-500 hover:text-slate-900 hover:bg-slate-100"
             onClick={() => onAction("clear-hands", "")}
           >
             Clear All
@@ -57,29 +57,29 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
 
       {hands.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-[var(--text-muted)]">No active hand raises</p>
+          <p className="text-xs text-slate-400">No active hand raises</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
           {hands.map((h, i) => (
             <div
               key={h.userId}
-              className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-2.5 hover:bg-white/[0.04] transition-all"
+              className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-2.5 hover:bg-slate-50 transition-all shadow-2xs"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[10px] font-bold text-primary">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-50 border border-indigo-100 text-[10px] font-bold text-indigo-600">
                   {h.queuePosition || i + 1}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white truncate">{h.name}</p>
-                  <p className="text-[9px] text-[var(--text-muted)]">Raised {getRelativeTime(h.raisedAt)}</p>
+                  <p className="text-xs font-semibold text-slate-900 truncate">{h.name}</p>
+                  <p className="text-[9px] text-slate-500">Raised {getRelativeTime(h.raisedAt)}</p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-[10px] px-2 text-success hover:bg-success/15 hover:text-success rounded-lg gap-1 font-medium"
+                  className="h-7 text-[10px] px-2 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 rounded-lg gap-1 font-medium"
                   onClick={() => onAction("call-on", h.userId)}
                   title="Call on student"
                 >
@@ -88,7 +88,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-[10px] px-2 text-violet-400 hover:bg-violet-500/15 hover:text-violet-400 rounded-lg gap-1 font-medium"
+                  className="h-7 text-[10px] px-2 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700 rounded-lg gap-1 font-medium"
                   onClick={() => onAction("speaking_granted", h.userId)}
                   title="Grant speaking permission"
                 >
@@ -97,7 +97,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 w-7 p-0 text-[var(--text-secondary)] hover:bg-white/5 hover:text-white rounded-lg"
+                  className="h-7 w-7 p-0 text-slate-400 hover:bg-slate-100 hover:text-slate-700 rounded-lg"
                   onClick={() => onAction("mark-answered", h.userId)}
                   title="Mark Answered"
                 >

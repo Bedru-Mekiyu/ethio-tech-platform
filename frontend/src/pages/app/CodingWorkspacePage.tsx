@@ -11,7 +11,6 @@ import {
   Minimize2,
   Play,
   RotateCcw,
-  Sparkles,
   Terminal,
   Trash2,
   FileCode,
@@ -223,9 +222,19 @@ export function InteractiveCounter() {
       expectedOutput: [
         { id: "1", type: "exec", message: "⚡ Initializing React 19 JSX compilation pipeline...", timestamp: "0.01s" },
         { id: "2", type: "info", message: "Transpiled TypeScript AST & JSX expressions in 18ms", timestamp: "0.02s" },
-        { id: "3", type: "success", message: "✓ Virtual DOM tree attached successfully to isolated test container", timestamp: "0.03s" },
+        {
+          id: "3",
+          type: "success",
+          message: "✓ Virtual DOM tree attached successfully to isolated test container",
+          timestamp: "0.03s",
+        },
         { id: "4", type: "info", message: "Hook state initialized: count=0, step=1", timestamp: "0.04s" },
-        { id: "5", type: "success", message: "⚡ Execution completed cleanly with 0 runtime exceptions (V8 VM: 24ms)", timestamp: "0.05s" },
+        {
+          id: "5",
+          type: "success",
+          message: "⚡ Execution completed cleanly with 0 runtime exceptions (V8 VM: 24ms)",
+          timestamp: "0.05s",
+        },
       ],
       tests: [
         {
@@ -353,10 +362,30 @@ export function TaskBoard() {
 }
 `,
       expectedOutput: [
-        { id: "1", type: "exec", message: "⚡ Compiling TaskBoard component with React 19 JSX parser...", timestamp: "0.01s" },
-        { id: "2", type: "info", message: "Hook dependency tree validated (useState: 4 items loaded)", timestamp: "0.02s" },
-        { id: "3", type: "success", message: "✓ Verified 4 list elements rendered with unique key IDs", timestamp: "0.03s" },
-        { id: "4", type: "success", message: "✓ Completed count badge matches initial state (2/4)", timestamp: "0.04s" },
+        {
+          id: "1",
+          type: "exec",
+          message: "⚡ Compiling TaskBoard component with React 19 JSX parser...",
+          timestamp: "0.01s",
+        },
+        {
+          id: "2",
+          type: "info",
+          message: "Hook dependency tree validated (useState: 4 items loaded)",
+          timestamp: "0.02s",
+        },
+        {
+          id: "3",
+          type: "success",
+          message: "✓ Verified 4 list elements rendered with unique key IDs",
+          timestamp: "0.03s",
+        },
+        {
+          id: "4",
+          type: "success",
+          message: "✓ Completed count badge matches initial state (2/4)",
+          timestamp: "0.04s",
+        },
       ],
       tests: [
         {
@@ -448,7 +477,12 @@ export function TelemetryGauge() {
       expectedOutput: [
         { id: "1", type: "exec", message: "⚡ Initializing TelemetryGauge virtual sandbox...", timestamp: "0.01s" },
         { id: "2", type: "info", message: "Registered Web Worker heartbeat listener (60Hz tick)", timestamp: "0.02s" },
-        { id: "3", type: "success", message: "✓ Verified 3 metric cards rendered cleanly with accurate units", timestamp: "0.03s" },
+        {
+          id: "3",
+          type: "success",
+          message: "✓ Verified 3 metric cards rendered cleanly with accurate units",
+          timestamp: "0.03s",
+        },
       ],
       tests: [
         {
@@ -521,11 +555,26 @@ ranked.forEach((l, idx) => {
         { id: "1", type: "exec", message: "🔨 Invoking tsc v5.8 type checker...", timestamp: "0.01s" },
         { id: "2", type: "info", message: "Zero type diagnostics or lint errors found in 14ms", timestamp: "0.02s" },
         { id: "3", type: "exec", message: "=== Top Leaderboard Standings ===", timestamp: "0.03s" },
-        { id: "4", type: "info", message: "#1 Almaz Ayana          | 3800 XP | [Cloud Architecture]", timestamp: "0.03s" },
-        { id: "5", type: "info", message: "#2 Derartu Tulu         | 3450 XP | [AI & Data Science]", timestamp: "0.04s" },
+        {
+          id: "4",
+          type: "info",
+          message: "#1 Almaz Ayana          | 3800 XP | [Cloud Architecture]",
+          timestamp: "0.03s",
+        },
+        {
+          id: "5",
+          type: "info",
+          message: "#2 Derartu Tulu         | 3450 XP | [AI & Data Science]",
+          timestamp: "0.04s",
+        },
         { id: "6", type: "info", message: "#3 Haile Gebrselassie   | 3100 XP | [Full-Stack]", timestamp: "0.04s" },
         { id: "7", type: "info", message: "#4 Abebe Bikila         | 2400 XP | [Full-Stack]", timestamp: "0.05s" },
-        { id: "8", type: "success", message: "⚡ Node.js process exited with code 0 (Execution: 18ms)", timestamp: "0.05s" },
+        {
+          id: "8",
+          type: "success",
+          message: "⚡ Node.js process exited with code 0 (Execution: 18ms)",
+          timestamp: "0.05s",
+        },
       ],
       tests: [
         {
@@ -703,7 +752,13 @@ runPipeline();
       expectedOutput: [
         { id: "1", type: "exec", message: "⚡ Starting Telemetry Data Pipeline...", timestamp: "0.01s" },
         { id: "2", type: "warn", message: "[RETRY 1/3] Backing off for 40ms...", timestamp: "0.02s" },
-        { id: "3", type: "success", message: '✓ Pipeline Resolved Payload: {\n  "status": 200,\n  "region": "Addis Ababa - Node 1",\n  "activeSessions": 1420\n}', timestamp: "0.08s" },
+        {
+          id: "3",
+          type: "success",
+          message:
+            '✓ Pipeline Resolved Payload: {\n  "status": 200,\n  "region": "Addis Ababa - Node 1",\n  "activeSessions": 1420\n}',
+          timestamp: "0.08s",
+        },
         { id: "4", type: "info", message: "Event loop drained in 82ms", timestamp: "0.09s" },
       ],
       tests: [
@@ -778,7 +833,12 @@ for key, value in stats.items():
         { id: "4", type: "info", message: "  Max               : 99", timestamp: "0.03s" },
         { id: "5", type: "info", message: "  Pass Rate         : 80.0%", timestamp: "0.04s" },
         { id: "6", type: "info", message: "  Total Students    : 10", timestamp: "0.04s" },
-        { id: "7", type: "success", message: "⚡ Python VM exited cleanly with returncode 0 (48ms)", timestamp: "0.05s" },
+        {
+          id: "7",
+          type: "success",
+          message: "⚡ Python VM exited cleanly with returncode 0 (48ms)",
+          timestamp: "0.05s",
+        },
       ],
       tests: [
         {
@@ -879,12 +939,37 @@ func main() {
 `,
       expectedOutput: [
         { id: "1", type: "exec", message: "🚀 Starting Go Concurrent Worker Pool (2 Workers)...", timestamp: "0.01s" },
-        { id: "2", type: "info", message: "[Worker #1] Evaluated submission for React Hooks Lab (Job #101)", timestamp: "0.03s" },
-        { id: "3", type: "info", message: "[Worker #2] Evaluated submission for FastAPI REST Server (Job #102)", timestamp: "0.03s" },
-        { id: "4", type: "info", message: "[Worker #1] Evaluated submission for PostgreSQL Migration (Job #103)", timestamp: "0.05s" },
-        { id: "5", type: "info", message: "[Worker #2] Evaluated submission for WebRTC Video Gateway (Job #104)", timestamp: "0.05s" },
+        {
+          id: "2",
+          type: "info",
+          message: "[Worker #1] Evaluated submission for React Hooks Lab (Job #101)",
+          timestamp: "0.03s",
+        },
+        {
+          id: "3",
+          type: "info",
+          message: "[Worker #2] Evaluated submission for FastAPI REST Server (Job #102)",
+          timestamp: "0.03s",
+        },
+        {
+          id: "4",
+          type: "info",
+          message: "[Worker #1] Evaluated submission for PostgreSQL Migration (Job #103)",
+          timestamp: "0.05s",
+        },
+        {
+          id: "5",
+          type: "info",
+          message: "[Worker #2] Evaluated submission for WebRTC Video Gateway (Job #104)",
+          timestamp: "0.05s",
+        },
         { id: "6", type: "success", message: "✓ All cohort submissions evaluated successfully.", timestamp: "0.06s" },
-        { id: "7", type: "success", message: "⚡ Go binary exited with status 0 (WASM sandbox: 38ms)", timestamp: "0.06s" },
+        {
+          id: "7",
+          type: "success",
+          message: "⚡ Go binary exited with status 0 (WASM sandbox: 38ms)",
+          timestamp: "0.06s",
+        },
       ],
       tests: [
         {
@@ -966,17 +1051,37 @@ fn main() {
 }
 `,
       expectedOutput: [
-        { id: "1", type: "exec", message: "🦀 Compiling with rustc 1.77 (opt-level=3, release mode)...", timestamp: "0.01s" },
+        {
+          id: "1",
+          type: "exec",
+          message: "🦀 Compiling with rustc 1.77 (opt-level=3, release mode)...",
+          timestamp: "0.01s",
+        },
         { id: "2", type: "info", message: "🦀 Initializing Rust 1.77 Session Manager...", timestamp: "0.03s" },
-        { id: "3", type: "info", message: 'Room Status: SessionRoom { room_id: "ethio-live-101", capacity: 2, active_peers: 2 }', timestamp: "0.04s" },
-        { id: "4", type: "warn", message: "Join Rejected (Expected): Capacity exceeded: Room is full", timestamp: "0.04s" },
-        { id: "5", type: "success", message: "✓ Zero borrow checker / memory safety violations detected", timestamp: "0.05s" },
+        {
+          id: "3",
+          type: "info",
+          message: 'Room Status: SessionRoom { room_id: "ethio-live-101", capacity: 2, active_peers: 2 }',
+          timestamp: "0.04s",
+        },
+        {
+          id: "4",
+          type: "warn",
+          message: "Join Rejected (Expected): Capacity exceeded: Room is full",
+          timestamp: "0.04s",
+        },
+        {
+          id: "5",
+          type: "success",
+          message: "✓ Zero borrow checker / memory safety violations detected",
+          timestamp: "0.05s",
+        },
       ],
       tests: [
         {
           id: "t1",
           title: "Initializes SessionRoom with correct capacity",
-          inputDescription: "SessionRoom::new(\"ethio-live-101\", 2)",
+          inputDescription: 'SessionRoom::new("ethio-live-101", 2)',
           expectedOutput: "capacity == 2, active_peers == 0",
           actualOutput: "capacity == 2, active_peers == 0",
           passed: true,
@@ -986,8 +1091,8 @@ fn main() {
           id: "t2",
           title: "Rejects join request when room capacity reached",
           inputDescription: "Call join() 3 times on room with capacity 2",
-          expectedOutput: "Err(\"Capacity exceeded: Room is full\")",
-          actualOutput: "Err(\"Capacity exceeded: Room is full\")",
+          expectedOutput: 'Err("Capacity exceeded: Room is full")',
+          actualOutput: 'Err("Capacity exceeded: Room is full")',
           passed: true,
           durationMs: 17,
         },
@@ -1037,8 +1142,7 @@ export function CodingWorkspacePage() {
   });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;
-  const primaryTrackId =
-    dashboard?.progressByTrack?.[0]?.trackId ?? dashboard?.user?.enrolledTracks?.[0]?._id;
+  const primaryTrackId = dashboard?.progressByTrack?.[0]?.trackId ?? dashboard?.user?.enrolledTracks?.[0]?._id;
 
   const trackQuery = useQuery({
     queryKey: ["track", primaryTrackId],
@@ -1060,9 +1164,7 @@ export function CodingWorkspacePage() {
   // Active template metadata
   const currentTemplate = useMemo(() => {
     return (
-      TEMPLATES[language]?.find((t) => t.id === selectedTemplateId) ||
-      TEMPLATES[language]?.[0] ||
-      TEMPLATES.react[0]
+      TEMPLATES[language]?.find((t) => t.id === selectedTemplateId) || TEMPLATES[language]?.[0] || TEMPLATES.react[0]
     );
   }, [language, selectedTemplateId]);
 
@@ -1257,30 +1359,30 @@ export function CodingWorkspacePage() {
   return (
     <div
       className={cn(
-        "flex flex-col bg-[#050507] text-zinc-200 antialiased font-sans border border-[#27272A] rounded-xl shadow-xl overflow-hidden",
+        "flex flex-col bg-white text-slate-900 antialiased font-sans border border-slate-200 rounded-xl shadow-xs overflow-hidden",
         isFullScreen
           ? "fixed inset-0 z-50 rounded-none border-0 h-screen w-screen"
           : "h-[calc(100vh-8.5rem)] min-h-[660px]",
       )}
     >
       {/* ─── TOP TOOLBAR (High-density IDE Navigation) ────────────────────────── */}
-      <header className="flex h-11 flex-none items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 sm:px-4 select-none">
+      <header className="flex h-11 flex-none items-center justify-between border-b border-slate-200 bg-white px-3 sm:px-4 select-none">
         {/* Left: Breadcrumbs & Active Tab */}
         <div className="flex items-center gap-2.5 overflow-hidden">
           <div className="flex items-center gap-1.5 text-xs font-mono">
-            <span className="text-zinc-500 hidden md:inline">workspace</span>
-            <span className="text-zinc-600 hidden md:inline">/</span>
-            <span className="text-zinc-400 hidden sm:inline">src</span>
-            <span className="text-zinc-600 hidden sm:inline">/</span>
-            <div className="flex items-center gap-1.5 rounded-md bg-[#141418] px-2 py-0.5 text-xs font-medium text-violet-300 border border-[#27272A]">
-              <FileCode size={12} className="text-violet-400" />
+            <span className="text-slate-400 hidden md:inline">workspace</span>
+            <span className="text-slate-300 hidden md:inline">/</span>
+            <span className="text-slate-400 hidden sm:inline">src</span>
+            <span className="text-slate-300 hidden sm:inline">/</span>
+            <div className="flex items-center gap-1.5 rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-800 border border-slate-200">
+              <FileCode size={12} className="text-indigo-600" />
               <span>{currentTemplate.fileName}</span>
             </div>
           </div>
 
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-zinc-400 border-l border-[#27272A] pl-2.5">
-            <span className="text-zinc-500 font-sans">Track:</span>
-            <span className="text-zinc-300 font-medium truncate max-w-[200px]">
+          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-500 border-l border-slate-200 pl-2.5">
+            <span className="text-slate-400 font-sans">Track:</span>
+            <span className="text-slate-700 font-medium truncate max-w-[200px]">
               {lesson?.title || primaryTrack?.title || "Full-Stack Web Development"}
             </span>
           </div>
@@ -1289,35 +1391,47 @@ export function CodingWorkspacePage() {
         {/* Center: Language & Template Selectors */}
         <div className="flex items-center gap-2">
           {/* Language Selector */}
-          <div className="flex items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 py-0.5">
-            <span className="text-[10px] font-semibold text-zinc-500 font-mono">Lang</span>
+          <div className="flex items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5">
+            <span className="text-[10px] font-semibold text-slate-500 font-mono">Lang</span>
             <select
               value={language}
               onChange={(e) => handleLanguageChange(e.target.value as SupportedLanguage)}
-              className="bg-transparent text-xs font-medium text-white focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-medium text-slate-800 focus:outline-none cursor-pointer"
             >
-              <option value="react" className="bg-[#141418] text-white">React (TSX)</option>
-              <option value="typescript" className="bg-[#141418] text-white">TypeScript</option>
-              <option value="javascript" className="bg-[#141418] text-white">JavaScript</option>
-              <option value="python" className="bg-[#141418] text-white">Python 3</option>
-              <option value="go" className="bg-[#141418] text-white">Go</option>
-              <option value="rust" className="bg-[#141418] text-white">Rust</option>
+              <option value="react" className="bg-white text-slate-800">
+                React (TSX)
+              </option>
+              <option value="typescript" className="bg-white text-slate-800">
+                TypeScript
+              </option>
+              <option value="javascript" className="bg-white text-slate-800">
+                JavaScript
+              </option>
+              <option value="python" className="bg-white text-slate-800">
+                Python 3
+              </option>
+              <option value="go" className="bg-white text-slate-800">
+                Go
+              </option>
+              <option value="rust" className="bg-white text-slate-800">
+                Rust
+              </option>
             </select>
           </div>
 
           {/* Starter Template Preset */}
-          <div className="hidden sm:flex items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 py-0.5">
-            <span className="text-[10px] font-semibold text-zinc-500 font-mono">Preset</span>
+          <div className="hidden sm:flex items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5">
+            <span className="text-[10px] font-semibold text-slate-500 font-mono">Preset</span>
             <select
               value={selectedTemplateId}
               onChange={(e) => {
                 const found = TEMPLATES[language]?.find((t) => t.id === e.target.value);
                 if (found) handleSelectTemplate(found);
               }}
-              className="bg-transparent text-xs font-medium text-zinc-300 focus:outline-none cursor-pointer max-w-[150px] lg:max-w-[200px] truncate"
+              className="bg-transparent text-xs font-medium text-slate-800 focus:outline-none cursor-pointer max-w-[150px] lg:max-w-[200px] truncate"
             >
               {TEMPLATES[language]?.map((tmpl) => (
-                <option key={tmpl.id} value={tmpl.id} className="bg-[#141418] text-white">
+                <option key={tmpl.id} value={tmpl.id} className="bg-white text-slate-800">
                   {tmpl.name}
                 </option>
               ))}
@@ -1332,7 +1446,7 @@ export function CodingWorkspacePage() {
             type="button"
             onClick={handleResetCode}
             title="Reset code boilerplate"
-            className="flex h-7 w-7 items-center justify-center rounded-md border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white hover:border-zinc-700 transition"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs"
           >
             <RotateCcw size={12} />
           </button>
@@ -1342,9 +1456,9 @@ export function CodingWorkspacePage() {
             type="button"
             onClick={handleCopyCode}
             title="Copy code to clipboard"
-            className="flex h-7 items-center gap-1 rounded-md border border-[#27272A] bg-[#141418] px-2 text-xs text-zinc-400 hover:text-white hover:border-zinc-700 transition"
+            className="flex h-7 items-center gap-1 rounded-md border border-slate-200 bg-white px-2 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs"
           >
-            {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+            {copied ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
             <span className="hidden sm:inline text-[11px]">{copied ? "Copied" : "Copy"}</span>
           </button>
 
@@ -1353,23 +1467,23 @@ export function CodingWorkspacePage() {
             type="button"
             onClick={() => setIsFullScreen(!isFullScreen)}
             title={isFullScreen ? "Exit Fullscreen" : "Fullscreen IDE"}
-            className="flex h-7 w-7 items-center justify-center rounded-md border border-[#27272A] bg-[#141418] text-zinc-400 hover:text-white hover:border-zinc-700 transition"
+            className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs"
           >
             {isFullScreen ? <Minimize2 size={12} /> : <Maximize2 size={12} />}
           </button>
 
-          <div className="h-4 w-px bg-[#27272A] mx-0.5" />
+          <div className="h-4 w-px bg-slate-200 mx-0.5" />
 
           {/* Primary Run Code Button */}
           <Button
             size="sm"
             onClick={handleRunCode}
             disabled={isRunning}
-            className="h-7 gap-1 bg-violet-600 hover:bg-violet-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
+            className="h-7 gap-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs px-2.5 rounded-md border-0 shadow-xs"
           >
             <Play size={11} className={cn("fill-current", isRunning && "animate-spin")} />
             <span>{isRunning ? "Running..." : "Run"}</span>
-            <span className="hidden md:inline font-mono text-[10px] opacity-75 ml-0.5">⌘↵</span>
+            <span className="hidden md:inline font-mono text-[10px] opacity-80 ml-0.5">⌘↵</span>
           </Button>
 
           {/* Submit Solution Button */}
@@ -1377,27 +1491,25 @@ export function CodingWorkspacePage() {
             size="sm"
             onClick={handleSubmitSolution}
             disabled={isSubmitting}
-            className="h-7 gap-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-2.5 rounded-md border-0"
+            className="h-7 gap-1 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs px-2.5 rounded-md border-0 shadow-xs"
           >
             <Send size={11} className={cn(isSubmitting && "animate-pulse")} />
-            <span className="hidden sm:inline">
-              {submittedSuccess ? "Submitted ✓" : "Submit"}
-            </span>
+            <span className="hidden sm:inline">{submittedSuccess ? "Submitted ✓" : "Submit"}</span>
           </Button>
         </div>
       </header>
 
       {/* ─── SUB-HEADER BREADCRUMB & NOTIFICATION STRIP ──────────────────────── */}
       {submittedSuccess && (
-        <div className="flex items-center justify-between bg-emerald-950/70 border-b border-emerald-800/80 px-4 py-1.5 text-xs text-emerald-300 animate-fadeIn">
+        <div className="flex items-center justify-between bg-emerald-50 border-b border-emerald-200 px-4 py-1.5 text-xs text-emerald-800 animate-fadeIn">
           <div className="flex items-center gap-2">
-            <CheckCircle2 size={14} className="text-emerald-400" />
+            <CheckCircle2 size={14} className="text-emerald-600" />
             <span className="font-semibold">Solution verified & submitted successfully!</span>
-            <span className="text-emerald-400/80 font-mono">(+100 XP Earned)</span>
+            <span className="text-emerald-700 font-mono">(+100 XP Earned)</span>
           </div>
           <Link
             to="/app/tracks"
-            className="flex items-center gap-1 font-semibold text-emerald-300 hover:text-white underline underline-offset-2"
+            className="flex items-center gap-1 font-semibold text-emerald-700 hover:text-emerald-900 underline underline-offset-2"
           >
             Next Challenge <ChevronRight size={13} />
           </Link>
@@ -1405,11 +1517,11 @@ export function CodingWorkspacePage() {
       )}
 
       {/* ─── SPLIT MAIN VIEW: EDITOR (LEFT) & WORKBENCH (RIGHT) ──────────────── */}
-      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden">
+      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden border-t border-slate-200">
         {/* ─── LEFT PANEL: MONOSPACE CODE EDITOR ─────────────────────────────── */}
-        <div className="flex flex-1 flex-col border-b lg:border-b-0 lg:border-r border-slate-800/90 bg-[#080D1A] min-w-0">
+        <div className="flex flex-1 flex-col border-b lg:border-b-0 lg:border-r border-slate-800 bg-slate-950 min-w-0">
           {/* Editor Sub-Bar */}
-          <div className="flex h-8 flex-none items-center justify-between border-b border-slate-800/80 bg-[#060A14] px-3 text-[11px] text-slate-400 font-mono select-none">
+          <div className="flex h-8 flex-none items-center justify-between border-b border-slate-800 bg-slate-900 px-3 text-[11px] text-slate-400 font-mono select-none">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5 text-slate-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
@@ -1518,9 +1630,9 @@ export function CodingWorkspacePage() {
         </div>
 
         {/* ─── RIGHT PANEL: OUTPUT & TEST WORKBENCH ─────────────────────────── */}
-        <div className="flex flex-1 flex-col bg-[#050914] min-w-0 lg:max-w-[48%] xl:max-w-[45%]">
+        <div className="flex flex-1 flex-col bg-white min-w-0 lg:max-w-[48%] xl:max-w-[45%]">
           {/* Workbench Tabs Header */}
-          <div className="flex h-8 flex-none items-center justify-between border-b border-slate-800/90 bg-[#060A14] px-2.5 select-none">
+          <div className="flex h-8 flex-none items-center justify-between border-b border-slate-200 bg-slate-50 px-2.5 select-none">
             <div className="flex items-center gap-1">
               {/* Console Tab */}
               <button
@@ -1529,14 +1641,14 @@ export function CodingWorkspacePage() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition",
                   activeTab === "console"
-                    ? "bg-slate-800 text-cyan-300 border border-slate-700/60"
-                    : "text-slate-400 hover:text-white hover:bg-slate-900",
+                    ? "bg-white text-slate-900 border border-slate-200 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100",
                 )}
               >
                 <Terminal size={13} />
                 <span>Console</span>
                 {logs.length > 0 && (
-                  <span className="ml-1 rounded-full bg-slate-700/80 px-1.5 py-0.2 text-[10px] font-mono text-slate-300">
+                  <span className="ml-1 rounded-full bg-slate-100 px-1.5 py-0.2 text-[10px] font-mono text-slate-600">
                     {logs.length}
                   </span>
                 )}
@@ -1549,13 +1661,13 @@ export function CodingWorkspacePage() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition",
                   activeTab === "tests"
-                    ? "bg-slate-800 text-emerald-300 border border-slate-700/60"
-                    : "text-slate-400 hover:text-white hover:bg-slate-900",
+                    ? "bg-white text-slate-900 border border-slate-200 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100",
                 )}
               >
                 <CheckCircle2 size={13} />
                 <span>Test Cases</span>
-                <span className="ml-1 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800/60 px-1.5 py-0.2 text-[10px] font-mono">
+                <span className="ml-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 px-1.5 py-0.2 text-[10px] font-mono font-semibold">
                   {currentTemplate.tests.filter((t) => t.passed).length}/{currentTemplate.tests.length}
                 </span>
               </button>
@@ -1567,11 +1679,11 @@ export function CodingWorkspacePage() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition",
                   activeTab === "preview"
-                    ? "bg-slate-800 text-purple-300 border border-slate-700/60"
-                    : "text-slate-400 hover:text-white hover:bg-slate-900",
+                    ? "bg-white text-slate-900 border border-slate-200 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100",
                 )}
               >
-                <Sparkles size={13} />
+                <Monitor size={13} />
                 <span>Live Preview</span>
               </button>
 
@@ -1582,8 +1694,8 @@ export function CodingWorkspacePage() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition",
                   activeTab === "problem"
-                    ? "bg-slate-800 text-amber-300 border border-slate-700/60"
-                    : "text-slate-400 hover:text-white hover:bg-slate-900",
+                    ? "bg-white text-slate-900 border border-slate-200 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100",
                 )}
               >
                 <HelpCircle size={13} />
@@ -1598,7 +1710,7 @@ export function CodingWorkspacePage() {
                   type="button"
                   onClick={() => setLogs([])}
                   title="Clear Console Output"
-                  className="flex h-6 w-6 items-center justify-center rounded text-slate-500 hover:text-slate-300 hover:bg-slate-800 transition"
+                  className="flex h-6 w-6 items-center justify-center rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
                 >
                   <Trash2 size={12} />
                 </button>
@@ -1608,7 +1720,7 @@ export function CodingWorkspacePage() {
                   type="button"
                   onClick={handleRunTests}
                   title="Re-run all test assertions"
-                  className="flex items-center gap-1 text-[11px] font-semibold text-emerald-400 hover:text-emerald-300 px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40"
+                  className="flex items-center gap-1 text-[11px] font-semibold text-emerald-700 hover:text-emerald-800 px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200"
                 >
                   <Play size={10} className="fill-current" /> Run Tests
                 </button>
@@ -1617,10 +1729,15 @@ export function CodingWorkspacePage() {
           </div>
 
           {/* Tab Content Area */}
-          <div className="flex-1 overflow-y-auto p-3.5 custom-scrollbar font-mono text-xs bg-[#040711]">
+          <div
+            className={cn(
+              "flex-1 overflow-y-auto p-3.5 custom-scrollbar text-xs",
+              activeTab === "console" ? "font-mono bg-slate-950 text-slate-200" : "font-sans bg-white text-slate-900",
+            )}
+          >
             {/* ─── TAB 1: CONSOLE LOGS ──────────────────────────────────────── */}
             {activeTab === "console" && (
-              <div className="space-y-2">
+              <div className="space-y-2 font-mono">
                 {/* Search / Filter logs bar */}
                 <div className="flex items-center justify-between border-b border-slate-800 pb-2">
                   <div className="flex items-center gap-1.5 text-slate-500 w-full max-w-xs">
@@ -1633,9 +1750,7 @@ export function CodingWorkspacePage() {
                       className="bg-transparent text-xs text-slate-300 placeholder-slate-600 focus:outline-none w-full"
                     />
                   </div>
-                  <span className="text-[10px] text-slate-500 font-mono">
-                    {filteredLogs.length} events
-                  </span>
+                  <span className="text-[10px] text-slate-500 font-mono">{filteredLogs.length} events</span>
                 </div>
 
                 {/* Log messages */}
@@ -1643,20 +1758,18 @@ export function CodingWorkspacePage() {
                   <div className="py-12 text-center text-slate-600">
                     <Terminal size={24} className="mx-auto mb-2 opacity-50" />
                     <p className="text-xs">No console events logged.</p>
-                    <p className="text-[11px] text-slate-700 mt-1">
+                    <p className="text-[11px] text-slate-600 mt-1">
                       Press <span className="text-cyan-400 font-bold">⌘+Enter</span> or click Run Code to execute.
                     </p>
                   </div>
                 ) : (
-                  <div className="space-y-1 text-slate-300">
+                  <div className="space-y-1 text-slate-300 font-mono">
                     {filteredLogs.map((log) => (
                       <div
                         key={log.id}
-                        className="flex items-start gap-2 rounded px-2 py-1 hover:bg-white/[0.02] transition leading-relaxed whitespace-pre-wrap"
+                        className="flex items-start gap-2 rounded px-2 py-1 hover:bg-white/[0.04] transition leading-relaxed whitespace-pre-wrap"
                       >
-                        <span className="text-[10px] text-slate-600 select-none pt-0.5">
-                          {log.timestamp}
-                        </span>
+                        <span className="text-[10px] text-slate-500 select-none pt-0.5">{log.timestamp}</span>
                         {log.type === "success" ? (
                           <span className="text-emerald-400 font-semibold">{log.message}</span>
                         ) : log.type === "warn" ? (
@@ -1679,13 +1792,12 @@ export function CodingWorkspacePage() {
             {activeTab === "tests" && (
               <div className="space-y-3 font-sans">
                 {/* Suite Header Summary */}
-                <div className="flex items-center justify-between rounded-lg bg-slate-900/90 border border-slate-800 p-3">
+                <div className="flex items-center justify-between rounded-lg bg-slate-50 border border-slate-200 p-3">
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                      Automated Assertions
-                    </h4>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      {currentTemplate.tests.filter((t) => t.passed).length} of {currentTemplate.tests.length} tests passing
+                    <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Automated Assertions</h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      {currentTemplate.tests.filter((t) => t.passed).length} of {currentTemplate.tests.length} tests
+                      passing
                     </p>
                   </div>
                   <Badge variant="success" className="gap-1 text-xs">
@@ -1698,36 +1810,36 @@ export function CodingWorkspacePage() {
                   {currentTemplate.tests.map((test, index) => (
                     <div
                       key={test.id}
-                      className="rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 hover:border-slate-700/80 transition"
+                      className="rounded-lg border border-slate-200 bg-white p-3 hover:border-slate-300 transition shadow-xs"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-2">
                           {test.passed ? (
-                            <CheckCircle2 size={15} className="text-emerald-400 flex-none" />
+                            <CheckCircle2 size={15} className="text-emerald-600 flex-none" />
                           ) : (
-                            <XCircle size={15} className="text-rose-400 flex-none" />
+                            <XCircle size={15} className="text-rose-600 flex-none" />
                           )}
-                          <span className="text-xs font-semibold text-white">
+                          <span className="text-xs font-semibold text-slate-900">
                             Test #{index + 1}: {test.title}
                           </span>
                         </div>
-                        <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/40">
+                        <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">
                           {test.durationMs}ms
                         </span>
                       </div>
 
                       <div className="mt-2.5 grid grid-cols-2 gap-2 text-[11px] font-mono">
-                        <div className="rounded bg-slate-950 p-2 border border-slate-800/60">
-                          <span className="text-[10px] text-slate-500 uppercase block mb-0.5">
+                        <div className="rounded bg-slate-50 p-2 border border-slate-200">
+                          <span className="text-[10px] text-slate-500 uppercase block mb-0.5 font-sans font-medium">
                             Expected
                           </span>
-                          <span className="text-slate-300 break-all">{test.expectedOutput}</span>
+                          <span className="text-slate-700 break-all">{test.expectedOutput}</span>
                         </div>
-                        <div className="rounded bg-slate-950 p-2 border border-slate-800/60">
-                          <span className="text-[10px] text-slate-500 uppercase block mb-0.5">
+                        <div className="rounded bg-emerald-50/50 p-2 border border-emerald-200">
+                          <span className="text-[10px] text-emerald-700 uppercase block mb-0.5 font-sans font-medium">
                             Actual
                           </span>
-                          <span className="text-emerald-400 break-all">{test.actualOutput}</span>
+                          <span className="text-emerald-700 break-all font-semibold">{test.actualOutput}</span>
                         </div>
                       </div>
                     </div>
@@ -1740,17 +1852,15 @@ export function CodingWorkspacePage() {
             {activeTab === "preview" && (
               <div className="flex flex-col h-full space-y-3 font-sans">
                 {/* Viewport bar */}
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <span className="text-xs font-semibold text-slate-300">
-                    Live Component Simulator
-                  </span>
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  <span className="text-xs font-semibold text-slate-800">Live Component Simulator</span>
                   <div className="flex items-center gap-1 text-slate-400">
                     <button
                       type="button"
                       onClick={() => setPreviewViewport("desktop")}
                       className={cn(
-                        "p-1 rounded hover:text-white",
-                        previewViewport === "desktop" && "text-cyan-400 bg-slate-800",
+                        "p-1 rounded hover:text-slate-800",
+                        previewViewport === "desktop" && "text-indigo-600 bg-slate-100",
                       )}
                       title="Desktop View"
                     >
@@ -1760,8 +1870,8 @@ export function CodingWorkspacePage() {
                       type="button"
                       onClick={() => setPreviewViewport("tablet")}
                       className={cn(
-                        "p-1 rounded hover:text-white",
-                        previewViewport === "tablet" && "text-cyan-400 bg-slate-800",
+                        "p-1 rounded hover:text-slate-800",
+                        previewViewport === "tablet" && "text-indigo-600 bg-slate-100",
                       )}
                       title="Tablet View"
                     >
@@ -1771,8 +1881,8 @@ export function CodingWorkspacePage() {
                       type="button"
                       onClick={() => setPreviewViewport("mobile")}
                       className={cn(
-                        "p-1 rounded hover:text-white",
-                        previewViewport === "mobile" && "text-cyan-400 bg-slate-800",
+                        "p-1 rounded hover:text-slate-800",
+                        previewViewport === "mobile" && "text-indigo-600 bg-slate-100",
                       )}
                       title="Mobile View"
                     >
@@ -1782,7 +1892,7 @@ export function CodingWorkspacePage() {
                 </div>
 
                 {/* Render container */}
-                <div className="flex flex-1 items-center justify-center p-4 bg-slate-950 rounded-xl border border-slate-800/80">
+                <div className="flex flex-1 items-center justify-center p-4 bg-slate-50 rounded-xl border border-slate-200">
                   {language === "react" ? (
                     <div
                       className={cn(
@@ -1795,21 +1905,17 @@ export function CodingWorkspacePage() {
                       )}
                     >
                       {selectedTemplateId === "react-counter" && (
-                        <div className="p-5 rounded-xl bg-slate-900 border border-slate-800 text-white shadow-2xl">
-                          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <h3 className="text-sm font-bold text-cyan-400">
-                              EthioTech Reactive Counter
-                            </h3>
-                            <span className="text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800/50 px-2 py-0.5 rounded-full">
+                        <div className="p-5 rounded-xl bg-white border border-slate-200 text-slate-900 shadow-sm">
+                          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <h3 className="text-sm font-bold text-indigo-600">EthioTech Reactive Counter</h3>
+                            <span className="text-[10px] font-mono bg-indigo-50 text-indigo-700 border border-indigo-200 px-2 py-0.5 rounded-full font-semibold">
                               Step: ±{previewStep}
                             </span>
                           </div>
 
                           <div className="my-5 text-center">
-                            <div className="text-4xl font-mono font-extrabold text-white">
-                              {previewCounter}
-                            </div>
-                            <p className="text-[11px] text-slate-400 mt-1 font-mono">
+                            <div className="text-4xl font-mono font-extrabold text-slate-900">{previewCounter}</div>
+                            <p className="text-[11px] text-slate-500 mt-1 font-mono">
                               Val: {previewCounter >= 0 ? `+${previewCounter}` : previewCounter}
                             </p>
                           </div>
@@ -1818,27 +1924,27 @@ export function CodingWorkspacePage() {
                             <button
                               type="button"
                               onClick={() => setPreviewCounter((c) => c - previewStep)}
-                              className="rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 transition py-2 text-xs font-semibold text-slate-200 border border-slate-700"
+                              className="rounded-lg bg-slate-100 hover:bg-slate-200 active:scale-95 transition py-2 text-xs font-semibold text-slate-800 border border-slate-200"
                             >
                               -{previewStep}
                             </button>
                             <button
                               type="button"
                               onClick={() => setPreviewCounter(0)}
-                              className="rounded-lg bg-slate-800/60 hover:bg-slate-700/60 active:scale-95 transition py-2 text-[11px] font-mono text-slate-400 border border-slate-700/50"
+                              className="rounded-lg bg-slate-50 hover:bg-slate-100 active:scale-95 transition py-2 text-[11px] font-mono text-slate-500 border border-slate-200"
                             >
                               Reset
                             </button>
                             <button
                               type="button"
                               onClick={() => setPreviewCounter((c) => c + previewStep)}
-                              className="rounded-lg bg-cyan-500 hover:bg-cyan-400 active:scale-95 transition py-2 text-xs font-bold text-slate-950 shadow-md shadow-cyan-500/20"
+                              className="rounded-lg bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition py-2 text-xs font-bold text-white shadow-xs"
                             >
                               +{previewStep}
                             </button>
                           </div>
 
-                          <div className="mt-3 flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-800">
+                          <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">
                             <span>Step:</span>
                             <div className="flex gap-1.5 font-mono">
                               {[1, 5, 10].map((s) => (
@@ -1849,8 +1955,8 @@ export function CodingWorkspacePage() {
                                   className={cn(
                                     "px-2 py-0.5 rounded text-[11px] transition",
                                     previewStep === s
-                                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-                                      : "bg-slate-800 text-slate-400 hover:text-white",
+                                      ? "bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold"
+                                      : "bg-slate-100 text-slate-600 hover:text-slate-900",
                                   )}
                                 >
                                   {s}
@@ -1862,13 +1968,13 @@ export function CodingWorkspacePage() {
                       )}
 
                       {selectedTemplateId === "react-todo" && (
-                        <div className="p-5 bg-slate-900 rounded-xl border border-slate-800 text-white shadow-xl">
-                          <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                        <div className="p-5 bg-white rounded-xl border border-slate-200 text-slate-900 shadow-sm">
+                          <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                             <div>
-                              <h4 className="font-bold text-xs text-cyan-300">Sprint Backlog</h4>
-                              <p className="text-[10px] text-slate-400">Interactive Tasks</p>
+                              <h4 className="font-bold text-xs text-slate-900">Sprint Backlog</h4>
+                              <p className="text-[10px] text-slate-500">Interactive Tasks</p>
                             </div>
-                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60 font-semibold">
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">
                               {previewTasks.filter((t) => t.completed).length}/{previewTasks.length} Done
                             </span>
                           </div>
@@ -1884,17 +1990,15 @@ export function CodingWorkspacePage() {
                                     ),
                                   )
                                 }
-                                className="flex items-center gap-2 p-2 rounded bg-slate-800/70 hover:bg-slate-800 cursor-pointer text-xs select-none"
+                                className="flex items-center gap-2 p-2 rounded bg-slate-50 hover:bg-slate-100 border border-slate-100 cursor-pointer text-xs select-none"
                               >
                                 <input
                                   type="checkbox"
                                   checked={t.completed}
                                   onChange={() => {}}
-                                  className="h-3 w-3 accent-cyan-500 pointer-events-none"
+                                  className="h-3 w-3 accent-indigo-600 pointer-events-none"
                                 />
-                                <span
-                                  className={t.completed ? "line-through text-slate-500" : "text-slate-200"}
-                                >
+                                <span className={t.completed ? "line-through text-slate-400" : "text-slate-700"}>
                                   {t.text}
                                 </span>
                               </li>
@@ -1904,31 +2008,29 @@ export function CodingWorkspacePage() {
                       )}
 
                       {selectedTemplateId === "react-telemetry" && (
-                        <div className="p-5 bg-slate-900 rounded-xl border border-slate-800 text-white shadow-xl font-mono">
-                          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+                        <div className="p-5 bg-white rounded-xl border border-slate-200 text-slate-900 shadow-sm font-mono">
+                          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                             <div className="flex items-center gap-2">
-                              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                              <span className="text-xs font-bold text-slate-200">
-                                Live Telemetry Stream
-                              </span>
+                              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                              <span className="text-xs font-bold text-slate-900">Live Telemetry Stream</span>
                             </div>
-                            <span className="text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">
+                            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
                               LIVE
                             </span>
                           </div>
 
                           <div className="grid grid-cols-3 gap-2 my-3 text-center">
-                            <div className="p-2 bg-slate-950 rounded border border-slate-800">
+                            <div className="p-2 bg-slate-50 rounded border border-slate-200">
                               <p className="text-[10px] text-slate-500">Latency</p>
-                              <p className="text-sm font-bold text-cyan-300">24ms</p>
+                              <p className="text-sm font-bold text-indigo-600">24ms</p>
                             </div>
-                            <div className="p-2 bg-slate-950 rounded border border-slate-800">
+                            <div className="p-2 bg-slate-50 rounded border border-slate-200">
                               <p className="text-[10px] text-slate-500">CPU</p>
-                              <p className="text-sm font-bold text-violet-300">14%</p>
+                              <p className="text-sm font-bold text-violet-600">14%</p>
                             </div>
-                            <div className="p-2 bg-slate-950 rounded border border-slate-800">
+                            <div className="p-2 bg-slate-50 rounded border border-slate-200">
                               <p className="text-[10px] text-slate-500">Memory</p>
-                              <p className="text-sm font-bold text-emerald-300">42MB</p>
+                              <p className="text-sm font-bold text-emerald-600">42MB</p>
                             </div>
                           </div>
                         </div>
@@ -1937,18 +2039,18 @@ export function CodingWorkspacePage() {
                   ) : (
                     /* Non-React execution representation */
                     <div className="text-center py-6 space-y-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 mx-auto">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 mx-auto border border-indigo-100">
                         <Activity size={24} />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-white">
+                        <p className="text-sm font-semibold text-slate-900">
                           {LANGUAGE_META[language].name} Native Sandbox
                         </p>
-                        <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
+                        <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
                           CLI and backend code execute in a secure isolated {langMeta.runtimeEngine}.
                         </p>
                       </div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
                         <Check size={12} /> Execution Engine Ready (Exit Code: 0)
                       </div>
                     </div>
@@ -1961,40 +2063,32 @@ export function CodingWorkspacePage() {
             {activeTab === "problem" && (
               <div className="space-y-4 font-sans text-xs">
                 <div>
-                  <div className="flex items-center gap-1.5 text-amber-400 font-bold uppercase tracking-wider text-[11px]">
+                  <div className="flex items-center gap-1.5 text-amber-600 font-bold uppercase tracking-wider text-[11px]">
                     <Zap size={13} />
                     <span>Objective</span>
                   </div>
-                  <h3 className="text-sm font-bold text-white mt-1">
-                    {currentTemplate.problemDescription.title}
-                  </h3>
-                  <p className="text-slate-300 mt-1 leading-relaxed">
-                    {currentTemplate.problemDescription.goal}
-                  </p>
+                  <h3 className="text-sm font-bold text-slate-900 mt-1">{currentTemplate.problemDescription.title}</h3>
+                  <p className="text-slate-600 mt-1 leading-relaxed">{currentTemplate.problemDescription.goal}</p>
                 </div>
 
-                <div className="space-y-2 border-t border-slate-800 pt-3">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                    Checkpoints & Criteria
-                  </h4>
+                <div className="space-y-2 border-t border-slate-100 pt-3">
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Checkpoints & Criteria</h4>
                   <ul className="space-y-1.5">
                     {currentTemplate.problemDescription.checkpoints.map((cp, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-slate-300">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                      <li key={idx} className="flex items-start gap-2 text-slate-600">
+                        <span className="text-emerald-600 font-bold">✓</span>
                         <span>{cp}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="space-y-1.5 border-t border-slate-800 pt-3">
-                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                    Constraints
-                  </h4>
-                  <ul className="space-y-1 text-slate-400">
+                <div className="space-y-1.5 border-t border-slate-100 pt-3">
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Constraints</h4>
+                  <ul className="space-y-1 text-slate-500">
                     {currentTemplate.problemDescription.constraints.map((c, idx) => (
                       <li key={idx} className="flex items-center gap-2">
-                        <span className="text-slate-600 font-mono">▪</span>
+                        <span className="text-slate-400 font-mono">▪</span>
                         <span>{c}</span>
                       </li>
                     ))}
@@ -2003,7 +2097,11 @@ export function CodingWorkspacePage() {
 
                 <div className="pt-2">
                   <Link to="/app/tracks">
-                    <Button variant="outline" size="sm" className="w-full text-xs gap-1.5">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full text-xs gap-1.5 border-slate-200 text-slate-700 hover:bg-slate-50"
+                    >
                       <BookOpen size={13} /> View Full Track Curriculum
                     </Button>
                   </Link>

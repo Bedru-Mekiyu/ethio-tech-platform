@@ -170,8 +170,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
           ? "purple"
           : "default";
 
-  const statusVariant =
-    user.status === "active" ? "success" : user.status === "suspended" ? "danger" : "default";
+  const statusVariant = user.status === "active" ? "success" : user.status === "suspended" ? "danger" : "default";
 
   return (
     <>
@@ -180,33 +179,33 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
       {/* Slide-Over Drawer */}
       <aside
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col border-l border-[var(--border)] bg-[var(--bg-card)] shadow-2xl overflow-hidden"
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-lg flex-col border-l border-slate-200 bg-white shadow-2xl overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-label="User Quick Action Drawer"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[var(--border)] px-6 py-4 bg-[var(--bg)]/80">
+        <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-slate-50/80">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-[var(--border)] bg-primary/10 text-primary flex items-center justify-center font-bold text-lg">
+            <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full border border-indigo-200 bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
               {user.avatarUrl ? (
                 <img src={user.avatarUrl} alt={user.fullName} className="h-full w-full object-cover" />
               ) : (
-                user.fullName?.charAt(0)?.toUpperCase() ?? "U"
+                (user.fullName?.charAt(0)?.toUpperCase() ?? "U")
               )}
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white truncate">{user.fullName}</h2>
-                {user.isVerified && <CheckCircle2 size={16} className="text-success shrink-0" />}
+                <h2 className="text-base font-bold text-slate-900 truncate">{user.fullName}</h2>
+                {user.isVerified && <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />}
               </div>
-              <p className="text-xs text-[var(--text-muted)] truncate">{user.email}</p>
+              <p className="text-xs text-slate-500 truncate">{user.email}</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-[var(--text-muted)] hover:bg-white/5 hover:text-white"
+            className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
             aria-label="Close drawer"
           >
             <X size={18} />
@@ -241,26 +240,30 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-3 gap-2.5">
-            <div className="rounded-xl border border-[var(--border)] bg-white/[0.02] p-3 text-center">
-              <span className="text-[11px] uppercase tracking-wider text-[var(--text-muted)]">XP & Level</span>
-              <p className="mt-1 text-base font-bold text-primary">{(user.xp ?? 0).toLocaleString()}</p>
-              <p className="text-[10px] text-[var(--text-secondary)]">Lvl {user.level ?? 1}</p>
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+              <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">XP & Level</span>
+              <p className="mt-1 text-base font-bold text-indigo-600">{(user.xp ?? 0).toLocaleString()}</p>
+              <p className="text-[10px] text-slate-500">Lvl {user.level ?? 1}</p>
             </div>
-            <div className="rounded-xl border border-[var(--border)] bg-white/[0.02] p-3 text-center">
-              <span className="text-[11px] uppercase tracking-wider text-[var(--text-muted)]">Sessions</span>
-              <p className="mt-1 text-base font-bold text-white">{user.totalSessions ?? 0}</p>
-              <p className="text-[10px] text-[var(--text-secondary)]">Completed</p>
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+              <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">Sessions</span>
+              <p className="mt-1 text-base font-bold text-slate-900">{user.totalSessions ?? 0}</p>
+              <p className="text-[10px] text-slate-500">Completed</p>
             </div>
-            <div className="rounded-xl border border-[var(--border)] bg-white/[0.02] p-3 text-center">
-              <span className="text-[11px] uppercase tracking-wider text-[var(--text-muted)]">Rating</span>
-              <p className="mt-1 text-base font-bold text-warning">{user.mentorRating ? `${user.mentorRating}/5` : "N/A"}</p>
-              <p className="text-[10px] text-[var(--text-secondary)]">Score: {user.mentorScore ? Math.round(user.mentorScore) : "-"}</p>
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+              <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">Rating</span>
+              <p className="mt-1 text-base font-bold text-amber-600">
+                {user.mentorRating ? `${user.mentorRating}/5` : "N/A"}
+              </p>
+              <p className="text-[10px] text-slate-500">
+                Score: {user.mentorScore ? Math.round(user.mentorScore) : "-"}
+              </p>
             </div>
           </div>
 
           {/* Quick Actions Panel */}
-          <div className="space-y-2 rounded-2xl border border-primary/20 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary">Quick Management Actions</p>
+          <div className="space-y-2 rounded-2xl border border-indigo-100 bg-indigo-50/40 p-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-indigo-700">Quick Management Actions</p>
             <div className="grid grid-cols-2 gap-2 pt-1">
               {!user.isVerified ? (
                 <Button
@@ -340,49 +343,44 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 <Shield size={14} /> Change Role
               </Button>
 
-              <Button
-                size="sm"
-                variant="danger"
-                onClick={() => setDeleteOpen(true)}
-                className="gap-1.5 text-xs w-full"
-              >
+              <Button size="sm" variant="danger" onClick={() => setDeleteOpen(true)} className="gap-1.5 text-xs w-full">
                 <Trash2 size={14} /> Delete User
               </Button>
             </div>
           </div>
 
           {/* Profile Details */}
-          <div className="space-y-3 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 text-xs">
-            <p className="font-semibold uppercase tracking-wider text-[var(--text-muted)]">Profile Details</p>
+          <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+            <p className="font-semibold uppercase tracking-wider text-slate-500">Profile Details</p>
             <div className="grid gap-2.5">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                <span className="flex items-center gap-1.5 text-slate-500">
                   <Mail size={13} /> Email
                 </span>
-                <span className="text-white font-medium">{user.email}</span>
+                <span className="text-slate-900 font-medium">{user.email}</span>
               </div>
               {user.phone && (
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                  <span className="flex items-center gap-1.5 text-slate-500">
                     <Phone size={13} /> Phone
                   </span>
-                  <span className="text-white">{user.phone}</span>
+                  <span className="text-slate-900">{user.phone}</span>
                 </div>
               )}
               {user.city && (
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                  <span className="flex items-center gap-1.5 text-slate-500">
                     <MapPin size={13} /> City
                   </span>
-                  <span className="text-white">{user.city}</span>
+                  <span className="text-slate-900">{user.city}</span>
                 </div>
               )}
               {user.currentCompany && (
                 <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                  <span className="flex items-center gap-1.5 text-slate-500">
                     <Briefcase size={13} /> Company / Track
                   </span>
-                  <span className="text-white">{user.currentCompany}</span>
+                  <span className="text-slate-900">{user.currentCompany}</span>
                 </div>
               )}
             </div>
@@ -390,11 +388,11 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Interests & Skills */}
           {((user.expertise ?? []).length > 0 || (user.learningInterests ?? []).length > 0) && (
-            <div className="space-y-3 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 text-xs">
-              <p className="font-semibold uppercase tracking-wider text-[var(--text-muted)]">Expertise & Interests</p>
+            <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+              <p className="font-semibold uppercase tracking-wider text-slate-500">Expertise & Interests</p>
               {(user.expertise ?? []).length > 0 && (
                 <div className="space-y-1">
-                  <span className="text-[var(--text-muted)]">Expertise:</span>
+                  <span className="text-slate-500">Expertise:</span>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {user.expertise!.map((exp) => (
                       <Badge key={exp} variant="purple" className="text-[10px]">
@@ -406,7 +404,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
               )}
               {(user.learningInterests ?? []).length > 0 && (
                 <div className="space-y-1 pt-1">
-                  <span className="text-[var(--text-muted)]">Interests:</span>
+                  <span className="text-slate-500">Interests:</span>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {user.learningInterests!.map((int) => (
                       <Badge key={int} variant="default" className="text-[10px]">
@@ -421,34 +419,34 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Bio */}
           {user.bio && (
-            <div className="space-y-1.5 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 text-xs">
-              <p className="font-semibold uppercase tracking-wider text-[var(--text-muted)]">Bio</p>
-              <p className="text-[var(--text-secondary)] leading-relaxed">{user.bio}</p>
+            <div className="space-y-1.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+              <p className="font-semibold uppercase tracking-wider text-slate-500">Bio</p>
+              <p className="text-slate-700 leading-relaxed">{user.bio}</p>
             </div>
           )}
 
           {/* Security & Activity History */}
-          <div className="space-y-2.5 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 text-xs">
-            <p className="font-semibold uppercase tracking-wider text-[var(--text-muted)]">Security & Activity</p>
-            <div className="grid gap-2 text-[var(--text-secondary)]">
+          <div className="space-y-2.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+            <p className="font-semibold uppercase tracking-wider text-slate-500">Security & Activity</p>
+            <div className="grid gap-2 text-slate-600">
               <div className="flex justify-between">
                 <span>Last Login:</span>
-                <span className="text-white font-medium">{formatDate(user.lastLoginAt)}</span>
+                <span className="text-slate-900 font-medium">{formatDate(user.lastLoginAt)}</span>
               </div>
               {user.lastLoginIp && (
                 <div className="flex justify-between">
                   <span>Last IP:</span>
-                  <span className="font-mono text-white">{user.lastLoginIp}</span>
+                  <span className="font-mono text-slate-900">{user.lastLoginIp}</span>
                 </div>
               )}
               <div className="flex justify-between">
                 <span>Account Created:</span>
-                <span className="text-white">{formatDate(user.createdAt)}</span>
+                <span className="text-slate-900">{formatDate(user.createdAt)}</span>
               </div>
               {user.statusChangedAt && (
                 <div className="flex justify-between">
                   <span>Status Updated:</span>
-                  <span className="text-white">{formatDate(user.statusChangedAt)}</span>
+                  <span className="text-slate-900">{formatDate(user.statusChangedAt)}</span>
                 </div>
               )}
             </div>
@@ -456,7 +454,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
         </div>
 
         {/* Footer */}
-        <div className="border-t border-[var(--border)] p-4 bg-[var(--bg)] flex justify-end">
+        <div className="border-t border-slate-200 p-4 bg-slate-50 flex justify-end">
           <Button variant="outline" size="sm" onClick={onClose}>
             Close Drawer
           </Button>
@@ -466,24 +464,28 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
       {/* Suspend Confirmation Dialog */}
       {suspendOpen && (
         <>
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs" onClick={() => setSuspendOpen(false)} aria-hidden="true" />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-red-500/30 bg-[var(--bg-card)] p-6 shadow-2xl space-y-4"
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs"
+            onClick={() => setSuspendOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-red-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10 text-red-500">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                 <AlertTriangle size={20} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Suspend {user.fullName}</h3>
-                <p className="text-xs text-[var(--text-muted)]">Revokes platform access and active tokens.</p>
+                <h3 className="text-base font-bold text-slate-900">Suspend {user.fullName}</h3>
+                <p className="text-xs text-slate-500">Revokes platform access and active tokens.</p>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
                 Reason for suspension (optional)
               </label>
               <Input
@@ -513,24 +515,28 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
       {/* Reset Password Dialog */}
       {resetPasswordOpen && (
         <>
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs" onClick={() => setResetPasswordOpen(false)} aria-hidden="true" />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-2xl space-y-4"
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs"
+            onClick={() => setResetPasswordOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                 <Key size={20} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Reset User Password</h3>
-                <p className="text-xs text-[var(--text-muted)]">Set a new temporary password for {user.fullName}.</p>
+                <h3 className="text-base font-bold text-slate-900">Reset User Password</h3>
+                <p className="text-xs text-slate-500">Set a new temporary password for {user.fullName}.</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
                 New Password
               </label>
               <div className="flex gap-2">
@@ -541,21 +547,21 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                   className="font-mono text-sm"
                 />
                 <Button size="sm" variant="outline" onClick={copyPassword} className="shrink-0">
-                  {copiedPassword ? <Check size={14} className="text-success" /> : <Copy size={14} />}
+                  {copiedPassword ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
                 </Button>
               </div>
               <div className="flex justify-between items-center pt-1">
                 <button
                   type="button"
                   onClick={generateRandomPassword}
-                  className="text-xs text-primary hover:underline flex items-center gap-1"
+                  className="text-xs text-indigo-600 hover:underline flex items-center gap-1 font-medium"
                 >
                   <Sparkles size={12} /> Generate Secure Random Password
                 </button>
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-[var(--border)]">
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
               <Button variant="outline" size="sm" onClick={() => setResetPasswordOpen(false)}>
                 Cancel
               </Button>
@@ -576,30 +582,34 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
       {/* Role Change Dialog */}
       {roleChangeOpen && (
         <>
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs" onClick={() => setRoleChangeOpen(false)} aria-hidden="true" />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 shadow-2xl space-y-4"
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs"
+            onClick={() => setRoleChangeOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10 text-purple-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
                 <Shield size={20} />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Change Role</h3>
-                <p className="text-xs text-[var(--text-muted)]">Assign a new permission role to {user.fullName}.</p>
+                <h3 className="text-base font-bold text-slate-900">Change Role</h3>
+                <p className="text-xs text-slate-500">Assign a new permission role to {user.fullName}.</p>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">
                 Select Platform Role
               </label>
               <select
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
-                className="h-10 w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] px-3 text-sm text-[var(--text-primary)] outline-none focus:border-primary"
+                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
               >
                 <option value="student">Student</option>
                 <option value="mentor">Mentor</option>
@@ -611,7 +621,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
               </select>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-[var(--border)]">
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
               <Button variant="outline" size="sm" onClick={() => setRoleChangeOpen(false)}>
                 Cancel
               </Button>
@@ -668,11 +678,11 @@ export function AdminUsersPage() {
   return (
     <div className="space-y-6 text-[var(--text-primary)]">
       {/* Header */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">User Management Directory</h1>
-            <p className="mt-0.5 text-xs text-zinc-400">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">User Management Directory</h1>
+            <p className="mt-0.5 text-xs text-slate-500">
               Search, filter, and execute administrative actions across all platform roles and accounts.
             </p>
           </div>
@@ -684,7 +694,7 @@ export function AdminUsersPage() {
                 queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
                 queryClient.invalidateQueries({ queryKey: ["admin", "users", "analytics"] });
               }}
-              className="text-xs text-zinc-300 hover:text-white"
+              className="text-xs text-slate-700 hover:text-slate-900 border-slate-200"
             >
               <RefreshCw size={12} className="mr-1" /> Refresh
             </Button>
@@ -692,7 +702,7 @@ export function AdminUsersPage() {
               variant="outline"
               size="sm"
               onClick={() => adminUserService.exportUsers({})}
-              className="text-xs text-zinc-300 hover:text-white"
+              className="text-xs text-slate-700 hover:text-slate-900 border-slate-200"
             >
               <Download size={12} className="mr-1" /> Export CSV
             </Button>
@@ -702,40 +712,40 @@ export function AdminUsersPage() {
 
       {/* Analytics Overview Ribbon */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Total Users</p>
-          <p className="mt-1 text-xl font-bold text-white">{totalUsers.toLocaleString()}</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">{activeUsers} active</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Total Users</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{totalUsers.toLocaleString()}</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">{activeUsers} active</p>
         </div>
 
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-violet-400 font-semibold">Students</p>
-          <p className="mt-1 text-xl font-bold text-white">{studentCount.toLocaleString()}</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">Learners</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-indigo-600 font-semibold">Students</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{studentCount.toLocaleString()}</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">Learners</p>
         </div>
 
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-emerald-400 font-semibold">Mentors</p>
-          <p className="mt-1 text-xl font-bold text-white">{mentorCount.toLocaleString()}</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">Active guides</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-emerald-600 font-semibold">Mentors</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{mentorCount.toLocaleString()}</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">Active guides</p>
         </div>
 
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-purple-400 font-semibold">Parents</p>
-          <p className="mt-1 text-xl font-bold text-white">{parentCount.toLocaleString()}</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">Family accounts</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-purple-600 font-semibold">Parents</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{parentCount.toLocaleString()}</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">Family accounts</p>
         </div>
 
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold">Admins & Staff</p>
-          <p className="mt-1 text-xl font-bold text-white">{adminCount.toLocaleString()}</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">Platform ops</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-amber-600 font-semibold">Admins & Staff</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{adminCount.toLocaleString()}</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">Platform ops</p>
         </div>
 
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-3.5">
-          <p className="text-[10px] uppercase tracking-wider text-sky-400 font-semibold">Verified Rate</p>
-          <p className="mt-1 text-xl font-bold text-white">{verifiedPercent}%</p>
-          <p className="text-[11px] text-zinc-400 mt-0.5">{verifiedUsers} verified</p>
+        <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-sm">
+          <p className="text-[10px] uppercase tracking-wider text-sky-600 font-semibold">Verified Rate</p>
+          <p className="mt-1 text-xl font-bold text-slate-900">{verifiedPercent}%</p>
+          <p className="text-[11px] text-slate-500 mt-0.5">{verifiedUsers} verified</p>
         </div>
       </div>
 

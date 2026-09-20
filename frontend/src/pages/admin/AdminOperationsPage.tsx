@@ -260,7 +260,8 @@ export function AdminOperationsPage() {
         const q = searchQuery.toLowerCase();
         const matchesAction = log.action?.toLowerCase().includes(q);
         const matchesResource = log.resource?.toLowerCase().includes(q);
-        const matchesActor = log.actor?.fullName?.toLowerCase().includes(q) || log.actor?.email?.toLowerCase().includes(q);
+        const matchesActor =
+          log.actor?.fullName?.toLowerCase().includes(q) || log.actor?.email?.toLowerCase().includes(q);
         const matchesIp = log.ip?.toLowerCase().includes(q);
         const matchesReason = typeof log.metadata?.reason === "string" && log.metadata.reason.toLowerCase().includes(q);
         if (!matchesAction && !matchesResource && !matchesActor && !matchesIp && !matchesReason) {
@@ -280,8 +281,15 @@ export function AdminOperationsPage() {
         const action = log.action?.toUpperCase() || "";
         if (selectedCategory === "USERS" && !action.includes("USER") && !action.includes("ROLE")) return false;
         if (selectedCategory === "MENTORS" && !action.includes("MENTOR")) return false;
-        if (selectedCategory === "SUBMISSIONS" && !action.includes("SUBMISSION") && !action.includes("FLAG")) return false;
-        if (selectedCategory === "SYSTEM" && !action.includes("CACHE") && !action.includes("HUB") && !action.includes("CONFIG")) return false;
+        if (selectedCategory === "SUBMISSIONS" && !action.includes("SUBMISSION") && !action.includes("FLAG"))
+          return false;
+        if (
+          selectedCategory === "SYSTEM" &&
+          !action.includes("CACHE") &&
+          !action.includes("HUB") &&
+          !action.includes("CONFIG")
+        )
+          return false;
       }
 
       return true;
@@ -341,13 +349,13 @@ export function AdminOperationsPage() {
   }
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
+    <div className="space-y-6 text-slate-900">
       {/* ─── 1. Command Center Header Banner ─── */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+      <Card className="rounded-2xl border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-[11px] font-medium text-emerald-700">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
@@ -361,30 +369,37 @@ export function AdminOperationsPage() {
                 API {health.live?.version ?? "v1"}
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-              Platform Operations Center
-            </h1>
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Real-time microservices orchestration, distributed telemetry meters, infrastructure readiness, and security audit streams.
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Operations Center</h1>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Real-time microservices orchestration, distributed telemetry meters, infrastructure readiness, and
+              security audit streams.
             </p>
           </div>
 
           {/* Quick Operations Actions */}
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             {/* Auto-refresh interval dropdown */}
-            <div className="flex items-center gap-1.5 rounded-lg border border-[#27272A] bg-[#141418] px-2.5 py-1 text-xs text-zinc-300">
-              <Clock size={12} className="text-sky-400" />
+            <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-600">
+              <Clock size={12} className="text-sky-500" />
               <span>Poll:</span>
               <select
                 aria-label="Select Telemetry Polling Interval"
                 value={refreshIntervalMs}
                 onChange={(e) => setRefreshIntervalMs(Number(e.target.value))}
-                className="bg-transparent font-medium text-white focus:outline-none cursor-pointer text-xs"
+                className="bg-transparent font-medium text-slate-900 focus:outline-none cursor-pointer text-xs"
               >
-                <option value={10000} className="bg-[#141418] text-white">10s</option>
-                <option value={30000} className="bg-[#141418] text-white">30s</option>
-                <option value={60000} className="bg-[#141418] text-white">60s</option>
-                <option value={0} className="bg-[#141418] text-white">Paused</option>
+                <option value={10000} className="bg-white text-slate-900">
+                  10s
+                </option>
+                <option value={30000} className="bg-white text-slate-900">
+                  30s
+                </option>
+                <option value={60000} className="bg-white text-slate-900">
+                  60s
+                </option>
+                <option value={0} className="bg-white text-slate-900">
+                  Paused
+                </option>
               </select>
             </div>
 
@@ -397,18 +412,18 @@ export function AdminOperationsPage() {
                 toast.success("Infrastructure state refreshed.");
               }}
               disabled={healthQuery.isFetching}
-              className="text-xs text-zinc-300 hover:text-white"
+              className="text-xs text-slate-700 hover:text-slate-900 border-slate-200 bg-white hover:bg-slate-50"
             >
-              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-violet-400 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={healthQuery.isFetching ? "animate-spin text-indigo-600 mr-1" : "mr-1"} />
               Refresh
             </Button>
           </div>
         </div>
 
         {/* Diagnostic Utility Buttons Bar */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-[#27272A] pt-3.5">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 mr-1 flex items-center gap-1">
-            <Terminal size={12} className="text-violet-400" />
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3.5">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1">
+            <Terminal size={12} className="text-indigo-600" />
             Quick Ops:
           </span>
           <Button
@@ -416,7 +431,7 @@ export function AdminOperationsPage() {
             size="sm"
             onClick={handlePingSFU}
             disabled={isDiagnosticRunning}
-            className="h-7 text-xs gap-1 font-medium"
+            className="h-7 text-xs gap-1 font-medium border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
           >
             <Video size={11} />
             Test LiveKit SFU
@@ -425,7 +440,7 @@ export function AdminOperationsPage() {
             variant="outline"
             size="sm"
             onClick={handleTestDatabase}
-            className="h-7 text-xs gap-1 font-medium"
+            className="h-7 text-xs gap-1 font-medium border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
           >
             <Database size={11} />
             Ping Database Pool
@@ -434,7 +449,7 @@ export function AdminOperationsPage() {
             variant="outline"
             size="sm"
             onClick={handlePurgeCache}
-            className="h-7 text-xs gap-1 font-medium"
+            className="h-7 text-xs gap-1 font-medium border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
           >
             <Trash2 size={11} />
             Flush CDN & Cache
@@ -446,11 +461,11 @@ export function AdminOperationsPage() {
       <div className="space-y-3">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-sm font-semibold text-white flex items-center gap-1.5">
-              <Server className="text-violet-400" size={15} />
+            <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+              <Server className="text-indigo-600" size={15} />
               Microservices Health Grid
             </h2>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-slate-500">
               Heartbeat monitoring across video SFU, document storage, and WebSocket gateways
             </p>
           </div>
@@ -470,11 +485,11 @@ export function AdminOperationsPage() {
             {microservices.map((svc) => (
               <Card
                 key={svc.id}
-                className="flex flex-col justify-between rounded-xl border-[#27272A] bg-[#0E0E11] p-4 shadow-sm transition-all hover:border-zinc-700"
+                className="flex flex-col justify-between rounded-xl border-slate-200/80 bg-white p-4 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-violet-400">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-indigo-600">
                       {svc.icon}
                     </div>
                     <Badge variant={svc.status === "operational" ? "success" : "warning"} size="sm" showDot>
@@ -482,25 +497,23 @@ export function AdminOperationsPage() {
                     </Badge>
                   </div>
 
-                  <h3 className="mt-3 text-xs font-bold text-white">{svc.name}</h3>
-                  <p className="text-[10px] font-medium text-zinc-500">{svc.category}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-400 line-clamp-2">
-                    {svc.description}
-                  </p>
+                  <h3 className="mt-3 text-xs font-bold text-slate-900">{svc.name}</h3>
+                  <p className="text-[10px] font-medium text-slate-500">{svc.category}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">{svc.description}</p>
                 </div>
 
-                <div className="mt-3 space-y-1.5 border-t border-[#27272A] pt-2.5">
+                <div className="mt-3 space-y-1.5 border-t border-slate-100 pt-2.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-zinc-500 text-[11px]">Latency:</span>
-                    <span className="font-semibold text-sky-400">{svc.latency}</span>
+                    <span className="text-slate-500 text-[11px]">Latency:</span>
+                    <span className="font-semibold text-sky-600">{svc.latency}</span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-zinc-500 text-[11px]">Load:</span>
-                    <span className="font-semibold text-emerald-400">{svc.throughput}</span>
+                    <span className="text-slate-500 text-[11px]">Load:</span>
+                    <span className="font-semibold text-emerald-600">{svc.throughput}</span>
                   </div>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500">
+                  <div className="flex items-center justify-between text-[11px] text-slate-500">
                     <span className="truncate max-w-[110px]">{svc.versionOrRegion}</span>
-                    <CheckCircle2 size={12} className="text-emerald-400 shrink-0" />
+                    <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
                   </div>
                 </div>
               </Card>
@@ -512,110 +525,116 @@ export function AdminOperationsPage() {
       {/* ─── 3. Live Resource Telemetry Grid ─── */}
       <div className="space-y-3">
         <div>
-          <h2 className="text-sm font-semibold text-white flex items-center gap-1.5">
-            <Activity className="text-sky-400" size={15} />
+          <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+            <Activity className="text-indigo-600" size={15} />
             Live Resource Telemetry
           </h2>
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-slate-500">
             Cluster hardware allocation, SLA latency distribution, and socket saturation
           </p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {/* Telemetry 1: Memory Allocation */}
-          <Card className="rounded-xl border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
+          <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                 Memory Allocation
               </span>
-              <Cpu size={14} className="text-violet-400" />
+              <Cpu size={14} className="text-indigo-600" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-white">86.4 MB</span>
-              <span className="text-xs text-zinc-500">/ 128 MB</span>
+              <span className="text-xl font-bold text-slate-900">86.4 MB</span>
+              <span className="text-xs text-slate-500">/ 128 MB</span>
             </div>
             <div className="mt-2.5 space-y-1">
-              <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
                 <div
-                  className="h-full rounded-full bg-violet-500 transition-all duration-500"
+                  className="h-full rounded-full bg-indigo-600 transition-all duration-500"
                   style={{ width: "67.5%" }}
                 />
               </div>
-              <div className="flex justify-between text-[10px] text-zinc-500">
+              <div className="flex justify-between text-[10px] text-slate-500">
                 <span>RSS: 142 MB</span>
-                <span className="text-emerald-400 font-medium">67.5% Utilized</span>
+                <span className="text-emerald-600 font-medium">67.5% Utilized</span>
               </div>
             </div>
           </Card>
 
           {/* Telemetry 2: API Gateway Latency p99 */}
-          <Card className="rounded-xl border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
+          <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                 API Latency (p99)
               </span>
-              <Zap size={14} className="text-amber-400" />
+              <Zap size={14} className="text-amber-500" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-white">42 ms</span>
-              <span className="text-[11px] font-medium text-emerald-400">&lt;150ms SLA</span>
+              <span className="text-xl font-bold text-slate-900">42 ms</span>
+              <span className="text-[11px] font-medium text-emerald-600">&lt;150ms SLA</span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-zinc-500 border-t border-[#27272A] pt-2">
-              <span>p50: <strong className="text-zinc-300">18ms</strong></span>
-              <span>p95: <strong className="text-zinc-300">38ms</strong></span>
-              <span>p99: <strong className="text-zinc-300">88ms</strong></span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+              <span>
+                p50: <strong className="text-slate-700">18ms</strong>
+              </span>
+              <span>
+                p95: <strong className="text-slate-700">38ms</strong>
+              </span>
+              <span>
+                p99: <strong className="text-slate-700">88ms</strong>
+              </span>
             </div>
           </Card>
 
           {/* Telemetry 3: Socket Concurrency */}
-          <Card className="rounded-xl border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
+          <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                 Socket Concurrency
               </span>
-              <Wifi size={14} className="text-emerald-400" />
+              <Wifi size={14} className="text-emerald-500" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-white">
-                {health.realtime?.activeSockets ?? 0}
-              </span>
-              <span className="text-xs text-zinc-500">Active Connections</span>
+              <span className="text-xl font-bold text-slate-900">{health.realtime?.activeSockets ?? 0}</span>
+              <span className="text-xs text-slate-500">Active Connections</span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-zinc-500 border-t border-[#27272A] pt-2">
-              <span>Rooms: <strong className="text-zinc-300">{health.realtime?.rooms ?? 0}</strong></span>
-              <span className="text-emerald-400 font-medium">100% WS</span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+              <span>
+                Rooms: <strong className="text-slate-700">{health.realtime?.rooms ?? 0}</strong>
+              </span>
+              <span className="text-emerald-600 font-medium">100% WS</span>
             </div>
           </Card>
 
           {/* Telemetry 4: Security Shield & Request Volume */}
-          <Card className="rounded-xl border-[#27272A] bg-[#0E0E11] p-4 shadow-sm">
+          <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                Security Shield
-              </span>
-              <ShieldCheck size={14} className="text-violet-400" />
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Security Shield</span>
+              <ShieldCheck size={14} className="text-indigo-600" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
-              <span className="text-xl font-bold text-white">99.98%</span>
-              <span className="text-xs text-zinc-500">Success Rate</span>
+              <span className="text-xl font-bold text-slate-900">99.98%</span>
+              <span className="text-xs text-slate-500">Success Rate</span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-zinc-500 border-t border-[#27272A] pt-2">
-              <span>Limiter: <strong className="text-zinc-300">200/15m</strong></span>
-              <span className="text-emerald-400 font-medium">Active</span>
+            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+              <span>
+                Limiter: <strong className="text-slate-700">200/15m</strong>
+              </span>
+              <span className="text-emerald-600 font-medium">Active</span>
             </div>
           </Card>
         </div>
       </div>
 
       {/* ─── 4. Searchable & Filterable Security Audit Log Stream ─── */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-xl">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between border-b border-[#27272A] pb-3.5">
+      <Card className="rounded-2xl border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 pb-3.5">
           <div>
             <div className="flex items-center gap-2">
-              <FileClock size={15} className="text-violet-400" />
-              <CardTitle className="text-sm font-semibold text-white">Privileged Security Audit Stream</CardTitle>
+              <FileClock size={15} className="text-indigo-600" />
+              <CardTitle className="text-sm font-semibold text-slate-900">Privileged Security Audit Stream</CardTitle>
             </div>
-            <CardDescription className="text-xs text-zinc-400 mt-0.5">
+            <CardDescription className="text-xs text-slate-500 mt-0.5">
               Tamper-evident logs of privileged administrative actions, role escalations, and system events.
             </CardDescription>
           </div>
@@ -625,7 +644,7 @@ export function AdminOperationsPage() {
               variant="outline"
               size="sm"
               onClick={handleExportAuditLogs}
-              className="text-xs gap-1 text-zinc-300 hover:text-white"
+              className="text-xs gap-1 text-slate-700 hover:text-slate-900 border-slate-200 bg-white hover:bg-slate-50"
             >
               <Download size={12} />
               Export JSON
@@ -637,30 +656,30 @@ export function AdminOperationsPage() {
         </div>
 
         {/* Filter Bar */}
-        <div className="mt-4 flex flex-col gap-2.5 rounded-lg border border-[#27272A] bg-[#141418] p-3 md:flex-row md:items-center md:justify-between">
+        <div className="mt-4 flex flex-col gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 md:flex-row md:items-center md:justify-between">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" size={13} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
             <input
               type="text"
               placeholder="Search action, actor, resource ID, or IP..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8 w-full rounded-md border border-[#27272A] bg-[#0E0E11] pl-8 pr-3 text-xs text-white placeholder:text-zinc-500 focus:border-violet-500 focus:outline-none"
+              className="h-8 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-colors"
             />
           </div>
 
           {/* Filter Dropdowns */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Category Filter */}
-            <div className="flex items-center gap-1 text-xs text-zinc-400">
-              <Filter size={12} className="text-violet-400" />
-              <span className="text-[11px]">Category:</span>
+            <div className="flex items-center gap-1 text-xs text-slate-600">
+              <Filter size={12} className="text-indigo-600" />
+              <span className="text-[11px] font-medium">Category:</span>
               <select
                 aria-label="Filter Audit Logs by Category"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="h-8 rounded-md border border-[#27272A] bg-[#0E0E11] px-2 text-xs font-medium text-white focus:outline-none cursor-pointer"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
               >
                 <option value="ALL">All Categories</option>
                 <option value="USERS">Users & Roles</option>
@@ -671,14 +690,14 @@ export function AdminOperationsPage() {
             </div>
 
             {/* Role Filter */}
-            <div className="flex items-center gap-1 text-xs text-zinc-400">
-              <Shield size={12} className="text-sky-400" />
-              <span className="text-[11px]">Role:</span>
+            <div className="flex items-center gap-1 text-xs text-slate-600">
+              <Shield size={12} className="text-indigo-600" />
+              <span className="text-[11px] font-medium">Role:</span>
               <select
                 aria-label="Filter Audit Logs by Role"
                 value={selectedRole}
                 onChange={(e) => setSelectedRole(e.target.value)}
-                className="h-8 rounded-md border border-[#27272A] bg-[#0E0E11] px-2 text-xs font-medium text-white focus:outline-none cursor-pointer"
+                className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs font-medium text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer"
               >
                 <option value="ALL">All Roles</option>
                 <option value="admin">Admin</option>
@@ -692,62 +711,61 @@ export function AdminOperationsPage() {
         {/* Audit Log Stream List */}
         {auditQuery.isLoading ? (
           <div className="mt-4 space-y-2.5">
-            <Skeleton className="h-16 rounded-lg" />
-            <Skeleton className="h-16 rounded-lg" />
-            <Skeleton className="h-16 rounded-lg" />
+            <Skeleton className="h-16 rounded-xl" />
+            <Skeleton className="h-16 rounded-xl" />
+            <Skeleton className="h-16 rounded-xl" />
           </div>
         ) : filteredLogs.length > 0 ? (
           <div className="mt-4 space-y-2.5">
             {filteredLogs.map((log) => {
               const isExpanded = expandedLogId === log._id;
               const role = log.actor?.role?.toLowerCase() ?? "unknown";
-              const roleBadgeVariant =
-                role === "admin" ? "purple" : role === "mentor" ? "cyan" : "default";
+              const roleBadgeVariant = role === "admin" ? "purple" : role === "mentor" ? "cyan" : "default";
 
               const method = (log.metadata?.method as string) ?? "ACTION";
               const methodColor =
                 method === "DELETE"
-                  ? "border-rose-500/30 bg-rose-500/10 text-rose-300"
+                  ? "border-rose-200 bg-rose-50 text-rose-700"
                   : method === "PATCH" || method === "PUT"
-                  ? "border-amber-500/30 bg-amber-500/10 text-amber-300"
-                  : method === "POST"
-                  ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
-                  : "border-sky-500/30 bg-sky-500/10 text-sky-300";
+                    ? "border-amber-200 bg-amber-50 text-amber-700"
+                    : method === "POST"
+                      ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                      : "border-sky-200 bg-sky-50 text-sky-700";
 
               return (
                 <div
                   key={log._id}
-                  className="rounded-lg border border-[#27272A] bg-[#141418] p-3 transition-all hover:border-zinc-700"
+                  className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs transition-all hover:border-slate-300 hover:shadow-sm"
                 >
                   <div className="flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between">
                     {/* Left: Action & Resource */}
                     <div className="flex items-start gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#0E0E11] text-violet-400 shrink-0">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-100 bg-slate-50 text-indigo-600 shrink-0">
                         {log.action.includes("FLAG") ? (
-                          <ShieldAlert size={14} className="text-rose-400" />
+                          <ShieldAlert size={14} className="text-rose-500" />
                         ) : log.action.includes("APPROVE") ? (
-                          <CheckCircle2 size={14} className="text-emerald-400" />
+                          <CheckCircle2 size={14} className="text-emerald-600" />
                         ) : log.action.includes("CACHE") ? (
-                          <Zap size={14} className="text-amber-400" />
+                          <Zap size={14} className="text-amber-500" />
                         ) : (
-                          <Shield size={14} className="text-violet-400" />
+                          <Shield size={14} className="text-indigo-600" />
                         )}
                       </div>
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-semibold text-white text-xs">{log.action}</span>
+                          <span className="font-semibold text-slate-900 text-xs">{log.action}</span>
                           <span
-                            className={`rounded border px-1 py-0.2 text-[9px] font-bold uppercase ${methodColor}`}
+                            className={`rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase ${methodColor}`}
                           >
                             {method}
                           </span>
-                          <span className="text-[11px] text-zinc-400 font-mono">
+                          <span className="text-[11px] text-slate-500 font-mono">
                             {log.resource}
                             {log.resourceId ? ` • #${log.resourceId}` : ""}
                           </span>
                         </div>
                         {log.metadata?.reason ? (
-                          <p className="mt-0.5 text-xs text-zinc-400 italic">
+                          <p className="mt-0.5 text-xs text-slate-500 italic">
                             &ldquo;{String(log.metadata.reason)}&rdquo;
                           </p>
                         ) : null}
@@ -755,28 +773,26 @@ export function AdminOperationsPage() {
                     </div>
 
                     {/* Right: Actor & IP & Timestamp */}
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
                       <div className="flex items-center gap-1.5">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-800 text-[10px] font-bold text-zinc-200">
+                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[10px] font-bold text-slate-700">
                           {log.actor?.fullName ? log.actor.fullName.charAt(0) : "S"}
                         </div>
                         <div>
-                          <p className="font-medium text-zinc-300 text-xs">
-                            {log.actor?.fullName ?? "System Worker"}
-                          </p>
+                          <p className="font-medium text-slate-800 text-xs">{log.actor?.fullName ?? "System Worker"}</p>
                         </div>
                         <Badge variant={roleBadgeVariant} size="sm">
                           {log.actor?.role ?? "system"}
                         </Badge>
                       </div>
 
-                      <div className="flex items-center gap-1 text-zinc-500 font-mono text-[11px]">
-                        <Globe size={11} className="text-zinc-500" />
+                      <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
+                        <Globe size={11} className="text-slate-400" />
                         <span>{log.ip ?? "127.0.0.1"}</span>
                       </div>
 
-                      <div className="flex items-center gap-1 text-zinc-500 text-[11px]">
-                        <Clock size={11} />
+                      <div className="flex items-center gap-1 text-slate-500 text-[11px]">
+                        <Clock size={11} className="text-slate-400" />
                         <span>
                           {log.createdAt
                             ? new Date(log.createdAt).toLocaleTimeString([], {
@@ -793,7 +809,7 @@ export function AdminOperationsPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => setExpandedLogId(isExpanded ? null : log._id)}
-                        className="h-7 gap-1 text-xs text-zinc-400 hover:text-white"
+                        className="h-7 gap-1 text-xs text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                       >
                         <Code size={11} />
                         {isExpanded ? "Hide" : "Inspect"}
@@ -804,14 +820,14 @@ export function AdminOperationsPage() {
 
                   {/* Expandable JSON Metadata Inspector */}
                   {isExpanded && (
-                    <div className="mt-3 rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 font-mono text-xs text-zinc-300">
-                      <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#27272A] text-[10px] text-zinc-500">
+                    <div className="mt-3 rounded-lg border border-slate-800 bg-slate-950 p-3 font-mono text-xs text-slate-300">
+                      <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[10px] text-slate-400">
                         <span>Payload Metadata Snapshot ({log._id})</span>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => copyToClipboard(JSON.stringify(log, null, 2), "Audit Event JSON")}
-                          className="h-5 text-[10px] gap-1 text-zinc-400 hover:text-white"
+                          className="h-5 text-[10px] gap-1 text-slate-400 hover:text-white hover:bg-slate-800"
                         >
                           <Copy size={10} /> Copy JSON
                         </Button>
@@ -828,7 +844,7 @@ export function AdminOperationsPage() {
                             timestamp: log.createdAt,
                           },
                           null,
-                          2
+                          2,
                         )}
                       </pre>
                     </div>
@@ -838,10 +854,10 @@ export function AdminOperationsPage() {
             })}
           </div>
         ) : (
-          <div className="mt-4 rounded-lg border border-dashed border-[#27272A] p-6 text-center">
-            <ShieldCheck className="mx-auto text-violet-400" size={28} />
-            <h3 className="mt-2 text-xs font-semibold text-white">No audit records match filters</h3>
-            <p className="mt-0.5 text-xs text-zinc-500">
+          <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center bg-slate-50/50">
+            <ShieldCheck className="mx-auto text-indigo-500" size={32} />
+            <h3 className="mt-2 text-xs font-semibold text-slate-900">No audit records match filters</h3>
+            <p className="mt-0.5 text-xs text-slate-500">
               Try adjusting your search query or reset category and role filters.
             </p>
             <Button
@@ -852,7 +868,7 @@ export function AdminOperationsPage() {
                 setSelectedCategory("ALL");
                 setSelectedRole("ALL");
               }}
-              className="mt-3 text-xs"
+              className="mt-3 text-xs border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
             >
               Reset Filters
             </Button>

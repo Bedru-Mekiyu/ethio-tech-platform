@@ -56,25 +56,21 @@ export function ConfirmDialog({
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-0 text-white shadow-xl backdrop:bg-black/60"
+      className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[var(--text-primary)] shadow-xl backdrop:bg-slate-900/40 backdrop-blur-xs"
     >
       <div className="p-6">
         <div className="flex items-start justify-between">
-          <h2 className="text-lg font-semibold">{title}</h2>
+          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
           <button
             type="button"
             onClick={onCancel}
-            className="text-[var(--text-muted)] hover:text-white"
+            className="text-slate-400 hover:text-slate-700 transition-colors rounded-lg p-1 hover:bg-slate-100"
             aria-label="Close"
           >
             <X size={18} />
           </button>
         </div>
-        {description && (
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">
-            {description}
-          </p>
-        )}
+        {description && <p className="mt-2 text-sm text-[var(--text-secondary)]">{description}</p>}
         <div className="mt-6 flex justify-end gap-3">
           <Button variant="outline" onClick={onCancel} disabled={loading}>
             {cancelLabel}
@@ -82,11 +78,7 @@ export function ConfirmDialog({
           <Button
             onClick={onConfirm}
             disabled={loading}
-            className={
-              variant === "danger"
-                ? "bg-[var(--danger)] hover:bg-[var(--danger)]/80"
-                : ""
-            }
+            className={variant === "danger" ? "bg-[var(--danger)] hover:bg-[var(--danger)]/80" : ""}
           >
             {loading ? "Processing…" : confirmLabel}
           </Button>

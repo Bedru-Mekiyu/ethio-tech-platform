@@ -25,15 +25,13 @@ export function Logo({ className, to = "/", variant = "default", subtitle }: Log
         whileTap={{ scale: 0.98 }}
         className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm transition-all duration-200 overflow-hidden border border-violet-400/30"
       >
-        <span className="relative z-10 text-base font-black text-white leading-none select-none tracking-tight">
-          E
-        </span>
+        <span className="relative z-10 text-base font-black text-white leading-none select-none tracking-tight">E</span>
       </motion.div>
 
       {!isCompact && (
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
-            <span className="font-bold text-white tracking-[-0.01em] group-hover:text-primary transition-colors duration-200 text-base leading-tight">
+            <span className="font-bold text-[var(--text-primary)] tracking-[-0.01em] group-hover:text-primary transition-colors duration-200 text-base leading-tight">
               Ethio<span className="text-primary">Tech</span>
             </span>
           </div>

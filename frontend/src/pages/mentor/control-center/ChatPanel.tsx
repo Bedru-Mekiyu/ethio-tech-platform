@@ -109,12 +109,12 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   });
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-[550px] animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[550px] shadow-sm rounded-xl">
       <div className="flex items-center gap-2 mb-4 shrink-0">
-        <div className="bg-primary/15 text-primary p-1.5 rounded-lg">
+        <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
           <MessageSquare size={16} />
         </div>
-        <h3 className="text-sm font-semibold text-white">Live Moderated Chat</h3>
+        <h3 className="text-sm font-semibold text-slate-900">Live Moderated Chat</h3>
       </div>
 
       <Tabs value={activeSubTab} onValueChange={setActiveSubTab} className="flex-1 flex flex-col min-h-0">
@@ -139,7 +139,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         <div className="flex-1 overflow-y-auto mcc-scrollbar my-3 space-y-3 pr-1">
           {filteredMessages.length === 0 ? (
             <div className="h-full flex items-center justify-center text-center">
-              <p className="text-xs text-[var(--text-muted)]">No messages in this tab</p>
+              <p className="text-xs text-slate-400">No messages in this tab</p>
             </div>
           ) : (
             filteredMessages.map((msg) => {
@@ -149,8 +149,8 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               if (isSystem) {
                 return (
                   <div key={msg.messageId} className="flex items-center gap-2 justify-center py-1">
-                    <span className="text-[10px] text-[var(--text-secondary)] bg-white/5 border border-white/5 px-2 py-0.5 rounded-full flex items-center gap-1">
-                      <AlertCircle size={10} className="text-violet-400" />
+                    <span className="text-[10px] text-slate-600 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <AlertCircle size={10} className="text-indigo-600" />
                       {msg.text}
                     </span>
                   </div>
@@ -160,7 +160,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               return (
                 <div key={msg.messageId} className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-slate-900">
                       {msg.author || "Participant"}
                       {msg.announcement && (
                         <Badge variant="warning" className="text-[8px] px-1 ml-1">
@@ -169,14 +169,14 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                       )}
                     </span>
                     <div className="flex items-center gap-1.5 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
-                      <span className="text-[9px] text-[var(--text-muted)]">
+                      <span className="text-[9px] text-slate-500">
                         {msg.at ? new Date(msg.at).toLocaleTimeString() : ""}
                       </span>
                       {!isOwn && (
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="h-5 w-5 p-0 text-danger hover:bg-danger/10 rounded-md"
+                          className="h-5 w-5 p-0 text-red-600 hover:bg-red-50 rounded-md"
                           onClick={() => msg.messageId && setDeleteTarget(msg.messageId)}
                           title="Delete message"
                         >
@@ -185,7 +185,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                       )}
                     </div>
                   </div>
-                  <div className="bg-white/5 border border-white/5 rounded-xl px-3 py-2 text-[#E5E7EB] break-all">
+                  <div className="bg-slate-50 border border-slate-200/80 rounded-xl px-3 py-2 text-slate-800 break-all">
                     {msg.text}
                   </div>
                 </div>
@@ -196,11 +196,11 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         </div>
 
         {/* Input box */}
-        <div className="shrink-0 flex gap-2 pt-2 border-t border-white/5">
+        <div className="shrink-0 flex gap-2 pt-2 border-t border-slate-100">
           <select
             value={chatType}
             onChange={(e) => setChatType(e.target.value as "public" | "announcement" | "direct" | "private_question")}
-            className="h-9 rounded-xl border border-white/10 bg-[#0B0F19] px-2 text-xs text-white outline-none shrink-0"
+            className="h-9 rounded-xl border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none shrink-0 focus:border-indigo-500"
           >
             <option value="public">Public</option>
             <option value="announcement">Announce</option>
@@ -211,7 +211,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
           {chatType === "direct" && (
             <Input
               placeholder="Recipient User ID..."
-              className="h-9 text-xs w-28 bg-white/5 border-white/5 text-white"
+              className="h-9 text-xs w-28 bg-white border-slate-200 text-slate-900"
               value={recipientId}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRecipientId(e.target.value)}
             />
@@ -230,7 +230,11 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
           />
-          <Button size="sm" className="h-9 w-9 p-0 rounded-xl" onClick={handleSendMessage}>
+          <Button
+            size="sm"
+            className="h-9 w-9 p-0 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white"
+            onClick={handleSendMessage}
+          >
             <Send size={14} />
           </Button>
         </div>

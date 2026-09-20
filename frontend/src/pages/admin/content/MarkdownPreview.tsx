@@ -11,7 +11,7 @@ interface MarkdownPreviewProps {
 export function MarkdownPreview({ content, className }: MarkdownPreviewProps) {
   if (!content || !content.trim()) {
     return (
-      <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-white/10 p-6 text-center text-sm text-[var(--text-muted)]">
+      <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-500 bg-slate-50/50">
         No content written yet. Switch to &quot;Write&quot; tab to draft markdown.
       </div>
     );
@@ -20,12 +20,7 @@ export function MarkdownPreview({ content, className }: MarkdownPreviewProps) {
   const renderedBlocks = parseMarkdownToReact(content);
 
   return (
-    <div
-      className={cn(
-        "prose prose-invert max-w-none space-y-4 text-sm sm:text-base leading-relaxed text-slate-300",
-        className,
-      )}
-    >
+    <div className={cn("prose max-w-none space-y-4 text-sm sm:text-base leading-relaxed text-slate-800", className)}>
       {renderedBlocks}
     </div>
   );
@@ -80,7 +75,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <blockquote
           key={`quote-${nodes.length}`}
-          className="border-l-4 border-primary/60 bg-primary/5 pl-4 py-2 my-2 rounded-r-lg italic text-[var(--text-secondary)]"
+          className="border-l-4 border-indigo-500 bg-indigo-50/50 pl-4 py-2 my-2 rounded-r-lg italic text-slate-700"
         >
           {renderInlineMarkdown(quoteLines.join(" "))}
         </blockquote>,
@@ -104,7 +99,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <h1
           key={`h1-${nodes.length}`}
-          className="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-6 mb-3 border-b border-white/10 pb-2"
+          className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mt-6 mb-3 border-b border-slate-200 pb-2"
         >
           {renderInlineMarkdown(line.slice(2))}
         </h1>,
@@ -116,7 +111,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <h2
           key={`h2-${nodes.length}`}
-          className="text-xl sm:text-2xl font-semibold tracking-tight text-white mt-5 mb-2.5"
+          className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mt-5 mb-2.5"
         >
           {renderInlineMarkdown(line.slice(3))}
         </h2>,
@@ -126,7 +121,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     }
     if (line.startsWith("### ")) {
       nodes.push(
-        <h3 key={`h3-${nodes.length}`} className="text-lg sm:text-xl font-semibold text-slate-100 mt-4 mb-2">
+        <h3 key={`h3-${nodes.length}`} className="text-lg sm:text-xl font-semibold text-slate-900 mt-4 mb-2">
           {renderInlineMarkdown(line.slice(4))}
         </h3>,
       );
@@ -135,7 +130,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     }
     if (line.startsWith("#### ")) {
       nodes.push(
-        <h4 key={`h4-${nodes.length}`} className="text-base font-semibold text-slate-200 mt-3 mb-1.5">
+        <h4 key={`h4-${nodes.length}`} className="text-base font-semibold text-slate-800 mt-3 mb-1.5">
           {renderInlineMarkdown(line.slice(5))}
         </h4>,
       );
@@ -145,7 +140,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
 
     // Horizontal Rule
     if (/^(\*{3,}|-{3,}|_{3,})$/.test(line.trim())) {
-      nodes.push(<hr key={`hr-${nodes.length}`} className="my-6 border-t border-white/10" />);
+      nodes.push(<hr key={`hr-${nodes.length}`} className="my-6 border-t border-slate-200" />);
       i++;
       continue;
     }
@@ -168,7 +163,10 @@ function parseMarkdownToReact(md: string): ReactNode[] {
         i++;
       }
       nodes.push(
-        <ul key={`ul-${nodes.length}`} className="my-3 space-y-1.5 pl-5 list-disc marker:text-primary">
+        <ul
+          key={`ul-${nodes.length}`}
+          className="my-3 space-y-1.5 pl-5 list-disc marker:text-indigo-600 text-slate-800"
+        >
           {listItems.map((item, idx) => (
             <li key={idx} className="leading-relaxed">
               {item.checked !== undefined ? (
@@ -177,9 +175,9 @@ function parseMarkdownToReact(md: string): ReactNode[] {
                     type="checkbox"
                     checked={item.checked}
                     readOnly
-                    className="rounded border-white/20 bg-white/5 text-primary focus:ring-0"
+                    className="rounded border-slate-300 bg-white text-indigo-600 focus:ring-0"
                   />
-                  <span className={item.checked ? "line-through text-[var(--text-muted)]" : ""}>
+                  <span className={item.checked ? "line-through text-slate-400" : ""}>
                     {renderInlineMarkdown(item.text)}
                   </span>
                 </label>
@@ -201,9 +199,12 @@ function parseMarkdownToReact(md: string): ReactNode[] {
         i++;
       }
       nodes.push(
-        <ol key={`ol-${nodes.length}`} className="my-3 space-y-1.5 pl-5 list-decimal marker:text-primary font-medium">
+        <ol
+          key={`ol-${nodes.length}`}
+          className="my-3 space-y-1.5 pl-5 list-decimal marker:text-indigo-600 font-medium text-slate-900"
+        >
           {listItems.map((item, idx) => (
-            <li key={idx} className="font-normal text-slate-300">
+            <li key={idx} className="font-normal text-slate-800">
               {renderInlineMarkdown(item)}
             </li>
           ))}
@@ -236,7 +237,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
 
     if (paragraphLines.length > 0) {
       nodes.push(
-        <p key={`p-${nodes.length}`} className="leading-relaxed text-slate-300">
+        <p key={`p-${nodes.length}`} className="leading-relaxed text-slate-800">
           {renderInlineMarkdown(paragraphLines.join(" "))}
         </p>,
       );
@@ -294,38 +295,38 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 function CalloutBlock({ type, content }: { type: string; content: string }) {
   const styles: Record<string, { bg: string; border: string; text: string; icon: ReactNode; label: string }> = {
     NOTE: {
-      bg: "bg-blue-500/10",
-      border: "border-blue-500/30",
-      text: "text-blue-300",
-      icon: <Info size={16} className="text-blue-400" />,
+      bg: "bg-blue-50/80 border-blue-200",
+      border: "border-blue-200",
+      text: "text-blue-900",
+      icon: <Info size={16} className="text-blue-600" />,
       label: "Note",
     },
     TIP: {
-      bg: "bg-emerald-500/10",
-      border: "border-emerald-500/30",
-      text: "text-emerald-300",
-      icon: <Lightbulb size={16} className="text-emerald-400" />,
+      bg: "bg-emerald-50/80 border-emerald-200",
+      border: "border-emerald-200",
+      text: "text-emerald-900",
+      icon: <Lightbulb size={16} className="text-emerald-600" />,
       label: "Tip",
     },
     WARNING: {
-      bg: "bg-amber-500/10",
-      border: "border-amber-500/30",
-      text: "text-amber-300",
-      icon: <AlertTriangle size={16} className="text-amber-400" />,
+      bg: "bg-amber-50/80 border-amber-200",
+      border: "border-amber-200",
+      text: "text-amber-900",
+      icon: <AlertTriangle size={16} className="text-amber-600" />,
       label: "Warning",
     },
     IMPORTANT: {
-      bg: "bg-purple-500/10",
-      border: "border-purple-500/30",
-      text: "text-purple-300",
-      icon: <AlertCircle size={16} className="text-purple-400" />,
+      bg: "bg-purple-50/80 border-purple-200",
+      border: "border-purple-200",
+      text: "text-purple-900",
+      icon: <AlertCircle size={16} className="text-purple-600" />,
       label: "Important",
     },
     CAUTION: {
-      bg: "bg-rose-500/10",
-      border: "border-rose-500/30",
-      text: "text-rose-300",
-      icon: <AlertTriangle size={16} className="text-rose-400" />,
+      bg: "bg-rose-50/80 border-rose-200",
+      border: "border-rose-200",
+      text: "text-rose-900",
+      icon: <AlertTriangle size={16} className="text-rose-600" />,
       label: "Caution",
     },
   };
@@ -333,10 +334,10 @@ function CalloutBlock({ type, content }: { type: string; content: string }) {
   const style = styles[type] || styles.NOTE;
 
   return (
-    <div className={cn("my-4 rounded-2xl border p-4", style.bg, style.border)}>
+    <div className={cn("my-4 rounded-2xl border p-4 shadow-2xs", style.bg, style.border)}>
       <div className="flex items-center gap-2 mb-1">
         {style.icon}
-        <span className="text-xs font-bold uppercase tracking-wider text-white">{style.label}</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-900">{style.label}</span>
       </div>
       <div className={cn("text-xs sm:text-sm leading-relaxed", style.text)}>{renderInlineMarkdown(content)}</div>
     </div>
@@ -357,9 +358,9 @@ function TableBlock({ tableLines }: { tableLines: string[] }) {
   const dataRows = tableLines.slice(2).map(parseRow);
 
   return (
-    <div className="my-4 overflow-x-auto rounded-2xl border border-white/10 shadow-sm">
+    <div className="my-4 overflow-x-auto rounded-2xl border border-slate-200 shadow-xs bg-white">
       <table className="w-full text-left text-xs sm:text-sm">
-        <thead className="bg-white/[0.04] text-white border-b border-white/10">
+        <thead className="bg-slate-50 text-slate-900 border-b border-slate-200">
           <tr>
             {headers.map((h, i) => (
               <th key={i} className="px-4 py-3 font-semibold">
@@ -368,11 +369,11 @@ function TableBlock({ tableLines }: { tableLines: string[] }) {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-white/5">
+        <tbody className="divide-y divide-slate-100">
           {dataRows.map((row, rIdx) => (
-            <tr key={rIdx} className="hover:bg-white/[0.02]">
+            <tr key={rIdx} className="hover:bg-slate-50/60 transition-colors">
               {row.map((cell, cIdx) => (
-                <td key={cIdx} className="px-4 py-2.5 text-slate-300">
+                <td key={cIdx} className="px-4 py-2.5 text-slate-800">
                   {renderInlineMarkdown(cell)}
                 </td>
               ))}
@@ -433,7 +434,7 @@ function renderInlineMarkdown(text: string): ReactNode {
       parts.push(
         <code
           key={keyIdx++}
-          className="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-xs text-primary font-semibold border border-white/5"
+          className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-indigo-700 font-semibold border border-slate-200"
         >
           {first.match[2]}
         </code>,
@@ -445,7 +446,7 @@ function renderInlineMarkdown(text: string): ReactNode {
           key={keyIdx++}
           src={first.match[3]}
           alt={first.match[2] || "Image"}
-          className="my-3 rounded-xl border border-white/10 max-h-96 object-cover shadow-md"
+          className="my-3 rounded-xl border border-slate-200 max-h-96 object-cover shadow-sm"
         />,
       );
       remaining = first.match[4];
@@ -458,7 +459,7 @@ function renderInlineMarkdown(text: string): ReactNode {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+          className="inline-flex items-center gap-1 font-semibold text-indigo-600 underline underline-offset-2 hover:text-indigo-800 transition-colors"
         >
           {first.match[2]}
           {isExternal && <ExternalLink size={12} className="shrink-0 inline" />}
@@ -467,21 +468,21 @@ function renderInlineMarkdown(text: string): ReactNode {
       remaining = first.match[4];
     } else if (first.type === "bold") {
       parts.push(
-        <strong key={keyIdx++} className="font-bold text-white">
+        <strong key={keyIdx++} className="font-bold text-slate-900">
           {renderInlineMarkdown(first.match[3])}
         </strong>,
       );
       remaining = first.match[4];
     } else if (first.type === "strike") {
       parts.push(
-        <del key={keyIdx++} className="line-through text-[var(--text-muted)]">
+        <del key={keyIdx++} className="line-through text-slate-400">
           {renderInlineMarkdown(first.match[2])}
         </del>,
       );
       remaining = first.match[3];
     } else if (first.type === "italic") {
       parts.push(
-        <em key={keyIdx++} className="italic text-slate-200">
+        <em key={keyIdx++} className="italic text-slate-700">
           {renderInlineMarkdown(first.match[3])}
         </em>,
       );

@@ -37,13 +37,15 @@ function MetricCard({
   subtitle?: string;
 }) {
   return (
-    <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+    <Card className="border-slate-200/80 bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400 border border-violet-500/20">{icon}</div>
-        <div>
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">{label}</p>
-          <p className="text-xl font-bold text-white mt-0.5">{value}</p>
-          {subtitle && <p className="text-xs text-zinc-400 mt-0.5">{subtitle}</p>}
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100/80 shrink-0">
+          {icon}
+        </div>
+        <div className="min-w-0">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">{label}</p>
+          <p className="text-xl font-bold text-slate-900 mt-0.5 tracking-tight">{value}</p>
+          {subtitle && <p className="text-xs text-slate-500 mt-0.5 truncate">{subtitle}</p>}
         </div>
       </div>
     </Card>
@@ -54,9 +56,9 @@ function MetricCard({
 function CustomChartTooltip({ active, payload, label, unit = "" }: any) {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg border border-[#27272A] bg-[#0E0E11] p-2.5 shadow-xl">
-        <p className="text-xs font-semibold text-white">{label}</p>
-        <p className="mt-0.5 text-xs text-violet-400 font-bold">
+      <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-lg">
+        <p className="text-xs font-semibold text-slate-900">{label}</p>
+        <p className="mt-0.5 text-xs text-indigo-600 font-bold">
           {payload[0].value} {unit}
         </p>
       </div>
@@ -106,12 +108,12 @@ export function MentorAnalyticsPage() {
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {Array.from({ length: 8 }).map((_, i) => (
-            <Skeleton key={i} className="h-24 rounded-2xl" />
+            <Skeleton key={i} className="h-24 rounded-xl" />
           ))}
         </div>
         <div className="grid gap-6 lg:grid-cols-2">
-          <Skeleton className="h-[400px] rounded-[28px]" />
-          <Skeleton className="h-[400px] rounded-[28px]" />
+          <Skeleton className="h-[380px] rounded-xl" />
+          <Skeleton className="h-[380px] rounded-xl" />
         </div>
       </div>
     );
@@ -127,13 +129,14 @@ export function MentorAnalyticsPage() {
   }
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
+    <div className="space-y-6">
       {/* Header card */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-1.5">
-          <h1 className="text-xl font-bold text-white tracking-tight sm:text-2xl">Mentor Insights & Analytics</h1>
-          <p className="text-xs text-zinc-400 leading-relaxed">
-            Understand session execution, engagement frequency, and cohort attendance metrics to maximize student outcomes.
+          <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Mentor Insights & Analytics</h1>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Understand session execution, engagement frequency, and cohort attendance metrics to maximize student
+            outcomes.
           </p>
         </div>
       </Card>
@@ -193,31 +196,31 @@ export function MentorAnalyticsPage() {
       {/* Dynamic charts */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Sessions Per Month */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 flex flex-col">
-          <h2 className="text-sm font-semibold text-white">Sessions Per Month</h2>
-          <p className="text-xs text-zinc-400 mb-4">Distribution of live classrooms hosted</p>
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 flex flex-col shadow-sm">
+          <h2 className="text-sm font-semibold text-slate-900">Sessions Per Month</h2>
+          <p className="text-xs text-slate-500 mb-4">Distribution of live classrooms hosted</p>
           {monthlySessionsData.length > 0 ? (
             <div className="relative w-full h-[260px] mt-auto">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={monthlySessionsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="sessionGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#6366F1" stopOpacity={0.8} />
-                      <stop offset="100%" stopColor="#6366F1" stopOpacity={0.1} />
+                      <stop offset="0%" stopColor="#4f46e5" stopOpacity={0.9} />
+                      <stop offset="100%" stopColor="#4f46e5" stopOpacity={0.2} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
-                  <XAxis dataKey="name" stroke="#71717A" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis
-                    stroke="#71717A"
-                    fontSize={10}
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#64748b"
+                    fontSize={11}
                     tickLine={false}
-                    axisLine={false}
-                    allowDecimals={false}
+                    axisLine={{ stroke: "#e2e8f0" }}
                   />
+                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} allowDecimals={false} />
                   <Tooltip
                     content={<CustomChartTooltip unit="sessions" />}
-                    cursor={{ fill: "rgba(255,255,255,0.02)" }}
+                    cursor={{ fill: "rgba(241, 245, 249, 0.7)" }}
                   />
                   <Bar dataKey="sessions" fill="url(#sessionGrad)" radius={[4, 4, 0, 0]} maxBarSize={40} />
                 </BarChart>
@@ -225,40 +228,40 @@ export function MentorAnalyticsPage() {
             </div>
           ) : (
             <div className="flex-1 flex items-center justify-center min-h-[260px]">
-              <p className="text-xs text-zinc-500">No session data available</p>
+              <p className="text-xs text-slate-400">No session data available</p>
             </div>
           )}
         </Card>
 
         {/* Student Growth */}
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 flex flex-col">
-          <h2 className="text-sm font-semibold text-white">Student Activity Growth</h2>
-          <p className="text-xs text-zinc-400 mb-4">Total monthly student session participation</p>
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 flex flex-col shadow-sm">
+          <h2 className="text-sm font-semibold text-slate-900">Student Activity Growth</h2>
+          <p className="text-xs text-slate-500 mb-4">Total monthly student session participation</p>
           {studentGrowthData.length > 0 ? (
             <div className="relative w-full h-[260px] mt-auto">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={studentGrowthData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#10B981" stopOpacity={0.3} />
-                      <stop offset="100%" stopColor="#10B981" stopOpacity={0.0} />
+                      <stop offset="0%" stopColor="#10b981" stopOpacity={0.3} />
+                      <stop offset="100%" stopColor="#10b981" stopOpacity={0.02} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
-                  <XAxis dataKey="name" stroke="#71717A" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis
-                    stroke="#71717A"
-                    fontSize={10}
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#64748b"
+                    fontSize={11}
                     tickLine={false}
-                    axisLine={false}
-                    allowDecimals={false}
+                    axisLine={{ stroke: "#e2e8f0" }}
                   />
+                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} allowDecimals={false} />
                   <Tooltip content={<CustomChartTooltip unit="students" />} />
                   <Area
                     type="monotone"
                     dataKey="students"
-                    stroke="#10B981"
-                    strokeWidth={1.5}
+                    stroke="#10b981"
+                    strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#growthGrad)"
                   />
@@ -267,23 +270,27 @@ export function MentorAnalyticsPage() {
             </div>
           ) : (
             <div className="flex-1 flex items-center justify-center min-h-[260px]">
-              <p className="text-xs text-zinc-500">No student growth data available</p>
+              <p className="text-xs text-slate-400">No student growth data available</p>
             </div>
           )}
         </Card>
       </div>
 
       {/* Link to Session Overview */}
-      <Card className="border-[#27272A] bg-[#0E0E11] p-4">
+      <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h2 className="text-xs font-semibold text-white">Need granular session reports?</h2>
-            <p className="text-xs text-zinc-400 mt-0.5">
+            <h2 className="text-xs font-semibold text-slate-900">Need granular session reports?</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
               Navigate to your sessions board to fetch analytics for specific virtual classrooms.
             </p>
           </div>
           <Link to="/mentor/sessions">
-            <Button variant="outline" size="sm" className="text-xs font-medium text-zinc-300 hover:text-white shrink-0">
+            <Button
+              variant="outline"
+              size="sm"
+              className="text-xs font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 shrink-0"
+            >
               Sessions Library <ArrowRight size={13} className="ml-1" />
             </Button>
           </Link>

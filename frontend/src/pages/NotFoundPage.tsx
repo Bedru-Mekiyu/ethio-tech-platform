@@ -2,7 +2,18 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore, type UserRole } from "@/store/authStore";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Home, BookOpen, FolderKanban, Video, MessageSquare, Users, FileCheck, BarChart3, LayoutDashboard } from "lucide-react";
+import {
+  ArrowLeft,
+  Home,
+  BookOpen,
+  FolderKanban,
+  Video,
+  MessageSquare,
+  Users,
+  FileCheck,
+  BarChart3,
+  LayoutDashboard,
+} from "lucide-react";
 
 const sectionRecovery: Record<string, string> = {
   "/app/tracks": "/app/tracks",
@@ -115,25 +126,22 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-violet-400 font-semibold">404</p>
-          <h1 className="mt-2 text-xl font-bold tracking-tight text-white">Page not found</h1>
-          <p className="mt-1.5 text-xs text-zinc-400">
-            The page you requested does not exist or has moved.
-          </p>
+        <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8 text-center">
+          <p className="text-xs uppercase tracking-wider text-indigo-600 font-semibold">404</p>
+          <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900">Page not found</h1>
+          <p className="mt-1.5 text-xs text-slate-600">The page you requested does not exist or has moved.</p>
 
           {import.meta.env.DEV && (
-            <p className="mt-3 text-[11px] text-zinc-500 break-all font-mono">
+            <p className="mt-3 text-[11px] text-slate-500 break-all font-mono bg-slate-50 border border-slate-200 py-1 px-2 rounded">
               {location.pathname}
             </p>
           )}
 
           {recovery && (
-            <div className="mt-5 rounded-lg border border-violet-500/20 bg-violet-500/10 px-3.5 py-2.5">
-              <p className="text-xs text-zinc-400">
-                Redirecting to{" "}
-                <span className="font-medium text-violet-400">{recovery}</span> in{" "}
-                <span className="font-semibold text-white">{countdown}</span>s...
+            <div className="mt-5 rounded-lg border border-indigo-100 bg-indigo-50/50 px-3.5 py-2.5">
+              <p className="text-xs text-slate-600">
+                Redirecting to <span className="font-medium text-indigo-600">{recovery}</span> in{" "}
+                <span className="font-semibold text-slate-900">{countdown}</span>s...
               </p>
             </div>
           )}
@@ -145,7 +153,23 @@ export function NotFoundPage() {
                 Return to previous page
               </Button>
             )}
-            <Link to={user ? (user.role === "mentor" ? "/mentor" : user.role === "admin" || user.role === "super_admin" || user.role === "moderator" || user.role === "reviewer" || user.role === "support" ? "/admin" : user.role === "parent" ? "/parent" : "/app/dashboard") : "/"}>
+            <Link
+              to={
+                user
+                  ? user.role === "mentor"
+                    ? "/mentor"
+                    : user.role === "admin" ||
+                        user.role === "super_admin" ||
+                        user.role === "moderator" ||
+                        user.role === "reviewer" ||
+                        user.role === "support"
+                      ? "/admin"
+                      : user.role === "parent"
+                        ? "/parent"
+                        : "/app/dashboard"
+                  : "/"
+              }
+            >
               <Button size="sm">
                 <Home size={14} className="mr-1.5" />
                 Go home
@@ -155,13 +179,13 @@ export function NotFoundPage() {
         </div>
 
         <div className="mt-6">
-          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-[var(--text-muted)]">
+          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-slate-500 font-medium">
             Suggested destinations
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {suggestions.map((s) => (
               <Link key={s.to} to={s.to}>
-                <Button variant="ghost" size="sm" className="text-[var(--text-secondary)] hover:text-white">
+                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                   {s.icon}
                   <span className="ml-1.5">{s.label}</span>
                 </Button>

@@ -50,11 +50,11 @@ function statusTone(status?: string) {
 }
 
 function ScoreBadge({ score, label }: { score: number; label: string }) {
-  const color = score >= 4 ? "text-emerald-400" : score >= 3 ? "text-amber-400" : "text-red-400";
+  const color = score >= 4 ? "text-emerald-600" : score >= 3 ? "text-amber-600" : "text-rose-600";
   return (
-    <div className="flex flex-col items-center gap-0.5 bg-[#141418] border border-[#27272A] rounded-lg px-2 py-0.5">
+    <div className="flex flex-col items-center gap-0.5 bg-slate-50 border border-slate-200 rounded-lg px-2 py-0.5">
       <span className={cn("text-xs font-bold", color)}>{score.toFixed(1)}</span>
-      <span className="text-[8px] uppercase tracking-wider text-zinc-500">{label}</span>
+      <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">{label}</span>
     </div>
   );
 }
@@ -73,34 +73,38 @@ function ReviewWorkspace({
       type="button"
       onClick={onSelect}
       className={cn(
-        "w-full rounded-lg border p-3.5 text-left transition-all",
-        isSelected ? "border-violet-500 bg-violet-500/10 shadow-sm" : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700",
+        "w-full rounded-xl border p-3.5 text-left transition-all",
+        isSelected
+          ? "border-indigo-600 bg-indigo-50/40 shadow-sm ring-1 ring-indigo-200"
+          : "border-slate-200 bg-white hover:border-slate-300",
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="text-xs font-semibold text-white truncate">{submission.project?.title ?? "Project submission"}</p>
-          <p className="text-[11px] text-zinc-400">{submission.student?.fullName}</p>
+          <p className="text-xs font-semibold text-slate-900 truncate">
+            {submission.project?.title ?? "Project submission"}
+          </p>
+          <p className="text-[11px] text-slate-500">{submission.student?.fullName}</p>
         </div>
-        <Badge variant={statusTone(submission.status)} size="sm">{submission.status ?? "pending"}</Badge>
+        <Badge variant={statusTone(submission.status)} size="sm">
+          {submission.status ?? "pending"}
+        </Badge>
       </div>
-      <div className="mt-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
-        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-wider text-zinc-500">
+      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50/60 p-3">
+        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-wider text-slate-400">
           <FileText size={12} />
           <span>Files Attached</span>
         </div>
-        <p className="text-xs leading-relaxed text-zinc-400">
+        <p className="text-xs leading-relaxed text-slate-600">
           {submission.files?.length
             ? `${submission.files.length} file${submission.files.length === 1 ? "" : "s"} attached for review.`
             : "No files attached yet."}
         </p>
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs text-zinc-400">
+      <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
         <span>Grade: {submission.grade ?? 0}/100</span>
         {submission.createdAt ? (
-          <span className="text-zinc-500">
-            · {new Date(submission.createdAt).toLocaleDateString()}
-          </span>
+          <span className="text-slate-400">· {new Date(submission.createdAt).toLocaleDateString()}</span>
         ) : null}
       </div>
     </button>
@@ -228,16 +232,20 @@ export function MentorReviewPage() {
   }
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+    <div className="space-y-6 text-slate-900">
+      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Interactive Project Review Board</h1>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              Interactive Project Review Board
+            </h1>
+            <p className="text-xs text-slate-500 leading-relaxed">
               Review submissions, evaluate performance scores, and provide actionable mentor feedback.
             </p>
           </div>
-          <Badge variant="success" size="sm">{filtered.length} visible</Badge>
+          <Badge variant="success" size="sm">
+            {filtered.length} visible
+          </Badge>
         </div>
       </Card>
 
@@ -250,8 +258,8 @@ export function MentorReviewPage() {
             className={cn(
               "rounded px-3 py-1 text-xs transition font-medium capitalize",
               filter === option.value
-                ? "border border-violet-500 bg-violet-600 text-white"
-                : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:text-white",
+                ? "border border-indigo-600 bg-indigo-600 text-white shadow-xs"
+                : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
             )}
           >
             {option.label}
@@ -260,12 +268,14 @@ export function MentorReviewPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-        <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
-          <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3.5">
+        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div>
-              <h2 className="text-sm font-semibold text-white">Submissions Awaiting Feedback</h2>
+              <h2 className="text-sm font-semibold text-slate-900">Submissions Awaiting Feedback</h2>
             </div>
-            <Badge variant="success" size="sm">{filtered.length} items</Badge>
+            <Badge variant="outline" size="sm">
+              {filtered.length} items
+            </Badge>
           </div>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {filtered.slice(0, 4).map((item) => (
@@ -287,57 +297,59 @@ export function MentorReviewPage() {
 
         <div className="space-y-6">
           {/* Selected details */}
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
-            <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3">
+          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <div>
-                <h3 className="text-sm font-semibold text-white">{selected?.project?.title ?? "Project"}</h3>
+                <h3 className="text-sm font-semibold text-slate-900">{selected?.project?.title ?? "Project"}</h3>
               </div>
-              <Badge variant={statusTone(selected?.status)} size="sm">{selected?.status ?? "pending"}</Badge>
+              <Badge variant={statusTone(selected?.status)} size="sm">
+                {selected?.status ?? "pending"}
+              </Badge>
             </div>
-            <div className="mt-3 space-y-2 text-xs text-zinc-400">
+            <div className="mt-3 space-y-2 text-xs text-slate-500">
               <p>
-                Student: <strong className="text-white">{selected?.student?.fullName ?? "Learner"}</strong>
+                Student: <strong className="text-slate-900">{selected?.student?.fullName ?? "Learner"}</strong>
               </p>
               <p>Track: {selected?.project?.track?.title ?? "Learning track"}</p>
               <p>XP reward: +{selected?.project?.xpReward ?? 0} XP</p>
-              <ProgressBar value={selected?.grade ?? 0} max={100} className="mt-2 h-1" />
+              <ProgressBar value={selected?.grade ?? 0} max={100} className="mt-2 h-1.5" />
             </div>
           </Card>
 
           {/* Feedback & Review Form */}
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="space-y-3.5">
               <div>
-                <Label className="text-xs text-zinc-400">Grade Score (0 - 100)</Label>
+                <Label className="text-xs font-medium text-slate-700">Grade Score (0 - 100)</Label>
                 <Input
                   value={grade}
                   onChange={(event) => setGrade(event.target.value)}
                   type="number"
                   min={0}
                   max={100}
-                  className="mt-1 text-xs bg-[#141418] border-[#27272A] text-white"
+                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <Label className="text-xs text-zinc-400">Mentor Feedback & Code Review</Label>
+                <Label className="text-xs font-medium text-slate-700">Mentor Feedback & Code Review</Label>
                 <Textarea
                   value={feedback}
                   onChange={(event) => setFeedback(event.target.value)}
                   placeholder="What should the student improve? Point out strengths..."
-                  className="mt-1 min-h-20 text-xs bg-[#141418] border-[#27272A] text-white placeholder:text-zinc-500"
+                  className="mt-1 min-h-20 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
               {/* Session Performance Ratings */}
-              <div className="border-t border-[#27272A] pt-3.5 space-y-2.5">
-                <h4 className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">
+              <div className="border-t border-slate-100 pt-3.5 space-y-2.5">
+                <h4 className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
                   Session Performance Rating (Optional)
                 </h4>
                 <div className="space-y-2.5">
                   <div>
-                    <Label className="text-xs text-zinc-400">Associate with Session</Label>
+                    <Label className="text-xs font-medium text-slate-700">Associate with Session</Label>
                     <Select
-                      className="mt-1 h-8 text-xs bg-[#141418] border-[#27272A] text-white"
+                      className="mt-1 h-8 text-xs bg-white border-slate-200 text-slate-900"
                       value={selectedSessionId}
                       onValueChange={setSelectedSessionId}
                     >
@@ -354,9 +366,9 @@ export function MentorReviewPage() {
                     <div className="space-y-2.5 animate-in fade-in duration-300">
                       <div className="grid grid-cols-3 gap-2">
                         <div className="space-y-1">
-                          <label className="text-[10px] text-zinc-500 uppercase">Participation</label>
+                          <label className="text-[10px] text-slate-500 font-medium uppercase">Participation</label>
                           <Select
-                            className="h-7 text-xs bg-[#141418] border-[#27272A] text-white"
+                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(participationScore)}
                             onValueChange={(v) => setParticipationScore(Number(v))}
                           >
@@ -368,9 +380,9 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-zinc-500 uppercase">Communication</label>
+                          <label className="text-[10px] text-slate-500 font-medium uppercase">Communication</label>
                           <Select
-                            className="h-7 text-xs bg-[#141418] border-[#27272A] text-white"
+                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(communicationScore)}
                             onValueChange={(v) => setCommunicationScore(Number(v))}
                           >
@@ -382,9 +394,9 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-zinc-500 uppercase">Professionalism</label>
+                          <label className="text-[10px] text-slate-500 font-medium uppercase">Professionalism</label>
                           <Select
-                            className="h-7 text-xs bg-[#141418] border-[#27272A] text-white"
+                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(professionalismScore)}
                             onValueChange={(v) => setProfessionalismScore(Number(v))}
                           >
@@ -397,12 +409,12 @@ export function MentorReviewPage() {
                         </div>
                       </div>
                       <div>
-                        <Label className="text-xs text-zinc-400">Session comment</Label>
+                        <Label className="text-xs font-medium text-slate-700">Session comment</Label>
                         <Textarea
                           value={sessionComment}
                           onChange={(e) => setSessionComment(e.target.value)}
                           placeholder="Session performance comments..."
-                          className="mt-1 min-h-14 text-xs bg-[#141418] border-[#27272A] text-white"
+                          className="mt-1 min-h-14 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
                         />
                       </div>
                     </div>
@@ -410,11 +422,11 @@ export function MentorReviewPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-2 border-t border-[#27272A]">
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
                 <Button
                   size="sm"
                   variant="outline"
-                  className="text-xs font-medium"
+                  className="text-xs font-medium text-slate-700"
                   onClick={() => {
                     if (!selected) return;
                     void reviewMutation.mutateAsync({ id: selected._id, status: "reviewed" });
@@ -455,12 +467,12 @@ export function MentorReviewPage() {
           </Card>
 
           {/* Student Feedback History */}
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
-              <div className="bg-violet-500/10 p-1.5 rounded-lg text-violet-400 border border-violet-500/20">
+              <div className="bg-indigo-50 p-1.5 rounded-lg text-indigo-600 border border-indigo-100">
                 <MessageSquare size={14} />
               </div>
-              <h4 className="text-xs font-semibold text-white">Learner Feedback History</h4>
+              <h4 className="text-xs font-semibold text-slate-900">Learner Feedback History</h4>
             </div>
             {currentStudentDetails?.feedbackHistory && currentStudentDetails.feedbackHistory.length > 0 ? (
               <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
@@ -477,15 +489,16 @@ export function MentorReviewPage() {
                     },
                     idx: number,
                   ) => (
-                    <div key={idx} className="rounded-lg border border-[#27272A] bg-[#141418] p-3 text-xs space-y-1.5">
+                    <div
+                      key={idx}
+                      className="rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs space-y-1.5"
+                    >
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-white truncate max-w-[150px]">
+                          <p className="font-semibold text-slate-900 truncate max-w-[150px]">
                             {fb.sessionTitle ?? "Session review"}
                           </p>
-                          <p className="text-[10px] text-zinc-500">
-                            {new Date(fb.createdAt).toLocaleDateString()}
-                          </p>
+                          <p className="text-[10px] text-slate-400">{new Date(fb.createdAt).toLocaleDateString()}</p>
                         </div>
                         <div className="flex gap-1">
                           <ScoreBadge score={fb.participationScore ?? fb.score} label="PRT" />
@@ -493,17 +506,13 @@ export function MentorReviewPage() {
                           <ScoreBadge score={fb.professionalismScore ?? fb.score} label="PRF" />
                         </div>
                       </div>
-                      {fb.comment && (
-                        <p className="text-xs text-zinc-400 italic">
-                          &ldquo;{fb.comment}&rdquo;
-                        </p>
-                      )}
+                      {fb.comment && <p className="text-xs text-slate-600 italic">&ldquo;{fb.comment}&rdquo;</p>}
                     </div>
                   ),
                 )}
               </div>
             ) : (
-              <div className="text-center py-4 text-xs text-zinc-500">
+              <div className="text-center py-4 text-xs text-slate-400">
                 No past feedback records for this student yet.
               </div>
             )}

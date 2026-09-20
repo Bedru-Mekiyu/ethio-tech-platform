@@ -55,15 +55,15 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
           resources.map((resource) => (
             <div
               key={resource._id || resource.id}
-              className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white/5 p-4"
+              className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--bg-card)] border border-[var(--border)] text-primary">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600">
                   {getResourceIcon(resource.type ?? resource.fileType ?? "link")}
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-white">{resource.title || resource.name}</p>
-                  <p className="truncate text-xs text-[var(--text-muted)]">
+                  <p className="truncate text-sm font-semibold text-slate-900">{resource.title || resource.name}</p>
+                  <p className="truncate text-xs text-slate-500">
                     {resource.type || resource.fileType} • {resource.size || "External Link"}
                   </p>
                 </div>
@@ -71,10 +71,10 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
               <Button
                 variant="outline"
                 size="sm"
-                className="shrink-0"
+                className="shrink-0 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                 onClick={() => handleDownload(resource._id ?? resource.id ?? "", resource.url)}
               >
-                <Download size={16} className="mr-2" />
+                <Download size={16} className="mr-2 text-indigo-600" />
                 {resource.url?.startsWith("http") ? "Open" : "Download"}
               </Button>
             </div>

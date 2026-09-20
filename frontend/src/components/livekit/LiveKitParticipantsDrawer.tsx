@@ -1,6 +1,20 @@
 import { useState } from "react";
 import { Participant } from "livekit-client";
-import { Users, X, Search, Mic, MicOff, Video, VideoOff, Hand, MoreHorizontal, Pin, UserX, VolumeX, Shield } from "lucide-react";
+import {
+  Users,
+  X,
+  Search,
+  Mic,
+  MicOff,
+  Video,
+  VideoOff,
+  Hand,
+  MoreHorizontal,
+  Pin,
+  UserX,
+  VolumeX,
+  Shield,
+} from "lucide-react";
 
 interface LiveKitParticipantsDrawerProps {
   isOpen: boolean;
@@ -52,29 +66,29 @@ export function LiveKitParticipantsDrawer({
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col border-l border-white/10 bg-[#0F172A] shadow-2xl backdrop-blur-2xl animate-in slide-in-from-right duration-200">
+    <div className="fixed inset-y-0 right-0 z-40 flex w-full max-w-sm flex-col border-l border-slate-200 bg-white shadow-2xl animate-in slide-in-from-right duration-200">
       {/* Header */}
-      <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
+      <div className="flex h-16 items-center justify-between border-b border-slate-200 px-5 bg-slate-50/70">
         <div className="flex items-center gap-2.5">
-          <div className="rounded-lg bg-violet-500/20 p-2 text-violet-400">
+          <div className="rounded-lg bg-indigo-50 p-2 text-indigo-600">
             <Users className="h-4 w-4" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-white">Participants</h2>
-            <p className="text-[11px] text-slate-400">{allParticipants.length} people in session</p>
+            <h2 className="text-sm font-semibold text-slate-900">Participants</h2>
+            <p className="text-[11px] text-slate-500">{allParticipants.length} people in session</p>
           </div>
         </div>
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg p-2 text-slate-400 hover:bg-white/5 hover:text-white transition-colors"
+          className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
         >
           <X className="h-4 w-4" />
         </button>
       </div>
 
       {/* Search Input */}
-      <div className="p-4 border-b border-white/5">
+      <div className="p-4 border-b border-slate-100 bg-white">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
           <input
@@ -82,13 +96,13 @@ export function LiveKitParticipantsDrawer({
             placeholder="Search participants..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-slate-900/80 pl-9 pr-4 py-2 text-xs text-white placeholder:text-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 shadow-xs"
           />
         </div>
       </div>
 
       {/* Participant List */}
-      <div className="flex-1 overflow-y-auto px-4 py-2 space-y-1.5 divide-y divide-white/5">
+      <div className="flex-1 overflow-y-auto px-4 py-2 space-y-1 divide-y divide-slate-100">
         {filtered.map((p) => {
           const isLocal = p.sid === localParticipant.sid;
           const meta = parseMeta(p);
@@ -110,15 +124,13 @@ export function LiveKitParticipantsDrawer({
           return (
             <div
               key={p.sid || p.identity}
-              className="flex items-center justify-between gap-3 py-2.5 px-2 rounded-xl hover:bg-white/5 transition-colors group relative"
+              className="flex items-center justify-between gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50 transition-colors group relative"
             >
               {/* Left: Avatar & Info */}
               <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-semibold text-xs text-white shadow-sm ${
-                    isParticipantHost
-                      ? "bg-gradient-to-tr from-violet-600 to-violet-500 ring-1 ring-violet-400/30"
-                      : "bg-gradient-to-tr from-slate-700 to-slate-800 text-slate-200"
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-semibold text-xs text-white shadow-xs ${
+                    isParticipantHost ? "bg-indigo-600 ring-2 ring-indigo-100" : "bg-slate-700 text-white"
                   }`}
                 >
                   {meta.avatar ? (
@@ -130,16 +142,16 @@ export function LiveKitParticipantsDrawer({
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <p className="text-xs font-medium text-white truncate max-w-[130px]">{displayName}</p>
-                    {isLocal && <span className="text-[10px] text-slate-400">(You)</span>}
+                    <p className="text-xs font-semibold text-slate-900 truncate max-w-[130px]">{displayName}</p>
+                    {isLocal && <span className="text-[10px] text-slate-500">(You)</span>}
                   </div>
                   <div className="flex items-center gap-1.5 mt-0.5">
                     {isParticipantHost ? (
-                      <span className="inline-flex items-center gap-0.5 rounded bg-violet-500/20 px-1.5 py-0.2 text-[9px] font-semibold text-violet-300 uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-0.5 rounded bg-indigo-50 border border-indigo-200/60 px-1.5 py-0.2 text-[9px] font-semibold text-indigo-700 uppercase tracking-wider">
                         <Shield className="h-2.5 w-2.5" /> Mentor
                       </span>
                     ) : (
-                      <span className="text-[10px] text-slate-400">Student</span>
+                      <span className="text-[10px] text-slate-500">Student</span>
                     )}
                   </div>
                 </div>
@@ -148,20 +160,20 @@ export function LiveKitParticipantsDrawer({
               {/* Right: State Icons & Host Action Menu */}
               <div className="flex items-center gap-2 shrink-0">
                 {hasHandRaised && (
-                  <span className="rounded-md bg-amber-500/20 p-1 text-amber-400 animate-bounce" title="Hand Raised">
+                  <span className="rounded-md bg-amber-50 p-1 text-amber-600 animate-bounce" title="Hand Raised">
                     <Hand className="h-3.5 w-3.5 fill-current" />
                   </span>
                 )}
 
                 <span
-                  className={`p-1 rounded-md ${isAudioMuted ? "text-rose-400 bg-rose-500/10" : "text-slate-400"}`}
+                  className={`p-1 rounded-md ${isAudioMuted ? "text-rose-600 bg-rose-50" : "text-slate-400"}`}
                   title={isAudioMuted ? "Mic Off" : "Mic On"}
                 >
                   {isAudioMuted ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
                 </span>
 
                 <span
-                  className={`p-1 rounded-md ${isVideoMuted ? "text-slate-500" : "text-emerald-400 bg-emerald-500/10"}`}
+                  className={`p-1 rounded-md ${isVideoMuted ? "text-slate-400" : "text-emerald-600 bg-emerald-50"}`}
                   title={isVideoMuted ? "Camera Off" : "Camera On"}
                 >
                   {isVideoMuted ? <VideoOff className="h-3.5 w-3.5" /> : <Video className="h-3.5 w-3.5" />}
@@ -173,13 +185,13 @@ export function LiveKitParticipantsDrawer({
                     <button
                       type="button"
                       onClick={() => setActiveMenuId(activeMenuId === p.sid ? null : p.sid)}
-                      className="rounded-lg p-1 text-slate-400 hover:bg-white/10 hover:text-white transition-colors"
+                      className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
                     >
                       <MoreHorizontal className="h-3.5 w-3.5" />
                     </button>
 
                     {activeMenuId === p.sid && (
-                      <div className="absolute right-0 top-full mt-1 w-44 rounded-xl border border-white/10 bg-slate-900/95 py-1 shadow-2xl backdrop-blur-xl z-50">
+                      <div className="absolute right-0 top-full mt-1 w-44 rounded-xl border border-slate-200 bg-white py-1 shadow-xl z-50">
                         {onPinParticipant && (
                           <button
                             type="button"
@@ -187,9 +199,10 @@ export function LiveKitParticipantsDrawer({
                               onPinParticipant(p);
                               setActiveMenuId(null);
                             }}
-                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-slate-300 hover:bg-white/10 hover:text-white"
+                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-50"
                           >
-                            <Pin className="h-3.5 w-3.5" /> {isPinned ? "Unpin participant" : "Spotlight / Pin"}
+                            <Pin className="h-3.5 w-3.5 text-slate-500" />{" "}
+                            {isPinned ? "Unpin participant" : "Spotlight / Pin"}
                           </button>
                         )}
                         {onMuteParticipant && !isAudioMuted && (
@@ -199,7 +212,7 @@ export function LiveKitParticipantsDrawer({
                               onMuteParticipant(p);
                               setActiveMenuId(null);
                             }}
-                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-amber-300 hover:bg-amber-500/10"
+                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-amber-700 hover:bg-amber-50"
                           >
                             <VolumeX className="h-3.5 w-3.5" /> Mute participant
                           </button>
@@ -211,7 +224,7 @@ export function LiveKitParticipantsDrawer({
                               onKickParticipant(p);
                               setActiveMenuId(null);
                             }}
-                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-rose-400 hover:bg-rose-500/10"
+                            className="flex w-full items-center gap-2 px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50"
                           >
                             <UserX className="h-3.5 w-3.5" /> Remove from session
                           </button>
@@ -228,13 +241,13 @@ export function LiveKitParticipantsDrawer({
 
       {/* Host Global Quick Actions */}
       {isHost && (
-        <div className="border-t border-white/10 p-4 bg-slate-900/50 space-y-2">
+        <div className="border-t border-slate-200 p-4 bg-slate-50/60 space-y-2">
           <div className="flex gap-2">
             {onMuteAll && (
               <button
                 type="button"
                 onClick={onMuteAll}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-300 hover:bg-amber-500/20 transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 hover:bg-amber-100 transition-colors shadow-xs"
               >
                 <VolumeX className="h-3.5 w-3.5" /> Mute All
               </button>
@@ -243,7 +256,7 @@ export function LiveKitParticipantsDrawer({
               <button
                 type="button"
                 onClick={onLowerAllHands}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-300 hover:bg-white/10 transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-xs"
               >
                 <Hand className="h-3.5 w-3.5" /> Lower Hands
               </button>

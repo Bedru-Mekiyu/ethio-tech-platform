@@ -58,18 +58,18 @@ export function CodeSandboxStarterEditor({
   };
 
   return (
-    <div className="space-y-4 rounded-2xl border border-[var(--border)] bg-white/[0.02] p-4 sm:p-5">
+    <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Code2 size={18} className="text-emerald-400" />
-          <h3 className="text-sm font-semibold text-white">Code Lab & Sandbox Environment</h3>
+          <Code2 size={18} className="text-emerald-600" />
+          <h3 className="text-sm font-semibold text-slate-900">Code Lab & Sandbox Environment</h3>
         </div>
         {codeSandboxUrl && (
           <a
             href={codeSandboxUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs text-primary hover:underline"
+            className="flex items-center gap-1 text-xs text-indigo-600 hover:underline"
           >
             Launch Sandbox <ExternalLink size={12} />
           </a>
@@ -78,7 +78,7 @@ export function CodeSandboxStarterEditor({
 
       {/* Sandbox URL */}
       <div className="space-y-1.5">
-        <label htmlFor="sandbox-url" className="block text-xs font-medium text-[var(--text-secondary)]">
+        <label htmlFor="sandbox-url" className="block text-xs font-medium text-slate-700">
           CodeSandbox or StackBlitz URL
         </label>
         <Input
@@ -87,7 +87,7 @@ export function CodeSandboxStarterEditor({
           onChange={(e) => onCodeSandboxUrlChange(e.target.value)}
           placeholder="https://codesandbox.io/p/sandbox/... or https://stackblitz.com/edit/..."
         />
-        <p className="text-[11px] text-[var(--text-muted)]">
+        <p className="text-[11px] text-slate-500">
           Students can open this link to launch a cloud container pre-configured with dependencies.
         </p>
       </div>
@@ -95,17 +95,17 @@ export function CodeSandboxStarterEditor({
       {/* Starter Code */}
       <div className="space-y-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <label htmlFor="starter-code" className="block text-xs font-medium text-[var(--text-secondary)]">
+          <label htmlFor="starter-code" className="block text-xs font-medium text-slate-700">
             Starter Code Snippet
           </label>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-[var(--text-muted)]">Templates:</span>
+            <span className="text-[11px] text-slate-500">Templates:</span>
             {TEMPLATES.map((tmpl) => (
               <button
                 key={tmpl.label}
                 type="button"
                 onClick={() => applyTemplate(tmpl.code)}
-                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
+                className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
               >
                 {tmpl.label}
               </button>
@@ -114,7 +114,7 @@ export function CodeSandboxStarterEditor({
               <button
                 type="button"
                 onClick={handleCopy}
-                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-primary hover:underline"
+                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-indigo-600 hover:underline"
               >
                 {copied ? <Check size={12} /> : <Copy size={12} />}
                 {copied ? "Copied" : "Copy"}
@@ -129,15 +129,15 @@ export function CodeSandboxStarterEditor({
           onChange={(e) => onStarterCodeChange(e.target.value)}
           placeholder="Paste or write starter boilerplate for this lesson..."
           rows={6}
-          className="font-mono text-xs leading-relaxed"
+          className="font-mono text-xs leading-relaxed bg-slate-950 text-slate-200 border-slate-800 focus:border-indigo-500 focus:ring-indigo-500"
         />
       </div>
 
       {/* Challenge Task */}
       {onChallengeTaskChange && (
         <div className="space-y-1.5">
-          <label htmlFor="challenge-task" className="flex items-center gap-1.5 text-xs font-medium text-amber-400">
-            <Sparkles size={13} />
+          <label htmlFor="challenge-task" className="flex items-center gap-1.5 text-xs font-medium text-amber-700">
+            <Sparkles size={13} className="text-amber-600" />
             Challenge / Hands-On Task Prompt
           </label>
           <Input

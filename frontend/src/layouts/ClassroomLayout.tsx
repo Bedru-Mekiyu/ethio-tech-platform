@@ -12,18 +12,18 @@ export function ClassroomLayout() {
       >
         Skip to classroom
       </a>
-      <header className="border-b border-[var(--border)] bg-[var(--bg-card)]">
+      <header className="border-b border-slate-200 bg-white">
         <div className="page-shell flex items-center justify-between gap-3 py-3.5">
           <Logo to="/app/dashboard" />
           <div className="flex items-center gap-3">
-            <Badge variant="danger" size="sm" showDot className="animate-pulse shadow-[0_0_8px_rgba(255,75,92,0.4)]">
+            <Badge variant="danger" size="sm" showDot>
               LIVE
             </Badge>
-            <span className="text-sm font-semibold tracking-wide text-white">Virtual Classroom</span>
+            <span className="text-sm font-semibold tracking-wide text-slate-900">Virtual Classroom</span>
           </div>
           <Link
             to="/app/dashboard"
-            className="flex h-8 items-center gap-2 rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs text-[var(--text-secondary)] hover:bg-white/8 hover:text-white transition-all"
+            className="flex h-8 items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-all"
           >
             <ArrowLeft size={14} />
             Leave

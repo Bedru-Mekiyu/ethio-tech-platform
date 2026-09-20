@@ -91,63 +91,63 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
   };
 
   return (
-    <Card className="mcc-card border-white/5 bg-[var(--bg-card)]/50 p-4 flex flex-col h-full animate-slide-in">
+    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-primary/15 text-primary p-1.5 rounded-lg border border-primary/20">
+          <div className="bg-indigo-50 text-indigo-600 border border-indigo-100 p-1.5 rounded-lg">
             <Link2 size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-white">Shared Class Resources</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Shared Class Resources</h3>
           </div>
         </div>
         <Button
           size="sm"
-          className="h-8 text-xs bg-primary hover:bg-primary/90 text-white rounded-lg"
+          className="h-8 text-xs bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg"
           onClick={() => setShowCreate(true)}
         >
           <Plus size={12} className="mr-1" /> Share Resource
         </Button>
         <dialog
           ref={createDialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-white/10 bg-[#0B0F19] p-0 text-white shadow-xl backdrop:bg-black/60"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
           onCancel={(e) => {
             e.preventDefault();
             setShowCreate(false);
           }}
         >
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-white">Share Resource</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Share Resource</h2>
             <div className="space-y-4 mt-4">
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Title</label>
+                <label className="text-xs text-slate-600 mb-1 block">Title</label>
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Lecture Slides - Week 1"
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Description (Optional)</label>
+                <label className="text-xs text-slate-600 mb-1 block">Description (Optional)</label>
                 <Input
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Short notes about slides..."
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Link / URL</label>
+                <label className="text-xs text-slate-600 mb-1 block">Link / URL</label>
                 <Input
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://..."
-                  className="bg-white/5 border-white/5 text-white"
+                  className="bg-white border-slate-200 text-slate-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-[var(--text-secondary)] mb-1 block">Resource Type</label>
+                <label className="text-xs text-slate-600 mb-1 block">Resource Type</label>
                 <Select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
@@ -164,13 +164,13 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
               <div className="flex justify-end gap-3 pt-2">
                 <Button
                   variant="outline"
-                  className="border-white/10 hover:bg-white/5 text-white"
+                  className="border-slate-200 hover:bg-slate-50 text-slate-700"
                   onClick={() => setShowCreate(false)}
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="bg-primary hover:bg-primary/95 text-white"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white"
                   onClick={handleCreate}
                   disabled={!title.trim() || !url.trim() || isSubmitting}
                 >
@@ -189,7 +189,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
         </div>
       ) : resources.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-[var(--text-muted)]">No resources shared yet</p>
+          <p className="text-xs text-slate-400">No resources shared yet</p>
         </div>
       ) : (
         <div className="space-y-2.5 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -206,16 +206,16 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
             }) => (
               <div
                 key={res._id}
-                className="rounded-xl border border-white/5 bg-white/[0.01] p-3.5 flex items-center justify-between gap-3 hover:bg-white/[0.03] transition-all"
+                className="rounded-xl border border-slate-200/80 bg-white p-3.5 flex items-center justify-between gap-3 hover:bg-slate-50 transition-all shadow-2xs"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="bg-white/5 p-2 rounded-lg shrink-0">{getResourceIcon(res.type)}</div>
+                  <div className="bg-slate-50 border border-slate-100 p-2 rounded-lg shrink-0">
+                    {getResourceIcon(res.type)}
+                  </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-white truncate">{res.title}</p>
-                    {res.description && (
-                      <p className="text-[10px] text-[var(--text-secondary)] truncate mt-0.5">{res.description}</p>
-                    )}
-                    <p className="text-[9px] text-primary/80 mt-1 truncate hover:underline">
+                    <p className="text-xs font-semibold text-slate-900 truncate">{res.title}</p>
+                    {res.description && <p className="text-[10px] text-slate-500 truncate mt-0.5">{res.description}</p>}
+                    <p className="text-[9px] text-indigo-600 mt-1 truncate hover:underline">
                       <a href={res.url} target="_blank" rel="noopener noreferrer">
                         {res.url}
                       </a>
@@ -224,7 +224,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  <div className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)]">
+                  <div className="flex items-center gap-2 text-[10px] text-slate-500">
                     <span className="flex items-center gap-0.5">
                       <Eye size={11} /> {res.viewCount || 0}
                     </span>
@@ -234,7 +234,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   </div>
                   <Badge
                     variant="default"
-                    className="text-[9px] border-white/10 uppercase font-bold text-white bg-white/5"
+                    className="text-[9px] border-slate-200 uppercase font-bold text-slate-700 bg-slate-100"
                   >
                     {res.type}
                   </Badge>

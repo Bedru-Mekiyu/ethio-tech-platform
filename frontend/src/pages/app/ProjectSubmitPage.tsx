@@ -4,7 +4,7 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CheckCircle2, FileCode2, Rocket, Send, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
+import { CheckCircle2, FileCode2, Rocket, Send, ShieldCheck, ExternalLink } from "lucide-react";
 import { api } from "@/services/api";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -131,23 +131,24 @@ export function ProjectSubmitPage() {
   ];
 
   return (
-    <div className="space-y-6 text-[var(--text-primary)]">
-      <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6">
+    <div className="space-y-6 text-slate-900">
+      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-2">
-            <h1 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Project Submission Portal</h1>
-            <p className="text-xs text-zinc-400 max-w-2xl leading-relaxed">
-              Choose an active capstone assignment, attach your GitHub repository and live deployment URLs, and submit for mentor review.
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Project Submission Portal</h1>
+            <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+              Choose an active capstone assignment, attach your GitHub repository and live deployment URLs, and submit
+              for mentor review.
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
               <Link to="/app/projects">
-                <Button size="sm" variant="primary" type="button" className="text-xs font-medium bg-violet-600 hover:bg-violet-500 text-white gap-1.5">
+                <Button size="sm" variant="primary" type="button" className="text-xs font-medium gap-1.5">
                   <Rocket size={13} />
                   View Assignments
                 </Button>
               </Link>
               <Link to={selectedProject?.trackId ? `/app/tracks/${selectedProject.trackId}` : "/app/tracks"}>
-                <Button size="sm" variant="outline" type="button" className="text-xs text-zinc-300 gap-1.5">
+                <Button size="sm" variant="outline" type="button" className="text-xs text-slate-700 gap-1.5">
                   <ShieldCheck size={13} />
                   View Track
                 </Button>
@@ -156,19 +157,19 @@ export function ProjectSubmitPage() {
           </div>
 
           <div className="grid grid-cols-3 gap-2.5 xl:w-[26rem]">
-            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">Assigned</p>
-              <p className="mt-1 text-lg font-bold text-white">{assignedProjects.length}</p>
+            <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">Assigned</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">{assignedProjects.length}</p>
             </div>
-            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">In Feedback</p>
-              <p className="mt-1 text-lg font-bold text-white">
+            <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">In Feedback</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "feedback").length}
               </p>
             </div>
-            <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">Active</p>
-              <p className="mt-1 text-lg font-bold text-white">
+            <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">Active</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "active").length}
               </p>
             </div>
@@ -178,10 +179,12 @@ export function ProjectSubmitPage() {
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
         <div className="space-y-6">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
-            <div className="flex items-center justify-between gap-3 border-b border-[#27272A] pb-3">
-              <h2 className="text-sm font-semibold text-white">Active Assignment Board</h2>
-              <Badge variant="success" size="sm">{Math.round(completion)}% complete</Badge>
+          <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
+              <h2 className="text-sm font-semibold text-slate-900">Active Assignment Board</h2>
+              <Badge variant="success" size="sm">
+                {Math.round(completion)}% complete
+              </Badge>
             </div>
 
             <div className="mt-4 grid gap-2.5">
@@ -193,16 +196,16 @@ export function ProjectSubmitPage() {
                     setSelectedProjectId(project.projectId);
                     setValue("projectId", project.projectId, { shouldValidate: true });
                   }}
-                  className={`rounded-lg border p-3.5 text-left transition ${
+                  className={`rounded-lg border p-3.5 text-left transition shadow-xs ${
                     project.projectId === selectedProjectId
-                      ? "border-violet-500 bg-violet-500/10 text-white"
-                      : "border-[#27272A] bg-[#141418] hover:border-zinc-700 text-zinc-300"
+                      ? "border-indigo-500 bg-indigo-50/70 text-slate-900"
+                      : "border-slate-200 bg-white hover:border-slate-300 text-slate-700"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs font-semibold text-white">{project.title}</p>
-                      <p className="mt-0.5 text-[11px] text-zinc-400">
+                      <p className="text-xs font-semibold text-slate-900">{project.title}</p>
+                      <p className="mt-0.5 text-[11px] text-slate-500">
                         {project.trackTitle} · {project.difficulty ?? "guided"} · {project.xpReward ?? 0} XP
                       </p>
                     </div>
@@ -212,7 +215,7 @@ export function ProjectSubmitPage() {
                           ? "success"
                           : project.category === "feedback"
                             ? "purple"
-                            : "default"
+                            : "outline"
                       }
                       size="sm"
                     >
@@ -224,28 +227,30 @@ export function ProjectSubmitPage() {
             </div>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#27272A] pb-3">
-              <h2 className="text-sm font-semibold text-white">{selectedProject?.title}</h2>
-              <Badge variant="purple" size="sm">{selectedProject?.trackTitle ?? "Learning Track"}</Badge>
+          <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
+              <h2 className="text-sm font-semibold text-slate-900">{selectedProject?.title}</h2>
+              <Badge variant="purple" size="sm">
+                {selectedProject?.trackTitle ?? "Learning Track"}
+              </Badge>
             </div>
-            <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
+            <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
               {selectedProject?.description ||
                 "Use the submission form to provide the links and files your mentor needs."}
             </p>
 
             <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
-              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Feedback</p>
-                <p className="mt-1 text-xs text-white">{selectedProject?.feedback || "Awaiting review"}</p>
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Feedback</p>
+                <p className="mt-1 text-xs text-slate-800">{selectedProject?.feedback || "Awaiting review"}</p>
               </div>
-              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Grade</p>
-                <p className="mt-1 text-sm font-bold text-white">{selectedProject?.grade ?? "—"}</p>
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Grade</p>
+                <p className="mt-1 text-sm font-bold text-slate-900">{selectedProject?.grade ?? "—"}</p>
               </div>
-              <div className="rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Submitted</p>
-                <p className="mt-1 text-xs text-white">
+              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Submitted</p>
+                <p className="mt-1 text-xs text-slate-800">
                   {selectedProject?.submittedAt
                     ? new Date(selectedProject.submittedAt).toLocaleDateString()
                     : "Not yet"}
@@ -256,14 +261,14 @@ export function ProjectSubmitPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-5 sm:p-6 shadow-sm">
-            <CardHeader className="p-0 border-b border-[#27272A] pb-3">
-              <CardTitle className="text-sm font-semibold text-white">Send Final Build</CardTitle>
+          <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+            <CardHeader className="p-0 border-b border-slate-200 pb-3">
+              <CardTitle className="text-sm font-semibold text-slate-900">Send Final Build</CardTitle>
             </CardHeader>
 
             <form className="mt-4 space-y-3.5" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-300">Project Assignment</Label>
+                <Label className="text-xs text-slate-700">Project Assignment</Label>
                 <Select
                   {...projectField}
                   onChange={(event) => {
@@ -271,10 +276,10 @@ export function ProjectSubmitPage() {
                     setSelectedProjectId(event.target.value);
                     setValue("projectId", event.target.value, { shouldValidate: true });
                   }}
-                  className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 focus:border-indigo-500 shadow-xs"
                 >
                   {assignedProjects.map((project) => (
-                    <option key={project.projectId} value={project.projectId} className="bg-[#141418] text-white">
+                    <option key={project.projectId} value={project.projectId}>
                       {project.title}
                     </option>
                   ))}
@@ -283,37 +288,35 @@ export function ProjectSubmitPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-300">GitHub Repository URL</Label>
+                <Label className="text-xs text-slate-700">GitHub Repository URL</Label>
                 <Input
                   placeholder="https://github.com/username/project"
                   autoComplete="off"
                   {...register("githubLink")}
-                  className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
                 />
                 {errors.githubLink ? <p className="text-[11px] text-danger">Enter a valid GitHub URL.</p> : null}
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-300">Live Deployed URL</Label>
+                <Label className="text-xs text-slate-700">Live Deployed URL</Label>
                 <Input
                   placeholder="https://your-app.vercel.app"
                   autoComplete="off"
                   {...register("deployedUrl")}
-                  className="bg-[#141418] border-[#27272A] text-xs h-9 text-white"
+                  className="bg-white border-slate-300 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
                 />
                 {errors.deployedUrl ? <p className="text-[11px] text-danger">Enter a valid deployed URL.</p> : null}
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-300">Files Included</Label>
+                <Label className="text-xs text-slate-700">Files Included</Label>
                 <Textarea
                   placeholder="src/App.tsx&#10;src/components/...&#10;public/index.html"
                   {...register("files")}
-                  className="bg-[#141418] border-[#27272A] text-xs text-white"
+                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 shadow-xs"
                 />
-                <p className="text-[11px] text-zinc-500">
-                  Add one file per line or separate entries with commas.
-                </p>
+                <p className="text-[11px] text-slate-500">Add one file per line or separate entries with commas.</p>
               </div>
 
               {submissionMutation.isError && (
@@ -323,7 +326,7 @@ export function ProjectSubmitPage() {
               )}
 
               {submissionMutation.isSuccess && (
-                <div className="rounded-2xl border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
+                <div className="rounded-xl border border-success/30 bg-success/10 px-4 py-3 text-sm text-success font-medium">
                   Submission sent. Your mentor can now review the build.
                 </div>
               )}
@@ -340,32 +343,32 @@ export function ProjectSubmitPage() {
             </form>
           </Card>
 
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-            <div className="flex items-center gap-2 text-[var(--text-muted)]">
-              <Sparkles size={14} />
-              <span className="text-[10px] uppercase tracking-[0.22em]">Submission checklist</span>
+          <Card className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+            <div className="flex items-center gap-2 text-slate-500">
+              <CheckCircle2 size={14} className="text-indigo-600" />
+              <span className="text-[10px] uppercase tracking-wider font-semibold">Submission checklist</span>
             </div>
             <div className="mt-4 space-y-3">
               {checklist.map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center justify-between rounded-[20px] border border-[var(--border)] bg-white/5 px-4 py-3"
+                  className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50/70 px-4 py-3"
                 >
-                  <span className="text-sm text-white">{item.label}</span>
+                  <span className="text-sm text-slate-800">{item.label}</span>
                   {item.done ? (
-                    <CheckCircle2 size={16} className="text-success" />
+                    <CheckCircle2 size={16} className="text-emerald-600" />
                   ) : (
-                    <span className="text-xs text-[var(--text-muted)]">Pending</span>
+                    <span className="text-xs text-slate-400">Pending</span>
                   )}
                 </div>
               ))}
             </div>
           </Card>
 
-          <Card className="rounded-[28px] border-[var(--border)] bg-[var(--bg-card)] p-6">
-            <div className="flex items-center gap-2 text-[var(--text-muted)]">
-              <FileCode2 size={14} />
-              <span className="text-[10px] uppercase tracking-[0.22em]">Recent submissions</span>
+          <Card className="rounded-xl border border-slate-200 bg-white p-6 shadow-xs">
+            <div className="flex items-center gap-2 text-slate-500">
+              <FileCode2 size={14} className="text-indigo-600" />
+              <span className="text-[10px] uppercase tracking-wider font-semibold">Recent submissions</span>
             </div>
             <div className="mt-4 space-y-3">
               {(recentSubmissions.length
@@ -374,10 +377,10 @@ export function ProjectSubmitPage() {
               ).map((submission, index) => (
                 <div
                   key={`${submission.project?.title ?? "submission"}-${index}`}
-                  className="rounded-[20px] border border-[var(--border)] bg-white/5 p-4"
+                  className="rounded-lg border border-slate-200 bg-slate-50/70 p-4"
                 >
-                  <p className="text-sm font-medium text-white">{submission.project?.title ?? "Untitled"}</p>
-                  <p className="mt-1 text-xs text-[var(--text-muted)]">
+                  <p className="text-sm font-medium text-slate-900">{submission.project?.title ?? "Untitled"}</p>
+                  <p className="mt-1 text-xs text-slate-500">
                     {submission.status ?? "draft"} ·{" "}
                     {submission.createdAt ? new Date(submission.createdAt).toLocaleDateString() : "Not submitted"}
                   </p>
@@ -389,13 +392,13 @@ export function ProjectSubmitPage() {
       </div>
 
       {latestSubmission && (
-        <Card className="rounded-[28px] border-[var(--border)] bg-[linear-gradient(180deg,rgba(16,23,37,0.92),rgba(8,12,20,0.96))] p-6">
+        <Card className="rounded-xl border border-indigo-100 bg-indigo-50/40 p-6 shadow-xs">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 className="mt-3 text-2xl font-semibold text-white">
+              <h3 className="mt-1 text-xl font-bold text-slate-900">
                 {latestSubmission.project?.title ?? "Recent project"} is already in the review queue
               </h3>
-              <p className="mt-2 text-sm text-[var(--text-secondary)]">
+              <p className="mt-1 text-xs text-slate-600">
                 Keep iterating from the mentor feedback above and move the next submission forward with clearer scope
                 and cleaner delivery.
               </p>

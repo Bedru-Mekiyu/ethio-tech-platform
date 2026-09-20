@@ -16,7 +16,6 @@ import {
   MapPinned,
   Radio,
   ShieldCheck,
-  Sparkles,
   Target,
   Terminal,
   Trophy,
@@ -491,27 +490,31 @@ export function AboutPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-400 mb-4">
-            <Sparkles size={12} />
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 mb-4">
+            <Zap size={12} />
             <span>The Ethiopian Software Engineering Movement</span>
           </div>
-          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-white">
-            Democratizing elite tech education with the <span className="text-violet-400">PISTELS</span> framework
+          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-slate-900">
+            Democratizing elite tech education with the <span className="text-indigo-600">PISTELS</span> framework
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             {data?.hero.description ||
               "EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects."}
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="md" className="font-medium">
+              <Button size="md" className="font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm">
                 Join as Student <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button variant="outline" size="md">
-                <Users className="mr-2 h-4 w-4 text-violet-400" /> Become a Mentor
+              <Button
+                variant="outline"
+                size="md"
+                className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm"
+              >
+                <Users className="mr-2 h-4 w-4 text-indigo-600" /> Become a Mentor
               </Button>
             </Link>
             <Button
@@ -521,13 +524,13 @@ export function AboutPage() {
                 const el = document.getElementById("pistels-framework");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-zinc-400 hover:text-white"
+              className="text-slate-600 hover:text-slate-900"
             >
               Explore the PISTELS Pillars
             </Button>
           </div>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-zinc-400">
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-slate-600">
             {(
               data?.hero.highlights ?? [
                 "100% Free & Open Source",
@@ -539,9 +542,9 @@ export function AboutPage() {
             ).map((item) => (
               <span
                 key={item}
-                className="flex items-center gap-1.5 rounded-md border border-[#27272A] bg-[#0E0E11] px-2.5 py-1 text-xs text-zinc-300"
+                className="flex items-center gap-1.5 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs text-slate-700 shadow-sm"
               >
-                <Sparkles className="h-3 w-3 text-violet-400" />
+                <CheckCircle2 className="h-3 w-3 text-indigo-600" />
                 {item}
               </span>
             ))}
@@ -557,18 +560,18 @@ export function AboutPage() {
             return (
               <Card
                 key={stat.label}
-                className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700"
+                className="relative overflow-hidden border-slate-200 bg-white p-5 transition-all duration-150 hover:border-slate-300 shadow-sm"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                     <Icon size={18} />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold tracking-tight text-white">{stat.value}</p>
-                    <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">{stat.label}</p>
+                    <p className="text-2xl font-bold tracking-tight text-slate-900">{stat.value}</p>
+                    <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{stat.label}</p>
                   </div>
                 </div>
-                <p className="mt-2 text-xs text-zinc-400">{stat.helper}</p>
+                <p className="mt-2 text-xs text-slate-600">{stat.helper}</p>
               </Card>
             );
           })}
@@ -584,13 +587,13 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
             <span>National Context & Strategic Imperative</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Unlocking Ethiopia’s <span className="text-violet-400">Demographic Dividend</span>
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+            Unlocking Ethiopia’s <span className="text-indigo-600">Demographic Dividend</span>
           </h2>
-          <p className="mt-3 text-base leading-relaxed text-zinc-400">
+          <p className="mt-3 text-base leading-relaxed text-slate-600">
             With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
             EthioTech provides the production-grade tooling and mentorship needed to bridge academic theory with
             industry demands.
@@ -604,14 +607,14 @@ export function AboutPage() {
             return (
               <Card
                 key={fact.label}
-                className="border-[#27272A] bg-[#0E0E11] p-5 transition duration-150 hover:border-zinc-700"
+                className="border-slate-200 bg-white p-5 transition duration-150 hover:border-slate-300 shadow-sm"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                   <Icon size={18} />
                 </div>
-                <p className="mt-3 text-2xl font-bold text-white">{fact.metric}</p>
-                <h3 className="mt-0.5 text-sm font-semibold text-white">{fact.label}</h3>
-                <p className="mt-1.5 text-xs leading-5 text-zinc-400">{fact.description}</p>
+                <p className="mt-3 text-2xl font-bold text-slate-900">{fact.metric}</p>
+                <h3 className="mt-0.5 text-sm font-semibold text-slate-900">{fact.label}</h3>
+                <p className="mt-1.5 text-xs leading-5 text-slate-600">{fact.description}</p>
               </Card>
             );
           })}
@@ -620,38 +623,38 @@ export function AboutPage() {
         {/* Regional Divide vs Scaled Solution */}
         <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-center">
           <div className="space-y-4">
-            <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6">
-              <div className="flex items-center gap-2 text-rose-400">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 text-rose-600">
                 <Flame size={18} />
-                <h3 className="text-base font-semibold text-white">The Theory vs. Practice Chasm</h3>
+                <h3 className="text-base font-semibold text-slate-900">The Theory vs. Practice Chasm</h3>
               </div>
-              <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
+              <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
                 Most university students graduate having completed blackboard algorithms and single-page textbook
                 projects. Real software engineering requires git branching workflows, automated CI/CD pipelines, Docker
                 containers, and high-availability system architecture.
               </p>
-              <div className="mt-3 space-y-1.5 text-xs text-zinc-400">
+              <div className="mt-3 space-y-1.5 text-xs text-slate-600">
                 <div className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500" />
                   <span>Academic labs lack continuous deployment and cloud credits.</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500" />
                   <span>Regional universities face sporadic connectivity and isolated cohorts.</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-500" />
                   <span>Graduates lack verifiable proof-of-work repositories for hiring teams.</span>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-6">
-              <div className="flex items-center gap-2 text-emerald-400">
+            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center gap-2 text-emerald-600">
                 <ShieldCheck size={18} />
-                <h3 className="text-base font-semibold text-white">How EthioTech Solves This</h3>
+                <h3 className="text-base font-semibold text-slate-900">How EthioTech Solves This</h3>
               </div>
-              <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
+              <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
                 EthioTech provides a continuous software development lifecycle right in the browser and across our
                 physical regional hubs. Students push real code, receive automated CI test feedback in seconds, and
                 review code with senior mentors.
@@ -675,8 +678,8 @@ export function AboutPage() {
 
           {/* Regional Solutions Cards */}
           <div className="space-y-3.5">
-            <h3 className="text-base font-semibold text-white">Overcoming the Regional Digital Divide</h3>
-            <p className="text-xs text-zinc-400">
+            <h3 className="text-base font-semibold text-slate-900">Overcoming the Regional Digital Divide</h3>
+            <p className="text-xs text-slate-600">
               We design specifically for Ethiopian infrastructure, ensuring learners in every region enjoy an
               uncompromising learning experience.
             </p>
@@ -686,19 +689,19 @@ export function AboutPage() {
                 return (
                   <Card
                     key={sol.title}
-                    className="border-[#27272A] bg-[#0E0E11] p-4 transition-all duration-150 hover:border-zinc-700"
+                    className="border-slate-200 bg-white p-4 transition-all duration-150 hover:border-slate-300 shadow-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                         <Icon size={15} />
                       </div>
                       <Badge variant="default" size="sm">
                         {sol.tag}
                       </Badge>
                     </div>
-                    <h4 className="mt-2 text-xs font-semibold text-white">{sol.title}</h4>
-                    <p className="mt-0.5 text-[11px] text-zinc-500">{sol.subtitle}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-zinc-400">{sol.description}</p>
+                    <h4 className="mt-2 text-xs font-semibold text-slate-900">{sol.title}</h4>
+                    <p className="mt-0.5 text-[11px] text-slate-500">{sol.subtitle}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-slate-600">{sol.description}</p>
                   </Card>
                 );
               })}
@@ -708,16 +711,16 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── The PISTELS Framework (Core Pedagogical Backbone) ─── */}
-      <section id="pistels-framework" className="relative border-y border-[#27272A] bg-[#050507] py-16">
+      <section id="pistels-framework" className="relative border-y border-slate-200 bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
               <span>Core Pedagogical Backbone</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
-              The <span className="text-violet-400">PISTELS</span> Ideology
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              The <span className="text-indigo-600">PISTELS</span> Ideology
             </h2>
-            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Our 7-pillar methodology engineered to systematically develop collaborative software engineers capable of
               shipping at high technical standards.
             </p>
@@ -734,13 +737,13 @@ export function AboutPage() {
                   onClick={() => setActivePillarIndex(idx)}
                   className={`group relative flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? "border-violet-500/40 bg-violet-500/15 text-white"
-                      : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                      ? "border-indigo-600 bg-indigo-600 text-white shadow-sm font-semibold"
+                      : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                   }`}
                 >
                   <span
                     className={`flex h-5 w-5 items-center justify-center rounded text-xs font-bold ${
-                      isActive ? "bg-violet-500 text-white" : "bg-[#141418] text-zinc-300"
+                      isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-700"
                     }`}
                   >
                     {pillar.letter === "S2" ? "S" : pillar.letter}
@@ -760,67 +763,67 @@ export function AboutPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="overflow-hidden rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-lg"
+                className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm"
               >
                 <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-12 lg:items-center">
                   {/* Left Column: Narrative & Mechanisms */}
                   <div className="space-y-4 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                         <activePillar.icon size={20} />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-semibold uppercase tracking-wider text-violet-400">
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-indigo-600">
                             Pillar {activePillarIndex + 1} of 7
                           </span>
                           <Badge variant="default" size="sm">
                             {activePillar.badge}
                           </Badge>
                         </div>
-                        <h3 className="text-xl font-bold text-white md:text-2xl">{activePillar.name}</h3>
+                        <h3 className="text-xl font-bold text-slate-900 md:text-2xl">{activePillar.name}</h3>
                       </div>
                     </div>
 
-                    <p className="text-sm font-medium text-violet-400">{activePillar.tagline}</p>
-                    <p className="text-xs leading-relaxed text-zinc-400">{activePillar.philosophy}</p>
+                    <p className="text-sm font-medium text-indigo-600">{activePillar.tagline}</p>
+                    <p className="text-xs leading-relaxed text-slate-600">{activePillar.philosophy}</p>
 
                     <div>
-                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                         Core Architecture & Mechanics
                       </h4>
                       <ul className="mt-2 space-y-1.5">
                         {activePillar.mechanisms.map((mech) => (
-                          <li key={mech} className="flex items-start gap-2 text-xs text-zinc-200">
-                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                          <li key={mech} className="flex items-start gap-2 text-xs text-slate-700">
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" />
                             <span>{mech}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-lg border border-[#27272A] bg-[#141418] p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
+                    <div className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-100 text-indigo-700">
                         <Trophy size={16} />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                        <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           {activePillar.keyMetric.label}
                         </p>
-                        <p className="text-base font-bold text-white">{activePillar.keyMetric.value}</p>
+                        <p className="text-base font-bold text-slate-900">{activePillar.keyMetric.value}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Right Column: Code & Interactive Architecture */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="overflow-hidden rounded-lg border border-[#27272A] bg-black/60 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-[#27272A] bg-[#0E0E11] px-3 py-1.5">
+                    <div className="overflow-hidden rounded-lg border border-slate-800 bg-slate-950 shadow-inner">
+                      <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-3 py-1.5">
                         <div className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="h-2 w-2 rounded-full bg-[#27272A]" />
-                          <span className="ml-2 text-xs font-mono text-zinc-500">
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="h-2 w-2 rounded-full bg-slate-700" />
+                          <span className="ml-2 text-xs font-mono text-slate-400">
                             {activePillar.shortKey}-architecture.ts
                           </span>
                         </div>
@@ -828,12 +831,12 @@ export function AboutPage() {
                           PISTELS Spec
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
+                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-slate-300">
                         <code>{activePillar.codeSnippet}</code>
                       </pre>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs text-zinc-400">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
                       <span>Click any pillar above to inspect mechanics</span>
                       <Button
                         variant="ghost"
@@ -841,7 +844,7 @@ export function AboutPage() {
                         onClick={() => {
                           setActivePillarIndex((prev) => (prev + 1) % PISTELS_PILLARS.length);
                         }}
-                        className="text-violet-400 hover:text-white"
+                        className="text-indigo-600 hover:text-indigo-700 font-medium"
                       >
                         Next Pillar <ArrowRight size={13} className="ml-1" />
                       </Button>
@@ -863,20 +866,20 @@ export function AboutPage() {
                   onClick={() => setActivePillarIndex(idx)}
                   className={`cursor-pointer border p-3.5 transition-all duration-150 ${
                     isSelected
-                      ? "border-violet-500/40 bg-violet-500/10 shadow-xs"
-                      : "border-[#27272A] bg-[#0E0E11] hover:border-zinc-700"
+                      ? "border-indigo-600 bg-indigo-50/50 shadow-sm"
+                      : "border-slate-200 bg-white hover:border-slate-300 shadow-sm"
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                       <Icon size={14} />
                     </div>
-                    <span className="text-xs font-bold font-mono text-violet-400">
+                    <span className="text-xs font-bold font-mono text-indigo-600">
                       {pillar.letter === "S2" ? "S" : pillar.letter}
                     </span>
                   </div>
-                  <h4 className="mt-2 text-xs font-semibold text-white">{pillar.name}</h4>
-                  <p className="mt-0.5 text-[11px] text-zinc-400 line-clamp-2">{pillar.tagline}</p>
+                  <h4 className="mt-2 text-xs font-semibold text-slate-900">{pillar.name}</h4>
+                  <p className="mt-0.5 text-[11px] text-slate-500 line-clamp-2">{pillar.tagline}</p>
                 </Card>
               );
             })}
@@ -893,29 +896,29 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.25 }}
       >
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
+          <Card className="border-slate-200 bg-white p-6 shadow-sm hover:border-slate-300 transition-all">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <Target size={20} />
               </div>
               <Badge variant="default">Our Purpose</Badge>
             </div>
-            <h3 className="mt-4 text-lg font-bold text-white">{data?.mission.title ?? "Our Mission"}</h3>
-            <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+            <h3 className="mt-4 text-lg font-bold text-slate-900">{data?.mission.title ?? "Our Mission"}</h3>
+            <p className="mt-2 text-xs leading-relaxed text-slate-600">
               {data?.mission.description ??
                 "To democratize software engineering education for every Ethiopian youth through free, open, and production-grade experiential learning, powered by low-latency tooling and global diaspora mentorship."}
             </p>
           </Card>
 
-          <Card className="border-[#27272A] bg-[#0E0E11] p-6 transition-all hover:border-zinc-700">
+          <Card className="border-slate-200 bg-white p-6 shadow-sm hover:border-slate-300 transition-all">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <Compass size={20} />
               </div>
               <Badge variant="default">Our Horizon</Badge>
             </div>
-            <h3 className="mt-4 text-lg font-bold text-white">{data?.vision.title ?? "Our Vision"}</h3>
-            <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+            <h3 className="mt-4 text-lg font-bold text-slate-900">{data?.vision.title ?? "Our Vision"}</h3>
+            <p className="mt-2 text-xs leading-relaxed text-slate-600">
               {data?.vision.description ??
                 "To establish Ethiopia as Africa's preeminent sovereign software and artificial intelligence talent powerhouse, placing 100,000+ certified engineers into high-growth pan-African companies and global distributed engineering teams by 2030."}
             </p>
@@ -925,7 +928,7 @@ export function AboutPage() {
         {/* Visual Community Showcase */}
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="relative">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-[#27272A] shadow-lg">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200 shadow-sm">
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
                 alt="EthioTech immersive learning environment preview - student programmer at work"
@@ -939,13 +942,13 @@ export function AboutPage() {
           </div>
 
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-2">
               <span>National Impact Model</span>
             </div>
-            <h3 className="text-xl font-bold leading-tight sm:text-2xl text-white">
+            <h3 className="text-xl font-bold leading-tight sm:text-2xl text-slate-900">
               {data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}
             </h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-zinc-400">
+            <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
               {data?.bridge.description ??
                 "EthioTech operates as an open-impact digital public good. We bridge the structural divide by linking university classrooms directly to diaspora tech leads and production codebases."}
             </p>
@@ -958,17 +961,17 @@ export function AboutPage() {
                   "Physical Regional Hubs with reliable power and internet across 6 university cities.",
                 ]
               ).map((bullet, index) => {
-                const icons = [Sparkles, ShieldCheck, MapPinned];
-                const Icon = icons[index] ?? Sparkles;
+                const icons = [Zap, ShieldCheck, MapPinned];
+                const Icon = icons[index] ?? Zap;
                 return (
                   <div
                     key={bullet}
-                    className="flex items-start gap-2.5 rounded-lg border border-[#27272A] bg-[#0E0E11] p-3 transition hover:border-zinc-700"
+                    className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50 p-3 transition hover:border-slate-300"
                   >
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-violet-500/10 text-violet-400">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-indigo-50 text-indigo-600">
                       <Icon size={14} />
                     </div>
-                    <p className="text-xs leading-relaxed text-zinc-300">{bullet}</p>
+                    <p className="text-xs leading-relaxed text-slate-700">{bullet}</p>
                   </div>
                 );
               })}
@@ -981,7 +984,7 @@ export function AboutPage() {
                 </Button>
               </Link>
               <Link to="/hubs">
-                <Button variant="ghost" size="sm" className="text-violet-400 hover:text-white">
+                <Button variant="ghost" size="sm" className="text-indigo-600 hover:text-slate-900">
                   Explore Regional Hubs
                 </Button>
               </Link>
@@ -999,11 +1002,11 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
             <span>Trajectory & Execution</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Platform Roadmap & Milestones</h2>
-          <p className="mt-2 text-xs sm:text-sm text-zinc-400 font-normal">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Roadmap & Milestones</h2>
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal">
             Our multi-year blueprint scaling Ethiopia's digital software engineering infrastructure.
           </p>
 
@@ -1015,8 +1018,8 @@ export function AboutPage() {
                 onClick={() => setRoadmapFilter(filterKey)}
                 className={`rounded-md px-3 py-1 text-xs font-medium transition ${
                   roadmapFilter === filterKey
-                    ? "border border-violet-500 bg-violet-600 text-white"
-                    : "border border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                    ? "border border-indigo-600 bg-indigo-600 text-white font-semibold shadow-sm"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                 }`}
               >
                 {filterKey === "all" ? "All Phases" : filterKey.replace("-", " ")}
@@ -1028,42 +1031,42 @@ export function AboutPage() {
         <div className="mt-8 space-y-3">
           {filteredRoadmap.map((item) => {
             const statusConfig = {
-              completed: { badge: "Completed", variant: "success" as const, dotColor: "bg-emerald-400" },
+              completed: { badge: "Completed", variant: "success" as const, dotColor: "bg-emerald-500" },
               "in-progress": {
                 badge: "Current Phase",
                 variant: "default" as const,
-                dotColor: "bg-violet-400 animate-pulse",
+                dotColor: "bg-indigo-600 animate-pulse",
               },
-              planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-zinc-500" },
+              planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-slate-400" },
             }[item.status];
 
             return (
               <Card
                 key={item.phase}
-                className="overflow-hidden border-[#27272A] bg-[#0E0E11] p-5 transition-all duration-150 hover:border-zinc-700"
+                className="overflow-hidden border-slate-200 bg-white p-5 shadow-sm transition-all duration-150 hover:border-slate-300"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <span className={`h-2 w-2 rounded-full ${statusConfig.dotColor}`} />
-                    <span className="text-xs font-semibold uppercase tracking-wider text-violet-400">{item.phase}</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">{item.phase}</span>
                     <Badge variant={statusConfig.variant} size="sm">
                       {statusConfig.badge}
                     </Badge>
                   </div>
-                  <span className="text-xs font-mono text-zinc-500">{item.year}</span>
+                  <span className="text-xs font-mono text-slate-500">{item.year}</span>
                 </div>
 
-                <h3 className="mt-2 text-base font-bold text-white">{item.title}</h3>
-                <p className="mt-1 text-xs leading-relaxed text-zinc-400">{item.description}</p>
+                <h3 className="mt-2 text-base font-bold text-slate-900">{item.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600">{item.description}</p>
 
                 <div className="mt-3.5">
-                  <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                  <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                     Key Deliverables & Milestones
                   </h4>
                   <div className="mt-2 grid gap-2 sm:grid-cols-2">
                     {item.deliverables.map((deliv) => (
-                      <div key={deliv} className="flex items-start gap-2 text-xs text-zinc-300">
-                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                      <div key={deliv} className="flex items-start gap-2 text-xs text-slate-700">
+                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" />
                         <span>{deliv}</span>
                       </div>
                     ))}
@@ -1076,48 +1079,50 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── Governance, Transparency & Open Impact Model ─── */}
-      <section className="border-t border-[#27272A] bg-[#050507] py-16">
+      <section className="border-t border-slate-200 bg-slate-50/50 py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-3">
               <span>Institutional Trust</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Governance & Open Impact Model</h2>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-400 font-normal">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              Governance & Open Impact Model
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal">
               EthioTech is operated as a transparent, non-profit digital public good dedicated to long-term national
               capacity building.
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+            <Card className="border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <BookOpen size={18} />
               </div>
-              <h3 className="mt-3 text-sm font-semibold text-white">100% Open Source Syllabus</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+              <h3 className="mt-3 text-sm font-semibold text-slate-900">100% Open Source Syllabus</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                 All curriculum outlines, project boilerplate repositories, and testing suites are published under open
                 permissive licenses (MIT / CC-BY-4.0). Any university or student can inspect or fork improvements.
               </p>
             </Card>
 
-            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+            <Card className="border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <ShieldCheck size={18} />
               </div>
-              <h3 className="mt-3 text-sm font-semibold text-white">Ethical Philanthropic Model</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+              <h3 className="mt-3 text-sm font-semibold text-slate-900">Ethical Philanthropic Model</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                 We operate free from extractive investor incentives. Funding is derived exclusively from diaspora tech
                 philanthropy, educational grants, and CSR partnerships. No student is ever charged tuition.
               </p>
             </Card>
 
-            <Card className="border-[#27272A] bg-[#0E0E11] p-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+            <Card className="border-slate-200 bg-white p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <ShieldCheck size={18} />
               </div>
-              <h3 className="mt-3 text-sm font-semibold text-white">Transparent Impact Auditing</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-zinc-400">
+              <h3 className="mt-3 text-sm font-semibold text-slate-900">Transparent Impact Auditing</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
                 We maintain a telemetry reporting system documenting active cohorts, PR merge volumes, mentor volunteer
                 hours, and verified career placements. Every metric is audited and verifiable.
               </p>
@@ -1128,33 +1133,40 @@ export function AboutPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-20 pt-8 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 shadow-lg">
+        <Card className="mx-auto max-w-7xl overflow-hidden border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400 mb-2.5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-0.5 text-xs font-medium text-indigo-700 mb-2.5">
                 <span>Join the Movement</span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                 Ready to transform your engineering trajectory?
               </h2>
-              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-zinc-400 sm:text-sm">
+              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
                 Whether you are a university student eager to build production systems or a seasoned diaspora engineer
                 ready to guide the next generation, EthioTech is your platform.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
-                <Button size="md" className="w-full sm:w-auto font-medium">
+                <Button
+                  size="md"
+                  className="w-full sm:w-auto font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
+                >
                   Join as Student
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
-                <Button variant="outline" size="md" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="md"
+                  className="w-full sm:w-auto border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm"
+                >
                   Become a Mentor
                 </Button>
               </Link>
               <Link to="/how-it-works">
-                <Button variant="ghost" size="md" className="w-full sm:w-auto text-violet-400 hover:text-white">
+                <Button variant="ghost" size="md" className="w-full sm:w-auto text-indigo-600 hover:text-slate-900">
                   Explore Learning Flow <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>

@@ -21,8 +21,8 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
       <div className="max-w-3xl">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">{title}</h1>
-        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-400">{intro}</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{title}</h1>
+        <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{intro}</p>
         {(primary || secondary) && (
           <div className="mt-5 flex flex-wrap gap-2.5">
             {primary && (
@@ -32,7 +32,9 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
             )}
             {secondary && (
               <Link to={secondary.to}>
-                <Button variant="outline" size="sm">{secondary.label}</Button>
+                <Button variant="outline" size="sm">
+                  {secondary.label}
+                </Button>
               </Link>
             )}
           </div>
@@ -41,14 +43,14 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
 
       <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {sections.map((section) => (
-          <Card key={section.title} className="h-full border-[#27272A] bg-[#0E0E11] p-5">
-            <h2 className="text-sm font-semibold text-white">{section.title}</h2>
-            <p className="mt-2 text-xs leading-relaxed text-zinc-400">{section.body}</p>
+          <Card key={section.title} className="h-full border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-900">{section.title}</h2>
+            <p className="mt-2 text-xs leading-relaxed text-slate-600">{section.body}</p>
             {section.bullets && (
-              <ul className="mt-3 space-y-1.5 text-xs text-zinc-400">
+              <ul className="mt-3 space-y-1.5 text-xs text-slate-600">
                 {section.bullets.map((bullet) => (
                   <li key={bullet} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-violet-400 shrink-0" />
+                    <span className="mt-1.5 h-1 w-1 rounded-full bg-indigo-600 shrink-0" />
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -119,46 +121,44 @@ export function ContactPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 lg:px-8">
-      <h1 className="text-3xl font-bold">Talk to the EthioTech team</h1>
-      <p className="mt-4 text-[var(--text-secondary)]">
-        Learner support, mentor onboarding, partnerships, and school coordination.
-      </p>
+      <h1 className="text-3xl font-bold text-slate-900">Talk to the EthioTech team</h1>
+      <p className="mt-4 text-slate-600">Learner support, mentor onboarding, partnerships, and school coordination.</p>
       {sent ? (
-        <Card className="mt-8 p-6">
-          <p className="font-medium text-success">Message received. We will respond soon.</p>
+        <Card className="mt-8 border-slate-200 bg-white p-6 shadow-sm">
+          <p className="font-medium text-emerald-600">Message received. We will respond soon.</p>
         </Card>
       ) : (
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <label className="block text-sm">
+          <label className="block text-sm font-medium text-slate-700">
             Name
             <input
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-sm"
             />
           </label>
-          <label className="block text-sm">
+          <label className="block text-sm font-medium text-slate-700">
             Email
             <input
               required
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-sm"
             />
           </label>
-          <label className="block text-sm">
+          <label className="block text-sm font-medium text-slate-700">
             Message
             <textarea
               required
               rows={5}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 focus:border-indigo-600 focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-sm"
             />
           </label>
-          {error ? <p className="text-sm text-danger">{error}</p> : null}
+          {error ? <p className="text-sm text-rose-600">{error}</p> : null}
           <Button type="submit">Send message</Button>
         </form>
       )}

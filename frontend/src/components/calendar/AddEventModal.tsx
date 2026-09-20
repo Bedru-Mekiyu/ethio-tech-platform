@@ -9,7 +9,8 @@ import {
   AlertCircle,
   Award,
   MapPin,
-  Sparkles,
+  Tag,
+  Check,
   Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,7 +79,7 @@ const TYPE_OPTIONS: Array<{
     type: "custom",
     label: "Custom Reminder",
     desc: "Personal milestone or review note",
-    icon: Sparkles,
+    icon: Tag,
     defaultColor: "#8B5CF6",
   },
 ];
@@ -217,7 +218,7 @@ export function AddEventModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-[#040711]/80 backdrop-blur-md transition-opacity"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -228,22 +229,22 @@ export function AddEventModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-[24px] border border-[#1E293B] bg-[#090D16] text-white shadow-2xl shadow-violet-950/40"
+          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-xl"
           role="dialog"
           aria-modal="true"
           aria-labelledby="add-event-modal-title"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-[#1E293B] bg-[#0F172A]/90 px-6 py-5">
+          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-6 py-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/20 text-violet-400 border border-violet-500/30">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-100">
                 <CalendarIcon size={20} />
               </div>
               <div>
-                <h2 id="add-event-modal-title" className="text-lg font-bold tracking-tight text-white">
+                <h2 id="add-event-modal-title" className="text-lg font-bold tracking-tight text-slate-900">
                   Schedule Event / Study Block
                 </h2>
-                <p className="text-xs text-[var(--text-muted)]">
+                <p className="text-xs text-slate-500">
                   Add focus sessions, sprint checkpoints, or mentor classes to your calendar.
                 </p>
               </div>
@@ -252,7 +253,7 @@ export function AddEventModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full border border-white/10 bg-white/5 p-2 text-[var(--text-muted)] hover:bg-white/10 hover:text-white transition"
+              className="rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition shadow-xs"
               aria-label="Close modal"
             >
               <X size={18} />
@@ -262,7 +263,7 @@ export function AddEventModal({
           {/* Form */}
           <form onSubmit={handleSubmit} className="max-h-[75vh] overflow-y-auto p-6 space-y-5">
             {errorMessage && (
-              <div className="flex items-center gap-2.5 rounded-xl border border-red-500/30 bg-red-500/10 p-3.5 text-xs text-red-400">
+              <div className="flex items-center gap-2.5 rounded-xl border border-rose-200 bg-rose-50 p-3.5 text-xs text-rose-700">
                 <AlertCircle size={16} className="shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -270,8 +271,8 @@ export function AddEventModal({
 
             {/* Event Title */}
             <div className="space-y-1.5">
-              <label htmlFor={titleInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Event Title <span className="text-violet-400">*</span>
+              <label htmlFor={titleInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-700">
+                Event Title <span className="text-indigo-600">*</span>
               </label>
               <input
                 id={titleInputId}
@@ -280,13 +281,13 @@ export function AddEventModal({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Distributed Caching & Redis Architecture Sprint"
-                className="w-full rounded-xl border border-[#1E293B] bg-[#0F172A] px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 transition"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition shadow-xs"
               />
             </div>
 
             {/* Event Type Selection */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">Event Category</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-slate-700">Event Category</label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {TYPE_OPTIONS.map((opt) => {
                   const Icon = opt.icon;
@@ -296,10 +297,10 @@ export function AddEventModal({
                       key={opt.type}
                       type="button"
                       onClick={() => handleTypeChange(opt.type)}
-                      className={`flex flex-col items-start rounded-xl border p-2.5 text-left transition ${
+                      className={`flex flex-col items-start rounded-xl border p-2.5 text-left transition shadow-xs ${
                         isSelected
-                          ? "border-violet-500 bg-violet-500/15 shadow-sm shadow-violet-500/20"
-                          : "border-[#1E293B] bg-[#0F172A]/70 hover:bg-[#0F172A] hover:border-slate-700"
+                          ? "border-indigo-600 bg-indigo-50/60 ring-1 ring-indigo-500"
+                          : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -312,9 +313,9 @@ export function AddEventModal({
                         >
                           <Icon size={13} />
                         </span>
-                        <span className="text-xs font-semibold text-white truncate">{opt.label}</span>
+                        <span className="text-xs font-semibold text-slate-900 truncate">{opt.label}</span>
                       </div>
-                      <span className="mt-1 text-[10px] text-[var(--text-muted)] line-clamp-1">{opt.desc}</span>
+                      <span className="mt-1 text-[10px] text-slate-500 line-clamp-1">{opt.desc}</span>
                     </button>
                   );
                 })}
@@ -322,22 +323,22 @@ export function AddEventModal({
             </div>
 
             {/* Date & Time Row */}
-            <div className="space-y-3 rounded-2xl border border-[#1E293B] bg-[#0F172A]/50 p-4">
+            <div className="space-y-3 rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-                  <Clock size={14} className="text-violet-400" />
+                <span className="flex items-center gap-1.5 text-xs font-semibold text-slate-800">
+                  <Clock size={14} className="text-indigo-600" />
                   Schedule & Timing
                 </span>
                 <label
                   htmlFor={allDayInputId}
-                  className="flex items-center gap-2 text-xs text-slate-400 cursor-pointer"
+                  className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer"
                 >
                   <input
                     id={allDayInputId}
                     type="checkbox"
                     checked={isAllDay}
                     onChange={(e) => setIsAllDay(e.target.checked)}
-                    className="rounded border-slate-700 bg-slate-800 text-violet-600 focus:ring-violet-500"
+                    className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
                   />
                   <span>All-day event</span>
                 </label>
@@ -345,7 +346,7 @@ export function AddEventModal({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="space-y-1">
-                  <label htmlFor={dateInputId} className="text-[11px] text-slate-400">
+                  <label htmlFor={dateInputId} className="text-[11px] text-slate-500">
                     Date
                   </label>
                   <input
@@ -354,14 +355,14 @@ export function AddEventModal({
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border border-[#1E293B] bg-[#090D16] px-3 py-2 text-xs text-white focus:border-violet-500 focus:outline-none transition"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                   />
                 </div>
 
                 {!isAllDay && (
                   <>
                     <div className="space-y-1">
-                      <label htmlFor={startInputId} className="text-[11px] text-slate-400">
+                      <label htmlFor={startInputId} className="text-[11px] text-slate-500">
                         Start Time
                       </label>
                       <input
@@ -369,11 +370,11 @@ export function AddEventModal({
                         type="time"
                         value={startTime}
                         onChange={(e) => setStartTime(e.target.value)}
-                        className="w-full rounded-xl border border-[#1E293B] bg-[#090D16] px-3 py-2 text-xs text-white focus:border-violet-500 focus:outline-none transition"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label htmlFor={endInputId} className="text-[11px] text-slate-400">
+                      <label htmlFor={endInputId} className="text-[11px] text-slate-500">
                         End Time
                       </label>
                       <input
@@ -381,7 +382,7 @@ export function AddEventModal({
                         type="time"
                         value={endTime}
                         onChange={(e) => setEndTime(e.target.value)}
-                        className="w-full rounded-xl border border-[#1E293B] bg-[#090D16] px-3 py-2 text-xs text-white focus:border-violet-500 focus:outline-none transition"
+                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                       />
                     </div>
                   </>
@@ -394,9 +395,9 @@ export function AddEventModal({
               <div className="space-y-1.5">
                 <label
                   htmlFor={trackInputId}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-300"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-700"
                 >
-                  <Layers size={13} className="text-violet-400" />
+                  <Layers size={13} className="text-indigo-600" />
                   Target Track
                 </label>
                 <select
@@ -406,7 +407,7 @@ export function AddEventModal({
                     setTargetTrack(e.target.value);
                     setCapstoneProject("");
                   }}
-                  className="w-full rounded-xl border border-[#1E293B] bg-[#0F172A] px-3 py-2.5 text-xs text-white focus:border-violet-500 focus:outline-none transition"
+                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                 >
                   <option value="">General / Independent Study</option>
                   {TRACKS_CATALOG.map((track) => (
@@ -420,9 +421,9 @@ export function AddEventModal({
               <div className="space-y-1.5">
                 <label
                   htmlFor={capstoneInputId}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-300"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-slate-700"
                 >
-                  <Layers size={13} className="text-violet-400" />
+                  <Layers size={13} className="text-indigo-600" />
                   Target Capstone / Project
                 </label>
                 {availableCapstones.length > 0 ? (
@@ -430,7 +431,7 @@ export function AddEventModal({
                     id={capstoneInputId}
                     value={capstoneProject}
                     onChange={(e) => setCapstoneProject(e.target.value)}
-                    className="w-full rounded-xl border border-[#1E293B] bg-[#0F172A] px-3 py-2.5 text-xs text-white focus:border-violet-500 focus:outline-none transition"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                   >
                     <option value="">None / Custom Scope</option>
                     {availableCapstones.map((cap) => (
@@ -446,7 +447,7 @@ export function AddEventModal({
                     value={capstoneProject}
                     onChange={(e) => setCapstoneProject(e.target.value)}
                     placeholder="e.g. Microservices Auth Gateway"
-                    className="w-full rounded-xl border border-[#1E293B] bg-[#0F172A] px-3 py-2.5 text-xs text-white placeholder-slate-500 focus:border-violet-500 focus:outline-none transition"
+                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none transition shadow-xs"
                   />
                 )}
               </div>
@@ -454,7 +455,7 @@ export function AddEventModal({
 
             {/* Description & Goals */}
             <div className="space-y-1.5">
-              <label htmlFor={descInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+              <label htmlFor={descInputId} className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                 Description & Learning Objectives
               </label>
               <textarea
@@ -463,14 +464,14 @@ export function AddEventModal({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="What topics, code exercises, or deliverables will you complete during this block?"
-                className="w-full rounded-xl border border-[#1E293B] bg-[#0F172A] px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 transition resize-none"
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition resize-none shadow-xs"
               />
             </div>
 
             {/* Color Accent Picker */}
             <div className="space-y-2">
-              <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-300">
-                <Sparkles size={13} className="text-violet-400" />
+              <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                <Tag size={13} className="text-indigo-600" />
                 Color Theme Tag
               </label>
               <div className="flex flex-wrap gap-2.5">
@@ -482,8 +483,8 @@ export function AddEventModal({
                     onClick={() => setSelectedColor(preset.hex)}
                     className={`h-7 w-7 rounded-full transition-transform ${
                       selectedColor === preset.hex
-                        ? "ring-2 ring-white ring-offset-2 ring-offset-[#090D16] scale-110"
-                        : "opacity-75 hover:opacity-100 hover:scale-105"
+                        ? "ring-2 ring-indigo-600 ring-offset-2 ring-offset-white scale-110"
+                        : "opacity-80 hover:opacity-100 hover:scale-105"
                     }`}
                     style={{ backgroundColor: preset.hex }}
                   />
@@ -492,26 +493,26 @@ export function AddEventModal({
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center justify-end gap-3 border-t border-[#1E293B] pt-4">
+            <div className="flex items-center justify-end gap-3 border-t border-slate-100 pt-4">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
                 disabled={isSubmitting}
-                className="border-slate-700 bg-slate-800/40 text-slate-300 hover:bg-slate-800"
+                className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-violet-600 hover:bg-violet-500 text-white font-semibold shadow-md shadow-violet-600/30 px-5"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs px-5"
               >
                 {isSubmitting ? (
                   "Scheduling..."
                 ) : (
                   <>
-                    <Sparkles size={14} className="mr-1.5" />
+                    <Check size={14} className="mr-1.5" />
                     {type === "study_block" ? "Add Study Block" : "Schedule Event"}
                   </>
                 )}

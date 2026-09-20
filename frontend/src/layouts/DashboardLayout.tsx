@@ -186,8 +186,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           cn(
             "group relative flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium transition-colors duration-150 select-none border border-transparent",
             isActive
-              ? "bg-[var(--primary)]/10 text-[var(--primary)] font-semibold border-[var(--primary)]/20 shadow-xs"
-              : "text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]",
+              ? "bg-indigo-50 text-indigo-700 font-semibold border-indigo-200/60 shadow-xs"
+              : "text-slate-600 hover:bg-slate-100/70 hover:text-slate-900",
           )
         }
       >
@@ -196,14 +196,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
             {isActive && (
               <motion.div
                 layoutId={isMobile ? "active-mobile-drawer-indicator" : "active-sidebar-indicator"}
-                className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-violet-500"
+                className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary"
                 transition={{ type: "spring", stiffness: 350, damping: 30 }}
               />
             )}
             <span
               className={cn(
                 "transition-transform duration-150",
-                isActive ? "text-violet-400" : "text-zinc-500 group-hover:text-white",
+                isActive ? "text-primary" : "text-slate-400 group-hover:text-slate-700",
               )}
             >
               {item.icon}
@@ -218,21 +218,21 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     <div className="flex min-h-screen bg-[var(--bg-base)]">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to main content
       </a>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[var(--bg-card)] p-5 lg:flex">
+      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-slate-200 bg-white p-5 lg:flex">
         <Logo to="/" />
         <nav className="mt-8 flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
           {renderNavItems(false)}
         </nav>
-        <div className="mt-4 flex flex-col gap-3 border-t border-[#27272A] pt-4">
+        <div className="mt-4 flex flex-col gap-3 border-t border-slate-200 pt-4">
           <Link
             to={getSettingsPath(user?.role ?? variant)}
-            className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-white transition-colors duration-200 border border-transparent hover:bg-[#141418] hover:border-[#27272A]"
+            className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors duration-200 border border-transparent hover:bg-slate-100 hover:border-slate-200"
           >
             <Settings size={15} /> Settings
           </Link>
@@ -248,7 +248,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-[4px] lg:hidden"
+              className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden"
             />
             <motion.aside
               ref={drawerRef}
@@ -257,7 +257,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 26, stiffness: 220 }}
-              className="fixed inset-y-0 left-0 z-50 flex w-66 flex-col border-r border-[#27272A] bg-[#0E0E11] p-5 lg:hidden shadow-2xl"
+              className="fixed inset-y-0 left-0 z-50 flex w-66 flex-col border-r border-slate-200 bg-white p-5 lg:hidden shadow-2xl"
               role="dialog"
               aria-label="Navigation Menu"
             >
@@ -267,7 +267,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   type="button"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="p-1 rounded-lg hover:bg-white/5 text-zinc-400 hover:text-white transition-colors duration-200 min-h-9 min-w-9 flex items-center justify-center"
+                  className="p-1 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors duration-200 min-h-9 min-w-9 flex items-center justify-center"
                 >
                   <X size={18} />
                 </button>
@@ -275,11 +275,11 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               <nav className="flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
                 {renderNavItems(true)}
               </nav>
-              <div className="mt-4 flex flex-col gap-3 border-t border-[#27272A] pt-4">
+              <div className="mt-4 flex flex-col gap-3 border-t border-slate-200 pt-4">
                 <Link
                   to={getSettingsPath(user?.role ?? variant)}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-white transition-colors duration-200 border border-transparent hover:bg-[#141418] hover:border-[#27272A]"
+                  className="flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium text-slate-600 hover:text-slate-900 transition-colors duration-200 border border-transparent hover:bg-slate-100 hover:border-slate-200"
                 >
                   <Settings size={15} /> Settings
                 </Link>
@@ -291,12 +291,12 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col pb-20 lg:pb-0">
-        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--bg-card)]/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
+        <header className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <button
               ref={openButtonRef}
               type="button"
-              className="min-h-9 min-w-9 rounded-lg border border-[#27272A] p-2 lg:hidden flex items-center justify-center hover:bg-[#141418] text-white transition-colors duration-200"
+              className="min-h-9 min-w-9 rounded-lg border border-slate-200 p-2 lg:hidden flex items-center justify-center hover:bg-slate-100 text-slate-700 transition-colors duration-200"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={mobileOpen}
@@ -309,14 +309,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 <Badge variant="purple" size="sm" showDot>
                   Family Workspace
                 </Badge>
-                <span className="text-xs font-medium text-zinc-400">Parent View</span>
+                <span className="text-xs font-medium text-slate-500">Parent View</span>
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-zinc-500 sm:inline">
+                <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:inline">
                   Rank
                 </span>
-                <span className="text-xs font-bold text-violet-400">{getRankTitle(user?.level ?? 1)}</span>
+                <span className="text-xs font-bold text-primary">{getRankTitle(user?.level ?? 1)}</span>
                 {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
               </div>
             )}
@@ -330,7 +330,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                     ? "/admin/notifications"
                     : "/app/notifications"
               }
-              className="relative p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-[#141418] transition-colors duration-200 min-w-9 min-h-9 flex items-center justify-center border border-transparent hover:border-[#27272A]"
+              className="relative p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors duration-200 min-w-9 min-h-9 flex items-center justify-center border border-transparent hover:border-slate-200"
               aria-label="Notifications"
             >
               <Bell size={18} />
@@ -341,11 +341,11 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               )}
             </Link>
             {user && (
-              <div className="relative border-l border-[#27272A] pl-3" ref={accountRef}>
+              <div className="relative border-l border-slate-200 pl-3" ref={accountRef}>
                 <button
                   type="button"
                   onClick={() => setAccountOpen((prev) => !prev)}
-                  className="flex items-center gap-2 min-h-9 rounded-lg p-1 hover:bg-[#141418] transition-colors duration-200"
+                  className="flex items-center gap-2 min-h-9 rounded-lg p-1 hover:bg-slate-100 transition-colors duration-200"
                   aria-label="Account menu"
                   aria-expanded={accountOpen}
                 >
@@ -359,14 +359,14 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   />
                   <ChevronDown
                     size={12}
-                    className={cn("text-zinc-500 transition-transform duration-200", accountOpen && "rotate-180")}
+                    className={cn("text-slate-500 transition-transform duration-200", accountOpen && "rotate-180")}
                   />
                 </button>
                 {accountOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-52 rounded-xl border border-[#27272A] bg-[#0E0E11] shadow-2xl backdrop-blur-xl z-50 py-1">
-                    <div className="px-3.5 py-2.5 border-b border-[#27272A]">
-                      <p className="text-xs font-semibold text-white truncate">{user.fullName}</p>
-                      <p className="text-[11px] text-zinc-500 truncate mt-0.5">{user.email}</p>
+                  <div className="absolute right-0 top-full mt-2 w-52 rounded-xl border border-slate-200 bg-white shadow-xl z-50 py-1">
+                    <div className="px-3.5 py-2.5 border-b border-slate-100">
+                      <p className="text-xs font-semibold text-slate-900 truncate">{user.fullName}</p>
+                      <p className="text-[11px] text-slate-500 truncate mt-0.5">{user.email}</p>
                     </div>
                     <Link
                       to={
@@ -377,21 +377,21 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                             : "/admin/profile"
                       }
                       onClick={() => setAccountOpen(false)}
-                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-zinc-300 hover:bg-[#141418] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors"
                     >
                       <User size={13} /> Profile
                     </Link>
                     <Link
                       to={getSettingsPath(user.role)}
                       onClick={() => setAccountOpen(false)}
-                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-zinc-300 hover:bg-[#141418] hover:text-white transition-colors"
+                      className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors"
                     >
                       <Settings size={13} /> Settings
                     </Link>
                     <button
                       type="button"
                       onClick={handleLogout}
-                      className="flex w-full items-center gap-2.5 px-3.5 py-2 text-xs text-red-400 hover:bg-red-500/10 transition-colors border-t border-[#27272A]"
+                      className="flex w-full items-center gap-2.5 px-3.5 py-2 text-xs text-red-600 hover:bg-red-50 transition-colors border-t border-slate-100"
                     >
                       <LogOut size={13} /> Sign out
                     </button>
@@ -408,7 +408,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
         {/* Mobile bottom nav with sliding layout indicator */}
         <nav
-          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-[#27272A] bg-[#0E0E11]/95 pb-[env(safe-area-inset-bottom)] lg:hidden backdrop-blur-md"
+          className="fixed bottom-0 left-0 right-0 z-30 flex border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] lg:hidden backdrop-blur-md"
           aria-label="Mobile navigation"
         >
           {(variant === "student"
@@ -426,8 +426,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
               end
               className={({ isActive }) =>
                 cn(
-                  "relative flex min-h-14 flex-1 flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-[var(--text-muted)] transition-colors duration-200 select-none",
-                  isActive ? "text-primary" : "hover:text-white",
+                  "relative flex min-h-14 flex-1 flex-col items-center justify-center gap-1 py-1.5 text-[10px] font-semibold text-slate-500 transition-colors duration-200 select-none",
+                  isActive ? "text-primary font-bold" : "hover:text-slate-900",
                 )
               }
             >
@@ -436,7 +436,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   {isActive && (
                     <motion.span
                       layoutId="active-bottom-bar-indicator"
-                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_8px_rgba(99,102,241,0.6)]"
+                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_4px_rgba(79,70,229,0.4)]"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}

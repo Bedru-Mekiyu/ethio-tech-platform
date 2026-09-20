@@ -22,18 +22,10 @@ const TOOLS: Array<{ icon: string; type: WhiteboardOp["type"] }> = [
 
 export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, socket }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const {
-    ops,
-    tool,
-    setTool,
-    color,
-    setColor,
-    lineWidth,
-    setLineWidth,
-    draw,
-    clear,
-    undo,
-  } = useWhiteboard({ sessionId, socket });
+  const { ops, tool, setTool, color, setColor, lineWidth, setLineWidth, draw, clear, undo } = useWhiteboard({
+    sessionId,
+    socket,
+  });
 
   const [startPoint, setStartPoint] = useState<{ x: number; y: number } | null>(null);
   const [currentPoints, setCurrentPoints] = useState<Array<{ x: number; y: number }>>([]);
@@ -60,16 +52,16 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
       setStartPoint(pos);
       setCurrentPoints([pos]);
     },
-    [tool, color, lineWidth, getCanvasPos, draw]
+    [tool, color, lineWidth, getCanvasPos, draw],
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
       if (!startPoint && tool !== "pen" && tool !== "eraser" && tool !== "line") return;
       const pos = getCanvasPos(e);
-      setCurrentPoints(prev => [...prev, pos]);
+      setCurrentPoints((prev) => [...prev, pos]);
     },
-    [startPoint, tool, getCanvasPos]
+    [startPoint, tool, getCanvasPos],
   );
 
   const handleMouseUp = useCallback(
@@ -99,7 +91,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
       setStartPoint(null);
       setCurrentPoints([]);
     },
-    [tool, color, lineWidth, startPoint, currentPoints, draw, getCanvasPos]
+    [tool, color, lineWidth, startPoint, currentPoints, draw, getCanvasPos],
   );
 
   useEffect(() => {
@@ -156,15 +148,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
         case "circle":
           if (op.x !== undefined && op.y !== undefined && op.w !== undefined && op.h !== undefined) {
             ctx.beginPath();
-            ctx.ellipse(
-              op.x + op.w / 2,
-              op.y + op.h / 2,
-              Math.abs(op.w / 2),
-              Math.abs(op.h / 2),
-              0,
-              0,
-              Math.PI * 2
-            );
+            ctx.ellipse(op.x + op.w / 2, op.y + op.h / 2, Math.abs(op.w / 2), Math.abs(op.h / 2), 0, 0, Math.PI * 2);
             ctx.stroke();
           }
           break;
@@ -186,44 +170,52 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
   }, [ops]);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-white p-3 shadow-sm">
       <div className="flex items-center gap-2 flex-wrap">
         {TOOLS.map((t) => (
           <Button
             key={t.type}
             variant={tool === t.type ? "primary" : "outline"}
             size="sm"
+            className={tool === t.type ? "" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}
             onClick={() => setTool(t.type)}
             aria-label={`Select ${t.icon} tool`}
           >
             {t.icon}
           </Button>
         ))}
-        <div className="w-px h-6 bg-border" />
+        <div className="w-px h-6 bg-slate-200" />
         {COLORS.map((c) => (
           <button
             key={c}
-            className="w-6 h-6 rounded-full border-2"
+            className="w-6 h-6 rounded-full border-2 transition-all hover:scale-105"
             style={{
               backgroundColor: c,
-              borderColor: color === c ? "#3B82F6" : "transparent",
+              borderColor: color === c ? "#4f46e5" : "#e2e8f0",
+              boxShadow: color === c ? "0 0 0 2px rgba(79, 70, 229, 0.2)" : "none",
             }}
             onClick={() => setColor(c)}
             aria-label={`Select color ${c}`}
           />
         ))}
-        <div className="w-px h-6 bg-border" />
+        <div className="w-px h-6 bg-slate-200" />
         <input
           type="range"
           min="1"
           max="10"
           value={lineWidth}
           onChange={(e) => setLineWidth(Number(e.target.value))}
-          className="w-20"
+          className="w-20 accent-indigo-600"
           aria-label="Line width"
         />
-        <div className="w-px h-6 bg-border" />
-        <Button variant="outline" size="sm" onClick={undo} aria-label="Undo">
+        <div className="w-px h-6 bg-slate-200" />
+        <Button
+          variant="outline"
+          size="sm"
+          className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+          onClick={undo}
+          aria-label="Undo"
+        >
           Undo
         </Button>
         <Button variant="danger" size="sm" onClick={clear} aria-label="Clear board">
@@ -234,7 +226,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
         ref={canvasRef}
         width={1200}
         height={800}
-        className="border rounded cursor-crosshair w-full max-w-full"
+        className="border border-slate-200 rounded-xl cursor-crosshair w-full max-w-full shadow-inner bg-white"
         style={{ touchAction: "none" }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

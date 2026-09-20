@@ -10,7 +10,6 @@ import {
   Code2,
   Search,
   ShieldCheck,
-  Sparkles,
   Trophy,
   Users,
   Video,
@@ -190,13 +189,13 @@ function MentorStatCard({
   tone?: "primary" | "purple" | "success" | "warning";
 }) {
   return (
-    <Card className="border-[#27272A] bg-[#0E0E11] p-3.5 text-center transition hover:border-zinc-700 shadow-md">
-      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-[#27272A] bg-[#141418] text-violet-400">
+    <Card className="border-slate-200 bg-white p-3.5 text-center transition hover:border-slate-300 shadow-xs">
+      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 text-indigo-600">
         <Icon size={15} />
       </div>
-      <p className="mt-2 text-xl font-bold tracking-tight text-white font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-zinc-500">{label}</p>
-      <p className="mt-0.5 text-xs text-zinc-400">{helper}</p>
+      <p className="mt-2 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
+      <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-slate-500">{label}</p>
+      <p className="mt-0.5 text-xs text-slate-600">{helper}</p>
     </Card>
   );
 }
@@ -206,7 +205,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
 
   return (
     <Card
-      className={`flex h-full flex-col justify-between border-[#27272A] bg-[#0E0E11] transition-all duration-150 hover:border-zinc-700 shadow-md ${
+      className={`flex h-full flex-col justify-between border-slate-200 bg-white transition hover:border-slate-300 shadow-xs hover:shadow-sm ${
         featured ? "p-5" : "p-4"
       }`}
     >
@@ -222,10 +221,12 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
             />
             <div>
               <div className="flex items-center gap-1">
-                <h3 className={`font-semibold text-white ${featured ? "text-sm" : "text-xs"}`}>{mentor.fullName}</h3>
-                {mentor.isVerified && <BadgeCheck size={14} className="text-violet-400 shrink-0" />}
+                <h3 className={`font-semibold text-slate-900 ${featured ? "text-sm" : "text-xs"}`}>
+                  {mentor.fullName}
+                </h3>
+                {mentor.isVerified && <BadgeCheck size={14} className="text-indigo-600 shrink-0" />}
               </div>
-              <p className="text-[11px] font-medium text-violet-400 mt-0.5">
+              <p className="text-[11px] font-medium text-indigo-600 mt-0.5">
                 {mentor.currentCompany || "Senior Tech Leader"}
               </p>
             </div>
@@ -235,15 +236,15 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
           </Badge>
         </div>
 
-        {mentor.bio ? <p className="text-xs leading-relaxed text-zinc-400 line-clamp-2">{mentor.bio}</p> : null}
+        {mentor.bio ? <p className="text-xs leading-relaxed text-slate-600 line-clamp-2">{mentor.bio}</p> : null}
 
         {/* Mentor Rating & Sessions Bar */}
         <div className="space-y-1 pt-1">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
             <span>Student Rating</span>
-            <span className="text-zinc-200 font-bold font-mono">{score}% Satisfaction</span>
+            <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
-          <ProgressBar value={score} max={100} className="h-1 bg-[#27272A]" />
+          <ProgressBar value={score} max={100} className="h-1 bg-slate-200" />
         </div>
 
         {/* Skills Tag Cloud */}
@@ -251,7 +252,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
           {(mentor.expertise ?? []).slice(0, featured ? 4 : 3).map((skill) => (
             <span
               key={skill}
-              className="rounded border border-[#27272A] bg-[#141418] px-2 py-0.5 text-[10px] text-zinc-400 font-medium"
+              className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] text-slate-600 font-medium"
             >
               {skill}
             </span>
@@ -259,9 +260,9 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-[#27272A] flex items-center justify-between gap-2">
-        <span className="text-[11px] text-zinc-500 font-medium">
-          <strong className="text-zinc-300 font-mono">{mentor.totalSessions ?? 50}+</strong> sessions
+      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <span className="text-[11px] text-slate-500 font-medium">
+          <strong className="text-slate-900 font-mono">{mentor.totalSessions ?? 50}+</strong> sessions
         </span>
         <Link to="/contact">
           <Button size="sm" variant={featured ? "primary" : "outline"} className="text-xs">
@@ -342,7 +343,7 @@ export function MentorsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-[var(--text-primary)]">
+    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-slate-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -350,16 +351,16 @@ export function MentorsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-0.5 text-xs font-medium text-violet-400">
-          <Sparkles size={13} />
+        <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50/80 px-3 py-1 text-xs font-medium text-indigo-700">
+          <Users size={13} className="text-indigo-600" />
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-tight">
-          Learn From Senior Engineers Shaping <span className="text-violet-400">Global & African Tech</span>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
+          Learn From Senior Engineers Shaping <span className="text-indigo-600">Global & African Tech</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-400 font-normal">
+        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
           Connect with senior software architects, engineering leads, and technical founders from Google, Safaricom,
           Ethio Telecom, CBE, Chapa, and Gebeya who provide structured 1-on-1 guidance, live architectural reviews, and
           career sponsorship.
@@ -380,15 +381,15 @@ export function MentorsPage() {
         </div>
 
         {/* Requirements & Commitment Callout Strip */}
-        <div className="rounded-xl border border-[#27272A] bg-[#0E0E11] p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-400">
-          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <ShieldCheck size={14} className="text-violet-400" /> Requirement: 2+ Years Senior Experience
+        <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
+          <span className="flex items-center gap-1.5 font-medium text-slate-800">
+            <ShieldCheck size={14} className="text-indigo-600" /> Requirement: 2+ Years Senior Experience
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Clock size={14} className="text-violet-400" /> Commitment: 2–4 Hours / Week (Flexible)
+          <span className="flex items-center gap-1.5 font-medium text-slate-800">
+            <Clock size={14} className="text-indigo-600" /> Commitment: 2–4 Hours / Week (Flexible)
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-            <Trophy size={14} className="text-emerald-400" /> Verified Leadership Credentials
+          <span className="flex items-center gap-1.5 font-medium text-slate-800">
+            <Trophy size={14} className="text-emerald-600" /> Verified Leadership Credentials
           </span>
         </div>
       </motion.section>
@@ -429,10 +430,10 @@ export function MentorsPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="purple">Structured Learning</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             How Mentorship Works at EthioTech
           </h2>
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-slate-600">
             A practical, real-world engineering feedback loop designed to bridge the gap between classroom theory and
             production engineering.
           </p>
@@ -442,13 +443,16 @@ export function MentorsPage() {
           {MENTORSHIP_PILLARS.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
-              <Card key={idx} className="flex flex-col justify-between border-[#27272A] bg-[#0E0E11] p-5 shadow-md">
+              <Card
+                key={idx}
+                className="flex flex-col justify-between border-slate-200 bg-white p-5 shadow-xs hover:border-slate-300"
+              >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#141418] text-violet-400 border border-[#27272A]">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 border border-indigo-100">
                     <Icon size={18} />
                   </div>
-                  <h3 className="mt-4 font-semibold text-white text-sm">{pillar.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-400">{pillar.description}</p>
+                  <h3 className="mt-4 font-semibold text-slate-900 text-sm">{pillar.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600">{pillar.description}</p>
                 </div>
               </Card>
             );
@@ -461,20 +465,20 @@ export function MentorsPage() {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <Badge variant="default">Directory</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl mt-1">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1">
               Browse the Mentor Directory
             </h2>
-            <p className="text-xs text-zinc-400 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
+            <p className="text-xs text-slate-600 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
           </div>
 
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" size={15} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, company, or stack..."
-              className="pl-9 h-9 text-xs bg-[#0E0E11] border-[#27272A] text-white"
+              className="pl-9 h-9 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-indigo-500"
             />
           </div>
         </div>
@@ -488,8 +492,8 @@ export function MentorsPage() {
               onClick={() => setSelectedDomain(domain.value)}
               className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
                 selectedDomain === domain.value
-                  ? "border-violet-500 bg-violet-600 text-white"
-                  : "border-[#27272A] bg-[#0E0E11] text-zinc-400 hover:border-zinc-700 hover:text-white"
+                  ? "border-indigo-600 bg-indigo-600 text-white shadow-xs"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900"
               }`}
             >
               {domain.label}
@@ -500,7 +504,7 @@ export function MentorsPage() {
         {/* Featured Mentors Section */}
         {featuredMentors.length > 0 ? (
           <div className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Featured Senior Mentors</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Featured Senior Mentors</h3>
             <div className="grid gap-4 md:grid-cols-3">
               {featuredMentors.map((mentor) => (
                 <MentorCard key={mentor._id} mentor={mentor} featured />
@@ -512,7 +516,7 @@ export function MentorsPage() {
         {/* Discover Mentors Grid */}
         {discoverMentors.length > 0 ? (
           <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
               All Verified Mentors ({filteredMentors.length})
             </h3>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -537,11 +541,13 @@ export function MentorsPage() {
       </section>
 
       {/* ─── Bottom CTA Banner ─── */}
-      <Card className="relative overflow-hidden border-[#27272A] bg-[#0E0E11] p-6 sm:p-8 text-center space-y-4 shadow-lg">
+      <Card className="relative overflow-hidden border border-indigo-100 bg-gradient-to-b from-indigo-50/60 to-white p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
           <Badge variant="purple">Join the Guild</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Are You a Senior Engineer or Tech Leader?</h2>
-          <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            Are You a Senior Engineer or Tech Leader?
+          </h2>
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Dedicate 2–4 hours per week to shape Ethiopia&apos;s next generation of software engineers. Benefit from
             leadership credentials, direct talent scouting, and an elite diaspora peer network.
           </p>
@@ -558,7 +564,7 @@ export function MentorsPage() {
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-violet-400 hover:text-white">
+            <Button variant="ghost" size="md" className="text-indigo-600 hover:text-indigo-700">
               Talk to Guild Coordinator
             </Button>
           </Link>
