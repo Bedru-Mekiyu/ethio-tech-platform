@@ -7,19 +7,18 @@ export const Input = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTML
       <input
         ref={ref}
         className={cn(
-          "h-11 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 text-sm text-white",
+          "h-11 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 text-sm text-[var(--text-primary)]",
           "placeholder:text-[var(--text-muted)]",
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]",
           "transition-[border-color,box-shadow] duration-200",
           "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "aria-[invalid=true]:border-danger/50 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,75,92,0.1)]",
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Input.displayName = "Input";
@@ -30,19 +29,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttrib
       <textarea
         ref={ref}
         className={cn(
-          "min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 text-sm text-white",
+          "min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 text-sm text-[var(--text-primary)]",
           "placeholder:text-[var(--text-muted)]",
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]",
           "transition-[border-color,box-shadow] duration-200",
           "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "aria-[invalid=true]:border-danger/50 aria-[invalid=true]:shadow-[0_0_0_3px_rgba(255,75,92,0.1)]",
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Textarea.displayName = "Textarea";
@@ -61,7 +59,7 @@ export function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={cn("mb-1.5 block text-sm font-medium tracking-[0.01em] text-white", className)}
+      className={cn("mb-1.5 block text-sm font-medium tracking-[0.01em] text-[var(--text-primary)]", className)}
     >
       {children}
       {required && <span className="ml-0.5 text-danger">*</span>}

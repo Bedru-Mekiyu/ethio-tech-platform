@@ -186,8 +186,8 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           cn(
             "group relative flex items-center gap-3 rounded-lg px-3.5 py-2 text-xs font-medium transition-colors duration-150 select-none border border-transparent",
             isActive
-              ? "bg-violet-500/10 text-violet-400 font-semibold border-violet-500/25 shadow-xs"
-              : "text-zinc-400 hover:bg-[#141418] hover:text-white",
+              ? "bg-[var(--primary)]/10 text-[var(--primary)] font-semibold border-[var(--primary)]/20 shadow-xs"
+              : "text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]",
           )
         }
       >
@@ -215,7 +215,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     ));
 
   return (
-    <div className="flex min-h-screen bg-[#050507]">
+    <div className="flex min-h-screen bg-[var(--bg-base)]">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-white"
@@ -224,7 +224,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       </a>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[#27272A] bg-[#0E0E11] p-5 lg:flex">
+      <aside className="hidden w-66 flex-shrink-0 flex-col border-r border-[var(--border)] bg-[var(--bg-card)] p-5 lg:flex">
         <Logo to="/" />
         <nav className="mt-8 flex flex-1 flex-col gap-1 overflow-y-auto pr-1 custom-scrollbar">
           {renderNavItems(false)}
@@ -291,7 +291,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col pb-20 lg:pb-0">
-        <header className="flex items-center justify-between gap-4 border-b border-[#27272A] bg-[#0E0E11]/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
+        <header className="flex items-center justify-between gap-4 border-b border-[var(--border)] bg-[var(--bg-card)]/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <button
               ref={openButtonRef}
@@ -359,10 +359,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   />
                   <ChevronDown
                     size={12}
-                    className={cn(
-                      "text-zinc-500 transition-transform duration-200",
-                      accountOpen && "rotate-180",
-                    )}
+                    className={cn("text-zinc-500 transition-transform duration-200", accountOpen && "rotate-180")}
                   />
                 </button>
                 {accountOpen && (
