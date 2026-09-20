@@ -31,22 +31,24 @@ export function EmptyState({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "rounded-xl border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center gap-3.5 px-6 py-10 text-center shadow-md",
+        "rounded-xl border border-[var(--border)] bg-[var(--bg-card)] flex flex-col items-center justify-center gap-3.5 px-6 py-10 text-center shadow-xs",
         className,
       )}
       role="status"
     >
-      <span className="rounded-full border border-violet-500/20 bg-violet-500/10 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-violet-400 select-none">
+      <span className="rounded-full border border-indigo-500/20 bg-indigo-50 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-indigo-600 select-none">
         {eyebrow}
       </span>
 
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#141418] border border-[#27272A] text-zinc-500 select-none relative">
-        {illustration ?? <Inbox size={22} className="text-zinc-400" />}
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-slate-500 select-none relative">
+        {illustration ?? <Inbox size={22} className="text-slate-400" />}
       </div>
 
       <div className="max-w-md space-y-1">
-        <h3 className="text-sm font-semibold text-white tracking-tight">{title}</h3>
-        {description && <p className="text-xs text-zinc-400 leading-relaxed max-w-sm mx-auto">{description}</p>}
+        <h3 className="text-sm font-semibold text-[var(--text-primary)] tracking-tight">{title}</h3>
+        {description && (
+          <p className="text-xs text-[var(--text-secondary)] leading-relaxed max-w-sm mx-auto">{description}</p>
+        )}
       </div>
 
       {actionLabel && (

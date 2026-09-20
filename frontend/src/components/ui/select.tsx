@@ -18,8 +18,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={value}
           onChange={(e) => onValueChange?.(e.target.value)}
           className={cn(
-            "h-11 w-full cursor-pointer appearance-none rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 pr-10 text-sm text-white",
-            "shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]",
+            "h-11 w-full cursor-pointer appearance-none rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 pr-10 text-sm text-[var(--text-primary)]",
             "transition-[border-color,box-shadow,background-color] duration-200",
             "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
             "disabled:cursor-not-allowed disabled:opacity-50",
@@ -35,14 +34,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ) : null}
           {children ??
             options?.map((opt) => (
-              <option key={opt.value} value={opt.value} className="bg-[var(--bg-input)] text-white">
+              <option key={opt.value} value={opt.value} className="bg-[var(--bg-input)] text-[var(--text-primary)]">
                 {opt.label}
               </option>
             ))}
         </select>
         <ChevronDown
           size={16}
-          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] transition-transform duration-200 group-focus-within:rotate-180 group-focus-within:text-white"
+          className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] transition-transform duration-200 group-focus-within:rotate-180 group-focus-within:text-[var(--text-primary)]"
         />
       </div>
     );
