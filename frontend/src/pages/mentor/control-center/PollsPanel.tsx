@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select } from "@/components/ui/select";
 import { Vote, Plus, PauseCircle, PlayCircle, Eye, XCircle } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createPoll, closePoll, reopenPoll, publishPollResults } from "@/services/mentorControlService";
@@ -133,16 +133,15 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
               </div>
               <div>
                 <label className="text-xs text-[var(--text-secondary)] mb-1 block">Type</label>
-                <Select value={pollType} onChange={(e) => setPollType(e.target.value as typeof pollType)}>
-                  <SelectTrigger className="bg-white/5 border-white/5 text-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-[#0B0F19] border-white/10 text-white">
-                    <SelectItem value="single">Single Choice</SelectItem>
-                    <SelectItem value="multiple">Multiple Choice</SelectItem>
-                    <SelectItem value="true_false">True/False</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Select
+                  value={pollType}
+                  onChange={(e) => setPollType(e.target.value as typeof pollType)}
+                  options={[
+                    { value: "single", label: "Single Choice" },
+                    { value: "multiple", label: "Multiple Choice" },
+                    { value: "true_false", label: "True/False" },
+                  ]}
+                />
               </div>
               {pollType !== "true_false" && (
                 <div className="space-y-2">
