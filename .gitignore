@@ -9,3 +9,5 @@ coverage/
 .vscode/
 .idea/
 .qodo/
+test-results/
+playwright-report/
