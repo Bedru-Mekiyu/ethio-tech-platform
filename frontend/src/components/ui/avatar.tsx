@@ -10,7 +10,7 @@ import { useAvatarSnapshot } from "@/store/avatarRegistry";
 
 export interface AvatarProps {
   src?: string;
-  name: string;
+  name?: string;
   userId?: string;
   size?: "sm" | "md" | "lg" | "xl";
   status?: "online" | "offline" | "away";
@@ -24,7 +24,7 @@ const unique = (items: Array<string | null | undefined>) =>
   items.filter((item, index, list) => Boolean(item) && list.indexOf(item) === index) as string[];
 
 function getInitials(name?: string): string {
-  if (!name || !name.trim()) return "?";
+  if (!name || typeof name !== "string" || !name.trim()) return "?";
   const parts = name.trim().split(/\s+/);
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
@@ -45,7 +45,7 @@ export function Avatar({
 
   const candidateSources = useMemo(() => {
     const resolvedSource = resolveAvatarUrl(registryAvatar?.avatarUrl ?? src);
-    const fallbackSeed = userId ?? name;
+    const fallbackSeed = userId || name || "ethio-user";
     const systemCandidates = buildAvatarFallbackChain(fallbackSeed, role, 4).map((candidate) =>
       resolveAvatarUrl(candidate),
     );
@@ -72,7 +72,7 @@ export function Avatar({
     offline: "bg-zinc-400 ring-2 ring-white",
   };
 
-  const resolvedAlt = alt ?? `${name}'s profile avatar`;
+  const resolvedAlt = alt ?? (name ? `${name}'s profile avatar` : "Profile avatar");
 
   return (
     <div className="relative inline-block shrink-0">
@@ -104,7 +104,7 @@ export function Avatar({
 
 interface AvatarMediaProps {
   candidateSources: string[];
-  name: string;
+  name?: string;
   sizeClass: string;
   alt: string;
   className?: string;
@@ -126,7 +126,7 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
       return;
     }
     setHasErrored(true);
-    setLoadError(`Failed to load avatar for ${name}`);
+    setLoadError(name ? `Failed to load avatar for ${name}` : "Failed to load avatar");
   };
 
   useEffect(() => {

@@ -74,7 +74,7 @@ export async function fetchSystemAvatars(): Promise<SystemAvatarEntry[]> {
     cachePromise = (async (): Promise<SystemAvatarEntry[]> => {
       let avatars: SystemAvatarEntry[] = buildLocalCatalog();
       try {
-        const response = await fetch(`${getBackendOrigin()}/api/users/me/avatars`, {
+        const response = await fetch(`${getBackendOrigin()}/api/v1/users/me/avatars`, {
           credentials: "include",
         });
         if (response.ok) {
@@ -113,7 +113,8 @@ export function getSystemAvatarById(id: string): SystemAvatarEntry | null {
   return catalog.find((avatar) => avatar.id === id) ?? null;
 }
 
-const hashSeed = (seed: string) => {
+const hashSeed = (seed?: string | null) => {
+  if (!seed || typeof seed !== "string") return 0;
   let hash = 0;
   for (let index = 0; index < seed.length; index += 1) {
     hash = (hash * 31 + seed.charCodeAt(index)) >>> 0;
@@ -124,11 +125,12 @@ const hashSeed = (seed: string) => {
 const uniqueByUrl = (avatars: SystemAvatarEntry[]) =>
   avatars.filter((avatar, index, list) => list.findIndex((item) => item.url === avatar.url) === index);
 
-export function buildAvatarFallbackChain(seed: string, role?: SystemAvatarRole, count = 4): string[] {
+export function buildAvatarFallbackChain(seed?: string | null, role?: SystemAvatarRole, count = 4): string[] {
   const catalog = getSystemAvatars(role);
   if (catalog.length === 0) return [];
 
-  const primaryIndex = hashSeed(seed) % catalog.length;
+  const safeSeed = seed && typeof seed === "string" && seed.trim() ? seed.trim() : "ethio-user";
+  const primaryIndex = hashSeed(safeSeed) % catalog.length;
   const secondaryIndex = (primaryIndex + 3) % catalog.length;
   const tertiaryIndex = (primaryIndex + 5) % catalog.length;
   const quaternaryIndex = (primaryIndex + 7) % catalog.length;

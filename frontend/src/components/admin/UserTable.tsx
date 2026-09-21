@@ -158,7 +158,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
     onError: () => toast.error("Failed to verify user"),
   });
 
-  const items = useMemo(() => data?.items ?? [], [data?.items]);
+  const items = useMemo(() => (Array.isArray(data?.items) ? data.items : []), [data]);
   const pagination = data?.pagination;
   const totalPages = pagination?.totalPages ?? 1;
   const allSelected = items.length > 0 && items.every((item) => selectedIds.has(item._id ?? ""));
@@ -454,9 +454,16 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     </td>
                     <td className="px-3.5 py-2.5">
                       <div className="flex items-center gap-2.5">
-                        <Avatar src={user.avatarUrl} name={user.fullName} size="sm" />
+                        <Avatar
+                          src={user.avatarUrl}
+                          name={user.fullName || user.email || "User"}
+                          userId={user.id ?? user._id}
+                          size="sm"
+                        />
                         <div className="min-w-0">
-                          <p className="font-semibold text-zinc-900 truncate text-xs">{user.fullName}</p>
+                          <p className="font-semibold text-zinc-900 truncate text-xs">
+                            {user.fullName || user.email || "User"}
+                          </p>
                           <p className="text-[11px] text-zinc-500 truncate">{user.email}</p>
                         </div>
                       </div>

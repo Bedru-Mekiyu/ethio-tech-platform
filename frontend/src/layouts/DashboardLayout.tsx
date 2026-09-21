@@ -182,7 +182,6 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/contact", label: "Support", icon: <MessageSquare size={18} /> },
   ];
 
-
   const adminNav: NavItem[] = [
     { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
     { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
@@ -371,7 +370,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                 >
                   <Avatar
                     src={user.avatarUrl ?? user.avatar}
-                    name={user.fullName}
+                    name={user.fullName || user.email || "User"}
                     userId={user.id}
                     role={user.role === "mentor" ? "mentor" : "student"}
                     size="sm"
