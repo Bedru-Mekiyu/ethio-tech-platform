@@ -501,8 +501,8 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
           <div>
             <p className="text-xs uppercase tracking-wider text-zinc-500">Overall Match Score</p>
             <div className="flex items-baseline gap-2 mt-1">
-              <span className="text-3xl font-bold text-zinc-900">{result.percentage}%</span>
-              <span className="text-sm text-zinc-500">
+              <span className="text-2xl font-bold text-zinc-900">{result.percentage}%</span>
+              <span className="text-xs text-zinc-500">
                 ({result.total} / {result.max} pts)
               </span>
             </div>

@@ -256,7 +256,7 @@ export function MentorsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"

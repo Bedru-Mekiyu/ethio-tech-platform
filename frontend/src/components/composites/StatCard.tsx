@@ -12,10 +12,10 @@ export function StatCard({
   icon?: React.ReactNode;
 }) {
   return (
-    <Card className="relative overflow-hidden border border-zinc-200 bg-white p-5 select-none h-full shadow-xs">
-      {icon && <div className="absolute right-5 top-5 text-zinc-400">{icon}</div>}
+    <Card className="relative overflow-hidden border border-zinc-200 bg-white p-4 sm:p-5 select-none h-full shadow-xs">
+      {icon && <div className="absolute right-4.5 top-4.5 text-zinc-400">{icon}</div>}
       <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-muted)]">{label}</p>
-      <p className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">{value}</p>
+      <p className="mt-2 text-2xl font-bold tracking-tight text-zinc-900">{value}</p>
       {sub && <p className="mt-1.5 text-xs font-medium leading-relaxed text-[var(--text-secondary)]">{sub}</p>}
     </Card>
   );

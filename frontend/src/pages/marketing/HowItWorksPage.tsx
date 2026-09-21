@@ -522,7 +522,7 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── 5-Stage Interactive Learner Lifecycle ─── */}
-      <section id="learner-lifecycle" className="border-t border-zinc-200 bg-zinc-50/50 py-16">
+      <section id="learner-lifecycle" className="border-t border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
@@ -709,7 +709,7 @@ export function HowItWorksPage() {
 
       {/* ─── 3-Way Persona Experience Breakdown ─── */}
       <motion.section
-        className="mx-auto max-w-7xl px-4 py-16 lg:px-8"
+        className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -805,7 +805,7 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── Featured Track Pathways ─── */}
-      <section className="border-t border-zinc-200 bg-zinc-50/50 py-16">
+      <section className="border-t border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
@@ -894,7 +894,7 @@ export function HowItWorksPage() {
 
       {/* ─── Interactive Filterable FAQ ─── */}
       <motion.section
-        className="mx-auto max-w-5xl px-4 py-16 lg:px-8"
+        className="mx-auto max-w-5xl px-4 py-12 lg:py-14 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -989,7 +989,7 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── Closing CTA ─── */}
-      <section className="px-4 pb-24 lg:px-8">
+      <section className="px-4 pb-14 pt-4 lg:px-8">
         <Card className="mx-auto max-w-7xl overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>

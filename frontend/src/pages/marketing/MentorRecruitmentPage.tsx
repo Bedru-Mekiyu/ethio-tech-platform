@@ -217,7 +217,7 @@ export function MentorRecruitmentPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -353,7 +353,7 @@ export function MentorRecruitmentPage() {
 
       {/* ─── Interactive Application Form & Guidelines ─── */}
       <section id="mentor-form" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 md:p-10 shadow-xs">
+        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
             {/* Left: Expectations & Guidelines */}
             <div className="space-y-5">
@@ -362,7 +362,7 @@ export function MentorRecruitmentPage() {
                 <span>Mentor Application</span>
               </div>
 
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900">Join the Guild</h2>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">Join the Guild</h2>
 
               <p className="text-xs leading-relaxed text-zinc-600">
                 Tell us about your professional background, technical strengths, and preferred mentoring schedule.

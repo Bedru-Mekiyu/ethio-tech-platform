@@ -87,8 +87,8 @@ export function CapstonePreviewModal({
                     <Clock size={13} className="text-zinc-700" />~{project.estimatedHours} build hours
                   </span>
                 </div>
-                <h2 className="text-2xl font-bold text-zinc-900 sm:text-3xl">{project.title}</h2>
-                <p className="max-w-2xl text-sm leading-relaxed text-zinc-600">{project.tagline}</p>
+                <h2 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900">{project.title}</h2>
+                <p className="max-w-2xl text-xs sm:text-sm leading-relaxed text-zinc-600">{project.tagline}</p>
               </div>
 
               <button

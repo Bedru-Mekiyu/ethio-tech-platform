@@ -548,7 +548,7 @@ export function HomePage() {
           1. HERO SECTION
       ────────────────────────────────────────────────────────────── */}
       <motion.section
-        className="page-shell pt-12 pb-16 lg:pt-20 lg:pb-24"
+        className="page-shell pt-10 pb-14 lg:pt-16 lg:pb-20"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
@@ -723,11 +723,11 @@ export function HomePage() {
       {/* ─────────────────────────────────────────────────────────────
           2. NATIONAL REACH & IMPACT METRICS BAR
       ────────────────────────────────────────────────────────────── */}
-      <section className="page-shell pb-16">
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 md:p-8 shadow-xs">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 lg:gap-8">
+      <section className="page-shell pb-12 lg:pb-14">
+        <div className="rounded-xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900 md:text-3xl">
+              <p className="text-2xl font-bold tracking-tight text-zinc-900">
                 {formatCompactCount(activeLearnersCount)}+
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Active Young Learners</p>
@@ -735,13 +735,13 @@ export function HomePage() {
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900 md:text-3xl">45,000+</p>
+              <p className="text-2xl font-bold tracking-tight text-zinc-900">45,000+</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Mentorship Hours</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">1-on-1 & Live Cohort Sessions</p>
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900 md:text-3xl">6 Hubs</p>
+              <p className="text-2xl font-bold tracking-tight text-zinc-900">6 Hubs</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">
                 Regional Innovation Hubs
               </p>
@@ -749,7 +749,7 @@ export function HomePage() {
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900 md:text-3xl">{approvalRate}%</p>
+              <p className="text-2xl font-bold tracking-tight text-zinc-900">{approvalRate}%</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Capstone Approval</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">Audited Production Projects</p>
             </div>
@@ -1476,7 +1476,7 @@ export function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 p-8 sm:p-12 shadow-xs"
+          className="relative overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 shadow-xs"
         >
           <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
@@ -1484,7 +1484,7 @@ export function HomePage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-zinc-800" />
                 Applications Open
               </span>
-              <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
                 Ready to Build the Future of <span className="text-[#b91c1c]">Ethiopian Tech?</span>
               </h2>
               <p className="text-sm leading-relaxed text-zinc-600 max-w-xl">

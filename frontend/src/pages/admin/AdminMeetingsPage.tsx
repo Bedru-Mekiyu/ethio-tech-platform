@@ -96,7 +96,7 @@ export function AdminMeetingsPage() {
   if (isError) {
     return (
       <div className="space-y-6">
-        <h1 className="section-title text-2xl md:text-3xl">Meetings</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">Meetings</h1>
         <QueryError onRetry={() => refetch()} />
       </div>
     );

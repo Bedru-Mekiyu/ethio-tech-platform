@@ -402,7 +402,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           </div>
         </header>
 
-        <main id="main-content" className="flex-1 p-4 lg:p-8 overflow-y-auto scroll-smooth">
+        <main id="main-content" className="flex-1 p-4 sm:p-5 lg:p-6 overflow-y-auto scroll-smooth">
           <Outlet />
         </main>
 

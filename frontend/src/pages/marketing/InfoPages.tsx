@@ -19,7 +19,7 @@ type PageProps = {
 
 function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8">
       <div className="max-w-3xl">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">{title}</h1>
         <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600">{intro}</p>
@@ -120,9 +120,11 @@ export function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 lg:px-8">
-      <h1 className="text-3xl font-bold text-zinc-900">Talk to the EthioTech team</h1>
-      <p className="mt-4 text-zinc-600">Learner support, mentor onboarding, partnerships, and school coordination.</p>
+    <div className="mx-auto max-w-3xl px-4 py-12 lg:py-14 lg:px-8">
+      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Talk to the EthioTech team</h1>
+      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600">
+        Learner support, mentor onboarding, partnerships, and school coordination.
+      </p>
       {sent ? (
         <Card className="mt-8 border-zinc-200 bg-white p-6 shadow-sm">
           <p className="font-semibold text-zinc-900">Message received. We will respond soon.</p>

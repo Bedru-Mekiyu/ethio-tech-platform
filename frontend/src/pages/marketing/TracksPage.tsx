@@ -96,7 +96,7 @@ export function TracksPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-50/70 py-16 lg:py-20">
+      <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-50/70 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8 relative z-10">
           <div className="mx-auto max-w-4xl text-center space-y-5">
             <motion.div
@@ -164,7 +164,7 @@ export function TracksPage() {
       </section>
 
       {/* Main Catalog Section */}
-      <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-8">
+      <section className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-8">
         {/* Filters and Search Bar */}
         <div className="space-y-4">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
@@ -537,7 +537,7 @@ export function TracksPage() {
       </section>
 
       {/* Curriculum Pillars Callout */}
-      <section className="border-t border-zinc-200 bg-zinc-50/50 py-16">
+      <section className="border-t border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
             <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
@@ -587,7 +587,7 @@ export function TracksPage() {
       </section>
 
       {/* CTA Footer Banner */}
-      <section className="relative overflow-hidden border-t border-zinc-200 bg-white py-14 text-center">
+      <section className="relative overflow-hidden border-t border-zinc-200 bg-white py-10 lg:py-12 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
             <CheckCircle2 size={12} className="text-zinc-700" />

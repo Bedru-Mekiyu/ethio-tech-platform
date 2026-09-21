@@ -524,7 +524,7 @@ export function AboutPage() {
 
       {/* ─── The Ethiopian Demographic Context & Challenge ─── */}
       <motion.section
-        className="mx-auto max-w-7xl px-4 py-16 lg:px-8"
+        className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -534,10 +534,10 @@ export function AboutPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
             <span>National Context & Strategic Imperative</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 md:text-4xl">
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
             Unlocking Ethiopia’s <span className="text-[#b91c1c]">Demographic Dividend</span>
           </h2>
-          <p className="mt-3 text-base leading-relaxed text-zinc-600">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
             EthioTech provides the production-grade tooling and mentorship needed to bridge academic theory with
             industry demands.
@@ -655,7 +655,7 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── The PISTELS Framework (Core Pedagogical Backbone) ─── */}
-      <section id="pistels-framework" className="relative border-y border-zinc-200 bg-zinc-50/50 py-16">
+      <section id="pistels-framework" className="relative border-y border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
@@ -846,7 +846,7 @@ export function AboutPage() {
 
       {/* ─── Mission, Vision & Community Bridge ─── */}
       <motion.section
-        className="mx-auto max-w-7xl px-4 py-16 lg:px-8"
+        className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -998,7 +998,7 @@ export function AboutPage() {
 
       {/* ─── Interactive Roadmap & Milestones ─── */}
       <motion.section
-        className="mx-auto max-w-6xl px-4 py-16 lg:px-8"
+        className="mx-auto max-w-6xl px-4 py-12 lg:py-14 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         whileInView="visible"
@@ -1082,7 +1082,7 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── Governance, Transparency & Open Impact Model ─── */}
-      <section className="border-t border-zinc-200 bg-zinc-50/50 py-16">
+      <section className="border-t border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
@@ -1135,7 +1135,7 @@ export function AboutPage() {
       </section>
 
       {/* ─── Closing CTA ─── */}
-      <section className="px-4 pb-20 pt-8 lg:px-8">
+      <section className="px-4 pb-14 pt-6 lg:px-8">
         <Card className="mx-auto max-w-7xl overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>

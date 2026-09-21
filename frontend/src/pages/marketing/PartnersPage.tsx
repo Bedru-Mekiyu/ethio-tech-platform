@@ -201,7 +201,7 @@ export function PartnersPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -392,7 +392,7 @@ export function PartnersPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Structured Delivery</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900">The Partnership Lifecycle</h2>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">The Partnership Lifecycle</h2>
           <p className="text-xs text-zinc-600">
             A frictionless, transparent 4-phase framework designed for rapid execution and accountable outcomes.
           </p>
@@ -452,7 +452,7 @@ export function PartnersPage() {
 
       {/* ─── Interactive Partnership Inquiry Form ─── */}
       <section id="partner-inquiry" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 md:p-10 shadow-xs">
+        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-5">
               <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">

@@ -379,7 +379,7 @@ export function HubsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8 space-y-16 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -985,13 +985,15 @@ export function HubsPage() {
           role="dialog"
           aria-modal="true"
         >
-          <Card className="w-full max-w-2xl border-zinc-200 bg-white p-6 md:p-8 space-y-5 shadow-2xl my-8 text-zinc-900">
+          <Card className="w-full max-w-2xl border-zinc-200 bg-white p-5 sm:p-6 space-y-4 shadow-xl my-6 text-zinc-900">
             <div className="flex items-start justify-between border-b border-zinc-200 pb-4">
               <div>
                 <Badge variant="outline" size="sm">
                   Physical Seat & Mentor Booking
                 </Badge>
-                <h3 className="text-xl md:text-2xl font-bold text-zinc-900 mt-1">Book at {bookingHub.city} Tech Hub</h3>
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 mt-1">
+                  Book at {bookingHub.city} Tech Hub
+                </h3>
                 <p className="text-xs text-zinc-500 mt-0.5">{bookingHub.address}</p>
               </div>
               <button
@@ -1322,22 +1324,24 @@ export function HubsPage() {
       )}
 
       {/* ─── Bottom Host / Partner CTA ─── */}
-      <Card className="border border-zinc-200 bg-zinc-50 p-8 md:p-10 text-center space-y-5 shadow-xs">
+      <Card className="border border-zinc-200 bg-zinc-50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-zinc-900">Want to Host a Community Hub in Your City?</h2>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">
+            Want to Host a Community Hub in Your City?
+          </h2>
           <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
             Universities, tech parks, and regional innovation hubs can partner with EthioTech to deploy a plug-and-play
             LAN caching server and join the national learning network.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2.5">
           <Link to="/contact">
-            <Button size="lg" className="font-medium">
+            <Button size="md" className="font-medium">
               Partner as a Hub Host
             </Button>
           </Link>
           <Link to="/mentors">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="md">
               Meet Regional Mentors
             </Button>
           </Link>

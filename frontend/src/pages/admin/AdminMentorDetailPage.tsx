@@ -902,13 +902,17 @@ Ethio-Tech Mentorship Team`;
                   Teaching Metrics & Cohort Activity
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50/60 p-5 text-center">
-                    <p className="text-4xl font-bold text-zinc-900">{detail?.teaching.totalSessions ?? 0}</p>
-                    <p className="text-xs text-zinc-500 mt-1 uppercase tracking-wider">Total Sessions</p>
+                  <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 text-center">
+                    <p className="text-2xl font-bold text-zinc-900">{detail?.teaching.totalSessions ?? 0}</p>
+                    <p className="text-[11px] font-semibold text-zinc-500 mt-1 uppercase tracking-wider">
+                      Total Sessions
+                    </p>
                   </div>
-                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50/60 p-5 text-center">
-                    <p className="text-4xl font-bold text-zinc-900">{detail?.teaching.studentsCount ?? 0}</p>
-                    <p className="text-xs text-zinc-500 mt-1 uppercase tracking-wider">Mentees Guided</p>
+                  <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 text-center">
+                    <p className="text-2xl font-bold text-zinc-900">{detail?.teaching.studentsCount ?? 0}</p>
+                    <p className="text-[11px] font-semibold text-zinc-500 mt-1 uppercase tracking-wider">
+                      Mentees Guided
+                    </p>
                   </div>
                 </div>
 

@@ -194,7 +194,7 @@ export function DonationPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -774,8 +774,8 @@ export function DonationPage() {
           {FUND_ALLOCATION.map((item, idx) => (
             <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
               <div>
-                <p className="text-3xl font-bold font-mono text-zinc-900">{item.percentage}%</p>
-                <h3 className="mt-2.5 font-semibold text-zinc-900 text-sm">{item.label}</h3>
+                <p className="text-2xl font-bold font-mono text-zinc-900">{item.percentage}%</p>
+                <h3 className="mt-2 font-semibold text-zinc-900 text-sm">{item.label}</h3>
                 <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{item.description}</p>
               </div>
             </Card>
