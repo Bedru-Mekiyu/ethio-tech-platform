@@ -4,6 +4,8 @@ export interface PeerGroup {
   _id: string;
   name: string;
   groupXP?: number;
+  members?: unknown[];
+  memberCount?: number;
 }
 
 export async function fetchMyPeerGroups() {
@@ -13,8 +15,6 @@ export async function fetchMyPeerGroups() {
 }
 
 export async function fetchPeerGroupById(id: string) {
-  const { data } = await api.get<ApiResponse<{ group: PeerGroup & { members?: unknown[] } }>>(
-    `/peer-groups/${id}`
-  );
+  const { data } = await api.get<ApiResponse<{ group: PeerGroup & { members?: unknown[] } }>>(`/peer-groups/${id}`);
   return data.data.group;
 }

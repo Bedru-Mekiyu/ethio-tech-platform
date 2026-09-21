@@ -928,7 +928,7 @@ export function AboutPage() {
         {/* Visual Community Showcase */}
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="relative">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200 shadow-sm">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-zinc-200 shadow-sm">
               <SmartImage
                 unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
                 alt="EthioTech immersive learning environment preview - student programmer at work"

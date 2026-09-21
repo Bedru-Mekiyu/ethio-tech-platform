@@ -31,15 +31,15 @@ export default function MentorDirectoryPage() {
   });
 
   return (
-    <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+    <div className="space-y-6 text-zinc-900">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 border border-zinc-200">
             <Users className="h-5 w-5" />
           </span>
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Mentor Directory</h1>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Mentor Directory</h1>
+            <p className="text-xs text-zinc-500 mt-0.5">
               Find and connect with industry engineering mentors across Ethiopia and worldwide.
             </p>
           </div>

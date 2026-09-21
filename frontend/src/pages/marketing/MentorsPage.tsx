@@ -35,89 +35,6 @@ const sectionVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
 
-const CURATED_MENTORS: MarketingMentorPageMentor[] = [
-  {
-    _id: "m-1",
-    fullName: "Amanuel Kebede",
-    bio: "Senior Distributed Systems Architect specializing in high-throughput Go microservices and Kubernetes infrastructure for fintech.",
-    currentCompany: "Chapa Financial Technologies",
-    mentorScore: 98,
-    totalSessions: 142,
-    expertise: ["Backend & Distributed Systems", "Go", "Kubernetes", "Fintech"],
-    isVerified: true,
-  },
-  {
-    _id: "m-2",
-    fullName: "Bethlehem Tadesse",
-    bio: "Staff Frontend Engineer with 7+ years building enterprise React architectures, design systems, and WebGL visualizations.",
-    currentCompany: "Google (Diaspora Lead)",
-    mentorScore: 99,
-    totalSessions: 186,
-    expertise: ["Frontend", "React", "TypeScript", "Design Systems"],
-    isVerified: true,
-  },
-  {
-    _id: "m-3",
-    fullName: "Yared Hailemariam",
-    bio: "Principal AI/ML Researcher focusing on NLP for low-resource Ethiopic languages and computer vision applications.",
-    currentCompany: "Ethio AI Labs / iCog",
-    mentorScore: 96,
-    totalSessions: 110,
-    expertise: ["AI & Machine Learning", "Python", "PyTorch", "NLP"],
-    isVerified: true,
-  },
-  {
-    _id: "m-4",
-    fullName: "Sara Yohannes",
-    bio: "Cloud Security Architect with deep experience in DevSecOps, AWS IAM governance, and zero-trust security postures.",
-    currentCompany: "Safaricom Ethiopia",
-    mentorScore: 97,
-    totalSessions: 94,
-    expertise: ["Cybersecurity", "Cloud & DevOps", "AWS", "Security"],
-    isVerified: true,
-  },
-  {
-    _id: "m-5",
-    fullName: "Biniyam Getachew",
-    bio: "Senior Mobile Engineer architecting offline-first Flutter applications for financial inclusion across East Africa.",
-    currentCompany: "Commercial Bank of Ethiopia (CBE)",
-    mentorScore: 95,
-    totalSessions: 128,
-    expertise: ["Mobile & Embedded", "Flutter", "Dart", "Offline-First"],
-    isVerified: true,
-  },
-  {
-    _id: "m-6",
-    fullName: "Hanna Alemu",
-    bio: "Lead Product Designer & UX Researcher focused on accessible multimodal interfaces for emerging market users.",
-    currentCompany: "Gebeya Inc.",
-    mentorScore: 98,
-    totalSessions: 88,
-    expertise: ["Product & Design", "UI/UX", "User Research", "Figma"],
-    isVerified: true,
-  },
-  {
-    _id: "m-7",
-    fullName: "Kaleb Tesfaye",
-    bio: "Site Reliability Engineer optimizing low-latency telecom core networks and Linux kernel performance.",
-    currentCompany: "Ethio Telecom Core Systems",
-    mentorScore: 94,
-    totalSessions: 76,
-    expertise: ["Cloud & DevOps", "Linux Kernel", "Docker", "Terraform"],
-    isVerified: true,
-  },
-  {
-    _id: "m-8",
-    fullName: "Rahel Mengistu",
-    bio: "Full Stack Engineer & Tech Lead coaching junior developers on clean code, test-driven development, and CI/CD pipelines.",
-    currentCompany: "Ride Ethiopia / Hybrid Labs",
-    mentorScore: 97,
-    totalSessions: 104,
-    expertise: ["Frontend", "Backend & Distributed Systems", "Node.js", "PostgreSQL"],
-    isVerified: true,
-  },
-];
-
 const MENTORSHIP_PILLARS = [
   {
     icon: Code2,
@@ -238,11 +155,11 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
 
         {/* Mentor Rating & Sessions Bar */}
         <div className="space-y-1 pt-1">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
             <span>Student Rating</span>
-            <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
+            <span className="text-zinc-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
-          <ProgressBar value={score} max={100} className="h-1 bg-slate-200" />
+          <ProgressBar value={score} max={100} className="h-1 bg-zinc-200" />
         </div>
 
         {/* Skills Tag Cloud */}
@@ -250,7 +167,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
           {(mentor.expertise ?? []).slice(0, featured ? 4 : 3).map((skill) => (
             <span
               key={skill}
-              className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] text-slate-600 font-medium"
+              className="rounded border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] text-zinc-600 font-medium"
             >
               {skill}
             </span>
@@ -258,9 +175,9 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-        <span className="text-[11px] text-slate-500 font-medium">
-          <strong className="text-slate-900 font-mono">{mentor.totalSessions ?? 50}+</strong> sessions
+      <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between gap-2">
+        <span className="text-[11px] text-zinc-500 font-medium">
+          <strong className="text-zinc-900 font-mono">{mentor.totalSessions ?? 0}</strong> sessions
         </span>
         <Link to="/contact">
           <Button size="sm" variant={featured ? "primary" : "outline"} className="text-xs">
@@ -283,9 +200,7 @@ export function MentorsPage() {
   });
 
   const allMentors = useMemo(() => {
-    const fetched = [...(data?.featuredMentors ?? []), ...(data?.discoverMentors ?? [])];
-    if (fetched.length > 0) return fetched;
-    return CURATED_MENTORS;
+    return [...(data?.featuredMentors ?? []), ...(data?.discoverMentors ?? [])];
   }, [data]);
 
   const filteredMentors = useMemo(() => {
@@ -395,28 +310,36 @@ export function MentorsPage() {
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <MentorStatCard
           icon={Users}
-          value={formatCompactNumber(data?.stats?.totalMentors ?? 140)}
+          value={formatCompactNumber(data?.stats?.totalMentors ?? allMentors.length)}
           label="Senior Mentors"
           helper="Active in the verified guild"
           tone="primary"
         />
         <MentorStatCard
           icon={BadgeCheck}
-          value={formatCompactNumber(data?.stats?.verifiedMentors ?? 118)}
+          value={formatCompactNumber(data?.stats?.verifiedMentors ?? allMentors.filter((m) => m.isVerified).length)}
           label="Verified Practitioners"
           helper="From leading engineering teams"
           tone="default"
         />
         <MentorStatCard
           icon={Video}
-          value={formatCompactNumber(data?.stats?.totalSessions ?? 2850)}
+          value={formatCompactNumber(
+            data?.stats?.totalSessions ?? allMentors.reduce((sum, m) => sum + (m.totalSessions ?? 0), 0),
+          )}
           label="Mentorship Sessions"
           helper="Live code reviews & office hours"
           tone="default"
         />
         <MentorStatCard
           icon={Trophy}
-          value={`${data?.stats?.averageScore ?? 98}%`}
+          value={
+            data?.stats?.averageScore
+              ? `${data.stats.averageScore}%`
+              : allMentors.length > 0
+                ? `${Math.round(allMentors.reduce((sum, m) => sum + (m.mentorScore ?? 95), 0) / allMentors.length)}%`
+                : "—"
+          }
           label="Student Rating"
           helper="Consistently high quality standard"
           tone="warning"
@@ -470,7 +393,7 @@ export function MentorsPage() {
 
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={15} />
+            <Search className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" size={15} />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -498,42 +421,53 @@ export function MentorsPage() {
           ))}
         </div>
 
-        {/* Featured Mentors Section */}
-        {featuredMentors.length > 0 ? (
-          <div className="space-y-3">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Featured Senior Mentors</h3>
-            <div className="grid gap-4 md:grid-cols-3">
-              {featuredMentors.map((mentor) => (
-                <MentorCard key={mentor._id} mentor={mentor} featured />
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        {/* Discover Mentors Grid */}
-        {discoverMentors.length > 0 ? (
-          <div className="space-y-3 pt-2">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-              All Verified Mentors ({filteredMentors.length})
-            </h3>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {discoverMentors.map((mentor) => (
-                <MentorCard key={mentor._id} mentor={mentor} />
-              ))}
-            </div>
-          </div>
+        {allMentors.length === 0 ? (
+          <EmptyState
+            eyebrow="Mentor Guild"
+            title="No mentors registered yet"
+            description="Our engineering mentor network is currently accepting applications from senior practitioners and tech leads in the Ethiopian tech ecosystem and diaspora."
+            actionLabel="Apply to Become a Mentor"
+            actionHref="/mentor-recruitment"
+          />
+        ) : filteredMentors.length === 0 ? (
+          <EmptyState
+            eyebrow="Filter Results"
+            title="No matching mentors found"
+            description="Try adjusting your search query or specialty filter."
+            actionLabel="Show All Mentors"
+            onAction={() => {
+              setSearchQuery("");
+              setSelectedDomain("all");
+            }}
+          />
         ) : (
-          featuredMentors.length === 0 && (
-            <EmptyState
-              title="No mentors found"
-              description="Try adjusting your search query or specialty filter."
-              actionLabel="Show All Mentors"
-              onAction={() => {
-                setSearchQuery("");
-                setSelectedDomain("all");
-              }}
-            />
-          )
+          <>
+            {featuredMentors.length > 0 ? (
+              <div className="space-y-3">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                  Featured Senior Mentors
+                </h3>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {featuredMentors.map((mentor) => (
+                    <MentorCard key={mentor._id} mentor={mentor} featured />
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {discoverMentors.length > 0 ? (
+              <div className="space-y-3 pt-2">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                  All Verified Mentors ({filteredMentors.length})
+                </h3>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  {discoverMentors.map((mentor) => (
+                    <MentorCard key={mentor._id} mentor={mentor} />
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </>
         )}
       </section>
 

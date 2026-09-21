@@ -80,14 +80,14 @@ export function ResetPasswordPage() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-slate-900"
+        className="rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm text-zinc-900"
       >
         <motion.div variants={fadeUp} custom={0}>
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
             <ShieldCheck size={22} />
           </div>
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-slate-900">Missing reset token</h1>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+          <h1 className="mt-5 text-2xl font-bold tracking-tight text-zinc-900">Missing reset token</h1>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
             This link appears to be invalid or expired. Please request a new password reset.
           </p>
           <div className="mt-6">
@@ -104,13 +104,13 @@ export function ResetPasswordPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm"
     >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 transition hover:text-zinc-900"
         >
           <ArrowLeft size={13} />
           Back to sign in
@@ -122,8 +122,8 @@ export function ResetPasswordPage() {
         <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-700">
           <ShieldCheck size={16} />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Set New Password</h1>
-        <p className="text-xs leading-relaxed text-slate-500">
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 pt-2">Set New Password</h1>
+        <p className="text-xs leading-relaxed text-zinc-500">
           Must be at least 8 characters containing letters and numbers.
         </p>
       </motion.div>
@@ -135,7 +135,7 @@ export function ResetPasswordPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create strong password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -147,7 +147,7 @@ export function ResetPasswordPage() {
               animate={{ opacity: 1, height: "auto" }}
               className="mt-2 space-y-1"
             >
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100 border border-slate-200">
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-200">
                 <motion.div
                   className="h-full rounded-full"
                   style={{ backgroundColor: strength.color }}
@@ -167,7 +167,7 @@ export function ResetPasswordPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Re-enter password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+            className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />

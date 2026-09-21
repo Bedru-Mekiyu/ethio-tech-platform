@@ -102,7 +102,7 @@ export function TrackDetailPage() {
   const firstLessonId = modules[0]?.lessons?.[0]?._id;
 
   return (
-    <div className="page-shell py-6 space-y-6 text-slate-900">
+    <div className="page-shell py-6 space-y-6 text-zinc-900">
       {/* Capstone Preview Modal */}
       <CapstonePreviewModal
         project={selectedCapstone}
@@ -439,10 +439,10 @@ export function TrackDetailPage() {
 
           {/* TAB 3: COMPETENCIES & TOOLING */}
           {activeTab === "competencies" && (
-            <Card className="rounded-2xl border border-slate-200 bg-white p-6 space-y-6 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-6 space-y-6 shadow-xs">
               <div>
-                <h2 className="text-lg font-bold text-slate-900">Core Competencies & Industry Tooling</h2>
-                <p className="text-xs text-slate-500 mt-1">
+                <h2 className="text-lg font-bold text-zinc-900">Core Competencies & Industry Tooling</h2>
+                <p className="text-xs text-zinc-500 mt-1">
                   Master the exact toolchains and design patterns required by modern engineering organizations.
                 </p>
               </div>

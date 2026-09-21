@@ -368,18 +368,18 @@ export function CalendarPage() {
   if (isLoading) return <CalendarSkeleton />;
 
   return (
-    <div className="space-y-6 text-slate-900">
+    <div className="space-y-6 text-zinc-900">
       {/* Top Header */}
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Study Planner & Calendar</h1>
+              <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Study Planner & Calendar</h1>
               <Badge variant="outline" size="sm">
                 Live Planner
               </Badge>
             </div>
-            <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+            <p className="text-xs text-zinc-500 max-w-2xl leading-relaxed">
               Coordinate study blocks, live mentorship sessions, capstone milestones, and physical tech hub visits.
             </p>
           </div>
@@ -391,7 +391,7 @@ export function CalendarPage() {
               size="sm"
               onClick={() => syncMutation.mutate()}
               disabled={syncMutation.isPending}
-              className="text-xs text-slate-700 border-slate-200 hover:bg-slate-50"
+              className="text-xs text-zinc-700 border-zinc-200 hover:bg-zinc-50"
             >
               <RefreshCw size={12} className={cn("mr-1", syncMutation.isPending && "animate-spin")} />
               {syncMutation.isPending ? "Syncing..." : "Sync Sessions"}
@@ -401,7 +401,7 @@ export function CalendarPage() {
               variant="outline"
               size="sm"
               onClick={() => downloadCalendarFile()}
-              className="text-xs text-slate-700 border-slate-200 hover:bg-slate-50"
+              className="text-xs text-zinc-700 border-zinc-200 hover:bg-zinc-50"
             >
               <Download size={12} className="mr-1" />
               Export ICS
@@ -427,7 +427,7 @@ export function CalendarPage() {
       )}
 
       {/* Study Sprint & Habit Tracker Widget */}
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2.5 max-w-xl">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -435,27 +435,27 @@ export function CalendarPage() {
                 <Flame size={12} className="fill-amber-500 text-amber-500" />
                 {sprintStats.streakDays}-Day Study Streak
               </span>
-              <span className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[11px] font-medium text-slate-600">
+              <span className="rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-[11px] font-medium text-zinc-600">
                 Weekly Sprint
               </span>
             </div>
 
             <div>
               <div className="flex items-baseline gap-2">
-                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+                <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
                   {sprintStats.completedHours}
-                  <span className="text-sm font-normal text-slate-500"> / {sprintStats.targetHours} hrs completed</span>
+                  <span className="text-sm font-normal text-zinc-500"> / {sprintStats.targetHours} hrs completed</span>
                 </h2>
                 <span className="text-xs font-semibold text-[#b91c1c]">({sprintStats.progressPercent}% of target)</span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-zinc-500 mt-0.5">
                 {sprintStats.completedCount} of {sprintStats.totalCount} blocks completed this week.
               </p>
             </div>
 
             {/* Progress bar */}
             <div className="space-y-1">
-              <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 border border-slate-200">
+              <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-200">
                 <div
                   className="h-full rounded-full bg-[#b91c1c] transition-all duration-500"
                   style={{ width: `${sprintStats.progressPercent}%` }}
@@ -467,21 +467,21 @@ export function CalendarPage() {
           {/* Quick Stats Grid & Action */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2 text-center">
                 <span className="text-[10px] text-zinc-700 font-semibold uppercase">Study</span>
-                <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.studyBlockCount}</p>
+                <p className="text-base font-bold text-zinc-900 mt-0.5">{sprintStats.studyBlockCount}</p>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2 text-center">
                 <span className="text-[10px] text-zinc-900 font-semibold uppercase">Sessions</span>
-                <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.sessionCount}</p>
+                <p className="text-base font-bold text-zinc-900 mt-0.5">{sprintStats.sessionCount}</p>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2 text-center">
                 <span className="text-[10px] text-rose-600 font-semibold uppercase">Deadlines</span>
-                <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.deadlineCount}</p>
+                <p className="text-base font-bold text-zinc-900 mt-0.5">{sprintStats.deadlineCount}</p>
               </div>
-              <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-2 text-center">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2 text-center">
                 <span className="text-[10px] text-amber-600 font-semibold uppercase">Hubs</span>
-                <p className="text-base font-bold text-slate-900 mt-0.5">{sprintStats.hubVisitCount}</p>
+                <p className="text-base font-bold text-zinc-900 mt-0.5">{sprintStats.hubVisitCount}</p>
               </div>
             </div>
 
@@ -497,17 +497,17 @@ export function CalendarPage() {
       </Card>
 
       {/* View Switcher & Period Controls */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-3.5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200 pb-3.5">
         {/* View Mode Tabs */}
-        <div className="flex items-center rounded-lg border border-slate-200 bg-slate-100/70 p-1">
+        <div className="flex items-center rounded-lg border border-zinc-200 bg-zinc-100/70 p-1">
           <button
             type="button"
             onClick={() => setViewMode("month")}
             className={cn(
               "flex items-center gap-1.5 rounded-md px-3 py-1 text-xs font-medium transition",
               viewMode === "month"
-                ? "bg-white text-slate-900 shadow-xs font-semibold"
-                : "text-slate-600 hover:text-slate-900",
+                ? "bg-white text-zinc-900 shadow-xs font-semibold"
+                : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <LayoutGrid size={12} />
@@ -519,8 +519,8 @@ export function CalendarPage() {
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium transition",
               viewMode === "week"
-                ? "bg-white text-slate-900 shadow-xs font-semibold"
-                : "text-slate-600 hover:text-slate-900",
+                ? "bg-white text-zinc-900 shadow-xs font-semibold"
+                : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <CalendarDays size={14} />
@@ -532,8 +532,8 @@ export function CalendarPage() {
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-medium transition",
               viewMode === "agenda"
-                ? "bg-white text-slate-900 shadow-xs font-semibold"
-                : "text-slate-600 hover:text-slate-900",
+                ? "bg-white text-zinc-900 shadow-xs font-semibold"
+                : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <CalendarDays size={14} />
@@ -547,13 +547,13 @@ export function CalendarPage() {
             type="button"
             onClick={prevPeriod}
             aria-label="Previous period"
-            className="rounded-xl border border-slate-200 bg-white p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs"
+            className="rounded-xl border border-zinc-200 bg-white p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition shadow-xs"
           >
             <ChevronLeft size={16} />
           </button>
 
           <div className="text-center min-w-[180px]">
-            <h3 className="text-sm font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-zinc-900">
               {viewMode === "month" && currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
               {viewMode === "week" && (
                 <>
@@ -578,7 +578,7 @@ export function CalendarPage() {
             type="button"
             onClick={nextPeriod}
             aria-label="Next period"
-            className="rounded-xl border border-slate-200 bg-white p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition shadow-xs"
+            className="rounded-xl border border-zinc-200 bg-white p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 transition shadow-xs"
           >
             <ChevronRight size={16} />
           </button>
@@ -589,11 +589,11 @@ export function CalendarPage() {
       {viewMode === "month" && (
         <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
           {/* Main Month Grid Card */}
-          <Card className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+          <Card className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs">
             {/* Weekday headers */}
-            <div className="grid grid-cols-7 gap-2 border-b border-slate-200 pb-3 text-center">
+            <div className="grid grid-cols-7 gap-2 border-b border-zinc-200 pb-3 text-center">
               {WEEKDAYS.map((day) => (
-                <div key={day} className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                <div key={day} className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
                   {day}
                 </div>
               ))}
@@ -624,25 +624,21 @@ export function CalendarPage() {
                         ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900"
                         : isToday
                           ? "border-zinc-400 bg-zinc-50 ring-1 ring-zinc-300"
-                          : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300",
+                          : "border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300",
                     )}
                   >
                     <div className="flex items-center justify-between">
                       <span
                         className={cn(
                           "flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold",
-                          isToday
-                            ? "bg-zinc-900 text-white"
-                            : isSelected
-                              ? "text-zinc-900 font-bold"
-                              : "text-slate-700",
+                          isToday ? "bg-zinc-900 text-white" : isSelected ? "text-zinc-900 font-bold" : "text-zinc-700",
                         )}
                       >
                         {day}
                       </span>
 
                       {dayEvents.length > 0 && (
-                        <span className="rounded-full bg-slate-100 border border-slate-200 px-1.5 py-0.5 text-[10px] font-semibold text-slate-600">
+                        <span className="rounded-full bg-zinc-100 border border-zinc-200 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600">
                           {dayEvents.length}
                         </span>
                       )}
@@ -667,7 +663,7 @@ export function CalendarPage() {
                         </div>
                       ))}
                       {dayEvents.length > 2 && (
-                        <span className="text-[9px] text-slate-500 block pl-1">+{dayEvents.length - 2} more</span>
+                        <span className="text-[9px] text-zinc-500 block pl-1">+{dayEvents.length - 2} more</span>
                       )}
                     </div>
                   </button>
@@ -678,11 +674,11 @@ export function CalendarPage() {
 
           {/* Right Selected Date Detail Sidebar */}
           <div className="space-y-4">
-            <Card className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+            <Card className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-xs">
               <div className="flex items-start justify-between">
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-800">Day Agenda</span>
-                  <h3 className="text-lg font-bold text-slate-900 mt-0.5">
+                  <h3 className="text-lg font-bold text-zinc-900 mt-0.5">
                     {selectedDate
                       ? new Date(selectedDate + "T12:00:00").toLocaleDateString("en-US", {
                           weekday: "long",
@@ -691,7 +687,7 @@ export function CalendarPage() {
                         })
                       : "Select a Date"}
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-zinc-500">
                     {selectedEvents.length} event{selectedEvents.length !== 1 ? "s" : ""} scheduled
                   </p>
                 </div>
@@ -700,7 +696,7 @@ export function CalendarPage() {
                   size="sm"
                   variant="outline"
                   onClick={() => openAddModal("study_block", selectedDate)}
-                  className="border-slate-200 bg-white text-xs text-slate-700 hover:bg-slate-50"
+                  className="border-zinc-200 bg-white text-xs text-zinc-700 hover:bg-zinc-50"
                 >
                   <Plus size={13} className="mr-1" />
                   Add
@@ -721,7 +717,7 @@ export function CalendarPage() {
                           "relative rounded-xl border p-4 transition shadow-xs",
                           isCompleted
                             ? "border-zinc-200 bg-zinc-50 opacity-75"
-                            : "border-slate-200 bg-white hover:border-slate-300",
+                            : "border-zinc-200 bg-white hover:border-zinc-300",
                         )}
                         style={{ borderLeftColor: event.color || "#18181b", borderLeftWidth: "4px" }}
                       >
@@ -750,25 +746,25 @@ export function CalendarPage() {
 
                             <h4
                               className={cn(
-                                "font-semibold text-sm text-slate-900",
-                                isCompleted && "line-through text-slate-400",
+                                "font-semibold text-sm text-zinc-900",
+                                isCompleted && "line-through text-zinc-400",
                               )}
                             >
                               {event.title}
                             </h4>
 
                             {event.description && (
-                              <p className="text-xs text-slate-600 line-clamp-2">{event.description}</p>
+                              <p className="text-xs text-zinc-600 line-clamp-2">{event.description}</p>
                             )}
 
-                            <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-slate-500">
+                            <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-zinc-500">
                               <span className="flex items-center gap-1">
                                 <CalendarIcon size={12} className="text-[#b91c1c]" />
                                 {formatTime(event.start)}
                                 {event.end && ` - ${formatTime(event.end)}`}
                               </span>
                               {event.targetTrack && (
-                                <span className="flex items-center gap-1 text-slate-500">
+                                <span className="flex items-center gap-1 text-zinc-500">
                                   <Layers size={11} /> {event.targetTrack}
                                 </span>
                               )}
@@ -790,7 +786,7 @@ export function CalendarPage() {
                                 "rounded-lg p-1.5 transition",
                                 isCompleted
                                   ? "text-zinc-900 hover:bg-zinc-100"
-                                  : "text-slate-400 hover:text-slate-700 hover:bg-slate-100",
+                                  : "text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100",
                               )}
                             >
                               {isCompleted ? <CheckCircle2 size={16} /> : <Circle size={16} />}
@@ -800,7 +796,7 @@ export function CalendarPage() {
                               type="button"
                               title="Delete event"
                               onClick={() => deleteEventMutation.mutate(event._id)}
-                              className="rounded-lg p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                              className="rounded-lg p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 transition"
                             >
                               <Trash2 size={14} />
                             </button>
@@ -809,7 +805,7 @@ export function CalendarPage() {
 
                         {/* LiveKit Classroom quick join for live session events */}
                         {(event.type === "session" || event.sessionId) && (
-                          <div className="mt-3 border-t border-slate-100 pt-3">
+                          <div className="mt-3 border-t border-zinc-100 pt-3">
                             <Link
                               to={`/app/classroom/${event.sessionId || meeting?.id || "demo-room"}`}
                               className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#b91c1c] px-3 py-2 text-xs font-semibold text-white hover:bg-[#991b1b] transition shadow-xs"
@@ -823,8 +819,8 @@ export function CalendarPage() {
                     );
                   })
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-center">
-                    <p className="text-xs text-slate-500">No events for this date.</p>
+                  <div className="rounded-2xl border border-dashed border-zinc-200 p-6 text-center">
+                    <p className="text-xs text-zinc-500">No events for this date.</p>
                     <Button
                       size="sm"
                       onClick={() => openAddModal("study_block", selectedDate)}
@@ -862,13 +858,13 @@ export function CalendarPage() {
                       ? "border-zinc-900 bg-zinc-100 ring-1 ring-zinc-900"
                       : isToday
                         ? "border-zinc-400 bg-zinc-50"
-                        : "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300",
+                        : "border-zinc-200 bg-white hover:bg-zinc-50 hover:border-zinc-300",
                   )}
                 >
                   {/* Column Day Header */}
-                  <div className="border-b border-slate-100 pb-2.5">
+                  <div className="border-b border-zinc-100 pb-2.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500">
                         {dateObj.toLocaleDateString("en-US", { weekday: "short" })}
                       </span>
                       {isToday && (
@@ -878,8 +874,8 @@ export function CalendarPage() {
                       )}
                     </div>
                     <div className="flex items-baseline justify-between mt-1">
-                      <span className="text-xl font-extrabold text-slate-900">{dateObj.getDate()}</span>
-                      <span className="text-[10px] text-slate-500 font-medium">
+                      <span className="text-xl font-extrabold text-zinc-900">{dateObj.getDate()}</span>
+                      <span className="text-[10px] text-zinc-500 font-medium">
                         {totalHours > 0 ? `${totalHours}h planned` : "Free"}
                       </span>
                     </div>
@@ -896,12 +892,12 @@ export function CalendarPage() {
                             "rounded-xl border p-2.5 text-xs transition space-y-1.5 shadow-xs",
                             isCompleted
                               ? "border-zinc-200 bg-zinc-50 opacity-75"
-                              : "border-slate-200 bg-white hover:border-slate-300",
+                              : "border-zinc-200 bg-white hover:border-zinc-300",
                           )}
                           style={{ borderLeftColor: ev.color || "#18181b", borderLeftWidth: "3px" }}
                         >
                           <div className="flex items-start justify-between gap-1">
-                            <span className="font-semibold text-slate-900 truncate text-[11px]">{ev.title}</span>
+                            <span className="font-semibold text-zinc-900 truncate text-[11px]">{ev.title}</span>
                             <button
                               type="button"
                               onClick={(e) => {
@@ -913,14 +909,14 @@ export function CalendarPage() {
                               }}
                               className={cn(
                                 "shrink-0",
-                                isCompleted ? "text-zinc-900" : "text-slate-400 hover:text-slate-700",
+                                isCompleted ? "text-zinc-900" : "text-zinc-400 hover:text-zinc-700",
                               )}
                             >
                               {isCompleted ? <CheckCircle2 size={13} /> : <Circle size={13} />}
                             </button>
                           </div>
 
-                          <div className="text-[10px] text-slate-500">{formatTime(ev.start)}</div>
+                          <div className="text-[10px] text-zinc-500">{formatTime(ev.start)}</div>
 
                           {(ev.type === "session" || ev.sessionId) && (
                             <Link
@@ -936,7 +932,7 @@ export function CalendarPage() {
                     })}
 
                     {dayEvents.length === 0 && (
-                      <div className="py-6 text-center text-[11px] text-slate-400">No events</div>
+                      <div className="py-6 text-center text-[11px] text-zinc-400">No events</div>
                     )}
                   </div>
 
@@ -948,7 +944,7 @@ export function CalendarPage() {
                       e.stopPropagation();
                       openAddModal("study_block", dateKey);
                     }}
-                    className="mt-2 w-full text-[11px] text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-dashed border-slate-200"
+                    className="mt-2 w-full text-[11px] text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 border border-dashed border-zinc-200"
                   >
                     <Plus size={12} className="mr-1" /> Add Block
                   </Button>
@@ -961,15 +957,15 @@ export function CalendarPage() {
 
       {/* VIEW 3: STUDY AGENDA */}
       {viewMode === "agenda" && (
-        <Card className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs space-y-6">
+        <Card className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs space-y-6">
           {/* Agenda Filter & Search Bar */}
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-zinc-200 pb-5">
             {/* Type & Status Filters */}
             <div className="flex flex-wrap items-center gap-2">
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-zinc-900 focus:outline-none shadow-xs"
+                className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-800 focus:border-zinc-900 focus:outline-none shadow-xs"
               >
                 <option value="all">All Categories</option>
                 <option value="study_block">Study Blocks</option>
@@ -983,7 +979,7 @@ export function CalendarPage() {
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:border-zinc-900 focus:outline-none shadow-xs"
+                className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs text-zinc-800 focus:border-zinc-900 focus:outline-none shadow-xs"
               >
                 <option value="all">All Statuses</option>
                 <option value="pending">Pending Only</option>
@@ -996,14 +992,14 @@ export function CalendarPage() {
               <label htmlFor={searchInputId} className="sr-only">
                 Search agenda events
               </label>
-              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={14} className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
               <input
                 id={searchInputId}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search agenda by title, track..."
-                className="w-full rounded-xl border border-slate-200 bg-white pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-400 focus:border-zinc-900 focus:outline-none shadow-xs"
+                className="w-full rounded-xl border border-zinc-200 bg-white pl-9 pr-4 py-2 text-xs text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none shadow-xs"
               />
             </div>
           </div>
@@ -1023,17 +1019,17 @@ export function CalendarPage() {
                       "flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border p-4 transition shadow-xs",
                       isCompleted
                         ? "border-zinc-200 bg-zinc-50 opacity-75"
-                        : "border-slate-200 bg-white hover:border-slate-300",
+                        : "border-zinc-200 bg-white hover:border-zinc-300",
                     )}
                     style={{ borderLeftColor: event.color || "#18181b", borderLeftWidth: "4px" }}
                   >
                     {/* Left: Date Badge & Details */}
                     <div className="flex items-start gap-3.5">
-                      <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-center">
+                      <div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-zinc-50 border border-zinc-200 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-700">
                           {eventDate.toLocaleDateString("en-US", { month: "short" })}
                         </span>
-                        <span className="text-sm font-extrabold text-slate-900">{eventDate.getDate()}</span>
+                        <span className="text-sm font-extrabold text-zinc-900">{eventDate.getDate()}</span>
                       </div>
 
                       <div className="space-y-1">
@@ -1048,7 +1044,7 @@ export function CalendarPage() {
                           </Badge>
 
                           {event.targetTrack && (
-                            <span className="rounded bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-700">
+                            <span className="rounded bg-zinc-100 border border-zinc-200 px-2 py-0.5 text-[10px] text-zinc-700">
                               {event.targetTrack}
                             </span>
                           )}
@@ -1061,19 +1057,14 @@ export function CalendarPage() {
                         </div>
 
                         <h4
-                          className={cn(
-                            "text-sm font-bold text-slate-900",
-                            isCompleted && "line-through text-slate-400",
-                          )}
+                          className={cn("text-sm font-bold text-zinc-900", isCompleted && "line-through text-zinc-400")}
                         >
                           {event.title}
                         </h4>
 
-                        {event.description && (
-                          <p className="text-xs text-slate-600 line-clamp-1">{event.description}</p>
-                        )}
+                        {event.description && <p className="text-xs text-zinc-600 line-clamp-1">{event.description}</p>}
 
-                        <div className="flex items-center gap-3 text-[11px] text-slate-500">
+                        <div className="flex items-center gap-3 text-[11px] text-zinc-500">
                           <span className="flex items-center gap-1">
                             <CalendarIcon size={12} className="text-[#b91c1c]" />
                             {eventDate.toLocaleDateString("en-US", { weekday: "short" })}, {formatTime(event.start)}{" "}
@@ -1127,7 +1118,7 @@ export function CalendarPage() {
                         type="button"
                         title="Delete event"
                         onClick={() => deleteEventMutation.mutate(event._id)}
-                        className="rounded-xl border border-slate-200 bg-white p-2 text-slate-400 hover:text-rose-600 hover:border-rose-200 hover:bg-rose-50 transition shadow-xs"
+                        className="rounded-xl border border-zinc-200 bg-white p-2 text-zinc-400 hover:text-rose-600 hover:border-rose-200 hover:bg-rose-50 transition shadow-xs"
                       >
                         <Trash2 size={14} />
                       </button>

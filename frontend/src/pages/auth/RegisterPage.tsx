@@ -84,15 +84,15 @@ export function RegisterPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-700">
           <Code2 size={11} className="text-zinc-700" />
           <span>Student Registration</span>
         </div>
-        <h2 className="text-xl font-bold tracking-tight text-slate-900">Create Student Account</h2>
-        <p className="text-xs text-slate-500">Join hands-on software engineering tracks with senior mentor support.</p>
+        <h2 className="text-xl font-bold tracking-tight text-zinc-900">Create Student Account</h2>
+        <p className="text-xs text-zinc-500">Join hands-on software engineering tracks with senior mentor support.</p>
       </motion.div>
 
       <motion.form variants={fadeUp} custom={1} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
@@ -101,7 +101,7 @@ export function RegisterPage() {
             <Input
               autoComplete="given-name"
               placeholder="Abel"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("firstName", errors.firstName?.message)}
               {...register("firstName")}
             />
@@ -110,7 +110,7 @@ export function RegisterPage() {
             <Input
               autoComplete="family-name"
               placeholder="Kebede"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("lastName", errors.lastName?.message)}
               {...register("lastName")}
             />
@@ -122,7 +122,7 @@ export function RegisterPage() {
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+            className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("email", errors.email?.message)}
             {...register("email")}
           />
@@ -138,7 +138,7 @@ export function RegisterPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -148,7 +148,7 @@ export function RegisterPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Confirm password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("confirmPassword", errors.confirmPassword?.message)}
               {...register("confirmPassword")}
             />
@@ -163,7 +163,7 @@ export function RegisterPage() {
               })}
               id="gradeLevel"
               defaultValue=""
-              className="text-xs bg-white border-slate-300 text-slate-800 shadow-xs"
+              className="text-xs bg-white border-zinc-300 text-zinc-800 shadow-xs"
             >
               <option value="">Select grade level</option>
               {[8, 9, 10, 11, 12].map((g) => (
@@ -178,7 +178,7 @@ export function RegisterPage() {
             <Input
               autoComplete="address-level2"
               placeholder="e.g. Addis Ababa"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               {...fieldAriaProps("city", errors.city?.message)}
               {...register("city")}
             />
@@ -193,7 +193,7 @@ export function RegisterPage() {
         >
           <Input
             placeholder="Web, Mobile, AI, Cloud"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+            className="text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
             {...fieldAriaProps("learningInterests", errors.learningInterests?.message)}
             {...register("learningInterests")}
           />
@@ -220,9 +220,9 @@ export function RegisterPage() {
       <motion.div
         variants={fadeUp}
         custom={2}
-        className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-3 text-center"
+        className="mt-5 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-center"
       >
-        <p className="text-xs text-slate-600">
+        <p className="text-xs text-zinc-600">
           Want to mentor students?{" "}
           <Link to="/mentor-recruitment" className="font-semibold text-zinc-900 hover:text-zinc-700 ml-1">
             Apply as Mentor →
@@ -230,8 +230,8 @@ export function RegisterPage() {
         </p>
       </motion.div>
 
-      <motion.div variants={fadeUp} custom={3} className="mt-5 border-t border-slate-100 pt-4 text-center">
-        <p className="text-xs text-slate-500">
+      <motion.div variants={fadeUp} custom={3} className="mt-5 border-t border-zinc-100 pt-4 text-center">
+        <p className="text-xs text-zinc-500">
           Already have an account?{" "}
           <Link
             to="/login"

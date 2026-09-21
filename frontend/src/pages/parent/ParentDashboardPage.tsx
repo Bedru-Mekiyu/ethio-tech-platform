@@ -29,12 +29,12 @@ export function ParentDashboardPage() {
   }
 
   return (
-    <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+    <div className="space-y-6 text-zinc-900">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="max-w-3xl space-y-1">
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Welcome back, {firstName}</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Welcome back, {firstName}</h1>
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Monitor linked learners&apos; progress, milestone completion, and platform learning engagement.
             </p>
           </div>
@@ -63,31 +63,31 @@ export function ParentDashboardPage() {
       ) : (
         <div className="grid gap-3.5 md:grid-cols-2 xl:grid-cols-3">
           {learners.map((learner) => (
-            <Card key={learner.id} className="border-slate-200 bg-white p-4.5 shadow-xs hover:border-slate-300">
+            <Card key={learner.id} className="border-zinc-200 bg-white p-4.5 shadow-xs hover:border-zinc-300">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                   <Users size={15} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">{learner.fullName}</p>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-sm font-semibold text-zinc-900">{learner.fullName}</p>
+                  <p className="text-[11px] text-zinc-500">
                     Level {learner.level ?? 1} · {learner.xp ?? 0} XP
                   </p>
                 </div>
               </div>
-              <div className="mt-3.5 space-y-1.5 rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600">
+              <div className="mt-3.5 space-y-1.5 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-600">
                 <p>
-                  Lessons completed: <span className="font-semibold text-slate-900">{learner.lessonsCompleted}</span>
+                  Lessons completed: <span className="font-semibold text-zinc-900">{learner.lessonsCompleted}</span>
                 </p>
                 <p>
                   Projects approved: <span className="font-semibold text-zinc-900">{learner.approvedProjects}</span> /{" "}
                   {learner.submissions}
                 </p>
                 <p>
-                  Enrolled tracks: <span className="font-semibold text-slate-900">{learner.enrolledTrackCount}</span>
+                  Enrolled tracks: <span className="font-semibold text-zinc-900">{learner.enrolledTrackCount}</span>
                 </p>
               </div>
-              <div className="mt-3 pt-2 border-t border-slate-100">
+              <div className="mt-3 pt-2 border-t border-zinc-100">
                 <Link to="/app/dashboard" className="text-xs font-medium text-[#b91c1c] hover:underline">
                   View Learning Hub →
                 </Link>
@@ -98,30 +98,30 @@ export function ParentDashboardPage() {
       )}
 
       <div className="grid gap-3.5 md:grid-cols-3">
-        <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
+        <Card className="border-zinc-200 bg-white p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-zinc-900">
             <ShieldCheck size={16} />
-            <p className="text-xs font-semibold text-slate-900">Access Status</p>
+            <p className="text-xs font-semibold text-zinc-900">Access Status</p>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-slate-600">
+          <p className="mt-2 text-xs leading-relaxed text-zinc-600">
             Parent accounts use role-based access and short-lived tokens for secure family oversight.
           </p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
+        <Card className="border-zinc-200 bg-white p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-zinc-900">
             <BookOpen size={16} />
-            <p className="text-xs font-semibold text-slate-900">Live Progress</p>
+            <p className="text-xs font-semibold text-zinc-900">Live Progress</p>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-slate-600">
+          <p className="mt-2 text-xs leading-relaxed text-zinc-600">
             Lesson completion and project approvals update dynamically as learners work through tracks.
           </p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
+        <Card className="border-zinc-200 bg-white p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-amber-500">
             <Sparkles size={16} />
-            <p className="text-xs font-semibold text-slate-900">Support & Inquiries</p>
+            <p className="text-xs font-semibold text-zinc-900">Support & Inquiries</p>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-slate-600">
+          <p className="mt-2 text-xs leading-relaxed text-zinc-600">
             Need to link another student? Our team is available 24/7.
           </p>
           <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-[#b91c1c] hover:underline">

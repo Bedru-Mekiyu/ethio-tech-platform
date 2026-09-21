@@ -280,8 +280,8 @@ export function LeaderboardPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-[760px] w-full text-left text-sm">
-            <thead className="border-b border-slate-200 bg-slate-50">
-              <tr className="text-[10px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
+            <thead className="border-b border-zinc-200 bg-zinc-50">
+              <tr className="text-[10px] uppercase tracking-[0.22em] text-zinc-500 font-semibold">
                 <th className="px-5 py-4">Rank</th>
                 <th className="px-5 py-4">{tab === "teams" ? "Team" : "Member"}</th>
                 <th className="px-5 py-4">{tab === "mentors" ? "Score" : "Level & XP"}</th>
@@ -369,7 +369,7 @@ export function LeaderboardPage() {
           </table>
         </div>
 
-        <div className="border-t border-slate-200 bg-slate-50/50 p-4 text-center">
+        <div className="border-t border-zinc-200 bg-zinc-50/50 p-4 text-center">
           <Button variant="outline" onClick={() => setLimit((value) => value + 5)} disabled={activeQuery.isFetching}>
             {activeQuery.isFetching ? "Loading more…" : "Load more"}
           </Button>

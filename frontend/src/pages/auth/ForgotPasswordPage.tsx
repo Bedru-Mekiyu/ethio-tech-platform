@@ -46,13 +46,13 @@ export function ForgotPasswordPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm"
     >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500 transition hover:text-zinc-900"
         >
           <ArrowLeft size={13} />
           Back to sign in
@@ -64,10 +64,8 @@ export function ForgotPasswordPage() {
         <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-700">
           <KeyRound size={16} />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Reset Password</h1>
-        <p className="text-xs leading-relaxed text-slate-500">
-          Enter your account email to receive reset instructions.
-        </p>
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 pt-2">Reset Password</h1>
+        <p className="text-xs leading-relaxed text-zinc-500">Enter your account email to receive reset instructions.</p>
       </motion.div>
 
       {/* Form */}
@@ -76,10 +74,10 @@ export function ForgotPasswordPage() {
           <div className="relative">
             <Mail
               size={15}
-              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -tranzinc-y-1/2 text-zinc-400"
             />
             <Input
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-zinc-900"
+              className="pl-10 text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
@@ -103,7 +101,7 @@ export function ForgotPasswordPage() {
             className="mt-5 flex items-start gap-2.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5"
           >
             <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0 text-zinc-700" />
-            <p className="text-xs text-slate-700">{message}</p>
+            <p className="text-xs text-zinc-700">{message}</p>
           </motion.div>
         ) : null}
       </div>

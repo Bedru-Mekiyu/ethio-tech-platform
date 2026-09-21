@@ -70,7 +70,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 border border-slate-200 bg-white p-4.5 shadow-xs">
+    <Card className="flex h-full flex-col justify-between gap-3 border border-zinc-200 bg-white p-4.5 shadow-xs">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <Badge variant={statusTone} size="sm">
@@ -79,16 +79,16 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
           <span className="text-xs font-bold text-[#b91c1c]">+{project.xpReward ?? 0} XP</span>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-slate-900">{project.title}</h3>
-          <p className="text-[11px] text-slate-500 mt-0.5">{project.trackTitle}</p>
+          <h3 className="text-sm font-semibold text-zinc-900">{project.title}</h3>
+          <p className="text-[11px] text-zinc-500 mt-0.5">{project.trackTitle}</p>
         </div>
-        <p className="text-xs leading-relaxed text-slate-600 line-clamp-3">
+        <p className="text-xs leading-relaxed text-zinc-600 line-clamp-3">
           {project.description ?? "Project work assigned through your learning track."}
         </p>
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="flex items-center justify-between text-xs text-zinc-500">
             <span>Progress</span>
-            <span className="font-semibold text-slate-900">{project.completionPercent}%</span>
+            <span className="font-semibold text-zinc-900">{project.completionPercent}%</span>
           </div>
           <ProgressBar value={project.completionPercent} max={100} color="primary" className="h-1.5" />
         </div>
@@ -99,7 +99,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
         ) : null}
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
         <Link to={actionRoute}>
           <Button size="sm" className="text-xs">
             {actionLabel}
@@ -122,7 +122,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const overdue = isOverdue(assignment.dueDate) && status === "pending";
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 border border-slate-200 bg-white p-4.5 shadow-xs">
+    <Card className="flex h-full flex-col justify-between gap-3 border border-zinc-200 bg-white p-4.5 shadow-xs">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -138,18 +138,18 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
               {status}
             </Badge>
           </div>
-          <span className="text-xs text-slate-500 font-mono">{assignment.maxScore} pts</span>
+          <span className="text-xs text-zinc-500 font-mono">{assignment.maxScore} pts</span>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-slate-900">{assignment.title}</h3>
-          <p className="mt-0.5 text-xs text-slate-600 line-clamp-2 leading-relaxed">{assignment.description}</p>
+          <h3 className="text-sm font-semibold text-zinc-900">{assignment.title}</h3>
+          <p className="mt-0.5 text-xs text-zinc-600 line-clamp-2 leading-relaxed">{assignment.description}</p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-slate-500">
+        <div className="flex items-center gap-3 text-xs text-zinc-500">
           <span className="flex items-center gap-1">
             {overdue ? (
               <AlertTriangle size={12} className="text-amber-500" />
             ) : (
-              <Clock size={12} className="text-slate-400" />
+              <Clock size={12} className="text-zinc-400" />
             )}
             <span className={overdue ? "text-amber-600 font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
           </span>
@@ -162,7 +162,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
         ) : null}
       </div>
 
-      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+      <div className="mt-2 flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
         {status === "pending" ? (
           <Link to={`/app/projects/submit?mode=submit&assignmentId=${assignment._id}`}>
             <Button size="sm" className="text-xs">
@@ -231,12 +231,12 @@ export function AssignedProjectsPage() {
     gradedAssignments.length;
 
   return (
-    <div className="page-shell space-y-6 text-slate-900">
-      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+    <div className="page-shell space-y-6 text-zinc-900">
+      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Assigned Projects & Tasks</h1>
-            <p className="mt-0.5 text-xs text-slate-500">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Assigned Projects & Tasks</h1>
+            <p className="mt-0.5 text-xs text-zinc-500">
               Track assignments, submit milestone repositories, and review mentor feedback.
             </p>
           </div>
@@ -249,7 +249,7 @@ export function AssignedProjectsPage() {
       </Card>
 
       <div
-        className="flex items-center rounded-lg border border-slate-200 bg-slate-100/80 p-1 w-fit shadow-xs"
+        className="flex items-center rounded-lg border border-zinc-200 bg-zinc-100/80 p-1 w-fit shadow-xs"
         role="tablist"
       >
         {(["active", "submitted", "graded"] as const).map((t) => (
@@ -261,7 +261,7 @@ export function AssignedProjectsPage() {
             onClick={() => setTab(t)}
             className={cn(
               "rounded-md px-3.5 py-1 text-xs font-medium transition",
-              tab === t ? "bg-white text-slate-900 shadow-xs font-semibold" : "text-slate-600 hover:text-slate-900",
+              tab === t ? "bg-white text-zinc-900 shadow-xs font-semibold" : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             {tabLabels[t]}

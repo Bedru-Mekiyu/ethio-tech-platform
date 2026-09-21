@@ -50,6 +50,16 @@ const mockAnalyticsData: dashboardService.AdminAnalyticsData = {
     { title: "Go Microservices & Kafka", scheduledAt: "2026-09-01T14:00:00Z", status: "scheduled" },
     { title: "React 19 Server Actions", scheduledAt: "2026-09-02T16:00:00Z", status: "live" },
   ],
+  hubs: [
+    {
+      city: "Addis Ababa Hub",
+      address: "Bole Medhanialem Innovation Lab",
+      capacity: 60,
+      availableSeats: 18,
+      computersAvailable: 35,
+      mentorInCharge: { fullName: "Abebe Bekele" },
+    },
+  ],
 };
 
 const mockPlatformHealthData: dashboardService.PlatformHealthData = {
@@ -108,7 +118,7 @@ const renderWithProviders = (component: React.ReactElement) => {
       <QueryClientProvider client={queryClient}>
         <ToastProvider>{component}</ToastProvider>
       </QueryClientProvider>
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 };
 
@@ -172,26 +182,26 @@ describe("AdminOperationsPage Component Suite", () => {
     vi.mocked(dashboardService.fetchAdminAuditLogs).mockResolvedValue({ logs: mockAuditLogs });
   });
 
-  it("renders operations center header and all 5 microservices in the health grid", async () => {
+  it("renders operations center header and all 5 services in the health grid", async () => {
     renderWithProviders(<AdminOperationsPage />);
 
     expect(await screen.findByText("Platform Operations Center")).toBeTruthy();
-    expect(screen.getByText("All Systems Operational")).toBeTruthy();
+    expect(screen.getByText("Systems Active")).toBeTruthy();
 
-    // Microservices (rendered after healthQuery resolves)
-    expect(await screen.findByText("LiveKit WebRTC SFU Server")).toBeTruthy();
-    expect(screen.getByText("MongoDB Atlas Primary Cluster")).toBeTruthy();
+    // Services (rendered after healthQuery resolves)
+    expect(await screen.findByText("Express API Application Server")).toBeTruthy();
+    expect(screen.getByText("MongoDB Persistence Engine")).toBeTruthy();
     expect(screen.getByText("Socket.IO Gateway Cluster")).toBeTruthy();
-    expect(screen.getByText("Cloud Storage & Global CDN")).toBeTruthy();
-    expect(screen.getByText("Redis In-Memory Key-Value Cache")).toBeTruthy();
+    expect(screen.getByText("LiveKit WebRTC SFU Gateway")).toBeTruthy();
+    expect(screen.getByText("Cloud Storage & Media Delivery")).toBeTruthy();
   });
 
   it("renders live resource telemetry meters", async () => {
     renderWithProviders(<AdminOperationsPage />);
 
     expect(await screen.findByText("Live Resource Telemetry")).toBeTruthy();
-    expect(screen.getByText("Memory Allocation")).toBeTruthy();
-    expect(screen.getByText("API Latency (p99)")).toBeTruthy();
+    expect(screen.getByText("Application Server")).toBeTruthy();
+    expect(screen.getByText("Database Store")).toBeTruthy();
     expect(screen.getByText("Socket Concurrency")).toBeTruthy();
     expect(screen.getByText("Security Shield")).toBeTruthy();
   });
@@ -226,13 +236,13 @@ describe("AdminOperationsPage Component Suite", () => {
   it("executes diagnostic quick action buttons", async () => {
     renderWithProviders(<AdminOperationsPage />);
 
-    const sfuBtn = await screen.findByRole("button", { name: /test livekit sfu/i });
+    const sfuBtn = await screen.findByRole("button", { name: /check livekit sfu/i });
     fireEvent.click(sfuBtn);
 
     const dbBtn = screen.getByRole("button", { name: /ping database pool/i });
     fireEvent.click(dbBtn);
 
-    const purgeBtn = screen.getByRole("button", { name: /flush cdn & cache/i });
+    const purgeBtn = screen.getByRole("button", { name: /refresh app cache/i });
     fireEvent.click(purgeBtn);
   });
 });

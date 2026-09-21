@@ -80,8 +80,8 @@ describe("HomePage Component Suite", () => {
     expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
     expect(screen.getAllByRole("button", { name: /Start Coding Free/i }).length).toBeGreaterThan(0);
 
-    // Check for the LivePlatformPulse text (just one of the fake events to ensure it renders)
-    expect(screen.getByText(/Addis Ababa Hub started a live session/i)).toBeDefined();
+    // Check for the authentic platform badge
+    expect(screen.getByText(/Interactive Technology & Career Platform/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {

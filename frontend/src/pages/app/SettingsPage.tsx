@@ -286,12 +286,12 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
   return (
     <>
-      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6 text-slate-900">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6 text-zinc-900">
+        <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Account Settings</h1>
-              <p className="mt-0.5 text-xs text-slate-500">
+              <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Account Settings</h1>
+              <p className="mt-0.5 text-xs text-zinc-500">
                 Manage your personal profile, avatar, credentials, and notifications.
               </p>
             </div>
@@ -300,7 +300,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               size="sm"
               type="button"
               onClick={handleLogout}
-              className="text-xs gap-1.5 text-slate-700"
+              className="text-xs gap-1.5 text-zinc-700"
             >
               <LogOut size={13} /> Sign Out
             </Button>
@@ -317,15 +317,15 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Profile Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
-              <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
-                <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <Card className="rounded-xl border border-zinc-200 bg-white shadow-sm p-5 sm:p-6">
+              <CardHeader className="p-0 border-b border-zinc-100 pb-3 mb-4">
+                <CardTitle className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
                   <UserCircle2 size={15} className="text-[#b91c1c]" /> Personal Profile
                 </CardTitle>
               </CardHeader>
 
               <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-3.5">
-                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-col gap-3">
+                <div className="p-3.5 rounded-xl border border-zinc-200 bg-zinc-50/60 flex flex-col gap-3">
                   <FileInput
                     label="Profile photo"
                     accept="image/jpeg,image/png,image/webp"
@@ -368,11 +368,11 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     </Button>
                   </div>
                   {avatarFile && (
-                    <p className="text-xs font-medium text-slate-600">Ready to upload: {avatarFile.name}</p>
+                    <p className="text-xs font-medium text-zinc-600">Ready to upload: {avatarFile.name}</p>
                   )}
                   {avatarOptions.length ? (
                     <div className="space-y-3">
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
                         Choose a default avatar
                       </p>
                       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -388,7 +388,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                                 "group rounded-2xl border p-3 text-left transition",
                                 selected
                                   ? "border-zinc-900 bg-zinc-100 shadow-sm"
-                                  : "border-slate-200 bg-white hover:border-zinc-400 hover:bg-zinc-50/50",
+                                  : "border-zinc-200 bg-white hover:border-zinc-400 hover:bg-zinc-50/50",
                               )}
                             >
                               <Avatar
@@ -398,10 +398,8 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                                 className="mx-auto"
                                 alt={option.alt}
                               />
-                              <p className="mt-2 text-center text-[11px] font-semibold text-slate-900">
-                                {option.label}
-                              </p>
-                              <p className="text-center text-[10px] text-slate-500 capitalize">{option.role}</p>
+                              <p className="mt-2 text-center text-[11px] font-semibold text-zinc-900">{option.label}</p>
+                              <p className="text-center text-[10px] text-zinc-500 capitalize">{option.role}</p>
                             </button>
                           );
                         })}
@@ -489,9 +487,9 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
           {/* Security Password Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
-              <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
-                <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+            <Card className="rounded-xl border border-zinc-200 bg-white shadow-sm p-5 sm:p-6">
+              <CardHeader className="p-0 border-b border-zinc-100 pb-3 mb-4">
+                <CardTitle className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
                   <Lock size={15} className="text-[#b91c1c]" /> Security & Password
                 </CardTitle>
               </CardHeader>
@@ -503,7 +501,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     placeholder="••••••••"
                     autoComplete="current-password"
                     {...passwordForm.register("currentPassword")}
-                    className="bg-white border-slate-200 text-xs h-9 text-slate-900"
+                    className="bg-white border-zinc-200 text-xs h-9 text-zinc-900"
                   />
                 </FormField>
 
@@ -518,7 +516,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     placeholder="••••••••"
                     autoComplete="new-password"
                     {...passwordForm.register("newPassword")}
-                    className="bg-white border-slate-200 text-xs h-9 text-slate-900"
+                    className="bg-white border-zinc-200 text-xs h-9 text-zinc-900"
                   />
                 </FormField>
 
@@ -533,7 +531,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                     placeholder="••••••••"
                     autoComplete="new-password"
                     {...passwordForm.register("confirm")}
-                    className="bg-white border-slate-200 text-xs h-9 text-slate-900"
+                    className="bg-white border-zinc-200 text-xs h-9 text-zinc-900"
                   />
                 </FormField>
 

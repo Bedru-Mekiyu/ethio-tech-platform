@@ -103,6 +103,14 @@ export interface AdminAnalyticsData {
   topMentors?: Array<{ fullName?: string; mentorScore?: number; totalSessions?: number; expertise?: string }>;
   xpByTrack?: Array<{ title?: string; category?: string; xpTotal?: number }>;
   upcomingSessions?: Array<{ title?: string; scheduledAt?: string; status?: string; participants?: unknown[] }>;
+  hubs?: Array<{
+    city?: string;
+    address?: string;
+    capacity?: number;
+    availableSeats?: number;
+    computersAvailable?: number;
+    mentorInCharge?: { fullName?: string };
+  }>;
 }
 
 export interface AdminMentorApplication {

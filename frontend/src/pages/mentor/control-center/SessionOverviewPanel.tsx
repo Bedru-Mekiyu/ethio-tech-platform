@@ -79,7 +79,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
       {statItems.map((item, idx) => {
         const Icon = item.icon;
         return (
-          <Card key={idx} className="mcc-card mcc-stat-card border-slate-200/80 bg-white p-4 relative shadow-sm">
+          <Card key={idx} className="mcc-card mcc-stat-card border-zinc-200/80 bg-white p-4 relative shadow-sm">
             <div className="card-content flex items-center gap-3">
               <div
                 className={cn(
@@ -92,10 +92,10 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
                 <Icon size={20} className="shrink-0" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold truncate">
+                <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold truncate">
                   {item.label}
                 </p>
-                <p className="text-xl font-bold text-slate-900 mt-0.5">{item.value}</p>
+                <p className="text-xl font-bold text-zinc-900 mt-0.5">{item.value}</p>
               </div>
             </div>
           </Card>

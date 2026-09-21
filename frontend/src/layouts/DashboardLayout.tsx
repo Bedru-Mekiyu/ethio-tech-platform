@@ -166,7 +166,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   const adminNav: NavItem[] = [
     { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
     { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
-    { to: "/admin/moderation", label: "Moderation", icon: <FileCheck size={18} /> },
+    { to: "/admin/moderation", label: "Applications", icon: <FileCheck size={18} /> },
     { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
     { to: "/admin/gamification", label: "Gamification", icon: <Trophy size={18} /> },
     { to: "/admin/meetings", label: "Meetings", icon: <Video size={18} /> },
@@ -436,7 +436,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   {isActive && (
                     <motion.span
                       layoutId="active-bottom-bar-indicator"
-                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_4px_rgba(79,70,229,0.4)]"
+                      className="absolute top-0 left-1/4 right-1/4 h-0.5 rounded-full bg-primary shadow-[0_1px_4px_rgba(185,28,28,0.25)]"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}

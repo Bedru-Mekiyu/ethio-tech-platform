@@ -406,22 +406,22 @@ export function AdminContentPage() {
     deleteCapstoneMutation.isPending;
 
   return (
-    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-slate-900 bg-slate-50/50">
+    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-zinc-900 bg-zinc-50/50">
       {/* Top Banner Bar */}
-      <div className="border-b border-slate-200/80 bg-white px-5 py-3.5 shrink-0 shadow-2xs">
+      <div className="border-b border-zinc-200/80 bg-white px-5 py-3.5 shrink-0 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-zinc-900" />
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum Content Studio</h1>
+              <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Curriculum Content Studio</h1>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-zinc-500 mt-0.5">
               Master-detail hierarchical architect for learning tracks, modules, video lectures, and code labs.
             </p>
           </div>
 
           {/* Mobile Tab Switcher */}
-          <div className="flex sm:hidden items-center rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs">
+          <div className="flex sm:hidden items-center rounded-xl bg-zinc-100 p-1 border border-zinc-200 text-xs">
             <button
               type="button"
               onClick={() => setMobileTab("tracks")}
@@ -429,7 +429,7 @@ export function AdminContentPage() {
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tracks"
                   ? "bg-zinc-900 text-white shadow-xs font-semibold"
-                  : "text-slate-600 hover:text-slate-900",
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               Tracks
@@ -441,7 +441,7 @@ export function AdminContentPage() {
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tree"
                   ? "bg-zinc-900 text-white shadow-xs font-semibold"
-                  : "text-slate-600 hover:text-slate-900",
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               Curriculum
@@ -453,7 +453,7 @@ export function AdminContentPage() {
                 "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
                 mobileTab === "editor"
                   ? "bg-zinc-900 text-white shadow-xs font-semibold"
-                  : "text-slate-600 hover:text-slate-900",
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               Editor

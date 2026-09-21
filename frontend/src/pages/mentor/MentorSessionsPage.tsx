@@ -146,12 +146,12 @@ export function MentorSessionsPage() {
   }
 
   return (
-    <div className="space-y-6 text-slate-900">
-      <div className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+    <div className="space-y-6 text-zinc-900">
+      <div className="rounded-xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Session Management</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Session Management</h1>
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Schedule live classes, track attendance, and launch virtual classrooms from a calm schedule view.
             </p>
           </div>
@@ -167,20 +167,20 @@ export function MentorSessionsPage() {
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Upcoming sessions</p>
-          <p className="mt-1.5 text-xl font-bold text-slate-900">{upcoming.length}</p>
+        <Card className="border-zinc-200 bg-white p-4 shadow-sm">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Upcoming sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">{upcoming.length}</p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Past sessions</p>
-          <p className="mt-1.5 text-xl font-bold text-slate-900">{past.length}</p>
+        <Card className="border-zinc-200 bg-white p-4 shadow-sm">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Past sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">{past.length}</p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Total sessions</p>
-          <p className="mt-1.5 text-xl font-bold text-slate-900">{sessions.length}</p>
+        <Card className="border-zinc-200 bg-white p-4 shadow-sm">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Total sessions</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">{sessions.length}</p>
         </Card>
-        <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Fill rate</p>
+        <Card className="border-zinc-200 bg-white p-4 shadow-sm">
+          <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-500">Fill rate</p>
           <p className="mt-1.5 text-xl font-bold text-zinc-900">
             {sessions.length
               ? Math.round(
@@ -190,7 +190,7 @@ export function MentorSessionsPage() {
               : 0}
             %
           </p>
-          <p className="mt-0.5 text-[10px] text-slate-400">Enrolled learners ratio</p>
+          <p className="mt-0.5 text-[10px] text-zinc-400">Enrolled learners ratio</p>
         </Card>
       </div>
 
@@ -204,7 +204,7 @@ export function MentorSessionsPage() {
               "rounded-md border px-3 py-1 text-xs capitalize transition-all font-medium",
               filter === value
                 ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900",
+                : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900",
             )}
           >
             {value}
@@ -213,16 +213,16 @@ export function MentorSessionsPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between gap-3 border-b border-zinc-100 pb-3.5">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">{monthLabel(cursor)}</h2>
+              <h2 className="text-sm font-semibold text-zinc-900">{monthLabel(cursor)}</h2>
             </div>
             <div className="flex gap-1.5">
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 w-8 p-0 text-slate-600"
+                className="h-8 w-8 p-0 text-zinc-600"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() - 1, 1))}
               >
                 <ChevronLeft size={14} />
@@ -230,7 +230,7 @@ export function MentorSessionsPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 w-8 p-0 text-slate-600"
+                className="h-8 w-8 p-0 text-zinc-600"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() + 1, 1))}
               >
                 <ChevronRight size={14} />
@@ -238,7 +238,7 @@ export function MentorSessionsPage() {
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] uppercase font-semibold tracking-wider text-slate-400">
+          <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] uppercase font-semibold tracking-wider text-zinc-400">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div key={day} className="py-1">
                 {day}
@@ -255,13 +255,13 @@ export function MentorSessionsPage() {
                   key={day ? day.toDateString() : `blank-${index}`}
                   className={cn(
                     "min-h-[4.75rem] rounded-lg border p-1.5 transition-colors",
-                    day ? "border-slate-200 bg-slate-50/50" : "border-transparent bg-transparent",
+                    day ? "border-zinc-200 bg-zinc-50/50" : "border-transparent bg-transparent",
                     isToday && "border-zinc-900 bg-zinc-100 ring-1 ring-zinc-300",
                   )}
                 >
                   {day ? (
                     <>
-                      <p className="text-xs font-semibold text-slate-700">{day.getDate()}</p>
+                      <p className="text-xs font-semibold text-zinc-700">{day.getDate()}</p>
                       <div className="mt-1 space-y-1">
                         {sessionsForDay.slice(0, 2).map((session, index) => (
                           <div
@@ -272,7 +272,7 @@ export function MentorSessionsPage() {
                           </div>
                         ))}
                         {sessionsForDay.length > 2 ? (
-                          <p className="text-[9px] text-slate-400 font-medium">+{sessionsForDay.length - 2} more</p>
+                          <p className="text-[9px] text-zinc-400 font-medium">+{sessionsForDay.length - 2} more</p>
                         ) : null}
                       </div>
                     </>
@@ -283,11 +283,11 @@ export function MentorSessionsPage() {
           </div>
         </Card>
 
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between gap-3 border-b border-zinc-100 pb-3.5">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">Live Session Queue</h2>
-              <p className="text-xs text-slate-500">Scheduled interactive classrooms</p>
+              <h2 className="text-sm font-semibold text-zinc-900">Live Session Queue</h2>
+              <p className="text-xs text-zinc-500">Scheduled interactive classrooms</p>
             </div>
             <Link
               to="/app/workspace"
@@ -304,12 +304,12 @@ export function MentorSessionsPage() {
                 return (
                   <div
                     key={session._id ?? `${session.title}-${index}`}
-                    className="rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
+                    className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 hover:border-zinc-300 transition-colors"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="text-xs font-semibold text-slate-900 truncate">{session.title}</p>
-                        <p className="text-[11px] text-slate-500">
+                        <p className="text-xs font-semibold text-zinc-900 truncate">{session.title}</p>
+                        <p className="text-[11px] text-zinc-500">
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "TBD"}
                         </p>
                       </div>
@@ -318,7 +318,7 @@ export function MentorSessionsPage() {
                       </Badge>
                     </div>
                     <div className="mt-2.5 space-y-1.5">
-                      <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <div className="flex items-center justify-between text-[11px] text-zinc-500">
                         <span>
                           {participantCount}
                           {session.maxParticipants
@@ -335,7 +335,7 @@ export function MentorSessionsPage() {
                         ) : null}
                       </div>
                       {session.maxParticipants && session.maxParticipants > 0 ? (
-                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200">
                           <div
                             className={cn(
                               "h-full rounded-full transition-all",
@@ -363,18 +363,18 @@ export function MentorSessionsPage() {
       {createOpen ? (
         <dialog
           ref={dialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/50"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-xl border border-zinc-200 bg-white p-0 text-zinc-900 shadow-2xl backdrop:bg-zinc-900/50"
         >
           <form onSubmit={handleCreateSubmit} className="p-6 space-y-4">
-            <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+            <div className="flex items-start justify-between border-b border-zinc-100 pb-3">
               <div>
-                <h2 className="text-sm font-bold text-slate-900">Create New Session</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Schedule a live classroom session for your cohort.</p>
+                <h2 className="text-sm font-bold text-zinc-900">Create New Session</h2>
+                <p className="text-xs text-zinc-500 mt-0.5">Schedule a live classroom session for your cohort.</p>
               </div>
               <button
                 type="button"
                 onClick={() => setCreateOpen(false)}
-                className="text-slate-400 hover:text-slate-700"
+                className="text-zinc-400 hover:text-zinc-700"
                 aria-label="Close"
               >
                 <X size={16} />
@@ -383,27 +383,27 @@ export function MentorSessionsPage() {
 
             <div className="space-y-3">
               <label className="block">
-                <span className="text-xs font-medium text-slate-700">Title</span>
+                <span className="text-xs font-medium text-zinc-700">Title</span>
                 <Input
                   name="title"
                   required
                   maxLength={120}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
                   placeholder="e.g. Intro to Microservices & Docker"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-medium text-slate-700">Scheduled At</span>
+                <span className="text-xs font-medium text-zinc-700">Scheduled At</span>
                 <Input
                   name="scheduledAt"
                   type="datetime-local"
                   required
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900"
+                  className="mt-1 text-xs bg-white border-zinc-200 text-zinc-900"
                   defaultValue={defaultScheduledAt}
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-medium text-slate-700">Duration (minutes)</span>
+                <span className="text-xs font-medium text-zinc-700">Duration (minutes)</span>
                 <Input
                   name="durationMinutes"
                   type="number"
@@ -411,28 +411,28 @@ export function MentorSessionsPage() {
                   max={600}
                   step={15}
                   defaultValue={60}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900"
+                  className="mt-1 text-xs bg-white border-zinc-200 text-zinc-900"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-medium text-slate-700">Description (optional)</span>
+                <span className="text-xs font-medium text-zinc-700">Description (optional)</span>
                 <Input
                   name="description"
                   maxLength={500}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
                   placeholder="What will learners build?"
                 />
               </label>
             </div>
 
-            <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
+            <div className="flex justify-end gap-2 pt-3 border-t border-zinc-100">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={() => setCreateOpen(false)}
                 disabled={createMutation.isPending}
-                className="text-xs text-slate-700"
+                className="text-xs text-zinc-700"
               >
                 Cancel
               </Button>

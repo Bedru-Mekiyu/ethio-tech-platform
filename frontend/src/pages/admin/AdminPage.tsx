@@ -47,14 +47,14 @@ interface CustomChartTooltipProps {
 function CustomChartTooltip({ active, payload, label, unit = "" }: CustomChartTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-lg">
-        <p className="text-xs font-semibold text-slate-900">{label}</p>
+      <div className="rounded-lg border border-zinc-200 bg-white p-2.5 shadow-lg">
+        <p className="text-xs font-semibold text-zinc-900">{label}</p>
         <div className="mt-1.5 space-y-1">
           {payload.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#18181b" }} />
-              <span className="text-slate-500">{item.name || item.dataKey}:</span>
-              <span className="font-bold text-slate-900">
+              <span className="text-zinc-500">{item.name || item.dataKey}:</span>
+              <span className="font-bold text-zinc-900">
                 {typeof item.value === "number" ? item.value.toLocaleString() : item.value} {unit}
               </span>
             </div>
@@ -145,16 +145,15 @@ export function AdminPage() {
   }, [xpEarned30d]);
 
   const enrollmentTrendData = useMemo(() => {
-    // Default 6-month authentic admissions trajectory
-    return [
-      { month: "Mar", students: 120, active: 88 },
-      { month: "Apr", students: 185, active: 142 },
-      { month: "May", students: 260, active: 205 },
-      { month: "Jun", students: 340, active: 275 },
-      { month: "Jul", students: 430, active: 350 },
-      { month: "Aug", students: totalStudents || 520, active: activeLearners || 410 },
-    ];
-  }, [totalStudents, activeLearners]);
+    const raw = (
+      analytics as unknown as { enrollmentTrend?: Array<{ month: string; students: number; active: number }> }
+    )?.enrollmentTrend;
+    if (raw && raw.length > 0) return raw;
+    if (totalStudents > 0 || activeLearners > 0) {
+      return [{ month: "Current Cohort", students: totalStudents, active: activeLearners }];
+    }
+    return [];
+  }, [analytics, totalStudents, activeLearners]);
 
   const trackData = useMemo(() => {
     const rawTracks = analytics?.xpByTrack ?? [];
@@ -167,81 +166,16 @@ export function AdminPage() {
         percentage: Math.round(((t.xpTotal ?? 0) / totalXpInTracks) * 100),
       }));
     }
-
-    // Default authentic tracks
-    const defaults = [
-      { name: "Frontend & Web3", xp: Math.round(xpEarned30d * 0.36) || 8400, category: "Web" },
-      { name: "Backend & Cloud", xp: Math.round(xpEarned30d * 0.28) || 6200, category: "Cloud" },
-      { name: "AI & Machine Learning", xp: Math.round(xpEarned30d * 0.21) || 4900, category: "AI" },
-      { name: "Mobile Development", xp: Math.round(xpEarned30d * 0.15) || 3500, category: "Mobile" },
-    ];
-    const sumXp = defaults.reduce((acc, d) => acc + d.xp, 0);
-    return defaults.map((d) => ({
-      ...d,
-      percentage: Math.round((d.xp / sumXp) * 100),
-    }));
-  }, [analytics?.xpByTrack, xpEarned30d]);
+    return [];
+  }, [analytics?.xpByTrack]);
 
   /* ─── Hubs & Mentors Data ─── */
   const hubs = useMemo(() => {
-    const rawHubs = analytics?.hubs ?? [];
-    if (rawHubs.length > 0) return rawHubs;
-
-    // Authentic fallback for regional hub locations
-    return [
-      {
-        _id: "hub-1",
-        city: "Addis Ababa Hub",
-        address: "Bole Medhanialem, Innovation Center",
-        capacity: 60,
-        availableSeats: 18,
-        computersAvailable: 45,
-        mentorInCharge: { fullName: "Abebe Kebede", email: "abebe@ethiotech.org" },
-        isActive: true,
-      },
-      {
-        _id: "hub-2",
-        city: "Hawassa Tech Hub",
-        address: "Hawassa University Tech Park",
-        capacity: 40,
-        availableSeats: 12,
-        computersAvailable: 30,
-        mentorInCharge: { fullName: "Selamawit Tadesse", email: "selam@ethiotech.org" },
-        isActive: true,
-      },
-      {
-        _id: "hub-3",
-        city: "Bahir Dar Innovation Hub",
-        address: "Lake Tana Digital Center",
-        capacity: 35,
-        availableSeats: 9,
-        computersAvailable: 25,
-        mentorInCharge: { fullName: "Dawit Mengistu", email: "dawit@ethiotech.org" },
-        isActive: true,
-      },
-      {
-        _id: "hub-4",
-        city: "Mekelle Hub",
-        address: "Mekelle Institute of Tech Center",
-        capacity: 30,
-        availableSeats: 8,
-        computersAvailable: 20,
-        mentorInCharge: { fullName: "Helen Berhe", email: "helen@ethiotech.org" },
-        isActive: true,
-      },
-    ];
+    return analytics?.hubs ?? [];
   }, [analytics?.hubs]);
 
   const topMentors = useMemo(() => {
-    const mentors = analytics?.topMentors ?? [];
-    if (mentors.length > 0) return mentors;
-
-    return [
-      { fullName: "Dr. Henok Tesfaye", mentorScore: 99.4, totalSessions: 48, expertise: "Distributed Systems" },
-      { fullName: "Bethlehem Alemu", mentorScore: 98.1, totalSessions: 39, expertise: "Cloud Architecture" },
-      { fullName: "Yonas Girma", mentorScore: 96.5, totalSessions: 34, expertise: "Machine Learning" },
-      { fullName: "Meron Assefa", mentorScore: 95.0, totalSessions: 29, expertise: "Product & UI/UX" },
-    ];
+    return analytics?.topMentors ?? [];
   }, [analytics?.topMentors]);
 
   const upcomingSessions = analytics?.upcomingSessions ?? [];
@@ -252,8 +186,8 @@ export function AdminPage() {
     return (
       <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
         <Sparkles className="mx-auto text-red-500" size={30} />
-        <h1 className="mt-3 text-lg font-bold text-slate-900">Unable to load analytics</h1>
-        <p className="mt-1 text-xs text-slate-500">Could not establish connection to the analytics telemetry stream.</p>
+        <h1 className="mt-3 text-lg font-bold text-zinc-900">Unable to load analytics</h1>
+        <p className="mt-1 text-xs text-zinc-500">Could not establish connection to the analytics telemetry stream.</p>
         <Button
           variant="outline"
           size="sm"
@@ -272,7 +206,7 @@ export function AdminPage() {
   return (
     <div className="space-y-6">
       {/* ─── 1. Hero Platform Console Header ─── */}
-      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
@@ -281,11 +215,11 @@ export function AdminPage() {
                 Command Center
               </span>
               <Badge variant="outline" size="sm">
-                v2.4 Telemetry
+                Production Data
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Analytics & Growth</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Platform Analytics & Growth</h1>
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and
               gamification XP velocity.
             </p>
@@ -298,7 +232,7 @@ export function AdminPage() {
               size="sm"
               onClick={() => refetch()}
               disabled={isFetching}
-              className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+              className="text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
             >
               <RefreshCw size={12} className={isFetching ? "animate-spin text-zinc-900 mr-1" : "mr-1"} />
               Sync
@@ -307,7 +241,7 @@ export function AdminPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                className="text-xs gap-1 font-medium border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
               >
                 <Monitor size={13} />
                 Operations
@@ -317,10 +251,10 @@ export function AdminPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                className="text-xs gap-1 font-medium border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
               >
                 <Award size={13} />
-                Moderation
+                Applications
               </Button>
             </Link>
             <Link to="/admin/users">
@@ -364,25 +298,25 @@ export function AdminPage() {
       {/* ─── 3. Authentic Time-Series Charts Grid ─── */}
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Chart 1: Dynamic XP Growth Time-Series with Area Gradient */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 pb-3.5">
             <div>
               <div className="flex items-center gap-2">
                 <Sparkles size={14} className="text-zinc-900" />
-                <CardTitle className="text-sm font-semibold text-slate-900">XP Gamification Growth</CardTitle>
+                <CardTitle className="text-sm font-semibold text-zinc-900">XP Gamification Growth</CardTitle>
               </div>
-              <CardDescription className="text-xs text-slate-500 mt-0.5">
+              <CardDescription className="text-xs text-zinc-500 mt-0.5">
                 {xpTimeView === "weekly" ? "Weekly XP earned velocity" : "Cumulative 30-day XP trajectory"}
               </CardDescription>
             </div>
             {/* View Mode Switcher */}
-            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
+            <div className="inline-flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5">
               <button
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "weekly"
                     ? "bg-white text-zinc-900 font-semibold shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-zinc-600 hover:text-zinc-900"
                 }`}
               >
                 Weekly Volume
@@ -392,7 +326,7 @@ export function AdminPage() {
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "cumulative"
                     ? "bg-white text-zinc-900 font-semibold shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-zinc-600 hover:text-zinc-900"
                 }`}
               >
                 Cumulative
@@ -413,16 +347,16 @@ export function AdminPage() {
                     <stop offset="95%" stopColor="#b91c1c" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid stroke="#f1f5f9" strokeDasharray="3 3" vertical={false} />
+                <CartesianGrid stroke="#f4f4f5" strokeDasharray="3 3" vertical={false} />
                 <XAxis
                   dataKey="week"
-                  stroke="#64748b"
+                  stroke="#71717a"
                   fontSize={11}
                   tickLine={false}
-                  axisLine={{ stroke: "#e2e8f0" }}
+                  axisLine={{ stroke: "#e4e4e7" }}
                 />
                 <YAxis
-                  stroke="#64748b"
+                  stroke="#71717a"
                   fontSize={11}
                   tickLine={false}
                   axisLine={false}
@@ -449,54 +383,58 @@ export function AdminPage() {
           </div>
         </Card>
 
-        {/* Chart 2: Rolling 6-Month Enrollment & Cohort Growth */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <CardHeader className="flex flex-col gap-1 p-0 border-b border-slate-100 pb-3.5">
+        {/* Chart 2: Rolling Enrollment & Cohort Growth */}
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-xs">
+          <CardHeader className="flex flex-col gap-1 p-0 border-b border-zinc-100 pb-3.5">
             <div className="flex items-center gap-2">
               <TrendingUp size={14} className="text-zinc-900" />
-              <CardTitle className="text-sm font-semibold text-slate-900">Cohort Growth & Admissions</CardTitle>
+              <CardTitle className="text-sm font-semibold text-zinc-900">Cohort Growth & Admissions</CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-500">
-              Monthly student admissions vs active learners
-            </CardDescription>
+            <CardDescription className="text-xs text-zinc-500">Student admissions vs active learners</CardDescription>
           </CardHeader>
 
-          <div className="mt-4 h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={enrollmentTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
-                <CartesianGrid stroke="#f1f5f9" strokeDasharray="3 3" vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  stroke="#64748b"
-                  fontSize={11}
-                  tickLine={false}
-                  axisLine={{ stroke: "#e2e8f0" }}
-                />
-                <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
-                <Tooltip
-                  content={<CustomChartTooltip unit="students" />}
-                  cursor={{ fill: "rgba(241, 245, 249, 0.7)" }}
-                />
-                <Bar dataKey="students" name="Total Admitted" fill="#18181b" radius={[4, 4, 0, 0]} maxBarSize={28} />
-                <Bar dataKey="active" name="Active Monthly" fill="#71717a" radius={[4, 4, 0, 0]} maxBarSize={28} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          {enrollmentTrendData.length > 0 ? (
+            <div className="mt-4 h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={enrollmentTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 0 }}>
+                  <CartesianGrid stroke="#f4f4f5" strokeDasharray="3 3" vertical={false} />
+                  <XAxis
+                    dataKey="month"
+                    stroke="#71717a"
+                    fontSize={11}
+                    tickLine={false}
+                    axisLine={{ stroke: "#e4e4e7" }}
+                  />
+                  <YAxis stroke="#71717a" fontSize={11} tickLine={false} axisLine={false} />
+                  <Tooltip
+                    content={<CustomChartTooltip unit="students" />}
+                    cursor={{ fill: "rgba(244, 244, 245, 0.7)" }}
+                  />
+                  <Bar dataKey="students" name="Total Admitted" fill="#18181b" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                  <Bar dataKey="active" name="Active Monthly" fill="#71717a" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-zinc-200 mt-4">
+              <p className="text-xs text-zinc-500">No enrollment records logged yet.</p>
+            </div>
+          )}
         </Card>
       </div>
 
       {/* ─── 4. Track Performance Matrix & Top Mentors Leaderboard ─── */}
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
         {/* Track Performance Matrix */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-xs">
+          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
             <div className="flex items-center gap-2">
               <Layers size={15} className="text-zinc-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-slate-900">
+                <CardTitle className="text-sm font-semibold text-zinc-900">
                   Track Performance & XP Distribution
                 </CardTitle>
-                <CardDescription className="text-xs text-slate-500">
+                <CardDescription className="text-xs text-zinc-500">
                   Curriculum engagement across disciplines
                 </CardDescription>
               </div>
@@ -507,35 +445,41 @@ export function AdminPage() {
           </div>
 
           {/* Detailed Progress Bars */}
-          <div className="mt-4 space-y-3">
-            {trackData.map((track) => (
-              <div key={track.name} className="space-y-1 rounded-lg border border-slate-200/80 bg-slate-50/50 p-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-900">{track.name}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-zinc-900">{track.xp.toLocaleString()} XP</span>
-                    <span className="text-[11px] text-slate-500">({track.percentage}%)</span>
+          {trackData.length > 0 ? (
+            <div className="mt-4 space-y-3">
+              {trackData.map((track) => (
+                <div key={track.name} className="space-y-1 rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-zinc-900">{track.name}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-zinc-900">{track.xp.toLocaleString()} XP</span>
+                      <span className="text-[11px] text-zinc-500">({track.percentage}%)</span>
+                    </div>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200">
+                    <div
+                      className="h-full rounded-full bg-zinc-900 transition-all duration-500"
+                      style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
+                    />
                   </div>
                 </div>
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
-                  <div
-                    className="h-full rounded-full bg-zinc-900 transition-all duration-500"
-                    style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-zinc-200">
+              <p className="text-xs text-zinc-500">No track XP engagement recorded yet.</p>
+            </div>
+          )}
         </Card>
 
         {/* Top Mentors Leaderboard */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
             <div className="flex items-center gap-2">
               <Award size={15} className="text-amber-500" />
               <div>
-                <CardTitle className="text-sm font-semibold text-slate-900">Top Diaspora Mentors</CardTitle>
-                <CardDescription className="text-xs text-slate-500">
+                <CardTitle className="text-sm font-semibold text-zinc-900">Top Diaspora Mentors</CardTitle>
+                <CardDescription className="text-xs text-zinc-500">
                   Highest rated guides by sessions & feedback
                 </CardDescription>
               </div>
@@ -552,44 +496,50 @@ export function AdminPage() {
           </div>
 
           <div className="mt-4 space-y-2.5">
-            {topMentors.map((mentor, index) => {
-              const rankStyles = [
-                "border-amber-200 bg-amber-50 text-amber-700",
-                "border-slate-200 bg-slate-100 text-slate-700",
-                "border-amber-300 bg-amber-100/50 text-amber-800",
-                "border-slate-200 bg-slate-50 text-slate-600",
-              ];
-              const badgeClass = rankStyles[index] ?? rankStyles[3];
+            {topMentors.length > 0 ? (
+              topMentors.map((mentor, index) => {
+                const rankStyles = [
+                  "border-amber-200 bg-amber-50 text-amber-700",
+                  "border-zinc-200 bg-zinc-100 text-zinc-700",
+                  "border-amber-300 bg-amber-100/50 text-amber-800",
+                  "border-zinc-200 bg-zinc-50 text-zinc-600",
+                ];
+                const badgeClass = rankStyles[index] ?? rankStyles[3];
 
-              return (
-                <div
-                  key={mentor.fullName ?? index}
-                  className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className={`flex h-7 w-7 items-center justify-center rounded-md border text-xs font-bold ${badgeClass}`}
-                    >
-                      #{index + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-slate-900 text-xs">{mentor.fullName}</p>
-                      <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                        <span>{mentor.totalSessions ?? 0} sessions</span>
-                        <span>•</span>
-                        <span className="flex items-center gap-0.5 text-amber-600">
-                          <Star size={10} className="fill-amber-400 text-amber-500" />
-                          {Math.round(mentor.mentorScore ?? 95)} score
-                        </span>
+                return (
+                  <div
+                    key={mentor.fullName ?? index}
+                    className="flex items-center justify-between rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3 transition-colors hover:border-zinc-300 hover:bg-zinc-50"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div
+                        className={`flex h-7 w-7 items-center justify-center rounded-md border text-xs font-bold ${badgeClass}`}
+                      >
+                        #{index + 1}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-zinc-900 text-xs">{mentor.fullName}</p>
+                        <div className="flex items-center gap-2 text-[11px] text-zinc-500">
+                          <span>{mentor.totalSessions ?? 0} sessions</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-0.5 text-amber-600">
+                            <Star size={10} className="fill-amber-400 text-amber-500" />
+                            {Math.round(mentor.mentorScore ?? 95)} score
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    <Badge variant="outline" size="sm">
+                      Active
+                    </Badge>
                   </div>
-                  <Badge variant="outline" size="sm">
-                    Active
-                  </Badge>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div className="p-6 text-center rounded-lg border border-dashed border-zinc-200">
+                <p className="text-xs text-zinc-500">No diaspora mentor ratings recorded yet.</p>
+              </div>
+            )}
           </div>
         </Card>
       </div>
@@ -597,13 +547,13 @@ export function AdminPage() {
       {/* ─── 5. Regional Hub Capacity & Live Upcoming Sessions ─── */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Regional Hubs Matrix */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 pb-3.5">
             <div className="flex items-center gap-2">
               <MapPin size={15} className="text-zinc-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-slate-900">Regional Hub Capacity & Hardware</CardTitle>
-                <CardDescription className="text-xs text-slate-500">
+                <CardTitle className="text-sm font-semibold text-zinc-900">Regional Hub Capacity & Hardware</CardTitle>
+                <CardDescription className="text-xs text-zinc-500">
                   Physical computing centers across Ethiopia
                 </CardDescription>
               </div>
@@ -613,71 +563,77 @@ export function AdminPage() {
             </Badge>
           </div>
 
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {hubs.map((hub, index) => {
-              const capacity = hub.capacity ?? 50;
-              const available = hub.availableSeats ?? 15;
-              const occupied = Math.max(0, capacity - available);
-              const occupancyPct = Math.round((occupied / capacity) * 100);
+          {hubs.length > 0 ? (
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {hubs.map((hub, index) => {
+                const capacity = hub.capacity ?? 50;
+                const available = hub.availableSeats ?? 15;
+                const occupied = Math.max(0, capacity - available);
+                const occupancyPct = Math.round((occupied / capacity) * 100);
 
-              return (
-                <div
-                  key={hub.city ?? index}
-                  className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:border-slate-300 hover:bg-slate-50"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="font-semibold text-slate-900 text-xs">{hub.city ?? "Regional Hub"}</p>
-                      <p className="text-[11px] text-slate-500 truncate max-w-[180px]">
-                        {hub.address ?? "Innovation Center"}
-                      </p>
+                return (
+                  <div
+                    key={hub.city ?? index}
+                    className="rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3.5 transition-all hover:border-zinc-300 hover:bg-zinc-50"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <p className="font-semibold text-zinc-900 text-xs">{hub.city ?? "Regional Hub"}</p>
+                        <p className="text-[11px] text-zinc-500 truncate max-w-[180px]">
+                          {hub.address ?? "Innovation Center"}
+                        </p>
+                      </div>
+                      <Badge variant={occupancyPct > 80 ? "warning" : "default"} size="sm">
+                        {occupancyPct}% Full
+                      </Badge>
                     </div>
-                    <Badge variant={occupancyPct > 80 ? "warning" : "default"} size="sm">
-                      {occupancyPct}% Full
-                    </Badge>
-                  </div>
 
-                  {/* Seat Progress Bar */}
-                  <div className="mt-3 space-y-1">
-                    <div className="flex justify-between text-[11px] text-slate-500">
-                      <span>
-                        Seats ({occupied}/{capacity})
+                    {/* Seat Progress Bar */}
+                    <div className="mt-3 space-y-1">
+                      <div className="flex justify-between text-[11px] text-zinc-500">
+                        <span>
+                          Seats ({occupied}/{capacity})
+                        </span>
+                        <span className="font-medium text-zinc-900">{available} open</span>
+                      </div>
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            occupancyPct > 80 ? "bg-amber-500" : "bg-zinc-900"
+                          }`}
+                          style={{ width: `${occupancyPct}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-2.5 flex items-center justify-between border-t border-zinc-200/70 pt-2 text-[11px] text-zinc-500">
+                      <span className="flex items-center gap-1">
+                        <Monitor size={11} className="text-zinc-600" />
+                        {hub.computersAvailable ?? 30} PCs
                       </span>
-                      <span className="font-medium text-zinc-900">{available} open</span>
-                    </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          occupancyPct > 80 ? "bg-amber-500" : "bg-zinc-900"
-                        }`}
-                        style={{ width: `${occupancyPct}%` }}
-                      />
+                      <span className="truncate max-w-[120px] text-zinc-600">
+                        {hub.mentorInCharge?.fullName ?? "Staff Mentor"}
+                      </span>
                     </div>
                   </div>
-
-                  <div className="mt-2.5 flex items-center justify-between border-t border-slate-200/70 pt-2 text-[11px] text-slate-500">
-                    <span className="flex items-center gap-1">
-                      <Monitor size={11} className="text-zinc-600" />
-                      {hub.computersAvailable ?? 30} PCs
-                    </span>
-                    <span className="truncate max-w-[120px] text-slate-600">
-                      {hub.mentorInCharge?.fullName ?? "Staff Mentor"}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-zinc-200">
+              <p className="text-xs text-zinc-500">No regional hubs registered yet.</p>
+            </div>
+          )}
         </Card>
 
         {/* Live & Upcoming Mentorship Sessions */}
-        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
             <div className="flex items-center gap-2">
               <Video size={15} className="text-zinc-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-slate-900">Upcoming Sessions</CardTitle>
-                <CardDescription className="text-xs text-slate-500">Live cohorts schedule</CardDescription>
+                <CardTitle className="text-sm font-semibold text-zinc-900">Upcoming Sessions</CardTitle>
+                <CardDescription className="text-xs text-zinc-500">Live cohorts schedule</CardDescription>
               </div>
             </div>
             <Link to="/admin/meetings">
@@ -692,74 +648,51 @@ export function AdminPage() {
           </div>
 
           <div className="mt-4 space-y-2.5">
-            {upcomingSessions.length > 0
-              ? upcomingSessions.slice(0, 4).map((session, index) => (
-                  <div
-                    key={session.title ?? index}
-                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="font-semibold text-slate-900 text-xs truncate">{session.title}</p>
-                      <Badge
-                        variant={session.status === "live" ? "outline" : "outline"}
-                        size="sm"
-                        showDot={session.status === "live"}
-                      >
-                        {session.status ?? "scheduled"}
-                      </Badge>
-                    </div>
-                    <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-slate-500">
-                      <Clock size={11} />
-                      <span>
-                        {session.scheduledAt
-                          ? new Date(session.scheduledAt).toLocaleString(undefined, {
-                              month: "short",
-                              day: "numeric",
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                          : "Scheduled soon"}
-                      </span>
-                    </div>
+            {upcomingSessions.length > 0 ? (
+              upcomingSessions.slice(0, 4).map((session, index) => (
+                <div
+                  key={session.title ?? index}
+                  className="rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3 transition-colors hover:border-zinc-300 hover:bg-zinc-50"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <p className="font-semibold text-zinc-900 text-xs truncate">{session.title}</p>
+                    <Badge
+                      variant={session.status === "live" ? "outline" : "outline"}
+                      size="sm"
+                      showDot={session.status === "live"}
+                    >
+                      {session.status ?? "scheduled"}
+                    </Badge>
                   </div>
-                ))
-              : [
-                  {
-                    title: "Cloud Native Microservices with Go",
-                    status: "scheduled",
-                    time: "Tomorrow, 4:00 PM EAT",
-                  },
-                  {
-                    title: "AI Model Deployment on Edge",
-                    status: "live",
-                    time: "In progress now",
-                  },
-                  {
-                    title: "React 19 & Web Architecture",
-                    status: "scheduled",
-                    time: "Friday, 6:00 PM EAT",
-                  },
-                ].map((sess, i) => (
-                  <div
-                    key={i}
-                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <p className="font-semibold text-slate-900 text-xs truncate">{sess.title}</p>
-                      <Badge
-                        variant={sess.status === "live" ? "outline" : "default"}
-                        size="sm"
-                        showDot={sess.status === "live"}
-                      >
-                        {sess.status}
-                      </Badge>
-                    </div>
-                    <p className="mt-1.5 text-[11px] text-slate-500 flex items-center gap-1.5">
-                      <Clock size={11} />
-                      {sess.time}
-                    </p>
+                  <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-500">
+                    <Clock size={11} />
+                    <span>
+                      {session.scheduledAt
+                        ? new Date(session.scheduledAt).toLocaleString(undefined, {
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : "Scheduled soon"}
+                    </span>
                   </div>
-                ))}
+                </div>
+              ))
+            ) : (
+              <div className="rounded-lg border border-dashed border-zinc-200 p-6 text-center space-y-2">
+                <p className="text-xs text-zinc-500">No cohort sessions currently scheduled.</p>
+                <Link to="/admin/meetings" className="inline-block">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                  >
+                    Manage Sessions
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </Card>
       </div>

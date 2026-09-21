@@ -66,21 +66,21 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
   if (isLoading) return <Skeleton className="h-48 w-full rounded-xl" />;
 
   return (
-    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
+    <Card className="border-zinc-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <FileText size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Interactive Session Notes</h3>
+            <h3 className="text-sm font-semibold text-zinc-900">Interactive Session Notes</h3>
           </div>
         </div>
         <div className="flex items-center gap-2">
           <Button
             size="sm"
             variant="outline"
-            className="h-8 text-xs gap-1.5 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+            className="h-8 text-xs gap-1.5 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
             onClick={() => setShowHistory(!showHistory)}
           >
             <History size={12} /> {showHistory ? "Hide History" : "Version History"}
@@ -93,7 +93,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
 
       <div className="grid gap-4 md:grid-cols-[1fr_auto]">
         <div className="space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="flex items-center justify-between text-xs text-zinc-500">
             <span className="flex items-center gap-1.5">
               {autosaveError ? (
                 <>
@@ -114,13 +114,13 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
             value={content}
             onChange={(e) => handleSave(e.target.value)}
             placeholder="Write session outlines, class notes, or markdown instructions here. Autosaves automatically..."
-            className="min-h-[250px] text-sm bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+            className="min-h-[250px] text-sm bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400 rounded-xl focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
           />
         </div>
 
         {showHistory && (
-          <div className="w-60 border-l border-slate-200 pl-4 space-y-3 shrink-0 animate-slide-in">
-            <h4 className="text-xs font-semibold text-slate-900 flex items-center gap-1">
+          <div className="w-60 border-l border-zinc-200 pl-4 space-y-3 shrink-0 animate-slide-in">
+            <h4 className="text-xs font-semibold text-zinc-900 flex items-center gap-1">
               <History size={12} /> Version Logs
             </h4>
             {notes?.versionHistory && notes.versionHistory.length > 0 ? (
@@ -138,19 +138,19 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
                   ) => (
                     <div
                       key={idx}
-                      className="p-2 rounded-lg border border-slate-200/80 bg-slate-50 hover:bg-slate-100 transition-all text-[10px]"
+                      className="p-2 rounded-lg border border-zinc-200/80 bg-zinc-50 hover:bg-zinc-100 transition-all text-[10px]"
                     >
-                      <div className="flex justify-between text-slate-900 font-medium">
+                      <div className="flex justify-between text-zinc-900 font-medium">
                         <span>Version {version.version}</span>
                         <span>{new Date(version.createdAt ?? version.updatedAt).toLocaleTimeString()}</span>
                       </div>
-                      <p className="text-slate-500 truncate mt-1">{version.changeSummary || "Auto-saved backup"}</p>
+                      <p className="text-zinc-500 truncate mt-1">{version.changeSummary || "Auto-saved backup"}</p>
                     </div>
                   ),
                 )}
               </div>
             ) : (
-              <p className="text-[10px] text-slate-400">No version backups logged yet.</p>
+              <p className="text-[10px] text-zinc-400">No version backups logged yet.</p>
             )}
           </div>
         )}

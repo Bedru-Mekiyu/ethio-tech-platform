@@ -73,7 +73,7 @@ export function LessonPage() {
   const trackId = lesson?.trackId;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6 text-slate-900">
+    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6 text-zinc-900">
       {/* Navigation Breadcrumb */}
       <div className="flex items-center justify-between">
         <Link
@@ -85,7 +85,7 @@ export function LessonPage() {
         </Link>
 
         {lesson?.durationMinutes && (
-          <span className="text-xs text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-zinc-500 flex items-center gap-1">
             <Clock size={12} className="text-[#b91c1c]" />
             {lesson.durationMinutes} min
           </span>
@@ -93,7 +93,7 @@ export function LessonPage() {
       </div>
 
       {/* Lesson Header Card */}
-      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
         <div className="space-y-2.5">
           <div className="flex flex-wrap items-center gap-1.5">
             {lesson?.moduleTitle && (
@@ -112,17 +112,17 @@ export function LessonPage() {
             </Badge>
           </div>
 
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">{lesson?.title}</h1>
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">{lesson?.title}</h1>
 
-          {lesson?.summary && <p className="text-xs text-slate-600 leading-relaxed">{lesson.summary}</p>}
+          {lesson?.summary && <p className="text-xs text-zinc-600 leading-relaxed">{lesson.summary}</p>}
         </div>
       </Card>
 
       {/* Main Content Card */}
-      <Card className="border border-slate-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs">
+      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
-          <div className="rounded-lg border border-slate-200 bg-slate-50/70 p-3.5">
+          <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3.5">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-700 flex items-center gap-1.5">
               <Code2 size={11} />
               Lesson Prerequisites
@@ -131,7 +131,7 @@ export function LessonPage() {
               {lesson.prerequisites.map((req) => (
                 <span
                   key={req}
-                  className="rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] text-slate-700 shadow-xs"
+                  className="rounded-md border border-zinc-200 bg-white px-2 py-0.5 text-[11px] text-zinc-700 shadow-xs"
                 >
                   {req}
                 </span>
@@ -141,7 +141,7 @@ export function LessonPage() {
         )}
 
         {/* Text / Markdown Content */}
-        <div className="prose max-w-none text-xs md:text-sm leading-relaxed text-slate-700">
+        <div className="prose max-w-none text-xs md:text-sm leading-relaxed text-zinc-700">
           <p className="whitespace-pre-wrap">
             {lesson?.content || "No detailed text has been published for this lesson yet."}
           </p>
@@ -149,8 +149,8 @@ export function LessonPage() {
 
         {/* Starter Code Lab Box */}
         {lesson?.starterCode && (
-          <div className="space-y-2 pt-3 border-t border-slate-200">
-            <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="space-y-2 pt-3 border-t border-zinc-200">
+            <div className="flex items-center justify-between text-xs text-zinc-500">
               <span className="font-mono flex items-center gap-1.5">
                 <Code2 size={13} className="text-[#b91c1c]" />
                 Hands-On Code Sandbox Snippet
@@ -165,7 +165,7 @@ export function LessonPage() {
               </button>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-950 p-3.5 font-mono text-xs text-slate-200">
+            <div className="overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 p-3.5 font-mono text-xs text-zinc-200">
               <pre>
                 <code>{lesson.starterCode}</code>
               </pre>
@@ -180,8 +180,8 @@ export function LessonPage() {
               <CheckCircle size={12} />
               Interactive Challenge Task
             </p>
-            <p className="text-xs text-slate-900 font-medium">{lesson.challengeTask}</p>
-            <p className="text-[11px] text-slate-500">
+            <p className="text-xs text-zinc-900 font-medium">{lesson.challengeTask}</p>
+            <p className="text-[11px] text-zinc-500">
               Test your solution locally or in the integrated coding workspace.
             </p>
           </div>
@@ -194,7 +194,7 @@ export function LessonPage() {
               href={lesson.videoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
             >
               <Play size={12} className="text-[#b91c1c]" />
               Video Workshop
@@ -206,7 +206,7 @@ export function LessonPage() {
               href={lesson.codeSandboxUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
             >
               <BookOpen size={12} className="text-[#b91c1c]" />
               Interactive Sandbox
@@ -221,7 +221,7 @@ export function LessonPage() {
           </Link>
 
           <Link to="/app/mentors">
-            <Button variant="ghost" size="sm" className="gap-2 text-xs text-slate-500 hover:text-slate-900">
+            <Button variant="ghost" size="sm" className="gap-2 text-xs text-zinc-500 hover:text-zinc-900">
               <GraduationCap size={15} />
               Ask a Mentor
             </Button>

@@ -30,25 +30,12 @@ const FaqPage = lazy(() => import("@/pages/marketing/InfoPages").then((module) =
 const ContactPage = lazy(() =>
   import("@/pages/marketing/InfoPages").then((module) => ({ default: module.ContactPage })),
 );
-const CommunityPage = lazy(() =>
-  import("@/pages/marketing/InfoPages").then((module) => ({ default: module.CommunityPage })),
-);
-const ResourcesPage = lazy(() =>
-  import("@/pages/marketing/InfoPages").then((module) => ({ default: module.ResourcesPage })),
-);
-const SupportPage = lazy(() =>
-  import("@/pages/marketing/InfoPages").then((module) => ({ default: module.SupportPage })),
-);
 const MentorsPage = lazy(() =>
   import("@/pages/marketing/MentorsPage").then((module) => ({ default: module.MentorsPage })),
 );
 const MentorRecruitmentPage = lazy(() =>
   import("@/pages/marketing/MentorRecruitmentPage").then((module) => ({ default: module.MentorRecruitmentPage })),
 );
-const SuccessStoriesPage = lazy(() =>
-  import("@/pages/marketing/InfoPages").then((module) => ({ default: module.SuccessStoriesPage })),
-);
-const EventsPage = lazy(() => import("@/pages/marketing/InfoPages").then((module) => ({ default: module.EventsPage })));
 const PrivacyPage = lazy(() =>
   import("@/pages/marketing/InfoPages").then((module) => ({ default: module.PrivacyPage })),
 );
@@ -113,9 +100,6 @@ const MentorReviewPage = lazy(() =>
 const MentorControlCenterPage = lazy(() =>
   import("@/pages/mentor/MentorControlCenterPage").then((module) => ({ default: module.default })),
 );
-const MentorAnalyticsPage = lazy(() =>
-  import("@/pages/mentor/MentorAnalyticsPage").then((module) => ({ default: module.MentorAnalyticsPage })),
-);
 const MentorStudentsPage = lazy(() =>
   import("@/pages/mentor/MentorStudentsPage").then((module) => ({ default: module.MentorStudentsPage })),
 );
@@ -172,7 +156,6 @@ const CalendarPage = lazy(() =>
 const MentorDirectoryPage = lazy(() =>
   import("@/pages/app/MentorDirectoryPage").then((module) => ({ default: module.default })),
 );
-const BlogPage = lazy(() => import("@/pages/marketing/BlogPage").then((module) => ({ default: module.BlogPage })));
 const PartnersPage = lazy(() =>
   import("@/pages/marketing/PartnersPage").then((module) => ({ default: module.PartnersPage })),
 );
@@ -241,17 +224,11 @@ export default function App() {
                     <Route path="leaderboard" element={<LeaderboardPage />} />
                     <Route path="faq" element={<FaqPage />} />
                     <Route path="contact" element={<ContactPage />} />
-                    <Route path="community" element={<CommunityPage />} />
-                    <Route path="resources" element={<ResourcesPage />} />
-                    <Route path="support" element={<SupportPage />} />
                     <Route path="mentor-recruitment" element={<MentorRecruitmentPage />} />
-                    <Route path="success-stories" element={<SuccessStoriesPage />} />
-                    <Route path="events" element={<EventsPage />} />
                     <Route path="privacy" element={<PrivacyPage />} />
                     <Route path="terms" element={<TermsPage />} />
                     <Route path="tracks" element={<MarketingTracksPage />} />
                     <Route path="tracks/:trackId" element={<MarketingTracksPage />} />
-                    <Route path="blog" element={<BlogPage />} />
                     <Route path="partners" element={<PartnersPage />} />
                     <Route path="donate" element={<DonationPage />} />
                   </Route>
@@ -328,7 +305,6 @@ export default function App() {
                       <Route path="students" element={<MentorStudentsPage />} />
                       <Route path="availability" element={<MentorAvailabilityPage />} />
                       <Route path="notifications" element={<NotificationsPage />} />
-                      <Route path="analytics" element={<MentorAnalyticsPage />} />
                       <Route path="settings" element={<SettingsPage scope="mentor" />} />
                     </Route>
                     <Route path="profile" element={<ProfilePage />} />

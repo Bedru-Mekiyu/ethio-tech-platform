@@ -85,7 +85,7 @@ export function TracksPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-white text-zinc-900">
       {/* Capstone Preview Modal */}
       <CapstonePreviewModal
         project={previewProject?.project ?? null}
@@ -171,7 +171,7 @@ export function TracksPage() {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             {/* Search Input */}
             <div className="relative w-full lg:max-w-md">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <Search size={16} className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
               <Input
                 type="text"
                 placeholder="Search tracks, tooling, capstone projects..."
@@ -183,7 +183,7 @@ export function TracksPage() {
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
+                  className="absolute right-3 top-1/2 -tranzinc-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
                 >
                   Clear
                 </button>

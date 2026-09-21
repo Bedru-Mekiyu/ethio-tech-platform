@@ -62,14 +62,14 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
   }, [queue, autoAdmit, soundEnabled, onAction]);
 
   return (
-    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
+    <Card className="border-zinc-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="bg-amber-50 text-amber-600 border border-amber-200/60 p-1.5 rounded-lg">
             <DoorOpen size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+            <h3 className="text-sm font-semibold text-zinc-900 flex items-center gap-1.5">
               Waiting Room
               <Badge variant="warning" className="h-5 px-1.5">
                 {queue.length} waiting
@@ -81,7 +81,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
           <Button
             size="sm"
             variant="ghost"
-            className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900"
+            className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-900"
             onClick={() => setSoundEnabled(!soundEnabled)}
             title={soundEnabled ? "Mute sounds" : "Enable sounds"}
           >
@@ -100,20 +100,20 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
 
       {queue.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-slate-400">No participants waiting</p>
+          <p className="text-xs text-zinc-400">No participants waiting</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
           {queue.map((w) => (
             <div
               key={w.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white p-2.5 hover:bg-slate-50 transition-all shadow-2xs"
+              className="flex items-center justify-between gap-3 rounded-xl border border-zinc-200/80 bg-white p-2.5 hover:bg-zinc-50 transition-all shadow-2xs"
             >
               <div className="flex items-center gap-2.5 min-w-0">
                 <Avatar name={w.name} src={w.avatar} size="sm" className="h-8 w-8 rounded-lg shrink-0" />
                 <div className="min-w-0">
-                  <p className="text-xs font-semibold text-slate-900 truncate">{w.name}</p>
-                  <p className="text-[9px] text-slate-500">Joined {new Date(w.joinedAt).toLocaleTimeString()}</p>
+                  <p className="text-xs font-semibold text-zinc-900 truncate">{w.name}</p>
+                  <p className="text-[9px] text-zinc-500">Joined {new Date(w.joinedAt).toLocaleTimeString()}</p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">

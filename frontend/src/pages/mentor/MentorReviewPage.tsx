@@ -52,9 +52,9 @@ function statusTone(status?: string) {
 function ScoreBadge({ score, label }: { score: number; label: string }) {
   const color = score >= 4 ? "text-zinc-900" : score >= 3 ? "text-amber-600" : "text-rose-600";
   return (
-    <div className="flex flex-col items-center gap-0.5 bg-slate-50 border border-slate-200 rounded-lg px-2 py-0.5">
+    <div className="flex flex-col items-center gap-0.5 bg-zinc-50 border border-zinc-200 rounded-lg px-2 py-0.5">
       <span className={cn("text-xs font-bold", color)}>{score.toFixed(1)}</span>
-      <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">{label}</span>
+      <span className="text-[8px] uppercase tracking-wider text-zinc-400 font-semibold">{label}</span>
     </div>
   );
 }
@@ -74,35 +74,35 @@ function ReviewWorkspace({
       onClick={onSelect}
       className={cn(
         "w-full rounded-xl border p-3.5 text-left transition-all",
-        isSelected ? "border-zinc-900 bg-zinc-100 shadow-sm" : "border-slate-200 bg-white hover:border-slate-300",
+        isSelected ? "border-zinc-900 bg-zinc-100 shadow-sm" : "border-zinc-200 bg-white hover:border-zinc-300",
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="text-xs font-semibold text-slate-900 truncate">
+          <p className="text-xs font-semibold text-zinc-900 truncate">
             {submission.project?.title ?? "Project submission"}
           </p>
-          <p className="text-[11px] text-slate-500">{submission.student?.fullName}</p>
+          <p className="text-[11px] text-zinc-500">{submission.student?.fullName}</p>
         </div>
         <Badge variant={statusTone(submission.status)} size="sm">
           {submission.status ?? "pending"}
         </Badge>
       </div>
-      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50/60 p-3">
-        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-wider text-slate-400">
+      <div className="mt-3 rounded-lg border border-zinc-200 bg-zinc-50/60 p-3">
+        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-wider text-zinc-400">
           <FileText size={12} />
           <span>Files Attached</span>
         </div>
-        <p className="text-xs leading-relaxed text-slate-600">
+        <p className="text-xs leading-relaxed text-zinc-600">
           {submission.files?.length
             ? `${submission.files.length} file${submission.files.length === 1 ? "" : "s"} attached for review.`
             : "No files attached yet."}
         </p>
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+      <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500">
         <span>Grade: {submission.grade ?? 0}/100</span>
         {submission.createdAt ? (
-          <span className="text-slate-400">· {new Date(submission.createdAt).toLocaleDateString()}</span>
+          <span className="text-zinc-400">· {new Date(submission.createdAt).toLocaleDateString()}</span>
         ) : null}
       </div>
     </button>
@@ -230,14 +230,14 @@ export function MentorReviewPage() {
   }
 
   return (
-    <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+    <div className="space-y-6 text-zinc-900">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
               Interactive Project Review Board
             </h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Review submissions, evaluate performance scores, and provide actionable mentor feedback.
             </p>
           </div>
@@ -257,7 +257,7 @@ export function MentorReviewPage() {
               "rounded px-3 py-1 text-xs transition font-medium capitalize",
               filter === option.value
                 ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
+                : "border border-zinc-200 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300",
             )}
           >
             {option.label}
@@ -266,10 +266,10 @@ export function MentorReviewPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
+        <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between gap-3 border-b border-zinc-100 pb-3.5">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">Submissions Awaiting Feedback</h2>
+              <h2 className="text-sm font-semibold text-zinc-900">Submissions Awaiting Feedback</h2>
             </div>
             <Badge variant="outline" size="sm">
               {filtered.length} items
@@ -295,18 +295,18 @@ export function MentorReviewPage() {
 
         <div className="space-y-6">
           {/* Selected details */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
-            <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
+            <div className="flex items-center justify-between gap-3 border-b border-zinc-100 pb-3">
               <div>
-                <h3 className="text-sm font-semibold text-slate-900">{selected?.project?.title ?? "Project"}</h3>
+                <h3 className="text-sm font-semibold text-zinc-900">{selected?.project?.title ?? "Project"}</h3>
               </div>
               <Badge variant={statusTone(selected?.status)} size="sm">
                 {selected?.status ?? "pending"}
               </Badge>
             </div>
-            <div className="mt-3 space-y-2 text-xs text-slate-500">
+            <div className="mt-3 space-y-2 text-xs text-zinc-500">
               <p>
-                Student: <strong className="text-slate-900">{selected?.student?.fullName ?? "Learner"}</strong>
+                Student: <strong className="text-zinc-900">{selected?.student?.fullName ?? "Learner"}</strong>
               </p>
               <p>Track: {selected?.project?.track?.title ?? "Learning track"}</p>
               <p>XP reward: +{selected?.project?.xpReward ?? 0} XP</p>
@@ -315,39 +315,39 @@ export function MentorReviewPage() {
           </Card>
 
           {/* Feedback & Review Form */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="space-y-3.5">
               <div>
-                <Label className="text-xs font-medium text-slate-700">Grade Score (0 - 100)</Label>
+                <Label className="text-xs font-medium text-zinc-700">Grade Score (0 - 100)</Label>
                 <Input
                   value={grade}
                   onChange={(event) => setGrade(event.target.value)}
                   type="number"
                   min={0}
                   max={100}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900"
+                  className="mt-1 text-xs bg-white border-zinc-200 text-zinc-900"
                 />
               </div>
               <div>
-                <Label className="text-xs font-medium text-slate-700">Mentor Feedback & Code Review</Label>
+                <Label className="text-xs font-medium text-zinc-700">Mentor Feedback & Code Review</Label>
                 <Textarea
                   value={feedback}
                   onChange={(event) => setFeedback(event.target.value)}
                   placeholder="What should the student improve? Point out strengths..."
-                  className="mt-1 min-h-20 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 min-h-20 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
                 />
               </div>
 
               {/* Session Performance Ratings */}
-              <div className="border-t border-slate-100 pt-3.5 space-y-2.5">
-                <h4 className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
+              <div className="border-t border-zinc-100 pt-3.5 space-y-2.5">
+                <h4 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">
                   Session Performance Rating (Optional)
                 </h4>
                 <div className="space-y-2.5">
                   <div>
-                    <Label className="text-xs font-medium text-slate-700">Associate with Session</Label>
+                    <Label className="text-xs font-medium text-zinc-700">Associate with Session</Label>
                     <Select
-                      className="mt-1 h-8 text-xs bg-white border-slate-200 text-slate-900"
+                      className="mt-1 h-8 text-xs bg-white border-zinc-200 text-zinc-900"
                       value={selectedSessionId}
                       onValueChange={setSelectedSessionId}
                     >
@@ -364,9 +364,9 @@ export function MentorReviewPage() {
                     <div className="space-y-2.5 animate-in fade-in duration-300">
                       <div className="grid grid-cols-3 gap-2">
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Participation</label>
+                          <label className="text-[10px] text-zinc-500 font-medium uppercase">Participation</label>
                           <Select
-                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
+                            className="h-7 text-xs bg-white border-zinc-200 text-zinc-900"
                             value={String(participationScore)}
                             onValueChange={(v) => setParticipationScore(Number(v))}
                           >
@@ -378,9 +378,9 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Communication</label>
+                          <label className="text-[10px] text-zinc-500 font-medium uppercase">Communication</label>
                           <Select
-                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
+                            className="h-7 text-xs bg-white border-zinc-200 text-zinc-900"
                             value={String(communicationScore)}
                             onValueChange={(v) => setCommunicationScore(Number(v))}
                           >
@@ -392,9 +392,9 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Professionalism</label>
+                          <label className="text-[10px] text-zinc-500 font-medium uppercase">Professionalism</label>
                           <Select
-                            className="h-7 text-xs bg-white border-slate-200 text-slate-900"
+                            className="h-7 text-xs bg-white border-zinc-200 text-zinc-900"
                             value={String(professionalismScore)}
                             onValueChange={(v) => setProfessionalismScore(Number(v))}
                           >
@@ -407,12 +407,12 @@ export function MentorReviewPage() {
                         </div>
                       </div>
                       <div>
-                        <Label className="text-xs font-medium text-slate-700">Session comment</Label>
+                        <Label className="text-xs font-medium text-zinc-700">Session comment</Label>
                         <Textarea
                           value={sessionComment}
                           onChange={(e) => setSessionComment(e.target.value)}
                           placeholder="Session performance comments..."
-                          className="mt-1 min-h-14 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                          className="mt-1 min-h-14 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
                         />
                       </div>
                     </div>
@@ -420,11 +420,11 @@ export function MentorReviewPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-100">
                 <Button
                   size="sm"
                   variant="outline"
-                  className="text-xs font-medium text-slate-700"
+                  className="text-xs font-medium text-zinc-700"
                   onClick={() => {
                     if (!selected) return;
                     void reviewMutation.mutateAsync({ id: selected._id, status: "reviewed" });
@@ -465,12 +465,12 @@ export function MentorReviewPage() {
           </Card>
 
           {/* Student Feedback History */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <div className="bg-zinc-100 p-1.5 rounded-lg text-zinc-900 border border-zinc-200">
                 <MessageSquare size={14} />
               </div>
-              <h4 className="text-xs font-semibold text-slate-900">Learner Feedback History</h4>
+              <h4 className="text-xs font-semibold text-zinc-900">Learner Feedback History</h4>
             </div>
             {currentStudentDetails?.feedbackHistory && currentStudentDetails.feedbackHistory.length > 0 ? (
               <div className="space-y-2.5 max-h-64 overflow-y-auto pr-1">
@@ -487,16 +487,13 @@ export function MentorReviewPage() {
                     },
                     idx: number,
                   ) => (
-                    <div
-                      key={idx}
-                      className="rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs space-y-1.5"
-                    >
+                    <div key={idx} className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-3 text-xs space-y-1.5">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-slate-900 truncate max-w-[150px]">
+                          <p className="font-semibold text-zinc-900 truncate max-w-[150px]">
                             {fb.sessionTitle ?? "Session review"}
                           </p>
-                          <p className="text-[10px] text-slate-400">{new Date(fb.createdAt).toLocaleDateString()}</p>
+                          <p className="text-[10px] text-zinc-400">{new Date(fb.createdAt).toLocaleDateString()}</p>
                         </div>
                         <div className="flex gap-1">
                           <ScoreBadge score={fb.participationScore ?? fb.score} label="PRT" />
@@ -504,13 +501,13 @@ export function MentorReviewPage() {
                           <ScoreBadge score={fb.professionalismScore ?? fb.score} label="PRF" />
                         </div>
                       </div>
-                      {fb.comment && <p className="text-xs text-slate-600 italic">&ldquo;{fb.comment}&rdquo;</p>}
+                      {fb.comment && <p className="text-xs text-zinc-600 italic">&ldquo;{fb.comment}&rdquo;</p>}
                     </div>
                   ),
                 )}
               </div>
             ) : (
-              <div className="text-center py-4 text-xs text-slate-400">
+              <div className="text-center py-4 text-xs text-zinc-400">
                 No past feedback records for this student yet.
               </div>
             )}

@@ -169,7 +169,7 @@ function DigitalPassQRCode({ passCode, size = 160 }: { passCode: string; size?: 
   const cellSize = size / 15;
 
   return (
-    <div className="relative inline-flex items-center justify-center rounded-xl bg-white p-3 border border-slate-200 shadow-xs">
+    <div className="relative inline-flex items-center justify-center rounded-xl bg-white p-3 border border-zinc-200 shadow-xs">
       <svg
         width={size}
         height={size}
@@ -450,13 +450,13 @@ export function HubsPage() {
       </motion.section>
 
       {/* ─── Navigation Switcher: Directory vs Passes ─── */}
-      <div className="flex justify-center border-b border-slate-200 pb-4">
-        <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-1">
+      <div className="flex justify-center border-b border-zinc-200 pb-4">
+        <div className="inline-flex rounded-lg border border-zinc-200 bg-zinc-100 p-1">
           <button
             type="button"
             onClick={() => setActiveTab("directory")}
             className={`flex items-center gap-2 rounded-md px-4 py-1.5 text-xs font-semibold transition ${
-              activeTab === "directory" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
+              activeTab === "directory" ? "bg-white text-zinc-900 shadow-xs" : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <Building2 size={14} />
@@ -467,7 +467,7 @@ export function HubsPage() {
             type="button"
             onClick={() => setActiveTab("passes")}
             className={`flex items-center gap-2 rounded-md px-4 py-1.5 text-xs font-semibold transition ${
-              activeTab === "passes" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
+              activeTab === "passes" ? "bg-white text-zinc-900 shadow-xs" : "text-zinc-600 hover:text-zinc-900"
             }`}
           >
             <TicketIcon size={14} />
@@ -707,7 +707,7 @@ export function HubsPage() {
                         key={hub.id}
                         type="button"
                         onClick={() => setSelectedCity(hub.city)}
-                        className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-pointer transition-transform hover:scale-105 z-10"
+                        className="absolute -tranzinc-x-1/2 -tranzinc-y-1/2 group cursor-pointer transition-transform hover:scale-105 z-10"
                         style={{ top: hub.coordinates.top, left: hub.coordinates.left }}
                         aria-label={`Select ${hub.city} Hub`}
                       >
@@ -828,7 +828,7 @@ export function HubsPage() {
 
               {/* Search input */}
               <div className="relative w-full sm:w-72">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+                <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -839,7 +839,7 @@ export function HubsPage() {
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                    className="absolute right-2.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 hover:text-zinc-600"
                   >
                     <X size={13} />
                   </button>

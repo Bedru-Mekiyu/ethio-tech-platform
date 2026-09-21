@@ -1359,21 +1359,21 @@ export function CodingWorkspacePage() {
   return (
     <div
       className={cn(
-        "flex flex-col bg-white text-slate-900 antialiased font-sans border border-slate-200 rounded-xl shadow-xs overflow-hidden",
+        "flex flex-col bg-white text-zinc-900 antialiased font-sans border border-zinc-200 rounded-xl shadow-xs overflow-hidden",
         isFullScreen
           ? "fixed inset-0 z-50 rounded-none border-0 h-screen w-screen"
           : "h-[calc(100vh-8.5rem)] min-h-[660px]",
       )}
     >
       {/* ─── TOP TOOLBAR (High-density IDE Navigation) ────────────────────────── */}
-      <header className="flex h-11 flex-none items-center justify-between border-b border-slate-200 bg-white px-3 sm:px-4 select-none">
+      <header className="flex h-11 flex-none items-center justify-between border-b border-zinc-200 bg-white px-3 sm:px-4 select-none">
         {/* Left: Breadcrumbs & Active Tab */}
         <div className="flex items-center gap-2.5 overflow-hidden">
           <div className="flex items-center gap-1.5 text-xs font-mono">
-            <span className="text-slate-400 hidden md:inline">workspace</span>
-            <span className="text-slate-300 hidden md:inline">/</span>
-            <span className="text-slate-400 hidden sm:inline">src</span>
-            <span className="text-slate-300 hidden sm:inline">/</span>
+            <span className="text-zinc-400 hidden md:inline">workspace</span>
+            <span className="text-zinc-300 hidden md:inline">/</span>
+            <span className="text-zinc-400 hidden sm:inline">src</span>
+            <span className="text-zinc-300 hidden sm:inline">/</span>
             <div className="flex items-center gap-1.5 rounded-md bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-800 border border-zinc-200">
               <FileCode size={12} className="text-[#b91c1c]" />
               <span>{currentTemplate.fileName}</span>

@@ -69,14 +69,14 @@ export function CapstoneProjectEditor({
   };
 
   return (
-    <div className="space-y-6 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
+    <div className="space-y-6 rounded-2xl border border-zinc-200/80 bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
             <Award size={20} className="text-amber-500" />
-            <h3 className="text-base font-bold text-slate-900">Track Capstone Projects</h3>
+            <h3 className="text-base font-bold text-zinc-900">Track Capstone Projects</h3>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-zinc-500 mt-0.5">
             Capstone projects serve as the final portfolio pieces students build to graduate from &quot;{trackTitle}
             &quot;.
           </p>
@@ -99,7 +99,7 @@ export function CapstoneProjectEditor({
             <button
               type="button"
               onClick={() => setEditingProject(null)}
-              className="text-xs text-slate-500 hover:text-slate-900"
+              className="text-xs text-zinc-500 hover:text-zinc-900"
             >
               Cancel
             </button>
@@ -107,7 +107,7 @@ export function CapstoneProjectEditor({
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5 sm:col-span-2">
-              <label htmlFor="capstone-title" className="block text-xs font-semibold text-slate-800">
+              <label htmlFor="capstone-title" className="block text-xs font-semibold text-zinc-800">
                 Project Title <span className="text-rose-500">*</span>
               </label>
               <Input
@@ -115,13 +115,13 @@ export function CapstoneProjectEditor({
                 value={editingProject.title || ""}
                 onChange={(e) => setEditingProject({ ...editingProject, title: e.target.value })}
                 placeholder="e.g. Enterprise Fintech Microservices Platform"
-                className="border-slate-200 bg-white text-slate-900"
+                className="border-zinc-200 bg-white text-zinc-900"
                 required
               />
             </div>
 
             <div className="space-y-1.5 sm:col-span-2">
-              <label htmlFor="capstone-desc" className="block text-xs font-semibold text-slate-800">
+              <label htmlFor="capstone-desc" className="block text-xs font-semibold text-zinc-800">
                 Specification & Architecture Description
               </label>
               <Textarea
@@ -130,12 +130,12 @@ export function CapstoneProjectEditor({
                 onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
                 placeholder="Describe project requirements, tech stack constraints, and expected outcomes..."
                 rows={3}
-                className="border-slate-200 bg-white text-slate-900"
+                className="border-zinc-200 bg-white text-zinc-900"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="capstone-difficulty" className="block text-xs font-semibold text-slate-800">
+              <label htmlFor="capstone-difficulty" className="block text-xs font-semibold text-zinc-800">
                 Difficulty Level
               </label>
               <select
@@ -147,7 +147,7 @@ export function CapstoneProjectEditor({
                     difficulty: e.target.value as CapstoneProjectItem["difficulty"],
                   })
                 }
-                className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-zinc-900 cursor-pointer"
+                className="h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-800 focus:outline-none focus:border-zinc-900 cursor-pointer"
               >
                 <option value="easy">Beginner / Easy</option>
                 <option value="medium">Intermediate / Medium</option>
@@ -157,7 +157,7 @@ export function CapstoneProjectEditor({
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="capstone-xp" className="block text-xs font-semibold text-slate-800">
+              <label htmlFor="capstone-xp" className="block text-xs font-semibold text-zinc-800">
                 XP Reward
               </label>
               <Input
@@ -171,13 +171,13 @@ export function CapstoneProjectEditor({
                     xpReward: Number(e.target.value),
                   })
                 }
-                className="border-slate-200 bg-white text-slate-900"
+                className="border-zinc-200 bg-white text-zinc-900"
               />
             </div>
 
             <div className="space-y-1.5 sm:col-span-2">
-              <label htmlFor="capstone-repo" className="flex items-center gap-1.5 text-xs font-semibold text-slate-800">
-                <Github size={13} className="text-slate-700" />
+              <label htmlFor="capstone-repo" className="flex items-center gap-1.5 text-xs font-semibold text-zinc-800">
+                <Github size={13} className="text-zinc-700" />
                 GitHub Starter Template Repository URL
               </label>
               <Input
@@ -185,13 +185,13 @@ export function CapstoneProjectEditor({
                 value={editingProject.githubTemplate || ""}
                 onChange={(e) => setEditingProject({ ...editingProject, githubTemplate: e.target.value })}
                 placeholder="https://github.com/..."
-                className="border-slate-200 bg-white text-slate-900"
+                className="border-zinc-200 bg-white text-zinc-900"
               />
             </div>
 
             {/* Requirements builder */}
             <div className="space-y-2 sm:col-span-2">
-              <label className="block text-xs font-semibold text-slate-800">
+              <label className="block text-xs font-semibold text-zinc-800">
                 Graduation Deliverables & Requirements
               </label>
               <div className="flex gap-2">
@@ -199,7 +199,7 @@ export function CapstoneProjectEditor({
                   value={newRequirement}
                   onChange={(e) => setNewRequirement(e.target.value)}
                   placeholder="e.g. Implement Role-Based Access Control (RBAC)"
-                  className="text-xs border-slate-200 bg-white text-slate-900"
+                  className="text-xs border-zinc-200 bg-white text-zinc-900"
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
@@ -216,16 +216,16 @@ export function CapstoneProjectEditor({
                 {(editingProject.requirements || []).map((req, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between gap-2 rounded-xl bg-white px-3 py-1.5 text-xs border border-slate-200 shadow-2xs"
+                    className="flex items-center justify-between gap-2 rounded-xl bg-white px-3 py-1.5 text-xs border border-zinc-200 shadow-2xs"
                   >
-                    <span className="flex items-center gap-2 text-slate-800">
+                    <span className="flex items-center gap-2 text-zinc-800">
                       <CheckCircle2 size={13} className="text-zinc-900 shrink-0" />
                       {req}
                     </span>
                     <button
                       type="button"
                       onClick={() => removeRequirement(idx)}
-                      className="text-slate-400 hover:text-rose-600 transition-colors"
+                      className="text-zinc-400 hover:text-rose-600 transition-colors"
                     >
                       <Trash2 size={12} />
                     </button>
@@ -242,7 +242,7 @@ export function CapstoneProjectEditor({
               size="sm"
               onClick={() => setEditingProject(null)}
               disabled={isSaving}
-              className="border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+              className="border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700"
             >
               Cancel
             </Button>
@@ -257,7 +257,7 @@ export function CapstoneProjectEditor({
       {!editingProject && (
         <div className="space-y-3">
           {projects.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-200 p-6 text-center text-xs text-slate-500 bg-slate-50/50">
+            <div className="rounded-xl border border-dashed border-zinc-200 p-6 text-center text-xs text-zinc-500 bg-zinc-50/50">
               No capstone project linked to this track. Click &quot;Add Capstone Project&quot; to configure graduation
               criteria.
             </div>
@@ -265,11 +265,11 @@ export function CapstoneProjectEditor({
             projects.map((proj) => (
               <div
                 key={proj._id}
-                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-200/80 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-xs shadow-2xs"
+                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-zinc-200/80 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs shadow-2xs"
               >
                 <div className="space-y-1 min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-semibold text-slate-900 truncate">{proj.title}</h4>
+                    <h4 className="text-sm font-semibold text-zinc-900 truncate">{proj.title}</h4>
                     {proj.difficulty && (
                       <Badge variant="outline" size="sm">
                         {proj.difficulty}
@@ -281,7 +281,7 @@ export function CapstoneProjectEditor({
                       </Badge>
                     )}
                   </div>
-                  {proj.description && <p className="text-xs text-slate-500 line-clamp-2">{proj.description}</p>}
+                  {proj.description && <p className="text-xs text-zinc-500 line-clamp-2">{proj.description}</p>}
                   {proj.githubTemplate && (
                     <a
                       href={proj.githubTemplate}
@@ -299,7 +299,7 @@ export function CapstoneProjectEditor({
                     variant="outline"
                     size="sm"
                     onClick={() => setEditingProject(proj)}
-                    className="h-8 text-xs border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+                    className="h-8 text-xs border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700"
                   >
                     Edit
                   </Button>

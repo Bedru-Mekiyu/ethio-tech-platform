@@ -19,10 +19,10 @@ export function SquadsListPage() {
   const groups = data ?? [];
 
   return (
-    <div className="space-y-6 text-slate-900">
-      <Card className="border border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
-        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Collaboration Squads</h1>
-        <p className="mt-0.5 text-xs text-slate-500">
+    <div className="space-y-6 text-zinc-900">
+      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Collaboration Squads</h1>
+        <p className="mt-0.5 text-xs text-zinc-500">
           Join cohort squad rooms for real-time discussions, code share, and collective XP rewards.
         </p>
       </Card>
@@ -36,22 +36,22 @@ export function SquadsListPage() {
       ) : (
         <div className="grid gap-3.5 md:grid-cols-2">
           {groups.map((group) => (
-            <Card key={group._id} className="rounded-xl border border-slate-200 bg-white p-5 shadow-xs">
+            <Card key={group._id} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
                     <Users size={15} />
                   </span>
-                  <h3 className="text-sm font-semibold text-slate-900">{group.name}</h3>
+                  <h3 className="text-sm font-semibold text-zinc-900">{group.name}</h3>
                 </div>
-                <span className="rounded-md border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] font-medium text-slate-700">
+                <span className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] font-medium text-zinc-700">
                   {group.groupXP ?? 0} XP
                 </span>
               </div>
-              <p className="mt-2.5 text-xs text-slate-600">
+              <p className="mt-2.5 text-xs text-zinc-600">
                 Active group sprint channel and collaborative peer review board.
               </p>
-              <div className="mt-4 pt-3 border-t border-slate-100 flex justify-end">
+              <div className="mt-4 pt-3 border-t border-zinc-100 flex justify-end">
                 <Link
                   to={`/app/squads/${group._id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"

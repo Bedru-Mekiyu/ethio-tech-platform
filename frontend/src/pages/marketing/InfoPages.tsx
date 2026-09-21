@@ -166,147 +166,39 @@ export function ContactPage() {
   );
 }
 
-export function CommunityPage() {
-  return (
-    <InfoPage
-      title="Learn together"
-      intro="Peer squads, mentor rooms, and shared projects keep learners moving while making the platform feel alive."
-      primary={{ to: "/register", label: "Join a cohort" }}
-      sections={[
-        {
-          title: "Peer squads",
-          body: "Small groups support daily accountability, coding practice, and project delivery.",
-        },
-        { title: "Mentor rooms", body: "Mentors can host live sessions, office hours, and review checkpoints." },
-        { title: "Collaborative missions", body: "Challenge-based activities encourage teamwork and shared XP gains." },
-        {
-          title: "Community safety",
-          body: "Moderation and reporting flows are expected for every public discussion space.",
-        },
-      ]}
-    />
-  );
-}
-
-export function ResourcesPage() {
-  return (
-    <InfoPage
-      title="Reusable learning material for every stage"
-      intro="Keep students moving with guides, lesson summaries, exercises, and practical project references."
-      primary={{ to: "/how-it-works", label: "See the learning flow" }}
-      sections={[
-        {
-          title: "Beginner guides",
-          body: "Simple onboarding docs help new learners understand the platform and their next step.",
-        },
-        {
-          title: "Curriculum notes",
-          body: "Structured resources keep lessons, modules, and project milestones aligned.",
-        },
-        {
-          title: "Practice kits",
-          body: "Sample exercises and project starters reduce friction for hands-on learning.",
-        },
-        { title: "Mentor playbooks", body: "Mentors need repeatable session formats and feedback templates." },
-      ]}
-    />
-  );
-}
-
-export function SupportPage() {
-  return (
-    <InfoPage
-      title="Help fund, equip, and scale the learning network"
-      intro="Support can mean donations, devices, school partnerships, volunteer mentoring, or sponsoring a learner."
-      primary={{ to: "/contact", label: "Partner with us" }}
-      sections={[
-        { title: "Donate", body: "Fund scholarships, classroom access, and platform expansion." },
-        {
-          title: "Sponsor a school",
-          body: "Help a partner school launch a hub with the right equipment and mentoring.",
-        },
-        { title: "Volunteer", body: "Mentors and engineers can contribute sessions, code reviews, and coaching." },
-        { title: "Equip learners", body: "Devices, connectivity, and shared lab resources remove access barriers." },
-      ]}
-    />
-  );
-}
-
-export function MentorRecruitmentPage() {
-  return (
-    <InfoPage
-      title="Recruit mentors who can actually move learners forward"
-      intro="The platform is designed to help mentors run sessions, review submissions, and guide real progression."
-      primary={{ to: "/mentor-recruitment", label: "Apply as a mentor" }}
-      secondary={{ to: "/community", label: "See the community" }}
-      sections={[
-        { title: "What mentors do", body: "Mentors host live sessions, review projects, and give targeted feedback." },
-        {
-          title: "Why they stay",
-          body: "Clear dashboards, visible impact, and learner outcomes make the role rewarding.",
-        },
-        {
-          title: "What to look for",
-          body: "Strong communication, practical engineering experience, and a willingness to coach.",
-        },
-        {
-          title: "Onboarding",
-          body: "Mentor access should include scheduling, live classroom access, and performance analytics.",
-        },
-      ]}
-    />
-  );
-}
-
-export function SuccessStoriesPage() {
-  return (
-    <InfoPage
-      title="Student progress and outcomes"
-      intro="Real stories from students and mentors using the platform to build skills and ship projects."
-      primary={{ to: "/leaderboard", label: "View the leaderboard" }}
-      sections={[
-        {
-          title: "Learning progression",
-          body: "Students move from first lesson to completed projects with mentor guidance at each step.",
-        },
-        {
-          title: "Mentor impact",
-          body: "Mentors see how their sessions and feedback affect student outcomes over time.",
-        },
-        {
-          title: "Peer collaboration",
-          body: "Squads and cohorts help students stay accountable and learn from each other.",
-        },
-      ]}
-    />
-  );
-}
-
-export function EventsPage() {
-  return (
-    <InfoPage
-      title="Live events and activities"
-      intro="Workshops, demo days, mentor clinics, and seasonal challenges give learners a reason to return."
-      primary={{ to: "/register", label: "Join an event stream" }}
-      sections={[
-        { title: "Weekly workshops", body: "Short, focused sessions help students keep moving every week." },
-        { title: "Demo days", body: "Projects should be shown publicly so learners can celebrate progress." },
-        { title: "Mentor clinics", body: "Office hours make it easier to unblock students before they stall." },
-        { title: "Seasonal challenges", body: "Time-boxed events create urgency and retention loops." },
-      ]}
-    />
-  );
-}
-
 export function PrivacyPage() {
   return (
     <InfoPage
-      title="How learner data is handled"
-      intro="Protecting student and mentor data is part of the platform promise, not an afterthought."
+      title="Platform Privacy & Data Governance"
+      intro="EthioTech is committed to transparent data management. We protect student project artifacts, mentor communications, and platform credentials."
       sections={[
-        { title: "Access control", body: "Role-based permissions limit what each user can see and edit." },
-        { title: "Session security", body: "Live classroom access should be short-lived and validated server-side." },
-        { title: "Data minimization", body: "Only collect the profile data needed for learning and support." },
+        {
+          title: "Account & Profile Information",
+          body: "We collect only the minimum account information necessary for track progression, attendance verification, and mentorship coordination.",
+          bullets: [
+            "Encrypted password hashes and secure JWT sessions",
+            "Role-based access controls for student, mentor, and parent data",
+            "Zero monetization or sale of student data to third parties",
+          ],
+        },
+        {
+          title: "Session & Communication Privacy",
+          body: "Interactive classroom feeds, peer squad chats, and 1-on-1 code reviews are protected by authenticated access tokens.",
+          bullets: [
+            "Short-lived WebRTC media tokens for LiveKit classrooms",
+            "Scoped direct messaging channels between enrolled peers and assigned mentors",
+            "Automated audit logging for administrative actions",
+          ],
+        },
+        {
+          title: "Student Project Artifacts",
+          body: "Code submissions, capstone repositories, and verified achievements belong to the learner. Public portfolios are published only with learner consent.",
+          bullets: [
+            "Cryptographically verifiable credentials",
+            "Optional public showcase links for verified employers",
+            "Full data export capability upon account request",
+          ],
+        },
       ]}
     />
   );
@@ -315,12 +207,36 @@ export function PrivacyPage() {
 export function TermsPage() {
   return (
     <InfoPage
-      title="Platform usage expectations"
-      intro="Clear expectations help protect learners, mentors, and partner schools."
+      title="Platform Terms of Service"
+      intro="Our terms ensure a safe, collaborative, and academically rigorous environment for Ethiopian students, diaspora mentors, and partner institutions."
       sections={[
-        { title: "Respectful conduct", body: "Users should keep classrooms and community spaces safe and productive." },
-        { title: "Academic integrity", body: "Projects and submissions must reflect the learner's own work." },
-        { title: "Service availability", body: "Realtime features depend on connectivity and backend health." },
+        {
+          title: "Academic Integrity & Code Originality",
+          body: "EthioTech emphasizes genuine proof-of-work. All submitted project code must represent the learner's own understanding and contribution.",
+          bullets: [
+            "Open source libraries and templates must be properly attributed",
+            "Automated test suites and mentor code reviews evaluate authentic comprehension",
+            "Plagiarized capstones forfeit graduation credentials",
+          ],
+        },
+        {
+          title: "Code of Conduct in Classrooms & Squads",
+          body: "Classrooms, squad channels, and review queues must remain respectful, inclusive, and focused on technical excellence.",
+          bullets: [
+            "Constructive and professional peer code review standards",
+            "Zero tolerance for harassment, discrimination, or abusive behavior",
+            "Immediate suspension for unauthorized sharing of classroom access",
+          ],
+        },
+        {
+          title: "Service Reliability & Offline Synchronization",
+          body: "While we design for bandwidth-adaptive and offline-first usage, cloud features depend on network infrastructure and external service availability.",
+          bullets: [
+            "Local lab caching nodes support offline study during connectivity drops",
+            "Recorded sessions remain available asynchronously in the student portal",
+            "Platform maintenance notices are posted in advance via platform alerts",
+          ],
+        },
       ]}
     />
   );

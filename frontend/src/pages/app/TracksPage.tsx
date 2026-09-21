@@ -451,7 +451,7 @@ export function TracksPage() {
 
           {/* Search Input */}
           <div className="relative w-full lg:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
             <Input
               type="text"
               placeholder="Search tracks or tools..."
@@ -463,7 +463,7 @@ export function TracksPage() {
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 hover:text-zinc-600"
+                className="absolute right-3 top-1/2 -tranzinc-y-1/2 text-[10px] text-zinc-400 hover:text-zinc-600"
               >
                 Clear
               </button>
@@ -472,7 +472,7 @@ export function TracksPage() {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
+        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
           {CATEGORY_TABS.map((cat) => (
             <button
               key={cat.key}
@@ -481,8 +481,8 @@ export function TracksPage() {
               className={cn(
                 "rounded-md px-2.5 py-1 text-xs transition-colors shadow-xs",
                 categoryFilter === cat.key
-                  ? "bg-slate-900 text-white font-semibold border border-slate-900"
-                  : "bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 border border-slate-200",
+                  ? "bg-zinc-900 text-white font-semibold border border-zinc-900"
+                  : "bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 border border-zinc-200",
               )}
             >
               {cat.label}

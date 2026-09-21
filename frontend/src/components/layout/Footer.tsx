@@ -67,18 +67,23 @@ export function Footer({ className }: FooterProps) {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3.5">Platform</h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link to="/tracks" className="text-slate-600 hover:text-primary transition-colors">
+                  Curriculum Tracks
+                </Link>
+              </li>
+              <li>
                 <Link to="/how-it-works" className="text-slate-600 hover:text-primary transition-colors">
-                  Tracks & Programs
+                  How It Works
                 </Link>
               </li>
               <li>
                 <Link to="/mentors" className="text-slate-600 hover:text-primary transition-colors">
-                  Find a Mentor
+                  Engineering Mentors
                 </Link>
               </li>
               <li>
                 <Link to="/hubs" className="text-slate-600 hover:text-primary transition-colors">
-                  Tech Hubs
+                  Regional Tech Hubs
                 </Link>
               </li>
               <li>
@@ -94,33 +99,28 @@ export function Footer({ className }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 2: Ecosystem & Community */}
+          {/* Column 2: Ecosystem & Support */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3.5">Ecosystem</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/community" className="text-slate-600 hover:text-primary transition-colors">
-                  Community Squads
-                </Link>
-              </li>
-              <li>
-                <Link to="/events" className="text-slate-600 hover:text-primary transition-colors">
-                  Workshops & Events
-                </Link>
-              </li>
-              <li>
-                <Link to="/success-stories" className="text-slate-600 hover:text-primary transition-colors">
-                  Success Stories
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-slate-600 hover:text-primary transition-colors">
-                  Engineering Blog
+                <Link to="/partners" className="text-slate-600 hover:text-primary transition-colors">
+                  Industry & University Partners
                 </Link>
               </li>
               <li>
                 <Link to="/donate" className="text-slate-600 hover:text-primary transition-colors">
-                  Support & Donate
+                  Scholarships & Giving
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="text-slate-600 hover:text-primary transition-colors">
+                  Platform FAQ
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-slate-600 hover:text-primary transition-colors">
+                  Contact & Support
                 </Link>
               </li>
             </ul>
@@ -132,12 +132,7 @@ export function Footer({ className }: FooterProps) {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/about" className="text-slate-600 hover:text-primary transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-slate-600 hover:text-primary transition-colors">
-                  Contact & Support
+                  About EthioTech
                 </Link>
               </li>
               <li>
@@ -148,11 +143,6 @@ export function Footer({ className }: FooterProps) {
               <li>
                 <Link to="/terms" className="text-slate-600 hover:text-primary transition-colors">
                   Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/partners" className="text-slate-600 hover:text-primary transition-colors">
-                  Ecosystem Partners
                 </Link>
               </li>
             </ul>

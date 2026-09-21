@@ -102,7 +102,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
       "Pre-configured cloud devcontainer environment with zero local setup hurdles",
     ],
     toolsUsed: ["Adaptive Diagnostic Engine", "Squad Matchmaker", "Skill Matrix Graph"],
-    telemetryMetric: { label: "Diagnostic Accuracy", value: "96.8%" },
+    telemetryMetric: { label: "Assessment Window", value: "45 Minutes" },
     codeMock: {
       filename: "calibration-engine.ts",
       code: `// Stage 1: Diagnostic Profile Calibration
@@ -138,7 +138,7 @@ export async function calibrateLearnerPath(profile: DiagnosticSubmission): Promi
       "System design masterclasses breaking down real production architectures",
     ],
     toolsUsed: ["Monaco Synchronized IDE", "WebRTC Audio Mesh", "Realtime Whiteboard"],
-    telemetryMetric: { label: "Avg Live Audio Latency", value: "< 120ms" },
+    telemetryMetric: { label: "Live Lab Audio Codec", value: "Opus @ 32kbps" },
     codeMock: {
       filename: "webrtc-pair-session.ts",
       code: `// Stage 2: WebRTC Low-Bandwidth Live Sync
@@ -206,7 +206,7 @@ export async function runAutomatedLabAudit(repoUrl: string): Promise<AuditResult
       "Squad XP bonuses and peer reputation score boosts for helpful reviews",
     ],
     toolsUsed: ["EthioTech PR Reviewer", "Code Diff Heatmaps", "Squad Standup Bots"],
-    telemetryMetric: { label: "Peer Code Reviews Completed", value: "112,000+" },
+    telemetryMetric: { label: "Peer Review Requirement", value: ">= 2 Approvals / PR" },
     codeMock: {
       filename: "pull-request-policy.ts",
       code: `// Stage 4: Squad PR Approval Gate
@@ -226,33 +226,32 @@ export const squadPRPolicy = {
     id: "verified-placement",
     title: "5. Verified Skill Passport & Career Placement",
     shortTitle: "5. Verified Placement",
-    subtitle: "Tamper-proof credentials, proof-of-work portfolio & direct employer hiring",
+    subtitle: "Verified credentials, proof-of-work portfolio & direct employer hiring",
     icon: Trophy,
     badge: "Direct Hiring Pipeline",
     overview:
-      "Upon track completion and capstone defense, learners receive a cryptographically signed Skill Passport. This replaces traditional resumes with verifiable proof-of-work, granting immediate fast-track interviews with hiring partners across Ethiopia, Africa, and global remote engineering teams.",
+      "Upon track completion and capstone defense, learners receive a verified Skill Passport. This replaces traditional resumes with verifiable proof-of-work, granting direct interview pathways with vetted hiring partners across Ethiopia, Africa, and global engineering teams.",
     keyDeliverables: [
-      "Cryptographically verified Skill Passport detailing verified competencies",
-      "Live interactive portfolio featuring deployed apps and code playback timelines",
-      "Direct fast-track interview referrals with vetted hiring partners (Zero recruiter fees)",
+      "Verified Skill Passport detailing validated technical competencies",
+      "Live interactive portfolio featuring deployed apps and commit timelines",
+      "Direct interview referrals with vetted hiring partners (Zero recruiter fees)",
     ],
     toolsUsed: ["Talent Passport Verifier", "Employer Talent Directory", "Alumni Network"],
-    telemetryMetric: { label: "Hiring Placement Rate", value: "88.2%" },
+    telemetryMetric: { label: "Employer Hiring Model", value: "Direct & Fee-Free" },
     codeMock: {
       filename: "skill-passport.ts",
-      code: `// Stage 5: Cryptographically Verifiable Talent Passport
-export interface VerifiableSkillPassport {
-  passportId: "ETH-2026-8894";
-  graduateName: "Helen Tadesse";
-  certifiedTrack: "Fullstack Cloud Architecture";
-  verifiedCompetencies: [
-    "Distributed Microservices (Go/Node)",
-    "PostgreSQL High-Concurrency Tuning",
-    "Docker & Kubernetes CI/CD",
-    "WebRTC Low-Latency Data Channels"
-  ];
-  githubCommitProof: "https://github.com/ethio-tech-proofs/helen-t";
-  digitalSignature: "0x8f2a4e9b7c1d3e5f6a8b...";
+      code: `// Stage 5: Verified Skill Passport & Competency Record
+export interface LearnerSkillPassport {
+  studentId: string;
+  trackId: "FULLSTACK_CLOUD" | "APPLIED_AI" | "CLOUD_DEVOPS";
+  completedMilestones: Array<{
+    moduleId: string;
+    verifiedAt: string;
+    mentorSignoff: string;
+    repositoryUrl: string;
+  }>;
+  verifiedCompetencies: string[];
+  publicVerificationUrl: string;
 }`,
     },
   },
@@ -545,7 +544,7 @@ export function HowItWorksPage() {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-50 text-zinc-700 border border-zinc-200">
               <Layers3 size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(tracks.length || 4)}</p>
+            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(tracks.length)}</p>
             <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
             <p className="mt-0.5 text-xs text-zinc-600">Fullstack, AI, Cloud, Mobile</p>
           </Card>
@@ -554,7 +553,7 @@ export function HowItWorksPage() {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-50 text-zinc-700 border border-zinc-200">
               <BookOpen size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalModules || 36)}</p>
+            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalModules)}</p>
             <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
             <p className="mt-0.5 text-xs text-zinc-600">Structured knowledge blocks</p>
           </Card>
@@ -563,7 +562,7 @@ export function HowItWorksPage() {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-50 text-zinc-700 border border-zinc-200">
               <Code2 size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalLessons || 180)}</p>
+            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalLessons)}</p>
             <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
             <p className="mt-0.5 text-xs text-zinc-600">Real git repos & tests</p>
           </Card>
@@ -572,7 +571,7 @@ export function HowItWorksPage() {
             <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-50 text-zinc-700 border border-zinc-200">
               <Zap size={16} />
             </div>
-            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalXp || 24000)}</p>
+            <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalXp)}</p>
             <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
             <p className="mt-0.5 text-xs text-zinc-600">Earned through verified PRs</p>
           </Card>
@@ -711,7 +710,7 @@ export function HowItWorksPage() {
                           <span className="ml-2 text-xs font-mono text-zinc-400">{currentStage.codeMock.filename}</span>
                         </div>
                         <Badge variant="default" size="sm">
-                          Telemetry Live
+                          Architecture Spec
                         </Badge>
                       </div>
                       <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
@@ -952,7 +951,7 @@ export function HowItWorksPage() {
           {/* Search & Category Filter */}
           <div className="mt-8 space-y-3">
             <div className="relative mx-auto max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" size={15} />
+              <Search className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" size={15} />
               <input
                 type="text"
                 placeholder="Search questions (e.g. internet, cost, mentor, hiring)..."

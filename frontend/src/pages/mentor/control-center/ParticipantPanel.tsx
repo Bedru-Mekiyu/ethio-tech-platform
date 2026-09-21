@@ -116,10 +116,10 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
   };
 
   return (
-    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
+    <Card className="border-zinc-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+          <h3 className="text-sm font-semibold text-zinc-900 flex items-center gap-1.5">
             Active Classroom
             <Badge variant="outline" className="h-5 px-1.5">
               {participants.length} online
@@ -130,7 +130,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           <Button
             size="sm"
             variant="outline"
-            className="h-8 text-[11px] gap-1 border-slate-200 text-slate-700 hover:bg-slate-50"
+            className="h-8 text-[11px] gap-1 border-zinc-200 text-zinc-700 hover:bg-zinc-50"
             onClick={handleMuteAll}
           >
             <VolumeX size={12} /> Mute All
@@ -138,7 +138,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           <Button
             size="sm"
             variant="outline"
-            className="h-8 text-[11px] gap-1 border-slate-200 text-slate-700 hover:bg-slate-50"
+            className="h-8 text-[11px] gap-1 border-zinc-200 text-zinc-700 hover:bg-zinc-50"
             onClick={handleUnmuteAll}
           >
             <Volume2 size={12} /> Unmute All
@@ -148,10 +148,10 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       <div className="flex gap-2 mb-3">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
           <Input
             placeholder="Search participants..."
-            className="h-8 pl-8 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+            className="h-8 pl-8 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -159,7 +159,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-800 outline-none focus:border-zinc-900"
+          className="h-8 rounded-lg border border-zinc-200 bg-white px-2 text-xs text-zinc-800 outline-none focus:border-zinc-900"
         >
           <option value="all">All Roles</option>
           <option value="host">Host</option>
@@ -172,7 +172,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       {filteredParticipants.length === 0 ? (
         <div className="h-40 flex items-center justify-center text-center">
-          <p className="text-xs text-slate-400">No matching participants</p>
+          <p className="text-xs text-zinc-400">No matching participants</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -184,7 +184,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             return (
               <div
                 key={p.id}
-                className="rounded-xl border border-slate-200/80 bg-white p-3 flex items-center justify-between gap-3 shadow-2xs hover:border-slate-300 transition-colors"
+                className="rounded-xl border border-zinc-200/80 bg-white p-3 flex items-center justify-between gap-3 shadow-2xs hover:border-zinc-300 transition-colors"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="relative shrink-0">
@@ -198,7 +198,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-slate-900 truncate flex items-center gap-1.5">
+                    <p className="text-xs font-semibold text-zinc-900 truncate flex items-center gap-1.5">
                       {p.name}
                       {isHost && (
                         <Badge variant="outline" className="text-[9px] px-1 py-0 scale-90">
@@ -211,7 +211,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                         </Badge>
                       )}
                     </p>
-                    <p className="text-[9px] text-slate-500 mt-0.5">
+                    <p className="text-[9px] text-zinc-500 mt-0.5">
                       Online: {Math.floor(p.attendanceDuration / 60)}m · {p.role}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                        className="h-8 w-8 p-0 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900"
                         onClick={() => onAction("mute", p.userId)}
                         title="Mute student"
                       >
@@ -232,7 +232,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                        className="h-8 w-8 p-0 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900"
                         onClick={() => onAction("unmute", p.userId)}
                         title="Unmute student"
                       >
@@ -245,19 +245,19 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                      className="h-8 w-8 p-0 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900"
                       onClick={() => setMenuOpenId(menuOpenId === p.id ? null : p.id)}
                     >
                       <MoreHorizontal size={14} />
                     </Button>
 
                     {menuOpenId === p.id && (
-                      <div className="absolute right-0 top-full z-50 mt-1 w-44 rounded-xl border border-slate-200 bg-white py-1.5 shadow-xl">
+                      <div className="absolute right-0 top-full z-50 mt-1 w-44 rounded-xl border border-zinc-200 bg-white py-1.5 shadow-xl">
                         {!isHost && (
                           <>
                             {p.role !== "cohost" ? (
                               <button
-                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
+                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-zinc-700 hover:bg-zinc-50"
                                 onClick={() => {
                                   onAction("promote", p.userId);
                                   setMenuOpenId(null);
@@ -267,7 +267,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                               </button>
                             ) : (
                               <button
-                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
+                                className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-zinc-700 hover:bg-zinc-50"
                                 onClick={() => {
                                   onAction("demote", p.userId);
                                   setMenuOpenId(null);
@@ -277,7 +277,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                               </button>
                             )}
                             <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
+                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-zinc-700 hover:bg-zinc-50"
                               onClick={() => {
                                 onAction("timeout", p.userId);
                                 setMenuOpenId(null);
@@ -286,7 +286,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                               <VolumeX size={13} /> Timeout (5m)
                             </button>
                             <button
-                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-slate-700 hover:bg-slate-50"
+                              className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-zinc-700 hover:bg-zinc-50"
                               onClick={() => {
                                 setFeedbackUser({ userId: p.userId, name: p.name });
                                 setMenuOpenId(null);
@@ -294,7 +294,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                             >
                               <MessageSquare size={13} className="text-[#b91c1c]" /> Submit Feedback
                             </button>
-                            <div className="my-1 border-t border-slate-100" />
+                            <div className="my-1 border-t border-zinc-100" />
                             <button
                               className="flex w-full items-center gap-2 px-3.5 py-2 text-left text-xs text-red-600 hover:bg-red-50"
                               onClick={() => triggerConfirm("remove", p.userId, p.name)}
@@ -333,28 +333,28 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
       {/* Feedback Dialog */}
       <dialog
         ref={feedbackDialogRef}
-        className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
+        className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-0 text-zinc-900 shadow-2xl backdrop:bg-zinc-900/40"
         onCancel={(e) => {
           e.preventDefault();
           setFeedbackUser(null);
         }}
       >
         <div className="p-6">
-          <h2 className="text-lg font-semibold text-slate-900">Submit Session Feedback</h2>
-          <p className="mt-2 text-sm text-slate-600">
+          <h2 className="text-lg font-semibold text-zinc-900">Submit Session Feedback</h2>
+          <p className="mt-2 text-sm text-zinc-600">
             Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this
             session.
           </p>
           <div className="space-y-4 py-4">
             <div className="grid grid-cols-3 gap-3">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
                   Participation
                 </label>
                 <select
                   value={participationScore}
                   onChange={(e) => setParticipationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
+                  className="w-full h-9 rounded-lg border border-zinc-200 bg-white px-2 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -364,13 +364,13 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
                   Communication
                 </label>
                 <select
                   value={communicationScore}
                   onChange={(e) => setCommunicationScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
+                  className="w-full h-9 rounded-lg border border-zinc-200 bg-white px-2 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -380,13 +380,13 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
                   Professionalism
                 </label>
                 <select
                   value={professionalismScore}
                   onChange={(e) => setProfessionalismScore(Number(e.target.value))}
-                  className="w-full h-9 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-zinc-900"
+                  className="w-full h-9 rounded-lg border border-zinc-200 bg-white px-2 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                 >
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
@@ -397,19 +397,19 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Comment</label>
+              <label className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Comment</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add session comments or specific recommendations..."
-                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-zinc-900 resize-none"
+                className="w-full min-h-20 rounded-lg border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-zinc-900 resize-none"
               />
             </div>
           </div>
           <div className="flex justify-end gap-3">
             <Button
               variant="outline"
-              className="border-slate-200 hover:bg-slate-50 text-slate-700"
+              className="border-zinc-200 hover:bg-zinc-50 text-zinc-700"
               onClick={() => setFeedbackUser(null)}
               disabled={isSubmittingFeedback}
             >

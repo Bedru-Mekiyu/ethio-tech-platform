@@ -69,9 +69,9 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
   const isValid = Boolean(embedUrl);
 
   return (
-    <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+    <div className="space-y-3 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
-        <label htmlFor="lesson-video-url" className="flex items-center gap-2 text-sm font-medium text-slate-900">
+        <label htmlFor="lesson-video-url" className="flex items-center gap-2 text-sm font-medium text-zinc-900">
           <Video size={16} className="text-zinc-900" />
           Video Embed / Stream URL
         </label>
@@ -94,7 +94,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
           <button
             type="button"
             onClick={() => setShowPreview((p) => !p)}
-            className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
           >
             <Play size={13} className="text-zinc-900" />
             {showPreview ? "Hide Preview" : "Test Embed"}
@@ -102,16 +102,16 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
         )}
       </div>
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-zinc-500">
         Supports YouTube, Vimeo, Loom, or direct HTTPS video streams. Automatically converts share links to responsive
         iframe embeds.
       </p>
 
       {/* Video Preview Player */}
       {showPreview && isValid && embedUrl && (
-        <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-md">
-          <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-2 text-xs text-slate-400">
-            <span className="font-semibold text-slate-100 flex items-center gap-1.5">
+        <div className="mt-3 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-950 shadow-md">
+          <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/90 px-4 py-2 text-xs text-zinc-400">
+            <span className="font-semibold text-zinc-100 flex items-center gap-1.5">
               <Play size={12} className="text-white" />
               Live Video Preview ({platform})
             </span>

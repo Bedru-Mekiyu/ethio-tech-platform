@@ -93,14 +93,14 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
   };
 
   return (
-    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
+    <Card className="border-zinc-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
             <Video size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Session Playback Recordings</h3>
+            <h3 className="text-sm font-semibold text-zinc-900">Session Playback Recordings</h3>
           </div>
         </div>
         <Button
@@ -112,56 +112,56 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </Button>
         <dialog
           ref={createDialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/40"
+          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-0 text-zinc-900 shadow-2xl backdrop:bg-zinc-900/40"
           onCancel={(e) => {
             e.preventDefault();
             setShowCreate(false);
           }}
         >
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-slate-900">Add Session Recording</h2>
+            <h2 className="text-lg font-semibold text-zinc-900">Add Session Recording</h2>
             <div className="space-y-4 mt-4">
               <div>
-                <label className="text-xs text-slate-600 mb-1 block">Title</label>
+                <label className="text-xs text-zinc-600 mb-1 block">Title</label>
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Lesson 1 - Introduction to Node.js"
-                  className="bg-white border-slate-200 text-slate-900"
+                  className="bg-white border-zinc-200 text-zinc-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-600 mb-1 block">Description (Optional)</label>
+                <label className="text-xs text-zinc-600 mb-1 block">Description (Optional)</label>
                 <Input
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Brief summary..."
-                  className="bg-white border-slate-200 text-slate-900"
+                  className="bg-white border-zinc-200 text-zinc-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-600 mb-1 block">Recording URL</label>
+                <label className="text-xs text-zinc-600 mb-1 block">Recording URL</label>
                 <Input
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://youtube.com/watch?v=..."
-                  className="bg-white border-slate-200 text-slate-900"
+                  className="bg-white border-zinc-200 text-zinc-900"
                 />
               </div>
               <div>
-                <label className="text-xs text-slate-600 mb-1 block">Duration (Minutes)</label>
+                <label className="text-xs text-zinc-600 mb-1 block">Duration (Minutes)</label>
                 <Input
                   value={durationMinutes}
                   type="number"
                   onChange={(e) => setDurationMinutes(e.target.value)}
                   placeholder="45"
-                  className="bg-white border-slate-200 text-slate-900"
+                  className="bg-white border-zinc-200 text-zinc-900"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <Button
                   variant="outline"
-                  className="border-slate-200 hover:bg-slate-50 text-slate-700"
+                  className="border-zinc-200 hover:bg-zinc-50 text-zinc-700"
                   onClick={() => setShowCreate(false)}
                 >
                   Cancel
@@ -186,7 +186,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </div>
       ) : recordings.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No recordings uploaded yet</p>
+          <p className="text-xs text-zinc-400">No recordings uploaded yet</p>
         </div>
       ) : (
         <div className="space-y-3 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -204,16 +204,16 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
             }) => (
               <div
                 key={rec._id}
-                className="rounded-xl border border-slate-200/80 bg-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50 transition-all shadow-2xs"
+                className="rounded-xl border border-zinc-200/80 bg-white p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-zinc-50 transition-all shadow-2xs"
               >
                 <div className="flex items-start gap-3 min-w-0">
                   <div className="bg-zinc-100 p-3 border border-zinc-200 rounded-xl shrink-0 flex items-center justify-center text-zinc-900">
                     <Play size={18} className="fill-current" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-slate-900 truncate">{rec.title}</p>
-                    {rec.description && <p className="text-[10px] text-slate-500 mt-0.5 truncate">{rec.description}</p>}
-                    <div className="flex items-center gap-3 mt-2 text-[9px] text-slate-500">
+                    <p className="text-xs font-semibold text-zinc-900 truncate">{rec.title}</p>
+                    {rec.description && <p className="text-[10px] text-zinc-500 mt-0.5 truncate">{rec.description}</p>}
+                    <div className="flex items-center gap-3 mt-2 text-[9px] text-zinc-500">
                       {rec.durationMinutes && <span>{rec.durationMinutes} minutes</span>}
                       <span className="flex items-center gap-0.5">
                         <Eye size={10} /> Views: {rec.totalViews || 0}
@@ -235,10 +235,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                   >
                     {rec.isPublished ? "Published" : "Publish"}
                   </Button>
-                  <Badge
-                    variant="default"
-                    className="text-[9px] border-slate-200 uppercase bg-slate-100 text-slate-700"
-                  >
+                  <Badge variant="default" className="text-[9px] border-zinc-200 uppercase bg-zinc-100 text-zinc-700">
                     mp4
                   </Badge>
                 </div>

@@ -126,22 +126,22 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
-        <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8 text-center">
+        <div className="rounded-xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 text-center">
           <p className="text-xs uppercase tracking-wider text-[#b91c1c] font-semibold">404</p>
-          <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900">Page not found</h1>
-          <p className="mt-1.5 text-xs text-slate-600">The page you requested does not exist or has moved.</p>
+          <h1 className="mt-2 text-xl font-bold tracking-tight text-zinc-900">Page not found</h1>
+          <p className="mt-1.5 text-xs text-zinc-600">The page you requested does not exist or has moved.</p>
 
           {import.meta.env.DEV && (
-            <p className="mt-3 text-[11px] text-slate-500 break-all font-mono bg-slate-50 border border-slate-200 py-1 px-2 rounded">
+            <p className="mt-3 text-[11px] text-zinc-500 break-all font-mono bg-zinc-50 border border-zinc-200 py-1 px-2 rounded">
               {location.pathname}
             </p>
           )}
 
           {recovery && (
             <div className="mt-5 rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-zinc-600">
                 Redirecting to <span className="font-medium text-zinc-900">{recovery}</span> in{" "}
-                <span className="font-semibold text-slate-900">{countdown}</span>s...
+                <span className="font-semibold text-zinc-900">{countdown}</span>s...
               </p>
             </div>
           )}
@@ -179,13 +179,13 @@ export function NotFoundPage() {
         </div>
 
         <div className="mt-6">
-          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-slate-500 font-medium">
+          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-zinc-500 font-medium">
             Suggested destinations
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {suggestions.map((s) => (
               <Link key={s.to} to={s.to}>
-                <Button variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                <Button variant="ghost" size="sm" className="text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">
                   {s.icon}
                   <span className="ml-1.5">{s.label}</span>
                 </Button>

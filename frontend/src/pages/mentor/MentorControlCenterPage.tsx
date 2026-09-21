@@ -364,12 +364,12 @@ export default function MentorControlCenterPage() {
   return (
     <div className="mcc-container p-4 sm:p-6 space-y-5" role="main" aria-label="Mentor Control Center">
       {/* Header section */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200 pb-4">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 w-8 p-0 rounded-lg hover:bg-slate-100 text-slate-700"
+            className="h-8 w-8 p-0 rounded-lg hover:bg-zinc-100 text-zinc-700"
             onClick={() => navigate(-1)}
             aria-label="Go back"
             title="Go back (Esc)"
@@ -377,8 +377,8 @@ export default function MentorControlCenterPage() {
             <ArrowLeft size={16} aria-hidden="true" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Mentor OS Control Center</h1>
-            <p className="text-xs text-slate-500 mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
+            <h1 className="text-xl font-bold text-zinc-900 tracking-tight sm:text-2xl">Mentor OS Control Center</h1>
+            <p className="text-xs text-zinc-500 mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
           </div>
           <Badge
             className="mcc-live-badge ml-2 animate-pulse"
@@ -392,7 +392,7 @@ export default function MentorControlCenterPage() {
         <Button
           size="sm"
           variant="outline"
-          className="h-8 text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-lg"
+          className="h-8 text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-lg"
           onClick={() => refetch()}
           aria-label="Refresh dashboard data"
         >
@@ -407,12 +407,12 @@ export default function MentorControlCenterPage() {
       />
 
       <div className="grid gap-3 sm:grid-cols-3">
-        <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Waiting students</p>
-          <p className="mt-1.5 text-xl font-bold text-slate-900">
+        <Card className="border-zinc-200/80 bg-white p-4 shadow-sm">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Waiting students</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">
             {meetingStatus === "waiting_for_host" || meetingStatus === "scheduled" ? Math.max(0, presenceCount) : 0}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-zinc-500">
             {meetingStatus === "waiting_for_host"
               ? "Students are ready for you to start."
               : meetingStatus === "scheduled"
@@ -420,15 +420,15 @@ export default function MentorControlCenterPage() {
                 : "Session in progress."}
           </p>
         </Card>
-        <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">In-room participants</p>
-          <p className="mt-1.5 text-xl font-bold text-slate-900">{overview?.liveParticipants ?? 0}</p>
-          <p className="mt-0.5 text-xs text-slate-500">Active learners in the live classroom.</p>
+        <Card className="border-zinc-200/80 bg-white p-4 shadow-sm">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">In-room participants</p>
+          <p className="mt-1.5 text-xl font-bold text-zinc-900">{overview?.liveParticipants ?? 0}</p>
+          <p className="mt-0.5 text-xs text-zinc-500">Active learners in the live classroom.</p>
         </Card>
-        <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Meeting status</p>
+        <Card className="border-zinc-200/80 bg-white p-4 shadow-sm">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Meeting status</p>
           <p className="mt-1.5 text-xl font-bold text-zinc-900 capitalize">{meetingStatus.replace("_", " ")}</p>
-          <p className="mt-0.5 text-xs text-slate-500">Live status synchronized across all devices.</p>
+          <p className="mt-0.5 text-xs text-zinc-500">Live status synchronized across all devices.</p>
         </Card>
       </div>
 
@@ -491,25 +491,25 @@ export default function MentorControlCenterPage() {
                 />
               </div>
               <div className="space-y-6">
-                <Card className="border-slate-200/80 bg-white p-4 shadow-sm rounded-xl">
-                  <h3 className="text-sm font-semibold text-slate-900 mb-3">Live Participants</h3>
+                <Card className="border-zinc-200/80 bg-white p-4 shadow-sm rounded-xl">
+                  <h3 className="text-sm font-semibold text-zinc-900 mb-3">Live Participants</h3>
                   <div className="space-y-2 max-h-80 overflow-y-auto mcc-scrollbar pr-1">
                     {(data?.participants || []).slice(0, 5).map((p) => (
                       <div
                         key={p.id}
-                        className="flex items-center justify-between gap-3 p-2 border-b border-slate-100 text-xs text-slate-800"
+                        className="flex items-center justify-between gap-3 p-2 border-b border-zinc-100 text-xs text-zinc-800"
                       >
                         <span>{p.name}</span>
                         <Badge
                           variant="default"
-                          className="text-[9px] border-slate-200 uppercase bg-slate-100 text-slate-700"
+                          className="text-[9px] border-zinc-200 uppercase bg-zinc-100 text-zinc-700"
                         >
                           {p.role}
                         </Badge>
                       </div>
                     ))}
                     {(!data?.participants || data.participants.length === 0) && (
-                      <p className="text-xs text-slate-400 text-center py-4">No participants online</p>
+                      <p className="text-xs text-zinc-400 text-center py-4">No participants online</p>
                     )}
                   </div>
                   {data?.participants && data.participants.length > 5 && (
@@ -525,26 +525,26 @@ export default function MentorControlCenterPage() {
                 </Card>
 
                 {/* Quick actions panel */}
-                <Card className="border-slate-200/80 bg-white p-4 space-y-3 shadow-sm rounded-xl">
-                  <h3 className="text-sm font-semibold text-slate-900">Quick Actions</h3>
+                <Card className="border-zinc-200/80 bg-white p-4 space-y-3 shadow-sm rounded-xl">
+                  <h3 className="text-sm font-semibold text-zinc-900">Quick Actions</h3>
                   <div className="grid grid-cols-2 gap-2">
                     <Button
                       variant="outline"
-                      className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                      className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                       onClick={() => setActiveTab("chat")}
                     >
                       <Megaphone size={13} className="mr-2" /> Announce
                     </Button>
                     <Button
                       variant="outline"
-                      className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                      className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                       onClick={() => setActiveTab("recordings")}
                     >
                       <Video size={13} className="mr-2" /> Playbacks
                     </Button>
                     <Button
                       variant="outline"
-                      className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                      className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                       onClick={() => setActiveTab("resources")}
                     >
                       <Link2 size={13} className="mr-2" /> Resources
@@ -564,11 +564,11 @@ export default function MentorControlCenterPage() {
                   isResumableStatus(sessionStatus) ||
                   canCloseRegistration(sessionStatus) ||
                   isRescheduleableStatus(sessionStatus) ? (
-                    <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
+                    <div className="grid grid-cols-2 gap-2 border-t border-zinc-100 pt-3">
                       {isPausableStatus(sessionStatus) ? (
                         <Button
                           variant="outline"
-                          className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                          className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                           onClick={handlePause}
                           disabled={pauseMutation.isPending}
                           aria-label="Pause session"
@@ -580,7 +580,7 @@ export default function MentorControlCenterPage() {
                       {isResumableStatus(sessionStatus) ? (
                         <Button
                           variant="outline"
-                          className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                          className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                           onClick={handleResume}
                           disabled={resumeMutation.isPending}
                           aria-label="Resume session"
@@ -592,7 +592,7 @@ export default function MentorControlCenterPage() {
                       {canCloseRegistration(sessionStatus) ? (
                         <Button
                           variant="outline"
-                          className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                          className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                           onClick={handleCloseRegistration}
                           disabled={closeRegMutation.isPending}
                           aria-label="Close registration"
@@ -604,7 +604,7 @@ export default function MentorControlCenterPage() {
                       {isRescheduleableStatus(sessionStatus) ? (
                         <Button
                           variant="outline"
-                          className="justify-center text-xs h-9 border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-xl"
+                          className="justify-center text-xs h-9 border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl"
                           onClick={handleReschedule}
                           disabled={rescheduleMutation.isPending}
                           aria-label="Reschedule session"

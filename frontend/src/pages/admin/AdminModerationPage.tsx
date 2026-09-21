@@ -152,12 +152,12 @@ function StatCard({
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
       className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 shadow-xs ${
         active
-          ? "border-zinc-900 bg-zinc-100 text-slate-900 ring-1 ring-zinc-900/10"
-          : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50"
+          ? "border-zinc-900 bg-zinc-100 text-zinc-900 ring-1 ring-zinc-900/10"
+          : "border-zinc-200/80 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
       }`}
     >
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
-      <p className="mt-1.5 text-xl font-bold text-slate-900 font-mono">{count}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{label}</p>
+      <p className="mt-1.5 text-xl font-bold text-zinc-900 font-mono">{count}</p>
     </div>
   );
 }
@@ -198,7 +198,7 @@ function ApplicationCard({
       className={`group relative space-y-4 rounded-2xl border p-5 transition-all duration-200 shadow-xs ${
         selected
           ? "border-zinc-900 bg-zinc-50 ring-1 ring-zinc-900/20"
-          : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/40"
+          : "border-zinc-200/80 bg-white hover:border-zinc-300 hover:bg-zinc-50/40"
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -209,13 +209,13 @@ function ApplicationCard({
               e.stopPropagation();
               onToggleSelect(application._id);
             }}
-            className="mt-1 text-slate-400 hover:text-zinc-900 transition-colors"
+            className="mt-1 text-zinc-400 hover:text-zinc-900 transition-colors"
             aria-label={selected ? "Deselect applicant" : "Select applicant"}
           >
             {selected ? (
               <CheckCircle2 size={20} className="text-zinc-900" />
             ) : (
-              <Square size={20} className="text-slate-300 hover:text-slate-400" />
+              <Square size={20} className="text-zinc-300 hover:text-zinc-400" />
             )}
           </button>
 
@@ -227,18 +227,18 @@ function ApplicationCard({
             className="cursor-pointer"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold text-slate-900 group-hover:text-[#b91c1c] transition-colors">
+              <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-[#b91c1c] transition-colors">
                 {application.fullName}
               </h3>
               <Badge variant={rubric.variant} className="text-[11px] gap-1">
                 <Sparkles size={11} /> {rubric.percentage}% Match
               </Badge>
             </div>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-zinc-600">
               {application.currentRole}
               {application.currentCompany ? ` • ${application.currentCompany}` : ""}
             </p>
-            <p className="text-xs text-slate-500 mt-0.5">{application.email}</p>
+            <p className="text-xs text-zinc-500 mt-0.5">{application.email}</p>
           </div>
         </div>
 
@@ -263,7 +263,7 @@ function ApplicationCard({
               e.stopPropagation();
               onOpenRubric(application);
             }}
-            className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
+            className="h-7 px-2.5 text-xs gap-1 border-zinc-200 text-zinc-700 hover:text-zinc-900"
           >
             <Sliders size={13} /> Rubric
           </Button>
@@ -274,28 +274,28 @@ function ApplicationCard({
               e.stopPropagation();
               onOpenInterview(application);
             }}
-            className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
+            className="h-7 px-2.5 text-xs gap-1 border-zinc-200 text-zinc-700 hover:text-zinc-900"
           >
             <Calendar size={13} /> Interview
           </Button>
         </div>
       </div>
 
-      <div className="grid gap-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-4 bg-slate-50/70 p-3 rounded-xl border border-slate-200/80">
+      <div className="grid gap-2 text-sm text-zinc-600 sm:grid-cols-2 lg:grid-cols-4 bg-zinc-50/70 p-3 rounded-xl border border-zinc-200/80">
         <div className="flex items-center gap-2">
-          <Briefcase size={14} className="text-slate-400" />
+          <Briefcase size={14} className="text-zinc-400" />
           <span>{application.yearsExperience ?? 0} yrs experience</span>
         </div>
         <div className="flex items-center gap-2">
-          <Clock size={14} className="text-slate-400" />
+          <Clock size={14} className="text-zinc-400" />
           <span className="capitalize">{application.availability ?? "Flexible"}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Award size={14} className="text-slate-400" />
+          <Award size={14} className="text-zinc-400" />
           <span>{(application.mentoringStyle ?? []).join(", ") || "Live Sessions"}</span>
         </div>
         <div className="flex items-center gap-2">
-          <Users size={14} className="text-slate-400" />
+          <Users size={14} className="text-zinc-400" />
           <span>{application.location ?? "Ethiopia / Remote"}</span>
         </div>
       </div>
@@ -306,7 +306,7 @@ function ApplicationCard({
             href={application.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             LinkedIn <ExternalLink size={12} />
@@ -317,7 +317,7 @@ function ApplicationCard({
             href={application.portfolio}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             Portfolio / GitHub <ExternalLink size={12} />
@@ -328,7 +328,7 @@ function ApplicationCard({
             href={application.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             CV / Resume <ExternalLink size={12} />
@@ -336,8 +336,8 @@ function ApplicationCard({
         )}
       </div>
 
-      <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 text-sm leading-relaxed text-slate-700">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Why Mentor?</p>
+      <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-3.5 text-sm leading-relaxed text-zinc-700">
+        <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-1">Why Mentor?</p>
         <p className="line-clamp-3">{application.whyMentor || "No motivation statement provided."}</p>
       </div>
 
@@ -352,28 +352,28 @@ function ApplicationCard({
       {application.rejectionReason && (
         <div className="rounded-xl border border-red-200 bg-red-50/50 p-3 text-xs">
           <p className="font-semibold text-red-600">Rejection Reason</p>
-          <p className="mt-1 text-slate-700">{application.rejectionReason}</p>
+          <p className="mt-1 text-zinc-700">{application.rejectionReason}</p>
         </div>
       )}
 
       {application.reviewNotes && application.status === "changes_requested" && (
         <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3 text-xs">
           <p className="font-semibold text-amber-700">Requested Changes</p>
-          <p className="mt-1 text-slate-700">{application.reviewNotes}</p>
+          <p className="mt-1 text-zinc-700">{application.reviewNotes}</p>
         </div>
       )}
 
       {canAct && (
-        <div className="pt-2 border-t border-slate-100 space-y-3" onClick={(e) => e.stopPropagation()}>
+        <div className="pt-2 border-t border-zinc-100 space-y-3" onClick={(e) => e.stopPropagation()}>
           <div>
-            <label className="mb-1.5 block text-xs uppercase tracking-wider text-slate-500 font-medium">
+            <label className="mb-1.5 block text-xs uppercase tracking-wider text-zinc-500 font-medium">
               Review notes & rubric feedback
             </label>
             <textarea
               value={reviewNotes}
               onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
               placeholder="Add feedback, approval remarks, or specific information requested..."
-              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
+              className="min-h-[70px] w-full rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
               aria-label="Review notes"
             />
           </div>
@@ -390,7 +390,7 @@ function ApplicationCard({
                 size="sm"
                 variant="outline"
                 onClick={() => onRequestChanges(application._id)}
-                className="gap-1.5 border-slate-200 text-slate-700"
+                className="gap-1.5 border-zinc-200 text-zinc-700"
               >
                 <FileText size={15} /> Request Info
               </Button>
@@ -399,7 +399,7 @@ function ApplicationCard({
               size="sm"
               variant="outline"
               onClick={() => onOpen(application._id)}
-              className="border-slate-200 text-slate-700"
+              className="border-zinc-200 text-zinc-700"
             >
               View Full Profile
             </Button>
@@ -473,7 +473,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
     <>
       <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-label="Evaluation Rubric"
@@ -482,15 +482,15 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
           <div>
             <div className="flex items-center gap-2">
               <Sliders size={20} className="text-zinc-900" />
-              <h2 className="text-xl font-bold text-slate-900">Evaluation Rubric</h2>
+              <h2 className="text-xl font-bold text-zinc-900">Evaluation Rubric</h2>
             </div>
-            <p className="text-sm text-slate-500 mt-1">
-              Screening rubric for <span className="font-semibold text-slate-900">{application.fullName}</span>
+            <p className="text-sm text-zinc-500 mt-1">
+              Screening rubric for <span className="font-semibold text-zinc-900">{application.fullName}</span>
             </p>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
           >
             <X size={18} />
           </button>
@@ -499,10 +499,10 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
         {/* Score Banner */}
         <div className="flex items-center justify-between rounded-xl border border-zinc-200 bg-zinc-50 p-4">
           <div>
-            <p className="text-xs uppercase tracking-wider text-slate-500">Overall Match Score</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500">Overall Match Score</p>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-3xl font-bold text-zinc-900">{result.percentage}%</span>
-              <span className="text-sm text-slate-500">
+              <span className="text-sm text-zinc-500">
                 ({result.total} / {result.max} pts)
               </span>
             </div>
@@ -517,14 +517,14 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
           {criteria.map((c) => {
             const currentVal = scores[c.key];
             return (
-              <div key={c.key} className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+              <div key={c.key} className="space-y-2 rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-4">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-slate-900 text-sm">{c.title}</span>
+                  <span className="font-semibold text-zinc-900 text-sm">{c.title}</span>
                   <span className="text-xs font-mono font-bold text-zinc-900">
                     {currentVal} / 5 ({c.labels[currentVal - 1]})
                   </span>
                 </div>
-                <p className="text-xs text-slate-500">{c.desc}</p>
+                <p className="text-xs text-zinc-500">{c.desc}</p>
                 <div className="grid grid-cols-5 gap-1.5 pt-2">
                   {[1, 2, 3, 4, 5].map((val) => (
                     <button
@@ -534,7 +534,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
                       className={`flex flex-col items-center justify-center rounded-lg border py-2 px-1 text-xs transition-all ${
                         currentVal === val
                           ? "border-zinc-900 bg-zinc-900 text-white font-bold shadow-xs"
-                          : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                          : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50"
                       }`}
                     >
                       <span>{val} ★</span>
@@ -547,7 +547,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
           })}
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+        <div className="flex justify-end gap-3 pt-4 border-t border-zinc-100">
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
@@ -614,7 +614,7 @@ Ethio-Tech Mentorship Team`;
     <>
       <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl space-y-6"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6"
         role="dialog"
         aria-modal="true"
         aria-label="Schedule Screening Interview"
@@ -625,24 +625,24 @@ Ethio-Tech Mentorship Team`;
               <Calendar size={20} />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-slate-900">Interview Screening</h2>
-              <p className="text-xs text-slate-500">
-                Applicant: <span className="text-slate-900 font-medium">{application.fullName}</span> (
+              <h2 className="text-xl font-bold text-zinc-900">Interview Screening</h2>
+              <p className="text-xs text-zinc-500">
+                Applicant: <span className="text-zinc-900 font-medium">{application.fullName}</span> (
                 {application.email})
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+            className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Direct Link Section */}
-        <div className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
-          <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+        <div className="space-y-3 rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-4">
+          <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
             Dedicated Video Room Link
           </label>
           <div className="flex items-center gap-2">
@@ -650,13 +650,13 @@ Ethio-Tech Mentorship Team`;
               type="text"
               readOnly
               value={meetingUrl}
-              className="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-mono text-slate-800"
+              className="flex-1 rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-mono text-zinc-800"
             />
             <Button
               size="sm"
               variant="outline"
               onClick={() => copyToClipboard(meetingUrl, true)}
-              className="gap-1.5 shrink-0 border-slate-200 text-slate-700"
+              className="gap-1.5 shrink-0 border-zinc-200 text-zinc-700"
             >
               {copiedLink ? <Check size={14} className="text-zinc-900" /> : <Copy size={14} />}
               {copiedLink ? "Copied" : "Copy"}
@@ -669,7 +669,7 @@ Ethio-Tech Mentorship Team`;
               </Button>
             </a>
             <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
-              <Button size="sm" variant="outline" className="w-full gap-2 border-slate-200 text-slate-700">
+              <Button size="sm" variant="outline" className="w-full gap-2 border-zinc-200 text-zinc-700">
                 <Calendar size={14} /> Add to Google Calendar
               </Button>
             </a>
@@ -679,7 +679,7 @@ Ethio-Tech Mentorship Team`;
         {/* Email Invitation Template */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
               Invitation Email Template
             </label>
             <Button
@@ -695,11 +695,11 @@ Ethio-Tech Mentorship Team`;
           <textarea
             readOnly
             value={emailTemplate}
-            className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3 text-xs leading-relaxed text-slate-700 font-mono outline-none"
+            className="min-h-[140px] w-full rounded-xl border border-zinc-200 bg-zinc-50/50 p-3 text-xs leading-relaxed text-zinc-700 font-mono outline-none"
           />
         </div>
 
-        <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+        <div className="flex justify-end gap-2 pt-2 border-t border-zinc-100">
           <Button variant="outline" onClick={onClose}>
             Close
           </Button>
@@ -909,13 +909,13 @@ export function AdminModerationPage() {
   return (
     <div className="space-y-6 text-[var(--text-primary)]">
       {/* Header */}
-      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
               Mentor Moderation & Screening
             </h1>
-            <p className="max-w-2xl text-xs text-slate-500 leading-relaxed">
+            <p className="max-w-2xl text-xs text-zinc-500 leading-relaxed">
               Evaluate applicant rubrics, schedule screening interviews, and manage platform mentor onboarding.
             </p>
           </div>
@@ -924,7 +924,7 @@ export function AdminModerationPage() {
               variant="outline"
               size="sm"
               onClick={() => invalidateAll()}
-              className="text-xs text-slate-700 hover:text-slate-900 border-slate-200"
+              className="text-xs text-zinc-700 hover:text-zinc-900 border-zinc-200"
             >
               <RefreshCw size={12} className="mr-1" /> Refresh
             </Button>
@@ -956,14 +956,14 @@ export function AdminModerationPage() {
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
-            <span className="text-xs font-semibold text-slate-900">
+            <span className="text-xs font-semibold text-zinc-900">
               {selectedIds.size === 1 ? "application" : "applications"} selected
             </span>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setSelectedIds(new Set())}
-              className="text-xs text-slate-500 hover:text-slate-900 h-7 px-2"
+              className="text-xs text-zinc-500 hover:text-zinc-900 h-7 px-2"
             >
               Deselect All
             </Button>
@@ -974,7 +974,7 @@ export function AdminModerationPage() {
               variant="outline"
               size="sm"
               onClick={exportSelectedApplications}
-              className="text-xs h-7 text-slate-700 border-slate-200"
+              className="text-xs h-7 text-zinc-700 border-zinc-200"
             >
               <Download size={11} className="mr-1" /> Export JSON
             </Button>
@@ -998,7 +998,7 @@ export function AdminModerationPage() {
               variant="outline"
               size="sm"
               onClick={() => setPageAction({ type: "bulk-request" })}
-              className="text-xs h-7 gap-1 border-slate-200 text-slate-700"
+              className="text-xs h-7 gap-1 border-zinc-200 text-zinc-700"
             >
               <FileText size={12} /> Request Info
             </Button>
@@ -1010,27 +1010,27 @@ export function AdminModerationPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-1 flex-wrap items-center gap-3">
           <div className="relative min-w-[260px] flex-1 max-w-md">
-            <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
+            <Search className="absolute left-3.5 top-1/2 size-4 -tranzinc-y-1/2 text-zinc-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={`Search ${QUEUE_LABELS[tab].toLowerCase()}...`}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs placeholder:text-slate-400"
+              className="h-10 w-full rounded-xl border border-zinc-200 bg-white pl-10 pr-4 text-sm text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs placeholder:text-zinc-400"
               aria-label={`Search ${QUEUE_LABELS[tab].toLowerCase()}`}
             />
           </div>
 
           {/* Experience Filter */}
           <div className="flex items-center gap-1.5">
-            <Filter size={14} className="text-slate-400" />
+            <Filter size={14} className="text-zinc-400" />
             <select
               value={expFilter}
               onChange={(e) => {
                 setExpFilter(e.target.value);
                 setPage(1);
               }}
-              className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-800 outline-none focus:border-zinc-900 shadow-xs"
+              className="h-10 rounded-xl border border-zinc-200 bg-white px-3 text-xs text-zinc-800 outline-none focus:border-zinc-900 shadow-xs"
             >
               <option value="all">All Experience Levels</option>
               <option value="junior">Junior (0 - 2 yrs)</option>
@@ -1045,12 +1045,12 @@ export function AdminModerationPage() {
             variant="ghost"
             size="sm"
             onClick={toggleSelectAll}
-            className="gap-1.5 text-xs text-slate-600 hover:text-slate-900"
+            className="gap-1.5 text-xs text-zinc-600 hover:text-zinc-900"
           >
             {allSelected ? (
               <CheckCircle2 size={16} className="text-zinc-900" />
             ) : (
-              <Square size={16} className="text-slate-400" />
+              <Square size={16} className="text-zinc-400" />
             )}
             {allSelected ? "Deselect All" : "Select All On Page"}
           </Button>
@@ -1082,8 +1082,8 @@ export function AdminModerationPage() {
           </div>
 
           {applicationsQuery.data?.pagination && (
-            <div className="flex items-center justify-between pt-4 border-t border-slate-200">
-              <p className="text-sm text-slate-500">
+            <div className="flex items-center justify-between pt-4 border-t border-zinc-200">
+              <p className="text-sm text-zinc-500">
                 Page {applicationsQuery.data.pagination.page} of {applicationsQuery.data.pagination.totalPages} (
                 {applicationsQuery.data.pagination.total} total)
               </p>

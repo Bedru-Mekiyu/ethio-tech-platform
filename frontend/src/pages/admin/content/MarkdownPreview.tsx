@@ -11,7 +11,7 @@ interface MarkdownPreviewProps {
 export function MarkdownPreview({ content, className }: MarkdownPreviewProps) {
   if (!content || !content.trim()) {
     return (
-      <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-500 bg-slate-50/50">
+      <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-zinc-200 p-6 text-center text-sm text-zinc-500 bg-zinc-50/50">
         No content written yet. Switch to &quot;Write&quot; tab to draft markdown.
       </div>
     );
@@ -20,7 +20,7 @@ export function MarkdownPreview({ content, className }: MarkdownPreviewProps) {
   const renderedBlocks = parseMarkdownToReact(content);
 
   return (
-    <div className={cn("prose max-w-none space-y-4 text-sm sm:text-base leading-relaxed text-slate-800", className)}>
+    <div className={cn("prose max-w-none space-y-4 text-sm sm:text-base leading-relaxed text-zinc-800", className)}>
       {renderedBlocks}
     </div>
   );
@@ -75,7 +75,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <blockquote
           key={`quote-${nodes.length}`}
-          className="border-l-4 border-zinc-900 bg-zinc-50 pl-4 py-2 my-2 rounded-r-lg italic text-slate-700"
+          className="border-l-4 border-zinc-900 bg-zinc-50 pl-4 py-2 my-2 rounded-r-lg italic text-zinc-700"
         >
           {renderInlineMarkdown(quoteLines.join(" "))}
         </blockquote>,
@@ -99,7 +99,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <h1
           key={`h1-${nodes.length}`}
-          className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mt-6 mb-3 border-b border-slate-200 pb-2"
+          className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 mt-6 mb-3 border-b border-zinc-200 pb-2"
         >
           {renderInlineMarkdown(line.slice(2))}
         </h1>,
@@ -111,7 +111,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <h2
           key={`h2-${nodes.length}`}
-          className="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 mt-5 mb-2.5"
+          className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-900 mt-5 mb-2.5"
         >
           {renderInlineMarkdown(line.slice(3))}
         </h2>,
@@ -121,7 +121,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     }
     if (line.startsWith("### ")) {
       nodes.push(
-        <h3 key={`h3-${nodes.length}`} className="text-lg sm:text-xl font-semibold text-slate-900 mt-4 mb-2">
+        <h3 key={`h3-${nodes.length}`} className="text-lg sm:text-xl font-semibold text-zinc-900 mt-4 mb-2">
           {renderInlineMarkdown(line.slice(4))}
         </h3>,
       );
@@ -130,7 +130,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
     }
     if (line.startsWith("#### ")) {
       nodes.push(
-        <h4 key={`h4-${nodes.length}`} className="text-base font-semibold text-slate-800 mt-3 mb-1.5">
+        <h4 key={`h4-${nodes.length}`} className="text-base font-semibold text-zinc-800 mt-3 mb-1.5">
           {renderInlineMarkdown(line.slice(5))}
         </h4>,
       );
@@ -140,7 +140,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
 
     // Horizontal Rule
     if (/^(\*{3,}|-{3,}|_{3,})$/.test(line.trim())) {
-      nodes.push(<hr key={`hr-${nodes.length}`} className="my-6 border-t border-slate-200" />);
+      nodes.push(<hr key={`hr-${nodes.length}`} className="my-6 border-t border-zinc-200" />);
       i++;
       continue;
     }
@@ -163,7 +163,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
         i++;
       }
       nodes.push(
-        <ul key={`ul-${nodes.length}`} className="my-3 space-y-1.5 pl-5 list-disc marker:text-zinc-900 text-slate-800">
+        <ul key={`ul-${nodes.length}`} className="my-3 space-y-1.5 pl-5 list-disc marker:text-zinc-900 text-zinc-800">
           {listItems.map((item, idx) => (
             <li key={idx} className="leading-relaxed">
               {item.checked !== undefined ? (
@@ -172,9 +172,9 @@ function parseMarkdownToReact(md: string): ReactNode[] {
                     type="checkbox"
                     checked={item.checked}
                     readOnly
-                    className="rounded border-slate-300 bg-white text-zinc-900 focus:ring-0"
+                    className="rounded border-zinc-300 bg-white text-zinc-900 focus:ring-0"
                   />
-                  <span className={item.checked ? "line-through text-slate-400" : ""}>
+                  <span className={item.checked ? "line-through text-zinc-400" : ""}>
                     {renderInlineMarkdown(item.text)}
                   </span>
                 </label>
@@ -198,10 +198,10 @@ function parseMarkdownToReact(md: string): ReactNode[] {
       nodes.push(
         <ol
           key={`ol-${nodes.length}`}
-          className="my-3 space-y-1.5 pl-5 list-decimal marker:text-zinc-900 font-medium text-slate-900"
+          className="my-3 space-y-1.5 pl-5 list-decimal marker:text-zinc-900 font-medium text-zinc-900"
         >
           {listItems.map((item, idx) => (
-            <li key={idx} className="font-normal text-slate-800">
+            <li key={idx} className="font-normal text-zinc-800">
               {renderInlineMarkdown(item)}
             </li>
           ))}
@@ -234,7 +234,7 @@ function parseMarkdownToReact(md: string): ReactNode[] {
 
     if (paragraphLines.length > 0) {
       nodes.push(
-        <p key={`p-${nodes.length}`} className="leading-relaxed text-slate-800">
+        <p key={`p-${nodes.length}`} className="leading-relaxed text-zinc-800">
           {renderInlineMarkdown(paragraphLines.join(" "))}
         </p>,
       );
@@ -280,7 +280,7 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
           )}
         </button>
       </div>
-      <div className="overflow-x-auto p-4 leading-relaxed text-slate-200">
+      <div className="overflow-x-auto p-4 leading-relaxed text-zinc-200">
         <pre>
           <code>{code}</code>
         </pre>
@@ -334,7 +334,7 @@ function CalloutBlock({ type, content }: { type: string; content: string }) {
     <div className={cn("my-4 rounded-2xl border p-4 shadow-2xs", style.bg, style.border)}>
       <div className="flex items-center gap-2 mb-1">
         {style.icon}
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-900">{style.label}</span>
+        <span className="text-xs font-bold uppercase tracking-wider text-zinc-900">{style.label}</span>
       </div>
       <div className={cn("text-xs sm:text-sm leading-relaxed", style.text)}>{renderInlineMarkdown(content)}</div>
     </div>
@@ -355,9 +355,9 @@ function TableBlock({ tableLines }: { tableLines: string[] }) {
   const dataRows = tableLines.slice(2).map(parseRow);
 
   return (
-    <div className="my-4 overflow-x-auto rounded-2xl border border-slate-200 shadow-xs bg-white">
+    <div className="my-4 overflow-x-auto rounded-2xl border border-zinc-200 shadow-xs bg-white">
       <table className="w-full text-left text-xs sm:text-sm">
-        <thead className="bg-slate-50 text-slate-900 border-b border-slate-200">
+        <thead className="bg-zinc-50 text-zinc-900 border-b border-zinc-200">
           <tr>
             {headers.map((h, i) => (
               <th key={i} className="px-4 py-3 font-semibold">
@@ -366,11 +366,11 @@ function TableBlock({ tableLines }: { tableLines: string[] }) {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">
+        <tbody className="divide-y divide-zinc-100">
           {dataRows.map((row, rIdx) => (
-            <tr key={rIdx} className="hover:bg-slate-50/60 transition-colors">
+            <tr key={rIdx} className="hover:bg-zinc-50/60 transition-colors">
               {row.map((cell, cIdx) => (
-                <td key={cIdx} className="px-4 py-2.5 text-slate-800">
+                <td key={cIdx} className="px-4 py-2.5 text-zinc-800">
                   {renderInlineMarkdown(cell)}
                 </td>
               ))}
@@ -431,7 +431,7 @@ function renderInlineMarkdown(text: string): ReactNode {
       parts.push(
         <code
           key={keyIdx++}
-          className="rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-xs text-zinc-900 font-semibold border border-slate-200"
+          className="rounded-md bg-zinc-100 px-1.5 py-0.5 font-mono text-xs text-zinc-900 font-semibold border border-zinc-200"
         >
           {first.match[2]}
         </code>,
@@ -443,7 +443,7 @@ function renderInlineMarkdown(text: string): ReactNode {
           key={keyIdx++}
           src={first.match[3]}
           alt={first.match[2] || "Image"}
-          className="my-3 rounded-xl border border-slate-200 max-h-96 object-cover shadow-sm"
+          className="my-3 rounded-xl border border-zinc-200 max-h-96 object-cover shadow-sm"
         />,
       );
       remaining = first.match[4];
@@ -465,21 +465,21 @@ function renderInlineMarkdown(text: string): ReactNode {
       remaining = first.match[4];
     } else if (first.type === "bold") {
       parts.push(
-        <strong key={keyIdx++} className="font-bold text-slate-900">
+        <strong key={keyIdx++} className="font-bold text-zinc-900">
           {renderInlineMarkdown(first.match[3])}
         </strong>,
       );
       remaining = first.match[4];
     } else if (first.type === "strike") {
       parts.push(
-        <del key={keyIdx++} className="line-through text-slate-400">
+        <del key={keyIdx++} className="line-through text-zinc-400">
           {renderInlineMarkdown(first.match[2])}
         </del>,
       );
       remaining = first.match[3];
     } else if (first.type === "italic") {
       parts.push(
-        <em key={keyIdx++} className="italic text-slate-700">
+        <em key={keyIdx++} className="italic text-zinc-700">
           {renderInlineMarkdown(first.match[3])}
         </em>,
       );

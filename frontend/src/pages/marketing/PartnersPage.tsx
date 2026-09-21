@@ -201,7 +201,7 @@ export function PartnersPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-slate-900">
+    <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8 space-y-20 text-zinc-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -392,8 +392,8 @@ export function PartnersPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Structured Delivery</Badge>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">The Partnership Lifecycle</h2>
-          <p className="text-xs text-slate-600">
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900">The Partnership Lifecycle</h2>
+          <p className="text-xs text-zinc-600">
             A frictionless, transparent 4-phase framework designed for rapid execution and accountable outcomes.
           </p>
         </div>
@@ -404,7 +404,7 @@ export function PartnersPage() {
             return (
               <Card
                 key={step.step}
-                className="relative flex flex-col justify-between border-slate-200 bg-white p-5 shadow-xs"
+                className="relative flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs"
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -642,14 +642,14 @@ export function PartnersPage() {
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Institutional FAQ</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Frequently Asked Questions</h2>
+          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Frequently Asked Questions</h2>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
           {faqs.map((faq, idx) => (
-            <Card key={idx} className="border-slate-200 bg-white p-5 space-y-1.5 shadow-xs">
-              <h3 className="font-semibold text-slate-900 text-xs">{faq.q}</h3>
-              <p className="text-xs leading-relaxed text-slate-600">{faq.a}</p>
+            <Card key={idx} className="border-zinc-200 bg-white p-5 space-y-1.5 shadow-xs">
+              <h3 className="font-semibold text-zinc-900 text-xs">{faq.q}</h3>
+              <p className="text-xs leading-relaxed text-zinc-600">{faq.a}</p>
             </Card>
           ))}
         </div>

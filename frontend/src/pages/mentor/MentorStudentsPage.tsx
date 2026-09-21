@@ -101,13 +101,13 @@ function StatCard({
           : "bg-zinc-100 text-zinc-900 border border-zinc-200";
 
   return (
-    <Card className="border border-slate-200 bg-white p-4 shadow-sm">
+    <Card className="border border-zinc-200 bg-white p-4 shadow-sm">
       <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${toneClass}`}>
         <Icon size={15} />
       </div>
-      <p className="mt-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{label}</p>
-      <p className="mt-1 text-xl font-bold text-slate-900 font-mono">{value}</p>
-      {note && <p className="mt-0.5 text-xs text-slate-500">{note}</p>}
+      <p className="mt-3 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">{label}</p>
+      <p className="mt-1 text-xl font-bold text-zinc-900 font-mono">{value}</p>
+      {note && <p className="mt-0.5 text-xs text-zinc-500">{note}</p>}
     </Card>
   );
 }
@@ -130,9 +130,7 @@ function StudentRow({
     <div
       className={cn(
         "rounded-xl border transition-all",
-        isExpanded
-          ? "border-zinc-900 bg-white shadow-md"
-          : "border-slate-200 bg-white hover:border-slate-300 shadow-sm",
+        isExpanded ? "border-zinc-900 bg-white shadow-md" : "border-zinc-200 bg-white hover:border-zinc-300 shadow-sm",
       )}
     >
       {/* Collapsed row */}
@@ -148,34 +146,34 @@ function StudentRow({
           userId={student._id}
           role="student"
           size="sm"
-          className="border border-slate-200"
+          className="border border-zinc-200"
         />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-semibold text-slate-900">{student.fullName}</p>
-          <p className="mt-0.5 text-[11px] text-slate-500">
+          <p className="truncate text-xs font-semibold text-zinc-900">{student.fullName}</p>
+          <p className="mt-0.5 text-[11px] text-zinc-500">
             Level {student.level ?? 1} · {student.xp ?? 0} XP
           </p>
         </div>
 
         <div className="hidden items-center gap-5 md:flex">
           <div className="text-center">
-            <p className="text-xs font-semibold text-slate-900">{student.sessionsAttended ?? 0}</p>
-            <p className="text-[10px] text-slate-400">Sessions</p>
+            <p className="text-xs font-semibold text-zinc-900">{student.sessionsAttended ?? 0}</p>
+            <p className="text-[10px] text-zinc-400">Sessions</p>
           </div>
           <div className="text-center">
-            <p className="text-xs font-semibold text-slate-900">{attendanceRate}%</p>
-            <p className="text-[10px] text-slate-400">Attendance</p>
+            <p className="text-xs font-semibold text-zinc-900">{attendanceRate}%</p>
+            <p className="text-[10px] text-zinc-400">Attendance</p>
           </div>
           <div className="text-center">
             <p
               className={cn(
                 "text-xs font-semibold",
-                avgScore >= 4 ? "text-zinc-900" : avgScore >= 3 ? "text-amber-600" : "text-slate-900",
+                avgScore >= 4 ? "text-zinc-900" : avgScore >= 3 ? "text-amber-600" : "text-zinc-900",
               )}
             >
               {avgScore ? avgScore.toFixed(1) : "—"}
             </p>
-            <p className="text-[10px] text-slate-400">Avg Score</p>
+            <p className="text-[10px] text-zinc-400">Avg Score</p>
           </div>
           <Badge
             variant={
@@ -191,18 +189,16 @@ function StudentRow({
           </Badge>
         </div>
 
-        <div className="shrink-0 text-slate-400">
-          {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-        </div>
+        <div className="shrink-0 text-zinc-400">{isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</div>
       </button>
 
       {/* Expanded detail */}
       {isExpanded && (
-        <div className="border-t border-slate-100 p-4 space-y-4 bg-slate-50/40 rounded-b-xl">
+        <div className="border-t border-zinc-100 p-4 space-y-4 bg-zinc-50/40 rounded-b-xl">
           {/* Quick stats grid */}
           <div className="grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Tracks Enrolled</p>
+            <div className="rounded-xl border border-zinc-200 bg-white p-3 shadow-xs">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-400">Tracks Enrolled</p>
               <div className="mt-1.5 flex flex-wrap gap-1">
                 {student.enrolledTracks && student.enrolledTracks.length > 0 ? (
                   student.enrolledTracks.map((track) => (
@@ -211,20 +207,20 @@ function StudentRow({
                     </Badge>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-400">No tracks</span>
+                  <span className="text-xs text-zinc-400">No tracks</span>
                 )}
               </div>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Attendance Rate</p>
+            <div className="rounded-xl border border-zinc-200 bg-white p-3 shadow-xs">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-400">Attendance Rate</p>
               <ProgressBar value={attendanceRate} max={100} className="mt-2 h-1.5" />
-              <p className="mt-1.5 text-xs font-semibold text-slate-900">
+              <p className="mt-1.5 text-xs font-semibold text-zinc-900">
                 {student.sessionsAttended ?? 0} / {student.totalSessions ?? 0} sessions
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-xs">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Last Active</p>
-              <p className="mt-1.5 text-xs font-semibold text-slate-900">
+            <div className="rounded-xl border border-zinc-200 bg-white p-3 shadow-xs">
+              <p className="text-[10px] uppercase font-semibold tracking-wider text-zinc-400">Last Active</p>
+              <p className="mt-1.5 text-xs font-semibold text-zinc-900">
                 {student.lastActiveAt
                   ? new Date(student.lastActiveAt).toLocaleDateString(undefined, {
                       month: "short",
@@ -233,7 +229,7 @@ function StudentRow({
                     })
                   : "Unknown"}
               </p>
-              <p className="mt-0.5 text-[10px] text-slate-400">
+              <p className="mt-0.5 text-[10px] text-zinc-400">
                 {student.lastActiveAt
                   ? `${Math.round((Date.now() - Date.parse(student.lastActiveAt)) / (1000 * 60 * 60 * 24))} days ago`
                   : "—"}
@@ -244,14 +240,14 @@ function StudentRow({
           {/* Feedback history */}
           {student.feedbackHistory && student.feedbackHistory.length > 0 ? (
             <div className="space-y-2">
-              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Feedback History</h4>
+              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">Feedback History</h4>
               {student.feedbackHistory.slice(0, 5).map((fb, idx) => (
-                <div key={idx} className="rounded-xl border border-slate-200 bg-white p-3 space-y-1 shadow-xs">
+                <div key={idx} className="rounded-xl border border-zinc-200 bg-white p-3 space-y-1 shadow-xs">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-900">{fb.sessionTitle}</span>
-                    <span className="text-[10px] text-slate-400">{new Date(fb.createdAt).toLocaleDateString()}</span>
+                    <span className="font-semibold text-zinc-900">{fb.sessionTitle}</span>
+                    <span className="text-[10px] text-zinc-400">{new Date(fb.createdAt).toLocaleDateString()}</span>
                   </div>
-                  {fb.comment && <p className="text-xs text-slate-600">{fb.comment}</p>}
+                  {fb.comment && <p className="text-xs text-zinc-600">{fb.comment}</p>}
                 </div>
               ))}
             </div>
@@ -360,13 +356,13 @@ export function MentorStudentsPage() {
   }
 
   return (
-    <div className="space-y-6 text-slate-900">
+    <div className="space-y-6 text-zinc-900">
       {/* Header */}
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Your Learners Directory</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <h1 className="text-xl font-bold text-zinc-900 tracking-tight sm:text-2xl">Your Learners Directory</h1>
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
@@ -408,21 +404,21 @@ export function MentorStudentsPage() {
       </div>
 
       {/* Filters & Search */}
-      <Card className="border-slate-200 bg-white p-4 shadow-sm">
+      <Card className="border-zinc-200 bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative max-w-sm flex-1">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
             <Input
               placeholder="Search by name, email, or track..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+              className="pl-9 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"
             />
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1">
-              <Filter size={12} className="text-slate-400" />
-              <span className="text-[11px] text-slate-500 font-medium">Engagement:</span>
+              <Filter size={12} className="text-zinc-400" />
+              <span className="text-[11px] text-zinc-500 font-medium">Engagement:</span>
             </div>
             {(["all", "high", "medium", "low"] as const).map((f) => (
               <button
@@ -433,7 +429,7 @@ export function MentorStudentsPage() {
                   "rounded px-2.5 py-1 text-[11px] capitalize transition font-medium",
                   filterEngagement === f
                     ? "bg-zinc-900 text-white shadow-xs"
-                    : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
+                    : "border border-zinc-200 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300",
                 )}
               >
                 {f}
@@ -442,8 +438,8 @@ export function MentorStudentsPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <div className="flex items-center gap-1">
-              <ArrowUpDown size={12} className="text-slate-400" />
-              <span className="text-[11px] text-slate-500 font-medium">Sort:</span>
+              <ArrowUpDown size={12} className="text-zinc-400" />
+              <span className="text-[11px] text-zinc-500 font-medium">Sort:</span>
             </div>
             {sortOptions.map((opt) => (
               <button
@@ -454,7 +450,7 @@ export function MentorStudentsPage() {
                   "rounded px-2.5 py-1 text-[11px] transition font-medium",
                   sortBy === opt.value
                     ? "bg-zinc-900 text-white border border-zinc-900 font-semibold"
-                    : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
+                    : "border border-zinc-200 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300",
                 )}
               >
                 {opt.label} {sortBy === opt.value && (sortDir === "asc" ? "↑" : "↓")}
@@ -476,7 +472,7 @@ export function MentorStudentsPage() {
             />
           ))
         ) : (
-          <Card className="border-slate-200 bg-white p-8 text-center shadow-sm">
+          <Card className="border-zinc-200 bg-white p-8 text-center shadow-sm">
             <EmptyState
               title={search ? "No students match your search" : "No students yet"}
               description={

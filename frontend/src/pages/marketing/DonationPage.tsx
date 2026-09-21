@@ -372,7 +372,7 @@ export function DonationPage() {
               <div className="space-y-1.5">
                 <Label>Or Enter a Custom Amount (USD)</Label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 font-bold text-sm">$</span>
+                  <span className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 font-bold text-sm">$</span>
                   <Input
                     type="number"
                     min={5}

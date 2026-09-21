@@ -66,12 +66,12 @@ export function LoginPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm"
     >
       {/* Header */}
       <motion.div variants={fadeUp} custom={0} className="space-y-1 text-center sm:text-left">
-        <h2 className="text-xl font-bold tracking-tight text-slate-900">Sign In</h2>
-        <p className="text-xs text-slate-500">Enter your credentials to access your engineering workspace.</p>
+        <h2 className="text-xl font-bold tracking-tight text-zinc-900">Sign In</h2>
+        <p className="text-xs text-zinc-500">Enter your credentials to access your engineering workspace.</p>
       </motion.div>
 
       {/* Form */}
@@ -80,10 +80,10 @@ export function LoginPage() {
           <div className="relative">
             <Mail
               size={15}
-              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -tranzinc-y-1/2 text-zinc-400"
             />
             <Input
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-zinc-900 shadow-xs"
+              className="pl-10 text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 focus-visible:ring-zinc-900 shadow-xs"
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
@@ -97,11 +97,11 @@ export function LoginPage() {
           <div className="relative">
             <LockKeyhole
               size={15}
-              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -tranzinc-y-1/2 text-zinc-400"
             />
             <PasswordInput
               wrapperClassName="w-full"
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 focus-visible:ring-zinc-900 shadow-xs"
+              className="pl-10 text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 focus-visible:ring-zinc-900 shadow-xs"
               placeholder="••••••••"
               autoComplete="current-password"
               {...fieldAriaProps("password", errors.password?.message)}
@@ -111,10 +111,7 @@ export function LoginPage() {
         </FormField>
 
         <div className="flex items-center justify-end">
-          <Link
-            to="/auth/forgot-password"
-            className="text-xs font-medium text-slate-500 transition hover:text-zinc-900"
-          >
+          <Link to="/auth/forgot-password" className="text-xs font-medium text-zinc-500 transition hover:text-zinc-900">
             Forgot password?
           </Link>
         </div>
@@ -138,8 +135,8 @@ export function LoginPage() {
       </motion.form>
 
       {/* Footer */}
-      <motion.div variants={fadeUp} custom={2} className="mt-6 border-t border-slate-100 pt-5 text-center">
-        <p className="text-xs text-slate-500">
+      <motion.div variants={fadeUp} custom={2} className="mt-6 border-t border-zinc-100 pt-5 text-center">
+        <p className="text-xs text-zinc-500">
           New to EthioTech?{" "}
           <Link
             to="/register"

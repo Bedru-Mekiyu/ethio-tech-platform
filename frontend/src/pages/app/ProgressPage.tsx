@@ -52,15 +52,6 @@ const fetchCertificates = async (): Promise<CertificateItem[]> => {
   }
 };
 
-const SKILL_CATEGORIES = [
-  { name: "Frontend & React", level: 88, xp: 1450, tier: "Advanced", icon: "⚛️" },
-  { name: "Backend & APIs", level: 75, xp: 1200, tier: "Proficient", icon: "⚙️" },
-  { name: "Data Structures & Algos", level: 64, xp: 950, tier: "Intermediate", icon: "🧩" },
-  { name: "System Design & Cloud", level: 52, xp: 700, tier: "Intermediate", icon: "☁️" },
-  { name: "UI/UX & Accessibility", level: 90, xp: 1600, tier: "Master", icon: "🎨" },
-  { name: "Database & Persistence", level: 70, xp: 1100, tier: "Proficient", icon: "💾" },
-];
-
 const MILESTONES = [
   { label: "Starter", xp: 0, note: "Complete the first learning steps and setup dev environment." },
   { label: "Builder", xp: 750, note: "Ship your first verified project submission." },
@@ -187,45 +178,50 @@ export function ProgressPage() {
 
   // Completed projects for portfolio
   const portfolioProjects = useMemo(() => {
-    const assigned = dashboard?.assignedProjects ?? [];
-    if (assigned.length > 0) return assigned;
+    return dashboard?.assignedProjects ?? [];
+  }, [dashboard?.assignedProjects]);
 
-    // Fallback demo portfolio projects to ensure gorgeous preview
+  // Derive skills dynamically from enrolled tracks and real progress
+  const skills = useMemo(() => {
+    const tracks = dashboard?.progressByTrack ?? [];
+    if (tracks.length > 0) {
+      return tracks.map((t) => {
+        const level = Math.round(t.overallProgressPercent ?? 0);
+        const tier = level >= 80 ? "Advanced" : level >= 50 ? "Proficient" : level >= 20 ? "Intermediate" : "Novice";
+        const estimatedXp = Math.round((level / 100) * 2000);
+        return {
+          name: t.title,
+          level,
+          xp: estimatedXp,
+          tier,
+          icon: "💻",
+        };
+      });
+    }
+    const baseProgress = Math.min(100, Math.round(((user?.xp ?? 0) / 2500) * 100));
     return [
       {
-        projectId: "proj-1",
-        title: "Realtime Collaborative Whiteboard",
-        trackTitle: "Full-Stack Web Development",
-        completionPercent: 100,
-        submissionStatus: "approved",
-        grade: 98,
-        feedback: "Exceptional architecture with zero race conditions on socket broadcasts.",
-        githubLink: "https://github.com/ethiotech/collaborative-board",
-        deployedUrl: "https://ethiotech-board.vercel.app",
-        submittedAt: "2026-08-15T10:30:00Z",
+        name: "Core Software Engineering",
+        level: Math.max(10, baseProgress),
+        xp: user?.xp ?? 0,
+        tier: baseProgress >= 50 ? "Proficient" : "Novice",
+        icon: "💻",
       },
       {
-        projectId: "proj-2",
-        title: "Addis Fintech Microservices Gateway",
-        trackTitle: "Cloud & Backend Engineering",
-        completionPercent: 100,
-        submissionStatus: "approved",
-        grade: 95,
-        feedback: "Well-structured token validation and circuit breaker implementations.",
-        githubLink: "https://github.com/ethiotech/fintech-gateway",
-        deployedUrl: "https://fintech-gateway.demo.io",
-        submittedAt: "2026-08-20T14:15:00Z",
+        name: "Problem Solving & Logic",
+        level: Math.max(10, Math.round(baseProgress * 0.85)),
+        xp: Math.round((user?.xp ?? 0) * 0.85),
+        tier: baseProgress >= 50 ? "Proficient" : "Novice",
+        icon: "⚙️",
       },
     ];
-  }, [dashboard?.assignedProjects]);
+  }, [dashboard?.progressByTrack, user?.xp]);
 
   if (dashboardQuery.isError) return <QueryError onRetry={() => dashboardQuery.refetch()} />;
   if (dashboardQuery.isLoading) return <ProgressSkeleton />;
 
-  // Calculate overall readiness score
-  const overallReadiness = Math.round(
-    SKILL_CATEGORIES.reduce((acc, curr) => acc + curr.level, 0) / SKILL_CATEGORIES.length,
-  );
+  // Calculate overall readiness score from actual skills
+  const overallReadiness = Math.round(skills.reduce((acc, curr) => acc + curr.level, 0) / (skills.length || 1));
 
   return (
     <div className="space-y-6 text-zinc-900">
@@ -417,7 +413,7 @@ export function ProgressPage() {
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-2">
-              {SKILL_CATEGORIES.map((skill) => (
+              {skills.map((skill) => (
                 <div key={skill.name} className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3.5 space-y-2.5">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -552,69 +548,67 @@ export function ProgressPage() {
                 <p className="text-xs text-zinc-500">Verifiable completion credentials issued upon track graduation.</p>
               </div>
               <Badge variant="default" size="sm" className="gap-1">
-                <Award size={12} /> {certificates.length || 1} Issued
+                <Award size={12} /> {certificates.length} Issued
               </Badge>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              {(certificates.length > 0
-                ? certificates
-                : [
-                    {
-                      _id: "cert-1",
-                      track: { title: "Full-Stack Web & Realtime Systems" },
-                      serialNumber: "CERT-ET-2026-9482",
-                      createdAt: "2026-08-20T00:00:00Z",
-                      certificateUrl: "#",
-                    },
-                  ]
-              ).map((cert) => (
-                <Card
-                  key={cert._id}
-                  className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-xs hover:border-zinc-300 transition-all"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
-                        <Award size={20} />
-                      </div>
-                      <div>
-                        <Badge variant="default" size="sm" className="font-medium">
-                          Verified & Signed
-                        </Badge>
-                        <h3 className="mt-0.5 text-sm font-semibold text-zinc-900">
-                          {cert.track?.title ?? "Full-Stack Development Track"}
-                        </h3>
+            {certificates.length > 0 ? (
+              <div className="grid gap-3 md:grid-cols-2">
+                {certificates.map((cert) => (
+                  <Card
+                    key={cert._id}
+                    className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-xs hover:border-zinc-300 transition-all"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+                          <Award size={20} />
+                        </div>
+                        <div>
+                          <Badge variant="default" size="sm" className="font-medium">
+                            Verified & Signed
+                          </Badge>
+                          <h3 className="mt-0.5 text-sm font-semibold text-zinc-900">
+                            {cert.track?.title ?? "Full-Stack Development Track"}
+                          </h3>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="mt-4 space-y-1 border-t border-zinc-100 pt-3 text-xs text-zinc-500">
-                    <div className="flex justify-between">
-                      <span>Credential ID:</span>
-                      <span className="font-mono font-semibold text-zinc-800">
-                        {cert.serialNumber ?? "CERT-ET-2026-9482"}
-                      </span>
+                    <div className="mt-4 space-y-1 border-t border-zinc-100 pt-3 text-xs text-zinc-500">
+                      <div className="flex justify-between">
+                        <span>Credential ID:</span>
+                        <span className="font-mono font-semibold text-zinc-800">
+                          {cert.serialNumber ?? "CERT-VERIFIED"}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>Issued to:</span>
+                        <span className="text-zinc-800 font-medium">{user?.fullName ?? "Learner"}</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Issued to:</span>
-                      <span className="text-zinc-800 font-medium">{user?.fullName ?? "Learner"}</span>
-                    </div>
-                  </div>
 
-                  <div className="mt-4 flex items-center gap-2">
-                    <Button size="sm" variant="primary" className="gap-1 text-xs font-medium">
-                      <Download size={12} />
-                      Download Certificate PDF
-                    </Button>
-                    <Button size="sm" variant="outline" className="gap-1 text-xs">
-                      <ExternalLink size={12} />
-                      Verify Credential
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                    <div className="mt-4 flex items-center gap-2">
+                      <Button size="sm" variant="primary" className="gap-1 text-xs font-medium">
+                        <Download size={12} />
+                        Download Certificate PDF
+                      </Button>
+                      <Button size="sm" variant="outline" className="gap-1 text-xs">
+                        <ExternalLink size={12} />
+                        Verify Credential
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title="No certificates issued yet"
+                description="Complete all curriculum modules and capstone projects in an enrolled track to earn verified credentials."
+                actionLabel="Explore Tracks"
+                actionHref="/app/tracks"
+              />
+            )}
           </div>
 
           {/* Completed Projects Portfolio */}
@@ -626,55 +620,64 @@ export function ProgressPage() {
               </p>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-2">
-              {portfolioProjects.map((p, idx) => (
-                <Card
-                  key={p.projectId || idx}
-                  className="rounded-xl border border-zinc-200 bg-white p-4 space-y-3 shadow-xs hover:border-zinc-300 transition-all"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-600">
-                        {p.trackTitle}
-                      </span>
-                      <h3 className="mt-0.5 text-sm font-semibold text-zinc-900">{p.title}</h3>
+            {portfolioProjects.length > 0 ? (
+              <div className="grid gap-3 md:grid-cols-2">
+                {portfolioProjects.map((p, idx) => (
+                  <Card
+                    key={p.projectId || idx}
+                    className="rounded-xl border border-zinc-200 bg-white p-4 space-y-3 shadow-xs hover:border-zinc-300 transition-all"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-600">
+                          {p.trackTitle}
+                        </span>
+                        <h3 className="mt-0.5 text-sm font-semibold text-zinc-900">{p.title}</h3>
+                      </div>
+                      <Badge variant="outline" size="sm" className="font-medium">
+                        Grade: {p.grade ?? 95}/100
+                      </Badge>
                     </div>
-                    <Badge variant="outline" size="sm" className="font-medium">
-                      Grade: {p.grade ?? 95}/100
-                    </Badge>
-                  </div>
 
-                  {p.feedback && (
-                    <div className="rounded-lg border border-zinc-100 bg-zinc-50 p-2.5 text-xs text-zinc-600 italic">
-                      "{p.feedback}"
+                    {p.feedback && (
+                      <div className="rounded-lg border border-zinc-100 bg-zinc-50 p-2.5 text-xs text-zinc-600 italic">
+                        &ldquo;{p.feedback}&rdquo;
+                      </div>
+                    )}
+
+                    <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
+                      {p.githubLink && (
+                        <a
+                          href={p.githubLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                        >
+                          <Github size={13} /> Repository
+                        </a>
+                      )}
+                      {p.deployedUrl && (
+                        <a
+                          href={p.deployedUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:underline ml-auto"
+                        >
+                          <ExternalLink size={13} /> Live Demo
+                        </a>
+                      )}
                     </div>
-                  )}
-
-                  <div className="flex items-center gap-3 pt-2 border-t border-zinc-100">
-                    {p.githubLink && (
-                      <a
-                        href={p.githubLink}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
-                      >
-                        <Github size={13} /> Repository
-                      </a>
-                    )}
-                    {p.deployedUrl && (
-                      <a
-                        href={p.deployedUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:underline ml-auto"
-                      >
-                        <ExternalLink size={13} /> Live Demo
-                      </a>
-                    )}
-                  </div>
-                </Card>
-              ))}
-            </div>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title="No submitted projects yet"
+                description="Your submitted project code and mentor evaluations will appear here once reviewed."
+                actionLabel="View Assigned Tasks"
+                actionHref="/app/projects"
+              />
+            )}
           </div>
         </div>
       )}

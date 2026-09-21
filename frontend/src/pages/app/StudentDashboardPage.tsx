@@ -6,6 +6,7 @@ import {
   ArrowRight,
   BookOpen,
   Building2,
+  CalendarDays,
   CheckCircle2,
   Code2,
   Flame,
@@ -23,6 +24,7 @@ import {
 import { fetchStudentDashboard } from "@/services/dashboardService";
 import { completeDailyChallenge } from "@/services/gamificationService";
 import { fetchMyPeerGroups } from "@/services/peerGroupsService";
+import { fetchMyHubBookings } from "@/services/hubsService";
 import { useAuthStore } from "@/store/authStore";
 import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
 import { Card } from "@/components/ui/card";
@@ -86,6 +88,17 @@ export function StudentDashboardPage() {
     enabled: !!user,
   });
 
+  const { data: myBookings } = useQuery({
+    queryKey: ["hubs", "myBookings"],
+    queryFn: fetchMyHubBookings,
+    enabled: !!user,
+  });
+
+  const activeBooking = useMemo(() => {
+    if (!myBookings || myBookings.length === 0) return null;
+    return myBookings.find((b) => b.status === "confirmed" || b.status === "checked_in") || null;
+  }, [myBookings]);
+
   const completeChallengeMutation = useMutation({
     mutationFn: completeDailyChallenge,
     onSuccess: () => {
@@ -135,21 +148,32 @@ export function StudentDashboardPage() {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="space-y-6 text-slate-900"
+      className="space-y-6 text-zinc-900"
     >
       {/* Top Welcome Bar */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Welcome back, {firstName}</h1>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900 md:text-2xl">Welcome back, {firstName}</h1>
+          <p className="mt-0.5 text-xs text-zinc-500">
             {currentStreak > 0
               ? `${currentStreak}-day learning streak active. Continue building your track milestones.`
               : "Let's build something great today. Pick up where you left off."}
           </p>
         </div>
 
-        {/* Quick Stat Badges */}
+        {/* Quick Stat Badges & Planner Shortcut */}
         <div className="flex flex-wrap items-center gap-2">
+          <Link to="/app/calendar">
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5 text-xs border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 shadow-xs"
+            >
+              <CalendarDays size={13} />
+              Study Planner
+            </Button>
+          </Link>
+
           <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs">
             <Flame className="text-amber-500" size={14} />
             <span className="text-xs font-semibold text-zinc-900">{currentStreak}</span>
@@ -165,7 +189,7 @@ export function StudentDashboardPage() {
           <Link to="/leaderboard">
             <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs hover:border-zinc-300 transition-colors">
               <Trophy className="text-amber-600" size={14} />
-              <span className="text-xs font-semibold text-zinc-900">#{data?.leaderboardPosition ?? "12"}</span>
+              <span className="text-xs font-semibold text-zinc-900">#{data?.leaderboardPosition ?? "—"}</span>
               <span className="text-[11px] text-zinc-500">Rank</span>
             </div>
           </Link>
@@ -299,114 +323,197 @@ export function StudentDashboardPage() {
             </div>
           </Card>
 
-          {/* ─── Physical Hub Arrival & Access Pass Widget ─── */}
+          {/* ─── Assigned Projects & Tasks ─── */}
           <Card className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div className="space-y-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 text-zinc-900 border border-zinc-200">
-                    <Building2 size={13} />
-                  </div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-700">
-                    Physical Hub Arrival & Pass
-                  </span>
-                  {hubCheckedIn ? (
-                    <Badge variant="default" size="sm" className="font-medium">
-                      Checked In Today
-                    </Badge>
-                  ) : (
-                    <Badge variant="outline" size="sm">
-                      Pass Active
-                    </Badge>
-                  )}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 text-zinc-900 border border-zinc-200">
+                  <BookOpen size={13} />
                 </div>
-
-                <h3 className="text-sm font-semibold text-zinc-900 pt-0.5">Addis Ababa Bole Tech Hub · Desk #B-14</h3>
-                <p className="text-xs text-zinc-500 flex items-center gap-1.5">
-                  <MapPin size={12} className="text-zinc-400" />
-                  Bole Medhanialem Tech Park, Floor 3 · Open 08:30 AM – 08:00 PM
-                </p>
+                <h3 className="text-sm font-semibold text-zinc-900">Assigned Projects & Portfolio Tasks</h3>
               </div>
+              <Link
+                to="/app/projects"
+                className="text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:underline flex items-center gap-1"
+              >
+                View All <ArrowRight size={11} />
+              </Link>
+            </div>
 
-              {/* Hub Access Actions */}
-              <div className="shrink-0 flex flex-wrap items-center gap-2">
-                {hubCheckedIn ? (
-                  <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-800">
-                    <CheckCircle2 size={14} className="text-zinc-700" />
-                    Verified Arrival (+50 XP)
-                  </div>
-                ) : (
-                  <Button
-                    size="sm"
-                    variant="primary"
-                    onClick={handleHubCheckIn}
-                    className="gap-1 font-medium bg-zinc-900 hover:bg-zinc-800 text-white"
+            {data?.assignedProjects && data.assignedProjects.length > 0 ? (
+              <div className="mt-3.5 space-y-2.5">
+                {data.assignedProjects.slice(0, 3).map((project) => (
+                  <div
+                    key={project.projectId}
+                    className="flex flex-col gap-2 rounded-lg border border-zinc-200 bg-zinc-50/70 p-3 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <Zap size={13} />
-                    Check In (+50 XP)
-                  </Button>
-                )}
+                    <div className="min-w-0 space-y-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold text-zinc-900 truncate">{project.title}</span>
+                        {project.difficulty && (
+                          <Badge variant="outline" size="sm" className="text-[10px]">
+                            {project.difficulty}
+                          </Badge>
+                        )}
+                        <Badge
+                          variant={project.category === "completed" ? "default" : "outline"}
+                          size="sm"
+                          className="text-[10px]"
+                        >
+                          {project.submissionStatus || project.category}
+                        </Badge>
+                      </div>
+                      <p className="text-[11px] text-zinc-500">{project.trackTitle}</p>
+                    </div>
 
-                <Link to="/hubs">
+                    <div className="flex items-center gap-3 shrink-0">
+                      <div className="text-right">
+                        <span className="text-xs font-mono font-semibold text-zinc-800">
+                          {project.completionPercent}%
+                        </span>
+                      </div>
+                      <Link to="/app/projects">
+                        <Button size="sm" variant="outline" className="text-xs h-7 px-2.5">
+                          Open Task
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-3.5 rounded-lg border border-dashed border-zinc-200 p-4 text-center">
+                <p className="text-xs text-zinc-600 font-medium">No individual project assignments pending.</p>
+                <p className="mt-0.5 text-[11px] text-zinc-500">
+                  Build production capstones and earn mentor reviews to populate your verified Skill Passport.
+                </p>
+                <Link to="/app/projects" className="mt-2.5 inline-block">
                   <Button size="sm" variant="outline" className="text-xs">
-                    Book / Switch Desk
+                    Browse Project Catalog
                   </Button>
                 </Link>
               </div>
-            </div>
-
-            {/* Hub Hardware & Connection Specs */}
-            <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-zinc-100">
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-zinc-500 block">Mesh Pass ID</span>
-                <span className="font-mono text-xs font-semibold text-zinc-800">PASS-ET-9482</span>
-              </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-zinc-500 flex items-center gap-1">
-                  <Wifi size={11} className="text-zinc-700" /> Fiber WiFi
-                </span>
-                <span className="text-xs font-semibold text-zinc-800">EthioTech-5G-Hub</span>
-              </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
-                <span className="text-[10px] font-medium text-zinc-500 block">Workstation</span>
-                <span className="text-xs font-semibold text-zinc-800">Dual Monitor + UPS</span>
-              </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5 flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] font-medium text-zinc-500 block">QR Gate Pass</span>
-                  <span className="text-xs font-semibold text-zinc-800">Ready to Scan</span>
-                </div>
-                <svg
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-zinc-400"
-                  aria-hidden="true"
-                >
-                  <rect width="5" height="5" x="3" y="3" rx="1" />
-                  <rect width="5" height="5" x="16" y="3" rx="1" />
-                  <rect width="5" height="5" x="3" y="16" rx="1" />
-                  <path d="M21 16h-3a2 2 0 0 0-2 2v3" />
-                  <path d="M21 21v.01" />
-                  <path d="M12 7v3a2 2 0 0 1-2 2H7" />
-                  <path d="M3 12h.01" />
-                  <path d="M12 3h.01" />
-                  <path d="M12 16v.01" />
-                  <path d="M16 12h1" />
-                  <path d="M21 12v.01" />
-                  <path d="M12 21v-1" />
-                </svg>
-              </div>
-            </div>
+            )}
           </Card>
 
+          {/* ─── Physical Hub Arrival & Access Pass Widget ─── */}
+          {activeBooking ? (
+            <Card className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 text-zinc-900 border border-zinc-200">
+                      <Building2 size={13} />
+                    </div>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-700">
+                      Physical Hub Arrival & Pass
+                    </span>
+                    {activeBooking.status === "checked_in" || hubCheckedIn ? (
+                      <Badge variant="default" size="sm" className="font-medium">
+                        Checked In Today
+                      </Badge>
+                    ) : (
+                      <Badge variant="outline" size="sm">
+                        Pass Active
+                      </Badge>
+                    )}
+                  </div>
+
+                  <h3 className="text-sm font-semibold text-zinc-900 pt-0.5">
+                    {activeBooking.hubCity} Tech Hub · {activeBooking.workstationLabel}
+                  </h3>
+                  <p className="text-xs text-zinc-500 flex items-center gap-1.5">
+                    <MapPin size={12} className="text-zinc-400" />
+                    {activeBooking.hubAddress} · Slot: {activeBooking.slotLabel} ({activeBooking.slotTimeRange})
+                  </p>
+                </div>
+
+                {/* Hub Access Actions */}
+                <div className="shrink-0 flex flex-wrap items-center gap-2">
+                  {activeBooking.status === "checked_in" || hubCheckedIn ? (
+                    <div className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-800">
+                      <CheckCircle2 size={14} className="text-zinc-700" />
+                      Verified Arrival (+50 XP)
+                    </div>
+                  ) : (
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      onClick={handleHubCheckIn}
+                      className="gap-1 font-medium bg-zinc-900 hover:bg-zinc-800 text-white"
+                    >
+                      <Zap size={13} />
+                      Check In (+50 XP)
+                    </Button>
+                  )}
+
+                  <Link to="/hubs">
+                    <Button size="sm" variant="outline" className="text-xs">
+                      Book / Switch Desk
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Hub Hardware & Connection Specs */}
+              <div className="mt-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 border-t border-zinc-100">
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                  <span className="text-[10px] font-medium text-zinc-500 block">Pass Code</span>
+                  <span className="font-mono text-xs font-semibold text-zinc-800">{activeBooking.passCode}</span>
+                </div>
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                  <span className="text-[10px] font-medium text-zinc-500 flex items-center gap-1">
+                    <Wifi size={11} className="text-zinc-700" /> Connection
+                  </span>
+                  <span className="text-xs font-semibold text-zinc-800">High-Speed Fiber</span>
+                </div>
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                  <span className="text-[10px] font-medium text-zinc-500 block">Visit Date</span>
+                  <span className="text-xs font-semibold text-zinc-800">{activeBooking.visitDate}</span>
+                </div>
+                <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-2.5">
+                  <span className="text-[10px] font-medium text-zinc-500 block">Slot</span>
+                  <span className="text-xs font-semibold text-zinc-800">{activeBooking.slotLabel}</span>
+                </div>
+              </div>
+            </Card>
+          ) : (
+            <Card className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-6 w-6 items-center justify-center rounded-md bg-zinc-100 text-zinc-900 border border-zinc-200">
+                      <Building2 size={13} />
+                    </div>
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-700">
+                      Regional Learning Hubs
+                    </span>
+                    <Badge variant="outline" size="sm">
+                      Free Access
+                    </Badge>
+                  </div>
+                  <h3 className="text-sm font-semibold text-zinc-900 pt-0.5">
+                    Need reliable fiber internet or uninterrupted power?
+                  </h3>
+                  <p className="text-xs text-zinc-500">
+                    Reserve a workstation, GPU compute rig, or study desk at any of our regional learning hubs across
+                    Ethiopia.
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <Link to="/hubs">
+                    <Button size="sm" variant="primary" className="gap-1 font-medium">
+                      <Building2 size={13} />
+                      Reserve Hub Seat
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          )}
+
           {/* Quick Platform Navigation Shortcuts */}
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <Link to="/app/workspace" className="group">
               <Card className="h-full rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
@@ -431,6 +538,20 @@ export function StudentDashboardPage() {
                 </h3>
                 <p className="mt-0.5 text-[11px] text-zinc-500">
                   Ship real-world portfolio tasks and get mentor review code scores.
+                </p>
+              </Card>
+            </Link>
+
+            <Link to="/app/calendar" className="group">
+              <Card className="h-full rounded-xl border border-zinc-200 bg-white p-4 transition-all hover:border-zinc-300 hover:shadow-xs">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+                  <CalendarDays size={16} />
+                </div>
+                <h3 className="mt-2.5 text-xs font-semibold text-zinc-900 group-hover:text-zinc-700 transition-colors">
+                  Study Planner
+                </h3>
+                <p className="mt-0.5 text-[11px] text-zinc-500">
+                  Sprint calendar, study blocks, and mentor session schedule.
                 </p>
               </Card>
             </Link>
@@ -553,28 +674,40 @@ export function StudentDashboardPage() {
               </Link>
             </div>
 
-            <div className="mt-2.5 rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-zinc-800 truncate">
-                  {squad?.name || "Alpha Code Squad #4"}
-                </span>
-                <Badge variant="outline" size="sm">
-                  {squad?.groupXP ? `${squad.groupXP.toLocaleString()} XP` : "1,420 XP"}
-                </Badge>
+            {squad ? (
+              <div className="mt-2.5 rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-medium text-zinc-800 truncate">{squad.name}</span>
+                  <Badge variant="outline" size="sm">
+                    {squad.groupXP ? `${squad.groupXP.toLocaleString()} XP` : "0 XP"}
+                  </Badge>
+                </div>
+                <p className="mt-1 text-xs text-zinc-500">
+                  Active squad peers collaborating on track milestones and peer code reviews.
+                </p>
+                <div className="mt-2.5 flex items-center justify-between border-t border-zinc-200 pt-2 text-xs text-zinc-500">
+                  <span>{squad.members?.length || squad.memberCount || 1} members</span>
+                  <Link
+                    to={squadPath || "/app/squads"}
+                    className="text-zinc-800 font-medium hover:text-zinc-900 transition-colors"
+                  >
+                    Open Squad Hub →
+                  </Link>
+                </div>
               </div>
-              <p className="mt-1 text-xs text-zinc-500">
-                Active peers collaborating on track milestones and live study sessions.
-              </p>
-              <div className="mt-2.5 flex items-center justify-between border-t border-zinc-200 pt-2 text-xs text-zinc-500">
-                <span>4 active discussions</span>
-                <Link
-                  to={squadPath || "/app/squads"}
-                  className="text-zinc-800 font-medium hover:text-zinc-900 transition-colors"
-                >
-                  Join Chat →
+            ) : (
+              <div className="mt-2.5 rounded-lg border border-dashed border-zinc-200 p-3 text-center">
+                <p className="text-xs text-zinc-600 font-medium">Not assigned to a study squad</p>
+                <p className="mt-0.5 text-[11px] text-zinc-500">
+                  Collaborate in 4–6 person peer squads with shared code reviews and sprint check-ins.
+                </p>
+                <Link to={squadPath || "/app/squads"} className="mt-2.5 inline-block">
+                  <Button size="sm" variant="outline" className="text-xs h-7">
+                    Join or Create Squad
+                  </Button>
                 </Link>
               </div>
-            </div>
+            )}
           </Card>
         </div>
       </div>

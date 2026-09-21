@@ -25,8 +25,8 @@ import {
   FileCode,
   Smartphone,
   ChevronRight,
+  Layers,
 } from "lucide-react";
-import { LivePlatformPulse } from "@/components/composites/LivePlatformPulse";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -557,7 +557,10 @@ export function HomePage() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
           <div className="space-y-6">
-            <LivePlatformPulse />
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-800">
+              <span className="h-1.5 w-1.5 rounded-full bg-zinc-900" />
+              <span>Interactive Technology & Career Platform</span>
+            </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-zinc-900">
@@ -659,11 +662,11 @@ export function HomePage() {
                   <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
                   <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
                   <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-                  <span className="ml-2 font-mono text-xs text-zinc-500">ethio-tech-live-sandbox v2.4</span>
+                  <span className="ml-2 font-mono text-xs text-zinc-600">Interactive Classroom</span>
                 </div>
                 <div className="flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-800">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-600" />
-                  <span>LIVE COHORT • Squad 04</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
+                  <span>LiveKit WebRTC Classroom</span>
                 </div>
               </div>
 
@@ -818,8 +821,8 @@ export function HomePage() {
       >
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium tracking-wide text-zinc-800">
-            <Zap size={12} />
-            <span>Platform Capabilities</span>
+            <Layers size={12} />
+            <span>Interactive Learning Stack</span>
           </div>
           <h2 className="mt-4 text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
             Everything You Need to Master <span className="text-[#b91c1c]">Production Software</span>

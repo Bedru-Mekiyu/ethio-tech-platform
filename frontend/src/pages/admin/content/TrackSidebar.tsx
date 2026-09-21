@@ -68,17 +68,17 @@ export function TrackSidebar({
   });
 
   return (
-    <div className="flex h-full flex-col border-r border-slate-200/80 bg-white">
+    <div className="flex h-full flex-col border-r border-zinc-200/80 bg-white">
       {/* Sidebar Header */}
-      <div className="border-b border-slate-100 p-4 space-y-3">
+      <div className="border-b border-zinc-100 p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
               <BookOpen size={16} />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-slate-900 tracking-tight">Curriculum Tracks</h2>
-              <p className="text-[11px] text-slate-500">
+              <h2 className="text-sm font-bold text-zinc-900 tracking-tight">Curriculum Tracks</h2>
+              <p className="text-[11px] text-zinc-500">
                 {tracks.length} {tracks.length === 1 ? "track" : "tracks"} total
               </p>
             </div>
@@ -90,18 +90,18 @@ export function TrackSidebar({
 
         {/* Search Input */}
         <div className="relative">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
           <Input
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search tracks..."
-            className="h-9 pl-8 pr-8 text-xs bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-400 focus:bg-white"
+            className="h-9 pl-8 pr-8 text-xs bg-zinc-50 border-zinc-200 text-zinc-900 placeholder:text-zinc-400 focus:bg-white"
           />
           {search && (
             <button
               type="button"
               onClick={() => onSearchChange("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+              className="absolute right-2.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 hover:text-zinc-700"
             >
               <X size={13} />
             </button>
@@ -121,7 +121,7 @@ export function TrackSidebar({
                   "whitespace-nowrap rounded-lg px-2.5 py-1 text-[11px] font-medium transition-all",
                   isSelected
                     ? "bg-zinc-900 text-white shadow-xs"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900",
+                    : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 hover:text-zinc-900",
                 )}
               >
                 {filter.label}
@@ -131,19 +131,19 @@ export function TrackSidebar({
         </div>
 
         {/* Status Filters Pill */}
-        <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+        <div className="flex items-center justify-between text-[11px] text-zinc-500 pt-1">
           <span className="flex items-center gap-1 font-medium">
-            <Filter size={11} className="text-slate-400" /> Status:
+            <Filter size={11} className="text-zinc-400" /> Status:
           </span>
-          <div className="flex items-center gap-1 rounded-lg bg-slate-100 p-0.5 border border-slate-200">
+          <div className="flex items-center gap-1 rounded-lg bg-zinc-100 p-0.5 border border-zinc-200">
             <button
               type="button"
               onClick={() => onStatusFilterChange("all")}
               className={cn(
                 "rounded px-2 py-0.5 transition-colors",
                 statusFilter === "all"
-                  ? "bg-white text-slate-900 font-semibold shadow-xs"
-                  : "text-slate-600 hover:text-slate-900",
+                  ? "bg-white text-zinc-900 font-semibold shadow-xs"
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               All
@@ -155,7 +155,7 @@ export function TrackSidebar({
                 "rounded px-2 py-0.5 transition-colors",
                 statusFilter === "active"
                   ? "bg-zinc-900 text-white font-semibold shadow-xs"
-                  : "text-slate-600 hover:text-slate-900",
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               Active
@@ -167,7 +167,7 @@ export function TrackSidebar({
                 "rounded px-2 py-0.5 transition-colors",
                 statusFilter === "draft"
                   ? "bg-amber-50 text-amber-700 font-semibold shadow-xs"
-                  : "text-slate-600 hover:text-slate-900",
+                  : "text-zinc-600 hover:text-zinc-900",
               )}
             >
               Draft
@@ -187,15 +187,15 @@ export function TrackSidebar({
         )}
 
         {!isLoading && filteredTracks.length === 0 && (
-          <div className="flex h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 p-4 text-center bg-slate-50/50">
-            <BookOpen size={24} className="text-slate-400 mb-2" />
-            <p className="text-xs font-semibold text-slate-900">No tracks match filters</p>
-            <p className="mt-1 text-[11px] text-slate-500">Try adjusting your search terms or category selection.</p>
+          <div className="flex h-48 flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-200 p-4 text-center bg-zinc-50/50">
+            <BookOpen size={24} className="text-zinc-400 mb-2" />
+            <p className="text-xs font-semibold text-zinc-900">No tracks match filters</p>
+            <p className="mt-1 text-[11px] text-zinc-500">Try adjusting your search terms or category selection.</p>
             <Button
               variant="outline"
               size="sm"
               onClick={onCreateTrack}
-              className="mt-3 text-xs h-7 gap-1 border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+              className="mt-3 text-xs h-7 gap-1 border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700"
             >
               <Plus size={12} /> Create Track
             </Button>
@@ -218,7 +218,7 @@ export function TrackSidebar({
                   "group relative flex w-full flex-col rounded-xl border p-3 text-left transition-all",
                   isSelected
                     ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900/20"
-                    : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50 shadow-2xs",
+                    : "border-zinc-200/80 bg-white hover:border-zinc-300 hover:bg-zinc-50/50 shadow-2xs",
                 )}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -228,7 +228,7 @@ export function TrackSidebar({
                         {isActive ? "Active" : "Draft"}
                       </Badge>
                       {track.category && (
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 truncate max-w-[120px]">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 truncate max-w-[120px]">
                           {track.category}
                         </span>
                       )}
@@ -236,7 +236,7 @@ export function TrackSidebar({
                     <h3
                       className={cn(
                         "text-xs font-semibold leading-tight line-clamp-1 transition-colors",
-                        isSelected ? "text-zinc-950 font-bold" : "text-slate-800 group-hover:text-slate-900",
+                        isSelected ? "text-zinc-950 font-bold" : "text-zinc-800 group-hover:text-zinc-900",
                       )}
                     >
                       {track.title}
@@ -245,11 +245,11 @@ export function TrackSidebar({
                 </div>
 
                 {track.description && (
-                  <p className="mt-1 text-[11px] text-slate-500 line-clamp-1">{track.description}</p>
+                  <p className="mt-1 text-[11px] text-zinc-500 line-clamp-1">{track.description}</p>
                 )}
 
-                <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
-                  <span className="flex items-center gap-1 text-slate-700 font-medium">
+                <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[10px] text-zinc-500">
+                  <span className="flex items-center gap-1 text-zinc-700 font-medium">
                     <Layers size={11} className="text-zinc-600" />
                     {moduleCount} {moduleCount === 1 ? "module" : "mods"}
                   </span>

@@ -143,8 +143,8 @@ export function MentorOnboardingPage() {
   return (
     <div className="mx-auto max-w-xl space-y-6 px-4 py-8">
       <div className="space-y-1">
-        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Mentor Onboarding</h1>
-        <p className="text-xs text-slate-500 leading-relaxed">
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Mentor Onboarding</h1>
+        <p className="text-xs text-zinc-500 leading-relaxed">
           Complete these setup steps to activate your mentor console and interactive tools.
         </p>
       </div>
@@ -161,7 +161,7 @@ export function MentorOnboardingPage() {
                   ? "border-zinc-900 bg-zinc-900 text-white font-semibold shadow-xs"
                   : done
                     ? "border-zinc-300 text-zinc-900 bg-zinc-100"
-                    : "border-slate-200 bg-slate-50 text-slate-500"
+                    : "border-zinc-200 bg-zinc-50 text-zinc-500"
               }`}
             >
               {done ? <CheckCircle2 size={12} className="text-zinc-900" /> : null}
@@ -171,25 +171,25 @@ export function MentorOnboardingPage() {
         })}
       </div>
 
-      <Card className="space-y-4 border-slate-200/80 bg-white p-5 sm:p-6 rounded-xl shadow-sm">
+      <Card className="space-y-4 border-zinc-200/80 bg-white p-5 sm:p-6 rounded-xl shadow-sm">
         {activeStep === "password" && (
           <>
             <div className="space-y-0.5">
-              <h2 className="text-sm font-bold text-slate-900">Set Your Permanent Password</h2>
-              <p className="text-xs text-slate-500">Replace your temporary activation password with a secure one.</p>
+              <h2 className="text-sm font-bold text-zinc-900">Set Your Permanent Password</h2>
+              <p className="text-xs text-zinc-500">Replace your temporary activation password with a secure one.</p>
             </div>
             <FormField id="currentPassword" label="Temporary Password">
               <PasswordInput
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                className="text-xs bg-white border-slate-200 text-slate-900"
+                className="text-xs bg-white border-zinc-200 text-zinc-900"
               />
             </FormField>
             <FormField id="newPassword" label="New Password">
               <PasswordInput
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="text-xs bg-white border-slate-200 text-slate-900"
+                className="text-xs bg-white border-zinc-200 text-zinc-900"
               />
             </FormField>
             <Button
@@ -206,15 +206,15 @@ export function MentorOnboardingPage() {
         {activeStep === "terms" && (
           <>
             <div className="space-y-0.5">
-              <h2 className="text-sm font-bold text-slate-900">Accept Mentor Terms</h2>
-              <p className="text-xs text-slate-500">Review ethical teaching standards and student safety policies.</p>
+              <h2 className="text-sm font-bold text-zinc-900">Accept Mentor Terms</h2>
+              <p className="text-xs text-zinc-500">Review ethical teaching standards and student safety policies.</p>
             </div>
-            <label className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50/60 p-3 text-xs text-slate-700">
+            <label className="flex items-start gap-2.5 rounded-lg border border-zinc-200 bg-zinc-50/60 p-3 text-xs text-zinc-700">
               <input
                 type="checkbox"
                 checked={termsChecked}
                 onChange={(e) => setTermsChecked(e.target.checked)}
-                className="mt-0.5 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900"
+                className="mt-0.5 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
               />
               <span>
                 I agree to the platform mentor code of conduct, session quality standards, and student safety policies.
@@ -234,8 +234,8 @@ export function MentorOnboardingPage() {
         {activeStep === "profile" && (
           <>
             <div className="space-y-0.5">
-              <h2 className="text-sm font-bold text-slate-900">Complete Your Mentor Profile</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-sm font-bold text-zinc-900">Complete Your Mentor Profile</h2>
+              <p className="text-xs text-zinc-500">
                 Let students know about your professional background and areas of expertise.
               </p>
             </div>
@@ -243,21 +243,21 @@ export function MentorOnboardingPage() {
               <textarea
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                className="min-h-[80px] w-full rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                className="min-h-[80px] w-full rounded-lg border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               />
             </FormField>
             <FormField id="company" label="Current Company / Organization">
               <Input
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
-                className="text-xs bg-white border-slate-200 text-slate-900"
+                className="text-xs bg-white border-zinc-200 text-zinc-900"
               />
             </FormField>
             <FormField id="expertise" label="Expertise (comma-separated, min 2)">
               <Input
                 value={expertise}
                 onChange={(e) => setExpertise(e.target.value)}
-                className="text-xs bg-white border-slate-200 text-slate-900"
+                className="text-xs bg-white border-zinc-200 text-zinc-900"
               />
             </FormField>
             <Button
@@ -274,14 +274,14 @@ export function MentorOnboardingPage() {
         {activeStep === "photo" && (
           <>
             <div className="space-y-0.5">
-              <h2 className="text-sm font-bold text-slate-900">Upload Profile Photo</h2>
-              <p className="text-xs text-slate-500">Add a clear profile picture for students to recognize you.</p>
+              <h2 className="text-sm font-bold text-zinc-900">Upload Profile Photo</h2>
+              <p className="text-xs text-zinc-500">Add a clear profile picture for students to recognize you.</p>
             </div>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setAvatarFile(e.target.files?.[0] ?? null)}
-              className="text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+              className="text-xs text-zinc-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-zinc-100 file:text-zinc-700 hover:file:bg-zinc-200"
             />
             <Button
               size="sm"
@@ -297,8 +297,8 @@ export function MentorOnboardingPage() {
         {activeStep === "availability" && (
           <>
             <div className="space-y-0.5">
-              <h2 className="text-sm font-bold text-slate-900">Set Teaching Availability</h2>
-              <p className="text-xs text-slate-500">
+              <h2 className="text-sm font-bold text-zinc-900">Set Teaching Availability</h2>
+              <p className="text-xs text-zinc-500">
                 Add at least one weekly window. You can refine this later in mentor availability settings.
               </p>
             </div>
@@ -306,7 +306,7 @@ export function MentorOnboardingPage() {
               <select
                 value={dayOfWeek}
                 onChange={(e) => setDayOfWeek(Number(e.target.value))}
-                className="h-9 w-full rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                className="h-9 w-full rounded-lg border border-zinc-200 bg-white px-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               >
                 {["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day, i) => (
                   <option key={day} value={i}>
@@ -315,12 +315,12 @@ export function MentorOnboardingPage() {
                 ))}
               </select>
             </FormField>
-            <p className="text-[11px] text-slate-500">Default recurring slot: 6:00 PM – 8:00 PM</p>
+            <p className="text-[11px] text-zinc-500">Default recurring slot: 6:00 PM – 8:00 PM</p>
             <div className="flex gap-2.5 pt-2">
               <Button
                 size="sm"
                 variant="outline"
-                className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50"
+                className="text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50"
                 onClick={() => availabilityMutation.mutate()}
                 disabled={availabilityMutation.isPending}
               >

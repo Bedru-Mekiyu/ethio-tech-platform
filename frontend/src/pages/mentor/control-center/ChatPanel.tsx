@@ -109,12 +109,12 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   });
 
   return (
-    <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[550px] shadow-sm rounded-xl">
+    <Card className="border-zinc-200/80 bg-white p-4 flex flex-col h-[550px] shadow-sm rounded-xl">
       <div className="flex items-center gap-2 mb-4 shrink-0">
         <div className="bg-zinc-100 text-zinc-900 border border-zinc-200 p-1.5 rounded-lg">
           <MessageSquare size={16} />
         </div>
-        <h3 className="text-sm font-semibold text-slate-900">Live Moderated Chat</h3>
+        <h3 className="text-sm font-semibold text-zinc-900">Live Moderated Chat</h3>
       </div>
 
       <Tabs value={activeSubTab} onValueChange={setActiveSubTab} className="flex-1 flex flex-col min-h-0">
@@ -139,7 +139,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         <div className="flex-1 overflow-y-auto mcc-scrollbar my-3 space-y-3 pr-1">
           {filteredMessages.length === 0 ? (
             <div className="h-full flex items-center justify-center text-center">
-              <p className="text-xs text-slate-400">No messages in this tab</p>
+              <p className="text-xs text-zinc-400">No messages in this tab</p>
             </div>
           ) : (
             filteredMessages.map((msg) => {
@@ -149,7 +149,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               if (isSystem) {
                 return (
                   <div key={msg.messageId} className="flex items-center gap-2 justify-center py-1">
-                    <span className="text-[10px] text-slate-600 bg-slate-100 border border-slate-200/80 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="text-[10px] text-zinc-600 bg-zinc-100 border border-zinc-200/80 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <AlertCircle size={10} className="text-zinc-600" />
                       {msg.text}
                     </span>
@@ -160,7 +160,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
               return (
                 <div key={msg.messageId} className="flex flex-col gap-1 text-xs">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-semibold text-slate-900">
+                    <span className="font-semibold text-zinc-900">
                       {msg.author || "Participant"}
                       {msg.announcement && (
                         <Badge variant="warning" className="text-[8px] px-1 ml-1">
@@ -169,7 +169,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                       )}
                     </span>
                     <div className="flex items-center gap-1.5 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
-                      <span className="text-[9px] text-slate-500">
+                      <span className="text-[9px] text-zinc-500">
                         {msg.at ? new Date(msg.at).toLocaleTimeString() : ""}
                       </span>
                       {!isOwn && (
@@ -185,7 +185,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                       )}
                     </div>
                   </div>
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-xl px-3 py-2 text-slate-800 break-all">
+                  <div className="bg-zinc-50 border border-zinc-200/80 rounded-xl px-3 py-2 text-zinc-800 break-all">
                     {msg.text}
                   </div>
                 </div>
@@ -196,11 +196,11 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         </div>
 
         {/* Input box */}
-        <div className="shrink-0 flex gap-2 pt-2 border-t border-slate-100">
+        <div className="shrink-0 flex gap-2 pt-2 border-t border-zinc-100">
           <select
             value={chatType}
             onChange={(e) => setChatType(e.target.value as "public" | "announcement" | "direct" | "private_question")}
-            className="h-9 rounded-xl border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none shrink-0 focus:border-zinc-900"
+            className="h-9 rounded-xl border border-zinc-200 bg-white px-2 text-xs text-zinc-900 outline-none shrink-0 focus:border-zinc-900"
           >
             <option value="public">Public</option>
             <option value="announcement">Announce</option>
@@ -211,7 +211,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
           {chatType === "direct" && (
             <Input
               placeholder="Recipient User ID..."
-              className="h-9 text-xs w-28 bg-white border-slate-200 text-slate-900"
+              className="h-9 text-xs w-28 bg-white border-zinc-200 text-zinc-900"
               value={recipientId}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRecipientId(e.target.value)}
             />

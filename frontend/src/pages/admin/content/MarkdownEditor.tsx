@@ -79,12 +79,12 @@ export function MarkdownEditor({
   return (
     <div
       className={cn(
-        "flex flex-col rounded-2xl border border-slate-200/80 bg-white overflow-hidden shadow-sm",
+        "flex flex-col rounded-2xl border border-zinc-200/80 bg-white overflow-hidden shadow-sm",
         className,
       )}
     >
       {/* Top Toolbar Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 bg-slate-50/70 p-2.5 sm:px-4">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-200/80 bg-zinc-50/70 p-2.5 sm:px-4">
         {/* Formatting actions */}
         <div className="flex flex-wrap items-center gap-1">
           <ToolbarButton
@@ -102,7 +102,7 @@ export function MarkdownEditor({
             label="H3 Heading"
             onClick={() => insertText("\n### ", "\n", "Heading 3")}
           />
-          <div className="mx-1 h-4 w-px bg-slate-200" />
+          <div className="mx-1 h-4 w-px bg-zinc-200" />
           <ToolbarButton
             icon={<span className="font-bold text-sm font-serif">B</span>}
             label="Bold (Ctrl+B)"
@@ -118,7 +118,7 @@ export function MarkdownEditor({
             label="Strikethrough"
             onClick={() => insertText("~~", "~~", "strikethrough text")}
           />
-          <div className="mx-1 h-4 w-px bg-slate-200" />
+          <div className="mx-1 h-4 w-px bg-zinc-200" />
           <ToolbarButton
             icon={<span className="font-mono text-xs">• List</span>}
             label="Bullet List"
@@ -134,7 +134,7 @@ export function MarkdownEditor({
             label="Task Checkbox"
             onClick={() => insertText("\n- [ ] ", "\n", "Task to complete")}
           />
-          <div className="mx-1 h-4 w-px bg-slate-200" />
+          <div className="mx-1 h-4 w-px bg-zinc-200" />
           <ToolbarButton icon={<Code2 size={14} />} label="Inline Code" onClick={() => insertText("`", "`", "code")} />
           <ToolbarButton
             icon={<FileCode2 size={14} />}
@@ -151,7 +151,7 @@ export function MarkdownEditor({
             label="Alert Callout"
             onClick={() => insertText("\n> [!NOTE]\n> ", "\n", "Highlight important context here")}
           />
-          <div className="mx-1 h-4 w-px bg-slate-200" />
+          <div className="mx-1 h-4 w-px bg-zinc-200" />
           <ToolbarButton
             icon={<Link2 size={14} />}
             label="Link (Ctrl+K)"
@@ -172,15 +172,13 @@ export function MarkdownEditor({
         </div>
 
         {/* View Mode Switcher */}
-        <div className="flex items-center rounded-xl bg-slate-200/60 p-1 border border-slate-200">
+        <div className="flex items-center rounded-xl bg-zinc-200/60 p-1 border border-zinc-200">
           <button
             type="button"
             onClick={() => setMode("write")}
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all",
-              mode === "write"
-                ? "bg-white text-slate-900 font-semibold shadow-xs"
-                : "text-slate-600 hover:text-slate-900",
+              mode === "write" ? "bg-white text-zinc-900 font-semibold shadow-xs" : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <Edit3 size={13} />
@@ -192,8 +190,8 @@ export function MarkdownEditor({
             className={cn(
               "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all",
               mode === "preview"
-                ? "bg-white text-slate-900 font-semibold shadow-xs"
-                : "text-slate-600 hover:text-slate-900",
+                ? "bg-white text-zinc-900 font-semibold shadow-xs"
+                : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <Eye size={13} />
@@ -204,9 +202,7 @@ export function MarkdownEditor({
             onClick={() => setMode("split")}
             className={cn(
               "hidden md:flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all",
-              mode === "split"
-                ? "bg-white text-slate-900 font-semibold shadow-xs"
-                : "text-slate-600 hover:text-slate-900",
+              mode === "split" ? "bg-white text-zinc-900 font-semibold shadow-xs" : "text-zinc-600 hover:text-zinc-900",
             )}
           >
             <Columns size={13} />
@@ -216,7 +212,7 @@ export function MarkdownEditor({
       </div>
 
       {/* Editor Body */}
-      <div className="grid grid-cols-1 md:grid-cols-12 flex-1 divide-y md:divide-y-0 md:divide-x divide-slate-200/80">
+      <div className="grid grid-cols-1 md:grid-cols-12 flex-1 divide-y md:divide-y-0 md:divide-x divide-zinc-200/80">
         {/* Write Pane */}
         {(mode === "write" || mode === "split") && (
           <div className={cn(mode === "split" ? "md:col-span-6" : "md:col-span-12", "flex flex-col bg-white")}>
@@ -227,7 +223,7 @@ export function MarkdownEditor({
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
               style={{ minHeight }}
-              className="w-full resize-y bg-transparent p-4 font-mono text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:outline-none"
+              className="w-full resize-y bg-transparent p-4 font-mono text-sm leading-relaxed text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
             />
           </div>
         )}
@@ -237,14 +233,14 @@ export function MarkdownEditor({
           <div
             className={cn(
               mode === "split" ? "md:col-span-6" : "md:col-span-12",
-              "overflow-y-auto bg-slate-50/40 p-4 sm:p-6",
+              "overflow-y-auto bg-zinc-50/40 p-4 sm:p-6",
             )}
             style={{ minHeight }}
           >
             {mode === "split" && (
-              <div className="mb-3 flex items-center justify-between border-b border-slate-200 pb-2 text-xs font-semibold uppercase tracking-wider text-zinc-900">
+              <div className="mb-3 flex items-center justify-between border-b border-zinc-200 pb-2 text-xs font-semibold uppercase tracking-wider text-zinc-900">
                 <span>Live Markdown Preview</span>
-                <span className="text-[10px] text-slate-500 font-medium">Real-time render</span>
+                <span className="text-[10px] text-zinc-500 font-medium">Real-time render</span>
               </div>
             )}
             <MarkdownPreview content={value} />
@@ -253,7 +249,7 @@ export function MarkdownEditor({
       </div>
 
       {/* Status Footer */}
-      <div className="flex items-center justify-between border-t border-slate-200/80 bg-slate-50/50 px-4 py-2 text-[11px] text-slate-500">
+      <div className="flex items-center justify-between border-t border-zinc-200/80 bg-zinc-50/50 px-4 py-2 text-[11px] text-zinc-500">
         <span className="flex items-center gap-3">
           <span>{wordCount} words</span>
           <span>·</span>
@@ -274,7 +270,7 @@ function ToolbarButton({ icon, label, onClick }: { icon: ReactNode; label: strin
       onClick={onClick}
       title={label}
       aria-label={label}
-      className="h-7 w-7 rounded-lg text-slate-600 hover:bg-slate-200/70 hover:text-slate-900"
+      className="h-7 w-7 rounded-lg text-zinc-600 hover:bg-zinc-200/70 hover:text-zinc-900"
     >
       {icon}
     </Button>
