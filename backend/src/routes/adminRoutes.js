@@ -29,7 +29,7 @@ import adminUserRoutes from "./adminUserRoutes.js";
 
 const router = Router();
 
-router.use(protect, authorize("admin", "super_admin", "moderator", "reviewer"));
+router.use(protect, authorize("admin", "super_admin", "moderator", "reviewer", "support"));
 
 router.get("/analytics", authorize("admin", "super_admin"), getAnalytics);
 router.get("/audit-logs", getAuditLogs);

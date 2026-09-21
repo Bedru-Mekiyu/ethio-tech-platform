@@ -32,7 +32,7 @@ const authLimiter = rateLimit({
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 8,
+  max: process.env.NODE_ENV === "test" ? 1000 : process.env.NODE_ENV === "production" ? 30 : 100,
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many login attempts" },
@@ -66,7 +66,7 @@ router.post(
   "/first-login/change-password",
   protect,
   validateRequest({ body: authSchemas.firstLoginChangePassword }),
-  firstLoginPassword
+  firstLoginPassword,
 );
 router.post("/accept-terms", protect, acceptTermsHandler);
 router.get("/onboarding-status", protect, onboardingStatus);
@@ -75,7 +75,7 @@ router.post(
   "/onboarding/step",
   protect,
   validateRequest({ body: authSchemas.onboardingStep }),
-  updateOnboardingStepHandler
+  updateOnboardingStepHandler,
 );
 router.get("/me", protect, me);
 

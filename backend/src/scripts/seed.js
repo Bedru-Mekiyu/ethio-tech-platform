@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import mongoose from "mongoose";
 
 import { connectDB } from "../config/db.js";
@@ -33,8 +33,7 @@ import {
 import { createTracksAndContent, createBadgesAndLevels, createDailyChallengesForMonth } from "./generators.js";
 import { randomInt, pick, pickMany, batchInsert, hoursAgo } from "./utils.js";
 import { ETHIOPIAN_CITIES } from "./datasets.js";
-
-dotenv.config();
+import { seedRoleUsers } from "./seed-roles.js";
 
 export const runSeed = async ({ verbose = true } = {}) => {
   const log = (...args) => {
@@ -321,12 +320,9 @@ export const runSeed = async ({ verbose = true } = {}) => {
     console.log(`  Project Submissions: ${submissions.length}`);
     console.log(`  Certificates: ${certificates.length}\n`);
 
-    console.log("🎓 TEST ACCOUNTS:");
-    console.log(`  📧 Admin: admin@ethiotech.com / Passw0rd!`);
-    if (createdMentors.length > 0) console.log(`  👨‍🏫 Mentor: ${createdMentors[0].email} / Passw0rd!`);
-    if (createdStudents.length > 0) console.log(`  👨‍🎓 Student: ${createdStudents[0].email} / Passw0rd!\n`);
+    await seedRoleUsers({ verbose });
 
-    console.log("🚀 Ethio Tech Platform ecosystem is ready for use!\n");
+    console.log("\n🚀 Ethio Tech Platform ecosystem is ready for use!\n");
   }
 
   return {

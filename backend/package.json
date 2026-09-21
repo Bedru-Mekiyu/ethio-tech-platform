@@ -9,6 +9,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "seed": "tsx src/scripts/seed.js",
+    "seed:roles": "tsx src/scripts/seed-roles.js",
     "upload:avatars": "tsx src/scripts/upload-system-avatars.js",
     "migrate:approved-mentors": "tsx src/scripts/migrate-approved-mentors.js",
     "test": "node --max-old-space-size=8192 ../node_modules/vitest/vitest.mjs run",

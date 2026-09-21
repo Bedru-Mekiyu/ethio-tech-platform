@@ -201,7 +201,12 @@ export const createUser = asyncHandler(async (req, res) => {
   });
 
   const createdUser = await User.findById(user._id).select(SENSITIVE_FIELDS).lean();
-  sendResponse(res, 201, "User created successfully", { user: createdUser });
+  sendResponse(res, 201, "User created successfully", {
+    user: {
+      ...createdUser,
+      id: createdUser._id?.toString?.() ?? createdUser._id,
+    },
+  });
 });
 
 export const updateUser = asyncHandler(async (req, res) => {
@@ -257,7 +262,12 @@ export const updateUser = asyncHandler(async (req, res) => {
     userAgent: req.headers["user-agent"],
   });
 
-  sendResponse(res, 200, "User updated successfully", { user: updated });
+  sendResponse(res, 200, "User updated successfully", {
+    user: {
+      ...updated,
+      id: updated._id?.toString?.() ?? updated._id,
+    },
+  });
 });
 
 export const changeUserRole = asyncHandler(async (req, res) => {

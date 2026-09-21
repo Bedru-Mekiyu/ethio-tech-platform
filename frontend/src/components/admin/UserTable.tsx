@@ -337,6 +337,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <option value="parent">Parent</option>
               <option value="moderator">Moderator</option>
               <option value="reviewer">Reviewer</option>
+              <option value="support">Support</option>
               <option value="super_admin">Super Admin</option>
             </select>
           </div>

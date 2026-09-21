@@ -41,9 +41,12 @@ export function createStudent({
 
   return {
     fullName: `${firstName} ${lastName}`,
-    email: email || `${firstName.toLowerCase()}.${lastName.toLowerCase()}${uniqueSuffix}@example.com`.replace(/[^a-z0-9@.]/g, ""),
+    email:
+      email ||
+      `${firstName.toLowerCase()}.${lastName.toLowerCase()}${uniqueSuffix}@example.com`.replace(/[^a-z0-9@.]/g, ""),
     password: hashPassword("Passw0rd!"),
     role: "student",
+    status: "active",
     avatar: generateAvatarUrl(firstName, lastName),
     bio: `Passionate learner from ${city} interested in ${pick(STUDENT_LEARNING_GOALS).toLowerCase()}. Building skills in tech to create impact.`,
     phone: generatePhoneNumber(),
@@ -76,9 +79,24 @@ export function createMentor({
 
   return {
     fullName: `${firstName} ${lastName}`,
-    email: email || `${firstName.toLowerCase()}.${lastName.toLowerCase()}${uniqueSuffix}@mentor.tech`.replace(/[^a-z0-9@.]/g, ""),
+    email:
+      email ||
+      `${firstName.toLowerCase()}.${lastName.toLowerCase()}${uniqueSuffix}@mentor.tech`.replace(/[^a-z0-9@.]/g, ""),
     password: hashPassword("Passw0rd!"),
     role: "mentor",
+    status: "active",
+    mentorStatus: "approved",
+    mentorAccountStatus: "active",
+    termsAcceptedAt: createdAt,
+    onboardingCompletedAt: createdAt,
+    mustChangePassword: false,
+    onboardingSteps: {
+      passwordChanged: true,
+      termsAccepted: true,
+      profileCompleted: true,
+      photoUploaded: true,
+      availabilitySet: true,
+    },
     avatar: generateAvatarUrl(firstName, lastName),
     bio:
       bio ||
@@ -98,16 +116,13 @@ export function createMentor({
   };
 }
 
-export function createAdmin({
-  firstName = "Admin",
-  lastName = "User",
-  email = null,
-} = {}) {
+export function createAdmin({ firstName = "Admin", lastName = "User", email = null } = {}) {
   return {
     fullName: `${firstName} ${lastName}`,
     email: email || generateEmail(firstName, lastName, "admin.ethiotech.com"),
     password: hashPassword("Passw0rd!"),
     role: "admin",
+    status: "active",
     avatar: generateAvatarUrl(firstName, lastName),
     bio: "Platform administrator managing community and content.",
     phone: generatePhoneNumber(),
@@ -117,16 +132,13 @@ export function createAdmin({
   };
 }
 
-export function createParent({
-  firstName = pick(FIRST_NAMES),
-  lastName = pick(LAST_NAMES),
-  email = null,
-} = {}) {
+export function createParent({ firstName = pick(FIRST_NAMES), lastName = pick(LAST_NAMES), email = null } = {}) {
   return {
     fullName: `${firstName} ${lastName}`,
     email: email || generateEmail(firstName, lastName, "parent.ethiotech.com"),
     password: hashPassword("Passw0rd!"),
     role: "parent",
+    status: "active",
     avatar: generateAvatarUrl(firstName, lastName),
     bio: "Parent monitoring student progress",
     phone: generatePhoneNumber(),
@@ -138,13 +150,7 @@ export function createParent({
 
 // ====== BADGE FACTORIES ======
 
-export function createBadge({
-  name,
-  description,
-  xpRequired = 0,
-  xpBonus = 0,
-  category = "achievement",
-} = {}) {
+export function createBadge({ name, description, xpRequired = 0, xpBonus = 0, category = "achievement" } = {}) {
   return {
     name,
     description,
@@ -182,9 +188,7 @@ export function createLevelConfig(level) {
 
   return {
     level,
-    title: ["Starter", "Builder", "Creator", "Innovator", "Leader", "Architect", "Champion"][
-      Math.min(level - 1, 6)
-    ],
+    title: ["Starter", "Builder", "Creator", "Innovator", "Leader", "Architect", "Champion"][Math.min(level - 1, 6)],
     xpRequired: Math.floor(200 * Math.pow(1.5, level - 1)),
     perks: perks.slice(0, Math.min(basePerk + 1, perks.length)),
   };
@@ -350,12 +354,7 @@ export function createSession({
 
 // ====== SUBMISSION FACTORIES ======
 
-export function createSubmission({
-  studentId,
-  projectId,
-  status = "pending",
-  reviewedBy = null,
-} = {}) {
+export function createSubmission({ studentId, projectId, status = "pending", reviewedBy = null } = {}) {
   const createdAt = nowMinusDays(randomInt(1, 60));
   let updatedAt = createdAt;
   let feedback = null;

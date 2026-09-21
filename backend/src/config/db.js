@@ -14,8 +14,12 @@ const startMemoryServer = async () => {
   return memoryServer;
 };
 
-const connectWithUri = async (uri) => {
-  await mongoose.connect(uri);
+const connectWithUri = async (uri, options = {}) => {
+  const isProduction = process.env.NODE_ENV === "production";
+  await mongoose.connect(uri, {
+    serverSelectionTimeoutMS: isProduction ? 30000 : 3000,
+    ...options,
+  });
 };
 
 export const connectDB = async () => {

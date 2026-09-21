@@ -30,6 +30,8 @@ import {
   CheckCircle2,
   Copy,
   Check,
+  UserPlus,
+  Pencil,
 } from "lucide-react";
 
 interface QuickActionDrawerProps {
@@ -50,6 +52,14 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
   const [copiedPassword, setCopiedPassword] = useState(false);
   const [roleChangeOpen, setRoleChangeOpen] = useState(false);
   const [selectedRole, setSelectedRole] = useState(user?.role || "student");
+  const [editOpen, setEditOpen] = useState(false);
+  const [editFullName, setEditFullName] = useState(user?.fullName || "");
+  const [editPhone, setEditPhone] = useState(user?.phone || "");
+  const [editCity, setEditCity] = useState(user?.city || "");
+  const [editBio, setEditBio] = useState(user?.bio || "");
+  const [editGradeLevel, setEditGradeLevel] = useState(user?.gradeLevel ? String(user.gradeLevel) : "");
+  const [editCompany, setEditCompany] = useState(user?.currentCompany || "");
+  const [editExpertise, setEditExpertise] = useState(user?.expertise ? user.expertise.join(", ") : "");
 
   const userId = user?._id ?? user?.id ?? "";
 
@@ -126,6 +136,40 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
       invalidate();
     },
     onError: () => toast.error("Failed to delete user"),
+  });
+
+  const editMutation = useMutation({
+    mutationFn: () => {
+      const payload: Record<string, unknown> = {
+        fullName: editFullName.trim(),
+        phone: editPhone.trim() || undefined,
+        city: editCity.trim() || undefined,
+        bio: editBio.trim() || undefined,
+      };
+      if (user?.role === "student" && editGradeLevel) {
+        payload.gradeLevel = Number(editGradeLevel);
+      }
+      if (user?.role === "mentor") {
+        if (editCompany.trim()) payload.currentCompany = editCompany.trim();
+        if (editExpertise.trim()) {
+          payload.expertise = editExpertise
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+      }
+      return adminUserService.updateUser(userId, payload);
+    },
+    onSuccess: () => {
+      toast.success(`Profile updated for ${editFullName}`);
+      setEditOpen(false);
+      invalidate();
+    },
+    onError: (err: unknown) => {
+      const msg =
+        (err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Failed to update profile";
+      toast.error(msg);
+    },
   });
 
   const generateRandomPassword = () => {
@@ -341,6 +385,24 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 className="gap-1.5 text-xs w-full"
               >
                 <Shield size={14} /> Change Role
+              </Button>
+
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setEditFullName(user.fullName || "");
+                  setEditPhone(user.phone || "");
+                  setEditCity(user.city || "");
+                  setEditBio(user.bio || "");
+                  setEditGradeLevel(user.gradeLevel ? String(user.gradeLevel) : "");
+                  setEditCompany(user.currentCompany || "");
+                  setEditExpertise(user.expertise ? user.expertise.join(", ") : "");
+                  setEditOpen(true);
+                }}
+                className="gap-1.5 text-xs w-full"
+              >
+                <Pencil size={14} /> Edit Profile
               </Button>
 
               <Button size="sm" variant="danger" onClick={() => setDeleteOpen(true)} className="gap-1.5 text-xs w-full">
@@ -614,6 +676,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 <option value="parent">Parent</option>
                 <option value="moderator">Moderator</option>
                 <option value="reviewer">Reviewer</option>
+                <option value="support">Support</option>
                 <option value="super_admin">Super Admin</option>
               </select>
             </div>
@@ -629,6 +692,144 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 loading={changeRoleMutation.isPending}
               >
                 Update Role
+              </Button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Edit User Profile Modal */}
+      {editOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs"
+            onClick={() => setEditOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Edit Profile for ${user.fullName}`}
+          >
+            <div className="flex items-center justify-between pb-2 border-b border-zinc-100">
+              <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900">
+                  <Pencil size={18} />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-zinc-900">Edit User Profile</h3>
+                  <p className="text-xs text-zinc-500">Update account attributes for {user.fullName}.</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setEditOpen(false)}
+                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <div className="space-y-3 pt-1">
+              <div>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Full Name *</label>
+                <Input
+                  value={editFullName}
+                  onChange={(e) => setEditFullName(e.target.value)}
+                  placeholder="e.g. Abebe Bikila"
+                  className="h-9 text-xs"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">City</label>
+                  <Input
+                    value={editCity}
+                    onChange={(e) => setEditCity(e.target.value)}
+                    placeholder="e.g. Addis Ababa"
+                    className="h-9 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">Phone</label>
+                  <Input
+                    value={editPhone}
+                    onChange={(e) => setEditPhone(e.target.value)}
+                    placeholder="e.g. +251 911 000 000"
+                    className="h-9 text-xs"
+                  />
+                </div>
+              </div>
+
+              {user.role === "student" && (
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">Grade Level</label>
+                  <select
+                    value={editGradeLevel}
+                    onChange={(e) => setEditGradeLevel(e.target.value)}
+                    className="h-9 w-full rounded-lg border border-zinc-200 bg-white px-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  >
+                    <option value="">Select grade...</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                    <option value="11">Grade 11</option>
+                    <option value="12">Grade 12</option>
+                  </select>
+                </div>
+              )}
+
+              {user.role === "mentor" && (
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1">Current Company</label>
+                    <Input
+                      value={editCompany}
+                      onChange={(e) => setEditCompany(e.target.value)}
+                      placeholder="e.g. Google, Safaricom, Ethio Telecom"
+                      className="h-9 text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1">
+                      Expertise (comma separated)
+                    </label>
+                    <Input
+                      value={editExpertise}
+                      onChange={(e) => setEditExpertise(e.target.value)}
+                      placeholder="e.g. Python, Cloud, Distributed Systems"
+                      className="h-9 text-xs"
+                    />
+                  </div>
+                </>
+              )}
+
+              <div>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Bio</label>
+                <textarea
+                  value={editBio}
+                  onChange={(e) => setEditBio(e.target.value)}
+                  placeholder="Professional background or student profile description..."
+                  rows={3}
+                  className="w-full rounded-lg border border-zinc-200 bg-white p-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-none"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2 pt-3 border-t border-zinc-100">
+              <Button variant="outline" size="sm" onClick={() => setEditOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                disabled={!editFullName.trim() || editMutation.isPending}
+                onClick={() => editMutation.mutate()}
+                loading={editMutation.isPending}
+              >
+                Save Changes
               </Button>
             </div>
           </div>
@@ -654,6 +855,99 @@ export function AdminUsersPage() {
   usePageTitle("User Management");
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const queryClient = useQueryClient();
+  const toast = useToast();
+
+  const [createOpen, setCreateOpen] = useState(false);
+  const [createName, setCreateName] = useState("");
+  const [createEmail, setCreateEmail] = useState("");
+  const [createPassword, setCreatePassword] = useState("");
+  const [createRole, setCreateRole] = useState("student");
+  const [createGradeLevel, setCreateGradeLevel] = useState("11");
+  const [createCity, setCreateCity] = useState("Addis Ababa");
+  const [createPhone, setCreatePhone] = useState("");
+  const [createBio, setCreateBio] = useState("");
+  const [createCompany, setCreateCompany] = useState("");
+  const [createExpertise, setCreateExpertise] = useState("");
+  const [createError, setCreateError] = useState("");
+
+  const generateRandomPasswordForCreate = () => {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%&*";
+    let pwd = "";
+    for (let i = 0; i < 12; i++) {
+      pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setCreatePassword(pwd);
+  };
+
+  const createUserMutation = useMutation({
+    mutationFn: async () => {
+      setCreateError("");
+      if (!createName.trim() || createName.trim().length < 2) {
+        throw new Error("Full name must be at least 2 characters.");
+      }
+      if (!createEmail.trim() || !createEmail.includes("@")) {
+        throw new Error("Please enter a valid email address.");
+      }
+      if (!createPassword || createPassword.length < 8) {
+        throw new Error("Password must be at least 8 characters.");
+      }
+      const payload: {
+        fullName: string;
+        email: string;
+        password: string;
+        role: string;
+        gradeLevel?: number;
+        city?: string;
+        phone?: string;
+        bio?: string;
+        currentCompany?: string;
+        expertise?: string[];
+      } = {
+        fullName: createName.trim(),
+        email: createEmail.trim().toLowerCase(),
+        password: createPassword,
+        role: createRole,
+      };
+      if (createCity.trim()) payload.city = createCity.trim();
+      if (createPhone.trim()) payload.phone = createPhone.trim();
+      if (createBio.trim()) payload.bio = createBio.trim();
+      if (createRole === "student" && createGradeLevel) {
+        payload.gradeLevel = Number(createGradeLevel);
+      }
+      if (createRole === "mentor") {
+        if (createCompany.trim()) payload.currentCompany = createCompany.trim();
+        if (createExpertise.trim()) {
+          payload.expertise = createExpertise
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+      }
+      return adminUserService.createUser(payload);
+    },
+    onSuccess: (data) => {
+      toast.success(`User ${data.user.fullName} (${data.user.role}) created successfully!`);
+      setCreateOpen(false);
+      setCreateName("");
+      setCreateEmail("");
+      setCreatePassword("");
+      setCreateRole("student");
+      setCreatePhone("");
+      setCreateBio("");
+      setCreateCompany("");
+      setCreateExpertise("");
+      setCreateError("");
+      queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
+      queryClient.invalidateQueries({ queryKey: ["admin", "users", "analytics"] });
+    },
+    onError: (err: unknown) => {
+      const msg =
+        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
+        (err instanceof Error ? err.message : "Failed to create user. Please check your inputs.");
+      setCreateError(msg);
+      toast.error(msg);
+    },
+  });
 
   const analyticsQuery = useQuery<AdminUserAnalytics>({
     queryKey: ["admin", "users", "analytics"],
@@ -684,6 +978,18 @@ export function AdminUsersPage() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setCreateError("");
+                generateRandomPasswordForCreate();
+                setCreateOpen(true);
+              }}
+              className="text-xs text-white bg-zinc-900 hover:bg-zinc-800 gap-1.5 shadow-xs"
+            >
+              <UserPlus size={14} /> Create User
+            </Button>
             <Button
               variant="outline"
               size="sm"
@@ -758,6 +1064,217 @@ export function AdminUsersPage() {
             queryClient.invalidateQueries({ queryKey: ["admin", "users"] });
           }}
         />
+      )}
+      {/* Create User Modal Dialog */}
+      {createOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs"
+            onClick={() => setCreateOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl max-h-[90vh] overflow-y-auto space-y-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Create New User Account"
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 text-white">
+                  <UserPlus size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-zinc-900">Create New User Account</h3>
+                  <p className="text-xs text-zinc-500">Provision a new account with active access.</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setCreateOpen(false)}
+                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700"
+                aria-label="Close dialog"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Error Message */}
+            {createError && (
+              <div className="flex items-center gap-2 rounded-xl border border-rose-200 bg-rose-50/80 p-3 text-xs text-rose-700">
+                <AlertTriangle size={15} className="shrink-0 text-rose-600" />
+                <p className="font-medium">{createError}</p>
+              </div>
+            )}
+
+            {/* Form Fields */}
+            <div className="space-y-3.5 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">
+                    Full Name <span className="text-rose-500">*</span>
+                  </label>
+                  <Input
+                    value={createName}
+                    onChange={(e) => setCreateName(e.target.value)}
+                    placeholder="e.g. Abebe Bikila"
+                    className="h-9 text-xs"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">
+                    Email Address <span className="text-rose-500">*</span>
+                  </label>
+                  <Input
+                    type="email"
+                    value={createEmail}
+                    onChange={(e) => setCreateEmail(e.target.value)}
+                    placeholder="user@ethiotech.com"
+                    className="h-9 text-xs"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="text-xs font-semibold text-zinc-700">
+                    Password <span className="text-rose-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={generateRandomPasswordForCreate}
+                    className="text-[11px] font-medium text-[#b91c1c] hover:underline flex items-center gap-1"
+                  >
+                    <Sparkles size={11} /> Generate Random
+                  </button>
+                </div>
+                <Input
+                  type="text"
+                  value={createPassword}
+                  onChange={(e) => setCreatePassword(e.target.value)}
+                  placeholder="At least 8 chars (letters & numbers)"
+                  className="h-9 text-xs font-mono"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">
+                    Platform Role <span className="text-rose-500">*</span>
+                  </label>
+                  <select
+                    value={createRole}
+                    onChange={(e) => setCreateRole(e.target.value)}
+                    className="h-9 w-full rounded-lg border border-zinc-200 bg-white px-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                  >
+                    <option value="student">Student</option>
+                    <option value="mentor">Mentor</option>
+                    <option value="parent">Parent</option>
+                    <option value="admin">Admin</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="reviewer">Reviewer</option>
+                    <option value="support">Support</option>
+                    <option value="super_admin">Super Admin</option>
+                  </select>
+                </div>
+
+                {createRole === "student" && (
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1">Grade Level</label>
+                    <select
+                      value={createGradeLevel}
+                      onChange={(e) => setCreateGradeLevel(e.target.value)}
+                      className="h-9 w-full rounded-lg border border-zinc-200 bg-white px-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
+                    >
+                      <option value="8">Grade 8</option>
+                      <option value="9">Grade 9</option>
+                      <option value="10">Grade 10</option>
+                      <option value="11">Grade 11</option>
+                      <option value="12">Grade 12</option>
+                    </select>
+                  </div>
+                )}
+
+                {createRole === "mentor" && (
+                  <div>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1">Current Company</label>
+                    <Input
+                      value={createCompany}
+                      onChange={(e) => setCreateCompany(e.target.value)}
+                      placeholder="e.g. Google, Safaricom"
+                      className="h-9 text-xs"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {createRole === "mentor" && (
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">Expertise (comma separated)</label>
+                  <Input
+                    value={createExpertise}
+                    onChange={(e) => setCreateExpertise(e.target.value)}
+                    placeholder="e.g. Python, Cloud, Distributed Systems"
+                    className="h-9 text-xs"
+                  />
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">City</label>
+                  <Input
+                    value={createCity}
+                    onChange={(e) => setCreateCity(e.target.value)}
+                    placeholder="e.g. Addis Ababa"
+                    className="h-9 text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1">Phone</label>
+                  <Input
+                    value={createPhone}
+                    onChange={(e) => setCreatePhone(e.target.value)}
+                    placeholder="e.g. +251 911 000 000"
+                    className="h-9 text-xs"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-zinc-700 mb-1">Bio</label>
+                <textarea
+                  value={createBio}
+                  onChange={(e) => setCreateBio(e.target.value)}
+                  placeholder="Optional background or bio description..."
+                  rows={2}
+                  className="w-full rounded-lg border border-zinc-200 bg-white p-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-none"
+                />
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex justify-end gap-2 pt-3 border-t border-zinc-100">
+              <Button variant="outline" size="sm" onClick={() => setCreateOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => createUserMutation.mutate()}
+                loading={createUserMutation.isPending}
+                disabled={createUserMutation.isPending || !createName.trim() || !createEmail.trim() || !createPassword}
+                className="text-white bg-zinc-900 hover:bg-zinc-800 gap-1.5"
+              >
+                <UserPlus size={14} /> Create User
+              </Button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
