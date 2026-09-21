@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Avatar } from "@/components/ui/avatar";
 import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { useToast } from "@/components/composites/ToastProvider";
@@ -219,12 +220,12 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
-            <span className="font-medium text-slate-900">{selectedIds.size === 1 ? "user" : "users"} selected</span>
+            <span className="font-medium text-zinc-900">{selectedIds.size === 1 ? "user" : "users"} selected</span>
             <Button
               variant="ghost"
               size="sm"
               onClick={clearSelection}
-              className="ml-2 h-7 px-2 text-slate-600 hover:text-slate-900"
+              className="ml-2 h-7 px-2 text-zinc-600 hover:text-zinc-900"
             >
               <X size={14} className="mr-1" /> Clear
             </Button>
@@ -246,12 +247,12 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3">
           <div className="relative flex-1 max-w-md">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <Input
               value={searchInput}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search by name, email, city, company..."
-              className="pl-10 h-10 border-slate-200 bg-white text-slate-900"
+              className="pl-10 h-10 border-zinc-200 bg-white text-zinc-900"
               aria-label="Search users"
             />
           </div>
@@ -261,7 +262,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             onClick={() => setShowFilters(!showFilters)}
             aria-pressed={showFilters}
             aria-label="Toggle filters"
-            className="border-slate-200 text-slate-700 hover:text-slate-900"
+            className="border-zinc-200 text-zinc-700 hover:text-zinc-900"
           >
             <Filter size={16} className="mr-2" />
             Filters
@@ -276,14 +277,14 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             size="sm"
             onClick={() => refetch()}
             aria-label="Refresh"
-            className="border-slate-200 text-slate-700 hover:text-slate-900"
+            className="border-zinc-200 text-zinc-700 hover:text-zinc-900"
           >
             <RefreshCw size={16} />
           </Button>
         </div>
         <div className="flex items-center gap-3">
           <select
-            className="h-10 rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
+            className="h-10 rounded-xl border border-zinc-200 bg-white px-3 text-sm text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
@@ -308,7 +309,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               adminUserService.exportUsers(params);
             }}
             aria-label="Export users"
-            className="border-slate-200 text-slate-700 hover:text-slate-900"
+            className="border-zinc-200 text-zinc-700 hover:text-zinc-900"
           >
             <Download size={16} className="mr-2" />
             Export
@@ -317,11 +318,11 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       {showFilters && (
-        <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+        <div className="flex flex-wrap gap-3 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-slate-500">Role</label>
+            <label className="text-xs font-medium text-zinc-500">Role</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900"
+              className="h-9 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-800 outline-none focus:border-zinc-900"
               value={roleFilter}
               onChange={(e) => {
                 setRoleFilter(e.target.value);
@@ -340,9 +341,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-slate-500">Status</label>
+            <label className="text-xs font-medium text-zinc-500">Status</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-zinc-900"
+              className="h-9 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-800 outline-none focus:border-zinc-900"
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value);
@@ -364,7 +365,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-slate-600 hover:text-slate-900"
+                className="text-zinc-600 hover:text-zinc-900"
                 onClick={() => {
                   setRoleFilter("");
                   setStatusFilter("");
@@ -378,29 +379,29 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-2xl border border-slate-200/80 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-2xl border border-zinc-200/80 bg-white shadow-sm">
         <table className="w-full text-left" role="table">
           <thead>
-            <tr className="border-b border-slate-200/80 bg-slate-50/75">
+            <tr className="border-b border-zinc-200/80 bg-zinc-50/75">
               <th className="w-10 p-4">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
+                  className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">User</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Role</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Status</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">XP</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Track</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Joined</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Last Login</th>
-              <th className="p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Verified</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">User</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Role</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Status</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">XP</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Track</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Joined</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Last Login</th>
+              <th className="p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Verified</th>
               {showActions && (
-                <th className="w-20 p-4 text-xs font-medium uppercase tracking-wider text-slate-500">Actions</th>
+                <th className="w-20 p-4 text-xs font-medium uppercase tracking-wider text-zinc-500">Actions</th>
               )}
             </tr>
           </thead>
@@ -420,7 +421,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     eyebrow="Directory"
                     title="No users found"
                     description="Try adjusting your search or filters to see more results."
-                    illustration={<Users size={26} className="text-slate-400 opacity-80" />}
+                    illustration={<Users size={26} className="text-zinc-400 opacity-80" />}
                     className="rounded-none border-0 bg-transparent py-16"
                   />
                 </td>
@@ -431,7 +432,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                 return (
                   <tr
                     key={id}
-                    className="border-b border-slate-100 transition-colors hover:bg-slate-50/70 cursor-pointer"
+                    className="border-b border-zinc-100 transition-colors hover:bg-zinc-50/70 cursor-pointer"
                     onClick={() => onSelectUser?.(user)}
                     role="row"
                   >
@@ -440,24 +441,16 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         type="checkbox"
                         checked={selectedIds.has(id)}
                         onChange={() => toggleSelect(id)}
-                        className="h-4 w-4 rounded border-slate-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
+                        className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
                         aria-label={`Select ${user.fullName}`}
                       />
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-3">
-                        <div className="h-9 w-9 flex-shrink-0 overflow-hidden rounded-full bg-slate-100 border border-slate-200">
-                          {user.avatarUrl ? (
-                            <img src={user.avatarUrl} alt="" className="h-full w-full object-cover" loading="lazy" />
-                          ) : (
-                            <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-slate-600">
-                              {user.fullName.charAt(0).toUpperCase()}
-                            </div>
-                          )}
-                        </div>
+                        <Avatar src={user.avatarUrl} name={user.fullName} size="sm" />
                         <div className="min-w-0">
-                          <p className="font-semibold text-slate-900 truncate">{user.fullName}</p>
-                          <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                          <p className="font-semibold text-zinc-900 truncate">{user.fullName}</p>
+                          <p className="text-xs text-zinc-500 truncate">{user.email}</p>
                         </div>
                       </div>
                     </td>
@@ -469,15 +462,15 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         {user.status ?? "unknown"}
                       </Badge>
                     </td>
-                    <td className="p-4 text-sm font-medium text-slate-700">{(user.xp ?? 0).toLocaleString()}</td>
-                    <td className="p-4 text-sm text-slate-600">{user.currentCompany || "-"}</td>
-                    <td className="p-4 text-sm text-slate-500">{formatDate(user.createdAt)}</td>
-                    <td className="p-4 text-sm text-slate-500">{formatDate(user.lastLoginAt)}</td>
+                    <td className="p-4 text-sm font-medium text-zinc-700">{(user.xp ?? 0).toLocaleString()}</td>
+                    <td className="p-4 text-sm text-zinc-600">{user.currentCompany || "-"}</td>
+                    <td className="p-4 text-sm text-zinc-500">{formatDate(user.createdAt)}</td>
+                    <td className="p-4 text-sm text-zinc-500">{formatDate(user.lastLoginAt)}</td>
                     <td className="p-4">
                       {user.isVerified ? (
                         <CheckCircle size={16} className="text-zinc-900" />
                       ) : (
-                        <XCircle size={16} className="text-slate-400" />
+                        <XCircle size={16} className="text-zinc-400" />
                       )}
                     </td>
                     {showActions && (
@@ -486,7 +479,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {onSelectUser && (
                             <Tooltip content="View profile">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+                                className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800"
                                 onClick={() => onSelectUser(user)}
                                 aria-label={`View ${user.fullName}'s profile`}
                               >
@@ -497,7 +490,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "active" && (
                             <Tooltip content="Suspend user">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                                className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-red-50 hover:text-red-600"
                                 onClick={() => suspendMutation.mutate({ id })}
                                 aria-label={`Suspend ${user.fullName}`}
                               >
@@ -508,7 +501,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "suspended" && (
                             <Tooltip content="Reactivate user">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+                                className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                                 onClick={() => reactivateMutation.mutate(id)}
                                 aria-label={`Reactivate ${user.fullName}`}
                               >
@@ -519,7 +512,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {!user.isVerified && (
                             <Tooltip content="Verify user">
                               <button
-                                className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+                                className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
                                 onClick={() => verifyMutation.mutate(id)}
                                 aria-label={`Verify ${user.fullName}`}
                               >
@@ -529,7 +522,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           )}
                           <Tooltip content="Delete user">
                             <button
-                              className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                              className="rounded-lg p-2 text-zinc-500 transition-colors hover:bg-red-50 hover:text-red-600"
                               onClick={() => setDeleteTarget(user)}
                               aria-label={`Delete ${user.fullName}`}
                             >
@@ -548,7 +541,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-zinc-500">
           {pagination ? `Page ${pagination.page} of ${pagination.totalPages} (${pagination.total} total)` : ""}
         </p>
         <div className="flex items-center gap-2">

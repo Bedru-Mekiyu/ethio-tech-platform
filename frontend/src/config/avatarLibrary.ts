@@ -158,7 +158,8 @@ export function buildAvatarSrcSet(baseUrl: string): string {
 
 export function resolveAvatarUrl(src?: string | null): string | null {
   if (!src) return null;
-  if (src.startsWith("/avatars/")) return `${getBackendOrigin()}${src}`;
+  // If it starts with /avatars/, it is served directly from local frontend static assets
+  if (src.startsWith("/avatars/")) return src;
   return src;
 }
 

@@ -41,17 +41,17 @@ const BreakoutCard: React.FC<{
   }, [timeLeft]);
 
   return (
-    <Card className="mb-2 rounded-2xl border border-slate-200/80 bg-white shadow-xs">
+    <Card className="mb-2 rounded-2xl border border-zinc-200/80 bg-white shadow-xs">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-semibold text-slate-900 flex items-center justify-between">
+        <CardTitle className="text-sm font-semibold text-zinc-900 flex items-center justify-between">
           <span>{breakout.name}</span>
-          <span className="text-slate-500 text-xs font-medium">
+          <span className="text-zinc-500 text-xs font-medium">
             {breakout.participantCount}/{breakout.maxParticipants}
           </span>
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+        <div className="flex items-center gap-2 text-xs text-zinc-500 mb-2">
           <span>Status: {breakout.status}</span>
           {timeLeft !== null && timeLeft > 0 && (
             <span className="font-mono font-bold text-zinc-900">{formatTime(timeLeft)}</span>
@@ -62,7 +62,7 @@ const BreakoutCard: React.FC<{
             <Button
               size="sm"
               variant="outline"
-              className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              className="border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
               onClick={() => onJoin(breakout._id)}
             >
               Join
@@ -72,7 +72,7 @@ const BreakoutCard: React.FC<{
             <Button
               size="sm"
               variant="outline"
-              className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              className="border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
               onClick={() => onStartTimer(breakout._id)}
             >
               Start
@@ -110,14 +110,14 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({ sessionId, isHost 
 
   return (
     <div className="flex flex-col gap-3 p-1">
-      <h3 className="font-bold text-sm text-slate-900">Breakout Rooms</h3>
+      <h3 className="font-bold text-sm text-zinc-900">Breakout Rooms</h3>
       {isHost && (
-        <div className="flex flex-col gap-2 p-3 rounded-2xl border border-slate-200/80 bg-slate-50/70">
+        <div className="flex flex-col gap-2 p-3 rounded-2xl border border-zinc-200/80 bg-zinc-50/70">
           <Input
             placeholder="Room name"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
-            className="h-8 text-sm border-slate-200 bg-white"
+            className="h-8 text-sm border-zinc-200 bg-white"
           />
           <div className="flex gap-2">
             <Input
@@ -125,7 +125,7 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({ sessionId, isHost 
               placeholder="Max"
               value={maxP}
               onChange={(e) => setMaxP(Number(e.target.value))}
-              className="h-8 text-sm w-20 border-slate-200 bg-white"
+              className="h-8 text-sm w-20 border-zinc-200 bg-white"
               min={2}
             />
             <Input
@@ -133,7 +133,7 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({ sessionId, isHost 
               placeholder="Timer (s)"
               value={timer}
               onChange={(e) => setTimer(Number(e.target.value))}
-              className="h-8 text-sm w-24 border-slate-200 bg-white"
+              className="h-8 text-sm w-24 border-zinc-200 bg-white"
               min={30}
             />
           </div>
@@ -150,10 +150,10 @@ export const BreakoutPanel: React.FC<BreakoutPanelProps> = ({ sessionId, isHost 
         </div>
       )}
       {loading ? (
-        <div className="text-xs text-slate-500">Loading...</div>
+        <div className="text-xs text-zinc-500">Loading...</div>
       ) : (
         <div className="flex flex-col gap-1">
-          {breakouts.length === 0 && <div className="text-xs text-slate-500">No breakout rooms active</div>}
+          {breakouts.length === 0 && <div className="text-xs text-zinc-500">No breakout rooms active</div>}
           {breakouts.map((b) => (
             <BreakoutCard
               key={b._id}

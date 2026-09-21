@@ -59,17 +59,17 @@ export function AchievementToast({ socket }: AchievementToastProps) {
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, x: 100, scale: 0.95 }}
-            className="bg-[#0F172A] border border-[#1E293B] rounded-xl p-4 shadow-xl backdrop-blur-md"
+            className="bg-white border border-zinc-200 rounded-xl p-4 shadow-lg"
           >
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0 border border-amber-500/20">
-                <Trophy className="w-5 h-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0 border border-amber-200">
+                <Trophy className="w-5 h-5 text-amber-600" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-white">{n.title}</p>
-                <p className="text-xs text-[var(--text-secondary)] mt-0.5">{n.body}</p>
+                <p className="text-sm font-semibold text-zinc-900">{n.title}</p>
+                <p className="text-xs text-zinc-600 mt-0.5">{n.body}</p>
               </div>
-              <button onClick={() => dismiss(n.id)} className="text-[var(--text-muted)] hover:text-white flex-shrink-0">
+              <button onClick={() => dismiss(n.id)} className="text-zinc-400 hover:text-zinc-700 flex-shrink-0">
                 <X className="w-4 h-4" />
               </button>
             </div>

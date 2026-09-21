@@ -470,7 +470,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             aria-hidden="true"
           />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-red-200 bg-white p-6 shadow-2xl space-y-4"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-red-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >
@@ -521,7 +521,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             aria-hidden="true"
           />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-4"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >
@@ -585,7 +585,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
             aria-hidden="true"
           />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-4"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-4"
             role="dialog"
             aria-modal="true"
           >

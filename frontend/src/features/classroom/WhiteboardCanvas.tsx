@@ -170,21 +170,21 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
   }, [ops]);
 
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-slate-200/80 bg-white p-3 shadow-sm">
+    <div className="flex flex-col gap-3 rounded-2xl border border-zinc-200/80 bg-white p-3 shadow-sm">
       <div className="flex items-center gap-2 flex-wrap">
         {TOOLS.map((t) => (
           <Button
             key={t.type}
             variant={tool === t.type ? "primary" : "outline"}
             size="sm"
-            className={tool === t.type ? "" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"}
+            className={tool === t.type ? "" : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"}
             onClick={() => setTool(t.type)}
             aria-label={`Select ${t.icon} tool`}
           >
             {t.icon}
           </Button>
         ))}
-        <div className="w-px h-6 bg-slate-200" />
+        <div className="w-px h-6 bg-zinc-200" />
         {COLORS.map((c) => (
           <button
             key={c}
@@ -198,7 +198,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
             aria-label={`Select color ${c}`}
           />
         ))}
-        <div className="w-px h-6 bg-slate-200" />
+        <div className="w-px h-6 bg-zinc-200" />
         <input
           type="range"
           min="1"
@@ -208,11 +208,11 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
           className="w-20 accent-zinc-900"
           aria-label="Line width"
         />
-        <div className="w-px h-6 bg-slate-200" />
+        <div className="w-px h-6 bg-zinc-200" />
         <Button
           variant="outline"
           size="sm"
-          className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+          className="border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
           onClick={undo}
           aria-label="Undo"
         >
@@ -226,7 +226,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({ sessionId, s
         ref={canvasRef}
         width={1200}
         height={800}
-        className="border border-slate-200 rounded-xl cursor-crosshair w-full max-w-full shadow-inner bg-white"
+        className="border border-zinc-200 rounded-xl cursor-crosshair w-full max-w-full shadow-inner bg-white"
         style={{ touchAction: "none" }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

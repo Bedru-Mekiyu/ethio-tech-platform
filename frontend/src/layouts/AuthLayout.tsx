@@ -1,8 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Shield, Zap, Users } from "lucide-react";
-import { SmartImage } from "@/components/ui/smart-image";
-import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 
 const features = [
   { icon: Zap, label: "Live classrooms", desc: "Real-time sessions with mentors" },
@@ -24,19 +22,7 @@ export function AuthLayout() {
       </a>
 
       {/* ── Left Brand Panel (desktop) ── */}
-      <div className="relative hidden w-[46%] flex-col justify-between overflow-hidden border-r border-slate-200 bg-slate-50 p-10 lg:flex xl:p-12">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0 opacity-[0.03] mix-blend-multiply pointer-events-none">
-          <SmartImage
-            unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
-            alt=""
-            className="h-full w-full object-cover"
-            wrapperClassName="h-full w-full border-0 bg-transparent"
-            width={1000}
-            quality={85}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-transparent to-transparent" />
-        </div>
+      <div className="relative hidden w-[46%] flex-col justify-between overflow-hidden border-r border-zinc-200 bg-zinc-50 p-10 lg:flex xl:p-12">
         <div className="relative z-10">
           <Logo />
           <div className="mt-12">
@@ -44,12 +30,12 @@ export function AuthLayout() {
               <Shield size={12} className="text-zinc-700" />
               <span>Pan-Ethiopian Engineering Platform</span>
             </div>
-            <h1 className="mt-5 max-w-md text-2xl font-bold leading-tight tracking-tight text-slate-900 xl:text-3xl">
+            <h1 className="mt-5 max-w-md text-xl font-bold leading-tight tracking-tight text-zinc-900 xl:text-2xl">
               {isLogin
                 ? "Welcome back to your engineering workspace"
                 : "Start learning software engineering with verified mentorship"}
             </h1>
-            <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-600 sm:text-sm">
+            <p className="mt-3 max-w-md text-xs leading-relaxed text-zinc-600 sm:text-sm">
               {isLogin
                 ? "Your active tracks, code sandboxes, squad sessions, and regional hub passes are ready."
                 : "Join high school students and university engineers mastering practical web, mobile, AI, and cloud architectures."}
@@ -60,21 +46,21 @@ export function AuthLayout() {
             {features.map(({ icon: Icon, label, desc }) => (
               <div
                 key={label}
-                className="flex items-center gap-3.5 rounded-lg border border-slate-200 bg-white p-3.5 transition-colors duration-150 hover:border-slate-300 shadow-xs"
+                className="flex items-center gap-3.5 rounded-lg border border-zinc-200 bg-white p-3.5 transition-colors duration-150 hover:border-zinc-300 shadow-xs"
               >
                 <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-zinc-100 text-zinc-700 border border-zinc-200">
                   <Icon size={15} />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-slate-900">{label}</p>
-                  <p className="text-[11px] text-slate-500">{desc}</p>
+                  <p className="text-xs font-semibold text-zinc-900">{label}</p>
+                  <p className="text-[11px] text-zinc-500">{desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="relative z-10 text-[11px] text-slate-400">© {new Date().getFullYear()} EthioTech Platform.</p>
+        <p className="relative z-10 text-[11px] text-zinc-400">© {new Date().getFullYear()} EthioTech Platform.</p>
       </div>
 
       {/* ── Right Form Panel ── */}

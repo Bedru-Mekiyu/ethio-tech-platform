@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Illustrated Ethiopian student avatar with a hoodie">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12243a" />
+      <stop offset="100%" stop-color="#19424d" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="42" fill="url(#bg)" />
+  <circle cx="128" cy="128" r="54" fill="#c48b63" />
+  <path d="M72 110c10-28 32-45 56-45s46 12 56 34c3 7 5 14 5 22-11-8-24-11-39-11-18 0-34 5-45 13-9-10-19-17-33-13Z" fill="#4b5563" />
+  <path d="M80 188c11-30 28-42 48-42s37 12 48 42v26H80z" fill="#0f766e" />
+  <path d="M105 144h46l-7 46h-31z" fill="#d1fae5" opacity=".15" />
+  <circle cx="109" cy="130" r="4" fill="#111827" />
+  <circle cx="147" cy="130" r="4" fill="#111827" />
+  <path d="M113 150c7 6 23 6 30 0" fill="none" stroke="#8a4936" stroke-linecap="round" stroke-width="4" />
+  <path d="M92 202c8-8 22-14 36-14s28 6 36 14" fill="none" stroke="#99f6e4" stroke-linecap="round" stroke-width="14" opacity=".24" />
+</svg>

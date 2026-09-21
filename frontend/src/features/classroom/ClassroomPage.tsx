@@ -314,7 +314,7 @@ export function ClassroomPage() {
       <div className="flex h-screen items-center justify-center bg-white">
         <div className="text-center">
           <div className="mx-auto mb-4 h-10 w-10 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent" />
-          <p className="text-sm text-slate-500 font-medium">Loading interactive classroom...</p>
+          <p className="text-sm text-zinc-500 font-medium">Loading interactive classroom...</p>
         </div>
       </div>
     );
@@ -330,7 +330,7 @@ export function ClassroomPage() {
     <div className="flex h-screen flex-col bg-[#0B0F19] text-white overflow-hidden select-none">
       {/* Top Meeting Status Banner */}
       {meetingStatus !== "active" && (
-        <div className="border-b border-slate-200 bg-white px-4 py-2.5 md:px-6 shadow-xs">
+        <div className="border-b border-zinc-200 bg-white px-4 py-2.5 md:px-6 shadow-xs">
           <MeetingStatusBanner status={meetingStatus} meeting={meeting} joinHref={classroomHref} joinable={joinable} />
         </div>
       )}
@@ -338,19 +338,19 @@ export function ClassroomPage() {
       {/* Main Classroom Split Workspace */}
       <div className="relative flex flex-1 overflow-hidden">
         {/* Center Live Media & Whiteboard Stage */}
-        <div className="relative flex flex-1 flex-col overflow-hidden bg-slate-950">
+        <div className="relative flex flex-1 flex-col overflow-hidden bg-zinc-950">
           {activePanel === "whiteboard" ? (
             /* Whiteboard Canvas Mode */
-            <div className="relative flex flex-1 flex-col bg-slate-50">
-              <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2.5 shadow-xs">
-                <div className="flex items-center gap-2 text-xs font-semibold text-slate-900">
+            <div className="relative flex flex-1 flex-col bg-zinc-50">
+              <div className="flex items-center justify-between border-b border-zinc-200 bg-white px-4 py-2.5 shadow-xs">
+                <div className="flex items-center gap-2 text-xs font-semibold text-zinc-900">
                   <Sparkles className="h-4 w-4 text-zinc-900" />
                   <span>Collaborative Whiteboard</span>
                 </div>
                 <button
                   type="button"
                   onClick={() => setActivePanel("none")}
-                  className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+                  className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -385,15 +385,15 @@ export function ClassroomPage() {
             />
           ) : (
             /* Waiting / Scheduled State Screen */
-            <div className="flex h-full items-center justify-center bg-slate-50 px-6 text-center">
-              <div className="max-w-md rounded-3xl border border-slate-200/80 bg-white p-8 shadow-md">
+            <div className="flex h-full items-center justify-center bg-zinc-50 px-6 text-center">
+              <div className="max-w-md rounded-3xl border border-zinc-200/80 bg-white p-8 shadow-md">
                 <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-900">
                   <Sparkles className="h-7 w-7" />
                 </div>
-                <h2 className="text-lg font-bold text-slate-900">
+                <h2 className="text-lg font-bold text-zinc-900">
                   {meetingStatus === "active" ? "Connecting to LiveKit Media Server..." : "Session is Not Live Yet"}
                 </h2>
-                <p className="mt-2 text-xs text-slate-500 leading-relaxed">
+                <p className="mt-2 text-xs text-zinc-500 leading-relaxed">
                   {meetingStatus === "scheduled"
                     ? "This meeting is scheduled. The live classroom will unlock automatically when the host starts."
                     : meetingStatus === "waiting_for_host"
@@ -407,7 +407,7 @@ export function ClassroomPage() {
                 <button
                   type="button"
                   onClick={() => navigate("/app/sessions")}
-                  className="mt-6 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors shadow-xs"
+                  className="mt-6 inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-5 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 transition-colors shadow-xs"
                 >
                   Back to Sessions
                 </button>
@@ -420,11 +420,11 @@ export function ClassroomPage() {
         {activePanel !== "none" && activePanel !== "whiteboard" && activePanel !== "participants" && (
           <aside
             aria-label="Classroom side panel"
-            className="flex w-80 md:w-96 flex-col border-l border-slate-200 bg-white shadow-xl animate-in slide-in-from-right duration-200 z-30"
+            className="flex w-80 md:w-96 flex-col border-l border-zinc-200 bg-white shadow-xl animate-in slide-in-from-right duration-200 z-30"
           >
             {/* Panel Header */}
-            <div className="flex h-14 items-center justify-between border-b border-slate-200 bg-slate-50/70 px-4">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-700">
+            <div className="flex h-14 items-center justify-between border-b border-zinc-200 bg-zinc-50/70 px-4">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-700">
                 {activePanel === "chat" && <MessageSquare className="h-4 w-4 text-zinc-900" />}
                 {activePanel === "qa" && <HelpCircle className="h-4 w-4 text-zinc-900" />}
                 {activePanel === "polls" && <BarChart3 className="h-4 w-4 text-zinc-900" />}
@@ -448,7 +448,7 @@ export function ClassroomPage() {
               <button
                 type="button"
                 onClick={() => setActivePanel("none")}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-700 transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -461,7 +461,7 @@ export function ClassroomPage() {
                   {/* Messages Stream */}
                   <div className="flex-1 overflow-y-auto space-y-3 pr-1">
                     {chatMessages.length === 0 ? (
-                      <div className="flex h-full items-center justify-center text-center text-xs text-slate-400">
+                      <div className="flex h-full items-center justify-center text-center text-xs text-zinc-400">
                         No messages yet. Say hello in chat!
                       </div>
                     ) : (
@@ -473,18 +473,18 @@ export function ClassroomPage() {
                               ? "bg-zinc-100 text-zinc-900 border border-zinc-200 text-center font-medium"
                               : msg.userId === user?.id
                                 ? "bg-zinc-900 text-white ml-4 shadow-xs"
-                                : "bg-slate-100 border border-slate-200 text-slate-800 mr-4"
+                                : "bg-zinc-100 border border-zinc-200 text-zinc-800 mr-4"
                           }`}
                         >
                           {!msg.isSystem && (
                             <div className="flex items-center justify-between gap-2 mb-1">
                               <span
-                                className={`font-semibold text-[11px] truncate ${msg.userId === user?.id ? "text-zinc-200" : "text-slate-700"}`}
+                                className={`font-semibold text-[11px] truncate ${msg.userId === user?.id ? "text-zinc-200" : "text-zinc-700"}`}
                               >
                                 {msg.author}
                               </span>
                               <span
-                                className={`text-[9px] font-mono ${msg.userId === user?.id ? "text-zinc-300" : "text-slate-400"}`}
+                                className={`text-[9px] font-mono ${msg.userId === user?.id ? "text-zinc-300" : "text-zinc-400"}`}
                               >
                                 {new Date(msg.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                               </span>
@@ -498,13 +498,13 @@ export function ClassroomPage() {
                   </div>
 
                   {/* Chat Input */}
-                  <form onSubmit={handleSendChat} className="mt-3 flex gap-2 pt-2 border-t border-slate-200">
+                  <form onSubmit={handleSendChat} className="mt-3 flex gap-2 pt-2 border-t border-zinc-200">
                     <input
                       type="text"
                       placeholder="Send a message..."
                       value={chatDraft}
                       onChange={(e) => setChatDraft(e.target.value)}
-                      className="flex-1 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 shadow-xs"
+                      className="flex-1 rounded-xl border border-zinc-200 bg-white px-3.5 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none focus:ring-1 focus:ring-zinc-900 shadow-xs"
                     />
                     <button
                       type="submit"

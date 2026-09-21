@@ -16,7 +16,6 @@ import {
   Code2,
   Filter,
 } from "lucide-react";
-import { SmartImage } from "@/components/ui/smart-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -171,7 +170,7 @@ export function TracksPage() {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             {/* Search Input */}
             <div className="relative w-full lg:max-w-md">
-              <Search size={16} className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
               <Input
                 type="text"
                 placeholder="Search tracks, tooling, capstone projects..."
@@ -183,7 +182,7 @@ export function TracksPage() {
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -tranzinc-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
                 >
                   Clear
                 </button>
@@ -379,25 +378,32 @@ export function TracksPage() {
 
                     {/* Right Column: Visual, Career Outcomes, Prerequisites, CTAs */}
                     <div className="flex flex-col justify-between gap-4">
-                      {/* Image Preview & Market Demand Card */}
-                      <div className="relative overflow-hidden rounded-xl border border-zinc-200 aspect-[16/10] sm:aspect-[2/1] lg:aspect-[16/10]">
-                        <SmartImage
-                          unsplashId={track.unsplashId}
-                          alt={track.title}
-                          wrapperClassName="h-full w-full border-none bg-transparent"
-                          className="h-full w-full object-cover"
-                          width={800}
-                          quality={80}
-                          hoverEffect="zoom"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent p-4 flex flex-col justify-end">
-                          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400">
-                            Market Insight
-                          </p>
-                          <p className="text-xs font-semibold text-white mt-0.5">{track.marketDemand.growthMetric}</p>
-                          <p className="text-[11px] text-zinc-300 mt-0.5">
-                            Est. Compensation: {track.marketDemand.salaryRange}
-                          </p>
+                      {/* Market Insight & Industry Demand Card */}
+                      <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-4">
+                        <div className="flex items-center justify-between border-b border-zinc-200/80 pb-2.5">
+                          <div className="flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full bg-[#b91c1c]" />
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                              Market Demand & Compensation
+                            </span>
+                          </div>
+                          <Badge variant="default" size="sm">
+                            {track.marketDemand.rating} Demand
+                          </Badge>
+                        </div>
+                        <div className="mt-3 grid grid-cols-2 gap-3">
+                          <div>
+                            <p className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">
+                              Hiring Trajectory
+                            </p>
+                            <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.growthMetric}</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">
+                              Est. Compensation
+                            </p>
+                            <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.salaryRange}</p>
+                          </div>
                         </div>
                       </div>
 
@@ -615,7 +621,7 @@ export function TracksPage() {
               <CheckCircle2 size={12} className="text-zinc-700" /> 6 Physical regional hubs
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-zinc-700" /> Verifiable on-chain certs
+              <CheckCircle2 size={12} className="text-zinc-700" /> Verifiable digital certificates
             </span>
           </div>
         </div>

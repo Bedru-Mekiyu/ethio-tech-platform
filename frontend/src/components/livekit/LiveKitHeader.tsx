@@ -64,8 +64,8 @@ export function LiveKitHeader({
             {title || "Live Classroom Session"}
           </h1>
           {mentorName && (
-            <p className="text-[11px] text-slate-400 truncate">
-              Hosted by <span className="text-slate-300 font-medium">{mentorName}</span>
+            <p className="text-[11px] text-zinc-400 truncate">
+              Hosted by <span className="text-zinc-300 font-medium">{mentorName}</span>
             </p>
           )}
         </div>
@@ -73,7 +73,7 @@ export function LiveKitHeader({
 
       {/* Center: Live Elapsed Timer & Recording Badge */}
       <div className="hidden sm:flex items-center gap-3">
-        <div className="flex items-center gap-2 rounded-xl bg-slate-900/80 border border-white/5 px-3 py-1.5 text-xs font-mono font-medium text-slate-300">
+        <div className="flex items-center gap-2 rounded-xl bg-zinc-900/80 border border-white/5 px-3 py-1.5 text-xs font-mono font-medium text-zinc-300">
           <Radio className="h-3.5 w-3.5 text-rose-400 animate-pulse" />
           <span>{elapsedTime}</span>
         </div>
@@ -89,18 +89,18 @@ export function LiveKitHeader({
       {/* Right: Controls, Layout Switcher & Participant count */}
       <div className="flex items-center gap-2 md:gap-3">
         {/* Participant Count */}
-        <div className="flex items-center gap-1.5 rounded-xl bg-slate-900/80 border border-white/5 px-3 py-1.5 text-xs font-medium text-slate-300">
+        <div className="flex items-center gap-1.5 rounded-xl bg-zinc-900/80 border border-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300">
           <Users className="h-3.5 w-3.5 text-white" />
           <span>{participantCount}</span>
         </div>
 
         {/* Layout Switcher */}
-        <div className="flex items-center rounded-xl bg-slate-900/80 border border-white/5 p-1">
+        <div className="flex items-center rounded-xl bg-zinc-900/80 border border-white/5 p-1">
           <button
             type="button"
             onClick={() => onChangeLayout("grid")}
             className={`rounded-lg p-1.5 transition-colors ${
-              layout === "grid" ? "bg-white/20 text-white" : "text-slate-400 hover:text-white"
+              layout === "grid" ? "bg-white/20 text-white" : "text-zinc-400 hover:text-white"
             }`}
             title="Grid View"
           >
@@ -110,7 +110,7 @@ export function LiveKitHeader({
             type="button"
             onClick={() => onChangeLayout("speaker")}
             className={`rounded-lg p-1.5 transition-colors ${
-              layout === "speaker" ? "bg-white/20 text-white" : "text-slate-400 hover:text-white"
+              layout === "speaker" ? "bg-white/20 text-white" : "text-zinc-400 hover:text-white"
             }`}
             title="Speaker / Spotlight View"
           >
@@ -123,7 +123,7 @@ export function LiveKitHeader({
           <button
             type="button"
             onClick={onToggleFullscreen}
-            className="hidden md:flex rounded-xl bg-slate-900/80 border border-white/5 p-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="hidden md:flex rounded-xl bg-zinc-900/80 border border-white/5 p-2 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
             title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
           >
             {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}

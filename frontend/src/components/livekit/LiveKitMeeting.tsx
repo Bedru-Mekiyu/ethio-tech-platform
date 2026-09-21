@@ -422,7 +422,7 @@ export const LiveKitMeeting = forwardRef<LiveKitMeetingHandle, LiveKitMeetingPro
             <AlertCircle className="h-7 w-7" />
           </div>
           <h2 className="text-lg font-bold text-white">Connection Error</h2>
-          <p className="mt-2 text-xs text-slate-400 leading-relaxed">{connectionError}</p>
+          <p className="mt-2 text-xs text-zinc-400 leading-relaxed">{connectionError}</p>
           <button
             type="button"
             onClick={() => void connectToRoom()}

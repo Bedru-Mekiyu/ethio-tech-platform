@@ -297,7 +297,7 @@ export function SessionHistoryPage() {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
           <Input
             placeholder={tab === "schedule" ? "Search sessions…" : "Search recordings…"}
             value={search}

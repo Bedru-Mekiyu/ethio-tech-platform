@@ -81,8 +81,8 @@ export function Tabs({
           className={cn(
             "flex items-center",
             variant === "pill"
-              ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
-              : "gap-6 border-b border-slate-200 pb-0",
+              ? "gap-1.5 rounded-xl border border-zinc-200 bg-zinc-100 p-1"
+              : "gap-6 border-b border-zinc-200 pb-0",
           )}
           role="tablist"
         >
@@ -102,9 +102,9 @@ export function Tabs({
                 className={cn(
                   "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
                   variant === "pill"
-                    ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
-                    : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
-                  isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
+                    ? "min-h-9 rounded-lg px-3.5 py-1.5 text-zinc-600 hover:text-zinc-900"
+                    : "pb-3 pt-2 text-zinc-600 hover:text-zinc-900",
+                  isActive && (variant === "pill" ? "text-zinc-900 font-semibold" : "text-primary font-semibold"),
                   triggerClassName,
                 )}
               >
@@ -232,8 +232,8 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
       className={cn(
         "flex items-center",
         variant === "pill"
-          ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
-          : "gap-6 border-b border-slate-200 pb-0",
+          ? "gap-1.5 rounded-xl border border-zinc-200 bg-zinc-100 p-1"
+          : "gap-6 border-b border-zinc-200 pb-0",
         className,
       )}
       role="tablist"
@@ -266,9 +266,9 @@ export function TabsTrigger({
       className={cn(
         "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
         variant === "pill"
-          ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
-          : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
-        isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
+          ? "min-h-9 rounded-lg px-3.5 py-1.5 text-zinc-600 hover:text-zinc-900"
+          : "pb-3 pt-2 text-zinc-600 hover:text-zinc-900",
+        isActive && (variant === "pill" ? "text-zinc-900 font-semibold" : "text-primary font-semibold"),
         className,
       )}
       {...props}

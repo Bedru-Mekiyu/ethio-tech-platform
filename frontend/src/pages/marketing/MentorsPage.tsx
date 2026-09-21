@@ -393,7 +393,7 @@ export function MentorsPage() {
 
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" size={15} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={15} />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

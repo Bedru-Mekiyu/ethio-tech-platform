@@ -473,7 +473,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
     <>
       <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-label="Evaluation Rubric"
@@ -614,7 +614,7 @@ Ethio-Tech Mentorship Team`;
     <>
       <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs" onClick={onClose} aria-hidden="true" />
       <div
-        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6"
+        className="fixed left-1/2 top-1/2 z-50 w-full max-w-xl -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl space-y-6"
         role="dialog"
         aria-modal="true"
         aria-label="Schedule Screening Interview"
@@ -1010,7 +1010,7 @@ export function AdminModerationPage() {
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-1 flex-wrap items-center gap-3">
           <div className="relative min-w-[260px] flex-1 max-w-md">
-            <Search className="absolute left-3.5 top-1/2 size-4 -tranzinc-y-1/2 text-zinc-400" />
+            <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-zinc-400" />
             <input
               type="text"
               value={search}

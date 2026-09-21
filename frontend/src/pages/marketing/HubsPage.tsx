@@ -707,7 +707,7 @@ export function HubsPage() {
                         key={hub.id}
                         type="button"
                         onClick={() => setSelectedCity(hub.city)}
-                        className="absolute -tranzinc-x-1/2 -tranzinc-y-1/2 group cursor-pointer transition-transform hover:scale-105 z-10"
+                        className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-pointer transition-transform hover:scale-105 z-10"
                         style={{ top: hub.coordinates.top, left: hub.coordinates.left }}
                         aria-label={`Select ${hub.city} Hub`}
                       >
@@ -828,7 +828,7 @@ export function HubsPage() {
 
               {/* Search input */}
               <div className="relative w-full sm:w-72">
-                <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
                 <Input
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -839,7 +839,7 @@ export function HubsPage() {
                   <button
                     type="button"
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 hover:text-zinc-600"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
                   >
                     <X size={13} />
                   </button>

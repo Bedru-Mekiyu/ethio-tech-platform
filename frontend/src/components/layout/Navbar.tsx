@@ -55,7 +55,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-200",
+        "sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-md transition-all duration-200",
         className,
       )}
     >
@@ -150,10 +150,10 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             </div>
 
             {/* Mobile CTAs */}
-            <div className="border-t border-slate-200 pt-4 flex flex-col gap-2.5">
+            <div className="border-t border-zinc-200 pt-4 flex flex-col gap-2.5">
               <Link
                 to="/login"
-                className="w-full text-center py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                className="w-full text-center py-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
                 Sign in

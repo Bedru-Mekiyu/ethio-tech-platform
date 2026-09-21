@@ -992,7 +992,7 @@ export function CalendarPage() {
               <label htmlFor={searchInputId} className="sr-only">
                 Search agenda events
               </label>
-              <Search size={14} className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+              <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
               <input
                 id={searchInputId}
                 type="text"

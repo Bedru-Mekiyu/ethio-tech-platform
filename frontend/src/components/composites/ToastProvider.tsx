@@ -126,11 +126,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 )}
               >
                 <Icon size={18} className={cn("mt-0.5 flex-shrink-0", variantStyles[t.variant].icon)} />
-                <p className="flex-1 text-sm font-medium text-slate-800 leading-relaxed">{t.message}</p>
+                <p className="flex-1 text-sm font-medium text-zinc-800 leading-relaxed">{t.message}</p>
                 <button
                   type="button"
                   onClick={() => removeToast(t.id)}
-                  className="flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors duration-200 p-0.5 rounded-md hover:bg-slate-100"
+                  className="flex-shrink-0 text-zinc-400 hover:text-zinc-700 transition-colors duration-200 p-0.5 rounded-md hover:bg-zinc-100"
                   aria-label="Dismiss notification"
                 >
                   <X size={15} />

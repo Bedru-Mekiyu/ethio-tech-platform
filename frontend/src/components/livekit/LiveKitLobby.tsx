@@ -112,11 +112,11 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
 
   return (
     <div className="flex h-full w-full items-center justify-center bg-[#0B0F19] p-4 md:p-8 select-none">
-      <div className="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-slate-900/60 p-6 md:p-10 shadow-2xl backdrop-blur-2xl">
+      <div className="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-zinc-900/60 p-6 md:p-10 shadow-2xl backdrop-blur-2xl">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           {/* Left Column: Camera Preview */}
           <div className="md:col-span-7 flex flex-col items-center">
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-950 shadow-inner flex items-center justify-center">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-inner flex items-center justify-center">
               {/* Video Element */}
               <video
                 ref={videoRef}
@@ -130,11 +130,11 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
 
               {/* Avatar placeholder when camera is off */}
               {(!videoEnabled || permissionError) && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-950">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950">
                   <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 text-white border border-white/10 shadow-2xl">
                     <UserIcon className="h-12 w-12" />
                   </div>
-                  <p className="mt-4 text-xs font-medium text-slate-400">Camera is turned off</p>
+                  <p className="mt-4 text-xs font-medium text-zinc-400">Camera is turned off</p>
                 </div>
               )}
 
@@ -144,7 +144,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                   type="button"
                   onClick={handleToggleAudio}
                   className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all ${
-                    audioEnabled ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-rose-600 text-white"
+                    audioEnabled ? "bg-zinc-800 text-white hover:bg-zinc-700" : "bg-rose-600 text-white"
                   }`}
                   title={audioEnabled ? "Mute Microphone" : "Unmute Microphone"}
                 >
@@ -155,7 +155,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                   type="button"
                   onClick={handleToggleVideo}
                   className={`flex h-10 w-10 items-center justify-center rounded-xl transition-all ${
-                    videoEnabled ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-rose-600 text-white"
+                    videoEnabled ? "bg-zinc-800 text-white hover:bg-zinc-700" : "bg-rose-600 text-white"
                   }`}
                   title={videoEnabled ? "Turn Off Camera" : "Turn On Camera"}
                 >
@@ -168,7 +168,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
                     setIsSettingsOpen(true);
                     void settingsModalRef.current?.loadDevices();
                   }}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-all"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-all"
                   title="Device Settings"
                 >
                   <Settings className="h-4 w-4" />
@@ -179,7 +179,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               {audioEnabled && !permissionError && (
                 <div className="absolute top-4 left-4 flex items-center gap-2 rounded-xl bg-black/60 backdrop-blur-md px-3 py-1 border border-white/5">
                   <Mic className="h-3.5 w-3.5 text-white" />
-                  <div className="h-1.5 w-16 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="h-1.5 w-16 rounded-full bg-zinc-800 overflow-hidden">
                     <div className="h-full bg-white transition-all duration-75" style={{ width: `${audioLevel}%` }} />
                   </div>
                 </div>
@@ -198,31 +198,31 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               </div>
               <h2 className="text-xl md:text-2xl font-bold text-white leading-tight">{sessionTitle}</h2>
               {mentorName && (
-                <div className="mt-2 flex items-center gap-2 text-xs text-slate-400">
-                  <Shield className="h-3.5 w-3.5 text-slate-400" />
+                <div className="mt-2 flex items-center gap-2 text-xs text-zinc-400">
+                  <Shield className="h-3.5 w-3.5 text-zinc-400" />
                   <span>
-                    Hosted by <strong className="text-slate-200">{mentorName}</strong>
+                    Hosted by <strong className="text-zinc-200">{mentorName}</strong>
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="rounded-2xl border border-white/5 bg-slate-950/60 p-4 space-y-2.5 text-xs text-slate-300">
+            <div className="rounded-2xl border border-white/5 bg-zinc-950/60 p-4 space-y-2.5 text-xs text-zinc-300">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Microphone</span>
+                <span className="text-zinc-400">Microphone</span>
                 <span className={audioEnabled ? "text-white font-medium" : "text-rose-400 font-medium"}>
                   {audioEnabled ? "On" : "Muted"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Camera</span>
-                <span className={videoEnabled ? "text-white font-medium" : "text-slate-400 font-medium"}>
+                <span className="text-zinc-400">Camera</span>
+                <span className={videoEnabled ? "text-white font-medium" : "text-zinc-400 font-medium"}>
                   {videoEnabled ? "On" : "Off"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Media Server</span>
-                <span className="text-slate-300 font-medium flex items-center gap-1">
+                <span className="text-zinc-400">Media Server</span>
+                <span className="text-zinc-300 font-medium flex items-center gap-1">
                   <Sparkles className="h-3 w-3" /> LiveKit Ultra-Low Latency
                 </span>
               </div>

@@ -168,7 +168,7 @@ export function AdminMeetingsPage() {
             })}
           </div>
           <div className="relative w-full max-w-xs">
-            <Search size={12} className="pointer-events-none absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+            <Search size={12} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}

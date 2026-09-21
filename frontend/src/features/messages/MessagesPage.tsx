@@ -15,8 +15,8 @@ const ConversationItem: React.FC<{
 
   return (
     <button
-      className={`w-full text-left p-3.5 transition-colors border-b border-slate-100 ${
-        isActive ? "bg-white border-l-4 border-l-[#b91c1c] shadow-sm" : "hover:bg-slate-100/60"
+      className={`w-full text-left p-3.5 transition-colors border-b border-zinc-100 ${
+        isActive ? "bg-white border-l-4 border-l-[#b91c1c] shadow-sm" : "hover:bg-zinc-100/60"
       }`}
       onClick={onClick}
     >
@@ -24,17 +24,17 @@ const ConversationItem: React.FC<{
         <Avatar
           src={otherParticipant?.avatar}
           name={otherParticipant?.fullName || "?"}
-          className="h-9 w-9 border border-slate-200"
+          className="h-9 w-9 border border-zinc-200"
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between">
-            <span className="font-semibold text-sm truncate text-slate-900">
+            <span className="font-semibold text-sm truncate text-zinc-900">
               {conversation.type === "group"
                 ? conversation.name || "Group Chat"
                 : otherParticipant?.fullName || "Unknown"}
             </span>
             {conversation.lastMessageAt && (
-              <span className="text-[11px] text-slate-400 font-medium">
+              <span className="text-[11px] text-zinc-400 font-medium">
                 {new Date(conversation.lastMessageAt).toLocaleTimeString([], {
                   hour: "2-digit",
                   minute: "2-digit",
@@ -43,7 +43,7 @@ const ConversationItem: React.FC<{
             )}
           </div>
           {conversation.lastMessagePreview && (
-            <p className="text-xs text-slate-500 truncate mt-0.5">{conversation.lastMessagePreview}</p>
+            <p className="text-xs text-zinc-500 truncate mt-0.5">{conversation.lastMessagePreview}</p>
           )}
         </div>
       </div>
@@ -57,12 +57,12 @@ const MessageBubble: React.FC<{ message: DMMessage; isOwn: boolean }> = ({ messa
       className={`max-w-[70%] rounded-2xl px-4 py-2.5 shadow-sm ${
         isOwn
           ? "bg-zinc-900 text-white rounded-tr-sm"
-          : "bg-slate-100 text-slate-900 border border-slate-200 rounded-tl-sm"
+          : "bg-zinc-100 text-zinc-900 border border-zinc-200 rounded-tl-sm"
       }`}
     >
-      {!isOwn && <div className="text-xs font-semibold mb-1 text-slate-700">{message.senderId.fullName}</div>}
+      {!isOwn && <div className="text-xs font-semibold mb-1 text-zinc-700">{message.senderId.fullName}</div>}
       <p className="text-sm leading-relaxed">{message.text}</p>
-      <div className={`text-[10px] mt-1 text-right ${isOwn ? "text-zinc-300" : "text-slate-400"}`}>
+      <div className={`text-[10px] mt-1 text-right ${isOwn ? "text-zinc-300" : "text-zinc-400"}`}>
         {new Date(message.createdAt).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -120,19 +120,19 @@ export const MessagesPage: React.FC = () => {
   const activeConversation = conversations.find((c) => c._id === activeConversationId);
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+    <div className="flex h-[calc(100vh-8rem)] rounded-xl border border-zinc-200 bg-white overflow-hidden shadow-sm">
       {/* Sidebar: Conversations — hidden on mobile when thread is open */}
       <div
-        className={`${mobileShowThread ? "hidden" : "flex"} md:flex w-full md:w-80 border-r border-slate-200 bg-slate-50/50 flex-col`}
+        className={`${mobileShowThread ? "hidden" : "flex"} md:flex w-full md:w-80 border-r border-zinc-200 bg-zinc-50/50 flex-col`}
       >
-        <div className="p-4 border-b border-slate-200 bg-white">
-          <h2 className="font-bold text-base text-slate-900">Messages</h2>
+        <div className="p-4 border-b border-zinc-200 bg-white">
+          <h2 className="font-bold text-base text-zinc-900">Messages</h2>
         </div>
         <div className="flex-1 overflow-y-auto">
           {loadingConversations ? (
-            <div className="p-4 text-sm text-slate-500">Loading conversations...</div>
+            <div className="p-4 text-sm text-zinc-500">Loading conversations...</div>
           ) : conversations.length === 0 ? (
-            <div className="p-4 text-sm text-slate-500">No conversations yet</div>
+            <div className="p-4 text-sm text-zinc-500">No conversations yet</div>
           ) : (
             conversations.map((conv) => (
               <ConversationItem
@@ -150,11 +150,11 @@ export const MessagesPage: React.FC = () => {
       <div className={`${mobileShowThread ? "flex" : "hidden"} md:flex flex-1 flex-col bg-white`}>
         {activeConversationId ? (
           <>
-            <div className="p-3.5 border-b border-slate-200 flex items-center gap-3 bg-white">
+            <div className="p-3.5 border-b border-zinc-200 flex items-center gap-3 bg-white">
               <Button
                 variant="ghost"
                 size="sm"
-                className="md:hidden mr-1 text-slate-600"
+                className="md:hidden mr-1 text-zinc-600"
                 onClick={handleBack}
                 aria-label="Back to conversations"
               >
@@ -163,30 +163,30 @@ export const MessagesPage: React.FC = () => {
               <Avatar
                 src={activeConversation?.participants[0]?.avatar}
                 name={activeConversation?.participants[0]?.fullName || "?"}
-                className="h-9 w-9 border border-slate-200"
+                className="h-9 w-9 border border-zinc-200"
               />
               <div>
-                <div className="font-semibold text-sm text-slate-900">
+                <div className="font-semibold text-sm text-zinc-900">
                   {activeConversation?.type === "group"
                     ? activeConversation?.name || "Group Chat"
                     : activeConversation?.participants[0]?.fullName || "Unknown"}
                 </div>
-                <div className="text-xs text-slate-500">{activeConversation?.participants.length} participants</div>
+                <div className="text-xs text-zinc-500">{activeConversation?.participants.length} participants</div>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 bg-slate-50/30">
+            <div className="flex-1 overflow-y-auto p-4 bg-zinc-50/30">
               {loadingMessages ? (
-                <div className="text-sm text-slate-500">Loading messages...</div>
+                <div className="text-sm text-zinc-500">Loading messages...</div>
               ) : messages.length === 0 ? (
-                <div className="text-sm text-slate-500 text-center mt-8">No messages yet. Say hello!</div>
+                <div className="text-sm text-zinc-500 text-center mt-8">No messages yet. Say hello!</div>
               ) : (
                 messages.map((msg) => (
                   <MessageBubble key={msg._id} message={msg} isOwn={msg.senderId._id === currentUserId} />
                 ))
               )}
               {typingUsers[activeConversationId || ""]?.length > 0 && (
-                <div className="px-4 py-2 text-xs text-slate-400 italic">
+                <div className="px-4 py-2 text-xs text-zinc-400 italic">
                   {typingUsers[activeConversationId!].map((t) => t.userName).join(", ")}
                   {typingUsers[activeConversationId!].length === 1 ? "is" : "are"} typing...
                 </div>
@@ -194,7 +194,7 @@ export const MessagesPage: React.FC = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="p-3.5 border-t border-slate-200 bg-white">
+            <div className="p-3.5 border-t border-zinc-200 bg-white">
               <div className="flex gap-2">
                 <Input
                   placeholder="Type a message..."
@@ -205,7 +205,7 @@ export const MessagesPage: React.FC = () => {
                   }}
                   onKeyDown={handleKeyDown}
                   disabled={sending}
-                  className="flex-1 bg-white border-slate-200 text-slate-900 text-sm"
+                  className="flex-1 bg-white border-zinc-200 text-zinc-900 text-sm"
                 />
                 <Button variant="primary" onClick={handleSend} disabled={!inputText.trim() || sending}>
                   {sending ? "..." : "Send"}
@@ -214,7 +214,7 @@ export const MessagesPage: React.FC = () => {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-slate-400 text-sm bg-slate-50/20">
+          <div className="flex-1 flex items-center justify-center text-zinc-400 text-sm bg-zinc-50/20">
             Select a conversation to start messaging
           </div>
         )}

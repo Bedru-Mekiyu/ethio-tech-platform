@@ -451,7 +451,7 @@ export function TracksPage() {
 
           {/* Search Input */}
           <div className="relative w-full lg:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
             <Input
               type="text"
               placeholder="Search tracks or tools..."
@@ -463,7 +463,7 @@ export function TracksPage() {
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -tranzinc-y-1/2 text-[10px] text-zinc-400 hover:text-zinc-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 hover:text-zinc-600"
               >
                 Clear
               </button>

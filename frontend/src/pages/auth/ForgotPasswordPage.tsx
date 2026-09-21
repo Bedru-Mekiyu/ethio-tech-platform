@@ -74,7 +74,7 @@ export function ForgotPasswordPage() {
           <div className="relative">
             <Mail
               size={15}
-              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -tranzinc-y-1/2 text-zinc-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-zinc-400"
             />
             <Input
               className="pl-10 text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-900"

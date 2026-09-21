@@ -79,10 +79,7 @@ interface LifecycleStage {
   keyDeliverables: string[];
   toolsUsed: string[];
   telemetryMetric: { label: string; value: string };
-  codeMock: {
-    filename: string;
-    code: string;
-  };
+  evaluationCriteria: string[];
 }
 
 const LIFECYCLE_STAGES: LifecycleStage[] = [
@@ -103,24 +100,11 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     ],
     toolsUsed: ["Adaptive Diagnostic Engine", "Squad Matchmaker", "Skill Matrix Graph"],
     telemetryMetric: { label: "Assessment Window", value: "45 Minutes" },
-    codeMock: {
-      filename: "calibration-engine.ts",
-      code: `// Stage 1: Diagnostic Profile Calibration
-export async function calibrateLearnerPath(profile: DiagnosticSubmission): Promise<CalibratedPath> {
-  const recommendations = await evaluateKnowledgeGraph({
-    algorithms: profile.scoreLogic,
-    systemDesign: profile.scoreArchitecture,
-    preferredLanguage: profile.primaryLang,
-    weeklyCommitmentHrs: profile.hoursAvailable
-  });
-
-  return {
-    assignedTrack: recommendations.primaryTrack, // e.g. "FULLSTACK_CLOUD"
-    recommendedSquadId: await findOptimalSquad(profile.region, profile.schedule),
-    baselineXP: 250
-  };
-}`,
-    },
+    evaluationCriteria: [
+      "Algorithmic fundamentals & problem solving assessment",
+      "Curriculum pathway & entry tier calibration",
+      "Squad timezone and weekly availability match",
+    ],
   },
   {
     step: 2,
@@ -139,20 +123,11 @@ export async function calibrateLearnerPath(profile: DiagnosticSubmission): Promi
     ],
     toolsUsed: ["Monaco Synchronized IDE", "WebRTC Audio Mesh", "Realtime Whiteboard"],
     telemetryMetric: { label: "Live Lab Audio Codec", value: "Opus @ 32kbps" },
-    codeMock: {
-      filename: "webrtc-pair-session.ts",
-      code: `// Stage 2: WebRTC Low-Bandwidth Live Sync
-const liveSession = new CollaborativeLabRoom({
-  roomId: "eth-track-fs-squad-4",
-  mentor: "Abebe.B (Staff Eng @ Diaspora Network)",
-  codecOptions: { audioOnly: true, maxBitrateKbps: 32 },
-  operationalTransform: { syncDeltaMs: 50 }
-});
-
-liveSession.on("peer-cursor-move", ({ line, char, user }) => {
-  renderMentorCursor(user, line, char);
-});`,
-    },
+    evaluationCriteria: [
+      "Weekly 1-on-1 architectural consultation attendance",
+      "Active participation in live collaborative debugging sessions",
+      "Consistent milestone progression across live clinics",
+    ],
   },
   {
     step: 3,
@@ -171,24 +146,11 @@ liveSession.on("peer-cursor-move", ({ line, char, user }) => {
     ],
     toolsUsed: ["Docker Devcontainers", "WASM Micro-kernels", "Jest/PyTest Runners"],
     telemetryMetric: { label: "Test Coverage Requirement", value: ">= 85%" },
-    codeMock: {
-      filename: "project-submission.ts",
-      code: `// Stage 3: Automated Project Suite Verification
-export async function runAutomatedLabAudit(repoUrl: string): Promise<AuditResult> {
-  const sandbox = await spinUpEphemeralContainer({ image: "ethio-node-postgres:latest" });
-  const [unitTests, integrationTests, lintErrors] = await sandbox.runAll([
-    "npm test -- --coverage",
-    "npm run test:e2e",
-    "npm run lint:strict"
-  ]);
-
-  return {
-    passed: unitTests.coverage >= 85 && lintErrors.count === 0,
-    earnedXP: 500,
-    unlocksNextModule: true
-  };
-}`,
-    },
+    evaluationCriteria: [
+      "Production Git repository with clear atomic commit history",
+      "Automated test suite passing with >= 85% statement coverage",
+      "Zero security warnings and clean linter audit",
+    ],
   },
   {
     step: 4,
@@ -207,19 +169,11 @@ export async function runAutomatedLabAudit(repoUrl: string): Promise<AuditResult
     ],
     toolsUsed: ["EthioTech PR Reviewer", "Code Diff Heatmaps", "Squad Standup Bots"],
     telemetryMetric: { label: "Peer Review Requirement", value: ">= 2 Approvals / PR" },
-    codeMock: {
-      filename: "pull-request-policy.ts",
-      code: `// Stage 4: Squad PR Approval Gate
-export const squadPRPolicy = {
-  minPeerReviews: 2,
-  requireArchitectureDefense: (moduleTier: string) => moduleTier === "CAPSTONE",
-  autoRejectOnLinterWarning: true,
-  rewardReviewerXP: (reviewerId: string) => ({
-    reviewerXP: 75,
-    reputationScoreBonus: 0.1
-  })
-};`,
-    },
+    evaluationCriteria: [
+      "Minimum 2 approved peer code reviews per pull request",
+      "Live 15-minute architecture defense with mentor sign-off",
+      "Thorough peer feedback contributions to squad members",
+    ],
   },
   {
     step: 5,
@@ -238,22 +192,11 @@ export const squadPRPolicy = {
     ],
     toolsUsed: ["Talent Passport Verifier", "Employer Talent Directory", "Alumni Network"],
     telemetryMetric: { label: "Employer Hiring Model", value: "Direct & Fee-Free" },
-    codeMock: {
-      filename: "skill-passport.ts",
-      code: `// Stage 5: Verified Skill Passport & Competency Record
-export interface LearnerSkillPassport {
-  studentId: string;
-  trackId: "FULLSTACK_CLOUD" | "APPLIED_AI" | "CLOUD_DEVOPS";
-  completedMilestones: Array<{
-    moduleId: string;
-    verifiedAt: string;
-    mentorSignoff: string;
-    repositoryUrl: string;
-  }>;
-  verifiedCompetencies: string[];
-  publicVerificationUrl: string;
-}`,
-    },
+    evaluationCriteria: [
+      "Completed track curriculum and capstone project deliverable",
+      "Senior engineering fellow verification of core competencies",
+      "Publicly accessible verifiable credential with shareable portfolio",
+    ],
   },
 ];
 
@@ -701,21 +644,39 @@ export function HowItWorksPage() {
 
                   {/* Right: Code Simulation & Step Action */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-3 py-1.5">
-                        <div className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="ml-2 text-xs font-mono text-zinc-400">{currentStage.codeMock.filename}</span>
+                    <div className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs space-y-4">
+                      <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                        <div>
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                            Verification Standards
+                          </span>
+                          <h4 className="text-xs font-bold text-zinc-900 mt-0.5">
+                            Stage {currentStage.step} Quality Gates
+                          </h4>
                         </div>
-                        <Badge variant="default" size="sm">
-                          Architecture Spec
+                        <Badge variant="outline" size="sm">
+                          {currentStage.badge}
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
-                        <code>{currentStage.codeMock.code}</code>
-                      </pre>
+
+                      <div className="space-y-2.5">
+                        <p className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
+                          Evaluation Criteria
+                        </p>
+                        {currentStage.evaluationCriteria.map((criterion) => (
+                          <div key={criterion} className="flex items-start gap-2.5 text-xs text-zinc-700">
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#b91c1c]" />
+                            <span>{criterion}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 flex items-center justify-between text-xs">
+                        <span className="text-zinc-600 font-medium">Stage Target Benchmark:</span>
+                        <span className="font-semibold text-zinc-900 font-mono">
+                          {currentStage.telemetryMetric.value}
+                        </span>
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -951,7 +912,7 @@ export function HowItWorksPage() {
           {/* Search & Category Filter */}
           <div className="mt-8 space-y-3">
             <div className="relative mx-auto max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400" size={15} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" size={15} />
               <input
                 type="text"
                 placeholder="Search questions (e.g. internet, cost, mentor, hiring)..."

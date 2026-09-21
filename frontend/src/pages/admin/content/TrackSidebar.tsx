@@ -90,7 +90,7 @@ export function TrackSidebar({
 
         {/* Search Input */}
         <div className="relative">
-          <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
           <Input
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
@@ -101,7 +101,7 @@ export function TrackSidebar({
             <button
               type="button"
               onClick={() => onSearchChange("")}
-              className="absolute right-2.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 hover:text-zinc-700"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700"
             >
               <X size={13} />
             </button>

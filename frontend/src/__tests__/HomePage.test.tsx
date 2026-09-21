@@ -76,7 +76,7 @@ describe("HomePage Component Suite", () => {
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Empowering youth with senior engineering mentors/i)).toBeDefined();
+    expect(screen.getByText(/Connecting university students and aspiring software engineers/i)).toBeDefined();
     expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
     expect(screen.getAllByRole("button", { name: /Start Coding Free/i }).length).toBeGreaterThan(0);
 

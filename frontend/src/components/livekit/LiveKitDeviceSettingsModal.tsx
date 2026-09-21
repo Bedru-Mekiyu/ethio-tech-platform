@@ -143,13 +143,13 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-white">Device & Audio Settings</h2>
-                <p className="text-xs text-slate-400">Configure your camera, microphone, and output devices</p>
+                <p className="text-xs text-zinc-400">Configure your camera, microphone, and output devices</p>
               </div>
             </div>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg p-2 text-slate-400 hover:bg-white/5 hover:text-white transition-colors"
+              className="rounded-lg p-2 text-zinc-400 hover:bg-white/5 hover:text-white transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
@@ -158,14 +158,14 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
           <div className="mt-5 space-y-5">
             {/* Microphone */}
             <div className="space-y-2">
-              <label className="flex items-center justify-between text-xs font-semibold text-slate-300">
+              <label className="flex items-center justify-between text-xs font-semibold text-zinc-300">
                 <span className="flex items-center gap-2">
                   <Mic className="h-4 w-4 text-white" /> Microphone
                 </span>
                 <button
                   type="button"
                   onClick={loadDevices}
-                  className="text-[11px] text-slate-300 hover:text-white flex items-center gap-1"
+                  className="text-[11px] text-zinc-300 hover:text-white flex items-center gap-1"
                 >
                   <RefreshCw className={`h-3 w-3 ${loading ? "animate-spin" : ""}`} /> Refresh
                 </button>
@@ -173,7 +173,7 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
               <select
                 value={selectedAudioInput}
                 onChange={(e) => setSelectedAudioInput(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                className="w-full rounded-xl border border-white/10 bg-zinc-900/80 px-3.5 py-2.5 text-sm text-zinc-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
               >
                 {audioInputs.map((d) => (
                   <option key={d.deviceId} value={d.deviceId}>
@@ -184,23 +184,23 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
               </select>
               {/* Audio level meter */}
               <div className="mt-2 flex items-center gap-2">
-                <span className="text-[10px] uppercase font-semibold text-slate-500">Input Level</span>
-                <div className="h-2 flex-1 rounded-full bg-slate-800 overflow-hidden">
+                <span className="text-[10px] uppercase font-semibold text-zinc-500">Input Level</span>
+                <div className="h-2 flex-1 rounded-full bg-zinc-800 overflow-hidden">
                   <div className="h-full bg-white transition-all duration-75" style={{ width: `${audioLevel}%` }} />
                 </div>
-                <span className="text-[10px] text-slate-400 w-7 text-right">{audioLevel}%</span>
+                <span className="text-[10px] text-zinc-400 w-7 text-right">{audioLevel}%</span>
               </div>
             </div>
 
             {/* Camera */}
             <div className="space-y-2">
-              <label className="flex items-center gap-2 text-xs font-semibold text-slate-300">
+              <label className="flex items-center gap-2 text-xs font-semibold text-zinc-300">
                 <Video className="h-4 w-4 text-white" /> Camera
               </label>
               <select
                 value={selectedVideoInput}
                 onChange={(e) => setSelectedVideoInput(e.target.value)}
-                className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                className="w-full rounded-xl border border-white/10 bg-zinc-900/80 px-3.5 py-2.5 text-sm text-zinc-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
               >
                 {videoInputs.map((d) => (
                   <option key={d.deviceId} value={d.deviceId}>
@@ -214,13 +214,13 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
             {/* Speaker / Audio Output */}
             {audioOutputs.length > 0 && (
               <div className="space-y-2">
-                <label className="flex items-center gap-2 text-xs font-semibold text-slate-300">
+                <label className="flex items-center gap-2 text-xs font-semibold text-zinc-300">
                   <Volume2 className="h-4 w-4 text-white" /> Speaker / Output
                 </label>
                 <select
                   value={selectedAudioOutput}
                   onChange={(e) => setSelectedAudioOutput(e.target.value)}
-                  className="w-full rounded-xl border border-white/10 bg-slate-900/80 px-3.5 py-2.5 text-sm text-slate-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
+                  className="w-full rounded-xl border border-white/10 bg-zinc-900/80 px-3.5 py-2.5 text-sm text-zinc-200 focus:border-white focus:outline-none focus:ring-1 focus:ring-white"
                 >
                   {audioOutputs.map((d) => (
                     <option key={d.deviceId} value={d.deviceId}>
@@ -236,7 +236,7 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-white/10 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-white/5 transition-colors"
+              className="rounded-xl border border-white/10 px-4 py-2 text-sm font-medium text-zinc-300 hover:bg-white/5 transition-colors"
             >
               Cancel
             </button>

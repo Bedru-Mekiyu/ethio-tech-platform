@@ -55,7 +55,7 @@ const SCHOLARSHIP_TIERS = [
       "12 months unlimited platform curriculum & automated test suites",
       "Dedicated 1-on-1 mentor code reviews and capstone feedback",
       "Cloud database and API sandbox compute allocations",
-      "Verifiable cryptographic graduation certificate",
+      "Verifiable digital graduation certificate",
     ],
     impactQuote: "Enables an ambitious high school or university student to break into tech.",
   },
@@ -372,7 +372,7 @@ export function DonationPage() {
               <div className="space-y-1.5">
                 <Label>Or Enter a Custom Amount (USD)</Label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -tranzinc-y-1/2 text-zinc-400 font-bold text-sm">$</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 font-bold text-sm">$</span>
                   <Input
                     type="number"
                     min={5}

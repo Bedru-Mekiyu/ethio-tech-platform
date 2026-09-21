@@ -23,19 +23,12 @@ export interface AvatarProps {
 const unique = (items: Array<string | null | undefined>) =>
   items.filter((item, index, list) => Boolean(item) && list.indexOf(item) === index) as string[];
 
-const GenericAvatarIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.5}
-    className="w-1/2 h-1/2 text-white/60"
-    aria-hidden="true"
-  >
-    <circle cx="12" cy="8" r="4" />
-    <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
-  </svg>
-);
+function getInitials(name?: string): string {
+  if (!name || !name.trim()) return "?";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
 
 export function Avatar({
   src,
@@ -167,7 +160,7 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
             srcSet={srcSet || undefined}
             sizes={srcSet ? "(max-width: 640px) 64px, (max-width: 1024px) 128px, 256px" : undefined}
             alt={alt}
-            className={cn("h-full w-full object-cover ring-2 ring-primary/30", !isLoaded && "opacity-0")}
+            className={cn("h-full w-full object-cover border border-zinc-200", !isLoaded && "opacity-0")}
             onLoad={() => setIsLoaded(true)}
             onError={handleError}
             loading="lazy"
@@ -175,24 +168,20 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
           />
           <div
             className={cn(
-              "absolute inset-0 flex items-center justify-center font-semibold text-white ring-2 ring-primary/20 transition-opacity duration-200",
-              "bg-gradient-to-tr from-secondary/40 via-primary/30 to-secondary/30",
+              "absolute inset-0 flex items-center justify-center font-semibold text-zinc-700 bg-zinc-100 border border-zinc-200 transition-opacity duration-200",
               isLoaded ? "opacity-0" : "opacity-100",
             )}
             aria-hidden="true"
           >
-            <span className="sr-only">{name}</span>
+            <span>{getInitials(name)}</span>
           </div>
         </>
       ) : (
         <div
-          className={cn(
-            "flex h-full w-full items-center justify-center ring-2 ring-primary/20",
-            "bg-gradient-to-tr from-secondary/40 via-primary/30 to-secondary/30",
-          )}
-          aria-label={`${name} avatar unavailable`}
+          className="flex h-full w-full items-center justify-center border border-zinc-200 bg-zinc-100 font-semibold text-zinc-700 select-none text-xs"
+          aria-label={alt}
         >
-          <GenericAvatarIcon />
+          <span>{getInitials(name)}</span>
         </div>
       )}
     </div>

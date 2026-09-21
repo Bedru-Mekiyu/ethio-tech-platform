@@ -23,8 +23,6 @@ import {
   Zap,
   type LucideIcon,
 } from "lucide-react";
-import { SmartImage } from "@/components/ui/smart-image";
-import { MEDIA_CATEGORIES } from "@/config/mediaConfig";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -95,7 +93,6 @@ interface PistelPillar {
   philosophy: string;
   mechanisms: string[];
   keyMetric: { label: string; value: string };
-  codeSnippet?: string;
 }
 
 const PISTELS_PILLARS: PistelPillar[] = [
@@ -107,23 +104,14 @@ const PISTELS_PILLARS: PistelPillar[] = [
     badge: "Day 1 Production",
     icon: Terminal,
     philosophy:
-      "Ethiopian universities teach robust algorithm theory, but graduates encounter steep hurdles when required to configure CI/CD workflows, manage database migrations, or orchestrate Dockerized microservices. EthioTech replaces generic todo tutorials with distributed backends, resilient event loops, and production-grade pull requests.",
+      "Ethiopian universities teach robust algorithm theory, but graduates encounter steep hurdles when required to configure CI/CD workflows, manage database migrations, or orchestrate Dockerized microservices. EthioTech replaces generic tutorials with distributed backends, resilient event loops, and production-grade pull requests.",
     mechanisms: [
       "Containerized devcontainers mirroring standard industry cloud setups",
       "Automated unit, integration, and end-to-end testing requirements for all project merges",
-      "Live staging deployments on decentralized and edge compute nodes",
-      "Real-world incident simulation labs (debugging latency spikes, memory leaks, concurrency locks)",
+      "Live staging deployments on edge compute nodes",
+      "Real-world incident simulation labs (debugging latency, indexing, concurrency locks)",
     ],
-    keyMetric: { label: "Production PRs Merged", value: "48,000+" },
-    codeSnippet: `// EthioTech Real Pipeline Validator
-export async function verifyProductionDeploy(spec: ServiceSpec): Promise<PipelineStatus> {
-  const [lintPass, testCoverage, secAudit] = await Promise.all([
-    runStaticAnalyzer(spec.sourceDir),
-    runCoverageReport(spec.testDir, { minThreshold: 85 }),
-    runDependencyVulnerabilityScan(spec.packageLock)
-  ]);
-  return lintPass && testCoverage && secAudit ? "READY_FOR_DEPLOY" : "REJECTED";
-}`,
+    keyMetric: { label: "Engineering Standard", value: "Production PR Reviews & CI" },
   },
   {
     letter: "I",
@@ -140,14 +128,7 @@ export async function verifyProductionDeploy(spec: ServiceSpec): Promise<Pipelin
       "In-browser WebAssembly micro-kernels for instant code execution",
       "Real-time code heatmaps highlighting peer syntax errors and test diffs",
     ],
-    keyMetric: { label: "Avg Live Audio Latency", value: "< 120ms" },
-    codeSnippet: `// WebRTC Audio + Operational Sync Engine
-const rtcChannel = new DataChannelMesh({
-  bandwidthMode: "ADAPTIVE_LOW_BANDWIDTH", // Optimized for regional telecom links
-  audioBitrateKbps: 32,
-  syncIntervalMs: 80,
-  fallbackToTextDiffs: true
-});`,
+    keyMetric: { label: "Live Lab Latency Target", value: "Sub-150ms WebRTC" },
   },
   {
     letter: "S",
@@ -164,14 +145,7 @@ const rtcChannel = new DataChannelMesh({
       "Peer pull request reviews required before mentor review unlock",
       "Collective squad XP bonuses unlocking hackathon entries and hardware access",
     ],
-    keyMetric: { label: "Cohort Retention Rate", value: "91.4%" },
-    codeSnippet: `// Squad Peer Review Gatekeeper
-interface SquadReviewPolicy {
-  minPeerApprovals: 2;
-  mandatoryDiffInspection: true;
-  mentorSignOffRequired: boolean;
-  squadCohesionScoreMultiplier: 1.25;
-}`,
+    keyMetric: { label: "Collaboration Model", value: "4-to-6 Engineer Agile Squads" },
   },
   {
     letter: "T",
@@ -181,21 +155,14 @@ interface SquadReviewPolicy {
     badge: "High-Demand Stacks",
     icon: Layers,
     philosophy:
-      "Rather than generic computer science survey courses, EthioTech curates four hyper-focused vocational tracks matching the exact hiring demand of high-growth African startups, global remote contractors, and pan-African digital transformation initiatives.",
+      "Rather than generic computer science survey courses, EthioTech curates hyper-focused vocational tracks matching the exact hiring demand of high-growth African startups, global remote contractors, and pan-African digital transformation initiatives.",
     mechanisms: [
       "Modern Cloud Fullstack: TypeScript, Next.js, Node.js, Go, PostgreSQL, Redis",
       "Applied AI & Machine Learning: Python, LLM Orchestration, PyTorch, Local Vector Stores",
       "Cloud Infrastructure & DevOps: Kubernetes, Docker, Terraform, CI/CD, Linux Systems",
       "Mobile First Engineering: Flutter, React Native, Offline-first SQLite sync, Mobile Money APIs",
     ],
-    keyMetric: { label: "Active Curated Tracks", value: "4 Core + 12 Specializations" },
-    codeSnippet: `// Dynamic Curriculum Progression
-export const TRACK_MANIFEST = {
-  FULLSTACK: { primary: "TypeScript", runtime: "Node/Go", db: "PostgreSQL" },
-  AI_SYSTEMS: { primary: "Python", frameworks: ["PyTorch", "LangChain", "FastAPI"] },
-  CLOUD_DEVOPS: { tooling: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"] },
-  MOBILE_SCALE: { framework: "Flutter", paymentIntegrations: ["Telebirr", "CBE Birr"] }
-};`,
+    keyMetric: { label: "Curriculum Pathways", value: "6 High-Demand Tech Tracks" },
   },
   {
     letter: "E",
@@ -212,15 +179,7 @@ export const TRACK_MANIFEST = {
       "Physical Hub network across Addis Ababa, Hawassa, Bahir Dar, Mekelle, Jimma, and Dire Dawa",
       "Data-saving ultra-compact mode cutting asset payloads by up to 88%",
     ],
-    keyMetric: { label: "Tuition / Fee Cost", value: "$0 Always" },
-    codeSnippet: `// Offline PWA Sync Engine
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/offline-mesh-worker.js', {
-      scope: '/curriculum/'
-    });
-  });
-}`,
+    keyMetric: { label: "Tuition / Cost", value: "$0 100% Free Access" },
   },
   {
     letter: "L",
@@ -237,13 +196,7 @@ if ('serviceWorker' in navigator) {
       "Reverse mentorship: Diaspora leads stay connected with grassroots Ethiopian innovations",
       "Verified mentor credentialing and alumni endorsement badges",
     ],
-    keyMetric: { label: "Global Mentor Network", value: "250+ Engineers" },
-    codeSnippet: `// 1-on-1 Mentor Slot Booking Matcher
-export function matchLearnerToMentor(learnerGoal: string, mentorExpertise: string[]) {
-  return mentorDirectory.filter(mentor => 
-    mentor.isVerified && mentor.expertise.includes(learnerGoal) && mentor.availableSlots > 0
-  );
-}`,
+    keyMetric: { label: "Mentorship Format", value: "1-on-1 Sessions & PR Reviews" },
   },
   {
     letter: "S2",
@@ -260,16 +213,7 @@ export function matchLearnerToMentor(learnerGoal: string, mentorExpertise: strin
       "Direct fast-track interview pipelines with hiring partners across Ethiopia and remote global firms",
       "Continuous alumni career leveling, salary benchmarking, and leadership advancement",
     ],
-    keyMetric: { label: "Graduates Placed in Tech", value: "88.2%" },
-    codeSnippet: `// Verifiable Proof-of-Work Credential
-export interface SkillPassport {
-  learnerId: string;
-  verifiedTracks: string[];
-  cumulativeXP: number;
-  gitHubCommitEvidence: string[];
-  architecturalDefenseScore: number;
-  digitalSignature: string;
-}`,
+    keyMetric: { label: "Graduation Deliverable", value: "Verifiable Digital Credential" },
   },
 ];
 
@@ -815,29 +759,42 @@ export function AboutPage() {
                     </div>
                   </div>
 
-                  {/* Right Column: Code & Interactive Architecture */}
+                  {/* Right Column: Implementation Standards & Practices */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-950 shadow-inner">
-                      <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900 px-3 py-1.5">
-                        <div className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="h-2 w-2 rounded-full bg-zinc-700" />
-                          <span className="ml-2 text-xs font-mono text-zinc-400">
-                            {activePillar.shortKey}-architecture.ts
-                          </span>
-                        </div>
+                    <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-4">
+                      <div className="flex items-center justify-between border-b border-zinc-200/80 pb-3">
+                        <span className="text-xs font-semibold text-zinc-900">Standard & Verification</span>
                         <Badge variant="default" size="sm">
-                          PISTELS Spec
+                          PISTELS Framework
                         </Badge>
                       </div>
-                      <pre className="overflow-x-auto p-3 text-xs font-mono leading-relaxed text-zinc-300">
-                        <code>{activePillar.codeSnippet}</code>
-                      </pre>
+
+                      <div className="mt-3.5 space-y-3 text-xs">
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                            Execution Paradigm
+                          </p>
+                          <p className="mt-0.5 text-xs font-medium text-zinc-800">{activePillar.tagline}</p>
+                        </div>
+
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                            Evaluation Focus
+                          </p>
+                          <p className="mt-0.5 text-xs text-zinc-600 leading-relaxed">{activePillar.philosophy}</p>
+                        </div>
+
+                        <div className="rounded-md border border-zinc-200 bg-white p-2.5">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-medium text-zinc-700">Verification Outcome:</span>
+                            <span className="font-semibold text-zinc-900">{activePillar.keyMetric.value}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between text-xs text-zinc-500">
-                      <span>Click any pillar above to inspect mechanics</span>
+                      <span>Click any pillar below to inspect mechanics</span>
                       <Button
                         variant="ghost"
                         size="sm"
@@ -925,21 +882,67 @@ export function AboutPage() {
           </Card>
         </div>
 
-        {/* Visual Community Showcase */}
+        {/* National Delivery Architecture Showcase */}
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="relative">
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-zinc-200 shadow-sm">
-              <SmartImage
-                unsplashId={MEDIA_CATEGORIES.marketing.hero[1].unsplashId}
-                alt="EthioTech immersive learning environment preview - student programmer at work"
-                hoverEffect="glow"
-                wrapperClassName="h-full w-full border-none bg-transparent rounded-xl overflow-hidden"
-                className="h-full w-full object-cover"
-                width={1000}
-                quality={85}
-              />
+          <Card className="border-zinc-200 bg-white p-6 shadow-xs">
+            <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#b91c1c]" />
+                <span className="text-xs font-semibold text-zinc-900">National Delivery Architecture</span>
+              </div>
+              <Badge variant="default" size="sm">
+                4-Tier Distributed System
+              </Badge>
             </div>
-          </div>
+
+            <div className="mt-4 space-y-3">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-zinc-900">1. Regional Hub Network</span>
+                  <span className="text-[11px] text-zinc-500 font-medium">Physical Mesh</span>
+                </div>
+                <p className="mt-1 text-xs text-zinc-600">
+                  Dedicated computer labs with backup power, local caches, and fiber internet across 6 university
+                  cities.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-zinc-900">2. In-Browser WASM Runtime</span>
+                  <span className="text-[11px] text-zinc-500 font-medium">Edge Compute</span>
+                </div>
+                <p className="mt-1 text-xs text-zinc-600">
+                  Zero-install developer environment running locally via WebAssembly, resilient to network drops.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-zinc-900">3. Diaspora Mentorship Mesh</span>
+                  <span className="text-[11px] text-zinc-500 font-medium">Global Network</span>
+                </div>
+                <p className="mt-1 text-xs text-zinc-600">
+                  Weekly code reviews and async architecture feedback from Ethiopian staff engineers worldwide.
+                </p>
+              </div>
+
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-zinc-900">4. Talent Verification Gateway</span>
+                  <span className="text-[11px] text-zinc-500 font-medium">Verifiable Proof</span>
+                </div>
+                <p className="mt-1 text-xs text-zinc-600">
+                  Cryptographically verifiable skill passports backed by production git commits and peer reviews.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-wrap items-center justify-between border-t border-zinc-100 pt-3 text-xs text-zinc-500">
+              <span>Sovereign Tech Talent Infrastructure</span>
+              <span className="font-medium text-zinc-700">100% Free & Open Access</span>
+            </div>
+          </Card>
 
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-2 shadow-xs">

@@ -22,7 +22,6 @@ import {
   Compass,
   BookOpen,
   Radio,
-  FileCode,
   Smartphone,
   ChevronRight,
   Layers,
@@ -569,8 +568,8 @@ export function HomePage() {
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base leading-relaxed text-zinc-600 max-w-2xl font-normal">
-              Empowering youth with senior engineering mentors, in-browser cloud sandboxes, 4-peer agile squads, and
-              direct hiring pathways. Verified by {formatCompactCount(activeLearnersCount)}+ active learners.
+              Connecting university students and aspiring software engineers with senior diaspora mentors, structured
+              production curriculums, and collaborative 4-peer agile squads.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
@@ -596,32 +595,18 @@ export function HomePage() {
             </div>
 
             {/* Trust Signals */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center lg:items-start gap-4">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="inline-block h-8 w-8 rounded-full border-2 border-white bg-zinc-100 overflow-hidden shadow-xs"
-                  >
-                    <img
-                      src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                      alt="Student"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
+            <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-600">
+              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <span>100% Free & Open Access</span>
               </div>
-              <div className="flex flex-col items-center sm:items-start">
-                <div className="flex items-center gap-1 text-amber-500">
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                </div>
-                <p className="mt-1 text-xs text-zinc-500 font-medium">
-                  <span className="font-semibold text-zinc-900">4.9/5 Rating</span> from 1,200+ Alumni Reviews
-                </p>
+              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <span>Low-Bandwidth WebRTC Mesh</span>
+              </div>
+              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <span>Verified Deliverable Credentials</span>
               </div>
             </div>
 
@@ -653,118 +638,82 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Right Column: High-Tech Live Interactive Simulation Preview */}
+          {/* Right Column: Platform Workspace Preview */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-4 sm:p-5 shadow-sm">
-              {/* Window Header */}
+            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm space-y-4">
+              {/* Header */}
               <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
                 <div className="flex items-center gap-2">
-                  <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-zinc-300" />
-                  <span className="ml-2 font-mono text-xs text-zinc-600">Interactive Classroom</span>
+                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
+                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
+                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
+                  <span className="ml-1 text-xs font-semibold text-zinc-800">Learning Workspace</span>
                 </div>
-                <div className="flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-800">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
-                  <span>LiveKit WebRTC Classroom</span>
-                </div>
+                <Badge variant="outline" size="sm" className="gap-1.5 font-medium text-[11px]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c]" />
+                  Active Session
+                </Badge>
               </div>
 
-              {/* Live WebRTC Streamer Card Inside IDE */}
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                {/* Mentor Stream Box */}
-                <div className="relative overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 p-3">
-                  <div className="flex items-center gap-3">
-                    <Avatar
-                      src=""
-                      name="Selamawit Tekle"
-                      userId="selamawit-tekle"
-                      role="mentor"
-                      size="md"
-                      className="ring-1 ring-zinc-200"
-                    />
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <p className="text-xs font-semibold text-zinc-900">Selamawit Tekle</p>
-                        <ShieldCheck size={13} className="text-zinc-700" />
-                      </div>
-                      <p className="text-[10px] text-zinc-600 font-medium">Senior Engineering Fellow</p>
+              {/* Live Mentorship Session Card */}
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                    Live Workshop · WebRTC Mesh
+                  </span>
+                  <span className="flex items-center gap-1 text-[11px] font-medium text-zinc-700">
+                    <Radio size={11} className="text-[#b91c1c] animate-pulse" /> Sub-150ms Audio
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Avatar
+                    name="Selamawit Tekle"
+                    userId="selamawit-tekle"
+                    role="mentor"
+                    size="md"
+                    className="border border-zinc-200"
+                  />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-xs font-semibold text-zinc-900 truncate">Selamawit Tekle</p>
+                      <ShieldCheck size={13} className="text-zinc-700 shrink-0" />
                     </div>
-                  </div>
-                  <div className="mt-3 flex items-center justify-between rounded-md bg-white border border-zinc-200 px-2 py-1 text-[10px] text-zinc-600">
-                    <span className="flex items-center gap-1 text-zinc-700 font-medium">
-                      <Radio size={11} className="animate-pulse" /> 1080p • 38ms
-                    </span>
-                    <span>Addis Ababa Hub</span>
-                  </div>
-                </div>
-
-                {/* Squad Members Active Box */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 bg-zinc-50 p-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-medium text-zinc-700">Active Peer Squad</span>
-                    <span className="rounded-full border border-zinc-200 bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-800">
-                      +20% Streak
-                    </span>
-                  </div>
-                  <div className="flex items-center -space-x-1.5 mt-2">
-                    {["Abebe K.", "Bethlehem T.", "Chala M.", "Dagmawi Z."].map((name) => (
-                      <div
-                        key={name}
-                        className="flex h-6 w-6 items-center justify-center rounded-full border border-white bg-zinc-200 text-[10px] font-semibold text-zinc-700 shadow-xs"
-                        title={name}
-                      >
-                        {name.charAt(0)}
-                      </div>
-                    ))}
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white bg-zinc-100 text-[10px] font-semibold text-zinc-500 shadow-xs">
-                      +24
-                    </div>
-                  </div>
-                  <div className="mt-2 text-[10px] text-zinc-600 flex items-center gap-1">
-                    <CheckCircle2 size={11} className="text-zinc-700" />
-                    <span>3 of 4 PRs merged into main</span>
+                    <p className="text-[11px] text-zinc-600 truncate">
+                      Senior Engineering Fellow · Distributed Systems
+                    </p>
                   </div>
                 </div>
               </div>
 
-              {/* Code Snippet Area */}
-              <div className="mt-3 rounded-lg border border-zinc-800 bg-zinc-950 p-3.5 font-mono text-xs shadow-inner">
-                <div className="flex items-center justify-between border-b border-zinc-800 pb-2 text-[11px] text-zinc-400">
-                  <div className="flex items-center gap-2">
-                    <FileCode size={13} className="text-zinc-400" />
-                    <span className="text-zinc-200">telebirr_payment_gateway.go</span>
+              {/* Active Curriculum Track Progress Card */}
+              <div className="rounded-lg border border-zinc-200 bg-white p-3.5 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      Curriculum Pathway
+                    </span>
+                    <p className="text-xs font-bold text-zinc-900 mt-0.5">Fullstack Cloud & Distributed Systems</p>
                   </div>
-                  <span className="text-zinc-400 font-mono text-[10px]">● Synced</span>
+                  <span className="font-mono text-xs font-bold text-zinc-900">50%</span>
                 </div>
-                <div className="mt-2.5 space-y-1 text-[11px] leading-relaxed text-zinc-300">
-                  <p>
-                    <span className="text-zinc-200 font-semibold">func</span> ProcessTelebirrWebhook(w
-                    http.ResponseWriter, r *http.Request) &#123;
-                  </p>
-                  <p className="pl-4">
-                    signature := r.Header.Get(<span className="text-amber-300">&quot;X-Telebirr-Signature&quot;</span>)
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-zinc-200 font-semibold">if err</span> := crypto.VerifyEd25519(signature,
-                    payload); err != nil &#123;
-                  </p>
-                  <p className="pl-8 text-red-400">return http.Error(w, &quot;Unauthorized Payload&quot;, 401)</p>
-                  <p className="pl-4">&#125;</p>
-                  <p className="pl-4">
-                    squad.BroadcastEvent(<span className="text-amber-300">&quot;payment:verified&quot;</span>, payload)
-                  </p>
-                  <p>&#125;</p>
+                <div className="h-1.5 w-full rounded-full bg-zinc-100 overflow-hidden">
+                  <div className="h-full bg-zinc-900 rounded-full" style={{ width: "50%" }} />
+                </div>
+                <div className="flex items-center justify-between text-[11px] text-zinc-600 pt-0.5">
+                  <span className="flex items-center gap-1.5 font-medium text-zinc-800">
+                    <CheckCircle2 size={12} className="text-zinc-700" /> Module 4: PostgreSQL Indexing & Pooling
+                  </span>
+                  <span className="text-zinc-500">8 / 16 Lessons</span>
                 </div>
               </div>
 
-              {/* Terminal Output Footer */}
-              <div className="mt-3 flex items-center justify-between rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-[11px] font-mono text-zinc-700">
+              {/* Agile Peer Squad Card */}
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 size={13} className="text-zinc-700" />
-                  <span>CI Suite: 18/18 Tests Passed (42ms)</span>
+                  <Users size={14} className="text-zinc-700" />
+                  <span className="font-medium text-zinc-800">Sprint Squad 04</span>
                 </div>
-                <span className="text-[10px] text-zinc-500">Deployed to Addis Edge DC</span>
+                <span className="text-[11px] font-medium text-zinc-500">4 Peers Connected</span>
               </div>
             </div>
           </div>
@@ -947,104 +896,119 @@ export function HomePage() {
                 )}
 
                 {activeTabDetails.id === "sandbox" && (
-                  <div className="space-y-3 font-mono text-xs">
+                  <div className="space-y-3 text-xs">
                     <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
                       <div className="flex items-center gap-2">
                         <Terminal size={14} className="text-zinc-700" />
                         <span className="font-semibold text-zinc-900">
-                          Linux Dev Container • Node 22 & PostgreSQL 16
+                          Cloud Devcontainer · Node.js 22 & PostgreSQL 16
                         </span>
                       </div>
-                      <span className="text-[10px] text-zinc-700 font-semibold">● Running</span>
+                      <Badge variant="outline" size="sm" className="gap-1 text-[10px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-900" /> Running
+                      </Badge>
                     </div>
 
-                    <div className="rounded-md bg-zinc-950 p-3 text-[11px] space-y-1 text-zinc-300 font-mono shadow-inner border border-zinc-800">
-                      <p className="text-zinc-400">$ npm test -- --coverage</p>
-                      <p className="text-zinc-300 font-semibold">PASS tests/wallet_transfer.test.ts (0.42s)</p>
-                      <p className="text-zinc-300 font-semibold">PASS tests/concurrency_lock.test.ts (0.38s)</p>
-                      <p className="text-white font-semibold mt-2">
-                        Test Suites: 2 passed, 2 total | Statements: 98.4% (128/130)
+                    <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-2">
+                      <div className="flex items-center justify-between text-[11px]">
+                        <span className="font-semibold text-zinc-900">Module Checkpoint 04</span>
+                        <span className="text-zinc-500 font-medium">Step 3 of 4</span>
+                      </div>
+                      <p className="text-xs text-zinc-600">
+                        Implement atomic database transactions and connection pooling with pg-pool.
                       </p>
+                      <div className="space-y-1.5 pt-1">
+                        <div className="flex items-center gap-2 text-[11px] text-zinc-700">
+                          <CheckCircle2 size={12} className="text-zinc-800" />
+                          <span>Database migrations applied cleanly</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-[11px] text-zinc-700">
+                          <CheckCircle2 size={12} className="text-zinc-800" />
+                          <span>Integration test suite passed (12/12)</span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white px-3 py-1.5 text-[11px] shadow-xs">
-                      <span className="text-zinc-700 font-medium">Web Preview on localhost:3000</span>
-                      <span className="text-zinc-500 text-xs">Ready</span>
+                    <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-[11px]">
+                      <span className="text-zinc-700 font-medium">In-Browser Live Preview</span>
+                      <span className="text-zinc-600 font-mono text-[10px]">localhost:3000 · Port Forwarded</span>
                     </div>
                   </div>
                 )}
 
                 {activeTabDetails.id === "squads" && (
-                  <div className="space-y-3 font-mono text-xs">
+                  <div className="space-y-3 text-xs">
                     <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
                       <div className="flex items-center gap-2">
                         <Users size={14} className="text-zinc-700" />
-                        <span className="font-semibold text-zinc-900">Squad 07: Addis Vanguard (Sprint #4)</span>
+                        <span className="font-semibold text-zinc-900">4-Peer Agile Sprint Squad</span>
                       </div>
-                      <span className="text-[10px] text-zinc-700 font-semibold">14-Day Streak</span>
+                      <span className="text-[10px] text-zinc-500 font-medium">Sprint Cycle #4</span>
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2 shadow-xs">
+                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2.5 shadow-xs">
                         <div>
-                          <p className="font-semibold text-zinc-900 text-[11px]">PR #42: Add Telebirr USSD parser</p>
-                          <p className="text-[10px] text-zinc-500">by Bethlehem T. • 2 Approvals</p>
+                          <p className="font-semibold text-zinc-900 text-xs">PR #14: Implement USSD Parser Gateway</p>
+                          <p className="text-[10px] text-zinc-500 mt-0.5">2 Peer Code Reviews Approved</p>
                         </div>
-                        <Badge variant="outline">Merged</Badge>
+                        <Badge variant="outline" size="sm">
+                          Approved
+                        </Badge>
                       </div>
 
-                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2 shadow-xs">
+                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2.5 shadow-xs">
                         <div>
-                          <p className="font-semibold text-zinc-900 text-[11px]">
-                            PR #43: Implement JWT Auth Middleware
-                          </p>
-                          <p className="text-[10px] text-zinc-500">by Chala M. • Review in progress</p>
+                          <p className="font-semibold text-zinc-900 text-xs">PR #15: JWT Authentication Middleware</p>
+                          <p className="text-[10px] text-zinc-500 mt-0.5">Code review requested</p>
                         </div>
-                        <Badge variant="outline">Reviewing</Badge>
+                        <Badge variant="outline" size="sm">
+                          Under Review
+                        </Badge>
                       </div>
                     </div>
 
-                    <div className="rounded-md bg-zinc-100 p-2 text-[11px] flex items-center justify-between border border-zinc-200">
-                      <span className="text-zinc-600">Squad Total XP this Week:</span>
-                      <span className="font-semibold text-zinc-900">12,450 XP (Rank #2)</span>
+                    <div className="rounded-md bg-zinc-50 p-2.5 text-[11px] text-zinc-600 border border-zinc-200">
+                      Learn collaboratively with peers on scheduled sprints, unblocking each other and shipping
+                      together.
                     </div>
                   </div>
                 )}
 
                 {activeTabDetails.id === "certs" && (
-                  <div className="space-y-3 font-mono text-xs">
-                    <div className="rounded-lg border border-zinc-200 bg-white p-3.5 shadow-xs">
+                  <div className="space-y-3 text-xs">
+                    <div className="rounded-lg border border-zinc-200 bg-white p-4 shadow-xs space-y-2.5">
                       <div className="flex items-start justify-between">
                         <div>
                           <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
-                            Verified Credential
+                            Verifiable Digital Credential
                           </p>
-                          <p className="text-sm font-semibold text-zinc-900 mt-0.5">
-                            Fullstack Distributed Systems Engineer
+                          <p className="text-sm font-bold text-zinc-900 mt-0.5">
+                            Fullstack Cloud & Distributed Systems
                           </p>
-                          <p className="text-[11px] text-zinc-500">Issued to: Abebe Kebede (Cohort 04)</p>
+                          <p className="text-[11px] text-zinc-500 mt-0.5">
+                            Earned by completing 16 lessons & capstone defense
+                          </p>
                         </div>
                         <div className="h-8 w-8 rounded-md border border-zinc-200 bg-zinc-50 flex items-center justify-center text-zinc-700 font-bold text-xs">
-                          QR
+                          <Award size={16} />
                         </div>
                       </div>
 
-                      <div className="mt-2.5 pt-2 border-t border-zinc-200 space-y-1 text-[10px]">
+                      <div className="pt-2 border-t border-zinc-100 space-y-1.5 text-[11px]">
                         <p className="text-zinc-700">
-                          <span className="text-zinc-500">Audited Repo:</span>{" "}
-                          github.com/ethio-tech-graduates/telebirr-gateway
+                          <span className="text-zinc-500">Verified Capstone:</span> Production API Gateway with
+                          Distributed Storage
                         </p>
                         <p className="text-zinc-700">
-                          <span className="text-zinc-500">Signature Hash:</span> 0x8f3c91a7e20b4d... [Verified]
-                        </p>
-                        <p className="text-zinc-700">
-                          <span className="text-zinc-500">Senior Mentor Sign-off:</span> Selamawit Tekle (Senior Fellow)
+                          <span className="text-zinc-500">Attestation:</span> Reviewed & signed off by Senior
+                          Engineering Fellow
                         </p>
                       </div>
                     </div>
 
-                    <div className="text-center text-[10px] text-zinc-500">
-                      Instant 1-Click Verification for Hiring Partners & LinkedIn
+                    <div className="text-center text-[11px] text-zinc-500 font-medium">
+                      Publicly shareable credential verifiable by hiring partners and engineering leads
                     </div>
                   </div>
                 )}

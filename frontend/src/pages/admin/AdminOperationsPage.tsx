@@ -569,7 +569,7 @@ export function AdminOperationsPage() {
         <div className="mt-4 flex flex-col gap-2.5 rounded-xl border border-zinc-200/80 bg-zinc-50/70 p-3 md:flex-row md:items-center md:justify-between">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" size={13} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={13} />
             <input
               type="text"
               placeholder="Search action, actor, resource ID, or IP..."

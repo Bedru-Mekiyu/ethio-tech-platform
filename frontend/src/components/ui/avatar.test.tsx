@@ -4,12 +4,12 @@ import { Avatar } from "./avatar";
 import { buildAvatarFallbackChain, getSystemAvatarById } from "@/config/avatarLibrary";
 
 describe("avatar system", () => {
-  it("renders a system avatar fallback instead of initials", () => {
+  it("renders a system avatar fallback with accessible initials placeholder", () => {
     const html = renderToStaticMarkup(<Avatar name="Aster Bekele" />);
 
     expect(html).toContain("/avatars/");
     expect(html).toContain("profile avatar");
-    expect(html).not.toContain(">AB<");
+    expect(html).toContain(">AB<");
   });
 
   it("builds a stable fallback chain", () => {

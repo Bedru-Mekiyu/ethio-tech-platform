@@ -146,7 +146,7 @@ export function LiveKitParticipantTile({
       default:
         return (
           <span title="Connection: Stable">
-            <Wifi className="h-3.5 w-3.5 text-slate-400" />
+            <Wifi className="h-3.5 w-3.5 text-zinc-400" />
           </span>
         );
     }
@@ -154,7 +154,7 @@ export function LiveKitParticipantTile({
 
   return (
     <div
-      className={`group relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-900 border transition-all duration-300 ${
+      className={`group relative flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900 border transition-all duration-300 ${
         isSpeaking
           ? "border-white shadow-lg shadow-white/10 ring-2 ring-white/30"
           : "border-white/10 hover:border-white/20"
@@ -173,7 +173,7 @@ export function LiveKitParticipantTile({
 
       {/* Avatar Fallback when video is muted */}
       {isVideoMuted && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-[#0E1726] to-slate-950 p-4 select-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-zinc-900 via-[#0E1726] to-zinc-950 p-4 select-none">
           <div
             className={`relative flex items-center justify-center rounded-2xl shadow-xl transition-transform duration-300 ${
               isSpeaking ? "scale-105 ring-4 ring-white/40" : ""
@@ -192,7 +192,7 @@ export function LiveKitParticipantTile({
             {/* Speaking audio wave indicator around avatar */}
             {isSpeaking && <span className="absolute -inset-1.5 animate-ping rounded-2xl border-2 border-white/60" />}
           </div>
-          <p className="mt-3 text-xs md:text-sm font-medium text-slate-300 max-w-[85%] truncate text-center">
+          <p className="mt-3 text-xs md:text-sm font-medium text-zinc-300 max-w-[85%] truncate text-center">
             {displayName} {isLocal && "(You)"}
           </p>
         </div>
@@ -202,7 +202,7 @@ export function LiveKitParticipantTile({
       <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none z-10">
         {/* Hand Raised Badge */}
         {isHandRaised && (
-          <div className="flex items-center gap-1.5 rounded-full bg-amber-500/90 backdrop-blur-md px-2.5 py-1 text-xs font-bold text-slate-950 shadow-lg animate-bounce">
+          <div className="flex items-center gap-1.5 rounded-full bg-amber-500/90 backdrop-blur-md px-2.5 py-1 text-xs font-bold text-zinc-950 shadow-lg animate-bounce">
             <Hand className="h-3.5 w-3.5 fill-current" />
             <span>Hand Raised</span>
           </div>
@@ -231,7 +231,7 @@ export function LiveKitParticipantTile({
               className={`pointer-events-auto rounded-lg p-1.5 backdrop-blur-md transition-all ${
                 isPinned
                   ? "bg-[#b91c1c] text-white"
-                  : "bg-black/50 text-slate-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
+                  : "bg-black/50 text-zinc-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
               }`}
               title={isPinned ? "Unpin participant" : "Pin participant"}
             >

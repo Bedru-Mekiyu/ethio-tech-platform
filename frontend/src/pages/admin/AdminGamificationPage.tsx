@@ -697,7 +697,7 @@ export function AdminGamificationPage() {
           {/* Search & Tier Filters Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="relative min-w-[260px] flex-1 max-w-md">
-              <Search className="absolute left-3.5 top-1/2 size-4 -tranzinc-y-1/2 text-zinc-400" />
+              <Search className="absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-zinc-400" />
               <input
                 type="text"
                 value={badgeSearch}
@@ -741,7 +741,7 @@ export function AdminGamificationPage() {
                 return (
                   <Card
                     key={badge._id}
-                    className={`group relative rounded-2xl border p-5 transition-all duration-200 hover:-tranzinc-y-0.5 hover:shadow-md ${tierStyle.border} ${tierStyle.bg} ${tierStyle.glow}`}
+                    className={`group relative rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${tierStyle.border} ${tierStyle.bg} ${tierStyle.glow}`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -972,7 +972,7 @@ export function AdminGamificationPage() {
             aria-hidden="true"
           />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl space-y-5"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl space-y-5"
             role="dialog"
             aria-modal="true"
             aria-label="Create Badge"
@@ -1104,7 +1104,7 @@ export function AdminGamificationPage() {
             aria-hidden="true"
           />
           <div
-            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -tranzinc-x-1/2 -tranzinc-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl space-y-5"
+            className="fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl space-y-5"
             role="dialog"
             aria-modal="true"
             aria-label="Create Daily Quest"

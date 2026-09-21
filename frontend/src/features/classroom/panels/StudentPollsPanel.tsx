@@ -29,24 +29,21 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
       <div className="flex-1 overflow-y-auto space-y-4">
         {activePolls.length > 0 && (
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Live Polls</h4>
+            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Live Polls</h4>
             {activePolls.map((poll) => (
-              <div
-                key={poll.pollId}
-                className="rounded-2xl border border-slate-200/80 bg-white p-4 space-y-4 shadow-sm"
-              >
-                <p className="font-semibold text-slate-900">{poll.question}</p>
+              <div key={poll.pollId} className="rounded-2xl border border-zinc-200/80 bg-white p-4 space-y-4 shadow-sm">
+                <p className="font-semibold text-zinc-900">{poll.question}</p>
                 <div className="space-y-2">
                   {poll.options.map((option: PollOption, index: number) => (
                     <Button
                       key={index}
                       variant="outline"
-                      className="w-full justify-start h-auto py-3 px-4 text-left whitespace-normal border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-zinc-400 text-slate-800 transition-colors"
+                      className="w-full justify-start h-auto py-3 px-4 text-left whitespace-normal border-zinc-200 bg-zinc-50 hover:bg-zinc-100 hover:border-zinc-400 text-zinc-800 transition-colors"
                       onClick={() => onVote(poll.pollId, index)}
                       disabled={poll.hasVoted}
                     >
                       <div className="flex w-full items-center justify-between gap-3">
-                        <span className="font-medium text-xs text-slate-900">{option.text}</span>
+                        <span className="font-medium text-xs text-zinc-900">{option.text}</span>
                         {poll.hasVoted && (
                           <span className="text-xs font-bold text-zinc-900">{option.percentage || 0}%</span>
                         )}
@@ -64,31 +61,28 @@ export function StudentPollsPanel({ polls, onVote }: StudentPollsPanelProps) {
 
         {closedPolls.length > 0 && (
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Previous Polls</h4>
+            <h4 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Previous Polls</h4>
             {closedPolls.map((poll) => (
               <div
                 key={poll.pollId}
-                className="rounded-2xl border border-slate-200/80 bg-white p-4 space-y-4 shadow-xs opacity-90"
+                className="rounded-2xl border border-zinc-200/80 bg-white p-4 space-y-4 shadow-xs opacity-90"
               >
-                <p className="font-semibold text-slate-900">{poll.question}</p>
+                <p className="font-semibold text-zinc-900">{poll.question}</p>
                 <div className="space-y-2">
                   {poll.options.map((option: PollOption, index: number) => (
-                    <div
-                      key={index}
-                      className="relative overflow-hidden rounded-lg bg-slate-50 border border-slate-200"
-                    >
+                    <div key={index} className="relative overflow-hidden rounded-lg bg-zinc-50 border border-zinc-200">
                       <div
                         className="absolute inset-0 bg-zinc-200 transition-all duration-500"
                         style={{ width: `${option.percentage || 0}%` }}
                       />
-                      <div className="relative flex justify-between px-3 py-2 text-sm text-slate-900 font-medium">
+                      <div className="relative flex justify-between px-3 py-2 text-sm text-zinc-900 font-medium">
                         <span>{option.text}</span>
                         <span className="font-semibold">{option.percentage || 0}%</span>
                       </div>
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-right text-slate-500 font-medium">{poll.totalVotes} votes total</p>
+                <p className="text-xs text-right text-zinc-500 font-medium">{poll.totalVotes} votes total</p>
               </div>
             ))}
           </div>

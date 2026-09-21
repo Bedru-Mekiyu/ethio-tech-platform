@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Illustrated Ethiopian mentor avatar with a calm profile">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1f4b4b" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="42" fill="url(#bg)" />
+  <circle cx="128" cy="124" r="55" fill="#c89469" />
+  <path d="M76 107c11-25 32-41 56-41s46 12 56 31c2 4 4 10 4 18-11-7-24-10-39-10-17 0-32 5-44 14-11-11-22-18-33-12Z" fill="#1f2937" />
+  <path d="M78 188c9-27 26-41 50-41s41 14 50 41v26H78z" fill="#334155" />
+  <path d="M120 142h16l-2 46h-12z" fill="#fff" opacity=".15" />
+  <circle cx="108" cy="130" r="4" fill="#111827" />
+  <circle cx="148" cy="130" r="4" fill="#111827" />
+  <path d="M112 150c8 6 24 6 32 0" fill="none" stroke="#7a3e2d" stroke-linecap="round" stroke-width="4" />
+  <path d="M90 201c14-8 28-12 38-12s24 4 38 12" fill="none" stroke="#d1fae5" stroke-linecap="round" stroke-width="14" opacity=".22" />
+</svg>

@@ -218,7 +218,7 @@ export function AddEventModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity"
+          className="fixed inset-0 bg-zinc-900/40 backdrop-blur-xs transition-opacity"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -229,22 +229,22 @@ export function AddEventModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-xl"
+          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-200 bg-white text-zinc-900 shadow-xl"
           role="dialog"
           aria-modal="true"
           aria-labelledby="add-event-modal-title"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/70 px-6 py-5">
+          <div className="flex items-center justify-between border-b border-zinc-100 bg-zinc-50/70 px-6 py-5">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 text-zinc-700 border border-zinc-200">
                 <CalendarIcon size={20} />
               </div>
               <div>
-                <h2 id="add-event-modal-title" className="text-lg font-bold tracking-tight text-slate-900">
+                <h2 id="add-event-modal-title" className="text-lg font-bold tracking-tight text-zinc-900">
                   Schedule Event / Study Block
                 </h2>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-zinc-500">
                   Add focus sessions, sprint checkpoints, or mentor classes to your calendar.
                 </p>
               </div>
@@ -253,7 +253,7 @@ export function AddEventModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full border border-slate-200 bg-white p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-800 transition shadow-xs"
+              className="rounded-full border border-zinc-200 bg-white p-2 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 transition shadow-xs"
               aria-label="Close modal"
             >
               <X size={18} />

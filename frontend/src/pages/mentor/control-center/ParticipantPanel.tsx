@@ -148,7 +148,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       <div className="flex gap-2 mb-3">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3 top-1/2 -tranzinc-y-1/2 text-zinc-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
           <Input
             placeholder="Search participants..."
             className="h-8 pl-8 text-xs bg-white border-zinc-200 text-zinc-900 placeholder:text-zinc-400"

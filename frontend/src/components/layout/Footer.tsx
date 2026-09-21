@@ -18,7 +18,7 @@ export function Footer({ className }: FooterProps) {
           {/* Brand & Mission Statement */}
           <div className="space-y-4 lg:col-span-2">
             <Logo variant="full" subtitle="East Africa Tech Ecosystem" />
-            <p className="text-sm text-slate-600 leading-relaxed max-w-sm">
+            <p className="text-sm text-zinc-600 leading-relaxed max-w-sm">
               EthioTech is a high-performance interactive learning platform for African students, featuring live
               interactive classrooms, peer squads, expert mentorship, and project-based tracks.
             </p>
@@ -29,7 +29,7 @@ export function Footer({ className }: FooterProps) {
                 href="https://github.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
                 aria-label="GitHub repository"
               >
                 <Github size={15} />
@@ -38,7 +38,7 @@ export function Footer({ className }: FooterProps) {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
                 aria-label="Twitter / X"
               >
                 <Twitter size={15} />
@@ -47,14 +47,14 @@ export function Footer({ className }: FooterProps) {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
                 aria-label="LinkedIn page"
               >
                 <Linkedin size={15} />
               </a>
               <a
                 href="#"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
                 aria-label="Global Community"
               >
                 <Globe size={15} />
@@ -64,35 +64,35 @@ export function Footer({ className }: FooterProps) {
 
           {/* Column 1: Platform */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3.5">Platform</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 mb-3.5">Platform</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/tracks" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/tracks" className="text-zinc-600 hover:text-primary transition-colors">
                   Curriculum Tracks
                 </Link>
               </li>
               <li>
-                <Link to="/how-it-works" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/how-it-works" className="text-zinc-600 hover:text-primary transition-colors">
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link to="/mentors" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/mentors" className="text-zinc-600 hover:text-primary transition-colors">
                   Engineering Mentors
                 </Link>
               </li>
               <li>
-                <Link to="/hubs" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/hubs" className="text-zinc-600 hover:text-primary transition-colors">
                   Regional Tech Hubs
                 </Link>
               </li>
               <li>
-                <Link to="/leaderboard" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/leaderboard" className="text-zinc-600 hover:text-primary transition-colors">
                   XP Leaderboard
                 </Link>
               </li>
               <li>
-                <Link to="/mentor-recruitment" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/mentor-recruitment" className="text-zinc-600 hover:text-primary transition-colors">
                   Become a Mentor
                 </Link>
               </li>
@@ -101,25 +101,25 @@ export function Footer({ className }: FooterProps) {
 
           {/* Column 2: Ecosystem & Support */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3.5">Ecosystem</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 mb-3.5">Ecosystem</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/partners" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/partners" className="text-zinc-600 hover:text-primary transition-colors">
                   Industry & University Partners
                 </Link>
               </li>
               <li>
-                <Link to="/donate" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/donate" className="text-zinc-600 hover:text-primary transition-colors">
                   Scholarships & Giving
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/faq" className="text-zinc-600 hover:text-primary transition-colors">
                   Platform FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/contact" className="text-zinc-600 hover:text-primary transition-colors">
                   Contact & Support
                 </Link>
               </li>
@@ -128,20 +128,20 @@ export function Footer({ className }: FooterProps) {
 
           {/* Column 3: Trust & Legal */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3.5">Company</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 mb-3.5">Company</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/about" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/about" className="text-zinc-600 hover:text-primary transition-colors">
                   About EthioTech
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/privacy" className="text-zinc-600 hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-slate-600 hover:text-primary transition-colors">
+                <Link to="/terms" className="text-zinc-600 hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
@@ -160,7 +160,7 @@ export function Footer({ className }: FooterProps) {
             <span>© {new Date().getFullYear()} EthioTech Platform</span>
           </div>
 
-          <p className="flex items-center gap-1.5 text-slate-500">
+          <p className="flex items-center gap-1.5 text-zinc-500">
             <span>Engineered with</span>
             <Heart size={12} className="text-rose-500 fill-rose-500 inline" />
             <span>for East African youth</span>

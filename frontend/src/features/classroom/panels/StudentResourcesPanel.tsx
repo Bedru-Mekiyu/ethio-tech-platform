@@ -55,15 +55,15 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
           resources.map((resource) => (
             <div
               key={resource._id || resource.id}
-              className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs"
+              className="flex items-center justify-between gap-3 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-xs"
             >
               <div className="flex items-center gap-3 min-w-0">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-900">
                   {getResourceIcon(resource.type ?? resource.fileType ?? "link")}
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-slate-900">{resource.title || resource.name}</p>
-                  <p className="truncate text-xs text-slate-500">
+                  <p className="truncate text-sm font-semibold text-zinc-900">{resource.title || resource.name}</p>
+                  <p className="truncate text-xs text-zinc-500">
                     {resource.type || resource.fileType} • {resource.size || "External Link"}
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export function StudentResourcesPanel({ resources, sessionId }: StudentResources
               <Button
                 variant="outline"
                 size="sm"
-                className="shrink-0 border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                className="shrink-0 border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
                 onClick={() => handleDownload(resource._id ?? resource.id ?? "", resource.url)}
               >
                 <Download size={16} className="mr-2 text-zinc-900" />
