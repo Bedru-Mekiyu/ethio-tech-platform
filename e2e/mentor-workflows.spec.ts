@@ -6,7 +6,8 @@ test.describe("Mentor Workflows", () => {
     await page.fill('[name="email"]', "mentor@example.com");
     await page.fill('[name="password"]', "password123");
     await page.click('button[type="submit"]');
-    await page.waitForURL("/mentor");
+    // Mentor may land on /mentor (fully approved) or /mentor/onboarding (pending onboarding)
+    await page.waitForURL(/\/mentor(\/onboarding)?$/, { timeout: 10000 });
   });
 
   test("Mentor dashboard loads with correct metrics", async ({ page }) => {
@@ -25,9 +26,9 @@ test.describe("Mentor Workflows", () => {
     await expect(page.locator("text=Mentor Control Center")).toBeVisible({ timeout: 10000 });
   });
 
-  test("Mentor can view analytics dashboard", async ({ page }) => {
-    await page.goto("/mentor/analytics");
-    await expect(page.locator("text=Mentor Analytics")).toBeVisible({ timeout: 10000 });
+  test("Mentor can view dashboard analytics", async ({ page }) => {
+    // /mentor is the analytics dashboard for mentors — /mentor/analytics does not exist
+    await expect(page.locator("text=Mentor Score")).toBeVisible({ timeout: 10000 });
   });
 
   test("Mentor can admit student from waiting room", async ({ page }) => {

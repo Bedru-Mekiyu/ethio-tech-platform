@@ -26,7 +26,7 @@ export function Footer({ className }: FooterProps) {
             {/* Social Links */}
             <div className="flex items-center gap-2 pt-1">
               <a
-                href="https://github.com"
+                href="https://github.com/Bedru-Mekiyu/ethio-tech-platform"
                 target="_blank"
                 rel="noreferrer"
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
@@ -35,7 +35,7 @@ export function Footer({ className }: FooterProps) {
                 <Github size={15} />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://x.com/EthioTech"
                 target="_blank"
                 rel="noreferrer"
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
@@ -44,7 +44,7 @@ export function Footer({ className }: FooterProps) {
                 <Twitter size={15} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://linkedin.com/company/ethio-tech"
                 target="_blank"
                 rel="noreferrer"
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
@@ -52,13 +52,14 @@ export function Footer({ className }: FooterProps) {
               >
                 <Linkedin size={15} />
               </a>
-              <a
-                href="#"
+              <Link
+                to="/hubs"
                 className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-900 transition-colors"
-                aria-label="Global Community"
+                aria-label="Regional Community Hubs"
+                title="Regional Community Hubs"
               >
                 <Globe size={15} />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -153,8 +154,8 @@ export function Footer({ className }: FooterProps) {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-zinc-200 pt-8 text-xs text-zinc-500 md:flex-row">
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-zinc-700" />
-              <span>Platform Systems Operational</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-medium text-zinc-600">Platform Systems Operational</span>
             </span>
             <span>·</span>
             <span>© {new Date().getFullYear()} EthioTech Platform</span>

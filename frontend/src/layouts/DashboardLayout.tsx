@@ -12,7 +12,6 @@ import { useQuickNavLinks } from "@/hooks/useQuickNavLinks";
 import { motion, AnimatePresence } from "framer-motion";
 import { logoutApi } from "@/services/authService";
 import { fetchUnreadCount } from "@/services/notificationsService";
-import { getSocket } from "@/services/socket";
 import {
   LayoutDashboard,
   BookOpen,
@@ -32,6 +31,9 @@ import {
   FileCheck,
   Trophy,
   Activity,
+  Award,
+  Mail,
+  Calendar,
 } from "lucide-react";
 
 type NavItem = { to: string; label: string; icon: React.ReactNode };
@@ -57,15 +59,29 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
   }, [user, setBadgeCount]);
 
   useEffect(() => {
-    const socket = getSocket();
-    const handleCount = (payload: { userId: string; count: number }) => {
-      if (payload.userId === user?.id) {
-        setBadgeCount(payload.count);
-      }
-    };
-    socket.on("notification:count", handleCount);
+    if (!user?.id) return;
+
+    let cleanup: (() => void) | undefined;
+
+    // Defer socket notification listener — after page is interactive
+    const timer = setTimeout(() => {
+      import("@/services/socket").then(({ getSocket }) => {
+        const socket = getSocket();
+        const handleCount = (payload: { userId: string; count: number }) => {
+          if (payload.userId === user?.id) {
+            setBadgeCount(payload.count);
+          }
+        };
+        socket.on("notification:count", handleCount);
+        cleanup = () => {
+          socket.off("notification:count", handleCount);
+        };
+      });
+    }, 800);
+
     return () => {
-      socket.off("notification:count", handleCount);
+      clearTimeout(timer);
+      cleanup?.();
     };
   }, [user?.id, setBadgeCount]);
 
@@ -143,6 +159,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/app/squads", label: "Squads", icon: <MessageSquare size={18} /> },
     { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
     { to: "/app/mentors", label: "Mentors", icon: <Users size={18} /> },
+    { to: "/app/messages", label: "Messages", icon: <Mail size={18} /> },
+    { to: "/app/calendar", label: "Calendar", icon: <Calendar size={18} /> },
+    { to: "/app/certificates", label: "Certificates", icon: <Award size={18} /> },
   ];
 
   const mentorNav: NavItem[] = [
@@ -157,11 +176,12 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
 
   const parentNav: NavItem[] = [
     { to: "/parent", label: "Home", icon: <LayoutDashboard size={18} /> },
-    { to: "/app/progress", label: "Progress", icon: <BarChart3 size={18} /> },
-    { to: "/app/sessions", label: "Sessions", icon: <Video size={18} /> },
+    { to: "/app/progress", label: "Child's Progress", icon: <BarChart3 size={18} /> },
+    { to: "/app/sessions", label: "Child's Sessions", icon: <Video size={18} /> },
     { to: "/app/notifications", label: "Notifications", icon: <Bell size={18} /> },
     { to: "/contact", label: "Support", icon: <MessageSquare size={18} /> },
   ];
+
 
   const adminNav: NavItem[] = [
     { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },

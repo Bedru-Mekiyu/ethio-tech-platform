@@ -21,7 +21,6 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
         }}
         className="relative flex items-center justify-center"
       >
-        <div className="absolute inset-0 -z-10 rounded-full bg-primary/20 blur-xl scale-125 animate-pulse" aria-hidden="true" />
         <Logo to="/" variant="full" className="scale-110" />
       </motion.div>
       
@@ -34,7 +33,7 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
         </span>
       </div>
 
-      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-white/5 relative" aria-hidden="true">
+      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-zinc-200 relative" aria-hidden="true">
         <motion.div
           initial={{ left: "-100%" }}
           animate={{ left: "100%" }}

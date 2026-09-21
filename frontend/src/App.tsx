@@ -162,12 +162,17 @@ const PartnersPage = lazy(() =>
 const DonationPage = lazy(() =>
   import("@/pages/marketing/DonationPage").then((module) => ({ default: module.DonationPage })),
 );
+const MarketingTrackDetailPage = lazy(() =>
+  import("@/pages/marketing/MarketingTrackDetailPage").then((module) => ({
+    default: module.MarketingTrackDetailPage,
+  })),
+);
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((module) => ({ default: module.NotFoundPage })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 2,
+      retry: 1,
       staleTime: 45_000,
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
@@ -228,7 +233,7 @@ export default function App() {
                     <Route path="privacy" element={<PrivacyPage />} />
                     <Route path="terms" element={<TermsPage />} />
                     <Route path="tracks" element={<MarketingTracksPage />} />
-                    <Route path="tracks/:trackId" element={<MarketingTracksPage />} />
+                    <Route path="tracks/:trackId" element={<MarketingTrackDetailPage />} />
                     <Route path="partners" element={<PartnersPage />} />
                     <Route path="donate" element={<DonationPage />} />
                   </Route>

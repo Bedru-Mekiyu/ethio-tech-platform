@@ -264,7 +264,11 @@ export function TracksPage() {
 
                       {/* Header */}
                       <div className="space-y-1">
-                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight">{track.title}</h2>
+                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight">
+                          <Link to={`/tracks/${track.slug}`} className="hover:text-[#b91c1c] transition-colors">
+                            {track.title}
+                          </Link>
+                        </h2>
                         <p className="text-xs md:text-sm leading-relaxed text-zinc-600">{track.tagline}</p>
                       </div>
 
@@ -457,19 +461,27 @@ export function TracksPage() {
 
                       {/* Action Buttons */}
                       <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                        <Link
+                          to={`/tracks/${track.slug}`}
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-2xs"
+                        >
+                          <span>Track Overview</span>
+                          <ArrowRight size={13} />
+                        </Link>
+
                         <button
                           type="button"
                           onClick={() => setExpandedSyllabusId(isSyllabusExpanded ? null : track.id)}
-                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-2xs"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-2xs"
                         >
                           <BookOpen size={14} />
-                          <span>{isSyllabusExpanded ? "Hide Syllabus" : "View Full Syllabus"}</span>
+                          <span>{isSyllabusExpanded ? "Hide Syllabus" : "View Syllabus"}</span>
                           {isSyllabusExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                         </button>
 
                         <Link to="/register" className="flex-1">
                           <Button className="w-full font-medium" size="md">
-                            Enroll in This Track
+                            Enroll in Track
                             <ArrowRight size={14} className="ml-1.5" />
                           </Button>
                         </Link>

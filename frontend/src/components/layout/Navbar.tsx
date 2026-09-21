@@ -3,8 +3,9 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuthStore, getDashboardPath } from "@/store/authStore";
 
 export interface NavItem {
   to: string;
@@ -28,6 +29,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const [prevPath, setPrevPath] = useState(location.pathname);
+  const { user } = useAuthStore();
 
   // Close mobile drawer on route change
   if (prevPath !== location.pathname) {
@@ -87,19 +89,31 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
 
         {/* Desktop CTA Action Buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            to="/login"
-            className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors duration-150"
-          >
-            Sign in
-          </Link>
-          <Link to="/register">
-            <Button size="sm" className="gap-1.5 font-medium">
-              <span>Join EthioTech</span>
-              <ArrowRight size={14} />
-            </Button>
-          </Link>
+          {user ? (
+            <Link to={getDashboardPath(user.role)}>
+              <Button size="sm" className="gap-1.5 font-medium">
+                <LayoutDashboard size={14} />
+                <span>Dashboard</span>
+              </Button>
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors duration-150"
+              >
+                Sign in
+              </Link>
+              <Link to="/register">
+                <Button size="sm" className="gap-1.5 font-medium">
+                  <span>Join EthioTech</span>
+                  <ArrowRight size={14} />
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
+
 
         {/* Mobile Hamburger Toggle Button */}
         <button
@@ -151,19 +165,30 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
 
             {/* Mobile CTAs */}
             <div className="border-t border-zinc-200 pt-4 flex flex-col gap-2.5">
-              <Link
-                to="/login"
-                className="w-full text-center py-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
-                onClick={() => setMobileOpen(false)}
-              >
-                Sign in
-              </Link>
-              <Link to="/register" onClick={() => setMobileOpen(false)}>
-                <Button className="w-full justify-center gap-2 py-2">
-                  <span>Join EthioTech</span>
-                  <ArrowRight size={15} />
-                </Button>
-              </Link>
+              {user ? (
+                <Link to={getDashboardPath(user.role)} onClick={() => setMobileOpen(false)}>
+                  <Button className="w-full justify-center gap-2 py-2">
+                    <LayoutDashboard size={15} />
+                    <span>Go to Dashboard</span>
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="w-full text-center py-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                  <Link to="/register" onClick={() => setMobileOpen(false)}>
+                    <Button className="w-full justify-center gap-2 py-2">
+                      <span>Join EthioTech</span>
+                      <ArrowRight size={15} />
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
