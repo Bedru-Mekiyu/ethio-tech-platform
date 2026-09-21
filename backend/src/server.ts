@@ -9,6 +9,7 @@ import { createApp } from "./app.js";
 import { setupSocket } from "./socket/index.js";
 import { logger } from "./lib/logger.js";
 import { runSeed } from "./scripts/seed.js";
+import { seedRoleUsers } from "./scripts/seed-roles.js";
 
 dotenv.config();
 validateEnvOnBoot();
@@ -54,7 +55,13 @@ const startServer = async () => {
         logger.error("Auto-seed failed", err);
       }
     } else {
-      logger.info(`Database already contains ${userCount} users; skipping auto-seed.`);
+      logger.info(`Database contains ${userCount} users. Ensuring canonical role accounts exist…`);
+      try {
+        await seedRoleUsers({ verbose: false });
+        logger.info("Canonical role accounts verified.");
+      } catch (err) {
+        logger.error("Canonical role accounts verification failed", err);
+      }
     }
   }
 

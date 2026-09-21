@@ -98,8 +98,17 @@ export const runSeed = async ({ verbose = true } = {}) => {
   // ====== CREATE MENTORS ======
   log("🎓 Creating mentors...");
   const mentorCount = 12;
-  const mentors = [];
-  for (let i = 0; i < mentorCount; i++) {
+  const mentors = [
+    createMentor({
+      firstName: "Selamawit",
+      lastName: "Tekle",
+      email: "mentor@ethiotech.com",
+      currentCompany: "Google",
+      expertise: ["Distributed Systems", "Cloud Computing", "Go", "TypeScript"],
+      bio: "Staff Distributed Systems Engineer mentoring African software engineers.",
+    }),
+  ];
+  for (let i = 1; i < mentorCount; i++) {
     mentors.push(createMentor());
   }
   const createdMentors = await User.insertMany(mentors);
@@ -134,8 +143,18 @@ export const runSeed = async ({ verbose = true } = {}) => {
   // ====== CREATE STUDENTS ======
   log("👨‍🎓 Creating students...");
   const studentCount = 45;
-  const students = [];
-  for (let i = 0; i < studentCount; i++) {
+  const students = [
+    createStudent({
+      firstName: "Abebe",
+      lastName: "Kebede",
+      email: "student@ethiotech.com",
+      city: "Addis Ababa",
+      gradeLevel: 11,
+      xp: 2450,
+      isActive: true,
+    }),
+  ];
+  for (let i = 1; i < studentCount; i++) {
     students.push(createStudent({ isActive: Math.random() > 0.15 }));
   }
   const studentBatches = batchInsert(students, 500);
@@ -318,12 +337,10 @@ export const runSeed = async ({ verbose = true } = {}) => {
     console.log(`  Peer Groups: ${peerGroups.length}`);
     console.log(`  Sessions: ${sessions.length}`);
     console.log(`  Project Submissions: ${submissions.length}`);
-    console.log(`  Certificates: ${certificates.length}\n`);
-
-    await seedRoleUsers({ verbose });
-
     console.log("\n🚀 Ethio Tech Platform ecosystem is ready for use!\n");
   }
+
+  await seedRoleUsers({ verbose });
 
   return {
     admins: createdAdmins.length,
