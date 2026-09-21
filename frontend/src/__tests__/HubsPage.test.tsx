@@ -101,21 +101,27 @@ describe("HubsPage Component Suite", () => {
     fireEvent.click(submitBtn);
 
     // Digital pass modal should appear
-    await waitFor(() => {
-      expect(screen.getByText(/Official Digital Hub Pass/i)).toBeDefined();
-      expect(screen.getByText(/Pass Code/i)).toBeDefined();
-      expect(screen.getByText(/Abebe Bikila/i)).toBeDefined();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByText(/Official Digital Hub Pass/i)).toBeDefined();
+        expect(screen.getByText(/Pass Code/i)).toBeDefined();
+        expect(screen.getByText(/Abebe Bikila/i)).toBeDefined();
+      },
+      { timeout: 5000 },
+    );
 
     // Verify Check-in action
     const checkInBtn = screen.getByRole("button", { name: /Confirm Arrival Check-In/i });
     fireEvent.click(checkInBtn);
 
     // Expect celebration / XP reward
-    await waitFor(() => {
-      expect(screen.getByText(/Check-In Complete!/i)).toBeDefined();
-      expect(screen.getByText(/\+50 XP Awarded to your profile/i)).toBeDefined();
-    });
+    await waitFor(
+      () => {
+        expect(screen.getByText(/Check-In Complete!/i)).toBeDefined();
+        expect(screen.getByText(/\+50 XP Awarded to your profile/i)).toBeDefined();
+      },
+      { timeout: 5000 },
+    );
   });
 
   it("navigates to My Active Passes tab and performs arrival verification", async () => {

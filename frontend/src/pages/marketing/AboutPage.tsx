@@ -26,10 +26,12 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SmartImage } from "@/components/ui/smart-image";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchMarketingAbout, type MarketingAboutData } from "@/services/marketingService";
 import { useQuery } from "@tanstack/react-query";
+import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -951,10 +953,25 @@ export function AboutPage() {
             <h3 className="text-xl font-bold leading-tight sm:text-2xl text-zinc-900">
               {data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}
             </h3>
-            <p className="mt-2.5 text-xs leading-relaxed text-zinc-600">
+            <p className="mt-2 text-xs leading-relaxed text-zinc-600">
               {data?.bridge.description ??
                 "EthioTech operates as an open-impact digital public good. We bridge the structural divide by linking university classrooms directly to diaspora tech leads and production codebases."}
             </p>
+
+            <div className="mt-4 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs">
+              <SmartImage
+                src={LOCAL_MEDIA_ASSETS.community.classroom}
+                alt="University technology classroom connecting students directly with hands-on software curriculum"
+                aspectRatio="aspect-[16/9]"
+                className="w-full object-cover"
+              />
+              <div className="border-t border-zinc-200 bg-zinc-50 px-3 py-2">
+                <p className="text-[11px] font-medium text-zinc-600 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <span>Campus-to-cloud engineering cohorts across Ethiopian universities</span>
+                </p>
+              </div>
+            </div>
 
             <div className="mt-4 space-y-2">
               {(

@@ -7,11 +7,38 @@
 
 export interface MediaAsset {
   id: string;
-  unsplashId: string;
+  unsplashId?: string;
+  localPath?: string;
   alt: string;
   caption?: string;
   blurDataUrl?: string; // Low-res placeholder for smooth progressive blur-up
 }
+
+export const LOCAL_MEDIA_ASSETS = {
+  hero: {
+    collaboration: "/images/hero/software-team-collaboration.webp",
+  },
+  tracks: {
+    fullstack: "/images/tracks/fullstack-cloud.webp",
+    frontend: "/images/tracks/frontend-engineering.webp",
+    mobile: "/images/tracks/mobile-engineering.webp",
+    ai: "/images/tracks/applied-ai-systems.webp",
+    devops: "/images/tracks/cloud-devops.webp",
+    fintech: "/images/tracks/fintech-systems.webp",
+  },
+  events: {
+    hackathon: "/images/events/developer-event.webp",
+  },
+  mentorship: {
+    codeReview: "/images/mentorship/technical-mentorship.webp",
+  },
+  hubs: {
+    workshop: "/images/hubs/tech-hub-workshop.webp",
+  },
+  community: {
+    classroom: "/images/community/tech-community-classroom.webp",
+  },
+} as const;
 
 export const MEDIA_CATEGORIES = {
   marketing: {

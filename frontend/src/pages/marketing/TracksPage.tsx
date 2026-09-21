@@ -19,6 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SmartImage } from "@/components/ui/smart-image";
 import { Input } from "@/components/ui/input";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { CapstonePreviewModal } from "@/components/composites/CapstonePreviewModal";
@@ -378,6 +379,20 @@ export function TracksPage() {
 
                     {/* Right Column: Visual, Career Outcomes, Prerequisites, CTAs */}
                     <div className="flex flex-col justify-between gap-4">
+                      {/* Track Visual Preview */}
+                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-zinc-200">
+                        <SmartImage
+                          src={track.localImage}
+                          unsplashId={track.unsplashId}
+                          alt={`${track.title} engineering curriculum preview`}
+                          hoverEffect="zoom"
+                          className="h-full w-full object-cover"
+                          wrapperClassName="h-full w-full border-none bg-transparent"
+                          width={800}
+                          quality={80}
+                        />
+                      </div>
+
                       {/* Market Insight & Industry Demand Card */}
                       <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-4">
                         <div className="flex items-center justify-between border-b border-zinc-200/80 pb-2.5">

@@ -14,6 +14,7 @@ export interface SmartImageProps extends React.ImgHTMLAttributes<HTMLImageElemen
   quality?: number;
   hoverEffect?: "none" | "zoom" | "lift" | "glow";
   wrapperClassName?: string;
+  aspectRatio?: string;
 }
 
 function generateSrcSet(unsplashId: string, fit: "crop" | "facearea" | "fill" | "max" | "min" | "scale"): string {
@@ -32,6 +33,7 @@ export function SmartImage({
   hoverEffect = "none",
   className,
   wrapperClassName,
+  aspectRatio,
   ...props
 }: SmartImageProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -45,20 +47,20 @@ export function SmartImage({
 
   const hoverVariants = {
     none: {},
-    zoom: shouldReduceMotion ? {} : { scale: 1.04 },
-    lift: shouldReduceMotion ? {} : { y: -4, scale: 1.01 },
-    glow: shouldReduceMotion ? {} : { scale: 1.01, boxShadow: "0 0 25px rgba(0, 210, 255, 0.25)" },
+    zoom: shouldReduceMotion ? {} : { scale: 1.03 },
+    lift: shouldReduceMotion ? {} : { y: -3, scale: 1.01 },
+    glow: shouldReduceMotion ? {} : { scale: 1.01, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.08)" },
   };
 
   return (
     <motion.div
       key={finalSrc}
-      className={cn("relative overflow-hidden bg-[var(--bg-card)] border border-white/5", wrapperClassName)}
+      className={cn("relative overflow-hidden bg-zinc-100 border border-zinc-200", aspectRatio, wrapperClassName)}
       whileHover={hoverEffect !== "none" ? hoverEffect : undefined}
       variants={hoverVariants}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
-      {!loaded && !error && <div className="absolute inset-0 z-10 animate-pulse bg-white/[0.04]" />}
+      {!loaded && !error && <div className="absolute inset-0 z-10 animate-pulse bg-zinc-200/60" />}
 
       {placeholderSrc && !loaded && !error && (
         <img
@@ -70,7 +72,7 @@ export function SmartImage({
       )}
 
       {error ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-white/[0.02] p-4 text-[var(--text-muted)]">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-50 p-4 text-zinc-500">
           <ImageIcon size={24} className="opacity-60" />
           <span className="text-xs">Image unavailable</span>
         </div>

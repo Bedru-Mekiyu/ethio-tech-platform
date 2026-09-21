@@ -28,10 +28,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Label } from "@/components/ui/input";
+import { SmartImage } from "@/components/ui/smart-image";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/composites/ToastProvider";
 import { useAuthStore } from "@/store/authStore";
+import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 import {
   CANONICAL_REGIONAL_HUBS,
   WORKSTATION_CONFIG,
@@ -950,14 +952,48 @@ export function HubsPage() {
 
           {/* ─── Offline Architecture Pillars ─── */}
           <section className="space-y-8">
-            <div className="mx-auto max-w-3xl text-center space-y-2">
-              <Badge variant="default">Resilient Offline Design</Badge>
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-                Engineered for High-Reliability Local Operations
-              </h2>
-              <p className="text-xs text-zinc-600">
-                EthioTech hubs eliminate bandwidth barriers so learners can build and test software continuously.
-              </p>
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div className="lg:col-span-6 space-y-4">
+                <Badge variant="default">Resilient Offline Design</Badge>
+                <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+                  Engineered for High-Reliability Local Operations
+                </h2>
+                <p className="text-xs leading-relaxed text-zinc-600">
+                  EthioTech regional learning hubs bridge digital infrastructure gaps nationwide. Every hub is equipped
+                  with dual-fiber backhauls, automated solar-battery backup systems, local mirror caches for package
+                  registries, and high-density developer workstations.
+                </p>
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
+                    <p className="text-xs font-semibold text-zinc-900">Local LAN Mirrors</p>
+                    <p className="text-[11px] text-zinc-500 mt-0.5">
+                      Gigabit-speed package downloads with zero internet dependency.
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
+                    <p className="text-xs font-semibold text-zinc-900">Solar + Battery Rigs</p>
+                    <p className="text-[11px] text-zinc-500 mt-0.5">
+                      Continuous 12-hour uptime during municipal grid brownouts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="lg:col-span-6">
+                <div className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs">
+                  <SmartImage
+                    src={LOCAL_MEDIA_ASSETS.hubs.workshop}
+                    alt="Physical technology learning hub equipped with dual monitors and high-speed developer workstations"
+                    aspectRatio="aspect-[16/10]"
+                    className="w-full object-cover"
+                  />
+                  <div className="border-t border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
+                    <p className="text-[11px] font-medium text-zinc-600 flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                      <span>In-person collaborative technical workshops at regional EthioTech centers</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

@@ -30,9 +30,11 @@ import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SmartImage } from "@/components/ui/smart-image";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchMarketingHome } from "@/services/marketingService";
+import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -638,16 +640,16 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Right Column: Platform Workspace Preview */}
+          {/* Right Column: Platform Workspace & Real Collaboration Preview */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm space-y-4">
+            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm space-y-3.5">
               {/* Header */}
               <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-zinc-300" />
                   <div className="h-2 w-2 rounded-full bg-zinc-300" />
                   <div className="h-2 w-2 rounded-full bg-zinc-300" />
-                  <span className="ml-1 text-xs font-semibold text-zinc-800">Learning Workspace</span>
+                  <span className="ml-1 text-xs font-semibold text-zinc-800">Collaborative Engineering</span>
                 </div>
                 <Badge variant="outline" size="sm" className="gap-1.5 font-medium text-[11px]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c]" />
@@ -655,8 +657,28 @@ export function HomePage() {
                 </Badge>
               </div>
 
+              {/* Authentic Developer Collaboration Image */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-zinc-200">
+                <SmartImage
+                  src={LOCAL_MEDIA_ASSETS.hero.collaboration}
+                  alt="Young software engineers collaborating on system architecture in a modern tech workspace"
+                  hoverEffect="zoom"
+                  className="h-full w-full object-cover"
+                  wrapperClassName="h-full w-full border-none bg-transparent"
+                  width={800}
+                  quality={85}
+                />
+                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-md bg-zinc-900/85 px-2.5 py-1 text-[11px] text-white backdrop-blur-xs">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Live Peer Review
+                  </span>
+                  <span className="text-zinc-300 font-mono text-[10px]">Addis Ababa • Remote Mesh</span>
+                </div>
+              </div>
+
               {/* Live Mentorship Session Card */}
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3.5 space-y-2.5">
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
                     Live Workshop · WebRTC Mesh
@@ -670,7 +692,7 @@ export function HomePage() {
                     name="Selamawit Tekle"
                     userId="selamawit-tekle"
                     role="mentor"
-                    size="md"
+                    size="sm"
                     className="border border-zinc-200"
                   />
                   <div className="min-w-0">
@@ -686,7 +708,7 @@ export function HomePage() {
               </div>
 
               {/* Active Curriculum Track Progress Card */}
-              <div className="rounded-lg border border-zinc-200 bg-white p-3.5 space-y-2.5">
+              <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
@@ -705,15 +727,6 @@ export function HomePage() {
                   </span>
                   <span className="text-zinc-500">8 / 16 Lessons</span>
                 </div>
-              </div>
-
-              {/* Agile Peer Squad Card */}
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <Users size={14} className="text-zinc-700" />
-                  <span className="font-medium text-zinc-800">Sprint Squad 04</span>
-                </div>
-                <span className="text-[11px] font-medium text-zinc-500">4 Peers Connected</span>
               </div>
             </div>
           </div>
@@ -1423,22 +1436,45 @@ export function HomePage() {
               </div>
             </div>
 
-            {/* Visual Callout Box */}
-            <div className="relative rounded-lg border border-zinc-200 bg-zinc-50 p-5 space-y-3">
-              <h3 className="text-xs sm:text-sm font-semibold text-zinc-900 flex items-center gap-2">
-                <Building2 size={15} className="text-zinc-700" />
-                <span>Community & In-Person Hackathons</span>
-              </h3>
-              <p className="text-xs leading-relaxed text-zinc-600">
-                Hubs host weekly in-person sprint demos, weekend hackathons, algorithmic coding competitions, and local
-                mentor office hours.
-              </p>
-              <div className="rounded-md border border-zinc-200 bg-white p-3 space-y-1 text-xs shadow-xs">
-                <p className="font-semibold text-zinc-900">Upcoming Event:</p>
-                <p className="text-zinc-900 font-medium">National FinTech & AI Hackathon</p>
-                <p className="text-zinc-500 text-[11px]">
-                  Hosted synchronously across all 6 hubs with 1M ETB in project grants.
+            {/* Visual Community & Hackathons Card */}
+            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-xs space-y-3">
+              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-zinc-200">
+                <SmartImage
+                  src={LOCAL_MEDIA_ASSETS.events.hackathon}
+                  alt="Software developers and engineering teams collaborating during an in-person hackathon sprint"
+                  hoverEffect="zoom"
+                  className="h-full w-full object-cover"
+                  wrapperClassName="h-full w-full border-none bg-transparent"
+                  width={800}
+                  quality={85}
+                />
+              </div>
+              <div className="p-4 space-y-2.5 pt-0">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs sm:text-sm font-semibold text-zinc-900 flex items-center gap-1.5">
+                    <Building2 size={15} className="text-zinc-700" />
+                    <span>In-Person Hackathons & Lab Sprints</span>
+                  </h3>
+                  <Badge variant="outline" size="sm">
+                    Synchronous
+                  </Badge>
+                </div>
+                <p className="text-xs leading-relaxed text-zinc-600">
+                  Hubs host weekly in-person sprint demos, weekend hackathons, algorithmic coding competitions, and
+                  local mentor office hours across all 6 national corridors.
                 </p>
+                <div className="rounded-md border border-zinc-200 bg-zinc-50 p-3 space-y-1 text-xs">
+                  <div className="flex items-center justify-between">
+                    <p className="font-semibold text-zinc-900">Upcoming Regional Event:</p>
+                    <span className="text-[10px] font-semibold text-[#b91c1c] uppercase tracking-wider">
+                      Registration Open
+                    </span>
+                  </div>
+                  <p className="text-zinc-900 font-medium">National FinTech & AI Systems Hackathon</p>
+                  <p className="text-zinc-500 text-[11px]">
+                    Hosted synchronously across Addis, Bahir Dar, and Hawassa with 1M ETB in project grants.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

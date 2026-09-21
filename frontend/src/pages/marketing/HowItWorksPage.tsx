@@ -28,9 +28,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SmartImage } from "@/components/ui/smart-image";
 import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchTracks, type TrackSummary } from "@/services/tracksService";
+import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -208,6 +210,8 @@ interface RolePersona {
   badge: string;
   icon: LucideIcon;
   description: string;
+  image: string;
+  imageAlt: string;
   keyBenefits: Array<{ title: string; desc: string; icon: LucideIcon }>;
   ctaLabel: string;
   ctaLink: string;
@@ -222,6 +226,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     icon: GraduationCap,
     description:
       "Transform your career through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from world-class diaspora engineers.",
+    image: LOCAL_MEDIA_ASSETS.hero.collaboration,
+    imageAlt: "Engineering squads collaborating on real-world production codebases",
     keyBenefits: [
       {
         title: "Zero Financial Barriers",
@@ -255,6 +261,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     icon: Users,
     description:
       "Give back to Ethiopia's software ecosystem with maximum leverage. Share your expertise through structured office hours, PR reviews, and system design masterclasses.",
+    image: LOCAL_MEDIA_ASSETS.mentorship.codeReview,
+    imageAlt: "Senior diaspora engineers mentoring students on architectural design and code reviews",
     keyBenefits: [
       {
         title: "High-Leverage Structured Format",
@@ -288,6 +296,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     icon: Award,
     description:
       "Hire vetted, production-ready software engineers with verified proof-of-work, production git histories, and strong teamwork habits.",
+    image: LOCAL_MEDIA_ASSETS.events.hackathon,
+    imageAlt: "Top graduate teams showcasing enterprise-grade systems at live developer showcases",
     keyBenefits: [
       {
         title: "Proof-of-Work Over Resumes",
@@ -758,46 +768,67 @@ export function HowItWorksPage() {
               transition={{ duration: 0.2 }}
               className="rounded-xl border border-zinc-200 bg-white p-6 shadow-xs md:p-8"
             >
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#b91c1c]">
-                    {currentRoleData.eyebrow}
-                  </span>
-                  <h3 className="mt-0.5 text-xl font-bold text-zinc-900 md:text-2xl">{currentRoleData.title}</h3>
-                </div>
-                <Badge variant="default" size="md">
-                  {currentRoleData.badge}
-                </Badge>
-              </div>
-
-              <p className="mt-3 max-w-3xl text-xs leading-relaxed text-zinc-600">{currentRoleData.description}</p>
-
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {currentRoleData.keyBenefits.map((benefit) => {
-                  const Icon = benefit.icon;
-                  return (
-                    <div
-                      key={benefit.title}
-                      className="flex items-start gap-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4 transition hover:border-zinc-300"
-                    >
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-700 border border-zinc-200">
-                        <Icon size={16} />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-xs text-zinc-900">{benefit.title}</h4>
-                        <p className="mt-0.5 text-[11px] leading-relaxed text-zinc-600">{benefit.desc}</p>
-                      </div>
+              <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+                <div className="lg:col-span-7">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[#b91c1c]">
+                        {currentRoleData.eyebrow}
+                      </span>
+                      <h3 className="mt-0.5 text-xl font-bold text-zinc-900 md:text-2xl">{currentRoleData.title}</h3>
                     </div>
-                  );
-                })}
-              </div>
+                    <Badge variant="default" size="md">
+                      {currentRoleData.badge}
+                    </Badge>
+                  </div>
 
-              <div className="mt-6 flex justify-end">
-                <Link to={currentRoleData.ctaLink}>
-                  <Button size="md" className="bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
-                    {currentRoleData.ctaLabel} <ArrowRight size={14} className="ml-1.5" />
-                  </Button>
-                </Link>
+                  <p className="mt-3 text-xs leading-relaxed text-zinc-600">{currentRoleData.description}</p>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {currentRoleData.keyBenefits.map((benefit) => {
+                      const Icon = benefit.icon;
+                      return (
+                        <div
+                          key={benefit.title}
+                          className="flex items-start gap-3 rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 transition hover:border-zinc-300"
+                        >
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-700 border border-zinc-200">
+                            <Icon size={14} />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold text-xs text-zinc-900">{benefit.title}</h4>
+                            <p className="mt-0.5 text-[11px] leading-relaxed text-zinc-600">{benefit.desc}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-6 flex justify-start">
+                    <Link to={currentRoleData.ctaLink}>
+                      <Button size="md" className="bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
+                        {currentRoleData.ctaLabel} <ArrowRight size={14} className="ml-1.5" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <div className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs">
+                    <SmartImage
+                      src={currentRoleData.image}
+                      alt={currentRoleData.imageAlt}
+                      aspectRatio="aspect-[4/3]"
+                      className="w-full object-cover"
+                    />
+                    <div className="border-t border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
+                      <p className="text-[11px] font-medium text-zinc-600 flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                        <span>{currentRoleData.imageAlt}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>

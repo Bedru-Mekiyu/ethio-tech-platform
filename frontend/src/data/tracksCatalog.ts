@@ -107,6 +107,7 @@ export interface TrackCatalogItem {
   modules: CatalogModule[];
   badgeColor: "outline" | "default" | "warning";
   unsplashId: string;
+  localImage?: string;
 }
 
 export const TRACKS_CATALOG: TrackCatalogItem[] = [
@@ -130,6 +131,7 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
     featured: true,
     badgeColor: "outline",
     unsplashId: "photo-1555066931-4365d14bab8c",
+    localImage: "/images/tracks/fullstack-cloud.webp",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+44% YoY hiring growth in Africa & Global Remote",
@@ -513,7 +515,8 @@ export function setupCollaborationRoom(io: Server) {
     xpReward: 3000,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1526498460520-4c246339dccb",
+    unsplashId: "photo-1551650975-87deedd944c3",
+    localImage: "/images/tracks/mobile-engineering.webp",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+52% surge in mobile software demand across East Africa",
@@ -822,7 +825,8 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
     xpReward: 3200,
     featured: true,
     badgeColor: "default",
-    unsplashId: "photo-1618401471353-b98aedd04e11",
+    unsplashId: "photo-1550751827-4bd374c3f58b",
+    localImage: "/images/tracks/cloud-devops.webp",
     marketDemand: {
       rating: "Very High",
       growthMetric: "+65% enterprise demand for cloud automation & reliability",
@@ -1121,6 +1125,7 @@ export async function handler(event: S3Event) {
     featured: true,
     badgeColor: "warning",
     unsplashId: "photo-1555949963-aa79dcee981c",
+    localImage: "/images/tracks/applied-ai-systems.webp",
     marketDemand: {
       rating: "Extremely High",
       growthMetric: "+68% global hiring surge for AI & Data specialists",
@@ -1421,7 +1426,8 @@ class MultilingualAssistant:
     xpReward: 3100,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1550751827-4bd374c3f58b",
+    unsplashId: "photo-1581291518857-4e27b48ff24e",
+    localImage: "/images/tracks/fintech-systems.webp",
     marketDemand: {
       rating: "Extremely High",
       growthMetric: "+70% critical shortfall in certified security analysts",
@@ -1703,7 +1709,8 @@ export const loginRateLimiter = rateLimit({
     xpReward: 2800,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1581291518857-4e27b48ff24e",
+    unsplashId: "photo-1526498460520-4c246339dccb",
+    localImage: "/images/tracks/frontend-engineering.webp",
     marketDemand: {
       rating: "High",
       growthMetric: "+38% demand for hybrid Design Technologists",

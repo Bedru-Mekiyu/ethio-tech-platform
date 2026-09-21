@@ -19,6 +19,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { SmartImage } from "@/components/ui/smart-image";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { Input } from "@/components/ui/input";
@@ -29,6 +30,7 @@ import {
   type MarketingMentorPageData,
   type MarketingMentorPageMentor,
 } from "@/services/marketingService";
+import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -348,15 +350,48 @@ export function MentorsPage() {
 
       {/* ─── The Mentorship Framework ─── */}
       <section className="space-y-8">
-        <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Structured Learning</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-            How Mentorship Works at EthioTech
-          </h2>
-          <p className="text-xs text-zinc-600">
-            A practical, real-world engineering feedback loop designed to bridge the gap between classroom theory and
-            production engineering.
-          </p>
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-7 space-y-4">
+            <Badge variant="default">Structured Learning</Badge>
+            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+              How Mentorship Works at EthioTech
+            </h2>
+            <p className="text-xs leading-relaxed text-zinc-600">
+              EthioTech connects Ethiopian software engineering students with senior diaspora practitioners and industry
+              leads across Silicon Valley, Europe, and Pan-Africa. Every interaction is structured around real
+              codebases, asynchronous GitHub PR feedback, and high-leverage architectural review.
+            </p>
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
+                <p className="text-xs font-semibold text-zinc-900">Weekly Office Hours</p>
+                <p className="text-[11px] text-zinc-500 mt-0.5">
+                  Direct 1-on-1 screen share and architectural deep dives.
+                </p>
+              </div>
+              <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
+                <p className="text-xs font-semibold text-zinc-900">PR Line-by-Line Audits</p>
+                <p className="text-[11px] text-zinc-500 mt-0.5">
+                  Enterprise standards for idiomatic code, tests, and security.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-5">
+            <div className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs">
+              <SmartImage
+                src={LOCAL_MEDIA_ASSETS.mentorship.codeReview}
+                alt="Senior software engineer mentoring a junior developer on system design and code implementation"
+                aspectRatio="aspect-[4/3]"
+                className="w-full object-cover"
+              />
+              <div className="border-t border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
+                <p className="text-[11px] font-medium text-zinc-600 flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <span>Personalized code review and technical career mentoring</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
