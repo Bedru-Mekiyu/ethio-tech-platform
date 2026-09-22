@@ -60,7 +60,10 @@ export const rateLimit = (type = "api", options = {}) => {
   };
 };
 
-export const globalRateLimit = rateLimit("api", { windowMs: 60_000, max: 120 });
+export const globalRateLimit = rateLimit("api", {
+  windowMs: 60_000,
+  max: Number(process.env.GLOBAL_RATE_LIMIT_PER_MINUTE) || 600,
+});
 
 export const authRateLimit = rateLimit("auth", { windowMs: 900_000, max: 10 });
 
