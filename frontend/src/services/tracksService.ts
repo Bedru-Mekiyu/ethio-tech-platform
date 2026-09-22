@@ -77,6 +77,7 @@ export interface LessonDetail {
   previousLessonId?: string;
   trackId?: string;
   trackTitle?: string;
+  isCompleted?: boolean;
 }
 
 export interface LeaderboardEntry {
@@ -217,9 +218,14 @@ export async function fetchTrackById(trackId: string): Promise<TrackSummary> {
 
 export async function fetchLessonById(lessonId: string): Promise<LessonDetail> {
   try {
-    const { data } = await api.get<ApiResponse<{ lesson: LessonDetail }>>(`/lessons/${lessonId}`);
-    const backendLesson = (data.data as { lesson: LessonDetail }).lesson;
-    if (backendLesson) return backendLesson;
+    const { data } = await api.get<ApiResponse<{ lesson: LessonDetail; isCompleted?: boolean }>>(`/lessons/${lessonId}`);
+    const payload = data.data as { lesson: LessonDetail; isCompleted?: boolean };
+    if (payload?.lesson) {
+      return {
+        ...payload.lesson,
+        isCompleted: payload.isCompleted,
+      };
+    }
   } catch {
     // fallback to catalog search below
   }
@@ -284,6 +290,15 @@ export async function fetchLessonById(lessonId: string): Promise<LessonDetail> {
     trackId: firstTrack.id,
     trackTitle: firstTrack.title,
   };
+}
+
+export async function enrollTrack(trackId: string) {
+  try {
+    const { data } = await api.post<ApiResponse<{ user: unknown }>>(`/users/me/enroll/${trackId}`);
+    return data.data;
+  } catch {
+    return null;
+  }
 }
 
 export async function completeLesson(lessonId: string) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowRight,
@@ -18,7 +18,7 @@ import {
   Check,
   Layers3,
 } from "lucide-react";
-import { fetchTrackById, type CapstoneProject } from "@/services/tracksService";
+import { fetchTrackById, enrollTrack, type CapstoneProject } from "@/services/tracksService";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -50,11 +50,22 @@ export function TrackDetailPage() {
   const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const [selectedCapstone, setSelectedCapstone] = useState<CapstoneProject | null>(null);
 
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["track", trackId],
     queryFn: () => fetchTrackById(trackId!),
     enabled: !!trackId,
   });
+
+  const handleStartTrack = () => {
+    if (data?._id) {
+      enrollTrack(data._id)
+        .then(() => {
+          queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
+        })
+        .catch(() => undefined);
+    }
+  };
 
   const modules = data?.modules ?? [];
   const lessonCount = modules.reduce((sum, module) => sum + (module.lessons?.length ?? 0), 0);
@@ -147,14 +158,14 @@ export function TrackDetailPage() {
 
             <div className="flex flex-wrap gap-2 pt-1">
               {firstLessonId ? (
-                <Link to={`/app/lessons/${firstLessonId}`}>
+                <Link to={`/app/lessons/${firstLessonId}`} onClick={handleStartTrack}>
                   <Button size="sm" className="gap-1.5 text-xs font-medium">
                     <Rocket size={14} />
                     Start / Resume Track
                   </Button>
                 </Link>
               ) : (
-                <Link to="/app/workspace">
+                <Link to="/app/workspace" onClick={handleStartTrack}>
                   <Button size="sm" className="gap-1.5 text-xs font-medium">
                     <Rocket size={14} />
                     Open Workspace

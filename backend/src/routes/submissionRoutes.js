@@ -14,7 +14,7 @@ const router = Router();
 router.use(protect);
 router.post("/", authorize("student"), validateRequest({ body: submissionSchemas.create }), createSubmission);
 router.get("/mine", authorize("student"), getMySubmissions);
-router.get("/", authorize("mentor", "admin"), getSubmissions);
-router.patch("/:id/review", authorize("mentor", "admin"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: submissionSchemas.review }), reviewSubmission);
+router.get("/", authorize("mentor", "admin", "super_admin", "reviewer", "moderator"), getSubmissions);
+router.patch("/:id/review", authorize("mentor", "admin", "super_admin", "reviewer", "moderator"), requireVerifiedMentor, validateRequest({ params: commonSchemas.idParam, body: submissionSchemas.review }), reviewSubmission);
 
 export default router;

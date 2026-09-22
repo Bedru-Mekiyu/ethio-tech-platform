@@ -57,10 +57,17 @@ export const optionalProtect = async (req, _res, next) => {
 };
 
 export const authorize = (...roles) => (req, res, next) => {
-  if (!req.user || !roles.includes(req.user.role)) {
-    return next(new ApiError(403, "Forbidden: insufficient role permissions"));
+  if (!req.user) {
+    return next(new ApiError(401, "Not authorized"));
   }
-  next();
+  if (
+    roles.includes(req.user.role) ||
+    (req.user.role === "super_admin" &&
+      roles.some((r) => ["admin", "super_admin", "moderator", "reviewer", "support", "mentor"].includes(r)))
+  ) {
+    return next();
+  }
+  return next(new ApiError(403, "Forbidden: insufficient role permissions"));
 };
 
 export const requirePermission = (...permissions) => (req, res, next) => {

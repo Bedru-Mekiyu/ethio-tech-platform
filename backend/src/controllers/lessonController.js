@@ -24,7 +24,14 @@ export const getLessons = asyncHandler(async (req, res) => {
 export const getLessonById = asyncHandler(async (req, res) => {
   const lesson = await Lesson.findById(req.params.id);
   if (!lesson) throw new ApiError(404, "Lesson not found");
-  sendResponse(res, 200, "Lesson fetched", { lesson });
+
+  let isCompleted = false;
+  if (req.user) {
+    const progressDoc = await LessonProgress.findOne({ student: req.user._id, lesson: lesson._id });
+    isCompleted = Boolean(progressDoc);
+  }
+
+  sendResponse(res, 200, "Lesson fetched", { lesson, isCompleted });
 });
 
 export const updateLesson = asyncHandler(async (req, res) => {

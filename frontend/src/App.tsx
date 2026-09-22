@@ -292,6 +292,7 @@ export default function App() {
                   >
                     <Route index element={<ParentDashboardPage />} />
                     <Route path="settings" element={<SettingsPage scope="parent" />} />
+                    <Route path="profile" element={<ProfilePage />} />
                     <Route path="*" element={<NotFoundPage />} />
                   </Route>
                   <Route

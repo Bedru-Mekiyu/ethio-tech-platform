@@ -56,14 +56,21 @@ export const getRecordingStats = asyncHandler(async (req, res) => {
 });
 
 export const getStudentRecordings = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
-  
+  let userIds = [req.user._id];
+  if (req.user.role === "parent") {
+    const User = (await import("../models/User.js")).default;
+    const parent = await User.findById(req.user._id).select("linkedStudents");
+    if (parent?.linkedStudents?.length) {
+      userIds = parent.linkedStudents;
+    }
+  }
+
   // Import models here to avoid circular dependency / dependency loading order issues if any
   const SessionParticipant = (await import("../models/SessionParticipant.js")).default;
   const SessionRecording = (await import("../models/SessionRecording.js")).default;
 
   // Find all sessions this student participated in
-  const participants = await SessionParticipant.find({ user: userId }).select("session").lean();
+  const participants = await SessionParticipant.find({ user: { $in: userIds } }).select("session").lean();
   const sessionIds = participants.map((p) => p.session);
 
   if (sessionIds.length === 0) {
@@ -88,7 +95,7 @@ export const getStudentRecordings = asyncHandler(async (req, res) => {
   let totalWatchTimeMinutes = 0;
 
   const formattedRecordings = recordings.map((rec) => {
-    const wp = rec.watchProgress?.find((p) => String(p.user) === String(userId));
+    const wp = rec.watchProgress?.find((p) => userIds.some((uid) => String(p.user) === String(uid)));
     const watchedPercent = wp ? wp.progressPercent : 0;
     const completed = wp ? wp.completed : false;
 

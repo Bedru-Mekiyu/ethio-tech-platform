@@ -4,7 +4,7 @@ import { authorize, protect } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get("/student", protect, authorize("student"), getStudentDashboard);
+router.get("/student", protect, authorize("student", "parent", "admin", "super_admin"), getStudentDashboard);
 router.get("/mentor", protect, authorize("mentor", "admin"), getMentorDashboard);
 
 export default router;

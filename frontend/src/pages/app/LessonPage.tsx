@@ -27,7 +27,7 @@ export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const queryClient = useQueryClient();
   const setUser = useAuthStore((s) => s.setUser);
-  const [completed, setCompleted] = useState(false);
+  const [completedLocally, setCompletedLocally] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
 
   const { data, isLoading, isError, refetch } = useQuery({
@@ -36,14 +36,17 @@ export function LessonPage() {
     enabled: !!lessonId,
   });
 
+  const completed = completedLocally || Boolean(data?.isCompleted);
+
   const completeMutation = useMutation({
     mutationFn: () => completeLesson(lessonId!),
     onSuccess: async (result) => {
-      setCompleted(true);
+      setCompletedLocally(true);
       if ((result as { alreadyCompleted?: boolean }).alreadyCompleted) return;
       const me = await fetchMe();
       setUser(me.user);
       queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
+      queryClient.invalidateQueries({ queryKey: ["lesson", lessonId] });
     },
   });
 

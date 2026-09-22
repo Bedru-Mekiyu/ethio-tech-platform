@@ -73,7 +73,7 @@ export const reviewSubmission = asyncHandler(async (req, res) => {
     recipient: submission.student,
     type: "project",
     message: `Your submission for ${submission.project?.title || "project"} was marked as ${status}.`,
-    link: `/submissions/${submission._id}`,
+    link: `/app/projects`,
     createdBy: req.user._id,
   });
 

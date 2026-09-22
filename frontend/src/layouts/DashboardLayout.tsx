@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
 import { Avatar } from "@/components/ui/avatar";
@@ -182,15 +182,41 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
     { to: "/contact", label: "Support", icon: <MessageSquare size={18} /> },
   ];
 
-  const adminNav: NavItem[] = [
-    { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
-    { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
-    { to: "/admin/moderation", label: "Applications", icon: <FileCheck size={18} /> },
-    { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
-    { to: "/admin/gamification", label: "Gamification", icon: <Trophy size={18} /> },
-    { to: "/admin/meetings", label: "Meetings", icon: <Video size={18} /> },
-    { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
-  ];
+  const userRole = user?.role ?? "admin";
+  const adminNav: NavItem[] = useMemo(() => {
+    if (userRole === "support") {
+      return [
+        { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
+        { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
+      ];
+    }
+    if (userRole === "reviewer") {
+      return [
+        { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
+        { to: "/admin/moderation", label: "Applications", icon: <FileCheck size={18} /> },
+        { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
+        { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
+      ];
+    }
+    if (userRole === "moderator") {
+      return [
+        { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
+        { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
+        { to: "/admin/moderation", label: "Applications", icon: <FileCheck size={18} /> },
+        { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
+        { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
+      ];
+    }
+    return [
+      { to: "/admin", label: "Analytics", icon: <BarChart3 size={18} /> },
+      { to: "/admin/users", label: "Users", icon: <Users size={18} /> },
+      { to: "/admin/moderation", label: "Applications", icon: <FileCheck size={18} /> },
+      { to: "/admin/content", label: "Content", icon: <BookOpen size={18} /> },
+      { to: "/admin/gamification", label: "Gamification", icon: <Trophy size={18} /> },
+      { to: "/admin/meetings", label: "Meetings", icon: <Video size={18} /> },
+      { to: "/admin/operations", label: "Operations", icon: <Activity size={18} /> },
+    ];
+  }, [userRole]);
 
   const nav =
     variant === "mentor" ? mentorNav : variant === "admin" ? adminNav : variant === "parent" ? parentNav : studentNav;
@@ -397,7 +423,9 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                           ? "/app/profile"
                           : variant === "mentor"
                             ? "/mentor/profile"
-                            : "/admin/profile"
+                            : variant === "parent"
+                              ? "/parent/profile"
+                              : "/admin/profile"
                       }
                       onClick={() => setAccountOpen(false)}
                       className="flex items-center gap-2.5 px-3.5 py-2 text-xs text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 transition-colors"

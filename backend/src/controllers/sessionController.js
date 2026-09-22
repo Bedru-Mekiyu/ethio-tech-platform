@@ -3,6 +3,7 @@ import Session from "../models/Session.js";
 import SessionFeedback from "../models/SessionFeedback.js";
 import SessionParticipant from "../models/SessionParticipant.js";
 import SessionAuditLog from "../models/SessionAuditLog.js";
+import User from "../models/User.js";
 import Notification from "../models/Notification.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
@@ -75,10 +76,14 @@ export const getSessions = asyncHandler(async (req, res) => {
   const filter = {};
   if (status) filter.status = status;
 
-  if (req.user.role === "admin") {
+  if (["admin", "super_admin", "moderator", "reviewer"].includes(req.user.role)) {
     if (mentor) filter.mentor = mentor;
   } else if (req.user.role === "mentor") {
     filter.mentor = req.user._id;
+  } else if (req.user.role === "parent") {
+    const parent = await User.findById(req.user._id).select("linkedStudents");
+    const linkedIds = parent?.linkedStudents || [];
+    filter.participants = { $in: linkedIds };
   } else {
     filter.$or = [{ participants: req.user._id }, { mentor: req.user._id }];
   }
@@ -124,10 +129,16 @@ export const getSessionById = asyncHandler(async (req, res) => {
 
   const isMentor = String(session.mentor?._id ?? session.mentor) === String(req.user._id);
   const isParticipant = session.participants.some((participant) => String(participant._id) === String(req.user._id));
-  const isAdmin = req.user.role === "admin";
+  const isStaff = ["admin", "super_admin", "moderator", "reviewer", "support"].includes(req.user.role);
+  let isParentOfParticipant = false;
+  if (req.user.role === "parent") {
+    const parent = await User.findById(req.user._id).select("linkedStudents");
+    const linked = (parent?.linkedStudents || []).map((id) => id.toString());
+    isParentOfParticipant = session.participants.some((p) => linked.includes(String(p._id ?? p)));
+  }
 
-  if (!isMentor && !isParticipant && !isAdmin) {
-    throw new ApiError(403, "Only mentor, participants, or admin can access session details");
+  if (!isMentor && !isParticipant && !isStaff && !isParentOfParticipant) {
+    throw new ApiError(403, "Only mentor, participants, linked parent, or authorized staff can access session details");
   }
 
   sendResponse(res, 200, "Session fetched", { session });

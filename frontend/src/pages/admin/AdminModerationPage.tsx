@@ -9,6 +9,7 @@ import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useToast } from "@/components/composites/ToastProvider";
+import { useAuthStore } from "@/store/authStore";
 import {
   fetchQueueApplications,
   fetchQueueStats,
@@ -189,8 +190,11 @@ function ApplicationCard({
   reviewNotes,
   onReviewNotesChange,
 }: ApplicationCardProps) {
+  const user = useAuthStore((s) => s.user);
   const isPending = application.status === "pending_review";
-  const canAct = application.status === "pending_review" || application.status === "changes_requested";
+  const canAct =
+    (application.status === "pending_review" || application.status === "changes_requested") &&
+    (user?.role === "admin" || user?.role === "super_admin");
   const rubric = useMemo(() => calculateRubricScore(autoEvaluateApplication(application)), [application]);
 
   return (

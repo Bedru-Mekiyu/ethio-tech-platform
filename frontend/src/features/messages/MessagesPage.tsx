@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar } from "@/components/ui/avatar";
 import { useAuthStore } from "@/store/authStore";
 import { acquireSocketConnection } from "@/services/socket";
 import { useDM, type Conversation, type DMMessage } from "@/hooks/useDM";
+import { createConversation } from "@/services/dmService";
 
 const ConversationItem: React.FC<{
   conversation: Conversation;
@@ -92,8 +94,33 @@ export const MessagesPage: React.FC = () => {
     emitTypingStart,
   } = useDM({ socket });
 
+  const [searchParams] = useSearchParams();
+  const startUserId = searchParams.get("start");
+
   const [inputText, setInputText] = useState("");
   const [mobileShowThread, setMobileShowThread] = useState(false);
+
+  useEffect(() => {
+    if (!startUserId || loadingConversations) return;
+    const existing = conversations.find((c) =>
+      c.participants.some((p) => p._id === startUserId)
+    );
+    if (existing) {
+      Promise.resolve().then(() => {
+        selectConversation(existing._id);
+        setMobileShowThread(true);
+      });
+    } else {
+      createConversation(startUserId)
+        .then((newConv) => {
+          if (newConv?._id) {
+            selectConversation(newConv._id);
+            setMobileShowThread(true);
+          }
+        })
+        .catch(() => undefined);
+    }
+  }, [startUserId, conversations, loadingConversations, selectConversation]);
 
   const handleSend = async () => {
     if (!inputText.trim()) return;
