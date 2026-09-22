@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuthStore } from "@/store/authStore";
 import { adminUserService, type AdminUser, type AdminUserAnalytics } from "@/services/adminUserService";
 import { UserTable } from "@/components/admin/UserTable";
 import { Button } from "@/components/ui/button";
@@ -43,6 +44,14 @@ interface QuickActionDrawerProps {
 function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerProps) {
   const queryClient = useQueryClient();
   const toast = useToast();
+  const currentUser = useAuthStore((s) => s.user);
+
+  const canChangeRole = currentUser?.role === "admin" || currentUser?.role === "super_admin";
+  const canDeleteUser = currentUser?.role === "admin" || currentUser?.role === "super_admin";
+  const canForceLogout = currentUser?.role === "admin" || currentUser?.role === "super_admin";
+  const canSuspendUser =
+    currentUser?.role === "admin" || currentUser?.role === "super_admin" || currentUser?.role === "moderator";
+  const canVerifyUser = currentUser?.role === "admin" || currentUser?.role === "super_admin";
 
   const [suspendOpen, setSuspendOpen] = useState(false);
   const [suspendReason, setSuspendReason] = useState("");
@@ -309,48 +318,50 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
           <div className="space-y-2 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-zinc-900">Quick Management Actions</p>
             <div className="grid grid-cols-2 gap-2 pt-1">
-              {!user.isVerified ? (
-                <Button
-                  size="sm"
-                  variant="primary"
-                  onClick={() => verifyMutation.mutate()}
-                  disabled={verifyMutation.isPending}
-                  className="gap-1.5 text-xs w-full"
-                >
-                  <UserCheck size={14} /> Verify User
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => verifyMutation.mutate()}
-                  disabled={verifyMutation.isPending}
-                  className="gap-1.5 text-xs w-full text-success"
-                >
-                  <CheckCircle2 size={14} /> Verified
-                </Button>
-              )}
+              {canVerifyUser &&
+                (!user.isVerified ? (
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    onClick={() => verifyMutation.mutate()}
+                    disabled={verifyMutation.isPending}
+                    className="gap-1.5 text-xs w-full"
+                  >
+                    <UserCheck size={14} /> Verify User
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => verifyMutation.mutate()}
+                    disabled={verifyMutation.isPending}
+                    className="gap-1.5 text-xs w-full text-success"
+                  >
+                    <CheckCircle2 size={14} /> Verified
+                  </Button>
+                ))}
 
-              {user.status === "suspended" ? (
-                <Button
-                  size="sm"
-                  variant="primary"
-                  onClick={() => reactivateMutation.mutate()}
-                  disabled={reactivateMutation.isPending}
-                  className="gap-1.5 text-xs w-full text-black"
-                >
-                  <RotateCcw size={14} /> Reactivate
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => setSuspendOpen(true)}
-                  className="gap-1.5 text-xs w-full"
-                >
-                  <AlertTriangle size={14} /> Suspend
-                </Button>
-              )}
+              {canSuspendUser &&
+                (user.status === "suspended" ? (
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    onClick={() => reactivateMutation.mutate()}
+                    disabled={reactivateMutation.isPending}
+                    className="gap-1.5 text-xs w-full text-black"
+                  >
+                    <RotateCcw size={14} /> Reactivate
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="danger"
+                    onClick={() => setSuspendOpen(true)}
+                    className="gap-1.5 text-xs w-full"
+                  >
+                    <AlertTriangle size={14} /> Suspend
+                  </Button>
+                ))}
 
               <Button
                 size="sm"
@@ -365,27 +376,31 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 <Key size={14} /> Reset Password
               </Button>
 
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => forceLogoutMutation.mutate()}
-                disabled={forceLogoutMutation.isPending}
-                className="gap-1.5 text-xs w-full"
-              >
-                <Lock size={14} /> Force Logout
-              </Button>
+              {canForceLogout && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => forceLogoutMutation.mutate()}
+                  disabled={forceLogoutMutation.isPending}
+                  className="gap-1.5 text-xs w-full"
+                >
+                  <Lock size={14} /> Force Logout
+                </Button>
+              )}
 
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={() => {
-                  setSelectedRole(user.role || "student");
-                  setRoleChangeOpen(true);
-                }}
-                className="gap-1.5 text-xs w-full"
-              >
-                <Shield size={14} /> Change Role
-              </Button>
+              {canChangeRole && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setSelectedRole(user.role || "student");
+                    setRoleChangeOpen(true);
+                  }}
+                  className="gap-1.5 text-xs w-full"
+                >
+                  <Shield size={14} /> Change Role
+                </Button>
+              )}
 
               <Button
                 size="sm"
@@ -405,9 +420,16 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 <Pencil size={14} /> Edit Profile
               </Button>
 
-              <Button size="sm" variant="danger" onClick={() => setDeleteOpen(true)} className="gap-1.5 text-xs w-full">
-                <Trash2 size={14} /> Delete User
-              </Button>
+              {canDeleteUser && (
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={() => setDeleteOpen(true)}
+                  className="gap-1.5 text-xs w-full"
+                >
+                  <Trash2 size={14} /> Delete User
+                </Button>
+              )}
             </div>
           </div>
 
@@ -856,6 +878,9 @@ export function AdminUsersPage() {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const queryClient = useQueryClient();
   const toast = useToast();
+  const currentUser = useAuthStore((s) => s.user);
+  const canCreateUser = currentUser?.role === "admin" || currentUser?.role === "super_admin";
+  const canExportUsers = currentUser?.role === "admin" || currentUser?.role === "super_admin";
 
   const [createOpen, setCreateOpen] = useState(false);
   const [createName, setCreateName] = useState("");
@@ -978,18 +1003,20 @@ export function AdminUsersPage() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                setCreateError("");
-                generateRandomPasswordForCreate();
-                setCreateOpen(true);
-              }}
-              className="text-xs text-white bg-zinc-900 hover:bg-zinc-800 gap-1.5 shadow-xs"
-            >
-              <UserPlus size={14} /> Create User
-            </Button>
+            {canCreateUser && (
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setCreateError("");
+                  generateRandomPasswordForCreate();
+                  setCreateOpen(true);
+                }}
+                className="text-xs text-white bg-zinc-900 hover:bg-zinc-800 gap-1.5 shadow-xs"
+              >
+                <UserPlus size={14} /> Create User
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
@@ -1001,14 +1028,16 @@ export function AdminUsersPage() {
             >
               <RefreshCw size={12} className="mr-1" /> Refresh
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => adminUserService.exportUsers({})}
-              className="text-xs text-zinc-700 hover:text-zinc-900 border-zinc-200"
-            >
-              <Download size={12} className="mr-1" /> Export CSV
-            </Button>
+            {canExportUsers && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => adminUserService.exportUsers({})}
+                className="text-xs text-zinc-700 hover:text-zinc-900 border-zinc-200"
+              >
+                <Download size={12} className="mr-1" /> Export CSV
+              </Button>
+            )}
           </div>
         </div>
       </Card>

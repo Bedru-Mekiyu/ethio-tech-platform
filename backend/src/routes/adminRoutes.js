@@ -31,7 +31,7 @@ const router = Router();
 
 router.use(protect, authorize("admin", "super_admin", "moderator", "reviewer", "support"));
 
-router.get("/analytics", authorize("admin", "super_admin"), getAnalytics);
+router.get("/analytics", requirePermission(PERMISSIONS.ANALYTICS_VIEW), getAnalytics);
 router.get("/audit-logs", getAuditLogs);
 router.get("/moderation", authorize("admin", "super_admin", "moderator"), getModerationQueue);
 router.post(

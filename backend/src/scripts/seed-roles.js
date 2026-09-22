@@ -51,6 +51,13 @@ export const seedRoleUsers = async ({ verbose = true } = {}) => {
       city: "Addis Ababa",
     },
     {
+      email: "super_admin@ethiotech.com",
+      fullName: "Super Administrator",
+      role: ROLES.SUPER_ADMIN,
+      bio: "Global platform super administrator with unrestricted governance.",
+      city: "Addis Ababa",
+    },
+    {
       email: "admin@ethiotech.com",
       fullName: "Platform Administrator",
       role: ROLES.ADMIN,
@@ -133,7 +140,7 @@ export const seedRoleUsers = async ({ verbose = true } = {}) => {
   log("================================================================");
   log("✅ CANONICAL ROLE ACCOUNTS SEEDED (Password: Passw0rd!)");
   log("================================================================");
-  log("1. super_admin : superadmin@ethiotech.com -> /admin");
+  log("1. super_admin : super_admin@ethiotech.com / superadmin@ethiotech.com -> /admin");
   log("2. admin       : admin@ethiotech.com      -> /admin");
   log("3. moderator   : moderator@ethiotech.com  -> /admin");
   log("4. reviewer    : reviewer@ethiotech.com   -> /admin");

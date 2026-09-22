@@ -38,6 +38,7 @@ describe("Role Seeding & Multi-Role Authentication Suite", () => {
   describe("Database Records Verification", () => {
     const canonicalRoles = [
       { email: "superadmin@ethiotech.com", role: ROLES.SUPER_ADMIN },
+      { email: "super_admin@ethiotech.com", role: ROLES.SUPER_ADMIN },
       { email: "admin@ethiotech.com", role: ROLES.ADMIN },
       { email: "moderator@ethiotech.com", role: ROLES.MODERATOR },
       { email: "reviewer@ethiotech.com", role: ROLES.REVIEWER },
@@ -86,6 +87,7 @@ describe("Role Seeding & Multi-Role Authentication Suite", () => {
   describe("Real Auth Service Authentication Across All Roles", () => {
     const rolesToTest = [
       { email: "superadmin@ethiotech.com", expectedRole: "super_admin" },
+      { email: "super_admin@ethiotech.com", expectedRole: "super_admin" },
       { email: "admin@ethiotech.com", expectedRole: "admin" },
       { email: "moderator@ethiotech.com", expectedRole: "moderator" },
       { email: "reviewer@ethiotech.com", expectedRole: "reviewer" },
@@ -136,6 +138,7 @@ describe("Role Seeding & Multi-Role Authentication Suite", () => {
         email: {
           $in: [
             "superadmin@ethiotech.com",
+            "super_admin@ethiotech.com",
             "admin@ethiotech.com",
             "moderator@ethiotech.com",
             "reviewer@ethiotech.com",
@@ -147,7 +150,7 @@ describe("Role Seeding & Multi-Role Authentication Suite", () => {
         },
       });
 
-      expect(count).toBe(8);
+      expect(count).toBe(9);
 
       // Still authenticates cleanly
       const loginResult = await loginUser({ email: "student@ethiotech.com", password: "Passw0rd!", ip: "127.0.0.1" });
