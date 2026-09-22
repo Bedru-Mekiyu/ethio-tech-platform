@@ -24,7 +24,7 @@ const router = Router();
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 30,
+  max: Number(process.env.AUTH_RATE_LIMIT_MAX) || 200,
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many authentication requests" },
@@ -32,7 +32,7 @@ const authLimiter = rateLimit({
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: process.env.NODE_ENV === "test" ? 1000 : process.env.NODE_ENV === "production" ? 30 : 100,
+  max: process.env.NODE_ENV === "test" ? 1000 : Number(process.env.LOGIN_RATE_LIMIT_MAX) || 120,
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many login attempts" },
