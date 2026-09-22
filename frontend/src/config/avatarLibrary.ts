@@ -141,7 +141,7 @@ export function buildAvatarFallbackChain(seed?: string | null, role?: SystemAvat
 }
 
 export function buildAvatarSrcSet(baseUrl: string): string {
-  if (baseUrl.startsWith("/avatars/")) {
+  if (baseUrl.startsWith("/avatars/") || baseUrl.endsWith(".svg")) {
     return "";
   }
   if (baseUrl.includes("res.cloudinary.com")) {
@@ -160,7 +160,11 @@ export function buildAvatarSrcSet(baseUrl: string): string {
 
 export function resolveAvatarUrl(src?: string | null): string | null {
   if (!src) return null;
-  // If it starts with /avatars/, it is served directly from local frontend static assets
+  // If it's a system avatar SVG, serve directly from local static assets
+  const systemMatch = src.match(/(student|mentor)-\d+/);
+  if (systemMatch && (src.includes("avatars/system") || src.includes("undefined") || src.endsWith(".svg"))) {
+    return `/avatars/${systemMatch[0]}.svg`;
+  }
   if (src.startsWith("/avatars/")) return src;
   return src;
 }

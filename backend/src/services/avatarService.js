@@ -68,14 +68,20 @@ const isCloudinaryConfigured = () =>
 const buildCloudinarySystemAvatarUrl = (avatarId, transformations = {}) => {
   if (!isCloudinaryConfigured()) return null;
   const base = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`;
-  const trans = ["f_auto", "q_auto", ...Object.entries(transformations).map(([k, v]) => `${k}_${v}`)].join(",");
+  const validTrans = Object.entries(transformations)
+    .filter(([_, v]) => v !== undefined && v !== null && v !== "")
+    .map(([k, v]) => `${k}_${v}`);
+  const trans = ["f_auto", "q_auto", ...validTrans].join(",");
   return `${base}/${trans}/avatars/system/${avatarId}.svg`;
 };
 
 export const buildSystemAvatarUrl = (avatarId, options = {}) => {
   const { cloudinary = true, width, height } = options;
   if (cloudinary && isCloudinaryConfigured()) {
-    return buildCloudinarySystemAvatarUrl(avatarId, { w: width, h: height, c: "fill", g: "face" });
+    const transformations = { c: "fill", g: "face" };
+    if (width) transformations.w = width;
+    if (height) transformations.h = height;
+    return buildCloudinarySystemAvatarUrl(avatarId, transformations);
   }
   return `${SYSTEM_AVATAR_BASE_PATH}/${avatarId}.svg`;
 };
