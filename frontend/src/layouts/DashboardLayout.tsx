@@ -309,7 +309,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col pb-20 lg:pb-0">
+      <div className="flex flex-1 flex-col min-w-0 pb-20 lg:pb-0">
         <header className="flex items-center justify-between gap-4 border-b border-zinc-200 bg-white/90 px-4 py-3.5 backdrop-blur-md lg:px-8">
           <div className="flex items-center gap-3">
             <button
@@ -421,7 +421,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
           </div>
         </header>
 
-        <main id="main-content" className="flex-1 p-4 sm:p-5 lg:p-6 overflow-y-auto scroll-smooth">
+        <main id="main-content" className="flex-1 min-w-0 p-4 sm:p-5 lg:p-6 overflow-y-auto scroll-smooth">
           <Outlet />
         </main>
 

@@ -343,7 +343,7 @@ test.describe("4. Role Specific Workflows (Mentor, Student, Parent)", () => {
 
     // Verify student dashboard elements
     await expect(page.locator("h1:has-text('Welcome back')")).toBeVisible({ timeout: 20000 });
-    await expect(page.locator("text=Study Planner")).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("button", { name: "Study Planner" })).toBeVisible({ timeout: 15000 });
   });
 
   test("Parent account loads /parent and displays linked student card", async ({ page }) => {
