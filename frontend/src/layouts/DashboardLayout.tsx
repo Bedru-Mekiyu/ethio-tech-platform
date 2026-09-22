@@ -336,7 +336,11 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   Rank
                 </span>
                 <span className="text-xs font-bold text-zinc-900">{getRankTitle(user?.level ?? 1)}</span>
-                {user && <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />}
+                {user && (
+                  <div className="hidden sm:block">
+                    <RankProgress level={user.level ?? 1} xp={user.xp ?? 0} />
+                  </div>
+                )}
               </div>
             )}
           </div>
