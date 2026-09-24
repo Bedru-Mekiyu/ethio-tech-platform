@@ -49,15 +49,15 @@
 
 Combining **sub-second LiveKit WebRTC classrooms**, an in-browser **Cloud Sandbox IDE**, **4–6 student peer squads**, **physical regional hub workstation booking with arrival check-ins**, and a **Master-Detail Curriculum CMS**, EthioTech delivers an end-to-end pathway taking learners from basic digital literacy to global engineering employability.
 
-### High-Level Impact Metrics
+### Core Architecture & Quality Metrics
 
-| Metric | Measured Value | Implementation & Verification |
+| Dimension | Specification | Verification & Implementation |
 |---|---|---|
-| **Active Learners** | 18,450+ nationwide | Seeded & dynamic telemetry via `dashboardService.ts` |
-| **Live Mentorship Hours** | 4,200+ hours completed | Validated via `SessionParticipant.js` heartbeat logs |
-| **Regional Tech Hubs** | 6 connected cities | Addis Ababa, Hawassa, Bahir Dar, Mekelle, Jimma, Dire Dawa |
-| **Verified Capstones Shipped** | 3,120+ repositories | Proof-of-work Git commits & automated test verifications |
-| **Platform Access Cost** | **100% Free / Non-Profit** | Public-benefit initiative funded by grants and diaspora mentors |
+| **Architecture** | Monorepo Workspace | React 19 Frontend + Node.js 22 / Express Backend |
+| **Real-Time Video** | LiveKit WebRTC SFU | Low-latency audio/video classrooms with adaptive bitrate |
+| **Distributed State** | Socket.IO + Redis Adapter | Pub/sub synchronized messaging and active room presence |
+| **Automated Testing** | 50 Test Suites (444 Tests) | Vitest, Supertest integration tests, and Playwright E2E |
+| **Deployment** | Render Infrastructure | Multi-service orchestration (`render.yaml`) with Nginx static frontend |
 
 ---
 
