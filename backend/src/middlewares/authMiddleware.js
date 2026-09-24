@@ -12,8 +12,14 @@ export const protect = async (req, res, next) => {
 
   const token = authHeader.split(" ")[1];
 
+  let decoded;
   try {
-    const decoded = jwt.verify(token, getEnv().jwtSecret);
+    decoded = jwt.verify(token, getEnv().jwtSecret);
+  } catch (_error) {
+    return next(new ApiError(401, "Invalid or expired token"));
+  }
+
+  try {
     const user = await User.findById(decoded.id).select("-password +mustChangePassword");
 
     if (!user) {
@@ -31,7 +37,7 @@ export const protect = async (req, res, next) => {
     req.user = user;
     next();
   } catch (_error) {
-    next(new ApiError(401, "Invalid or expired token"));
+    return next(new ApiError(503, "Database service temporarily unavailable, please retry"));
   }
 };
 
@@ -43,14 +49,20 @@ export const optionalProtect = async (req, _res, next) => {
 
   const token = authHeader.split(" ")[1];
 
+  let decoded;
   try {
-    const decoded = jwt.verify(token, getEnv().jwtSecret);
+    decoded = jwt.verify(token, getEnv().jwtSecret);
+  } catch {
+    return next();
+  }
+
+  try {
     const user = await User.findById(decoded.id).select("-password");
     if (user && !user.deletedAt && user.status !== "suspended" && user.status !== "banned") {
       req.user = user;
     }
   } catch {
-    // ignore invalid optional token
+    // DB error during optional auth — proceed unauthenticated
   }
 
   next();

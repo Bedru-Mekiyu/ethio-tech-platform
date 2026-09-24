@@ -11,6 +11,7 @@ import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
 import { fetchAssignments, type Assignment } from "@/services/assignmentService";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 
 type Tab = "active" | "submitted" | "graded";
@@ -189,15 +190,18 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
 }
 
 export function AssignedProjectsPage() {
+  const user = useAuthStore((s) => s.user);
   const [tab, setTab] = useState<Tab>("active");
 
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
+    enabled: !!user,
   });
   const assignmentsQuery = useQuery({
     queryKey: ["assignments"],
     queryFn: () => fetchAssignments(),
+    enabled: !!user,
   });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;

@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 import { useToast } from "@/components/composites/ToastProvider";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 
 type SessionRow = {
@@ -45,7 +46,12 @@ export function MentorSessionsPage() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const queryClient = useQueryClient();
   const toast = useToast();
-  const { data, isLoading, isError, error, refetch } = useQuery({ queryKey: ["sessions"], queryFn: fetchSessions });
+  const user = useAuthStore((s) => s.user);
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["sessions"],
+    queryFn: fetchSessions,
+    enabled: !!user,
+  });
 
   const [defaultScheduledAt] = useState(() => {
     const d = new Date(Date.now() + 24 * 60 * 60 * 1000);

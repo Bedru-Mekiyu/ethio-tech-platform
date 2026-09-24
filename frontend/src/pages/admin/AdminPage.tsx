@@ -28,6 +28,7 @@ import {
   Zap,
 } from "lucide-react";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useAuthStore } from "@/store/authStore";
 
 /* ─── Modern Custom Recharts Tooltip ─── */
 interface CustomTooltipPayloadItem {
@@ -92,11 +93,13 @@ function AdminSkeleton() {
 /* ─── Main Admin Analytics Component ─── */
 export function AdminPage() {
   usePageTitle("Admin Analytics & Platform Overview");
+  const user = useAuthStore((s) => s.user);
   const [xpTimeView, setXpTimeView] = useState<"weekly" | "cumulative">("weekly");
 
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
     queryKey: ["admin", "analytics"],
     queryFn: fetchAdminAnalytics,
+    enabled: !!user,
     staleTime: 30_000,
   });
 

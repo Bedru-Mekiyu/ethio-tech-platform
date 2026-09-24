@@ -111,17 +111,19 @@ export function SquadPage() {
   const notificationsQuery = useQuery({
     queryKey: ["notifications", "me"],
     queryFn: () => fetchMyNotifications(),
+    enabled: !!user,
   });
 
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
+    enabled: !!user,
   });
 
   const squadQuery = useQuery({
     queryKey: ["peer-group", id],
     queryFn: () => fetchPeerGroupById(id!),
-    enabled: Boolean(id),
+    enabled: Boolean(id) && !!user,
   });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;

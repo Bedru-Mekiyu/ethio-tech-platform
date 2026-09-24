@@ -8,7 +8,7 @@ export const API_ORIGIN = getBackendOrigin();
 export const api = axios.create({
   baseURL: API_URL,
   headers: { "Content-Type": "application/json" },
-  timeout: 15_000,
+  timeout: 30_000,
   withCredentials: true,
 });
 
@@ -28,7 +28,14 @@ api.interceptors.response.use(
   (res) => res,
   async (error) => {
     const original = error.config;
-    if (error.response?.status !== 401 || original._retry) {
+    if (!original) return Promise.reject(error);
+
+    const isAuthRoute =
+      original.url?.includes("/auth/login") ||
+      original.url?.includes("/auth/register") ||
+      original.url?.includes("/auth/refresh");
+
+    if (error.response?.status !== 401 || original._retry || isAuthRoute) {
       return Promise.reject(error);
     }
     original._retry = true;
@@ -39,13 +46,15 @@ api.interceptors.response.use(
           const { data } = await axios.post(
             `${API_URL}/auth/refresh`,
             {},
-            { withCredentials: true }
+            { withCredentials: true, timeout: 15_000 }
           );
           const payload = data.data ?? data;
           useAuthStore.getState().setAccessToken(payload.accessToken);
           return payload.accessToken as string;
-        } catch {
-          if (typeof navigator === "undefined" || navigator.onLine) {
+        } catch (refreshErr: unknown) {
+          const status = (refreshErr as { response?: { status?: number } })?.response?.status;
+          // Only log out if server explicitly rejected the refresh token (401/403)
+          if (status === 401 || status === 403) {
             useAuthStore.getState().logout();
           }
           return null;

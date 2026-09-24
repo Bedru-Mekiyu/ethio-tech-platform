@@ -102,6 +102,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   });
 
   useEffect(() => {
+    if (!user) return;
     let cancelled = false;
     (async () => {
       try {
@@ -134,10 +135,10 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   useEffect(() => {
+    if (!user) return;
     let cancelled = false;
     (async () => {
       try {
@@ -154,7 +155,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [user]);
 
   const currentAvatarId = useMemo(
     () => avatarOptions.find((option) => option.url === (avatarPreview ?? user?.avatarUrl ?? user?.avatar))?.id,

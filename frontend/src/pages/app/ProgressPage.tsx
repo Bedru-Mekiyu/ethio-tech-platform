@@ -82,11 +82,24 @@ export function ProgressPage() {
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
+    enabled: !!user,
   });
 
-  const badgesQuery = useQuery({ queryKey: ["badges"], queryFn: fetchBadges });
-  const historyQuery = useQuery({ queryKey: ["xp", "history"], queryFn: fetchXpHistory });
-  const certsQuery = useQuery({ queryKey: ["certificates", "me"], queryFn: fetchCertificates });
+  const badgesQuery = useQuery({
+    queryKey: ["badges"],
+    queryFn: fetchBadges,
+    enabled: !!user,
+  });
+  const historyQuery = useQuery({
+    queryKey: ["xp", "history"],
+    queryFn: fetchXpHistory,
+    enabled: !!user,
+  });
+  const certsQuery = useQuery({
+    queryKey: ["certificates", "me"],
+    queryFn: fetchCertificates,
+    enabled: !!user,
+  });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;
 

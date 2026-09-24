@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, FileCode2, Rocket, Send, ShieldCheck, ExternalLink } from "lucide-react";
 import { api } from "@/services/api";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
+import { useAuthStore } from "@/store/authStore";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -41,9 +42,11 @@ function SubmitSkeleton() {
 
 export function ProjectSubmitPage() {
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
+    enabled: !!user,
   });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;

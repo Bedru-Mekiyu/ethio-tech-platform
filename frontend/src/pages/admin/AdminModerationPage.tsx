@@ -732,11 +732,13 @@ export function AdminModerationPage() {
   const [activeInterviewApp, setActiveInterviewApp] = useState<MentorApplication | null>(null);
 
   const navigate = useNavigate();
+  const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
 
   const statsQuery = useQuery({
     queryKey: ["admin", "mentor-applications", "stats"],
     queryFn: fetchQueueStats,
+    enabled: !!user,
     refetchInterval: 30000,
   });
 
@@ -763,6 +765,7 @@ export function AdminModerationPage() {
         experienceMax,
       });
     },
+    enabled: !!user,
   });
 
   const invalidateAll = useCallback(async () => {

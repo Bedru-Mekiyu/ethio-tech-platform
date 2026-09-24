@@ -71,6 +71,7 @@ import RecordingsPanel from "./control-center/RecordingsPanel";
 import NotificationsPanel from "./control-center/NotificationsPanel";
 import { MeetingStatusBanner } from "@/components/meeting/MeetingStatusBanner";
 import { useMeetingStatus } from "@/hooks/useMeetingStatus";
+import { useAuthStore } from "@/store/authStore";
 
 // Styling
 import "./control-center/MentorControlCenter.css";
@@ -80,6 +81,7 @@ export default function MentorControlCenterPage() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const [activeTab, setActiveTab] = useState("overview");
   const toast = useToast();
 
@@ -131,14 +133,14 @@ export default function MentorControlCenterPage() {
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["mentor-control", sessionId],
     queryFn: () => fetchMentorControlCenter(sessionId!),
-    enabled: !!sessionId,
+    enabled: !!sessionId && !!user,
     refetchInterval: 15000,
   });
 
   const sessionDetailQuery = useQuery({
     queryKey: ["session", sessionId],
     queryFn: () => fetchSessionById(sessionId!),
-    enabled: !!sessionId,
+    enabled: !!sessionId && !!user,
     refetchInterval: 20000,
   });
   const sessionStatus = sessionDetailQuery.data?.status;

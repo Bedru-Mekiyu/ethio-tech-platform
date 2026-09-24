@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
+import { useAuthStore } from "@/store/authStore";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { MeetingCard } from "@/components/meeting/MeetingCard";
 import { useMeetings } from "@/hooks/useMeetings";
@@ -81,12 +82,14 @@ function iconForType(type?: string) {
 
 export function NotificationsPage() {
   usePageTitle("Notifications");
+  const user = useAuthStore((s) => s.user);
   const queryClient = useQueryClient();
   const [page] = useState(1);
   const clearBadge = useNotificationStore((s) => s.clearBadge);
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["notifications", page],
     queryFn: () => fetchMyNotifications(page),
+    enabled: !!user,
   });
 
   const markRead = useMutation({

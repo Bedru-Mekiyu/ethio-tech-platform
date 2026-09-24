@@ -28,6 +28,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { CapstonePreviewModal } from "@/components/composites/CapstonePreviewModal";
 import { fetchStudentDashboard } from "@/services/dashboardService";
 import { fetchTracks, type TrackSummary, type CapstoneProject } from "@/services/tracksService";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 
 type TrackStatusFilter = "all" | "in-progress" | "completed" | "not-started";
@@ -247,6 +248,7 @@ function StudentTrackCard({
 }
 
 export function TracksPage() {
+  const user = useAuthStore((s) => s.user);
   const reduceMotion = useReducedMotion();
   const [statusFilter, setStatusFilter] = useState<TrackStatusFilter>("all");
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("all");
@@ -263,6 +265,7 @@ export function TracksPage() {
       const [tracks, dashboard] = await Promise.all([fetchTracks(), fetchStudentDashboard()]);
       return { tracks, dashboard };
     },
+    enabled: !!user,
   });
 
   const view = useMemo(() => {

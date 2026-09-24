@@ -59,7 +59,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
   const detailQuery = useQuery({
     queryKey: ["admin", "mentor-application", applicationId],
     queryFn: () => fetchApplicationDetail(applicationId!),
-    enabled: Boolean(applicationId),
+    enabled: Boolean(applicationId) && !!user,
   });
 
   const invalidate = async () => {
@@ -151,7 +151,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
   const loginHistoryQuery = useQuery({
     queryKey: ["admin", "mentor-login-history", applicationId],
     queryFn: () => fetchLoginHistory(applicationId!),
-    enabled: Boolean(applicationId),
+    enabled: Boolean(applicationId) && !!user,
   });
 
   if (!applicationId) return null;

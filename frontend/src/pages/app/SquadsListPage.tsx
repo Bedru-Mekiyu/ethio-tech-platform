@@ -2,15 +2,18 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { MessageSquare, Users } from "lucide-react";
 import { fetchMyPeerGroups } from "@/services/peerGroupsService";
+import { useAuthStore } from "@/store/authStore";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
 
 export function SquadsListPage() {
+  const user = useAuthStore((s) => s.user);
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["peer-groups", "mine"],
     queryFn: fetchMyPeerGroups,
+    enabled: !!user,
   });
 
   if (isError) return <QueryError onRetry={() => refetch()} />;

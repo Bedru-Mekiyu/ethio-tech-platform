@@ -31,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import { QueryError } from "@/components/composites/QueryError";
 import { fetchStudentDashboard, type StudentDashboardData } from "@/services/dashboardService";
 import { fetchTrackById, fetchLessonById } from "@/services/tracksService";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -1136,9 +1137,11 @@ export function CodingWorkspacePage() {
   const editorRef = useRef<HTMLTextAreaElement>(null);
 
   // Queries for lesson / track context
+  const user = useAuthStore((s) => s.user);
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,
+    enabled: !!user,
   });
 
   const dashboard = dashboardQuery.data as StudentDashboardData | undefined;
@@ -1147,7 +1150,7 @@ export function CodingWorkspacePage() {
   const trackQuery = useQuery({
     queryKey: ["track", primaryTrackId],
     queryFn: () => fetchTrackById(primaryTrackId!),
-    enabled: !!primaryTrackId,
+    enabled: !!primaryTrackId && !!user,
   });
 
   const primaryTrack = trackQuery.data;
@@ -1156,7 +1159,7 @@ export function CodingWorkspacePage() {
   const lessonQuery = useQuery({
     queryKey: ["lesson", targetLessonId],
     queryFn: () => fetchLessonById(targetLessonId!),
-    enabled: !!targetLessonId,
+    enabled: !!targetLessonId && !!user,
   });
 
   const lesson = lessonQuery.data;

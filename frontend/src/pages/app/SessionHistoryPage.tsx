@@ -219,6 +219,7 @@ export function SessionHistoryPage() {
   const sessionsQuery = useQuery({
     queryKey: ["sessions"],
     queryFn: fetchSessions,
+    enabled: !!user,
   });
   const recordingsQuery = useQuery({
     queryKey: ["student", "recordings"],

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { useToast } from "@/components/composites/ToastProvider";
+import { useAuthStore } from "@/store/authStore";
 import {
   Award,
   Flame,
@@ -372,6 +373,7 @@ export function AdminGamificationPage() {
 
   // Multiplier rules state
   const [multiplierRules, setMultiplierRules] = useState<XpMultiplierRule[]>(INITIAL_MULTIPLIER_RULES);
+  const user = useAuthStore((s) => s.user);
 
   const badgesQuery = useQuery({
     queryKey: ["admin", "badges"],
@@ -388,6 +390,7 @@ export function AdminGamificationPage() {
         return DEFAULT_SAMPLE_BADGES;
       }
     },
+    enabled: !!user,
   });
 
   const challengesQuery = useQuery({
@@ -449,6 +452,7 @@ export function AdminGamificationPage() {
         ];
       }
     },
+    enabled: !!user,
   });
 
   const createBadgeMutation = useMutation({

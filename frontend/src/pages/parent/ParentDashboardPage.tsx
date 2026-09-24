@@ -15,6 +15,7 @@ export function ParentDashboardPage() {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["parent", "dashboard"],
     queryFn: fetchParentDashboard,
+    enabled: !!user,
   });
 
   const firstName = user?.fullName?.split(" ")[0] ?? "Parent";

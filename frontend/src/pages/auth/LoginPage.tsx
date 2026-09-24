@@ -57,8 +57,17 @@ export function LoginPage() {
       setAuth(result.user, result.accessToken);
       const from = (location.state as { from?: { pathname: string } })?.from?.pathname;
       navigate(from ?? getPostLoginPath(result.user.role, result.authFlags));
-    } catch {
-      setError("Invalid email or password. Please try again.");
+    } catch (err: unknown) {
+      const response = (err as { response?: { status?: number; data?: { message?: string } } })?.response;
+      if (response?.status === 401 || response?.status === 400) {
+        setError(response.data?.message || "Invalid email or password. Please try again.");
+      } else if (response?.status === 429) {
+        setError("Too many sign-in attempts. Please wait a few moments and try again.");
+      } else if (response?.status && response.status >= 500) {
+        setError("The platform server is currently initializing or updating. Please try again in a moment.");
+      } else {
+        setError("Unable to connect to the authentication service. Please check your connection and try again.");
+      }
     }
   };
 

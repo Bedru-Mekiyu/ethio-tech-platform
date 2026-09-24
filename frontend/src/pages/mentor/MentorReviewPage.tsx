@@ -14,6 +14,7 @@ import { fetchSubmissionQueue, reviewSubmissionItem, type SubmissionReviewItem }
 import { fetchSessions } from "@/services/sessionsService";
 import { submitStudentFeedback } from "@/services/mentorControlService";
 import { api } from "@/services/api";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/composites/ToastProvider";
 
@@ -124,11 +125,13 @@ export function MentorReviewPage() {
   const [sessionComment, setSessionComment] = useState("");
   const [isSubmittingSessionFeedback, setIsSubmittingSessionFeedback] = useState(false);
   const toast = useToast();
+  const user = useAuthStore((s) => s.user);
 
   // Fetch submissions queue
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["mentor", "submissions"],
     queryFn: fetchSubmissionQueue,
+    enabled: !!user,
   });
 
   // Fetch student performance history
@@ -138,12 +141,14 @@ export function MentorReviewPage() {
       const { data } = await api.get("/mentor/students");
       return data.data?.students ?? [];
     },
+    enabled: !!user,
   });
 
   // Fetch mentor's sessions for association
   const { data: sessionsList } = useQuery({
     queryKey: ["mentor", "sessions-list"],
     queryFn: fetchSessions,
+    enabled: !!user,
   });
 
   const reviewMutation = useMutation({

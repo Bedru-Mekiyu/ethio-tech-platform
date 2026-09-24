@@ -162,10 +162,19 @@ export function resolveAvatarUrl(src?: string | null): string | null {
   if (!src) return null;
   // If it's a system avatar SVG, serve directly from local static assets
   const systemMatch = src.match(/(student|mentor)-\d+/);
-  if (systemMatch && (src.includes("avatars/system") || src.includes("undefined") || src.endsWith(".svg"))) {
+  if (systemMatch) {
     return `/avatars/${systemMatch[0]}.svg`;
   }
-  if (src.startsWith("/avatars/")) return src;
+  if (src.startsWith("/avatars/")) {
+    if (/^\/avatars\/(student|mentor)-0[1-4]\.svg$/.test(src)) {
+      return src;
+    }
+    // Fallback for non-existent legacy avatar paths like /avatars/abebe_kebede.png
+    if (src.includes("mentor") || src.includes("admin") || src.includes("selamawit")) {
+      return "/avatars/mentor-01.svg";
+    }
+    return "/avatars/student-01.svg";
+  }
   return src;
 }
 

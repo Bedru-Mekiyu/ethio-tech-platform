@@ -166,7 +166,7 @@ export function AdminMentorDetailPage() {
       }
       return data;
     },
-    enabled: Boolean(id),
+    enabled: Boolean(id) && !!user,
   });
 
   usePageTitle(
@@ -263,7 +263,7 @@ export function AdminMentorDetailPage() {
   const loginHistoryQuery = useQuery({
     queryKey: ["admin", "mentor-login-history", id],
     queryFn: () => fetchLoginHistory(id!),
-    enabled: Boolean(id),
+    enabled: Boolean(id) && !!user,
   });
 
   const detail = detailQuery.data;

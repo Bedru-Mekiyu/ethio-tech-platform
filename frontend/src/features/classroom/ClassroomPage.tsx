@@ -89,7 +89,7 @@ export function ClassroomPage() {
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
     queryFn: () => fetchSessionById(sessionId!),
-    enabled: !!sessionId && sessionId !== "demo",
+    enabled: !!sessionId && sessionId !== "demo" && !!user,
   });
 
   // 2. LiveKit Public Config Query
@@ -116,7 +116,8 @@ export function ClassroomPage() {
       !!sessionId &&
       sessionId !== "demo" &&
       Boolean(livekitConfigQuery.data?.enabled) &&
-      (meetingStatus === "active" || meetingStatus === "waiting_for_host" || meetingStatus === "scheduled"),
+      (meetingStatus === "active" || meetingStatus === "waiting_for_host" || meetingStatus === "scheduled") &&
+      !!user,
   });
 
   // End Session Mutation (Host)

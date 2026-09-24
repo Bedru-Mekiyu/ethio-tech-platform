@@ -5,6 +5,7 @@ import { api, type ApiResponse } from "@/services/api";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { QueryError } from "@/components/composites/QueryError";
+import { useAuthStore } from "@/store/authStore";
 
 interface Slot {
   dayOfWeek: number;
@@ -96,12 +97,14 @@ const fetchAvailability = async () => {
 
 export function MentorAvailabilityPage() {
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const [draft, setDraft] = useState<Slot>({ dayOfWeek: 1, startMinutes: 540, endMinutes: 1020 });
   const [showForm, setShowForm] = useState(false);
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["mentor", "availability"],
     queryFn: fetchAvailability,
+    enabled: !!user,
   });
 
   const saveMutation = useMutation({

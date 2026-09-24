@@ -10,6 +10,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { useToast } from "@/components/composites/ToastProvider";
+import { useAuthStore } from "@/store/authStore";
 import {
   Search,
   ChevronLeft,
@@ -83,6 +84,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [deleteTarget, setDeleteTarget] = useState<AdminUser | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
+  const user = useAuthStore((s) => s.user);
   const searchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { data, isLoading, isError, refetch } = useQuery({
@@ -96,6 +98,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         status: statusFilter || undefined,
         sort,
       }),
+    enabled: !!user,
   });
 
   const deleteMutation = useMutation({

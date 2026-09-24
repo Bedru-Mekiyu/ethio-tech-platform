@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { QueryError } from "@/components/composites/QueryError";
+import { useAuthStore } from "@/store/authStore";
 
 interface Certificate {
   _id: string;
@@ -20,9 +21,11 @@ const fetchMyCertificates = async () => {
 };
 
 export function CertificatesPage() {
+  const user = useAuthStore((s) => s.user);
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["certificates", "me"],
     queryFn: fetchMyCertificates,
+    enabled: !!user,
   });
 
   if (isError) return <QueryError onRetry={() => refetch()} />;

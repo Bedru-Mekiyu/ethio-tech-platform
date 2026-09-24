@@ -27,6 +27,7 @@ import { QueryError } from "@/components/composites/QueryError";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useMeetings } from "@/hooks/useMeetings";
 import type { MeetingViewModel } from "@/lib/realtime";
+import { useAuthStore } from "@/store/authStore";
 import {
   fetchCalendarEvents,
   syncSessionsToCalendar,
@@ -131,6 +132,8 @@ export function CalendarPage() {
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getFirstDayOfMonth(year, month);
 
+  const user = useAuthStore((s) => s.user);
+
   // TanStack Query for Calendar Events
   const {
     data: events = [],
@@ -140,6 +143,7 @@ export function CalendarPage() {
   } = useQuery({
     queryKey: ["calendar-events"],
     queryFn: () => fetchCalendarEvents(),
+    enabled: !!user,
   });
 
   const { meetings: upcomingMeetings } = useMeetings({ scope: "upcoming" });

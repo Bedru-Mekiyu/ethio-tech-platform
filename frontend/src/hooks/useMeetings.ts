@@ -4,6 +4,7 @@ import { fetchMyMeetings, fetchAdminMeetings } from "@/services/meetingsService"
 import { acquireSocketConnection, releaseSocketConnection } from "@/services/socket";
 import type { MeetingStatus, MeetingViewModel } from "@/lib/realtime";
 import { enrichMeeting } from "@/features/meetings/meetingStatus";
+import { useAuthStore } from "@/store/authStore";
 
 export interface UseMeetingsOptions {
   scope?: "upcoming" | "past" | "all";
@@ -15,19 +16,21 @@ export interface UseMeetingsOptions {
 export function useMeetings(options: UseMeetingsOptions = {}) {
   const { scope = "upcoming", status = "all", enabled = true, refetchIntervalMs = 30_000 } = options;
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
+  const effectiveEnabled = Boolean(enabled && user);
   const [now, setNow] = useState(0);
 
   const query = useQuery({
     queryKey: ["meeting", "list", scope, status],
     queryFn: () => fetchMyMeetings({ scope, status }),
-    enabled,
+    enabled: effectiveEnabled,
     refetchInterval: refetchIntervalMs,
     refetchOnWindowFocus: false,
     staleTime: 10_000,
   });
 
   useEffect(() => {
-    if (!enabled) return undefined;
+    if (!effectiveEnabled) return undefined;
     const socket = acquireSocketConnection();
     const handler = () => {
       queryClient.invalidateQueries({ queryKey: ["meeting", "list"] });
@@ -41,7 +44,7 @@ export function useMeetings(options: UseMeetingsOptions = {}) {
       socket.off("meeting:presence", handler);
       releaseSocketConnection();
     };
-  }, [enabled, queryClient]);
+  }, [effectiveEnabled, queryClient]);
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);
@@ -67,19 +70,21 @@ export function useMeetings(options: UseMeetingsOptions = {}) {
 export function useAdminMeetings(options: { status?: MeetingStatus | "all"; q?: string; enabled?: boolean } = {}) {
   const { status = "all", q, enabled = true } = options;
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
+  const effectiveEnabled = Boolean(enabled && user);
   const [now, setNow] = useState(0);
 
   const query = useQuery({
     queryKey: ["meetings", "admin", status, q ?? ""],
     queryFn: () => fetchAdminMeetings({ status, q }),
-    enabled,
+    enabled: effectiveEnabled,
     refetchInterval: 30_000,
     refetchOnWindowFocus: false,
     staleTime: 10_000,
   });
 
   useEffect(() => {
-    if (!enabled) return undefined;
+    if (!effectiveEnabled) return undefined;
     const socket = acquireSocketConnection();
     const handler = () => {
       queryClient.invalidateQueries({ queryKey: ["meetings", "admin"] });
@@ -91,7 +96,7 @@ export function useAdminMeetings(options: { status?: MeetingStatus | "all"; q?: 
       socket.off("meeting:presence", handler);
       releaseSocketConnection();
     };
-  }, [enabled, queryClient]);
+  }, [effectiveEnabled, queryClient]);
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 30_000);

@@ -28,7 +28,11 @@ export function ProfilePage() {
   const user = useAuthStore((s) => s.user);
   const isStudent = user?.role === "student";
 
-  const profileQuery = useQuery({ queryKey: ["profile", "me"], queryFn: getMyProfile });
+  const profileQuery = useQuery({
+    queryKey: ["profile", "me"],
+    queryFn: getMyProfile,
+    enabled: !!user,
+  });
   const dashboardQuery = useQuery({
     queryKey: ["dashboard", "student"],
     queryFn: fetchStudentDashboard,

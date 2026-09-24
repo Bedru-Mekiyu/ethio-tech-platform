@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "@/components/ui/skeleton";
 import { fetchApplicationAuditLog, type AuditLogEntry } from "@/services/mentorApplicationService";
+import { useAuthStore } from "@/store/authStore";
 
 function formatAction(action: string): string {
   return action.replace(/\./g, " · ").replace(/_/g, " ");
@@ -22,9 +23,11 @@ function AuditItem({ log }: { log: AuditLogEntry }) {
 }
 
 export function MentorAuditTimeline({ applicationId }: { applicationId: string }) {
+  const user = useAuthStore((s) => s.user);
   const auditQuery = useQuery({
     queryKey: ["admin", "mentor-application", applicationId, "audit"],
     queryFn: () => fetchApplicationAuditLog(applicationId),
+    enabled: Boolean(applicationId) && !!user,
   });
 
   if (auditQuery.isLoading) {

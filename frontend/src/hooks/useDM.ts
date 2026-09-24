@@ -7,6 +7,7 @@ import {
   markRead,
 } from "@/services/dmService";
 import type { Conversation, DMMessage } from "@/services/dmService";
+import { useAuthStore } from "@/store/authStore";
 
 export type { Conversation, DMMessage } from "@/services/dmService";
 
@@ -32,6 +33,7 @@ interface UseDMOptions {
 }
 
 export const useDM = ({ socket }: UseDMOptions) => {
+  const user = useAuthStore((s) => s.user);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
   const [messages, setMessages] = useState<DMMessage[]>([]);
@@ -60,9 +62,10 @@ export const useDM = ({ socket }: UseDMOptions) => {
   }, []);
 
   useEffect(() => {
+    if (!user) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     loadConversations();
-  }, [loadConversations]);
+  }, [loadConversations, user]);
 
   const loadMessages = useCallback(async (conversationId: string) => {
     setLoadingMessages(true);

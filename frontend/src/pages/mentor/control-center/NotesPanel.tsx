@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSessionNotes, updateSessionNotes, publishSessionNotes } from "@/services/mentorControlService";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/composites/ToastProvider";
+import { useAuthStore } from "@/store/authStore";
 
 interface NotesPanelProps {
   sessionId: string;
@@ -15,10 +16,11 @@ interface NotesPanelProps {
 export default function NotesPanel({ sessionId }: NotesPanelProps) {
   const queryClient = useQueryClient();
   const toast = useToast();
+  const user = useAuthStore((s) => s.user);
   const { data: notes, isLoading } = useQuery({
     queryKey: ["session-notes", sessionId],
     queryFn: () => getSessionNotes(sessionId),
-    enabled: !!sessionId,
+    enabled: !!sessionId && !!user,
   });
 
   const [content, setContent] = useState("");

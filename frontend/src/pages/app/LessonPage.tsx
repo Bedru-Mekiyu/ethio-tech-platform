@@ -26,6 +26,7 @@ import { fetchMe } from "@/services/authService";
 export function LessonPage() {
   const { lessonId } = useParams<{ lessonId: string }>();
   const queryClient = useQueryClient();
+  const user = useAuthStore((s) => s.user);
   const setUser = useAuthStore((s) => s.setUser);
   const [completedLocally, setCompletedLocally] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
@@ -33,7 +34,7 @@ export function LessonPage() {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["lesson", lessonId],
     queryFn: () => fetchLessonById(lessonId!),
-    enabled: !!lessonId,
+    enabled: !!lessonId && !!user,
   });
 
   const completed = completedLocally || Boolean(data?.isCompleted);

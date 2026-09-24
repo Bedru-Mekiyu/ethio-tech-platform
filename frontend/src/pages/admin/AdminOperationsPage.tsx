@@ -41,6 +41,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
 import { useToast } from "@/components/composites/ToastProvider";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useAuthStore } from "@/store/authStore";
 
 /* ─── Microservice Card Interface ─── */
 interface MicroserviceNode {
@@ -67,16 +68,20 @@ export function AdminOperationsPage() {
   const [expandedLogId, setExpandedLogId] = useState<string | null>(null);
   const [isDiagnosticRunning, setIsDiagnosticRunning] = useState(false);
 
+  const user = useAuthStore((s) => s.user);
+
   /* ─── Queries ─── */
   const healthQuery = useQuery({
     queryKey: ["admin", "operations", "health"],
     queryFn: fetchPlatformHealth,
+    enabled: !!user,
     refetchInterval: refreshIntervalMs > 0 ? refreshIntervalMs : false,
   });
 
   const auditQuery = useQuery<{ logs: AdminAuditLog[] }>({
     queryKey: ["admin", "audit-logs"],
     queryFn: () => fetchAdminAuditLogs({ limit: 50 }),
+    enabled: !!user,
     refetchInterval: refreshIntervalMs > 0 ? refreshIntervalMs : false,
   });
 

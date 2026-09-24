@@ -272,6 +272,7 @@ export function HubsPage() {
     queryKey: ["myHubBookings"],
     queryFn: fetchMyHubBookings,
     initialData: [],
+    enabled: !!user,
   });
 
   const { data: availability } = useQuery({

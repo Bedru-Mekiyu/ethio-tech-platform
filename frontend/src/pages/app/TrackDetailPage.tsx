@@ -28,6 +28,7 @@ import { QueryError } from "@/components/composites/QueryError";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { CapstonePreviewModal } from "@/components/composites/CapstonePreviewModal";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/store/authStore";
 
 type DetailTab = "curriculum" | "capstones" | "competencies" | "career" | "prerequisites";
 
@@ -46,6 +47,7 @@ function TrackDetailSkeleton() {
 
 export function TrackDetailPage() {
   const { trackId } = useParams<{ trackId: string }>();
+  const user = useAuthStore((s) => s.user);
   const [activeTab, setActiveTab] = useState<DetailTab>("curriculum");
   const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
   const [selectedCapstone, setSelectedCapstone] = useState<CapstoneProject | null>(null);
@@ -54,7 +56,7 @@ export function TrackDetailPage() {
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["track", trackId],
     queryFn: () => fetchTrackById(trackId!),
-    enabled: !!trackId,
+    enabled: !!trackId && !!user,
   });
 
   const handleStartTrack = () => {

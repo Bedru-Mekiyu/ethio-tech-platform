@@ -48,6 +48,7 @@ export function MentorOnboardingPage() {
   const statusQuery = useQuery({
     queryKey: ["mentor", "onboarding-status"],
     queryFn: fetchOnboardingStatus,
+    enabled: !!user,
   });
 
   const onboarding = statusQuery.data;

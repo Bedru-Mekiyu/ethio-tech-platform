@@ -8,6 +8,7 @@ import { TrackSidebar } from "./content/TrackSidebar";
 import { ModuleLessonTree } from "./content/ModuleLessonTree";
 import { ContentEditorPane } from "./content/ContentEditorPane";
 import type { Track, Module, Lesson, CapstoneProjectItem, ContentSelection } from "./content/types";
+import { useAuthStore } from "@/store/authStore";
 import { cn } from "@/lib/utils";
 
 const unwrap = <T,>(payload: unknown, key: string): T => {
@@ -43,12 +44,15 @@ export function AdminContentPage() {
   // =========================================================================
   // Queries
   // =========================================================================
+  const user = useAuthStore((s) => s.user);
+
   const tracksQuery = useQuery({
     queryKey: ["admin", "tracks"],
     queryFn: async () => {
       const { data } = await api.get("/tracks");
       return unwrap<Track[]>(data, "tracks") || [];
     },
+    enabled: !!user,
   });
 
   const tracks = tracksQuery.data ?? [];
@@ -75,7 +79,7 @@ export function AdminContentPage() {
       const { data } = await api.get(`/modules?track=${currentTrackId}`);
       return unwrap<Module[]>(data, "modules") || [];
     },
-    enabled: !!currentTrackId,
+    enabled: !!user && !!currentTrackId,
   });
 
   const modules = modulesQuery.data ?? [];
@@ -89,7 +93,7 @@ export function AdminContentPage() {
       const unwrapped = unwrap<CapstoneProjectItem[]>(data, "items");
       return unwrapped || [];
     },
-    enabled: !!currentTrackId,
+    enabled: !!user && !!currentTrackId,
   });
 
   const capstoneProjects = capstonesQuery.data ?? [];
@@ -118,7 +122,7 @@ export function AdminContentPage() {
       }
       return record;
     },
-    enabled: moduleIds.length > 0,
+    enabled: !!user && !!currentTrackId && moduleIds.length > 0,
   });
 
   const lessonsByModule = lessonsQuery.data ?? {};
