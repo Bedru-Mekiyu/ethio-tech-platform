@@ -16,6 +16,7 @@ import { OfflineBanner } from "@/components/composites/OfflineBanner";
 import { AchievementToast } from "@/components/composites/AchievementNotification";
 import { AvatarSyncBootstrap } from "@/components/auth/AvatarSyncBootstrap";
 import { useFocusOnRouteChange } from "@/hooks/useFocusOnRouteChange";
+import { useAuthStore } from "@/store/authStore";
 
 const HomePage = lazy(() => import("@/pages/marketing/HomePage").then((module) => ({ default: module.HomePage })));
 const AboutPage = lazy(() => import("@/pages/marketing/AboutPage").then((module) => ({ default: module.AboutPage })));
@@ -190,20 +191,31 @@ function NavigationManager() {
 }
 
 function AchievementToastWrapper() {
+  const accessToken = useAuthStore((s) => s.accessToken);
   const [socket, setSocket] = useState<React.ComponentProps<typeof AchievementToast>["socket"] | null>(null);
 
   useEffect(() => {
+    if (!accessToken) return;
+
+    let release: (() => void) | undefined;
     import("@/services/socket")
       .then((mod) => {
         if (typeof mod.acquireSocketConnection === "function") {
           const conn = mod.acquireSocketConnection();
-          if (conn) setSocket(conn as unknown as React.ComponentProps<typeof AchievementToast>["socket"]);
+          if (conn) {
+            setSocket(conn as unknown as React.ComponentProps<typeof AchievementToast>["socket"]);
+            release = mod.releaseSocketConnection;
+          }
         }
       })
       .catch(() => {});
-  }, []);
 
-  if (!socket) return null;
+    return () => {
+      release?.();
+    };
+  }, [accessToken]);
+
+  if (!accessToken || !socket) return null;
   return <AchievementToast socket={socket} />;
 }
 
