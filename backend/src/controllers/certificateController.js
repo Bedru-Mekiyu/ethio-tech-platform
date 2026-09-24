@@ -38,6 +38,14 @@ export const getCertificates = asyncHandler(async (req, res) => {
   const filter = {};
   if (req.user.role === "student") {
     filter.student = req.user._id;
+  } else if (req.user.role === "parent") {
+    if (req.query.student) {
+      filter.student = req.query.student;
+    } else if (req.user.linkedStudents && req.user.linkedStudents.length > 0) {
+      filter.student = { $in: req.user.linkedStudents };
+    } else {
+      filter.student = null;
+    }
   } else if (req.query.student) {
     filter.student = req.query.student;
   }

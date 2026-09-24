@@ -7,7 +7,11 @@ import { certificateSchemas } from "../validators/schemas.js";
 const router = Router();
 
 router.use(protect);
-router.get("/", authorize("mentor", "admin", "student"), getCertificates);
+router.get(
+  "/",
+  authorize("mentor", "admin", "super_admin", "student", "parent", "moderator", "reviewer", "support"),
+  getCertificates,
+);
 router.post("/", authorize("mentor", "admin"), requireVerifiedMentor, validateRequest({ body: certificateSchemas.issue }), issueCertificate);
 
 export default router;

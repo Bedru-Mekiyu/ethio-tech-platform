@@ -48,6 +48,7 @@ import calendarRoutes from "./calendarRoutes.js";
 import recommendationRoutes from "./recommendationRoutes.js";
 import { globalRateLimit } from "../services/rateLimitService.js";
 import meetingRoutes from "./meetingRoutes.js";
+import mentorRoutes from "./mentorRoutes.js";
 
 const router = Router();
 
@@ -73,6 +74,7 @@ router.use("/sessions/:sessionId/recordings", sessionRecordingRoutes);
 router.use("/sessions/:sessionId/hands", handRaiseRoutes);
 router.use("/sessions/:sessionId/student-feedback", mentorStudentFeedbackRoutes);
 router.use("/mentor", mentorAnalyticsRoutes);
+router.use("/mentors", mentorRoutes);
 router.use("/peer-groups", peerGroupRoutes);
 router.use("/leaderboard", leaderboardRoutes);
 router.use("/marketing", marketingRoutes);
