@@ -27,8 +27,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SmartImage } from "@/components/ui/smart-image";
-import { QueryError } from "@/components/composites/QueryError";
-import { Skeleton } from "@/components/ui/skeleton";
 import { fetchMarketingAbout, type MarketingAboutData } from "@/services/marketingService";
 import { useQuery } from "@tanstack/react-query";
 import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
@@ -44,45 +42,6 @@ function formatCompactCount(value: number) {
     compactDisplay: "short",
     maximumFractionDigits: value >= 1_000 ? 1 : 0,
   }).format(value);
-}
-
-function AboutSkeleton() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 pb-24 pt-16 lg:px-8">
-      <div className="mx-auto max-w-4xl text-center">
-        <Skeleton className="mx-auto h-6 w-48 rounded-full" />
-        <Skeleton className="mx-auto mt-5 h-14 w-full max-w-4xl" />
-        <Skeleton className="mx-auto mt-4 h-14 w-full max-w-3xl" />
-        <Skeleton className="mx-auto mt-6 h-5 w-full max-w-2xl" />
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Skeleton className="h-12 w-40 rounded-xl" />
-          <Skeleton className="h-12 w-44 rounded-xl" />
-        </div>
-      </div>
-
-      <div className="mt-16 grid gap-6 md:grid-cols-2">
-        <Skeleton className="h-52 rounded-[24px]" />
-        <Skeleton className="h-52 rounded-[24px]" />
-      </div>
-
-      <div className="mt-20 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <Skeleton className="aspect-[16/10] rounded-[28px]" />
-        <div className="space-y-4">
-          <Skeleton className="h-6 w-40" />
-          <Skeleton className="h-10 w-full max-w-[28rem]" />
-          <Skeleton className="h-5 w-full max-w-[34rem]" />
-          <div className="space-y-3 pt-2">
-            <Skeleton className="h-20 rounded-[20px]" />
-            <Skeleton className="h-20 rounded-[20px]" />
-            <Skeleton className="h-20 rounded-[20px]" />
-          </div>
-        </div>
-      </div>
-
-      <Skeleton className="mt-20 h-40 w-full rounded-[28px]" />
-      <Skeleton className="mt-20 h-96 w-full rounded-[28px]" />
-    </div>
-  );
 }
 
 interface PistelPillar {
@@ -366,27 +325,12 @@ export function AboutPage() {
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
   const [roadmapFilter, setRoadmapFilter] = useState<"all" | "completed" | "in-progress" | "planned">("all");
 
-  const { data, isLoading, isError, error, refetch } = useQuery<MarketingAboutData>({
+  const { data } = useQuery<MarketingAboutData>({
     queryKey: ["marketing", "about"],
     queryFn: fetchMarketingAbout,
+    staleTime: 5 * 60_000,
+    gcTime: 10 * 60_000,
   });
-
-  if (isLoading) {
-    return <AboutSkeleton />;
-  }
-
-  if (isError) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-16 lg:px-8">
-        <QueryError
-          message={error instanceof Error ? error.message : "Unable to load the about page right now."}
-          onRetry={() => {
-            void refetch();
-          }}
-        />
-      </div>
-    );
-  }
 
   const activePillar = PISTELS_PILLARS[activePillarIndex] || PISTELS_PILLARS[0];
 

@@ -102,18 +102,22 @@ const startServer = async () => {
   setupSocket(socketServer);
   app.set("io", socketServer);
 
-  try {
-    const { startReminderEngine } = await import("./services/reminderService.js");
-    startReminderEngine();
-    logger.info("Reminder engine started");
-  } catch (err) {
-    logger.warn("Reminder engine failed to start", {
-      error: err instanceof Error ? err.message : String(err),
-    });
-  }
-
   httpServer.listen(PORT, () => {
     logger.info(`Server running on port ${PORT}`);
+
+    // Defer reminder engine start — server already accepting requests before this runs
+    setImmediate(() => {
+      import("./services/reminderService.js")
+        .then(({ startReminderEngine }) => {
+          startReminderEngine();
+          logger.info("Reminder engine started");
+        })
+        .catch((err) => {
+          logger.warn("Reminder engine failed to start", {
+            error: err instanceof Error ? err.message : String(err),
+          });
+        });
+    });
   });
 
   process.on("SIGTERM", () => shutdown("SIGTERM"));

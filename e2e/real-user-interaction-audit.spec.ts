@@ -68,7 +68,7 @@ test.describe("ROLE 1: STUDENT Interactive Production Audit", () => {
     // Open Tracks Catalog
     await page.goto("/app/tracks");
     await page.waitForLoadState("networkidle");
-    await expect(page.getByRole("heading", { name: /Tracks|Curriculum/i }).first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Learning Pathways/i })).toBeVisible({ timeout: 15000 });
 
     // Select first track
     const firstTrackLink = page.locator('a[href^="/app/tracks/"]').first();
@@ -171,7 +171,8 @@ test.describe("ROLE 2: MENTOR Interactive Production Audit", () => {
     await page.goto("/mentor/profile");
     await page.waitForLoadState("networkidle");
     await expect(page.getByText(/Something went wrong/i)).toHaveCount(0);
-    await expect(page.getByText(/Mentor Account/i)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("heading", { name: /Selamawit/i })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/Account Information/i)).toBeVisible();
   });
 });
 
@@ -204,8 +205,9 @@ test.describe("ROLE 3: PARENT Interactive Production Audit", () => {
     await page.goto("/parent/profile");
     await page.waitForLoadState("networkidle");
     await expect(page.getByText(/Something went wrong/i)).toHaveCount(0);
-    await expect(page.getByText(/Parent \/ Guardian/i)).toBeVisible({ timeout: 15000 });
-    await expect(page.getByRole("link", { name: /Family Dashboard/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Kebede/i })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole("heading", { name: "Account Information" })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Return to Role Dashboard/i })).toBeVisible();
   });
 });
 
@@ -251,7 +253,7 @@ test.describe("ROLE 5: REVIEWER Interactive Production Audit", () => {
 
     // Scoped Navigation
     await expect(page.getByRole("link", { name: /Applications/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Curriculum CMS/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /^Content$/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /Gamification/i })).toBeHidden();
 
     // Moderation page inspection (zero 403 errors)
@@ -300,7 +302,7 @@ test.describe("ROLE 7: ADMIN Interactive Production Audit", () => {
     await expect(page.getByRole("link", { name: /Users/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /Applications/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /Operations/i })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Curriculum CMS/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /^Content$/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /Gamification/i })).toBeVisible();
 
     // Content CMS 3-pane editor

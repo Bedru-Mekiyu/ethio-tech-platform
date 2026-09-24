@@ -31,8 +31,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SmartImage } from "@/components/ui/smart-image";
-import { QueryError } from "@/components/composites/QueryError";
-import { Skeleton } from "@/components/ui/skeleton";
 import { fetchMarketingHome } from "@/services/marketingService";
 import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
 
@@ -489,9 +487,12 @@ export function HomePage() {
   >("all");
   const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ["marketing", "home"],
     queryFn: fetchMarketingHome,
+    staleTime: 5 * 60_000, // 5 min — marketing stats don't change constantly
+    gcTime: 10 * 60_000,
+    // No early-return on isLoading — render immediately with fallback values
   });
 
   const filteredTracks = useMemo(() => {
@@ -505,44 +506,10 @@ export function HomePage() {
 
   const activePillar = PISTELS_PILLARS[activePillarIndex] || PISTELS_PILLARS[0];
 
-  // Dynamic Metrics with fallback values
+  // Dynamic Metrics with fallback values — page renders immediately, updates when API resolves
   const activeLearnersCount = data?.stats?.activeLearners ?? 12500;
   const approvalRate = data?.stats?.approvalRate ?? 94.2;
 
-  if (isLoading) {
-    return (
-      <div className="mx-auto max-w-7xl px-4 py-20 lg:px-8 space-y-12">
-        <div className="space-y-4 max-w-3xl">
-          <Skeleton className="h-6 w-48 rounded-full" />
-          <Skeleton className="h-14 w-full" />
-          <Skeleton className="h-6 w-4/5" />
-          <div className="flex gap-4 pt-4">
-            <Skeleton className="h-12 w-44 rounded-xl" />
-            <Skeleton className="h-12 w-40 rounded-xl" />
-          </div>
-        </div>
-        <Skeleton className="h-32 w-full rounded-3xl" />
-        <div className="grid gap-6 md:grid-cols-3">
-          <Skeleton className="h-64 rounded-3xl" />
-          <Skeleton className="h-64 rounded-3xl" />
-          <Skeleton className="h-64 rounded-3xl" />
-        </div>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-20 lg:px-8">
-        <QueryError
-          message={error instanceof Error ? error.message : "Unable to load the platform home page right now."}
-          onRetry={() => {
-            void refetch();
-          }}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="relative overflow-hidden selection:bg-zinc-200 selection:text-zinc-900">
@@ -741,7 +708,11 @@ export function HomePage() {
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
             <div className="text-center">
               <p className="text-2xl font-bold tracking-tight text-zinc-900">
-                {formatCompactCount(activeLearnersCount)}+
+                {data ? (
+                  <>{formatCompactCount(activeLearnersCount)}+</>
+                ) : (
+                  <span className="inline-block h-7 w-14 rounded-md bg-zinc-100 animate-pulse" aria-hidden="true" />
+                )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Active Young Learners</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">Grade 8 to University Grads</p>
@@ -762,7 +733,13 @@ export function HomePage() {
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900">{approvalRate}%</p>
+              <p className="text-2xl font-bold tracking-tight text-zinc-900">
+                {data ? (
+                  <>{approvalRate}%</>
+                ) : (
+                  <span className="inline-block h-7 w-14 rounded-md bg-zinc-100 animate-pulse" aria-hidden="true" />
+                )}
+              </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Capstone Approval</p>
               <p className="mt-0.5 text-[11px] text-zinc-500">Audited Production Projects</p>
             </div>

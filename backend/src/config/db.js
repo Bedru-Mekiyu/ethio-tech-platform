@@ -18,6 +18,9 @@ const connectWithUri = async (uri, options = {}) => {
   const isProduction = process.env.NODE_ENV === "production";
   await mongoose.connect(uri, {
     serverSelectionTimeoutMS: isProduction ? 30000 : 3000,
+    maxPoolSize: isProduction ? 10 : 5,
+    minPoolSize: isProduction ? 2 : 1,
+    socketTimeoutMS: 30000,
     ...options,
   });
 };
