@@ -302,7 +302,7 @@ function CalloutBlock({ type, content }: { type: string; content: string }) {
       bg: "bg-zinc-50 border-zinc-300",
       border: "border-zinc-300",
       text: "text-zinc-900",
-      icon: <Lightbulb size={16} className="text-[#b91c1c]" />,
+      icon: <Lightbulb size={16} className="text-[var(--secondary)]" />,
       label: "Tip",
     },
     WARNING: {
@@ -456,7 +456,7 @@ function renderInlineMarkdown(text: string): ReactNode {
           href={href}
           target={isExternal ? "_blank" : undefined}
           rel={isExternal ? "noopener noreferrer" : undefined}
-          className="inline-flex items-center gap-1 font-semibold text-[#b91c1c] underline underline-offset-2 hover:text-[#991b1b] transition-colors"
+          className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2 hover:text-primary-hover transition-colors"
         >
           {first.match[2]}
           {isExternal && <ExternalLink size={12} className="shrink-0 inline" />}

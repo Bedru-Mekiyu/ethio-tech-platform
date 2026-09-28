@@ -169,7 +169,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                   <button
                     type="button"
                     onClick={() => addOption(qIndex)}
-                    className="text-xs text-[#b91c1c] font-medium hover:underline pt-1 inline-flex items-center gap-1"
+                    className="text-xs text-primary font-medium hover:text-primary-hover hover:underline pt-1 inline-flex items-center gap-1"
                   >
                     <Plus size={12} /> Add option
                   </button>

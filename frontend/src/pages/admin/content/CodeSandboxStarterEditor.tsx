@@ -69,7 +69,7 @@ export function CodeSandboxStarterEditor({
             href={codeSandboxUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-xs text-[#b91c1c] hover:underline"
+            className="flex items-center gap-1 text-xs text-primary hover:text-primary-hover hover:underline"
           >
             Launch Sandbox <ExternalLink size={12} />
           </a>
@@ -114,7 +114,7 @@ export function CodeSandboxStarterEditor({
               <button
                 type="button"
                 onClick={handleCopy}
-                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-[#b91c1c] hover:underline"
+                className="flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] text-primary hover:text-primary-hover hover:underline"
               >
                 {copied ? <Check size={12} /> : <Copy size={12} />}
                 {copied ? "Copied" : "Copy"}

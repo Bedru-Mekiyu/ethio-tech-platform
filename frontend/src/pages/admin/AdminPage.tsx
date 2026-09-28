@@ -214,7 +214,7 @@ export function AdminPage() {
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
-                <Radio size={11} className="animate-pulse text-[#b91c1c]" />
+                <Radio size={11} className="animate-pulse text-[var(--secondary)]" />
                 Command Center
               </span>
               <Badge variant="outline" size="sm">
@@ -345,9 +345,9 @@ export function AdminPage() {
                     <stop offset="5%" stopColor="#18181b" stopOpacity={0.25} />
                     <stop offset="95%" stopColor="#18181b" stopOpacity={0.02} />
                   </linearGradient>
-                  <linearGradient id="vermilionGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#b91c1c" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="#b91c1c" stopOpacity={0.02} />
+                  <linearGradient id="navyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#1e3a8a" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#1e3a8a" stopOpacity={0.02} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid stroke="#f4f4f5" strokeDasharray="3 3" vertical={false} />
@@ -377,9 +377,9 @@ export function AdminPage() {
                   stroke="#18181b"
                   strokeWidth={2}
                   fillOpacity={1}
-                  fill={xpTimeView === "weekly" ? "url(#xpAreaGrad)" : "url(#vermilionGrad)"}
+                  fill={xpTimeView === "weekly" ? "url(#xpAreaGrad)" : "url(#navyGrad)"}
                   dot={{ r: 3, fill: "#18181b", stroke: "#ffffff", strokeWidth: 2 }}
-                  activeDot={{ r: 5, fill: "#b91c1c", stroke: "#ffffff", strokeWidth: 2 }}
+                  activeDot={{ r: 5, fill: "#1e3a8a", stroke: "#ffffff", strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -491,7 +491,7 @@ export function AdminPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
+                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-zinc-50"
               >
                 View All <ChevronRight size={12} />
               </Button>
@@ -643,7 +643,7 @@ export function AdminPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
+                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-zinc-50"
               >
                 All <ExternalLink size={11} />
               </Button>

@@ -636,7 +636,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                 <button
                   type="button"
                   onClick={generateRandomPassword}
-                  className="text-xs text-[#b91c1c] hover:underline flex items-center gap-1 font-medium"
+                  className="text-xs text-primary hover:text-primary-hover hover:underline flex items-center gap-1 font-medium"
                 >
                   <Sparkles size={12} /> Generate Secure Random Password
                 </button>
@@ -1175,7 +1175,7 @@ export function AdminUsersPage() {
                   <button
                     type="button"
                     onClick={generateRandomPasswordForCreate}
-                    className="text-[11px] font-medium text-[#b91c1c] hover:underline flex items-center gap-1"
+                    className="text-[11px] font-medium text-primary hover:text-primary-hover hover:underline flex items-center gap-1"
                   >
                     <Sparkles size={11} /> Generate Random
                   </button>

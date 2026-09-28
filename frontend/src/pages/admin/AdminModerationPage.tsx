@@ -231,7 +231,7 @@ function ApplicationCard({
             className="cursor-pointer"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-[#b91c1c] transition-colors">
+              <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-primary transition-colors">
                 {application.fullName}
               </h3>
               <Badge variant={rubric.variant} className="text-[11px] gap-1">
@@ -310,7 +310,7 @@ function ApplicationCard({
             href={application.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-primary hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             LinkedIn <ExternalLink size={12} />
@@ -321,7 +321,7 @@ function ApplicationCard({
             href={application.portfolio}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-primary hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             Portfolio / GitHub <ExternalLink size={12} />
@@ -332,7 +332,7 @@ function ApplicationCard({
             href={application.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-[#b91c1c] hover:underline"
+            className="inline-flex items-center gap-1 text-zinc-700 font-medium hover:text-primary hover:underline"
             onClick={(e) => e.stopPropagation()}
           >
             CV / Resume <ExternalLink size={12} />
@@ -690,7 +690,7 @@ Ethio-Tech Mentorship Team`;
               size="sm"
               variant="ghost"
               onClick={() => copyToClipboard(emailTemplate, false)}
-              className="h-7 text-xs gap-1 text-[#b91c1c] hover:text-[#991b1b]"
+              className="h-7 text-xs gap-1 text-primary hover:text-primary-hover"
             >
               {copiedTemplate ? <Check size={13} className="text-zinc-900" /> : <Copy size={13} />}
               {copiedTemplate ? "Copied" : "Copy Template"}

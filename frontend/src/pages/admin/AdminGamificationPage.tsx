@@ -141,10 +141,10 @@ const TIER_CONFIG: Record<
   },
   legendary: {
     label: "Legendary",
-    border: "border-[#b91c1c]/40",
-    bg: "bg-zinc-100",
-    text: "text-[#b91c1c]",
-    iconColor: "text-[#b91c1c]",
+    border: "border-[var(--secondary)]/40",
+    bg: "bg-blue-50/50",
+    text: "text-[var(--secondary)]",
+    iconColor: "text-[var(--secondary)]",
     glow: "shadow-xs",
   },
 };
@@ -328,7 +328,7 @@ function BadgeTierIcon({ tier, size = 20 }: { tier?: BadgeTier | string; size?: 
   const t = (tier as BadgeTier) || "bronze";
   switch (t) {
     case "legendary":
-      return <Crown size={size} className="text-[#b91c1c]" />;
+      return <Crown size={size} className="text-[var(--secondary)]" />;
     case "diamond":
       return <Sparkles size={size} className="text-zinc-900" />;
     case "platinum":
@@ -582,7 +582,7 @@ export function AdminGamificationPage() {
           <div className="space-y-1.5 max-w-2xl">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
-                <Sparkles size={11} className="text-[#b91c1c]" /> Level 1-100 Progression Engine
+                <Sparkles size={11} className="text-[var(--secondary)]" /> Level 1-100 Progression Engine
               </span>
               <Badge variant="outline" size="sm" className="gap-1">
                 <Zap size={11} /> {activeMultiplierCount} Active Multipliers
@@ -755,7 +755,7 @@ export function AdminGamificationPage() {
                           <BadgeTierIcon tier={badge.tier} size={24} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-zinc-900 text-base group-hover:text-[#b91c1c] transition-colors">
+                          <h4 className="font-bold text-zinc-900 text-base group-hover:text-primary transition-colors">
                             {badge.name}
                           </h4>
                           <span className={`text-xs font-semibold uppercase tracking-wider ${tierStyle.text}`}>
@@ -787,7 +787,7 @@ export function AdminGamificationPage() {
                       {badge.multiplier && (
                         <div className="space-y-0.5 text-right">
                           <span className="text-zinc-500">Boost</span>
-                          <p className="font-mono font-bold text-[#b91c1c]">{badge.multiplier}x</p>
+                          <p className="font-mono font-bold text-[var(--secondary)]">{badge.multiplier}x</p>
                         </div>
                       )}
                     </div>
@@ -880,7 +880,7 @@ export function AdminGamificationPage() {
                     </div>
                     <p className="text-lg font-bold text-zinc-900">{m.days} Days</p>
                     <p className="text-xs font-mono font-bold text-zinc-900">+{m.xp} XP</p>
-                    <p className="text-[11px] text-[#b91c1c] font-semibold">Multiplier: {m.bonusMultiplier}</p>
+                    <p className="text-[11px] text-[var(--secondary)] font-semibold">Multiplier: {m.bonusMultiplier}</p>
                     <Badge variant="default" className="text-[10px]">
                       {m.label}
                     </Badge>

@@ -287,7 +287,7 @@ export function CapstoneProjectEditor({
                       href={proj.githubTemplate}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[11px] text-[#b91c1c] hover:underline pt-1"
+                      className="inline-flex items-center gap-1 text-[11px] text-primary hover:text-primary-hover hover:underline pt-1"
                     >
                       <Github size={11} /> Starter Repository <ExternalLink size={10} />
                     </a>

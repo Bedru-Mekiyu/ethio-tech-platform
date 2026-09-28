@@ -248,7 +248,7 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
           <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Starts</p>
           <p className="mt-0.5 text-xs font-semibold text-zinc-900">{formatDateTime(meeting.scheduledAt)}</p>
           {meeting.startsInMs != null && meeting.status !== "completed" && meeting.status !== "cancelled" ? (
-            <p className="text-[10px] text-[#b91c1c] font-medium">In {formatCountdown(meeting.startsInMs)}</p>
+            <p className="text-[10px] text-[var(--secondary)] font-medium">In {formatCountdown(meeting.startsInMs)}</p>
           ) : null}
         </div>
         <div className="rounded-lg border border-zinc-200/80 bg-zinc-50/70 px-3 py-2">
@@ -258,7 +258,10 @@ function AdminMeetingTile({ meeting, onForceEnd, forceEndLoading }: AdminMeeting
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-zinc-100 pt-2.5">
-        <a href={meeting.joinHref || "#"} className="text-xs font-semibold text-[#b91c1c] hover:underline">
+        <a
+          href={meeting.joinHref || "#"}
+          className="text-xs font-semibold text-primary hover:text-primary-hover hover:underline"
+        >
           Open Classroom →
         </a>
         {meeting.status !== "completed" && meeting.status !== "cancelled" ? (

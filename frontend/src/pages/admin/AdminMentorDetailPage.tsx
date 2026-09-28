@@ -778,7 +778,7 @@ Ethio-Tech Mentorship Team`;
                         size="sm"
                         variant="ghost"
                         onClick={() => copyToClipboard(emailTemplate, false)}
-                        className="h-6 text-xs text-[#b91c1c] hover:text-[#991b1b] gap-1"
+                        className="h-6 text-xs text-primary hover:text-primary-hover gap-1"
                       >
                         {copiedTemplate ? <Check size={12} className="text-zinc-900" /> : <Copy size={12} />}
                         {copiedTemplate ? "Copied" : "Copy Template"}

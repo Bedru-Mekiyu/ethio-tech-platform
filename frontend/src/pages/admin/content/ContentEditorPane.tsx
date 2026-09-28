@@ -718,7 +718,7 @@ export function ContentEditorPane({
                           {lt.value === "code-lab" && <Code2 size={14} className="text-zinc-900" />}
                           {lt.value === "concept" && <BookOpen size={14} className="text-zinc-900" />}
                           {lt.value === "quiz" && <HelpCircle size={14} className="text-amber-600" />}
-                          {lt.value === "project" && <Award size={14} className="text-[#b91c1c]" />}
+                          {lt.value === "project" && <Award size={14} className="text-[var(--secondary)]" />}
                           <span className="text-xs font-semibold leading-none">{lt.label}</span>
                         </div>
                         <span className="text-[10px] text-zinc-500 line-clamp-2">{lt.description}</span>
@@ -842,7 +842,7 @@ export function ContentEditorPane({
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-900">
-                  <Sparkles size={14} className="text-[#b91c1c]" />
+                  <Sparkles size={14} className="text-[var(--secondary)]" />
                   Markdown Curriculum Content & Live Preview
                 </label>
                 <span className="text-[11px] text-zinc-500">

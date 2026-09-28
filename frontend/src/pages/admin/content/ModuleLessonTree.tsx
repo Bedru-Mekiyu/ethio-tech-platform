@@ -86,7 +86,7 @@ export function ModuleLessonTree({
       case "quiz":
         return <HelpCircle size={14} className="text-amber-600" />;
       case "project":
-        return <Award size={14} className="text-[#b91c1c]" />;
+        return <Award size={14} className="text-[var(--secondary)]" />;
       default:
         return <FileText size={14} className="text-zinc-900" />;
     }
@@ -113,7 +113,7 @@ export function ModuleLessonTree({
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-600">Track Root</span>
-                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c] animate-pulse" />}
+                {isTrackSelected && <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />}
               </div>
               <h2 className="text-xs font-bold text-zinc-900 truncate">{track.title}</h2>
               <p className="text-[11px] text-zinc-500">Click to edit track metadata</p>
@@ -276,7 +276,7 @@ export function ModuleLessonTree({
                         <button
                           type="button"
                           onClick={() => onAddLesson(mod._id)}
-                          className="mt-1 text-[11px] font-semibold text-[#b91c1c] hover:underline inline-flex items-center gap-1"
+                          className="mt-1 text-[11px] font-semibold text-primary hover:text-primary-hover hover:underline inline-flex items-center gap-1"
                         >
                           <Plus size={11} /> Add First Lesson
                         </button>
