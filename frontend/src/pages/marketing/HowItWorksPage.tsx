@@ -445,17 +445,17 @@ export function HowItWorksPage() {
             <Zap size={12} className="text-zinc-700" />
             <span>The 5-Stage Engineering Engine</span>
           </div>
-          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-zinc-900">
-            How aspiring engineers become <span className="text-[#b91c1c]">production-ready</span>
+          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-zinc-900">
+            How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
             From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
             and verified career placement. Explore the full architecture of how EthioTech works.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="md" className="font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
+              <Button size="md" className="font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs">
                 Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -498,7 +498,7 @@ export function HowItWorksPage() {
               <Layers3 size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(tracks.length)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tech Tracks</p>
             <p className="mt-0.5 text-xs text-zinc-600">Fullstack, AI, Cloud, Mobile</p>
           </Card>
 
@@ -507,7 +507,7 @@ export function HowItWorksPage() {
               <BookOpen size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalModules)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Interactive Modules</p>
             <p className="mt-0.5 text-xs text-zinc-600">Structured knowledge blocks</p>
           </Card>
 
@@ -516,7 +516,7 @@ export function HowItWorksPage() {
               <Code2 size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalLessons)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Hands-on Labs</p>
             <p className="mt-0.5 text-xs text-zinc-600">Real git repos & tests</p>
           </Card>
 
@@ -525,7 +525,7 @@ export function HowItWorksPage() {
               <Zap size={16} />
             </div>
             <p className="mt-2 text-xl font-bold text-zinc-900">{formatCompactNumber(totalXp)}</p>
-            <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
+            <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">XP Catalog</p>
             <p className="mt-0.5 text-xs text-zinc-600">Earned through verified PRs</p>
           </Card>
         </div>
@@ -538,7 +538,7 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
               <span>Step-by-Step Flow</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
               The 5-Stage Learner Lifecycle
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
@@ -657,7 +657,7 @@ export function HowItWorksPage() {
                     <div className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs space-y-4">
                       <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
                         <div>
-                          <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
                             Verification Standards
                           </span>
                           <h4 className="text-xs font-bold text-zinc-900 mt-0.5">
@@ -675,7 +675,7 @@ export function HowItWorksPage() {
                         </p>
                         {currentStage.evaluationCriteria.map((criterion) => (
                           <div key={criterion} className="flex items-start gap-2.5 text-xs text-zinc-700">
-                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#b91c1c]" />
+                            <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--secondary)]" />
                             <span>{criterion}</span>
                           </div>
                         ))}
@@ -729,7 +729,7 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
             <span>Ecosystem Experience</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">What It Looks Like For You</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">What It Looks Like For You</h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
           </p>
@@ -772,7 +772,7 @@ export function HowItWorksPage() {
                 <div className="lg:col-span-7">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-[#b91c1c]">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)]">
                         {currentRoleData.eyebrow}
                       </span>
                       <h3 className="mt-0.5 text-xl font-bold text-zinc-900 md:text-2xl">{currentRoleData.title}</h3>
@@ -806,7 +806,7 @@ export function HowItWorksPage() {
 
                   <div className="mt-6 flex justify-start">
                     <Link to={currentRoleData.ctaLink}>
-                      <Button size="md" className="bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
+                      <Button size="md" className="bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs">
                         {currentRoleData.ctaLabel} <ArrowRight size={14} className="ml-1.5" />
                       </Button>
                     </Link>
@@ -842,7 +842,7 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
               <span>Curriculum Architecture</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
               Choose Your Engineering Pathway
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
@@ -895,7 +895,7 @@ export function HowItWorksPage() {
                         {moduleCount} Modules
                       </Badge>
                       <span className="flex items-center gap-1 text-xs font-semibold text-zinc-900">
-                        <Zap size={12} className="text-[#b91c1c]" /> {track.xpReward ?? 6000} XP
+                        <Zap size={12} className="text-[var(--secondary)]" /> {track.xpReward ?? 6000} XP
                       </span>
                     </div>
                     <h3 className="mt-3 text-sm font-bold text-zinc-900">{track.title}</h3>
@@ -935,7 +935,7 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Frequently Asked Questions</h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             Everything you need to know about our pedagogy, time requirements, mentorship, and certification.
           </p>
@@ -1027,7 +1027,7 @@ export function HowItWorksPage() {
               <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-2.5 shadow-xs">
                 <span>Start Today</span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
                 Ready to accelerate your software engineering journey?
               </h2>
               <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-zinc-600 sm:text-sm">
@@ -1038,7 +1038,7 @@ export function HowItWorksPage() {
               <Link to="/register">
                 <Button
                   size="md"
-                  className="w-full sm:w-auto font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                  className="w-full sm:w-auto font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                 >
                   Join a Learning Track
                 </Button>

@@ -271,11 +271,11 @@ export function MentorsPage() {
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
-          Learn From Senior Engineers Shaping <span className="text-[#b91c1c]">Global & African Tech</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Learn From Senior Engineers Shaping <span className="text-primary">Global & African Tech</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
           Connect with senior software architects, engineering leads, and technical founders who provide structured
           1-on-1 guidance, live architectural reviews, and career sponsorship.
         </p>

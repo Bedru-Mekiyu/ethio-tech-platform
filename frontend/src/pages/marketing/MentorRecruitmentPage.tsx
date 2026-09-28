@@ -230,11 +230,11 @@ export function MentorRecruitmentPage() {
           <span>Senior Engineering Guild Membership</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
-          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-[#b91c1c]">Tech Leaders</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-primary">Tech Leaders</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
           Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom,
           bridge the digital divide, and discover top technical talent.
         </p>
@@ -671,7 +671,7 @@ export function MentorRecruitmentPage() {
               <p className="text-xs leading-relaxed text-zinc-600 italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="pt-3 border-t border-zinc-100">
                 <p className="font-semibold text-zinc-900 text-xs">{t.author}</p>
-                <p className="text-xs text-[#b91c1c] font-medium">{t.role}</p>
+                <p className="text-xs text-[var(--secondary)] font-medium">{t.role}</p>
                 <p className="text-[11px] text-zinc-500 mt-0.5">{t.company}</p>
               </div>
             </Card>
@@ -682,7 +682,7 @@ export function MentorRecruitmentPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/60 p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Questions About Mentoring?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Questions About Mentoring?</h2>
           <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
             Reach out directly to our Guild Admissions Coordinator for questions regarding scheduling, honorariums, or
             curriculum tracks.

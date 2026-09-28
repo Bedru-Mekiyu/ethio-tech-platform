@@ -77,7 +77,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 cn(
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
-                    ? "text-zinc-900 font-semibold bg-zinc-100/80"
+                    ? "text-primary font-semibold bg-red-50/50"
                     : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100/60",
                 )
               }
@@ -113,7 +113,6 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             </>
           )}
         </div>
-
 
         {/* Mobile Hamburger Toggle Button */}
         <button
@@ -152,7 +151,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                     cn(
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150",
                       isActive
-                        ? "bg-zinc-100 text-zinc-900 font-semibold"
+                        ? "bg-red-50/50 text-primary font-semibold"
                         : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50",
                     )
                   }

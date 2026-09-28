@@ -184,8 +184,10 @@ export function LeaderboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
       <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Engineering Contributor Index</h1>
-        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-600">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Engineering Contributor Index
+        </h1>
+        <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-zinc-600">
           Rankings updated continuously from verified code reviews, sprint commits, and technical capstone evaluations.
         </p>
       </div>
@@ -214,23 +216,23 @@ export function LeaderboardPage() {
         <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
           <div className="flex items-center justify-center gap-1.5 text-zinc-500">
             <Users size={13} />
-            <span className="text-[10px] uppercase tracking-wider font-semibold">{statLabel(tab)}</span>
+            <span className="text-xs uppercase tracking-wider font-semibold">{statLabel(tab)}</span>
           </div>
           <p className="mt-2 text-xl font-bold text-zinc-900">{rows.length}</p>
           <p className="mt-0.5 text-[11px] text-zinc-500">Active contributors</p>
         </Card>
         <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
           <div className="flex items-center justify-center gap-1.5 text-zinc-500">
-            <span className="text-[10px] uppercase tracking-wider font-semibold">
+            <span className="text-xs uppercase tracking-wider font-semibold">
               {tab === "mentors" ? "Top score" : "Top XP"}
             </span>
           </div>
-          <p className="mt-2 text-xl font-bold text-[#b91c1c]">{podiumText(tab, topRank)}</p>
+          <p className="mt-2 text-xl font-bold text-[var(--secondary)]">{podiumText(tab, topRank)}</p>
           <p className="mt-0.5 text-[11px] text-zinc-500">Cohort benchmark</p>
         </Card>
         <Card className="border-zinc-200 bg-white p-4 text-center shadow-xs">
           <div className="flex items-center justify-center gap-1.5 text-zinc-500">
-            <span className="text-[10px] uppercase tracking-wider font-semibold">Average</span>
+            <span className="text-xs uppercase tracking-wider font-semibold">Average</span>
           </div>
           <p className="mt-2 text-xl font-bold text-zinc-900">{podiumText(tab, averageRank)}</p>
           <p className="mt-0.5 text-[11px] text-zinc-500">Cohort average</p>

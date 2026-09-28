@@ -203,15 +203,15 @@ export function DonationPage() {
         animate="visible"
       >
         <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-1 text-xs font-medium text-zinc-700 shadow-xs">
-          <Heart size={13} className="text-[#b91c1c]" />
+          <Heart size={13} className="text-primary" />
           <span>Transparent Impact Philanthropy</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
-          Empower Ethiopian Talent Through <span className="text-[#b91c1c]">Sovereign Education</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Empower Ethiopian Talent Through <span className="text-primary">Sovereign Education</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
           Every dollar or birr directly funds student scholarship passes, solar-powered regional tech hubs, and hardware
           distribution to gifted learners across Ethiopia with 100% transparent milestone verification.
         </p>
@@ -233,7 +233,7 @@ export function DonationPage() {
       <section id="donate-now" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Direct Impact Model</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             Choose Your Student Sponsorship Tier
           </h2>
           <p className="text-xs text-zinc-600">
@@ -502,12 +502,13 @@ export function DonationPage() {
                         </p>
                         <div className="font-mono bg-zinc-50 p-2 rounded border border-zinc-200 text-zinc-800 text-[11px] space-y-0.5">
                           <p>
-                            Telebirr Merchant ID: <strong className="text-[#b91c1c] font-bold">884920</strong>{" "}
+                            Telebirr Merchant ID: <strong className="text-[var(--secondary)] font-bold">884920</strong>{" "}
                             (EthioTech Foundation)
                           </p>
                           <p>
-                            CBE Birr / Account: <strong className="text-[#b91c1c] font-bold">1000482910482</strong>{" "}
-                            (EthioTech Education)
+                            CBE Birr / Account:{" "}
+                            <strong className="text-[var(--secondary)] font-bold">1000482910482</strong> (EthioTech
+                            Education)
                           </p>
                         </div>
                       </div>
@@ -535,7 +536,7 @@ export function DonationPage() {
                         <Button
                           type="submit"
                           size="md"
-                          className="w-full font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                         >
                           Confirm Telebirr / CBE Contribution
                         </Button>
@@ -578,7 +579,7 @@ export function DonationPage() {
                         <Button
                           type="submit"
                           size="md"
-                          className="w-full font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                         >
                           Proceed to Secure Stripe Gateway
                           <Lock size={13} className="ml-1.5" />
@@ -621,7 +622,7 @@ export function DonationPage() {
                         <Button
                           type="submit"
                           size="md"
-                          className="w-full font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                         >
                           Log Web3 Donation Confirmation
                         </Button>
@@ -730,7 +731,7 @@ export function DonationPage() {
               <Button
                 size="sm"
                 onClick={() => setHardwareModal(true)}
-                className="bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                className="bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
               >
                 Register a Hardware Donation Pledge
               </Button>
@@ -873,7 +874,7 @@ export function DonationPage() {
                 <Button
                   type="submit"
                   size="md"
-                  className="w-full font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                  className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                 >
                   Submit Hardware Pledge
                 </Button>
@@ -886,7 +887,7 @@ export function DonationPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             Have Questions About Institutional Grants?
           </h2>
           <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
@@ -896,7 +897,7 @@ export function DonationPage() {
         </div>
         <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#donate-now">
-            <Button size="md" className="font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
+            <Button size="md" className="font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs">
               Sponsor a Student Today
             </Button>
           </a>

@@ -384,17 +384,17 @@ export function AboutPage() {
             <Zap size={12} className="text-zinc-700" />
             <span>The Ethiopian Software Engineering Movement</span>
           </div>
-          <h1 className="mt-2 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl text-zinc-900">
-            Democratizing elite tech education with the <span className="text-[#b91c1c]">PISTELS</span> framework
+          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-zinc-900">
+            Democratizing elite tech education with the <span className="text-primary">PISTELS</span> framework
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
             {data?.hero.description ||
               "EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects."}
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="md" className="font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs">
+              <Button size="md" className="font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs">
                 Join as Student <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -480,8 +480,8 @@ export function AboutPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
             <span>National Context & Strategic Imperative</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-            Unlocking Ethiopia’s <span className="text-[#b91c1c]">Demographic Dividend</span>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+            Unlocking Ethiopia’s <span className="text-primary">Demographic Dividend</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
@@ -607,8 +607,8 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-0.5 text-xs font-medium text-zinc-700 mb-3 shadow-xs">
               <span>Core Pedagogical Backbone</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-              The <span className="text-[#b91c1c]">PISTELS</span> Ideology
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              The <span className="text-primary">PISTELS</span> Ideology
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
               Our 7-pillar methodology engineered to systematically develop collaborative software engineers capable of
@@ -664,7 +664,7 @@ export function AboutPage() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-semibold uppercase tracking-wider text-[#b91c1c]">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)]">
                             Pillar {activePillarIndex + 1} of 7
                           </span>
                           <Badge variant="default" size="sm">
@@ -833,7 +833,7 @@ export function AboutPage() {
           <Card className="border-zinc-200 bg-white p-6 shadow-xs">
             <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#b91c1c]" />
+                <span className="h-2 w-2 rounded-full bg-[var(--secondary)]" />
                 <span className="text-xs font-semibold text-zinc-900">National Delivery Architecture</span>
               </div>
               <Badge variant="default" size="sm">
@@ -995,11 +995,11 @@ export function AboutPage() {
         <div className="mt-8 space-y-3">
           {filteredRoadmap.map((item) => {
             const statusConfig = {
-              completed: { badge: "Completed", variant: "default" as const, dotColor: "bg-zinc-800" },
+              completed: { badge: "Completed", variant: "default" as const, dotColor: "bg-emerald-600" },
               "in-progress": {
                 badge: "Current Phase",
                 variant: "default" as const,
-                dotColor: "bg-[#b91c1c]",
+                dotColor: "bg-[var(--secondary)]",
               },
               planned: { badge: "Planned", variant: "default" as const, dotColor: "bg-zinc-400" },
             }[item.status];
@@ -1115,7 +1115,7 @@ export function AboutPage() {
               <Link to="/register">
                 <Button
                   size="md"
-                  className="w-full sm:w-auto font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+                  className="w-full sm:w-auto font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
                 >
                   Join as Student
                 </Button>

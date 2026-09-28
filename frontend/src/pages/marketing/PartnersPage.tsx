@@ -214,11 +214,11 @@ export function PartnersPage() {
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
-          Empowering Ethiopia&apos;s Digital Economy Through <span className="text-[#b91c1c]">Strategic Alliances</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Empowering Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
           We partner with technology employers, universities, development agencies, and public sector bodies to build a
           sovereign, world-class technical workforce across Ethiopia.
         </p>
@@ -241,24 +241,22 @@ export function PartnersPage() {
         <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
           <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">6</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
             <p className="mt-0.5 text-xs text-zinc-600">Across Ethiopia</p>
           </Card>
           <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">5</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
-              Specialized Tracks
-            </p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Specialized Tracks</p>
             <p className="mt-0.5 text-xs text-zinc-600">Curriculum standard</p>
           </Card>
           <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-[#b91c1c] font-mono md:text-2xl">100%</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Open Access</p>
+            <p className="text-xl font-bold text-[var(--secondary)] font-mono md:text-2xl">100%</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Open Access</p>
             <p className="mt-0.5 text-xs text-zinc-600">Free educational mission</p>
           </Card>
           <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">Sub-Sec</p>
-            <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Classroom SFU</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Classroom SFU</p>
             <p className="mt-0.5 text-xs text-zinc-600">LiveKit WebRTC</p>
           </Card>
         </div>
@@ -268,7 +266,7 @@ export function PartnersPage() {
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Collaboration Pillars</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             Tailored Frameworks for Every Stakeholder
           </h2>
           <p className="text-xs text-zinc-600">
@@ -325,9 +323,7 @@ export function PartnersPage() {
                 <p className="text-xs leading-relaxed text-zinc-600">{activeFramework.description}</p>
 
                 <div className="space-y-2">
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-zinc-500">
-                    Key Value Deliverables
-                  </p>
+                  <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500">Key Value Deliverables</p>
                   <ul className="space-y-1.5">
                     {activeFramework.deliverables.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-xs text-zinc-700">
@@ -642,7 +638,7 @@ export function PartnersPage() {
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="default">Institutional FAQ</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Frequently Asked Questions</h2>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
@@ -658,7 +654,7 @@ export function PartnersPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             Institutional Technical Collaboration
           </h2>
           <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">

@@ -127,7 +127,7 @@ export function NotFoundPage() {
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="rounded-xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-[#b91c1c] font-semibold">404</p>
+          <p className="text-xs uppercase tracking-wider text-primary font-semibold">404</p>
           <h1 className="mt-2 text-xl font-bold tracking-tight text-zinc-900">Page not found</h1>
           <p className="mt-1.5 text-xs text-zinc-600">The page you requested does not exist or has moved.</p>
 

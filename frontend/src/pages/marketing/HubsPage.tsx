@@ -395,11 +395,11 @@ export function HubsPage() {
           <span>Regional Physical Tech Infrastructure</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight">
-          Physical Tech Hubs <span className="text-[#b91c1c]">Across Ethiopia</span>
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+          Physical Tech Hubs <span className="text-primary">Across Ethiopia</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
           Book dedicated high-spec developer workstations, consult in-person with on-duty mentors, access local offline
           caching servers, and check in physically to earn XP across 6 national innovation corridors.
         </p>
@@ -428,25 +428,25 @@ export function HubsPage() {
         <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
           <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900">6</p>
-            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Regional Hubs</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">Regional Hubs</p>
             <p className="mt-0.5 text-xs text-zinc-600">Active national nodes</p>
           </Card>
 
           <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900">{totalWorkstations}</p>
-            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Workstations</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">Workstations</p>
             <p className="mt-0.5 text-xs text-zinc-600">Dual-screen & GPU rigs</p>
           </Card>
 
           <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
             <p className="text-xl font-bold text-zinc-900">{totalOpenSeats}</p>
-            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Available Today</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">Available Today</p>
             <p className="mt-0.5 text-xs text-zinc-600">Instant reservation</p>
           </Card>
 
           <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
-            <p className="text-xl font-bold text-[#b91c1c]">100% Free</p>
-            <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Community Access</p>
+            <p className="text-xl font-bold text-[var(--secondary)]">100% Free</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-zinc-500">Community Access</p>
             <p className="mt-0.5 text-xs text-zinc-600">+50 XP per check-in</p>
           </Card>
         </div>

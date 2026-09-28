@@ -33,7 +33,6 @@ import { Card } from "@/components/ui/card";
 import { SmartImage } from "@/components/ui/smart-image";
 import { fetchMarketingHome } from "@/services/marketingService";
 import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
-import { PalettePreviewBanner } from "@/components/marketing/PalettePreviewBanner";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -513,9 +512,6 @@ export function HomePage() {
 
   return (
     <div className="relative overflow-hidden selection:bg-zinc-200 selection:text-zinc-900">
-      {/* 0. INTERACTIVE PALETTE PREVIEW SELECTOR */}
-      <PalettePreviewBanner />
-
       {/* ─────────────────────────────────────────────────────────────
           1. HERO SECTION (Decluttered, Balanced 36-44px Typography)
       ────────────────────────────────────────────────────────────── */}

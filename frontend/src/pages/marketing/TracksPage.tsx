@@ -114,17 +114,17 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.05 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-zinc-900 leading-tight"
+              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]"
             >
               Master In-Demand Tech with <br className="hidden sm:inline" />
-              <span className="text-[#b91c1c]">Production Capstones</span> & Mentorship
+              <span className="text-primary">Production Capstones</span> & Mentorship
             </motion.h1>
 
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="mx-auto max-w-2xl text-xs sm:text-sm text-zinc-600 leading-relaxed font-normal"
+              className="mx-auto max-w-2xl text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
             >
               Forget static video tutorials. Build distributed cloud systems, real-time mobile apps, fraud detection
               engines, and hardened cybersecurity architectures with live code reviews.
@@ -139,25 +139,19 @@ export function TracksPage() {
             >
               <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
                 <p className="text-xl font-bold text-zinc-900">6</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
               </Card>
               <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
                 <p className="text-xl font-bold text-zinc-900">{totalCapstones}+</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
-                  Real Capstones
-                </p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Real Capstones</p>
               </Card>
               <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
                 <p className="text-xl font-bold text-zinc-900">{totalLiveHours}+</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
-                  Live & Mentor Hrs
-                </p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Live & Mentor Hrs</p>
               </Card>
               <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
                 <p className="text-xl font-bold text-zinc-900">100%</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
-                  Free for Learners
-                </p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Free for Learners</p>
               </Card>
             </motion.div>
           </div>
@@ -265,7 +259,7 @@ export function TracksPage() {
                       {/* Header */}
                       <div className="space-y-1">
                         <h2 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight">
-                          <Link to={`/tracks/${track.slug}`} className="hover:text-[#b91c1c] transition-colors">
+                          <Link to={`/tracks/${track.slug}`} className="hover:text-primary transition-colors">
                             {track.title}
                           </Link>
                         </h2>
@@ -307,8 +301,8 @@ export function TracksPage() {
                       {/* Practical Capstones Showcase */}
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-[10px] font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-1.5">
-                            <Code2 size={13} className="text-[#b91c1c]" />
+                          <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-1.5">
+                            <Code2 size={13} className="text-[var(--secondary)]" />
                             Practical Capstone Projects
                           </h3>
                           <span className="text-[10px] text-zinc-500">Click to preview code & architecture</span>
@@ -336,7 +330,7 @@ export function TracksPage() {
                                   View Code <ArrowRight size={11} />
                                 </span>
                               </div>
-                              <h4 className="mt-1.5 text-xs font-semibold text-zinc-900 group-hover/cap:text-[#b91c1c] transition line-clamp-1">
+                              <h4 className="mt-1.5 text-xs font-semibold text-zinc-900 group-hover/cap:text-primary transition line-clamp-1">
                                 {capstone.title}
                               </h4>
                               <p className="mt-0.5 text-[11px] text-zinc-600 line-clamp-2 leading-relaxed">
@@ -401,8 +395,8 @@ export function TracksPage() {
                       <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-4">
                         <div className="flex items-center justify-between border-b border-zinc-200/80 pb-2.5">
                           <div className="flex items-center gap-2">
-                            <span className="h-2 w-2 rounded-full bg-[#b91c1c]" />
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                            <span className="h-2 w-2 rounded-full bg-[var(--secondary)]" />
+                            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
                               Market Demand & Compensation
                             </span>
                           </div>
@@ -412,13 +406,13 @@ export function TracksPage() {
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-3">
                           <div>
-                            <p className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">
+                            <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
                               Hiring Trajectory
                             </p>
                             <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.growthMetric}</p>
                           </div>
                           <div>
-                            <p className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider">
+                            <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
                               Est. Compensation
                             </p>
                             <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.salaryRange}</p>
@@ -534,7 +528,7 @@ export function TracksPage() {
                                   <span className="text-zinc-800 truncate font-medium">
                                     {mIdx + 1}.{lIdx + 1} {lesson.title}
                                   </span>
-                                  <span className="text-[10px] text-[#b91c1c] font-medium shrink-0 ml-2 font-mono">
+                                  <span className="text-xs text-[var(--secondary)] font-medium shrink-0 ml-2 font-mono">
                                     +{lesson.xpReward} XP ({lesson.durationMinutes}m)
                                   </span>
                                 </div>
@@ -620,7 +614,7 @@ export function TracksPage() {
             <CheckCircle2 size={12} className="text-zinc-700" />
             <span>100% Tuition-Free Open Education Model</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
             Ready to Begin Your Technical Journey?
           </h2>
           <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
