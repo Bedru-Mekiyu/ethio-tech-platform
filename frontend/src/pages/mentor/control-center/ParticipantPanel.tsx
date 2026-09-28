@@ -292,7 +292,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                                 setMenuOpenId(null);
                               }}
                             >
-                              <MessageSquare size={13} className="text-[#b91c1c]" /> Submit Feedback
+                              <MessageSquare size={13} className="text-zinc-600" /> Submit Feedback
                             </button>
                             <div className="my-1 border-t border-zinc-100" />
                             <button

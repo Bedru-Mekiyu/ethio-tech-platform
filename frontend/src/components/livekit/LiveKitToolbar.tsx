@@ -95,7 +95,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("whiteboard")}
           className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all border ${
             activePanel === "whiteboard"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Toggle Collaborative Whiteboard"
@@ -145,7 +145,7 @@ export function LiveKitToolbar({
           onClick={onToggleScreenShare}
           className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all border ${
             isScreenSharing
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg ring-2 ring-[#b91c1c]/30"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg ring-2 ring-[var(--secondary)]/30"
               : "bg-zinc-800 border-white/10 text-zinc-300 hover:bg-zinc-700 hover:text-white"
           }`}
           title={isScreenSharing ? "Stop Screen Share" : "Share Your Screen"}
@@ -186,14 +186,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("chat")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "chat"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Chat Messages"
         >
           <MessageSquare className="h-4 w-4" />
           {unreadChatCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--secondary)] text-[9px] font-bold text-white shadow-md">
               {unreadChatCount > 9 ? "9+" : unreadChatCount}
             </span>
           )}
@@ -205,14 +205,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("qa")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "qa"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Questions & Answers"
         >
           <HelpCircle className="h-4 w-4" />
           {unreadQaCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--secondary)] text-[9px] font-bold text-white shadow-md">
               {unreadQaCount}
             </span>
           )}
@@ -224,14 +224,14 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("polls")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "polls"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Interactive Polls"
         >
           <BarChart3 className="h-4 w-4" />
           {activePollCount > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#b91c1c] text-[9px] font-bold text-white shadow-md">
+            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--secondary)] text-[9px] font-bold text-white shadow-md">
               {activePollCount}
             </span>
           )}
@@ -243,7 +243,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("notes")}
           className={`hidden md:flex relative h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "notes" || activePanel === "resources"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Session Notes & Resources"
@@ -257,7 +257,7 @@ export function LiveKitToolbar({
           onClick={() => onTogglePanel("participants")}
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "participants"
-              ? "bg-[#b91c1c] border-[#b91c1c] text-white shadow-lg"
+              ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
               : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
           }`}
           title="Participants Roster"

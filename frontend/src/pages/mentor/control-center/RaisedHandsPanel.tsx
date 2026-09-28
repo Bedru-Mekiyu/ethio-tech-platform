@@ -88,7 +88,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 text-[10px] px-2 text-[#b91c1c] hover:bg-red-50 hover:text-[#991b1b] rounded-lg gap-1 font-medium"
+                  className="h-7 text-xs px-2 text-primary hover:bg-zinc-100 rounded-lg gap-1 font-medium"
                   onClick={() => onAction("speaking_granted", h.userId)}
                   title="Grant speaking permission"
                 >

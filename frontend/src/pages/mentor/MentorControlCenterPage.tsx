@@ -518,7 +518,7 @@ export default function MentorControlCenterPage() {
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="w-full mt-2 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:bg-zinc-50"
+                      className="w-full mt-2 text-xs text-primary hover:bg-zinc-50"
                       onClick={() => setActiveTab("participants")}
                     >
                       View All {data.participants.length} Participants
@@ -619,8 +619,8 @@ export default function MentorControlCenterPage() {
                   ) : null}
 
                   {isLiveStatus(sessionStatus) ? (
-                    <p className="rounded-lg border border-zinc-300 bg-zinc-100 px-2.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-900">
-                      <Activity size={11} className="mr-1.5 inline-block text-[#b91c1c]" /> Live now
+                    <p className="rounded-lg border border-zinc-300 bg-zinc-100 px-2.5 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-900">
+                      <Activity size={11} className="mr-1.5 inline-block text-[var(--secondary)]" /> Live now
                     </p>
                   ) : null}
                 </Card>

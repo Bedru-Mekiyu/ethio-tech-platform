@@ -150,7 +150,7 @@ export function MentorAvailabilityPage() {
         <CardHeader className="p-0 border-b border-zinc-100 pb-3.5">
           <CardTitle className="flex items-center justify-between text-sm font-semibold text-zinc-900">
             <span className="flex items-center gap-2">
-              <CalendarClock size={15} className="text-[#b91c1c]" /> Weekly Availability Slots
+              <CalendarClock size={15} className="text-[var(--secondary)]" /> Weekly Availability Slots
             </span>
             <Button
               size="sm"

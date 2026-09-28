@@ -215,7 +215,7 @@ export function MentorDashboardPage() {
                 <Settings size={14} />
                 Control Center
                 {activeMeeting?.status === "active" && (
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-[#b91c1c] animate-pulse" />
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 )}
               </Button>
             </Link>
@@ -312,7 +312,7 @@ export function MentorDashboardPage() {
               </div>
               <Link
                 to="/mentor/sessions"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
               >
                 Full Calendar <ArrowRight size={12} />
               </Link>
@@ -400,23 +400,20 @@ export function MentorDashboardPage() {
                 <h2 className="text-sm font-semibold text-zinc-900">Cohort Retention & Impact</h2>
                 <p className="text-xs text-zinc-500">Measured over the last 30 active days</p>
               </div>
-              <Link
-                to="/mentor/students"
-                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-              >
+              <Link to="/mentor/students" className="text-xs font-semibold text-primary hover:underline">
                 View Students →
               </Link>
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Session Quality</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Session Quality</span>
                 <p className="text-lg font-bold text-zinc-900">{impact ? `${impact}%` : "—"}</p>
                 <ProgressBar value={impact ?? 0} max={100} className="mt-1.5 h-1" />
               </div>
 
               <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Reviews Delivered</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Reviews Delivered</span>
                 <p className="text-lg font-bold text-zinc-900">
                   {dashboard?.contributionMetrics?.feedbackCount
                     ? `${dashboard.contributionMetrics.feedbackCount} reviews`
@@ -430,7 +427,7 @@ export function MentorDashboardPage() {
               </div>
 
               <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-3.5 space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Mentee Engagement</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Mentee Engagement</span>
                 <p className="text-lg font-bold text-zinc-900">
                   {dashboard?.contributionMetrics?.engagement
                     ? `${Math.round(dashboard.contributionMetrics.engagement)}%`
@@ -450,10 +447,7 @@ export function MentorDashboardPage() {
                 <h2 className="text-sm font-semibold text-zinc-900">Student Submissions Queue</h2>
                 <p className="text-xs text-zinc-500">{pendingSubmissions.length} projects pending code review</p>
               </div>
-              <Link
-                to="/mentor/reviews"
-                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-              >
+              <Link to="/mentor/reviews" className="text-xs font-semibold text-primary hover:underline">
                 View All →
               </Link>
             </div>

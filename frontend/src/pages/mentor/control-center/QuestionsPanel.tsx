@@ -141,7 +141,10 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     title={q.isPinned ? "Unpin question" : "Pin question"}
                     disabled={submittingId === q.id}
                   >
-                    <Pin size={14} className={q.isPinned ? "text-[#b91c1c] fill-[#b91c1c]" : "opacity-60"} />
+                    <Pin
+                      size={14}
+                      className={q.isPinned ? "text-[var(--secondary)] fill-[var(--secondary)]" : "opacity-60"}
+                    />
                   </Button>
                   <span className="text-[10px] font-bold text-zinc-500 flex items-center gap-0.5">
                     <ThumbsUp size={10} /> {q.upvoteCount}

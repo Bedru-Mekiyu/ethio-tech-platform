@@ -295,10 +295,7 @@ export function MentorSessionsPage() {
               <h2 className="text-sm font-semibold text-zinc-900">Live Session Queue</h2>
               <p className="text-xs text-zinc-500">Scheduled interactive classrooms</p>
             </div>
-            <Link
-              to="/app/workspace"
-              className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-            >
+            <Link to="/app/workspace" className="text-xs font-semibold text-primary hover:underline">
               Open workspace →
             </Link>
           </div>
@@ -334,7 +331,7 @@ export function MentorSessionsPage() {
                         {session._id ? (
                           <Link
                             to={`/app/classroom/${session._id}`}
-                            className="inline-flex items-center gap-1 font-semibold text-[#b91c1c] hover:text-[#991b1b]"
+                            className="inline-flex items-center gap-1 font-semibold text-primary hover:underline"
                           >
                             Launch Room <Video size={12} />
                           </Link>
@@ -349,7 +346,7 @@ export function MentorSessionsPage() {
                                 ? "bg-red-500"
                                 : participantCount / session.maxParticipants > 0.8
                                   ? "bg-amber-500"
-                                  : "bg-[#b91c1c]",
+                                  : "bg-[var(--secondary)]",
                             )}
                             style={{ width: `${Math.min(100, (participantCount / session.maxParticipants) * 100)}%` }}
                           />

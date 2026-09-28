@@ -48,7 +48,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
       icon: Flame,
       label: "Engagement Score",
       value: `${overview?.engagementScore ?? 0}/100`,
-      color: overview && overview.engagementScore >= 60 ? "vermilion" : "warning",
+      color: overview && overview.engagementScore >= 60 ? "secondary" : "warning",
       glow: "rgba(0, 0, 0, 0.04)",
     },
     {
@@ -84,7 +84,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
               <div
                 className={cn(
                   "rounded-xl p-2.5 shrink-0",
-                  item.color === "vermilion" && "bg-red-50 text-[#b91c1c] border border-red-100",
+                  item.color === "secondary" && "bg-blue-50 text-[var(--secondary)] border border-blue-100",
                   item.color === "warning" && "bg-amber-50 text-amber-600 border border-amber-100",
                   (item.color === "default" || !item.color) && "bg-zinc-100 text-zinc-900 border border-zinc-200",
                 )}
@@ -92,9 +92,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
                 <Icon size={20} className="shrink-0" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold truncate">
-                  {item.label}
-                </p>
+                <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold truncate">{item.label}</p>
                 <p className="text-xl font-bold text-zinc-900 mt-0.5">{item.value}</p>
               </div>
             </div>

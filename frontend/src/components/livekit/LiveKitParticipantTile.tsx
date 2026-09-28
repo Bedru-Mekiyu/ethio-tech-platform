@@ -178,7 +178,7 @@ export function LiveKitParticipantTile({
             className={`relative flex items-center justify-center rounded-2xl shadow-xl transition-transform duration-300 ${
               isSpeaking ? "scale-105 ring-4 ring-white/40" : ""
             } ${aspectRatio === "video" ? "h-20 w-20 md:h-24 md:w-24 text-2xl md:text-3xl" : "h-16 w-16 text-xl"} font-bold text-white bg-gradient-to-tr ${
-              isHost ? "from-[#b91c1c] to-[#991b1b]" : "from-zinc-800 to-zinc-700"
+              isHost ? "from-[var(--secondary)] to-blue-950" : "from-zinc-800 to-zinc-700"
             }`}
           >
             {avatarUrl ? (
@@ -230,7 +230,7 @@ export function LiveKitParticipantTile({
               }}
               className={`pointer-events-auto rounded-lg p-1.5 backdrop-blur-md transition-all ${
                 isPinned
-                  ? "bg-[#b91c1c] text-white"
+                  ? "bg-[var(--secondary)] text-white"
                   : "bg-black/50 text-zinc-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
               }`}
               title={isPinned ? "Unpin participant" : "Pin participant"}

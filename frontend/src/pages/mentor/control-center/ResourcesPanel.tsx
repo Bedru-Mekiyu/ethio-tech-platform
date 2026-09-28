@@ -215,7 +215,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-zinc-900 truncate">{res.title}</p>
                     {res.description && <p className="text-[10px] text-zinc-500 truncate mt-0.5">{res.description}</p>}
-                    <p className="text-[9px] text-[#b91c1c] mt-1 truncate hover:underline">
+                    <p className="text-xs text-primary mt-1 truncate hover:underline">
                       <a href={res.url} target="_blank" rel="noopener noreferrer">
                         {res.url}
                       </a>

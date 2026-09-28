@@ -243,7 +243,7 @@ export const LiveKitDeviceSettingsModal = forwardRef<DeviceSettingsModalRef, Liv
             <button
               type="button"
               onClick={handleApply}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#b91c1c] px-5 py-2 text-sm font-semibold text-white shadow-lg hover:bg-[#991b1b] transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2 text-sm font-semibold text-white shadow-lg hover:bg-primary-hover transition-colors"
             >
               <Check className="h-4 w-4" /> Save Preferences
             </button>

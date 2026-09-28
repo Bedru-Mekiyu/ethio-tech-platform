@@ -76,7 +76,7 @@ export function StudentQuestionsPanel({ questions, onAskQuestion, onUpvote }: St
                   </Button>
                 </div>
                 {q.status === "answering" && (
-                  <p className="mt-2 text-xs font-semibold text-[#b91c1c]">Being answered live...</p>
+                  <p className="mt-2 text-xs font-semibold text-[var(--secondary)]">Being answered live...</p>
                 )}
               </div>
             ))}

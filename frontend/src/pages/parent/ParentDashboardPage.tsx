@@ -89,7 +89,7 @@ export function ParentDashboardPage() {
                 </p>
               </div>
               <div className="mt-3 pt-2 border-t border-zinc-100">
-                <Link to="/app/dashboard" className="text-xs font-medium text-[#b91c1c] hover:underline">
+                <Link to="/app/dashboard" className="text-xs font-medium text-primary hover:underline">
                   View Learning Hub →
                 </Link>
               </div>
@@ -125,7 +125,7 @@ export function ParentDashboardPage() {
           <p className="mt-2 text-xs leading-relaxed text-zinc-600">
             Need to link another student? Our team is available 24/7.
           </p>
-          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-[#b91c1c] hover:underline">
+          <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-primary hover:underline">
             Contact Support →
           </Link>
         </Card>

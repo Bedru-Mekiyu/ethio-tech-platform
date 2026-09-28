@@ -232,7 +232,7 @@ export function LiveKitLobby({ sessionTitle, mentorName, onJoin, isJoining = fal
               type="button"
               disabled={isJoining}
               onClick={handleJoin}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#b91c1c] px-6 py-3.5 text-sm font-semibold text-white shadow-xl hover:bg-[#991b1b] transition-all disabled:opacity-50"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-xl hover:bg-primary-hover transition-all disabled:opacity-50"
             >
               {isJoining ? (
                 <>
