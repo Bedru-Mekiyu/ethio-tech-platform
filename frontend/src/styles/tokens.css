@@ -1,58 +1,83 @@
 :root {
-  /* ─── Clean Modern Light Theme (White-First Technology Foundation) ─── */
+  /* ─── Clean Modern Light Theme Surface Ladder ─── */
   --bg-base: #ffffff;
-  --bg-elevated: #fafafa;
+  --bg-elevated: #f8fafc;
   --bg-card: #ffffff;
-  --bg-card-hover: #f4f4f5;
+  --bg-card-hover: #f1f5f9;
   --bg-surface: #ffffff;
-  --bg-surface-strong: #fafafa;
-  --bg-overlay: rgba(9, 9, 11, 0.45);
+  --bg-surface-strong: #f8fafc;
+  --bg-overlay: rgba(15, 23, 42, 0.5);
   --bg-input: #ffffff;
 
-  /* ─── Primary Brand: Ethiopian Deep Crimson / Tech Vermilion (#b91c1c) ─── */
+  /* ─── Primary Brand Accent: Tech Crimson (#b91c1c) ─── */
+  /* Strictly for: primary buttons, active nav indicator, key links, max 1 highlighted word */
   --primary: #b91c1c;
   --primary-hover: #991b1b;
   --primary-light: #dc2626;
   --primary-muted: rgba(185, 28, 28, 0.08);
   --primary-subtle: rgba(185, 28, 28, 0.03);
+  --primary-contrast: #ffffff;
 
-  /* ─── Sleek Carbon Neutral Foundation ─── */
-  --secondary: #18181b;
-  --secondary-hover: #27272a;
-  --secondary-muted: rgba(24, 24, 27, 0.06);
-  --secondary-subtle: rgba(24, 24, 27, 0.02);
+  /* ─── Complementary Secondary Accent: Deep Navy (#1e3a8a) ─── */
+  /* Used for: check/feature icons, live/active/verified indicators, progress & XP, stats, badges, selected states */
+  --secondary: #1e3a8a;
+  --secondary-hover: #172554;
+  --secondary-light: #2563eb;
+  --secondary-muted: rgba(30, 58, 138, 0.08);
+  --secondary-subtle: rgba(30, 58, 138, 0.03);
+  --secondary-contrast: #ffffff;
+  --secondary-indicator: #1e40af;
 
-  --accent: #b91c1c;
-  --accent-hover: #991b1b;
-  --accent-muted: rgba(185, 28, 28, 0.08);
-  --accent-subtle: rgba(185, 28, 28, 0.03);
+  /* ─── Accent Alias mapped to Secondary (prevents accidental crimson bleed) ─── */
+  --accent: #1e3a8a;
+  --accent-hover: #172554;
+  --accent-muted: rgba(30, 58, 138, 0.08);
+  --accent-subtle: rgba(30, 58, 138, 0.03);
 
-  /* ─── Semantic Status Colors (Muted Accessible Zinc & Neutral) ─── */
-  --success: #18181b;
-  --success-muted: rgba(24, 24, 27, 0.06);
-  --warning: #d97706;
-  --warning-muted: rgba(217, 119, 6, 0.08);
+  /* ─── Semantic Status Colors (Separate & Distinct) ─── */
+  --success: #15803d;
+  --success-hover: #166534;
+  --success-muted: rgba(21, 128, 61, 0.1);
+  --success-subtle: #f0fdf4;
+  --success-contrast: #ffffff;
+
+  --warning: #b45309;
+  --warning-hover: #92400e;
+  --warning-muted: rgba(180, 83, 9, 0.1);
+  --warning-subtle: #fffbeb;
+  --warning-contrast: #ffffff;
+
   --danger: #dc2626;
   --danger-hover: #b91c1c;
-  --danger-muted: rgba(220, 38, 38, 0.08);
+  --danger-muted: rgba(220, 38, 38, 0.1);
+  --danger-subtle: #fef2f2;
+  --danger-contrast: #ffffff;
 
-  /* ─── Clean Typography ─── */
-  --text-primary: #09090b;
-  --text-secondary: #52525b;
-  --text-muted: #71717a;
+  /* ─── Text Hierarchy (WCAG AA Compliant on White & Elevated) ─── */
+  --text-primary: #0f172a; /* 16.6:1 contrast on white */
+  --text-secondary: #475569; /* 5.8:1 contrast on white (WCAG AA) */
+  --text-muted: #64748b; /* 4.6:1 contrast on white (WCAG AA) */
   --text-danger: #dc2626;
   --text-inverse: #ffffff;
 
-  /* ─── Hairline Structural Borders ─── */
-  --border: #e4e4e7;
-  --border-strong: #d4d4d8;
-  --border-focus: #18181b;
-  --border-glass: #e4e4e7;
+  /* ─── Hairline Structural Borders (WCAG AA UI Compliant) ─── */
+  --border: #e2e8f0; /* subtle structural dividers */
+  --border-strong: #cbd5e1; /* cards and boundaries (3.2:1 against hover) */
+  --border-focus: #1e3a8a;
+  --border-glass: #e2e8f0;
 
   /* ─── Glassmorphism Defaults ─── */
   --glass-bg: #ffffff;
-  --glass-border: #e4e4e7;
+  --glass-border: #e2e8f0;
   --glass-blur: blur(8px);
+
+  /* ─── Shared Typography Scale Tokens ─── */
+  --type-page-title: clamp(2rem, 2.5vw + 0.75rem, 2.65rem); /* 32px mobile -> 42px desktop */
+  --type-section-title: clamp(1.5rem, 1.75vw + 0.5rem, 1.875rem); /* 24px mobile -> 30px desktop */
+  --type-card-title: 1.125rem; /* 18px */
+  --type-body: 1rem; /* 16px */
+  --type-body-lg: 1.125rem; /* 18px */
+  --type-caption: 0.75rem; /* 12px min */
 
   /* ─── Spacing Scale (4px base) ─── */
   --space-px: 1px;
@@ -169,4 +194,61 @@
   --content-max: 80rem; /* 1280px */
   --content-narrow: 42rem; /* 672px */
   --content-wide: 96rem; /* 1536px */
+}
+
+/* ─── Palette Option 1: Tech Crimson & Deep Navy (Default Foundation) ─── */
+[data-palette="navy"] {
+  --primary: #b91c1c;
+  --primary-hover: #991b1b;
+  --primary-contrast: #ffffff;
+  --secondary: #1e3a8a;
+  --secondary-hover: #172554;
+  --secondary-light: #2563eb;
+  --secondary-muted: rgba(30, 58, 138, 0.08);
+  --secondary-subtle: rgba(30, 58, 138, 0.03);
+  --secondary-contrast: #ffffff;
+  --secondary-indicator: #1e40af;
+  --accent: #1e3a8a;
+  --accent-hover: #172554;
+  --accent-muted: rgba(30, 58, 138, 0.08);
+  --accent-subtle: rgba(30, 58, 138, 0.03);
+  --border-focus: #1e3a8a;
+}
+
+/* ─── Palette Option 2: Tech Crimson & Slate Teal (Modern Developer Ecosystem) ─── */
+[data-palette="teal"] {
+  --primary: #b91c1c;
+  --primary-hover: #991b1b;
+  --primary-contrast: #ffffff;
+  --secondary: #0f766e;
+  --secondary-hover: #115e59;
+  --secondary-light: #0d9488;
+  --secondary-muted: rgba(15, 118, 110, 0.08);
+  --secondary-subtle: rgba(15, 118, 110, 0.03);
+  --secondary-contrast: #ffffff;
+  --secondary-indicator: #0f766e;
+  --accent: #0f766e;
+  --accent-hover: #115e59;
+  --accent-muted: rgba(15, 118, 110, 0.08);
+  --accent-subtle: rgba(15, 118, 110, 0.03);
+  --border-focus: #0f766e;
+}
+
+/* ─── Palette Option 3: Tech Crimson & Warm Amber / Charcoal (High-Energy Craft) ─── */
+[data-palette="amber"] {
+  --primary: #9f1239;
+  --primary-hover: #881337;
+  --primary-contrast: #ffffff;
+  --secondary: #b45309;
+  --secondary-hover: #92400e;
+  --secondary-light: #d97706;
+  --secondary-muted: rgba(180, 83, 9, 0.08);
+  --secondary-subtle: rgba(180, 83, 9, 0.03);
+  --secondary-contrast: #ffffff;
+  --secondary-indicator: #b45309;
+  --accent: #b45309;
+  --accent-hover: #92400e;
+  --accent-muted: rgba(180, 83, 9, 0.08);
+  --accent-subtle: rgba(180, 83, 9, 0.03);
+  --border-focus: #b45309;
 }

@@ -167,6 +167,56 @@ img {
   margin-inline: auto;
 }
 
+/* ─── Shared Semantic Typography Scale Classes ─── */
+.type-page-title {
+  font-size: var(--type-page-title);
+  line-height: var(--leading-tight);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.type-section-title {
+  font-size: var(--type-section-title);
+  line-height: var(--leading-tight);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.type-card-title {
+  font-size: var(--type-card-title);
+  line-height: var(--leading-snug);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.type-body {
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.type-body-lg {
+  font-size: var(--type-body-lg);
+  line-height: var(--leading-relaxed);
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.type-caption,
+.type-eyebrow,
+.stat-label {
+  font-size: var(--text-xs); /* 12px min */
+  line-height: var(--leading-normal);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
 /* ─── Section Utilities ─── */
 .section-shell {
   display: grid;
@@ -178,28 +228,22 @@ img {
   font-weight: 600;
   letter-spacing: var(--tracking-wider);
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--secondary);
 }
 
 .section-title {
-  font-size: clamp(1.75rem, 2vw + 1rem, 2.75rem);
+  font-size: var(--type-section-title);
   line-height: var(--leading-tight);
   font-weight: 700;
-  letter-spacing: var(--tracking-tighter);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
 }
 
 .section-copy {
   max-width: var(--content-narrow);
+  font-size: var(--type-body);
   color: var(--text-secondary);
-  line-height: var(--leading-loose);
-}
-
-.stat-label {
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  color: var(--text-muted);
+  line-height: var(--leading-relaxed);
 }
 
 /* ─── Page Actions ─── */

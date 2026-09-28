@@ -33,6 +33,7 @@ import { Card } from "@/components/ui/card";
 import { SmartImage } from "@/components/ui/smart-image";
 import { fetchMarketingHome } from "@/services/marketingService";
 import { LOCAL_MEDIA_ASSETS } from "@/config/mediaConfig";
+import { PalettePreviewBanner } from "@/components/marketing/PalettePreviewBanner";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -510,41 +511,46 @@ export function HomePage() {
   const activeLearnersCount = data?.stats?.activeLearners ?? 12500;
   const approvalRate = data?.stats?.approvalRate ?? 94.2;
 
-
   return (
     <div className="relative overflow-hidden selection:bg-zinc-200 selection:text-zinc-900">
+      {/* 0. INTERACTIVE PALETTE PREVIEW SELECTOR */}
+      <PalettePreviewBanner />
+
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION
+          1. HERO SECTION (Decluttered, Balanced 36-44px Typography)
       ────────────────────────────────────────────────────────────── */}
       <motion.section
-        className="page-shell pt-10 pb-14 lg:pt-16 lg:pb-20"
+        className="page-shell pt-8 pb-12 lg:pt-12 lg:pb-16"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-800">
-              <span className="h-1.5 w-1.5 rounded-full bg-zinc-900" />
+          <div className="space-y-5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-semibold text-zinc-800 shadow-2xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)]" />
               <span>Interactive Technology & Career Platform</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-zinc-900">
-              Building Ethiopia&apos;s Tech Future with <span className="text-[#b91c1c]">Live Mentorship</span>
+            {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
+            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-zinc-900 max-w-2xl">
+              Building Ethiopia&apos;s Tech Future with <span className="text-primary">Live Mentorship</span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-sm sm:text-base leading-relaxed text-zinc-600 max-w-2xl font-normal">
+            {/* Subtitle - Trimmed to comfortable 16-18px */}
+            <p className="text-base sm:text-lg leading-relaxed text-zinc-600 max-w-xl font-normal">
               Connecting university students and aspiring software engineers with senior diaspora mentors, structured
               production curriculums, and collaborative 4-peer agile squads.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-2">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full gap-2 font-medium">
+                <Button
+                  size="lg"
+                  className="w-full gap-2 font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
+                >
                   <span>Start Coding Free</span>
                   <ArrowRight size={16} />
                 </Button>
@@ -552,7 +558,7 @@ export function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="w-full sm:w-auto gap-2 font-medium border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 shadow-xs"
+                className="w-full sm:w-auto gap-2 font-medium border-zinc-200 bg-white text-zinc-800 hover:bg-zinc-50 hover:text-zinc-900 shadow-xs"
                 onClick={() => {
                   const el = document.getElementById("curriculum-section");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -563,46 +569,19 @@ export function HomePage() {
               </Button>
             </div>
 
-            {/* Trust Signals */}
+            {/* Single Row of Trust Points */}
             <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-600">
               <div className="flex items-center gap-1.5 font-medium text-zinc-800">
-                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>100% Free & Open Access</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-zinc-800">
-                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>Low-Bandwidth WebRTC Mesh</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-zinc-800">
-                <CheckCircle2 size={14} className="text-[#b91c1c]" />
+                <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>Verified Deliverable Credentials</span>
-              </div>
-            </div>
-
-            {/* Micro Feature Matrix Badges */}
-            <div className="pt-2">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                Proven Platform Architecture
-              </p>
-              <div className="mt-2.5 flex flex-wrap gap-2">
-                {[
-                  { icon: Video, label: "WebRTC HD Classrooms" },
-                  { icon: Terminal, label: "In-Browser Cloud Sandbox" },
-                  { icon: Users, label: "4-Peer Sprint Squads" },
-                  { icon: ShieldCheck, label: "Verifiable Digital Credentials" },
-                  { icon: MapPin, label: "6 Regional Hubs" },
-                ].map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.label}
-                      className="flex items-center gap-1.5 rounded-md border border-zinc-200 bg-white px-2.5 py-1 text-xs text-zinc-700 shadow-xs transition-colors hover:border-zinc-300 hover:text-zinc-900"
-                    >
-                      <Icon size={13} className="text-zinc-700" />
-                      <span>{item.label}</span>
-                    </div>
-                  );
-                })}
               </div>
             </div>
           </div>
@@ -610,16 +589,15 @@ export function HomePage() {
           {/* Right Column: Platform Workspace & Real Collaboration Preview */}
           <div className="relative">
             <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm space-y-3.5">
-              {/* Header */}
+              {/* Header - window dots removed */}
               <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
-                <div className="flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
-                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
-                  <div className="h-2 w-2 rounded-full bg-zinc-300" />
-                  <span className="ml-1 text-xs font-semibold text-zinc-800">Collaborative Engineering</span>
-                </div>
-                <Badge variant="outline" size="sm" className="gap-1.5 font-medium text-[11px]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c]" />
+                <span className="text-xs font-semibold text-zinc-800">Collaborative Engineering</span>
+                <Badge
+                  variant="outline"
+                  size="sm"
+                  className="gap-1.5 font-medium text-xs border-zinc-200 bg-zinc-50 text-zinc-800"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                   Active Session
                 </Badge>
               </div>
@@ -635,64 +613,47 @@ export function HomePage() {
                   width={800}
                   quality={85}
                 />
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-md bg-zinc-900/85 px-2.5 py-1 text-[11px] text-white backdrop-blur-xs">
+                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-md bg-zinc-900/85 px-2.5 py-1 text-xs text-white backdrop-blur-xs">
                   <span className="flex items-center gap-1.5 font-medium">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Live Peer Review
                   </span>
-                  <span className="text-zinc-300 font-mono text-[10px]">Addis Ababa • Remote Mesh</span>
+                  <span className="text-zinc-300 font-mono text-[11px]">Addis Ababa • Remote Mesh</span>
                 </div>
               </div>
 
-              {/* Live Mentorship Session Card */}
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                    Live Workshop · WebRTC Mesh
-                  </span>
-                  <span className="flex items-center gap-1 text-[11px] font-medium text-zinc-700">
-                    <Radio size={11} className="text-[#b91c1c] animate-pulse" /> Sub-150ms Audio
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
+              {/* Single Live Mentorship Session Line */}
+              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
                   <Avatar
                     name="Selamawit Tekle"
                     userId="selamawit-tekle"
                     role="mentor"
                     size="sm"
-                    className="border border-zinc-200"
+                    className="border border-zinc-200 shrink-0"
                   />
                   <div className="min-w-0">
-                    <div className="flex items-center gap-1.5">
-                      <p className="text-xs font-semibold text-zinc-900 truncate">Selamawit Tekle</p>
-                      <ShieldCheck size={13} className="text-zinc-700 shrink-0" />
-                    </div>
-                    <p className="text-[11px] text-zinc-600 truncate">
-                      Senior Engineering Fellow · Distributed Systems
-                    </p>
+                    <p className="text-xs font-semibold text-zinc-900 truncate">Selamawit Tekle</p>
+                    <p className="text-[11px] text-zinc-500 truncate">Senior Fellow · Distributed Systems</p>
                   </div>
                 </div>
+                <span className="flex items-center gap-1 text-xs font-medium text-zinc-700 shrink-0">
+                  <Radio size={12} className="text-[var(--secondary)] animate-pulse" /> Sub-150ms
+                </span>
               </div>
 
-              {/* Active Curriculum Track Progress Card */}
+              {/* Single Track Progress Line */}
               <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
-                      Curriculum Pathway
-                    </span>
-                    <p className="text-xs font-bold text-zinc-900 mt-0.5">Fullstack Cloud & Distributed Systems</p>
-                  </div>
-                  <span className="font-mono text-xs font-bold text-zinc-900">50%</span>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-semibold text-zinc-800 truncate">Fullstack Cloud & Distributed Systems</span>
+                  <span className="font-mono font-bold text-zinc-900">50%</span>
                 </div>
                 <div className="h-1.5 w-full rounded-full bg-zinc-100 overflow-hidden">
-                  <div className="h-full bg-zinc-900 rounded-full" style={{ width: "50%" }} />
+                  <div className="h-full bg-[var(--secondary)] rounded-full transition-all" style={{ width: "50%" }} />
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-zinc-600 pt-0.5">
-                  <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-                    <CheckCircle2 size={12} className="text-zinc-700" /> Module 4: PostgreSQL Indexing & Pooling
-                  </span>
-                  <span className="text-zinc-500">8 / 16 Lessons</span>
+                <div className="flex items-center justify-between text-[11px] text-zinc-500">
+                  <span>Module 4: PostgreSQL Pooling</span>
+                  <span>8 / 16 Lessons</span>
                 </div>
               </div>
             </div>
@@ -701,10 +662,10 @@ export function HomePage() {
       </motion.section>
 
       {/* ─────────────────────────────────────────────────────────────
-          2. NATIONAL REACH & IMPACT METRICS BAR
+          2. NATIONAL REACH & IMPACT METRICS BAR + ARCHITECTURE PILLARS
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-12 lg:pb-14">
-        <div className="rounded-xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
+        <div className="rounded-xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs space-y-5">
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
             <div className="text-center">
               <p className="text-2xl font-bold tracking-tight text-zinc-900">
@@ -744,6 +705,31 @@ export function HomePage() {
               <p className="mt-0.5 text-[11px] text-zinc-500">Audited Production Projects</p>
             </div>
           </div>
+
+          {/* Folded Architecture Highlight Strip */}
+          <div className="pt-4 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Proven Platform Architecture</p>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { icon: Video, label: "WebRTC HD Classrooms" },
+                { icon: Terminal, label: "In-Browser Cloud Sandbox" },
+                { icon: Users, label: "4-Peer Sprint Squads" },
+                { icon: ShieldCheck, label: "Verifiable Digital Credentials" },
+                { icon: MapPin, label: "6 Regional Hubs" },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-1.5 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-700 shadow-2xs"
+                  >
+                    <Icon size={13} className="text-[var(--secondary)]" />
+                    <span>{item.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -763,8 +749,8 @@ export function HomePage() {
             <Layers size={12} />
             <span>Interactive Learning Stack</span>
           </div>
-          <h2 className="mt-4 text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-            Everything You Need to Master <span className="text-[#b91c1c]">Production Software</span>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+            Everything You Need to Master <span className="text-primary">Production Software</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             Purpose-built for Ethiopian engineers. Zero friction, instant cloud sandboxes, adaptive live classrooms, and
@@ -1024,8 +1010,8 @@ export function HomePage() {
             <Compass size={12} />
             <span>The PISTELS Framework</span>
           </div>
-          <h2 className="mt-4 text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-            7 Pillars Engineered for <span className="text-[#b91c1c]">Engineering Mastery</span>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+            7 Pillars Engineered for <span className="text-primary">Engineering Mastery</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
             PISTELS is our proprietary pedagogical framework designed to bridge the gap between academic theory and the
@@ -1135,8 +1121,8 @@ export function HomePage() {
               <BookOpen size={12} />
               <span>Job-Ready Curricula</span>
             </div>
-            <h2 className="mt-3 text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-              Engineered for <span className="text-[#b91c1c]">High-Demand Tech Careers</span>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              Engineered for <span className="text-primary">High-Demand Tech Careers</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
               Structured step-by-step pathways taking learners from foundational coding to shipping production systems.
@@ -1284,8 +1270,8 @@ export function HomePage() {
               <Award size={12} />
               <span>World-Class Mentors</span>
             </div>
-            <h2 className="mt-3 text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-              Learn From <span className="text-[#b91c1c]">Global & Local Leaders</span>
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              Learn From <span className="text-primary">Global & Local Leaders</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
               Direct access to Ethiopian staff engineers, architects, and technical founders from Silicon Valley,
@@ -1375,8 +1361,8 @@ export function HomePage() {
                 <span>Nationwide Physical Reach</span>
               </div>
 
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-                6 Regional Hubs Powering <span className="text-[#b91c1c]">Equal Access</span>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+                6 Regional Hubs Powering <span className="text-primary">Equal Access</span>
               </h2>
 
               <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
@@ -1443,7 +1429,7 @@ export function HomePage() {
                 <div className="rounded-md border border-zinc-200 bg-zinc-50 p-3 space-y-1 text-xs">
                   <div className="flex items-center justify-between">
                     <p className="font-semibold text-zinc-900">Upcoming Regional Event:</p>
-                    <span className="text-[10px] font-semibold text-[#b91c1c] uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
                       Registration Open
                     </span>
                   </div>
@@ -1497,8 +1483,8 @@ export function HomePage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-zinc-800" />
                 Applications Open
               </span>
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
-                Ready to Build the Future of <span className="text-[#b91c1c]">Ethiopian Tech?</span>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+                Ready to Build the Future of <span className="text-primary">Ethiopian Tech?</span>
               </h2>
               <p className="text-sm leading-relaxed text-zinc-600 max-w-xl">
                 Join {formatCompactCount(activeLearnersCount)}+ developers mastering real-world software engineering
