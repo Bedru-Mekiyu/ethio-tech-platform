@@ -414,7 +414,7 @@ export function CalendarPage() {
             <Button
               size="sm"
               onClick={() => openAddModal("study_block")}
-              className="text-xs font-medium bg-[#b91c1c] hover:bg-[#991b1b] text-white shadow-xs"
+              className="text-xs font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
             >
               <Plus size={13} className="mr-1" />
               Schedule Block
@@ -450,7 +450,9 @@ export function CalendarPage() {
                   {sprintStats.completedHours}
                   <span className="text-sm font-normal text-zinc-500"> / {sprintStats.targetHours} hrs completed</span>
                 </h2>
-                <span className="text-xs font-semibold text-[#b91c1c]">({sprintStats.progressPercent}% of target)</span>
+                <span className="text-xs font-semibold text-[var(--secondary)]">
+                  ({sprintStats.progressPercent}% of target)
+                </span>
               </div>
               <p className="text-xs text-zinc-500 mt-0.5">
                 {sprintStats.completedCount} of {sprintStats.totalCount} blocks completed this week.
@@ -461,7 +463,7 @@ export function CalendarPage() {
             <div className="space-y-1">
               <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-200">
                 <div
-                  className="h-full rounded-full bg-[#b91c1c] transition-all duration-500"
+                  className="h-full rounded-full bg-[var(--secondary)] transition-all duration-500"
                   style={{ width: `${sprintStats.progressPercent}%` }}
                 />
               </div>
@@ -572,7 +574,7 @@ export function CalendarPage() {
               type="button"
               onClick={goToday}
               aria-label="Jump to today"
-              className="text-[11px] font-medium text-[#b91c1c] hover:underline"
+              className="text-[11px] font-medium text-primary hover:underline"
             >
               Jump to Today
             </button>
@@ -763,7 +765,7 @@ export function CalendarPage() {
 
                             <div className="flex flex-wrap items-center gap-3 pt-1 text-[11px] text-zinc-500">
                               <span className="flex items-center gap-1">
-                                <CalendarIcon size={12} className="text-[#b91c1c]" />
+                                <CalendarIcon size={12} className="text-zinc-500" />
                                 {formatTime(event.start)}
                                 {event.end && ` - ${formatTime(event.end)}`}
                               </span>
@@ -812,7 +814,7 @@ export function CalendarPage() {
                           <div className="mt-3 border-t border-zinc-100 pt-3">
                             <Link
                               to={`/app/classroom/${event.sessionId || meeting?.id || "demo-room"}`}
-                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#b91c1c] px-3 py-2 text-xs font-semibold text-white hover:bg-[#991b1b] transition shadow-xs"
+                              className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-primary px-3 py-2 text-xs font-semibold text-white hover:bg-[var(--primary-hover)] transition shadow-xs"
                             >
                               <Video size={14} />
                               Join Live WebRTC Room
@@ -828,7 +830,7 @@ export function CalendarPage() {
                     <Button
                       size="sm"
                       onClick={() => openAddModal("study_block", selectedDate)}
-                      className="mt-3 bg-[#b91c1c] hover:bg-[#991b1b] text-xs text-white shadow-xs"
+                      className="mt-3 bg-primary hover:bg-[var(--primary-hover)] text-xs text-white shadow-xs"
                     >
                       <Plus size={13} className="mr-1" />
                       Add Study Block
@@ -926,7 +928,7 @@ export function CalendarPage() {
                             <Link
                               to={`/app/classroom/${ev.sessionId || "demo-room"}`}
                               onClick={(e) => e.stopPropagation()}
-                              className="mt-1 flex items-center justify-center gap-1 rounded bg-[#b91c1c] px-2 py-1 text-[10px] font-semibold text-white hover:bg-[#991b1b] shadow-xs"
+                              className="mt-1 flex items-center justify-center gap-1 rounded bg-primary px-2 py-1 text-[10px] font-semibold text-white hover:bg-[var(--primary-hover)] shadow-xs"
                             >
                               <Video size={10} /> Join
                             </Link>
@@ -1070,7 +1072,7 @@ export function CalendarPage() {
 
                         <div className="flex items-center gap-3 text-[11px] text-zinc-500">
                           <span className="flex items-center gap-1">
-                            <CalendarIcon size={12} className="text-[#b91c1c]" />
+                            <CalendarIcon size={12} className="text-zinc-500" />
                             {eventDate.toLocaleDateString("en-US", { weekday: "short" })}, {formatTime(event.start)}{" "}
                             {event.end && ` - ${formatTime(event.end)}`}
                           </span>
@@ -1084,7 +1086,7 @@ export function CalendarPage() {
                       {isMeeting && (
                         <Link
                           to={`/app/classroom/${event.sessionId || "demo-room"}`}
-                          className="inline-flex items-center gap-1.5 rounded-xl bg-[#b91c1c] px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#991b1b] transition shadow-xs"
+                          className="inline-flex items-center gap-1.5 rounded-xl bg-primary px-3.5 py-2 text-xs font-semibold text-white hover:bg-[var(--primary-hover)] transition shadow-xs"
                         >
                           <Video size={13} />
                           Join Live

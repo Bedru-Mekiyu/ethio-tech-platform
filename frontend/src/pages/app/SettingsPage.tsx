@@ -321,7 +321,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-zinc-200 bg-white shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-zinc-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
-                  <UserCircle2 size={15} className="text-[#b91c1c]" /> Personal Profile
+                  <UserCircle2 size={15} className="text-zinc-600" /> Personal Profile
                 </CardTitle>
               </CardHeader>
 
@@ -491,7 +491,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
             <Card className="rounded-xl border border-zinc-200 bg-white shadow-sm p-5 sm:p-6">
               <CardHeader className="p-0 border-b border-zinc-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-zinc-900 flex items-center gap-2">
-                  <Lock size={15} className="text-[#b91c1c]" /> Security & Password
+                  <Lock size={15} className="text-zinc-600" /> Security & Password
                 </CardTitle>
               </CardHeader>
 
@@ -548,7 +548,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                   </Button>
                   <Link
                     to="/auth/forgot-password"
-                    className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline self-start mt-0.5"
+                    className="text-xs font-medium text-primary hover:underline self-start mt-0.5"
                   >
                     Forgot password?
                   </Link>

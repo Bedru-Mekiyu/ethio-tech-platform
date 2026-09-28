@@ -112,7 +112,7 @@ function ScheduleRow({
               <div
                 className={cn(
                   "h-full rounded-full",
-                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-[#b91c1c]",
+                  isFull ? "bg-rose-500" : capacityPct > 80 ? "bg-amber-500" : "bg-[var(--secondary)]",
                 )}
                 style={{ width: `${capacityPct}%` }}
               />
@@ -126,7 +126,7 @@ function ScheduleRow({
       <div className="flex shrink-0 gap-2">
         {isLive ? (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" className="text-xs bg-[#b91c1c] hover:bg-[#991b1b] text-white font-medium">
+            <Button size="sm" className="text-xs bg-primary hover:bg-[var(--primary-hover)] text-white font-medium">
               Join Live
             </Button>
           </Link>

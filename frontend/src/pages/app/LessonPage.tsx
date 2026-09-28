@@ -82,7 +82,7 @@ export function LessonPage() {
       <div className="flex items-center justify-between">
         <Link
           to={trackId ? `/app/tracks/${trackId}` : "/app/tracks"}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
         >
           <ArrowLeft size={13} />
           Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
@@ -90,7 +90,7 @@ export function LessonPage() {
 
         {lesson?.durationMinutes && (
           <span className="text-xs text-zinc-500 flex items-center gap-1">
-            <Clock size={12} className="text-[#b91c1c]" />
+            <Clock size={12} className="text-zinc-500" />
             {lesson.durationMinutes} min
           </span>
         )}
@@ -102,7 +102,7 @@ export function LessonPage() {
           <div className="flex flex-wrap items-center gap-1.5">
             {lesson?.moduleTitle && (
               <Badge variant="outline" size="sm" className="flex items-center gap-1">
-                <Layers size={10} className="text-[#b91c1c]" />
+                <Layers size={10} className="text-zinc-500" />
                 {lesson.moduleTitle}
               </Badge>
             )}
@@ -156,13 +156,13 @@ export function LessonPage() {
           <div className="space-y-2 pt-3 border-t border-zinc-200">
             <div className="flex items-center justify-between text-xs text-zinc-500">
               <span className="font-mono flex items-center gap-1.5">
-                <Code2 size={13} className="text-[#b91c1c]" />
+                <Code2 size={13} className="text-[var(--secondary)]" />
                 Hands-On Code Sandbox Snippet
               </span>
               <button
                 type="button"
                 onClick={() => handleCopyStarter(lesson.starterCode!)}
-                className="inline-flex items-center gap-1 text-[#b91c1c] hover:underline text-xs font-medium"
+                className="inline-flex items-center gap-1 text-primary hover:underline text-xs font-medium"
               >
                 {copiedCode ? <Check size={12} /> : <Copy size={12} />}
                 {copiedCode ? "Copied" : "Copy"}
@@ -200,7 +200,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
             >
-              <Play size={12} className="text-[#b91c1c]" />
+              <Play size={12} className="text-[var(--secondary)]" />
               Video Workshop
             </a>
           )}
@@ -212,7 +212,7 @@ export function LessonPage() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
             >
-              <BookOpen size={12} className="text-[#b91c1c]" />
+              <BookOpen size={12} className="text-[var(--secondary)]" />
               Interactive Sandbox
             </a>
           )}

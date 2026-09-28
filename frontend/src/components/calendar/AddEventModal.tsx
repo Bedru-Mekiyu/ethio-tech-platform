@@ -52,14 +52,14 @@ const TYPE_OPTIONS: Array<{
     label: "Live Session",
     desc: "WebRTC lecture, squad sync, or mentor meeting",
     icon: Video,
-    defaultColor: "#b91c1c",
+    defaultColor: "#1e3a8a",
   },
   {
     type: "deadline",
     label: "Assignment Deadline",
     desc: "Deliverable or quiz submission cutoff",
     icon: AlertCircle,
-    defaultColor: "#b91c1c",
+    defaultColor: "#d97706",
   },
   {
     type: "milestone",
@@ -86,6 +86,7 @@ const TYPE_OPTIONS: Array<{
 
 const COLOR_PRESETS = [
   { hex: "#18181b", label: "Carbon Neutral" },
+  { hex: "#1e3a8a", label: "Deep Navy" },
   { hex: "#b91c1c", label: "Tech Vermilion" },
   { hex: "#d97706", label: "Muted Amber" },
   { hex: "#71717a", label: "Zinc Muted" },
@@ -272,7 +273,7 @@ export function AddEventModal({
             {/* Event Title */}
             <div className="space-y-1.5">
               <label htmlFor={titleInputId} className="text-xs font-semibold uppercase tracking-wider text-zinc-700">
-                Event Title <span className="text-[#b91c1c]">*</span>
+                Event Title <span className="text-rose-500">*</span>
               </label>
               <input
                 id={titleInputId}
@@ -326,7 +327,7 @@ export function AddEventModal({
             <div className="space-y-3 rounded-2xl border border-zinc-200 bg-zinc-50/60 p-4">
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-1.5 text-xs font-semibold text-zinc-800">
-                  <Clock size={14} className="text-[#b91c1c]" />
+                  <Clock size={14} className="text-[var(--secondary)]" />
                   Schedule & Timing
                 </span>
                 <label htmlFor={allDayInputId} className="flex items-center gap-2 text-xs text-zinc-600 cursor-pointer">
@@ -391,7 +392,7 @@ export function AddEventModal({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <label htmlFor={trackInputId} className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700">
-                  <Layers size={13} className="text-[#b91c1c]" />
+                  <Layers size={13} className="text-[var(--secondary)]" />
                   Target Track
                 </label>
                 <select
@@ -417,7 +418,7 @@ export function AddEventModal({
                   htmlFor={capstoneInputId}
                   className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700"
                 >
-                  <Layers size={13} className="text-[#b91c1c]" />
+                  <Layers size={13} className="text-[var(--secondary)]" />
                   Target Capstone / Project
                 </label>
                 {availableCapstones.length > 0 ? (
@@ -465,7 +466,7 @@ export function AddEventModal({
             {/* Color Accent Picker */}
             <div className="space-y-2">
               <label className="flex items-center gap-1.5 text-xs font-semibold text-zinc-700">
-                <Tag size={13} className="text-[#b91c1c]" />
+                <Tag size={13} className="text-[var(--secondary)]" />
                 Color Theme Tag
               </label>
               <div className="flex flex-wrap gap-2.5">
@@ -500,7 +501,7 @@ export function AddEventModal({
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-[#b91c1c] hover:bg-[#991b1b] text-white font-semibold shadow-xs px-5"
+                className="bg-primary hover:bg-primary-hover text-white font-semibold shadow-xs px-5"
               >
                 {isSubmitting ? (
                   "Scheduling..."

@@ -69,7 +69,7 @@ export function CertificatesPage() {
                     href={cert.certificateUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                   >
                     Download Certificate →
                   </a>

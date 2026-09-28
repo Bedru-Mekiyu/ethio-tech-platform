@@ -181,7 +181,7 @@ export function StudentDashboardPage() {
           </div>
 
           <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs">
-            <Zap className="text-[#b91c1c]" size={14} />
+            <Zap className="text-[var(--secondary)]" size={14} />
             <span className="text-xs font-semibold text-zinc-900">{userXp.toLocaleString()}</span>
             <span className="text-[11px] text-zinc-500">XP (Lvl {userLevel})</span>
           </div>
@@ -301,7 +301,7 @@ export function StudentDashboardPage() {
                       : "Building Interactive Components & State Management"}
                   </p>
                   <p className="text-[11px] text-zinc-500">
-                    Earn <span className="font-semibold text-[#b91c1c]">+50 XP</span> upon completion
+                    Earn <span className="font-semibold text-[var(--secondary)]">+50 XP</span> upon completion
                   </p>
                 </div>
 
@@ -629,7 +629,7 @@ export function StudentDashboardPage() {
                   <CheckCircle2 size={13} className="text-zinc-700" /> Completed
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-[#b91c1c]">
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-[var(--secondary)]">
                   <Zap size={12} /> +{dailyChallenge?.xpReward ?? 25} XP
                 </span>
               )}

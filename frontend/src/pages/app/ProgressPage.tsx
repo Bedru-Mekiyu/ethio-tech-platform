@@ -256,7 +256,7 @@ export function ProgressPage() {
           </div>
 
           <div className="flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 shadow-xs">
-            <Zap className="text-[#b91c1c]" size={14} />
+            <Zap className="text-[var(--secondary)]" size={14} />
             <span className="text-xs font-semibold text-zinc-900">{userXp.toLocaleString()}</span>
             <span className="text-[11px] text-zinc-500">XP</span>
           </div>
@@ -445,7 +445,7 @@ export function ProgressPage() {
 
                   <div className="flex items-center justify-between text-[11px] text-zinc-500">
                     <span>{skill.level}% Mastery</span>
-                    <span className="font-mono text-[#b91c1c] font-semibold">{skill.xp} XP Earned</span>
+                    <span className="font-mono text-[var(--secondary)] font-semibold">{skill.xp} XP Earned</span>
                   </div>
                 </div>
               ))}
@@ -724,7 +724,7 @@ export function ProgressPage() {
                       {log.sourceType ? ` · Source: ${log.sourceType}` : ""}
                     </p>
                   </div>
-                  <span className="text-xs font-bold font-mono text-[#b91c1c]">+{log.amount} XP</span>
+                  <span className="text-xs font-bold font-mono text-[var(--secondary)]">+{log.amount} XP</span>
                 </Card>
               ))}
             </div>

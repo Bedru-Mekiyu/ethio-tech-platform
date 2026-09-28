@@ -57,7 +57,7 @@ export function SquadsListPage() {
               <div className="mt-4 pt-3 border-t border-zinc-100 flex justify-end">
                 <Link
                   to={`/app/squads/${group._id}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
                 >
                   <MessageSquare size={13} /> Open Squad Room →
                 </Link>

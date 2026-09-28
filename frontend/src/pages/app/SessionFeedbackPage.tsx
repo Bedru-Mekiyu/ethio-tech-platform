@@ -86,7 +86,7 @@ export function SessionFeedbackPage() {
     <div className="mx-auto max-w-lg space-y-6 text-zinc-900">
       <Link
         to="/app/sessions"
-        className="inline-flex items-center gap-1.5 text-xs text-[#b91c1c] hover:text-[#991b1b] hover:underline font-medium"
+        className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium"
       >
         <ArrowLeft size={13} />
         Back to sessions

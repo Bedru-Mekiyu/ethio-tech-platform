@@ -97,7 +97,7 @@ const LANGUAGE_META: Record<SupportedLanguage, LanguageMeta> = {
     badge: "TS 5.8",
     defaultFile: "solution.ts",
     runtimeEngine: "Node.js v22.3 (tsc JIT)",
-    accentColor: "text-[#b91c1c]",
+    accentColor: "text-[var(--secondary)]",
   },
   javascript: {
     id: "javascript",
@@ -193,7 +193,7 @@ export function InteractiveCounter() {
         </button>
         <button
           onClick={() => updateCount(count + step)}
-          className="rounded-lg bg-[#b91c1c] hover:bg-[#991b1b] active:scale-95 transition px-3 py-2 text-sm font-semibold text-white font-bold shadow-xs"
+          className="rounded-lg bg-primary hover:bg-[var(--primary-hover)] active:scale-95 transition px-3 py-2 text-sm font-semibold text-white font-bold shadow-xs"
         >
           +{step}
         </button>
@@ -1378,7 +1378,7 @@ export function CodingWorkspacePage() {
             <span className="text-zinc-400 hidden sm:inline">src</span>
             <span className="text-zinc-300 hidden sm:inline">/</span>
             <div className="flex items-center gap-1.5 rounded-md bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-800 border border-zinc-200">
-              <FileCode size={12} className="text-[#b91c1c]" />
+              <FileCode size={12} className="text-[var(--secondary)]" />
               <span>{currentTemplate.fileName}</span>
             </div>
           </div>
@@ -1494,7 +1494,7 @@ export function CodingWorkspacePage() {
             size="sm"
             onClick={handleSubmitSolution}
             disabled={isSubmitting}
-            className="h-7 gap-1 bg-[#b91c1c] hover:bg-[#991b1b] text-white font-medium text-xs px-2.5 rounded-md border-0 shadow-xs"
+            className="h-7 gap-1 bg-primary hover:bg-primary-hover text-white font-medium text-xs px-2.5 rounded-md border-0 shadow-xs"
           >
             <Send size={11} className={cn(isSubmitting && "animate-pulse")} />
             <span className="hidden sm:inline">{submittedSuccess ? "Submitted ✓" : "Submit"}</span>
@@ -1508,11 +1508,11 @@ export function CodingWorkspacePage() {
           <div className="flex items-center gap-2">
             <CheckCircle2 size={14} className="text-zinc-900" />
             <span className="font-semibold">Solution verified & submitted successfully!</span>
-            <span className="text-[#b91c1c] font-mono font-bold">(+100 XP Earned)</span>
+            <span className="text-[var(--secondary)] font-mono font-bold">(+100 XP Earned)</span>
           </div>
           <Link
             to="/app/tracks"
-            className="flex items-center gap-1 font-semibold text-[#b91c1c] hover:text-[#991b1b] underline underline-offset-2"
+            className="flex items-center gap-1 font-semibold text-primary hover:text-primary-hover underline underline-offset-2"
           >
             Next Challenge <ChevronRight size={13} />
           </Link>
@@ -1527,7 +1527,7 @@ export function CodingWorkspacePage() {
           <div className="flex h-8 flex-none items-center justify-between border-b border-zinc-800 bg-zinc-900 px-3 text-[11px] text-zinc-400 font-mono select-none">
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1.5 text-zinc-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#b91c1c]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)]" />
                 <span>{currentTemplate.fileName}</span>
               </div>
               <span className="text-zinc-600">|</span>
@@ -1780,7 +1780,7 @@ export function CodingWorkspacePage() {
                         ) : log.type === "error" ? (
                           <span className="text-rose-400 font-semibold">{log.message}</span>
                         ) : log.type === "exec" ? (
-                          <span className="text-[#b91c1c] font-semibold">{log.message}</span>
+                          <span className="text-sky-400 font-semibold">{log.message}</span>
                         ) : (
                           <span className="text-zinc-300">{log.message}</span>
                         )}

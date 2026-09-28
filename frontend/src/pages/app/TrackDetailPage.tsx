@@ -328,7 +328,7 @@ export function TrackDetailPage() {
                               {lesson.durationMinutes && (
                                 <span className="text-xs text-zinc-500">{lesson.durationMinutes} min</span>
                               )}
-                              <span className="inline-flex items-center gap-1 rounded-lg bg-zinc-100 border border-zinc-200 px-2.5 py-1 text-xs font-semibold text-[#b91c1c]">
+                              <span className="inline-flex items-center gap-1 rounded-lg bg-zinc-100 border border-zinc-200 px-2.5 py-1 text-xs font-semibold text-[var(--secondary)]">
                                 +{lesson.xpReward ?? 50} XP
                                 <ArrowRight size={13} />
                               </span>

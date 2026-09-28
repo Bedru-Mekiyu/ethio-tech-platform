@@ -348,8 +348,8 @@ export function ProjectSubmitPage() {
 
           <Card className="rounded-xl border border-zinc-200 bg-white p-6 shadow-xs">
             <div className="flex items-center gap-2 text-zinc-500">
-              <CheckCircle2 size={14} className="text-[#b91c1c]" />
-              <span className="text-[10px] uppercase tracking-wider font-semibold">Submission checklist</span>
+              <CheckCircle2 size={14} className="text-[var(--secondary)]" />
+              <span className="text-xs uppercase tracking-wider font-semibold">Submission checklist</span>
             </div>
             <div className="mt-4 space-y-3">
               {checklist.map((item) => (
@@ -370,8 +370,8 @@ export function ProjectSubmitPage() {
 
           <Card className="rounded-xl border border-zinc-200 bg-white p-6 shadow-xs">
             <div className="flex items-center gap-2 text-zinc-500">
-              <FileCode2 size={14} className="text-[#b91c1c]" />
-              <span className="text-[10px] uppercase tracking-wider font-semibold">Recent submissions</span>
+              <FileCode2 size={14} className="text-[var(--secondary)]" />
+              <span className="text-xs uppercase tracking-wider font-semibold">Recent submissions</span>
             </div>
             <div className="mt-4 space-y-3">
               {(recentSubmissions.length

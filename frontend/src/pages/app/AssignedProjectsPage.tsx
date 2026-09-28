@@ -77,7 +77,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
           <Badge variant={statusTone} size="sm">
             {project.category}
           </Badge>
-          <span className="text-xs font-bold text-[#b91c1c]">+{project.xpReward ?? 0} XP</span>
+          <span className="text-xs font-bold text-[var(--secondary)]">+{project.xpReward ?? 0} XP</span>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-zinc-900">{project.title}</h3>

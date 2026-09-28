@@ -129,10 +129,7 @@ export function ProfilePage() {
           <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 pb-3">
               <h2 className="text-sm font-semibold text-zinc-900">{track?.title ?? "Current Track"}</h2>
-              <Link
-                to="/app/tracks"
-                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-              >
+              <Link to="/app/tracks" className="text-xs font-semibold text-primary hover:underline">
                 {track ? "View track" : "Browse tracks"}
               </Link>
             </div>
@@ -151,10 +148,7 @@ export function ProfilePage() {
           <Card className="border-zinc-200 bg-white p-5 sm:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 pb-3">
               <h2 className="text-sm font-semibold text-zinc-900">Recent Achievements</h2>
-              <Link
-                to="/app/progress"
-                className="text-xs font-semibold text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-              >
+              <Link to="/app/progress" className="text-xs font-semibold text-primary hover:underline">
                 View all
               </Link>
             </div>
@@ -165,7 +159,7 @@ export function ProfilePage() {
                     key={badge._id ?? badge.name}
                     className="flex items-center gap-2.5 rounded-xl border border-zinc-200 bg-zinc-50/60 p-2.5"
                   >
-                    <Award size={14} className="text-[#b91c1c] shrink-0" />
+                    <Award size={14} className="text-[var(--secondary)] shrink-0" />
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-semibold text-zinc-900 truncate">{badge.name}</p>
                       <p className="text-[10px] text-zinc-400 capitalize">{badge.category ?? "achievement"}</p>
@@ -198,7 +192,9 @@ export function ProfilePage() {
               {liveUser?.bio && (
                 <div className="pt-1">
                   <span className="text-zinc-500 block mb-1">Bio</span>
-                  <p className="text-zinc-700 leading-relaxed bg-zinc-50 p-2.5 rounded-lg border border-zinc-100">{liveUser.bio}</p>
+                  <p className="text-zinc-700 leading-relaxed bg-zinc-50 p-2.5 rounded-lg border border-zinc-100">
+                    {liveUser.bio}
+                  </p>
                 </div>
               )}
             </div>
@@ -239,7 +235,7 @@ export function ProfilePage() {
           <Link to="/app/certificates" className="block group">
             <Card className="border-zinc-200 bg-white p-4 transition-all hover:border-zinc-400 hover:shadow-md shadow-sm">
               <p className="text-xs font-medium text-zinc-500">Certificates</p>
-              <p className="mt-0.5 text-xs font-semibold text-zinc-900 group-hover:text-[#b91c1c] transition-colors">
+              <p className="mt-0.5 text-xs font-semibold text-zinc-900 group-hover:text-primary transition-colors">
                 View earned certificates →
               </p>
             </Card>
@@ -248,7 +244,7 @@ export function ProfilePage() {
         <Link to={getSettingsPath(liveUser?.role ?? "student")} className="block group">
           <Card className="border-zinc-200 bg-white p-4 transition-all hover:border-zinc-400 hover:shadow-md shadow-sm">
             <p className="text-xs font-medium text-zinc-500">Settings</p>
-            <p className="mt-0.5 text-xs font-semibold text-zinc-900 group-hover:text-[#b91c1c] transition-colors">
+            <p className="mt-0.5 text-xs font-semibold text-zinc-900 group-hover:text-primary transition-colors">
               Manage account & privacy →
             </p>
           </Card>

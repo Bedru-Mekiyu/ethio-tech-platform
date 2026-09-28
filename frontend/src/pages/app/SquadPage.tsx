@@ -51,7 +51,7 @@ function NewsCard({ item }: { item: NotificationItem }) {
         {item.link ? (
           <Link
             to={item.link}
-            className="mt-2 block text-sm leading-6 text-zinc-900 hover:text-[#b91c1c] transition-colors"
+            className="mt-2 block text-sm leading-6 text-zinc-900 hover:text-primary transition-colors"
           >
             {item.message}
           </Link>
@@ -189,7 +189,7 @@ export function SquadPage() {
               <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
                 {squadQuery.data?.name ?? "Squad"}
               </h1>
-              <p className="text-xs text-[#b91c1c] font-semibold">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
+              <p className="text-xs text-[var(--secondary)] font-semibold">Group XP: {squadQuery.data?.groupXP ?? 0}</p>
               <p className="text-xs text-zinc-500">
                 Chat with your squad and coordinate project progress in real time.
               </p>
@@ -337,10 +337,7 @@ export function SquadPage() {
         <Card className="border border-zinc-200 bg-white p-5 shadow-xs">
           <div className="flex items-center justify-between gap-3 border-b border-zinc-200 pb-2.5">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Upcoming Sessions</h3>
-            <Link
-              to="/app/sessions"
-              className="text-xs text-[#b91c1c] hover:text-[#991b1b] hover:underline font-medium"
-            >
+            <Link to="/app/sessions" className="text-xs text-primary hover:underline font-medium">
               View all
             </Link>
           </div>

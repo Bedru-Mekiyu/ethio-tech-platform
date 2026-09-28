@@ -75,8 +75,8 @@ export interface CalendarFilterParams {
 
 export const EVENT_TYPE_COLORS: Record<CalendarEventType, { bg: string; text: string; border: string; hex: string }> = {
   study_block: { bg: "bg-zinc-100", text: "text-zinc-800", border: "border-zinc-300", hex: "#18181b" },
-  session: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", hex: "#b91c1c" },
-  deadline: { bg: "bg-red-50", text: "text-red-700", border: "border-red-200", hex: "#b91c1c" },
+  session: { bg: "bg-blue-50", text: "text-blue-900", border: "border-blue-200", hex: "#1e3a8a" },
+  deadline: { bg: "bg-amber-50", text: "text-amber-900", border: "border-amber-200", hex: "#b45309" },
   milestone: { bg: "bg-zinc-100", text: "text-zinc-900", border: "border-zinc-300", hex: "#27272a" },
   hub_visit: { bg: "bg-amber-50", text: "text-amber-800", border: "border-amber-200", hex: "#d97706" },
   office_hours: { bg: "bg-zinc-100", text: "text-zinc-800", border: "border-zinc-200", hex: "#3f3f46" },

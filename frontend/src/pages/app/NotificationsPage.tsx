@@ -236,7 +236,7 @@ export function NotificationsPage() {
                               {notification.link ? (
                                 <a
                                   href={notification.link}
-                                  className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
+                                  className="text-xs font-medium text-primary hover:underline"
                                 >
                                   Open item →
                                 </a>
@@ -278,10 +278,7 @@ export function NotificationsPage() {
                         </p>
                         <div className="mt-2.5 flex flex-wrap gap-2">
                           {notification.link ? (
-                            <a
-                              href={notification.link}
-                              className="text-xs font-medium text-[#b91c1c] hover:text-[#991b1b] hover:underline"
-                            >
+                            <a href={notification.link} className="text-xs font-medium text-primary hover:underline">
                               Open item →
                             </a>
                           ) : null}

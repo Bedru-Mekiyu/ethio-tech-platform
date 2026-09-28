@@ -18,7 +18,7 @@ const ConversationItem: React.FC<{
   return (
     <button
       className={`w-full text-left p-3.5 transition-colors border-b border-zinc-100 ${
-        isActive ? "bg-white border-l-4 border-l-[#b91c1c] shadow-sm" : "hover:bg-zinc-100/60"
+        isActive ? "bg-white border-l-4 border-l-[var(--secondary)] shadow-sm" : "hover:bg-zinc-100/60"
       }`}
       onClick={onClick}
     >
@@ -102,9 +102,7 @@ export const MessagesPage: React.FC = () => {
 
   useEffect(() => {
     if (!startUserId || loadingConversations) return;
-    const existing = conversations.find((c) =>
-      c.participants.some((p) => p._id === startUserId)
-    );
+    const existing = conversations.find((c) => c.participants.some((p) => p._id === startUserId));
     if (existing) {
       Promise.resolve().then(() => {
         selectConversation(existing._id);
