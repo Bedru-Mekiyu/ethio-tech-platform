@@ -31,7 +31,7 @@ export function ProgressBar({
 
   const colors = {
     primary: "bg-primary",
-    success: "bg-zinc-800",
+    success: "bg-slate-800",
     danger: "bg-red-600",
     gradient: "bg-primary",
     neutral: "bg-zinc-700",
@@ -50,7 +50,7 @@ export function ProgressBar({
       {(label || showValueLabel) && (
         <div className="flex justify-between items-center text-xs font-medium text-[var(--text-secondary)] tracking-wide">
           {label && <span>{label}</span>}
-          {showValueLabel && <span className="text-zinc-900 font-semibold tabular-nums">{pct}%</span>}
+          {showValueLabel && <span className="text-slate-900 font-semibold tabular-nums">{pct}%</span>}
         </div>
       )}
       <div
@@ -59,7 +59,7 @@ export function ProgressBar({
         aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label || "Progress"}
-        className={cn("w-full overflow-hidden rounded-full bg-zinc-100 border border-zinc-200/70", barSizes[size])}
+        className={cn("w-full overflow-hidden rounded-full bg-slate-100 border border-slate-200/70", barSizes[size])}
       >
         <div
           className={cn(

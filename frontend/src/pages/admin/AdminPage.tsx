@@ -48,14 +48,14 @@ interface CustomChartTooltipProps {
 function CustomChartTooltip({ active, payload, label, unit = "" }: CustomChartTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-lg border border-zinc-200 bg-white p-2.5 shadow-lg">
-        <p className="text-xs font-semibold text-zinc-900">{label}</p>
+      <div className="rounded-lg border border-slate-200 bg-white p-2.5 shadow-lg">
+        <p className="text-xs font-semibold text-slate-900">{label}</p>
         <div className="mt-1.5 space-y-1">
           {payload.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 text-xs">
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.color || "#18181b" }} />
-              <span className="text-zinc-500">{item.name || item.dataKey}:</span>
-              <span className="font-bold text-zinc-900">
+              <span className="text-slate-500">{item.name || item.dataKey}:</span>
+              <span className="font-bold text-slate-900">
                 {typeof item.value === "number" ? item.value.toLocaleString() : item.value} {unit}
               </span>
             </div>
@@ -189,8 +189,8 @@ export function AdminPage() {
     return (
       <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
         <Sparkles className="mx-auto text-red-500" size={30} />
-        <h1 className="mt-3 text-lg font-bold text-zinc-900">Unable to load analytics</h1>
-        <p className="mt-1 text-xs text-zinc-500">Could not establish connection to the analytics telemetry stream.</p>
+        <h1 className="mt-3 text-lg font-bold text-slate-900">Unable to load analytics</h1>
+        <p className="mt-1 text-xs text-slate-500">Could not establish connection to the analytics telemetry stream.</p>
         <Button
           variant="outline"
           size="sm"
@@ -209,11 +209,11 @@ export function AdminPage() {
   return (
     <div className="space-y-6">
       {/* ─── 1. Hero Platform Console Header ─── */}
-      <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-300 bg-zinc-100 px-2.5 py-0.5 text-[11px] font-medium text-zinc-900">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-900">
                 <Radio size={11} className="animate-pulse text-[var(--secondary)]" />
                 Command Center
               </span>
@@ -221,8 +221,8 @@ export function AdminPage() {
                 Production Data
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Platform Analytics & Growth</h1>
-            <p className="text-xs text-zinc-500 leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Analytics & Growth</h1>
+            <p className="text-xs text-slate-500 leading-relaxed">
               Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and
               gamification XP velocity.
             </p>
@@ -235,16 +235,16 @@ export function AdminPage() {
               size="sm"
               onClick={() => refetch()}
               disabled={isFetching}
-              className="text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+              className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
             >
-              <RefreshCw size={12} className={isFetching ? "animate-spin text-zinc-900 mr-1" : "mr-1"} />
+              <RefreshCw size={12} className={isFetching ? "animate-spin text-slate-900 mr-1" : "mr-1"} />
               Sync
             </Button>
             <Link to="/admin/operations">
               <Button
                 variant="outline"
                 size="sm"
-                className="text-xs gap-1 font-medium border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               >
                 <Monitor size={13} />
                 Operations
@@ -254,14 +254,14 @@ export function AdminPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="text-xs gap-1 font-medium border-zinc-200 text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900"
+                className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               >
                 <Award size={13} />
                 Applications
               </Button>
             </Link>
             <Link to="/admin/users">
-              <Button size="sm" className="text-xs gap-1 font-medium bg-zinc-900 hover:bg-zinc-800 text-white">
+              <Button size="sm" className="text-xs gap-1 font-medium bg-slate-900 hover:bg-slate-800 text-white">
                 <Users size={13} />
                 Users
               </Button>
@@ -276,19 +276,19 @@ export function AdminPage() {
           label="Active Learners"
           value={activeLearners.toLocaleString()}
           sub={`7-day active • ${activeRatio}% of cohort`}
-          icon={<Activity className="text-zinc-900" size={18} />}
+          icon={<Activity className="text-slate-900" size={18} />}
         />
         <StatCard
           label="Total Students"
           value={totalStudents.toLocaleString()}
           sub="Enrolled across 5 career tracks"
-          icon={<Users className="text-zinc-900" size={18} />}
+          icon={<Users className="text-slate-900" size={18} />}
         />
         <StatCard
           label="Diaspora Mentors"
           value={mentorCount.toLocaleString()}
           sub="Verified global industry guides"
-          icon={<GraduationCap className="text-zinc-900" size={18} />}
+          icon={<GraduationCap className="text-slate-900" size={18} />}
         />
         <StatCard
           label="30d XP Velocity"
@@ -301,25 +301,25 @@ export function AdminPage() {
       {/* ─── 3. Authentic Time-Series Charts Grid ─── */}
       <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         {/* Chart 1: Dynamic XP Growth Time-Series with Area Gradient */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <CardHeader className="flex flex-col gap-3 p-0 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles size={14} className="text-zinc-900" />
-                <CardTitle className="text-sm font-semibold text-zinc-900">XP Gamification Growth</CardTitle>
+                <Sparkles size={14} className="text-slate-900" />
+                <CardTitle className="text-sm font-semibold text-slate-900">XP Gamification Growth</CardTitle>
               </div>
-              <CardDescription className="text-xs text-zinc-500 mt-0.5">
+              <CardDescription className="text-xs text-slate-500 mt-0.5">
                 {xpTimeView === "weekly" ? "Weekly XP earned velocity" : "Cumulative 30-day XP trajectory"}
               </CardDescription>
             </div>
             {/* View Mode Switcher */}
-            <div className="inline-flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5">
+            <div className="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
               <button
                 onClick={() => setXpTimeView("weekly")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "weekly"
-                    ? "bg-white text-zinc-900 font-semibold shadow-xs"
-                    : "text-zinc-600 hover:text-zinc-900"
+                    ? "bg-white text-slate-900 font-semibold shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 Weekly Volume
@@ -328,8 +328,8 @@ export function AdminPage() {
                 onClick={() => setXpTimeView("cumulative")}
                 className={`rounded-md px-2.5 py-1 text-[11px] font-medium transition-all ${
                   xpTimeView === "cumulative"
-                    ? "bg-white text-zinc-900 font-semibold shadow-xs"
-                    : "text-zinc-600 hover:text-zinc-900"
+                    ? "bg-white text-slate-900 font-semibold shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 Cumulative
@@ -387,13 +387,13 @@ export function AdminPage() {
         </Card>
 
         {/* Chart 2: Rolling Enrollment & Cohort Growth */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-xs">
-          <CardHeader className="flex flex-col gap-1 p-0 border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+          <CardHeader className="flex flex-col gap-1 p-0 border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <TrendingUp size={14} className="text-zinc-900" />
-              <CardTitle className="text-sm font-semibold text-zinc-900">Cohort Growth & Admissions</CardTitle>
+              <TrendingUp size={14} className="text-slate-900" />
+              <CardTitle className="text-sm font-semibold text-slate-900">Cohort Growth & Admissions</CardTitle>
             </div>
-            <CardDescription className="text-xs text-zinc-500">Student admissions vs active learners</CardDescription>
+            <CardDescription className="text-xs text-slate-500">Student admissions vs active learners</CardDescription>
           </CardHeader>
 
           {enrollmentTrendData.length > 0 ? (
@@ -419,8 +419,8 @@ export function AdminPage() {
               </ResponsiveContainer>
             </div>
           ) : (
-            <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-zinc-200 mt-4">
-              <p className="text-xs text-zinc-500">No enrollment records logged yet.</p>
+            <div className="flex h-64 items-center justify-center rounded-lg border border-dashed border-slate-200 mt-4">
+              <p className="text-xs text-slate-500">No enrollment records logged yet.</p>
             </div>
           )}
         </Card>
@@ -429,15 +429,15 @@ export function AdminPage() {
       {/* ─── 4. Track Performance Matrix & Top Mentors Leaderboard ─── */}
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
         {/* Track Performance Matrix */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-xs">
-          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-xs">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Layers size={15} className="text-zinc-900" />
+              <Layers size={15} className="text-slate-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-zinc-900">
+                <CardTitle className="text-sm font-semibold text-slate-900">
                   Track Performance & XP Distribution
                 </CardTitle>
-                <CardDescription className="text-xs text-zinc-500">
+                <CardDescription className="text-xs text-slate-500">
                   Curriculum engagement across disciplines
                 </CardDescription>
               </div>
@@ -451,17 +451,17 @@ export function AdminPage() {
           {trackData.length > 0 ? (
             <div className="mt-4 space-y-3">
               {trackData.map((track) => (
-                <div key={track.name} className="space-y-1 rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3">
+                <div key={track.name} className="space-y-1 rounded-lg border border-slate-200/80 bg-slate-50/50 p-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-zinc-900">{track.name}</span>
+                    <span className="font-semibold text-slate-900">{track.name}</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-zinc-900">{track.xp.toLocaleString()} XP</span>
-                      <span className="text-[11px] text-zinc-500">({track.percentage}%)</span>
+                      <span className="font-bold text-slate-900">{track.xp.toLocaleString()} XP</span>
+                      <span className="text-[11px] text-slate-500">({track.percentage}%)</span>
                     </div>
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200">
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                     <div
-                      className="h-full rounded-full bg-zinc-900 transition-all duration-500"
+                      className="h-full rounded-full bg-slate-900 transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.max(12, track.percentage))}%` }}
                     />
                   </div>
@@ -469,20 +469,20 @@ export function AdminPage() {
               ))}
             </div>
           ) : (
-            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-zinc-200">
-              <p className="text-xs text-zinc-500">No track XP engagement recorded yet.</p>
+            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-slate-200">
+              <p className="text-xs text-slate-500">No track XP engagement recorded yet.</p>
             </div>
           )}
         </Card>
 
         {/* Top Mentors Leaderboard */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
               <Award size={15} className="text-amber-500" />
               <div>
-                <CardTitle className="text-sm font-semibold text-zinc-900">Top Diaspora Mentors</CardTitle>
-                <CardDescription className="text-xs text-zinc-500">
+                <CardTitle className="text-sm font-semibold text-slate-900">Top Diaspora Mentors</CardTitle>
+                <CardDescription className="text-xs text-slate-500">
                   Highest rated guides by sessions & feedback
                 </CardDescription>
               </div>
@@ -491,7 +491,7 @@ export function AdminPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-zinc-50"
+                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-slate-50"
               >
                 View All <ChevronRight size={12} />
               </Button>
@@ -503,16 +503,16 @@ export function AdminPage() {
               topMentors.map((mentor, index) => {
                 const rankStyles = [
                   "border-amber-200 bg-amber-50 text-amber-700",
-                  "border-zinc-200 bg-zinc-100 text-zinc-700",
+                  "border-slate-200 bg-slate-100 text-slate-700",
                   "border-amber-300 bg-amber-100/50 text-amber-800",
-                  "border-zinc-200 bg-zinc-50 text-zinc-600",
+                  "border-slate-200 bg-slate-50 text-slate-600",
                 ];
                 const badgeClass = rankStyles[index] ?? rankStyles[3];
 
                 return (
                   <div
                     key={mentor.fullName ?? index}
-                    className="flex items-center justify-between rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3 transition-colors hover:border-zinc-300 hover:bg-zinc-50"
+                    className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-center gap-2.5">
                       <div
@@ -521,8 +521,8 @@ export function AdminPage() {
                         #{index + 1}
                       </div>
                       <div>
-                        <p className="font-semibold text-zinc-900 text-xs">{mentor.fullName}</p>
-                        <div className="flex items-center gap-2 text-[11px] text-zinc-500">
+                        <p className="font-semibold text-slate-900 text-xs">{mentor.fullName}</p>
+                        <div className="flex items-center gap-2 text-[11px] text-slate-500">
                           <span>{mentor.totalSessions ?? 0} sessions</span>
                           <span>•</span>
                           <span className="flex items-center gap-0.5 text-amber-600">
@@ -539,8 +539,8 @@ export function AdminPage() {
                 );
               })
             ) : (
-              <div className="p-6 text-center rounded-lg border border-dashed border-zinc-200">
-                <p className="text-xs text-zinc-500">No diaspora mentor ratings recorded yet.</p>
+              <div className="p-6 text-center rounded-lg border border-dashed border-slate-200">
+                <p className="text-xs text-slate-500">No diaspora mentor ratings recorded yet.</p>
               </div>
             )}
           </div>
@@ -550,13 +550,13 @@ export function AdminPage() {
       {/* ─── 5. Regional Hub Capacity & Live Upcoming Sessions ─── */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Regional Hubs Matrix */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm lg:col-span-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <MapPin size={15} className="text-zinc-900" />
+              <MapPin size={15} className="text-slate-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-zinc-900">Regional Hub Capacity & Hardware</CardTitle>
-                <CardDescription className="text-xs text-zinc-500">
+                <CardTitle className="text-sm font-semibold text-slate-900">Regional Hub Capacity & Hardware</CardTitle>
+                <CardDescription className="text-xs text-slate-500">
                   Physical computing centers across Ethiopia
                 </CardDescription>
               </div>
@@ -577,12 +577,12 @@ export function AdminPage() {
                 return (
                   <div
                     key={hub.city ?? index}
-                    className="rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3.5 transition-all hover:border-zinc-300 hover:bg-zinc-50"
+                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <p className="font-semibold text-zinc-900 text-xs">{hub.city ?? "Regional Hub"}</p>
-                        <p className="text-[11px] text-zinc-500 truncate max-w-[180px]">
+                        <p className="font-semibold text-slate-900 text-xs">{hub.city ?? "Regional Hub"}</p>
+                        <p className="text-[11px] text-slate-500 truncate max-w-[180px]">
                           {hub.address ?? "Innovation Center"}
                         </p>
                       </div>
@@ -593,28 +593,28 @@ export function AdminPage() {
 
                     {/* Seat Progress Bar */}
                     <div className="mt-3 space-y-1">
-                      <div className="flex justify-between text-[11px] text-zinc-500">
+                      <div className="flex justify-between text-[11px] text-slate-500">
                         <span>
                           Seats ({occupied}/{capacity})
                         </span>
-                        <span className="font-medium text-zinc-900">{available} open</span>
+                        <span className="font-medium text-slate-900">{available} open</span>
                       </div>
-                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-200">
+                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
                         <div
                           className={`h-full rounded-full transition-all duration-500 ${
-                            occupancyPct > 80 ? "bg-amber-500" : "bg-zinc-900"
+                            occupancyPct > 80 ? "bg-amber-500" : "bg-slate-900"
                           }`}
                           style={{ width: `${occupancyPct}%` }}
                         />
                       </div>
                     </div>
 
-                    <div className="mt-2.5 flex items-center justify-between border-t border-zinc-200/70 pt-2 text-[11px] text-zinc-500">
+                    <div className="mt-2.5 flex items-center justify-between border-t border-slate-200/70 pt-2 text-[11px] text-slate-500">
                       <span className="flex items-center gap-1">
-                        <Monitor size={11} className="text-zinc-600" />
+                        <Monitor size={11} className="text-slate-600" />
                         {hub.computersAvailable ?? 30} PCs
                       </span>
-                      <span className="truncate max-w-[120px] text-zinc-600">
+                      <span className="truncate max-w-[120px] text-slate-600">
                         {hub.mentorInCharge?.fullName ?? "Staff Mentor"}
                       </span>
                     </div>
@@ -623,27 +623,27 @@ export function AdminPage() {
               })}
             </div>
           ) : (
-            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-zinc-200">
-              <p className="text-xs text-zinc-500">No regional hubs registered yet.</p>
+            <div className="mt-4 p-8 text-center rounded-lg border border-dashed border-slate-200">
+              <p className="text-xs text-slate-500">No regional hubs registered yet.</p>
             </div>
           )}
         </Card>
 
         {/* Live & Upcoming Mentorship Sessions */}
-        <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
-          <div className="flex items-center justify-between border-b border-zinc-100 pb-3.5">
+        <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
             <div className="flex items-center gap-2">
-              <Video size={15} className="text-zinc-900" />
+              <Video size={15} className="text-slate-900" />
               <div>
-                <CardTitle className="text-sm font-semibold text-zinc-900">Upcoming Sessions</CardTitle>
-                <CardDescription className="text-xs text-zinc-500">Live cohorts schedule</CardDescription>
+                <CardTitle className="text-sm font-semibold text-slate-900">Upcoming Sessions</CardTitle>
+                <CardDescription className="text-xs text-slate-500">Live cohorts schedule</CardDescription>
               </div>
             </div>
             <Link to="/admin/meetings">
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-zinc-50"
+                className="h-7 gap-1 text-xs text-primary hover:text-primary-hover hover:bg-slate-50"
               >
                 All <ExternalLink size={11} />
               </Button>
@@ -655,10 +655,10 @@ export function AdminPage() {
               upcomingSessions.slice(0, 4).map((session, index) => (
                 <div
                   key={session.title ?? index}
-                  className="rounded-lg border border-zinc-200/80 bg-zinc-50/50 p-3 transition-colors hover:border-zinc-300 hover:bg-zinc-50"
+                  className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-semibold text-zinc-900 text-xs truncate">{session.title}</p>
+                    <p className="font-semibold text-slate-900 text-xs truncate">{session.title}</p>
                     <Badge
                       variant={session.status === "live" ? "outline" : "outline"}
                       size="sm"
@@ -667,7 +667,7 @@ export function AdminPage() {
                       {session.status ?? "scheduled"}
                     </Badge>
                   </div>
-                  <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-zinc-500">
+                  <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-slate-500">
                     <Clock size={11} />
                     <span>
                       {session.scheduledAt
@@ -683,13 +683,13 @@ export function AdminPage() {
                 </div>
               ))
             ) : (
-              <div className="rounded-lg border border-dashed border-zinc-200 p-6 text-center space-y-2">
-                <p className="text-xs text-zinc-500">No cohort sessions currently scheduled.</p>
+              <div className="rounded-lg border border-dashed border-slate-200 p-6 text-center space-y-2">
+                <p className="text-xs text-slate-500">No cohort sessions currently scheduled.</p>
                 <Link to="/admin/meetings" className="inline-block">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-xs border-zinc-200 text-zinc-700 hover:bg-zinc-50"
+                    className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50"
                   >
                     Manage Sessions
                   </Button>

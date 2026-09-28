@@ -8,7 +8,7 @@ export function Card({ className, variant = "default", children, ...props }: Car
   const variants = {
     default: "card-surface p-6",
     elevated: "card-surface p-6 shadow-[var(--shadow-lg)] border-[var(--border-strong)]",
-    interactive: "card-surface p-6 hover-lift cursor-pointer hover:border-[var(--border-strong)]",
+    interactive: "card-surface p-6 card-interactive",
     ghost: "rounded-[var(--radius-2xl)] border border-transparent bg-transparent p-6",
   };
 

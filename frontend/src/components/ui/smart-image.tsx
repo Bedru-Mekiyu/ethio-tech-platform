@@ -55,12 +55,12 @@ export function SmartImage({
   return (
     <motion.div
       key={finalSrc}
-      className={cn("relative overflow-hidden bg-zinc-100 border border-zinc-200", aspectRatio, wrapperClassName)}
+      className={cn("relative overflow-hidden bg-slate-100 border border-slate-200", aspectRatio, wrapperClassName)}
       whileHover={hoverEffect !== "none" ? hoverEffect : undefined}
       variants={hoverVariants}
       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
     >
-      {!loaded && !error && <div className="absolute inset-0 z-10 animate-pulse bg-zinc-200/60" />}
+      {!loaded && !error && <div className="absolute inset-0 z-10 animate-pulse bg-slate-200/60" />}
 
       {placeholderSrc && !loaded && !error && (
         <img
@@ -72,7 +72,7 @@ export function SmartImage({
       )}
 
       {error ? (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-50 p-4 text-zinc-500">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-slate-50 p-4 text-slate-500">
           <ImageIcon size={24} className="opacity-60" />
           <span className="text-xs">Image unavailable</span>
         </div>

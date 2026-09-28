@@ -1,9 +1,9 @@
 :root {
   /* ─── Clean Modern Light Theme Surface Ladder ─── */
-  --bg-base: #ffffff;
-  --bg-elevated: #f8fafc;
+  --bg-base: #fcfcfd;
+  --bg-elevated: #ffffff;
   --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
+  --bg-card-hover: #ffffff;
   --bg-surface: #ffffff;
   --bg-surface-strong: #f8fafc;
   --bg-overlay: rgba(15, 23, 42, 0.5);
@@ -139,21 +139,23 @@
   --radius-3xl: 20px;
   --radius-full: 9999px;
 
-  /* ─── Restrained Shadows & Elevation ─── */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.06);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
-  --shadow-panel: 0 8px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px #e4e4e7;
-  --shadow-glow: none;
-  --shadow-glow-sm: none;
-  --shadow-glow-lg: none;
-
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.05), 0 0 0 1px #d4d4d8;
-  --shadow-input-focus: 0 0 0 2px rgba(24, 24, 27, 0.15);
+  /* ─── Modern Multi-Layered Diffuse Slate Shadows ─── */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 2px 4px rgba(15, 23, 42, 0.02);
+  --shadow-md: 0 2px 4px -1px rgba(15, 23, 42, 0.04), 0 6px 16px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 4px 6px -2px rgba(15, 23, 42, 0.03), 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+  --shadow-xl: 0 8px 10px -4px rgba(15, 23, 42, 0.03), 0 20px 32px -6px rgba(15, 23, 42, 0.09);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+  --shadow-soft: 0 4px 20px rgba(15, 23, 42, 0.05);
+  --shadow-panel: 0 8px 24px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(226, 232, 240, 0.85);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 6px 16px -2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 14px 28px -4px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 24px rgba(185, 28, 28, 0.12);
+  --shadow-glow-sm: 0 0 12px rgba(185, 28, 28, 0.08);
+  --shadow-glow-lg: 0 0 40px rgba(185, 28, 28, 0.16);
+  --shadow-crimson-cta: 0 1px 2px rgba(15, 23, 42, 0.12), 0 4px 14px rgba(185, 28, 28, 0.28);
+  --shadow-crimson-hover: 0 2px 4px rgba(15, 23, 42, 0.14), 0 6px 20px rgba(185, 28, 28, 0.38);
+  --shadow-input-focus: 0 0 0 3px rgba(30, 58, 138, 0.12);
 
   /* ─── Z-Index Scale ─── */
   --z-base: 0;

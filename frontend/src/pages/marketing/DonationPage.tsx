@@ -194,7 +194,7 @@ export function DonationPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16 lg:px-8 space-y-12 text-slate-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -202,29 +202,29 @@ export function DonationPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-1 text-xs font-medium text-zinc-700 shadow-xs">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
           <Heart size={13} className="text-primary" />
           <span>Transparent Impact Philanthropy</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
           Empower Ethiopian Talent Through <span className="text-primary">Sovereign Education</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
           Every dollar or birr directly funds student scholarship passes, solar-powered regional tech hubs, and hardware
           distribution to gifted learners across Ethiopia with 100% transparent milestone verification.
         </p>
 
         <div className="flex flex-wrap justify-center gap-2 pt-1">
-          <span className="rounded-md border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 font-medium flex items-center gap-1.5 shadow-2xs">
-            <ShieldCheck size={13} className="text-zinc-700" /> 100% Auditable Milestones
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 font-medium flex items-center gap-1.5 shadow-xs">
+            <ShieldCheck size={13} className="text-[var(--secondary)]" /> 100% Auditable Milestones
           </span>
-          <span className="rounded-md border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 font-medium flex items-center gap-1.5 shadow-2xs">
-            <Zap size={13} className="text-zinc-700" /> $50 Sponsors 1 Full Year
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 font-medium flex items-center gap-1.5 shadow-xs">
+            <Zap size={13} className="text-[var(--secondary)]" /> $50 Sponsors 1 Full Year
           </span>
-          <span className="rounded-md border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-600 font-medium flex items-center gap-1.5 shadow-2xs">
-            <Laptop2 size={13} className="text-zinc-700" /> Hardware Donation Drive Active
+          <span className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 font-medium flex items-center gap-1.5 shadow-xs">
+            <Laptop2 size={13} className="text-[var(--secondary)]" /> Hardware Donation Drive Active
           </span>
         </div>
       </motion.section>
@@ -232,26 +232,26 @@ export function DonationPage() {
       {/* ─── Interactive Scholarship Breakdown & Donation Calculator ─── */}
       <section id="donate-now" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Direct Impact Model</Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <Badge variant="secondary">Direct Impact Model</Badge>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Choose Your Student Sponsorship Tier
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             Select a verified outcome tier. Toggle currency and frequency to see your real-world contribution.
           </p>
         </div>
 
         {/* Currency & Frequency Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-200 bg-zinc-50 p-3 shadow-2xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
           {/* Frequency Toggle */}
-          <div className="flex rounded-lg border border-zinc-200 bg-white p-0.5 shadow-2xs">
+          <div className="flex rounded-xl border border-slate-200 bg-slate-100 p-1">
             <button
               type="button"
               onClick={() => setFrequency("one-time")}
-              className={`rounded-md px-3 py-1 text-xs font-medium transition ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                 frequency === "one-time"
-                  ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                  : "text-zinc-600 hover:text-zinc-900"
+                  ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               One-Time Contribution
@@ -259,30 +259,30 @@ export function DonationPage() {
             <button
               type="button"
               onClick={() => setFrequency("monthly")}
-              className={`rounded-md px-3 py-1 text-xs font-medium flex items-center gap-1.5 transition ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium flex items-center gap-1.5 transition ${
                 frequency === "monthly"
-                  ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                  : "text-zinc-600 hover:text-zinc-900"
+                  ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              <Sparkles size={12} />
+              <Sparkles size={12} className="text-amber-400" />
               Monthly Impact Patron
             </button>
           </div>
 
           {/* Currency Toggle */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-zinc-500 font-semibold uppercase tracking-wider">Currency:</span>
-            <div className="flex rounded-lg border border-zinc-200 bg-white p-0.5 shadow-2xs">
+            <span className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider">Currency:</span>
+            <div className="flex rounded-xl border border-slate-200 bg-white p-1 shadow-xs">
               {(["USD", "ETB", "EUR", "GBP"] as Currency[]).map((c) => (
                 <button
                   key={c}
                   type="button"
                   onClick={() => setCurrency(c)}
-                  className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
+                  className={`rounded-lg px-2.5 py-1 text-xs font-medium transition ${
                     currency === c
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900"
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   {c}
@@ -305,39 +305,43 @@ export function DonationPage() {
                   setSelectedTier(tier.id);
                   setCustomAmountUSD("");
                 }}
-                className={`relative cursor-pointer flex flex-col justify-between p-5 transition rounded-xl ${
+                className={`relative cursor-pointer flex flex-col justify-between p-5 transition-all rounded-2xl ${
                   isSelected
-                    ? "border-zinc-900 bg-zinc-50/80 shadow-xs ring-1 ring-zinc-900"
-                    : "border-zinc-200 bg-white hover:border-zinc-300 shadow-xs hover:shadow-sm"
+                    ? "border-blue-200 bg-blue-50/40 shadow-sm ring-1 ring-blue-500/30"
+                    : "border-slate-200/80 bg-white hover:border-slate-300 shadow-xs hover:shadow-md"
                 }`}
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Badge variant="default" size="sm">
+                    <Badge
+                      variant={isSelected ? "secondary" : "outline"}
+                      size="sm"
+                      className={!isSelected ? "border-slate-200 text-slate-700 font-medium" : undefined}
+                    >
                       {tier.highlight}
                     </Badge>
-                    {isSelected && <CheckCircle2 size={16} className="text-zinc-900" />}
+                    {isSelected && <CheckCircle2 size={16} className="text-[var(--secondary)]" />}
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-zinc-900">{tier.title}</h3>
-                    <p className="text-[11px] text-zinc-600 font-medium mt-0.5">{tier.tagline}</p>
+                    <h3 className="text-base font-bold text-slate-900">{tier.title}</h3>
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5">{tier.tagline}</p>
                   </div>
 
                   <div className="py-1">
-                    <p className="text-2xl font-bold font-mono text-zinc-900">
+                    <p className="text-2xl font-bold font-mono text-slate-900">
                       {CURRENCY_SYMBOLS[currency]}
                       {tierAmount.toLocaleString()}
-                      {frequency === "monthly" && <span className="text-xs font-normal text-zinc-500">/mo</span>}
+                      {frequency === "monthly" && <span className="text-xs font-normal text-slate-500">/mo</span>}
                     </p>
                   </div>
 
-                  <p className="text-xs text-zinc-600 leading-relaxed">{tier.description}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed">{tier.description}</p>
 
-                  <ul className="space-y-1 pt-2 border-t border-zinc-100 text-[11px] text-zinc-600">
+                  <ul className="space-y-1 pt-2 border-t border-slate-100 text-[11px] text-slate-600">
                     {tier.breakdown.slice(0, 3).map((item, i) => (
                       <li key={i} className="flex items-start gap-1.5">
-                        <CheckCircle2 size={11} className="mt-0.5 text-zinc-700 shrink-0" />
+                        <CheckCircle2 size={11} className="mt-0.5 text-[var(--secondary)] shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -345,7 +349,11 @@ export function DonationPage() {
                 </div>
 
                 <div className="pt-3 mt-auto">
-                  <Button size="sm" variant={isSelected ? "primary" : "outline"} className="w-full">
+                  <Button
+                    size="sm"
+                    variant={isSelected ? "primary" : "secondary"}
+                    className="w-full font-semibold shadow-xs"
+                  >
                     {isSelected ? "Selected" : "Select Tier"}
                   </Button>
                 </div>
@@ -355,15 +363,15 @@ export function DonationPage() {
         </div>
 
         {/* Custom Amount & Payment Execution Panel */}
-        <Card className="border-zinc-200 bg-white p-6 md:p-8 shadow-xs space-y-6">
+        <Card className="rounded-2xl border-slate-200/90 bg-white p-6 md:p-8 shadow-sm space-y-6">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             {/* Left: Summary & Custom Amount */}
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-bold text-zinc-900">Contribution Summary</h3>
-                <p className="text-xs text-zinc-600 mt-0.5">
+                <h3 className="text-xl font-bold text-slate-900">Contribution Summary</h3>
+                <p className="text-xs text-slate-600 mt-0.5">
                   You are sponsoring{" "}
-                  <strong className="text-zinc-900">{frequency === "monthly" ? "monthly ongoing" : "one-time"}</strong>{" "}
+                  <strong className="text-slate-900">{frequency === "monthly" ? "monthly ongoing" : "one-time"}</strong>{" "}
                   technical scholarships with 100% direct allocation.
                 </p>
               </div>
@@ -372,7 +380,7 @@ export function DonationPage() {
               <div className="space-y-1.5">
                 <Label>Or Enter a Custom Amount (USD)</Label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400 font-bold text-sm">$</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">$</span>
                   <Input
                     type="number"
                     min={5}
@@ -381,27 +389,27 @@ export function DonationPage() {
                       setCustomAmountUSD(e.target.value === "" ? "" : Math.max(1, Number(e.target.value)));
                     }}
                     placeholder="Enter custom USD amount (e.g. 250)"
-                    className="pl-8 text-sm font-semibold bg-white border-zinc-300 text-zinc-900 shadow-xs focus:border-zinc-500"
+                    className="pl-8 text-sm font-semibold bg-white border-slate-200 text-slate-900 shadow-xs focus:border-slate-400 rounded-xl"
                   />
                 </div>
               </div>
 
               {/* Live Impact Preview Box */}
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 space-y-2">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                  <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                     Calculated Contribution
                   </span>
-                  <span className="text-xl font-bold font-mono text-zinc-900">
+                  <span className="text-xl font-bold font-mono text-slate-900">
                     {CURRENCY_SYMBOLS[currency]}
                     {convertedAmount.toLocaleString()} {frequency === "monthly" ? "/ month" : ""}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-zinc-600">
-                  <Award size={14} className="text-amber-600 shrink-0" />
+                <div className="flex items-center gap-2 text-xs text-slate-600">
+                  <Award size={14} className="text-[var(--secondary)] shrink-0" />
                   <span>
                     Equivalent to full-year scholarships for{" "}
-                    <strong className="text-zinc-900">
+                    <strong className="text-slate-900">
                       {Math.max(1, Math.floor(activeAmountUSD / 50))} student{activeAmountUSD >= 100 ? "s" : ""}
                     </strong>
                     .
@@ -410,28 +418,28 @@ export function DonationPage() {
               </div>
 
               {/* Anonymous Giving Option */}
-              <label className="flex items-center gap-2.5 cursor-pointer text-xs text-zinc-600">
+              <label className="flex items-center gap-2.5 cursor-pointer text-xs text-slate-600">
                 <input
                   type="checkbox"
                   checked={isAnonymous}
                   onChange={(e) => setIsAnonymous(e.target.checked)}
-                  className="h-4 w-4 rounded border-zinc-300 bg-white text-zinc-900 focus:ring-zinc-900"
+                  className="h-4 w-4 rounded border-slate-300 bg-white text-slate-900 focus:ring-slate-900"
                 />
                 <span>Make my donation anonymous on the public Wall of Gratitude</span>
               </label>
             </div>
 
             {/* Right: Multi-Rail Payment Interface */}
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 space-y-4">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-4">
               {/* Payment Rail Tabs */}
-              <div className="grid grid-cols-4 gap-1 rounded-lg border border-zinc-200 bg-white p-1 text-xs shadow-2xs">
+              <div className="grid grid-cols-4 gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1 text-xs shadow-2xs">
                 <button
                   type="button"
                   onClick={() => setPaymentTab("local")}
-                  className={`rounded-md py-1.5 text-[11px] font-medium transition ${
+                  className={`rounded-lg py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "local"
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900"
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Telebirr / CBE
@@ -439,10 +447,10 @@ export function DonationPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentTab("international")}
-                  className={`rounded-md py-1.5 text-[11px] font-medium transition ${
+                  className={`rounded-lg py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "international"
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900"
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Card / Stripe
@@ -450,10 +458,10 @@ export function DonationPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentTab("crypto")}
-                  className={`rounded-md py-1.5 text-[11px] font-medium transition ${
+                  className={`rounded-lg py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "crypto"
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900"
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Crypto / Web3
@@ -461,10 +469,10 @@ export function DonationPage() {
                 <button
                   type="button"
                   onClick={() => setPaymentTab("wire")}
-                  className={`rounded-md py-1.5 text-[11px] font-medium transition ${
+                  className={`rounded-lg py-1.5 text-[11px] font-medium transition ${
                     paymentTab === "wire"
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "text-zinc-600 hover:text-zinc-900"
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   SWIFT Wire
@@ -473,19 +481,24 @@ export function DonationPage() {
 
               {/* Payment Tab Contents */}
               {paymentSuccess ? (
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 text-center space-y-2.5">
-                  <CheckCircle2 size={30} className="mx-auto text-zinc-800" />
-                  <h4 className="text-lg font-bold text-zinc-900">Thank You for Your Generosity!</h4>
-                  <p className="text-xs text-zinc-600 leading-relaxed">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-center space-y-2.5">
+                  <CheckCircle2 size={30} className="mx-auto text-emerald-600" />
+                  <h4 className="text-lg font-bold text-slate-900">Thank You for Your Generosity!</h4>
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Your contribution of{" "}
-                    <strong className="text-zinc-900">
+                    <strong className="text-slate-900">
                       {CURRENCY_SYMBOLS[currency]}
                       {convertedAmount.toLocaleString()}
                     </strong>{" "}
                     has been recorded. A tax receipt and student milestone tracking link have been dispatched to{" "}
-                    <strong className="text-zinc-900">{donorEmail || "your email"}</strong>.
+                    <strong className="text-slate-900">{donorEmail || "your email"}</strong>.
                   </p>
-                  <Button variant="outline" size="sm" onClick={() => setPaymentSuccess(false)}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setPaymentSuccess(false)}
+                    className="font-semibold shadow-xs"
+                  >
                     Submit Another Gift
                   </Button>
                 </div>
@@ -493,14 +506,15 @@ export function DonationPage() {
                 <>
                   {paymentTab === "local" && (
                     <div className="space-y-3 text-xs">
-                      <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-1.5 shadow-2xs">
-                        <p className="font-semibold text-zinc-900 text-xs flex items-center gap-1.5">
-                          <Smartphone className="text-zinc-700 inline" size={14} /> Telebirr / CBE Birr Quick Rails
+                      <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5 shadow-2xs">
+                        <p className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+                          <Smartphone className="text-[var(--secondary)] inline" size={14} /> Telebirr / CBE Birr Quick
+                          Rails
                         </p>
-                        <p className="text-zinc-600 text-[11px]">
+                        <p className="text-slate-600 text-[11px]">
                           Send directly via Telebirr Merchant Code or CBE Birr Account:
                         </p>
-                        <div className="font-mono bg-zinc-50 p-2 rounded border border-zinc-200 text-zinc-800 text-[11px] space-y-0.5">
+                        <div className="font-mono bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-800 text-[11px] space-y-1">
                           <p>
                             Telebirr Merchant ID: <strong className="text-[var(--secondary)] font-bold">884920</strong>{" "}
                             (EthioTech Foundation)
@@ -521,6 +535,7 @@ export function DonationPage() {
                             onChange={(e) => setDonorName(e.target.value)}
                             required
                             placeholder="e.g. Almaz Tadesse"
+                            className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                           />
                         </div>
                         <div>
@@ -531,13 +546,10 @@ export function DonationPage() {
                             type="email"
                             required
                             placeholder="e.g. almaz@example.com"
+                            className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                           />
                         </div>
-                        <Button
-                          type="submit"
-                          size="md"
-                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-                        >
+                        <Button type="submit" size="md" className="w-full font-semibold shadow-xs">
                           Confirm Telebirr / CBE Contribution
                         </Button>
                       </form>
@@ -546,12 +558,12 @@ export function DonationPage() {
 
                   {paymentTab === "international" && (
                     <div className="space-y-3 text-xs">
-                      <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-1.5 shadow-2xs">
-                        <p className="font-semibold text-zinc-900 text-xs flex items-center gap-1.5">
-                          <CreditCard className="text-zinc-700 inline" size={14} /> Credit / Debit Card (Stripe /
-                          PayPal)
+                      <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5 shadow-2xs">
+                        <p className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+                          <CreditCard className="text-[var(--secondary)] inline" size={14} /> Credit / Debit Card
+                          (Stripe / PayPal)
                         </p>
-                        <p className="text-zinc-600 text-[11px]">
+                        <p className="text-slate-600 text-[11px]">
                           Accepts Visa, MasterCard, American Express, Apple Pay, and Google Pay worldwide.
                         </p>
                       </div>
@@ -564,6 +576,7 @@ export function DonationPage() {
                             onChange={(e) => setDonorName(e.target.value)}
                             required
                             placeholder="e.g. Michael Chen"
+                            className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                           />
                         </div>
                         <div>
@@ -574,13 +587,10 @@ export function DonationPage() {
                             type="email"
                             required
                             placeholder="e.g. michael@example.com"
+                            className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                           />
                         </div>
-                        <Button
-                          type="submit"
-                          size="md"
-                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-                        >
+                        <Button type="submit" size="md" className="w-full font-semibold shadow-xs">
                           Proceed to Secure Stripe Gateway
                           <Lock size={13} className="ml-1.5" />
                         </Button>
@@ -590,22 +600,26 @@ export function DonationPage() {
 
                   {paymentTab === "crypto" && (
                     <div className="space-y-3 text-xs">
-                      <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-1.5 shadow-2xs">
-                        <p className="font-semibold text-zinc-900 text-xs flex items-center gap-1.5">
-                          <CreditCard className="text-zinc-700 inline" size={14} /> Non-Profit Treasury (USDC / USDT /
-                          ETH)
+                      <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5 shadow-2xs">
+                        <p className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+                          <CreditCard className="text-[var(--secondary)] inline" size={14} /> Non-Profit Treasury (USDC
+                          / USDT / ETH)
                         </p>
-                        <p className="text-zinc-600 text-[11px]">
+                        <p className="text-slate-600 text-[11px]">
                           Direct multichain wallet for decentralized donors (Ethereum & Polygon):
                         </p>
-                        <div className="flex items-center justify-between font-mono bg-zinc-50 p-2 rounded border border-zinc-200 text-zinc-800 text-[11px]">
+                        <div className="flex items-center justify-between font-mono bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-800 text-[11px]">
                           <span className="truncate">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</span>
                           <button
                             type="button"
                             onClick={() => handleCopyCrypto("0x742d35Cc6634C0532925a3b844Bc454e4438f44e")}
-                            className="ml-2 text-zinc-700 hover:text-zinc-900"
+                            className="ml-2 text-slate-700 hover:text-slate-900 font-semibold"
                           >
-                            {copiedAddress ? <CheckCircle2 size={14} className="text-zinc-800" /> : <Copy size={14} />}
+                            {copiedAddress ? (
+                              <CheckCircle2 size={14} className="text-emerald-600" />
+                            ) : (
+                              <Copy size={14} />
+                            )}
                           </button>
                         </div>
                       </div>
@@ -617,13 +631,10 @@ export function DonationPage() {
                             value={donorEmail}
                             onChange={(e) => setDonorEmail(e.target.value)}
                             placeholder="e.g. donor@domain.com or 0x8f2..."
+                            className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                           />
                         </div>
-                        <Button
-                          type="submit"
-                          size="md"
-                          className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-                        >
+                        <Button type="submit" size="md" className="w-full font-semibold shadow-xs">
                           Log Web3 Donation Confirmation
                         </Button>
                       </form>
@@ -632,33 +643,33 @@ export function DonationPage() {
 
                   {paymentTab === "wire" && (
                     <div className="space-y-3 text-xs">
-                      <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-1.5 shadow-2xs">
-                        <p className="font-semibold text-zinc-900 text-xs flex items-center gap-1.5">
-                          <Building2 className="text-amber-600 inline" size={14} /> Institutional SWIFT Wire
+                      <div className="rounded-xl border border-slate-200 bg-white p-3 space-y-1.5 shadow-2xs">
+                        <p className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+                          <Building2 className="text-[var(--secondary)] inline" size={14} /> Institutional SWIFT Wire
                           Instructions
                         </p>
-                        <div className="font-mono bg-zinc-50 p-2.5 rounded border border-zinc-200 text-zinc-800 space-y-1 text-[11px] leading-relaxed">
+                        <div className="font-mono bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-slate-800 space-y-1 text-[11px] leading-relaxed">
                           <p>
                             Bank:{" "}
-                            <strong className="text-zinc-900 font-semibold">Commercial Bank of Ethiopia (CBE)</strong>
+                            <strong className="text-slate-900 font-semibold">Commercial Bank of Ethiopia (CBE)</strong>
                           </p>
                           <p>
-                            SWIFT Code: <strong className="text-zinc-900 font-semibold">CBETETAA</strong>
+                            SWIFT Code: <strong className="text-slate-900 font-semibold">CBETETAA</strong>
                           </p>
                           <p>
                             Beneficiary:{" "}
-                            <strong className="text-zinc-900">EthioTech Digital Platform Foundation</strong>
+                            <strong className="text-slate-900">EthioTech Digital Platform Foundation</strong>
                           </p>
                           <p>
                             Account Number (USD):{" "}
-                            <strong className="text-zinc-900 font-semibold">1000-8849-2910</strong>
+                            <strong className="text-slate-900 font-semibold">1000-8849-2910</strong>
                           </p>
                         </div>
                       </div>
 
                       <div className="text-center">
                         <Link to="/contact">
-                          <Button variant="outline" size="sm">
+                          <Button variant="secondary" size="sm" className="font-semibold shadow-xs">
                             Request Official Wire Invoice & W-9
                           </Button>
                         </Link>
@@ -675,11 +686,13 @@ export function DonationPage() {
       {/* ─── Hardware Donation Drive Section ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Hardware Drive</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Hardware Drive
+          </Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Donate Laptops & Regional Hub Equipment
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             Empower Ethiopian students by donating refurbished developer laptops, monitors, Raspberry Pis, and server
             gear. We provide full asset tracking and certified data sanitization.
           </p>
@@ -687,71 +700,72 @@ export function DonationPage() {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {ACCEPTED_HARDWARE.map((item, idx) => (
-            <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+            <Card
+              key={idx}
+              className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
               <div>
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-50 text-zinc-700 border border-zinc-200">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                   <Laptop2 size={18} />
                 </div>
-                <h3 className="mt-3.5 font-semibold text-zinc-900 text-sm">{item.item}</h3>
-                <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{item.spec}</p>
+                <h3 className="mt-3.5 font-semibold text-slate-900 text-sm">{item.item}</h3>
+                <p className="mt-1 text-xs text-slate-600 leading-relaxed">{item.spec}</p>
               </div>
             </Card>
           ))}
         </div>
 
         {/* Hardware Donation Workflow Banner */}
-        <Card className="border-zinc-200 bg-white p-6 md:p-8 shadow-xs">
+        <Card className="rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-2 items-center">
             <div className="space-y-3.5">
-              <Badge variant="default">Drop-off & International Freight</Badge>
-              <h3 className="text-xl font-bold text-zinc-900">How Hardware Donations Work</h3>
-              <ul className="space-y-2 text-xs text-zinc-600">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={14} className="mt-0.5 text-zinc-700 shrink-0" />
+              <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+                Drop-off & International Freight
+              </Badge>
+              <h3 className="text-xl font-bold text-slate-900">How Hardware Donations Work</h3>
+              <ul className="space-y-2.5 text-xs text-slate-600">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 size={15} className="mt-0.5 text-[var(--secondary)] shrink-0" />
                   <span>
-                    <strong className="text-zinc-900">Local Drop-off:</strong> Hand over devices at any of our 6
-                    regional hubs in Addis Ababa, Hawassa, Bahir Dar, Dire Dawa, Mekelle, or Jimma.
+                    <strong className="text-slate-900 font-semibold">Local Drop-off:</strong> Hand over devices at any
+                    of our 6 regional hubs in Addis Ababa, Hawassa, Bahir Dar, Dire Dawa, Mekelle, or Jimma.
                   </span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={14} className="mt-0.5 text-zinc-700 shrink-0" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 size={15} className="mt-0.5 text-[var(--secondary)] shrink-0" />
                   <span>
-                    <strong className="text-zinc-900">Diaspora Freight:</strong> Free consolidated bulk shipping from
-                    our partner collection points in Washington D.C., Atlanta, London, and Frankfurt.
+                    <strong className="text-slate-900 font-semibold">Diaspora Freight:</strong> Free consolidated bulk
+                    shipping from our partner collection points in Washington D.C., Atlanta, London, and Frankfurt.
                   </span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={14} className="mt-0.5 text-zinc-700 shrink-0" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 size={15} className="mt-0.5 text-[var(--secondary)] shrink-0" />
                   <span>
-                    <strong className="text-zinc-900">DoD 5220.22-M Data Wipe:</strong> Every laptop is sanitized with a
-                    certified data erasure certificate provided to donors.
+                    <strong className="text-slate-900 font-semibold">DoD 5220.22-M Data Wipe:</strong> Every laptop is
+                    sanitized with a certified data erasure certificate provided to donors.
                   </span>
                 </li>
               </ul>
-              <Button
-                size="sm"
-                onClick={() => setHardwareModal(true)}
-                className="bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-              >
+              <Button size="sm" onClick={() => setHardwareModal(true)} className="font-semibold shadow-xs">
                 Register a Hardware Donation Pledge
               </Button>
             </div>
 
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 space-y-3">
-              <h4 className="text-xs uppercase tracking-wider font-semibold text-zinc-900">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-3 shadow-xs">
+              <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-900">
                 Hardware Drive Impact to Date
               </h4>
               <div className="grid grid-cols-2 gap-2.5">
-                <div className="p-3 rounded-lg bg-white border border-zinc-200 text-center shadow-2xs">
-                  <p className="text-xl font-bold text-zinc-900 font-mono">320+</p>
-                  <p className="text-[9px] uppercase text-zinc-500 font-semibold mt-0.5">Laptops Deployed</p>
+                <div className="p-3 rounded-lg bg-white border border-slate-200/80 text-center shadow-xs">
+                  <p className="text-xl font-bold text-[var(--secondary)] font-mono">320+</p>
+                  <p className="text-[9px] uppercase text-slate-500 font-semibold mt-0.5">Laptops Deployed</p>
                 </div>
-                <div className="p-3 rounded-lg bg-white border border-zinc-200 text-center shadow-2xs">
-                  <p className="text-xl font-bold text-zinc-900 font-mono">6</p>
-                  <p className="text-[9px] uppercase text-zinc-500 font-semibold mt-0.5">Hub Labs Equipped</p>
+                <div className="p-3 rounded-lg bg-white border border-slate-200/80 text-center shadow-xs">
+                  <p className="text-xl font-bold text-[var(--secondary)] font-mono">6</p>
+                  <p className="text-[9px] uppercase text-slate-500 font-semibold mt-0.5">Hub Labs Equipped</p>
                 </div>
               </div>
-              <p className="text-xs text-zinc-600 italic">
+              <p className="text-xs text-slate-600 italic">
                 &ldquo;Receiving a refurbished ThinkPad allowed me to complete my full-stack capstone and land my first
                 engineering job.&rdquo; — Mahlet G., Cohort 2
               </p>
@@ -763,9 +777,11 @@ export function DonationPage() {
       {/* ─── Transparent Fund Allocation & Governance ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Zero Overhead Waste</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Transparent Fund Allocation</h2>
-          <p className="text-xs text-zinc-600">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Zero Overhead Waste
+          </Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Transparent Fund Allocation</h2>
+          <p className="text-xs text-slate-600">
             We publish quarterly audited reports. Our platform core is independently underwritten so that 100% of your
             gift directly fuels student learning.
           </p>
@@ -773,11 +789,14 @@ export function DonationPage() {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {FUND_ALLOCATION.map((item, idx) => (
-            <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+            <Card
+              key={idx}
+              className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
               <div>
-                <p className="text-2xl font-bold font-mono text-zinc-900">{item.percentage}%</p>
-                <h3 className="mt-2 font-semibold text-zinc-900 text-sm">{item.label}</h3>
-                <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{item.description}</p>
+                <p className="text-2xl font-bold font-mono text-[var(--secondary)]">{item.percentage}%</p>
+                <h3 className="mt-2 font-semibold text-slate-900 text-sm">{item.label}</h3>
+                <p className="mt-1 text-xs text-slate-600 leading-relaxed">{item.description}</p>
               </div>
             </Card>
           ))}
@@ -787,24 +806,29 @@ export function DonationPage() {
       {/* ─── Donor Recognition & Perks Wall ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Donor Honor Roll</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Donor Honor Roll
+          </Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Donor Recognition & Stewardship
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             We honor every patron who invests in the next generation of Ethiopian builders.
           </p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {DONOR_RECOGNITION_TIERS.map((tier) => (
-            <Card key={tier.name} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+            <Card
+              key={tier.name}
+              className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
               <div>
-                <Badge variant="default" size="sm">
+                <Badge variant="secondary" size="sm">
                   {tier.range}
                 </Badge>
-                <h3 className="mt-2.5 text-sm font-bold text-zinc-900">{tier.name}</h3>
-                <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{tier.perks}</p>
+                <h3 className="mt-2.5 text-sm font-bold text-slate-900">{tier.name}</h3>
+                <p className="mt-1 text-xs text-slate-600 leading-relaxed">{tier.perks}</p>
               </div>
             </Card>
           ))}
@@ -813,33 +837,38 @@ export function DonationPage() {
 
       {/* ─── Hardware Pledge Modal ─── */}
       {hardwareModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/40 backdrop-blur-xs p-4">
-          <Card className="w-full max-w-lg border-zinc-200 bg-white p-6 md:p-8 space-y-5 shadow-2xl text-zinc-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+          <Card className="w-full max-w-lg rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 space-y-5 shadow-2xl text-slate-900">
             <div className="flex items-start justify-between">
               <div>
-                <Badge variant="default" size="sm">
+                <Badge variant="secondary" size="sm">
                   Hardware Pledge
                 </Badge>
-                <h3 className="text-xl font-bold text-zinc-900 mt-1">Register Equipment Donation</h3>
+                <h3 className="text-xl font-bold text-slate-900 mt-1">Register Equipment Donation</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setHardwareModal(false)}
-                className="text-zinc-400 hover:text-zinc-700 text-base font-bold p-1 rounded"
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors font-bold"
               >
                 ✕
               </button>
             </div>
 
             {hardwareSubmitted ? (
-              <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 text-center space-y-2.5">
-                <CheckCircle2 size={30} className="mx-auto text-zinc-800" />
-                <h4 className="text-lg font-bold text-zinc-900">Hardware Pledge Logged</h4>
-                <p className="text-xs text-zinc-600 leading-relaxed">
+              <div className="rounded-xl border border-emerald-200/80 bg-emerald-50/70 p-5 text-center space-y-2.5">
+                <CheckCircle2 size={30} className="mx-auto text-emerald-600" />
+                <h4 className="text-lg font-bold text-slate-900">Hardware Pledge Logged</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
                   Thank you! Our logistics team will email you shipping labels or local hub drop-off instructions within
                   24 hours.
                 </p>
-                <Button variant="outline" size="sm" onClick={() => setHardwareModal(false)}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setHardwareModal(false)}
+                  className="border-slate-200 bg-white font-semibold"
+                >
                   Close
                 </Button>
               </div>
@@ -871,11 +900,7 @@ export function DonationPage() {
                   <Label required>Location / Drop-off Preference</Label>
                   <Input required placeholder="Addis Ababa Hub, Washington D.C., or DHL Freight" />
                 </div>
-                <Button
-                  type="submit"
-                  size="md"
-                  className="w-full font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-                >
+                <Button type="submit" size="md" className="w-full font-semibold shadow-xs">
                   Submit Hardware Pledge
                 </Button>
               </form>
@@ -885,29 +910,33 @@ export function DonationPage() {
       )}
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
+      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-b from-slate-50/80 to-white p-8 sm:p-10 text-center space-y-5 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Have Questions About Institutional Grants?
           </h2>
-          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Our Philanthropy & Grants Committee is available to review multi-year scholarship endowments, CSR budgets,
             and 501(c)(3) fiscal sponsorships.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#donate-now">
-            <Button size="md" className="font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs">
+            <Button size="md" className="font-semibold shadow-xs">
               Sponsor a Student Today
             </Button>
           </a>
           <Link to="/partners">
-            <Button variant="outline" size="md">
+            <Button
+              variant="outline"
+              size="md"
+              className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
+            >
               Explore Partner Frameworks
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-zinc-700 hover:text-zinc-900">
+            <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
               Contact Grants Committee
             </Button>
           </Link>

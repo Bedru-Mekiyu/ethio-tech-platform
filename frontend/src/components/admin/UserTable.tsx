@@ -218,17 +218,17 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
   return (
     <div className="space-y-6">
       {selectedIds.size > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-xs">
           <div className="flex items-center gap-2 text-sm">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-900 text-[10px] font-bold text-white">
               {selectedIds.size}
             </span>
-            <span className="font-medium text-zinc-900">{selectedIds.size === 1 ? "user" : "users"} selected</span>
+            <span className="font-medium text-slate-900">{selectedIds.size === 1 ? "user" : "users"} selected</span>
             <Button
               variant="ghost"
               size="sm"
               onClick={clearSelection}
-              className="ml-2 h-7 px-2 text-zinc-600 hover:text-zinc-900"
+              className="ml-2 h-7 px-2 text-slate-600 hover:text-slate-900"
             >
               <X size={14} className="mr-1" /> Clear
             </Button>
@@ -250,12 +250,12 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-3">
           <div className="relative flex-1 max-w-md">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <Input
               value={searchInput}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search by name, email, city, company..."
-              className="pl-9 h-9 text-xs rounded-lg border-zinc-200 bg-white text-zinc-900"
+              className="pl-9 h-9 text-xs rounded-lg border-slate-200 bg-white text-slate-900"
               aria-label="Search users"
             />
           </div>
@@ -265,12 +265,12 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             onClick={() => setShowFilters(!showFilters)}
             aria-pressed={showFilters}
             aria-label="Toggle filters"
-            className="border-zinc-200 text-zinc-700 hover:text-zinc-900 h-9 text-xs"
+            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9 text-xs"
           >
             <Filter size={14} className="mr-1.5" />
             Filters
             {(roleFilter || statusFilter) && (
-              <span className="ml-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-zinc-900 text-[10px] font-bold text-white">
+              <span className="ml-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-slate-900 text-[10px] font-bold text-white">
                 {(roleFilter ? 1 : 0) + (statusFilter ? 1 : 0)}
               </span>
             )}
@@ -280,14 +280,14 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             size="sm"
             onClick={() => refetch()}
             aria-label="Refresh"
-            className="border-zinc-200 text-zinc-700 hover:text-zinc-900 h-9"
+            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9"
           >
             <RefreshCw size={14} />
           </Button>
         </div>
         <div className="flex items-center gap-2.5">
           <select
-            className="h-9 rounded-lg border border-zinc-200 bg-white px-2.5 text-xs text-zinc-800 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 shadow-xs"
+            className="h-9 rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-xs"
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
@@ -312,7 +312,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               adminUserService.exportUsers(params);
             }}
             aria-label="Export users"
-            className="border-zinc-200 text-zinc-700 hover:text-zinc-900"
+            className="border-slate-200 text-slate-700 hover:text-slate-900"
           >
             <Download size={16} className="mr-2" />
             Export
@@ -321,11 +321,11 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       {showFilters && (
-        <div className="flex flex-wrap gap-3 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-sm">
+        <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-zinc-500">Role</label>
+            <label className="text-xs font-medium text-slate-500">Role</label>
             <select
-              className="h-9 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-800 outline-none focus:border-zinc-900"
+              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-900"
               value={roleFilter}
               onChange={(e) => {
                 setRoleFilter(e.target.value);
@@ -345,9 +345,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-zinc-500">Status</label>
+            <label className="text-xs font-medium text-slate-500">Status</label>
             <select
-              className="h-9 rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-800 outline-none focus:border-zinc-900"
+              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-900"
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value);
@@ -369,7 +369,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-zinc-600 hover:text-zinc-900"
+                className="text-slate-600 hover:text-slate-900"
                 onClick={() => {
                   setRoleFilter("");
                   setStatusFilter("");
@@ -383,33 +383,37 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-xl border border-zinc-200/80 bg-white shadow-xs">
+      <div className="overflow-x-auto rounded-xl border border-slate-200/80 bg-white shadow-xs">
         <table className="w-full text-left" role="table">
           <thead>
-            <tr className="border-b border-zinc-200/80 bg-zinc-50/75">
+            <tr className="border-b border-slate-200/80 bg-slate-50/75">
               <th className="w-10 px-3.5 py-2.5">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
+                  className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900 accent-zinc-900"
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">User</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Role</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Status</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">XP</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Track</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">Joined</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">User</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">Role</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                Status
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">XP</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">Track</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                Joined
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                 Last Login
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                 Verified
               </th>
               {showActions && (
-                <th className="w-20 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+                <th className="w-20 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
                   Actions
                 </th>
               )}
@@ -431,7 +435,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     eyebrow="Directory"
                     title="No users found"
                     description="Try adjusting your search or filters to see more results."
-                    illustration={<Users size={26} className="text-zinc-400 opacity-80" />}
+                    illustration={<Users size={26} className="text-slate-400 opacity-80" />}
                     className="rounded-none border-0 bg-transparent py-16"
                   />
                 </td>
@@ -442,7 +446,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                 return (
                   <tr
                     key={id}
-                    className="border-b border-zinc-100 transition-colors hover:bg-zinc-50/70 cursor-pointer text-xs"
+                    className="border-b border-slate-100 transition-colors hover:bg-slate-50/70 cursor-pointer text-xs"
                     onClick={() => onSelectUser?.(user)}
                     role="row"
                   >
@@ -451,7 +455,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         type="checkbox"
                         checked={selectedIds.has(id)}
                         onChange={() => toggleSelect(id)}
-                        className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 accent-zinc-900"
+                        className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900 accent-zinc-900"
                         aria-label={`Select ${user.fullName}`}
                       />
                     </td>
@@ -464,10 +468,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           size="sm"
                         />
                         <div className="min-w-0">
-                          <p className="font-semibold text-zinc-900 truncate text-xs">
+                          <p className="font-semibold text-slate-900 truncate text-xs">
                             {user.fullName || user.email || "User"}
                           </p>
-                          <p className="text-[11px] text-zinc-500 truncate">{user.email}</p>
+                          <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
                         </div>
                       </div>
                     </td>
@@ -481,17 +485,17 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         {user.status ?? "unknown"}
                       </Badge>
                     </td>
-                    <td className="px-3.5 py-2.5 text-xs font-medium text-zinc-700">
+                    <td className="px-3.5 py-2.5 text-xs font-medium text-slate-700">
                       {(user.xp ?? 0).toLocaleString()}
                     </td>
-                    <td className="px-3.5 py-2.5 text-xs text-zinc-600">{user.currentCompany || "-"}</td>
-                    <td className="px-3.5 py-2.5 text-xs text-zinc-500">{formatDate(user.createdAt)}</td>
-                    <td className="px-3.5 py-2.5 text-xs text-zinc-500">{formatDate(user.lastLoginAt)}</td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-600">{user.currentCompany || "-"}</td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-500">{formatDate(user.createdAt)}</td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-500">{formatDate(user.lastLoginAt)}</td>
                     <td className="px-3.5 py-2.5">
                       {user.isVerified ? (
-                        <CheckCircle size={15} className="text-zinc-900" />
+                        <CheckCircle size={15} className="text-slate-900" />
                       ) : (
-                        <XCircle size={15} className="text-zinc-400" />
+                        <XCircle size={15} className="text-slate-400" />
                       )}
                     </td>
                     {showActions && (
@@ -500,7 +504,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {onSelectUser && (
                             <Tooltip content="View profile">
                               <button
-                                className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800"
+                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
                                 onClick={() => onSelectUser(user)}
                                 aria-label={`View ${user.fullName}'s profile`}
                               >
@@ -511,7 +515,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "active" && (
                             <Tooltip content="Suspend user">
                               <button
-                                className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
                                 onClick={() => suspendMutation.mutate({ id })}
                                 aria-label={`Suspend ${user.fullName}`}
                               >
@@ -522,7 +526,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "suspended" && (
                             <Tooltip content="Reactivate user">
                               <button
-                                className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
                                 onClick={() => reactivateMutation.mutate(id)}
                                 aria-label={`Reactivate ${user.fullName}`}
                               >
@@ -533,7 +537,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {!user.isVerified && (
                             <Tooltip content="Verify user">
                               <button
-                                className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900"
+                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
                                 onClick={() => verifyMutation.mutate(id)}
                                 aria-label={`Verify ${user.fullName}`}
                               >
@@ -543,7 +547,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           )}
                           <Tooltip content="Delete user">
                             <button
-                              className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                              className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
                               onClick={() => setDeleteTarget(user)}
                               aria-label={`Delete ${user.fullName}`}
                             >
@@ -562,7 +566,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-slate-500">
           {pagination ? `Page ${pagination.page} of ${pagination.totalPages} (${pagination.total} total)` : ""}
         </p>
         <div className="flex items-center gap-2">

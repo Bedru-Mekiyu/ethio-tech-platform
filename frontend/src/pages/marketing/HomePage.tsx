@@ -511,12 +511,18 @@ export function HomePage() {
   const approvalRate = data?.stats?.approvalRate ?? 94.2;
 
   return (
-    <div className="relative overflow-hidden selection:bg-zinc-200 selection:text-zinc-900">
+    <div className="relative overflow-hidden selection:bg-slate-200 selection:text-slate-900">
+      {/* Luminous Ambient Background Glow */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.05),rgba(30,58,138,0.03),transparent_70%)]"
+        aria-hidden="true"
+      />
+
       {/* ─────────────────────────────────────────────────────────────
           1. HERO SECTION (Decluttered, Balanced 36-44px Typography)
       ────────────────────────────────────────────────────────────── */}
       <motion.section
-        className="page-shell pt-8 pb-12 lg:pt-12 lg:pb-16"
+        className="page-shell relative pt-8 pb-12 lg:pt-12 lg:pb-16"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
@@ -524,18 +530,18 @@ export function HomePage() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
           <div className="space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-semibold text-zinc-800 shadow-2xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] backdrop-blur-xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
               <span>Interactive Technology & Career Platform</span>
             </div>
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
-            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-zinc-900 max-w-2xl">
+            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl">
               Building Ethiopia&apos;s Tech Future with <span className="text-primary">Live Mentorship</span>
             </h1>
 
             {/* Subtitle - Trimmed to comfortable 16-18px */}
-            <p className="text-base sm:text-lg leading-relaxed text-zinc-600 max-w-xl font-normal">
+            <p className="text-base sm:text-lg leading-relaxed text-slate-600 max-w-xl font-normal">
               Connecting university students and aspiring software engineers with senior diaspora mentors, structured
               production curriculums, and collaborative 4-peer agile squads.
             </p>
@@ -543,18 +549,15 @@ export function HomePage() {
             {/* Primary & Secondary Action CTAs */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  className="w-full gap-2 font-medium bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
-                >
+                <Button size="lg" className="w-full sm:w-auto gap-2 font-medium">
                   <span>Start Coding Free</span>
                   <ArrowRight size={16} />
                 </Button>
               </Link>
               <Button
-                variant="outline"
+                variant="secondary"
                 size="lg"
-                className="w-full sm:w-auto gap-2 font-medium border-zinc-200 bg-white text-zinc-800 hover:bg-zinc-50 hover:text-zinc-900 shadow-xs"
+                className="w-full sm:w-auto gap-2 font-medium"
                 onClick={() => {
                   const el = document.getElementById("curriculum-section");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -566,16 +569,16 @@ export function HomePage() {
             </div>
 
             {/* Single Row of Trust Points */}
-            <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-zinc-600">
-              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+            <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
+              <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>100% Free & Open Access</span>
               </div>
-              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+              <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>Low-Bandwidth WebRTC Mesh</span>
               </div>
-              <div className="flex items-center gap-1.5 font-medium text-zinc-800">
+              <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
                 <span>Verified Deliverable Credentials</span>
               </div>
@@ -584,22 +587,18 @@ export function HomePage() {
 
           {/* Right Column: Platform Workspace & Real Collaboration Preview */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm space-y-3.5">
-              {/* Header - window dots removed */}
-              <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
-                <span className="text-xs font-semibold text-zinc-800">Collaborative Engineering</span>
-                <Badge
-                  variant="outline"
-                  size="sm"
-                  className="gap-1.5 font-medium text-xs border-zinc-200 bg-zinc-50 text-zinc-800"
-                >
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[var(--shadow-card)] space-y-3.5">
+              {/* Header */}
+              <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
+                <span className="text-xs font-semibold text-slate-800">Collaborative Engineering</span>
+                <Badge variant="secondary" size="sm" className="gap-1.5 font-medium text-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                   Active Session
                 </Badge>
               </div>
 
               {/* Authentic Developer Collaboration Image */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-zinc-200">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/80">
                 <SmartImage
                   src={LOCAL_MEDIA_ASSETS.hero.collaboration}
                   alt="Young software engineers collaborating on system architecture in a modern tech workspace"
@@ -609,45 +608,45 @@ export function HomePage() {
                   width={800}
                   quality={85}
                 />
-                <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between rounded-md bg-zinc-900/85 px-2.5 py-1 text-xs text-white backdrop-blur-xs">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between rounded-lg bg-slate-900/85 px-3 py-1.5 text-xs text-white backdrop-blur-sm border border-white/10">
                   <span className="flex items-center gap-1.5 font-medium">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Live Peer Review
                   </span>
-                  <span className="text-zinc-300 font-mono text-[11px]">Addis Ababa • Remote Mesh</span>
+                  <span className="text-slate-300 font-mono text-[11px]">Addis Ababa • Remote Mesh</span>
                 </div>
               </div>
 
               {/* Single Live Mentorship Session Line */}
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-3 flex items-center justify-between gap-3">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <Avatar
                     name="Selamawit Tekle"
                     userId="selamawit-tekle"
                     role="mentor"
                     size="sm"
-                    className="border border-zinc-200 shrink-0"
+                    className="border border-slate-200 shrink-0"
                   />
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-zinc-900 truncate">Selamawit Tekle</p>
-                    <p className="text-[11px] text-zinc-500 truncate">Senior Fellow · Distributed Systems</p>
+                    <p className="text-xs font-semibold text-slate-900 truncate">Selamawit Tekle</p>
+                    <p className="text-[11px] text-slate-500 truncate">Senior Fellow · Distributed Systems</p>
                   </div>
                 </div>
-                <span className="flex items-center gap-1 text-xs font-medium text-zinc-700 shrink-0">
+                <span className="flex items-center gap-1 text-xs font-medium text-slate-700 shrink-0">
                   <Radio size={12} className="text-[var(--secondary)] animate-pulse" /> Sub-150ms
                 </span>
               </div>
 
               {/* Single Track Progress Line */}
-              <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-2">
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3 space-y-2 shadow-[var(--shadow-xs)]">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-zinc-800 truncate">Fullstack Cloud & Distributed Systems</span>
-                  <span className="font-mono font-bold text-zinc-900">50%</span>
+                  <span className="font-semibold text-slate-800 truncate">Fullstack Cloud & Distributed Systems</span>
+                  <span className="font-mono font-bold text-slate-900">50%</span>
                 </div>
-                <div className="h-1.5 w-full rounded-full bg-zinc-100 overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
                   <div className="h-full bg-[var(--secondary)] rounded-full transition-all" style={{ width: "50%" }} />
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-zinc-500">
+                <div className="flex items-center justify-between text-[11px] text-slate-500">
                   <span>Module 4: PostgreSQL Pooling</span>
                   <span>8 / 16 Lessons</span>
                 </div>
@@ -661,50 +660,54 @@ export function HomePage() {
           2. NATIONAL REACH & IMPACT METRICS BAR + ARCHITECTURE PILLARS
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-12 lg:pb-14">
-        <div className="rounded-xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs space-y-5">
+        <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] space-y-5">
           <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900">
+              <p className="text-2xl font-bold tracking-tight text-slate-900">
                 {data ? (
                   <>{formatCompactCount(activeLearnersCount)}+</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-zinc-100 animate-pulse" aria-hidden="true" />
+                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse" aria-hidden="true" />
                 )}
               </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Active Young Learners</p>
-              <p className="mt-0.5 text-[11px] text-zinc-500">Grade 8 to University Grads</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
+                Active Young Learners
+              </p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Grade 8 to University Grads</p>
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900">45,000+</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Mentorship Hours</p>
-              <p className="mt-0.5 text-[11px] text-zinc-500">1-on-1 & Live Cohort Sessions</p>
+              <p className="text-2xl font-bold tracking-tight text-slate-900">45,000+</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Mentorship Hours</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">1-on-1 & Live Cohort Sessions</p>
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900">6 Hubs</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              <p className="text-2xl font-bold tracking-tight text-slate-900">6 Hubs</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
                 Regional Innovation Hubs
               </p>
-              <p className="mt-0.5 text-[11px] text-zinc-500">Addis, Bahir Dar, Hawassa & more</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Addis, Bahir Dar, Hawassa & more</p>
             </div>
 
             <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-zinc-900">
+              <p className="text-2xl font-bold tracking-tight text-slate-900">
                 {data ? (
                   <>{approvalRate}%</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-zinc-100 animate-pulse" aria-hidden="true" />
+                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse" aria-hidden="true" />
                 )}
               </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">Capstone Approval</p>
-              <p className="mt-0.5 text-[11px] text-zinc-500">Audited Production Projects</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Capstone Approval</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Audited Production Projects</p>
             </div>
           </div>
 
           {/* Folded Architecture Highlight Strip */}
-          <div className="pt-4 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Proven Platform Architecture</p>
+          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              Proven Platform Architecture
+            </p>
             <div className="flex flex-wrap gap-2">
               {[
                 { icon: Video, label: "WebRTC HD Classrooms" },
@@ -717,7 +720,7 @@ export function HomePage() {
                 return (
                   <div
                     key={item.label}
-                    className="flex items-center gap-1.5 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-700 shadow-2xs"
+                    className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50/70 px-2.5 py-1 text-xs text-slate-700 shadow-[var(--shadow-xs)] hover:border-slate-300 hover:bg-white transition-all"
                   >
                     <Icon size={13} className="text-[var(--secondary)]" />
                     <span>{item.label}</span>
@@ -741,14 +744,14 @@ export function HomePage() {
         viewport={{ once: true, amount: 0.15 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium tracking-wide text-zinc-800">
-            <Layers size={12} />
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
+            <Layers size={13} className="text-[var(--secondary)]" />
             <span>Interactive Learning Stack</span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Everything You Need to Master <span className="text-primary">Production Software</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             Purpose-built for Ethiopian engineers. Zero friction, instant cloud sandboxes, adaptive live classrooms, and
             peer sprint squads that turn curious students into high-earning developers.
           </p>
@@ -766,11 +769,11 @@ export function HomePage() {
                 onClick={() => setActiveShowcaseTab(tab.id)}
                 className={`relative flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-150 ${
                   isActive
-                    ? "border-zinc-900 bg-zinc-900 text-white shadow-xs font-semibold"
-                    : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 shadow-xs"
+                    ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                    : "border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-[var(--shadow-xs)]"
                 }`}
               >
-                <Icon size={15} className={isActive ? "text-white" : "text-zinc-500"} />
+                <Icon size={15} className={isActive ? "text-white" : "text-slate-500"} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -786,28 +789,28 @@ export function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="grid gap-8 rounded-xl border border-zinc-200 bg-white p-6 md:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center shadow-xs"
+              className="grid gap-8 rounded-2xl border border-slate-200/80 bg-white p-6 md:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center shadow-[var(--shadow-card)]"
             >
               {/* Left Side: Deep Value Breakdown */}
               <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-0.5 text-xs font-medium text-zinc-800">
-                  <Zap size={12} />
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-0.5 text-xs font-semibold text-[var(--secondary)]">
+                  <Zap size={12} className="text-[var(--secondary)]" />
                   <span>{activeTabDetails.badge}</span>
                 </div>
 
-                <h3 className="text-xl font-bold text-zinc-900 sm:text-2xl leading-tight">
+                <h3 className="text-xl font-bold text-slate-900 sm:text-2xl leading-tight">
                   {activeTabDetails.tagline}
                 </h3>
 
-                <p className="text-sm leading-relaxed text-zinc-600">{activeTabDetails.description}</p>
+                <p className="text-sm leading-relaxed text-slate-600">{activeTabDetails.description}</p>
 
                 <div className="space-y-2 pt-1">
                   {activeTabDetails.benefits.map((benefit) => (
                     <div key={benefit} className="flex items-start gap-2.5">
-                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-700">
+                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 border border-blue-200/60 text-[var(--secondary)]">
                         <Check size={11} />
                       </div>
-                      <span className="text-xs font-medium text-zinc-800">{benefit}</span>
+                      <span className="text-xs font-medium text-slate-800">{benefit}</span>
                     </div>
                   ))}
                 </div>
@@ -817,7 +820,7 @@ export function HomePage() {
                     <Button size="sm">Experience It Now</Button>
                   </Link>
                   <Link to="/how-it-works">
-                    <Button variant="outline" size="sm">
+                    <Button variant="secondary" size="sm">
                       See Full Workflow
                     </Button>
                   </Link>
@@ -825,42 +828,42 @@ export function HomePage() {
               </div>
 
               {/* Right Side: Experiential UI Visual for this Tab */}
-              <div className="relative rounded-lg border border-zinc-200 bg-zinc-50 p-4 shadow-xs overflow-hidden">
+              <div className="relative rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 shadow-[var(--shadow-xs)] overflow-hidden">
                 {activeTabDetails.id === "classroom" && (
                   <div className="space-y-3 font-mono text-xs">
-                    <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
+                    <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
                       <div className="flex items-center gap-2">
-                        <Video size={14} className="text-zinc-700" />
-                        <span className="font-semibold text-zinc-900">Live Classroom: Distributed Systems #12</span>
+                        <Video size={14} className="text-[var(--secondary)]" />
+                        <span className="font-semibold text-slate-900">Live Classroom: Distributed Systems #12</span>
                       </div>
-                      <span className="text-[10px] font-semibold text-zinc-700">● 32ms Latency</span>
+                      <span className="text-[10px] font-semibold text-emerald-700">● 32ms Latency</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-2">
-                      <div className="aspect-video rounded-md border border-zinc-200 bg-white p-2 flex flex-col justify-between shadow-xs">
-                        <span className="text-[10px] font-semibold text-zinc-900">Dawit A. (Screen Sharing)</span>
-                        <div className="flex items-center justify-between text-[10px] text-zinc-500">
+                      <div className="aspect-video rounded-lg border border-slate-200/80 bg-white p-2.5 flex flex-col justify-between shadow-[var(--shadow-xs)]">
+                        <span className="text-[10px] font-semibold text-slate-900">Dawit A. (Screen Sharing)</span>
+                        <div className="flex items-center justify-between text-[10px] text-slate-500">
                           <span>Whiteboard</span>
-                          <span className="text-zinc-600 font-medium">1080p</span>
+                          <span className="text-slate-600 font-medium">1080p</span>
                         </div>
                       </div>
 
-                      <div className="aspect-video rounded-md border border-zinc-200 bg-white p-2 flex flex-col justify-between shadow-xs">
-                        <span className="text-[10px] font-semibold text-zinc-900">Selamawit T. (Mentor)</span>
-                        <div className="flex items-center gap-1 text-[10px] text-zinc-700 font-medium">
-                          <Radio size={10} className="animate-pulse" /> Speaking
+                      <div className="aspect-video rounded-lg border border-slate-200/80 bg-white p-2.5 flex flex-col justify-between shadow-[var(--shadow-xs)]">
+                        <span className="text-[10px] font-semibold text-slate-900">Selamawit T. (Mentor)</span>
+                        <div className="flex items-center gap-1 text-[10px] text-slate-700 font-medium">
+                          <Radio size={10} className="animate-pulse text-[var(--secondary)]" /> Speaking
                         </div>
                       </div>
                     </div>
 
-                    <div className="rounded-md border border-zinc-200 bg-white p-2.5 shadow-xs">
-                      <p className="text-[10px] text-zinc-500 mb-1">// Synchronized Code Annotation</p>
-                      <p className="text-zinc-800 text-[11px]">
-                        <span className="text-zinc-700 font-semibold">const</span> cluster ={" "}
-                        <span className="text-zinc-700 font-semibold">new</span> RaftCluster(&#123; nodes: 5, heartbeat:
-                        150 &#125;);
+                    <div className="rounded-lg border border-slate-200/80 bg-white p-2.5 shadow-[var(--shadow-xs)]">
+                      <p className="text-[10px] text-slate-500 mb-1">// Synchronized Code Annotation</p>
+                      <p className="text-slate-800 text-[11px]">
+                        <span className="text-[var(--secondary)] font-semibold">const</span> cluster ={" "}
+                        <span className="text-[var(--secondary)] font-semibold">new</span> RaftCluster(&#123; nodes: 5,
+                        heartbeat: 150 &#125;);
                       </p>
-                      <p className="text-zinc-600 text-[10px] mt-1">
+                      <p className="text-slate-600 text-[10px] mt-1">
                         ↳ [Selamawit]: Leader election consensus reached in 18ms.
                       </p>
                     </div>
@@ -869,70 +872,70 @@ export function HomePage() {
 
                 {activeTabDetails.id === "sandbox" && (
                   <div className="space-y-3 text-xs">
-                    <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
+                    <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
                       <div className="flex items-center gap-2">
-                        <Terminal size={14} className="text-zinc-700" />
-                        <span className="font-semibold text-zinc-900">
+                        <Terminal size={14} className="text-[var(--secondary)]" />
+                        <span className="font-semibold text-slate-900">
                           Cloud Devcontainer · Node.js 22 & PostgreSQL 16
                         </span>
                       </div>
-                      <Badge variant="outline" size="sm" className="gap-1 text-[10px]">
-                        <span className="h-1.5 w-1.5 rounded-full bg-zinc-900" /> Running
+                      <Badge variant="secondary" size="sm" className="gap-1 text-[10px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" /> Running
                       </Badge>
                     </div>
 
-                    <div className="rounded-lg border border-zinc-200 bg-white p-3 space-y-2">
+                    <div className="rounded-xl border border-slate-200/80 bg-white p-3 space-y-2 shadow-[var(--shadow-xs)]">
                       <div className="flex items-center justify-between text-[11px]">
-                        <span className="font-semibold text-zinc-900">Module Checkpoint 04</span>
-                        <span className="text-zinc-500 font-medium">Step 3 of 4</span>
+                        <span className="font-semibold text-slate-900">Module Checkpoint 04</span>
+                        <span className="text-slate-500 font-medium">Step 3 of 4</span>
                       </div>
-                      <p className="text-xs text-zinc-600">
+                      <p className="text-xs text-slate-600">
                         Implement atomic database transactions and connection pooling with pg-pool.
                       </p>
                       <div className="space-y-1.5 pt-1">
-                        <div className="flex items-center gap-2 text-[11px] text-zinc-700">
-                          <CheckCircle2 size={12} className="text-zinc-800" />
+                        <div className="flex items-center gap-2 text-[11px] text-slate-700">
+                          <CheckCircle2 size={13} className="text-[var(--secondary)]" />
                           <span>Database migrations applied cleanly</span>
                         </div>
-                        <div className="flex items-center gap-2 text-[11px] text-zinc-700">
-                          <CheckCircle2 size={12} className="text-zinc-800" />
+                        <div className="flex items-center gap-2 text-[11px] text-slate-700">
+                          <CheckCircle2 size={13} className="text-[var(--secondary)]" />
                           <span>Integration test suite passed (12/12)</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-[11px]">
-                      <span className="text-zinc-700 font-medium">In-Browser Live Preview</span>
-                      <span className="text-zinc-600 font-mono text-[10px]">localhost:3000 · Port Forwarded</span>
+                    <div className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 text-[11px] shadow-[var(--shadow-xs)]">
+                      <span className="text-slate-700 font-medium">In-Browser Live Preview</span>
+                      <span className="text-slate-500 font-mono text-[10px]">localhost:3000 · Port Forwarded</span>
                     </div>
                   </div>
                 )}
 
                 {activeTabDetails.id === "squads" && (
                   <div className="space-y-3 text-xs">
-                    <div className="flex items-center justify-between border-b border-zinc-200 pb-2">
+                    <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
                       <div className="flex items-center gap-2">
-                        <Users size={14} className="text-zinc-700" />
-                        <span className="font-semibold text-zinc-900">4-Peer Agile Sprint Squad</span>
+                        <Users size={14} className="text-[var(--secondary)]" />
+                        <span className="font-semibold text-slate-900">4-Peer Agile Sprint Squad</span>
                       </div>
-                      <span className="text-[10px] text-zinc-500 font-medium">Sprint Cycle #4</span>
+                      <span className="text-[10px] text-slate-500 font-medium">Sprint Cycle #4</span>
                     </div>
 
                     <div className="space-y-2">
-                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2.5 shadow-xs">
+                      <div className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-white p-2.5 shadow-[var(--shadow-xs)]">
                         <div>
-                          <p className="font-semibold text-zinc-900 text-xs">PR #14: Implement USSD Parser Gateway</p>
-                          <p className="text-[10px] text-zinc-500 mt-0.5">2 Peer Code Reviews Approved</p>
+                          <p className="font-semibold text-slate-900 text-xs">PR #14: Implement USSD Parser Gateway</p>
+                          <p className="text-[10px] text-slate-500 mt-0.5">2 Peer Code Reviews Approved</p>
                         </div>
-                        <Badge variant="outline" size="sm">
+                        <Badge variant="secondary" size="sm">
                           Approved
                         </Badge>
                       </div>
 
-                      <div className="flex items-center justify-between rounded-md border border-zinc-200 bg-white p-2.5 shadow-xs">
+                      <div className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-white p-2.5 shadow-[var(--shadow-xs)]">
                         <div>
-                          <p className="font-semibold text-zinc-900 text-xs">PR #15: JWT Authentication Middleware</p>
-                          <p className="text-[10px] text-zinc-500 mt-0.5">Code review requested</p>
+                          <p className="font-semibold text-slate-900 text-xs">PR #15: JWT Authentication Middleware</p>
+                          <p className="text-[10px] text-slate-500 mt-0.5">Code review requested</p>
                         </div>
                         <Badge variant="outline" size="sm">
                           Under Review
@@ -940,7 +943,7 @@ export function HomePage() {
                       </div>
                     </div>
 
-                    <div className="rounded-md bg-zinc-50 p-2.5 text-[11px] text-zinc-600 border border-zinc-200">
+                    <div className="rounded-lg bg-white p-2.5 text-[11px] text-slate-600 border border-slate-200/80 shadow-[var(--shadow-xs)]">
                       Learn collaboratively with peers on scheduled sprints, unblocking each other and shipping
                       together.
                     </div>
@@ -949,37 +952,37 @@ export function HomePage() {
 
                 {activeTabDetails.id === "certs" && (
                   <div className="space-y-3 text-xs">
-                    <div className="rounded-lg border border-zinc-200 bg-white p-4 shadow-xs space-y-2.5">
+                    <div className="rounded-xl border border-slate-200/80 bg-white p-4 shadow-[var(--shadow-xs)] space-y-2.5">
                       <div className="flex items-start justify-between">
                         <div>
-                          <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+                          <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                             Verifiable Digital Credential
                           </p>
-                          <p className="text-sm font-bold text-zinc-900 mt-0.5">
+                          <p className="text-sm font-bold text-slate-900 mt-0.5">
                             Fullstack Cloud & Distributed Systems
                           </p>
-                          <p className="text-[11px] text-zinc-500 mt-0.5">
+                          <p className="text-[11px] text-slate-500 mt-0.5">
                             Earned by completing 16 lessons & capstone defense
                           </p>
                         </div>
-                        <div className="h-8 w-8 rounded-md border border-zinc-200 bg-zinc-50 flex items-center justify-center text-zinc-700 font-bold text-xs">
+                        <div className="h-8 w-8 rounded-lg border border-blue-200/70 bg-blue-50/70 flex items-center justify-center text-[var(--secondary)] font-bold text-xs">
                           <Award size={16} />
                         </div>
                       </div>
 
-                      <div className="pt-2 border-t border-zinc-100 space-y-1.5 text-[11px]">
-                        <p className="text-zinc-700">
-                          <span className="text-zinc-500">Verified Capstone:</span> Production API Gateway with
+                      <div className="pt-2 border-t border-slate-100 space-y-1.5 text-[11px]">
+                        <p className="text-slate-700">
+                          <span className="text-slate-500">Verified Capstone:</span> Production API Gateway with
                           Distributed Storage
                         </p>
-                        <p className="text-zinc-700">
-                          <span className="text-zinc-500">Attestation:</span> Reviewed & signed off by Senior
+                        <p className="text-slate-700">
+                          <span className="text-slate-500">Attestation:</span> Reviewed & signed off by Senior
                           Engineering Fellow
                         </p>
                       </div>
                     </div>
 
-                    <div className="text-center text-[11px] text-zinc-500 font-medium">
+                    <div className="text-center text-[11px] text-slate-500 font-medium">
                       Publicly shareable credential verifiable by hiring partners and engineering leads
                     </div>
                   </div>
@@ -1002,14 +1005,14 @@ export function HomePage() {
         viewport={{ once: true, amount: 0.15 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium tracking-wide text-zinc-800">
-            <Compass size={12} />
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
+            <Compass size={13} className="text-[var(--secondary)]" />
             <span>The PISTELS Framework</span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             7 Pillars Engineered for <span className="text-primary">Engineering Mastery</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             PISTELS is our proprietary pedagogical framework designed to bridge the gap between academic theory and the
             requirements of modern software engineering.
           </p>
@@ -1024,20 +1027,24 @@ export function HomePage() {
                 key={`${pillar.letter}-${idx}`}
                 type="button"
                 onClick={() => setActivePillarIndex(idx)}
-                className={`group flex flex-col items-center justify-center rounded-lg border p-3 sm:p-4 transition-all duration-150 ${
+                className={`group flex flex-col items-center justify-center rounded-xl border p-3 sm:p-4 transition-all duration-150 ${
                   isSelected
-                    ? "border-zinc-900 bg-zinc-100 text-zinc-900 shadow-xs"
-                    : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 shadow-xs"
+                    ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                    : "border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-[var(--shadow-xs)]"
                 }`}
               >
                 <span
                   className={`text-xl sm:text-2xl font-bold transition-colors ${
-                    isSelected ? "text-zinc-900" : "text-zinc-700 group-hover:text-zinc-900"
+                    isSelected ? "text-white" : "text-slate-700 group-hover:text-slate-900"
                   }`}
                 >
                   {pillar.letter}
                 </span>
-                <span className="hidden sm:block mt-1 text-[10px] font-medium text-zinc-500 text-center line-clamp-1">
+                <span
+                  className={`hidden sm:block mt-1 text-[10px] font-medium text-center line-clamp-1 ${
+                    isSelected ? "text-slate-300" : "text-slate-500"
+                  }`}
+                >
                   {pillar.name.split(" ")[0]}
                 </span>
               </button>
@@ -1054,40 +1061,40 @@ export function HomePage() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.99 }}
               transition={{ duration: 0.2 }}
-              className="rounded-xl border border-zinc-200 bg-white p-6 md:p-8 shadow-xs"
+              className="rounded-2xl border border-slate-200/80 bg-white p-6 md:p-8 shadow-[var(--shadow-card)]"
             >
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 font-bold text-lg border border-zinc-200">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] font-bold text-lg border border-blue-200/70 shadow-[var(--shadow-xs)]">
                       {activePillar.letter}
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-zinc-900 sm:text-xl">{activePillar.name}</h3>
-                      <p className="text-xs font-medium text-zinc-600">{activePillar.tagline}</p>
+                      <h3 className="text-lg font-bold text-slate-900 sm:text-xl">{activePillar.name}</h3>
+                      <p className="text-xs font-medium text-slate-600">{activePillar.tagline}</p>
                     </div>
                   </div>
 
-                  <p className="text-xs sm:text-sm leading-relaxed text-zinc-600">{activePillar.description}</p>
+                  <p className="text-xs sm:text-sm leading-relaxed text-slate-600">{activePillar.description}</p>
 
                   <div className="space-y-2 pt-1">
                     {activePillar.highlights.map((highlight) => (
-                      <div key={highlight} className="flex items-center gap-2.5 text-xs text-zinc-700">
-                        <CheckCircle2 size={13} className="text-zinc-700 shrink-0" />
+                      <div key={highlight} className="flex items-center gap-2.5 text-xs text-slate-700">
+                        <CheckCircle2 size={14} className="text-[var(--secondary)] shrink-0" />
                         <span>{highlight}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 space-y-2.5">
-                  <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">Methodology in Action</p>
-                  <p className="text-xs leading-relaxed text-zinc-600 italic">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2.5">
+                  <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Methodology in Action</p>
+                  <p className="text-xs leading-relaxed text-slate-600 italic">
                     &ldquo;Traditional training programs often fall short due to lack of team accountability and
                     real-world system complexity. EthioTech combines live diaspora mentors, peer squads, and local hubs
                     to guarantee true mastery.&rdquo;
                   </p>
-                  <div className="flex items-center justify-between text-xs text-zinc-500 pt-2 border-t border-zinc-200">
+                  <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-200/80">
                     <span>Applicable across all 5 tracks</span>
                     <Link to="/about" className="text-primary font-medium hover:underline">
                       Learn about our vision →
@@ -1113,20 +1120,20 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium tracking-wide text-zinc-800">
-              <BookOpen size={12} />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
+              <BookOpen size={13} className="text-[var(--secondary)]" />
               <span>Job-Ready Curricula</span>
             </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
               Engineered for <span className="text-primary">High-Demand Tech Careers</span>
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Structured step-by-step pathways taking learners from foundational coding to shipping production systems.
             </p>
           </div>
 
           <Link to="/tracks">
-            <Button variant="outline" size="sm">
+            <Button variant="secondary" size="sm">
               <span>View All Tracks</span>
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
@@ -1147,10 +1154,10 @@ export function HomePage() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedTrackCategory(cat.id)}
-              className={`rounded-md border px-3 py-1 text-xs font-medium transition-all ${
+              className={`rounded-lg border px-3 py-1 text-xs font-medium transition-all ${
                 selectedTrackCategory === cat.id
-                  ? "border-zinc-900 bg-zinc-900 text-white font-semibold shadow-xs"
-                  : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 shadow-xs"
+                  ? "border-slate-900 bg-slate-900 text-white font-semibold shadow-xs"
+                  : "border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-[var(--shadow-xs)]"
               }`}
             >
               {cat.label}
@@ -1170,15 +1177,15 @@ export function HomePage() {
             const Icon = track.icon;
             return (
               <motion.div key={track.id} variants={itemVariants} className="h-full">
-                <Card className="group flex h-full flex-col justify-between border-zinc-200 bg-white p-5 sm:p-6 transition-all duration-150 hover:border-zinc-300 hover:shadow-xs shadow-xs">
+                <Card className="group flex h-full flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]">
                   <div>
                     {/* Header Top Bar */}
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200 transition-colors">
-                        <Icon size={16} className="text-zinc-700" />
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 transition-colors shadow-[var(--shadow-xs)]">
+                        <Icon size={16} className="text-[var(--secondary)]" />
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Badge variant="default" size="sm">
+                        <Badge variant="secondary" size="sm">
                           {track.level}
                         </Badge>
                         <Badge variant="outline" size="sm">
@@ -1189,13 +1196,13 @@ export function HomePage() {
 
                     {/* Track Title & Description */}
                     <div className="mt-3.5 space-y-1">
-                      <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
                         {track.categoryLabel}
                       </span>
-                      <h3 className="text-sm font-bold leading-snug text-zinc-900 group-hover:text-primary transition-colors">
+                      <h3 className="text-sm font-bold leading-snug text-slate-900 group-hover:text-primary transition-colors">
                         {track.title}
                       </h3>
-                      <p className="text-xs leading-relaxed text-zinc-600">{track.description}</p>
+                      <p className="text-xs leading-relaxed text-slate-600">{track.description}</p>
                     </div>
 
                     {/* Skill Tags */}
@@ -1203,7 +1210,7 @@ export function HomePage() {
                       {track.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] font-medium text-zinc-700"
+                          className="rounded-md border border-slate-200/80 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700"
                         >
                           {skill}
                         </span>
@@ -1211,15 +1218,15 @@ export function HomePage() {
                     </div>
 
                     {/* Capstone Projects Highlight */}
-                    <div className="mt-3.5 rounded-lg border border-zinc-200 bg-zinc-50 p-3 space-y-1">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                        <Award size={12} className="text-zinc-600" />
+                    <div className="mt-3.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1">
+                      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                        <Award size={12} className="text-[var(--secondary)]" />
                         <span>Shipped Capstone Projects</span>
                       </p>
-                      <ul className="space-y-1 text-xs text-zinc-700">
+                      <ul className="space-y-1 text-xs text-slate-700">
                         {track.capstones.map((cap) => (
                           <li key={cap} className="flex items-center gap-1.5 text-[11px]">
-                            <span className="h-1 w-1 rounded-full bg-zinc-400 shrink-0" />
+                            <span className="h-1 w-1 rounded-full bg-slate-400 shrink-0" />
                             <span className="truncate">{cap}</span>
                           </li>
                         ))}
@@ -1228,10 +1235,10 @@ export function HomePage() {
                   </div>
 
                   {/* Card Bottom Meta & CTA */}
-                  <div className="mt-4 border-t border-zinc-200 pt-3 flex items-center justify-between">
-                    <div className="text-xs text-zinc-500">
-                      <span className="font-semibold text-zinc-900">{track.liveSessions}</span> Live Sessions •{" "}
-                      <span className="font-semibold text-zinc-900 font-mono">{track.xpReward} XP</span>
+                  <div className="mt-4 border-t border-slate-200/80 pt-3 flex items-center justify-between">
+                    <div className="text-xs text-slate-500">
+                      <span className="font-semibold text-slate-900">{track.liveSessions}</span> Live Sessions •{" "}
+                      <span className="font-semibold text-[var(--secondary)] font-mono">{track.xpReward} XP</span>
                     </div>
 
                     <Link
@@ -1262,14 +1269,14 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium tracking-wide text-zinc-800">
-              <Award size={12} />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
+              <Award size={13} className="text-[var(--secondary)]" />
               <span>World-Class Mentors</span>
             </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
               Learn From <span className="text-primary">Global & Local Leaders</span>
             </h2>
-            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+            <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Direct access to Ethiopian staff engineers, architects, and technical founders from Silicon Valley,
               Europe, and leading local African enterprises.
             </p>
@@ -1277,7 +1284,7 @@ export function HomePage() {
 
           <div className="flex gap-2.5">
             <Link to="/mentors">
-              <Button variant="outline" size="sm">
+              <Button variant="secondary" size="sm">
                 View All Mentors
               </Button>
             </Link>
@@ -1296,29 +1303,29 @@ export function HomePage() {
         >
           {FEATURED_MENTORS.map((mentor) => (
             <motion.div key={mentor.id} variants={itemVariants} className="h-full">
-              <Card className="flex h-full flex-col justify-between border-zinc-200 bg-white p-5 sm:p-6 transition-all duration-150 hover:border-zinc-300 shadow-xs">
+              <Card className="flex h-full flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]">
                 <div>
                   <div className="flex items-start gap-3.5">
                     <Avatar src="" name={mentor.name} userId={mentor.id} role="mentor" size="md" />
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-1.5">
-                        <h3 className="font-semibold text-zinc-900 text-sm">{mentor.name}</h3>
-                        <ShieldCheck size={13} className="text-zinc-700 shrink-0" />
+                        <h3 className="font-semibold text-slate-900 text-sm">{mentor.name}</h3>
+                        <ShieldCheck size={14} className="text-[var(--secondary)] shrink-0" />
                       </div>
-                      <p className="text-xs font-medium text-zinc-600">{mentor.role}</p>
-                      <p className="text-[11px] text-zinc-500">
+                      <p className="text-xs font-medium text-slate-600">{mentor.role}</p>
+                      <p className="text-[11px] text-slate-500">
                         {mentor.company} • {mentor.location}
                       </p>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs italic leading-relaxed text-zinc-600">&ldquo;{mentor.quote}&rdquo;</p>
+                  <p className="mt-3 text-xs italic leading-relaxed text-slate-600">&ldquo;{mentor.quote}&rdquo;</p>
 
                   <div className="mt-3 flex flex-wrap gap-1">
                     {mentor.expertise.map((exp) => (
                       <span
                         key={exp}
-                        className="rounded border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] font-medium text-zinc-700"
+                        className="rounded-md border border-slate-200/80 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-700"
                       >
                         {exp}
                       </span>
@@ -1326,12 +1333,12 @@ export function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-4 border-t border-zinc-200 pt-3 flex items-center justify-between text-xs">
+                <div className="mt-4 border-t border-slate-200/80 pt-3 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-1.5 text-amber-600 font-semibold">
                     <Star size={13} fill="currentColor" />
                     <span>{mentor.score}% Rating</span>
                   </div>
-                  <span className="text-zinc-500">{mentor.sessions} Sessions Delivered</span>
+                  <span className="text-slate-500">{mentor.sessions} Sessions Delivered</span>
                 </div>
               </Card>
             </motion.div>
@@ -1349,36 +1356,36 @@ export function HomePage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
       >
-        <div className="rounded-xl border border-zinc-200 bg-white p-6 md:p-8 shadow-xs">
+        <div className="rounded-2xl border border-slate-200/80 bg-white p-6 md:p-8 shadow-[var(--shadow-card)]">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-0.5 text-xs font-medium tracking-wide text-zinc-800">
-                <Globe size={12} />
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
+                <Globe size={13} className="text-[var(--secondary)]" />
                 <span>Nationwide Physical Reach</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
                 6 Regional Hubs Powering <span className="text-primary">Equal Access</span>
               </h2>
 
-              <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 font-normal">
+              <p className="text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
                 Geographic location should never limit talent. EthioTech operates physical access centers across major
                 Ethiopian cities, equipped with enterprise gigabit fiber, power backup, high-end workstations, and
                 on-site community leads.
               </p>
 
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
                 {REGIONAL_HUBS.map((hub) => (
                   <div
                     key={hub.city}
-                    className="rounded-lg border border-zinc-200 bg-zinc-50 p-2.5 text-left transition-colors hover:border-zinc-300 hover:bg-zinc-100"
+                    className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left transition-all hover:border-slate-300 hover:bg-white hover:shadow-[var(--shadow-xs)] shadow-2xs"
                   >
-                    <div className="flex items-center gap-1.5 text-zinc-700">
-                      <MapPin size={12} />
-                      <span className="font-semibold text-zinc-900 text-xs">{hub.city}</span>
+                    <div className="flex items-center gap-1.5 text-slate-700">
+                      <MapPin size={13} className="text-[var(--secondary)]" />
+                      <span className="font-semibold text-slate-900 text-xs">{hub.city}</span>
                     </div>
-                    <p className="mt-0.5 text-[11px] text-zinc-500 line-clamp-1">{hub.hub}</p>
-                    <p className="mt-1 text-[10px] font-medium text-zinc-600">
+                    <p className="mt-0.5 text-[11px] text-slate-500 line-clamp-1">{hub.hub}</p>
+                    <p className="mt-1 text-[10px] font-medium text-slate-600">
                       {hub.seats} Seats • {hub.bandwidth}
                     </p>
                   </div>
@@ -1387,7 +1394,7 @@ export function HomePage() {
 
               <div className="pt-1">
                 <Link to="/hubs">
-                  <Button variant="outline" size="sm">
+                  <Button variant="secondary" size="sm">
                     <span>Explore All Regional Hubs</span>
                     <ArrowRight size={13} className="ml-2" />
                   </Button>
@@ -1396,8 +1403,8 @@ export function HomePage() {
             </div>
 
             {/* Visual Community & Hackathons Card */}
-            <div className="relative overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-xs space-y-3">
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-zinc-200">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[var(--shadow-card)] space-y-3">
+              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-slate-200/80">
                 <SmartImage
                   src={LOCAL_MEDIA_ASSETS.events.hackathon}
                   alt="Software developers and engineering teams collaborating during an in-person hackathon sprint"
@@ -1410,27 +1417,27 @@ export function HomePage() {
               </div>
               <div className="p-4 space-y-2.5 pt-0">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs sm:text-sm font-semibold text-zinc-900 flex items-center gap-1.5">
-                    <Building2 size={15} className="text-zinc-700" />
+                  <h3 className="text-xs sm:text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+                    <Building2 size={15} className="text-[var(--secondary)]" />
                     <span>In-Person Hackathons & Lab Sprints</span>
                   </h3>
-                  <Badge variant="outline" size="sm">
+                  <Badge variant="secondary" size="sm">
                     Synchronous
                   </Badge>
                 </div>
-                <p className="text-xs leading-relaxed text-zinc-600">
+                <p className="text-xs leading-relaxed text-slate-600">
                   Hubs host weekly in-person sprint demos, weekend hackathons, algorithmic coding competitions, and
                   local mentor office hours across all 6 national corridors.
                 </p>
-                <div className="rounded-md border border-zinc-200 bg-zinc-50 p-3 space-y-1 text-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1 text-xs">
                   <div className="flex items-center justify-between">
-                    <p className="font-semibold text-zinc-900">Upcoming Regional Event:</p>
+                    <p className="font-semibold text-slate-900">Upcoming Regional Event:</p>
                     <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
                       Registration Open
                     </span>
                   </div>
-                  <p className="text-zinc-900 font-medium">National FinTech & AI Systems Hackathon</p>
-                  <p className="text-zinc-500 text-[11px]">
+                  <p className="text-slate-900 font-medium">National FinTech & AI Systems Hackathon</p>
+                  <p className="text-slate-500 text-[11px]">
                     Hosted synchronously across Addis, Bahir Dar, and Hawassa with 1M ETB in project grants.
                   </p>
                 </div>
@@ -1445,17 +1452,17 @@ export function HomePage() {
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell py-12">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold">
+          <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
             Trusted By & Partnering with Leading Institutions
           </p>
           <div className="mt-6 flex flex-wrap justify-center items-center gap-2.5 md:gap-3">
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
-                className="rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-center transition-colors hover:border-zinc-300 shadow-xs"
+                className="rounded-xl border border-slate-200/80 bg-white px-4 py-2.5 text-center transition-all duration-150 hover:border-slate-300 hover:shadow-[var(--shadow-xs)] shadow-[var(--shadow-xs)]"
               >
-                <p className="text-xs font-semibold text-zinc-900">{p.name}</p>
-                <p className="text-[10px] text-zinc-500">{p.category}</p>
+                <p className="text-xs font-semibold text-slate-900">{p.name}</p>
+                <p className="text-[10px] text-slate-500">{p.category}</p>
               </div>
             ))}
           </div>
@@ -1471,18 +1478,18 @@ export function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50 p-6 sm:p-10 shadow-xs"
+          className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/70 to-white p-6 sm:p-10 shadow-[var(--shadow-card)]"
         >
           <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
-              <span className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-800 shadow-xs">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-zinc-800" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3 py-1 text-xs font-medium text-slate-800 shadow-[var(--shadow-xs)]">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 Applications Open
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
                 Ready to Build the Future of <span className="text-primary">Ethiopian Tech?</span>
               </h2>
-              <p className="text-sm leading-relaxed text-zinc-600 max-w-xl">
+              <p className="text-sm leading-relaxed text-slate-600 max-w-xl">
                 Join {formatCompactCount(activeLearnersCount)}+ developers mastering real-world software engineering
                 with live senior mentorship, cloud sandboxes, and direct hiring pathways.
               </p>
@@ -1496,11 +1503,7 @@ export function HomePage() {
                 </Button>
               </Link>
               <Link to="/mentor-recruitment" className="w-full sm:w-auto">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-zinc-900 shadow-xs"
-                >
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto font-medium">
                   Join as Mentor
                 </Button>
               </Link>

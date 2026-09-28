@@ -126,29 +126,34 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
-        <div className="rounded-xl border border-zinc-200 bg-white shadow-sm p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-primary font-semibold">404</p>
-          <h1 className="mt-2 text-xl font-bold tracking-tight text-zinc-900">Page not found</h1>
-          <p className="mt-1.5 text-xs text-zinc-600">The page you requested does not exist or has moved.</p>
+        <div className="rounded-2xl border border-slate-200/80 bg-white shadow-md p-6 sm:p-8 text-center">
+          <p className="text-xs uppercase tracking-wider text-primary font-bold">404 Error</p>
+          <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900">Page Not Found</h1>
+          <p className="mt-1.5 text-xs text-slate-600">The page you requested does not exist or has moved.</p>
 
           {import.meta.env.DEV && (
-            <p className="mt-3 text-[11px] text-zinc-500 break-all font-mono bg-zinc-50 border border-zinc-200 py-1 px-2 rounded">
+            <p className="mt-3 text-[11px] text-slate-500 break-all font-mono bg-slate-50 border border-slate-200/80 py-1.5 px-3 rounded-lg">
               {location.pathname}
             </p>
           )}
 
           {recovery && (
-            <div className="mt-5 rounded-lg border border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
-              <p className="text-xs text-zinc-600">
-                Redirecting to <span className="font-medium text-zinc-900">{recovery}</span> in{" "}
-                <span className="font-semibold text-zinc-900">{countdown}</span>s...
+            <div className="mt-5 rounded-xl border border-blue-200/80 bg-blue-50/70 px-4 py-3">
+              <p className="text-xs text-slate-700">
+                Redirecting to <span className="font-semibold text-slate-900">{recovery}</span> in{" "}
+                <span className="font-bold text-[var(--secondary)] font-mono">{countdown}</span>s...
               </p>
             </div>
           )}
 
           <div className="mt-6 flex flex-wrap justify-center gap-2.5">
             {canGoBack && (
-              <Button variant="outline" size="sm" onClick={() => navigate(-1)}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate(-1)}
+                className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
+              >
                 <ArrowLeft size={14} className="mr-1.5" />
                 Return to previous page
               </Button>
@@ -170,7 +175,7 @@ export function NotFoundPage() {
                   : "/"
               }
             >
-              <Button size="sm">
+              <Button size="sm" className="font-semibold shadow-xs">
                 <Home size={14} className="mr-1.5" />
                 Go home
               </Button>
@@ -179,13 +184,17 @@ export function NotFoundPage() {
         </div>
 
         <div className="mt-6">
-          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-zinc-500 font-medium">
+          <p className="mb-3 text-center text-xs uppercase tracking-[0.15em] text-slate-500 font-semibold">
             Suggested destinations
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {suggestions.map((s) => (
               <Link key={s.to} to={s.to}>
-                <Button variant="ghost" size="sm" className="text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-slate-200/80 bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-50 shadow-xs font-semibold"
+                >
                   {s.icon}
                   <span className="ml-1.5">{s.label}</span>
                 </Button>

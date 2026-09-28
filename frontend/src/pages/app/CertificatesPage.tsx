@@ -34,10 +34,10 @@ export function CertificatesPage() {
   const certificates = data ?? [];
 
   return (
-    <div className="space-y-6 text-zinc-900">
-      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-        <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Verified Track Certificates</h1>
-        <p className="mt-0.5 text-xs text-zinc-500">
+    <div className="space-y-6 text-slate-900">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Verified Track Certificates</h1>
+        <p className="mt-1 text-xs text-slate-500">
           Track completions and capstone deliverables verified by mentors and curriculum directors.
         </p>
       </Card>
@@ -49,32 +49,35 @@ export function CertificatesPage() {
           actionHref="/app/tracks"
         />
       ) : (
-        <div className="grid gap-3.5 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {certificates.map((cert) => (
-            <Card key={cert._id} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
+            <Card
+              key={cert._id}
+              className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-xs hover:border-slate-300 hover:shadow-sm transition"
+            >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
-                    <Award size={15} />
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80 shadow-2xs">
+                    <Award size={16} />
                   </span>
-                  <h3 className="text-sm font-semibold text-zinc-900">{cert.track?.title ?? "Track Certificate"}</h3>
+                  <h3 className="text-sm font-bold text-slate-900">{cert.track?.title ?? "Track Certificate"}</h3>
                 </div>
                 <Badge variant="success" size="sm">
                   Verified
                 </Badge>
               </div>
-              <div className="mt-4 pt-3 border-t border-zinc-100 flex justify-end">
+              <div className="mt-4 pt-3.5 border-t border-slate-100 flex justify-end">
                 {cert.certificateUrl ? (
                   <a
                     href={cert.certificateUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
                   >
                     Download Certificate →
                   </a>
                 ) : (
-                  <p className="text-xs text-zinc-500">Certificate PDF generation in progress.</p>
+                  <p className="text-xs text-slate-500 font-medium">Certificate PDF generation in progress.</p>
                 )}
               </div>
             </Card>

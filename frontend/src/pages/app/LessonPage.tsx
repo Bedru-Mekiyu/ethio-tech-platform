@@ -77,65 +77,69 @@ export function LessonPage() {
   const trackId = lesson?.trackId;
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6 text-zinc-900">
+    <div className="mx-auto max-w-4xl space-y-6 py-6 px-4 sm:px-6 text-slate-900">
       {/* Navigation Breadcrumb */}
       <div className="flex items-center justify-between">
         <Link
           to={trackId ? `/app/tracks/${trackId}` : "/app/tracks"}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
         >
           <ArrowLeft size={13} />
           Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
         </Link>
 
         {lesson?.durationMinutes && (
-          <span className="text-xs text-zinc-500 flex items-center gap-1">
-            <Clock size={12} className="text-zinc-500" />
+          <span className="text-xs text-slate-500 font-medium flex items-center gap-1">
+            <Clock size={13} className="text-slate-400" />
             {lesson.durationMinutes} min
           </span>
         )}
       </div>
 
       {/* Lesson Header Card */}
-      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-        <div className="space-y-2.5">
-          <div className="flex flex-wrap items-center gap-1.5">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
             {lesson?.moduleTitle && (
-              <Badge variant="outline" size="sm" className="flex items-center gap-1">
-                <Layers size={10} className="text-zinc-500" />
+              <Badge variant="outline" size="sm" className="flex items-center gap-1 border-slate-200">
+                <Layers size={11} className="text-slate-500" />
                 {lesson.moduleTitle}
               </Badge>
             )}
             {lesson?.type && (
-              <Badge variant="outline" size="sm" className="uppercase">
+              <Badge variant="outline" size="sm" className="uppercase border-slate-200">
                 {lesson.type.replace("-", " ")}
               </Badge>
             )}
-            <Badge variant="success" size="sm" className="font-medium">
+            <Badge
+              variant="outline"
+              size="sm"
+              className="border-blue-100 bg-blue-50/80 text-[var(--secondary)] font-bold font-mono"
+            >
               +{lesson?.xpReward ?? 50} XP
             </Badge>
           </div>
 
-          <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">{lesson?.title}</h1>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">{lesson?.title}</h1>
 
-          {lesson?.summary && <p className="text-xs text-zinc-600 leading-relaxed">{lesson.summary}</p>}
+          {lesson?.summary && <p className="text-xs text-slate-600 leading-relaxed font-normal">{lesson.summary}</p>}
         </div>
       </Card>
 
       {/* Main Content Card */}
-      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 space-y-5 shadow-xs">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 space-y-6 shadow-sm">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
-          <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3.5">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-700 flex items-center gap-1.5">
-              <Code2 size={11} />
+          <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <Code2 size={12} className="text-[var(--secondary)]" />
               Lesson Prerequisites
             </p>
-            <div className="mt-1.5 flex flex-wrap gap-1">
+            <div className="mt-2 flex flex-wrap gap-1.5">
               {lesson.prerequisites.map((req) => (
                 <span
                   key={req}
-                  className="rounded-md border border-zinc-200 bg-white px-2 py-0.5 text-[11px] text-zinc-700 shadow-xs"
+                  className="rounded-md border border-slate-200 bg-white px-2.5 py-0.5 text-[11px] font-medium text-slate-700 shadow-2xs"
                 >
                   {req}
                 </span>
@@ -145,7 +149,7 @@ export function LessonPage() {
         )}
 
         {/* Text / Markdown Content */}
-        <div className="prose max-w-none text-xs md:text-sm leading-relaxed text-zinc-700">
+        <div className="prose max-w-none text-xs md:text-sm leading-relaxed text-slate-700 font-normal">
           <p className="whitespace-pre-wrap">
             {lesson?.content || "No detailed text has been published for this lesson yet."}
           </p>
@@ -153,23 +157,23 @@ export function LessonPage() {
 
         {/* Starter Code Lab Box */}
         {lesson?.starterCode && (
-          <div className="space-y-2 pt-3 border-t border-zinc-200">
-            <div className="flex items-center justify-between text-xs text-zinc-500">
-              <span className="font-mono flex items-center gap-1.5">
-                <Code2 size={13} className="text-[var(--secondary)]" />
+          <div className="space-y-2.5 pt-4 border-t border-slate-100">
+            <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
+              <span className="font-mono flex items-center gap-1.5 text-slate-700 font-bold">
+                <Code2 size={14} className="text-[var(--secondary)]" />
                 Hands-On Code Sandbox Snippet
               </span>
               <button
                 type="button"
                 onClick={() => handleCopyStarter(lesson.starterCode!)}
-                className="inline-flex items-center gap-1 text-primary hover:underline text-xs font-medium"
+                className="inline-flex items-center gap-1 text-primary hover:text-[var(--primary-hover)] text-xs font-semibold transition"
               >
-                {copiedCode ? <Check size={12} /> : <Copy size={12} />}
+                {copiedCode ? <Check size={13} className="text-[var(--secondary)]" /> : <Copy size={13} />}
                 {copiedCode ? "Copied" : "Copy"}
               </button>
             </div>
 
-            <div className="overflow-x-auto rounded-lg border border-zinc-800 bg-zinc-950 p-3.5 font-mono text-xs text-zinc-200">
+            <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950 p-4 font-mono text-xs text-slate-200 shadow-inner">
               <pre>
                 <code>{lesson.starterCode}</code>
               </pre>
@@ -179,28 +183,28 @@ export function LessonPage() {
 
         {/* Challenge Task Box */}
         {lesson?.challengeTask && (
-          <div className="rounded-lg border border-amber-200 bg-amber-50/50 p-4 space-y-1.5">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
-              <CheckCircle size={12} />
+          <div className="rounded-xl border border-amber-200/90 bg-amber-50/60 p-4.5 space-y-1.5 shadow-2xs">
+            <p className="text-[10px] font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+              <CheckCircle size={13} className="text-amber-600" />
               Interactive Challenge Task
             </p>
-            <p className="text-xs text-zinc-900 font-medium">{lesson.challengeTask}</p>
-            <p className="text-[11px] text-zinc-500">
+            <p className="text-xs text-slate-900 font-semibold">{lesson.challengeTask}</p>
+            <p className="text-[11px] text-slate-600">
               Test your solution locally or in the integrated coding workspace.
             </p>
           </div>
         )}
 
         {/* Video / Sandbox Links */}
-        <div className="flex flex-wrap gap-2 pt-1">
+        <div className="flex flex-wrap gap-2.5 pt-2">
           {lesson?.videoUrl && (
             <a
               href={lesson.videoUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-2xs"
             >
-              <Play size={12} className="text-[var(--secondary)]" />
+              <Play size={13} className="text-[var(--secondary)]" />
               Video Workshop
             </a>
           )}
@@ -210,22 +214,30 @@ export function LessonPage() {
               href={lesson.codeSandboxUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 hover:border-slate-300 transition shadow-2xs"
             >
-              <BookOpen size={12} className="text-[var(--secondary)]" />
+              <BookOpen size={13} className="text-[var(--secondary)]" />
               Interactive Sandbox
             </a>
           )}
 
           <Link to="/app/workspace">
-            <Button variant="outline" size="sm" className="gap-2 text-xs">
-              <Code2 size={15} />
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-2 text-xs font-semibold rounded-xl border-slate-200 hover:bg-slate-50"
+            >
+              <Code2 size={14} className="text-[var(--secondary)]" />
               Open Workspace
             </Button>
           </Link>
 
           <Link to="/app/mentors">
-            <Button variant="ghost" size="sm" className="gap-2 text-xs text-zinc-500 hover:text-zinc-900">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-xl"
+            >
               <GraduationCap size={15} />
               Ask a Mentor
             </Button>
@@ -238,7 +250,11 @@ export function LessonPage() {
         <div className="flex items-center gap-3">
           {prevLessonId && (
             <Link to={`/app/lessons/${prevLessonId}`}>
-              <Button variant="outline" size="lg" className="text-xs">
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-xs font-semibold rounded-xl border-slate-200 hover:bg-slate-50"
+              >
                 <ArrowLeft size={15} className="mr-1.5" />
                 Previous Lesson
               </Button>
@@ -248,8 +264,8 @@ export function LessonPage() {
 
         <div className="flex flex-wrap items-center gap-3">
           {completed ? (
-            <div className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm text-zinc-900 font-medium shadow-xs">
-              <CheckCircle size={18} />
+            <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm text-emerald-800 font-semibold shadow-2xs">
+              <CheckCircle size={18} className="text-emerald-600" />
               Completed (+{lesson?.xpReward ?? 50} XP)
             </div>
           ) : (
@@ -257,7 +273,7 @@ export function LessonPage() {
               onClick={() => completeMutation.mutate()}
               disabled={completeMutation.isPending}
               size="lg"
-              className="gap-2 font-medium"
+              className="gap-2 font-semibold rounded-xl shadow-xs"
             >
               <CheckCircle size={16} />
               {completeMutation.isPending ? "Recording progress..." : `Mark Complete (+${lesson?.xpReward ?? 50} XP)`}
@@ -266,7 +282,11 @@ export function LessonPage() {
 
           {nextLessonId ? (
             <Link to={`/app/lessons/${nextLessonId}`}>
-              <Button size="lg" variant={completed ? "primary" : "outline"} className="gap-1.5 font-medium">
+              <Button
+                size="lg"
+                variant={completed ? "primary" : "outline"}
+                className="gap-1.5 font-semibold rounded-xl shadow-xs"
+              >
                 Next Lesson
                 <ArrowRight size={16} />
               </Button>
@@ -274,7 +294,11 @@ export function LessonPage() {
           ) : (
             trackId && (
               <Link to={`/app/tracks/${trackId}`}>
-                <Button size="lg" variant="outline" className="gap-1.5 font-medium">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-1.5 font-semibold rounded-xl border-slate-200 hover:bg-slate-50"
+                >
                   Back to Track
                   <ArrowRight size={16} />
                 </Button>

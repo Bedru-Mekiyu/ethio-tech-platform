@@ -23,17 +23,15 @@ export function RouteFallback({ label = "Loading your learning space" }: { label
       >
         <Logo to="/" variant="full" className="scale-110" />
       </motion.div>
-      
+
       <div className="flex flex-col items-center gap-1.5 text-center mt-1">
-        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary animate-pulse">
-          {label}
-        </p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-primary animate-pulse">{label}</p>
         <span className="text-[11px] font-semibold text-[var(--text-muted)] tracking-wide">
           Syncing secure platform data...
         </span>
       </div>
 
-      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-zinc-200 relative" aria-hidden="true">
+      <div className="h-[2px] w-48 overflow-hidden rounded-full bg-slate-200 relative" aria-hidden="true">
         <motion.div
           initial={{ left: "-100%" }}
           animate={{ left: "100%" }}

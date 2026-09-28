@@ -201,7 +201,7 @@ export function PartnersPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-slate-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -209,29 +209,33 @@ export function PartnersPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-          <Building2 size={13} className="text-zinc-700" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/70 px-3.5 py-1 text-xs font-semibold text-[var(--secondary)] shadow-xs">
+          <Building2 size={13} className="text-[var(--secondary)]" />
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
           Empowering Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
           We partner with technology employers, universities, development agencies, and public sector bodies to build a
           sovereign, world-class technical workforce across Ethiopia.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#partner-inquiry">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Initiate Partnership
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#frameworks">
-            <Button variant="outline" size="md">
+            <Button
+              variant="outline"
+              size="md"
+              className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
+            >
               Explore Frameworks
             </Button>
           </a>
@@ -239,25 +243,25 @@ export function PartnersPage() {
 
         {/* Verified Capability Anchors */}
         <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
-          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">6</p>
-            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Regional Hubs</p>
-            <p className="mt-0.5 text-xs text-zinc-600">Across Ethiopia</p>
+          <Card className="rounded-xl border border-slate-200/80 bg-white p-4 text-center shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">6</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Regional Hubs</p>
+            <p className="mt-0.5 text-xs text-slate-600">Across Ethiopia</p>
           </Card>
-          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">5</p>
-            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Specialized Tracks</p>
-            <p className="mt-0.5 text-xs text-zinc-600">Curriculum standard</p>
+          <Card className="rounded-xl border border-slate-200/80 bg-white p-4 text-center shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">5</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Specialized Tracks</p>
+            <p className="mt-0.5 text-xs text-slate-600">Curriculum standard</p>
           </Card>
-          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
+          <Card className="rounded-xl border border-slate-200/80 bg-white p-4 text-center shadow-sm hover:shadow-md transition-shadow">
             <p className="text-xl font-bold text-[var(--secondary)] font-mono md:text-2xl">100%</p>
-            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Open Access</p>
-            <p className="mt-0.5 text-xs text-zinc-600">Free educational mission</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Open Access</p>
+            <p className="mt-0.5 text-xs text-slate-600">Free educational mission</p>
           </Card>
-          <Card className="border-zinc-200 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-zinc-900 font-mono md:text-2xl">Sub-Sec</p>
-            <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Classroom SFU</p>
-            <p className="mt-0.5 text-xs text-zinc-600">LiveKit WebRTC</p>
+          <Card className="rounded-xl border border-slate-200/80 bg-white p-4 text-center shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">Sub-Sec</p>
+            <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Classroom SFU</p>
+            <p className="mt-0.5 text-xs text-slate-600">LiveKit WebRTC</p>
           </Card>
         </div>
       </motion.section>
@@ -265,11 +269,13 @@ export function PartnersPage() {
       {/* ─── 4 Collaboration Frameworks Section ─── */}
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Collaboration Pillars</Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Collaboration Pillars
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Tailored Frameworks for Every Stakeholder
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             Structured engagement frameworks designed for technical employers, academic institutions, and public
             stakeholders.
           </p>
@@ -285,10 +291,10 @@ export function PartnersPage() {
                 key={framework.id}
                 type="button"
                 onClick={() => setSelectedPillar(framework.id)}
-                className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-medium transition-all ${
+                className={`flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-semibold transition-all ${
                   isSelected
-                    ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                    : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
+                    ? "border-slate-900 bg-slate-900 text-white shadow-xs"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs"
                 }`}
               >
                 <Icon size={15} />
@@ -305,51 +311,55 @@ export function PartnersPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <Card className="border-zinc-200 bg-white p-6 md:p-8 shadow-xs">
+          <Card className="rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 shadow-sm">
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <activeFramework.icon size={20} />
                   </div>
                   <div>
                     <Badge variant={activeFramework.badgeTone} size="sm">
                       {activeFramework.badgeText}
                     </Badge>
-                    <h3 className="text-lg font-bold text-zinc-900 mt-0.5">{activeFramework.title}</h3>
+                    <h3 className="text-lg font-bold text-slate-900 mt-0.5">{activeFramework.title}</h3>
                   </div>
                 </div>
 
-                <p className="text-xs leading-relaxed text-zinc-600">{activeFramework.description}</p>
+                <p className="text-xs leading-relaxed text-slate-600">{activeFramework.description}</p>
 
                 <div className="space-y-2">
-                  <p className="text-xs uppercase tracking-wider font-semibold text-zinc-500">Key Value Deliverables</p>
-                  <ul className="space-y-1.5">
+                  <p className="text-xs uppercase tracking-wider font-semibold text-slate-500">
+                    Key Value Deliverables
+                  </p>
+                  <ul className="space-y-2">
                     {activeFramework.deliverables.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-zinc-700">
-                        <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-zinc-800" />
+                      <li key={item} className="flex items-start gap-2.5 text-xs text-slate-700">
+                        <CheckCircle2 size={15} className="mt-0.5 shrink-0 text-[var(--secondary)]" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 flex items-center gap-2.5">
-                  <Award size={18} className="text-zinc-700 shrink-0" />
-                  <p className="text-xs text-zinc-600 font-medium">
-                    <strong className="text-zinc-900">Standard:</strong> {activeFramework.metrics}
+                <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-3.5 flex items-center gap-2.5">
+                  <Award size={18} className="text-[var(--secondary)] shrink-0" />
+                  <p className="text-xs text-slate-600 font-medium">
+                    <strong className="text-slate-900 font-semibold">Standard:</strong> {activeFramework.metrics}
                   </p>
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between rounded-xl border border-zinc-200 bg-zinc-50 p-5 space-y-4">
+              <div className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-4 shadow-xs">
                 <div>
-                  <h4 className="text-xs uppercase tracking-wider font-semibold text-zinc-800">Target Organizations</h4>
+                  <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-800">
+                    Target Organizations
+                  </h4>
                   <div className="mt-3 flex flex-wrap gap-1.5">
                     {activeFramework.partnerTypes.map((type) => (
                       <span
                         key={type}
-                        className="rounded-md border border-zinc-200 bg-white px-2.5 py-1 text-[11px] text-zinc-700 font-medium shadow-2xs"
+                        className="rounded-md border border-slate-200/80 bg-white px-2.5 py-1 text-[11px] text-slate-700 font-semibold shadow-2xs"
                       >
                         {type}
                       </span>
@@ -357,19 +367,19 @@ export function PartnersPage() {
                   </div>
                 </div>
 
-                <div className="space-y-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-2xs">
-                  <h4 className="text-xs font-semibold text-zinc-900 flex items-center gap-1.5">
-                    <Zap size={14} className="text-zinc-700" />
+                <div className="space-y-3 rounded-lg border border-slate-200/80 bg-white p-4 shadow-xs">
+                  <h4 className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
+                    <Zap size={14} className="text-[var(--secondary)]" />
                     Ready to collaborate?
                   </h4>
-                  <p className="text-xs text-zinc-600 leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Set up a 20-minute alignment consultation with our institutional partnership lead to review cohort
                     timelines and resource deployment.
                   </p>
                   <a href="#partner-inquiry" className="block">
                     <Button
                       size="sm"
-                      className="w-full font-medium"
+                      className="w-full font-semibold shadow-xs"
                       onClick={() => {
                         setInquiryType(activeFramework.id);
                       }}
@@ -387,9 +397,11 @@ export function PartnersPage() {
       {/* ─── Partnership Process / Lifecycle ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Structured Delivery</Badge>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">The Partnership Lifecycle</h2>
-          <p className="text-xs text-zinc-600">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Structured Delivery
+          </Badge>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">The Partnership Lifecycle</h2>
+          <p className="text-xs text-slate-600">
             A frictionless, transparent 4-phase framework designed for rapid execution and accountable outcomes.
           </p>
         </div>
@@ -400,17 +412,17 @@ export function PartnersPage() {
             return (
               <Card
                 key={step.step}
-                className="relative flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs"
+                className="relative flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                       <Icon size={16} />
                     </div>
-                    <span className="text-xl font-bold font-mono text-zinc-400">{step.step}</span>
+                    <span className="text-xl font-bold font-mono text-slate-300">{step.step}</span>
                   </div>
-                  <h3 className="mt-4 text-sm font-semibold text-zinc-900">{step.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-600">{step.description}</p>
+                  <h3 className="mt-4 text-sm font-semibold text-slate-900">{step.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600">{step.description}</p>
                 </div>
               </Card>
             );
@@ -421,9 +433,11 @@ export function PartnersPage() {
       {/* ─── Institutional Collaboration Principles ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Institutional Governance</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Core Collaboration Standards</h2>
-          <p className="text-xs text-zinc-600">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Institutional Governance
+          </Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Core Collaboration Standards</h2>
+          <p className="text-xs text-slate-600">
             Engineered for institutional accountability, reproducible metrics, and transparent talent development.
           </p>
         </div>
@@ -432,13 +446,16 @@ export function PartnersPage() {
           {partnerPrinciples.map((p, idx) => {
             const Icon = p.icon;
             return (
-              <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+              <Card
+                key={idx}
+                className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+              >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 mb-3">
                     <Icon size={16} />
                   </div>
-                  <h3 className="text-sm font-semibold text-zinc-900">{p.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-zinc-600">{p.description}</p>
+                  <h3 className="text-sm font-semibold text-slate-900">{p.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">{p.description}</p>
                 </div>
               </Card>
             );
@@ -448,49 +465,49 @@ export function PartnersPage() {
 
       {/* ─── Interactive Partnership Inquiry Form ─── */}
       <section id="partner-inquiry" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
+        <Card className="relative overflow-hidden rounded-2xl border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-                <Mail size={13} className="text-zinc-700" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/70 px-3.5 py-1 text-xs font-semibold text-[var(--secondary)] shadow-xs">
+                <Mail size={13} className="text-[var(--secondary)]" />
                 <span>Institutional Relations</span>
               </div>
 
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Institutional Partnership</h2>
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Institutional Partnership</h2>
 
-              <p className="text-xs leading-relaxed text-zinc-600">
+              <p className="text-xs leading-relaxed text-slate-600">
                 Submit your institutional requirements. Our Institutional Alliances team will prepare a tailored
                 collaboration framework and schedule a briefing within 24–48 business hours.
               </p>
 
               <div className="space-y-3 pt-1">
-                <div className="flex items-center gap-3 text-xs text-zinc-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
+                <div className="flex items-center gap-3 text-xs text-slate-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <Mail size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Direct Email</p>
-                    <p className="font-medium text-zinc-900">partnerships@ethiotech.org</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Direct Email</p>
+                    <p className="font-semibold text-slate-900">partnerships@ethiotech.org</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs text-zinc-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
+                <div className="flex items-center gap-3 text-xs text-slate-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <Phone size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">HQ Hotline</p>
-                    <p className="font-medium text-zinc-900">+251 11 668 5400 (Addis Ababa)</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">HQ Hotline</p>
+                    <p className="font-semibold text-slate-900">+251 11 668 5400 (Addis Ababa)</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs text-zinc-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 border border-zinc-200">
+                <div className="flex items-center gap-3 text-xs text-slate-600">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <ShieldCheck size={14} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">Data Governance</p>
-                    <p className="font-medium text-zinc-900">Enterprise data privacy & audit compliant</p>
+                    <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Data Governance</p>
+                    <p className="font-semibold text-slate-900">Enterprise data privacy & audit compliant</p>
                   </div>
                 </div>
               </div>
@@ -498,21 +515,21 @@ export function PartnersPage() {
 
             <div>
               {submitted ? (
-                <div className="rounded-xl border border-zinc-300 bg-zinc-50 p-6 text-center space-y-3">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white">
+                <div className="rounded-xl border border-emerald-200/80 bg-emerald-50/70 p-6 text-center space-y-3">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600 text-white">
                     <CheckCircle2 size={24} />
                   </div>
-                  <h3 className="text-xl font-bold text-zinc-900">Partnership Inquiry Logged</h3>
-                  <p className="text-xs leading-relaxed text-zinc-600 max-w-md mx-auto">
-                    Thank you, <strong className="text-zinc-900">{contactName || "partner"}</strong> from{" "}
-                    <strong className="text-zinc-900">{orgName || "your organization"}</strong>. Our institutional team
-                    has received your inquiry for <strong className="text-zinc-900">{inquiryType}</strong> and will
+                  <h3 className="text-xl font-bold text-slate-900">Partnership Inquiry Logged</h3>
+                  <p className="text-xs leading-relaxed text-slate-600 max-w-md mx-auto">
+                    Thank you, <strong className="text-slate-900">{contactName || "partner"}</strong> from{" "}
+                    <strong className="text-slate-900">{orgName || "your organization"}</strong>. Our institutional team
+                    has received your inquiry for <strong className="text-slate-900">{inquiryType}</strong> and will
                     follow up within 24–48 hours.
                   </p>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="mt-2"
+                    className="mt-2 border-slate-200 bg-white font-semibold"
                     onClick={() => {
                       setSubmitted(false);
                       setOrgName("");
@@ -528,7 +545,7 @@ export function PartnersPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                       Partnership Category
                     </Label>
                     <div className="grid grid-cols-2 gap-1.5 mt-1.5 sm:grid-cols-4">
@@ -537,10 +554,10 @@ export function PartnersPage() {
                           key={f.id}
                           type="button"
                           onClick={() => setInquiryType(f.id)}
-                          className={`rounded-md border px-2.5 py-1.5 text-xs font-medium transition ${
+                          className={`rounded-md border px-2.5 py-1.5 text-xs font-semibold transition ${
                             inquiryType === f.id
-                              ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                              : "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
+                              ? "border-slate-900 bg-slate-900 text-white shadow-xs"
+                              : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs"
                           }`}
                         >
                           {f.badgeText}
@@ -623,7 +640,7 @@ export function PartnersPage() {
                     />
                   </div>
 
-                  <Button type="submit" size="md" className="w-full font-medium" disabled={isSubmitting}>
+                  <Button type="submit" size="md" className="w-full font-semibold shadow-xs" disabled={isSubmitting}>
                     {isSubmitting ? "Submitting Inquiry..." : "Submit Institutional Partnership Inquiry"}
                     <ArrowRight size={14} className="ml-1.5" />
                   </Button>
@@ -637,43 +654,52 @@ export function PartnersPage() {
       {/* ─── Institutional FAQ Section ─── */}
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Institutional FAQ</Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Frequently Asked Questions</h2>
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+            Institutional FAQ
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
         </div>
 
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid gap-3.5 md:grid-cols-2">
           {faqs.map((faq, idx) => (
-            <Card key={idx} className="border-zinc-200 bg-white p-5 space-y-1.5 shadow-xs">
-              <h3 className="font-semibold text-zinc-900 text-xs">{faq.q}</h3>
-              <p className="text-xs leading-relaxed text-zinc-600">{faq.a}</p>
+            <Card
+              key={idx}
+              className="rounded-xl border border-slate-200/80 bg-white p-5 space-y-1.5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-slate-900 text-xs">{faq.q}</h3>
+              <p className="text-xs leading-relaxed text-slate-600">{faq.a}</p>
             </Card>
           ))}
         </div>
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/50 p-6 sm:p-8 text-center space-y-4 shadow-xs">
+      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-b from-slate-50/80 to-white p-8 sm:p-10 text-center space-y-5 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Institutional Technical Collaboration
           </h2>
-          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Review our institutional framework documentation or connect directly with our program leadership.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#partner-inquiry">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Initiate Collaboration
             </Button>
           </a>
           <Link to="/how-it-works">
-            <Button variant="outline" size="md">
+            <Button
+              variant="outline"
+              size="md"
+              className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
+            >
               Explore Learning Engine
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-zinc-700 hover:text-zinc-900">
+            <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
               Contact Leadership
             </Button>
           </Link>

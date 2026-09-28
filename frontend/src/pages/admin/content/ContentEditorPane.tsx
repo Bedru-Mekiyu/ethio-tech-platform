@@ -287,31 +287,31 @@ export function ContentEditorPane({
   const isEditingLesson = selection.type === "lesson" || selection.type === "new-lesson";
 
   return (
-    <div className="flex h-full flex-col bg-zinc-50/50">
+    <div className="flex h-full flex-col bg-slate-50/50">
       {/* Action Header Bar */}
-      <div className="border-b border-zinc-200/80 p-4 bg-white shadow-2xs">
+      <div className="border-b border-slate-200/80 p-4 bg-white shadow-2xs">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 text-xs text-zinc-500 min-w-0 flex-1">
-            <span className="flex items-center gap-1 font-semibold text-zinc-900 truncate">
-              {isEditingTrack && <BookOpen size={14} className="text-zinc-900 shrink-0" />}
-              {isEditingModule && <FolderOpen size={14} className="text-zinc-900 shrink-0" />}
-              {isEditingLesson && <FileText size={14} className="text-zinc-900 shrink-0" />}
+          <div className="flex items-center gap-2 text-xs text-slate-500 min-w-0 flex-1">
+            <span className="flex items-center gap-1 font-semibold text-slate-900 truncate">
+              {isEditingTrack && <BookOpen size={14} className="text-slate-900 shrink-0" />}
+              {isEditingModule && <FolderOpen size={14} className="text-slate-900 shrink-0" />}
+              {isEditingLesson && <FileText size={14} className="text-slate-900 shrink-0" />}
               {isEditingTrack &&
                 (selection.type === "new-track" ? "Tracks / New Track" : selectedTrack?.title || "Track Configuration")}
               {isEditingModule && (
                 <>
-                  <span className="text-zinc-500">{selectedTrack?.title}</span>
-                  <ChevronRight size={12} className="text-zinc-400" />
+                  <span className="text-slate-500">{selectedTrack?.title}</span>
+                  <ChevronRight size={12} className="text-slate-400" />
                   <span>{selectedModule?.title || "New Module"}</span>
                 </>
               )}
               {isEditingLesson && (
                 <>
-                  <span className="text-zinc-500 hidden sm:inline">{selectedTrack?.title}</span>
-                  <ChevronRight size={12} className="hidden sm:inline text-zinc-400" />
-                  <span className="text-zinc-500">{selectedModule?.title}</span>
-                  <ChevronRight size={12} className="text-zinc-400" />
+                  <span className="text-slate-500 hidden sm:inline">{selectedTrack?.title}</span>
+                  <ChevronRight size={12} className="hidden sm:inline text-slate-400" />
+                  <span className="text-slate-500">{selectedModule?.title}</span>
+                  <ChevronRight size={12} className="text-slate-400" />
                   <span>{selectedLesson?.title || "New Lesson"}</span>
                 </>
               )}
@@ -325,8 +325,8 @@ export function ContentEditorPane({
                   Unsaved changes
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-[10px] text-zinc-500">
-                  <CheckCircle2 size={11} className="text-zinc-900" />
+                <span className="inline-flex items-center gap-1 text-[10px] text-slate-500">
+                  <CheckCircle2 size={11} className="text-slate-900" />
                   Saved
                 </span>
               )}
@@ -341,7 +341,7 @@ export function ContentEditorPane({
                 variant="outline"
                 size="sm"
                 onClick={handleDiscard}
-                className="h-8 gap-1 text-xs border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-700"
+                className="h-8 gap-1 text-xs border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
               >
                 <RotateCcw size={13} /> Discard
               </Button>
@@ -408,11 +408,11 @@ export function ContentEditorPane({
         {isEditingTrack && (
           <div className="space-y-6 max-w-4xl mx-auto">
             {/* Track Header Card */}
-            <div className="rounded-2xl border border-zinc-200/80 bg-white p-5 space-y-4 shadow-sm">
-              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <BookOpen size={18} className="text-zinc-900" />
-                  <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+                  <BookOpen size={18} className="text-slate-900" />
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     {selection.type === "new-track" ? "Create New Track" : "Track Configuration"}
                   </h3>
                 </div>
@@ -423,7 +423,7 @@ export function ContentEditorPane({
 
               {/* Title */}
               <div className="space-y-1.5">
-                <label htmlFor="track-edit-title" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="track-edit-title" className="block text-xs font-semibold text-slate-800">
                   Track Title <span className="text-rose-500">*</span>
                 </label>
                 <Input
@@ -434,14 +434,14 @@ export function ContentEditorPane({
                     setIsDirty(true);
                   }}
                   placeholder="e.g. Data Science & Machine Learning Engineering"
-                  className="font-semibold text-base border-zinc-200 bg-white text-zinc-900"
+                  className="font-semibold text-base border-slate-200 bg-white text-slate-900"
                   required
                 />
               </div>
 
               {/* Description */}
               <div className="space-y-1.5">
-                <label htmlFor="track-edit-desc" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="track-edit-desc" className="block text-xs font-semibold text-slate-800">
                   Track Description & Curriculum Overview
                 </label>
                 <Textarea
@@ -453,14 +453,14 @@ export function ContentEditorPane({
                   }}
                   placeholder="Provide an overview of the competencies, tools, and real-world architectures students will master..."
                   rows={3}
-                  className="border-zinc-200 bg-white text-zinc-900"
+                  className="border-slate-200 bg-white text-slate-900"
                 />
               </div>
 
               {/* Track Metadata Grid */}
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="space-y-1.5">
-                  <label htmlFor="track-edit-cat" className="block text-xs font-semibold text-zinc-800">
+                  <label htmlFor="track-edit-cat" className="block text-xs font-semibold text-slate-800">
                     Category & Track Domain
                   </label>
                   <select
@@ -470,7 +470,7 @@ export function ContentEditorPane({
                       setTrackCategory(e.target.value);
                       setIsDirty(true);
                     }}
-                    className="h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-800 focus:outline-none focus:border-zinc-400 cursor-pointer"
+                    className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs font-medium text-slate-800 focus:outline-none focus:border-slate-400 cursor-pointer"
                   >
                     {TRACK_CATEGORY_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -483,7 +483,7 @@ export function ContentEditorPane({
                 <div className="space-y-1.5">
                   <label
                     htmlFor="track-edit-xp"
-                    className="flex items-center gap-1 text-xs font-semibold text-zinc-800"
+                    className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
                     <Award size={13} className="text-amber-500" />
                     XP Completion Reward
@@ -497,16 +497,16 @@ export function ContentEditorPane({
                       setTrackXpReward(e.target.value === "" ? "" : Number(e.target.value));
                       setIsDirty(true);
                     }}
-                    className="border-zinc-200 bg-white text-zinc-900"
+                    className="border-slate-200 bg-white text-slate-900"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label
                     htmlFor="track-edit-weeks"
-                    className="flex items-center gap-1 text-xs font-semibold text-zinc-800"
+                    className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Clock size={13} className="text-zinc-600" />
+                    <Clock size={13} className="text-slate-600" />
                     Estimated Duration (Weeks)
                   </label>
                   <Input
@@ -518,16 +518,16 @@ export function ContentEditorPane({
                       setTrackEstimatedWeeks(e.target.value === "" ? "" : Number(e.target.value));
                       setIsDirty(true);
                     }}
-                    className="border-zinc-200 bg-white text-zinc-900"
+                    className="border-slate-200 bg-white text-slate-900"
                   />
                 </div>
               </div>
 
               {/* Status Toggle */}
-              <div className="pt-2 border-t border-zinc-100 flex items-center justify-between">
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-semibold text-zinc-900 block">Publication Status</span>
-                  <span className="text-[11px] text-zinc-500">
+                  <span className="text-xs font-semibold text-slate-900 block">Publication Status</span>
+                  <span className="text-[11px] text-slate-500">
                     Active tracks are immediately discoverable in student dashboards.
                   </span>
                 </div>
@@ -540,11 +540,11 @@ export function ContentEditorPane({
                   className={cn(
                     "flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-all",
                     trackIsActive
-                      ? "border-zinc-300 bg-zinc-100 text-zinc-900"
+                      ? "border-slate-300 bg-slate-100 text-slate-900"
                       : "border-amber-300 bg-amber-50 text-amber-700",
                   )}
                 >
-                  <span className={cn("h-2 w-2 rounded-full", trackIsActive ? "bg-zinc-900" : "bg-amber-500")} />
+                  <span className={cn("h-2 w-2 rounded-full", trackIsActive ? "bg-slate-900" : "bg-amber-500")} />
                   {trackIsActive ? "Published & Live" : "Draft"}
                 </button>
               </div>
@@ -569,17 +569,17 @@ export function ContentEditorPane({
         {/* ========================================================================= */}
         {isEditingModule && (
           <div className="space-y-6 max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-zinc-200/80 bg-white p-5 space-y-4 shadow-sm">
-              <div className="flex items-center gap-2 border-b border-zinc-100 pb-3">
-                <FolderOpen size={18} className="text-zinc-900" />
-                <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
+              <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
+                <FolderOpen size={18} className="text-slate-900" />
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                   {selection.type === "new-module" ? "Create New Module" : "Module Configuration"}
                 </h3>
               </div>
 
               {/* Title */}
               <div className="space-y-1.5">
-                <label htmlFor="mod-edit-title" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="mod-edit-title" className="block text-xs font-semibold text-slate-800">
                   Module Title <span className="text-rose-500">*</span>
                 </label>
                 <Input
@@ -590,14 +590,14 @@ export function ContentEditorPane({
                     setIsDirty(true);
                   }}
                   placeholder="e.g. Module 1: Production System Architecture"
-                  className="font-semibold text-base border-zinc-200 bg-white text-zinc-900"
+                  className="font-semibold text-base border-slate-200 bg-white text-slate-900"
                   required
                 />
               </div>
 
               {/* Description */}
               <div className="space-y-1.5">
-                <label htmlFor="mod-edit-desc" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="mod-edit-desc" className="block text-xs font-semibold text-slate-800">
                   Module Description
                 </label>
                 <Textarea
@@ -609,14 +609,17 @@ export function ContentEditorPane({
                   }}
                   placeholder="What core competencies are unlocked in this module..."
                   rows={4}
-                  className="border-zinc-200 bg-white text-zinc-900"
+                  className="border-slate-200 bg-white text-slate-900"
                 />
               </div>
 
               {/* Order index */}
               <div className="space-y-1.5 max-w-xs">
-                <label htmlFor="mod-edit-order" className="flex items-center gap-1 text-xs font-semibold text-zinc-800">
-                  <Hash size={13} className="text-zinc-600" />
+                <label
+                  htmlFor="mod-edit-order"
+                  className="flex items-center gap-1 text-xs font-semibold text-slate-800"
+                >
+                  <Hash size={13} className="text-slate-600" />
                   Sequence Order Index
                 </label>
                 <Input
@@ -628,9 +631,9 @@ export function ContentEditorPane({
                     setModuleOrder(e.target.value === "" ? "" : Number(e.target.value));
                     setIsDirty(true);
                   }}
-                  className="border-zinc-200 bg-white text-zinc-900"
+                  className="border-slate-200 bg-white text-slate-900"
                 />
-                <p className="text-[11px] text-zinc-500">Lower numbers appear first in the curriculum tree.</p>
+                <p className="text-[11px] text-slate-500">Lower numbers appear first in the curriculum tree.</p>
               </div>
             </div>
           </div>
@@ -642,11 +645,11 @@ export function ContentEditorPane({
         {isEditingLesson && (
           <div className="space-y-6 max-w-4xl mx-auto">
             {/* Primary Lesson Details Card */}
-            <div className="rounded-2xl border border-zinc-200/80 bg-white p-5 space-y-4 shadow-sm">
-              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+            <div className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <FileText size={18} className="text-zinc-900" />
-                  <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wider">
+                  <FileText size={18} className="text-slate-900" />
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     {selection.type === "new-lesson" ? "Create New Lesson" : "Lesson Editor"}
                   </h3>
                 </div>
@@ -659,7 +662,7 @@ export function ContentEditorPane({
 
               {/* Lesson Title */}
               <div className="space-y-1.5">
-                <label htmlFor="lesson-edit-title" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="lesson-edit-title" className="block text-xs font-semibold text-slate-800">
                   Lesson Title <span className="text-rose-500">*</span>
                 </label>
                 <Input
@@ -670,14 +673,14 @@ export function ContentEditorPane({
                     setIsDirty(true);
                   }}
                   placeholder="e.g. Implementing Distributed Consensus with Raft"
-                  className="font-semibold text-base border-zinc-200 bg-white text-zinc-900"
+                  className="font-semibold text-base border-slate-200 bg-white text-slate-900"
                   required
                 />
               </div>
 
               {/* Lesson Summary / Tagline */}
               <div className="space-y-1.5">
-                <label htmlFor="lesson-edit-summary" className="block text-xs font-semibold text-zinc-800">
+                <label htmlFor="lesson-edit-summary" className="block text-xs font-semibold text-slate-800">
                   Lesson Summary & Core Objective
                 </label>
                 <Input
@@ -688,13 +691,13 @@ export function ContentEditorPane({
                     setIsDirty(true);
                   }}
                   placeholder="Brief 1-line overview displayed in the student syllabus..."
-                  className="border-zinc-200 bg-white text-zinc-900"
+                  className="border-slate-200 bg-white text-slate-900"
                 />
               </div>
 
               {/* Lesson Type Selector */}
               <div className="space-y-2">
-                <label className="block text-xs font-semibold text-zinc-800">Lesson Delivery Type</label>
+                <label className="block text-xs font-semibold text-slate-800">Lesson Delivery Type</label>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                   {LESSON_TYPES.map((lt) => {
                     const isSelected = lessonType === lt.value;
@@ -709,19 +712,19 @@ export function ContentEditorPane({
                         className={cn(
                           "flex flex-col items-start rounded-xl border p-2.5 text-left transition-all",
                           isSelected
-                            ? "border-zinc-900 bg-zinc-100 shadow-xs ring-1 ring-zinc-900/20 text-zinc-950 font-semibold"
-                            : "border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50",
+                            ? "border-slate-900 bg-slate-100 shadow-xs ring-1 ring-slate-900/20 text-zinc-950 font-semibold"
+                            : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                         )}
                       >
                         <div className="flex items-center gap-1.5 mb-1">
-                          {lt.value === "video" && <PlayCircle size={14} className="text-zinc-900" />}
-                          {lt.value === "code-lab" && <Code2 size={14} className="text-zinc-900" />}
-                          {lt.value === "concept" && <BookOpen size={14} className="text-zinc-900" />}
+                          {lt.value === "video" && <PlayCircle size={14} className="text-slate-900" />}
+                          {lt.value === "code-lab" && <Code2 size={14} className="text-slate-900" />}
+                          {lt.value === "concept" && <BookOpen size={14} className="text-slate-900" />}
                           {lt.value === "quiz" && <HelpCircle size={14} className="text-amber-600" />}
                           {lt.value === "project" && <Award size={14} className="text-[var(--secondary)]" />}
                           <span className="text-xs font-semibold leading-none">{lt.label}</span>
                         </div>
-                        <span className="text-[10px] text-zinc-500 line-clamp-2">{lt.description}</span>
+                        <span className="text-[10px] text-slate-500 line-clamp-2">{lt.description}</span>
                       </button>
                     );
                   })}
@@ -733,9 +736,9 @@ export function ContentEditorPane({
                 <div className="space-y-1.5">
                   <label
                     htmlFor="lesson-edit-duration"
-                    className="flex items-center gap-1 text-xs font-semibold text-zinc-800"
+                    className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Clock size={13} className="text-zinc-600" />
+                    <Clock size={13} className="text-slate-600" />
                     Estimated Duration (Minutes)
                   </label>
                   <Input
@@ -747,14 +750,14 @@ export function ContentEditorPane({
                       setLessonDurationMinutes(e.target.value === "" ? "" : Number(e.target.value));
                       setIsDirty(true);
                     }}
-                    className="border-zinc-200 bg-white text-zinc-900"
+                    className="border-slate-200 bg-white text-slate-900"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label
                     htmlFor="lesson-edit-xp"
-                    className="flex items-center gap-1 text-xs font-semibold text-zinc-800"
+                    className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
                     <Award size={13} className="text-amber-500" />
                     XP Completion Reward
@@ -768,16 +771,16 @@ export function ContentEditorPane({
                       setLessonXpReward(e.target.value === "" ? "" : Number(e.target.value));
                       setIsDirty(true);
                     }}
-                    className="border-zinc-200 bg-white text-zinc-900"
+                    className="border-slate-200 bg-white text-slate-900"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label
                     htmlFor="lesson-edit-order"
-                    className="flex items-center gap-1 text-xs font-semibold text-zinc-800"
+                    className="flex items-center gap-1 text-xs font-semibold text-slate-800"
                   >
-                    <Hash size={13} className="text-zinc-600" />
+                    <Hash size={13} className="text-slate-600" />
                     Sequence Order
                   </label>
                   <Input
@@ -789,7 +792,7 @@ export function ContentEditorPane({
                       setLessonOrder(e.target.value === "" ? "" : Number(e.target.value));
                       setIsDirty(true);
                     }}
-                    className="border-zinc-200 bg-white text-zinc-900"
+                    className="border-slate-200 bg-white text-slate-900"
                   />
                 </div>
               </div>
@@ -841,11 +844,11 @@ export function ContentEditorPane({
             {/* Comprehensive Markdown Content Editor */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-900">
+                <label className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-900">
                   <Sparkles size={14} className="text-[var(--secondary)]" />
                   Markdown Curriculum Content & Live Preview
                 </label>
-                <span className="text-[11px] text-zinc-500">
+                <span className="text-[11px] text-slate-500">
                   Toggle &quot;Split&quot; to write code and view rendered formatting side-by-side
                 </span>
               </div>

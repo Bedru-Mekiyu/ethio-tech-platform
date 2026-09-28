@@ -36,12 +36,12 @@ export function EmptyState({
       )}
       role="status"
     >
-      <span className="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-zinc-700 select-none">
+      <span className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-700 select-none">
         {eyebrow}
       </span>
 
-      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-500 select-none relative">
-        {illustration ?? <Inbox size={22} className="text-zinc-400" />}
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 border border-slate-200 text-slate-500 select-none relative">
+        {illustration ?? <Inbox size={22} className="text-slate-400" />}
       </div>
 
       <div className="max-w-md space-y-1">

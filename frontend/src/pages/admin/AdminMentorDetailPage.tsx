@@ -425,19 +425,19 @@ Ethio-Tech Mentorship Team`;
   return (
     <div className="space-y-6 text-[var(--text-primary)]">
       {/* Top Header */}
-      <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
               onClick={() => navigate("/admin/moderation")}
-              className="text-xs text-zinc-700 border-zinc-200 hover:text-zinc-900"
+              className="text-xs text-slate-700 border-slate-200 hover:text-slate-900"
             >
               <ArrowLeft size={13} className="mr-1" /> Back to Queue
             </Button>
-            <div className="h-5 w-px bg-zinc-200" />
-            <h1 className="text-xl font-bold text-zinc-900 sm:text-2xl">{app?.fullName ?? "Mentor Detail"}</h1>
+            <div className="h-5 w-px bg-slate-200" />
+            <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">{app?.fullName ?? "Mentor Detail"}</h1>
             {app && (
               <Badge variant={rubric.variant} size="sm">
                 {rubric.percentage}% Match
@@ -450,7 +450,7 @@ Ethio-Tech Mentorship Team`;
               variant="outline"
               size="sm"
               onClick={() => invalidate()}
-              className="text-xs text-zinc-700 hover:text-zinc-900 border-zinc-200"
+              className="text-xs text-slate-700 hover:text-slate-900 border-slate-200"
             >
               <RefreshCw size={12} className="mr-1" /> Refresh
             </Button>
@@ -469,27 +469,27 @@ Ethio-Tech Mentorship Team`;
           {/* Main Content Area */}
           <div className="space-y-6 lg:col-span-2">
             {/* Applicant Profile Card */}
-            <Card className="border-zinc-200/80 bg-white p-5 sm:p-6 shadow-sm">
+            <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex items-start gap-3.5">
                   {linkedUser?.avatarUrl ? (
                     <img
                       src={linkedUser.avatarUrl}
                       alt={app.fullName}
-                      className="h-12 w-12 rounded-xl border border-zinc-200 bg-zinc-100 object-cover"
+                      className="h-12 w-12 rounded-xl border border-slate-200 bg-slate-100 object-cover"
                     />
                   ) : (
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-100 text-xl font-bold text-zinc-900">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-100 text-xl font-bold text-slate-900">
                       {app.fullName.charAt(0).toUpperCase()}
                     </div>
                   )}
                   <div>
-                    <h2 className="text-base font-bold text-zinc-900">{app.fullName}</h2>
-                    <p className="text-xs text-zinc-600">
+                    <h2 className="text-base font-bold text-slate-900">{app.fullName}</h2>
+                    <p className="text-xs text-slate-600">
                       {app.currentRole}
                       {app.currentCompany ? ` • ${app.currentCompany}` : ""}
                     </p>
-                    <p className="text-[11px] text-zinc-500 mt-0.5">{app.email}</p>
+                    <p className="text-[11px] text-slate-500 mt-0.5">{app.email}</p>
                     <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                       {statusBadge(app.status)}
                       {linkedUser?.mentorAccountStatus && (
@@ -510,7 +510,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-zinc-900 font-medium hover:underline bg-zinc-100 px-2.5 py-1 rounded-md border border-zinc-200"
+                      className="inline-flex items-center gap-1 text-xs text-slate-900 font-medium hover:underline bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200"
                     >
                       LinkedIn <ExternalLink size={11} />
                     </a>
@@ -520,7 +520,7 @@ Ethio-Tech Mentorship Team`;
                       href={app.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-zinc-900 font-medium hover:underline bg-zinc-100 px-2.5 py-1 rounded-md border border-zinc-200"
+                      className="inline-flex items-center gap-1 text-xs text-slate-900 font-medium hover:underline bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200"
                     >
                       Portfolio <ExternalLink size={11} />
                     </a>
@@ -530,7 +530,7 @@ Ethio-Tech Mentorship Team`;
             </Card>
 
             {/* Navigation Tabs */}
-            <div className="flex flex-wrap gap-1.5 border-b border-zinc-200 pb-3">
+            <div className="flex flex-wrap gap-1.5 border-b border-slate-200 pb-3">
               {[
                 { key: "application", label: "Application & Profile", icon: <Briefcase size={15} /> },
                 { key: "rubric", label: "Evaluation Rubric & Interview", icon: <Sliders size={15} /> },
@@ -543,7 +543,7 @@ Ethio-Tech Mentorship Team`;
                   variant={activeTab === t.key ? "primary" : "outline"}
                   size="sm"
                   onClick={() => setActiveTab(t.key as typeof activeTab)}
-                  className={`gap-1.5 text-xs ${activeTab !== t.key ? "border-zinc-200 text-zinc-700 hover:text-zinc-900" : ""}`}
+                  className={`gap-1.5 text-xs ${activeTab !== t.key ? "border-slate-200 text-slate-700 hover:text-slate-900" : ""}`}
                 >
                   {t.icon} {t.label}
                 </Button>
@@ -553,51 +553,53 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 1: Application Profile */}
             {activeTab === "application" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-4 shadow-xs">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Application Overview</h3>
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Application Overview
+                  </h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs text-zinc-500">Current Position</p>
-                      <p className="text-sm font-medium text-zinc-900">
+                      <p className="text-xs text-slate-500">Current Position</p>
+                      <p className="text-sm font-medium text-slate-900">
                         {app.currentRole}
                         {app.currentCompany ? ` at ${app.currentCompany}` : ""}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-500">Experience</p>
-                      <p className="text-sm font-medium text-zinc-900">{app.yearsExperience ?? 0} years</p>
+                      <p className="text-xs text-slate-500">Experience</p>
+                      <p className="text-sm font-medium text-slate-900">{app.yearsExperience ?? 0} years</p>
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-500">Location</p>
-                      <p className="text-sm font-medium text-zinc-900">{app.location ?? "Not provided"}</p>
+                      <p className="text-xs text-slate-500">Location</p>
+                      <p className="text-sm font-medium text-slate-900">{app.location ?? "Not provided"}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-500">Availability</p>
-                      <p className="text-sm capitalize font-medium text-zinc-900">{app.availability ?? "Flexible"}</p>
+                      <p className="text-xs text-slate-500">Availability</p>
+                      <p className="text-sm capitalize font-medium text-slate-900">{app.availability ?? "Flexible"}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-500">Mentoring Style</p>
-                      <p className="text-sm font-medium text-zinc-900">
+                      <p className="text-xs text-slate-500">Mentoring Style</p>
+                      <p className="text-sm font-medium text-slate-900">
                         {(app.mentoringStyle ?? []).join(", ") || "Live Sessions & Reviews"}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-zinc-500">Application Date</p>
-                      <p className="text-sm font-medium text-zinc-900">
+                      <p className="text-xs text-slate-500">Application Date</p>
+                      <p className="text-sm font-medium text-slate-900">
                         {app.createdAt ? new Date(app.createdAt).toLocaleDateString() : "Recently"}
                       </p>
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-xs text-zinc-500 mb-1">Why do you want to mentor on Ethio-Tech?</p>
-                    <div className="rounded-xl border border-zinc-200/80 bg-zinc-50/70 p-4 text-sm leading-relaxed text-zinc-700">
+                    <p className="text-xs text-slate-500 mb-1">Why do you want to mentor on Ethio-Tech?</p>
+                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm leading-relaxed text-slate-700">
                       {app.whyMentor || "No statement provided."}
                     </div>
                   </div>
 
                   <div>
-                    <p className="mb-2 text-xs text-zinc-500 font-semibold uppercase tracking-wider">
+                    <p className="mb-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">
                       Specialized Skills & Tech Stack
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -613,7 +615,7 @@ Ethio-Tech Mentorship Team`;
                 {app.rejectionReason && (
                   <section className="rounded-2xl border border-red-200 bg-red-50/50 p-4 text-sm">
                     <p className="font-semibold text-red-600">Previous Rejection Reason</p>
-                    <p className="mt-1 text-zinc-700">{app.rejectionReason}</p>
+                    <p className="mt-1 text-slate-700">{app.rejectionReason}</p>
                   </section>
                 )}
               </div>
@@ -622,11 +624,11 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 2: Evaluation Rubric & Interview */}
             {activeTab === "rubric" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-6 shadow-xs">
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-6 shadow-sm">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <h3 className="text-base font-bold text-zinc-900">Structured Evaluation Rubric</h3>
-                      <p className="text-xs text-zinc-500">Evaluate candidate across standard screening dimensions.</p>
+                      <h3 className="text-base font-bold text-slate-900">Structured Evaluation Rubric</h3>
+                      <p className="text-xs text-slate-500">Evaluate candidate across standard screening dimensions.</p>
                     </div>
                     <Badge variant={rubric.variant} className="text-sm py-1.5 px-3">
                       {rubric.percentage}% - {rubric.recommendation}
@@ -679,14 +681,14 @@ Ethio-Tech Mentorship Team`;
                         ],
                       },
                     ].map((c) => (
-                      <div key={c.key} className="rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-4 space-y-2">
+                      <div key={c.key} className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 space-y-2">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="font-semibold text-zinc-900">{c.title}</span>
-                          <span className="font-mono text-xs font-bold text-zinc-900">
+                          <span className="font-semibold text-slate-900">{c.title}</span>
+                          <span className="font-mono text-xs font-bold text-slate-900">
                             {rubricScores[c.key]}/5 ({c.labels[rubricScores[c.key] - 1]})
                           </span>
                         </div>
-                        <p className="text-xs text-zinc-500">{c.desc}</p>
+                        <p className="text-xs text-slate-500">{c.desc}</p>
                         <div className="grid grid-cols-5 gap-2 pt-1">
                           {[1, 2, 3, 4, 5].map((v) => (
                             <button
@@ -695,8 +697,8 @@ Ethio-Tech Mentorship Team`;
                               onClick={() => setRubricScores((prev) => ({ ...prev, [c.key]: v }))}
                               className={`rounded-lg border py-2 text-xs font-medium transition-all ${
                                 rubricScores[c.key] === v
-                                  ? "border-zinc-900 bg-zinc-900 text-white font-bold shadow-xs"
-                                  : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50"
+                                  ? "border-slate-900 bg-slate-900 text-white font-bold shadow-xs"
+                                  : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
                               }`}
                             >
                               {v} ★
@@ -715,31 +717,31 @@ Ethio-Tech Mentorship Team`;
                 </section>
 
                 {/* Direct Interview Scheduling Section */}
-                <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-4 shadow-xs">
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <Calendar size={18} className="text-zinc-900" />
-                    <h3 className="text-base font-bold text-zinc-900">Screening Interview & Calendar</h3>
+                    <Calendar size={18} className="text-slate-900" />
+                    <h3 className="text-base font-bold text-slate-900">Screening Interview & Calendar</h3>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="space-y-2 rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                         Dedicated Video Room
                       </p>
                       <input
                         type="text"
                         readOnly
                         value={meetingUrl}
-                        className="w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-xs font-mono text-zinc-900"
+                        className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-mono text-slate-900"
                       />
                       <div className="flex gap-2 pt-1">
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => copyToClipboard(meetingUrl, true)}
-                          className="flex-1 text-xs gap-1 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                          className="flex-1 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
                         >
-                          {copiedLink ? <Check size={13} className="text-zinc-900" /> : <Copy size={13} />}
+                          {copiedLink ? <Check size={13} className="text-slate-900" /> : <Copy size={13} />}
                           {copiedLink ? "Copied" : "Copy Link"}
                         </Button>
                         <a href={meetingUrl} target="_blank" rel="noopener noreferrer" className="flex-1">
@@ -750,9 +752,9 @@ Ethio-Tech Mentorship Team`;
                       </div>
                     </div>
 
-                    <div className="space-y-2 rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Calendar Invite</p>
-                      <p className="text-xs text-zinc-600">
+                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Calendar Invite</p>
+                      <p className="text-xs text-slate-600">
                         Schedule directly on Google Calendar with prefilled agenda and meeting link.
                       </p>
                       <div className="pt-2">
@@ -760,7 +762,7 @@ Ethio-Tech Mentorship Team`;
                           <Button
                             size="sm"
                             variant="outline"
-                            className="w-full text-xs gap-1.5 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                            className="w-full text-xs gap-1.5 border-slate-200 text-slate-700 hover:text-slate-900"
                           >
                             <Calendar size={14} /> Schedule on Google Calendar
                           </Button>
@@ -771,7 +773,7 @@ Ethio-Tech Mentorship Team`;
 
                   <div className="space-y-2 pt-2">
                     <div className="flex items-center justify-between">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                         Email Invite Template
                       </p>
                       <Button
@@ -780,14 +782,14 @@ Ethio-Tech Mentorship Team`;
                         onClick={() => copyToClipboard(emailTemplate, false)}
                         className="h-6 text-xs text-primary hover:text-primary-hover gap-1"
                       >
-                        {copiedTemplate ? <Check size={12} className="text-zinc-900" /> : <Copy size={12} />}
+                        {copiedTemplate ? <Check size={12} className="text-slate-900" /> : <Copy size={12} />}
                         {copiedTemplate ? "Copied" : "Copy Template"}
                       </Button>
                     </div>
                     <textarea
                       readOnly
                       value={emailTemplate}
-                      className="min-h-[100px] w-full rounded-xl border border-zinc-200 bg-zinc-50/50 p-3 text-xs font-mono text-zinc-700 leading-relaxed outline-none"
+                      className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3 text-xs font-mono text-slate-700 leading-relaxed outline-none"
                     />
                   </div>
                 </section>
@@ -797,21 +799,21 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 3: Account & Credentials */}
             {activeTab === "account" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-4 shadow-xs">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Linked User Account</h3>
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Linked User Account</h3>
                   {linkedUser ? (
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <p className="text-xs text-zinc-500">User ID</p>
-                        <p className="text-sm font-mono text-zinc-900">{linkedUser.id}</p>
+                        <p className="text-xs text-slate-500">User ID</p>
+                        <p className="text-sm font-mono text-slate-900">{linkedUser.id}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-500">Role</p>
-                        <p className="text-sm text-zinc-900 capitalize">{linkedUser.role}</p>
+                        <p className="text-xs text-slate-500">Role</p>
+                        <p className="text-sm text-slate-900 capitalize">{linkedUser.role}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-500">Last Login</p>
-                        <p className="text-sm text-zinc-900">
+                        <p className="text-xs text-slate-500">Last Login</p>
+                        <p className="text-sm text-slate-900">
                           {linkedUser.lastLoginAt
                             ? new Date(linkedUser.lastLoginAt).toLocaleString()
                             : "Never logged in"}
@@ -819,16 +821,16 @@ Ethio-Tech Mentorship Team`;
                       </div>
                       {detail?.credentialsStatus.provisionedAt && (
                         <div>
-                          <p className="text-xs text-zinc-500">Provisioned At</p>
-                          <p className="text-sm text-zinc-900">
+                          <p className="text-xs text-slate-500">Provisioned At</p>
+                          <p className="text-sm text-slate-900">
                             {new Date(detail.credentialsStatus.provisionedAt).toLocaleString()}
                           </p>
                         </div>
                       )}
                       {detail?.credentialsStatus.sentAt && (
                         <div>
-                          <p className="text-xs text-zinc-500">Credentials Status</p>
-                          <p className="text-sm text-zinc-900">
+                          <p className="text-xs text-slate-500">Credentials Status</p>
+                          <p className="text-sm text-slate-900">
                             Sent via {detail.credentialsStatus.deliveryMethod ?? "email"} on{" "}
                             {new Date(detail.credentialsStatus.sentAt).toLocaleString()}
                           </p>
@@ -836,9 +838,9 @@ Ethio-Tech Mentorship Team`;
                       )}
                     </div>
                   ) : (
-                    <div className="rounded-xl border border-dashed border-zinc-200 bg-zinc-50/50 p-6 text-center">
-                      <p className="text-sm text-zinc-700">No active user account provisioned yet.</p>
-                      <p className="text-xs text-zinc-500 mt-1">
+                    <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
+                      <p className="text-sm text-slate-700">No active user account provisioned yet.</p>
+                      <p className="text-xs text-slate-500 mt-1">
                         Once approved, you can create credentials or provision automatically.
                       </p>
                     </div>
@@ -846,22 +848,22 @@ Ethio-Tech Mentorship Team`;
                 </section>
 
                 {linkedUser && (
-                  <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-4 shadow-xs">
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                  <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                       Security & Login History
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div>
-                        <p className="text-xs text-zinc-500">Active Sessions</p>
-                        <p className="text-xl font-bold text-zinc-900">{loginHistory?.activeSessions ?? 0}</p>
+                        <p className="text-xs text-slate-500">Active Sessions</p>
+                        <p className="text-xl font-bold text-slate-900">{loginHistory?.activeSessions ?? 0}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-500">Last IP Address</p>
-                        <p className="text-sm font-mono text-zinc-900">{loginHistory?.lastLoginIp ?? "N/A"}</p>
+                        <p className="text-xs text-slate-500">Last IP Address</p>
+                        <p className="text-sm font-mono text-slate-900">{loginHistory?.lastLoginIp ?? "N/A"}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-zinc-500">Registered Devices</p>
-                        <p className="text-xl font-bold text-zinc-900">{loginHistory?.devices?.length ?? 0}</p>
+                        <p className="text-xs text-slate-500">Registered Devices</p>
+                        <p className="text-xl font-bold text-slate-900">{loginHistory?.devices?.length ?? 0}</p>
                       </div>
                     </div>
 
@@ -870,21 +872,21 @@ Ethio-Tech Mentorship Team`;
                         {loginHistory!.devices!.map((device, i) => (
                           <div
                             key={i}
-                            className="flex items-center justify-between rounded-xl border border-zinc-200/80 bg-zinc-50/60 p-3 text-xs"
+                            className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-xs"
                           >
                             <div className="flex items-center gap-2.5">
                               {device.type === "mobile" ? (
-                                <Smartphone size={16} className="text-zinc-500" />
+                                <Smartphone size={16} className="text-slate-500" />
                               ) : (
-                                <Monitor size={16} className="text-zinc-500" />
+                                <Monitor size={16} className="text-slate-500" />
                               )}
                               <div>
-                                <span className="font-medium text-zinc-900 capitalize">{device.type}</span>
-                                {device.ip && <span className="text-zinc-500 ml-2">({device.ip})</span>}
+                                <span className="font-medium text-slate-900 capitalize">{device.type}</span>
+                                {device.ip && <span className="text-slate-500 ml-2">({device.ip})</span>}
                               </div>
                             </div>
                             {device.lastUsedAt && (
-                              <span className="text-zinc-500">{new Date(device.lastUsedAt).toLocaleDateString()}</span>
+                              <span className="text-slate-500">{new Date(device.lastUsedAt).toLocaleDateString()}</span>
                             )}
                           </div>
                         ))}
@@ -897,20 +899,20 @@ Ethio-Tech Mentorship Team`;
 
             {/* Tab 4: Teaching */}
             {activeTab === "teaching" && (
-              <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-6 shadow-xs">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-6 shadow-sm">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Teaching Metrics & Cohort Activity
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 text-center">
-                    <p className="text-2xl font-bold text-zinc-900">{detail?.teaching.totalSessions ?? 0}</p>
-                    <p className="text-[11px] font-semibold text-zinc-500 mt-1 uppercase tracking-wider">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+                    <p className="text-2xl font-bold text-slate-900">{detail?.teaching.totalSessions ?? 0}</p>
+                    <p className="text-[11px] font-semibold text-slate-500 mt-1 uppercase tracking-wider">
                       Total Sessions
                     </p>
                   </div>
-                  <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-4 text-center">
-                    <p className="text-2xl font-bold text-zinc-900">{detail?.teaching.studentsCount ?? 0}</p>
-                    <p className="text-[11px] font-semibold text-zinc-500 mt-1 uppercase tracking-wider">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+                    <p className="text-2xl font-bold text-slate-900">{detail?.teaching.studentsCount ?? 0}</p>
+                    <p className="text-[11px] font-semibold text-slate-500 mt-1 uppercase tracking-wider">
                       Mentees Guided
                     </p>
                   </div>
@@ -918,13 +920,13 @@ Ethio-Tech Mentorship Team`;
 
                 {(detail?.teaching.sessions ?? []).length > 0 ? (
                   <div className="space-y-2">
-                    <p className="text-xs font-semibold text-zinc-500">Recent Sessions:</p>
+                    <p className="text-xs font-semibold text-slate-500">Recent Sessions:</p>
                     {detail!.teaching.sessions.slice(0, 8).map((session, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between rounded-xl border border-zinc-200 bg-zinc-50/60 px-4 py-3 text-sm"
+                        className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm"
                       >
-                        <span className="text-zinc-900 font-medium">{session.title ?? "Untitled Session"}</span>
+                        <span className="text-slate-900 font-medium">{session.title ?? "Untitled Session"}</span>
                         <Badge
                           variant={
                             session.status === "completed"
@@ -940,15 +942,15 @@ Ethio-Tech Mentorship Team`;
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-zinc-500">No cohort sessions recorded yet.</p>
+                  <p className="text-xs text-slate-500">No cohort sessions recorded yet.</p>
                 )}
               </section>
             )}
 
             {/* Tab 5: Audit Timeline */}
             {activeTab === "audit" && (
-              <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-4 shadow-xs">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Application Audit Trail
                 </h3>
                 {id && <MentorAuditTimeline applicationId={id} />}
@@ -957,14 +959,14 @@ Ethio-Tech Mentorship Team`;
 
             {/* Review Notes Box */}
             {canReview && isAdmin && (
-              <section className="rounded-2xl border border-zinc-200/80 bg-white p-6 space-y-3 shadow-xs">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-3 shadow-sm">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Review & Feedback Notes
                 </label>
                 <textarea
                   value={reviewNotes}
                   onChange={(e) => setReviewNotes(e.target.value)}
-                  className="min-h-[100px] w-full rounded-xl border border-zinc-200 bg-white p-3 text-sm text-zinc-900 outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 resize-y"
+                  className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
                   placeholder="Enter approval notes, onboarding instructions, or specific changes requested..."
                 />
               </section>
@@ -974,9 +976,9 @@ Ethio-Tech Mentorship Team`;
           {/* Right Action Sidebar */}
           <div className="space-y-4 lg:col-span-1">
             {isAdmin && app && (
-              <div className="sticky top-6 rounded-2xl border border-zinc-200/80 bg-white p-5 space-y-4 shadow-sm">
+              <div className="sticky top-6 rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Quick Actions</h3>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Quick Actions</h3>
                   {statusBadge(app.status)}
                 </div>
 
@@ -987,7 +989,7 @@ Ethio-Tech Mentorship Team`;
                       variant="outline"
                       onClick={() => startReviewMutation.mutate()}
                       disabled={startReviewMutation.isPending}
-                      className="w-full gap-2 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                      className="w-full gap-2 border-slate-200 text-slate-700 hover:text-slate-900"
                     >
                       <Clock size={15} /> Mark In-Review
                     </Button>
@@ -1016,7 +1018,7 @@ Ethio-Tech Mentorship Team`;
                           size="sm"
                           variant="outline"
                           onClick={() => setConfirmAction("request-changes")}
-                          className="w-full gap-2 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                          className="w-full gap-2 border-slate-200 text-slate-700 hover:text-slate-900"
                         >
                           <FileText size={15} /> Request Changes / Info
                         </Button>
@@ -1041,7 +1043,7 @@ Ethio-Tech Mentorship Team`;
                         size="sm"
                         variant="outline"
                         onClick={() => setConfirmAction("resend")}
-                        className="w-full gap-2 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                        className="w-full gap-2 border-slate-200 text-slate-700 hover:text-slate-900"
                       >
                         <Mail size={15} /> Resend Credentials
                       </Button>
@@ -1049,7 +1051,7 @@ Ethio-Tech Mentorship Team`;
                         size="sm"
                         variant="outline"
                         onClick={() => setConfirmAction("reset-password")}
-                        className="w-full gap-2 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                        className="w-full gap-2 border-slate-200 text-slate-700 hover:text-slate-900"
                       >
                         <Shield size={15} /> Reset Password
                       </Button>
@@ -1058,7 +1060,7 @@ Ethio-Tech Mentorship Team`;
                           size="sm"
                           variant="outline"
                           onClick={() => setConfirmAction("reactivate")}
-                          className="w-full gap-2 text-zinc-900 border-zinc-300 hover:bg-zinc-100"
+                          className="w-full gap-2 text-slate-900 border-slate-300 hover:bg-slate-100"
                         >
                           <RefreshCw size={15} /> Reactivate Mentor
                         </Button>
@@ -1076,7 +1078,7 @@ Ethio-Tech Mentorship Team`;
                         size="sm"
                         variant="outline"
                         onClick={() => setConfirmAction("deactivate")}
-                        className="w-full gap-2 border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                        className="w-full gap-2 border-slate-200 text-slate-700 hover:text-slate-900"
                       >
                         Deactivate Account
                       </Button>
@@ -1096,7 +1098,7 @@ Ethio-Tech Mentorship Team`;
                       size="sm"
                       variant="outline"
                       onClick={() => setConfirmAction("archive")}
-                      className="w-full border-zinc-200 text-zinc-700 hover:text-zinc-900"
+                      className="w-full border-slate-200 text-slate-700 hover:text-slate-900"
                     >
                       Archive Application
                     </Button>

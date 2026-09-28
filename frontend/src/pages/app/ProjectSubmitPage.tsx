@@ -134,12 +134,12 @@ export function ProjectSubmitPage() {
   ];
 
   return (
-    <div className="space-y-6 text-zinc-900">
-      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
+    <div className="space-y-6 text-slate-900">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-2">
-            <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Project Submission Portal</h1>
-            <p className="text-xs text-zinc-500 max-w-2xl leading-relaxed">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Project Submission Portal</h1>
+            <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
               Choose an active capstone assignment, attach your GitHub repository and live deployment URLs, and submit
               for mentor review.
             </p>
@@ -151,7 +151,7 @@ export function ProjectSubmitPage() {
                 </Button>
               </Link>
               <Link to={selectedProject?.trackId ? `/app/tracks/${selectedProject.trackId}` : "/app/tracks"}>
-                <Button size="sm" variant="outline" type="button" className="text-xs text-zinc-700 gap-1.5">
+                <Button size="sm" variant="outline" type="button" className="text-xs text-slate-700 gap-1.5">
                   <ShieldCheck size={13} />
                   View Track
                 </Button>
@@ -160,19 +160,19 @@ export function ProjectSubmitPage() {
           </div>
 
           <div className="grid grid-cols-3 gap-2.5 xl:w-[26rem]">
-            <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">Assigned</p>
-              <p className="mt-1 text-lg font-bold text-zinc-900 font-mono">{assignedProjects.length}</p>
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">Assigned</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">{assignedProjects.length}</p>
             </div>
-            <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">In Feedback</p>
-              <p className="mt-1 text-lg font-bold text-zinc-900 font-mono">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">In Feedback</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "feedback").length}
               </p>
             </div>
-            <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-zinc-500">Active</p>
-              <p className="mt-1 text-lg font-bold text-zinc-900 font-mono">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+              <p className="text-[10px] uppercase font-semibold text-slate-500">Active</p>
+              <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "active").length}
               </p>
             </div>
@@ -182,9 +182,9 @@ export function ProjectSubmitPage() {
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
         <div className="space-y-6">
-          <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-            <div className="flex items-center justify-between gap-3 border-b border-zinc-200 pb-3">
-              <h2 className="text-sm font-semibold text-zinc-900">Active Assignment Board</h2>
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+            <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <h2 className="text-sm font-semibold text-slate-900">Active Assignment Board</h2>
               <Badge variant="success" size="sm">
                 {Math.round(completion)}% complete
               </Badge>
@@ -199,16 +199,16 @@ export function ProjectSubmitPage() {
                     setSelectedProjectId(project.projectId);
                     setValue("projectId", project.projectId, { shouldValidate: true });
                   }}
-                  className={`rounded-lg border p-3.5 text-left transition shadow-xs ${
+                  className={`rounded-xl border p-3.5 text-left transition shadow-xs ${
                     project.projectId === selectedProjectId
-                      ? "border-zinc-900 bg-zinc-100 text-zinc-900"
-                      : "border-zinc-200 bg-white hover:border-zinc-300 text-zinc-700"
+                      ? "border-slate-900 bg-slate-100/80 text-slate-900"
+                      : "border-slate-200/80 bg-white hover:border-slate-300 text-slate-700"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs font-semibold text-zinc-900">{project.title}</p>
-                      <p className="mt-0.5 text-[11px] text-zinc-500">
+                      <p className="text-xs font-semibold text-slate-900">{project.title}</p>
+                      <p className="mt-0.5 text-[11px] text-slate-500">
                         {project.trackTitle} · {project.difficulty ?? "guided"} · {project.xpReward ?? 0} XP
                       </p>
                     </div>
@@ -230,30 +230,30 @@ export function ProjectSubmitPage() {
             </div>
           </Card>
 
-          <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-200 pb-3">
-              <h2 className="text-sm font-semibold text-zinc-900">{selectedProject?.title}</h2>
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <h2 className="text-sm font-semibold text-slate-900">{selectedProject?.title}</h2>
               <Badge variant="outline" size="sm">
                 {selectedProject?.trackTitle ?? "Learning Track"}
               </Badge>
             </div>
-            <p className="mt-2.5 text-xs leading-relaxed text-zinc-600">
+            <p className="mt-2.5 text-xs leading-relaxed text-slate-600">
               {selectedProject?.description ||
                 "Use the submission form to provide the links and files your mentor needs."}
             </p>
 
             <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Feedback</p>
-                <p className="mt-1 text-xs text-zinc-800">{selectedProject?.feedback || "Awaiting review"}</p>
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Feedback</p>
+                <p className="mt-1 text-xs text-slate-800">{selectedProject?.feedback || "Awaiting review"}</p>
               </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Grade</p>
-                <p className="mt-1 text-sm font-bold text-zinc-900">{selectedProject?.grade ?? "—"}</p>
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Grade</p>
+                <p className="mt-1 text-sm font-bold text-slate-900">{selectedProject?.grade ?? "—"}</p>
               </div>
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-zinc-500">Submitted</p>
-                <p className="mt-1 text-xs text-zinc-800">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
+                <p className="text-[10px] uppercase font-semibold text-slate-500">Submitted</p>
+                <p className="mt-1 text-xs text-slate-800">
                   {selectedProject?.submittedAt
                     ? new Date(selectedProject.submittedAt).toLocaleDateString()
                     : "Not yet"}
@@ -264,14 +264,14 @@ export function ProjectSubmitPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-            <CardHeader className="p-0 border-b border-zinc-200 pb-3">
-              <CardTitle className="text-sm font-semibold text-zinc-900">Send Final Build</CardTitle>
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+            <CardHeader className="p-0 border-b border-slate-100 pb-3">
+              <CardTitle className="text-sm font-semibold text-slate-900">Send Final Build</CardTitle>
             </CardHeader>
 
             <form className="mt-4 space-y-3.5" onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-700">Project Assignment</Label>
+                <Label className="text-xs text-slate-700">Project Assignment</Label>
                 <Select
                   {...projectField}
                   onChange={(event) => {
@@ -279,7 +279,7 @@ export function ProjectSubmitPage() {
                     setSelectedProjectId(event.target.value);
                     setValue("projectId", event.target.value, { shouldValidate: true });
                   }}
-                  className="bg-white border-zinc-300 text-xs h-9 text-zinc-900 focus:border-zinc-900 shadow-xs"
+                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 focus:border-slate-900 shadow-xs"
                 >
                   {assignedProjects.map((project) => (
                     <option key={project.projectId} value={project.projectId}>
@@ -291,35 +291,35 @@ export function ProjectSubmitPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-700">GitHub Repository URL</Label>
+                <Label className="text-xs text-slate-700">GitHub Repository URL</Label>
                 <Input
                   placeholder="https://github.com/username/project"
                   autoComplete="off"
                   {...register("githubLink")}
-                  className="bg-white border-zinc-300 text-xs h-9 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 shadow-xs"
+                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
                 {errors.githubLink ? <p className="text-[11px] text-danger">Enter a valid GitHub URL.</p> : null}
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-700">Live Deployed URL</Label>
+                <Label className="text-xs text-slate-700">Live Deployed URL</Label>
                 <Input
                   placeholder="https://your-app.vercel.app"
                   autoComplete="off"
                   {...register("deployedUrl")}
-                  className="bg-white border-zinc-300 text-xs h-9 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 shadow-xs"
+                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
                 {errors.deployedUrl ? <p className="text-[11px] text-danger">Enter a valid deployed URL.</p> : null}
               </div>
 
               <div className="space-y-1">
-                <Label className="text-xs text-zinc-700">Files Included</Label>
+                <Label className="text-xs text-slate-700">Files Included</Label>
                 <Textarea
                   placeholder="src/App.tsx&#10;src/components/...&#10;public/index.html"
                   {...register("files")}
-                  className="bg-white border-zinc-300 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 shadow-xs"
+                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
-                <p className="text-[11px] text-zinc-500">Add one file per line or separate entries with commas.</p>
+                <p className="text-[11px] text-slate-500">Add one file per line or separate entries with commas.</p>
               </div>
 
               {submissionMutation.isError && (
@@ -346,32 +346,34 @@ export function ProjectSubmitPage() {
             </form>
           </Card>
 
-          <Card className="rounded-xl border border-zinc-200 bg-white p-6 shadow-xs">
-            <div className="flex items-center gap-2 text-zinc-500">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-500">
               <CheckCircle2 size={14} className="text-[var(--secondary)]" />
-              <span className="text-xs uppercase tracking-wider font-semibold">Submission checklist</span>
+              <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">
+                Submission checklist
+              </span>
             </div>
             <div className="mt-4 space-y-3">
               {checklist.map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center justify-between rounded-lg border border-zinc-200 bg-zinc-50/70 px-4 py-3"
+                  className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 px-4 py-3"
                 >
-                  <span className="text-sm text-zinc-800">{item.label}</span>
+                  <span className="text-sm text-slate-800">{item.label}</span>
                   {item.done ? (
-                    <CheckCircle2 size={16} className="text-zinc-900" />
+                    <CheckCircle2 size={16} className="text-[var(--secondary)]" />
                   ) : (
-                    <span className="text-xs text-zinc-400">Pending</span>
+                    <span className="text-xs text-slate-400">Pending</span>
                   )}
                 </div>
               ))}
             </div>
           </Card>
 
-          <Card className="rounded-xl border border-zinc-200 bg-white p-6 shadow-xs">
-            <div className="flex items-center gap-2 text-zinc-500">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-500">
               <FileCode2 size={14} className="text-[var(--secondary)]" />
-              <span className="text-xs uppercase tracking-wider font-semibold">Recent submissions</span>
+              <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">Recent submissions</span>
             </div>
             <div className="mt-4 space-y-3">
               {(recentSubmissions.length
@@ -380,10 +382,10 @@ export function ProjectSubmitPage() {
               ).map((submission, index) => (
                 <div
                   key={`${submission.project?.title ?? "submission"}-${index}`}
-                  className="rounded-lg border border-zinc-200 bg-zinc-50/70 p-4"
+                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4"
                 >
-                  <p className="text-sm font-medium text-zinc-900">{submission.project?.title ?? "Untitled"}</p>
-                  <p className="mt-1 text-xs text-zinc-500">
+                  <p className="text-sm font-medium text-slate-900">{submission.project?.title ?? "Untitled"}</p>
+                  <p className="mt-1 text-xs text-slate-500">
                     {submission.status ?? "draft"} ·{" "}
                     {submission.createdAt ? new Date(submission.createdAt).toLocaleDateString() : "Not submitted"}
                   </p>
@@ -395,13 +397,13 @@ export function ProjectSubmitPage() {
       </div>
 
       {latestSubmission && (
-        <Card className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 shadow-xs">
+        <Card className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-6 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <h3 className="mt-1 text-xl font-bold text-zinc-900">
+              <h3 className="mt-1 text-xl font-bold text-slate-900">
                 {latestSubmission.project?.title ?? "Recent project"} is already in the review queue
               </h3>
-              <p className="mt-1 text-xs text-zinc-600">
+              <p className="mt-1 text-xs text-slate-600">
                 Keep iterating from the mentor feedback above and move the next submission forward with clearer scope
                 and cleaner delivery.
               </p>

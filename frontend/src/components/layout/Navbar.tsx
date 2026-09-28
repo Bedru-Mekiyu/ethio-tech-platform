@@ -57,7 +57,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/95 backdrop-blur-md transition-all duration-200",
+        "sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-200",
         className,
       )}
     >
@@ -78,7 +78,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
                     ? "text-primary font-semibold bg-red-50/50"
-                    : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100/60",
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60",
                 )
               }
             >
@@ -100,7 +100,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             <>
               <Link
                 to="/login"
-                className="px-3 py-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors duration-150"
+                className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150"
               >
                 Sign in
               </Link>
@@ -117,7 +117,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
         {/* Mobile Hamburger Toggle Button */}
         <button
           type="button"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-900"
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={mobileOpen}
@@ -136,7 +136,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-zinc-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
+            className="border-t border-slate-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -152,7 +152,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150",
                       isActive
                         ? "bg-red-50/50 text-primary font-semibold"
-                        : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50",
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
                     )
                   }
                   onClick={() => setMobileOpen(false)}
@@ -163,7 +163,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             </div>
 
             {/* Mobile CTAs */}
-            <div className="border-t border-zinc-200 pt-4 flex flex-col gap-2.5">
+            <div className="border-t border-slate-200 pt-4 flex flex-col gap-2.5">
               {user ? (
                 <Link to={getDashboardPath(user.role)} onClick={() => setMobileOpen(false)}>
                   <Button className="w-full justify-center gap-2 py-2">
@@ -175,7 +175,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 <>
                   <Link
                     to="/login"
-                    className="w-full text-center py-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors"
+                    className="w-full text-center py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
                     onClick={() => setMobileOpen(false)}
                   >
                     Sign in

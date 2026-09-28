@@ -79,21 +79,21 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
       {statItems.map((item, idx) => {
         const Icon = item.icon;
         return (
-          <Card key={idx} className="mcc-card mcc-stat-card border-zinc-200/80 bg-white p-4 relative shadow-sm">
+          <Card key={idx} className="mcc-card mcc-stat-card border-slate-200/80 bg-white p-4 relative shadow-sm">
             <div className="card-content flex items-center gap-3">
               <div
                 className={cn(
                   "rounded-xl p-2.5 shrink-0",
                   item.color === "secondary" && "bg-blue-50 text-[var(--secondary)] border border-blue-100",
                   item.color === "warning" && "bg-amber-50 text-amber-600 border border-amber-100",
-                  (item.color === "default" || !item.color) && "bg-zinc-100 text-zinc-900 border border-zinc-200",
+                  (item.color === "default" || !item.color) && "bg-slate-100 text-slate-900 border border-slate-200",
                 )}
               >
                 <Icon size={20} className="shrink-0" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs uppercase tracking-wider text-zinc-500 font-semibold truncate">{item.label}</p>
-                <p className="text-xl font-bold text-zinc-900 mt-0.5">{item.value}</p>
+                <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold truncate">{item.label}</p>
+                <p className="text-xl font-bold text-slate-900 mt-0.5">{item.value}</p>
               </div>
             </div>
           </Card>

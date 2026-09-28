@@ -96,7 +96,7 @@ export function LiveKitToolbar({
           className={`flex items-center gap-2 rounded-xl px-3.5 py-2 text-xs font-semibold transition-all border ${
             activePanel === "whiteboard"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Toggle Collaborative Whiteboard"
         >
@@ -115,7 +115,7 @@ export function LiveKitToolbar({
             className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all shadow-lg ${
               isAudioMuted
                 ? "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/20 ring-2 ring-rose-500/30"
-                : "bg-zinc-800 hover:bg-zinc-700 text-white border border-white/10 hover:border-white/30"
+                : "bg-slate-800 hover:bg-zinc-700 text-white border border-white/10 hover:border-white/30"
             }`}
             title={isAudioMuted ? "Unmute Microphone" : "Mute Microphone"}
           >
@@ -131,7 +131,7 @@ export function LiveKitToolbar({
             className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all shadow-lg ${
               isVideoMuted
                 ? "bg-rose-500 hover:bg-rose-600 text-white shadow-rose-500/20 ring-2 ring-rose-500/30"
-                : "bg-zinc-800 hover:bg-zinc-700 text-white border border-white/10 hover:border-white/30"
+                : "bg-slate-800 hover:bg-zinc-700 text-white border border-white/10 hover:border-white/30"
             }`}
             title={isVideoMuted ? "Turn On Camera" : "Turn Off Camera"}
           >
@@ -146,7 +146,7 @@ export function LiveKitToolbar({
           className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all border ${
             isScreenSharing
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg ring-2 ring-[var(--secondary)]/30"
-              : "bg-zinc-800 border-white/10 text-zinc-300 hover:bg-zinc-700 hover:text-white"
+              : "bg-slate-800 border-white/10 text-slate-300 hover:bg-zinc-700 hover:text-white"
           }`}
           title={isScreenSharing ? "Stop Screen Share" : "Share Your Screen"}
         >
@@ -160,7 +160,7 @@ export function LiveKitToolbar({
           className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl transition-all border ${
             isHandRaised
               ? "bg-amber-500 border-amber-400 text-zinc-950 font-bold shadow-lg shadow-amber-500/25 animate-bounce"
-              : "bg-zinc-800 border-white/10 text-zinc-300 hover:bg-zinc-700 hover:text-white"
+              : "bg-slate-800 border-white/10 text-slate-300 hover:bg-zinc-700 hover:text-white"
           }`}
           title={isHandRaised ? "Lower Your Hand" : "Raise Your Hand"}
         >
@@ -171,7 +171,7 @@ export function LiveKitToolbar({
         <button
           type="button"
           onClick={onOpenSettings}
-          className="hidden sm:flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl border border-white/10 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white transition-colors"
+          className="hidden sm:flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-800 text-slate-300 hover:bg-zinc-700 hover:text-white transition-colors"
           title="Device Settings"
         >
           <Settings className="h-5 w-5" />
@@ -187,7 +187,7 @@ export function LiveKitToolbar({
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "chat"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Chat Messages"
         >
@@ -206,7 +206,7 @@ export function LiveKitToolbar({
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "qa"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Questions & Answers"
         >
@@ -225,7 +225,7 @@ export function LiveKitToolbar({
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "polls"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Interactive Polls"
         >
@@ -244,7 +244,7 @@ export function LiveKitToolbar({
           className={`hidden md:flex relative h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "notes" || activePanel === "resources"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Session Notes & Resources"
         >
@@ -258,7 +258,7 @@ export function LiveKitToolbar({
           className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl transition-all border ${
             activePanel === "participants"
               ? "bg-[var(--secondary)] border-[var(--secondary)] text-white shadow-lg"
-              : "bg-zinc-900/80 border-white/10 text-zinc-300 hover:bg-zinc-800 hover:text-white"
+              : "bg-slate-900/80 border-white/10 text-slate-300 hover:bg-slate-800 hover:text-white"
           }`}
           title="Participants Roster"
         >

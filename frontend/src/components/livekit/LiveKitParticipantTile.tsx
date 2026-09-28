@@ -128,7 +128,7 @@ export function LiveKitParticipantTile({
       case ConnectionQuality.Good:
         return (
           <span title="Connection: Good">
-            <Wifi className="h-3.5 w-3.5 text-zinc-300" />
+            <Wifi className="h-3.5 w-3.5 text-slate-300" />
           </span>
         );
       case ConnectionQuality.Poor:
@@ -146,7 +146,7 @@ export function LiveKitParticipantTile({
       default:
         return (
           <span title="Connection: Stable">
-            <Wifi className="h-3.5 w-3.5 text-zinc-400" />
+            <Wifi className="h-3.5 w-3.5 text-slate-400" />
           </span>
         );
     }
@@ -154,7 +154,7 @@ export function LiveKitParticipantTile({
 
   return (
     <div
-      className={`group relative flex items-center justify-center overflow-hidden rounded-2xl bg-zinc-900 border transition-all duration-300 ${
+      className={`group relative flex items-center justify-center overflow-hidden rounded-2xl bg-slate-900 border transition-all duration-300 ${
         isSpeaking
           ? "border-white shadow-lg shadow-white/10 ring-2 ring-white/30"
           : "border-white/10 hover:border-white/20"
@@ -192,7 +192,7 @@ export function LiveKitParticipantTile({
             {/* Speaking audio wave indicator around avatar */}
             {isSpeaking && <span className="absolute -inset-1.5 animate-ping rounded-2xl border-2 border-white/60" />}
           </div>
-          <p className="mt-3 text-xs md:text-sm font-medium text-zinc-300 max-w-[85%] truncate text-center">
+          <p className="mt-3 text-xs md:text-sm font-medium text-slate-300 max-w-[85%] truncate text-center">
             {displayName} {isLocal && "(You)"}
           </p>
         </div>
@@ -210,7 +210,7 @@ export function LiveKitParticipantTile({
 
         {/* Screen Share Pill */}
         {isScreenShare && (
-          <div className="flex items-center gap-1.5 rounded-full bg-zinc-800 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg border border-white/10">
+          <div className="flex items-center gap-1.5 rounded-full bg-slate-800 backdrop-blur-md px-2.5 py-1 text-xs font-semibold text-white shadow-lg border border-white/10">
             <Monitor className="h-3.5 w-3.5" />
             <span>Screen Share</span>
           </div>
@@ -231,7 +231,7 @@ export function LiveKitParticipantTile({
               className={`pointer-events-auto rounded-lg p-1.5 backdrop-blur-md transition-all ${
                 isPinned
                   ? "bg-[var(--secondary)] text-white"
-                  : "bg-black/50 text-zinc-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
+                  : "bg-black/50 text-slate-300 opacity-0 group-hover:opacity-100 hover:bg-black/80 hover:text-white"
               }`}
               title={isPinned ? "Unpin participant" : "Pin participant"}
             >

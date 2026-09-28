@@ -101,18 +101,18 @@ function TrackStatCard({
   helper: string;
   tone?: "primary" | "default" | "warning";
 }) {
-  const toneClass = "bg-zinc-100 text-zinc-900 border border-zinc-200";
+  const toneClass = "bg-slate-100 text-slate-900 border border-slate-200";
 
   return (
-    <Card className="border border-zinc-200 bg-white p-4 shadow-xs">
+    <Card className="border border-slate-200 bg-white p-4 shadow-xs">
       <div className="flex items-center justify-between">
         <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${toneClass}`}>
           <Icon size={15} />
         </div>
       </div>
-      <p className="mt-3 text-xl font-bold tracking-tight text-zinc-900 font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">{label}</p>
-      <p className="mt-0.5 text-[11px] text-zinc-400">{helper}</p>
+      <p className="mt-3 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
+      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
+      <p className="mt-0.5 text-[11px] text-slate-400">{helper}</p>
     </Card>
   );
 }
@@ -141,22 +141,22 @@ function StudentTrackCard({
   const actionLabel = done ? "Review Track" : track.enrolled ? "Resume Track" : "Start Learning";
 
   return (
-    <Card className="group grid gap-5 border border-zinc-200 bg-white p-5 shadow-xs transition duration-200 hover:border-zinc-300 lg:grid-cols-[160px_1fr_200px]">
+    <Card className="group grid gap-5 border border-slate-200 bg-white p-5 shadow-xs transition duration-200 hover:border-slate-300 lg:grid-cols-[160px_1fr_200px]">
       {/* Icon & Category Indicator */}
-      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50/70 p-4">
+      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-slate-50/70 p-4">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200 shadow-xs">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shadow-xs">
             <TrackIcon categoryKey={track.categoryKey} title={track.title} size={18} />
           </div>
           <Badge variant={done ? "default" : track.enrolled ? "default" : "outline"}>{statusLabel}</Badge>
         </div>
 
         <div className="mt-3 space-y-0.5">
-          <p className="text-[9px] uppercase tracking-wider text-zinc-500 font-semibold">Curriculum Depth</p>
-          <p className="text-sm font-bold text-zinc-900">
+          <p className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">Curriculum Depth</p>
+          <p className="text-sm font-bold text-slate-900">
             {track.totalLessons ? `${track.completedLessons} / ${track.totalLessons} Lessons` : `${track.progress}%`}
           </p>
-          <p className="text-[11px] text-zinc-500">+{track.xpReward ?? 0} Total XP</p>
+          <p className="text-[11px] text-slate-500">+{track.xpReward ?? 0} Total XP</p>
         </div>
       </div>
 
@@ -165,21 +165,21 @@ function StudentTrackCard({
         <div className="flex flex-wrap items-center gap-1.5">
           <Badge variant="outline">{track.category ?? "Engineering"}</Badge>
           <Badge variant="outline">{track.difficulty ?? "Intermediate"}</Badge>
-          <span className="text-xs text-zinc-500 flex items-center gap-1">
-            <Clock size={11} className="text-zinc-700" />
+          <span className="text-xs text-slate-500 flex items-center gap-1">
+            <Clock size={11} className="text-slate-700" />
             {track.estimatedWeeks ?? 12} Weeks
           </span>
-          <span className="text-xs text-zinc-500 flex items-center gap-1">
-            <Video size={11} className="text-zinc-700" />
+          <span className="text-xs text-slate-500 flex items-center gap-1">
+            <Video size={11} className="text-slate-700" />
             {track.liveSessionsCount ?? 20} Workshops
           </span>
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-base font-bold text-zinc-900 group-hover:text-zinc-700 transition-colors">
+          <h2 className="text-base font-bold text-slate-900 group-hover:text-slate-700 transition-colors">
             {track.title}
           </h2>
-          <p className="text-xs leading-relaxed text-zinc-600 max-w-3xl">
+          <p className="text-xs leading-relaxed text-slate-600 max-w-3xl">
             {track.tagline || track.description || "Comprehensive hands-on curriculum built for job readiness."}
           </p>
         </div>
@@ -187,8 +187,8 @@ function StudentTrackCard({
         {/* Progress Bar */}
         <div className="space-y-1.5 max-w-xl">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-zinc-500 font-medium">Path Completion</span>
-            <span className="font-semibold text-zinc-900">{track.progress}%</span>
+            <span className="text-slate-500 font-medium">Path Completion</span>
+            <span className="font-semibold text-slate-900">{track.progress}%</span>
           </div>
           <ProgressBar value={track.progress} max={100} className="h-1.5" />
         </div>
@@ -196,9 +196,9 @@ function StudentTrackCard({
         {/* Capstone Quick Preview Buttons */}
         {track.capstones && track.capstones.length > 0 && (
           <div className="pt-0.5">
-            <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-1.5">
-              <Code2 size={12} className="text-zinc-700" />
-              <span className="font-semibold uppercase tracking-wider text-[9px] text-zinc-500">
+            <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1.5">
+              <Code2 size={12} className="text-slate-700" />
+              <span className="font-semibold uppercase tracking-wider text-[9px] text-slate-500">
                 Capstone Projects:
               </span>
             </div>
@@ -208,11 +208,11 @@ function StudentTrackCard({
                   key={cap.id}
                   type="button"
                   onClick={() => onPreviewCapstone(cap, track.title, track._id)}
-                  className="inline-flex items-center gap-1.5 rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-xs"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-700 transition hover:border-slate-300 hover:text-slate-900 shadow-xs"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-800" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-800" />
                   <span>{cap.title}</span>
-                  <span className="text-[10px] text-zinc-600 underline ml-1 font-medium">Inspect</span>
+                  <span className="text-[10px] text-slate-600 underline ml-1 font-medium">Inspect</span>
                 </button>
               ))}
             </div>
@@ -221,17 +221,17 @@ function StudentTrackCard({
       </div>
 
       {/* Action / Next Step Column */}
-      <div className="flex flex-col justify-between gap-3 border-t lg:border-t-0 lg:border-l border-zinc-200 pt-3 lg:pt-0 lg:pl-5">
+      <div className="flex flex-col justify-between gap-3 border-t lg:border-t-0 lg:border-l border-slate-200 pt-3 lg:pt-0 lg:pl-5">
         <div className="space-y-1">
-          <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-500">Status & Mentorship</p>
-          <p className="text-xs text-zinc-600 leading-relaxed">
+          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500">Status & Mentorship</p>
+          <p className="text-xs text-slate-600 leading-relaxed">
             {done
               ? "All milestones completed! Review capstones or explore another track."
               : track.enrolled
                 ? "Active track. Attend upcoming live workshops & submit code checkpoints."
                 : "Available to start anytime. Includes 1:1 mentor code reviews."}
           </p>
-          <div className="text-xs font-semibold text-zinc-800 pt-0.5">
+          <div className="text-xs font-semibold text-slate-800 pt-0.5">
             {track.mentorshipHours ?? 30} Direct Mentor Review Hours
           </div>
         </div>
@@ -370,12 +370,12 @@ export function TracksPage() {
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-800 mb-1.5">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-800 mb-1.5">
               <Code2 size={12} />
               Career-Aligned Engineering Curriculum
             </div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">Learning Pathways</h1>
-            <p className="text-xs text-zinc-500 mt-1 max-w-2xl leading-relaxed">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Learning Pathways</h1>
+            <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
               Choose your engineering pathway, track your milestones, and build production-grade capstone projects with
               direct mentor reviews.
             </p>
@@ -443,8 +443,8 @@ export function TracksPage() {
                 className={cn(
                   "rounded-lg px-3 py-1.5 text-xs font-medium transition-colors shadow-xs",
                   statusFilter === tab.value
-                    ? "bg-zinc-900 text-white font-semibold"
-                    : "border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900",
+                    ? "bg-slate-900 text-white font-semibold"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900",
                 )}
               >
                 {tab.label}
@@ -454,19 +454,19 @@ export function TracksPage() {
 
           {/* Search Input */}
           <div className="relative w-full lg:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <Input
               type="text"
               placeholder="Search tracks or tools..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8.5 h-9 bg-white border-zinc-300 text-xs rounded-lg focus:border-zinc-900 text-zinc-900 placeholder:text-zinc-400 shadow-xs"
+              className="pl-8.5 h-9 bg-white border-slate-300 text-xs rounded-lg focus:border-slate-900 text-slate-900 placeholder:text-slate-400 shadow-xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-zinc-400 hover:text-zinc-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-600"
               >
                 Clear
               </button>
@@ -475,7 +475,7 @@ export function TracksPage() {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
+        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
           {CATEGORY_TABS.map((cat) => (
             <button
               key={cat.key}
@@ -484,8 +484,8 @@ export function TracksPage() {
               className={cn(
                 "rounded-md px-2.5 py-1 text-xs transition-colors shadow-xs",
                 categoryFilter === cat.key
-                  ? "bg-zinc-900 text-white font-semibold border border-zinc-900"
-                  : "bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900 border border-zinc-200",
+                  ? "bg-slate-900 text-white font-semibold border border-slate-900"
+                  : "bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 border border-slate-200",
               )}
             >
               {cat.label}

@@ -217,7 +217,7 @@ export function MentorRecruitmentPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16 lg:px-8 space-y-12 text-slate-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -225,60 +225,60 @@ export function MentorRecruitmentPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-          <ShieldCheck size={13} className="text-zinc-700" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
+          <ShieldCheck size={13} className="text-[var(--secondary)]" />
           <span>Senior Engineering Guild Membership</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
           Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-primary">Tech Leaders</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
           Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom,
           bridge the digital divide, and discover top technical talent.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Complete Mentor Application (5 Min)
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#onboarding-process">
-            <Button variant="outline" size="md">
+            <Button variant="secondary" size="md" className="font-semibold shadow-xs">
               View Onboarding Process
             </Button>
           </a>
         </div>
 
         {/* Enhanced Trust Signals */}
-        <div className="pt-2 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-zinc-500 font-medium">
+        <div className="pt-2 flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-xs text-slate-500 font-medium">
           <div className="flex items-center gap-1.5">
-            <CheckCircle2 size={14} className="text-zinc-700" />
+            <CheckCircle2 size={14} className="text-[var(--secondary)]" />
             <span>Identity Verified via Professional Profile</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Trophy size={14} className="text-amber-600" />
+            <Trophy size={14} className="text-[var(--secondary)]" />
             <span>Top 5% of Applicant Engineers Selected</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <Users size={14} className="text-zinc-700" />
+            <Users size={14} className="text-[var(--secondary)]" />
             <span>Join 50+ Active Tech Leads</span>
           </div>
         </div>
 
         {/* Requirements Strip */}
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-600 shadow-xs">
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <ShieldCheck size={14} className="text-zinc-700" /> Requirement: 2+ Years Senior Experience
+        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <ShieldCheck size={14} className="text-[var(--secondary)]" /> Requirement: 2+ Years Senior Experience
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <Clock size={14} className="text-zinc-700" /> Flexible Commitment: 2-4 Hours / Week
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <Clock size={14} className="text-[var(--secondary)]" /> Flexible Commitment: 2-4 Hours / Week
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <Award size={14} className="text-zinc-700" /> Verified Leadership Credential
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <Award size={14} className="text-[var(--secondary)]" /> Verified Leadership Credential
           </span>
         </div>
       </motion.section>
@@ -286,11 +286,11 @@ export function MentorRecruitmentPage() {
       {/* ─── Guild Value Proposition ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Why Senior Engineers Join</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary">Why Senior Engineers Join</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             High Impact. Zero Friction Mentoring.
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             We handle curriculum design, squad coordination, and student vetting so you can focus entirely on
             high-signal coaching.
           </p>
@@ -302,14 +302,14 @@ export function MentorRecruitmentPage() {
             return (
               <Card
                 key={idx}
-                className="flex flex-col justify-between border-zinc-200 bg-white p-5 transition hover:border-zinc-300 shadow-xs"
+                className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 transition-all hover:border-slate-300 shadow-xs hover:shadow-sm"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <Icon size={18} />
                   </div>
-                  <h3 className="mt-4 font-semibold text-zinc-900 text-sm">{benefit.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-zinc-600">{benefit.description}</p>
+                  <h3 className="mt-4 font-bold text-slate-900 text-sm">{benefit.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{benefit.description}</p>
                 </div>
               </Card>
             );
@@ -320,11 +320,11 @@ export function MentorRecruitmentPage() {
       {/* ─── 4-Step Frictionless Onboarding Process ─── */}
       <section id="onboarding-process" className="space-y-8 scroll-mt-16">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="default">Streamlined Process</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary">Streamlined Process</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             The 4-Step Mentor Onboarding Journey
           </h2>
-          <p className="text-xs text-zinc-600">
+          <p className="text-xs text-slate-600">
             We value your time. Our onboarding is designed to get you matched and coaching with minimal administrative
             overhead.
           </p>
@@ -334,16 +334,19 @@ export function MentorRecruitmentPage() {
           {ONBOARDING_STEPS.map((step) => {
             const Icon = step.icon;
             return (
-              <Card key={step.step} className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs">
+              <Card
+                key={step.step}
+                className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 shadow-xs hover:border-slate-300"
+              >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                       <Icon size={16} />
                     </div>
-                    <span className="text-xl font-bold font-mono text-zinc-300">{step.step}</span>
+                    <span className="text-xl font-bold font-mono text-slate-300">{step.step}</span>
                   </div>
-                  <h3 className="mt-4 font-semibold text-zinc-900 text-sm">{step.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-600">{step.description}</p>
+                  <h3 className="mt-4 font-bold text-slate-900 text-sm">{step.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600">{step.description}</p>
                 </div>
               </Card>
             );
@@ -353,60 +356,60 @@ export function MentorRecruitmentPage() {
 
       {/* ─── Interactive Application Form & Guidelines ─── */}
       <section id="mentor-form" className="scroll-mt-16">
-        <Card className="relative overflow-hidden border-zinc-200 bg-white p-6 sm:p-8 shadow-xs">
+        <Card className="relative overflow-hidden rounded-2xl border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
             {/* Left: Expectations & Guidelines */}
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-                <ShieldCheck size={13} className="text-zinc-700" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-800 shadow-xs">
+                <ShieldCheck size={13} className="text-[var(--secondary)]" />
                 <span>Mentor Application</span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900">Join the Guild</h2>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Join the Guild</h2>
 
-              <p className="text-xs leading-relaxed text-zinc-600">
+              <p className="text-xs leading-relaxed text-slate-600">
                 Tell us about your professional background, technical strengths, and preferred mentoring schedule.
                 Applications are reviewed by the Guild Admissions Committee within 2–3 business days.
               </p>
 
               {/* Stats Summary */}
               <div className="space-y-2.5 pt-1">
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-900 flex items-center gap-2">
-                    <Clock3 size={14} className="text-zinc-700" /> Flexible Weekly Commitment
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                  <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <Clock3 size={14} className="text-[var(--secondary)]" /> Flexible Weekly Commitment
                   </p>
-                  <p className="text-xs text-zinc-600">
+                  <p className="text-xs text-slate-600">
                     Allocate 2 to 4 hours per week for asynchronous PR reviews or weekend 1-on-1 office hours.
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-900 flex items-center gap-2">
-                    <Award size={14} className="text-zinc-700" /> Senior Experience Requirement
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                  <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <Award size={14} className="text-[var(--secondary)]" /> Senior Experience Requirement
                   </p>
-                  <p className="text-xs text-zinc-600">
+                  <p className="text-xs text-slate-600">
                     Minimum 2+ years of professional industry experience in engineering, product, or data.
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 space-y-1">
-                  <p className="text-xs font-semibold text-zinc-900 flex items-center gap-2">
-                    <Trophy size={14} className="text-zinc-700" /> Tooling & Platform Provided
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                  <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <Trophy size={14} className="text-[var(--secondary)]" /> Tooling & Platform Provided
                   </p>
-                  <p className="text-xs text-zinc-600">
+                  <p className="text-xs text-slate-600">
                     Access to built-in LiveKit video rooms, automated code review dashboards, and calendar booking.
                   </p>
                 </div>
 
                 {/* Live Mentor Guild Credibility Quote */}
-                <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 space-y-2">
-                  <p className="text-xs italic text-zinc-700 leading-relaxed">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-2">
+                  <p className="text-xs italic text-slate-700 leading-relaxed">
                     &ldquo;Reviewing PRs from students in Jimma and Bahir Dar is the most impactful engineering service
                     I do all week.&rdquo;
                   </p>
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-semibold text-zinc-900">Selamawit T.</span>
-                    <span className="text-zinc-600 font-mono font-medium">Staff SRE</span>
+                    <span className="font-bold text-slate-900">Selamawit T.</span>
+                    <span className="text-slate-600 font-mono font-medium">Staff SRE</span>
                   </div>
                 </div>
               </div>
@@ -415,25 +418,25 @@ export function MentorRecruitmentPage() {
             {/* Right: Application Form */}
             <div>
               {mutation.isSuccess ? (
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-6 text-center space-y-3">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 border border-zinc-200">
+                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-6 text-center space-y-3">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <CheckCircle2 size={24} />
                   </div>
-                  <Badge variant="default">Application Received</Badge>
-                  <h3 className="text-xl font-bold text-zinc-900">Thank you, {fullName || "Fellow Engineer"}!</h3>
-                  <p className="text-xs leading-relaxed text-zinc-600 max-w-md mx-auto">
+                  <Badge variant="secondary">Application Received</Badge>
+                  <h3 className="text-xl font-bold text-slate-900">Thank you, {fullName || "Fellow Engineer"}!</h3>
+                  <p className="text-xs leading-relaxed text-slate-600 max-w-md mx-auto">
                     Your mentor application has been securely submitted to the Guild Admissions Committee. We will
-                    review your background and follow up at <strong className="text-zinc-900">{email}</strong> within 48
-                    business hours.
+                    review your background and follow up at <strong className="text-slate-900">{email}</strong> within
+                    48 business hours.
                   </p>
                   <div className="pt-3 flex justify-center gap-3">
                     <Link to="/mentors">
-                      <Button variant="outline" size="sm">
+                      <Button variant="secondary" size="sm" className="font-semibold shadow-xs">
                         Browse Mentor Directory
                       </Button>
                     </Link>
                     <Link to="/about">
-                      <Button variant="ghost" size="sm" className="text-zinc-700 hover:text-zinc-900">
+                      <Button variant="ghost" size="sm" className="text-slate-700 hover:text-slate-900 font-medium">
                         Learn About EthioTech
                       </Button>
                     </Link>
@@ -449,6 +452,7 @@ export function MentorRecruitmentPage() {
                         onChange={(e) => setFullName(e.target.value)}
                         required
                         placeholder="e.g. Dawit Abebe"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                     <div>
@@ -459,6 +463,7 @@ export function MentorRecruitmentPage() {
                         type="email"
                         required
                         placeholder="e.g. dawit@example.com"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                   </div>
@@ -471,6 +476,7 @@ export function MentorRecruitmentPage() {
                         onChange={(e) => setCurrentRole(e.target.value)}
                         required
                         placeholder="e.g. Senior Software Architect"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                     <div>
@@ -479,6 +485,7 @@ export function MentorRecruitmentPage() {
                         value={currentCompany}
                         onChange={(e) => setCurrentCompany(e.target.value)}
                         placeholder="e.g. Technology Firm / Startup"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                   </div>
@@ -494,6 +501,7 @@ export function MentorRecruitmentPage() {
                         onChange={(e) => setYearsExperience(e.target.value)}
                         required
                         placeholder="e.g. 5"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                     <div>
@@ -502,13 +510,14 @@ export function MentorRecruitmentPage() {
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder="e.g. Addis Ababa / Seattle / Berlin"
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                   </div>
 
                   {/* Technical Expertise Domains */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                       Primary Technical Domains
                     </Label>
                     <div className="flex flex-wrap gap-1.5 mt-1.5">
@@ -519,10 +528,10 @@ export function MentorRecruitmentPage() {
                             key={skill}
                             type="button"
                             onClick={() => toggleSkill(skill)}
-                            className={`rounded-md border px-2.5 py-1 text-xs font-medium transition ${
+                            className={`rounded-lg border px-3 py-1 text-xs font-medium transition ${
                               active
-                                ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                                : "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
+                                ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                                : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900"
                             }`}
                           >
                             {skill}
@@ -534,7 +543,7 @@ export function MentorRecruitmentPage() {
 
                   {/* Mentoring Format Preferences */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                       Preferred Mentoring Formats
                     </Label>
                     <div className="grid gap-2 sm:grid-cols-2 mt-1.5">
@@ -545,14 +554,14 @@ export function MentorRecruitmentPage() {
                             key={style.value}
                             type="button"
                             onClick={() => toggleStyle(style.value)}
-                            className={`rounded-lg border p-2.5 text-left transition ${
+                            className={`rounded-xl border p-3 text-left transition ${
                               active
-                                ? "border-zinc-900 bg-zinc-100 text-zinc-900 shadow-2xs"
-                                : "border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-100/60"
+                                ? "border-blue-200 bg-blue-50/70 text-slate-900 shadow-2xs"
+                                : "border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-white"
                             }`}
                           >
-                            <p className="text-xs font-semibold text-zinc-900">{style.label}</p>
-                            <p className="text-[10px] text-zinc-500 mt-0.5">{style.desc}</p>
+                            <p className="text-xs font-bold text-slate-900">{style.label}</p>
+                            <p className="text-[10px] text-slate-500 mt-0.5">{style.desc}</p>
                           </button>
                         );
                       })}
@@ -561,7 +570,7 @@ export function MentorRecruitmentPage() {
 
                   {/* Weekly Availability */}
                   <div>
-                    <Label className="text-xs uppercase tracking-wider font-semibold text-zinc-500">
+                    <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                       Weekly Time Availability
                     </Label>
                     <div className="grid gap-2 sm:grid-cols-4 mt-1.5">
@@ -570,10 +579,10 @@ export function MentorRecruitmentPage() {
                           key={opt.value}
                           type="button"
                           onClick={() => setAvailability(opt.value)}
-                          className={`rounded-md border p-2 text-center text-xs font-medium transition ${
+                          className={`rounded-lg border p-2 text-center text-xs font-medium transition ${
                             availability === opt.value
-                              ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                              : "border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
+                              ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                              : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900"
                           }`}
                         >
                           {opt.label}
@@ -591,6 +600,7 @@ export function MentorRecruitmentPage() {
                       required
                       placeholder="Share your motivation for coaching Ethiopian junior engineers, your background, and how you hope to contribute."
                       rows={3}
+                      className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                     />
                   </div>
 
@@ -602,6 +612,7 @@ export function MentorRecruitmentPage() {
                         onChange={(e) => setLinkedin(e.target.value)}
                         type="url"
                         placeholder="https://linkedin.com/in/..."
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                     <div>
@@ -611,18 +622,19 @@ export function MentorRecruitmentPage() {
                         onChange={(e) => setPortfolio(e.target.value)}
                         type="url"
                         placeholder="https://github.com/..."
+                        className="rounded-xl border-slate-200 bg-white shadow-xs focus:border-slate-400"
                       />
                     </div>
                   </div>
 
                   {/* Consent Checkbox */}
-                  <label className="flex items-start gap-2.5 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-600 cursor-pointer">
+                  <label className="flex items-start gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-xs text-slate-600 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={consent}
                       onChange={(e) => setConsent(e.target.checked)}
                       required
-                      className="mt-0.5 h-4 w-4 rounded border-zinc-300 bg-white accent-zinc-900"
+                      className="mt-0.5 h-4 w-4 rounded border-slate-300 bg-white accent-slate-900"
                     />
                     <span>
                       I confirm that I have 2+ years of professional industry experience and commit to providing
@@ -630,10 +642,10 @@ export function MentorRecruitmentPage() {
                     </span>
                   </label>
 
-                  {submissionError && <p className="text-xs text-rose-600 font-medium">{submissionError}</p>}
+                  {submissionError && <p className="text-xs text-red-600 font-medium">{submissionError}</p>}
 
                   {mutation.isError && (
-                    <p className="text-xs text-rose-600 font-medium">
+                    <p className="text-xs text-red-600 font-medium">
                       {(mutation.error as { response?: { data?: { message?: string } } })?.response?.data?.message ||
                         (mutation.error as Error)?.message ||
                         "Unable to submit mentor application. Please verify your details."}
@@ -643,7 +655,7 @@ export function MentorRecruitmentPage() {
                   <Button
                     type="submit"
                     size="md"
-                    className="w-full font-medium"
+                    className="w-full font-semibold shadow-xs"
                     disabled={mutation.isPending || !consent}
                   >
                     {mutation.isPending ? "Submitting Application..." : "Submit Application to Mentor Guild"}
@@ -659,20 +671,23 @@ export function MentorRecruitmentPage() {
       {/* ─── Testimonials from Active Mentors ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="outline">Guild Voices</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary">Guild Voices</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Hear From Our Active Senior Mentors
           </h2>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           {TESTIMONIALS.map((t, idx) => (
-            <Card key={idx} className="flex flex-col justify-between border-zinc-200 bg-white p-5 space-y-3 shadow-xs">
-              <p className="text-xs leading-relaxed text-zinc-600 italic">&ldquo;{t.quote}&rdquo;</p>
-              <div className="pt-3 border-t border-zinc-100">
-                <p className="font-semibold text-zinc-900 text-xs">{t.author}</p>
-                <p className="text-xs text-[var(--secondary)] font-medium">{t.role}</p>
-                <p className="text-[11px] text-zinc-500 mt-0.5">{t.company}</p>
+            <Card
+              key={idx}
+              className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 space-y-3 shadow-xs hover:shadow-sm"
+            >
+              <p className="text-xs leading-relaxed text-slate-600 italic">&ldquo;{t.quote}&rdquo;</p>
+              <div className="pt-3 border-t border-slate-100">
+                <p className="font-bold text-slate-900 text-xs">{t.author}</p>
+                <p className="text-xs text-[var(--secondary)] font-semibold">{t.role}</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">{t.company}</p>
               </div>
             </Card>
           ))}
@@ -680,27 +695,27 @@ export function MentorRecruitmentPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/60 p-6 sm:p-8 text-center space-y-4 shadow-xs">
+      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">Questions About Mentoring?</h2>
-          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Questions About Mentoring?</h2>
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Reach out directly to our Guild Admissions Coordinator for questions regarding scheduling, honorariums, or
             curriculum tracks.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-2.5">
+        <div className="flex flex-wrap justify-center gap-2.5 pt-2">
           <a href="#mentor-form">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Apply to Join the Guild
             </Button>
           </a>
           <Link to="/mentors">
-            <Button variant="outline" size="md">
+            <Button variant="secondary" size="md" className="font-semibold shadow-xs">
               View Mentor Directory
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-zinc-700 hover:text-zinc-900">
+            <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
               Contact Guild Lead
             </Button>
           </Link>

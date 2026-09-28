@@ -67,7 +67,7 @@ export function Avatar({
   };
 
   const statusColors = {
-    online: "bg-zinc-800 ring-2 ring-white",
+    online: "bg-slate-800 ring-2 ring-white",
     away: "bg-amber-500 ring-2 ring-white",
     offline: "bg-zinc-400 ring-2 ring-white",
   };
@@ -160,7 +160,7 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
             srcSet={srcSet || undefined}
             sizes={srcSet ? "(max-width: 640px) 64px, (max-width: 1024px) 128px, 256px" : undefined}
             alt={alt}
-            className={cn("h-full w-full object-cover border border-zinc-200", !isLoaded && "opacity-0")}
+            className={cn("h-full w-full object-cover border border-slate-200", !isLoaded && "opacity-0")}
             onLoad={() => setIsLoaded(true)}
             onError={handleError}
             loading="lazy"
@@ -168,7 +168,7 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
           />
           <div
             className={cn(
-              "absolute inset-0 flex items-center justify-center font-semibold text-zinc-700 bg-zinc-100 border border-zinc-200 transition-opacity duration-200",
+              "absolute inset-0 flex items-center justify-center font-semibold text-slate-700 bg-slate-100 border border-slate-200 transition-opacity duration-200",
               isLoaded ? "opacity-0" : "opacity-100",
             )}
             aria-hidden="true"
@@ -178,7 +178,7 @@ function AvatarMedia({ candidateSources, name, sizeClass, alt, className }: Avat
         </>
       ) : (
         <div
-          className="flex h-full w-full items-center justify-center border border-zinc-200 bg-zinc-100 font-semibold text-zinc-700 select-none text-xs"
+          className="flex h-full w-full items-center justify-center border border-slate-200 bg-slate-100 font-semibold text-slate-700 select-none text-xs"
           aria-label={alt}
         >
           <span>{getInitials(name)}</span>

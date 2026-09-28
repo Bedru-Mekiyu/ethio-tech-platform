@@ -9,15 +9,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary text-white shadow-xs border border-red-800 hover:bg-[var(--primary-hover)] active:scale-[0.98]",
+          "bg-gradient-to-b from-red-600 to-primary text-white shadow-[var(--shadow-crimson-cta)] border border-red-700/80 hover:from-red-500 hover:to-primary-hover hover:shadow-[var(--shadow-crimson-hover)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all",
         secondary:
-          "border border-[var(--border)] bg-white text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:bg-zinc-50 hover:text-[var(--text-primary)] active:scale-[0.98] shadow-xs",
+          "border border-slate-200/90 bg-white text-slate-800 shadow-[var(--shadow-xs)] hover:border-slate-300 hover:bg-slate-50/80 hover:text-slate-950 hover:shadow-[var(--shadow-sm)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all",
         outline:
-          "border border-[var(--border)] bg-transparent text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:bg-zinc-50 hover:text-[var(--text-primary)] active:scale-[0.98]",
+          "border border-slate-200/90 bg-transparent text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 hover:text-slate-900 active:scale-[0.98] transition-all",
         ghost:
-          "bg-transparent text-[var(--text-secondary)] hover:bg-zinc-100 hover:text-[var(--text-primary)] active:scale-[0.98]",
+          "bg-transparent text-slate-600 hover:bg-slate-100/70 hover:text-slate-900 active:scale-[0.98] transition-all",
         danger:
-          "bg-danger text-white shadow-xs border border-red-700 hover:bg-[var(--danger-hover)] active:scale-[0.98]",
+          "bg-gradient-to-b from-red-500 to-danger text-white shadow-xs border border-red-700 hover:from-red-600 hover:to-red-700 active:scale-[0.98] transition-all",
       },
       size: {
         sm: "h-8 px-3 text-xs rounded-md gap-1.5",

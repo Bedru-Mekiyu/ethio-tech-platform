@@ -22,10 +22,10 @@ export function QueryError({
       </div>
       <div className="space-y-1">
         <p className="text-xs font-semibold uppercase tracking-wider text-rose-400">Unable to Load Data</p>
-        <p className="text-xs text-zinc-400 leading-relaxed max-w-md mx-auto">{message}</p>
+        <p className="text-xs text-slate-400 leading-relaxed max-w-md mx-auto">{message}</p>
       </div>
       {onRetry ? (
-        <Button size="sm" variant="outline" onClick={onRetry} className="gap-1.5 text-xs text-zinc-300">
+        <Button size="sm" variant="outline" onClick={onRetry} className="gap-1.5 text-xs text-slate-300">
           <RefreshCw size={13} />
           Try again
         </Button>

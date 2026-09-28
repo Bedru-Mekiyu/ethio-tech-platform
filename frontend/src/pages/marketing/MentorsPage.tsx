@@ -108,13 +108,13 @@ function MentorStatCard({
   tone?: "primary" | "default" | "warning";
 }) {
   return (
-    <Card className="border-zinc-200 bg-white p-3.5 text-center transition hover:border-zinc-300 shadow-xs">
-      <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-200 bg-zinc-100 text-zinc-900">
-        <Icon size={15} />
+    <Card className="rounded-2xl border-slate-200/80 bg-white p-4 text-center transition-all hover:border-slate-300 shadow-xs hover:shadow-sm">
+      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-[var(--secondary)]">
+        <Icon size={16} />
       </div>
-      <p className="mt-2 text-xl font-bold tracking-tight text-zinc-900 font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-zinc-500">{label}</p>
-      <p className="mt-0.5 text-xs text-zinc-600">{helper}</p>
+      <p className="mt-2 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
+      <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-slate-500">{label}</p>
+      <p className="mt-0.5 text-xs text-slate-600">{helper}</p>
     </Card>
   );
 }
@@ -124,7 +124,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
 
   return (
     <Card
-      className={`flex h-full flex-col justify-between border-zinc-200 bg-white transition hover:border-zinc-300 shadow-xs hover:shadow-sm ${
+      className={`flex h-full flex-col justify-between rounded-2xl border-slate-200/80 bg-white transition-all hover:border-slate-300 shadow-xs hover:shadow-md ${
         featured ? "p-5" : "p-4"
       }`}
     >
@@ -140,28 +140,32 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
             />
             <div>
               <div className="flex items-center gap-1">
-                <h3 className={`font-semibold text-zinc-900 ${featured ? "text-sm" : "text-xs"}`}>{mentor.fullName}</h3>
-                {mentor.isVerified && <BadgeCheck size={14} className="text-zinc-700 shrink-0" />}
+                <h3 className={`font-bold text-slate-900 ${featured ? "text-sm" : "text-xs"}`}>{mentor.fullName}</h3>
+                {mentor.isVerified && <BadgeCheck size={14} className="text-[var(--secondary)] shrink-0" />}
               </div>
-              <p className="text-[11px] font-medium text-zinc-600 mt-0.5">
+              <p className="text-[11px] font-medium text-slate-600 mt-0.5">
                 {mentor.currentCompany || "Senior Tech Leader"}
               </p>
             </div>
           </div>
-          <Badge variant={featured ? "default" : "outline"} size="sm">
+          <Badge
+            variant={featured ? "secondary" : "outline"}
+            size="sm"
+            className={!featured ? "border-slate-200 text-slate-700 font-medium" : undefined}
+          >
             {featured ? "Fellow" : "Verified"}
           </Badge>
         </div>
 
-        {mentor.bio ? <p className="text-xs leading-relaxed text-zinc-600 line-clamp-2">{mentor.bio}</p> : null}
+        {mentor.bio ? <p className="text-xs leading-relaxed text-slate-600 line-clamp-2">{mentor.bio}</p> : null}
 
         {/* Mentor Rating & Sessions Bar */}
         <div className="space-y-1 pt-1">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-zinc-500 font-semibold">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
             <span>Student Rating</span>
-            <span className="text-zinc-800 font-bold font-mono">{score}% Satisfaction</span>
+            <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
-          <ProgressBar value={score} max={100} className="h-1 bg-zinc-200" />
+          <ProgressBar value={score} max={100} className="h-1 bg-slate-100" />
         </div>
 
         {/* Skills Tag Cloud */}
@@ -169,7 +173,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
           {(mentor.expertise ?? []).slice(0, featured ? 4 : 3).map((skill) => (
             <span
               key={skill}
-              className="rounded border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] text-zinc-600 font-medium"
+              className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] text-slate-600 font-medium"
             >
               {skill}
             </span>
@@ -177,12 +181,12 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
         </div>
       </div>
 
-      <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between gap-2">
-        <span className="text-[11px] text-zinc-500 font-medium">
-          <strong className="text-zinc-900 font-mono">{mentor.totalSessions ?? 0}</strong> sessions
+      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+        <span className="text-[11px] text-slate-500 font-medium">
+          <strong className="text-slate-900 font-mono">{mentor.totalSessions ?? 0}</strong> sessions
         </span>
         <Link to="/contact">
-          <Button size="sm" variant={featured ? "primary" : "outline"} className="text-xs">
+          <Button size="sm" variant={featured ? "primary" : "secondary"} className="text-xs font-semibold shadow-xs">
             Connect
           </Button>
         </Link>
@@ -258,7 +262,7 @@ export function MentorsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-12 text-zinc-900">
+    <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16 lg:px-8 space-y-12 text-slate-900">
       {/* ─── Hero Section ─── */}
       <motion.section
         className="mx-auto max-w-4xl text-center space-y-5"
@@ -266,44 +270,44 @@ export function MentorsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-          <Users size={13} className="text-zinc-700" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
+          <Users size={13} className="text-[var(--secondary)]" />
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
           Learn From Senior Engineers Shaping <span className="text-primary">Global & African Tech</span>
         </h1>
 
-        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-zinc-600 font-normal">
+        <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
           Connect with senior software architects, engineering leads, and technical founders who provide structured
           1-on-1 guidance, live architectural reviews, and career sponsorship.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           <Link to="/mentor-recruitment">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Apply to Become a Mentor
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </Link>
           <a href="#mentor-directory">
-            <Button variant="outline" size="md">
+            <Button variant="secondary" size="md" className="font-semibold shadow-xs">
               Browse Mentor Directory
             </Button>
           </a>
         </div>
 
         {/* Requirements & Commitment Callout Strip */}
-        <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-zinc-600 shadow-xs">
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <ShieldCheck size={14} className="text-zinc-700" /> Requirement: 2+ Years Senior Experience
+        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <ShieldCheck size={14} className="text-[var(--secondary)]" /> Requirement: 2+ Years Senior Experience
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <Clock size={14} className="text-zinc-700" /> Commitment: 2–4 Hours / Week (Flexible)
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <Clock size={14} className="text-[var(--secondary)]" /> Commitment: 2–4 Hours / Week (Flexible)
           </span>
-          <span className="flex items-center gap-1.5 font-medium text-zinc-800">
-            <Trophy size={14} className="text-zinc-700" /> Verified Leadership Credentials
+          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
+            <Trophy size={14} className="text-[var(--secondary)]" /> Verified Leadership Credentials
           </span>
         </div>
       </motion.section>
@@ -352,40 +356,40 @@ export function MentorsPage() {
       <section className="space-y-8">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7 space-y-4">
-            <Badge variant="default">Structured Learning</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+            <Badge variant="secondary">Structured Learning</Badge>
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               How Mentorship Works at EthioTech
             </h2>
-            <p className="text-xs leading-relaxed text-zinc-600">
+            <p className="text-xs leading-relaxed text-slate-600">
               EthioTech connects Ethiopian software engineering students with senior diaspora practitioners and industry
               leads across Silicon Valley, Europe, and Pan-Africa. Every interaction is structured around real
               codebases, asynchronous GitHub PR feedback, and high-leverage architectural review.
             </p>
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
-                <p className="text-xs font-semibold text-zinc-900">Weekly Office Hours</p>
-                <p className="text-[11px] text-zinc-500 mt-0.5">
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs">
+                <p className="text-xs font-bold text-slate-900">Weekly Office Hours</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">
                   Direct 1-on-1 screen share and architectural deep dives.
                 </p>
               </div>
-              <div className="rounded-lg border border-zinc-200 bg-white p-3 shadow-xs">
-                <p className="text-xs font-semibold text-zinc-900">PR Line-by-Line Audits</p>
-                <p className="text-[11px] text-zinc-500 mt-0.5">
+              <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs">
+                <p className="text-xs font-bold text-slate-900">PR Line-by-Line Audits</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">
                   Enterprise standards for idiomatic code, tests, and security.
                 </p>
               </div>
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100 shadow-xs">
+            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.mentorship.codeReview}
                 alt="Senior software engineer mentoring a junior developer on system design and code implementation"
                 aspectRatio="aspect-[4/3]"
                 className="w-full object-cover"
               />
-              <div className="border-t border-zinc-200 bg-zinc-50 px-3.5 py-2.5">
-                <p className="text-[11px] font-medium text-zinc-600 flex items-center gap-1.5">
+              <div className="border-t border-slate-200 bg-slate-50 px-3.5 py-2.5">
+                <p className="text-[11px] font-medium text-slate-600 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
                   <span>Personalized code review and technical career mentoring</span>
                 </p>
@@ -400,14 +404,14 @@ export function MentorsPage() {
             return (
               <Card
                 key={idx}
-                className="flex flex-col justify-between border-zinc-200 bg-white p-5 shadow-xs hover:border-zinc-300"
+                className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                     <Icon size={18} />
                   </div>
-                  <h3 className="mt-4 font-semibold text-zinc-900 text-sm">{pillar.title}</h3>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-600">{pillar.description}</p>
+                  <h3 className="mt-4 font-bold text-slate-900 text-sm">{pillar.title}</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-600">{pillar.description}</p>
                 </div>
               </Card>
             );
@@ -419,21 +423,21 @@ export function MentorsPage() {
       <section id="mentor-directory" className="space-y-6 scroll-mt-16">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge variant="default">Directory</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl mt-1">
+            <Badge variant="secondary">Directory</Badge>
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1">
               Browse the Mentor Directory
             </h2>
-            <p className="text-xs text-zinc-600 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
+            <p className="text-xs text-slate-600 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
           </div>
 
           {/* Search Bar */}
           <div className="relative w-full md:w-80">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={15} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name, company, or stack..."
-              className="pl-9 h-9 text-xs bg-white border-zinc-300 text-zinc-900 placeholder:text-zinc-400 shadow-xs focus:border-zinc-500"
+              className="pl-9 h-9 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-400 rounded-xl"
             />
           </div>
         </div>
@@ -445,10 +449,10 @@ export function MentorsPage() {
               key={domain.value}
               type="button"
               onClick={() => setSelectedDomain(domain.value)}
-              className={`rounded-md border px-3 py-1 text-xs font-medium transition ${
+              className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition ${
                 selectedDomain === domain.value
-                  ? "border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                  : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900"
+                  ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs"
               }`}
             >
               {domain.label}
@@ -479,7 +483,7 @@ export function MentorsPage() {
           <>
             {featuredMentors.length > 0 ? (
               <div className="space-y-3">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Featured Senior Mentors
                 </h3>
                 <div className="grid gap-4 md:grid-cols-3">
@@ -492,7 +496,7 @@ export function MentorsPage() {
 
             {discoverMentors.length > 0 ? (
               <div className="space-y-3 pt-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   All Verified Mentors ({filteredMentors.length})
                 </h3>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -507,30 +511,30 @@ export function MentorsPage() {
       </section>
 
       {/* ─── Bottom CTA Banner ─── */}
-      <Card className="relative overflow-hidden border border-zinc-200 bg-zinc-50/60 p-6 sm:p-8 text-center space-y-4 shadow-xs">
+      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <Badge variant="outline">Join the Guild</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+          <Badge variant="secondary">Join the Guild</Badge>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
             Are You a Senior Engineer or Tech Leader?
           </h2>
-          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Dedicate 2–4 hours per week to shape Ethiopia&apos;s next generation of software engineers. Benefit from
             leadership credentials, direct talent scouting, and an elite diaspora peer network.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-2.5">
+        <div className="flex flex-wrap justify-center gap-2.5 pt-2">
           <Link to="/mentor-recruitment">
-            <Button size="md" className="font-medium">
+            <Button size="md" className="font-semibold shadow-xs">
               Apply to Become a Mentor
             </Button>
           </Link>
           <Link to="/how-it-works">
-            <Button variant="outline" size="md">
+            <Button variant="secondary" size="md" className="font-semibold shadow-xs">
               Explore Mentorship Journey
             </Button>
           </Link>
           <Link to="/contact">
-            <Button variant="ghost" size="md" className="text-zinc-700 hover:text-zinc-900">
+            <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
               Talk to Guild Coordinator
             </Button>
           </Link>

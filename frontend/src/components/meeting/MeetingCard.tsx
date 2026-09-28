@@ -126,10 +126,10 @@ export function MeetingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "rounded-2xl border border-zinc-200 bg-white p-4 transition-all duration-200 shadow-xs",
+        "rounded-2xl border border-slate-200 bg-white p-4 transition-all duration-200 shadow-xs",
         isFull && "md:p-5",
         isInline && "p-3",
-        meeting.status === "active" && "border-zinc-300 bg-zinc-50/60 ring-1 ring-zinc-900/10",
+        meeting.status === "active" && "border-slate-300 bg-slate-50/60 ring-1 ring-slate-900/10",
         meeting.status === "waiting_for_host" && "border-amber-200 bg-amber-50/40",
         meeting.status === "cancelled" && "border-red-200 bg-red-50/20 opacity-90",
         className,
@@ -142,11 +142,11 @@ export function MeetingCard({
         <div
           className={cn(
             "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border",
-            meeting.status === "active" && "bg-zinc-900 border-zinc-900 text-white",
+            meeting.status === "active" && "bg-slate-900 border-slate-900 text-white",
             meeting.status === "waiting_for_host" && "bg-amber-100 border-amber-200 text-amber-700",
             meeting.status === "cancelled" && "bg-red-100 border-red-200 text-red-700",
             (meeting.status === "scheduled" || meeting.status === "completed") &&
-              "bg-zinc-100 border-zinc-200 text-zinc-700",
+              "bg-slate-100 border-slate-200 text-slate-700",
           )}
         >
           <Icon size={18} />
@@ -160,30 +160,30 @@ export function MeetingCard({
             {meeting.presenceCount > 0 && meeting.status === "active" ? (
               <span
                 aria-label={`${meeting.presenceCount} participants`}
-                className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] font-semibold text-zinc-700"
+                className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-700"
               >
                 <Users size={11} /> {meeting.presenceCount}
               </span>
             ) : null}
             {!isCompact ? (
-              <span className="inline-flex items-center gap-1 text-[11px] text-zinc-500 font-medium">
+              <span className="inline-flex items-center gap-1 text-[11px] text-slate-500 font-medium">
                 <Clock size={11} /> {formatDateTime(meeting.scheduledAt)}
               </span>
             ) : null}
           </div>
 
-          <h3 className={cn("mt-2 font-bold text-zinc-900 tracking-tight", isInline ? "text-sm" : "text-base")}>
+          <h3 className={cn("mt-2 font-bold text-slate-900 tracking-tight", isInline ? "text-sm" : "text-base")}>
             {meeting.title || "Live session"}
           </h3>
 
           {!isCompact ? (
-            <p className="mt-1 text-xs text-zinc-600 leading-relaxed">
+            <p className="mt-1 text-xs text-slate-600 leading-relaxed">
               With <CounterpartyLabel meeting={meeting} />
               {meeting.durationMinutes ? ` · ${meeting.durationMinutes} min` : ""}
             </p>
           ) : null}
 
-          <p className="mt-1 text-[11px] font-medium text-zinc-500">
+          <p className="mt-1 text-[11px] font-medium text-slate-500">
             <StatusHelper meeting={meeting} />
           </p>
 
@@ -201,7 +201,7 @@ export function MeetingCard({
                     <Button
                       size="sm"
                       variant="outline"
-                      className="font-semibold border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50"
+                      className="font-semibold border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
                       data-testid="meeting-open"
                     >
                       Open meeting room
@@ -237,7 +237,7 @@ export function MeetingCard({
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="font-semibold text-zinc-500 hover:text-zinc-800"
+                  className="font-semibold text-slate-500 hover:text-slate-800"
                   onClick={() => onCancel?.(meeting)}
                   data-testid="meeting-cancel"
                 >
@@ -245,7 +245,7 @@ export function MeetingCard({
                 </Button>
               ) : null}
               {isDisabled ? (
-                <span className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-[11px] font-semibold text-zinc-500">
+                <span className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-500">
                   <Circle size={10} /> Unavailable
                 </span>
               ) : null}

@@ -10,13 +10,13 @@ export interface BadgeProps {
 
 export function Badge({ className, variant = "default", size = "md", showDot = false, children }: BadgeProps) {
   const variants = {
-    default: "border-zinc-200 bg-zinc-100 text-zinc-800 hover:bg-zinc-200/70",
-    primary: "border-red-200 bg-red-50 text-red-800 hover:bg-red-100/70",
-    secondary: "border-zinc-200 bg-zinc-50 text-[var(--secondary)] hover:bg-zinc-100/70",
-    success: "border-emerald-200 bg-emerald-50 text-emerald-800 hover:bg-emerald-100/70",
-    warning: "border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100/70",
-    danger: "border-red-200 bg-red-50 text-red-700 hover:bg-red-100/70",
-    outline: "border-zinc-200 bg-white text-zinc-800 hover:bg-zinc-50",
+    default: "border-slate-200/80 bg-slate-100/70 text-slate-800 hover:bg-slate-200/70",
+    primary: "border-red-200/80 bg-red-50 text-red-800 hover:bg-red-100/70",
+    secondary: "border-blue-200/70 bg-blue-50/70 text-[var(--secondary)] font-semibold shadow-xs hover:bg-blue-100/70",
+    success: "border-emerald-200/80 bg-emerald-50 text-emerald-800 hover:bg-emerald-100/70",
+    warning: "border-amber-200/80 bg-amber-50 text-amber-800 hover:bg-amber-100/70",
+    danger: "border-red-200/80 bg-red-50 text-red-700 hover:bg-red-100/70",
+    outline: "border-slate-200/90 bg-white text-slate-700 shadow-xs hover:bg-slate-50",
   };
 
   const sizes = {

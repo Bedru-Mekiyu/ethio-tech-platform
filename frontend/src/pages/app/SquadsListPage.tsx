@@ -22,10 +22,10 @@ export function SquadsListPage() {
   const groups = data ?? [];
 
   return (
-    <div className="space-y-6 text-zinc-900">
-      <Card className="border border-zinc-200 bg-white p-5 sm:p-6 shadow-xs">
-        <h1 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">Collaboration Squads</h1>
-        <p className="mt-0.5 text-xs text-zinc-500">
+    <div className="space-y-6 text-slate-900">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Collaboration Squads</h1>
+        <p className="mt-1 text-xs text-slate-500">
           Join cohort squad rooms for real-time discussions, code share, and collective XP rewards.
         </p>
       </Card>
@@ -37,27 +37,30 @@ export function SquadsListPage() {
           actionHref="/app/tracks"
         />
       ) : (
-        <div className="grid gap-3.5 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {groups.map((group) => (
-            <Card key={group._id} className="rounded-xl border border-zinc-200 bg-white p-5 shadow-xs">
+            <Card
+              key={group._id}
+              className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-xs hover:border-slate-300 hover:shadow-sm transition"
+            >
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
-                    <Users size={15} />
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80 shadow-2xs">
+                    <Users size={16} />
                   </span>
-                  <h3 className="text-sm font-semibold text-zinc-900">{group.name}</h3>
+                  <h3 className="text-sm font-bold text-slate-900">{group.name}</h3>
                 </div>
-                <span className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] font-medium text-zinc-700">
+                <span className="rounded-md border border-blue-100 bg-blue-50/80 px-2 py-0.5 text-[11px] font-bold text-[var(--secondary)] font-mono">
                   {group.groupXP ?? 0} XP
                 </span>
               </div>
-              <p className="mt-2.5 text-xs text-zinc-600">
+              <p className="mt-3 text-xs text-slate-600 leading-relaxed">
                 Active group sprint channel and collaborative peer review board.
               </p>
-              <div className="mt-4 pt-3 border-t border-zinc-100 flex justify-end">
+              <div className="mt-4 pt-3.5 border-t border-slate-100 flex justify-end">
                 <Link
                   to={`/app/squads/${group._id}`}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
                 >
                   <MessageSquare size={13} /> Open Squad Room →
                 </Link>

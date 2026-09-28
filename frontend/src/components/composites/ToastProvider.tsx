@@ -41,10 +41,10 @@ const icons: Record<ToastVariant, typeof Info> = {
 };
 
 const variantStyles: Record<ToastVariant, { container: string; icon: string }> = {
-  success: { container: "border-zinc-800 bg-zinc-900 shadow-lg", icon: "text-white" },
+  success: { container: "border-zinc-800 bg-slate-900 shadow-lg", icon: "text-white" },
   error: { container: "border-red-700 bg-red-600 shadow-lg", icon: "text-white" },
   warning: { container: "border-amber-700 bg-amber-600 shadow-lg", icon: "text-white" },
-  info: { container: "border-zinc-200 bg-zinc-100 shadow-lg", icon: "text-zinc-700" },
+  info: { container: "border-slate-200 bg-slate-100 shadow-lg", icon: "text-slate-700" },
 };
 
 let nextId = 0;
@@ -126,11 +126,11 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 )}
               >
                 <Icon size={18} className={cn("mt-0.5 flex-shrink-0", variantStyles[t.variant].icon)} />
-                <p className="flex-1 text-sm font-medium text-zinc-800 leading-relaxed">{t.message}</p>
+                <p className="flex-1 text-sm font-medium text-slate-800 leading-relaxed">{t.message}</p>
                 <button
                   type="button"
                   onClick={() => removeToast(t.id)}
-                  className="flex-shrink-0 text-zinc-400 hover:text-zinc-700 transition-colors duration-200 p-0.5 rounded-md hover:bg-zinc-100"
+                  className="flex-shrink-0 text-slate-400 hover:text-slate-700 transition-colors duration-200 p-0.5 rounded-md hover:bg-slate-100"
                   aria-label="Dismiss notification"
                 >
                   <X size={15} />

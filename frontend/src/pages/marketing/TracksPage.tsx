@@ -85,7 +85,7 @@ export function TracksPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
+    <div className="min-h-screen bg-white text-slate-900">
       {/* Capstone Preview Modal */}
       <CapstonePreviewModal
         project={previewProject?.project ?? null}
@@ -97,16 +97,16 @@ export function TracksPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-zinc-200 bg-zinc-50/70 py-12 lg:py-14">
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50/70 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8 relative z-10">
           <div className="mx-auto max-w-4xl text-center space-y-5">
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 12 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50/80 px-3 py-1 text-xs font-medium text-zinc-700 shadow-xs"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs"
             >
-              <Code2 size={13} className="text-zinc-700" />
+              <Code2 size={13} className="text-[var(--secondary)]" />
               Industry-Standard Technical Curriculum
             </motion.div>
 
@@ -114,7 +114,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: 0.05 }}
-              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-zinc-900 leading-[1.15]"
+              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]"
             >
               Master In-Demand Tech with <br className="hidden sm:inline" />
               <span className="text-primary">Production Capstones</span> & Mentorship
@@ -124,7 +124,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="mx-auto max-w-2xl text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
+              className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
             >
               Forget static video tutorials. Build distributed cloud systems, real-time mobile apps, fraud detection
               engines, and hardened cybersecurity architectures with live code reviews.
@@ -137,21 +137,25 @@ export function TracksPage() {
               transition={{ duration: 0.45, delay: 0.15 }}
               className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4"
             >
-              <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
-                <p className="text-xl font-bold text-zinc-900">6</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Core Tracks</p>
+              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
+                <p className="text-xl font-bold text-slate-900">6</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Core Tracks</p>
               </Card>
-              <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
-                <p className="text-xl font-bold text-zinc-900">{totalCapstones}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Real Capstones</p>
+              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
+                <p className="text-xl font-bold text-slate-900">{totalCapstones}+</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Real Capstones</p>
               </Card>
-              <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
-                <p className="text-xl font-bold text-zinc-900">{totalLiveHours}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Live & Mentor Hrs</p>
+              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
+                <p className="text-xl font-bold text-slate-900">{totalLiveHours}+</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                  Live & Mentor Hrs
+                </p>
               </Card>
-              <Card className="border-zinc-200 bg-white p-3 text-center shadow-xs">
-                <p className="text-xl font-bold text-zinc-900">100%</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-zinc-500 font-semibold">Free for Learners</p>
+              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
+                <p className="text-xl font-bold text-slate-900">100%</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                  Free for Learners
+                </p>
               </Card>
             </motion.div>
           </div>
@@ -159,25 +163,25 @@ export function TracksPage() {
       </section>
 
       {/* Main Catalog Section */}
-      <section className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8 space-y-8">
+      <section className="mx-auto max-w-7xl px-4 py-12 lg:py-16 lg:px-8 space-y-8">
         {/* Filters and Search Bar */}
         <div className="space-y-4">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             {/* Search Input */}
             <div className="relative w-full lg:max-w-md">
-              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <Input
                 type="text"
                 placeholder="Search tracks, tooling, capstone projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9 h-10 bg-white border-zinc-300 text-xs rounded-lg text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-500 shadow-xs"
+                className="pl-9 h-10 bg-white border-slate-200 text-xs rounded-xl text-slate-900 placeholder:text-slate-400 focus:border-slate-400 shadow-xs"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-700"
                 >
                   Clear
                 </button>
@@ -186,7 +190,7 @@ export function TracksPage() {
 
             {/* Difficulty Selector */}
             <div className="flex items-center gap-1.5">
-              <span className="text-xs uppercase tracking-wider text-zinc-500 font-semibold flex items-center gap-1">
+              <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-1">
                 <Filter size={12} />
                 Level:
               </span>
@@ -196,10 +200,10 @@ export function TracksPage() {
                   type="button"
                   onClick={() => setSelectedDifficulty(diff)}
                   className={cn(
-                    "rounded-md px-3 py-1 text-xs font-medium transition",
+                    "rounded-lg px-3 py-1.5 text-xs font-medium transition",
                     selectedDifficulty === diff
-                      ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                      : "border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900",
+                      ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                      : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs",
                   )}
                 >
                   {diff === "all" ? "All Levels" : diff}
@@ -209,17 +213,17 @@ export function TracksPage() {
           </div>
 
           {/* Category Pills */}
-          <div className="flex flex-wrap gap-1.5 pt-2 border-t border-zinc-200">
+          <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200/80">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.key}
                 type="button"
                 onClick={() => setSelectedCategory(cat.key)}
                 className={cn(
-                  "rounded-md px-3 py-1 text-xs font-medium transition",
+                  "rounded-lg px-3 py-1.5 text-xs font-medium transition",
                   selectedCategory === cat.key
-                    ? "border border-zinc-900 bg-zinc-900 text-white shadow-xs"
-                    : "border border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300 hover:text-zinc-900",
+                    ? "border border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-xs",
                 )}
               >
                 {cat.label}
@@ -238,74 +242,74 @@ export function TracksPage() {
                 <Card
                   key={track.id}
                   id={track.id}
-                  className="group relative overflow-hidden rounded-xl border-zinc-200 bg-white p-6 md:p-8 transition duration-150 hover:border-zinc-300 shadow-xs hover:shadow-sm"
+                  className="group relative overflow-hidden rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 transition-all duration-200 hover:border-slate-300 shadow-sm hover:shadow-md"
                 >
                   <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                     {/* Left Column: Track Info, Badges, Capstones, Career Roles */}
                     <div className="space-y-5">
                       {/* Badge row */}
                       <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="default" size="sm">
+                        <Badge variant="secondary" size="sm">
                           {track.category}
                         </Badge>
-                        <Badge variant="default" size="sm">
+                        <Badge variant="outline" size="sm" className="border-slate-200 text-slate-700 font-medium">
                           {track.difficulty}
                         </Badge>
-                        <Badge variant="default" size="sm">
+                        <Badge variant="outline" size="sm" className="border-slate-200 text-slate-700 font-medium">
                           {track.marketDemand.rating} Demand
                         </Badge>
                       </div>
 
                       {/* Header */}
                       <div className="space-y-1">
-                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900 tracking-tight">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
                           <Link to={`/tracks/${track.slug}`} className="hover:text-primary transition-colors">
                             {track.title}
                           </Link>
                         </h2>
-                        <p className="text-xs md:text-sm leading-relaxed text-zinc-600">{track.tagline}</p>
+                        <p className="text-xs md:text-sm leading-relaxed text-slate-600">{track.tagline}</p>
                       </div>
 
                       {/* Key stats bar */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-lg border border-zinc-200 bg-zinc-50 p-3 text-center">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
                         <div>
-                          <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Clock size={11} className="text-zinc-700" />
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                            <Clock size={11} className="text-slate-700" />
                             Duration
                           </p>
-                          <p className="mt-0.5 font-bold text-zinc-900 text-xs">{track.estimatedWeeks} Weeks</p>
+                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.estimatedWeeks} Weeks</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Video size={11} className="text-zinc-700" />
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                            <Video size={11} className="text-slate-700" />
                             Live Sessions
                           </p>
-                          <p className="mt-0.5 font-bold text-zinc-900 text-xs">{track.liveSessionsCount} Workshops</p>
+                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.liveSessionsCount} Workshops</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <GraduationCap size={11} className="text-zinc-700" />
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                            <GraduationCap size={11} className="text-slate-700" />
                             1:1 Mentorship
                           </p>
-                          <p className="mt-0.5 font-bold text-zinc-900 text-xs">{track.mentorshipHours} Hours</p>
+                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.mentorshipHours} Hours</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Award size={11} className="text-amber-600" />
+                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                            <Award size={11} className="text-[var(--secondary)]" />
                             XP Reward
                           </p>
-                          <p className="mt-0.5 font-bold text-zinc-900 text-xs">+{track.xpReward} XP</p>
+                          <p className="mt-0.5 font-bold text-slate-900 text-xs">+{track.xpReward} XP</p>
                         </div>
                       </div>
 
                       {/* Practical Capstones Showcase */}
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-900 flex items-center gap-1.5">
+                          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                             <Code2 size={13} className="text-[var(--secondary)]" />
                             Practical Capstone Projects
                           </h3>
-                          <span className="text-[10px] text-zinc-500">Click to preview code & architecture</span>
+                          <span className="text-[10px] text-slate-500">Click to preview code & architecture</span>
                         </div>
 
                         <div className="grid gap-2.5 sm:grid-cols-2">
@@ -320,33 +324,37 @@ export function TracksPage() {
                                   trackId: track.id,
                                 })
                               }
-                              className="group/cap text-left rounded-lg border border-zinc-200 bg-zinc-50 p-3 transition hover:border-zinc-300 hover:bg-zinc-100/60"
+                              className="group/cap text-left rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 transition-all hover:border-slate-300 hover:bg-white hover:shadow-xs"
                             >
                               <div className="flex items-center justify-between gap-2">
-                                <Badge variant="default" size="sm">
+                                <Badge
+                                  variant="outline"
+                                  size="sm"
+                                  className="border-slate-200 text-slate-700 font-medium"
+                                >
                                   {capstone.difficulty}
                                 </Badge>
-                                <span className="text-[10px] text-zinc-700 font-medium flex items-center gap-1">
+                                <span className="text-[10px] text-slate-700 font-medium flex items-center gap-1">
                                   View Code <ArrowRight size={11} />
                                 </span>
                               </div>
-                              <h4 className="mt-1.5 text-xs font-semibold text-zinc-900 group-hover/cap:text-primary transition line-clamp-1">
+                              <h4 className="mt-1.5 text-xs font-semibold text-slate-900 group-hover/cap:text-primary transition line-clamp-1">
                                 {capstone.title}
                               </h4>
-                              <p className="mt-0.5 text-[11px] text-zinc-600 line-clamp-2 leading-relaxed">
+                              <p className="mt-0.5 text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
                                 {capstone.tagline}
                               </p>
                               <div className="mt-2 flex flex-wrap gap-1">
                                 {capstone.techStack.slice(0, 3).map((tech) => (
                                   <span
                                     key={tech}
-                                    className="rounded bg-white border border-zinc-200 px-1.5 py-0.5 text-[9px] text-zinc-600 shadow-2xs"
+                                    className="rounded bg-white border border-slate-200 px-1.5 py-0.5 text-[9px] text-slate-600 shadow-2xs font-medium"
                                   >
                                     {tech}
                                   </span>
                                 ))}
                                 {capstone.techStack.length > 3 && (
-                                  <span className="rounded bg-white border border-zinc-200 px-1 py-0.5 text-[9px] text-zinc-500">
+                                  <span className="rounded bg-white border border-slate-200 px-1 py-0.5 text-[9px] text-slate-500 font-medium">
                                     +{capstone.techStack.length - 3}
                                   </span>
                                 )}
@@ -358,7 +366,7 @@ export function TracksPage() {
 
                       {/* Tooling & Technologies */}
                       <div className="space-y-1.5">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
                           <Cpu size={12} />
                           Core Tooling & Technologies
                         </p>
@@ -366,7 +374,7 @@ export function TracksPage() {
                           {track.tooling.map((tool) => (
                             <span
                               key={tool.name}
-                              className="rounded border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] text-zinc-700"
+                              className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-700 font-medium"
                             >
                               {tool.name}
                             </span>
@@ -378,7 +386,7 @@ export function TracksPage() {
                     {/* Right Column: Visual, Career Outcomes, Prerequisites, CTAs */}
                     <div className="flex flex-col justify-between gap-4">
                       {/* Track Visual Preview */}
-                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-zinc-200">
+                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-slate-200/90 shadow-xs">
                         <SmartImage
                           src={track.localImage}
                           unsplashId={track.unsplashId}
@@ -392,62 +400,62 @@ export function TracksPage() {
                       </div>
 
                       {/* Market Insight & Industry Demand Card */}
-                      <div className="rounded-lg border border-zinc-200 bg-zinc-50/80 p-4">
-                        <div className="flex items-center justify-between border-b border-zinc-200/80 pb-2.5">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
+                        <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
                           <div className="flex items-center gap-2">
                             <span className="h-2 w-2 rounded-full bg-[var(--secondary)]" />
-                            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                            <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
                               Market Demand & Compensation
                             </span>
                           </div>
-                          <Badge variant="default" size="sm">
+                          <Badge variant="secondary" size="sm">
                             {track.marketDemand.rating} Demand
                           </Badge>
                         </div>
                         <div className="mt-3 grid grid-cols-2 gap-3">
                           <div>
-                            <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
+                            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
                               Hiring Trajectory
                             </p>
-                            <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.growthMetric}</p>
+                            <p className="mt-0.5 text-xs font-bold text-slate-900">{track.marketDemand.growthMetric}</p>
                           </div>
                           <div>
-                            <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
+                            <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
                               Est. Compensation
                             </p>
-                            <p className="mt-0.5 text-xs font-bold text-zinc-900">{track.marketDemand.salaryRange}</p>
+                            <p className="mt-0.5 text-xs font-bold text-slate-900">{track.marketDemand.salaryRange}</p>
                           </div>
                         </div>
                       </div>
 
                       {/* Career Outcomes Preview */}
-                      <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 space-y-2">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                          <GraduationCap size={13} className="text-zinc-700" />
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-2">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                          <GraduationCap size={13} className="text-slate-700" />
                           Target Career Outcomes
                         </p>
                         <div className="space-y-1.5">
                           {track.targetCareerRoles.map((role) => (
                             <div key={role.role} className="flex items-start justify-between gap-2 text-xs">
-                              <span className="font-medium text-zinc-800">{role.role}</span>
-                              <span className="text-zinc-500 text-[11px] font-mono">{role.averageSalary}</span>
+                              <span className="font-medium text-slate-800">{role.role}</span>
+                              <span className="text-slate-500 text-[11px] font-mono">{role.averageSalary}</span>
                             </div>
                           ))}
                         </div>
                       </div>
 
                       {/* Prerequisites snippet */}
-                      <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-3 space-y-1.5">
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                          <CheckCircle2 size={12} className="text-zinc-700" />
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1.5">
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                          <CheckCircle2 size={12} className="text-[var(--secondary)]" />
                           Skill Prerequisites
                         </p>
                         <ul className="space-y-1">
                           {track.prerequisites.map((req) => (
-                            <li key={req.skill} className="text-xs text-zinc-600 flex items-center gap-2">
-                              <span className="h-1.5 w-1.5 rounded-full bg-zinc-800 shrink-0" />
-                              <span className="font-medium text-zinc-800">{req.skill}</span>
-                              <span className="text-[10px] text-zinc-500">({req.level})</span>
+                            <li key={req.skill} className="text-xs text-slate-600 flex items-center gap-2">
+                              <span className="h-1.5 w-1.5 rounded-full bg-slate-800 shrink-0" />
+                              <span className="font-medium text-slate-800">{req.skill}</span>
+                              <span className="text-[10px] text-slate-500">({req.level})</span>
                             </li>
                           ))}
                         </ul>
@@ -457,24 +465,24 @@ export function TracksPage() {
                       <div className="flex flex-col sm:flex-row gap-2 pt-1">
                         <Link
                           to={`/tracks/${track.slug}`}
-                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-2xs"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900 shadow-xs"
                         >
-                          <span>Track Overview</span>
+                          <span>Overview</span>
                           <ArrowRight size={13} />
                         </Link>
 
                         <button
                           type="button"
                           onClick={() => setExpandedSyllabusId(isSyllabusExpanded ? null : track.id)}
-                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-xs font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-900 shadow-2xs"
+                          className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900 shadow-xs"
                         >
                           <BookOpen size={14} />
-                          <span>{isSyllabusExpanded ? "Hide Syllabus" : "View Syllabus"}</span>
+                          <span>{isSyllabusExpanded ? "Hide Syllabus" : "Syllabus"}</span>
                           {isSyllabusExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                         </button>
 
                         <Link to="/register" className="flex-1">
-                          <Button className="w-full font-medium" size="md">
+                          <Button className="w-full font-semibold shadow-xs" size="md">
                             Enroll in Track
                             <ArrowRight size={14} className="ml-1.5" />
                           </Button>
@@ -490,12 +498,12 @@ export function TracksPage() {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="mt-6 border-t border-zinc-200 pt-5 space-y-4"
+                      className="mt-6 border-t border-slate-200/80 pt-5 space-y-4"
                     >
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-base font-bold text-zinc-900">Full Modular Curriculum & Lessons</h3>
-                          <p className="text-xs text-zinc-500 mt-0.5">
+                          <h3 className="text-base font-bold text-slate-900">Full Modular Curriculum & Lessons</h3>
+                          <p className="text-xs text-slate-500 mt-0.5">
                             {track.modules.length} modules • Complete hands-on lesson breakdown
                           </p>
                         </div>
@@ -505,30 +513,34 @@ export function TracksPage() {
                         {track.modules.map((module, mIdx) => (
                           <div
                             key={module._id}
-                            className="rounded-lg border border-zinc-200 bg-zinc-50 p-3.5 space-y-2.5"
+                            className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-2.5"
                           >
                             <div className="flex items-start justify-between gap-2">
                               <div>
-                                <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-600">
+                                <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-600">
                                   Module {mIdx + 1}
                                 </span>
-                                <h4 className="text-xs font-semibold text-zinc-900 mt-0.5">{module.title}</h4>
+                                <h4 className="text-xs font-semibold text-slate-900 mt-0.5">{module.title}</h4>
                               </div>
-                              <Badge variant="outline" size="sm">
+                              <Badge
+                                variant="outline"
+                                size="sm"
+                                className="border-slate-200 text-slate-700 font-medium"
+                              >
                                 {module.lessons.length} lessons
                               </Badge>
                             </div>
-                            <p className="text-xs text-zinc-600 leading-relaxed">{module.description}</p>
-                            <div className="space-y-1 pt-1.5 border-t border-zinc-200">
+                            <p className="text-xs text-slate-600 leading-relaxed">{module.description}</p>
+                            <div className="space-y-1 pt-1.5 border-t border-slate-200/80">
                               {module.lessons.map((lesson, lIdx) => (
                                 <div
                                   key={lesson._id}
-                                  className="flex items-center justify-between text-xs py-1.5 px-2.5 rounded-md bg-white border border-zinc-200 shadow-2xs"
+                                  className="flex items-center justify-between text-xs py-1.5 px-2.5 rounded-lg bg-white border border-slate-200/80 shadow-2xs"
                                 >
-                                  <span className="text-zinc-800 truncate font-medium">
+                                  <span className="text-slate-800 truncate font-medium">
                                     {mIdx + 1}.{lIdx + 1} {lesson.title}
                                   </span>
-                                  <span className="text-xs text-[var(--secondary)] font-medium shrink-0 ml-2 font-mono">
+                                  <span className="text-xs text-[var(--secondary)] font-semibold shrink-0 ml-2 font-mono">
                                     +{lesson.xpReward} XP ({lesson.durationMinutes}m)
                                   </span>
                                 </div>
@@ -558,47 +570,47 @@ export function TracksPage() {
       </section>
 
       {/* Curriculum Pillars Callout */}
-      <section className="border-t border-zinc-200 bg-zinc-50/50 py-12 lg:py-14">
+      <section className="border-t border-slate-200/80 bg-slate-50/60 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
-            <h2 className="text-xl font-bold tracking-tight text-zinc-900 sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Why EthioTech Tracks Are Built Differently
             </h2>
-            <p className="text-xs md:text-sm text-zinc-600">
+            <p className="text-xs md:text-sm text-slate-600">
               Designed from the ground up for software engineering excellence, remote job readiness, and African
               innovation.
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 md:grid-cols-3">
-            <Card className="border-zinc-200 bg-white p-5 space-y-2.5 shadow-xs">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                 <Code2 size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-zinc-900">Production-Grade Capstones</h3>
-              <p className="text-xs leading-relaxed text-zinc-600">
+              <h3 className="text-sm font-semibold text-slate-900">Production-Grade Capstones</h3>
+              <p className="text-xs leading-relaxed text-slate-600">
                 No trivial to-do apps. You will build multi-vendor e-commerce gateways, telemetry dashboards, and ML
                 fraud scoring engines.
               </p>
             </Card>
 
-            <Card className="border-zinc-200 bg-white p-5 space-y-2.5 shadow-xs">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                 <Video size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-zinc-900">Live Socratic Mentorship</h3>
-              <p className="text-xs leading-relaxed text-zinc-600">
+              <h3 className="text-sm font-semibold text-slate-900">Live Socratic Mentorship</h3>
+              <p className="text-xs leading-relaxed text-slate-600">
                 Weekly live code breakdowns with experienced engineers working across high-growth startups and tech
                 teams.
               </p>
             </Card>
 
-            <Card className="border-zinc-200 bg-white p-5 space-y-2.5 shadow-xs">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-900 border border-zinc-200">
+            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                 <Award size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-zinc-900">Verified Skill Credentials</h3>
-              <p className="text-xs leading-relaxed text-zinc-600">
+              <h3 className="text-sm font-semibold text-slate-900">Verified Skill Credentials</h3>
+              <p className="text-xs leading-relaxed text-slate-600">
                 Earn cryptographically verifiable track completion certificates and build an undeniable public GitHub
                 portfolio.
               </p>
@@ -608,41 +620,41 @@ export function TracksPage() {
       </section>
 
       {/* CTA Footer Banner */}
-      <section className="relative overflow-hidden border-t border-zinc-200 bg-white py-10 lg:py-12 text-center">
+      <section className="relative overflow-hidden border-t border-slate-200/80 bg-white py-12 lg:py-16 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800">
-            <CheckCircle2 size={12} className="text-zinc-700" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
+            <CheckCircle2 size={12} className="text-[var(--secondary)]" />
             <span>100% Tuition-Free Open Education Model</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Ready to Begin Your Technical Journey?
           </h2>
-          <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Join hundreds of Ethiopian students and developers learning together, building real projects, and advancing
             their careers.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <Link to="/register">
-              <Button size="md" className="font-medium">
+              <Button size="md" className="font-semibold shadow-xs">
                 Enroll in a Track (Free)
                 <ArrowRight size={14} className="ml-1.5" />
               </Button>
             </Link>
             <Link to="/how-it-works">
-              <Button size="md" variant="outline">
+              <Button size="md" variant="secondary" className="font-semibold shadow-xs">
                 How It Works
               </Button>
             </Link>
           </div>
-          <div className="flex flex-wrap justify-center gap-4 pt-3 text-[11px] text-zinc-600">
+          <div className="flex flex-wrap justify-center gap-4 pt-3 text-[11px] text-slate-600 font-medium">
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-zinc-700" /> No credit card required
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> No credit card required
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-zinc-700" /> 6 Physical regional hubs
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> 6 Physical regional hubs
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-zinc-700" /> Verifiable digital certificates
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> Verifiable digital certificates
             </span>
           </div>
         </div>
