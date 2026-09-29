@@ -102,9 +102,12 @@ export function Tabs({
                 className={cn(
                   "relative flex-shrink-0 text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
                   variant === "pill"
-                    ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
-                    : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
-                  isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
+                    ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-white/[0.04]"
+                    : "pb-3 pt-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200",
+                  isActive &&
+                    (variant === "pill"
+                      ? "text-slate-900 font-semibold dark:text-white"
+                      : "text-primary font-semibold"),
                   triggerClassName,
                 )}
               >
@@ -113,7 +116,9 @@ export function Tabs({
                     layoutId={`active-indicator-${tabId}`}
                     className={cn(
                       "absolute inset-0 -z-10",
-                      variant === "pill" ? "rounded-lg bg-white shadow-xs" : "border-b-2 border-primary",
+                      variant === "pill"
+                        ? "rounded-lg bg-white shadow-xs dark:bg-slate-800 dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]"
+                        : "border-b-2 border-primary",
                     )}
                     style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -266,9 +271,10 @@ export function TabsTrigger({
       className={cn(
         "relative flex-shrink-0 text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
         variant === "pill"
-          ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
-          : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
-        isActive && (variant === "pill" ? "text-slate-900 font-semibold" : "text-primary font-semibold"),
+          ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-white/[0.04]"
+          : "pb-3 pt-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200",
+        isActive &&
+          (variant === "pill" ? "text-slate-900 font-semibold dark:text-white" : "text-primary font-semibold"),
         className,
       )}
       {...props}
@@ -278,7 +284,9 @@ export function TabsTrigger({
           layoutId={`active-indicator-${tabsId}`}
           className={cn(
             "absolute inset-0 -z-10",
-            variant === "pill" ? "rounded-lg bg-white shadow-xs" : "border-b-2 border-primary",
+            variant === "pill"
+              ? "rounded-lg bg-white shadow-xs dark:bg-slate-800 dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]"
+              : "border-b-2 border-primary",
           )}
           style={variant === "underline" ? { bottom: 0, height: "2px", top: "auto" } : undefined}
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
