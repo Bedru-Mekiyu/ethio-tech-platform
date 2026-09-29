@@ -21,10 +21,10 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 lg:py-14 lg:px-8">
       <div className="max-w-3xl">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">{title}</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">{title}</h1>
         <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">{intro}</p>
         {(primary || secondary) && (
-          <div className="mt-5 flex flex-wrap gap-2.5">
+          <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-2.5">
             {primary && (
               <Link to={primary.to}>
                 <Button size="sm">{primary.label}</Button>
@@ -41,10 +41,10 @@ function InfoPage({ title, intro, sections, primary, secondary }: PageProps) {
         )}
       </div>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {sections.map((section) => (
           <Card key={section.title} className="h-full border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-sm font-semibold text-slate-900">{section.title}</h2>
+            <h2 className="text-sm font-semibold text-slate-900 break-words">{section.title}</h2>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">{section.body}</p>
             {section.bullets && (
               <ul className="mt-3 space-y-1.5 text-xs text-slate-600">
@@ -121,7 +121,9 @@ export function ContactPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 lg:py-14 lg:px-8">
-      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Talk to the EthioTech team</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+        Talk to the EthioTech team
+      </h1>
       <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
         Learner support, mentor onboarding, partnerships, and school coordination.
       </p>

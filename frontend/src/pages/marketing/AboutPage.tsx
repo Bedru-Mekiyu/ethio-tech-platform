@@ -390,7 +390,7 @@ export function AboutPage() {
             <Zap size={13} className="text-[var(--secondary)]" />
             <span>The Ethiopian Software Engineering Movement</span>
           </div>
-          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900">
+          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
             Democratizing elite tech education with the <span className="text-primary">PISTELS</span> framework
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
@@ -398,14 +398,14 @@ export function AboutPage() {
               "EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects."}
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="font-medium">
+              <Button size="lg" className="font-medium w-full sm:w-auto">
                 Join as Student <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button variant="secondary" size="lg" className="font-medium">
+              <Button variant="secondary" size="lg" className="font-medium w-full sm:w-auto">
                 <Users className="mr-2 h-4 w-4 text-[var(--secondary)]" /> Become a Mentor
               </Button>
             </Link>
@@ -482,7 +482,7 @@ export function AboutPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
             <span>National Context & Strategic Imperative</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Unlocking Ethiopia’s <span className="text-primary">Demographic Dividend</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -513,7 +513,7 @@ export function AboutPage() {
         </div>
 
         {/* Regional Divide vs Scaled Solution */}
-        <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-center">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 lg:items-center">
           <div className="space-y-4">
             <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)]">
               <div className="flex items-center gap-2 text-amber-700">
@@ -609,7 +609,7 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
               <span>Core Pedagogical Backbone</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               The <span className="text-primary">PISTELS</span> Ideology
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -800,7 +800,7 @@ export function AboutPage() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.25 }}
       >
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] hover:-translate-y-0.5 transition-all">
             <div className="flex items-center justify-between">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
@@ -943,7 +943,7 @@ export function AboutPage() {
               })}
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2.5">
+            <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-2.5">
               <Link to="/how-it-works">
                 <Button variant="secondary" size="sm">
                   See the 5-Stage Journey <ArrowRight size={13} className="ml-1.5" />
@@ -971,7 +971,9 @@ export function AboutPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
             <span>Trajectory & Execution</span>
           </div>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Roadmap & Milestones</h2>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
+            Platform Roadmap & Milestones
+          </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal">
             Our multi-year blueprint scaling Ethiopia's digital software engineering infrastructure.
           </p>
@@ -1051,7 +1053,7 @@ export function AboutPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
               <span>Institutional Trust</span>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Governance & Open Impact Model
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 font-normal">
@@ -1060,7 +1062,7 @@ export function AboutPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[var(--shadow-card)]">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
                 <BookOpen size={18} />
@@ -1106,7 +1108,7 @@ export function AboutPage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 <span>Join the Movement</span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
                 Ready to transform your engineering trajectory?
               </h2>
               <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">

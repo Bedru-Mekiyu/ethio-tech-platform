@@ -290,7 +290,7 @@ export function SessionHistoryPage() {
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div
-          className="flex items-center rounded-xl border border-slate-200/80 bg-slate-100/80 p-1 w-fit"
+          className="flex flex-wrap items-center rounded-xl border border-slate-200/80 bg-slate-100/80 p-1 w-fit"
           role="tablist"
         >
           {(["schedule", "recordings"] as const).map((t) => (

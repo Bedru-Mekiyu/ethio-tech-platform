@@ -230,7 +230,7 @@ export function MentorRecruitmentPage() {
           <span>Senior Engineering Guild Membership</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-primary">Tech Leaders</span>
         </h1>
 
@@ -239,7 +239,7 @@ export function MentorRecruitmentPage() {
           bridge the digital divide, and discover top technical talent.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
             <Button size="md" className="font-semibold shadow-xs">
               Complete Mentor Application (5 Min)
@@ -287,7 +287,7 @@ export function MentorRecruitmentPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="secondary">Why Senior Engineers Join</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             High Impact. Zero Friction Mentoring.
           </h2>
           <p className="text-xs text-slate-600">
@@ -321,7 +321,7 @@ export function MentorRecruitmentPage() {
       <section id="onboarding-process" className="space-y-8 scroll-mt-16">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="secondary">Streamlined Process</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             The 4-Step Mentor Onboarding Journey
           </h2>
           <p className="text-xs text-slate-600">
@@ -330,7 +330,7 @@ export function MentorRecruitmentPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ONBOARDING_STEPS.map((step) => {
             const Icon = step.icon;
             return (
@@ -365,7 +365,9 @@ export function MentorRecruitmentPage() {
                 <span>Mentor Application</span>
               </div>
 
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Join the Guild</h2>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 break-words">
+                Join the Guild
+              </h2>
 
               <p className="text-xs leading-relaxed text-slate-600">
                 Tell us about your professional background, technical strengths, and preferred mentoring schedule.
@@ -672,12 +674,12 @@ export function MentorRecruitmentPage() {
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="secondary">Guild Voices</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Hear From Our Active Senior Mentors
           </h2>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {TESTIMONIALS.map((t, idx) => (
             <Card
               key={idx}
@@ -697,7 +699,9 @@ export function MentorRecruitmentPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Questions About Mentoring?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            Questions About Mentoring?
+          </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Reach out directly to our Guild Admissions Coordinator for questions regarding scheduling, honorariums, or
             curriculum tracks.

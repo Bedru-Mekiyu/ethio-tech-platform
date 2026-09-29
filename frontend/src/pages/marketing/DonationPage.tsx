@@ -207,7 +207,7 @@ export function DonationPage() {
           <span>Transparent Impact Philanthropy</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Empower Ethiopian Talent Through <span className="text-primary">Sovereign Education</span>
         </h1>
 
@@ -233,7 +233,7 @@ export function DonationPage() {
       <section id="donate-now" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
           <Badge variant="secondary">Direct Impact Model</Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Choose Your Student Sponsorship Tier
           </h2>
           <p className="text-xs text-slate-600">
@@ -293,7 +293,7 @@ export function DonationPage() {
         </div>
 
         {/* Tier Cards Grid */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SCHOLARSHIP_TIERS.map((tier) => {
             const isSelected = selectedTier === tier.id && customAmountUSD === "";
             const tierAmount = Math.round(tier.baseUSD * EXCHANGE_RATES[currency]);
@@ -689,7 +689,7 @@ export function DonationPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Hardware Drive
           </Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Donate Laptops & Regional Hub Equipment
           </h2>
           <p className="text-xs text-slate-600">
@@ -698,7 +698,7 @@ export function DonationPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ACCEPTED_HARDWARE.map((item, idx) => (
             <Card
               key={idx}
@@ -717,7 +717,7 @@ export function DonationPage() {
 
         {/* Hardware Donation Workflow Banner */}
         <Card className="rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 shadow-sm">
-          <div className="grid gap-6 lg:grid-cols-2 items-center">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 items-center">
             <div className="space-y-3.5">
               <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
                 Drop-off & International Freight
@@ -755,7 +755,7 @@ export function DonationPage() {
               <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-900">
                 Hardware Drive Impact to Date
               </h4>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div className="p-3 rounded-lg bg-white border border-slate-200/80 text-center shadow-xs">
                   <p className="text-xl font-bold text-[var(--secondary)] font-mono">320+</p>
                   <p className="text-[9px] uppercase text-slate-500 font-semibold mt-0.5">Laptops Deployed</p>
@@ -780,14 +780,16 @@ export function DonationPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Zero Overhead Waste
           </Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Transparent Fund Allocation</h2>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
+            Transparent Fund Allocation
+          </h2>
           <p className="text-xs text-slate-600">
             We publish quarterly audited reports. Our platform core is independently underwritten so that 100% of your
             gift directly fuels student learning.
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FUND_ALLOCATION.map((item, idx) => (
             <Card
               key={idx}
@@ -809,7 +811,7 @@ export function DonationPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Donor Honor Roll
           </Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Donor Recognition & Stewardship
           </h2>
           <p className="text-xs text-slate-600">
@@ -817,7 +819,7 @@ export function DonationPage() {
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {DONOR_RECOGNITION_TIERS.map((tier) => (
             <Card
               key={tier.name}
@@ -912,7 +914,7 @@ export function DonationPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-b from-slate-50/80 to-white p-8 sm:p-10 text-center space-y-5 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Have Questions About Institutional Grants?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">

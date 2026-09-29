@@ -260,7 +260,7 @@ export function MentorSessionsPage() {
                 <div
                   key={day ? day.toDateString() : `blank-${index}`}
                   className={cn(
-                    "min-h-[4.75rem] rounded-lg border p-1.5 transition-colors",
+                    "min-h-[4.75rem] rounded-lg border p-1.5 sm:p-2.5 transition-colors",
                     day ? "border-slate-200 bg-slate-50/50" : "border-transparent bg-transparent",
                     isToday && "border-slate-900 bg-slate-100 ring-1 ring-zinc-300",
                   )}

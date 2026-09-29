@@ -301,7 +301,7 @@ export function ProgressPage() {
       {tab === "overview" && (
         <div className="space-y-5">
           {/* 3 Metric Cards */}
-          <div className="grid gap-3.5 sm:grid-cols-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
             <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider">
@@ -543,26 +543,26 @@ export function ProgressPage() {
           {/* Milestones Road */}
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <h2 className="text-sm font-bold text-slate-900">Career Milestones Road</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-4 flex flex-col sm:flex-row gap-4">
               {MILESTONES.map((m) => {
                 const complete = userXp >= m.xp;
                 return (
                   <div
                     key={m.label}
                     className={cn(
-                      "rounded-xl border p-3.5 space-y-1.5 transition-all shadow-xs",
+                      "flex-1 min-w-0 rounded-xl border p-3.5 space-y-1.5 transition-all shadow-xs",
                       complete ? "border-blue-200/80 bg-blue-50/50" : "border-slate-200 bg-slate-50/60 opacity-70",
                     )}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-900">{m.label}</span>
+                      <span className="text-xs font-bold text-slate-900 truncate">{m.label}</span>
                       {complete ? (
-                        <CheckCircle2 size={15} className="text-[var(--secondary)]" />
+                        <CheckCircle2 size={15} className="shrink-0 text-[var(--secondary)]" />
                       ) : (
-                        <Rocket size={15} className="text-slate-600 font-medium" />
+                        <Rocket size={15} className="shrink-0 text-slate-600 font-medium" />
                       )}
                     </div>
-                    <p className="text-[11px] text-slate-600 font-medium leading-relaxed">{m.note}</p>
+                    <p className="text-[11px] text-slate-600 font-medium leading-relaxed break-words">{m.note}</p>
                     <p className="text-[10px] font-mono font-bold text-slate-600 font-medium">{m.xp} XP</p>
                   </div>
                 );
@@ -633,7 +633,7 @@ export function ProgressPage() {
                       </div>
                     </div>
 
-                    <div className="mt-4 flex items-center gap-2">
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                       <Button size="sm" className="gap-1 text-xs font-semibold shadow-xs whitespace-nowrap">
                         <Download size={12} />
                         Download Certificate PDF
@@ -677,11 +677,11 @@ export function ProgressPage() {
                     className="rounded-2xl border border-slate-200/80 bg-white p-5 space-y-3 shadow-sm hover:shadow-md transition-all"
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-600 font-medium">
+                      <div className="min-w-0">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-600 font-medium truncate block">
                           {p.trackTitle}
                         </span>
-                        <h3 className="mt-0.5 text-sm font-bold text-slate-900">{p.title}</h3>
+                        <h3 className="mt-0.5 text-sm font-bold text-slate-900 truncate">{p.title}</h3>
                       </div>
                       <Badge
                         variant="secondary"

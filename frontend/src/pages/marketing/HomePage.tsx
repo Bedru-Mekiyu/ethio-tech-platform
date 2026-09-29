@@ -536,7 +536,7 @@ export function HomePage() {
             </div>
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
-            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl">
+            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
               Building Ethiopia&apos;s Tech Future with <span className="text-primary">Live Mentorship</span>
             </h1>
 
@@ -547,7 +547,7 @@ export function HomePage() {
             </p>
 
             {/* Primary & Secondary Action CTAs */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-1">
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto gap-2 font-medium">
                   <span>Start Coding Free</span>
@@ -661,7 +661,7 @@ export function HomePage() {
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-12 lg:pb-14">
         <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] space-y-5">
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
             <div className="text-center">
               <p className="text-2xl font-bold tracking-tight text-slate-900">
                 {data ? (
@@ -748,7 +748,7 @@ export function HomePage() {
             <Layers size={13} className="text-[var(--secondary)]" />
             <span>Interactive Learning Stack</span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Everything You Need to Master <span className="text-primary">Production Software</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -815,7 +815,7 @@ export function HomePage() {
                   ))}
                 </div>
 
-                <div className="pt-2 flex flex-wrap gap-2.5">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-2.5">
                   <Link to="/register">
                     <Button size="sm">Experience It Now</Button>
                   </Link>
@@ -839,7 +839,7 @@ export function HomePage() {
                       <span className="text-[10px] font-semibold text-emerald-700">● 32ms Latency</span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <div className="aspect-video rounded-lg border border-slate-200/80 bg-white p-2.5 flex flex-col justify-between shadow-[var(--shadow-xs)]">
                         <span className="text-[10px] font-semibold text-slate-900">Dawit A. (Screen Sharing)</span>
                         <div className="flex items-center justify-between text-[10px] text-slate-500">
@@ -1009,7 +1009,7 @@ export function HomePage() {
             <Compass size={13} className="text-[var(--secondary)]" />
             <span>The PISTELS Framework</span>
           </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             7 Pillars Engineered for <span className="text-primary">Engineering Mastery</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -1124,7 +1124,7 @@ export function HomePage() {
               <BookOpen size={13} className="text-[var(--secondary)]" />
               <span>Job-Ready Curricula</span>
             </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Engineered for <span className="text-primary">High-Demand Tech Careers</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -1167,7 +1167,7 @@ export function HomePage() {
 
         {/* Tracks Grid */}
         <motion.div
-          className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -1273,7 +1273,7 @@ export function HomePage() {
               <Award size={13} className="text-[var(--secondary)]" />
               <span>World-Class Mentors</span>
             </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Learn From <span className="text-primary">Global & Local Leaders</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -1282,7 +1282,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="flex gap-2.5">
+          <div className="flex flex-col sm:flex-row gap-2.5">
             <Link to="/mentors">
               <Button variant="secondary" size="sm">
                 View All Mentors
@@ -1295,7 +1295,7 @@ export function HomePage() {
         </div>
 
         <motion.div
-          className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -1364,7 +1364,7 @@ export function HomePage() {
                 <span>Nationwide Physical Reach</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
                 6 Regional Hubs Powering <span className="text-primary">Equal Access</span>
               </h2>
 
@@ -1374,7 +1374,7 @@ export function HomePage() {
                 on-site community leads.
               </p>
 
-              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
                 {REGIONAL_HUBS.map((hub) => (
                   <div
                     key={hub.city}
@@ -1486,7 +1486,7 @@ export function HomePage() {
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 Applications Open
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
                 Ready to Build the Future of <span className="text-primary">Ethiopian Tech?</span>
               </h2>
               <p className="text-sm leading-relaxed text-slate-600 max-w-xl">
@@ -1495,7 +1495,7 @@ export function HomePage() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
+            <div className="flex flex-col sm:flex-row gap-3 sm:flex-wrap lg:justify-end">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto font-medium">
                   <span>Start Coding Free</span>

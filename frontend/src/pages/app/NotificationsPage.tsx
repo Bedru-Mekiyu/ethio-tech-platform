@@ -223,9 +223,9 @@ export function NotificationsPage() {
                             <Icon size={14} />
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-1.5">
-                              <p className="text-xs font-semibold text-slate-900">{notification.message}</p>
-                              <Badge variant="warning" size="sm">
+                            <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+                              <p className="text-xs font-semibold text-slate-900 truncate">{notification.message}</p>
+                              <Badge variant="warning" size="sm" className="shrink-0">
                                 New
                               </Badge>
                             </div>
@@ -267,9 +267,9 @@ export function NotificationsPage() {
                         <Icon size={14} />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <p className="text-xs font-semibold text-slate-900">{notification.message}</p>
-                          <Badge variant="warning" size="sm">
+                        <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+                          <p className="text-xs font-semibold text-slate-900 truncate">{notification.message}</p>
+                          <Badge variant="warning" size="sm" className="shrink-0">
                             New
                           </Badge>
                         </div>
@@ -311,8 +311,8 @@ export function NotificationsPage() {
             <div className="mt-4 space-y-2.5">
               {grouped.recent.length ? (
                 grouped.recent.map((notification) => (
-                  <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3">
-                    <p className="text-xs font-medium text-slate-800">{notification.message}</p>
+                  <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3 min-w-0">
+                    <p className="text-xs font-medium text-slate-800 truncate">{notification.message}</p>
                     <p className="mt-1 text-[11px] text-slate-600 font-medium">
                       {new Date(notification.createdAt).toLocaleString()}
                     </p>

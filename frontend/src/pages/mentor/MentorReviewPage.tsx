@@ -367,7 +367,7 @@ export function MentorReviewPage() {
 
                   {selectedSessionId && (
                     <div className="space-y-2.5 animate-in fade-in duration-300">
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 gap-1.5">
                         <div className="space-y-1">
                           <label className="text-[10px] text-slate-700 font-semibold uppercase">Participation</label>
                           <Select

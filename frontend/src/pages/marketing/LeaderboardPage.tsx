@@ -43,7 +43,7 @@ function LeaderboardSkeleton() {
         <Skeleton className="h-24 rounded-xl" />
         <Skeleton className="h-24 rounded-xl" />
       </div>
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         <Skeleton className="h-64 rounded-2xl" />
         <Skeleton className="h-72 rounded-2xl" />
         <Skeleton className="h-64 rounded-2xl" />
@@ -195,7 +195,7 @@ export function LeaderboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8 space-y-10">
       <div className="text-center space-y-3">
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Engineering Contributor Index
         </h1>
         <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600">
@@ -251,7 +251,7 @@ export function LeaderboardPage() {
       </div>
 
       {podium.length ? (
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           <div className="order-2 md:order-1">
             {podium[1] ? <RankCard entry={podium[1]} place={2} tab={tab} maxValue={maxValue} /> : null}
           </div>
@@ -280,7 +280,7 @@ export function LeaderboardPage() {
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.2em] text-slate-500 font-semibold">Standings</p>
-              <h2 className="text-xl font-bold text-slate-900">Ranked Engineering Directory</h2>
+              <h2 className="text-xl font-bold text-slate-900 break-words">Ranked Engineering Directory</h2>
             </div>
             <Link
               to={tab === "students" ? "/register" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"}
@@ -343,10 +343,11 @@ export function LeaderboardPage() {
                             }
                             role={tab === "mentors" ? "mentor" : "student"}
                             size="sm"
+                            className="shrink-0"
                           />
-                          <div>
-                            <p className="font-semibold text-slate-900">{title}</p>
-                            <p className="text-xs text-slate-500">
+                          <div className="min-w-0">
+                            <p className="font-semibold text-slate-900 truncate">{title}</p>
+                            <p className="text-xs text-slate-500 truncate">
                               {tab === "students"
                                 ? getRankTitle((row as LeaderboardEntry).level ?? 1)
                                 : tab === "mentors"

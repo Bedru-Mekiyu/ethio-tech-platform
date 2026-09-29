@@ -510,7 +510,7 @@ export function CalendarPage() {
       {/* View Switcher & Period Controls */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-3.5">
         {/* View Mode Tabs */}
-        <div className="flex items-center rounded-xl border border-slate-200/80 bg-slate-100/70 p-1 shadow-xs">
+        <div className="flex flex-wrap items-center rounded-xl border border-slate-200/80 bg-slate-100/70 p-1 shadow-xs">
           <button
             type="button"
             onClick={() => setViewMode("month")}
@@ -613,7 +613,10 @@ export function CalendarPage() {
             {/* Days grid */}
             <div className="mt-3.5 grid grid-cols-7 gap-2">
               {Array.from({ length: firstDay }).map((_, i) => (
-                <div key={`empty-${i}`} className="h-20 rounded-xl bg-transparent opacity-20" />
+                <div
+                  key={`empty-${i}`}
+                  className="min-h-[40px] sm:min-h-[64px] lg:min-h-[80px] rounded-xl bg-transparent opacity-20"
+                />
               ))}
 
               {Array.from({ length: daysInMonth }).map((_, i) => {
@@ -630,7 +633,7 @@ export function CalendarPage() {
                     type="button"
                     onClick={() => setSelectedDate(dateKey)}
                     className={cn(
-                      "group relative flex h-20 sm:h-24 flex-col justify-between rounded-xl border p-2 text-left transition-all",
+                      "group relative flex min-h-[40px] sm:min-h-[64px] lg:min-h-[80px] flex-col justify-between rounded-xl border p-2 text-left transition-all",
                       isSelected
                         ? "border-slate-900 bg-slate-100/80 shadow-xs ring-1 ring-slate-900"
                         : isToday

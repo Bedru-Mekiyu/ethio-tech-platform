@@ -86,7 +86,7 @@ function MentorSkeleton() {
         <Skeleton className="h-28 rounded-2xl" />
         <Skeleton className="h-28 rounded-2xl" />
       </div>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         <Skeleton className="h-96 rounded-2xl" />
         <Skeleton className="h-96 rounded-2xl" />
         <Skeleton className="h-96 rounded-2xl" />
@@ -275,7 +275,7 @@ export function MentorsPage() {
           <span>Global Ethiopian Engineering Guild</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Learn From Senior Engineers Shaping <span className="text-primary">Global & African Tech</span>
         </h1>
 
@@ -284,7 +284,7 @@ export function MentorsPage() {
           1-on-1 guidance, live architectural reviews, and career sponsorship.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <Link to="/mentor-recruitment">
             <Button size="md" className="font-semibold shadow-xs">
               Apply to Become a Mentor
@@ -357,7 +357,7 @@ export function MentorsPage() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7 space-y-4">
             <Badge variant="secondary">Structured Learning</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               How Mentorship Works at EthioTech
             </h2>
             <p className="text-xs leading-relaxed text-slate-600">
@@ -365,7 +365,7 @@ export function MentorsPage() {
               leads across Silicon Valley, Europe, and Pan-Africa. Every interaction is structured around real
               codebases, asynchronous GitHub PR feedback, and high-leverage architectural review.
             </p>
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs">
                 <p className="text-xs font-bold text-slate-900">Weekly Office Hours</p>
                 <p className="text-[11px] text-slate-500 mt-0.5">
@@ -398,7 +398,7 @@ export function MentorsPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {MENTORSHIP_PILLARS.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
@@ -424,7 +424,7 @@ export function MentorsPage() {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <Badge variant="secondary">Directory</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1 break-words">
               Browse the Mentor Directory
             </h2>
             <p className="text-xs text-slate-600 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
@@ -486,7 +486,7 @@ export function MentorsPage() {
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Featured Senior Mentors
                 </h3>
-                <div className="grid gap-4 md:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {featuredMentors.map((mentor) => (
                     <MentorCard key={mentor._id} mentor={mentor} featured />
                   ))}
@@ -499,7 +499,7 @@ export function MentorsPage() {
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   All Verified Mentors ({filteredMentors.length})
                 </h3>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {discoverMentors.map((mentor) => (
                     <MentorCard key={mentor._id} mentor={mentor} />
                   ))}
@@ -514,7 +514,7 @@ export function MentorsPage() {
       <Card className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
           <Badge variant="secondary">Join the Guild</Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Are You a Senior Engineer or Tech Leader?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">

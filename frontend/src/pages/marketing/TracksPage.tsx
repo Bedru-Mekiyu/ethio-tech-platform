@@ -135,7 +135,7 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.15 }}
-              className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 sm:grid-cols-4"
             >
               <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
                 <p className="text-xl font-bold text-slate-900">6</p>
@@ -262,7 +262,7 @@ export function TracksPage() {
 
                       {/* Header */}
                       <div className="space-y-1">
-                        <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight break-words">
                           <Link to={`/tracks/${track.slug}`} className="hover:text-primary transition-colors">
                             {track.title}
                           </Link>
@@ -412,7 +412,7 @@ export function TracksPage() {
                             {track.marketDemand.rating} Demand
                           </Badge>
                         </div>
-                        <div className="mt-3 grid grid-cols-2 gap-3">
+                        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
                             <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
                               Hiring Trajectory
@@ -509,7 +509,7 @@ export function TracksPage() {
                         </div>
                       </div>
 
-                      <div className="grid gap-3 md:grid-cols-2">
+                      <div className="grid gap-3 sm:grid-cols-2">
                         {track.modules.map((module, mIdx) => (
                           <div
                             key={module._id}
@@ -573,7 +573,7 @@ export function TracksPage() {
       <section className="border-t border-slate-200/80 bg-slate-50/60 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Why EthioTech Tracks Are Built Differently
             </h2>
             <p className="text-xs md:text-sm text-slate-600">
@@ -582,7 +582,7 @@ export function TracksPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
                 <Code2 size={18} />
@@ -626,14 +626,14 @@ export function TracksPage() {
             <CheckCircle2 size={12} className="text-[var(--secondary)]" />
             <span>100% Tuition-Free Open Education Model</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Ready to Begin Your Technical Journey?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
             Join hundreds of Ethiopian students and developers learning together, building real projects, and advancing
             their careers.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
             <Link to="/register">
               <Button size="md" className="font-semibold shadow-xs">
                 Enroll in a Track (Free)

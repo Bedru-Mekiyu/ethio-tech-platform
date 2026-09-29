@@ -451,7 +451,7 @@ export function HowItWorksPage() {
             <Zap size={13} className="text-[var(--secondary)]" />
             <span>The 5-Stage Engineering Engine</span>
           </div>
-          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900">
+          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
             How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
@@ -459,16 +459,16 @@ export function HowItWorksPage() {
             and verified career placement. Explore the full architecture of how EthioTech works.
           </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
-              <Button size="lg" className="font-medium">
+              <Button size="lg" className="font-medium w-full sm:w-auto">
                 Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button
               variant="secondary"
               size="lg"
-              className="font-medium"
+              className="font-medium w-full sm:w-auto"
               onClick={() => {
                 const el = document.getElementById("learner-lifecycle");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -544,7 +544,7 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
               <span>Step-by-Step Flow</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               The 5-Stage Learner Lifecycle
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -554,7 +554,7 @@ export function HowItWorksPage() {
           </div>
 
           {/* Stepper Stage Selector */}
-          <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-5 md:gap-3">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:grid-cols-5 md:gap-3">
             {LIFECYCLE_STAGES.map((stage, idx) => {
               const isActive = idx === activeStageIndex;
               const Icon = stage.icon;
@@ -735,7 +735,9 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
             <span>Ecosystem Experience</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">What It Looks Like For You</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            What It Looks Like For You
+          </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
           </p>
@@ -848,7 +850,7 @@ export function HowItWorksPage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
               <span>Curriculum Architecture</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Choose Your Engineering Pathway
             </h2>
             <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -856,7 +858,7 @@ export function HowItWorksPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             {(featuredTracks.length > 0
               ? featuredTracks
               : [
@@ -937,7 +939,9 @@ export function HowItWorksPage() {
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            Frequently Asked Questions
+          </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
             Everything you need to know about our pedagogy, time requirements, mentorship, and certification.
           </p>
@@ -1029,7 +1033,7 @@ export function HowItWorksPage() {
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-slate-700 mb-2.5 shadow-xs">
                 <span>Start Today</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
                 Ready to accelerate your software engineering journey?
               </h2>
               <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">

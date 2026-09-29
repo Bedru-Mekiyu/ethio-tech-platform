@@ -77,7 +77,7 @@ export function MarketingTrackDetailPage() {
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{track.title}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl break-words">{track.title}</h1>
             <p className="mt-3 text-lg text-slate-600 leading-relaxed max-w-2xl">{track.tagline}</p>
           </div>
 
@@ -132,7 +132,7 @@ export function MarketingTrackDetailPage() {
 
       {/* ── Description ── */}
       <div className="max-w-3xl">
-        <h2 className="text-lg font-bold text-slate-900 mb-3">About This Track</h2>
+        <h2 className="text-lg font-bold text-slate-900 mb-3 break-words">About This Track</h2>
         <p className="text-sm text-slate-600 leading-relaxed">{track.description}</p>
       </div>
 
@@ -179,7 +179,7 @@ export function MarketingTrackDetailPage() {
         <div>
           <div className="flex items-center gap-3 mb-6">
             <BookOpen size={18} className="text-slate-900" />
-            <h2 className="text-lg font-bold text-slate-900">Curriculum Modules</h2>
+            <h2 className="text-lg font-bold text-slate-900 break-words">Curriculum Modules</h2>
             <Badge variant="outline" size="sm" className="border-slate-200 text-slate-700 font-medium">
               {track.modules.length} modules
             </Badge>
@@ -216,7 +216,7 @@ export function MarketingTrackDetailPage() {
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Cpu size={18} className="text-slate-900" />
-            <h2 className="text-lg font-bold text-slate-900">Tools & Technologies</h2>
+            <h2 className="text-lg font-bold text-slate-900 break-words">Tools & Technologies</h2>
           </div>
           <div className="flex flex-wrap gap-2">
             {track.tooling.map((tool) => (
@@ -236,7 +236,7 @@ export function MarketingTrackDetailPage() {
         <div>
           <div className="flex items-center gap-3 mb-4">
             <Users size={18} className="text-slate-900" />
-            <h2 className="text-lg font-bold text-slate-900">Career Outcomes</h2>
+            <h2 className="text-lg font-bold text-slate-900 break-words">Career Outcomes</h2>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {track.targetCareerRoles.map((role) => (
@@ -269,7 +269,7 @@ export function MarketingTrackDetailPage() {
         <div>
           <div className="flex items-center gap-3 mb-4">
             <CheckCircle2 size={18} className="text-[var(--secondary)]" />
-            <h2 className="text-lg font-bold text-slate-900">Prerequisites</h2>
+            <h2 className="text-lg font-bold text-slate-900 break-words">Prerequisites</h2>
           </div>
           <div className="space-y-2">
             {track.prerequisites.map((prereq) => (
@@ -301,7 +301,7 @@ export function MarketingTrackDetailPage() {
 
       {/* ── Final CTA ── */}
       <div className="rounded-2xl border border-slate-200/90 bg-white p-8 sm:p-10 text-center space-y-4 shadow-sm">
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Ready to start your journey?</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 break-words">Ready to start your journey?</h2>
         <p className="text-sm text-slate-600 max-w-md mx-auto">
           Join thousands of Ethiopian and East African students building their careers in technology.
         </p>

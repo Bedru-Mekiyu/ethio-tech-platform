@@ -214,7 +214,7 @@ export function PartnersPage() {
           <span>Institutional Alliances & Ecosystem</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Empowering Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
         </h1>
 
@@ -223,7 +223,7 @@ export function PartnersPage() {
           sovereign, world-class technical workforce across Ethiopia.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <a href="#partner-inquiry">
             <Button size="md" className="font-semibold shadow-xs">
               Initiate Partnership
@@ -242,7 +242,7 @@ export function PartnersPage() {
         </div>
 
         {/* Verified Capability Anchors */}
-        <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6 sm:grid-cols-4">
           <Card className="rounded-xl border border-slate-200/80 bg-white p-4 text-center shadow-sm hover:shadow-md transition-shadow">
             <p className="text-xl font-bold text-slate-900 font-mono md:text-2xl">6</p>
             <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Regional Hubs</p>
@@ -272,7 +272,7 @@ export function PartnersPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Collaboration Pillars
           </Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Tailored Frameworks for Every Stakeholder
           </h2>
           <p className="text-xs text-slate-600">
@@ -400,13 +400,15 @@ export function PartnersPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Structured Delivery
           </Badge>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">The Partnership Lifecycle</h2>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 break-words">
+            The Partnership Lifecycle
+          </h2>
           <p className="text-xs text-slate-600">
             A frictionless, transparent 4-phase framework designed for rapid execution and accountable outcomes.
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {partnershipProcess.map((step) => {
             const Icon = step.icon;
             return (
@@ -436,13 +438,15 @@ export function PartnersPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Institutional Governance
           </Badge>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Core Collaboration Standards</h2>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
+            Core Collaboration Standards
+          </h2>
           <p className="text-xs text-slate-600">
             Engineered for institutional accountability, reproducible metrics, and transparent talent development.
           </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {partnerPrinciples.map((p, idx) => {
             const Icon = p.icon;
             return (
@@ -473,7 +477,9 @@ export function PartnersPage() {
                 <span>Institutional Relations</span>
               </div>
 
-              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Institutional Partnership</h2>
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
+                Institutional Partnership
+              </h2>
 
               <p className="text-xs leading-relaxed text-slate-600">
                 Submit your institutional requirements. Our Institutional Alliances team will prepare a tailored
@@ -548,7 +554,7 @@ export function PartnersPage() {
                     <Label className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                       Partnership Category
                     </Label>
-                    <div className="grid grid-cols-2 gap-1.5 mt-1.5 sm:grid-cols-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-1.5 sm:grid-cols-4">
                       {partnerFrameworks.map((f) => (
                         <button
                           key={f.id}
@@ -657,10 +663,12 @@ export function PartnersPage() {
           <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
             Institutional FAQ
           </Badge>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Frequently Asked Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            Frequently Asked Questions
+          </h2>
         </div>
 
-        <div className="grid gap-3.5 md:grid-cols-2">
+        <div className="grid gap-3.5 sm:grid-cols-2">
           {faqs.map((faq, idx) => (
             <Card
               key={idx}
@@ -676,7 +684,7 @@ export function PartnersPage() {
       {/* ─── Bottom CTA Strip ─── */}
       <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-b from-slate-50/80 to-white p-8 sm:p-10 text-center space-y-5 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Institutional Technical Collaboration
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">

@@ -218,7 +218,7 @@ function HubsSkeleton() {
         <Skeleton className="h-24 rounded-2xl" />
       </div>
       <Skeleton className="h-[460px] rounded-3xl" />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <Skeleton className="h-80 rounded-2xl" />
         <Skeleton className="h-80 rounded-2xl" />
         <Skeleton className="h-80 rounded-2xl" />
@@ -395,7 +395,7 @@ export function HubsPage() {
           <span>Regional Physical Tech Infrastructure</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Physical Tech Hubs <span className="text-primary">Across Ethiopia</span>
         </h1>
 
@@ -404,7 +404,7 @@ export function HubsPage() {
           caching servers, and check in physically to earn XP across 6 national innovation corridors.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <Button
             size="md"
             className="font-semibold shadow-xs"
@@ -430,7 +430,7 @@ export function HubsPage() {
         </div>
 
         {/* Key Metrics Strip */}
-        <div className="grid grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
           <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
             <p className="text-xl font-bold text-slate-900 font-mono">6</p>
             <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Regional Hubs</p>
@@ -489,7 +489,7 @@ export function HubsPage() {
         <section className="space-y-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
             <Badge variant="secondary">Arrival Verification</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Digital Hub Passes & Physical Check-In
             </h2>
             <p className="text-xs text-slate-600">
@@ -559,7 +559,7 @@ export function HubsPage() {
                 </Button>
               </Card>
             ) : (
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {myBookings.map((booking) => {
                   const isCheckedIn = booking.status === "checked_in";
 
@@ -661,7 +661,7 @@ export function HubsPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <Badge variant="secondary">Regional Network</Badge>
-                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1">
+                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1 break-words">
                   Ethiopian Innovation Corridors
                 </h2>
                 <p className="text-xs text-slate-600 mt-0.5">
@@ -702,7 +702,7 @@ export function HubsPage() {
             {/* Map Surface + Interactive Hub Details Grid */}
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
               {/* Map Surface */}
-              <Card className="relative min-h-[440px] overflow-hidden rounded-2xl border-slate-200/80 bg-white p-4 shadow-sm">
+              <Card className="relative min-h-[280px] sm:min-h-[440px] overflow-hidden rounded-2xl border-slate-200/80 bg-white p-4 shadow-sm">
                 <div className="relative h-[400px] w-full rounded-xl border border-slate-200 bg-slate-50 overflow-hidden">
                   <div className="absolute top-3 left-3 rounded-lg border border-slate-200 bg-white/95 px-3 py-1 text-[10px] font-mono font-semibold text-slate-700 shadow-xs backdrop-blur-xs">
                     ETHIOPIA MESH CORRIDOR · 6 NODES ONLINE
@@ -857,7 +857,7 @@ export function HubsPage() {
               </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filteredHubs.map((hub) => (
                 <Card
                   key={hub.id}
@@ -884,7 +884,7 @@ export function HubsPage() {
                     </p>
 
                     {/* Workstation & Capacity Counters */}
-                    <div className="grid grid-cols-2 gap-2 pt-0.5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
                       <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center">
                         <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           Workstations
@@ -933,7 +933,7 @@ export function HubsPage() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="pt-4 grid grid-cols-2 gap-2">
+                  <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <Button
                       variant="secondary"
                       size="sm"
@@ -965,7 +965,7 @@ export function HubsPage() {
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-6 space-y-4">
                 <Badge variant="secondary">Resilient Offline Design</Badge>
-                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
                   Engineered for High-Reliability Local Operations
                 </h2>
                 <p className="text-xs leading-relaxed text-slate-600">
@@ -973,7 +973,7 @@ export function HubsPage() {
                   with dual-fiber backhauls, automated solar-battery backup systems, local mirror caches for package
                   registries, and high-density developer workstations.
                 </p>
-                <div className="grid grid-cols-2 gap-3 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs">
                     <p className="text-xs font-bold text-slate-900">Local LAN Mirrors</p>
                     <p className="text-[11px] text-slate-500 mt-0.5">
@@ -1006,7 +1006,7 @@ export function HubsPage() {
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {OFFLINE_SYNC_PILLARS.map((pillar, idx) => {
                 const Icon = pillar.icon;
                 return (
@@ -1376,7 +1376,7 @@ export function HubsPage() {
       <Card className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
           <Badge variant="secondary">Ecosystem Partnership</Badge>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mt-1 break-words">
             Want to Host a Community Hub in Your City?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
