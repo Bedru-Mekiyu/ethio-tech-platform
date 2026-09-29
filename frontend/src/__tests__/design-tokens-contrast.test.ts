@@ -200,3 +200,167 @@ describe("Design System Contrast & WCAG AA Automated Test Suite", () => {
     });
   });
 });
+
+// ─── Genuine Dark Theme Token Definitions ───
+export const DARK_PALETTE_TOKENS = {
+  surfaces: {
+    canvas: "#090d16",
+    elevated: "#111827",
+    card: "#111827",
+    cardHover: "#172033",
+    surfaceStrong: "#1e293b",
+    input: "#0b0f19",
+  },
+  typography: {
+    primary: "#f8fafc",
+    secondary: "#cbd5e1",
+    muted: "#94a3b8",
+    subtle: "#64748b",
+    inverse: "#0f172a",
+  },
+  semantics: {
+    success: "#22c55e",
+    warning: "#f59e0b",
+    danger: "#ef4444",
+  },
+  palette1_navy: {
+    name: "Tech Crimson & Electric Blue (Dark)",
+    primary: "#ef4444",
+    primaryHover: "#dc2626",
+    secondary: "#3b82f6",
+    secondaryHover: "#2563eb",
+    indicator: "#60a5fa",
+  },
+  palette2_teal: {
+    name: "Tech Crimson & Slate Teal (Dark)",
+    primary: "#ef4444",
+    primaryHover: "#dc2626",
+    secondary: "#14b8a6",
+    secondaryHover: "#0d9488",
+    indicator: "#2dd4bf",
+  },
+  palette3_amber: {
+    name: "Rose Crimson & Warm Amber (Dark)",
+    primary: "#f43f5e",
+    primaryHover: "#e11d48",
+    secondary: "#f59e0b",
+    secondaryHover: "#d97706",
+    indicator: "#fbbf24",
+  },
+};
+
+describe("Dark Theme Contrast & WCAG AA Automated Verification Suite", () => {
+  const { surfaces, typography, semantics, palette1_navy, palette2_teal, palette3_amber } = DARK_PALETTE_TOKENS;
+
+  describe("Dark Text Hierarchy against Dark Surfaces (WCAG AA >= 4.5:1, AAA >= 7.0:1)", () => {
+    it("primary text meets WCAG AAA on dark canvas (#090d16)", () => {
+      const ratio = getContrastRatio(typography.primary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(7.0);
+      expect(ratio).toBeGreaterThanOrEqual(17.0); // #f8fafc on #090d16 is ~17.7:1
+    });
+
+    it("primary text meets WCAG AAA on elevated card surface (#111827)", () => {
+      const ratio = getContrastRatio(typography.primary, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(7.0);
+      expect(ratio).toBeGreaterThanOrEqual(15.0); // #f8fafc on #111827 is ~15.9:1
+    });
+
+    it("secondary text meets WCAG AAA on dark canvas", () => {
+      const ratio = getContrastRatio(typography.secondary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(7.0);
+      expect(ratio).toBeGreaterThanOrEqual(11.0); // #cbd5e1 on #090d16 is ~12.3:1
+    });
+
+    it("secondary text meets WCAG AAA on elevated card surface", () => {
+      const ratio = getContrastRatio(typography.secondary, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(7.0);
+      expect(ratio).toBeGreaterThanOrEqual(11.0); // #cbd5e1 on #111827 is ~11.1:1
+    });
+
+    it("muted text meets WCAG AA on dark canvas", () => {
+      const ratio = getContrastRatio(typography.muted, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(7.0); // #94a3b8 on #090d16 is ~7.2:1
+    });
+
+    it("muted text meets WCAG AA on elevated card surface", () => {
+      const ratio = getContrastRatio(typography.muted, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(6.0); // #94a3b8 on #111827 is ~6.4:1
+    });
+  });
+
+  describe("Dark Semantic Status Indicators (WCAG AA >= 4.5:1 on Dark Surfaces)", () => {
+    it("success green meets WCAG AA on elevated card surface", () => {
+      const ratio = getContrastRatio(semantics.success, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(7.0); // #22c55e on #111827 is 7.79:1 (WCAG AAA)
+    });
+
+    it("warning amber meets WCAG AA on elevated card surface", () => {
+      const ratio = getContrastRatio(semantics.warning, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(8.0); // #f59e0b on #111827 is ~8.3:1
+    });
+
+    it("danger rose meets WCAG AA on elevated card surface", () => {
+      const ratio = getContrastRatio(semantics.danger, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(4.5); // #ef4444 on #111827 is ~4.97:1
+    });
+  });
+
+  describe("Brand Accent Tuning for Dark Mode (WCAG AA >= 4.5:1)", () => {
+    it("calibrated Tech Crimson meets WCAG AA on dark canvas", () => {
+      const ratio = getContrastRatio(palette1_navy.primary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(5.0); // #ef4444 on #090d16 is 5.16:1 (WCAG AA)
+    });
+
+    it("calibrated Tech Crimson meets WCAG AA on elevated card surface", () => {
+      const ratio = getContrastRatio(palette1_navy.primary, surfaces.elevated);
+      expect(ratio).toBeGreaterThanOrEqual(4.5); // #ef4444 on #111827 is ~4.97:1
+    });
+
+    it("electric blue secondary meets WCAG AA on dark canvas", () => {
+      const ratio = getContrastRatio(palette1_navy.secondary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(5.0); // #3b82f6 on #090d16 is ~5.32:1
+    });
+
+    it("slate teal secondary meets WCAG AA on dark canvas", () => {
+      const ratio = getContrastRatio(palette2_teal.secondary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(7.0); // #14b8a6 on #090d16 is ~7.65:1
+    });
+
+    it("warm amber secondary meets WCAG AA on dark canvas", () => {
+      const ratio = getContrastRatio(palette3_amber.secondary, surfaces.canvas);
+      expect(ratio).toBeGreaterThanOrEqual(4.5);
+      expect(ratio).toBeGreaterThanOrEqual(8.0); // #f59e0b on #090d16 is ~9.2:1
+    });
+  });
+});
+
+describe("Light Theme Immutability Guard (Zero Regression Guarantee)", () => {
+  it("light theme surfaces remain byte-for-byte unchanged", () => {
+    expect(PALETTE_TOKENS.surfaces.base).toBe("#ffffff");
+    expect(PALETTE_TOKENS.surfaces.elevated).toBe("#f8fafc");
+    expect(PALETTE_TOKENS.surfaces.card).toBe("#ffffff");
+    expect(PALETTE_TOKENS.surfaces.cardHover).toBe("#f1f5f9");
+  });
+
+  it("light theme typography tokens remain byte-for-byte unchanged", () => {
+    expect(PALETTE_TOKENS.typography.primary).toBe("#0f172a");
+    expect(PALETTE_TOKENS.typography.secondary).toBe("#475569");
+    expect(PALETTE_TOKENS.typography.muted).toBe("#64748b");
+    expect(PALETTE_TOKENS.typography.inverse).toBe("#ffffff");
+  });
+
+  it("light theme brand accent tokens remain byte-for-byte unchanged", () => {
+    expect(PALETTE_TOKENS.palette1_navy.primary).toBe("#b91c1c");
+    expect(PALETTE_TOKENS.palette1_navy.primaryHover).toBe("#991b1b");
+    expect(PALETTE_TOKENS.palette1_navy.secondary).toBe("#1e3a8a");
+    expect(PALETTE_TOKENS.palette1_navy.secondaryHover).toBe("#172554");
+    expect(PALETTE_TOKENS.palette1_navy.indicator).toBe("#1e40af");
+  });
+});
