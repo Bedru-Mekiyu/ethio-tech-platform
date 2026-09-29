@@ -19,6 +19,7 @@ import {
   type MentorApplication,
 } from "@/services/mentorApplicationService";
 import { MentorActionConfirmDialog } from "@/components/admin/MentorActionConfirmDialog";
+import { cn } from "@/lib/utils";
 import {
   ChevronLeft,
   ChevronRight,
@@ -175,6 +176,7 @@ interface ApplicationCardProps {
   onOpenInterview: (app: MentorApplication) => void;
   reviewNotes: string;
   onReviewNotesChange: (id: string, value: string) => void;
+  viewMode?: "compact" | "expanded";
 }
 
 function ApplicationCard({
@@ -189,8 +191,12 @@ function ApplicationCard({
   onOpenInterview,
   reviewNotes,
   onReviewNotesChange,
+  viewMode = "compact",
 }: ApplicationCardProps) {
   const user = useAuthStore((s) => s.user);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const expanded = viewMode === "expanded" || isExpanded;
+
   const isPending = application.status === "pending_review";
   const canAct =
     (application.status === "pending_review" || application.status === "changes_requested") &&
@@ -199,27 +205,29 @@ function ApplicationCard({
 
   return (
     <Card
-      className={`group relative space-y-4 rounded-2xl border p-4 sm:p-5 transition-all duration-200 shadow-xs ${
+      className={`group relative rounded-2xl border transition-all duration-200 shadow-xs ${
+        expanded ? "p-4 sm:p-5 space-y-4" : "p-3 sm:p-4 space-y-2.5"
+      } ${
         selected
           ? "border-slate-900 bg-slate-50 ring-1 ring-slate-900/20"
           : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/40"
       }`}
     >
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-start gap-3 min-w-0 flex-1">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0 flex-1">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onToggleSelect(application._id);
             }}
-            className="mt-1 text-slate-400 hover:text-slate-900 transition-colors shrink-0"
+            className="text-slate-400 hover:text-slate-900 transition-colors shrink-0"
             aria-label={selected ? "Deselect applicant" : "Select applicant"}
           >
             {selected ? (
-              <CheckCircle2 size={20} className="text-slate-900" />
+              <CheckCircle2 size={18} className="text-slate-900" />
             ) : (
-              <Square size={20} className="text-slate-300 hover:text-slate-400" />
+              <Square size={18} className="text-slate-300 hover:text-slate-400" />
             )}
           </button>
 
@@ -231,193 +239,230 @@ function ApplicationCard({
             className="cursor-pointer min-w-0 flex-1"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
+              <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-primary transition-colors truncate">
                 {application.fullName}
               </h3>
-              <Badge variant={rubric.variant} className="text-[11px] gap-1">
-                <Sparkles size={11} /> {rubric.percentage}% Match
+              <Badge variant={rubric.variant} className="text-[10px] gap-1 px-1.5 py-0.5">
+                <Sparkles size={10} /> {rubric.percentage}% Match
+              </Badge>
+              <Badge
+                variant={
+                  application.status === "approved"
+                    ? "outline"
+                    : application.status === "rejected"
+                      ? "warning"
+                      : application.status === "changes_requested"
+                        ? "outline"
+                        : "default"
+                }
+                className="text-[10px] px-1.5 py-0.5"
+              >
+                {application.status.replace(/_/g, " ")}
               </Badge>
             </div>
-            <p className="text-xs sm:text-sm text-slate-700 font-medium">
+            <p className="text-xs text-slate-700 font-medium truncate mt-0.5">
               {application.currentRole}
               {application.currentCompany ? ` • ${application.currentCompany}` : ""}
+              <span className="text-slate-400 font-normal"> · {application.yearsExperience ?? 0} yrs exp</span>
             </p>
-            <p className="text-xs text-slate-600 mt-0.5">{application.email}</p>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge
-            variant={
-              application.status === "approved"
-                ? "outline"
-                : application.status === "rejected"
-                  ? "warning"
-                  : application.status === "changes_requested"
-                    ? "outline"
-                    : "default"
-            }
-          >
-            {application.status.replace(/_/g, " ")}
-          </Badge>
+        {/* Quick Triage Controls */}
+        <div className="flex flex-wrap items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+          {!expanded && canAct && (
+            <>
+              <Button
+                size="sm"
+                variant="primary"
+                onClick={() => onApprove(application._id)}
+                className="h-7 px-2.5 text-xs gap-1 font-semibold"
+              >
+                <CheckCircle2 size={13} /> Approve
+              </Button>
+              <Button size="sm" variant="danger" onClick={() => onReject(application._id)} className="h-7 px-2 text-xs">
+                Reject
+              </Button>
+            </>
+          )}
+
           <Button
             size="sm"
             variant="outline"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenRubric(application);
-            }}
-            className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="h-7 px-2.5 text-xs border-slate-200 text-slate-700 hover:text-slate-900 font-medium"
           >
-            <Sliders size={13} /> Rubric
-          </Button>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenInterview(application);
-            }}
-            className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
-          >
-            <Calendar size={13} /> Interview
+            {expanded ? "Collapse ▴" : "Review Details ▾"}
           </Button>
         </div>
       </div>
 
-      <div className="grid gap-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-4 bg-slate-50/70 p-3 rounded-xl border border-slate-200/80">
-        <div className="flex items-center gap-2">
-          <Briefcase size={14} className="text-slate-400" />
-          <span>{application.yearsExperience ?? 0} yrs experience</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Clock size={14} className="text-slate-400" />
-          <span className="capitalize">{application.availability ?? "Flexible"}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Award size={14} className="text-slate-400" />
-          <span>{(application.mentoringStyle ?? []).join(", ") || "Live Sessions"}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Users size={14} className="text-slate-400" />
-          <span>{application.location ?? "Ethiopia / Remote"}</span>
-        </div>
-      </div>
-
-      <div className="flex flex-wrap items-center gap-4 text-xs">
-        {application.linkedin && (
-          <a
-            href={application.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            LinkedIn <ExternalLink size={12} />
-          </a>
-        )}
-        {application.portfolio && (
-          <a
-            href={application.portfolio}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Portfolio / GitHub <ExternalLink size={12} />
-          </a>
-        )}
-        {application.cvUrl && (
-          <a
-            href={application.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
-            onClick={(e) => e.stopPropagation()}
-          >
-            CV / Resume <ExternalLink size={12} />
-          </a>
-        )}
-      </div>
-
-      <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-3.5 text-sm leading-relaxed text-slate-700">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Why Mentor?</p>
-        <p className="line-clamp-3">{application.whyMentor || "No motivation statement provided."}</p>
-      </div>
-
-      <div className="flex flex-wrap gap-1.5">
-        {(application.expertise ?? []).slice(0, 10).map((skill) => (
-          <Badge key={skill} variant="outline" className="text-xs">
-            {skill}
-          </Badge>
-        ))}
-      </div>
-
-      {application.rejectionReason && (
-        <div className="rounded-xl border border-red-200 bg-red-50/50 p-3 text-xs">
-          <p className="font-semibold text-red-600">Rejection Reason</p>
-          <p className="mt-1 text-slate-700">{application.rejectionReason}</p>
-        </div>
-      )}
-
-      {application.reviewNotes && application.status === "changes_requested" && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3 text-xs">
-          <p className="font-semibold text-amber-700">Requested Changes</p>
-          <p className="mt-1 text-slate-700">{application.reviewNotes}</p>
-        </div>
-      )}
-
-      {canAct && (
-        <div className="pt-2 border-t border-slate-100 space-y-3" onClick={(e) => e.stopPropagation()}>
-          <div>
-            <label className="mb-1.5 block text-xs uppercase tracking-wider text-slate-700 font-bold">
-              Review notes & rubric feedback
-            </label>
-            <textarea
-              value={reviewNotes}
-              onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
-              placeholder="Add feedback, approval remarks, or specific information requested..."
-              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
-              aria-label="Review notes"
-            />
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <Button
-              size="sm"
-              variant="primary"
-              onClick={() => onApprove(application._id)}
-              className="gap-1.5 flex-1 sm:flex-none"
-            >
-              <CheckCircle2 size={15} /> Approve
-            </Button>
-            <Button
-              size="sm"
-              variant="danger"
-              onClick={() => onReject(application._id)}
-              className="gap-1.5 flex-1 sm:flex-none"
-            >
-              <XCircle size={15} /> Reject
-            </Button>
-            {isPending && (
+      {/* Expanded Deep Evaluation Section (Progressive Disclosure) */}
+      {expanded && (
+        <div className="space-y-4 pt-2 border-t border-slate-100">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-xs text-slate-500">{application.email}</p>
+            <div className="flex items-center gap-1.5">
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => onRequestChanges(application._id)}
-                className="gap-1.5 border-slate-200 text-slate-700 flex-1 sm:flex-none"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenRubric(application);
+                }}
+                className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
               >
-                <FileText size={15} /> Request Info
+                <Sliders size={13} /> Rubric
               </Button>
-            )}
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => onOpen(application._id)}
-              className="border-slate-200 text-slate-700 flex-1 sm:flex-none"
-            >
-              View Full Profile
-            </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenInterview(application);
+                }}
+                className="h-7 px-2.5 text-xs gap-1 border-slate-200 text-slate-700 hover:text-slate-900"
+              >
+                <Calendar size={13} /> Interview
+              </Button>
+            </div>
           </div>
+
+          <div className="grid gap-2 text-xs text-slate-600 sm:grid-cols-2 lg:grid-cols-4 bg-slate-50/70 p-3 rounded-xl border border-slate-200/80">
+            <div className="flex items-center gap-2">
+              <Briefcase size={14} className="text-slate-400" />
+              <span>{application.yearsExperience ?? 0} yrs experience</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock size={14} className="text-slate-400" />
+              <span className="capitalize">{application.availability ?? "Flexible"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Award size={14} className="text-slate-400" />
+              <span>{(application.mentoringStyle ?? []).join(", ") || "Live Sessions"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Users size={14} className="text-slate-400" />
+              <span>{application.location ?? "Ethiopia / Remote"}</span>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 text-xs">
+            {application.linkedin && (
+              <a
+                href={application.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                LinkedIn <ExternalLink size={12} />
+              </a>
+            )}
+            {application.portfolio && (
+              <a
+                href={application.portfolio}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Portfolio / GitHub <ExternalLink size={12} />
+              </a>
+            )}
+            {application.cvUrl && (
+              <a
+                href={application.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-slate-700 font-medium hover:text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                CV / Resume <ExternalLink size={12} />
+              </a>
+            )}
+          </div>
+
+          <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 text-xs sm:text-sm leading-relaxed text-slate-700">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Why Mentor?</p>
+            <p className="line-clamp-3">{application.whyMentor || "No motivation statement provided."}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-1.5">
+            {(application.expertise ?? []).slice(0, 10).map((skill) => (
+              <Badge key={skill} variant="outline" className="text-xs">
+                {skill}
+              </Badge>
+            ))}
+          </div>
+
+          {application.rejectionReason && (
+            <div className="rounded-xl border border-red-200 bg-red-50/50 p-3 text-xs">
+              <p className="font-semibold text-red-600">Rejection Reason</p>
+              <p className="mt-1 text-slate-700">{application.rejectionReason}</p>
+            </div>
+          )}
+
+          {application.reviewNotes && application.status === "changes_requested" && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3 text-xs">
+              <p className="font-semibold text-amber-700">Requested Changes</p>
+              <p className="mt-1 text-slate-700">{application.reviewNotes}</p>
+            </div>
+          )}
+
+          {canAct && (
+            <div className="pt-2 border-t border-slate-100 space-y-3" onClick={(e) => e.stopPropagation()}>
+              <div>
+                <label className="mb-1.5 block text-xs uppercase tracking-wider text-slate-700 font-bold">
+                  Review notes & rubric feedback
+                </label>
+                <textarea
+                  value={reviewNotes}
+                  onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
+                  placeholder="Add feedback, approval remarks, or specific information requested..."
+                  className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
+                  aria-label="Review notes"
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="primary"
+                  onClick={() => onApprove(application._id)}
+                  className="gap-1.5 flex-1 sm:flex-none"
+                >
+                  <CheckCircle2 size={15} /> Approve
+                </Button>
+                <Button
+                  size="sm"
+                  variant="danger"
+                  onClick={() => onReject(application._id)}
+                  className="gap-1.5 flex-1 sm:flex-none"
+                >
+                  <XCircle size={15} /> Reject
+                </Button>
+                {isPending && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => onRequestChanges(application._id)}
+                    className="gap-1.5 border-slate-200 text-slate-700 flex-1 sm:flex-none"
+                  >
+                    <FileText size={15} /> Request Info
+                  </Button>
+                )}
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => onOpen(application._id)}
+                  className="border-slate-200 text-slate-700 flex-1 sm:flex-none"
+                >
+                  View Full Profile
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </Card>
@@ -740,6 +785,7 @@ export function AdminModerationPage() {
   const [pageActionReason, setPageActionReason] = useState("");
   const [activeRubricApp, setActiveRubricApp] = useState<MentorApplication | null>(null);
   const [activeInterviewApp, setActiveInterviewApp] = useState<MentorApplication | null>(null);
+  const [viewMode, setViewMode] = useState<"compact" | "expanded">("compact");
 
   const navigate = useNavigate();
   const user = useAuthStore((s) => s.user);
@@ -1057,21 +1103,51 @@ export function AdminModerationPage() {
           </div>
         </div>
 
-        {applications.length > 0 && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={toggleSelectAll}
-            className="gap-1.5 text-xs text-slate-600 hover:text-slate-900"
-          >
-            {allSelected ? (
-              <CheckCircle2 size={16} className="text-slate-900" />
-            ) : (
-              <Square size={16} className="text-slate-400" />
-            )}
-            {allSelected ? "Deselect All" : "Select All On Page"}
-          </Button>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* View Density Mode Toggle (Linear Calm Design) */}
+          <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 text-xs">
+            <button
+              type="button"
+              onClick={() => setViewMode("compact")}
+              className={cn(
+                "px-2.5 py-1 rounded-lg font-medium transition-all text-xs",
+                viewMode === "compact"
+                  ? "bg-white text-slate-900 font-semibold shadow-2xs"
+                  : "text-slate-600 hover:text-slate-900",
+              )}
+            >
+              Compact Queue
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("expanded")}
+              className={cn(
+                "px-2.5 py-1 rounded-lg font-medium transition-all text-xs",
+                viewMode === "expanded"
+                  ? "bg-white text-slate-900 font-semibold shadow-2xs"
+                  : "text-slate-600 hover:text-slate-900",
+              )}
+            >
+              Expanded Review
+            </button>
+          </div>
+
+          {applications.length > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleSelectAll}
+              className="gap-1.5 text-xs text-slate-600 hover:text-slate-900"
+            >
+              {allSelected ? (
+                <CheckCircle2 size={16} className="text-slate-900" />
+              ) : (
+                <Square size={16} className="text-slate-400" />
+              )}
+              {allSelected ? "Deselect All" : "Select All On Page"}
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Application Cards List */}
@@ -1079,7 +1155,7 @@ export function AdminModerationPage() {
         <ModerationSkeleton />
       ) : applications.length ? (
         <>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {applications.map((application) => (
               <ApplicationCard
                 key={application._id}
@@ -1094,6 +1170,7 @@ export function AdminModerationPage() {
                 onRequestChanges={(id) => setPageAction({ type: "request-changes", id })}
                 onOpenRubric={(app) => setActiveRubricApp(app)}
                 onOpenInterview={(app) => setActiveInterviewApp(app)}
+                viewMode={viewMode}
               />
             ))}
           </div>
