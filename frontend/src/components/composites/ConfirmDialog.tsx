@@ -56,15 +56,15 @@ export function ConfirmDialog({
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-[9998] m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[var(--text-primary)] shadow-xl backdrop:bg-slate-900/40 backdrop-blur-xs"
+      className="fixed inset-0 z-[9998] m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[var(--text-primary)] shadow-xl backdrop:bg-slate-900/40 backdrop-blur-xs dark:border-white/15 dark:bg-slate-900"
     >
       <div className="p-6">
         <div className="flex items-start justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h2>
           <button
             type="button"
             onClick={onCancel}
-            className="text-slate-400 hover:text-slate-700 transition-colors rounded-lg p-1 hover:bg-slate-100"
+            className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors rounded-lg p-1 hover:bg-slate-100 dark:hover:bg-slate-800"
             aria-label="Close"
           >
             <X size={18} />

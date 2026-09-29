@@ -45,20 +45,25 @@ const ROLE_VARIANTS: Record<string, "warning" | "outline" | "default" | "danger"
 function StatusBadge({ status }: { status?: string }) {
   const s = status || "unknown";
   let dotColor = "bg-slate-400";
-  let badgeStyle = "bg-slate-50 text-slate-700 border-slate-200/80";
+  let badgeStyle =
+    "bg-slate-50 text-slate-700 border-slate-200/80 dark:bg-slate-800/80 dark:text-slate-300 dark:border-white/10";
 
   if (s === "active") {
     dotColor = "bg-emerald-500";
-    badgeStyle = "bg-emerald-50/70 text-emerald-800 border-emerald-200/80";
+    badgeStyle =
+      "bg-emerald-50/70 text-emerald-800 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/40";
   } else if (s === "pending") {
     dotColor = "bg-amber-500 animate-pulse";
-    badgeStyle = "bg-amber-50/70 text-amber-800 border-amber-200/80";
+    badgeStyle =
+      "bg-amber-50/70 text-amber-800 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/40";
   } else if (s === "suspended" || s === "banned" || s === "rejected") {
     dotColor = "bg-rose-500";
-    badgeStyle = "bg-rose-50/70 text-rose-800 border-rose-200/80";
+    badgeStyle =
+      "bg-rose-50/70 text-rose-800 border-rose-200/80 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800/40";
   } else if (s === "inactive" || s === "deleted") {
     dotColor = "bg-slate-400";
-    badgeStyle = "bg-slate-100 text-slate-600 border-slate-200/80";
+    badgeStyle =
+      "bg-slate-100 text-slate-600 border-slate-200/80 dark:bg-slate-800/60 dark:text-slate-400 dark:border-white/10";
   }
 
   return (
@@ -344,10 +349,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       {(roleFilter || statusFilter || search) && (
-        <div className="flex flex-wrap items-center gap-1.5 px-1 py-1 bg-slate-50/70 border border-slate-200/60 rounded-xl">
-          <span className="text-[11px] font-semibold text-slate-500 ml-1">Filtered by:</span>
+        <div className="flex flex-wrap items-center gap-1.5 px-1 py-1 bg-slate-50/70 dark:bg-slate-900/60 border border-slate-200/60 dark:border-white/10 rounded-xl">
+          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 ml-1">Filtered by:</span>
           {roleFilter && (
-            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-800 dark:text-slate-200 shadow-2xs">
               Role: <strong className="font-semibold capitalize">{roleFilter.replace("_", " ")}</strong>
               <button
                 type="button"
@@ -355,7 +360,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   setRoleFilter("");
                   setPage(1);
                 }}
-                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                className="ml-0.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 aria-label="Remove role filter"
               >
                 <X size={12} />
@@ -363,7 +368,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             </span>
           )}
           {statusFilter && (
-            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-800 dark:text-slate-200 shadow-2xs">
               Status: <strong className="font-semibold capitalize">{statusFilter}</strong>
               <button
                 type="button"
@@ -371,7 +376,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   setStatusFilter("");
                   setPage(1);
                 }}
-                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                className="ml-0.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 aria-label="Remove status filter"
               >
                 <X size={12} />
@@ -379,7 +384,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             </span>
           )}
           {search && (
-            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-800 px-2 py-0.5 text-[11px] font-medium text-slate-800 dark:text-slate-200 shadow-2xs">
               Search: &ldquo;{search}&rdquo;
               <button
                 type="button"
@@ -388,7 +393,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   setSearchInput("");
                   setPage(1);
                 }}
-                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                className="ml-0.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                 aria-label="Clear search"
               >
                 <X size={12} />
@@ -404,7 +409,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               setSearchInput("");
               setPage(1);
             }}
-            className="text-[11px] font-medium text-slate-500 hover:text-slate-900 underline ml-1.5"
+            className="text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white underline ml-1.5"
           >
             Clear all
           </button>
@@ -412,11 +417,11 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       )}
 
       {showFilters && (
-        <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+        <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-4 shadow-sm">
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-slate-500">Role</label>
+            <label className="text-xs font-medium text-slate-500 dark:text-slate-400">Role</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-900"
+              className="h-9 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 dark:text-slate-200 px-3 text-sm text-slate-800 outline-none focus:border-slate-900 dark:focus:border-slate-700"
               value={roleFilter}
               onChange={(e) => {
                 setRoleFilter(e.target.value);
@@ -436,9 +441,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-slate-500">Status</label>
+            <label className="text-xs font-medium text-slate-500 dark:text-slate-400">Status</label>
             <select
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-800 outline-none focus:border-slate-900"
+              className="h-9 rounded-lg border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 dark:text-slate-200 px-3 text-sm text-slate-800 outline-none focus:border-slate-900 dark:focus:border-slate-700"
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value);
@@ -460,7 +465,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-slate-600 hover:text-slate-900"
+                className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
                 onClick={() => {
                   setRoleFilter("");
                   setStatusFilter("");
@@ -474,45 +479,45 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200/80 bg-white shadow-xs">
+      <div className="overflow-x-auto rounded-xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900 shadow-xs">
         <table className="w-full text-left min-w-[700px]" role="table">
           <thead>
-            <tr className="border-b border-slate-200/80 bg-slate-50/75">
+            <tr className="border-b border-slate-200/80 dark:border-white/10 bg-slate-50/75 dark:bg-slate-950/60">
               <th className="w-10 px-3.5 py-2.5 whitespace-nowrap">
                 <input
                   type="checkbox"
                   checked={allSelected}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900 accent-zinc-900"
+                  className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-slate-900 focus:ring-slate-900 accent-zinc-900"
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 User
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Role
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Status
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap text-right">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap text-right">
                 XP
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Track
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Joined
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Last Login
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                 Verified
               </th>
               {showActions && (
-                <th className="w-20 px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                <th className="w-20 px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 whitespace-nowrap">
                   Actions
                 </th>
               )}
@@ -545,7 +550,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                 return (
                   <tr
                     key={id}
-                    className="border-b border-slate-100 transition-colors hover:bg-slate-50/70 cursor-pointer text-xs"
+                    className="border-b border-slate-100 dark:border-white/5 transition-colors hover:bg-slate-50/70 dark:hover:bg-white/[0.03] cursor-pointer text-xs"
                     onClick={() => onSelectUser?.(user)}
                     role="row"
                   >
@@ -554,7 +559,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                         type="checkbox"
                         checked={selectedIds.has(id)}
                         onChange={() => toggleSelect(id)}
-                        className="h-4 w-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900 accent-zinc-900"
+                        className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-slate-900 focus:ring-slate-900 accent-zinc-900"
                         aria-label={`Select ${user.fullName}`}
                       />
                     </td>
@@ -567,10 +572,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           size="sm"
                         />
                         <div className="min-w-0">
-                          <p className="font-semibold text-slate-900 truncate text-xs">
+                          <p className="font-semibold text-slate-900 dark:text-slate-100 truncate text-xs">
                             {user.fullName || user.email || "User"}
                           </p>
-                          <p className="text-[11px] text-slate-500 truncate">{user.email}</p>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user.email}</p>
                         </div>
                       </div>
                     </td>
@@ -582,21 +587,27 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     <td className="px-3.5 py-2.5">
                       <StatusBadge status={user.status} />
                     </td>
-                    <td className="px-3.5 py-2.5 text-xs font-mono font-medium text-slate-900 text-right tabular-nums">
+                    <td className="px-3.5 py-2.5 text-xs font-mono font-medium text-slate-900 dark:text-slate-100 text-right tabular-nums">
                       {(user.xp ?? 0).toLocaleString()}
                     </td>
-                    <td className="px-3.5 py-2.5 text-xs text-slate-600">{user.currentCompany || "-"}</td>
-                    <td className="px-3.5 py-2.5 text-xs text-slate-500">{formatDate(user.createdAt)}</td>
-                    <td className="px-3.5 py-2.5 text-xs text-slate-500">{formatDate(user.lastLoginAt)}</td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-600 dark:text-slate-300">
+                      {user.currentCompany || "-"}
+                    </td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-500 dark:text-slate-400">
+                      {formatDate(user.createdAt)}
+                    </td>
+                    <td className="px-3.5 py-2.5 text-xs text-slate-500 dark:text-slate-400">
+                      {formatDate(user.lastLoginAt)}
+                    </td>
                     <td className="px-3.5 py-2.5">
                       {user.isVerified ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-800">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-800 dark:text-slate-200">
                           <CheckCircle size={13} className="text-emerald-600 shrink-0" />
                           Verified
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400">
-                          <XCircle size={13} className="text-slate-400 shrink-0" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400 dark:text-slate-500">
+                          <XCircle size={13} className="text-slate-400 dark:text-slate-500 shrink-0" />
                           Unverified
                         </span>
                       )}
@@ -607,7 +618,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {onSelectUser && (
                             <Tooltip content="View profile">
                               <button
-                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+                                className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-800 dark:hover:text-slate-200"
                                 onClick={() => onSelectUser(user)}
                                 aria-label={`View ${user.fullName}'s profile`}
                               >
@@ -618,7 +629,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "active" && (
                             <Tooltip content="Suspend user">
                               <button
-                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                                className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 dark:hover:text-red-400"
                                 onClick={() => suspendMutation.mutate({ id })}
                                 aria-label={`Suspend ${user.fullName}`}
                               >
@@ -629,7 +640,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {user.status === "suspended" && (
                             <Tooltip content="Reactivate user">
                               <button
-                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                                className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
                                 onClick={() => reactivateMutation.mutate(id)}
                                 aria-label={`Reactivate ${user.fullName}`}
                               >
@@ -640,7 +651,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           {!user.isVerified && (
                             <Tooltip content="Verify user">
                               <button
-                                className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                                className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
                                 onClick={() => verifyMutation.mutate(id)}
                                 aria-label={`Verify ${user.fullName}`}
                               >
@@ -650,7 +661,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                           )}
                           <Tooltip content="Delete user">
                             <button
-                              className="rounded-md p-1.5 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                              className="rounded-md p-1.5 text-slate-500 dark:text-slate-400 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 dark:hover:text-red-400"
                               onClick={() => setDeleteTarget(user)}
                               aria-label={`Delete ${user.fullName}`}
                             >
@@ -669,7 +680,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-        <p className="text-xs text-slate-700 font-medium">
+        <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
           {pagination ? `Page ${pagination.page} of ${pagination.totalPages} (${pagination.total} total)` : ""}
         </p>
         <div className="flex items-center gap-2">
