@@ -603,7 +603,10 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── The PISTELS Framework (Core Pedagogical Backbone) ─── */}
-      <section id="pistels-framework" className="relative border-y border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
+      <section
+        id="pistels-framework"
+        className="relative border-y border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14"
+      >
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
@@ -1101,17 +1104,17 @@ export function AboutPage() {
 
       {/* ─── Closing CTA ─── */}
       <section className="px-4 pb-14 pt-6 lg:px-8">
-        <Card className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/70 to-white p-6 sm:p-8 shadow-[var(--shadow-card)]">
+        <Card className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-white/10 dark:bg-[var(--bg-card)] p-6 sm:p-8 shadow-[var(--shadow-card)]">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3 py-0.5 text-xs font-semibold text-slate-800 mb-2.5 shadow-[var(--shadow-xs)]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-200 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-2.5 shadow-[var(--shadow-xs)]">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 <span>Join the Movement</span>
               </div>
-              <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
+              <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl break-words">
                 Ready to transform your engineering trajectory?
               </h2>
-              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
+              <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-300 font-medium sm:text-sm">
                 Whether you are a university student eager to build production systems or a seasoned diaspora engineer
                 ready to guide the next generation, EthioTech is your platform.
               </p>

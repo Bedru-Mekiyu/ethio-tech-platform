@@ -269,7 +269,10 @@ export function PartnersPage() {
       {/* ─── 4 Collaboration Frameworks Section ─── */}
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+          <Badge
+            variant="secondary"
+            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          >
             Collaboration Pillars
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
@@ -397,7 +400,10 @@ export function PartnersPage() {
       {/* ─── Partnership Process / Lifecycle ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+          <Badge
+            variant="secondary"
+            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          >
             Structured Delivery
           </Badge>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 break-words">
@@ -435,7 +441,10 @@ export function PartnersPage() {
       {/* ─── Institutional Collaboration Principles ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+          <Badge
+            variant="secondary"
+            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          >
             Institutional Governance
           </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
@@ -660,7 +669,10 @@ export function PartnersPage() {
       {/* ─── Institutional FAQ Section ─── */}
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+          <Badge
+            variant="secondary"
+            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          >
             Institutional FAQ
           </Badge>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
@@ -682,12 +694,12 @@ export function PartnersPage() {
       </section>
 
       {/* ─── Bottom CTA Strip ─── */}
-      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-gradient-to-b from-slate-50/80 to-white p-8 sm:p-10 text-center space-y-5 shadow-sm">
+      <Card className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-white/10 dark:bg-[var(--bg-card)] p-8 sm:p-10 text-center space-y-5 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white break-words">
             Institutional Technical Collaboration
           </h2>
-          <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
+          <p className="text-xs md:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
             Review our institutional framework documentation or connect directly with our program leadership.
           </p>
         </div>

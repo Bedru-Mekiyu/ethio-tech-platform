@@ -667,7 +667,10 @@ export function HomePage() {
                 {data ? (
                   <>{formatCompactCount(activeLearnersCount)}+</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" aria-hidden="true" />
+                  <span
+                    className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+                    aria-hidden="true"
+                  />
                 )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -695,7 +698,10 @@ export function HomePage() {
                 {data ? (
                   <>{approvalRate}%</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" aria-hidden="true" />
+                  <span
+                    className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+                    aria-hidden="true"
+                  />
                 )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Capstone Approval</p>
@@ -1452,17 +1458,17 @@ export function HomePage() {
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell py-12">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">
+          <p className="text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 font-semibold">
             Trusted By & Partnering with Leading Institutions
           </p>
           <div className="mt-6 flex flex-wrap justify-center items-center gap-2.5 md:gap-3">
             {PARTNERS.map((p) => (
               <div
                 key={p.name}
-                className="rounded-xl border border-slate-200/80 bg-white px-4 py-2.5 text-center transition-all duration-150 hover:border-slate-300 hover:shadow-[var(--shadow-xs)] shadow-[var(--shadow-xs)]"
+                className="rounded-xl border border-slate-200/80 bg-white px-4 py-2.5 text-center transition-all duration-150 hover:border-slate-300 hover:shadow-[var(--shadow-xs)] shadow-[var(--shadow-xs)] dark:border-white/10 dark:bg-[var(--bg-card)]"
               >
-                <p className="text-xs font-semibold text-slate-900">{p.name}</p>
-                <p className="text-[10px] text-slate-500">{p.category}</p>
+                <p className="text-xs font-semibold text-slate-900 dark:text-white">{p.name}</p>
+                <p className="text-[10px] text-slate-600 dark:text-slate-400 font-medium">{p.category}</p>
               </div>
             ))}
           </div>
@@ -1478,18 +1484,18 @@ export function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-white via-slate-50/70 to-white p-6 sm:p-10 shadow-[var(--shadow-card)]"
+          className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-white/10 dark:bg-[var(--bg-card)] p-6 sm:p-10 shadow-[var(--shadow-card)]"
         >
           <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
-              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3 py-1 text-xs font-medium text-slate-800 shadow-[var(--shadow-xs)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-200">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 Applications Open
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white break-words">
                 Ready to Build the Future of <span className="text-primary">Ethiopian Tech?</span>
               </h2>
-              <p className="text-sm leading-relaxed text-slate-600 max-w-xl">
+              <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium max-w-xl">
                 Join {formatCompactCount(activeLearnersCount)}+ developers mastering real-world software engineering
                 with live senior mentorship, cloud sandboxes, and direct hiring pathways.
               </p>
