@@ -162,7 +162,7 @@ export function InteractiveCounter() {
   };
 
   return (
-    <div className="rounded-xl bg-slate-900 border border-zinc-800 p-6 text-white max-w-md shadow-2xl">
+    <div className="rounded-xl bg-slate-900 border border-zinc-800 p-4 sm:p-5 md:p-6 text-white max-w-md shadow-2xl">
       <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
         <h2 className="text-base font-bold text-slate-100">EthioTech Reactive Counter</h2>
         <span className="text-xs font-mono bg-slate-800 text-slate-300 border border-zinc-700 px-2 py-0.5 rounded-full">
@@ -174,11 +174,11 @@ export function InteractiveCounter() {
         <div className="text-4xl font-mono font-extrabold text-white tracking-tight">
           {count}
         </div>
-        <p className="text-xs text-slate-400 mt-1 font-mono">Current Val: {count >= 0 ? \`+\${count}\` : count}</p>
+        <p className="text-xs text-slate-600 font-medium mt-1 font-mono">Current Val: {count >= 0 ? \`+\${count}\` : count}</p>
       </div>
 
       {/* Control Buttons */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
         <button
           onClick={() => updateCount(count - step)}
           className="rounded-lg bg-slate-800 hover:bg-zinc-700 active:scale-95 transition px-3 py-2 text-sm font-semibold text-slate-200 border border-zinc-700"
@@ -187,7 +187,7 @@ export function InteractiveCounter() {
         </button>
         <button
           onClick={() => updateCount(0)}
-          className="rounded-lg bg-slate-800/60 hover:bg-zinc-700/60 active:scale-95 transition px-3 py-2 text-xs font-mono text-slate-400 border border-zinc-700/50"
+          className="rounded-lg bg-slate-800/60 hover:bg-zinc-700/60 active:scale-95 transition px-3 py-2 text-xs font-mono text-slate-600 font-medium border border-zinc-700/50"
         >
           Reset
         </button>
@@ -200,7 +200,7 @@ export function InteractiveCounter() {
       </div>
 
       {/* Step Selector */}
-      <div className="mt-4 flex items-center justify-between text-xs text-slate-400 pt-3 border-t border-zinc-800">
+      <div className="mt-4 flex items-center justify-between text-xs text-slate-600 font-medium pt-3 border-t border-zinc-800">
         <span>Change Step:</span>
         <div className="flex gap-1.5 font-mono">
           {[1, 5, 10].map((s) => (
@@ -208,7 +208,7 @@ export function InteractiveCounter() {
               key={s}
               onClick={() => setStep(s)}
               className={\`px-2 py-0.5 rounded text-xs transition \${
-                step === s ? "bg-red-500/20 text-red-300 border border-red-500/40" : "bg-slate-800 text-slate-400 hover:text-white"
+                step === s ? "bg-red-500/20 text-red-300 border border-red-500/40" : "bg-slate-800 text-slate-600 font-medium hover:text-white"
               }\`}
             >
               {s}
@@ -321,7 +321,7 @@ export function TaskBoard() {
       <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
         <div>
           <h3 className="font-bold text-sm text-slate-100">Sprint Backlog</h3>
-          <p className="text-xs text-slate-400">Sprint 14: Platform Workspace</p>
+          <p className="text-xs text-slate-600 font-medium">Sprint 14: Platform Workspace</p>
         </div>
         <span className="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 border border-zinc-700 font-semibold">
           {completedCount}/{tasks.length} Done
@@ -342,7 +342,7 @@ export function TaskBoard() {
                 onChange={() => {}}
                 className="h-3.5 w-3.5 rounded border-zinc-600 text-slate-100 accent-zinc-800 pointer-events-none"
               />
-              <span className={task.completed ? "line-through text-slate-500" : "text-slate-200"}>
+              <span className={task.completed ? "line-through text-slate-600 font-medium" : "text-slate-200"}>
                 {task.text}
               </span>
             </div>
@@ -443,7 +443,7 @@ export function TelemetryGauge() {
   return (
     <div className="p-5 bg-slate-900 rounded-xl border border-zinc-800 text-white max-w-md shadow-xl font-mono">
       <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-zinc-400 animate-pulse" />
           <span className="text-xs font-bold text-slate-200">Cloud Node Telemetry</span>
         </div>
@@ -452,22 +452,22 @@ export function TelemetryGauge() {
         </span>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 my-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 my-4">
         <div className="p-3 bg-slate-950/60 rounded-lg border border-zinc-800 text-center">
-          <p className="text-[10px] text-slate-400 uppercase">Latency</p>
-          <p className="text-lg font-bold text-slate-100 mt-1">{latency}<span className="text-xs font-normal text-slate-400">ms</span></p>
+          <p className="text-[10px] text-slate-600 font-medium uppercase">Latency</p>
+          <p className="text-lg font-bold text-slate-100 mt-1">{latency}<span className="text-xs font-normal text-slate-600 font-medium">ms</span></p>
         </div>
         <div className="p-3 bg-slate-950/60 rounded-lg border border-zinc-800 text-center">
-          <p className="text-[10px] text-slate-400 uppercase">CPU Load</p>
-          <p className="text-lg font-bold text-slate-300 mt-1">{cpuUsage}<span className="text-xs font-normal text-slate-400">%</span></p>
+          <p className="text-[10px] text-slate-600 font-medium uppercase">CPU Load</p>
+          <p className="text-lg font-bold text-slate-300 mt-1">{cpuUsage}<span className="text-xs font-normal text-slate-600 font-medium">%</span></p>
         </div>
         <div className="p-3 bg-slate-950/60 rounded-lg border border-zinc-800 text-center">
-          <p className="text-[10px] text-slate-400 uppercase">Memory</p>
-          <p className="text-lg font-bold text-slate-200 mt-1">{memoryMb}<span className="text-xs font-normal text-slate-400">MB</span></p>
+          <p className="text-[10px] text-slate-600 font-medium uppercase">Memory</p>
+          <p className="text-lg font-bold text-slate-200 mt-1">{memoryMb}<span className="text-xs font-normal text-slate-600 font-medium">MB</span></p>
         </div>
       </div>
 
-      <div className="text-[11px] text-slate-400 flex items-center justify-between pt-2 border-t border-zinc-800/80">
+      <div className="text-[11px] text-slate-600 font-medium flex items-center justify-between pt-2 border-t border-zinc-800/80">
         <span>Region: <strong className="text-white">Africa-East (Addis Ababa)</strong></span>
         <span>Uptime: <strong className="text-white">99.98%</strong></span>
       </div>
@@ -1373,9 +1373,9 @@ export function CodingWorkspacePage() {
         {/* Left: Breadcrumbs & Active Tab */}
         <div className="flex items-center gap-2.5 overflow-hidden">
           <div className="flex items-center gap-1.5 text-xs font-mono">
-            <span className="text-slate-400 hidden md:inline">workspace</span>
+            <span className="text-slate-600 font-medium hidden md:inline">workspace</span>
             <span className="text-slate-300 hidden md:inline">/</span>
-            <span className="text-slate-400 hidden sm:inline">src</span>
+            <span className="text-slate-600 font-medium hidden sm:inline">src</span>
             <span className="text-slate-300 hidden sm:inline">/</span>
             <div className="flex items-center gap-1.5 rounded-lg bg-slate-100/80 px-2.5 py-1 text-xs font-medium text-slate-800 border border-slate-200/80 shadow-2xs">
               <FileCode size={13} className="text-[var(--secondary)]" />
@@ -1383,8 +1383,8 @@ export function CodingWorkspacePage() {
             </div>
           </div>
 
-          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-500 border-l border-slate-200 pl-2.5">
-            <span className="text-slate-400 font-sans">Track:</span>
+          <div className="hidden xl:flex items-center gap-1.5 text-xs text-slate-600 font-medium border-l border-slate-200 pl-2.5">
+            <span className="text-slate-600 font-medium font-sans">Track:</span>
             <span className="text-slate-700 font-medium truncate max-w-[200px]">
               {lesson?.title || primaryTrack?.title || "Full-Stack Web Development"}
             </span>
@@ -1392,10 +1392,12 @@ export function CodingWorkspacePage() {
         </div>
 
         {/* Center: Language & Template Selectors */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Language Selector */}
           <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs">
-            <span className="text-[10px] font-bold text-slate-500 font-mono uppercase tracking-wider">Lang</span>
+            <span className="text-[10px] font-bold text-slate-600 font-medium font-mono uppercase tracking-wider">
+              Lang
+            </span>
             <select
               value={language}
               onChange={(e) => handleLanguageChange(e.target.value as SupportedLanguage)}
@@ -1424,7 +1426,9 @@ export function CodingWorkspacePage() {
 
           {/* Starter Template Preset */}
           <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs">
-            <span className="text-[10px] font-bold text-slate-500 font-mono uppercase tracking-wider">Preset</span>
+            <span className="text-[10px] font-bold text-slate-600 font-medium font-mono uppercase tracking-wider">
+              Preset
+            </span>
             <select
               value={selectedTemplateId}
               onChange={(e) => {
@@ -1505,7 +1509,7 @@ export function CodingWorkspacePage() {
       {/* ─── SUB-HEADER BREADCRUMB & NOTIFICATION STRIP ──────────────────────── */}
       {submittedSuccess && (
         <div className="flex items-center justify-between bg-blue-50/70 border-b border-blue-100 px-4 py-2 text-xs text-slate-900 animate-fadeIn">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <CheckCircle2 size={15} className="text-[var(--secondary)]" />
             <span className="font-semibold">Solution verified & submitted successfully!</span>
             <span className="text-[var(--secondary)] font-mono font-bold">(+100 XP Earned)</span>
@@ -1524,21 +1528,21 @@ export function CodingWorkspacePage() {
         {/* ─── LEFT PANEL: MONOSPACE CODE EDITOR ─────────────────────────────── */}
         <div className="flex flex-1 flex-col border-b lg:border-b-0 lg:border-r border-slate-800 bg-slate-950 min-w-0">
           {/* Editor Sub-Bar */}
-          <div className="flex h-9 flex-none items-center justify-between border-b border-slate-800/80 bg-slate-900 px-3 text-[11px] text-slate-400 font-mono select-none">
-            <div className="flex items-center gap-2">
+          <div className="flex h-9 flex-none items-center justify-between border-b border-slate-800/80 bg-slate-900 px-3 text-[11px] text-slate-600 font-medium font-mono select-none">
+            <div className="flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-1.5 text-slate-300 font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)]" />
                 <span>{currentTemplate.fileName}</span>
               </div>
               <span className="text-slate-600">|</span>
-              <span className="text-slate-500">UTF-8</span>
+              <span className="text-slate-600 font-medium">UTF-8</span>
               <span className="text-slate-600">|</span>
-              <span className="text-slate-500">Tab: 2 Spaces</span>
+              <span className="text-slate-600 font-medium">Tab: 2 Spaces</span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               {/* Font Size Selector */}
-              <div className="hidden sm:flex items-center gap-1 text-slate-500">
+              <div className="hidden sm:flex items-center gap-1 text-slate-600 font-medium">
                 <span>Font:</span>
                 <button
                   type="button"
@@ -1620,8 +1624,8 @@ export function CodingWorkspacePage() {
           </div>
 
           {/* Editor Status Bar */}
-          <footer className="flex h-7 flex-none items-center justify-between border-t border-slate-800/80 bg-slate-950 px-3 text-[11px] text-slate-400 font-mono select-none">
-            <div className="flex items-center gap-3">
+          <footer className="flex h-7 flex-none items-center justify-between border-t border-slate-800/80 bg-slate-950 px-3 text-[11px] text-slate-600 font-medium font-mono select-none">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="text-slate-300 font-medium">
                 Ln {cursorPos.line}, Col {cursorPos.col}
               </span>
@@ -1631,8 +1635,8 @@ export function CodingWorkspacePage() {
               <span>{code.length} chars</span>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-slate-500 hidden sm:inline">Engine:</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-slate-600 font-medium hidden sm:inline">Engine:</span>
               <span className="text-slate-300 flex items-center gap-1 font-medium">
                 <Cpu size={12} className="text-[var(--secondary)]" />
                 {langMeta.runtimeEngine}
@@ -1722,7 +1726,7 @@ export function CodingWorkspacePage() {
                   type="button"
                   onClick={() => setLogs([])}
                   title="Clear Console Output"
-                  className="flex h-6 w-6 items-center justify-center rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                  className="flex h-6 w-6 items-center justify-center rounded text-slate-600 font-medium hover:text-slate-700 hover:bg-slate-100 transition"
                 >
                   <Trash2 size={12} />
                 </button>
@@ -1752,7 +1756,7 @@ export function CodingWorkspacePage() {
               <div className="space-y-2 font-mono">
                 {/* Search / Filter logs bar */}
                 <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                  <div className="flex items-center gap-1.5 text-slate-500 w-full max-w-xs">
+                  <div className="flex items-center gap-1.5 text-slate-600 font-medium w-full max-w-xs">
                     <Search size={12} />
                     <input
                       type="text"
@@ -1762,15 +1766,15 @@ export function CodingWorkspacePage() {
                       className="bg-transparent text-xs text-slate-300 placeholder-slate-600 focus:outline-none w-full"
                     />
                   </div>
-                  <span className="text-[10px] text-slate-500 font-mono">{filteredLogs.length} events</span>
+                  <span className="text-[10px] text-slate-600 font-medium font-mono">{filteredLogs.length} events</span>
                 </div>
 
                 {/* Log messages */}
                 {filteredLogs.length === 0 ? (
                   <div className="py-12 text-center text-slate-600">
-                    <Terminal size={24} className="mx-auto mb-2 opacity-50 text-slate-400" />
+                    <Terminal size={24} className="mx-auto mb-2 opacity-50 text-slate-600 font-medium" />
                     <p className="text-xs">No console events logged.</p>
-                    <p className="text-[11px] text-slate-500 mt-1">
+                    <p className="text-[11px] text-slate-600 font-medium mt-1">
                       Press <span className="text-slate-200 font-bold">⌘+Enter</span> or click Run Code to execute.
                     </p>
                   </div>
@@ -1781,7 +1785,9 @@ export function CodingWorkspacePage() {
                         key={log.id}
                         className="flex items-start gap-2 rounded px-2 py-1 hover:bg-white/[0.04] transition leading-relaxed whitespace-pre-wrap"
                       >
-                        <span className="text-[10px] text-slate-500 select-none pt-0.5">{log.timestamp}</span>
+                        <span className="text-[10px] text-slate-600 font-medium select-none pt-0.5">
+                          {log.timestamp}
+                        </span>
                         {log.type === "success" ? (
                           <span className="text-emerald-400 font-semibold">{log.message}</span>
                         ) : log.type === "warn" ? (
@@ -1807,7 +1813,7 @@ export function CodingWorkspacePage() {
                 <div className="flex items-center justify-between rounded-xl bg-slate-50/80 border border-slate-200/80 p-3.5 shadow-2xs">
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Automated Assertions</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5 font-medium">
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5 font-medium">
                       {currentTemplate.tests.filter((t) => t.passed).length} of {currentTemplate.tests.length} tests
                       passing
                     </p>
@@ -1825,7 +1831,7 @@ export function CodingWorkspacePage() {
                       className="rounded-xl border border-slate-200/80 bg-white p-3.5 hover:border-slate-300 transition shadow-2xs"
                     >
                       <div className="flex items-start justify-between">
-                        <div className="flex items-center gap-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           {test.passed ? (
                             <CheckCircle2 size={15} className="text-[var(--secondary)] flex-none" />
                           ) : (
@@ -1840,9 +1846,9 @@ export function CodingWorkspacePage() {
                         </span>
                       </div>
 
-                      <div className="mt-2.5 grid grid-cols-2 gap-2 text-[11px] font-mono">
+                      <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-mono">
                         <div className="rounded-lg bg-slate-50/70 p-2.5 border border-slate-200/80">
-                          <span className="text-[10px] text-slate-500 uppercase block mb-1 font-sans font-bold tracking-wider">
+                          <span className="text-[10px] text-slate-600 font-medium uppercase block mb-1 font-sans font-bold tracking-wider">
                             Expected
                           </span>
                           <span className="text-slate-700 break-all">{test.expectedOutput}</span>
@@ -1866,7 +1872,7 @@ export function CodingWorkspacePage() {
                 {/* Viewport bar */}
                 <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                   <span className="text-xs font-bold text-slate-800">Live Component Simulator</span>
-                  <div className="flex items-center gap-1 text-slate-400">
+                  <div className="flex items-center gap-1 text-slate-600 font-medium">
                     <button
                       type="button"
                       onClick={() => setPreviewViewport("desktop")}
@@ -1927,12 +1933,12 @@ export function CodingWorkspacePage() {
 
                           <div className="my-5 text-center">
                             <div className="text-4xl font-mono font-extrabold text-slate-900">{previewCounter}</div>
-                            <p className="text-[11px] text-slate-500 mt-1 font-mono">
+                            <p className="text-[11px] text-slate-600 font-medium mt-1 font-mono">
                               Val: {previewCounter >= 0 ? `+${previewCounter}` : previewCounter}
                             </p>
                           </div>
 
-                          <div className="grid grid-cols-3 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                             <button
                               type="button"
                               onClick={() => setPreviewCounter((c) => c - previewStep)}
@@ -1943,7 +1949,7 @@ export function CodingWorkspacePage() {
                             <button
                               type="button"
                               onClick={() => setPreviewCounter(0)}
-                              className="rounded-xl bg-slate-50 hover:bg-slate-100 active:scale-95 transition py-2 text-[11px] font-mono text-slate-500 border border-slate-200/80"
+                              className="rounded-xl bg-slate-50 hover:bg-slate-100 active:scale-95 transition py-2 text-[11px] font-mono text-slate-600 font-medium border border-slate-200/80"
                             >
                               Reset
                             </button>
@@ -1956,7 +1962,7 @@ export function CodingWorkspacePage() {
                             </button>
                           </div>
 
-                          <div className="mt-3 flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+                          <div className="mt-3 flex items-center justify-between text-[11px] text-slate-600 font-medium pt-2 border-t border-slate-100">
                             <span>Step:</span>
                             <div className="flex gap-1.5 font-mono">
                               {[1, 5, 10].map((s) => (
@@ -1984,7 +1990,7 @@ export function CodingWorkspacePage() {
                           <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                             <div>
                               <h4 className="font-bold text-xs text-slate-900">Sprint Backlog</h4>
-                              <p className="text-[10px] text-slate-500">Interactive Tasks</p>
+                              <p className="text-[10px] text-slate-600 font-medium">Interactive Tasks</p>
                             </div>
                             <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-50 text-[var(--secondary)] border border-blue-100 font-bold">
                               {previewTasks.filter((t) => t.completed).length}/{previewTasks.length} Done
@@ -2011,7 +2017,11 @@ export function CodingWorkspacePage() {
                                   className="h-3.5 w-3.5 accent-[var(--secondary)] pointer-events-none rounded"
                                 />
                                 <span
-                                  className={t.completed ? "line-through text-slate-400" : "text-slate-700 font-medium"}
+                                  className={
+                                    t.completed
+                                      ? "line-through text-slate-600 font-medium"
+                                      : "text-slate-700 font-medium"
+                                  }
                                 >
                                   {t.text}
                                 </span>
@@ -2024,7 +2034,7 @@ export function CodingWorkspacePage() {
                       {selectedTemplateId === "react-telemetry" && (
                         <div className="p-5 bg-white rounded-2xl border border-slate-200/80 text-slate-900 shadow-sm font-mono">
                           <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                               <span className="text-xs font-bold text-slate-900">Live Telemetry Stream</span>
                             </div>
@@ -2033,17 +2043,17 @@ export function CodingWorkspacePage() {
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-3 gap-2 my-3 text-center">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 my-3 text-center">
                             <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
-                              <p className="text-[10px] text-slate-500 font-medium">Latency</p>
+                              <p className="text-[10px] text-slate-600 font-medium font-medium">Latency</p>
                               <p className="text-sm font-bold text-slate-900 font-mono">24ms</p>
                             </div>
                             <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
-                              <p className="text-[10px] text-slate-500 font-medium">CPU</p>
+                              <p className="text-[10px] text-slate-600 font-medium font-medium">CPU</p>
                               <p className="text-sm font-bold text-[var(--secondary)] font-mono">14%</p>
                             </div>
                             <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
-                              <p className="text-[10px] text-slate-500 font-medium">Memory</p>
+                              <p className="text-[10px] text-slate-600 font-medium font-medium">Memory</p>
                               <p className="text-sm font-bold text-slate-900 font-mono">42MB</p>
                             </div>
                           </div>
@@ -2060,7 +2070,7 @@ export function CodingWorkspacePage() {
                         <p className="text-sm font-bold text-slate-900">
                           {LANGUAGE_META[language].name} Native Sandbox
                         </p>
-                        <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
+                        <p className="text-xs text-slate-600 font-medium mt-1 max-w-xs mx-auto">
                           CLI and backend code execute in a secure isolated {langMeta.runtimeEngine}.
                         </p>
                       </div>
@@ -2099,10 +2109,10 @@ export function CodingWorkspacePage() {
 
                 <div className="space-y-1.5 border-t border-slate-100 pt-3">
                   <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Constraints</h4>
-                  <ul className="space-y-1 text-slate-500">
+                  <ul className="space-y-1 text-slate-600 font-medium">
                     {currentTemplate.problemDescription.constraints.map((c, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <span className="text-slate-400 font-mono">▪</span>
+                      <li key={idx} className="flex flex-wrap items-center gap-2">
+                        <span className="text-slate-600 font-medium font-mono">▪</span>
                         <span>{c}</span>
                       </li>
                     ))}

@@ -65,7 +65,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
             </option>
           ))}
         </select>
-        <span className="self-center text-xs text-slate-400">:</span>
+        <span className="self-center text-xs text-slate-600 font-medium">:</span>
         <select
           value={minute}
           onChange={(e) => setMinute(Number(e.target.value))}
@@ -135,18 +135,18 @@ export function MentorAvailabilityPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="space-y-1">
           <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
             Mentor Availability & Office Hours
           </h1>
-          <p className="text-xs text-slate-500 leading-relaxed">
+          <p className="text-xs text-slate-600 font-medium leading-relaxed">
             Set weekly recurring windows when students can book 1-on-1 consultations and project reviews.
           </p>
         </div>
       </Card>
 
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <CardHeader className="p-0 border-b border-slate-100 pb-3.5">
           <CardTitle className="flex items-center justify-between text-sm font-semibold text-slate-900">
             <span className="flex items-center gap-2">
@@ -164,7 +164,7 @@ export function MentorAvailabilityPage() {
         </CardHeader>
 
         {isLoading ? (
-          <p className="mt-4 text-xs text-slate-400">Loading availability...</p>
+          <p className="mt-4 text-xs text-slate-600 font-medium">Loading availability...</p>
         ) : (
           <ul className="mt-4 space-y-2">
             {slots.map((slot, index) => (
@@ -182,14 +182,14 @@ export function MentorAvailabilityPage() {
                   size="sm"
                   variant="ghost"
                   onClick={() => handleRemove(index)}
-                  className="h-7 w-7 p-0 text-slate-400 hover:text-rose-600 hover:bg-transparent"
+                  className="h-7 w-7 p-0 text-slate-600 font-medium hover:text-rose-600 hover:bg-transparent"
                 >
                   <Trash2 size={13} />
                 </Button>
               </li>
             ))}
             {!slots.length ? (
-              <li className="py-4 text-center text-xs text-slate-400">
+              <li className="py-4 text-center text-xs text-slate-600 font-medium">
                 No slots configured. Click &quot;Add Slot&quot; to configure your office hours.
               </li>
             ) : null}
@@ -198,8 +198,10 @@ export function MentorAvailabilityPage() {
       </Card>
 
       {showForm && (
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 space-y-4 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">New Availability Slot</p>
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-600 font-medium">
+            New Availability Slot
+          </p>
           <div className="space-y-3">
             <div>
               <label className="block text-xs font-medium text-slate-700 mb-1">Day of Week</label>

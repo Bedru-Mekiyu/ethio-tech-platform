@@ -32,7 +32,7 @@ function SubmitSkeleton() {
   return (
     <div className="space-y-6">
       <Skeleton className="h-32 rounded-[28px]" />
-      <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
+      <div className="grid gap-4 sm:p-5 md:p-6 xl:grid-cols-[1.08fr_0.92fr]">
         <Skeleton className="min-h-[34rem] rounded-[28px]" />
         <Skeleton className="min-h-[34rem] rounded-[28px]" />
       </div>
@@ -135,11 +135,11 @@ export function ProjectSubmitPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-2">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Project Submission Portal</h1>
-            <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 font-medium max-w-2xl leading-relaxed">
               Choose an active capstone assignment, attach your GitHub repository and live deployment URLs, and submit
               for mentor review.
             </p>
@@ -161,17 +161,17 @@ export function ProjectSubmitPage() {
 
           <div className="grid grid-cols-3 gap-2.5 xl:w-[26rem]">
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-slate-500">Assigned</p>
+              <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">Assigned</p>
               <p className="mt-1 text-lg font-bold text-slate-900 font-mono">{assignedProjects.length}</p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-slate-500">In Feedback</p>
+              <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">In Feedback</p>
               <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "feedback").length}
               </p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
-              <p className="text-[10px] uppercase font-semibold text-slate-500">Active</p>
+              <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">Active</p>
               <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {assignedProjects.filter((p) => p.category === "active").length}
               </p>
@@ -180,9 +180,9 @@ export function ProjectSubmitPage() {
         </div>
       </Card>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+      <div className="grid gap-4 sm:p-5 md:p-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
         <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">Active Assignment Board</h2>
               <Badge variant="success" size="sm">
@@ -208,7 +208,7 @@ export function ProjectSubmitPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs font-semibold text-slate-900">{project.title}</p>
-                      <p className="mt-0.5 text-[11px] text-slate-500">
+                      <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                         {project.trackTitle} · {project.difficulty ?? "guided"} · {project.xpReward ?? 0} XP
                       </p>
                     </div>
@@ -230,7 +230,7 @@ export function ProjectSubmitPage() {
             </div>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">{selectedProject?.title}</h2>
               <Badge variant="outline" size="sm">
@@ -244,15 +244,15 @@ export function ProjectSubmitPage() {
 
             <div className="mt-4 grid gap-2.5 sm:grid-cols-3">
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-slate-500">Feedback</p>
+                <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">Feedback</p>
                 <p className="mt-1 text-xs text-slate-800">{selectedProject?.feedback || "Awaiting review"}</p>
               </div>
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-slate-500">Grade</p>
+                <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">Grade</p>
                 <p className="mt-1 text-sm font-bold text-slate-900">{selectedProject?.grade ?? "—"}</p>
               </div>
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                <p className="text-[10px] uppercase font-semibold text-slate-500">Submitted</p>
+                <p className="text-[10px] uppercase font-semibold text-slate-600 font-medium">Submitted</p>
                 <p className="mt-1 text-xs text-slate-800">
                   {selectedProject?.submittedAt
                     ? new Date(selectedProject.submittedAt).toLocaleDateString()
@@ -264,7 +264,7 @@ export function ProjectSubmitPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
             <CardHeader className="p-0 border-b border-slate-100 pb-3">
               <CardTitle className="text-sm font-semibold text-slate-900">Send Final Build</CardTitle>
             </CardHeader>
@@ -296,7 +296,7 @@ export function ProjectSubmitPage() {
                   placeholder="https://github.com/username/project"
                   autoComplete="off"
                   {...register("githubLink")}
-                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
+                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-600 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
                 {errors.githubLink ? <p className="text-[11px] text-danger">Enter a valid GitHub URL.</p> : null}
               </div>
@@ -307,7 +307,7 @@ export function ProjectSubmitPage() {
                   placeholder="https://your-app.vercel.app"
                   autoComplete="off"
                   {...register("deployedUrl")}
-                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
+                  className="bg-white border-slate-200 text-xs h-9 text-slate-900 placeholder:text-slate-600 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
                 {errors.deployedUrl ? <p className="text-[11px] text-danger">Enter a valid deployed URL.</p> : null}
               </div>
@@ -317,9 +317,11 @@ export function ProjectSubmitPage() {
                 <Textarea
                   placeholder="src/App.tsx&#10;src/components/...&#10;public/index.html"
                   {...register("files")}
-                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
+                  className="bg-white border-slate-300 text-xs text-slate-900 placeholder:text-slate-600 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/5 shadow-xs"
                 />
-                <p className="text-[11px] text-slate-500">Add one file per line or separate entries with commas.</p>
+                <p className="text-[11px] text-slate-600 font-medium">
+                  Add one file per line or separate entries with commas.
+                </p>
               </div>
 
               {submissionMutation.isError && (
@@ -346,8 +348,8 @@ export function ProjectSubmitPage() {
             </form>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2 text-slate-500">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-600 font-medium">
               <CheckCircle2 size={14} className="text-[var(--secondary)]" />
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">
                 Submission checklist
@@ -363,15 +365,15 @@ export function ProjectSubmitPage() {
                   {item.done ? (
                     <CheckCircle2 size={16} className="text-[var(--secondary)]" />
                   ) : (
-                    <span className="text-xs text-slate-400">Pending</span>
+                    <span className="text-xs text-slate-600">Pending</span>
                   )}
                 </div>
               ))}
             </div>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
-            <div className="flex items-center gap-2 text-slate-500">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-600 font-medium">
               <FileCode2 size={14} className="text-[var(--secondary)]" />
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">Recent submissions</span>
             </div>
@@ -385,7 +387,7 @@ export function ProjectSubmitPage() {
                   className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4"
                 >
                   <p className="text-sm font-medium text-slate-900">{submission.project?.title ?? "Untitled"}</p>
-                  <p className="mt-1 text-xs text-slate-500">
+                  <p className="mt-1 text-xs text-slate-600 font-medium">
                     {submission.status ?? "draft"} ·{" "}
                     {submission.createdAt ? new Date(submission.createdAt).toLocaleDateString() : "Not submitted"}
                   </p>
@@ -397,7 +399,7 @@ export function ProjectSubmitPage() {
       </div>
 
       {latestSubmission && (
-        <Card className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="mt-1 text-xl font-bold text-slate-900">

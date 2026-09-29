@@ -80,7 +80,7 @@ export function ResetPasswordPage() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm text-slate-900"
+        className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm text-slate-900"
       >
         <motion.div variants={fadeUp} custom={0}>
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
@@ -104,13 +104,13 @@ export function ResetPasswordPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm"
     >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
           Back to sign in
@@ -123,7 +123,7 @@ export function ResetPasswordPage() {
           <ShieldCheck size={16} />
         </div>
         <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Set New Password</h1>
-        <p className="text-xs leading-relaxed text-slate-500">
+        <p className="text-xs leading-relaxed text-slate-600 font-medium">
           Must be at least 8 characters containing letters and numbers.
         </p>
       </motion.div>
@@ -135,7 +135,7 @@ export function ResetPasswordPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create strong password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -167,7 +167,7 @@ export function ResetPasswordPage() {
           <PasswordInput
             autoComplete="new-password"
             placeholder="Re-enter password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />

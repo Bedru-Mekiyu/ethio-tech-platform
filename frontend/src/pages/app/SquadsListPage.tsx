@@ -23,9 +23,9 @@ export function SquadsListPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Collaboration Squads</h1>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-slate-600 font-medium">
           Join cohort squad rooms for real-time discussions, code share, and collective XP rewards.
         </p>
       </Card>
@@ -41,7 +41,7 @@ export function SquadsListPage() {
           {groups.map((group) => (
             <Card
               key={group._id}
-              className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-xs hover:border-slate-300 hover:shadow-sm transition"
+              className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-xs hover:border-slate-300 hover:shadow-sm transition"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">

@@ -89,20 +89,20 @@ export function LessonPage() {
         </Link>
 
         {lesson?.durationMinutes && (
-          <span className="text-xs text-slate-500 font-medium flex items-center gap-1">
-            <Clock size={13} className="text-slate-400" />
+          <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
+            <Clock size={13} className="text-slate-600" />
             {lesson.durationMinutes} min
           </span>
         )}
       </div>
 
       {/* Lesson Header Card */}
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             {lesson?.moduleTitle && (
               <Badge variant="outline" size="sm" className="flex items-center gap-1 border-slate-200">
-                <Layers size={11} className="text-slate-500" />
+                <Layers size={11} className="text-slate-600 font-medium" />
                 {lesson.moduleTitle}
               </Badge>
             )}
@@ -127,7 +127,7 @@ export function LessonPage() {
       </Card>
 
       {/* Main Content Card */}
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 sm:p-8 space-y-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
           <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
@@ -158,7 +158,7 @@ export function LessonPage() {
         {/* Starter Code Lab Box */}
         {lesson?.starterCode && (
           <div className="space-y-2.5 pt-4 border-t border-slate-100">
-            <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
+            <div className="flex items-center justify-between text-xs text-slate-600 font-medium">
               <span className="font-mono flex items-center gap-1.5 text-slate-700 font-bold">
                 <Code2 size={14} className="text-[var(--secondary)]" />
                 Hands-On Code Sandbox Snippet
@@ -183,7 +183,7 @@ export function LessonPage() {
 
         {/* Challenge Task Box */}
         {lesson?.challengeTask && (
-          <div className="rounded-xl border border-amber-200/90 bg-amber-50/60 p-4.5 space-y-1.5 shadow-2xs">
+          <div className="rounded-xl border border-amber-200/90 bg-amber-50/60 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 space-y-1.5 shadow-2xs">
             <p className="text-[10px] font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
               <CheckCircle size={13} className="text-amber-600" />
               Interactive Challenge Task

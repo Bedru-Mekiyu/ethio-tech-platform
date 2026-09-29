@@ -47,7 +47,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
           <Button
             size="sm"
             variant="ghost"
-            className="h-7 text-[10px] text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+            className="h-7 text-[10px] text-slate-600 font-medium hover:text-slate-900 hover:bg-slate-100"
             onClick={() => onAction("clear-hands", "")}
           >
             Clear All
@@ -57,7 +57,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
 
       {hands.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-slate-400">No active hand raises</p>
+          <p className="text-xs text-slate-600 font-medium">No active hand raises</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
@@ -72,7 +72,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs font-semibold text-slate-900 truncate">{h.name}</p>
-                  <p className="text-[9px] text-slate-500">Raised {getRelativeTime(h.raisedAt)}</p>
+                  <p className="text-[9px] text-slate-600 font-medium">Raised {getRelativeTime(h.raisedAt)}</p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">
@@ -97,7 +97,7 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-7 w-7 p-0 text-slate-400 hover:bg-slate-100 hover:text-slate-700 rounded-lg"
+                  className="h-7 w-7 p-0 text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-700 rounded-lg"
                   onClick={() => onAction("mark-answered", h.userId)}
                   title="Mark Answered"
                 >

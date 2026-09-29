@@ -118,7 +118,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
             setShowCreate(false);
           }}
         >
-          <div className="p-6">
+          <div className="p-4 sm:p-5 md:p-6">
             <h2 className="text-lg font-semibold text-slate-900">Add Session Recording</h2>
             <div className="space-y-4 mt-4">
               <div>
@@ -186,7 +186,7 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
         </div>
       ) : recordings.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No recordings uploaded yet</p>
+          <p className="text-xs text-slate-600 font-medium">No recordings uploaded yet</p>
         </div>
       ) : (
         <div className="space-y-3 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -212,8 +212,10 @@ export default function RecordingsPanel({ sessionId }: RecordingsPanelProps) {
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-900 truncate">{rec.title}</p>
-                    {rec.description && <p className="text-[10px] text-slate-500 mt-0.5 truncate">{rec.description}</p>}
-                    <div className="flex items-center gap-3 mt-2 text-[9px] text-slate-500">
+                    {rec.description && (
+                      <p className="text-[10px] text-slate-600 font-medium mt-0.5 truncate">{rec.description}</p>
+                    )}
+                    <div className="flex items-center gap-3 mt-2 text-[9px] text-slate-600 font-medium">
                       {rec.durationMinutes && <span>{rec.durationMinutes} minutes</span>}
                       <span className="flex items-center gap-0.5">
                         <Eye size={10} /> Views: {rec.totalViews || 0}

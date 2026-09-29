@@ -75,7 +75,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
   ];
 
   return (
-    <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
+    <div className="grid gap-3 sm:grid-cols-2 md:sm:grid-cols-2 lg:grid-cols-4">
       {statItems.map((item, idx) => {
         const Icon = item.icon;
         return (
@@ -92,7 +92,9 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
                 <Icon size={20} className="shrink-0" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold truncate">{item.label}</p>
+                <p className="text-xs uppercase tracking-wider text-slate-600 font-medium font-semibold truncate">
+                  {item.label}
+                </p>
                 <p className="text-xl font-bold text-slate-900 mt-0.5">{item.value}</p>
               </div>
             </div>

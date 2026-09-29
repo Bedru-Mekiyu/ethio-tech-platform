@@ -95,7 +95,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
 
       <div className="grid gap-4 md:grid-cols-[1fr_auto]">
         <div className="space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="flex items-center justify-between text-xs text-slate-600 font-medium">
             <span className="flex items-center gap-1.5">
               {autosaveError ? (
                 <>
@@ -116,7 +116,7 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
             value={content}
             onChange={(e) => handleSave(e.target.value)}
             placeholder="Write session outlines, class notes, or markdown instructions here. Autosaves automatically..."
-            className="min-h-[250px] text-sm bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+            className="min-h-[250px] text-sm bg-white border-slate-200 text-slate-900 placeholder:text-slate-600 font-medium rounded-xl focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
           />
         </div>
 
@@ -146,13 +146,15 @@ export default function NotesPanel({ sessionId }: NotesPanelProps) {
                         <span>Version {version.version}</span>
                         <span>{new Date(version.createdAt ?? version.updatedAt).toLocaleTimeString()}</span>
                       </div>
-                      <p className="text-slate-500 truncate mt-1">{version.changeSummary || "Auto-saved backup"}</p>
+                      <p className="text-slate-600 font-medium truncate mt-1">
+                        {version.changeSummary || "Auto-saved backup"}
+                      </p>
                     </div>
                   ),
                 )}
               </div>
             ) : (
-              <p className="text-[10px] text-slate-400">No version backups logged yet.</p>
+              <p className="text-[10px] text-slate-600 font-medium">No version backups logged yet.</p>
             )}
           </div>
         )}

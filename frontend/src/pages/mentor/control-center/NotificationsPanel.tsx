@@ -159,7 +159,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
           <Button
             size="sm"
             variant="ghost"
-            className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900"
+            className="h-8 w-8 p-0 text-slate-600 font-medium hover:text-slate-900"
             onClick={() => setSoundEnabled(!soundEnabled)}
             title={soundEnabled ? "Mute sounds" : "Enable sounds"}
           >
@@ -181,7 +181,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
       <div className="flex-1 overflow-y-auto mcc-scrollbar space-y-2 pr-1">
         {notifications.length === 0 ? (
           <div className="h-full flex items-center justify-center text-center">
-            <p className="text-xs text-slate-400">No live events recorded yet</p>
+            <p className="text-xs text-slate-600 font-medium">No live events recorded yet</p>
           </div>
         ) : (
           notifications.map((n) => (
@@ -196,7 +196,7 @@ export default function NotificationsPanel({ sessionId }: NotificationsPanelProp
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs text-slate-800 font-medium leading-normal">{n.message}</p>
-                <p className="text-[9px] text-slate-500 mt-1">{n.timestamp.toLocaleTimeString()}</p>
+                <p className="text-[9px] text-slate-600 font-medium mt-1">{n.timestamp.toLocaleTimeString()}</p>
               </div>
             </div>
           ))

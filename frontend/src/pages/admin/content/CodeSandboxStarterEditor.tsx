@@ -60,7 +60,7 @@ export function CodeSandboxStarterEditor({
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Code2 size={18} className="text-slate-900" />
           <h3 className="text-sm font-semibold text-slate-900">Code Lab & Sandbox Environment</h3>
         </div>
@@ -87,7 +87,7 @@ export function CodeSandboxStarterEditor({
           onChange={(e) => onCodeSandboxUrlChange(e.target.value)}
           placeholder="https://codesandbox.io/p/sandbox/... or https://stackblitz.com/edit/..."
         />
-        <p className="text-[11px] text-slate-500">
+        <p className="text-[11px] text-slate-600 font-medium">
           Students can open this link to launch a cloud container pre-configured with dependencies.
         </p>
       </div>
@@ -98,8 +98,8 @@ export function CodeSandboxStarterEditor({
           <label htmlFor="starter-code" className="block text-xs font-medium text-slate-700">
             Starter Code Snippet
           </label>
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-slate-500">Templates:</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[11px] text-slate-600 font-medium">Templates:</span>
             {TEMPLATES.map((tmpl) => (
               <button
                 key={tmpl.label}

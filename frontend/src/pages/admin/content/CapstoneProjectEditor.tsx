@@ -72,11 +72,11 @@ export function CapstoneProjectEditor({
     <div className="space-y-6 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Award size={20} className="text-amber-500" />
             <h3 className="text-base font-bold text-slate-900">Track Capstone Projects</h3>
           </div>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-600 font-medium mt-0.5">
             Capstone projects serve as the final portfolio pieces students build to graduate from &quot;{trackTitle}
             &quot;.
           </p>
@@ -99,13 +99,13 @@ export function CapstoneProjectEditor({
             <button
               type="button"
               onClick={() => setEditingProject(null)}
-              className="text-xs text-slate-500 hover:text-slate-900"
+              className="text-xs text-slate-600 font-medium hover:text-slate-900"
             >
               Cancel
             </button>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-1 sm:grid-cols-2">
             <div className="space-y-1.5 sm:col-span-2">
               <label htmlFor="capstone-title" className="block text-xs font-semibold text-slate-800">
                 Project Title <span className="text-rose-500">*</span>
@@ -194,7 +194,7 @@ export function CapstoneProjectEditor({
               <label className="block text-xs font-semibold text-slate-800">
                 Graduation Deliverables & Requirements
               </label>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Input
                   value={newRequirement}
                   onChange={(e) => setNewRequirement(e.target.value)}
@@ -225,7 +225,7 @@ export function CapstoneProjectEditor({
                     <button
                       type="button"
                       onClick={() => removeRequirement(idx)}
-                      className="text-slate-400 hover:text-rose-600 transition-colors"
+                      className="text-slate-600 font-medium hover:text-rose-600 transition-colors"
                     >
                       <Trash2 size={12} />
                     </button>
@@ -257,7 +257,7 @@ export function CapstoneProjectEditor({
       {!editingProject && (
         <div className="space-y-3">
           {projects.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-slate-200 p-6 text-center text-xs text-slate-500 bg-slate-50/50">
+            <div className="rounded-xl border border-dashed border-slate-200 p-4 sm:p-5 md:p-6 text-center text-xs text-slate-600 font-medium bg-slate-50/50">
               No capstone project linked to this track. Click &quot;Add Capstone Project&quot; to configure graduation
               criteria.
             </div>
@@ -268,7 +268,7 @@ export function CapstoneProjectEditor({
                 className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-slate-200/80 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-xs shadow-2xs"
               >
                 <div className="space-y-1 min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <h4 className="text-sm font-semibold text-slate-900 truncate">{proj.title}</h4>
                     {proj.difficulty && (
                       <Badge variant="outline" size="sm">
@@ -281,7 +281,9 @@ export function CapstoneProjectEditor({
                       </Badge>
                     )}
                   </div>
-                  {proj.description && <p className="text-xs text-slate-500 line-clamp-2">{proj.description}</p>}
+                  {proj.description && (
+                    <p className="text-xs text-slate-600 font-medium line-clamp-2">{proj.description}</p>
+                  )}
                   {proj.githubTemplate && (
                     <a
                       href={proj.githubTemplate}

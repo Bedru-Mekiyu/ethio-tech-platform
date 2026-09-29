@@ -45,7 +45,7 @@ function NewsCard({ item }: { item: NotificationItem }) {
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant={tone}>{item.type ?? "update"}</Badge>
-          <span className="text-xs text-slate-500">{formatTime.format(new Date(item.createdAt))}</span>
+          <span className="text-xs text-slate-600 font-medium">{formatTime.format(new Date(item.createdAt))}</span>
           {!item.isRead ? <span className="text-xs font-semibold text-amber-600">New</span> : null}
         </div>
         {item.link ? (
@@ -77,10 +77,10 @@ function MessageRow({ msg, currentUserId }: { msg: RealtimeChatMessage; currentU
         }`}
       >
         <div className="flex items-center justify-between gap-3">
-          <p className="text-xs uppercase tracking-wider text-slate-500 font-bold">
+          <p className="text-xs uppercase tracking-wider text-slate-600 font-bold">
             {msg.author ?? (msg.userId === currentUserId ? "You" : "Member")}
           </p>
-          <span className="text-[11px] text-slate-400 font-mono">
+          <span className="text-[11px] text-slate-600 font-medium font-mono">
             {new Date(msg.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
           </span>
         </div>
@@ -183,7 +183,7 @@ export function SquadPage() {
   return (
     <div className="page-shell grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
       <div className="space-y-6 text-slate-900">
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-3xl space-y-1">
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
@@ -192,7 +192,7 @@ export function SquadPage() {
               <p className="text-xs text-[var(--secondary)] font-bold font-mono">
                 Group XP: {squadQuery.data?.groupXP ?? 0}
               </p>
-              <p className="mt-1 text-xs text-slate-500">
+              <p className="mt-1 text-xs text-slate-600 font-medium">
                 Chat with your squad and coordinate project progress in real time.
               </p>
             </div>
@@ -210,7 +210,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <h2 className="text-sm font-bold text-slate-900">Recent Squad Updates</h2>
             <Badge variant="success" size="sm">
@@ -229,7 +229,7 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <h2 className="text-sm font-bold text-slate-900">Squad Chat & Activity</h2>
             <Badge variant={connectionStatus === "connected" ? "success" : "warning"} size="sm">
@@ -239,7 +239,7 @@ export function SquadPage() {
 
           <div className="mt-4 grid gap-4 rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 lg:grid-cols-[1fr_280px]">
             <div className="space-y-3">
-              <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-500 font-bold">
+              <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-600 font-bold">
                 <MessageSquare size={13} className="text-[var(--secondary)]" />
                 <span>Room Messages</span>
               </div>
@@ -255,14 +255,14 @@ export function SquadPage() {
                   value={draft}
                   onChange={(event) => setDraft(event.target.value)}
                   onKeyDown={(event) => event.key === "Enter" && sendDraft()}
-                  className="bg-white border-slate-300 text-xs h-10 text-slate-900 placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-900/5 shadow-2xs rounded-xl"
+                  className="bg-white border-slate-300 text-xs h-10 text-slate-900 placeholder:text-slate-600 font-medium focus:border-slate-500 focus:ring-2 focus:ring-slate-900/5 shadow-2xs rounded-xl"
                 />
                 <Button
                   type="button"
                   size="sm"
                   onClick={sendDraft}
                   aria-label="Send squad update"
-                  className="h-10 px-4 rounded-xl bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs"
+                  className="h-10 px-4 rounded-xl bg-primary hover:bg-[var(--primary-hover)] text-white shadow-xs whitespace-nowrap"
                 >
                   <Send size={13} />
                 </Button>
@@ -271,14 +271,16 @@ export function SquadPage() {
 
             <div className="space-y-3">
               <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs">
-                <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Presence</p>
+                <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">Presence</p>
                 <p className="mt-1 text-xl font-bold text-slate-900 font-mono">{presenceCount}</p>
-                <p className="mt-0.5 text-xs text-slate-500 font-medium">{pendingCount} queued for sync</p>
+                <p className="mt-0.5 text-xs text-slate-600 font-medium">{pendingCount} queued for sync</p>
               </div>
               <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-2xs">
-                <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Squad Progress</p>
+                <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">
+                  Squad Progress
+                </p>
                 <div className="mt-2 space-y-1.5">
-                  <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
+                  <div className="flex items-center justify-between text-xs text-slate-600 font-medium">
                     <span>Current sprint</span>
                     <span className="font-bold text-slate-900 font-mono">
                       {dashboard?.progressByTrack?.[0]?.overallProgressPercent ?? 0}%
@@ -291,17 +293,17 @@ export function SquadPage() {
                     className="h-2 bg-slate-100 rounded-full"
                   />
                 </div>
-                <div className="mt-3 grid grid-cols-3 gap-1.5">
+                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1.5">
                   <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
-                    <p className="text-[9px] uppercase font-bold text-slate-500">Active</p>
+                    <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Active</p>
                     <p className="mt-0.5 text-sm font-bold text-slate-900 font-mono">{activeProjects}</p>
                   </div>
                   <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
-                    <p className="text-[9px] uppercase font-bold text-slate-500">Feedback</p>
+                    <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Feedback</p>
                     <p className="mt-0.5 text-sm font-bold text-[var(--secondary)] font-mono">{feedbackReady}</p>
                   </div>
                   <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
-                    <p className="text-[9px] uppercase font-bold text-slate-500">Approved</p>
+                    <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Approved</p>
                     <p className="mt-0.5 text-sm font-bold text-emerald-600 font-mono">{completedProjects}</p>
                   </div>
                 </div>
@@ -312,33 +314,33 @@ export function SquadPage() {
       </div>
 
       <div className="space-y-6">
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 shadow-2xs">
               <Users size={16} />
             </span>
             <div>
               <p className="text-sm font-bold text-slate-900">Squad Overview</p>
-              <p className="text-[11px] text-slate-500">Realtime room telemetry</p>
+              <p className="text-[11px] text-slate-600 font-medium">Realtime room telemetry</p>
             </div>
           </div>
           <div className="mt-4 grid gap-2.5">
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
-              <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Room Members</p>
+              <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">Room Members</p>
               <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {roomState?.connectedUserIds?.length ?? presenceCount}
               </p>
             </div>
             <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
-              <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Notifications</p>
+              <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">Notifications</p>
               <p className="mt-1 text-lg font-bold text-[var(--secondary)] font-mono">{newsItems.length}</p>
             </div>
           </div>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">Upcoming Sessions</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 font-medium">Upcoming Sessions</h3>
             <Link
               to="/app/sessions"
               className="text-xs text-primary hover:text-[var(--primary-hover)] font-semibold transition"
@@ -355,7 +357,7 @@ export function SquadPage() {
                   className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 transition hover:border-slate-300"
                 >
                   <p className="text-xs font-semibold text-slate-900">{session.title}</p>
-                  <p className="mt-0.5 text-[11px] text-slate-500">
+                  <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                     {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "Scheduled soon"}
                   </p>
                 </div>
@@ -366,10 +368,10 @@ export function SquadPage() {
           </div>
         </Card>
 
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm space-y-2.5">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm space-y-2.5">
           <Link to="/app/projects">
             <Button
-              className="w-full text-xs font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-xs"
+              className="w-full text-xs font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-xs whitespace-nowrap"
               size="sm"
             >
               Open Projects Hub
@@ -377,7 +379,7 @@ export function SquadPage() {
           </Link>
           <Link to="/app/tracks">
             <Button
-              className="w-full text-xs font-semibold rounded-xl text-slate-700 border-slate-200 hover:bg-slate-50"
+              className="w-full text-xs font-semibold rounded-xl text-slate-700 border-slate-200 hover:bg-slate-50 whitespace-nowrap"
               variant="outline"
               size="sm"
             >

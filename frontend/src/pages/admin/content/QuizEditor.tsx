@@ -65,7 +65,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
   return (
     <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <HelpCircle size={18} className="text-amber-600" />
           <h3 className="text-sm font-semibold text-slate-900">Lesson Assessment Quiz</h3>
         </div>
@@ -75,7 +75,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
       </div>
 
       {questions.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-slate-200 p-6 text-center text-xs text-slate-500 bg-slate-50/50">
+        <div className="rounded-xl border border-dashed border-slate-200 p-4 sm:p-5 md:p-6 text-center text-xs text-slate-600 font-medium bg-slate-50/50">
           No quiz questions configured. Click &quot;Add Question&quot; to build an interactive knowledge check.
         </div>
       ) : (
@@ -93,7 +93,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                     size="icon"
                     disabled={qIndex === 0}
                     onClick={() => moveQuestion(qIndex, qIndex - 1)}
-                    className="h-7 w-7 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
+                    className="h-7 w-7 text-slate-600 font-medium hover:text-slate-700 hover:bg-slate-100"
                     title="Move up"
                   >
                     <ChevronUp size={14} />
@@ -104,7 +104,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                     size="icon"
                     disabled={qIndex === questions.length - 1}
                     onClick={() => moveQuestion(qIndex, qIndex + 1)}
-                    className="h-7 w-7 text-slate-500 hover:text-slate-700 hover:bg-slate-100"
+                    className="h-7 w-7 text-slate-600 font-medium hover:text-slate-700 hover:bg-slate-100"
                     title="Move down"
                   >
                     <ChevronDown size={14} />
@@ -134,9 +134,11 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
 
               {/* Options */}
               <div className="space-y-2 pt-1">
-                <span className="text-xs text-slate-500 block">Options (select radio for correct answer):</span>
+                <span className="text-xs text-slate-600 font-medium block">
+                  Options (select radio for correct answer):
+                </span>
                 {q.options.map((opt, optIndex) => (
-                  <div key={optIndex} className="flex items-center gap-2">
+                  <div key={optIndex} className="flex flex-wrap items-center gap-2">
                     <input
                       type="radio"
                       name={`correct-${qIndex}`}
@@ -157,7 +159,7 @@ export function QuizEditor({ questions, onChange }: QuizEditorProps) {
                         variant="ghost"
                         size="icon"
                         onClick={() => removeOption(qIndex, optIndex)}
-                        className="h-7 w-7 text-slate-400 hover:text-rose-600 hover:bg-rose-50"
+                        className="h-7 w-7 text-slate-600 font-medium hover:text-rose-600 hover:bg-rose-50"
                       >
                         <Trash2 size={13} />
                       </Button>

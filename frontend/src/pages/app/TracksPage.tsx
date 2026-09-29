@@ -74,7 +74,7 @@ function TracksSkeleton() {
         <Skeleton className="h-12 w-full max-w-md" />
         <Skeleton className="h-5 w-full max-w-xl" />
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
         <Skeleton className="h-28 rounded-[24px]" />
         <Skeleton className="h-28 rounded-[24px]" />
         <Skeleton className="h-28 rounded-[24px]" />
@@ -111,8 +111,8 @@ function TrackStatCard({
         </div>
       </div>
       <p className="mt-3 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
-      <p className="mt-0.5 text-[11px] text-slate-400">{helper}</p>
+      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-600 font-medium">{label}</p>
+      <p className="mt-0.5 text-[11px] text-slate-600 font-medium">{helper}</p>
     </Card>
   );
 }
@@ -152,11 +152,13 @@ function StudentTrackCard({
         </div>
 
         <div className="mt-3 space-y-0.5">
-          <p className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold">Curriculum Depth</p>
+          <p className="text-[9px] uppercase tracking-wider text-slate-600 font-medium font-semibold">
+            Curriculum Depth
+          </p>
           <p className="text-sm font-bold text-slate-900">
             {track.totalLessons ? `${track.completedLessons} / ${track.totalLessons} Lessons` : `${track.progress}%`}
           </p>
-          <p className="text-[11px] text-slate-500">+{track.xpReward ?? 0} Total XP</p>
+          <p className="text-[11px] text-slate-600 font-medium">+{track.xpReward ?? 0} Total XP</p>
         </div>
       </div>
 
@@ -165,11 +167,11 @@ function StudentTrackCard({
         <div className="flex flex-wrap items-center gap-1.5">
           <Badge variant="outline">{track.category ?? "Engineering"}</Badge>
           <Badge variant="outline">{track.difficulty ?? "Intermediate"}</Badge>
-          <span className="text-xs text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
             <Clock size={11} className="text-slate-700" />
             {track.estimatedWeeks ?? 12} Weeks
           </span>
-          <span className="text-xs text-slate-500 flex items-center gap-1">
+          <span className="text-xs text-slate-600 font-medium flex items-center gap-1">
             <Video size={11} className="text-slate-700" />
             {track.liveSessionsCount ?? 20} Workshops
           </span>
@@ -187,7 +189,7 @@ function StudentTrackCard({
         {/* Progress Bar */}
         <div className="space-y-1.5 max-w-xl">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-slate-500 font-medium">Path Completion</span>
+            <span className="text-slate-600 font-medium font-medium">Path Completion</span>
             <span className="font-semibold text-slate-900">{track.progress}%</span>
           </div>
           <ProgressBar value={track.progress} max={100} className="h-1.5" />
@@ -196,9 +198,9 @@ function StudentTrackCard({
         {/* Capstone Quick Preview Buttons */}
         {track.capstones && track.capstones.length > 0 && (
           <div className="pt-0.5">
-            <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-1.5">
+            <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium mb-1.5">
               <Code2 size={12} className="text-slate-700" />
-              <span className="font-semibold uppercase tracking-wider text-[9px] text-slate-500">
+              <span className="font-semibold uppercase tracking-wider text-[9px] text-slate-600 font-medium">
                 Capstone Projects:
               </span>
             </div>
@@ -223,7 +225,9 @@ function StudentTrackCard({
       {/* Action / Next Step Column */}
       <div className="flex flex-col justify-between gap-3 border-t lg:border-t-0 lg:border-l border-slate-200 pt-3 lg:pt-0 lg:pl-5">
         <div className="space-y-1">
-          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-500">Status & Mentorship</p>
+          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-600 font-medium">
+            Status & Mentorship
+          </p>
           <p className="text-xs text-slate-600 leading-relaxed">
             {done
               ? "All milestones completed! Review capstones or explore another track."
@@ -375,13 +379,13 @@ export function TracksPage() {
               Career-Aligned Engineering Curriculum
             </div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Learning Pathways</h1>
-            <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 font-medium mt-1 max-w-2xl leading-relaxed">
               Choose your engineering pathway, track your milestones, and build production-grade capstone projects with
               direct mentor reviews.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Link to="/app/workspace">
               <Button variant="outline" size="sm" className="gap-1.5 text-xs">
                 <Code2 size={14} />
@@ -398,7 +402,7 @@ export function TracksPage() {
         </div>
 
         {/* Top Metric Cards */}
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
           <TrackStatCard
             icon={Layers3}
             value={formatCompactNumber(view.tracks.length)}
@@ -454,19 +458,19 @@ export function TracksPage() {
 
           {/* Search Input */}
           <div className="relative w-full lg:max-w-xs">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-medium" />
             <Input
               type="text"
               placeholder="Search tracks or tools..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-8.5 h-9 bg-white border-slate-300 text-xs rounded-lg focus:border-slate-900 text-slate-900 placeholder:text-slate-400 shadow-xs"
+              className="pl-8.5 h-9 bg-white border-slate-300 text-xs rounded-lg focus:border-slate-900 text-slate-900 placeholder:text-slate-600 font-medium shadow-xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-600 font-medium hover:text-slate-600"
               >
                 Clear
               </button>

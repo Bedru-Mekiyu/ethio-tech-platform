@@ -71,7 +71,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4.5 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <Badge variant={statusTone} size="sm">
@@ -83,13 +83,13 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
         </div>
         <div>
           <h3 className="text-sm font-semibold text-slate-900">{project.title}</h3>
-          <p className="text-[11px] text-slate-500 mt-0.5">{project.trackTitle}</p>
+          <p className="text-[11px] text-slate-600 font-medium mt-0.5">{project.trackTitle}</p>
         </div>
         <p className="text-xs leading-relaxed text-slate-600 line-clamp-3">
           {project.description ?? "Project work assigned through your learning track."}
         </p>
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="flex items-center justify-between text-xs text-slate-600 font-medium">
             <span>Progress</span>
             <span className="font-semibold font-mono text-slate-900">{project.completionPercent}%</span>
           </div>
@@ -125,7 +125,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const overdue = isOverdue(assignment.dueDate) && status === "pending";
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4.5 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -141,18 +141,18 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
               {status}
             </Badge>
           </div>
-          <span className="text-xs text-slate-500 font-mono">{assignment.maxScore} pts</span>
+          <span className="text-xs text-slate-600 font-medium font-mono">{assignment.maxScore} pts</span>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-slate-900">{assignment.title}</h3>
           <p className="mt-0.5 text-xs text-slate-600 line-clamp-2 leading-relaxed">{assignment.description}</p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-slate-500">
+        <div className="flex items-center gap-3 text-xs text-slate-600 font-medium">
           <span className="flex items-center gap-1">
             {overdue ? (
               <AlertTriangle size={12} className="text-amber-500" />
             ) : (
-              <Clock size={12} className="text-slate-400" />
+              <Clock size={12} className="text-slate-600" />
             )}
             <span className={overdue ? "text-amber-600 font-medium" : ""}>{formatDueDate(assignment.dueDate)}</span>
           </span>
@@ -238,11 +238,11 @@ export function AssignedProjectsPage() {
 
   return (
     <div className="page-shell space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Assigned Projects & Tasks</h1>
-            <p className="mt-0.5 text-xs text-slate-500">
+            <p className="mt-0.5 text-xs text-slate-600 font-medium">
               Track assignments, submit milestone repositories, and review mentor feedback.
             </p>
           </div>

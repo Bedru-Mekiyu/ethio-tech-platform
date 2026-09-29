@@ -105,7 +105,7 @@ function ScheduleRow({
             </Badge>
           ) : null}
         </div>
-        <p className="text-xs text-slate-500 mt-0.5">{new Date(session.scheduledAt).toLocaleString()}</p>
+        <p className="text-xs text-slate-600 font-medium mt-0.5">{new Date(session.scheduledAt).toLocaleString()}</p>
         {max > 0 ? (
           <div className="mt-2 flex items-center gap-2">
             <div className="h-1.5 flex-1 max-w-24 overflow-hidden rounded-full bg-slate-100 border border-slate-200/80">
@@ -117,7 +117,7 @@ function ScheduleRow({
                 style={{ width: `${capacityPct}%` }}
               />
             </div>
-            <span className="text-[10px] text-slate-400 font-medium">
+            <span className="text-[10px] text-slate-600 font-medium">
               {participantCount}/{max}
             </span>
           </div>
@@ -126,23 +126,32 @@ function ScheduleRow({
       <div className="flex shrink-0 gap-2">
         {isLive ? (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" className="text-xs bg-primary hover:bg-[var(--primary-hover)] text-white font-medium">
+            <Button
+              size="sm"
+              className="text-xs bg-primary hover:bg-[var(--primary-hover)] text-white font-medium whitespace-nowrap"
+            >
               Join Live
             </Button>
           </Link>
         ) : isEnded ? (
           <Link to={`/app/sessions/${session._id}/feedback`}>
-            <Button size="sm" variant="outline" className="text-xs">
+            <Button size="sm" variant="outline" className="text-xs whitespace-nowrap">
               Feedback
             </Button>
           </Link>
         ) : isFull ? (
-          <Button size="sm" variant="outline" className="text-xs" disabled={isWaitlisting} onClick={onWaitlist}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="text-xs whitespace-nowrap"
+            disabled={isWaitlisting}
+            onClick={onWaitlist}
+          >
             {isWaitlisting ? "…" : "Join waitlist"}
           </Button>
         ) : (
           <Link to={`/app/classroom/${session._id}`}>
-            <Button size="sm" variant="outline" className="text-xs">
+            <Button size="sm" variant="outline" className="text-xs whitespace-nowrap">
               Open
             </Button>
           </Link>
@@ -176,7 +185,7 @@ function RecordingCard({ recording }: { recording: Recording }) {
           <img src={recording.thumbnailUrl} alt="" className="h-full w-full object-cover" />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <Video size={30} className="text-slate-400" />
+            <Video size={30} className="text-slate-600 font-medium" />
           </div>
         )}
         {recording.durationMinutes ? (
@@ -187,14 +196,15 @@ function RecordingCard({ recording }: { recording: Recording }) {
       </div>
       <div className="p-3.5">
         <h3 className="line-clamp-2 font-semibold text-slate-900 text-xs">{recording.title}</h3>
-        <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
+        <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-600 font-medium">
           <span className="flex items-center gap-1">
-            <CalendarDays size={11} className="text-slate-400" /> {formatRelativeDate(recording.publishedAt)}
+            <CalendarDays size={11} className="text-slate-600 font-medium" />{" "}
+            {formatRelativeDate(recording.publishedAt)}
           </span>
           {watchedPercent > 0 && !isCompleted ? <span>{watchedPercent}% watched</span> : null}
         </div>
         <Button
-          className="mt-3 w-full text-xs"
+          className="mt-3 w-full text-xs whitespace-nowrap"
           size="sm"
           variant={isCompleted ? "outline" : "primary"}
           onClick={handlePlay}
@@ -259,10 +269,10 @@ export function SessionHistoryPage() {
 
   return (
     <div className="page-shell space-y-6 text-slate-900">
-      <Card className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Live Sessions & Archives</h1>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-slate-600 font-medium">
             Join live cohort classes, manage seat waitlists, and rewatch past archived recordings.
           </p>
         </div>
@@ -270,7 +280,7 @@ export function SessionHistoryPage() {
           <Button
             variant="outline"
             size="sm"
-            className="gap-1.5 text-xs border-slate-200/80 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-xs"
+            className="gap-1.5 text-xs border-slate-200/80 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-xs whitespace-nowrap"
           >
             <CalendarDays size={14} />
             Study Planner & Calendar
@@ -301,12 +311,12 @@ export function SessionHistoryPage() {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-medium" />
           <Input
             placeholder={tab === "schedule" ? "Search sessions…" : "Search recordings…"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 bg-white border-slate-200/80 text-xs h-8 text-slate-900 placeholder:text-slate-400"
+            className="pl-9 bg-white border-slate-200/80 text-xs h-8 text-slate-900 placeholder:text-slate-600 font-medium"
           />
         </div>
       </div>

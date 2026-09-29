@@ -148,10 +148,10 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       <div className="flex gap-2 mb-3">
         <div className="relative flex-1">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-medium" />
           <Input
             placeholder="Search participants..."
-            className="h-8 pl-8 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+            className="h-8 pl-8 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-600 font-medium"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -172,7 +172,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
 
       {filteredParticipants.length === 0 ? (
         <div className="h-40 flex items-center justify-center text-center">
-          <p className="text-xs text-slate-400">No matching participants</p>
+          <p className="text-xs text-slate-600 font-medium">No matching participants</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -211,7 +211,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                         </Badge>
                       )}
                     </p>
-                    <p className="text-[9px] text-slate-500 mt-0.5">
+                    <p className="text-[9px] text-slate-600 font-medium mt-0.5">
                       Online: {Math.floor(p.attendanceDuration / 60)}m · {p.role}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                        className="h-8 w-8 p-0 text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-900"
                         onClick={() => onAction("mute", p.userId)}
                         title="Mute student"
                       >
@@ -232,7 +232,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                       <Button
                         size="sm"
                         variant="ghost"
-                        className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                        className="h-8 w-8 p-0 text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-900"
                         onClick={() => onAction("unmute", p.userId)}
                         title="Unmute student"
                       >
@@ -245,7 +245,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                      className="h-8 w-8 p-0 text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-900"
                       onClick={() => setMenuOpenId(menuOpenId === p.id ? null : p.id)}
                     >
                       <MoreHorizontal size={14} />
@@ -339,16 +339,16 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
           setFeedbackUser(null);
         }}
       >
-        <div className="p-6">
+        <div className="p-4 sm:p-5 md:p-6">
           <h2 className="text-lg font-semibold text-slate-900">Submit Session Feedback</h2>
           <p className="mt-2 text-sm text-slate-600">
             Rate <strong>{feedbackUser?.name}</strong>'s engagement, communication, and professionalism during this
             session.
           </p>
           <div className="space-y-4 py-4">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-slate-600 font-medium font-semibold">
                   Participation
                 </label>
                 <select
@@ -364,7 +364,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-slate-600 font-medium font-semibold">
                   Communication
                 </label>
                 <select
@@ -380,7 +380,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
                 </select>
               </div>
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                <label className="text-[10px] uppercase tracking-wider text-slate-600 font-medium font-semibold">
                   Professionalism
                 </label>
                 <select
@@ -397,12 +397,14 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Comment</label>
+              <label className="text-[10px] uppercase tracking-wider text-slate-600 font-medium font-semibold">
+                Comment
+              </label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add session comments or specific recommendations..."
-                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-slate-900 resize-none"
+                className="w-full min-h-20 rounded-lg border border-slate-200 bg-white p-2.5 text-xs text-slate-900 placeholder:text-slate-600 font-medium outline-none focus:border-slate-900 resize-none"
               />
             </div>
           </div>

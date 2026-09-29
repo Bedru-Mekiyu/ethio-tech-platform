@@ -64,7 +64,7 @@ export function ProfilePage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-wrap items-center gap-4 sm:gap-5">
           <div className="relative shrink-0">
             <Avatar
@@ -85,7 +85,7 @@ export function ProfilePage() {
           </div>
           <div className="min-w-0 flex-1">
             <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">{liveUser?.fullName ?? "Learner"}</h1>
-            <p className="mt-0.5 text-xs text-slate-500">{liveUser?.email}</p>
+            <p className="mt-0.5 text-xs text-slate-600 font-medium">{liveUser?.email}</p>
             <div className="mt-2.5 flex flex-wrap gap-1.5">
               {isStudent ? (
                 <>
@@ -117,7 +117,7 @@ export function ProfilePage() {
             </div>
           </div>
           <Link to={getSettingsPath(liveUser?.role ?? "student")}>
-            <Button variant="outline" size="sm" className="text-xs text-slate-700 gap-1.5">
+            <Button variant="outline" size="sm" className="text-xs text-slate-700 gap-1.5 whitespace-nowrap">
               <Edit3 size={13} /> Edit Profile
             </Button>
           </Link>
@@ -126,7 +126,7 @@ export function ProfilePage() {
 
       {isStudent ? (
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">{track?.title ?? "Current Track"}</h2>
               <Link to="/app/tracks" className="text-xs font-semibold text-primary hover:underline">
@@ -136,16 +136,16 @@ export function ProfilePage() {
             {track ? (
               <>
                 <ProgressBar value={completion} max={100} className="mt-4" />
-                <p className="mt-2 text-xs text-slate-500">
+                <p className="mt-2 text-xs text-slate-600 font-medium">
                   {completion}% complete · {track.lessons.completed}/{track.lessons.total} lessons
                 </p>
               </>
             ) : (
-              <p className="mt-3 text-xs text-slate-500">Enroll in a track to see your progress here.</p>
+              <p className="mt-3 text-xs text-slate-600 font-medium">Enroll in a track to see your progress here.</p>
             )}
           </Card>
 
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">Recent Achievements</h2>
               <Link to="/app/progress" className="text-xs font-semibold text-primary hover:underline">
@@ -162,7 +162,9 @@ export function ProfilePage() {
                     <Award size={14} className="text-[var(--secondary)] shrink-0" />
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-semibold text-slate-900 truncate">{badge.name}</p>
-                      <p className="text-[10px] text-slate-400 capitalize">{badge.category ?? "achievement"}</p>
+                      <p className="text-[10px] text-slate-600 font-medium capitalize">
+                        {badge.category ?? "achievement"}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -174,24 +176,24 @@ export function ProfilePage() {
         </div>
       ) : (
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <h2 className="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-3">Account Information</h2>
             <div className="mt-4 space-y-3 text-xs">
               <div className="flex justify-between py-1 border-b border-zinc-50">
-                <span className="text-slate-500">Account Type</span>
+                <span className="text-slate-600 font-medium">Account Type</span>
                 <span className="font-semibold text-slate-900 capitalize">{liveUser?.role?.replace("_", " ")}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-zinc-50">
-                <span className="text-slate-500">Email Address</span>
+                <span className="text-slate-600 font-medium">Email Address</span>
                 <span className="font-medium text-slate-900">{liveUser?.email}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-zinc-50">
-                <span className="text-slate-500">Account Status</span>
+                <span className="text-slate-600 font-medium">Account Status</span>
                 <span className="font-semibold text-slate-900 capitalize">{liveUser?.status ?? "active"}</span>
               </div>
               {liveUser?.bio && (
                 <div className="pt-1">
-                  <span className="text-slate-500 block mb-1">Bio</span>
+                  <span className="text-slate-600 font-medium block mb-1">Bio</span>
                   <p className="text-slate-700 leading-relaxed bg-slate-50 p-2.5 rounded-lg border border-slate-100">
                     {liveUser.bio}
                   </p>
@@ -200,7 +202,7 @@ export function ProfilePage() {
             </div>
           </Card>
 
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <h2 className="text-sm font-semibold text-slate-900 border-b border-slate-100 pb-3">Quick Navigation</h2>
             <div className="mt-4 space-y-2">
               <Link
@@ -234,7 +236,7 @@ export function ProfilePage() {
         {isStudent && (
           <Link to="/app/certificates" className="block group">
             <Card className="border-slate-200 bg-white p-4 transition-all hover:border-slate-400 hover:shadow-md shadow-sm">
-              <p className="text-xs font-medium text-slate-500">Certificates</p>
+              <p className="text-xs font-medium text-slate-600 font-medium">Certificates</p>
               <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-primary transition-colors">
                 View earned certificates →
               </p>
@@ -243,7 +245,7 @@ export function ProfilePage() {
         )}
         <Link to={getSettingsPath(liveUser?.role ?? "student")} className="block group">
           <Card className="border-slate-200 bg-white p-4 transition-all hover:border-slate-400 hover:shadow-md shadow-sm">
-            <p className="text-xs font-medium text-slate-500">Settings</p>
+            <p className="text-xs font-medium text-slate-600 font-medium">Settings</p>
             <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-primary transition-colors">
               Manage account & privacy →
             </p>

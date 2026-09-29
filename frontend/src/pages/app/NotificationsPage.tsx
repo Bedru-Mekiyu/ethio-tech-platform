@@ -169,13 +169,13 @@ export function NotificationsPage() {
 
   return (
     <div className="page-shell space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Notifications & Activity Feed
             </h1>
-            <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
+            <p className="text-xs text-slate-600 font-medium max-w-2xl leading-relaxed">
               Classroom, project deliverables, and mentor updates so you can respond quickly.
             </p>
           </div>
@@ -191,7 +191,7 @@ export function NotificationsPage() {
       </Card>
 
       <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
-        <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <CardHeader className="p-0 border-b border-slate-100 pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-semibold text-slate-900">Priority Updates</CardTitle>
@@ -201,7 +201,7 @@ export function NotificationsPage() {
                   variant="outline"
                   onClick={() => markAllRead.mutate()}
                   disabled={markAllRead.isPending}
-                  className="text-xs h-7 text-slate-700"
+                  className="whitespace-nowrap text-xs h-7 text-slate-700"
                 >
                   Mark all read
                 </Button>
@@ -229,7 +229,7 @@ export function NotificationsPage() {
                                 New
                               </Badge>
                             </div>
-                            <p className="mt-1 text-[11px] text-slate-400">
+                            <p className="mt-1 text-[11px] text-slate-600 font-medium">
                               {new Date(notification.createdAt).toLocaleString()}
                             </p>
                             <div className="mt-2.5 flex flex-wrap gap-2">
@@ -245,7 +245,7 @@ export function NotificationsPage() {
                                 size="sm"
                                 variant="outline"
                                 onClick={() => markRead.mutate(notification._id)}
-                                className="text-xs h-6 px-2 text-slate-600"
+                                className="whitespace-nowrap text-xs h-6 px-2 text-slate-600"
                               >
                                 Mark read
                               </Button>
@@ -273,7 +273,7 @@ export function NotificationsPage() {
                             New
                           </Badge>
                         </div>
-                        <p className="mt-1 text-[11px] text-slate-400">
+                        <p className="mt-1 text-[11px] text-slate-600 font-medium">
                           {new Date(notification.createdAt).toLocaleString()}
                         </p>
                         <div className="mt-2.5 flex flex-wrap gap-2">
@@ -286,7 +286,7 @@ export function NotificationsPage() {
                             size="sm"
                             variant="outline"
                             onClick={() => markRead.mutate(notification._id)}
-                            className="text-xs h-6 px-2 text-slate-600"
+                            className="whitespace-nowrap text-xs h-6 px-2 text-slate-600"
                           >
                             Mark read
                           </Button>
@@ -303,8 +303,8 @@ export function NotificationsPage() {
         </Card>
 
         <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
-            <div className="flex items-center gap-2 text-slate-500 border-b border-slate-100 pb-3">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
+            <div className="flex items-center gap-2 text-slate-600 font-medium border-b border-slate-100 pb-3">
               <CheckCircle2 size={13} className="text-[var(--secondary)]" />
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">Recent Read Items</span>
             </div>
@@ -313,7 +313,7 @@ export function NotificationsPage() {
                 grouped.recent.map((notification) => (
                   <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3">
                     <p className="text-xs font-medium text-slate-800">{notification.message}</p>
-                    <p className="mt-1 text-[11px] text-slate-400">
+                    <p className="mt-1 text-[11px] text-slate-600 font-medium">
                       {new Date(notification.createdAt).toLocaleString()}
                     </p>
                   </div>

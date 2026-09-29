@@ -111,7 +111,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
             <option value="answered">Answered</option>
             <option value="archived">Archived</option>
           </Select>
-          <span className="text-xs text-slate-500">
+          <span className="text-xs text-slate-600 font-medium">
             {questions.filter((q) => q.status === "pending").length} unanswered
           </span>
         </div>
@@ -119,7 +119,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
 
       {sortedAndFiltered.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No questions in this category</p>
+          <p className="text-xs text-slate-600 font-medium">No questions in this category</p>
         </div>
       ) : (
         <div className="space-y-3 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -136,7 +136,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                   <Button
                     size="sm"
                     variant="ghost"
-                    className="h-8 w-8 p-0 text-slate-400 hover:text-slate-800 hover:bg-slate-100"
+                    className="h-8 w-8 p-0 text-slate-600 font-medium hover:text-slate-800 hover:bg-slate-100"
                     onClick={() => handlePin(q.id)}
                     title={q.isPinned ? "Unpin question" : "Pin question"}
                     disabled={submittingId === q.id}
@@ -146,7 +146,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                       className={q.isPinned ? "text-[var(--secondary)] fill-[var(--secondary)]" : "opacity-60"}
                     />
                   </Button>
-                  <span className="text-[10px] font-bold text-slate-500 flex items-center gap-0.5">
+                  <span className="text-[10px] font-bold text-slate-600 font-medium flex items-center gap-0.5">
                     <ThumbsUp size={10} /> {q.upvoteCount}
                   </span>
                 </div>
@@ -187,7 +187,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                   <div className="flex items-center gap-2 mt-3 flex-wrap">
                     <Input
                       placeholder="Type response..."
-                      className="h-8 text-xs flex-1 min-w-[150px] bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                      className="h-8 text-xs flex-1 min-w-[150px] bg-white border-slate-200 text-slate-900 placeholder:text-slate-600 font-medium"
                       value={answerText[q.id] || ""}
                       onChange={(e) => setAnswerText((prev) => ({ ...prev, [q.id]: e.target.value }))}
                       onKeyDown={(e) => e.key === "Enter" && handleAnswer(q.id)}
@@ -203,7 +203,7 @@ export default function QuestionsPanel({ questions, sessionId }: QuestionsPanelP
                     <Button
                       size="sm"
                       variant="ghost"
-                      className="h-8 w-8 p-0 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+                      className="h-8 w-8 p-0 text-slate-600 font-medium hover:bg-slate-100 hover:text-slate-700"
                       onClick={() => handleArchive(q.id)}
                       title="Archive Question"
                       disabled={submittingId === q.id}

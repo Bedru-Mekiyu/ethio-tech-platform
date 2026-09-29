@@ -288,11 +288,11 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   return (
     <>
       <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6 text-slate-900">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Account Settings</h1>
-              <p className="mt-0.5 text-xs text-slate-500">
+              <p className="mt-0.5 text-xs text-slate-600 font-medium">
                 Manage your personal profile, avatar, credentials, and notifications.
               </p>
             </div>
@@ -315,10 +315,10 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
         )}
 
         {/* Main Grid Forms */}
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 sm:p-5 md:p-6 lg:grid-cols-2">
           {/* Profile Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
+            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-4 sm:p-5 md:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                   <UserCircle2 size={15} className="text-slate-600" /> Personal Profile
@@ -373,7 +373,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                   )}
                   {avatarOptions.length ? (
                     <div className="space-y-3">
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
                         Choose a default avatar
                       </p>
                       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -402,7 +402,9 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                               <p className="mt-2 text-center text-[11px] font-semibold text-slate-900">
                                 {option.label}
                               </p>
-                              <p className="text-center text-[10px] text-slate-500 capitalize">{option.role}</p>
+                              <p className="text-center text-[10px] text-slate-600 font-medium capitalize">
+                                {option.role}
+                              </p>
                             </button>
                           );
                         })}
@@ -490,7 +492,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
           {/* Security Password Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 sm:p-6">
+            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-4 sm:p-5 md:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                   <Lock size={15} className="text-slate-600" /> Security & Password

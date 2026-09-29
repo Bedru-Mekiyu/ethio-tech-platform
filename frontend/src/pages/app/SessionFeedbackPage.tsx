@@ -35,7 +35,7 @@ function StarRating({ value, onChange, label }: { value: number; onChange: (v: n
             />
           </button>
         ))}
-        <span className="ml-2 text-sm text-slate-500 font-medium">{value}/5</span>
+        <span className="ml-2 text-sm text-slate-600 font-medium">{value}/5</span>
       </div>
     </div>
   );
@@ -57,12 +57,12 @@ export function SessionFeedbackPage() {
   if (submitted) {
     return (
       <div className="mx-auto max-w-lg space-y-6 py-8 text-slate-900">
-        <Card className="flex flex-col items-center gap-4 p-6 sm:p-8 text-center rounded-2xl border border-slate-200/80 bg-white shadow-sm">
+        <Card className="flex flex-col items-center gap-4 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 text-center rounded-2xl border border-slate-200/80 bg-white shadow-sm">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80">
             <CheckCircle size={24} />
           </div>
           <h1 className="text-xl font-bold text-slate-900">Thank you for your feedback!</h1>
-          <p className="text-xs text-slate-500 max-w-md">
+          <p className="text-xs text-slate-600 font-medium max-w-md">
             Your input directly helps mentors optimize future sessions and peer reviews.
           </p>
           <div className="flex flex-wrap gap-2.5 pt-2">
@@ -92,14 +92,14 @@ export function SessionFeedbackPage() {
         Back to sessions
       </Link>
 
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
         <h1 className="text-xl font-bold tracking-tight text-slate-900">Session Review & Feedback</h1>
-        <p className="mt-0.5 text-xs text-slate-500">
+        <p className="mt-0.5 text-xs text-slate-600 font-medium">
           Rate the session across three dimensions and leave comments for your mentor.
         </p>
       </Card>
 
-      <Card className="space-y-5 p-5 sm:p-6 rounded-2xl border border-slate-200/80 bg-white shadow-sm">
+      <Card className="space-y-5 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 rounded-2xl border border-slate-200/80 bg-white shadow-sm">
         <StarRating value={quality} onChange={setQuality} label="Content Quality" />
         <StarRating value={engagement} onChange={setEngagement} label="Engagement" />
         <StarRating value={impact} onChange={setImpact} label="Learning Impact" />
@@ -111,7 +111,7 @@ export function SessionFeedbackPage() {
             onChange={(e) => setComment(e.target.value)}
             placeholder="What worked well? What could be improved?"
             rows={4}
-            className="w-full rounded-xl border border-slate-200/80 bg-white px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/5 resize-none"
+            className="w-full rounded-xl border border-slate-200/80 bg-white px-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-600 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/5 resize-none"
           />
         </div>
 

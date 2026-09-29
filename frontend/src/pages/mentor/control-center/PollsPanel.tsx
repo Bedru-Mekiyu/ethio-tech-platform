@@ -119,7 +119,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
             setShowCreate(false);
           }}
         >
-          <div className="p-6">
+          <div className="p-4 sm:p-5 md:p-6">
             <h2 className="text-lg font-semibold text-slate-900">Create Poll</h2>
             <div className="space-y-4 mt-4">
               <div>
@@ -205,7 +205,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
 
       {polls.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No polls created for this session yet</p>
+          <p className="text-xs text-slate-600 font-medium">No polls created for this session yet</p>
         </div>
       ) : (
         <div className="space-y-4 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -217,7 +217,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                   {poll.status}
                 </Badge>
               </div>
-              <div className="text-[9px] text-slate-500 mb-3">
+              <div className="text-[9px] text-slate-600 font-medium mb-3">
                 {poll.type} · {poll.totalVotes} total responses
               </div>
               <div className="space-y-2">
@@ -229,7 +229,7 @@ export default function PollsPanel({ polls, sessionId }: PollsPanelProps) {
                     />
                     <div className="relative flex items-center justify-between px-3 h-full z-10 text-xs">
                       <span className="text-slate-800 font-medium">{opt.text}</span>
-                      <span className="text-slate-500 font-semibold">
+                      <span className="text-slate-600 font-medium font-semibold">
                         {opt.voteCount} ({opt.percentage}%)
                       </span>
                     </div>

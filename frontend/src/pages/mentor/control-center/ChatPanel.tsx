@@ -139,7 +139,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         <div className="flex-1 overflow-y-auto mcc-scrollbar my-3 space-y-3 pr-1">
           {filteredMessages.length === 0 ? (
             <div className="h-full flex items-center justify-center text-center">
-              <p className="text-xs text-slate-400">No messages in this tab</p>
+              <p className="text-xs text-slate-600 font-medium">No messages in this tab</p>
             </div>
           ) : (
             filteredMessages.map((msg) => {
@@ -169,7 +169,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
                       )}
                     </span>
                     <div className="flex items-center gap-1.5 shrink-0 opacity-60 hover:opacity-100 transition-opacity">
-                      <span className="text-[9px] text-slate-500">
+                      <span className="text-[9px] text-slate-600 font-medium">
                         {msg.at ? new Date(msg.at).toLocaleTimeString() : ""}
                       </span>
                       {!isOwn && (

@@ -116,7 +116,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
             setShowCreate(false);
           }}
         >
-          <div className="p-6">
+          <div className="p-4 sm:p-5 md:p-6">
             <h2 className="text-lg font-semibold text-slate-900">Share Resource</h2>
             <div className="space-y-4 mt-4">
               <div>
@@ -189,7 +189,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
         </div>
       ) : resources.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No resources shared yet</p>
+          <p className="text-xs text-slate-600 font-medium">No resources shared yet</p>
         </div>
       ) : (
         <div className="space-y-2.5 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -214,7 +214,9 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-900 truncate">{res.title}</p>
-                    {res.description && <p className="text-[10px] text-slate-500 truncate mt-0.5">{res.description}</p>}
+                    {res.description && (
+                      <p className="text-[10px] text-slate-600 font-medium truncate mt-0.5">{res.description}</p>
+                    )}
                     <p className="text-xs text-primary mt-1 truncate hover:underline">
                       <a href={res.url} target="_blank" rel="noopener noreferrer">
                         {res.url}
@@ -224,7 +226,7 @@ export default function ResourcesPanel({ sessionId }: ResourcesPanelProps) {
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  <div className="flex items-center gap-2 text-[10px] text-slate-500">
+                  <div className="flex items-center gap-2 text-[10px] text-slate-600 font-medium">
                     <span className="flex items-center gap-0.5">
                       <Eye size={11} /> {res.viewCount || 0}
                     </span>

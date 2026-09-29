@@ -145,7 +145,7 @@ export function MentorOnboardingPage() {
     <div className="mx-auto max-w-xl space-y-6 px-4 py-8">
       <div className="space-y-1">
         <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Mentor Onboarding</h1>
-        <p className="text-xs text-slate-500 leading-relaxed">
+        <p className="text-xs text-slate-600 font-medium leading-relaxed">
           Complete these setup steps to activate your mentor console and interactive tools.
         </p>
       </div>
@@ -162,7 +162,7 @@ export function MentorOnboardingPage() {
                   ? "border-slate-900 bg-slate-900 text-white font-semibold shadow-xs"
                   : done
                     ? "border-slate-300 text-slate-900 bg-slate-100"
-                    : "border-slate-200 bg-slate-50 text-slate-500"
+                    : "border-slate-200 bg-slate-50 text-slate-600 font-medium"
               }`}
             >
               {done ? <CheckCircle2 size={12} className="text-slate-900" /> : null}
@@ -172,12 +172,14 @@ export function MentorOnboardingPage() {
         })}
       </div>
 
-      <Card className="space-y-4 border-slate-200/80 bg-white p-5 sm:p-6 rounded-xl shadow-sm">
+      <Card className="space-y-4 border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 rounded-xl shadow-sm">
         {activeStep === "password" && (
           <>
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900">Set Your Permanent Password</h2>
-              <p className="text-xs text-slate-500">Replace your temporary activation password with a secure one.</p>
+              <p className="text-xs text-slate-600 font-medium">
+                Replace your temporary activation password with a secure one.
+              </p>
             </div>
             <FormField id="currentPassword" label="Temporary Password">
               <PasswordInput
@@ -208,7 +210,9 @@ export function MentorOnboardingPage() {
           <>
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900">Accept Mentor Terms</h2>
-              <p className="text-xs text-slate-500">Review ethical teaching standards and student safety policies.</p>
+              <p className="text-xs text-slate-600 font-medium">
+                Review ethical teaching standards and student safety policies.
+              </p>
             </div>
             <label className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50/60 p-3 text-xs text-slate-700">
               <input
@@ -236,7 +240,7 @@ export function MentorOnboardingPage() {
           <>
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900">Complete Your Mentor Profile</h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-600 font-medium">
                 Let students know about your professional background and areas of expertise.
               </p>
             </div>
@@ -276,13 +280,15 @@ export function MentorOnboardingPage() {
           <>
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900">Upload Profile Photo</h2>
-              <p className="text-xs text-slate-500">Add a clear profile picture for students to recognize you.</p>
+              <p className="text-xs text-slate-600 font-medium">
+                Add a clear profile picture for students to recognize you.
+              </p>
             </div>
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setAvatarFile(e.target.files?.[0] ?? null)}
-              className="text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+              className="text-xs text-slate-600 font-medium file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
             />
             <Button
               size="sm"
@@ -299,7 +305,7 @@ export function MentorOnboardingPage() {
           <>
             <div className="space-y-0.5">
               <h2 className="text-sm font-bold text-slate-900">Set Teaching Availability</h2>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-600 font-medium">
                 Add at least one weekly window. You can refine this later in mentor availability settings.
               </p>
             </div>
@@ -316,7 +322,7 @@ export function MentorOnboardingPage() {
                 ))}
               </select>
             </FormField>
-            <p className="text-[11px] text-slate-500">Default recurring slot: 6:00 PM – 8:00 PM</p>
+            <p className="text-[11px] text-slate-600 font-medium">Default recurring slot: 6:00 PM – 8:00 PM</p>
             <div className="flex gap-2.5 pt-2">
               <Button
                 size="sm"

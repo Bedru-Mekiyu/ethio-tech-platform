@@ -31,7 +31,7 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
 
       {sortedScores.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-400">No engagement data recorded for this session yet</p>
+          <p className="text-xs text-slate-600 font-medium">No engagement data recorded for this session yet</p>
         </div>
       ) : (
         <div className="space-y-2.5 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -56,7 +56,7 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
                     ) : rank === 3 ? (
                       <span className="text-lg">🥉</span>
                     ) : (
-                      <span className="text-xs font-bold text-slate-500">{rank}</span>
+                      <span className="text-xs font-bold text-slate-600 font-medium">{rank}</span>
                     )}
                   </div>
 
@@ -69,7 +69,7 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
 
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-900 truncate">{es.student?.fullName || "Unknown"}</p>
-                    <div className="flex items-center gap-3 mt-1.5 text-[9px] text-slate-500">
+                    <div className="flex items-center gap-3 mt-1.5 text-[9px] text-slate-600 font-medium">
                       <span className="flex items-center gap-0.5">
                         <MessageSquare size={10} /> Questions: {es.questionsAsked}
                       </span>
@@ -97,7 +97,11 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
                   <span
                     className={cn(
                       "text-base font-bold",
-                      es.score >= 70 ? "text-amber-600" : es.score >= 40 ? "text-slate-800" : "text-slate-500",
+                      es.score >= 70
+                        ? "text-amber-600"
+                        : es.score >= 40
+                          ? "text-slate-800"
+                          : "text-slate-600 font-medium",
                     )}
                   >
                     {es.score}

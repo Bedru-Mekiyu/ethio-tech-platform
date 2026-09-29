@@ -154,7 +154,7 @@ export function StudentDashboardPage() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Welcome back, {firstName}</h1>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-slate-600 font-medium">
             {currentStreak > 0
               ? `${currentStreak}-day learning streak active. Continue building your track milestones.`
               : "Let's build something great today. Pick up where you left off."}
@@ -167,7 +167,7 @@ export function StudentDashboardPage() {
             <Button
               variant="outline"
               size="sm"
-              className="gap-1.5 text-xs border-slate-200/80 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-semibold shadow-xs"
+              className="gap-1.5 text-xs border-slate-200/80 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-semibold shadow-xs whitespace-nowrap"
             >
               <CalendarDays size={13} />
               Study Planner
@@ -177,20 +177,20 @@ export function StudentDashboardPage() {
           <div className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
             <Flame className="text-amber-500" size={14} />
             <span className="text-xs font-semibold text-slate-900">{currentStreak}</span>
-            <span className="text-[11px] text-slate-500 font-medium">Day Streak</span>
+            <span className="text-[11px] text-slate-600 font-medium">Day Streak</span>
           </div>
 
           <div className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
             <Zap className="text-[var(--secondary)]" size={14} />
             <span className="text-xs font-semibold text-slate-900">{userXp.toLocaleString()}</span>
-            <span className="text-[11px] text-slate-500 font-medium">XP (Lvl {userLevel})</span>
+            <span className="text-[11px] text-slate-600 font-medium">XP (Lvl {userLevel})</span>
           </div>
 
           <Link to="/leaderboard">
             <div className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs hover:border-slate-300 transition-colors">
               <Trophy className="text-amber-600" size={14} />
               <span className="text-xs font-semibold text-slate-900">#{data?.leaderboardPosition ?? "—"}</span>
-              <span className="text-[11px] text-slate-500 font-medium">Rank</span>
+              <span className="text-[11px] text-slate-600 font-medium">Rank</span>
             </div>
           </Link>
         </div>
@@ -228,7 +228,7 @@ export function StudentDashboardPage() {
                         <Video size={11} /> Upcoming Session
                       </Badge>
                     )}
-                    <span className="text-xs text-slate-500 font-mono">
+                    <span className="text-xs text-slate-600 font-medium font-mono">
                       {new Date(activeMeeting.scheduledAt).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -240,7 +240,7 @@ export function StudentDashboardPage() {
                     {activeMeeting.title || "Interactive Mentor Session"}
                   </h2>
 
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-600 font-medium">
                     Mentor: {activeMeeting.mentorName || "Instructor"} · Live coding & Q&A
                   </p>
                 </div>
@@ -273,11 +273,11 @@ export function StudentDashboardPage() {
           ) : null}
 
           {/* Active Track Progress & Next Recommended Lesson */}
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-600 font-medium">
                     Active Track
                   </span>
                   <Badge
@@ -289,7 +289,7 @@ export function StudentDashboardPage() {
                   </Badge>
                 </div>
                 <h2 className="mt-1 text-base font-bold text-slate-900">{trackTitle}</h2>
-                <p className="mt-0.5 text-xs text-slate-500">
+                <p className="mt-0.5 text-xs text-slate-600 font-medium">
                   {completedLessons} of {totalLessons} lessons completed ({completion}% complete)
                 </p>
               </div>
@@ -307,21 +307,21 @@ export function StudentDashboardPage() {
                 <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider">Next Up</span>
-                    <span className="text-[11px] text-slate-400">· ~20 mins</span>
+                    <span className="text-[11px] text-slate-600 font-medium">· ~20 mins</span>
                   </div>
                   <p className="text-xs font-bold text-slate-900 truncate">
                     {currentTrack?.title
                       ? `Mastering State & Event Handlers in ${currentTrack.title}`
                       : "Building Interactive Components & State Management"}
                   </p>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     Earn <span className="font-semibold text-[var(--secondary)]">+50 XP</span> upon completion
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
                   <Link to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/workspace"}>
-                    <Button size="sm" className="gap-1 font-semibold shadow-xs">
+                    <Button size="sm" className="gap-1 font-semibold shadow-xs whitespace-nowrap">
                       <Play size={13} className="fill-current" />
                       Resume Lesson
                     </Button>
@@ -330,7 +330,7 @@ export function StudentDashboardPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="gap-1 text-xs border-slate-200/80 bg-white font-semibold shadow-xs hover:bg-slate-50"
+                      className="gap-1 text-xs border-slate-200/80 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                     >
                       <Code2 size={13} />
                       IDE
@@ -342,7 +342,7 @@ export function StudentDashboardPage() {
           </Card>
 
           {/* ─── Assigned Projects & Tasks ─── */}
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
@@ -390,7 +390,7 @@ export function StudentDashboardPage() {
                           {project.submissionStatus || project.category}
                         </Badge>
                       </div>
-                      <p className="text-[11px] text-slate-500">{project.trackTitle}</p>
+                      <p className="text-[11px] text-slate-600 font-medium">{project.trackTitle}</p>
                     </div>
 
                     <div className="flex items-center gap-3 shrink-0">
@@ -403,7 +403,7 @@ export function StudentDashboardPage() {
                         <Button
                           size="sm"
                           variant="outline"
-                          className="text-xs h-7 px-2.5 border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50"
+                          className="text-xs h-7 px-2.5 border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                         >
                           Open Task
                         </Button>
@@ -415,14 +415,14 @@ export function StudentDashboardPage() {
             ) : (
               <div className="mt-3.5 rounded-xl border border-dashed border-slate-200 p-5 text-center bg-slate-50/40">
                 <p className="text-xs text-slate-600 font-semibold">No individual project assignments pending.</p>
-                <p className="mt-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                   Build production capstones and earn mentor reviews to populate your verified Skill Passport.
                 </p>
                 <Link to="/app/projects" className="mt-2.5 inline-block">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-xs border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50"
+                    className="text-xs border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                   >
                     Browse Project Catalog
                   </Button>
@@ -433,7 +433,7 @@ export function StudentDashboardPage() {
 
           {/* ─── Physical Hub Arrival & Access Pass Widget ─── */}
           {activeBooking ? (
-            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-6 shadow-sm">
+            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -465,8 +465,8 @@ export function StudentDashboardPage() {
                   <h3 className="text-sm font-bold text-slate-900 pt-0.5">
                     {activeBooking.hubCity} Tech Hub · {activeBooking.workstationLabel}
                   </h3>
-                  <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                    <MapPin size={12} className="text-slate-400" />
+                  <p className="text-xs text-slate-600 font-medium flex items-center gap-1.5">
+                    <MapPin size={12} className="text-slate-600 font-medium" />
                     {activeBooking.hubAddress} · Slot: {activeBooking.slotLabel} ({activeBooking.slotTimeRange})
                   </p>
                 </div>
@@ -479,7 +479,11 @@ export function StudentDashboardPage() {
                       Verified Arrival (+50 XP)
                     </div>
                   ) : (
-                    <Button size="sm" onClick={handleHubCheckIn} className="gap-1 font-semibold shadow-xs">
+                    <Button
+                      size="sm"
+                      onClick={handleHubCheckIn}
+                      className="gap-1 font-semibold shadow-xs whitespace-nowrap"
+                    >
                       <Zap size={13} />
                       Check In (+50 XP)
                     </Button>
@@ -489,7 +493,7 @@ export function StudentDashboardPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="text-xs border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
+                      className="text-xs border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs whitespace-nowrap"
                     >
                       Book / Switch Desk
                     </Button>
@@ -500,31 +504,33 @@ export function StudentDashboardPage() {
               {/* Hub Hardware & Connection Specs */}
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3.5 border-t border-slate-100">
                 <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
-                  <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
                     Pass Code
                   </span>
                   <span className="font-mono text-xs font-bold text-slate-800">{activeBooking.passCode}</span>
                 </div>
                 <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
-                  <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider flex items-center gap-1">
                     <Wifi size={11} className="text-[var(--secondary)]" /> Connection
                   </span>
                   <span className="text-xs font-bold text-slate-800">High-Speed Fiber</span>
                 </div>
                 <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
-                  <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">
+                  <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
                     Visit Date
                   </span>
                   <span className="text-xs font-bold text-slate-800">{activeBooking.visitDate}</span>
                 </div>
                 <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
-                  <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">Slot</span>
+                  <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
+                    Slot
+                  </span>
                   <span className="text-xs font-bold text-slate-800">{activeBooking.slotLabel}</span>
                 </div>
               </div>
             </Card>
           ) : (
-            <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-6 shadow-sm">
+            <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -545,14 +551,14 @@ export function StudentDashboardPage() {
                   <h3 className="text-sm font-bold text-slate-900 pt-0.5">
                     Need reliable fiber internet or uninterrupted power?
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-600 font-medium">
                     Reserve a workstation, GPU compute rig, or study desk at any of our regional learning hubs across
                     Ethiopia.
                   </p>
                 </div>
                 <div className="shrink-0">
                   <Link to="/hubs">
-                    <Button size="sm" className="gap-1 font-semibold shadow-xs">
+                    <Button size="sm" className="gap-1 font-semibold shadow-xs whitespace-nowrap">
                       <Building2 size={13} />
                       Reserve Hub Seat
                     </Button>
@@ -572,7 +578,7 @@ export function StudentDashboardPage() {
                 <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
                   Coding Workspace
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
                   In-browser editor, terminal runner, and multi-language presets.
                 </p>
               </Card>
@@ -586,7 +592,7 @@ export function StudentDashboardPage() {
                 <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
                   Project Portfolio
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
                   Ship real-world portfolio tasks and get mentor review code scores.
                 </p>
               </Card>
@@ -600,7 +606,7 @@ export function StudentDashboardPage() {
                 <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
                   Study Planner
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
                   Sprint calendar, study blocks, and mentor session schedule.
                 </p>
               </Card>
@@ -614,7 +620,7 @@ export function StudentDashboardPage() {
                 <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
                   Progress & Badges
                 </h3>
-                <p className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
                   Skill mastery radar, verified certificates, and achievement history.
                 </p>
               </Card>
@@ -633,7 +639,7 @@ export function StudentDashboardPage() {
                 </div>
                 <div>
                   <h3 className="text-xs font-bold text-slate-900">Daily Streak</h3>
-                  <p className="text-[10px] text-slate-500">Best: {longestStreak} days</p>
+                  <p className="text-[10px] text-slate-600 font-medium">Best: {longestStreak} days</p>
                 </div>
               </div>
               <span className="text-base font-bold font-mono text-amber-600">{currentStreak}d</span>
@@ -645,7 +651,7 @@ export function StudentDashboardPage() {
                 const isActive = idx <= currentDayIndex && currentStreak > 0;
                 return (
                   <div key={idx} className="flex flex-col items-center gap-1">
-                    <span className="text-[10px] font-semibold text-slate-500">{day}</span>
+                    <span className="text-[10px] font-semibold text-slate-600 font-medium">{day}</span>
                     <div
                       className={cn(
                         "h-5 w-5 rounded-full flex items-center justify-center text-[9px] font-bold transition-all",
@@ -653,7 +659,7 @@ export function StudentDashboardPage() {
                           ? "bg-slate-900 text-white font-bold shadow-xs"
                           : idx === currentDayIndex
                             ? "border border-dashed border-slate-400 text-slate-800 bg-slate-100"
-                            : "bg-white border border-slate-200 text-slate-400",
+                            : "bg-white border border-slate-200 text-slate-600 font-medium",
                       )}
                     >
                       {isActive ? "✓" : ""}
@@ -662,7 +668,7 @@ export function StudentDashboardPage() {
                 );
               })}
             </div>
-            <p className="mt-2.5 text-center text-[11px] text-slate-500 font-medium">
+            <p className="mt-2.5 text-center text-[11px] text-slate-600 font-medium">
               Solve 1 challenge today to keep your streak active.
             </p>
           </Card>
@@ -686,7 +692,7 @@ export function StudentDashboardPage() {
             </div>
 
             <p className="mt-2 text-xs font-bold text-slate-800">{dailyChallenge?.title ?? "Practice Daily Problem"}</p>
-            <p className="mt-0.5 text-xs text-slate-500 leading-relaxed">
+            <p className="mt-0.5 text-xs text-slate-600 font-medium leading-relaxed">
               {dailyChallenge?.description ??
                 "Complete one lesson quiz, submit coding task code, or ask a question in your squad."}
             </p>
@@ -698,7 +704,7 @@ export function StudentDashboardPage() {
             ) : (
               <Button
                 size="sm"
-                className="mt-3 w-full font-semibold shadow-xs"
+                className="mt-3 w-full font-semibold shadow-xs whitespace-nowrap"
                 disabled={completeChallengeMutation.isPending}
                 onClick={() => completeChallengeMutation.mutate()}
               >
@@ -734,10 +740,10 @@ export function StudentDashboardPage() {
                     {squad.groupXP ? `${squad.groupXP.toLocaleString()} XP` : "0 XP"}
                   </Badge>
                 </div>
-                <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                <p className="mt-1 text-xs text-slate-600 font-medium leading-relaxed">
                   Active squad peers collaborating on track milestones and peer code reviews.
                 </p>
-                <div className="mt-3 flex items-center justify-between border-t border-slate-200/80 pt-2 text-xs text-slate-500">
+                <div className="mt-3 flex items-center justify-between border-t border-slate-200/80 pt-2 text-xs text-slate-600 font-medium">
                   <span className="font-medium">{squad.members?.length || squad.memberCount || 1} members</span>
                   <Link
                     to={squadPath || "/app/squads"}
@@ -750,14 +756,14 @@ export function StudentDashboardPage() {
             ) : (
               <div className="mt-3 rounded-xl border border-dashed border-slate-200 p-4 text-center bg-slate-50/40">
                 <p className="text-xs text-slate-600 font-semibold">Not assigned to a study squad</p>
-                <p className="mt-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                   Collaborate in 4–6 person peer squads with shared code reviews and sprint check-ins.
                 </p>
                 <Link to={squadPath || "/app/squads"} className="mt-2.5 inline-block">
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-xs h-7 border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50"
+                    className="text-xs h-7 border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                   >
                     Join or Create Squad
                   </Button>

@@ -82,7 +82,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
         )}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <Input
           id="lesson-video-url"
           value={url}
@@ -102,7 +102,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
         )}
       </div>
 
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-slate-600 font-medium">
         Supports YouTube, Vimeo, Loom, or direct HTTPS video streams. Automatically converts share links to responsive
         iframe embeds.
       </p>
@@ -110,7 +110,7 @@ export function VideoEmbedPreview({ url, onChange }: VideoEmbedPreviewProps) {
       {/* Video Preview Player */}
       {showPreview && isValid && embedUrl && (
         <div className="mt-3 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 shadow-md">
-          <div className="flex items-center justify-between border-b border-zinc-800 bg-slate-900/90 px-4 py-2 text-xs text-slate-400">
+          <div className="flex items-center justify-between border-b border-zinc-800 bg-slate-900/90 px-4 py-2 text-xs text-slate-600 font-medium">
             <span className="font-semibold text-slate-100 flex items-center gap-1.5">
               <Play size={12} className="text-white" />
               Live Video Preview ({platform})

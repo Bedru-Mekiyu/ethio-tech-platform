@@ -227,7 +227,7 @@ export function MarkdownEditor({
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
               style={{ minHeight }}
-              className="w-full resize-y bg-transparent p-4 font-mono text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:outline-none"
+              className="w-full resize-y bg-transparent p-4 font-mono text-sm leading-relaxed text-slate-900 placeholder:text-slate-600 font-medium focus:outline-none"
             />
           </div>
         )}
@@ -237,14 +237,14 @@ export function MarkdownEditor({
           <div
             className={cn(
               mode === "split" ? "md:col-span-6" : "md:col-span-12",
-              "overflow-y-auto bg-slate-50/40 p-4 sm:p-6",
+              "overflow-y-auto bg-slate-50/40 p-4 sm:p-4 sm:p-5 md:p-6",
             )}
             style={{ minHeight }}
           >
             {mode === "split" && (
               <div className="mb-3 flex items-center justify-between border-b border-slate-200 pb-2 text-xs font-semibold uppercase tracking-wider text-slate-900">
                 <span>Live Markdown Preview</span>
-                <span className="text-[10px] text-slate-500 font-medium">Real-time render</span>
+                <span className="text-[10px] text-slate-600 font-medium font-medium">Real-time render</span>
               </div>
             )}
             <MarkdownPreview content={value} />
@@ -253,8 +253,8 @@ export function MarkdownEditor({
       </div>
 
       {/* Status Footer */}
-      <div className="flex items-center justify-between border-t border-slate-200/80 bg-slate-50/50 px-4 py-2 text-[11px] text-slate-500">
-        <span className="flex items-center gap-3">
+      <div className="flex items-center justify-between border-t border-slate-200/80 bg-slate-50/50 px-4 py-2 text-[11px] text-slate-600 font-medium">
+        <span className="flex flex-wrap items-center gap-3">
           <span>{wordCount} words</span>
           <span>·</span>
           <span>{charCount} characters</span>

@@ -84,7 +84,7 @@ export function RegisterPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+      className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">
@@ -92,7 +92,9 @@ export function RegisterPage() {
           <span>Student Registration</span>
         </div>
         <h2 className="text-xl font-bold tracking-tight text-slate-900">Create Student Account</h2>
-        <p className="text-xs text-slate-500">Join hands-on software engineering tracks with senior mentor support.</p>
+        <p className="text-xs text-slate-600 font-medium">
+          Join hands-on software engineering tracks with senior mentor support.
+        </p>
       </motion.div>
 
       <motion.form variants={fadeUp} custom={1} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
@@ -101,7 +103,7 @@ export function RegisterPage() {
             <Input
               autoComplete="given-name"
               placeholder="Abel"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("firstName", errors.firstName?.message)}
               {...register("firstName")}
             />
@@ -110,7 +112,7 @@ export function RegisterPage() {
             <Input
               autoComplete="family-name"
               placeholder="Kebede"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("lastName", errors.lastName?.message)}
               {...register("lastName")}
             />
@@ -122,7 +124,7 @@ export function RegisterPage() {
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
             {...fieldAriaProps("email", errors.email?.message)}
             {...register("email")}
           />
@@ -138,7 +140,7 @@ export function RegisterPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Create password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("password", errors.password?.message)}
               {...register("password")}
             />
@@ -148,7 +150,7 @@ export function RegisterPage() {
             <PasswordInput
               autoComplete="new-password"
               placeholder="Confirm password"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("confirmPassword", errors.confirmPassword?.message)}
               {...register("confirmPassword")}
             />
@@ -178,7 +180,7 @@ export function RegisterPage() {
             <Input
               autoComplete="address-level2"
               placeholder="e.g. Addis Ababa"
-              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+              className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
               {...fieldAriaProps("city", errors.city?.message)}
               {...register("city")}
             />
@@ -193,7 +195,7 @@ export function RegisterPage() {
         >
           <Input
             placeholder="Web, Mobile, AI, Cloud"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-400 shadow-xs focus:border-slate-900"
+            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
             {...fieldAriaProps("learningInterests", errors.learningInterests?.message)}
             {...register("learningInterests")}
           />
@@ -231,7 +233,7 @@ export function RegisterPage() {
       </motion.div>
 
       <motion.div variants={fadeUp} custom={3} className="mt-5 border-t border-slate-100 pt-4 text-center">
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-600 font-medium">
           Already have an account?{" "}
           <Link
             to="/login"

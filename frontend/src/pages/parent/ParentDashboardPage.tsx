@@ -31,11 +31,11 @@ export function ParentDashboardPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="max-w-3xl space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Welcome back, {firstName}</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
               Monitor linked learners&apos; progress, milestone completion, and platform learning engagement.
             </p>
           </div>
@@ -62,7 +62,7 @@ export function ParentDashboardPage() {
           onAction={() => navigate("/contact")}
         />
       ) : (
-        <div className="grid gap-3.5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3.5 md:sm:grid-cols-2 xl:sm:grid-cols-2 lg:grid-cols-3">
           {learners.map((learner) => (
             <Card key={learner.id} className="border-slate-200 bg-white p-4.5 shadow-xs hover:border-slate-300">
               <div className="flex items-center gap-2.5">
@@ -71,7 +71,7 @@ export function ParentDashboardPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-slate-900">{learner.fullName}</p>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-slate-600 font-medium">
                     Level {learner.level ?? 1} · {learner.xp ?? 0} XP
                   </p>
                 </div>
@@ -98,7 +98,7 @@ export function ParentDashboardPage() {
         </div>
       )}
 
-      <div className="grid gap-3.5 md:grid-cols-3">
+      <div className="grid gap-3.5 md:sm:grid-cols-2 lg:grid-cols-3">
         <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-slate-900">
             <ShieldCheck size={16} />

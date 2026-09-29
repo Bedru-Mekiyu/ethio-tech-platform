@@ -81,7 +81,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
           <Button
             size="sm"
             variant="ghost"
-            className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900"
+            className="h-8 w-8 p-0 text-slate-600 font-medium hover:text-slate-900"
             onClick={() => setSoundEnabled(!soundEnabled)}
             title={soundEnabled ? "Mute sounds" : "Enable sounds"}
           >
@@ -100,7 +100,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
 
       {queue.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-slate-400">No participants waiting</p>
+          <p className="text-xs text-slate-600 font-medium">No participants waiting</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
@@ -113,7 +113,9 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
                 <Avatar name={w.name} src={w.avatar} size="sm" className="h-8 w-8 rounded-lg shrink-0" />
                 <div className="min-w-0">
                   <p className="text-xs font-semibold text-slate-900 truncate">{w.name}</p>
-                  <p className="text-[9px] text-slate-500">Joined {new Date(w.joinedAt).toLocaleTimeString()}</p>
+                  <p className="text-[9px] text-slate-600 font-medium">
+                    Joined {new Date(w.joinedAt).toLocaleTimeString()}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-1 shrink-0">
