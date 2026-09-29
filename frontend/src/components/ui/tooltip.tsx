@@ -10,13 +10,7 @@ export interface TooltipProps {
   contentClassName?: string;
 }
 
-export function Tooltip({
-  content,
-  children,
-  side = "top",
-  className,
-  contentClassName,
-}: TooltipProps) {
+export function Tooltip({ content, children, side = "top", className, contentClassName }: TooltipProps) {
   const [isOpen, setIsOpen] = useState(false);
   const tooltipId = useId();
 
@@ -42,9 +36,9 @@ export function Tooltip({
           id={tooltipId}
           role="tooltip"
           className={cn(
-            "pointer-events-none absolute z-50 max-w-xs rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-xs font-medium text-white shadow-lg",
+            "pointer-events-none absolute z-50 max-w-xs rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-2 text-xs font-medium text-white shadow-lg dark:bg-[#1a2236] dark:border-white/[0.12] dark:shadow-[0_4px_12px_rgba(0,0,0,0.5)] dark:text-slate-100",
             sideClasses[side],
-            contentClassName
+            contentClassName,
           )}
         >
           {content}

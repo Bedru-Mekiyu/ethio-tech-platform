@@ -69,13 +69,13 @@ export function CapstonePreviewModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.98, y: 12 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl"
+          className="relative z-10 w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-white/[0.12] dark:bg-[#1a2236] dark:shadow-[var(--shadow-floating)]"
           role="dialog"
           aria-modal="true"
           aria-label={project.title}
         >
           {/* Header banner */}
-          <div className="relative border-b border-slate-200 bg-slate-50 p-6 sm:p-8">
+          <div className="relative border-b border-slate-200 bg-slate-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">

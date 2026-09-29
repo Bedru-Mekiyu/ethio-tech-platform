@@ -60,54 +60,60 @@ export function ProvisionAccountDialog({
       aria-label="Create mentor account"
     >
       <div
-        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-2xl"
+        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-2xl dark:border-white/[0.12] dark:bg-[#1a2236] dark:shadow-[var(--shadow-floating)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-bold text-slate-900">Create Mentor Account</h2>
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">Create Mentor Account</h2>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-700 transition-colors p-1"
+            className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors p-1"
             aria-label="Close"
           >
             <X size={20} />
           </button>
         </div>
 
-        <p className="mb-5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+        <p className="mb-5 text-xs sm:text-sm text-slate-700 leading-relaxed dark:text-slate-300">
           Set the email and password for the mentor account. The mentor will use these credentials to sign in.
         </p>
 
         <div className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700">Email</label>
+            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Email
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:focus:border-white/30"
               placeholder="mentor@example.com"
             />
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700">Password</label>
+            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Password
+            </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:focus:border-white/30"
               placeholder="At least 8 characters, with letter and number"
             />
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700">Confirm password</label>
+            <label className="mb-1.5 block text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+              Confirm password
+            </label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900"
+              className="h-10 w-full rounded-xl border border-slate-200 bg-white px-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:focus:border-white/30"
               placeholder="Repeat the password"
             />
           </div>

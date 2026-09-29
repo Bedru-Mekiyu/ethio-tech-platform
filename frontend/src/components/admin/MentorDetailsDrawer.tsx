@@ -254,12 +254,12 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
     <>
       <div className="fixed inset-0 z-40 bg-black/50" onClick={onClose} aria-hidden="true" />
       <aside
-        className="fixed inset-y-0 right-0 z-50 flex w-full sm:max-w-xl flex-col border-l border-slate-200 bg-white shadow-2xl"
+        className="fixed inset-y-0 right-0 z-50 flex w-full sm:max-w-xl flex-col border-l border-slate-200 bg-white shadow-2xl dark:border-white/[0.12] dark:bg-[#1a2236] dark:shadow-[-24px_0_48px_rgba(0,0,0,0.55)]"
         role="dialog"
         aria-modal="true"
         aria-label="Mentor application details"
       >
-        <div className="flex items-center gap-4 border-b border-slate-200 px-6 py-4 bg-slate-50/80">
+        <div className="flex items-center gap-4 border-b border-slate-200 px-6 py-4 bg-slate-50/80 dark:border-white/10 dark:bg-white/[0.03]">
           {linkedUser?.avatarUrl ? (
             <img
               src={linkedUser.avatarUrl}

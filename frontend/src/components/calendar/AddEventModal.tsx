@@ -230,15 +230,15 @@ export function AddEventModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
-          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200/80 bg-white text-slate-900 shadow-2xl"
+          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200/80 bg-white text-slate-900 shadow-2xl dark:border-white/[0.12] dark:bg-[#1a2236] dark:text-slate-100 dark:shadow-[var(--shadow-floating)]"
           role="dialog"
           aria-modal="true"
           aria-labelledby="add-event-modal-title"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-6 py-5">
+          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-6 py-5 dark:border-white/10 dark:bg-white/[0.03]">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80 shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <CalendarIcon size={20} />
               </div>
               <div>
