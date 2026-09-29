@@ -111,7 +111,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
   return (
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-[550px] shadow-sm rounded-xl">
       <div className="flex items-center gap-2 mb-4 shrink-0">
-        <div className="bg-slate-100 text-slate-900 border border-slate-200 p-1.5 rounded-lg">
+        <div className="bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 p-1.5 rounded-lg">
           <MessageSquare size={16} />
         </div>
         <h3 className="text-sm font-semibold text-slate-900">Live Moderated Chat</h3>

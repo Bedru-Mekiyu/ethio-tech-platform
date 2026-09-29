@@ -822,7 +822,7 @@ export function HowItWorksPage() {
                 </div>
 
                 <div className="lg:col-span-5">
-                  <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs">
+                  <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <SmartImage
                       src={currentRoleData.image}
                       alt={currentRoleData.imageAlt}

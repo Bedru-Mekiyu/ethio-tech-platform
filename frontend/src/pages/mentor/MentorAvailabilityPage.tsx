@@ -170,7 +170,7 @@ export function MentorAvailabilityPage() {
             {slots.map((slot, index) => (
               <li
                 key={`${slot.dayOfWeek}-${index}`}
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 px-3.5 py-2.5"
               >
                 <div className="flex items-center gap-3 text-xs text-slate-900">
                   <span className="inline-block w-24 font-semibold text-slate-900">{DAYS[slot.dayOfWeek]}</span>

@@ -214,7 +214,7 @@ export function MentorOnboardingPage() {
                 Review ethical teaching standards and student safety policies.
               </p>
             </div>
-            <label className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50/60 p-3 text-xs text-slate-700">
+            <label className="flex items-start gap-2.5 rounded-lg border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-xs text-slate-700">
               <input
                 type="checkbox"
                 checked={termsChecked}

@@ -324,7 +324,7 @@ export function LeaderboardPage() {
                           {isMe ? (
                             <Badge
                               variant="secondary"
-                              className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] font-semibold"
+                              className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] font-semibold dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
                             >
                               You
                             </Badge>

@@ -69,7 +69,7 @@ function QueueAgeBadge({ createdAt }: { createdAt?: string }) {
 
   if (elapsedDays >= 2) {
     return (
-      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
+      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
         Needs review · {elapsedDays}d in queue
       </span>
     );
@@ -109,7 +109,7 @@ function ReviewWorkspace({
           {submission.status ?? "pending"}
         </Badge>
       </div>
-      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50/60 p-3">
+      <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3">
         <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider text-slate-700">
           <FileText size={12} />
           <span>Files Attached</span>
@@ -495,7 +495,7 @@ export function MentorReviewPage() {
           {/* Student Feedback History */}
           <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
-              <div className="bg-slate-100 p-1.5 rounded-lg text-slate-900 border border-slate-200">
+              <div className="bg-slate-100 p-1.5 rounded-lg text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <MessageSquare size={14} />
               </div>
               <h4 className="text-xs font-semibold text-slate-900">Learner Feedback History</h4>
@@ -517,7 +517,7 @@ export function MentorReviewPage() {
                   ) => (
                     <div
                       key={idx}
-                      className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3 text-xs space-y-1.5"
+                      className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-xs space-y-1.5"
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div>

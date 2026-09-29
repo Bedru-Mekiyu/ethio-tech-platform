@@ -93,12 +93,12 @@ function StatCard({
 }) {
   const toneClass =
     tone === "success"
-      ? "bg-slate-100 text-slate-900 border border-slate-200"
+      ? "bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
       : tone === "warning"
-        ? "bg-amber-50 text-amber-600 border border-amber-100"
+        ? "bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400"
         : tone === "secondary"
-          ? "bg-slate-100 text-slate-900 border border-slate-200"
-          : "bg-slate-100 text-slate-900 border border-slate-200";
+          ? "bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          : "bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300";
 
   return (
     <Card className="border border-slate-200 bg-white p-4 shadow-sm">
@@ -372,7 +372,7 @@ export function MentorStudentsPage() {
               Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shrink-0">
             <Users size={18} aria-hidden="true" />
           </div>
         </div>

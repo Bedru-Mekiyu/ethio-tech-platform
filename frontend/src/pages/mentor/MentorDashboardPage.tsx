@@ -215,7 +215,7 @@ export function MentorDashboardPage() {
             <div className="flex items-center gap-2">
               <Badge
                 variant="outline"
-                className="text-[11px] gap-1 font-semibold bg-slate-100 text-slate-900 border-slate-200"
+                className="text-[11px] gap-1 font-semibold bg-slate-100 text-slate-900 border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
               >
                 <Star size={12} className="text-amber-500 fill-amber-400" /> Lead Mentor
               </Badge>
@@ -377,7 +377,7 @@ export function MentorDashboardPage() {
                 upcomingSessions.map((session) => (
                   <div
                     key={session._id}
-                    className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
+                    className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 hover:border-slate-300 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shrink-0 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
@@ -420,7 +420,7 @@ export function MentorDashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+                <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10">
                   <Clock3 size={28} className="mx-auto text-slate-400 mb-2" />
                   <p className="text-xs font-medium text-slate-600">No upcoming live classrooms scheduled</p>
                   <Link to="/mentor/sessions">
@@ -446,13 +446,13 @@ export function MentorDashboardPage() {
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Session Quality</span>
                 <p className="text-lg font-bold text-slate-900">{impact ? `${impact}%` : "—"}</p>
                 <ProgressBar value={impact ?? 0} max={100} className="mt-1.5 h-1" />
               </div>
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Reviews Delivered</span>
                 <p className="text-lg font-bold text-slate-900">
                   {dashboard?.contributionMetrics?.feedbackCount
@@ -466,7 +466,7 @@ export function MentorDashboardPage() {
                 />
               </div>
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Mentee Engagement</span>
                 <p className="text-lg font-bold text-slate-900">
                   {dashboard?.contributionMetrics?.engagement
@@ -499,7 +499,7 @@ export function MentorDashboardPage() {
                 pendingSubmissions.map((sub) => (
                   <div
                     key={sub._id}
-                    className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-2.5 hover:border-slate-300 transition-colors"
+                    className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 space-y-2.5 hover:border-slate-300 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div className="space-y-0.5 min-w-0">
@@ -541,7 +541,7 @@ export function MentorDashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
+                <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10">
                   <FileCheck size={28} className="mx-auto text-slate-400 mb-2" />
                   <p className="text-xs font-semibold text-slate-800">Review queue is clear</p>
                   <p className="mt-0.5 text-[11px] font-medium text-slate-600">
@@ -558,7 +558,7 @@ export function MentorDashboardPage() {
             <div className="space-y-1.5">
               <Link
                 to="/mentor/students"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
               >
                 <div className="flex items-center gap-2">
                   <Users size={14} className="text-slate-900" />
@@ -569,7 +569,7 @@ export function MentorDashboardPage() {
 
               <Link
                 to="/mentor/availability"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
               >
                 <div className="flex items-center gap-2">
                   <Clock size={14} className="text-amber-500" />
@@ -580,7 +580,7 @@ export function MentorDashboardPage() {
 
               <Link
                 to="/mentor/reviews"
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-2.5 text-xs font-medium text-slate-700 hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 transition-all"
               >
                 <div className="flex items-center gap-2">
                   <FileCheck size={14} className="text-slate-900" />

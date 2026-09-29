@@ -165,7 +165,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
             <span>Student Rating</span>
             <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
-          <ProgressBar value={score} max={100} className="h-1 bg-slate-100" />
+          <ProgressBar value={score} max={100} className="h-1 bg-slate-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" />
         </div>
 
         {/* Skills Tag Cloud */}
@@ -381,7 +381,7 @@ export function MentorsPage() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs">
+            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.mentorship.codeReview}
                 alt="Senior software engineer mentoring a junior developer on system design and code implementation"

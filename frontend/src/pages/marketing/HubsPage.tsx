@@ -459,7 +459,7 @@ export function HubsPage() {
 
       {/* ─── Navigation Switcher: Directory vs Passes ─── */}
       <div className="flex justify-center border-b border-slate-200/80 pb-4">
-        <div className="inline-flex rounded-xl border border-slate-200 bg-slate-100 p-1">
+        <div className="inline-flex rounded-xl border border-slate-200 bg-slate-100 p-1 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
           <button
             type="button"
             onClick={() => setActiveTab("directory")}
@@ -989,7 +989,7 @@ export function HubsPage() {
                 </div>
               </div>
               <div className="lg:col-span-6">
-                <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs">
+                <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <SmartImage
                     src={LOCAL_MEDIA_ASSETS.hubs.workshop}
                     alt="Physical technology learning hub equipped with dual monitors and high-speed developer workstations"
@@ -1267,11 +1267,11 @@ export function HubsPage() {
 
             {checkInCelebration ? (
               <div className="space-y-4 py-2">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-slate-900 mx-auto border border-slate-200">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-slate-100 text-slate-900 mx-auto border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <Award size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">Check-In Complete!</h3>
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-300 px-3 py-1 text-xs font-bold text-slate-900">
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-300 px-3 py-1 text-xs font-bold text-slate-900 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <CheckCircle2 size={13} />
                   +50 XP Awarded to your profile
                 </div>
@@ -1361,7 +1361,7 @@ export function HubsPage() {
                     {checkInMutation.isPending ? "Validating Arrival..." : "Confirm Arrival Check-In (+50 XP)"}
                   </Button>
                 ) : (
-                  <div className="rounded-lg border border-slate-200 bg-slate-100 p-2.5 text-xs font-semibold text-slate-900 flex items-center justify-center gap-2">
+                  <div className="rounded-lg border border-slate-200 bg-slate-100 p-2.5 text-xs font-semibold text-slate-900 flex items-center justify-center gap-2 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <Check size={15} />
                     <span>Checked In · Physical Pass Verified</span>
                   </div>

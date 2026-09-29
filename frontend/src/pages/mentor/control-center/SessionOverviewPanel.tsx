@@ -85,8 +85,10 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
                 className={cn(
                   "rounded-xl p-2.5 shrink-0",
                   item.color === "secondary" && "bg-blue-50 text-[var(--secondary)] border border-blue-100",
-                  item.color === "warning" && "bg-amber-50 text-amber-600 border border-amber-100",
-                  (item.color === "default" || !item.color) && "bg-slate-100 text-slate-900 border border-slate-200",
+                  item.color === "warning" &&
+                    "bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400",
+                  (item.color === "default" || !item.color) &&
+                    "bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300",
                 )}
               >
                 <Icon size={20} className="shrink-0" />

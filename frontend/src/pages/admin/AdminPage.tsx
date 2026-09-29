@@ -196,7 +196,7 @@ export function AdminPage() {
         <Button
           variant="outline"
           size="sm"
-          className="mt-4 border-red-200 bg-white text-red-700 hover:bg-red-50 text-xs"
+          className="mt-4 border-red-200 bg-white text-red-700 hover:bg-red-50 dark:bg-red-950/20 dark:border-red-900/40 dark:text-red-400 text-xs"
           onClick={() => refetch()}
         >
           <RefreshCw size={13} className="mr-1.5" />
@@ -455,7 +455,10 @@ export function AdminPage() {
           {trackData.length > 0 ? (
             <div className="mt-4 space-y-3">
               {trackData.map((track) => (
-                <div key={track.name} className="space-y-1 rounded-lg border border-slate-200/80 bg-slate-50/50 p-3">
+                <div
+                  key={track.name}
+                  className="space-y-1 rounded-lg border border-slate-200/80 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3"
+                >
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-900">{track.name}</span>
                     <div className="flex items-center gap-2">
@@ -516,7 +519,7 @@ export function AdminPage() {
                 return (
                   <div
                     key={mentor.fullName ?? index}
-                    className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                    className="flex items-center justify-between rounded-lg border border-slate-200/80 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-center gap-2.5">
                       <div
@@ -581,7 +584,7 @@ export function AdminPage() {
                 return (
                   <div
                     key={hub.city ?? index}
-                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3.5 transition-all hover:border-slate-300 hover:bg-slate-50"
+                    className="rounded-lg border border-slate-200/80 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3.5 transition-all hover:border-slate-300 hover:bg-slate-50"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
@@ -659,7 +662,7 @@ export function AdminPage() {
               upcomingSessions.slice(0, 4).map((session, index) => (
                 <div
                   key={session.title ?? index}
-                  className="rounded-lg border border-slate-200/80 bg-slate-50/50 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                  className="rounded-lg border border-slate-200/80 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3 transition-colors hover:border-slate-300 hover:bg-slate-50"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <p className="font-semibold text-slate-900 text-xs truncate">{session.title}</p>

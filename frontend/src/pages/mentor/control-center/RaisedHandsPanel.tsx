@@ -31,13 +31,16 @@ export default function RaisedHandsPanel({ hands, onAction }: RaisedHandsPanelPr
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-slate-100 text-slate-900 border border-slate-200 p-1.5 rounded-lg">
+          <div className="bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 p-1.5 rounded-lg">
             <Hand size={16} />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
               Raised Hands
-              <Badge variant="outline" className="h-5 px-1.5 bg-slate-100 text-slate-900 border-slate-200">
+              <Badge
+                variant="outline"
+                className="h-5 px-1.5 bg-slate-100 text-slate-900 border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+              >
                 {hands.length}
               </Badge>
             </h3>

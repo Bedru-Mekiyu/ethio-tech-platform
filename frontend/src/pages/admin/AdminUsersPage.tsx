@@ -293,17 +293,17 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-3 gap-2.5">
-            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-center">
               <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">XP & Level</span>
               <p className="mt-1 text-base font-bold text-slate-900">{(user.xp ?? 0).toLocaleString()}</p>
               <p className="text-[10px] text-slate-500">Lvl {user.level ?? 1}</p>
             </div>
-            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-center">
               <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">Sessions</span>
               <p className="mt-1 text-base font-bold text-slate-900">{user.totalSessions ?? 0}</p>
               <p className="text-[10px] text-slate-500">Completed</p>
             </div>
-            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-3 text-center">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-center">
               <span className="text-[11px] uppercase tracking-wider text-slate-500 font-medium">Rating</span>
               <p className="mt-1 text-base font-bold text-amber-600">
                 {user.mentorRating ? `${user.mentorRating}/5` : "N/A"}
@@ -434,7 +434,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
           </div>
 
           {/* Profile Details */}
-          <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+          <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-xs">
             <p className="font-semibold uppercase tracking-wider text-slate-500">Profile Details</p>
             <div className="grid gap-2.5">
               <div className="flex items-center justify-between">
@@ -472,7 +472,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Interests & Skills */}
           {((user.expertise ?? []).length > 0 || (user.learningInterests ?? []).length > 0) && (
-            <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+            <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-xs">
               <p className="font-semibold uppercase tracking-wider text-slate-500">Expertise & Interests</p>
               {(user.expertise ?? []).length > 0 && (
                 <div className="space-y-1">
@@ -503,14 +503,14 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
 
           {/* Bio */}
           {user.bio && (
-            <div className="space-y-1.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+            <div className="space-y-1.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-xs">
               <p className="font-semibold uppercase tracking-wider text-slate-500">Bio</p>
               <p className="text-slate-700 leading-relaxed">{user.bio}</p>
             </div>
           )}
 
           {/* Security & Activity History */}
-          <div className="space-y-2.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 text-xs">
+          <div className="space-y-2.5 rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-xs">
             <p className="font-semibold uppercase tracking-wider text-slate-500">Security & Activity</p>
             <div className="grid gap-2 text-slate-600">
               <div className="flex justify-between">

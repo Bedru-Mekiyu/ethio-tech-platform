@@ -613,7 +613,7 @@ Ethio-Tech Mentorship Team`;
                 </section>
 
                 {app.rejectionReason && (
-                  <section className="rounded-2xl border border-red-200 bg-red-50/50 p-4 text-sm">
+                  <section className="rounded-2xl border border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900/40 dark:text-red-400/50 p-4 text-sm">
                     <p className="font-semibold text-red-600">Previous Rejection Reason</p>
                     <p className="mt-1 text-slate-700">{app.rejectionReason}</p>
                   </section>
@@ -683,7 +683,10 @@ Ethio-Tech Mentorship Team`;
                         ],
                       },
                     ].map((c) => (
-                      <div key={c.key} className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 space-y-2">
+                      <div
+                        key={c.key}
+                        className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 space-y-2"
+                      >
                         <div className="flex items-center justify-between text-sm">
                           <span className="font-semibold text-slate-900">{c.title}</span>
                           <span className="font-mono text-xs font-bold text-slate-900">
@@ -726,7 +729,7 @@ Ethio-Tech Mentorship Team`;
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4">
                       <p className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                         Dedicated Video Room
                       </p>
@@ -754,7 +757,7 @@ Ethio-Tech Mentorship Team`;
                       </div>
                     </div>
 
-                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+                    <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4">
                       <p className="text-xs font-semibold uppercase tracking-wider text-slate-700">Calendar Invite</p>
                       <p className="text-xs font-medium text-slate-600">
                         Schedule directly on Google Calendar with prefilled agenda and meeting link.
@@ -791,7 +794,7 @@ Ethio-Tech Mentorship Team`;
                     <textarea
                       readOnly
                       value={emailTemplate}
-                      className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3 text-xs font-mono text-slate-700 leading-relaxed outline-none"
+                      className="min-h-[100px] w-full rounded-xl border border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3 text-xs font-mono text-slate-700 leading-relaxed outline-none"
                     />
                   </div>
                 </section>
@@ -840,7 +843,7 @@ Ethio-Tech Mentorship Team`;
                       )}
                     </div>
                   ) : (
-                    <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
+                    <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-6 text-center">
                       <p className="text-sm font-semibold text-slate-800">No active user account provisioned yet.</p>
                       <p className="text-xs font-medium text-slate-600 mt-1">
                         Once approved, you can create credentials or provision automatically.
@@ -874,7 +877,7 @@ Ethio-Tech Mentorship Team`;
                         {loginHistory!.devices!.map((device, i) => (
                           <div
                             key={i}
-                            className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/60 p-3 text-xs"
+                            className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3 text-xs"
                           >
                             <div className="flex items-center gap-2.5">
                               {device.type === "mobile" ? (
@@ -908,11 +911,11 @@ Ethio-Tech Mentorship Team`;
                   Teaching Metrics & Cohort Activity
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-center">
                     <p className="text-2xl font-bold text-slate-900">{detail?.teaching.totalSessions ?? 0}</p>
                     <p className="text-[11px] font-bold text-slate-600 mt-1 uppercase tracking-wider">Total Sessions</p>
                   </div>
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4 text-center">
                     <p className="text-2xl font-bold text-slate-900">{detail?.teaching.studentsCount ?? 0}</p>
                     <p className="text-[11px] font-bold text-slate-600 mt-1 uppercase tracking-wider">Mentees Guided</p>
                   </div>
@@ -924,7 +927,7 @@ Ethio-Tech Mentorship Team`;
                     {detail!.teaching.sessions.slice(0, 8).map((session, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm"
+                        className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 px-4 py-3 text-sm"
                       >
                         <span className="text-slate-900 font-medium">{session.title ?? "Untitled Session"}</span>
                         <Badge

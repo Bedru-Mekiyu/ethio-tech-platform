@@ -772,7 +772,7 @@ export function AdminOperationsPage() {
             })}
           </div>
         ) : (
-          <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center bg-slate-50/50">
+          <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10">
             <ShieldCheck className="mx-auto text-slate-900" size={32} />
             <h3 className="mt-2 text-xs font-semibold text-slate-900">
               {allLogs.length === 0 ? "No administrative audit events recorded yet" : "No audit records match filters"}

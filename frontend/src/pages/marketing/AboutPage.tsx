@@ -904,7 +904,7 @@ export function AboutPage() {
                 "EthioTech operates as an open-impact digital public good. We bridge the structural divide by linking university classrooms directly to diaspora tech leads and production codebases."}
             </p>
 
-            <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)]">
+            <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.community.classroom}
                 alt="University technology classroom connecting students directly with hands-on software curriculum"

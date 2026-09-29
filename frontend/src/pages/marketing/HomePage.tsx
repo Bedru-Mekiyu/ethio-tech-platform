@@ -514,7 +514,7 @@ export function HomePage() {
     <div className="relative overflow-hidden selection:bg-slate-200 selection:text-slate-900">
       {/* Luminous Ambient Background Glow */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.05),rgba(30,58,138,0.03),transparent_70%)]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.05),rgba(30,58,138,0.03),transparent_70%)] dark:opacity-20"
         aria-hidden="true"
       />
 
@@ -643,7 +643,7 @@ export function HomePage() {
                   <span className="font-semibold text-slate-800 truncate">Fullstack Cloud & Distributed Systems</span>
                   <span className="font-mono font-bold text-slate-900">50%</span>
                 </div>
-                <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <div className="h-full bg-[var(--secondary)] rounded-full transition-all" style={{ width: "50%" }} />
                 </div>
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
@@ -667,7 +667,7 @@ export function HomePage() {
                 {data ? (
                   <>{formatCompactCount(activeLearnersCount)}+</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse" aria-hidden="true" />
+                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" aria-hidden="true" />
                 )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -695,7 +695,7 @@ export function HomePage() {
                 {data ? (
                   <>{approvalRate}%</>
                 ) : (
-                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse" aria-hidden="true" />
+                  <span className="inline-block h-7 w-14 rounded-md bg-slate-100 animate-pulse dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" aria-hidden="true" />
                 )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Capstone Approval</p>
@@ -793,7 +793,7 @@ export function HomePage() {
             >
               {/* Left Side: Deep Value Breakdown */}
               <div className="space-y-5">
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-0.5 text-xs font-semibold text-[var(--secondary)]">
+                <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/70 bg-blue-50/70 px-3 py-0.5 text-xs font-semibold text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <Zap size={12} className="text-[var(--secondary)]" />
                   <span>{activeTabDetails.badge}</span>
                 </div>
@@ -807,7 +807,7 @@ export function HomePage() {
                 <div className="space-y-2 pt-1">
                   {activeTabDetails.benefits.map((benefit) => (
                     <div key={benefit} className="flex items-start gap-2.5">
-                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 border border-blue-200/60 text-[var(--secondary)]">
+                      <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-50 border border-blue-200/60 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                         <Check size={11} />
                       </div>
                       <span className="text-xs font-medium text-slate-800">{benefit}</span>
@@ -965,7 +965,7 @@ export function HomePage() {
                             Earned by completing 16 lessons & capstone defense
                           </p>
                         </div>
-                        <div className="h-8 w-8 rounded-lg border border-blue-200/70 bg-blue-50/70 flex items-center justify-center text-[var(--secondary)] font-bold text-xs">
+                        <div className="h-8 w-8 rounded-lg border border-blue-200/70 bg-blue-50/70 flex items-center justify-center text-[var(--secondary)] font-bold text-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                           <Award size={16} />
                         </div>
                       </div>
@@ -1066,7 +1066,7 @@ export function HomePage() {
               <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] font-bold text-lg border border-blue-200/70 shadow-[var(--shadow-xs)]">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] font-bold text-lg border border-blue-200/70 shadow-[var(--shadow-xs)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                       {activePillar.letter}
                     </div>
                     <div>

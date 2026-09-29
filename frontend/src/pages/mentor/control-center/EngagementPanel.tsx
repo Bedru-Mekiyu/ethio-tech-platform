@@ -17,7 +17,7 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-amber-50 text-amber-600 p-1.5 rounded-lg border border-amber-200">
+          <div className="bg-amber-50 text-amber-600 p-1.5 rounded-lg border border-amber-200 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
             <Trophy size={16} />
           </div>
           <div>
@@ -44,7 +44,9 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
                 key={String(es.student?._id)}
                 className={cn(
                   "rounded-xl border p-3 flex items-center justify-between gap-3 transition-all hover:bg-slate-50 shadow-2xs",
-                  isTop3 ? "border-amber-200 bg-amber-50/40" : "border-slate-200/80 bg-white",
+                  isTop3
+                    ? "border-amber-200 bg-amber-50/40 dark:bg-amber-950/30 dark:text-amber-300"
+                    : "border-slate-200/80 bg-white",
                 )}
               >
                 <div className="flex items-center gap-3 min-w-0">

@@ -244,7 +244,7 @@ export function DonationPage() {
         {/* Currency & Frequency Controls */}
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 shadow-xs">
           {/* Frequency Toggle */}
-          <div className="flex rounded-xl border border-slate-200 bg-slate-100 p-1">
+          <div className="flex rounded-xl border border-slate-200 bg-slate-100 p-1 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
             <button
               type="button"
               onClick={() => setFrequency("one-time")}
@@ -432,7 +432,7 @@ export function DonationPage() {
             {/* Right: Multi-Rail Payment Interface */}
             <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-5 space-y-4">
               {/* Payment Rail Tabs */}
-              <div className="grid grid-cols-4 gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1 text-xs shadow-2xs">
+              <div className="grid grid-cols-4 gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1 text-xs shadow-2xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <button
                   type="button"
                   onClick={() => setPaymentTab("local")}
@@ -686,7 +686,7 @@ export function DonationPage() {
       {/* ─── Hardware Donation Drive Section ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
             Hardware Drive
           </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
@@ -719,7 +719,7 @@ export function DonationPage() {
         <Card className="rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 shadow-sm">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 items-center">
             <div className="space-y-3.5">
-              <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+              <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 Drop-off & International Freight
               </Badge>
               <h3 className="text-xl font-bold text-slate-900">How Hardware Donations Work</h3>
@@ -777,7 +777,7 @@ export function DonationPage() {
       {/* ─── Transparent Fund Allocation & Governance ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
             Zero Overhead Waste
           </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
@@ -808,7 +808,7 @@ export function DonationPage() {
       {/* ─── Donor Recognition & Perks Wall ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)]">
+          <Badge variant="secondary" className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
             Donor Honor Roll
           </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
@@ -851,7 +851,7 @@ export function DonationPage() {
               <button
                 type="button"
                 onClick={() => setHardwareModal(false)}
-                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors font-bold"
+                className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors font-bold dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
               >
                 ✕
               </button>

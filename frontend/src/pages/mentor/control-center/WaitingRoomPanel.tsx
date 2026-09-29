@@ -65,7 +65,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
     <Card className="border-slate-200/80 bg-white p-4 flex flex-col h-full shadow-sm rounded-xl">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="bg-amber-50 text-amber-600 border border-amber-200/60 p-1.5 rounded-lg">
+          <div className="bg-amber-50 text-amber-600 border border-amber-200 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400/60 p-1.5 rounded-lg">
             <DoorOpen size={16} />
           </div>
           <div>

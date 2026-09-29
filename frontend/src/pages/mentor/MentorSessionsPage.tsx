@@ -261,7 +261,9 @@ export function MentorSessionsPage() {
                   key={day ? day.toDateString() : `blank-${index}`}
                   className={cn(
                     "min-h-[4.75rem] rounded-lg border p-1.5 sm:p-2.5 transition-colors",
-                    day ? "border-slate-200 bg-slate-50/50" : "border-transparent bg-transparent",
+                    day
+                      ? "border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10"
+                      : "border-transparent bg-transparent",
                     isToday && "border-slate-900 bg-slate-100 ring-1 ring-zinc-300",
                   )}
                 >
@@ -307,7 +309,7 @@ export function MentorSessionsPage() {
                 return (
                   <div
                     key={session._id ?? `${session.title}-${index}`}
-                    className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
+                    className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 hover:border-slate-300 transition-colors"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="min-w-0">

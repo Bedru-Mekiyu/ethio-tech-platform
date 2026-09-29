@@ -410,7 +410,7 @@ export function AdminContentPage() {
     deleteCapstoneMutation.isPending;
 
   return (
-    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-slate-900 bg-slate-50/50">
+    <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-slate-900 bg-slate-50/50 dark:bg-white/[0.02]">
       {/* Top Banner Bar */}
       <div className="border-b border-slate-200/80 bg-white px-4 sm:px-6 py-3.5 shrink-0 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

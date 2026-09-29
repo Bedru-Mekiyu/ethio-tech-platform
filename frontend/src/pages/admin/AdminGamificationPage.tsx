@@ -678,7 +678,7 @@ export function AdminGamificationPage() {
                   className={`cursor-pointer rounded-2xl border p-4 transition-all ${
                     isActive
                       ? "border-slate-900 bg-slate-100 shadow-xs ring-1 ring-slate-900"
-                      : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50 shadow-xs"
+                      : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 shadow-xs"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -825,7 +825,7 @@ export function AdminGamificationPage() {
               {allChallenges.map((ch) => (
                 <div
                   key={ch._id}
-                  className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 shadow-sm relative overflow-hidden"
+                  className="rounded-2xl border border-slate-200 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-5 space-y-4 shadow-sm relative overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
@@ -875,7 +875,7 @@ export function AdminGamificationPage() {
                     key={m.days}
                     className={`rounded-2xl border p-4 text-center space-y-2 ${tierStyle.border} ${tierStyle.bg} shadow-xs`}
                   >
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
                       <Flame size={20} />
                     </div>
                     <p className="text-lg font-bold text-slate-900">{m.days} Days</p>

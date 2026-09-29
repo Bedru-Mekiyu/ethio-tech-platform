@@ -155,7 +155,7 @@ function StatCard({
       className={`cursor-pointer rounded-2xl border p-3.5 sm:p-4 transition-all duration-200 shadow-xs ${
         active
           ? "border-slate-900 bg-slate-100 text-slate-900 ring-1 ring-slate-900/10"
-          : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50"
+          : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10"
       }`}
     >
       <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700">{label}</p>
@@ -383,7 +383,7 @@ function ApplicationCard({
             )}
           </div>
 
-          <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 text-xs sm:text-sm leading-relaxed text-slate-700">
+          <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 text-xs sm:text-sm leading-relaxed text-slate-700">
             <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Why Mentor?</p>
             <p className="line-clamp-3">{application.whyMentor || "No motivation statement provided."}</p>
           </div>
@@ -397,14 +397,14 @@ function ApplicationCard({
           </div>
 
           {application.rejectionReason && (
-            <div className="rounded-xl border border-red-200 bg-red-50/50 p-3 text-xs">
+            <div className="rounded-xl border border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900/40 dark:text-red-400/50 p-3 text-xs">
               <p className="font-semibold text-red-600">Rejection Reason</p>
               <p className="mt-1 text-slate-700">{application.rejectionReason}</p>
             </div>
           )}
 
           {application.reviewNotes && application.status === "changes_requested" && (
-            <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-3 text-xs">
+            <div className="rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-slate-900 dark:border-white/10 p-3 text-xs">
               <p className="font-semibold text-amber-700">Requested Changes</p>
               <p className="mt-1 text-slate-700">{application.reviewNotes}</p>
             </div>
@@ -576,7 +576,10 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
           {criteria.map((c) => {
             const currentVal = scores[c.key];
             return (
-              <div key={c.key} className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+              <div
+                key={c.key}
+                className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4"
+              >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold text-slate-900 text-sm">{c.title}</span>
                   <span className="text-xs font-mono font-bold text-slate-900">
@@ -700,7 +703,7 @@ Ethio-Tech Mentorship Team`;
         </div>
 
         {/* Direct Link Section */}
-        <div className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
+        <div className="space-y-3 rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-4">
           <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
             Dedicated Video Room Link
           </label>
@@ -754,7 +757,7 @@ Ethio-Tech Mentorship Team`;
           <textarea
             readOnly
             value={emailTemplate}
-            className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50/50 p-3 text-xs leading-relaxed text-slate-700 font-mono outline-none"
+            className="min-h-[140px] w-full rounded-xl border border-slate-200 bg-slate-50/50 dark:bg-white/[0.02] dark:border-white/10 p-3 text-xs leading-relaxed text-slate-700 font-mono outline-none"
           />
         </div>
 
