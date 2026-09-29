@@ -11,6 +11,7 @@ import { ConfirmDialog } from "@/components/composites/ConfirmDialog";
 import { EmptyState } from "@/components/composites/EmptyState";
 import { useToast } from "@/components/composites/ToastProvider";
 import { useAuthStore } from "@/store/authStore";
+import { cn } from "@/lib/utils";
 import {
   Search,
   ChevronLeft,
@@ -41,15 +42,37 @@ const ROLE_VARIANTS: Record<string, "warning" | "outline" | "default" | "danger"
   parent: "outline",
 };
 
-const STATUS_VARIANTS: Record<string, "outline" | "warning" | "danger" | "default"> = {
-  active: "outline",
-  pending: "warning",
-  inactive: "default",
-  suspended: "danger",
-  banned: "danger",
-  rejected: "danger",
-  deleted: "default",
-};
+function StatusBadge({ status }: { status?: string }) {
+  const s = status || "unknown";
+  let dotColor = "bg-slate-400";
+  let badgeStyle = "bg-slate-50 text-slate-700 border-slate-200/80";
+
+  if (s === "active") {
+    dotColor = "bg-emerald-500";
+    badgeStyle = "bg-emerald-50/70 text-emerald-800 border-emerald-200/80";
+  } else if (s === "pending") {
+    dotColor = "bg-amber-500 animate-pulse";
+    badgeStyle = "bg-amber-50/70 text-amber-800 border-amber-200/80";
+  } else if (s === "suspended" || s === "banned" || s === "rejected") {
+    dotColor = "bg-rose-500";
+    badgeStyle = "bg-rose-50/70 text-rose-800 border-rose-200/80";
+  } else if (s === "inactive" || s === "deleted") {
+    dotColor = "bg-slate-400";
+    badgeStyle = "bg-slate-100 text-slate-600 border-slate-200/80";
+  }
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-medium border select-none",
+        badgeStyle,
+      )}
+    >
+      <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", dotColor)} />
+      <span className="capitalize">{s}</span>
+    </span>
+  );
+}
 
 const SORT_OPTIONS = [
   { value: "newest", label: "Newest first" },
@@ -320,6 +343,74 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
       </div>
 
+      {(roleFilter || statusFilter || search) && (
+        <div className="flex flex-wrap items-center gap-1.5 px-1 py-1 bg-slate-50/70 border border-slate-200/60 rounded-xl">
+          <span className="text-[11px] font-semibold text-slate-500 ml-1">Filtered by:</span>
+          {roleFilter && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+              Role: <strong className="font-semibold capitalize">{roleFilter.replace("_", " ")}</strong>
+              <button
+                type="button"
+                onClick={() => {
+                  setRoleFilter("");
+                  setPage(1);
+                }}
+                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                aria-label="Remove role filter"
+              >
+                <X size={12} />
+              </button>
+            </span>
+          )}
+          {statusFilter && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+              Status: <strong className="font-semibold capitalize">{statusFilter}</strong>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatusFilter("");
+                  setPage(1);
+                }}
+                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                aria-label="Remove status filter"
+              >
+                <X size={12} />
+              </button>
+            </span>
+          )}
+          {search && (
+            <span className="inline-flex items-center gap-1 rounded-md border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-800 shadow-2xs">
+              Search: &ldquo;{search}&rdquo;
+              <button
+                type="button"
+                onClick={() => {
+                  setSearch("");
+                  setSearchInput("");
+                  setPage(1);
+                }}
+                className="ml-0.5 text-slate-400 hover:text-slate-700"
+                aria-label="Clear search"
+              >
+                <X size={12} />
+              </button>
+            </span>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              setRoleFilter("");
+              setStatusFilter("");
+              setSearch("");
+              setSearchInput("");
+              setPage(1);
+            }}
+            className="text-[11px] font-medium text-slate-500 hover:text-slate-900 underline ml-1.5"
+          >
+            Clear all
+          </button>
+        </div>
+      )}
+
       {showFilters && (
         <div className="flex flex-wrap gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-1">
@@ -405,7 +496,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
                 Status
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap text-right">
                 XP
               </th>
               <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
@@ -489,11 +580,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                       </Badge>
                     </td>
                     <td className="px-3.5 py-2.5">
-                      <Badge variant={STATUS_VARIANTS[user.status ?? ""] || "default"} size="sm">
-                        {user.status ?? "unknown"}
-                      </Badge>
+                      <StatusBadge status={user.status} />
                     </td>
-                    <td className="px-3.5 py-2.5 text-xs font-medium text-slate-700">
+                    <td className="px-3.5 py-2.5 text-xs font-mono font-medium text-slate-900 text-right tabular-nums">
                       {(user.xp ?? 0).toLocaleString()}
                     </td>
                     <td className="px-3.5 py-2.5 text-xs text-slate-600">{user.currentCompany || "-"}</td>
@@ -501,9 +590,15 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                     <td className="px-3.5 py-2.5 text-xs text-slate-500">{formatDate(user.lastLoginAt)}</td>
                     <td className="px-3.5 py-2.5">
                       {user.isVerified ? (
-                        <CheckCircle size={15} className="text-slate-900" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-800">
+                          <CheckCircle size={13} className="text-emerald-600 shrink-0" />
+                          Verified
+                        </span>
                       ) : (
-                        <XCircle size={15} className="text-slate-400" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400">
+                          <XCircle size={13} className="text-slate-400 shrink-0" />
+                          Unverified
+                        </span>
                       )}
                     </td>
                     {showActions && (
