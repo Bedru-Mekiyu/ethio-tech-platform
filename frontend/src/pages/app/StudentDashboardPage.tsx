@@ -219,7 +219,9 @@ export function StudentDashboardPage() {
             <Card
               className={cn(
                 "rounded-2xl border p-4.5 transition-all shadow-sm",
-                activeMeeting.status === "active" ? "border-slate-300 bg-slate-50/70" : "border-slate-200/80 bg-white",
+                activeMeeting.status === "active"
+                  ? "border-slate-300 bg-slate-50/70 dark:border-white/[0.15] dark:bg-white/[0.03] dark:shadow-[var(--shadow-live-indicator)]"
+                  : "border-slate-200/80 bg-white dark:border-white/10",
               )}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

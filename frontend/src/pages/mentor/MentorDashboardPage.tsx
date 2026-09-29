@@ -209,7 +209,7 @@ export function MentorDashboardPage() {
       className="space-y-8 text-slate-900"
     >
       {/* Top Mentor Banner */}
-      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm dark:shadow-[var(--shadow-live-indicator)]">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
