@@ -225,7 +225,7 @@ const ROLE_PERSONAS: RolePersona[] = [
     badge: "100% Free Tuition",
     icon: GraduationCap,
     description:
-      "Transform your career through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from world-class diaspora engineers.",
+      "Transform your career through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from senior diaspora engineers.",
     image: LOCAL_MEDIA_ASSETS.hero.collaboration,
     imageAlt: "Engineering squads collaborating on real-world production codebases",
     keyBenefits: [
@@ -250,7 +250,7 @@ const ROLE_PERSONAS: RolePersona[] = [
         icon: Code2,
       },
     ],
-    ctaLabel: "Apply as a Student",
+    ctaLabel: "Enroll Free",
     ctaLink: "/register",
   },
   {
@@ -270,8 +270,8 @@ const ROLE_PERSONAS: RolePersona[] = [
         icon: Clock,
       },
       {
-        title: "Empower Future Tech Leaders",
-        desc: "Directly mentor high-potential Ethiopian engineers and help shape the next generation of African tech founders and architects.",
+        title: "Guide Emerging Engineers",
+        desc: "Directly mentor high-potential Ethiopian engineers and help shape emerging African software architects.",
         icon: Sparkles,
       },
       {
@@ -455,14 +455,14 @@ export function HowItWorksPage() {
             How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-            From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense,
-            and verified career placement. Explore the full architecture of how EthioTech works.
+            From baseline calibration to diaspora pairing, sandbox development, squad code defense, and verified career
+            placement.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
               <Button size="lg" className="font-medium w-full sm:w-auto">
-                Start Your Journey <ArrowRight className="ml-2 h-4 w-4" />
+                Start Free <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button
@@ -474,7 +474,7 @@ export function HowItWorksPage() {
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Explore the 5 Stages
+              Explore Stages
             </Button>
           </div>
 
@@ -538,7 +538,10 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── 5-Stage Interactive Learner Lifecycle ─── */}
-      <section id="learner-lifecycle" className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
+      <section
+        id="learner-lifecycle"
+        className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14"
+      >
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
@@ -915,7 +918,7 @@ export function HowItWorksPage() {
                   <div className="mt-5 pt-3.5 border-t border-slate-200/80">
                     <Link to="/register">
                       <Button variant="secondary" size="sm" className="w-full justify-between font-semibold">
-                        <span>Enroll in Track</span>
+                        <span>Enroll Now</span>
                         <ArrowRight size={13} />
                       </Button>
                     </Link>
@@ -1043,12 +1046,12 @@ export function HowItWorksPage() {
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link to="/register">
                 <Button size="md" className="w-full sm:w-auto font-semibold shadow-xs">
-                  Join a Learning Track
+                  Enroll Now
                 </Button>
               </Link>
               <Link to="/leaderboard">
                 <Button variant="secondary" size="md" className="w-full sm:w-auto font-semibold shadow-xs">
-                  See Learner Growth
+                  View Leaderboard
                 </Button>
               </Link>
               <Link to="/mentor-recruitment">
@@ -1057,7 +1060,7 @@ export function HowItWorksPage() {
                   size="md"
                   className="w-full sm:w-auto text-slate-700 hover:text-slate-900 font-medium"
                 >
-                  Explore Mentorship <ArrowRight size={14} className="ml-1.5" />
+                  Become a Mentor <ArrowRight size={14} className="ml-1.5" />
                 </Button>
               </Link>
             </div>

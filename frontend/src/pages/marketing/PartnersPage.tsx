@@ -215,12 +215,12 @@ export function PartnersPage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
-          Empowering Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
+          Building Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-          We partner with technology employers, universities, development agencies, and public sector bodies to build a
-          sovereign, world-class technical workforce across Ethiopia.
+          We partner with tech employers, universities, and public institutions to train production software engineers
+          across Ethiopia.
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
@@ -656,7 +656,7 @@ export function PartnersPage() {
                   </div>
 
                   <Button type="submit" size="md" className="w-full font-semibold shadow-xs" disabled={isSubmitting}>
-                    {isSubmitting ? "Submitting Inquiry..." : "Submit Institutional Partnership Inquiry"}
+                    {isSubmitting ? "Submitting..." : "Submit Inquiry"}
                     <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </form>
@@ -715,7 +715,7 @@ export function PartnersPage() {
               size="md"
               className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
             >
-              Explore Learning Engine
+              View Workflow
             </Button>
           </Link>
           <Link to="/contact">

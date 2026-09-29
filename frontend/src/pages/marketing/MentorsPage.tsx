@@ -40,27 +40,27 @@ const sectionVariants: Variants = {
 const MENTORSHIP_PILLARS = [
   {
     icon: Code2,
-    title: "1. Line-by-Line Code Reviews",
+    title: "Line-by-Line Code Reviews",
     description:
-      "Mentors provide structured, asynchronous pull request reviews on GitHub, teaching production-grade clean code, architectural patterns, and performance optimizations.",
+      "Mentors provide structured, asynchronous pull request reviews on GitHub, teaching production clean code, design patterns, and test discipline.",
   },
   {
     icon: Video,
-    title: "2. Weekly 1-on-1 Office Hours",
+    title: "Weekly Office Hours",
     description:
-      "Learners book dedicated video mentorship slots to untangle complex bugs, discuss system design trade-offs, and receive personalized career guidance.",
+      "Learners book video mentorship slots to untangle complex bugs, discuss system design trade-offs, and receive direct technical guidance.",
   },
   {
     icon: ShieldCheck,
-    title: "3. Capstone Defense Panels",
+    title: "Capstone Defense Panels",
     description:
-      "Students present their graduation capstone architectures in front of a panel of senior mentors, simulating enterprise technical design defenses.",
+      "Students present their graduation capstone architectures in front of a panel of senior mentors, simulating production design reviews.",
   },
   {
     icon: CheckCircle2,
-    title: "4. Career Sponsoring & Referrals",
+    title: "Career Referrals",
     description:
-      "Top-performing graduating students receive direct referrals to hiring managers and engineering leads across our partner employer network.",
+      "Top-performing graduating students receive direct referrals to engineering managers across our partner employer network.",
   },
 ];
 
@@ -165,7 +165,11 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
             <span>Student Rating</span>
             <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
-          <ProgressBar value={score} max={100} className="h-1 bg-slate-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300" />
+          <ProgressBar
+            value={score}
+            max={100}
+            className="h-1 bg-slate-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
+          />
         </div>
 
         {/* Skills Tag Cloud */}
@@ -287,13 +291,13 @@ export function MentorsPage() {
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <Link to="/mentor-recruitment">
             <Button size="md" className="font-semibold shadow-xs">
-              Apply to Become a Mentor
+              Apply to Mentor
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </Link>
           <a href="#mentor-directory">
             <Button variant="secondary" size="md" className="font-semibold shadow-xs">
-              Browse Mentor Directory
+              Browse Directory
             </Button>
           </a>
         </div>
@@ -464,8 +468,8 @@ export function MentorsPage() {
           <EmptyState
             eyebrow="Mentor Guild"
             title="No mentors registered yet"
-            description="Our engineering mentor network is currently accepting applications from senior practitioners and tech leads in the Ethiopian tech ecosystem and diaspora."
-            actionLabel="Apply to Become a Mentor"
+            description="Our mentor network is currently accepting applications from senior engineers and tech leads."
+            actionLabel="Apply to Mentor"
             actionHref="/mentor-recruitment"
           />
         ) : filteredMentors.length === 0 ? (
@@ -473,7 +477,7 @@ export function MentorsPage() {
             eyebrow="Filter Results"
             title="No matching mentors found"
             description="Try adjusting your search query or specialty filter."
-            actionLabel="Show All Mentors"
+            actionLabel="Reset Filters"
             onAction={() => {
               setSearchQuery("");
               setSelectedDomain("all");
@@ -515,27 +519,27 @@ export function MentorsPage() {
         <div className="mx-auto max-w-2xl space-y-2">
           <Badge variant="secondary">Join the Guild</Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
-            Are You a Senior Engineer or Tech Leader?
+            Are You a Senior Engineer?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-            Dedicate 2–4 hours per week to shape Ethiopia&apos;s next generation of software engineers. Benefit from
-            leadership credentials, direct talent scouting, and an elite diaspora peer network.
+            Dedicate 2–4 hours weekly to guide Ethiopian software engineers, conduct code reviews, and build hiring
+            connections.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-2.5 pt-2">
           <Link to="/mentor-recruitment">
             <Button size="md" className="font-semibold shadow-xs">
-              Apply to Become a Mentor
+              Apply to Mentor
             </Button>
           </Link>
           <Link to="/how-it-works">
             <Button variant="secondary" size="md" className="font-semibold shadow-xs">
-              Explore Mentorship Journey
+              View Workflow
             </Button>
           </Link>
           <Link to="/contact">
             <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
-              Talk to Guild Coordinator
+              Contact Guild
             </Button>
           </Link>
         </div>

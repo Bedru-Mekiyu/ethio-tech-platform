@@ -196,7 +196,7 @@ export function LeaderboardPage() {
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8 space-y-10">
       <div className="text-center space-y-3">
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
-          Engineering Contributor Index
+          National Engineering Contributor Index
         </h1>
         <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600">
           Rankings updated continuously from verified code reviews, sprint commits, and technical capstone evaluations.
@@ -267,7 +267,7 @@ export function LeaderboardPage() {
           <EmptyState
             title="No rankings yet"
             description="Once technical activity commences, contributor standings will compute automatically."
-            actionLabel="Join the platform"
+            actionLabel="Enroll Free"
             onAction={() => {
               navigate("/register");
             }}
@@ -286,7 +286,7 @@ export function LeaderboardPage() {
               to={tab === "students" ? "/register" : tab === "mentors" ? "/mentor-recruitment" : "/app/projects"}
               className="inline-flex items-center gap-2 text-sm text-slate-700 hover:text-slate-900 font-semibold"
             >
-              Participate in cohorts <ArrowRight size={15} />
+              Join Cohort <ArrowRight size={15} />
             </Link>
           </div>
         </div>
@@ -382,7 +382,7 @@ export function LeaderboardPage() {
               ) : (
                 <tr>
                   <td colSpan={4} className="px-5 py-12">
-                    <EmptyState title="No more rankings to show" description="Load more entries to extend the board." />
+                    <EmptyState title="No more rankings" description="Load more entries to extend the board." />
                   </td>
                 </tr>
               )}
@@ -398,7 +398,7 @@ export function LeaderboardPage() {
             disabled={activeQuery.isFetching}
             className="border-slate-200 bg-white hover:bg-slate-50 font-semibold shadow-xs"
           >
-            {activeQuery.isFetching ? "Loading more…" : "Load more"}
+            {activeQuery.isFetching ? "Loading..." : "Load More"}
           </Button>
         </div>
       </Card>

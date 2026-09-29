@@ -65,25 +65,25 @@ const availabilityOptions = [
 const ONBOARDING_STEPS = [
   {
     step: "01",
-    title: "Quick Application (5 Min)",
+    title: "Quick Application",
     description: "Submit your professional background, technical specialties, and preferred mentoring schedule.",
     icon: Code2,
   },
   {
     step: "02",
-    title: "15-Min Alignment Chat",
+    title: "Alignment Chat",
     description: "Connect briefly with a Guild Coordinator to review curriculum tracks and student expectations.",
     icon: Video,
   },
   {
     step: "03",
-    title: "Guild Onboarding & Tooling",
+    title: "Guild Onboarding",
     description: "Receive access to the mentor dashboard, LiveKit video rooms, and automated GitHub review queues.",
     icon: ShieldCheck,
   },
   {
     step: "04",
-    title: "First Mentee Cohort Pairing",
+    title: "Cohort Pairing",
     description: "Get matched with motivated learners whose project goals align directly with your technical stack.",
     icon: Rocket,
   },
@@ -231,24 +231,24 @@ export function MentorRecruitmentPage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
-          Give Back. Shape Ethiopia&apos;s Next Generation of <span className="text-primary">Tech Leaders</span>
+          Guide Ethiopia&apos;s Emerging <span className="text-primary">Software Architects</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-          Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom,
-          bridge the digital divide, and discover top technical talent.
+          Join senior engineers and architects guiding ambitious Ethiopian developers through structured code reviews,
+          system design, and career placement.
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
           <a href="#mentor-form">
             <Button size="md" className="font-semibold shadow-xs">
-              Complete Mentor Application (5 Min)
+              Apply to Mentor
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </a>
           <a href="#onboarding-process">
             <Button variant="secondary" size="md" className="font-semibold shadow-xs">
-              View Onboarding Process
+              View Onboarding
             </Button>
           </a>
         </div>
@@ -434,12 +434,12 @@ export function MentorRecruitmentPage() {
                   <div className="pt-3 flex justify-center gap-3">
                     <Link to="/mentors">
                       <Button variant="secondary" size="sm" className="font-semibold shadow-xs">
-                        Browse Mentor Directory
+                        Browse Directory
                       </Button>
                     </Link>
                     <Link to="/about">
                       <Button variant="ghost" size="sm" className="text-slate-700 hover:text-slate-900 font-medium">
-                        Learn About EthioTech
+                        Learn More
                       </Button>
                     </Link>
                   </div>
@@ -660,7 +660,7 @@ export function MentorRecruitmentPage() {
                     className="w-full font-semibold shadow-xs"
                     disabled={mutation.isPending || !consent}
                   >
-                    {mutation.isPending ? "Submitting Application..." : "Submit Application to Mentor Guild"}
+                    {mutation.isPending ? "Submitting Application..." : "Submit Application"}
                     <ArrowRight size={14} className="ml-1.5" />
                   </Button>
                 </form>
@@ -710,17 +710,17 @@ export function MentorRecruitmentPage() {
         <div className="flex flex-wrap justify-center gap-2.5 pt-2">
           <a href="#mentor-form">
             <Button size="md" className="font-semibold shadow-xs">
-              Apply to Join the Guild
+              Apply to Mentor
             </Button>
           </a>
           <Link to="/mentors">
             <Button variant="secondary" size="md" className="font-semibold shadow-xs">
-              View Mentor Directory
+              Browse Directory
             </Button>
           </Link>
           <Link to="/contact">
             <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
-              Contact Guild Lead
+              Contact Guild
             </Button>
           </Link>
         </div>

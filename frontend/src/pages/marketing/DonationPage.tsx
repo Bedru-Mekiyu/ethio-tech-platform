@@ -208,12 +208,12 @@ export function DonationPage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
-          Empower Ethiopian Talent Through <span className="text-primary">Sovereign Education</span>
+          Fund Ethiopian Developers Through <span className="text-primary">Sovereign Education</span>
         </h1>
 
         <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-          Every dollar or birr directly funds student scholarship passes, solar-powered regional tech hubs, and hardware
-          distribution to gifted learners across Ethiopia with 100% transparent milestone verification.
+          Directly fund student scholarships, regional solar hubs, and hardware distribution across Ethiopia with
+          transparent milestone verification.
         </p>
 
         <div className="flex flex-wrap justify-center gap-2 pt-1">
@@ -827,7 +827,7 @@ export function DonationPage() {
             Donor Recognition & Stewardship
           </h2>
           <p className="text-xs text-slate-600">
-            We honor every patron who invests in the next generation of Ethiopian builders.
+            We honor every patron who invests in emerging Ethiopian software engineers.
           </p>
         </div>
 
@@ -937,7 +937,7 @@ export function DonationPage() {
         <div className="flex flex-wrap justify-center gap-2.5">
           <a href="#donate-now">
             <Button size="md" className="font-semibold shadow-xs">
-              Sponsor a Student Today
+              Sponsor Student
             </Button>
           </a>
           <Link to="/partners">
@@ -946,12 +946,12 @@ export function DonationPage() {
               size="md"
               className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
             >
-              Explore Partner Frameworks
+              View Frameworks
             </Button>
           </Link>
           <Link to="/contact">
             <Button variant="ghost" size="md" className="text-slate-700 hover:text-slate-900 font-medium">
-              Contact Grants Committee
+              Contact Committee
             </Button>
           </Link>
         </div>

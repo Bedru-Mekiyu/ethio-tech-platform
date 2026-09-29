@@ -111,7 +111,7 @@ describe("HubsPage Component Suite", () => {
     );
 
     // Verify Check-in action
-    const checkInBtn = screen.getByRole("button", { name: /Confirm Arrival Check-In/i });
+    const checkInBtn = screen.getByRole("button", { name: /Confirm Check-In/i });
     fireEvent.click(checkInBtn);
 
     // Expect celebration / XP reward
@@ -146,7 +146,7 @@ describe("HubsPage Component Suite", () => {
     const codeInput = screen.getByPlaceholderText(/ETH-ADD-8392/i);
     fireEvent.change(codeInput, { target: { value: "ETH-ADD-9999" } });
 
-    const checkInBtn = screen.getByRole("button", { name: /Check In \(\+50 XP\)/i });
+    const checkInBtn = screen.getByRole("button", { name: /^Check In$/i });
     fireEvent.click(checkInBtn);
 
     await waitFor(() => {

@@ -68,8 +68,8 @@ export function FaqPage() {
     <InfoPage
       title="Answers for learners, mentors, and partners"
       intro="Everything people usually ask before joining EthioTech: how onboarding works, what support looks like, and how the virtual classroom stays safe."
-      primary={{ to: "/register", label: "Join the platform" }}
-      secondary={{ to: "/contact", label: "Contact support" }}
+      primary={{ to: "/register", label: "Enroll Free" }}
+      secondary={{ to: "/contact", label: "Contact Support" }}
       sections={[
         {
           title: "Who can join?",
@@ -163,7 +163,7 @@ export function ContactPage() {
             />
           </label>
           {error ? <p className="text-sm text-rose-600">{error}</p> : null}
-          <Button type="submit">Send message</Button>
+          <Button type="submit">Send Message</Button>
         </form>
       )}
     </div>

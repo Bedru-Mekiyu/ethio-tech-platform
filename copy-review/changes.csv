@@ -57,3 +57,65 @@ Footer.tsx,Company Link 2,"Privacy Policy","Privacy",7
 Footer.tsx,Company Link 3,"Terms of Service","Terms",5
 Footer.tsx,Status Text,"Platform Systems Operational","All Systems Operational",24
 Footer.tsx,Tagline,"Engineered with <Heart> for East African youth","Engineered for Ethiopian developers",34
+TracksPage.tsx,Hero Heading,"Production-Ready Software Engineering Tracks","Master Production Software Engineering",38
+TracksPage.tsx,Card CTA 1,"Overview","View Track",10
+TracksPage.tsx,Card CTA 2,"Enroll in Track","Enroll Now",10
+TracksPage.tsx,Empty State Title,"No tracks matched your criteria","No tracks found",15
+TracksPage.tsx,Bottom CTA,"Ready to Begin Your Technical Journey?","Start Your Engineering Pathway",30
+TracksPage.tsx,Bottom CTA Button,"Enroll in a Track (Free)","Enroll Free",11
+MarketingTrackDetailPage.tsx,Back Link,"← Back to All Learning Tracks","All Tracks",10
+MarketingTrackDetailPage.tsx,Sidebar CTA,"Enroll in Track","Enroll Now",10
+MarketingTrackDetailPage.tsx,Bottom Heading,"Ready to Master This Tech Stack?","Ready to Start Building?",25
+HowItWorksPage.tsx,Hero Subhead,"From initial baseline calibration to low-latency diaspora pairing, sandbox development, squad code defense, and verified career placement. Explore the full architecture of how EthioTech works.","From baseline calibration to diaspora pairing, sandbox development, squad code defense, and verified career placement.",116
+HowItWorksPage.tsx,Hero CTA 1,"Start Your Journey","Start Free",10
+HowItWorksPage.tsx,Hero CTA 2,"Explore the 5 Stages","Explore Stages",14
+HowItWorksPage.tsx,Persona Student Desc,"...direct guidance from world-class diaspora engineers.","...direct guidance from senior diaspora engineers.",51
+HowItWorksPage.tsx,Persona Student CTA,"Apply as a Student","Enroll Free",11
+HowItWorksPage.tsx,Persona Mentor Title,"Empower Future Tech Leaders","Guide Emerging Engineers",24
+HowItWorksPage.tsx,Track Card CTA,"Enroll in Track","Enroll Now",10
+HowItWorksPage.tsx,Closing CTA Button 1,"Join a Learning Track","Enroll Now",10
+HowItWorksPage.tsx,Closing CTA Button 2,"See Learner Growth","View Leaderboard",16
+HowItWorksPage.tsx,Closing CTA Button 3,"Explore Mentorship","Become a Mentor",15
+MentorsPage.tsx,Pillar 1,"1. Line-by-Line Code Reviews","Line-by-Line Code Reviews",26
+MentorsPage.tsx,Hero CTA 1,"Apply to Become a Mentor","Apply to Mentor",15
+MentorsPage.tsx,Hero CTA 2,"Browse Mentor Directory","Browse Directory",16
+MentorsPage.tsx,Empty State Title,"No mentors registered yet","No mentors registered yet",25
+MentorsPage.tsx,Bottom Heading,"Are You a Senior Engineer or Tech Leader?","Are You a Senior Engineer?",26
+MentorsPage.tsx,Bottom CTA 1,"Apply to Become a Mentor","Apply to Mentor",15
+MentorsPage.tsx,Bottom CTA 2,"Explore Mentorship Journey","View Workflow",13
+MentorRecruitmentPage.tsx,Hero Headline,"Give Back. Shape Ethiopia's Next Generation of Tech Leaders","Guide Ethiopia's Emerging Software Architects",46
+MentorRecruitmentPage.tsx,Hero Subhead,"Join a guild of senior software engineers, architects, and product leaders. Share practical industry wisdom, bridge the digital divide, and discover top technical talent.","Join senior engineers and architects guiding ambitious Ethiopian developers through structured code reviews, system design, and career placement.",139
+MentorRecruitmentPage.tsx,Hero CTA 1,"Complete Mentor Application (5 Min)","Apply to Mentor",15
+MentorRecruitmentPage.tsx,Hero CTA 2,"View Onboarding Process","View Onboarding",15
+MentorRecruitmentPage.tsx,Form Submit Button,"Submit Application to Mentor Guild","Submit Application",18
+MentorRecruitmentPage.tsx,Bottom CTA Button,"Apply to Join the Guild","Apply to Mentor",15
+HubsPage.tsx,Hero Subhead,"Book dedicated high-spec developer workstations, consult in-person with on-duty mentors, access local offline caching servers, and check in physically to earn XP across 6 national innovation corridors.","Reserve developer workstations, consult on-duty mentors, access offline LAN caches, and earn XP across six national innovation corridors.",136
+HubsPage.tsx,Hero CTA 1,"Explore 6 Regional Hubs","Explore Hubs",12
+HubsPage.tsx,Hero CTA 2,"My Active Passes (0)","View Passes (0)",15
+HubsPage.tsx,Check In Button,"Check In (+50 XP)","Check In",8
+HubsPage.tsx,Bottom CTA Button,"Partner as a Hub Host","Partner With Us",15
+AboutPage.tsx,Section 4,"The PISTELS Framework (Core Pedagogical Backbone)","[Deleted - Folded into plain text]",33
+AboutPage.tsx,Hero Headline,"Democratizing elite tech education with the PISTELS framework","Engineering Education Built for Ethiopian Developers",52
+AboutPage.tsx,Hero Subhead,"EthioTech is a non-profit educational platform bridging the chasm between academic theory and software engineering. Powered by the global Ethiopian diaspora, low-latency live sandboxes, and squad-based accountability, we empower Ethiopia's next generation of software architects.","Tuition-free learning combining diaspora mentorship, in-browser Linux environments, peer code reviews, and physical regional hubs across Ethiopia.",143
+AboutPage.tsx,Hero CTA 1,"Join as Student","Start Free",10
+AboutPage.tsx,Hero CTA 3,"Explore the PISTELS Pillars","View Architecture",17
+AboutPage.tsx,Mission Title,"Our Mission","Engineering Mission",19
+AboutPage.tsx,Vision Title,"Our Vision","Long-Term Vision",16
+AboutPage.tsx,Closing CTA Paragraph,"Whether you are a university student eager to build production systems or a seasoned diaspora engineer ready to guide the next generation, EthioTech is your platform.","Whether you are a university student building production systems or a diaspora engineer guiding emerging talent, EthioTech provides the platform.",146
+AboutPage.tsx,Closing CTA Button 1,"Join as Student","Enroll Free",11
+AboutPage.tsx,Closing CTA Button 3,"Explore Learning Flow","View Workflow",13
+LeaderboardPage.tsx,Hero Headline,"Engineering Contributor Index","National Engineering Contributor Index",38
+LeaderboardPage.tsx,Empty State Action,"Join the platform","Enroll Free",11
+LeaderboardPage.tsx,Table Header Link,"Participate in cohorts","Join Cohort",11
+LeaderboardPage.tsx,Load More Button,"Load more","Load More",9
+PartnersPage.tsx,Hero Headline,"Empowering Ethiopia's Digital Economy Through Strategic Alliances","Building Ethiopia's Digital Economy Through Strategic Alliances",62
+PartnersPage.tsx,Hero Subhead,"We partner with technology employers, universities, development agencies, and public sector bodies to build a sovereign, world-class technical workforce across Ethiopia.","We partner with tech employers, universities, and public institutions to train production software engineers across Ethiopia.",122
+PartnersPage.tsx,Form Submit Button,"Submit Institutional Partnership Inquiry","Submit Inquiry",14
+PartnersPage.tsx,Bottom CTA Button,"Explore Learning Engine","View Workflow",13
+DonationPage.tsx,Hero Headline,"Empower Ethiopian Talent Through Sovereign Education","Fund Ethiopian Developers Through Sovereign Education",52
+DonationPage.tsx,Hero Subhead,"Every dollar or birr directly funds student scholarship passes, solar-powered regional tech hubs, and hardware distribution to gifted learners across Ethiopia with 100% transparent milestone verification.","Directly fund student scholarships, regional solar hubs, and hardware distribution across Ethiopia with transparent milestone verification.",138
+DonationPage.tsx,Honor Roll Subhead,"We honor every patron who invests in the next generation of Ethiopian builders.","We honor every patron who invests in emerging Ethiopian software engineers.",69
+DonationPage.tsx,Bottom CTA 1,"Sponsor a Student Today","Sponsor Student",15
+DonationPage.tsx,Bottom CTA 2,"Explore Partner Frameworks","View Frameworks",15
+InfoPages.tsx,FaqPage Primary CTA,"Join the platform","Enroll Free",11
+InfoPages.tsx,ContactPage Submit,"Send message","Send Message",12

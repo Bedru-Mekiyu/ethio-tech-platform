@@ -400,8 +400,8 @@ export function HubsPage() {
         </h1>
 
         <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-          Book dedicated high-spec developer workstations, consult in-person with on-duty mentors, access local offline
-          caching servers, and check in physically to earn XP across 6 national innovation corridors.
+          Reserve developer workstations, consult on-duty mentors, access offline LAN caches, and earn XP across six
+          national innovation corridors.
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
@@ -414,7 +414,7 @@ export function HubsPage() {
               el?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Explore 6 Regional Hubs
+            Explore Hubs
             <ArrowRight size={14} className="ml-1.5" />
           </Button>
 
@@ -425,7 +425,7 @@ export function HubsPage() {
             onClick={() => setActiveTab("passes")}
           >
             <TicketIcon size={14} className="mr-1.5 text-slate-700" />
-            My Active Passes ({myBookings.length})
+            View Passes ({myBookings.length})
           </Button>
         </div>
 
@@ -522,7 +522,7 @@ export function HubsPage() {
                 disabled={!checkInCodeInput.trim() || checkInMutation.isPending}
                 className="shrink-0 font-semibold shadow-xs"
               >
-                {checkInMutation.isPending ? "Verifying..." : "Check In (+50 XP)"}
+                {checkInMutation.isPending ? "Verifying..." : "Check In"}
               </Button>
             </form>
           </Card>
@@ -540,7 +540,7 @@ export function HubsPage() {
                   setBookingHub(CANONICAL_REGIONAL_HUBS[0]);
                 }}
               >
-                Book Another Workstation
+                Book Workstation
               </Button>
             </div>
 
@@ -555,7 +555,7 @@ export function HubsPage() {
                   </p>
                 </div>
                 <Button onClick={() => setActiveTab("directory")} size="sm" className="text-xs font-semibold shadow-xs">
-                  Browse Regional Hubs
+                  Browse Hubs
                 </Button>
               </Card>
             ) : (
@@ -1358,7 +1358,7 @@ export function HubsPage() {
                     onClick={() => checkInMutation.mutate({ bookingId: viewingPass.id })}
                   >
                     <CheckCircle2 size={15} className="mr-2" />
-                    {checkInMutation.isPending ? "Validating Arrival..." : "Confirm Arrival Check-In (+50 XP)"}
+                    {checkInMutation.isPending ? "Validating Arrival..." : "Confirm Check-In"}
                   </Button>
                 ) : (
                   <div className="rounded-lg border border-slate-200 bg-slate-100 p-2.5 text-xs font-semibold text-slate-900 flex items-center justify-center gap-2 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
@@ -1387,12 +1387,12 @@ export function HubsPage() {
         <div className="flex flex-wrap justify-center gap-2.5 pt-2">
           <Link to="/contact">
             <Button size="md" className="font-semibold shadow-xs">
-              Partner as a Hub Host
+              Partner With Us
             </Button>
           </Link>
           <Link to="/mentors">
             <Button variant="secondary" size="md" className="font-semibold shadow-xs">
-              Meet Regional Mentors
+              View Mentors
             </Button>
           </Link>
         </div>

@@ -35,8 +35,8 @@ describe("MarketingTrackDetailPage Component Test Suite", () => {
     expect(screen.getByText(/Prerequisites/i)).toBeTruthy();
 
     // CTAs
-    expect(screen.getByRole("button", { name: /Enroll in Track/i })).toBeTruthy();
-    expect(screen.getByRole("button", { name: /Browse All Tracks/i })).toBeTruthy();
+    expect(screen.getAllByRole("button", { name: /Enroll Now/i }).length).toBeGreaterThan(0);
+    expect(screen.getByRole("button", { name: /View Tracks/i })).toBeTruthy();
   });
 
   it("redirects to /tracks when unknown track ID is provided", () => {

@@ -49,7 +49,7 @@ export function MarketingTrackDetailPage() {
           className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors"
         >
           <ArrowLeft size={15} />
-          All Curriculum Tracks
+          All Tracks
         </Link>
       </div>
 
@@ -105,13 +105,13 @@ export function MarketingTrackDetailPage() {
           <div className="flex flex-wrap gap-3 pt-2">
             <Link to="/register">
               <Button className="gap-2 font-semibold px-6 shadow-xs">
-                Enroll in Track
+                Enroll Now
                 <ArrowRight size={15} />
               </Button>
             </Link>
             <Link to="/tracks">
               <Button variant="secondary" className="gap-2 font-semibold shadow-xs">
-                Browse All Tracks
+                View Tracks
               </Button>
             </Link>
           </div>
@@ -301,20 +301,20 @@ export function MarketingTrackDetailPage() {
 
       {/* ── Final CTA ── */}
       <div className="rounded-2xl border border-slate-200/90 bg-white p-8 sm:p-10 text-center space-y-4 shadow-sm">
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 break-words">Ready to start your journey?</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 break-words">Ready to Start Building?</h2>
         <p className="text-sm text-slate-600 max-w-md mx-auto">
-          Join thousands of Ethiopian and East African students building their careers in technology.
+          Join thousands of Ethiopian developers shipping production software with live senior mentorship.
         </p>
         <div className="flex justify-center gap-3 pt-2">
           <Link to="/register">
             <Button className="gap-2 font-semibold px-8 shadow-xs">
-              Enroll in {track.shortTitle}
+              Enroll Now
               <ArrowRight size={15} />
             </Button>
           </Link>
           <Link to="/how-it-works">
             <Button variant="secondary" className="font-semibold shadow-xs">
-              How It Works
+              View Workflow
             </Button>
           </Link>
         </div>

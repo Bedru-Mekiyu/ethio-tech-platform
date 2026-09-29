@@ -107,7 +107,7 @@ export function TracksPage() {
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs"
             >
               <Code2 size={13} className="text-[var(--secondary)]" />
-              Industry-Standard Technical Curriculum
+              Production Curriculums
             </motion.div>
 
             <motion.h1
@@ -116,8 +116,8 @@ export function TracksPage() {
               transition={{ duration: 0.35, delay: 0.05 }}
               className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]"
             >
-              Master In-Demand Tech with <br className="hidden sm:inline" />
-              <span className="text-primary">Production Capstones</span> & Mentorship
+              Master Production Engineering with <br className="hidden sm:inline" />
+              <span className="text-primary">Senior Diaspora Mentors</span>
             </motion.h1>
 
             <motion.p
@@ -126,8 +126,8 @@ export function TracksPage() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
             >
-              Forget static video tutorials. Build distributed cloud systems, real-time mobile apps, fraud detection
-              engines, and hardened cybersecurity architectures with live code reviews.
+              Build distributed systems, mobile apps, and cloud architectures with live weekly code reviews from senior
+              diaspora engineers.
             </motion.p>
 
             {/* Quick Metrics Bar */}
@@ -143,19 +143,17 @@ export function TracksPage() {
               </Card>
               <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
                 <p className="text-xl font-bold text-slate-900">{totalCapstones}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Real Capstones</p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                  Audited Capstones
+                </p>
               </Card>
               <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
                 <p className="text-xl font-bold text-slate-900">{totalLiveHours}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                  Live & Mentor Hrs
-                </p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Mentorship Hours</p>
               </Card>
               <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
                 <p className="text-xl font-bold text-slate-900">100%</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                  Free for Learners
-                </p>
+                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Tuition Free</p>
               </Card>
             </motion.div>
           </div>
@@ -307,9 +305,9 @@ export function TracksPage() {
                         <div className="flex items-center justify-between">
                           <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                             <Code2 size={13} className="text-[var(--secondary)]" />
-                            Practical Capstone Projects
+                            Capstone Projects
                           </h3>
-                          <span className="text-[10px] text-slate-500">Click to preview code & architecture</span>
+                          <span className="text-[10px] text-slate-500">Preview code and architecture</span>
                         </div>
 
                         <div className="grid gap-2.5 sm:grid-cols-2">
@@ -335,7 +333,7 @@ export function TracksPage() {
                                   {capstone.difficulty}
                                 </Badge>
                                 <span className="text-[10px] text-slate-700 font-medium flex items-center gap-1">
-                                  View Code <ArrowRight size={11} />
+                                  Preview Code <ArrowRight size={11} />
                                 </span>
                               </div>
                               <h4 className="mt-1.5 text-xs font-semibold text-slate-900 group-hover/cap:text-primary transition line-clamp-1">
@@ -467,7 +465,7 @@ export function TracksPage() {
                           to={`/tracks/${track.slug}`}
                           className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900 shadow-xs"
                         >
-                          <span>Overview</span>
+                          <span>View Track</span>
                           <ArrowRight size={13} />
                         </Link>
 
@@ -483,7 +481,7 @@ export function TracksPage() {
 
                         <Link to="/register" className="flex-1">
                           <Button className="w-full font-semibold shadow-xs" size="md">
-                            Enroll in Track
+                            Enroll Now
                             <ArrowRight size={14} className="ml-1.5" />
                           </Button>
                         </Link>
@@ -557,9 +555,9 @@ export function TracksPage() {
           </div>
         ) : (
           <EmptyState
-            title="No tracks matched your criteria"
-            description="Try changing the category filter or searching for a different keyword like 'React', 'Docker', or 'Python'."
-            actionLabel="Reset all filters"
+            title="No tracks found"
+            description="Try changing filters or searching for keywords like React, Docker, or Python."
+            actionLabel="Reset Filters"
             onAction={() => {
               setSelectedCategory("all");
               setSelectedDifficulty("all");
@@ -574,11 +572,10 @@ export function TracksPage() {
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
             <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
-              Why EthioTech Tracks Are Built Differently
+              Why Our Tracks Excel
             </h2>
             <p className="text-xs md:text-sm text-slate-600">
-              Designed from the ground up for software engineering excellence, remote job readiness, and African
-              innovation.
+              Built for production engineering standards, remote employability, and Ethiopian infrastructure realities.
             </p>
           </div>
 
@@ -587,10 +584,9 @@ export function TracksPage() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Code2 size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-slate-900">Production-Grade Capstones</h3>
+              <h3 className="text-sm font-semibold text-slate-900">Production Capstones</h3>
               <p className="text-xs leading-relaxed text-slate-600">
-                No trivial to-do apps. You will build multi-vendor e-commerce gateways, telemetry dashboards, and ML
-                fraud scoring engines.
+                Build distributed gateways, telemetry dashboards, and ML scoring systems with production test suites.
               </p>
             </Card>
 
@@ -598,10 +594,9 @@ export function TracksPage() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Video size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-slate-900">Live Socratic Mentorship</h3>
+              <h3 className="text-sm font-semibold text-slate-900">Diaspora Mentorship</h3>
               <p className="text-xs leading-relaxed text-slate-600">
-                Weekly live code breakdowns with experienced engineers working across high-growth startups and tech
-                teams.
+                Weekly live code breakdowns with Ethiopian staff engineers from Silicon Valley and Europe.
               </p>
             </Card>
 
@@ -609,10 +604,9 @@ export function TracksPage() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Award size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-slate-900">Verified Skill Credentials</h3>
+              <h3 className="text-sm font-semibold text-slate-900">Audited Certificates</h3>
               <p className="text-xs leading-relaxed text-slate-600">
-                Earn cryptographically verifiable track completion certificates and build an undeniable public GitHub
-                portfolio.
+                Earn cryptographically signed credentials linked directly to your audited GitHub repositories.
               </p>
             </Card>
           </div>
@@ -624,37 +618,37 @@ export function TracksPage() {
         <div className="mx-auto max-w-2xl px-4 space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
             <CheckCircle2 size={12} className="text-[var(--secondary)]" />
-            <span>100% Tuition-Free Open Education Model</span>
+            <span>Tuition-Free Education</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-            Ready to Begin Your Technical Journey?
+            Start Your Engineering Pathway
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-            Join hundreds of Ethiopian students and developers learning together, building real projects, and advancing
-            their careers.
+            Join thousands of Ethiopian students mastering production software engineering with live mentorship and
+            regional hubs.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
             <Link to="/register">
               <Button size="md" className="font-semibold shadow-xs">
-                Enroll in a Track (Free)
+                Enroll Free
                 <ArrowRight size={14} className="ml-1.5" />
               </Button>
             </Link>
             <Link to="/how-it-works">
               <Button size="md" variant="secondary" className="font-semibold shadow-xs">
-                How It Works
+                View Workflow
               </Button>
             </Link>
           </div>
           <div className="flex flex-wrap justify-center gap-4 pt-3 text-[11px] text-slate-600 font-medium">
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> No credit card required
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> Tuition-free access
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> 6 Physical regional hubs
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> Six regional hubs
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> Verifiable digital certificates
+              <CheckCircle2 size={12} className="text-[var(--secondary)]" /> Audited credentials
             </span>
           </div>
         </div>
