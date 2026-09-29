@@ -144,7 +144,7 @@ export function SquadPage() {
       <EmptyState
         title="Squad not found"
         description="Choose a squad from your collaboration list."
-        actionLabel="View squads"
+        actionLabel="View Squads"
         actionHref="/app/squads"
       />
     );
@@ -345,7 +345,7 @@ export function SquadPage() {
               to="/app/sessions"
               className="text-xs text-primary hover:text-[var(--primary-hover)] font-semibold transition"
             >
-              View all
+              View All
             </Link>
           </div>
 
@@ -374,7 +374,7 @@ export function SquadPage() {
               className="w-full text-xs font-semibold rounded-xl bg-slate-900 hover:bg-slate-800 text-white shadow-xs whitespace-nowrap"
               size="sm"
             >
-              Open Projects Hub
+              Open Projects
             </Button>
           </Link>
           <Link to="/app/tracks">
@@ -383,7 +383,7 @@ export function SquadPage() {
               variant="outline"
               size="sm"
             >
-              Browse Learning Tracks
+              Browse Tracks
             </Button>
           </Link>
         </Card>

@@ -163,11 +163,11 @@ export function StudentDashboardPage() {
       {/* Top Welcome Bar */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Welcome back, {firstName}</h1>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Hello, {firstName}</h1>
           <p className="mt-0.5 text-xs text-slate-600 font-medium">
             {currentStreak > 0
               ? `${currentStreak}-day learning streak active. Continue building your track milestones.`
-              : "Let's build something great today. Pick up where you left off."}
+              : "Pick up where you left off and complete your daily coding milestone."}
           </p>
         </div>
 
@@ -364,7 +364,7 @@ export function StudentDashboardPage() {
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                   <BookOpen size={14} />
                 </div>
-                <h3 className="text-sm font-bold text-slate-900">Assigned Projects & Portfolio Tasks</h3>
+                <h3 className="text-sm font-bold text-slate-900">Assigned Projects & Portfolios</h3>
               </div>
               <Link
                 to="/app/projects"
@@ -501,7 +501,7 @@ export function StudentDashboardPage() {
                       className="gap-1 font-semibold shadow-xs whitespace-nowrap"
                     >
                       <Zap size={13} />
-                      Check In (+50 XP)
+                      Check In
                     </Button>
                   )}
 
@@ -511,7 +511,7 @@ export function StudentDashboardPage() {
                       variant="outline"
                       className="text-xs border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs whitespace-nowrap"
                     >
-                      Book / Switch Desk
+                      Switch Workstation
                     </Button>
                   </Link>
                 </div>
@@ -660,7 +660,7 @@ export function StudentDashboardPage() {
                 disabled={completeChallengeMutation.isPending}
                 onClick={() => completeChallengeMutation.mutate()}
               >
-                {completeChallengeMutation.isPending ? "Claiming XP…" : "Claim +25 XP Reward"}
+                {completeChallengeMutation.isPending ? "Claiming XP…" : "Claim Reward"}
               </Button>
             )}
           </Card>
@@ -676,7 +676,7 @@ export function StudentDashboardPage() {
                 to={squadPath || "/app/squads"}
                 className="text-xs text-slate-700 hover:text-slate-900 flex items-center gap-1 font-semibold"
               >
-                Open Hub <ArrowRight size={11} />
+                Open Squad <ArrowRight size={11} />
               </Link>
             </div>
 
@@ -701,7 +701,7 @@ export function StudentDashboardPage() {
                     to={squadPath || "/app/squads"}
                     className="text-slate-900 font-semibold hover:text-primary transition-colors"
                   >
-                    Open Squad Hub →
+                    Open Squad
                   </Link>
                 </div>
               </div>
@@ -717,7 +717,7 @@ export function StudentDashboardPage() {
                     variant="outline"
                     className="text-xs h-7 border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                   >
-                    Join or Create Squad
+                    Join Squad
                   </Button>
                 </Link>
               </div>

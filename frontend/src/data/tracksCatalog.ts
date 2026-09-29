@@ -1696,7 +1696,7 @@ export const loginRateLimiter = rateLimit({
     title: "UI/UX & Design Systems Engineering",
     shortTitle: "UI/UX Engineering",
     tagline:
-      "Design world-class product interfaces in Figma and build scalable, token-driven accessible design systems in React.",
+      "Design production interfaces in Figma and build scalable, token-driven accessible design systems in React.",
     description:
       "Bridge the gap between design and engineering. Master user research, wireframing, high-fidelity Figma components, design tokens, micro-interactions, WCAG 2.1 accessibility, and Storybook component documentation.",
     category: "UI/UX Engineering",

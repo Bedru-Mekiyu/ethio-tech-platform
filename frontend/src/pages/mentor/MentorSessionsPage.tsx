@@ -298,7 +298,7 @@ export function MentorSessionsPage() {
               <p className="text-xs font-medium text-slate-600">Scheduled interactive classrooms</p>
             </div>
             <Link to="/app/workspace" className="text-xs font-semibold text-primary hover:underline">
-              Open workspace →
+              Open Workspace
             </Link>
           </div>
 

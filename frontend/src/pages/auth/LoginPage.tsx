@@ -143,7 +143,7 @@ export function LoginPage() {
         ) : null}
 
         <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
-          {isSubmitting ? "Signing in…" : "Sign in to Platform"}
+          {isSubmitting ? "Signing in…" : "Sign In"}
           {!isSubmitting && <ArrowRight size={14} className="ml-1" />}
         </Button>
       </motion.form>
@@ -156,7 +156,7 @@ export function LoginPage() {
             to="/register"
             className="font-semibold text-slate-900 transition hover:text-slate-700 ml-1 inline-flex items-center gap-1"
           >
-            Create free account
+            Create Account
             <ArrowRight size={12} />
           </Link>
         </p>

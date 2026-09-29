@@ -61,19 +61,19 @@ export function SessionFeedbackPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80">
             <CheckCircle size={24} />
           </div>
-          <h1 className="text-xl font-bold text-slate-900">Thank you for your feedback!</h1>
+          <h1 className="text-xl font-bold text-slate-900">Feedback Received</h1>
           <p className="text-xs text-slate-600 font-medium max-w-md">
             Your input directly helps mentors optimize future sessions and peer reviews.
           </p>
           <div className="flex flex-wrap gap-2.5 pt-2">
             <Link to="/app/sessions">
               <Button size="sm" variant="primary" className="text-xs font-medium">
-                Back to Sessions
+                View Sessions
               </Button>
             </Link>
             <Link to="/app/dashboard">
               <Button size="sm" variant="outline" className="text-xs text-slate-700">
-                Dashboard
+                Open Dashboard
               </Button>
             </Link>
           </div>
@@ -89,7 +89,7 @@ export function SessionFeedbackPage() {
         className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium"
       >
         <ArrowLeft size={13} />
-        Back to sessions
+        All Sessions
       </Link>
 
       <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">

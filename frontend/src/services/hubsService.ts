@@ -9,12 +9,7 @@ export type HubWorkstationType =
 
 export type HubTimeSlot = "morning" | "afternoon" | "full_day" | "evening";
 
-export type HubPurpose =
-  | "self_study"
-  | "mentor_session"
-  | "pair_programming"
-  | "offline_assessment"
-  | "hackathon";
+export type HubPurpose = "self_study" | "mentor_session" | "pair_programming" | "offline_assessment" | "hackathon";
 
 export type HubBookingStatus = "confirmed" | "checked_in" | "cancelled" | "completed";
 
@@ -131,7 +126,7 @@ export const WORKSTATION_CONFIG: Record<
 > = {
   standard_pc: {
     label: "Standard Dev Station",
-    description: "Equipped with dual 27\" 4K monitors, Ubuntu/Linux, VS Code, Node & Rust preinstalled.",
+    description: 'Equipped with dual 27" 4K monitors, Ubuntu/Linux, VS Code, Node & Rust preinstalled.',
     spec: "Core i7 / 32GB RAM / 1TB NVMe / 1Gbps LAN",
     iconKey: "Monitor",
   },
@@ -143,8 +138,8 @@ export const WORKSTATION_CONFIG: Record<
   },
   collaborative_pod: {
     label: "Pair Programming Pod",
-    description: "Quad-desk pod with 65\" shared presentation display, magnetic whiteboard, and conference mic.",
-    spec: "4x Workstations + 65\" 4K Screen + Team Whiteboard",
+    description: 'Quad-desk pod with 65" shared presentation display, magnetic whiteboard, and conference mic.',
+    spec: '4x Workstations + 65" 4K Screen + Team Whiteboard',
     iconKey: "Users",
   },
   silent_desk: {
@@ -410,7 +405,13 @@ export const CANONICAL_REGIONAL_HUBS: RegionalHubProfile[] = [
     phone: "+251 47 111 4455",
     email: "jimma.hub@ethiotech.org",
     operatingHours: "Mon – Sat: 08:30 AM – 08:30 PM",
-    amenities: ["Campus High-Speed Fiber", "Solar Hybrid Microgrid", "Data Science Rig", "Offline Docs Server", "Collaboration Area"],
+    amenities: [
+      "Campus High-Speed Fiber",
+      "Solar Hybrid Microgrid",
+      "Data Science Rig",
+      "Offline Docs Server",
+      "Collaboration Area",
+    ],
     coordinates: { top: "62%", left: "32%", regionLabel: "Oromia Region" },
     onDutyMentors: [
       {
@@ -455,7 +456,10 @@ function saveStoredBookings(bookings: HubBooking[]): void {
 }
 
 function generatePassCode(city: string): string {
-  const prefix = city.substring(0, 3).toUpperCase().replace(/[^A-Z]/g, "HUB");
+  const prefix = city
+    .substring(0, 3)
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "HUB");
   const randomNum = Math.floor(1000 + Math.random() * 9000);
   return `ETH-${prefix}-${randomNum}`;
 }
@@ -463,7 +467,10 @@ function generatePassCode(city: string): string {
 export async function fetchHubs(params?: { city?: string; search?: string }): Promise<RegionalHubProfile[]> {
   try {
     // Attempt to fetch live data from backend
-    const { data } = await api.get<ApiResponse<{ hubs: Array<{ city: string; capacity?: number; computersAvailable?: number; address?: string }> }>>("/hubs");
+    const { data } =
+      await api.get<
+        ApiResponse<{ hubs: Array<{ city: string; capacity?: number; computersAvailable?: number; address?: string }> }>
+      >("/hubs");
     const backendHubs = data?.data?.hubs ?? [];
     const backendMap = new Map(backendHubs.map((h) => [h.city.toLowerCase(), h]));
 
@@ -514,7 +521,7 @@ export async function fetchHubs(params?: { city?: string; search?: string }): Pr
 export async function fetchHubAvailability(hubId: string, date: string): Promise<HubAvailability> {
   const hub = CANONICAL_REGIONAL_HUBS.find((h) => h.id === hubId) || CANONICAL_REGIONAL_HUBS[0];
   const existingBookings = getStoredBookings().filter(
-    (b) => b.hubId === hub.id && b.visitDate === date && b.status !== "cancelled"
+    (b) => b.hubId === hub.id && b.visitDate === date && b.status !== "cancelled",
   );
 
   const slots: HubSlotAvailability[] = (Object.keys(TIME_SLOT_CONFIG) as HubTimeSlot[]).map((slotKey) => {
@@ -600,13 +607,15 @@ export async function bookHubSeat(payload: BookHubSeatPayload): Promise<HubBooki
 
   // Optional background sync to backend attendance/booking endpoint if online
   try {
-    await api.post("/hubs/attendance", {
-      hubId: hub.id,
-      studentId: "anonymous",
-      date: payload.visitDate,
-    }).catch(() => {
-      // Ignored for non-authenticated public passes
-    });
+    await api
+      .post("/hubs/attendance", {
+        hubId: hub.id,
+        studentId: "anonymous",
+        date: payload.visitDate,
+      })
+      .catch(() => {
+        // Ignored for non-authenticated public passes
+      });
   } catch {
     // Silently continue
   }
@@ -639,10 +648,12 @@ export async function checkInHub(payload: CheckInHubPayload): Promise<CheckInRes
 
     // Attempt backend attendance sync
     try {
-      await api.post("/hubs/attendance", {
-        hubId: booking.hubId,
-        date: booking.visitDate,
-      }).catch(() => {});
+      await api
+        .post("/hubs/attendance", {
+          hubId: booking.hubId,
+          date: booking.visitDate,
+        })
+        .catch(() => {});
     } catch {
       // Continue gracefully
     }
@@ -651,7 +662,7 @@ export async function checkInHub(payload: CheckInHubPayload): Promise<CheckInRes
       success: true,
       booking: updatedBooking,
       xpAwarded: 50,
-      message: `Welcome to ${booking.hubCity} Tech Hub! Check-in verified successfully.`,
+      message: `Check-in verified for ${booking.hubCity} Tech Hub.`,
       checkedInAt: nowIso,
     };
   }

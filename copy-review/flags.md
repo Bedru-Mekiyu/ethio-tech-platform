@@ -30,3 +30,11 @@ The following strings represent IDs, technical endpoints, or data attributes and
 - API endpoints (`"/api/v1/..."`)
 - Socket.io event names (`"meeting:status"`, `"notification:new"`)
 - Icon symbol IDs in `public/icons.svg`
+
+---
+
+## 4. User Experience & Dashboard Strings Preserved
+- Role string identifiers (`"student"`, `"mentor"`, `"admin"`, `"parent"`)
+- Query params and navigation routes (`"/app/projects/submit?mode=view"`, `"/app/lessons/:id"`)
+- Dynamic user tags and grade numbers (`Grade 8` to `Grade 12`)
+- XP count metrics formatted via `.toLocaleString()`

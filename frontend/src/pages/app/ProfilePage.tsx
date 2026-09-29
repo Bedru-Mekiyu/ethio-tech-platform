@@ -130,7 +130,7 @@ export function ProfilePage() {
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">{track?.title ?? "Current Track"}</h2>
               <Link to="/app/tracks" className="text-xs font-semibold text-primary hover:underline">
-                {track ? "View track" : "Browse tracks"}
+                {track ? "View Track" : "Browse Tracks"}
               </Link>
             </div>
             {track ? (
@@ -149,7 +149,7 @@ export function ProfilePage() {
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">Recent Achievements</h2>
               <Link to="/app/progress" className="text-xs font-semibold text-primary hover:underline">
-                View all
+                View All
               </Link>
             </div>
             {badges.length ? (
@@ -209,7 +209,7 @@ export function ProfilePage() {
                 to={getSettingsPath(liveUser?.role ?? "student")}
                 className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors dark:bg-white/[0.02] dark:border-white/10"
               >
-                <span>Edit Account & Password Settings</span>
+                <span>Edit Settings</span>
                 <span>→</span>
               </Link>
               <Link
@@ -224,7 +224,7 @@ export function ProfilePage() {
                 }
                 className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors dark:bg-white/[0.02] dark:border-white/10"
               >
-                <span>Return to Role Dashboard</span>
+                <span>Open Dashboard</span>
                 <span>→</span>
               </Link>
             </div>
@@ -238,7 +238,7 @@ export function ProfilePage() {
             <Card className="border-slate-200 bg-white p-4 transition-all hover:border-slate-400 hover:shadow-md shadow-sm">
               <p className="text-xs font-medium text-slate-600 font-medium">Certificates</p>
               <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-primary transition-colors">
-                View earned certificates →
+                View Certificates
               </p>
             </Card>
           </Link>
@@ -247,7 +247,7 @@ export function ProfilePage() {
           <Card className="border-slate-200 bg-white p-4 transition-all hover:border-slate-400 hover:shadow-md shadow-sm">
             <p className="text-xs font-medium text-slate-600 font-medium">Settings</p>
             <p className="mt-0.5 text-xs font-semibold text-slate-900 group-hover:text-primary transition-colors">
-              Manage account & privacy →
+              Manage Settings
             </p>
           </Card>
         </Link>

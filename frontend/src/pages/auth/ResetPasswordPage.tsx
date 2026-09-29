@@ -92,7 +92,7 @@ export function ResetPasswordPage() {
           </p>
           <div className="mt-6">
             <Link to="/auth/forgot-password">
-              <Button variant="outline">Request new reset link</Button>
+              <Button variant="outline">Request Reset Link</Button>
             </Link>
           </div>
         </motion.div>
@@ -113,7 +113,7 @@ export function ResetPasswordPage() {
           className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
-          Back to sign in
+          Sign In
         </Link>
       </motion.div>
 

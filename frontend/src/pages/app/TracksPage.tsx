@@ -138,7 +138,7 @@ function StudentTrackCard({
 }) {
   const done = track.progress >= 100;
   const statusLabel = done ? "Completed" : track.enrolled ? "In Progress" : "Available";
-  const actionLabel = done ? "Review Track" : track.enrolled ? "Resume Track" : "Start Learning";
+  const actionLabel = done ? "Review Track" : track.enrolled ? "Resume Track" : "Start Track";
 
   return (
     <Card className="group grid gap-5 border border-slate-200 bg-white p-5 shadow-xs transition duration-200 hover:border-slate-300 lg:grid-cols-[160px_1fr_200px]">

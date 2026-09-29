@@ -240,7 +240,7 @@ export function AdminPage() {
               className="text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
             >
               <RefreshCw size={12} className={isFetching ? "animate-spin text-slate-900 mr-1" : "mr-1"} />
-              Sync
+              Sync Data
             </Button>
             <Link to="/admin/operations">
               <Button
@@ -249,7 +249,7 @@ export function AdminPage() {
                 className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               >
                 <Monitor size={13} />
-                Operations
+                View Operations
               </Button>
             </Link>
             <Link to="/admin/moderation">
@@ -259,13 +259,13 @@ export function AdminPage() {
                 className="text-xs gap-1 font-medium border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900"
               >
                 <Award size={13} />
-                Applications
+                Review Applications
               </Button>
             </Link>
             <Link to="/admin/users">
               <Button size="sm" className="text-xs gap-1 font-medium bg-slate-900 hover:bg-slate-800 text-white">
                 <Users size={13} />
-                Users
+                Manage Users
               </Button>
             </Link>
           </div>

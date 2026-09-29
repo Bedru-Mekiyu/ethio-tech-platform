@@ -249,7 +249,7 @@ export function MentorDashboardPage() {
             <Link to={activeSessionId ? `/mentor/control-center/${activeSessionId}` : "/mentor/sessions"}>
               <Button variant="primary" className="gap-2 text-xs font-medium">
                 <Settings size={14} />
-                Control Center
+                Open Control Center
                 {activeMeeting?.status === "active" && (
                   <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 )}
@@ -266,7 +266,7 @@ export function MentorDashboardPage() {
             <Link to="/mentor/reviews">
               <Button variant="outline" className="gap-2 text-xs text-slate-700">
                 <FileCheck size={14} />
-                Review Queue ({pendingSubmissions.length})
+                Review Queue
               </Button>
             </Link>
           </div>
@@ -490,7 +490,7 @@ export function MentorDashboardPage() {
                 </p>
               </div>
               <Link to="/mentor/reviews" className="text-xs font-semibold text-primary hover:underline">
-                View All →
+                View All
               </Link>
             </div>
 

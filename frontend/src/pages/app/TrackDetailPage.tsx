@@ -133,7 +133,7 @@ export function TrackDetailPage() {
           className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 hover:underline"
         >
           <ArrowLeft size={13} />
-          Back to all tracks
+          All Tracks
         </Link>
       </div>
 
@@ -163,7 +163,7 @@ export function TrackDetailPage() {
                 <Link to={`/app/lessons/${firstLessonId}`} onClick={handleStartTrack}>
                   <Button size="sm" className="gap-1.5 text-xs font-medium">
                     <Rocket size={14} />
-                    Start / Resume Track
+                    Resume Track
                   </Button>
                 </Link>
               ) : (
@@ -178,7 +178,7 @@ export function TrackDetailPage() {
               <Link to="/app/workspace">
                 <Button variant="outline" size="sm" className="gap-1.5 text-xs text-slate-700">
                   <Code2 size={14} />
-                  Coding Lab
+                  Open Lab
                 </Button>
               </Link>
 
@@ -289,7 +289,10 @@ export function TrackDetailPage() {
               <div className="space-y-4">
                 {modules.length > 0 ? (
                   modules.map((module, mIdx) => (
-                    <div key={module._id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10">
+                    <div
+                      key={module._id}
+                      className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10"
+                    >
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
@@ -363,7 +366,10 @@ export function TrackDetailPage() {
               <div className="space-y-5">
                 {data.capstones && data.capstones.length > 0 ? (
                   data.capstones.map((capstone) => (
-                    <div key={capstone.id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10">
+                    <div
+                      key={capstone.id}
+                      className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10"
+                    >
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
@@ -535,7 +541,10 @@ export function TrackDetailPage() {
               {/* Target career roles */}
               <div className="space-y-4">
                 {(data.targetCareerRoles ?? []).map((role) => (
-                  <div key={role.role} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-3 dark:bg-white/[0.02] dark:border-white/10">
+                  <div
+                    key={role.role}
+                    className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-3 dark:bg-white/[0.02] dark:border-white/10"
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <Badge variant="outline" className="text-[10px]">

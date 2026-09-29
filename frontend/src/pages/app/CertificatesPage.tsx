@@ -45,7 +45,7 @@ export function CertificatesPage() {
         <EmptyState
           title="No certificates yet"
           description="Finish a learning track and earn mentor verification to unlock certificates."
-          actionLabel="View tracks"
+          actionLabel="View Tracks"
           actionHref="/app/tracks"
         />
       ) : (
@@ -74,7 +74,7 @@ export function CertificatesPage() {
                     rel="noreferrer"
                     className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
                   >
-                    Download Certificate →
+                    Download Certificate
                   </a>
                 ) : (
                   <p className="text-xs text-slate-600 font-medium">Certificate PDF generation in progress.</p>

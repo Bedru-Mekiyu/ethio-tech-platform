@@ -33,7 +33,7 @@ export function SquadsListPage() {
         <EmptyState
           title="No squads yet"
           description="Enroll in a track to join a squad and collaborate with peers."
-          actionLabel="Browse tracks"
+          actionLabel="Browse Tracks"
           actionHref="/app/tracks"
         />
       ) : (
@@ -62,7 +62,7 @@ export function SquadsListPage() {
                   to={`/app/squads/${group._id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
                 >
-                  <MessageSquare size={13} /> Open Squad Room →
+                  <MessageSquare size={13} /> Open Squad
                 </Link>
               </div>
             </Card>

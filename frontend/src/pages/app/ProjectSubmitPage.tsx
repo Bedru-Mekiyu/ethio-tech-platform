@@ -116,8 +116,8 @@ export function ProjectSubmitPage() {
     return (
       <EmptyState
         title="No assigned projects yet"
-        description="Join a track first so the project workspace can unlock the next build step."
-        actionLabel="Browse tracks"
+        description="Enroll in a track to unlock project assignments and mentor reviews."
+        actionLabel="Browse Tracks"
         actionHref="/app/tracks"
       />
     );
@@ -342,7 +342,7 @@ export function ProjectSubmitPage() {
                 size="lg"
                 disabled={isSubmitting || submissionMutation.isPending}
               >
-                {isSubmitting || submissionMutation.isPending ? "Submitting..." : "Submit project"}
+                {isSubmitting || submissionMutation.isPending ? "Submitting..." : "Submit Project"}
                 <Send size={16} />
               </Button>
             </form>
@@ -352,7 +352,7 @@ export function ProjectSubmitPage() {
             <div className="flex items-center gap-2 text-slate-600 font-medium">
               <CheckCircle2 size={14} className="text-[var(--secondary)]" />
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">
-                Submission checklist
+                Submission Checklist
               </span>
             </div>
             <div className="mt-4 space-y-3">

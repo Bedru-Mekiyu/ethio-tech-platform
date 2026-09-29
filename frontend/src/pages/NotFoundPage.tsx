@@ -155,7 +155,7 @@ export function NotFoundPage() {
                 className="border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs"
               >
                 <ArrowLeft size={14} className="mr-1.5" />
-                Return to previous page
+                Go Back
               </Button>
             )}
             <Link
@@ -177,7 +177,7 @@ export function NotFoundPage() {
             >
               <Button size="sm" className="font-semibold shadow-xs">
                 <Home size={14} className="mr-1.5" />
-                Go home
+                Go Home
               </Button>
             </Link>
           </div>

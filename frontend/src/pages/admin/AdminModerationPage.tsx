@@ -512,7 +512,7 @@ function RubricModal({ application, onClose, onApplyRubricNotes }: RubricModalPr
     {
       key: "motivation" as keyof RubricScores,
       title: "Motivation & Mentoring Philosophy",
-      desc: "Clear pedagogical approach, empathy, and passion for empowering Ethiopian youth.",
+      desc: "Clear pedagogical approach, empathy, and dedication to mentoring Ethiopian developers.",
       labels: ["Weak statement", "Acceptable", "Good clarity", "Very thoughtful", "Exceptional vision"],
     },
   ];

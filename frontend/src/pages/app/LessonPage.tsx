@@ -85,7 +85,7 @@ export function LessonPage() {
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-[var(--primary-hover)] transition"
         >
           <ArrowLeft size={13} />
-          Back to {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
+          {lesson?.trackTitle ? `${lesson.trackTitle}` : "Track Overview"}
         </Link>
 
         {lesson?.durationMinutes && (
@@ -239,7 +239,7 @@ export function LessonPage() {
               className="gap-2 text-xs font-semibold text-slate-600 hover:text-slate-900 rounded-xl"
             >
               <GraduationCap size={15} />
-              Ask a Mentor
+              Consult Mentor
             </Button>
           </Link>
         </div>
@@ -276,7 +276,7 @@ export function LessonPage() {
               className="gap-2 font-semibold rounded-xl shadow-xs"
             >
               <CheckCircle size={16} />
-              {completeMutation.isPending ? "Recording progress..." : `Mark Complete (+${lesson?.xpReward ?? 50} XP)`}
+              {completeMutation.isPending ? "Recording progress..." : "Mark Complete"}
             </Button>
           )}
 
@@ -299,7 +299,7 @@ export function LessonPage() {
                   variant="outline"
                   className="gap-1.5 font-semibold rounded-xl border-slate-200 hover:bg-slate-50"
                 >
-                  Back to Track
+                  View Track
                   <ArrowRight size={16} />
                 </Button>
               </Link>

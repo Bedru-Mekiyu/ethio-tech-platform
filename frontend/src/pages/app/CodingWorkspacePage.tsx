@@ -2126,7 +2126,7 @@ export function CodingWorkspacePage() {
                       size="sm"
                       className="w-full text-xs gap-1.5 border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl"
                     >
-                      <BookOpen size={13} /> View Full Track Curriculum
+                      <BookOpen size={13} /> View Curriculum
                     </Button>
                   </Link>
                 </div>

@@ -62,10 +62,10 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
     project.category === "completed" ? "success" : project.category === "feedback" ? "outline" : "warning";
   const actionLabel =
     project.category === "completed"
-      ? "View submission"
+      ? "View Submission"
       : project.category === "feedback"
-        ? "Read feedback"
-        : "Submit work";
+        ? "Read Feedback"
+        : "Submit Work";
   const actionMode =
     project.category === "completed" ? "view" : project.category === "feedback" ? "feedback" : "submit";
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
@@ -111,7 +111,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
         {project.trackId ? (
           <Link to={`/app/tracks/${project.trackId}`}>
             <Button size="sm" variant="outline" className="text-xs rounded-xl">
-              Track
+              Open Track
             </Button>
           </Link>
         ) : null}
@@ -176,13 +176,13 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
         ) : status === "graded" ? (
           <Link to={`/app/projects/submit?mode=feedback&assignmentId=${assignment._id}`}>
             <Button size="sm" variant="outline" className="text-xs rounded-xl">
-              View feedback
+              View Feedback
             </Button>
           </Link>
         ) : (
           <Link to={`/app/projects/submit?mode=view&assignmentId=${assignment._id}`}>
             <Button size="sm" variant="outline" className="text-xs rounded-xl">
-              View submission
+              View Submission
             </Button>
           </Link>
         )}
@@ -279,7 +279,7 @@ export function AssignedProjectsPage() {
         <EmptyState
           title="No projects yet"
           description="Enroll in a learning track to see your projects and assignments here."
-          actionLabel="Browse tracks"
+          actionLabel="Browse Tracks"
           actionHref="/app/tracks"
         />
       ) : (

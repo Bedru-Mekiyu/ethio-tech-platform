@@ -119,3 +119,88 @@ DonationPage.tsx,Bottom CTA 1,"Sponsor a Student Today","Sponsor Student",15
 DonationPage.tsx,Bottom CTA 2,"Explore Partner Frameworks","View Frameworks",15
 InfoPages.tsx,FaqPage Primary CTA,"Join the platform","Enroll Free",11
 InfoPages.tsx,ContactPage Submit,"Send message","Send Message",12
+index.html,Meta Title,"EthioTech — Code the Future of East Africa","EthioTech — Engineering Education for Ethiopia",45
+index.html,Meta Description,"EthioTech is Ethiopia's premier technology and education platform — live interactive classrooms, diaspora mentorship, peer squads, project-based learning tracks, and regional tech hubs for the next generation of African engineers.","EthioTech delivers project-based engineering education for Ethiopia with live mentorship, peer squads, and regional tech hubs.",126
+tracksCatalog.ts,Track Tagline,"Design world-class product interfaces in Figma...","Design production interfaces in Figma and build scalable, token-driven accessible design systems in React.",108
+AdminModerationPage.tsx,Rubric Philosophy,"...passion for empowering Ethiopian youth.","...dedication to mentoring Ethiopian developers.",86
+AboutPage.tsx,Diaspora Bridge Subtitle,"World-class mentorship delivered locally","Engineering mentorship delivered locally",40
+DonationPage.tsx,Equipment Description,"Empower Ethiopian students by donating...","Equip Ethiopian developers by donating refurbished laptops, monitors, Raspberry Pis, and server gear. We provide full asset tracking and certified data sanitization.",166
+HubsPage.tsx,Check-in Confirmation,"Welcome to [HubCity] Tech Hub...","Checked in at [HubCity] Tech Hub. Connect to the local Wi-Fi network EthioTech-Hub-LAN for offline cache acceleration.",118
+hubsService.ts,Check-in Message,"Welcome to [hubCity] Tech Hub! Check-in verified successfully.","Check-in verified for [hubCity] Tech Hub.",41
+StudentDashboardPage.tsx,Header Greeting,"Welcome back, {firstName}","Hello, {firstName}",17
+StudentDashboardPage.tsx,Header Subtitle,"Let's build something great today. Pick up where you left off.","Pick up where you left off and complete your daily coding milestone.",68
+StudentDashboardPage.tsx,Card Title,"Assigned Projects & Portfolio Tasks","Assigned Projects & Portfolios",30
+StudentDashboardPage.tsx,Hub Check-in CTA,"Check In (+50 XP)","Check In",8
+StudentDashboardPage.tsx,Workstation CTA,"Book / Switch Desk","Switch Workstation",18
+StudentDashboardPage.tsx,Challenge Reward CTA,"Claim +25 XP Reward","Claim Reward",12
+StudentDashboardPage.tsx,Squad Card Link,"Open Squad Hub →","Open Squad",10
+StudentDashboardPage.tsx,Squad Join Button,"Join or Create Squad","Join Squad",10
+ProgressPage.tsx,Global Standings Link,"View Global Standings →","View Standings",14
+ProgressPage.tsx,Track Link,"Open Track Dashboard →","Open Track",10
+ProgressPage.tsx,Certificate Download CTA,"Download Certificate PDF","Download PDF",12
+ProgressPage.tsx,Empty State Action,"View Assigned Tasks","View Tasks",10
+NotificationsPage.tsx,Empty State Action,"Open dashboard","Open Dashboard",14
+NotificationsPage.tsx,Mark All Read Button,"Mark all read","Mark All Read",13
+NotificationsPage.tsx,Open Item Link,"Open item →","Open Item",9
+NotificationsPage.tsx,Mark Read Button,"Mark read","Mark Read",9
+CertificatesPage.tsx,Empty State Action,"View tracks","View Tracks",11
+CertificatesPage.tsx,Download Link,"Download Certificate →","Download Certificate",20
+AssignedProjectsPage.tsx,Submission Action,"View submission","View Submission",15
+AssignedProjectsPage.tsx,Feedback Action,"Read feedback","Read Feedback",13
+AssignedProjectsPage.tsx,Submit Action,"Submit work","Submit Work",11
+AssignedProjectsPage.tsx,Track Link,"Track","Open Track",10
+AssignedProjectsPage.tsx,Empty State Action,"Browse tracks","Browse Tracks",13
+ProjectSubmitPage.tsx,Empty State Description,"Join a track first so the project workspace can unlock the next build step.","Enroll in a track to unlock project assignments and mentor reviews.",67
+ProjectSubmitPage.tsx,Empty State Action,"Browse tracks","Browse Tracks",13
+ProjectSubmitPage.tsx,Submit Button,"Submit project","Submit Project",14
+ProjectSubmitPage.tsx,Checklist Title,"Submission checklist","Submission Checklist",20
+SessionFeedbackPage.tsx,Confirmation Title,"Thank you for your feedback!","Feedback Received",17
+SessionFeedbackPage.tsx,Sessions Link,"Back to Sessions","View Sessions",13
+SessionFeedbackPage.tsx,Dashboard Link,"Dashboard","Open Dashboard",14
+SessionFeedbackPage.tsx,Back Link,"Back to sessions","All Sessions",12
+SquadsListPage.tsx,Empty State Action,"Browse tracks","Browse Tracks",13
+SquadsListPage.tsx,Open Squad Link,"Open Squad Room →","Open Squad",10
+SquadPage.tsx,Empty State Action,"View squads","View Squads",11
+SquadPage.tsx,View All Link,"View all","View All",8
+SquadPage.tsx,Projects Link,"Open Projects Hub","Open Projects",13
+SquadPage.tsx,Tracks Link,"Browse Learning Tracks","Browse Tracks",13
+SessionHistoryPage.tsx,Leave Feedback Button,"Feedback","Leave Feedback",14
+SessionHistoryPage.tsx,Waitlist Button,"Join waitlist","Join Waitlist",13
+SessionHistoryPage.tsx,Enter Room Button,"Open","Enter Room",10
+CodingWorkspacePage.tsx,Curriculum Link,"View Full Track Curriculum","View Curriculum",15
+TrackDetailPage.tsx,All Tracks Link,"Back to all tracks","All Tracks",10
+TrackDetailPage.tsx,Resume Track CTA,"Start / Resume Track","Resume Track",12
+TrackDetailPage.tsx,Coding Lab CTA,"Coding Lab","Open Lab",8
+LessonPage.tsx,Breadcrumb Track Link,"Back to {trackTitle}","{trackTitle}",14
+LessonPage.tsx,Consult Mentor CTA,"Ask a Mentor","Consult Mentor",14
+LessonPage.tsx,Complete CTA,"Mark Complete (+50 XP)","Mark Complete",13
+LessonPage.tsx,Track Return Link,"Back to Track","View Track",10
+ProfilePage.tsx,Track Navigation Link,"View track / Browse tracks","View Track / Browse Tracks",27
+ProfilePage.tsx,Achievements Link,"View all","View All",8
+ProfilePage.tsx,Settings Navigation,"Edit Account & Password Settings","Edit Settings",13
+ProfilePage.tsx,Role Dashboard Navigation,"Return to Role Dashboard","Open Dashboard",14
+ProfilePage.tsx,Certificates Card Link,"View earned certificates →","View Certificates",17
+ProfilePage.tsx,Settings Card Link,"Manage account & privacy →","Manage Settings",15
+SettingsPage.tsx,Avatar Clear Button,"Clear selection","Clear Image",11
+SettingsPage.tsx,Avatar Reset Button,"Revert to system","Reset Avatar",12
+MentorDashboardPage.tsx,Control Center CTA,"Control Center","Open Control Center",19
+MentorDashboardPage.tsx,Review Queue CTA,"Review Queue (0)","Review Queue",12
+MentorDashboardPage.tsx,Queue View All Link,"View All →","View All",8
+MentorSessionsPage.tsx,Workspace Link,"Open workspace →","Open Workspace",14
+AdminPage.tsx,Sync Data Button,"Sync","Sync Data",9
+AdminPage.tsx,Operations Link,"Operations","View Operations",15
+AdminPage.tsx,Applications Link,"Applications","Review Applications",19
+AdminPage.tsx,Users Link,"Users","Manage Users",12
+LoginPage.tsx,Submit Button,"Sign in to Platform","Sign In",7
+LoginPage.tsx,Register Link,"Create free account","Create Account",14
+RegisterPage.tsx,Submit Button,"Create Student Account","Create Account",14
+RegisterPage.tsx,Mentor Apply Link,"Apply as Mentor →","Apply as Mentor",15
+RegisterPage.tsx,Sign In Link,"Sign in","Sign In",7
+ForgotPasswordPage.tsx,Back Link,"Back to sign in","Sign In",7
+ForgotPasswordPage.tsx,Dev Token Link,"Continue with token →","Continue with Token",19
+ResetPasswordPage.tsx,Reset Request CTA,"Request new reset link","Request Reset Link",18
+ResetPasswordPage.tsx,Back Link,"Back to sign in","Sign In",7
+ActivateAccountPage.tsx,Sign In Button,"Go to sign in","Sign In",7
+ActivateAccountPage.tsx,Back Link,"Back to sign in","Sign In",7
+NotFoundPage.tsx,Back Button,"Return to previous page","Go Back",7
+NotFoundPage.tsx,Home Button,"Go home","Go Home",7

@@ -1276,9 +1276,10 @@ export function HubsPage() {
                   +50 XP Awarded to your profile
                 </div>
                 <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto">
-                  Welcome to <strong className="text-slate-900">{viewingPass.hubCity} Tech Hub</strong>. Connect to the
-                  local Wi-Fi network <code className="text-slate-900 font-mono font-medium">EthioTech-Hub-LAN</code>{" "}
-                  for offline cache acceleration.
+                  Checked in at <strong className="text-slate-900">{viewingPass.hubCity} Tech Hub</strong>. Connect to
+                  the local Wi-Fi network{" "}
+                  <code className="text-slate-900 font-mono font-medium">EthioTech-Hub-LAN</code> for offline cache
+                  acceleration.
                 </p>
                 <Button
                   onClick={() => {

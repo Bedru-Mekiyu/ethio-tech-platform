@@ -214,7 +214,7 @@ export function RegisterPage() {
         ) : null}
 
         <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
-          {isSubmitting ? "Creating account…" : "Create Student Account"}
+          {isSubmitting ? "Creating account…" : "Create Account"}
           {!isSubmitting && <ArrowRight size={14} className="ml-1" />}
         </Button>
       </motion.form>
@@ -227,7 +227,7 @@ export function RegisterPage() {
         <p className="text-xs text-slate-600">
           Want to mentor students?{" "}
           <Link to="/mentor-recruitment" className="font-semibold text-slate-900 hover:text-slate-700 ml-1">
-            Apply as Mentor →
+            Apply as Mentor
           </Link>
         </p>
       </motion.div>
@@ -239,7 +239,7 @@ export function RegisterPage() {
             to="/login"
             className="font-semibold text-slate-900 transition hover:text-slate-700 ml-1 inline-flex items-center gap-1"
           >
-            Sign in
+            Sign In
             <ArrowRight size={12} />
           </Link>
         </p>

@@ -90,7 +90,7 @@ const REGIONAL_DIVIDE_SOLUTIONS = [
   },
   {
     title: "3. Global Ethiopian Diaspora Bridge",
-    subtitle: "World-class mentorship delivered locally",
+    subtitle: "Engineering mentorship delivered locally",
     description:
       "Over 250 Ethiopian tech leaders working at Google, Microsoft, Amazon, Safaricom, and African unicorns conduct weekly live reviews, bridging local talent to global engineering standards.",
     icon: Layers3,

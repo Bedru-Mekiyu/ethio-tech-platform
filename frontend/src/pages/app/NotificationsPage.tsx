@@ -161,7 +161,7 @@ export function NotificationsPage() {
       <EmptyState
         title="All caught up"
         description="Session updates, mentor feedback, and badge alerts will appear here."
-        actionLabel="Open dashboard"
+        actionLabel="Open Dashboard"
         actionHref="/app/dashboard"
       />
     );
@@ -203,7 +203,7 @@ export function NotificationsPage() {
                   disabled={markAllRead.isPending}
                   className="whitespace-nowrap text-xs h-7 text-slate-700"
                 >
-                  Mark all read
+                  Mark All Read
                 </Button>
               )}
             </div>
@@ -238,7 +238,7 @@ export function NotificationsPage() {
                                   href={notification.link}
                                   className="text-xs font-medium text-primary hover:underline"
                                 >
-                                  Open item →
+                                  Open Item
                                 </a>
                               ) : null}
                               <Button
@@ -247,7 +247,7 @@ export function NotificationsPage() {
                                 onClick={() => markRead.mutate(notification._id)}
                                 className="whitespace-nowrap text-xs h-6 px-2 text-slate-600"
                               >
-                                Mark read
+                                Mark Read
                               </Button>
                             </div>
                           </div>
@@ -279,7 +279,7 @@ export function NotificationsPage() {
                         <div className="mt-2.5 flex flex-wrap gap-2">
                           {notification.link ? (
                             <a href={notification.link} className="text-xs font-medium text-primary hover:underline">
-                              Open item →
+                              Open Item
                             </a>
                           ) : null}
                           <Button
@@ -288,7 +288,7 @@ export function NotificationsPage() {
                             onClick={() => markRead.mutate(notification._id)}
                             className="whitespace-nowrap text-xs h-6 px-2 text-slate-600"
                           >
-                            Mark read
+                            Mark Read
                           </Button>
                         </div>
                       </div>
@@ -311,7 +311,10 @@ export function NotificationsPage() {
             <div className="mt-4 space-y-2.5">
               {grouped.recent.length ? (
                 grouped.recent.map((notification) => (
-                  <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3 min-w-0 dark:bg-white/[0.02] dark:border-white/10">
+                  <div
+                    key={notification._id}
+                    className="rounded-xl border border-slate-100 bg-slate-50/40 p-3 min-w-0 dark:bg-white/[0.02] dark:border-white/10"
+                  >
                     <p className="text-xs font-medium text-slate-800 truncate">{notification.message}</p>
                     <p className="mt-1 text-[11px] text-slate-600 font-medium">
                       {new Date(notification.createdAt).toLocaleString()}

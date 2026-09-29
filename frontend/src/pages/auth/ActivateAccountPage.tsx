@@ -73,7 +73,7 @@ export function ActivateAccountPage() {
           </p>
           <div className="mt-6">
             <Link to="/login">
-              <Button variant="outline">Go to sign in</Button>
+              <Button variant="outline">Sign In</Button>
             </Link>
           </div>
         </motion.div>
@@ -93,7 +93,7 @@ export function ActivateAccountPage() {
           className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
-          Back to sign in
+          Sign In
         </Link>
       </motion.div>
 

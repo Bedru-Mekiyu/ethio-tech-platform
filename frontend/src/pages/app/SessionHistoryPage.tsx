@@ -136,7 +136,7 @@ function ScheduleRow({
         ) : isEnded ? (
           <Link to={`/app/sessions/${session._id}/feedback`}>
             <Button size="sm" variant="outline" className="text-xs whitespace-nowrap">
-              Feedback
+              Leave Feedback
             </Button>
           </Link>
         ) : isFull ? (
@@ -147,12 +147,12 @@ function ScheduleRow({
             disabled={isWaitlisting}
             onClick={onWaitlist}
           >
-            {isWaitlisting ? "…" : "Join waitlist"}
+            {isWaitlisting ? "…" : "Join Waitlist"}
           </Button>
         ) : (
           <Link to={`/app/classroom/${session._id}`}>
             <Button size="sm" variant="outline" className="text-xs whitespace-nowrap">
-              Open
+              Enter Room
             </Button>
           </Link>
         )}

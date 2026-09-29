@@ -357,7 +357,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                       onClick={() => handleAvatarPick(null)}
                       disabled={avatarBusy}
                     >
-                      Clear selection
+                      Clear Image
                     </Button>
                     <Button
                       type="button"
@@ -366,7 +366,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                       onClick={handleAvatarRemove}
                       disabled={avatarBusy}
                     >
-                      Revert to system
+                      Reset Avatar
                     </Button>
                   </div>
                   {avatarFile && (

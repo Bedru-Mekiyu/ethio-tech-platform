@@ -696,8 +696,8 @@ export function DonationPage() {
             Donate Laptops & Regional Hub Equipment
           </h2>
           <p className="text-xs text-slate-600">
-            Empower Ethiopian students by donating refurbished developer laptops, monitors, Raspberry Pis, and server
-            gear. We provide full asset tracking and certified data sanitization.
+            Equip Ethiopian developers by donating refurbished laptops, monitors, Raspberry Pis, and server gear. We
+            provide full asset tracking and certified data sanitization.
           </p>
         </div>
 

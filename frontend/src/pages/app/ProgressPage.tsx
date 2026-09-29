@@ -352,7 +352,7 @@ export function ProgressPage() {
                 to="/leaderboard"
                 className="mt-0.5 inline-block text-xs text-slate-700 hover:text-slate-900 font-semibold"
               >
-                View Global Standings →
+                View Standings
               </Link>
             </Card>
           </div>
@@ -372,7 +372,7 @@ export function ProgressPage() {
                 to={currentTrack?.trackId ? `/app/tracks/${currentTrack.trackId}` : "/app/tracks"}
                 className="text-xs font-semibold text-slate-700 hover:text-slate-900"
               >
-                Open Track Dashboard →
+                Open Track
               </Link>
             </div>
 
@@ -555,7 +555,9 @@ export function ProgressPage() {
                     key={m.label}
                     className={cn(
                       "flex-1 min-w-0 rounded-xl border p-3.5 space-y-1.5 transition-all shadow-xs",
-                      complete ? "border-blue-200/80 bg-blue-50/50 dark:bg-slate-900 dark:border-white/10" : "border-slate-200 bg-slate-50/60 opacity-70 dark:bg-white/[0.02] dark:border-white/10",
+                      complete
+                        ? "border-blue-200/80 bg-blue-50/50 dark:bg-slate-900 dark:border-white/10"
+                        : "border-slate-200 bg-slate-50/60 opacity-70 dark:bg-white/[0.02] dark:border-white/10",
                     )}
                   >
                     <div className="flex items-center justify-between">
@@ -640,7 +642,7 @@ export function ProgressPage() {
                     <div className="mt-4 flex flex-wrap items-center gap-2">
                       <Button size="sm" className="gap-1 text-xs font-semibold shadow-xs whitespace-nowrap">
                         <Download size={12} />
-                        Download Certificate PDF
+                        Download PDF
                       </Button>
                       <Button
                         size="sm"
@@ -731,7 +733,7 @@ export function ProgressPage() {
               <EmptyState
                 title="No submitted projects yet"
                 description="Your submitted project code and mentor evaluations will appear here once reviewed."
-                actionLabel="View Assigned Tasks"
+                actionLabel="View Tasks"
                 actionHref="/app/projects"
               />
             )}

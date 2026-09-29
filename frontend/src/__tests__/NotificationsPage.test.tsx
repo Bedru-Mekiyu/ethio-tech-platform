@@ -123,7 +123,7 @@ describe("NotificationsPage", () => {
     vi.mocked(notificationsService.markAllNotificationsRead).mockResolvedValue(undefined);
     renderWithProviders(React.createElement(NotificationsPage));
     await waitFor(() => {
-      const btn = screen.getByText("Mark all read");
+      const btn = screen.getByText("Mark All Read");
       fireEvent.click(btn);
       expect(notificationsService.markAllNotificationsRead).toHaveBeenCalled();
     });
