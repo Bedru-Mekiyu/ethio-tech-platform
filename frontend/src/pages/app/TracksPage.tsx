@@ -143,7 +143,7 @@ function StudentTrackCard({
   return (
     <Card className="group grid gap-5 border border-slate-200 bg-white p-5 shadow-xs transition duration-200 hover:border-slate-300 lg:grid-cols-[160px_1fr_200px]">
       {/* Icon & Category Indicator */}
-      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+      <div className="relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-slate-50/70 p-4 dark:bg-white/[0.02] dark:border-white/10">
         <div className="flex items-start justify-between gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shadow-xs">
             <TrackIcon categoryKey={track.categoryKey} title={track.title} size={18} />

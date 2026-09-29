@@ -1394,7 +1394,7 @@ export function CodingWorkspacePage() {
         {/* Center: Language & Template Selectors */}
         <div className="flex flex-wrap items-center gap-2">
           {/* Language Selector */}
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs">
+          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs dark:bg-white/[0.02] dark:border-white/10">
             <span className="text-[10px] font-bold text-slate-600 font-medium font-mono uppercase tracking-wider">
               Lang
             </span>
@@ -1425,7 +1425,7 @@ export function CodingWorkspacePage() {
           </div>
 
           {/* Starter Template Preset */}
-          <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs">
+          <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50/80 px-2.5 py-1 shadow-2xs dark:bg-white/[0.02] dark:border-white/10">
             <span className="text-[10px] font-bold text-slate-600 font-medium font-mono uppercase tracking-wider">
               Preset
             </span>
@@ -1648,7 +1648,7 @@ export function CodingWorkspacePage() {
         {/* ─── RIGHT PANEL: OUTPUT & TEST WORKBENCH ─────────────────────────── */}
         <div className="flex flex-1 flex-col bg-white min-w-0 lg:max-w-[48%] xl:max-w-[45%]">
           {/* Workbench Tabs Header */}
-          <div className="flex h-10 flex-none items-center justify-between border-b border-slate-200/80 bg-slate-50/80 px-2.5 select-none">
+          <div className="flex h-10 flex-none items-center justify-between border-b border-slate-200/80 bg-slate-50/80 px-2.5 select-none dark:bg-white/[0.02] dark:border-white/10">
             <div className="flex items-center gap-1">
               {/* Console Tab */}
               <button
@@ -1664,7 +1664,7 @@ export function CodingWorkspacePage() {
                 <Terminal size={13} />
                 <span>Console</span>
                 {logs.length > 0 && (
-                  <span className="ml-1 rounded-full bg-slate-100 px-1.5 py-0.2 text-[10px] font-mono text-slate-600 font-semibold border border-slate-200/60">
+                  <span className="ml-1 rounded-full bg-slate-100 px-1.5 py-0.2 text-[10px] font-mono text-slate-600 font-semibold border border-slate-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     {logs.length}
                   </span>
                 )}
@@ -1810,7 +1810,7 @@ export function CodingWorkspacePage() {
             {activeTab === "tests" && (
               <div className="space-y-3 font-sans">
                 {/* Suite Header Summary */}
-                <div className="flex items-center justify-between rounded-xl bg-slate-50/80 border border-slate-200/80 p-3.5 shadow-2xs">
+                <div className="flex items-center justify-between rounded-xl bg-slate-50/80 border border-slate-200/80 p-3.5 shadow-2xs dark:bg-white/[0.02] dark:border-white/10">
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Automated Assertions</h4>
                     <p className="text-[11px] text-slate-600 font-medium mt-0.5 font-medium">
@@ -1847,13 +1847,13 @@ export function CodingWorkspacePage() {
                       </div>
 
                       <div className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] font-mono">
-                        <div className="rounded-lg bg-slate-50/70 p-2.5 border border-slate-200/80">
+                        <div className="rounded-lg bg-slate-50/70 p-2.5 border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                           <span className="text-[10px] text-slate-600 font-medium uppercase block mb-1 font-sans font-bold tracking-wider">
                             Expected
                           </span>
                           <span className="text-slate-700 break-all">{test.expectedOutput}</span>
                         </div>
-                        <div className="rounded-lg bg-slate-50/70 p-2.5 border border-slate-200/80">
+                        <div className="rounded-lg bg-slate-50/70 p-2.5 border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                           <span className="text-[10px] text-slate-600 uppercase block mb-1 font-sans font-bold tracking-wider">
                             Actual
                           </span>
@@ -1910,7 +1910,7 @@ export function CodingWorkspacePage() {
                 </div>
 
                 {/* Render container */}
-                <div className="flex flex-1 items-center justify-center p-4 bg-slate-50/70 rounded-xl border border-slate-200/80">
+                <div className="flex flex-1 items-center justify-center p-4 bg-slate-50/70 rounded-xl border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                   {language === "react" ? (
                     <div
                       className={cn(
@@ -1949,7 +1949,7 @@ export function CodingWorkspacePage() {
                             <button
                               type="button"
                               onClick={() => setPreviewCounter(0)}
-                              className="rounded-xl bg-slate-50 hover:bg-slate-100 active:scale-95 transition py-2 text-[11px] font-mono text-slate-600 font-medium border border-slate-200/80"
+                              className="rounded-xl bg-slate-50 hover:bg-slate-100 active:scale-95 transition py-2 text-[11px] font-mono text-slate-600 font-medium border border-slate-200/80 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
                             >
                               Reset
                             </button>
@@ -2008,7 +2008,7 @@ export function CodingWorkspacePage() {
                                     ),
                                   )
                                 }
-                                className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 border border-slate-200/80 cursor-pointer text-xs select-none transition"
+                                className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50/70 hover:bg-slate-100/80 border border-slate-200/80 cursor-pointer text-xs select-none transition dark:bg-white/[0.02] dark:border-white/10"
                               >
                                 <input
                                   type="checkbox"
@@ -2044,15 +2044,15 @@ export function CodingWorkspacePage() {
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 my-3 text-center">
-                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
+                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                               <p className="text-[10px] text-slate-600 font-medium font-medium">Latency</p>
                               <p className="text-sm font-bold text-slate-900 font-mono">24ms</p>
                             </div>
-                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
+                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                               <p className="text-[10px] text-slate-600 font-medium font-medium">CPU</p>
                               <p className="text-sm font-bold text-[var(--secondary)] font-mono">14%</p>
                             </div>
-                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80">
+                            <div className="p-2.5 bg-slate-50/70 rounded-xl border border-slate-200/80 dark:bg-white/[0.02] dark:border-white/10">
                               <p className="text-[10px] text-slate-600 font-medium font-medium">Memory</p>
                               <p className="text-sm font-bold text-slate-900 font-mono">42MB</p>
                             </div>

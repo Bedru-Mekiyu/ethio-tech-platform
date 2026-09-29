@@ -293,7 +293,7 @@ export function LeaderboardPage() {
 
         <div className="overflow-x-auto">
           <table className="min-w-[760px] w-full text-left text-sm">
-            <thead className="border-b border-slate-200/80 bg-slate-50/70">
+            <thead className="border-b border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50">
               <tr className="text-[10px] uppercase tracking-[0.22em] text-slate-500 font-semibold">
                 <th className="px-5 py-4">Rank</th>
                 <th className="px-5 py-4">{tab === "teams" ? "Team" : "Member"}</th>
@@ -313,7 +313,7 @@ export function LeaderboardPage() {
                       key={(row as LeaderboardEntry)._id ?? title ?? rank}
                       className={cn(
                         "border-b border-slate-100 transition-colors",
-                        isMe ? "bg-blue-50/40 font-semibold" : "hover:bg-slate-50/60",
+                        isMe ? "bg-blue-50/40 font-semibold" : "hover:bg-slate-50/60 dark:bg-slate-900/50",
                       )}
                     >
                       <td className="px-5 py-4">
@@ -390,7 +390,7 @@ export function LeaderboardPage() {
           </table>
         </div>
 
-        <div className="border-t border-slate-200/80 bg-slate-50/50 p-4 text-center">
+        <div className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 p-4 text-center">
           <Button
             variant="outline"
             size="sm"

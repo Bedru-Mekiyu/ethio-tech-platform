@@ -316,7 +316,7 @@ export function StudentDashboardPage() {
             <ProgressBar value={completion} max={100} className="mt-3.5 h-2 bg-slate-100" />
 
             {/* Recommended Next Lesson Box */}
-            <div className="mt-4 rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 shadow-xs">
+            <div className="mt-4 rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
@@ -377,7 +377,7 @@ export function StudentDashboardPage() {
                 {data.assignedProjects.slice(0, 3).map((project) => (
                   <div
                     key={project.projectId}
-                    className="flex flex-col gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 sm:flex-row sm:items-center sm:justify-between shadow-xs"
+                    className="flex flex-col gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 sm:flex-row sm:items-center sm:justify-between shadow-xs dark:bg-white/[0.02] dark:border-white/10"
                   >
                     <div className="min-w-0 space-y-0.5">
                       <div className="flex items-center gap-2">
@@ -427,7 +427,7 @@ export function StudentDashboardPage() {
                 ))}
               </div>
             ) : (
-              <div className="mt-3.5 rounded-xl border border-dashed border-slate-200 p-5 text-center bg-slate-50/40">
+              <div className="mt-3.5 rounded-xl border border-dashed border-slate-200 p-5 text-center bg-slate-50/40 dark:bg-white/[0.02] dark:border-white/10">
                 <p className="text-xs text-slate-600 font-semibold">No individual project assignments pending.</p>
                 <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                   Build production capstones and earn mentor reviews to populate your verified Skill Passport.
@@ -517,25 +517,25 @@ export function StudentDashboardPage() {
 
               {/* Hub Hardware & Connection Specs */}
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3.5 border-t border-slate-100">
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                   <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
                     Pass Code
                   </span>
                   <span className="font-mono text-xs font-bold text-slate-800">{activeBooking.passCode}</span>
                 </div>
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                   <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider flex items-center gap-1">
                     <Wifi size={11} className="text-[var(--secondary)]" /> Connection
                   </span>
                   <span className="text-xs font-bold text-slate-800">High-Speed Fiber</span>
                 </div>
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                   <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
                     Visit Date
                   </span>
                   <span className="text-xs font-bold text-slate-800">{activeBooking.visitDate}</span>
                 </div>
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                   <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider block">
                     Slot
                   </span>
@@ -544,7 +544,7 @@ export function StudentDashboardPage() {
               </div>
             </Card>
           ) : (
-            <Card className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 shadow-xs">
+            <Card className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
               <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                 <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
@@ -584,7 +584,7 @@ export function StudentDashboardPage() {
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-amber-50 text-amber-600 border border-amber-100">
+                <div className="flex h-7 w-7 items-center justify-center rounded-md bg-amber-50 text-amber-600 border border-amber-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <Flame size={15} />
                 </div>
                 <div>
@@ -596,7 +596,7 @@ export function StudentDashboardPage() {
             </div>
 
             {/* Weekly Streak Dots */}
-            <div className="mt-3.5 flex items-center justify-between rounded-xl bg-slate-50/80 border border-slate-200/80 p-3 shadow-2xs">
+            <div className="mt-3.5 flex items-center justify-between rounded-xl bg-slate-50/80 border border-slate-200/80 p-3 shadow-2xs dark:bg-white/[0.02] dark:border-white/10">
               {daysOfWeek.map((day, idx) => {
                 const isActive = idx <= currentDayIndex && currentStreak > 0;
                 return (
@@ -679,7 +679,7 @@ export function StudentDashboardPage() {
             </div>
 
             {squad ? (
-              <div className="mt-3 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 shadow-xs">
+              <div className="mt-3 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-slate-900 truncate">{squad.name}</span>
                   <Badge
@@ -704,7 +704,7 @@ export function StudentDashboardPage() {
                 </div>
               </div>
             ) : (
-              <div className="mt-3 rounded-xl border border-dashed border-slate-200 p-4 text-center bg-slate-50/40">
+              <div className="mt-3 rounded-xl border border-dashed border-slate-200 p-4 text-center bg-slate-50/40 dark:bg-white/[0.02] dark:border-white/10">
                 <p className="text-xs text-slate-600 font-semibold">Not assigned to a study squad</p>
                 <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
                   Collaborate in 4–6 person peer squads with shared code reviews and sprint check-ins.

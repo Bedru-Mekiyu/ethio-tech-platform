@@ -41,7 +41,7 @@ function QueueAgeBadge({ createdAt }: { createdAt?: string }) {
 
   if (elapsedDays >= 2) {
     return (
-      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
+      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
         Needs review · {elapsedDays}d in queue
       </span>
     );
@@ -152,7 +152,7 @@ export function MentorDashboardPage() {
   if (user?.role === "mentor" && mentorStatus !== "approved") {
     return (
       <div className="space-y-6">
-        <Card className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-sm">
+        <Card className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-sm dark:bg-slate-900 dark:border-white/10">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-2xl">
               <Badge variant="warning">
@@ -169,7 +169,7 @@ export function MentorDashboardPage() {
                   : "Mentor tools stay locked until the admin team approves your mentor application and verifies your credentials for live mentoring."}
               </p>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
               <ShieldCheck size={26} />
             </div>
           </div>
@@ -278,7 +278,7 @@ export function MentorDashboardPage() {
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Mentor Rating</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-100 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
               <Star size={15} className="fill-amber-400" />
             </div>
           </div>
@@ -291,7 +291,7 @@ export function MentorDashboardPage() {
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Cohort Engagement</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <Users size={15} />
             </div>
           </div>
@@ -310,7 +310,7 @@ export function MentorDashboardPage() {
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Submissions Queue</span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <FileCheck size={15} />
             </div>
           </div>
@@ -327,7 +327,7 @@ export function MentorDashboardPage() {
             <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">
               Sessions Delivered
             </span>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <Video size={15} />
             </div>
           </div>
@@ -380,7 +380,7 @@ export function MentorDashboardPage() {
                     className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shrink-0">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shrink-0 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                         <Video size={16} />
                       </div>
                       <div className="space-y-0.5 min-w-0">

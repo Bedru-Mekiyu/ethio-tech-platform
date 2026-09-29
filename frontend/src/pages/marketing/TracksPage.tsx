@@ -97,7 +97,7 @@ export function TracksPage() {
       />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50/70 py-12 lg:py-16">
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8 relative z-10">
           <div className="mx-auto max-w-4xl text-center space-y-5">
             <motion.div
@@ -271,7 +271,7 @@ export function TracksPage() {
                       </div>
 
                       {/* Key stats bar */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 text-center">
                         <div>
                           <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
                             <Clock size={11} className="text-slate-700" />
@@ -324,7 +324,7 @@ export function TracksPage() {
                                   trackId: track.id,
                                 })
                               }
-                              className="group/cap text-left rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 transition-all hover:border-slate-300 hover:bg-white hover:shadow-xs"
+                              className="group/cap text-left rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 transition-all hover:border-slate-300 hover:bg-white hover:shadow-xs"
                             >
                               <div className="flex items-center justify-between gap-2">
                                 <Badge
@@ -400,7 +400,7 @@ export function TracksPage() {
                       </div>
 
                       {/* Market Insight & Industry Demand Card */}
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4">
                         <div className="flex items-center justify-between border-b border-slate-200/80 pb-2.5">
                           <div className="flex items-center gap-2">
                             <span className="h-2 w-2 rounded-full bg-[var(--secondary)]" />
@@ -429,7 +429,7 @@ export function TracksPage() {
                       </div>
 
                       {/* Career Outcomes Preview */}
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-2">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-2">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                           <GraduationCap size={13} className="text-slate-700" />
                           Target Career Outcomes
@@ -445,7 +445,7 @@ export function TracksPage() {
                       </div>
 
                       {/* Prerequisites snippet */}
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1.5">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-1.5">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                           <CheckCircle2 size={12} className="text-[var(--secondary)]" />
                           Skill Prerequisites
@@ -513,7 +513,7 @@ export function TracksPage() {
                         {track.modules.map((module, mIdx) => (
                           <div
                             key={module._id}
-                            className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-2.5"
+                            className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 space-y-2.5"
                           >
                             <div className="flex items-start justify-between gap-2">
                               <div>
@@ -570,7 +570,7 @@ export function TracksPage() {
       </section>
 
       {/* Curriculum Pillars Callout */}
-      <section className="border-t border-slate-200/80 bg-slate-50/60 py-12 lg:py-16">
+      <section className="border-t border-slate-200/80 bg-slate-50/60 dark:bg-slate-900/50 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
             <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
@@ -584,7 +584,7 @@ export function TracksPage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Code2 size={18} />
               </div>
               <h3 className="text-sm font-semibold text-slate-900">Production-Grade Capstones</h3>
@@ -595,7 +595,7 @@ export function TracksPage() {
             </Card>
 
             <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Video size={18} />
               </div>
               <h3 className="text-sm font-semibold text-slate-900">Live Socratic Mentorship</h3>
@@ -606,7 +606,7 @@ export function TracksPage() {
             </Card>
 
             <Card className="rounded-2xl border-slate-200/80 bg-white p-5 space-y-2.5 shadow-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Award size={18} />
               </div>
               <h3 className="text-sm font-semibold text-slate-900">Verified Skill Credentials</h3>

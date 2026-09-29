@@ -130,7 +130,7 @@ export function LessonPage() {
       <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
-          <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
+          <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:bg-white/[0.02] dark:border-white/10">
             <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
               <Code2 size={12} className="text-[var(--secondary)]" />
               Lesson Prerequisites

@@ -315,7 +315,7 @@ export function PartnersPage() {
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <activeFramework.icon size={20} />
                   </div>
                   <div>
@@ -342,7 +342,7 @@ export function PartnersPage() {
                   </ul>
                 </div>
 
-                <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-3.5 flex items-center gap-2.5">
+                <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 flex items-center gap-2.5">
                   <Award size={18} className="text-[var(--secondary)] shrink-0" />
                   <p className="text-xs text-slate-600 font-medium">
                     <strong className="text-slate-900 font-semibold">Standard:</strong> {activeFramework.metrics}
@@ -350,7 +350,7 @@ export function PartnersPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-4 shadow-xs">
+              <div className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-5 space-y-4 shadow-xs">
                 <div>
                   <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-800">
                     Target Organizations
@@ -418,7 +418,7 @@ export function PartnersPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                       <Icon size={16} />
                     </div>
                     <span className="text-xl font-bold font-mono text-slate-300">{step.step}</span>
@@ -455,7 +455,7 @@ export function PartnersPage() {
                 className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 mb-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 mb-3">
                     <Icon size={16} />
                   </div>
                   <h3 className="text-sm font-semibold text-slate-900">{p.title}</h3>
@@ -488,7 +488,7 @@ export function PartnersPage() {
 
               <div className="space-y-3 pt-1">
                 <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <Mail size={14} />
                   </div>
                   <div>
@@ -498,7 +498,7 @@ export function PartnersPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <Phone size={14} />
                   </div>
                   <div>
@@ -508,7 +508,7 @@ export function PartnersPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <ShieldCheck size={14} />
                   </div>
                   <div>

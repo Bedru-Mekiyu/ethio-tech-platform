@@ -618,7 +618,7 @@ export function HomePage() {
               </div>
 
               {/* Single Live Mentorship Session Line */}
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 flex items-center justify-between gap-3">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <Avatar
                     name="Selamawit Tekle"
@@ -720,7 +720,7 @@ export function HomePage() {
                 return (
                   <div
                     key={item.label}
-                    className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50/70 px-2.5 py-1 text-xs text-slate-700 shadow-[var(--shadow-xs)] hover:border-slate-300 hover:bg-white transition-all"
+                    className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 px-2.5 py-1 text-xs text-slate-700 shadow-[var(--shadow-xs)] hover:border-slate-300 hover:bg-white transition-all"
                   >
                     <Icon size={13} className="text-[var(--secondary)]" />
                     <span>{item.label}</span>
@@ -828,7 +828,7 @@ export function HomePage() {
               </div>
 
               {/* Right Side: Experiential UI Visual for this Tab */}
-              <div className="relative rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 shadow-[var(--shadow-xs)] overflow-hidden">
+              <div className="relative rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 shadow-[var(--shadow-xs)] overflow-hidden">
                 {activeTabDetails.id === "classroom" && (
                   <div className="space-y-3 font-mono text-xs">
                     <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
@@ -1087,7 +1087,7 @@ export function HomePage() {
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2.5">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 space-y-2.5">
                   <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Methodology in Action</p>
                   <p className="text-xs leading-relaxed text-slate-600 italic">
                     &ldquo;Traditional training programs often fall short due to lack of team accountability and
@@ -1181,7 +1181,7 @@ export function HomePage() {
                   <div>
                     {/* Header Top Bar */}
                     <div className="flex items-start justify-between gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 transition-colors shadow-[var(--shadow-xs)]">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 transition-colors shadow-[var(--shadow-xs)]">
                         <Icon size={16} className="text-[var(--secondary)]" />
                       </div>
                       <div className="flex items-center gap-1.5">
@@ -1218,7 +1218,7 @@ export function HomePage() {
                     </div>
 
                     {/* Capstone Projects Highlight */}
-                    <div className="mt-3.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1">
+                    <div className="mt-3.5 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-1">
                       <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
                         <Award size={12} className="text-[var(--secondary)]" />
                         <span>Shipped Capstone Projects</span>
@@ -1378,7 +1378,7 @@ export function HomePage() {
                 {REGIONAL_HUBS.map((hub) => (
                   <div
                     key={hub.city}
-                    className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-left transition-all hover:border-slate-300 hover:bg-white hover:shadow-[var(--shadow-xs)] shadow-2xs"
+                    className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 text-left transition-all hover:border-slate-300 hover:bg-white hover:shadow-[var(--shadow-xs)] shadow-2xs"
                   >
                     <div className="flex items-center gap-1.5 text-slate-700">
                       <MapPin size={13} className="text-[var(--secondary)]" />
@@ -1429,7 +1429,7 @@ export function HomePage() {
                   Hubs host weekly in-person sprint demos, weekend hackathons, algorithmic coding competitions, and
                   local mentor office hours across all 6 national corridors.
                 </p>
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 space-y-1 text-xs">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-1 text-xs">
                   <div className="flex items-center justify-between">
                     <p className="font-semibold text-slate-900">Upcoming Regional Event:</p>
                     <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">

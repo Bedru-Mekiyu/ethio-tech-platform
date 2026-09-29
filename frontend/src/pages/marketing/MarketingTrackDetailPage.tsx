@@ -137,9 +137,9 @@ export function MarketingTrackDetailPage() {
       </div>
 
       {/* ── Market Demand ── */}
-      <Card className="rounded-2xl border-slate-200/80 bg-slate-50/70 p-6 shadow-sm">
+      <Card className="rounded-2xl border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-6 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 flex-shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 flex-shrink-0">
             <TrendingUp size={18} />
           </div>
           <div className="flex-1 min-w-0">

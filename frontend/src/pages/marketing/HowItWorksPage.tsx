@@ -435,7 +435,7 @@ export function HowItWorksPage() {
     <div className="relative min-h-screen text-[var(--text-primary)] overflow-hidden">
       {/* Luminous Ambient Background Glow */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)] dark:opacity-20"
         aria-hidden="true"
       />
 
@@ -500,7 +500,7 @@ export function HowItWorksPage() {
         {/* Live Catalog Momentum Metrics */}
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
               <Layers3 size={16} />
             </div>
             <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(tracks.length)}</p>
@@ -509,7 +509,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
               <BookOpen size={16} />
             </div>
             <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalModules)}</p>
@@ -518,7 +518,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
               <Code2 size={16} />
             </div>
             <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalLessons)}</p>
@@ -527,7 +527,7 @@ export function HowItWorksPage() {
           </Card>
 
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
               <Zap size={16} />
             </div>
             <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalXp)}</p>
@@ -538,7 +538,7 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── 5-Stage Interactive Learner Lifecycle ─── */}
-      <section id="learner-lifecycle" className="border-t border-slate-200/80 bg-slate-50/50 py-12 lg:py-14">
+      <section id="learner-lifecycle" className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
@@ -645,8 +645,8 @@ export function HowItWorksPage() {
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60">
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                         <Trophy size={16} />
                       </div>
                       <div>
@@ -660,7 +660,7 @@ export function HowItWorksPage() {
 
                   {/* Right: Code Simulation & Step Action */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-5 shadow-[var(--shadow-xs)] space-y-4">
+                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-slate-900/50 p-5 shadow-[var(--shadow-xs)] space-y-4">
                       <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
                         <div>
                           <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
@@ -798,9 +798,9 @@ export function HowItWorksPage() {
                       return (
                         <div
                           key={benefit.title}
-                          className="flex items-start gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
+                          className="flex items-start gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 transition-all hover:bg-white hover:border-slate-300 hover:shadow-xs"
                         >
-                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                             <Icon size={14} />
                           </div>
                           <div>
@@ -844,7 +844,7 @@ export function HowItWorksPage() {
       </motion.section>
 
       {/* ─── Featured Track Pathways ─── */}
-      <section className="border-t border-slate-200/80 bg-slate-50/60 py-12 lg:py-16">
+      <section className="border-t border-slate-200/80 bg-slate-50/60 dark:bg-slate-900/50 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
@@ -990,7 +990,7 @@ export function HowItWorksPage() {
                   <button
                     type="button"
                     onClick={() => setExpandedFaqIndex(isExpanded ? null : idx)}
-                    className="flex w-full items-center justify-between gap-4 p-4 text-left text-slate-900 hover:bg-slate-50/50"
+                    className="flex w-full items-center justify-between gap-4 p-4 text-left text-slate-900 hover:bg-slate-50/50 dark:bg-slate-900/50"
                   >
                     <span className="text-xs sm:text-sm font-semibold">{faq.question}</span>
                     <ChevronDown

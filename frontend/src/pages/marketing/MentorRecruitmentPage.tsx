@@ -270,7 +270,7 @@ export function MentorRecruitmentPage() {
         </div>
 
         {/* Requirements Strip */}
-        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
+        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 max-w-3xl mx-auto mt-8 flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
           <span className="flex items-center gap-1.5 font-semibold text-slate-800">
             <ShieldCheck size={14} className="text-[var(--secondary)]" /> Requirement: 2+ Years Senior Experience
           </span>
@@ -305,7 +305,7 @@ export function MentorRecruitmentPage() {
                 className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 transition-all hover:border-slate-300 shadow-xs hover:shadow-sm"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <Icon size={18} />
                   </div>
                   <h3 className="mt-4 font-bold text-slate-900 text-sm">{benefit.title}</h3>
@@ -340,7 +340,7 @@ export function MentorRecruitmentPage() {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                       <Icon size={16} />
                     </div>
                     <span className="text-xl font-bold font-mono text-slate-300">{step.step}</span>
@@ -376,7 +376,7 @@ export function MentorRecruitmentPage() {
 
               {/* Stats Summary */}
               <div className="space-y-2.5 pt-1">
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 space-y-1">
                   <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
                     <Clock3 size={14} className="text-[var(--secondary)]" /> Flexible Weekly Commitment
                   </p>
@@ -385,7 +385,7 @@ export function MentorRecruitmentPage() {
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 space-y-1">
                   <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
                     <Award size={14} className="text-[var(--secondary)]" /> Senior Experience Requirement
                   </p>
@@ -394,7 +394,7 @@ export function MentorRecruitmentPage() {
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-1">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 space-y-1">
                   <p className="text-xs font-bold text-slate-900 flex items-center gap-2">
                     <Trophy size={14} className="text-[var(--secondary)]" /> Tooling & Platform Provided
                   </p>
@@ -404,7 +404,7 @@ export function MentorRecruitmentPage() {
                 </div>
 
                 {/* Live Mentor Guild Credibility Quote */}
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 space-y-2">
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5 space-y-2">
                   <p className="text-xs italic text-slate-700 leading-relaxed">
                     &ldquo;Reviewing PRs from students in Jimma and Bahir Dar is the most impactful engineering service
                     I do all week.&rdquo;
@@ -420,8 +420,8 @@ export function MentorRecruitmentPage() {
             {/* Right: Application Form */}
             <div>
               {mutation.isSuccess ? (
-                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-6 text-center space-y-3">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-6 text-center space-y-3">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <CheckCircle2 size={24} />
                   </div>
                   <Badge variant="secondary">Application Received</Badge>
@@ -559,7 +559,7 @@ export function MentorRecruitmentPage() {
                             className={`rounded-xl border p-3 text-left transition ${
                               active
                                 ? "border-blue-200 bg-blue-50/70 text-slate-900 shadow-2xs"
-                                : "border-slate-200 bg-slate-50/70 text-slate-700 hover:border-slate-300 hover:bg-white"
+                                : "border-slate-200 bg-slate-50/70 dark:bg-slate-900/50 text-slate-700 hover:border-slate-300 hover:bg-white"
                             }`}
                           >
                             <p className="text-xs font-bold text-slate-900">{style.label}</p>
@@ -630,7 +630,7 @@ export function MentorRecruitmentPage() {
                   </div>
 
                   {/* Consent Checkbox */}
-                  <label className="flex items-start gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-xs text-slate-600 cursor-pointer">
+                  <label className="flex items-start gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 text-xs text-slate-600 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={consent}

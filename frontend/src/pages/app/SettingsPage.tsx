@@ -327,7 +327,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               </CardHeader>
 
               <form onSubmit={profileForm.handleSubmit(onProfileSubmit)} className="space-y-3.5">
-                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-col gap-3">
+                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 flex flex-col gap-3 dark:bg-white/[0.02] dark:border-white/10">
                   <FileInput
                     label="Profile photo"
                     accept="image/jpeg,image/png,image/webp"

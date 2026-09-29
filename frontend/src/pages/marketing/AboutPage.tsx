@@ -374,7 +374,7 @@ export function AboutPage() {
     <div className="relative min-h-screen text-[var(--text-primary)] overflow-hidden">
       {/* Luminous Ambient Background Glow */}
       <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)] dark:opacity-20"
         aria-hidden="true"
       />
 
@@ -455,7 +455,7 @@ export function AboutPage() {
                 className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
               >
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                     <Icon size={18} />
                   </div>
                   <div>
@@ -501,7 +501,7 @@ export function AboutPage() {
                 key={fact.label}
                 className="rounded-2xl border border-slate-200/80 bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                   <Icon size={18} />
                 </div>
                 <p className="mt-3 text-2xl font-bold text-slate-900">{fact.metric}</p>
@@ -584,7 +584,7 @@ export function AboutPage() {
                     className="rounded-xl border border-slate-200/80 bg-white p-4 transition-all duration-150 hover:border-slate-300 hover:shadow-[var(--shadow-xs)] shadow-2xs"
                   >
                     <div className="flex items-center justify-between">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                         <Icon size={15} />
                       </div>
                       <Badge variant="outline" size="sm">
@@ -603,7 +603,7 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── The PISTELS Framework (Core Pedagogical Backbone) ─── */}
-      <section id="pistels-framework" className="relative border-y border-slate-200/80 bg-slate-50/50 py-12 lg:py-14">
+      <section id="pistels-framework" className="relative border-y border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
@@ -661,7 +661,7 @@ export function AboutPage() {
                   {/* Left Column: Narrative & Mechanisms */}
                   <div className="space-y-4 lg:col-span-7">
                     <div className="flex flex-wrap items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                         <activePillar.icon size={20} />
                       </div>
                       <div>
@@ -694,8 +694,8 @@ export function AboutPage() {
                       </ul>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60">
+                    <div className="flex items-center gap-3 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                         <Trophy size={16} />
                       </div>
                       <div>
@@ -709,7 +709,7 @@ export function AboutPage() {
 
                   {/* Right Column: Implementation Standards & Practices */}
                   <div className="space-y-3 lg:col-span-5">
-                    <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4">
+                    <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4">
                       <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
                         <span className="text-xs font-semibold text-slate-900">Standard & Verification</span>
                         <Badge variant="secondary" size="sm">
@@ -776,7 +776,7 @@ export function AboutPage() {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-2xs">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-2xs">
                       <Icon size={14} />
                     </div>
                     <span className="text-xs font-bold font-mono text-slate-900">
@@ -803,7 +803,7 @@ export function AboutPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] hover:-translate-y-0.5 transition-all">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                 <Target size={20} />
               </div>
               <Badge variant="secondary">Our Purpose</Badge>
@@ -817,7 +817,7 @@ export function AboutPage() {
 
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] hover:-translate-y-0.5 transition-all">
             <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                 <Compass size={20} />
               </div>
               <Badge variant="secondary">Our Horizon</Badge>
@@ -844,7 +844,7 @@ export function AboutPage() {
             </div>
 
             <div className="mt-4 space-y-3">
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-900">1. Regional Hub Network</span>
                   <span className="text-[11px] text-slate-500 font-medium">Physical Mesh</span>
@@ -855,7 +855,7 @@ export function AboutPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-900">2. In-Browser WASM Runtime</span>
                   <span className="text-[11px] text-slate-500 font-medium">Edge Compute</span>
@@ -865,7 +865,7 @@ export function AboutPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-900">3. Diaspora Mentorship Mesh</span>
                   <span className="text-[11px] text-slate-500 font-medium">Global Network</span>
@@ -875,7 +875,7 @@ export function AboutPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-900">4. Talent Verification Gateway</span>
                   <span className="text-[11px] text-slate-500 font-medium">Verifiable Proof</span>
@@ -932,9 +932,9 @@ export function AboutPage() {
                 return (
                   <div
                     key={bullet}
-                    className="flex items-start gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 transition hover:border-slate-300"
+                    className="flex items-start gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 transition hover:border-slate-300"
                   >
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-2xs">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-2xs">
                       <Icon size={14} />
                     </div>
                     <p className="text-xs leading-relaxed text-slate-700">{bullet}</p>
@@ -1047,7 +1047,7 @@ export function AboutPage() {
       </motion.section>
 
       {/* ─── Governance, Transparency & Open Impact Model ─── */}
-      <section className="border-t border-slate-200/80 bg-slate-50/50 py-12 lg:py-14">
+      <section className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
@@ -1064,7 +1064,7 @@ export function AboutPage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[var(--shadow-card)]">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                 <BookOpen size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-slate-900">100% Open Source Syllabus</h3>
@@ -1075,7 +1075,7 @@ export function AboutPage() {
             </Card>
 
             <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[var(--shadow-card)]">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                 <ShieldCheck size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-slate-900">Ethical Philanthropic Model</h3>
@@ -1086,7 +1086,7 @@ export function AboutPage() {
             </Card>
 
             <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[var(--shadow-card)]">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 shadow-[var(--shadow-xs)]">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
                 <ShieldCheck size={18} />
               </div>
               <h3 className="mt-3 text-sm font-semibold text-slate-900">Transparent Impact Auditing</h3>

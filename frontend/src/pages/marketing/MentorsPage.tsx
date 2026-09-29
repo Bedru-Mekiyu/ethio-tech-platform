@@ -109,7 +109,7 @@ function MentorStatCard({
 }) {
   return (
     <Card className="rounded-2xl border-slate-200/80 bg-white p-4 text-center transition-all hover:border-slate-300 shadow-xs hover:shadow-sm">
-      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-[var(--secondary)]">
+      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
         <Icon size={16} />
       </div>
       <p className="mt-2 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
@@ -299,7 +299,7 @@ export function MentorsPage() {
         </div>
 
         {/* Requirements & Commitment Callout Strip */}
-        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
+        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
           <span className="flex items-center gap-1.5 font-semibold text-slate-800">
             <ShieldCheck size={14} className="text-[var(--secondary)]" /> Requirement: 2+ Years Senior Experience
           </span>
@@ -407,7 +407,7 @@ export function MentorsPage() {
                 className="flex flex-col justify-between rounded-2xl border-slate-200/80 bg-white p-5 shadow-xs hover:border-slate-300 hover:shadow-sm transition-all"
               >
                 <div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                     <Icon size={18} />
                   </div>
                   <h3 className="mt-4 font-bold text-slate-900 text-sm">{pillar.title}</h3>

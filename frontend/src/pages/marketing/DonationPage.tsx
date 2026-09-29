@@ -242,7 +242,7 @@ export function DonationPage() {
         </div>
 
         {/* Currency & Frequency Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/70 p-3 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 shadow-xs">
           {/* Frequency Toggle */}
           <div className="flex rounded-xl border border-slate-200 bg-slate-100 p-1">
             <button
@@ -395,7 +395,7 @@ export function DonationPage() {
               </div>
 
               {/* Live Impact Preview Box */}
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                     Calculated Contribution
@@ -430,7 +430,7 @@ export function DonationPage() {
             </div>
 
             {/* Right: Multi-Rail Payment Interface */}
-            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-4">
+            <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-5 space-y-4">
               {/* Payment Rail Tabs */}
               <div className="grid grid-cols-4 gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1 text-xs shadow-2xs">
                 <button
@@ -705,7 +705,7 @@ export function DonationPage() {
               className="flex flex-col justify-between rounded-xl border border-slate-200/80 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
             >
               <div>
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <Laptop2 size={18} />
                 </div>
                 <h3 className="mt-3.5 font-semibold text-slate-900 text-sm">{item.item}</h3>
@@ -751,7 +751,7 @@ export function DonationPage() {
               </Button>
             </div>
 
-            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-5 space-y-3 shadow-xs">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-5 space-y-3 shadow-xs">
               <h4 className="text-xs uppercase tracking-wider font-semibold text-slate-900">
                 Hardware Drive Impact to Date
               </h4>

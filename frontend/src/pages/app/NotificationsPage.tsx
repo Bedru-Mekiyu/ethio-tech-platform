@@ -217,7 +217,7 @@ export function NotificationsPage() {
                 if (meeting) {
                   return (
                     <div key={notification._id} className="space-y-2">
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50 dark:bg-white/[0.02] dark:border-white/10">
                         <div className="flex items-start gap-3">
                           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100/80">
                             <Icon size={14} />
@@ -260,7 +260,7 @@ export function NotificationsPage() {
                 return (
                   <div
                     key={notification._id}
-                    className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50"
+                    className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-3.5 transition-colors hover:bg-slate-50 dark:bg-white/[0.02] dark:border-white/10"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100/80">
@@ -311,7 +311,7 @@ export function NotificationsPage() {
             <div className="mt-4 space-y-2.5">
               {grouped.recent.length ? (
                 grouped.recent.map((notification) => (
-                  <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3 min-w-0">
+                  <div key={notification._id} className="rounded-xl border border-slate-100 bg-slate-50/40 p-3 min-w-0 dark:bg-white/[0.02] dark:border-white/10">
                     <p className="text-xs font-medium text-slate-800 truncate">{notification.message}</p>
                     <p className="mt-1 text-[11px] text-slate-600 font-medium">
                       {new Date(notification.createdAt).toLocaleString()}

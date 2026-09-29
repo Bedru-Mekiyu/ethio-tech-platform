@@ -501,7 +501,7 @@ export function HubsPage() {
           {/* Quick Code Entry Check-In Card */}
           <Card className="mx-auto max-w-xl rounded-2xl border-slate-200/80 bg-white p-6 shadow-sm space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <QrCodeIcon size={20} />
               </div>
               <div>
@@ -568,7 +568,7 @@ export function HubsPage() {
                       key={booking.id}
                       className={`flex flex-col justify-between rounded-2xl border p-5 transition shadow-xs ${
                         isCheckedIn
-                          ? "border-slate-200 bg-slate-50/70"
+                          ? "border-slate-200 bg-slate-50/70 dark:bg-slate-900/50"
                           : "border-slate-200/80 bg-white hover:border-slate-300"
                       }`}
                     >
@@ -778,7 +778,7 @@ export function HubsPage() {
                         className={`cursor-pointer rounded-xl border p-3 transition ${
                           isSelected
                             ? "border-blue-200 bg-blue-50/70 shadow-2xs"
-                            : "border-slate-200/80 bg-slate-50/70 hover:bg-white hover:border-slate-300 hover:shadow-xs"
+                            : "border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 hover:bg-white hover:border-slate-300 hover:shadow-xs"
                         }`}
                       >
                         <div className="flex items-start justify-between">
@@ -885,13 +885,13 @@ export function HubsPage() {
 
                     {/* Workstation & Capacity Counters */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-2.5 text-center">
                         <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           Workstations
                         </p>
                         <p className="text-base font-bold text-slate-900 mt-0.5">{hub.workstations}</p>
                       </div>
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-2.5 text-center">
                         <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
                           Open Seats Today
                         </p>
@@ -920,7 +920,7 @@ export function HubsPage() {
                     </div>
 
                     {/* On-Duty Mentor Highlight */}
-                    <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-xs space-y-1">
+                    <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-2.5 text-xs space-y-1">
                       <div className="flex items-center justify-between">
                         <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Mentor Lead</p>
                         <Badge variant="secondary" size="sm">
@@ -1014,7 +1014,7 @@ export function HubsPage() {
                     key={idx}
                     className="rounded-2xl border-slate-200/80 bg-white p-5 transition-all hover:border-slate-300 shadow-xs hover:shadow-sm"
                   >
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                       <Icon size={18} />
                     </div>
                     <h4 className="mt-3 font-bold text-slate-900 text-sm">{pillar.title}</h4>
@@ -1089,7 +1089,7 @@ export function HubsPage() {
                         className={`rounded-lg border p-3 text-left transition ${
                           isSelected
                             ? "border-slate-900 bg-slate-100 text-slate-900 shadow-2xs font-medium"
-                            : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                            : "border-slate-200 bg-slate-50/50 dark:bg-slate-900/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -1124,7 +1124,7 @@ export function HubsPage() {
                         className={`rounded-lg border p-3 text-left transition ${
                           isSelected
                             ? "border-slate-900 bg-slate-100 text-slate-900 shadow-2xs font-medium"
-                            : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                            : "border-slate-200 bg-slate-50/50 dark:bg-slate-900/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                         }`}
                       >
                         <p className="font-semibold text-xs text-slate-900">{ws.label}</p>
@@ -1148,7 +1148,7 @@ export function HubsPage() {
                     className={`rounded-lg border p-2.5 text-left transition ${
                       selectedMentorId === ""
                         ? "border-slate-900 bg-slate-100 text-slate-900 shadow-2xs font-medium"
-                        : "border-slate-200 bg-slate-50/50 text-slate-600 hover:border-slate-300 hover:bg-slate-100"
+                        : "border-slate-200 bg-slate-50/50 dark:bg-slate-900/50 text-slate-600 hover:border-slate-300 hover:bg-slate-100"
                     }`}
                   >
                     <p className="font-medium text-xs text-slate-900">Solo Deep Work</p>
@@ -1165,7 +1165,7 @@ export function HubsPage() {
                         className={`rounded-lg border p-2.5 text-left transition ${
                           isSelected
                             ? "border-slate-900 bg-slate-100 text-slate-900 shadow-2xs font-medium"
-                            : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                            : "border-slate-200 bg-slate-50/50 dark:bg-slate-900/50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                         }`}
                       >
                         <p className="font-medium text-xs text-slate-900">{mentor.name}</p>

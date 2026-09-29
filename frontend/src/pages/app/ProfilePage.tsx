@@ -157,7 +157,7 @@ export function ProfilePage() {
                 {badges.slice(0, 4).map((badge) => (
                   <div
                     key={badge._id ?? badge.name}
-                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/60 p-2.5"
+                    className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/60 p-2.5 dark:bg-white/[0.02] dark:border-white/10"
                   >
                     <Award size={14} className="text-[var(--secondary)] shrink-0" />
                     <div className="min-w-0 flex-1">
@@ -207,7 +207,7 @@ export function ProfilePage() {
             <div className="mt-4 space-y-2">
               <Link
                 to={getSettingsPath(liveUser?.role ?? "student")}
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors dark:bg-white/[0.02] dark:border-white/10"
               >
                 <span>Edit Account & Password Settings</span>
                 <span>→</span>
@@ -222,7 +222,7 @@ export function ProfilePage() {
                         ? "/admin"
                         : "/app/dashboard"
                 }
-                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors"
+                className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3 text-xs font-medium text-slate-700 hover:border-slate-300 hover:text-slate-900 transition-colors dark:bg-white/[0.02] dark:border-white/10"
               >
                 <span>Return to Role Dashboard</span>
                 <span>→</span>

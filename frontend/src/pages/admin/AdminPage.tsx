@@ -187,7 +187,7 @@ export function AdminPage() {
 
   if (isError) {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+      <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center dark:bg-red-950/20 dark:border-red-900/40">
         <Sparkles className="mx-auto text-red-500" size={30} />
         <h1 className="mt-3 text-lg font-bold text-slate-900">Unable to load analytics</h1>
         <p className="mt-1 text-xs font-medium text-slate-600">
@@ -506,10 +506,10 @@ export function AdminPage() {
             {topMentors.length > 0 ? (
               topMentors.map((mentor, index) => {
                 const rankStyles = [
-                  "border-amber-200 bg-amber-50 text-amber-700",
-                  "border-slate-200 bg-slate-100 text-slate-700",
-                  "border-amber-300 bg-amber-100/50 text-amber-800",
-                  "border-slate-200 bg-slate-50 text-slate-600",
+                  "border-amber-200 bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:border-amber-900/40 dark:text-amber-300",
+                  "border-slate-200 bg-slate-100 text-slate-700 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300",
+                  "border-amber-300 bg-amber-100/50 text-amber-800 dark:bg-amber-950/30 dark:border-amber-900/40 dark:text-amber-300",
+                  "border-slate-200 bg-slate-50 text-slate-600 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300",
                 ];
                 const badgeClass = rankStyles[index] ?? rankStyles[3];
 

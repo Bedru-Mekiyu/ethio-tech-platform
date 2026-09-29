@@ -476,21 +476,21 @@ export function CalendarPage() {
           {/* Quick Stats Grid & Action */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <span className="text-[10px] text-slate-700 font-semibold uppercase tracking-wider">Study</span>
                 <p className="text-base font-bold text-slate-900 mt-0.5 font-mono">{sprintStats.studyBlockCount}</p>
               </div>
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <span className="text-[10px] text-[var(--secondary)] font-semibold uppercase tracking-wider">
                   Sessions
                 </span>
                 <p className="text-base font-bold text-slate-900 mt-0.5 font-mono">{sprintStats.sessionCount}</p>
               </div>
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <span className="text-[10px] text-rose-600 font-semibold uppercase tracking-wider">Deadlines</span>
                 <p className="text-base font-bold text-slate-900 mt-0.5 font-mono">{sprintStats.deadlineCount}</p>
               </div>
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs">
+              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5 text-center shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <span className="text-[10px] text-amber-600 font-semibold uppercase tracking-wider">Hubs</span>
                 <p className="text-base font-bold text-slate-900 mt-0.5 font-mono">{sprintStats.hubVisitCount}</p>
               </div>
@@ -843,7 +843,7 @@ export function CalendarPage() {
                     );
                   })
                 ) : (
-                  <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-center bg-slate-50/40">
+                  <div className="rounded-2xl border border-dashed border-slate-200 p-6 text-center bg-slate-50/40 dark:bg-white/[0.02] dark:border-white/10">
                     <p className="text-xs text-slate-500 font-medium">No events for this date.</p>
                     <Button
                       size="sm"

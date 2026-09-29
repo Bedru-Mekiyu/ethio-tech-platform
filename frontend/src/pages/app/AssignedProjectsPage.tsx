@@ -96,7 +96,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
           <ProgressBar value={project.completionPercent} max={100} color="primary" className="h-1.5" />
         </div>
         {project.feedback ? (
-          <p className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2.5 text-xs leading-relaxed text-slate-700">
+          <p className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2.5 text-xs leading-relaxed text-slate-700 dark:bg-white/[0.02] dark:border-white/10">
             {project.feedback}
           </p>
         ) : null}

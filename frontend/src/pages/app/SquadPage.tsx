@@ -237,7 +237,7 @@ export function SquadPage() {
             </Badge>
           </div>
 
-          <div className="mt-4 grid gap-4 rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 lg:grid-cols-[1fr_280px]">
+          <div className="mt-4 grid gap-4 rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 lg:grid-cols-[1fr_280px] dark:bg-white/[0.02] dark:border-white/10">
             <div className="space-y-3">
               <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-600 font-bold">
                 <MessageSquare size={13} className="text-[var(--secondary)]" />
@@ -294,15 +294,15 @@ export function SquadPage() {
                   />
                 </div>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1.5">
-                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
+                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center dark:bg-white/[0.02] dark:border-white/10">
                     <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Active</p>
                     <p className="mt-0.5 text-sm font-bold text-slate-900 font-mono">{activeProjects}</p>
                   </div>
-                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
+                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center dark:bg-white/[0.02] dark:border-white/10">
                     <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Feedback</p>
                     <p className="mt-0.5 text-sm font-bold text-[var(--secondary)] font-mono">{feedbackReady}</p>
                   </div>
-                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center">
+                  <div className="rounded-lg border border-slate-200/80 bg-slate-50/70 p-2 text-center dark:bg-white/[0.02] dark:border-white/10">
                     <p className="text-[9px] uppercase font-bold text-slate-600 font-medium">Approved</p>
                     <p className="mt-0.5 text-sm font-bold text-emerald-600 font-mono">{completedProjects}</p>
                   </div>
@@ -325,13 +325,13 @@ export function SquadPage() {
             </div>
           </div>
           <div className="mt-4 grid gap-2.5">
-            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 dark:bg-white/[0.02] dark:border-white/10">
               <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">Room Members</p>
               <p className="mt-1 text-lg font-bold text-slate-900 font-mono">
                 {roomState?.connectedUserIds?.length ?? presenceCount}
               </p>
             </div>
-            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5">
+            <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3.5 dark:bg-white/[0.02] dark:border-white/10">
               <p className="text-[10px] uppercase font-bold text-slate-600 font-medium tracking-wider">Notifications</p>
               <p className="mt-1 text-lg font-bold text-[var(--secondary)] font-mono">{newsItems.length}</p>
             </div>
@@ -354,7 +354,7 @@ export function SquadPage() {
               (dashboard?.upcomingSessions ?? []).slice(0, 3).map((session) => (
                 <div
                   key={session._id ?? session.title}
-                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 transition hover:border-slate-300"
+                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 transition hover:border-slate-300 dark:bg-white/[0.02] dark:border-white/10"
                 >
                   <p className="text-xs font-semibold text-slate-900">{session.title}</p>
                   <p className="mt-0.5 text-[11px] text-slate-600 font-medium">

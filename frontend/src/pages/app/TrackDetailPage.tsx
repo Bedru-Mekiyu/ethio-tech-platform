@@ -192,7 +192,7 @@ export function TrackDetailPage() {
           </div>
 
           {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 dark:bg-white/[0.02] dark:border-white/10">
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-slate-600 font-medium flex items-center gap-1 font-semibold">
                 <Clock size={10} className="text-slate-700" />
@@ -289,7 +289,7 @@ export function TrackDetailPage() {
               <div className="space-y-4">
                 {modules.length > 0 ? (
                   modules.map((module, mIdx) => (
-                    <div key={module._id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4">
+                    <div key={module._id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10">
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600">
@@ -363,7 +363,7 @@ export function TrackDetailPage() {
               <div className="space-y-5">
                 {data.capstones && data.capstones.length > 0 ? (
                   data.capstones.map((capstone) => (
-                    <div key={capstone.id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4">
+                    <div key={capstone.id} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-4 dark:bg-white/[0.02] dark:border-white/10">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
                           <div className="flex flex-wrap items-center gap-2">
@@ -472,7 +472,7 @@ export function TrackDetailPage() {
                   {(data.tooling ?? []).map((tool) => (
                     <div
                       key={tool.name}
-                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs"
+                      className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 px-3.5 py-2.5 text-xs dark:bg-white/[0.02] dark:border-white/10"
                     >
                       <span className="font-semibold text-slate-800">{tool.name}</span>
                       <span className="text-[10px] text-slate-600 font-medium">{tool.category}</span>
@@ -490,7 +490,7 @@ export function TrackDetailPage() {
                   {(data.competencyGroups ?? []).map((group) => (
                     <div
                       key={group.category}
-                      className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-2.5"
+                      className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-2.5 dark:bg-white/[0.02] dark:border-white/10"
                     >
                       <h4 className="text-sm font-bold text-slate-900">{group.category}</h4>
                       <ul className="space-y-1.5">
@@ -520,7 +520,7 @@ export function TrackDetailPage() {
 
               {/* Market demand overview */}
               {data.marketDemand && (
-                <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-5 space-y-2">
+                <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-5 space-y-2 dark:bg-white/[0.02] dark:border-white/10">
                   <div className="flex items-center justify-between">
                     <Badge variant="default">{data.marketDemand.rating} Demand Rating</Badge>
                     <span className="text-xs font-semibold text-slate-700">{data.marketDemand.growthMetric}</span>
@@ -535,7 +535,7 @@ export function TrackDetailPage() {
               {/* Target career roles */}
               <div className="space-y-4">
                 {(data.targetCareerRoles ?? []).map((role) => (
-                  <div key={role.role} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-3">
+                  <div key={role.role} className="rounded-2xl border border-slate-200 bg-slate-50/60 p-5 space-y-3 dark:bg-white/[0.02] dark:border-white/10">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <Badge variant="outline" className="text-[10px]">
@@ -578,7 +578,7 @@ export function TrackDetailPage() {
                 {(data.prerequisites ?? []).map((req) => (
                   <div
                     key={req.skill}
-                    className="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-5"
+                    className="flex items-start gap-4 rounded-xl border border-slate-200 bg-slate-50/60 p-5 dark:bg-white/[0.02] dark:border-white/10"
                   >
                     <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-100 text-slate-900 border border-slate-200 flex-shrink-0">
                       <CheckCircle2 size={18} />
@@ -616,7 +616,7 @@ export function TrackDetailPage() {
               <ProgressBar value={0} max={100} className="h-2 bg-slate-100" />
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-3">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 space-y-3 dark:bg-white/[0.02] dark:border-white/10">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-slate-600 font-medium">Live Sessions</span>
                 <span className="font-semibold text-slate-800">{data.liveSessionsCount ?? 20} Scheduled</span>

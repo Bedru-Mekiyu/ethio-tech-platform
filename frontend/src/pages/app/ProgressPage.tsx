@@ -311,7 +311,7 @@ export function ProgressPage() {
                 <span className="text-[10px] font-semibold text-slate-600 font-medium uppercase tracking-wider">
                   Active Streak
                 </span>
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-100">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <Flame size={15} />
                 </div>
               </div>
@@ -426,7 +426,7 @@ export function ProgressPage() {
                   Evaluated automatically through coding challenges, test suite runs, and mentor code reviews.
                 </p>
               </div>
-              <div className="flex items-center gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 px-4 py-2 shadow-xs">
+              <div className="flex items-center gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 px-4 py-2 shadow-xs dark:bg-white/[0.02] dark:border-white/10">
                 <ShieldCheck size={18} className="text-[var(--secondary)]" />
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-600 font-medium">
@@ -441,7 +441,7 @@ export function ProgressPage() {
               {skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2.5 shadow-xs"
+                  className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 space-y-2.5 shadow-xs dark:bg-white/[0.02] dark:border-white/10"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -555,7 +555,7 @@ export function ProgressPage() {
                     key={m.label}
                     className={cn(
                       "flex-1 min-w-0 rounded-xl border p-3.5 space-y-1.5 transition-all shadow-xs",
-                      complete ? "border-blue-200/80 bg-blue-50/50" : "border-slate-200 bg-slate-50/60 opacity-70",
+                      complete ? "border-blue-200/80 bg-blue-50/50 dark:bg-slate-900 dark:border-white/10" : "border-slate-200 bg-slate-50/60 opacity-70 dark:bg-white/[0.02] dark:border-white/10",
                     )}
                   >
                     <div className="flex items-center justify-between">
@@ -697,7 +697,7 @@ export function ProgressPage() {
                     </div>
 
                     {p.feedback && (
-                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-xs text-slate-600 italic">
+                      <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-xs text-slate-600 italic dark:bg-white/[0.02] dark:border-white/10">
                         &ldquo;{p.feedback}&rdquo;
                       </div>
                     )}
