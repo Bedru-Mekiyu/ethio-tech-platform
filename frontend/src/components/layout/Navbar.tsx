@@ -108,7 +108,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
               </Link>
               <Link to="/register">
                 <Button size="sm" className="gap-1.5 font-medium">
-                  <span>Join EthioTech</span>
+                  <span>Start Free</span>
                   <ArrowRight size={14} />
                 </Button>
               </Link>
@@ -173,7 +173,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 <Link to={getDashboardPath(user.role)} onClick={() => setMobileOpen(false)}>
                   <Button className="w-full justify-center gap-2 py-2">
                     <LayoutDashboard size={15} />
-                    <span>Go to Dashboard</span>
+                    <span>Open Dashboard</span>
                   </Button>
                 </Link>
               ) : (
@@ -187,7 +187,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                   </Link>
                   <Link to="/register" onClick={() => setMobileOpen(false)}>
                     <Button className="w-full justify-center gap-2 py-2">
-                      <span>Join EthioTech</span>
+                      <span>Start Free</span>
                       <ArrowRight size={15} />
                     </Button>
                   </Link>

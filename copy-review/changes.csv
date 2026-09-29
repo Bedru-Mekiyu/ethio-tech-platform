@@ -38,3 +38,22 @@ HomePage.tsx,Partners Label,"Trusted By & Partnering with Leading Institutions",
 HomePage.tsx,Bottom CTA Heading,"Ready to Build the Future of Ethiopian Tech?","Build Ethiopia's Next Engineering Generation",44
 HomePage.tsx,Bottom CTA 1,"Start Coding Free","Start Free",10
 HomePage.tsx,Bottom CTA 2,"Join as Mentor","Apply to Mentor",15
+Navbar.tsx,Desktop CTA,"Join EthioTech","Start Free",10
+Navbar.tsx,Mobile CTA Logged In,"Go to Dashboard","Open Dashboard",14
+Navbar.tsx,Mobile CTA Logged Out,"Join EthioTech","Start Free",10
+Logo.tsx,Subtitle Fallback,"East Africa · PISTELS","East Africa",11
+Footer.tsx,Brand Description,"EthioTech is a high-performance interactive learning platform for African students, featuring live interactive classrooms, peer squads, expert mentorship, and project-based tracks.","Tuition-free software engineering education for Ethiopia: live diaspora mentorship, in-browser Linux environments, peer squads, and regional tech hubs.",143
+Footer.tsx,Platform Link 1,"Curriculum Tracks","Tracks",6
+Footer.tsx,Platform Link 3,"Engineering Mentors","Mentors",7
+Footer.tsx,Platform Link 4,"Regional Tech Hubs","Tech Hubs",9
+Footer.tsx,Platform Link 5,"XP Leaderboard","Leaderboard",11
+Footer.tsx,Platform Link 6,"Become a Mentor","Apply to Mentor",15
+Footer.tsx,Ecosystem Link 1,"Industry & University Partners","Partners",8
+Footer.tsx,Ecosystem Link 2,"Scholarships & Giving","Giving",6
+Footer.tsx,Ecosystem Link 3,"Platform FAQ","FAQ",3
+Footer.tsx,Ecosystem Link 4,"Contact & Support","Contact",7
+Footer.tsx,Company Link 1,"About EthioTech","About",5
+Footer.tsx,Company Link 2,"Privacy Policy","Privacy",7
+Footer.tsx,Company Link 3,"Terms of Service","Terms",5
+Footer.tsx,Status Text,"Platform Systems Operational","All Systems Operational",24
+Footer.tsx,Tagline,"Engineered with <Heart> for East African youth","Engineered for Ethiopian developers",34

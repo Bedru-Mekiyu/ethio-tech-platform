@@ -74,3 +74,24 @@ This copy deck records all final, approved user-facing text across every page an
 - **Subheadline**: `Join 12,500+ developers mastering real-world software engineering with live senior mentorship, cloud sandboxes, and direct hiring pathways.`
 - **Primary CTA**: `Start Free`
 - **Secondary CTA**: `Apply to Mentor`
+
+## 2. Navigation, Brand & Footer
+
+### Navigation Bar (`Navbar.tsx`)
+- **Nav Links**: `Tracks`, `How It Works`, `Mentors`, `Hubs`, `About`
+- **Logged Out Actions**: `Sign in`, `Start Free`
+- **Logged In Actions**: `Dashboard` (desktop) / `Open Dashboard` (mobile)
+
+### Brand Logo (`Logo.tsx`)
+- **Wordmark**: `EthioTech`
+- **Subtitle Fallback**: `East Africa` (removed framework mention `PISTELS`)
+
+### Footer (`Footer.tsx`)
+- **Brand Subtitle**: `East Africa`
+- **Mission / Description**: `Tuition-free software engineering education for Ethiopia: live diaspora mentorship, in-browser Linux environments, peer squads, and regional tech hubs.`
+- **Platform Column**: `Tracks`, `How It Works`, `Mentors`, `Tech Hubs`, `Leaderboard`, `Apply to Mentor`
+- **Ecosystem Column**: `Partners`, `Giving`, `FAQ`, `Contact`
+- **Company Column**: `About`, `Privacy`, `Terms`
+- **Status Indicator**: `All Systems Operational`
+- **Copyright**: `© 2026 EthioTech Platform`
+- **Tagline**: `Engineered for Ethiopian developers`

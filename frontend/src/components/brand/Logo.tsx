@@ -40,7 +40,7 @@ export function Logo({ className, to = "/", variant = "default", subtitle }: Log
           </div>
           {isFull ? (
             <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)] mt-0.5 select-none">
-              {subtitle || "East Africa · PISTELS"}
+              {subtitle || "East Africa"}
             </span>
           ) : subtitle ? (
             <span className="text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)] mt-0.5 select-none">

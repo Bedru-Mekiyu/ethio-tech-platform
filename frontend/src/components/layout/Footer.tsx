@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
-import { Github, Twitter, Linkedin, Globe, Heart } from "lucide-react";
+import { Github, Twitter, Linkedin, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface FooterProps {
@@ -20,10 +20,10 @@ export function Footer({ className }: FooterProps) {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand & Mission Statement */}
           <div className="space-y-4 lg:col-span-2">
-            <Logo variant="full" subtitle="East Africa Tech Ecosystem" />
+            <Logo variant="full" subtitle="East Africa" />
             <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed max-w-sm">
-              EthioTech is a high-performance interactive learning platform for African students, featuring live
-              interactive classrooms, peer squads, expert mentorship, and project-based tracks.
+              Tuition-free software engineering education for Ethiopia: live diaspora mentorship, in-browser Linux
+              environments, peer squads, and regional tech hubs.
             </p>
 
             {/* Social Links */}
@@ -77,7 +77,7 @@ export function Footer({ className }: FooterProps) {
                   to="/tracks"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Curriculum Tracks
+                  Tracks
                 </Link>
               </li>
               <li>
@@ -93,7 +93,7 @@ export function Footer({ className }: FooterProps) {
                   to="/mentors"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Engineering Mentors
+                  Mentors
                 </Link>
               </li>
               <li>
@@ -101,7 +101,7 @@ export function Footer({ className }: FooterProps) {
                   to="/hubs"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Regional Tech Hubs
+                  Tech Hubs
                 </Link>
               </li>
               <li>
@@ -109,7 +109,7 @@ export function Footer({ className }: FooterProps) {
                   to="/leaderboard"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  XP Leaderboard
+                  Leaderboard
                 </Link>
               </li>
               <li>
@@ -117,7 +117,7 @@ export function Footer({ className }: FooterProps) {
                   to="/mentor-recruitment"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Become a Mentor
+                  Apply to Mentor
                 </Link>
               </li>
             </ul>
@@ -134,7 +134,7 @@ export function Footer({ className }: FooterProps) {
                   to="/partners"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Industry & University Partners
+                  Partners
                 </Link>
               </li>
               <li>
@@ -142,7 +142,7 @@ export function Footer({ className }: FooterProps) {
                   to="/donate"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Scholarships & Giving
+                  Giving
                 </Link>
               </li>
               <li>
@@ -150,7 +150,7 @@ export function Footer({ className }: FooterProps) {
                   to="/faq"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Platform FAQ
+                  FAQ
                 </Link>
               </li>
               <li>
@@ -158,7 +158,7 @@ export function Footer({ className }: FooterProps) {
                   to="/contact"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Contact & Support
+                  Contact
                 </Link>
               </li>
             </ul>
@@ -175,7 +175,7 @@ export function Footer({ className }: FooterProps) {
                   to="/about"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  About EthioTech
+                  About
                 </Link>
               </li>
               <li>
@@ -183,7 +183,7 @@ export function Footer({ className }: FooterProps) {
                   to="/privacy"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Privacy Policy
+                  Privacy
                 </Link>
               </li>
               <li>
@@ -191,7 +191,7 @@ export function Footer({ className }: FooterProps) {
                   to="/terms"
                   className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors"
                 >
-                  Terms of Service
+                  Terms
                 </Link>
               </li>
             </ul>
@@ -203,17 +203,13 @@ export function Footer({ className }: FooterProps) {
           <div className="flex items-center gap-3">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Platform Systems Operational</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-300">All Systems Operational</span>
             </span>
             <span>·</span>
             <span>© {new Date().getFullYear()} EthioTech Platform</span>
           </div>
 
-          <p className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 font-medium">
-            <span>Engineered with</span>
-            <Heart size={12} className="text-rose-500 fill-rose-500 inline" />
-            <span>for East African youth</span>
-          </p>
+          <p className="text-slate-600 dark:text-slate-400 font-medium">Engineered for Ethiopian developers</p>
         </div>
       </div>
     </footer>
