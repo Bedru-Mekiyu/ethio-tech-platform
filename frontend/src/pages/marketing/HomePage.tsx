@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Bot,
   Code2,
-  Cpu,
   ShieldCheck,
   Video,
   Terminal,
@@ -63,110 +62,6 @@ function formatCompactCount(value: number) {
   }).format(value);
 }
 
-// ─── PISTELS 7 Core Pillars Data ───
-interface PistelPillar {
-  letter: string;
-  name: string;
-  tagline: string;
-  description: string;
-  highlights: string[];
-  icon: typeof Code2;
-}
-
-const PISTELS_PILLARS: PistelPillar[] = [
-  {
-    letter: "P",
-    name: "Practical & Project-Based",
-    tagline: "Code real production systems from Day 1",
-    description:
-      "No toy tutorials or multiple-choice quizzes. Build production-grade microservices, mobile apps, and distributed backends integrated with local payment APIs.",
-    highlights: [
-      "Industry-standard Git and GitHub workflows",
-      "Automated CI/CD deployment pipelines",
-      "Production capstone deliverables for your public portfolio",
-    ],
-    icon: Code2,
-  },
-  {
-    letter: "I",
-    name: "Interactive Live Learning",
-    tagline: "Real-time classrooms and collaborative coding",
-    description:
-      "Engage daily in low-latency interactive sessions with live screen pairing, synchronized code editors, Q&A, and live mentor debugging.",
-    highlights: [
-      "Sub-150ms latency audio and video streaming",
-      "Live whiteboard and synchronized code annotations",
-      "Bandwidth-adaptive streaming optimized for 2G/3G/4G",
-    ],
-    icon: Video,
-  },
-  {
-    letter: "S",
-    name: "Squads & Social Learning",
-    tagline: "4-peer agile cohorts for consistent completion",
-    description:
-      "Never learn in isolation. Every learner joins a dedicated 4-person sprint squad with weekly standups, peer pull request reviews, and collective accountability.",
-    highlights: [
-      "Weekly agile standups and sprint planning",
-      "Peer code reviews and pair programming",
-      "Squad accountability and leaderboard milestones",
-    ],
-    icon: Users,
-  },
-  {
-    letter: "T",
-    name: "Tech Tracks for Industry",
-    tagline: "High-demand stacks aligned with modern employers",
-    description:
-      "Curricula co-designed with top tech employers in FinTech, AI, Cloud Infrastructure, and Telecom to ensure immediate job readiness upon graduation.",
-    highlights: [
-      "Next.js, Flutter, AWS, Kubernetes, and PyTorch",
-      "Security best practices and OWASP compliance",
-      "Microservices and resilient distributed systems",
-    ],
-    icon: Cpu,
-  },
-  {
-    letter: "E",
-    name: "Equity & Nationwide Access",
-    tagline: "6 Regional Hubs breaking geographic barriers",
-    description:
-      "Physical innovation hubs across Addis Ababa, Bahir Dar, Hawassa, Mekelle, Dire Dawa, and Jimma provide high-speed fiber internet, workstations, and local community.",
-    highlights: [
-      "Free workstation and fiber internet access",
-      "100% tuition-free scholarship model",
-      "Offline-first sync architecture for low-connectivity regions",
-    ],
-    icon: Globe,
-  },
-  {
-    letter: "L",
-    name: "Live Senior Mentorship",
-    tagline: "Direct access to diaspora and local tech leaders",
-    description:
-      "Get guided by senior software engineers, architects, and tech leads from Google, Microsoft, Amazon, Safaricom, and Chapa with weekly 1-on-1s and code reviews.",
-    highlights: [
-      "1-on-1 code reviews and architecture guidance",
-      "Diaspora and local engineering leadership network",
-      "Career roadmapping and technical mock interviews",
-    ],
-    icon: Award,
-  },
-  {
-    letter: "S",
-    name: "Sustainable Career Outcomes",
-    tagline: "Verifiable credentials and direct employer pipelines",
-    description:
-      "Graduate with cryptographically signed credentials, public portfolio showcases, audited GitHub repositories, and direct interview pipelines with 50+ hiring partners.",
-    highlights: [
-      "Cryptographically signed verifiable certificates",
-      "Audited GitHub project repositories with real commits",
-      "Direct interview pipelines to enterprise hiring partners",
-    ],
-    icon: Award,
-  },
-];
-
 // ─── Enhanced Structured Tracks Data ───
 interface RichTrackData {
   id: string;
@@ -188,13 +83,12 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     id: "track-fullstack",
     category: "web",
     categoryLabel: "Fullstack Web",
-    title: "Fullstack Web & Distributed Systems",
+    title: "Fullstack Web Systems",
     level: "Beginner",
     moduleCount: 12,
     liveSessions: 48,
     xpReward: 4500,
-    description:
-      "Master modern TypeScript, React 19, Next.js 15, Node.js microservices, PostgreSQL, Redis, and containerized Docker deployments.",
+    description: "Build scalable web apps with React 19, Next.js, Node.js microservices, PostgreSQL, and Docker.",
     skills: ["React 19", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker", "Redis", "Tailwind CSS"],
     capstones: [
       "Telebirr Integrated FinTech Gateway",
@@ -207,13 +101,12 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     id: "track-mobile",
     category: "mobile",
     categoryLabel: "Mobile Apps",
-    title: "Cross-Platform Mobile Engineering",
+    title: "Mobile App Engineering",
     level: "Beginner",
     moduleCount: 10,
     liveSessions: 40,
     xpReward: 4000,
-    description:
-      "Build high-performance, offline-first mobile apps for Android & iOS using Flutter, Dart, React Native, SQLite, and local push services.",
+    description: "Build offline-first mobile apps for Android and iOS using Flutter, Dart, React Native, and SQLite.",
     skills: ["Flutter", "Dart", "React Native", "SQLite", "Offline-First", "WebSockets", "Location APIs"],
     capstones: [
       "Ride-Hailing & Logistics SuperApp",
@@ -226,13 +119,13 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     id: "track-cloud",
     category: "cloud",
     categoryLabel: "Cloud & DevOps",
-    title: "Cloud Architecture & DevOps GitOps",
+    title: "Cloud & DevOps Engineering",
     level: "Intermediate",
     moduleCount: 10,
     liveSessions: 38,
     xpReward: 4200,
     description:
-      "Design resilient multi-cloud architectures, Kubernetes clusters, Terraform infrastructure-as-code, and automated GitHub Actions CI/CD pipelines.",
+      "Design resilient cloud architecture, Kubernetes clusters, Terraform code, and automated CI/CD pipelines.",
     skills: ["Kubernetes", "Docker", "AWS / GCP", "Terraform", "Linux SysAdmin", "GitHub Actions", "Prometheus"],
     capstones: [
       "Multi-Region HA Kubernetes Cluster",
@@ -245,13 +138,13 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     id: "track-ai",
     category: "ai",
     categoryLabel: "Data & AI",
-    title: "Applied AI, Data Science & Amharic NLP",
+    title: "Applied AI & Data Science",
     level: "Intermediate",
     moduleCount: 12,
     liveSessions: 44,
     xpReward: 4800,
     description:
-      "Harness Python, PyTorch, Scikit-Learn, computer vision, and LLM fine-tuning to build localized AI models for Ethiopian languages and industries.",
+      "Build machine learning models, NLP pipelines, data processing pipelines, and neural networks in PyTorch.",
     skills: ["Python", "PyTorch", "Pandas", "Scikit-Learn", "Amharic NLP", "LLM Fine-Tuning", "OpenCV"],
     capstones: [
       "Amharic Speech-to-Text Transcriber",
@@ -264,13 +157,13 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     id: "track-security",
     category: "security",
     categoryLabel: "Cyber Security",
-    title: "Cyber Security & Defensive Operations",
+    title: "Cyber Security & Systems",
     level: "Advanced",
     moduleCount: 10,
     liveSessions: 36,
     xpReward: 4000,
     description:
-      "Learn penetration testing, SOC incident response, network cryptography, zero-trust architectures, and OWASP top 10 vulnerability remediation.",
+      "Master network security, penetration testing, defensive architecture, application security, and cryptographic protocols.",
     skills: ["Penetration Testing", "SOC Operations", "Network Defense", "Cryptography", "OWASP Top 10", "Wireshark"],
     capstones: [
       "Enterprise Security Audit & Penetration Report",
@@ -391,62 +284,62 @@ interface ShowcaseTab {
 const SHOWCASE_TABS: ShowcaseTab[] = [
   {
     id: "classroom",
-    label: "Live WebRTC Classroom",
+    label: "Live Classroom",
     icon: Video,
-    tagline: "Sub-150ms HD Live Classrooms with Multi-User Code Projection",
-    badge: "Low-Bandwidth Optimized",
+    tagline: "Live Classrooms with Multi-User Code Projection",
+    badge: "Low-Bandwidth Ready",
     description:
-      "Experience interactive video learning engineered specifically for Ethiopian network conditions. Includes live synchronized code takeovers, multi-user digital whiteboards, dual-language audio streams, and automated recording with timestamped code markers.",
+      "Interactive video learning engineered for Ethiopian network conditions. Includes live code takeovers, digital whiteboards, and timestamped session recordings.",
     benefits: [
-      "Adaptive bitrate down to 256 kbps (Smooth over 2G/3G/4G)",
-      "Instant mentor screen takeovers and line-by-line debugging",
-      "Interactive code annotations & multi-user canvas whiteboard",
-      "Amharic & English audio channels with real-time AI transcription",
+      "Adaptive streaming down to 256 kbps",
+      "Live mentor screen takeover and line-by-line debugging",
+      "Interactive whiteboard and code annotations",
+      "Timestamped recordings for offline review",
     ],
   },
   {
     id: "sandbox",
-    label: "Cloud Coding Sandbox",
+    label: "In-Browser Workspace",
     icon: Terminal,
-    tagline: "Zero-Install In-Browser Cloud Linux Dev Environment",
-    badge: "Instant 2-Second Spinup",
+    tagline: "Zero-Setup Linux Development Environment in Your Browser",
+    badge: "Instant Launch",
     description:
-      "Say goodbye to complex local environment setup errors. Students code in an in-browser Monaco IDE backed by isolated Linux Docker containers with Node.js, Python, Go, PostgreSQL, and Rust ready in 2 seconds.",
+      "Write code in an in-browser Monaco editor backed by Linux containers with Node.js, Python, Go, and PostgreSQL ready in seconds.",
     benefits: [
-      "Instant automated test runner with live code coverage feedback",
-      "Pre-configured starters for Next.js, FastAPI, Flutter & PyTorch",
-      "Full interactive bash terminal with containerized isolation",
-      "Live hot-reloading port forwarding for instant web & app preview",
+      "Integrated test runner with instant feedback",
+      "Pre-configured fullstack starter projects",
+      "Interactive terminal with container isolation",
+      "Live port forwarding for browser preview",
     ],
   },
   {
     id: "squads",
-    label: "Squads Collaboration",
+    label: "Peer Squads",
     icon: Users,
-    tagline: "Agile 4-Person Peer Cohorts with GitHub Review Workflows",
-    badge: "89% Completion Rate",
+    tagline: "Four-Person Agile Squads with Weekly Code Reviews",
+    badge: "Agile Workflow",
     description:
-      "Engineers don't work alone, and neither should students. Learners are placed in 4-person accountability squads that conduct weekly sprint planning, code reviews on GitHub PRs, and earn collective XP streak bonuses.",
+      "Work in dedicated 4-person squads with weekly standups, GitHub pull request reviews, and shared sprint milestones.",
     benefits: [
-      "Integrated agile Kanban board & weekly sprint retrospectives",
-      "GitHub pull request peer reviews and automated code grading",
-      "Squad voice channels for instant pair-programming huddles",
-      "Squad XP multipliers & weekly national leaderboard ranking",
+      "Weekly standups and sprint planning",
+      "GitHub pull request peer reviews",
+      "Voice channels for pair programming",
+      "Squad XP bonuses and sprint tracking",
     ],
   },
   {
     id: "certs",
-    label: "Verified Certifications",
+    label: "Certificates",
     icon: Award,
-    tagline: "Tamper-Proof Cryptographic Credentials Linked to Real Code",
-    badge: "Employer Auditable",
+    tagline: "Verifiable Credentials Linked Directly to Audited Code",
+    badge: "Employer Audited",
     description:
-      "Unlike static PDF certificates, EthioTech credentials are cryptographically signed and link directly to audited GitHub project repositories. International and local employers can verify actual code quality in one click.",
+      "EthioTech certificates are cryptographically signed and link directly to audited GitHub project repositories. Employers verify real code quality in one click.",
     benefits: [
-      "Tamper-proof on-chain / cryptographic verification signatures",
-      "Direct deep links to audited production GitHub repositories",
-      "One-click LinkedIn credential and resume portfolio sharing",
-      "Direct priority hiring access with 50+ enterprise partner networks",
+      "Cryptographically signed verification signatures",
+      "Direct links to audited GitHub repositories",
+      "One-click portfolio and resume sharing",
+      "Direct review pipelines to tech employers",
     ],
   },
 ];
@@ -485,14 +378,12 @@ export function HomePage() {
   const [selectedTrackCategory, setSelectedTrackCategory] = useState<
     "all" | "web" | "mobile" | "cloud" | "ai" | "security"
   >("all");
-  const [activePillarIndex, setActivePillarIndex] = useState<number>(0);
 
   const { data } = useQuery({
     queryKey: ["marketing", "home"],
     queryFn: fetchMarketingHome,
-    staleTime: 5 * 60_000, // 5 min — marketing stats don't change constantly
+    staleTime: 5 * 60_000,
     gcTime: 10 * 60_000,
-    // No early-return on isLoading — render immediately with fallback values
   });
 
   const filteredTracks = useMemo(() => {
@@ -503,8 +394,6 @@ export function HomePage() {
   const activeTabDetails = useMemo(() => {
     return SHOWCASE_TABS.find((t) => t.id === activeShowcaseTab) || SHOWCASE_TABS[0];
   }, [activeShowcaseTab]);
-
-  const activePillar = PISTELS_PILLARS[activePillarIndex] || PISTELS_PILLARS[0];
 
   // Dynamic Metrics with fallback values — page renders immediately, updates when API resolves
   const activeLearnersCount = data?.stats?.activeLearners ?? 12500;
@@ -532,25 +421,25 @@ export function HomePage() {
           <div className="space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] backdrop-blur-xs">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-              <span>Interactive Technology & Career Platform</span>
+              <span>Engineering Education for Ethiopia</span>
             </div>
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
             <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
-              Building Ethiopia&apos;s Tech Future with <span className="text-primary">Live Mentorship</span>
+              Code Production Software with <span className="text-primary">Senior Diaspora Mentors</span>
             </h1>
 
             {/* Subtitle - Trimmed to comfortable 16-18px */}
             <p className="text-base sm:text-lg leading-relaxed text-slate-600 max-w-xl font-normal">
-              Connecting university students and aspiring software engineers with senior diaspora mentors, structured
-              production curriculums, and collaborative 4-peer agile squads.
+              Structured learning tracks, live code reviews from diaspora engineers, and solar-powered hubs across six
+              Ethiopian cities.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto gap-2 font-medium">
-                  <span>Start Coding Free</span>
+                  <span>Start Free</span>
                   <ArrowRight size={16} />
                 </Button>
               </Link>
@@ -564,7 +453,7 @@ export function HomePage() {
                 }}
               >
                 <Compass size={16} />
-                <span>Explore Curriculum</span>
+                <span>View Tracks</span>
               </Button>
             </div>
 
@@ -572,15 +461,15 @@ export function HomePage() {
             <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-                <span>100% Free & Open Access</span>
+                <span>Tuition-Free Access</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-                <span>Low-Bandwidth WebRTC Mesh</span>
+                <span>Low-Bandwidth Classrooms</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-                <span>Verified Deliverable Credentials</span>
+                <span>Verified GitHub Portfolios</span>
               </div>
             </div>
           </div>
@@ -673,24 +562,20 @@ export function HomePage() {
                   />
                 )}
               </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Active Young Learners
-              </p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Grade 8 to University Grads</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Active Learners</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Secondary to University</p>
             </div>
 
             <div className="text-center">
               <p className="text-2xl font-bold tracking-tight text-slate-900">45,000+</p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Mentorship Hours</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">1-on-1 & Live Cohort Sessions</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Live Pair Sessions</p>
             </div>
 
             <div className="text-center">
               <p className="text-2xl font-bold tracking-tight text-slate-900">6 Hubs</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                Regional Innovation Hubs
-              </p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Addis, Bahir Dar, Hawassa & more</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Regional Tech Hubs</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Six Physical Centers</p>
             </div>
 
             <div className="text-center">
@@ -705,22 +590,20 @@ export function HomePage() {
                 )}
               </p>
               <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Capstone Approval</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Audited Production Projects</p>
+              <p className="mt-0.5 text-[11px] text-slate-500">Audited Code Reviews</p>
             </div>
           </div>
 
           {/* Folded Architecture Highlight Strip */}
           <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-              Proven Platform Architecture
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Core Learning Stack</p>
             <div className="flex flex-wrap gap-2">
               {[
-                { icon: Video, label: "WebRTC HD Classrooms" },
-                { icon: Terminal, label: "In-Browser Cloud Sandbox" },
-                { icon: Users, label: "4-Peer Sprint Squads" },
-                { icon: ShieldCheck, label: "Verifiable Digital Credentials" },
-                { icon: MapPin, label: "6 Regional Hubs" },
+                { icon: Video, label: "WebRTC Classrooms" },
+                { icon: Terminal, label: "In-Browser Workspace" },
+                { icon: Users, label: "Peer Squads" },
+                { icon: ShieldCheck, label: "Audited Certificates" },
+                { icon: MapPin, label: "Regional Hubs" },
               ].map((item) => {
                 const Icon = item.icon;
                 return (
@@ -752,14 +635,14 @@ export function HomePage() {
         <div className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
             <Layers size={13} className="text-[var(--secondary)]" />
-            <span>Interactive Learning Stack</span>
+            <span>Platform Features</span>
           </div>
           <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-            Everything You Need to Master <span className="text-primary">Production Software</span>
+            Everything Needed to Ship <span className="text-primary">Production Code</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-            Purpose-built for Ethiopian engineers. Zero friction, instant cloud sandboxes, adaptive live classrooms, and
-            peer sprint squads that turn curious students into high-earning developers.
+            Built for Ethiopian engineers: live diaspora classrooms, in-browser Linux workspaces, peer squads, and
+            employer-verified certificates.
           </p>
         </div>
 
@@ -823,11 +706,11 @@ export function HomePage() {
 
                 <div className="pt-2 flex flex-col sm:flex-row flex-wrap gap-2.5">
                   <Link to="/register">
-                    <Button size="sm">Experience It Now</Button>
+                    <Button size="sm">Start Learning</Button>
                   </Link>
                   <Link to="/how-it-works">
                     <Button variant="secondary" size="sm">
-                      See Full Workflow
+                      View Workflow
                     </Button>
                   </Link>
                 </div>
@@ -1000,120 +883,6 @@ export function HomePage() {
       </motion.section>
 
       {/* ─────────────────────────────────────────────────────────────
-          4. PISTELS PEDAGOGICAL & IMPACT IDEOLOGY SECTION
-      ────────────────────────────────────────────────────────────── */}
-      <motion.section
-        id="pistels-section"
-        className="page-shell py-16"
-        variants={sectionVariants}
-        initial={reduceMotion ? false : "hidden"}
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-      >
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
-            <Compass size={13} className="text-[var(--secondary)]" />
-            <span>The PISTELS Framework</span>
-          </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-            7 Pillars Engineered for <span className="text-primary">Engineering Mastery</span>
-          </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-            PISTELS is our proprietary pedagogical framework designed to bridge the gap between academic theory and the
-            requirements of modern software engineering.
-          </p>
-        </div>
-
-        {/* 7 Pillar Letter Ribbon */}
-        <div className="mt-10 grid grid-cols-7 gap-2 md:gap-3">
-          {PISTELS_PILLARS.map((pillar, idx) => {
-            const isSelected = activePillarIndex === idx;
-            return (
-              <button
-                key={`${pillar.letter}-${idx}`}
-                type="button"
-                onClick={() => setActivePillarIndex(idx)}
-                className={`group flex flex-col items-center justify-center rounded-xl border p-3 sm:p-4 transition-all duration-150 ${
-                  isSelected
-                    ? "border-slate-900 bg-slate-900 text-white shadow-xs font-semibold"
-                    : "border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900 shadow-[var(--shadow-xs)]"
-                }`}
-              >
-                <span
-                  className={`text-xl sm:text-2xl font-bold transition-colors ${
-                    isSelected ? "text-white" : "text-slate-700 group-hover:text-slate-900"
-                  }`}
-                >
-                  {pillar.letter}
-                </span>
-                <span
-                  className={`hidden sm:block mt-1 text-[10px] font-medium text-center line-clamp-1 ${
-                    isSelected ? "text-slate-300" : "text-slate-500"
-                  }`}
-                >
-                  {pillar.name.split(" ")[0]}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Active Pillar Card Deep Dive */}
-        <div className="mt-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activePillar.name}
-              initial={{ opacity: 0, scale: 0.99 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.99 }}
-              transition={{ duration: 0.2 }}
-              className="rounded-2xl border border-slate-200/80 bg-white p-6 md:p-8 shadow-[var(--shadow-card)]"
-            >
-              <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] font-bold text-lg border border-blue-200/70 shadow-[var(--shadow-xs)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
-                      {activePillar.letter}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-slate-900 sm:text-xl">{activePillar.name}</h3>
-                      <p className="text-xs font-medium text-slate-600">{activePillar.tagline}</p>
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm leading-relaxed text-slate-600">{activePillar.description}</p>
-
-                  <div className="space-y-2 pt-1">
-                    {activePillar.highlights.map((highlight) => (
-                      <div key={highlight} className="flex items-center gap-2.5 text-xs text-slate-700">
-                        <CheckCircle2 size={14} className="text-[var(--secondary)] shrink-0" />
-                        <span>{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 space-y-2.5">
-                  <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Methodology in Action</p>
-                  <p className="text-xs leading-relaxed text-slate-600 italic">
-                    &ldquo;Traditional training programs often fall short due to lack of team accountability and
-                    real-world system complexity. EthioTech combines live diaspora mentors, peer squads, and local hubs
-                    to guarantee true mastery.&rdquo;
-                  </p>
-                  <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-200/80">
-                    <span>Applicable across all 5 tracks</span>
-                    <Link to="/about" className="text-primary font-medium hover:underline">
-                      Learn about our vision →
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.section>
-
-      {/* ─────────────────────────────────────────────────────────────
           5. STRUCTURED TRACKS CURRICULUM SHOWCASE
       ────────────────────────────────────────────────────────────── */}
       <motion.section
@@ -1128,19 +897,19 @@ export function HomePage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
               <BookOpen size={13} className="text-[var(--secondary)]" />
-              <span>Job-Ready Curricula</span>
+              <span>Structured Tracks</span>
             </div>
             <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-              Engineered for <span className="text-primary">High-Demand Tech Careers</span>
+              Curriculums Built for <span className="text-primary">Production Engineering</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-              Structured step-by-step pathways taking learners from foundational coding to shipping production systems.
+              Step-by-step pathways taking learners from foundational coding to shipping production systems.
             </p>
           </div>
 
           <Link to="/tracks">
             <Button variant="secondary" size="sm">
-              <span>View All Tracks</span>
+              <span>View Tracks</span>
               <ArrowRight size={14} className="ml-1.5" />
             </Button>
           </Link>
@@ -1277,25 +1046,25 @@ export function HomePage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
               <Award size={13} className="text-[var(--secondary)]" />
-              <span>World-Class Mentors</span>
+              <span>Diaspora Mentors</span>
             </div>
             <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-              Learn From <span className="text-primary">Global & Local Leaders</span>
+              Learn Directly From <span className="text-primary">Diaspora Engineers</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
               Direct access to Ethiopian staff engineers, architects, and technical founders from Silicon Valley,
-              Europe, and leading local African enterprises.
+              Europe, and leading local enterprises.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2.5">
             <Link to="/mentors">
               <Button variant="secondary" size="sm">
-                View All Mentors
+                View Mentors
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
-              <Button size="sm">Become a Mentor</Button>
+              <Button size="sm">Apply to Mentor</Button>
             </Link>
           </div>
         </div>
@@ -1367,17 +1136,16 @@ export function HomePage() {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
                 <Globe size={13} className="text-[var(--secondary)]" />
-                <span>Nationwide Physical Reach</span>
+                <span>Regional Tech Hubs</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-                6 Regional Hubs Powering <span className="text-primary">Equal Access</span>
+                Six Regional Hubs Powering <span className="text-primary">Nationwide Access</span>
               </h2>
 
               <p className="text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-                Geographic location should never limit talent. EthioTech operates physical access centers across major
-                Ethiopian cities, equipped with enterprise gigabit fiber, power backup, high-end workstations, and
-                on-site community leads.
+                Physical learning centers in six Ethiopian cities with high-speed internet, power backup, Linux
+                workstations, and on-site community leads.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
@@ -1401,7 +1169,7 @@ export function HomePage() {
               <div className="pt-1">
                 <Link to="/hubs">
                   <Button variant="secondary" size="sm">
-                    <span>Explore All Regional Hubs</span>
+                    <span>View Hubs</span>
                     <ArrowRight size={13} className="ml-2" />
                   </Button>
                 </Link>
@@ -1425,15 +1193,15 @@ export function HomePage() {
                 <div className="flex items-center justify-between">
                   <h3 className="text-xs sm:text-sm font-semibold text-slate-900 flex items-center gap-1.5">
                     <Building2 size={15} className="text-[var(--secondary)]" />
-                    <span>In-Person Hackathons & Lab Sprints</span>
+                    <span>Regional Hackathons & Sprints</span>
                   </h3>
                   <Badge variant="secondary" size="sm">
                     Synchronous
                   </Badge>
                 </div>
                 <p className="text-xs leading-relaxed text-slate-600">
-                  Hubs host weekly in-person sprint demos, weekend hackathons, algorithmic coding competitions, and
-                  local mentor office hours across all 6 national corridors.
+                  Weekly in-person sprint demos, hackathons, coding competitions, and mentor office hours across all six
+                  national hubs.
                 </p>
                 <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 space-y-1 text-xs">
                   <div className="flex items-center justify-between">
@@ -1459,7 +1227,7 @@ export function HomePage() {
       <section className="page-shell py-12">
         <div className="text-center">
           <p className="text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300 font-semibold">
-            Trusted By & Partnering with Leading Institutions
+            Ecosystem Partners
           </p>
           <div className="mt-6 flex flex-wrap justify-center items-center gap-2.5 md:gap-3">
             {PARTNERS.map((p) => (
@@ -1493,7 +1261,7 @@ export function HomePage() {
                 Applications Open
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white break-words">
-                Ready to Build the Future of <span className="text-primary">Ethiopian Tech?</span>
+                Build Ethiopia&apos;s Next <span className="text-primary">Engineering Generation</span>
               </h2>
               <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium max-w-xl">
                 Join {formatCompactCount(activeLearnersCount)}+ developers mastering real-world software engineering
@@ -1504,13 +1272,13 @@ export function HomePage() {
             <div className="flex flex-col sm:flex-row gap-3 sm:flex-wrap lg:justify-end">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto font-medium">
-                  <span>Start Coding Free</span>
+                  <span>Start Free</span>
                   <ArrowRight size={16} className="ml-1.5" />
                 </Button>
               </Link>
               <Link to="/mentor-recruitment" className="w-full sm:w-auto">
                 <Button variant="secondary" size="lg" className="w-full sm:w-auto font-medium">
-                  Join as Mentor
+                  Apply to Mentor
                 </Button>
               </Link>
             </div>

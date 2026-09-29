@@ -72,16 +72,16 @@ describe("HomePage Component Suite", () => {
     );
 
     const headline = await screen.findByRole("heading", {
-      name: /Building Ethiopia's Tech Future with Live Mentorship/i,
+      name: /Code Production Software with Senior Diaspora Mentors/i,
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Connecting university students and aspiring software engineers/i)).toBeDefined();
-    expect(screen.getByRole("button", { name: /Explore Curriculum/i })).toBeDefined();
-    expect(screen.getAllByRole("button", { name: /Start Coding Free/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Structured learning tracks, live code reviews from diaspora engineers/i)).toBeDefined();
+    expect(screen.getAllByRole("button", { name: /View Tracks/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: /Start Free/i }).length).toBeGreaterThan(0);
 
-    // Check for the authentic platform badge
-    expect(screen.getByText(/Interactive Technology & Career Platform/i)).toBeDefined();
+    // Check for the platform badge
+    expect(screen.getByText(/Engineering Education for Ethiopia/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {
@@ -94,9 +94,9 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByText(/Proven Platform Architecture/i)).toBeDefined();
-    expect(screen.getByText(/WebRTC HD Classrooms/i)).toBeDefined();
-    expect(screen.getAllByText(/6 Regional Hubs/i).length).toBeGreaterThan(0);
+    expect(await screen.findByText(/Core Learning Stack/i)).toBeDefined();
+    expect(screen.getByText(/WebRTC Classrooms/i)).toBeDefined();
+    expect(screen.getAllByText(/Regional Hubs/i).length).toBeGreaterThan(0);
   }, 15000);
 
   it("switches tabs in the platform feature showcase", async () => {
@@ -109,20 +109,20 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    const sandboxBtn = await screen.findByRole("button", { name: /Cloud Coding Sandbox/i });
+    const sandboxBtn = await screen.findByRole("button", { name: /In-Browser Workspace/i });
     fireEvent.click(sandboxBtn);
-    expect(screen.getByText(/Cloud Coding Sandbox/i)).toBeDefined();
+    expect(screen.getAllByText(/In-Browser Workspace/i).length).toBeGreaterThan(0);
 
-    const squadsBtn = screen.getByRole("button", { name: /Squads Collaboration/i });
+    const squadsBtn = screen.getByRole("button", { name: /Peer Squads/i });
     fireEvent.click(squadsBtn);
-    expect(screen.getByText(/Squads Collaboration/i)).toBeDefined();
+    expect(screen.getAllByText(/Peer Squads/i).length).toBeGreaterThan(0);
 
-    const certsBtn = screen.getByRole("button", { name: /Verified Certifications/i });
+    const certsBtn = screen.getByRole("button", { name: /Certificates/i });
     fireEvent.click(certsBtn);
-    expect(screen.getByText(/Verified Certifications/i)).toBeDefined();
+    expect(screen.getAllByText(/Certificates/i).length).toBeGreaterThan(0);
   }, 15000);
 
-  it("renders the 7 PISTELS pillars and allows pillar selection", async () => {
+  it("renders the mentor network spotlight", async () => {
     const queryClient = createQueryClient();
     render(
       <QueryClientProvider client={queryClient}>
@@ -132,15 +132,9 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByText(/The PISTELS Framework/i)).toBeDefined();
-    expect(screen.getByText(/Practical & Project-Based/i)).toBeDefined();
-
-    // Click on Pillar 'S' for Squads & Social Learning
-    const buttons = screen.getAllByRole("button");
-    const sBtn = buttons.find((b) => b.textContent?.startsWith("S"));
-    if (sBtn) {
-      fireEvent.click(sBtn);
-    }
+    expect(screen.getAllByText(/Diaspora Mentors/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Learn Directly From/i)).toBeDefined();
+    expect(screen.getAllByRole("button", { name: /Apply to Mentor/i }).length).toBeGreaterThan(0);
   }, 15000);
 
   it("filters the curriculum tracks", async () => {
@@ -153,11 +147,11 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByText(/Fullstack Web & Distributed Systems/i)).toBeDefined();
+    expect(await screen.findByText(/Fullstack Web Systems/i)).toBeDefined();
 
     const mobileFilterBtn = screen.getByRole("button", { name: /Mobile Apps/i });
     fireEvent.click(mobileFilterBtn);
-    expect(screen.getByText(/Cross-Platform Mobile Engineering/i)).toBeDefined();
+    expect(screen.getByText(/Mobile App Engineering/i)).toBeDefined();
   }, 15000);
 
   it("renders the regional hubs and partner organizations", async () => {
@@ -170,7 +164,7 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByText(/6 Regional Hubs Powering/i)).toBeDefined();
+    expect(await screen.findByText(/Six Regional Hubs Powering/i)).toBeDefined();
     expect(screen.getByText(/Addis Ababa University/i)).toBeDefined();
     expect(screen.getAllByText(/Chapa Payment Systems/i).length).toBeGreaterThanOrEqual(1);
   }, 15000);

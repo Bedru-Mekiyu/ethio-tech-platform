@@ -1,0 +1,40 @@
+File,Element,Before,After,Chars
+HomePage.tsx,Hero Badge,"Interactive Technology & Career Platform","Engineering Education for Ethiopia",34
+HomePage.tsx,Hero Headline,"Building Ethiopia's Tech Future with Live Mentorship","Code Production Software with Senior Diaspora Mentors",54
+HomePage.tsx,Hero Subhead,"Connecting university students and aspiring software engineers with senior diaspora mentors, structured production curriculums, and collaborative 4-peer agile squads.","Structured learning tracks, live code reviews from diaspora engineers, and solar-powered hubs across six Ethiopian cities.",124
+HomePage.tsx,Hero Primary CTA,"Start Coding Free","Start Free",10
+HomePage.tsx,Hero Secondary CTA,"Explore Curriculum","View Tracks",11
+HomePage.tsx,Hero Trust 1,"100% Free & Open Access","Tuition-Free Access",19
+HomePage.tsx,Hero Trust 2,"Low-Bandwidth WebRTC Mesh","Low-Bandwidth Classrooms",24
+HomePage.tsx,Hero Trust 3,"Verified Deliverable Credentials","Verified GitHub Portfolios",26
+HomePage.tsx,Metrics Label 1,"Active Young Learners","Active Learners",15
+HomePage.tsx,Metrics Sub 1,"Grade 8 to University Grads","Secondary to University",23
+HomePage.tsx,Metrics Sub 2,"1-on-1 & Live Cohort Sessions","Live Pair Sessions",18
+HomePage.tsx,Metrics Label 3,"Regional Innovation Hubs","Regional Tech Hubs",18
+HomePage.tsx,Metrics Sub 3,"Addis, Bahir Dar, Hawassa & more","Six Physical Centers",20
+HomePage.tsx,Metrics Sub 4,"Audited Production Projects","Audited Code Reviews",20
+HomePage.tsx,Arch Strip Title,"Proven Platform Architecture","Core Learning Stack",19
+HomePage.tsx,Showcase Badge,"Interactive Learning Stack","Platform Features",17
+HomePage.tsx,Showcase Heading,"Everything You Need to Master Production Software","Everything Needed to Ship Production Code",41
+HomePage.tsx,Showcase Subtitle,"Purpose-built for Ethiopian engineers. Zero friction, instant cloud sandboxes, adaptive live classrooms, and peer sprint squads that turn curious students into high-earning developers.","Built for Ethiopian engineers: live diaspora classrooms, in-browser Linux workspaces, peer squads, and employer-verified certificates.",135
+HomePage.tsx,Showcase Tab 2,"Cloud Coding Sandbox","In-Browser Workspace",20
+HomePage.tsx,Showcase Tab 3,"Squads Collaboration","Peer Squads",11
+HomePage.tsx,Showcase Tab 4,"Verified Certifications","Certificates",12
+HomePage.tsx,Showcase CTA 1,"Experience It Now","Start Learning",14
+HomePage.tsx,Showcase CTA 2,"See Full Workflow","View Workflow",13
+HomePage.tsx,Curriculum Badge,"Job-Ready Curricula","Structured Tracks",17
+HomePage.tsx,Curriculum Heading,"Engineered for High-Demand Tech Careers","Curriculums Built for Production Engineering",44
+HomePage.tsx,Curriculum CTA,"View All Tracks","View Tracks",11
+HomePage.tsx,Mentors Badge,"World-Class Mentors","Diaspora Mentors",16
+HomePage.tsx,Mentors Heading,"Learn From Global & Local Leaders","Learn Directly From Diaspora Engineers",39
+HomePage.tsx,Mentors CTA 1,"View All Mentors","View Mentors",12
+HomePage.tsx,Mentors CTA 2,"Become a Mentor","Apply to Mentor",15
+HomePage.tsx,Hubs Badge,"Nationwide Physical Reach","Regional Tech Hubs",18
+HomePage.tsx,Hubs Heading,"6 Regional Hubs Powering Equal Access","Six Regional Hubs Powering Nationwide Access",44
+HomePage.tsx,Hubs Subhead,"Geographic location should never limit talent. EthioTech operates physical access centers across major Ethiopian cities, equipped with enterprise gigabit fiber, power backup, high-end workstations, and on-site community leads.","Physical learning centers in six Ethiopian cities with high-speed internet, power backup, Linux workstations, and on-site community leads.",134
+HomePage.tsx,Hubs CTA,"Explore All Regional Hubs","View Hubs",9
+HomePage.tsx,Hubs Card Title,"In-Person Hackathons & Lab Sprints","Regional Hackathons & Sprints",29
+HomePage.tsx,Partners Label,"Trusted By & Partnering with Leading Institutions","Ecosystem Partners",18
+HomePage.tsx,Bottom CTA Heading,"Ready to Build the Future of Ethiopian Tech?","Build Ethiopia's Next Engineering Generation",44
+HomePage.tsx,Bottom CTA 1,"Start Coding Free","Start Free",10
+HomePage.tsx,Bottom CTA 2,"Join as Mentor","Apply to Mentor",15

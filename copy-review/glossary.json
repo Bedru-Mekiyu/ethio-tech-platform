@@ -1,0 +1,63 @@
+{
+  "approvedTerms": {
+    "actionToAcquireSkill": "Learn",
+    "actionToInitiate": "Start",
+    "curriculumPathway": "Track",
+    "curriculumUnit": "Lesson",
+    "peerGroup": "Squad",
+    "industryGuide": "Mentor",
+    "realTimeVideoSpace": "Classroom",
+    "physicalFacility": "Tech Hub",
+    "physicalDeskPass": "Hub Pass",
+    "inBrowserIDE": "Workspace",
+    "verifiedCredential": "Certificate",
+    "platformPoints": "XP",
+    "dailyStreak": "Streak"
+  },
+  "bannedTerms": [
+    "welcome to",
+    "we are proud to",
+    "our mission is",
+    "cutting-edge",
+    "world-class",
+    "revolutionary",
+    "synergy",
+    "premier",
+    "unleash",
+    "empower",
+    "next-generation",
+    "PISTELS",
+    "pedagogical backbone",
+    "7 pillars",
+    "ideology",
+    "sovereign education"
+  ],
+  "approvedButtonVerbs": [
+    "Start",
+    "Join",
+    "Book",
+    "Submit",
+    "Request",
+    "Create",
+    "Sign",
+    "Apply",
+    "View",
+    "Open",
+    "Save",
+    "Download",
+    "Verify"
+  ],
+  "standardButtonLabels": [
+    "Start Track",
+    "Join Squad",
+    "Book Hub Pass",
+    "Join Classroom",
+    "Submit Project",
+    "Request Review",
+    "Create Account",
+    "Sign In",
+    "Apply to Mentor",
+    "View Tracks",
+    "Open Workspace"
+  ]
+}
