@@ -255,10 +255,14 @@ export function ProgressPage() {
             <span className="text-[11px] text-slate-600 font-medium">Job Readiness</span>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
-            <Zap className="text-[var(--secondary)]" size={14} />
-            <span className="text-xs font-bold text-slate-900">{userXp.toLocaleString()}</span>
-            <span className="text-[11px] text-slate-600 font-medium">XP</span>
+          <div className="flex items-center gap-2 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
+            <Zap className="text-[var(--secondary)] shrink-0" size={14} />
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-slate-900 leading-none">{userXp.toLocaleString()} XP</span>
+              <span className="text-[10px] text-slate-500 font-medium mt-0.5">
+                Level {userLevel} · {500 - (userXp % 500)} XP to Lvl {userLevel + 1}
+              </span>
+            </div>
           </div>
         </div>
       </div>

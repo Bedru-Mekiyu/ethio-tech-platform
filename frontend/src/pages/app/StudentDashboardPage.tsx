@@ -33,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { ProgressBar } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { QueryError } from "@/components/composites/QueryError";
+import { useToast } from "@/components/composites/ToastProvider";
 import { useMeetings } from "@/hooks/useMeetings";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
@@ -62,6 +63,7 @@ export function StudentDashboardPage() {
   const user = useAuthStore((s) => s.user);
   const { classroomPath, squadPath } = useQuickNavLinks();
   const queryClient = useQueryClient();
+  const toast = useToast();
 
   // Hub Check-In state
   const todayKey = new Date().toISOString().slice(0, 10);
@@ -103,6 +105,10 @@ export function StudentDashboardPage() {
     mutationFn: completeDailyChallenge,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
+      toast.success("Daily Challenge Completed! +25 XP awarded · Learning Streak Maintained 🔥");
+    },
+    onError: () => {
+      toast.error("Could not claim challenge reward. Please try again.");
     },
   });
 
@@ -120,6 +126,7 @@ export function StudentDashboardPage() {
     } catch {
       // ignore storage errors
     }
+    toast.success("Hub Arrival Verified! +50 XP awarded · Workstation Ready 🏢");
   };
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
@@ -134,6 +141,9 @@ export function StudentDashboardPage() {
   const dailyChallengeCompleted = data?.dailyChallengeCompleted ?? false;
   const userXp = (user?.xp ?? 0) + (hubXpAwarded ? 50 : 0);
   const userLevel = user?.level ?? 1;
+  const xpForNextLevel = 500;
+  const currentLevelXp = userXp % xpForNextLevel;
+  const xpNeeded = xpForNextLevel - currentLevelXp;
 
   const trackTitle = currentTrack?.title ?? "Full-Stack Web Development";
   const completedLessons = currentTrack?.lessons?.completed ?? 0;
@@ -180,10 +190,14 @@ export function StudentDashboardPage() {
             <span className="text-[11px] text-slate-600 font-medium">Day Streak</span>
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
-            <Zap className="text-[var(--secondary)]" size={14} />
-            <span className="text-xs font-semibold text-slate-900">{userXp.toLocaleString()}</span>
-            <span className="text-[11px] text-slate-600 font-medium">XP (Lvl {userLevel})</span>
+          <div className="flex items-center gap-2 rounded-lg border border-slate-200/80 bg-white px-3 py-1.5 shadow-xs">
+            <Zap className="text-[var(--secondary)] shrink-0" size={14} />
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-slate-900 leading-none">{userXp.toLocaleString()} XP</span>
+              <span className="text-[10px] text-slate-500 font-medium mt-0.5">
+                Level {userLevel} · {xpNeeded} XP to Lvl {userLevel + 1}
+              </span>
+            </div>
           </div>
 
           <Link to="/leaderboard">
@@ -530,36 +544,31 @@ export function StudentDashboardPage() {
               </div>
             </Card>
           ) : (
-            <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="space-y-1 min-w-0">
+            <Card className="rounded-xl border border-slate-200/80 bg-slate-50/60 p-4 shadow-xs">
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+                <div className="space-y-0.5 min-w-0">
                   <div className="flex items-center gap-2">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
-                      <Building2 size={14} />
-                    </div>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-700">
-                      Regional Learning Hubs
-                    </span>
+                    <Building2 size={14} className="text-[var(--secondary)] shrink-0" />
+                    <span className="text-xs font-bold text-slate-900">Regional Tech Hub Desks</span>
                     <Badge
                       variant="secondary"
                       size="sm"
-                      className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] font-semibold"
+                      className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] text-[10px] font-semibold"
                     >
                       Free Access
                     </Badge>
                   </div>
-                  <h3 className="text-sm font-bold text-slate-900 pt-0.5">
-                    Need reliable fiber internet or uninterrupted power?
-                  </h3>
                   <p className="text-xs text-slate-600 font-medium">
-                    Reserve a workstation, GPU compute rig, or study desk at any of our regional learning hubs across
-                    Ethiopia.
+                    Reserve fiber internet & GPU workstations in Addis Ababa, Hawassa, Mekelle, and Bahir Dar.
                   </p>
                 </div>
                 <div className="shrink-0">
                   <Link to="/hubs">
-                    <Button size="sm" className="gap-1 font-semibold shadow-xs whitespace-nowrap">
-                      <Building2 size={13} />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="text-xs border-slate-200/80 bg-white hover:bg-slate-50 font-semibold shadow-xs whitespace-nowrap"
+                    >
                       Reserve Hub Seat
                     </Button>
                   </Link>
@@ -567,65 +576,6 @@ export function StudentDashboardPage() {
               </div>
             </Card>
           )}
-
-          {/* Quick Platform Navigation Shortcuts */}
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <Link to="/app/workspace" className="group">
-              <Card className="h-full rounded-xl border border-slate-200/80 bg-white p-4.5 transition-all hover:border-slate-300 hover:shadow-md shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 group-hover:scale-105 transition-transform">
-                  <Code2 size={16} />
-                </div>
-                <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  Coding Workspace
-                </h3>
-                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
-                  In-browser editor, terminal runner, and multi-language presets.
-                </p>
-              </Card>
-            </Link>
-
-            <Link to="/app/projects" className="group">
-              <Card className="h-full rounded-xl border border-slate-200/80 bg-white p-4.5 transition-all hover:border-slate-300 hover:shadow-md shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 group-hover:scale-105 transition-transform">
-                  <BookOpen size={16} />
-                </div>
-                <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  Project Portfolio
-                </h3>
-                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
-                  Ship real-world portfolio tasks and get mentor review code scores.
-                </p>
-              </Card>
-            </Link>
-
-            <Link to="/app/calendar" className="group">
-              <Card className="h-full rounded-xl border border-slate-200/80 bg-white p-4.5 transition-all hover:border-slate-300 hover:shadow-md shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 group-hover:scale-105 transition-transform">
-                  <CalendarDays size={16} />
-                </div>
-                <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  Study Planner
-                </h3>
-                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
-                  Sprint calendar, study blocks, and mentor session schedule.
-                </p>
-              </Card>
-            </Link>
-
-            <Link to="/app/progress" className="group">
-              <Card className="h-full rounded-xl border border-slate-200/80 bg-white p-4.5 transition-all hover:border-slate-300 hover:shadow-md shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100 group-hover:scale-105 transition-transform">
-                  <Trophy size={16} />
-                </div>
-                <h3 className="mt-3 text-xs font-bold text-slate-900 group-hover:text-primary transition-colors">
-                  Progress & Badges
-                </h3>
-                <p className="mt-0.5 text-[11px] text-slate-600 font-medium leading-relaxed">
-                  Skill mastery radar, verified certificates, and achievement history.
-                </p>
-              </Card>
-            </Link>
-          </div>
         </div>
 
         {/* Right Col: Streak, Daily Challenge & Squad Activity */}
