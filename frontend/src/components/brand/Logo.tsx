@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { EthiopiaSilhouette } from "./EthiopiaSilhouette";
+
+export { EthiopiaSilhouette };
 
 export interface LogoProps {
   className?: string;
@@ -25,7 +28,7 @@ export function Logo({ className, to = "/", variant = "default", subtitle }: Log
         whileTap={{ scale: 0.98 }}
         className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-white shadow-xs transition-all duration-200 overflow-hidden border border-red-800/20"
       >
-        <span className="relative z-10 text-sm font-black text-white leading-none select-none tracking-tight">E</span>
+        <EthiopiaSilhouette size={20} className="relative z-10 text-white" />
       </motion.div>
 
       {!isCompact && (
