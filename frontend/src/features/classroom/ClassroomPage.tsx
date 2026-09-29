@@ -510,7 +510,7 @@ export function ClassroomPage() {
                     <button
                       type="submit"
                       disabled={!chatDraft.trim()}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40 transition-colors shadow-xs"
+                      className="shrink-0 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800 disabled:opacity-40 transition-colors shadow-xs"
                     >
                       <Send className="h-4 w-4" />
                     </button>

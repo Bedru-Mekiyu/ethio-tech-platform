@@ -579,7 +579,7 @@ export function AdminGamificationPage() {
       {/* Hero Header */}
       <Card className="border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="space-y-1.5 max-w-2xl">
+          <div className="space-y-1.5 w-[calc(100%-1rem)] max-w-2xl">
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-900">
                 <Sparkles size={11} className="text-[var(--secondary)]" /> Level 1-100 Progression Engine

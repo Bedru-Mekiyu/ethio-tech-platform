@@ -61,7 +61,7 @@ export function ActivateAccountPage() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm text-slate-900"
+        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm text-slate-900"
       >
         <motion.div variants={fadeUp} custom={0}>
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
@@ -85,7 +85,7 @@ export function ActivateAccountPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0}>
         <Link

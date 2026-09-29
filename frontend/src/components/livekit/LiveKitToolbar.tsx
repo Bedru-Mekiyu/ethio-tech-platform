@@ -76,7 +76,7 @@ export function LiveKitToolbar({
       className="flex h-20 items-center justify-between border-t border-white/10 bg-[#0B0F19]/95 px-4 md:px-8 backdrop-blur-2xl z-30 select-none"
     >
       {/* Left: Host quick tools or secondary shortcuts */}
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="flex flex-wrap justify-center items-center gap-2 min-w-0">
         {isHost && onMuteAll && (
           <button
             type="button"
@@ -106,7 +106,7 @@ export function LiveKitToolbar({
       </div>
 
       {/* Center: Primary AV Controls */}
-      <div className="flex items-center gap-2.5 sm:gap-3.5">
+      <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3.5">
         {/* Microphone Toggle */}
         <div className="relative group">
           <button
@@ -179,7 +179,7 @@ export function LiveKitToolbar({
       </div>
 
       {/* Right: Drawer Panels & Leave/End actions */}
-      <div className="flex items-center gap-2 sm:gap-2.5">
+      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-2.5">
         {/* Chat Drawer Toggle */}
         <button
           type="button"

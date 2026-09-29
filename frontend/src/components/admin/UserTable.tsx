@@ -384,10 +384,10 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
       )}
 
       <div className="overflow-x-auto rounded-xl border border-slate-200/80 bg-white shadow-xs">
-        <table className="w-full text-left" role="table">
+        <table className="w-full text-left min-w-[700px]" role="table">
           <thead>
             <tr className="border-b border-slate-200/80 bg-slate-50/75">
-              <th className="w-10 px-3.5 py-2.5">
+              <th className="w-10 px-3.5 py-2.5 whitespace-nowrap">
                 <input
                   type="checkbox"
                   checked={allSelected}
@@ -396,18 +396,32 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">User</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Role</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Status</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">XP</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Track</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Joined</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                User
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                Role
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                Status
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                XP
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                Track
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                Joined
+              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
                 Last Login
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Verified</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                Verified
+              </th>
               {showActions && (
-                <th className="w-20 px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
+                <th className="w-20 px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
                   Actions
                 </th>
               )}

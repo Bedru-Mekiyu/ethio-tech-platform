@@ -75,7 +75,7 @@ export function LoginPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
     >
       {/* Header */}
       <motion.div variants={fadeUp} custom={0} className="space-y-1 text-center sm:text-left">

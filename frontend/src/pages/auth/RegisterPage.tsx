@@ -84,7 +84,7 @@ export function RegisterPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">
@@ -98,7 +98,7 @@ export function RegisterPage() {
       </motion.div>
 
       <motion.form variants={fadeUp} custom={1} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <FormField id="firstName" label="First name" error={errors.firstName?.message}>
             <Input
               autoComplete="given-name"

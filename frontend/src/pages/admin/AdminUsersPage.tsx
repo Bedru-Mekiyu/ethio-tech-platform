@@ -623,7 +623,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
                 New Password
               </label>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Input
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}

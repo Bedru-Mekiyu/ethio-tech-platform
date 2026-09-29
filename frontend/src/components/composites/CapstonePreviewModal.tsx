@@ -88,7 +88,9 @@ export function CapstonePreviewModal({
                   </span>
                 </div>
                 <h2 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">{project.title}</h2>
-                <p className="max-w-2xl text-xs sm:text-sm leading-relaxed text-slate-600">{project.tagline}</p>
+                <p className="w-[calc(100%-1rem)] max-w-2xl text-xs sm:text-sm leading-relaxed text-slate-600">
+                  {project.tagline}
+                </p>
               </div>
 
               <button
