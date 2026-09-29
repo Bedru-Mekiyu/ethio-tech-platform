@@ -15,7 +15,7 @@ export function Badge({ className, variant = "default", size = "md", showDot = f
     primary:
       "border-red-200/80 bg-red-50 text-red-800 hover:bg-red-100/70 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300",
     secondary:
-      "border-blue-200/70 bg-blue-50/70 text-[var(--secondary)] font-semibold shadow-xs hover:bg-blue-100/70 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300",
+      "border-blue-200/70 bg-blue-50/70 text-[var(--secondary)] font-semibold shadow-xs hover:bg-blue-100/70 dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-200",
     success:
       "border-emerald-200/80 bg-emerald-50 text-emerald-800 hover:bg-emerald-100/70 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300",
     warning:

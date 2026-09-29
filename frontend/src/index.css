@@ -195,12 +195,12 @@ img {
 
 .dark .bg-slate-50,
 [data-theme="dark"] .bg-slate-50 {
-  background-color: var(--bg-surface-strong);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .dark .bg-slate-100,
 [data-theme="dark"] .bg-slate-100 {
-  background-color: var(--bg-surface-strong);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .dark .border-slate-200,

@@ -78,7 +78,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 cn(
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
-                    ? "text-primary font-semibold bg-red-50/50 dark:bg-red-950/30"
+                    ? "text-primary font-semibold bg-red-50/50 dark:bg-white/[0.08] dark:text-white"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60",
                 )
               }
@@ -156,8 +156,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                     cn(
                       "px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150",
                       isActive
-                        ? "bg-red-50/50 text-primary font-semibold"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                        ? "bg-red-50/50 text-primary font-semibold dark:bg-white/[0.08] dark:text-white"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60",
                     )
                   }
                   onClick={() => setMobileOpen(false)}
@@ -168,7 +168,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             </div>
 
             {/* Mobile CTAs */}
-            <div className="border-t border-slate-200 pt-4 flex flex-col gap-2.5">
+            <div className="border-t border-slate-200 dark:border-white/10 pt-4 flex flex-col gap-2.5">
               {user ? (
                 <Link to={getDashboardPath(user.role)} onClick={() => setMobileOpen(false)}>
                   <Button className="w-full justify-center gap-2 py-2">
