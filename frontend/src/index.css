@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 @import "./styles/tokens.css";
 
 @theme {
@@ -72,6 +73,11 @@ html {
   color-scheme: light;
 }
 
+html.dark,
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -139,7 +145,7 @@ img {
 }
 
 .card-surface {
-  background: #ffffff;
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
@@ -170,15 +176,61 @@ img {
 .surface-panel {
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background: #ffffff;
+  background: var(--bg-surface);
   box-shadow: var(--shadow-card);
 }
 
 .hero-shell {
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
-  background: #ffffff;
+  background: var(--bg-surface);
   box-shadow: var(--shadow-lg);
+}
+
+/* ─── Seamless Dark Mode Bridges for Layout Surfaces & Containers ─── */
+.dark .bg-white,
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-card);
+}
+
+.dark .bg-slate-50,
+[data-theme="dark"] .bg-slate-50 {
+  background-color: var(--bg-surface-strong);
+}
+
+.dark .bg-slate-100,
+[data-theme="dark"] .bg-slate-100 {
+  background-color: var(--bg-surface-strong);
+}
+
+.dark .border-slate-200,
+[data-theme="dark"] .border-slate-200 {
+  border-color: var(--border);
+}
+
+.dark .border-slate-100,
+[data-theme="dark"] .border-slate-100 {
+  border-color: var(--border);
+}
+
+.dark .text-slate-900,
+[data-theme="dark"] .text-slate-900 {
+  color: var(--text-primary);
+}
+
+.dark .text-slate-800,
+[data-theme="dark"] .text-slate-800 {
+  color: var(--text-primary);
+}
+
+.dark .text-slate-700,
+[data-theme="dark"] .text-slate-700 {
+  color: var(--text-secondary);
+}
+
+.dark .text-slate-600,
+[data-theme="dark"] .text-slate-600 {
+  color: var(--text-muted);
 }
 
 /* ─── Container Utilities ─── */

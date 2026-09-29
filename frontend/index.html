@@ -32,6 +32,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- Immediate theme initialisation: checks for explicit user dark opt-in to prevent FOUT -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('ethio_theme');
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Immediate system font fallback: text renders instantly before Inter loads -->
     <style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}</style>
 
