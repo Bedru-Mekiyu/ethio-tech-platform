@@ -13,12 +13,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
 
     return (
       <div className={cn("relative group w-full", wrapperClassName)}>
-        <Input
-          ref={ref}
-          className={cn("pr-12", className)}
-          type={visible ? "text" : "password"}
-          {...props}
-        />
+        <Input ref={ref} className={cn("pr-12 sm:pr-12", className)} type={visible ? "text" : "password"} {...props} />
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
@@ -27,7 +22,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             "h-8 w-8 rounded-lg", // standard visible boundary
             "flex items-center justify-center text-[var(--text-muted)] hover:text-white transition-colors duration-200",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-1 focus-visible:ring-offset-[var(--bg-base)]",
-            "after:content-[''] after:absolute after:-inset-1 after:rounded-lg" // invisible expansion for 44px minimum touch target (h-8 is 32px, absolute -inset-1 adds 8px total, total active height is 48px)
+            "after:content-[''] after:absolute after:-inset-1 after:rounded-lg", // invisible expansion for 44px minimum touch target (h-8 is 32px, absolute -inset-1 adds 8px total, total active height is 48px)
           )}
           aria-label={visible ? "Hide password" : "Show password"}
         >
@@ -35,8 +30,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
         </button>
       </div>
     );
-  }
+  },
 );
 
 PasswordInput.displayName = "PasswordInput";
-

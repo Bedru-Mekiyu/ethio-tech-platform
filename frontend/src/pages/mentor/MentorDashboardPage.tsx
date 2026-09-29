@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Calendar,
+  CheckCircle2,
   ChevronRight,
   Clock,
   Clock3,
@@ -150,37 +151,72 @@ export function MentorDashboardPage() {
   };
 
   if (user?.role === "mentor" && mentorStatus !== "approved") {
+    const isRejected = mentorStatus === "rejected";
     return (
-      <div className="space-y-6">
-        <Card className="rounded-2xl border border-amber-200 bg-amber-50/50 p-6 shadow-sm dark:bg-slate-900 dark:border-white/10">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-2xl">
-              <Badge variant="warning">
-                {mentorStatus === "rejected" ? "Application not approved" : "Verification required"}
+      <div className="max-w-4xl mx-auto space-y-6 py-6 sm:py-10">
+        <Card className="rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900 p-6 sm:p-8 lg:p-10 shadow-sm space-y-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="space-y-3 max-w-2xl">
+              <Badge variant={isRejected ? "outline" : "secondary"}>
+                {isRejected ? "Application Status Update" : "Admissions Review in Progress"}
               </Badge>
-              <h1 className="text-xl md:text-2xl font-bold text-slate-900 mt-4">
-                {mentorStatus === "rejected"
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {isRejected
                   ? "Your mentor application needs another review"
                   : "Complete mentor onboarding before using mentor tools"}
               </h1>
-              <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                {mentorStatus === "rejected"
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {isRejected
                   ? "Your application was reviewed, but you do not currently have access to mentor tools. Contact support if you want feedback or want to apply again."
                   : "Mentor tools stay locked until the admin team approves your mentor application and verifies your credentials for live mentoring."}
               </p>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/20 dark:border-amber-900/40 dark:text-amber-400">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/[0.05] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10">
               <ShieldCheck size={26} />
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap gap-3">
+
+          {/* Status Progression Checklist */}
+          <div className="rounded-xl border border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-white/[0.02] p-4 sm:p-5 space-y-3">
+            <p className="text-xs font-semibold text-slate-900 dark:text-white">
+              {isRejected ? "Review Outcome & Follow-Up:" : "Admissions Verification Roadmap:"}
+            </p>
+            <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+              <li className="flex items-center gap-2.5">
+                <CheckCircle2 size={15} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <span>Application details and professional credentials submitted</span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                {isRejected ? (
+                  <span className="h-2 w-2 rounded-full bg-slate-400 dark:bg-slate-500 ml-1 mr-0.5 shrink-0" />
+                ) : (
+                  <Clock3 size={15} className="text-slate-700 dark:text-slate-300 shrink-0" />
+                )}
+                <span>
+                  {isRejected
+                    ? "Admissions review completed — feedback available upon request"
+                    : "Guild Admissions Committee background verification in progress (typically 2–3 business days)"}
+                </span>
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-600 ml-1 mr-0.5 shrink-0" />
+                <span>
+                  {isRejected
+                    ? "Re-application eligible after further senior engineering experience"
+                    : "Console authorization, video rooms, and code review queue access unlocked"}
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 pt-1 border-t border-slate-100 dark:border-white/10">
             <Link to="/mentor-recruitment">
-              <Button size="sm" variant="primary">
-                {mentorStatus === "rejected" ? "Review Application" : "Open Application"}
+              <Button size="md" variant="primary" className="font-semibold shadow-xs">
+                {isRejected ? "Review Application" : "Open Application"}
               </Button>
             </Link>
             <Link to="/contact">
-              <Button size="sm" variant="outline">
+              <Button size="md" variant="outline" className="font-semibold shadow-xs">
                 Contact Support
               </Button>
             </Link>

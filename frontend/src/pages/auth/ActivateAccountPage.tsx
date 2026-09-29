@@ -4,7 +4,7 @@ import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { ArrowLeft, ShieldCheck, AlertCircle } from "lucide-react";
+import { ArrowLeft, ShieldCheck, AlertCircle, Loader2 } from "lucide-react";
 import { activateAccount } from "@/services/authService";
 import { useAuthStore, getPostLoginPath } from "@/store/authStore";
 import { Button } from "@/components/ui/button";
@@ -29,7 +29,7 @@ const fadeUp = {
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: i * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -61,19 +61,31 @@ export function ActivateAccountPage() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm text-slate-900"
+        className="w-full max-w-md rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-slate-900 dark:text-slate-100 space-y-5"
       >
-        <motion.div variants={fadeUp} custom={0}>
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
+        <motion.div variants={fadeUp} custom={0} className="space-y-4">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200">
             <ShieldCheck size={22} />
           </div>
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-slate-900">Missing activation token</h1>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">
-            This link appears to be invalid or expired. Please contact support for a new activation link.
-          </p>
-          <div className="mt-6">
+          <div className="space-y-1.5">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Missing Activation Token
+            </h1>
+            <p className="text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              This activation link appears to be invalid or expired. Please contact support or check your email for a
+              new invitation.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 pt-2">
             <Link to="/login">
-              <Button variant="outline">Sign In</Button>
+              <Button variant="primary" size="md" className="font-semibold shadow-xs">
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="outline" size="md" className="font-semibold shadow-xs">
+                Contact Support
+              </Button>
             </Link>
           </div>
         </motion.div>
@@ -85,49 +97,50 @@ export function ActivateAccountPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm text-slate-900 dark:text-slate-100 space-y-6"
     >
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
         >
           <ArrowLeft size={13} />
-          Sign In
+          Back to Sign In
         </Link>
       </motion.div>
 
-      <motion.div variants={fadeUp} custom={1} className="mt-5 space-y-1">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-700">
-          <ShieldCheck size={16} />
+      <motion.div variants={fadeUp} custom={1} className="space-y-2">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] text-slate-800 dark:text-slate-200">
+          <ShieldCheck size={18} />
         </div>
-        <h1 className="text-xl font-bold tracking-tight text-slate-900 pt-2">Activate Mentor Account</h1>
-        <p className="text-xs leading-relaxed text-slate-600 font-medium">
-          Set a secure password to complete activation and access the mentor console.
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white pt-1">
+          Activate Mentor Account
+        </h1>
+        <p className="text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          Set a secure permanent password to complete activation and access the mentor console.
         </p>
       </motion.div>
 
-      <motion.form variants={fadeUp} custom={2} onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
+      <motion.form variants={fadeUp} custom={2} onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
         <FormField
           id="password"
-          label="Password"
+          label="Permanent Password"
           error={errors.password?.message}
-          description="Min 8 chars, letters & numbers"
+          description="Minimum 8 characters, including letters & numbers."
+          required
         >
           <PasswordInput
             autoComplete="new-password"
             placeholder="Create strong password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
             {...fieldAriaProps("password", errors.password?.message)}
             {...register("password")}
           />
         </FormField>
 
-        <FormField id="confirm" label="Confirm password" error={errors.confirm?.message}>
+        <FormField id="confirm" label="Confirm Permanent Password" error={errors.confirm?.message} required>
           <PasswordInput
             autoComplete="new-password"
-            placeholder="Re-enter password"
-            className="text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
+            placeholder="Re-enter permanent password"
             {...fieldAriaProps("confirm", errors.confirm?.message)}
             {...register("confirm")}
           />
@@ -135,16 +148,23 @@ export function ActivateAccountPage() {
 
         {error ? (
           <div
-            className="flex items-start gap-2.5 rounded-lg border border-rose-200 bg-rose-50 px-3.5 py-2.5"
+            className="flex items-start gap-2.5 rounded-lg border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/20 px-3.5 py-2.5 text-xs text-red-700 dark:text-red-400"
             role="alert"
           >
-            <AlertCircle size={14} className="mt-0.5 flex-shrink-0 text-rose-600" />
-            <p className="text-xs text-rose-700">{error}</p>
+            <AlertCircle size={15} className="mt-0.5 flex-shrink-0 text-red-600 dark:text-red-400" />
+            <p>{error}</p>
           </div>
         ) : null}
 
-        <Button type="submit" className="w-full font-medium" disabled={isSubmitting}>
-          {isSubmitting ? "Activating account…" : "Activate Account"}
+        <Button type="submit" size="md" className="w-full font-semibold shadow-xs" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader2 size={14} className="mr-2 animate-spin" />
+              Activating Account...
+            </>
+          ) : (
+            "Activate Account"
+          )}
         </Button>
       </motion.form>
     </motion.div>

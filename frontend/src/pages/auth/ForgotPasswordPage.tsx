@@ -75,11 +75,11 @@ export function ForgotPasswordPage() {
         <FormField id="email" label="Email address" error={errors.email?.message}>
           <div className="relative">
             <Mail
-              size={15}
-              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-600"
+              size={16}
+              className="pointer-events-none absolute left-3.5 top-1/2 z-10 -translate-y-1/2 text-slate-400 dark:text-slate-500"
             />
             <Input
-              className="pl-10 text-xs bg-white border-slate-300 text-slate-900 placeholder:text-slate-600 shadow-xs focus:border-slate-900"
+              className="pl-11 sm:pl-11 text-xs sm:text-sm bg-white dark:bg-slate-950 border-slate-300 dark:border-white/10 text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-500 shadow-xs focus-visible:ring-slate-900"
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
