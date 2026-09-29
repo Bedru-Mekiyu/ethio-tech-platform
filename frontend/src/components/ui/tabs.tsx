@@ -79,10 +79,10 @@ export function Tabs({
           ref={tabRef}
           onKeyDown={handleKeyDown}
           className={cn(
-            "flex items-center",
+            "flex items-center overflow-x-auto no-scrollbar",
             variant === "pill"
-              ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
-              : "gap-6 border-b border-slate-200 pb-0",
+              ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1 flex-nowrap"
+              : "gap-4 sm:gap-6 border-b border-slate-200 pb-0 flex-nowrap",
           )}
           role="tablist"
         >
@@ -100,7 +100,7 @@ export function Tabs({
                 disabled={item.disabled}
                 onClick={() => setActiveTab(item.value)}
                 className={cn(
-                  "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
+                  "relative flex-shrink-0 text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
                   variant === "pill"
                     ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
                     : "pb-3 pt-2 text-slate-600 hover:text-slate-900",
@@ -230,10 +230,10 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
       ref={listRef}
       onKeyDown={handleKeyDown}
       className={cn(
-        "flex items-center",
+        "flex items-center overflow-x-auto no-scrollbar",
         variant === "pill"
-          ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1"
-          : "gap-6 border-b border-slate-200 pb-0",
+          ? "gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1 flex-nowrap"
+          : "gap-4 sm:gap-6 border-b border-slate-200 pb-0 flex-nowrap",
         className,
       )}
       role="tablist"
@@ -264,7 +264,7 @@ export function TabsTrigger({
       id={`tab-trigger-${tabsId}-${value}`}
       onClick={() => ctx?.setValue(value)}
       className={cn(
-        "relative text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
+        "relative flex-shrink-0 text-sm font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]",
         variant === "pill"
           ? "min-h-9 rounded-lg px-3.5 py-1.5 text-slate-600 hover:text-slate-900"
           : "pb-3 pt-2 text-slate-600 hover:text-slate-900",

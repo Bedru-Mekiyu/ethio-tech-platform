@@ -188,10 +188,40 @@ img {
   padding-inline: var(--space-4);
 }
 
+@media (min-width: 640px) {
+  .page-shell {
+    padding-inline: var(--space-6);
+  }
+}
+
 @media (min-width: 1024px) {
   .page-shell {
     padding-inline: var(--space-8);
   }
+}
+
+/* ─── Scrollbar Utilities ─── */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #e2e8f0 transparent;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 9999px;
 }
 
 .container-narrow {

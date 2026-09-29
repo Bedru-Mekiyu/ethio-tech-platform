@@ -499,7 +499,7 @@ export function DashboardLayout({ variant = "student" }: { variant?: "student" |
                   >
                     {item.icon}
                   </span>
-                  <span>{item.label.split(" ")[0]}</span>
+                  <span className="truncate max-w-[48px] text-[9px] sm:text-[10px]">{item.label.split(" ")[0]}</span>
                 </>
               )}
             </NavLink>

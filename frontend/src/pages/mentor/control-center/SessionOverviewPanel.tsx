@@ -75,7 +75,7 @@ export default function SessionOverviewPanel({ overview }: SessionOverviewPanelP
   ];
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 md:sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {statItems.map((item, idx) => {
         const Icon = item.icon;
         return (

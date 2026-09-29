@@ -56,7 +56,7 @@ export function ConfirmDialog({
   return (
     <dialog
       ref={dialogRef}
-      className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[var(--text-primary)] shadow-xl backdrop:bg-slate-900/40 backdrop-blur-xs"
+      className="fixed inset-0 z-[9998] m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-slate-200 bg-white p-0 text-[var(--text-primary)] shadow-xl backdrop:bg-slate-900/40 backdrop-blur-xs"
     >
       <div className="p-6">
         <div className="flex items-start justify-between">

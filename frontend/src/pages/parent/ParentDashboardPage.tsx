@@ -62,7 +62,7 @@ export function ParentDashboardPage() {
           onAction={() => navigate("/contact")}
         />
       ) : (
-        <div className="grid gap-3.5 md:sm:grid-cols-2 xl:sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
           {learners.map((learner) => (
             <Card key={learner.id} className="border-slate-200 bg-white p-4.5 shadow-xs hover:border-slate-300">
               <div className="flex items-center gap-2.5">
@@ -98,7 +98,7 @@ export function ParentDashboardPage() {
         </div>
       )}
 
-      <div className="grid gap-3.5 md:sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
         <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
           <div className="flex items-center gap-2 text-slate-900">
             <ShieldCheck size={16} />

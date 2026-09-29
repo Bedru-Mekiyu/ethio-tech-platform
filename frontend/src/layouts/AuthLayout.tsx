@@ -64,7 +64,7 @@ export function AuthLayout() {
       </div>
 
       {/* ── Right Form Panel ── */}
-      <div className="relative flex flex-1 flex-col items-center justify-center px-5 py-10 lg:px-12 bg-white">
+      <div className="relative flex flex-1 flex-col items-center justify-center px-5 py-10 sm:px-8 md:px-12 lg:px-12 bg-white">
         {/* Mobile header */}
         <div className="mb-8 flex w-full max-w-md items-center justify-between lg:hidden">
           <Logo />

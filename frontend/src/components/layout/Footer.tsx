@@ -14,7 +14,7 @@ export function Footer({ className }: FooterProps) {
     >
       {/* ─── Main Footer Links & Information ─── */}
       <div className="page-shell py-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand & Mission Statement */}
           <div className="space-y-4 lg:col-span-2">
             <Logo variant="full" subtitle="East Africa Tech Ecosystem" />
