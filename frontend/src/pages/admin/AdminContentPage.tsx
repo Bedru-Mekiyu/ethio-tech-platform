@@ -412,25 +412,25 @@ export function AdminContentPage() {
   return (
     <div className="flex h-[calc(100vh-80px)] flex-col overflow-hidden text-slate-900 bg-slate-50/50">
       {/* Top Banner Bar */}
-      <div className="border-b border-slate-200/80 bg-white px-5 py-3.5 shrink-0 shadow-2xs">
+      <div className="border-b border-slate-200/80 bg-white px-4 sm:px-6 py-3.5 shrink-0 shadow-2xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-slate-900" />
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum Content Studio</h1>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-medium">
               Master-detail hierarchical architect for learning tracks, modules, video lectures, and code labs.
             </p>
           </div>
 
-          {/* Mobile Tab Switcher */}
-          <div className="flex sm:hidden items-center rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs">
+          {/* Responsive Tab Switcher (visible below lg / 1024px) */}
+          <div className="flex lg:hidden items-center rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs">
             <button
               type="button"
               onClick={() => setMobileTab("tracks")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                "flex-1 py-1.5 px-3 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tracks"
                   ? "bg-slate-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
@@ -442,7 +442,7 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("tree")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                "flex-1 py-1.5 px-3 rounded-lg font-medium transition-all text-center",
                 mobileTab === "tree"
                   ? "bg-slate-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
@@ -454,7 +454,7 @@ export function AdminContentPage() {
               type="button"
               onClick={() => setMobileTab("editor")}
               className={cn(
-                "flex-1 py-1 px-2.5 rounded-lg font-medium transition-all text-center",
+                "flex-1 py-1.5 px-3 rounded-lg font-medium transition-all text-center",
                 mobileTab === "editor"
                   ? "bg-slate-900 text-white shadow-xs font-semibold"
                   : "text-slate-600 hover:text-slate-900",
@@ -467,10 +467,10 @@ export function AdminContentPage() {
       </div>
 
       {/* Main 3-Pane Master Detail Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-12 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-12 flex-1 overflow-hidden">
         {/* Left Pane: Track Sidebar (3 Cols on desktop) */}
         <div
-          className={cn("md:col-span-3 h-full overflow-hidden", mobileTab === "tracks" ? "block" : "hidden md:block")}
+          className={cn("lg:col-span-3 h-full overflow-hidden", mobileTab === "tracks" ? "block" : "hidden lg:block")}
         >
           <TrackSidebar
             tracks={tracks}
@@ -488,7 +488,7 @@ export function AdminContentPage() {
         </div>
 
         {/* Middle Pane: Module & Lesson Tree (4 Cols on desktop) */}
-        <div className={cn("md:col-span-4 h-full overflow-hidden", mobileTab === "tree" ? "block" : "hidden md:block")}>
+        <div className={cn("lg:col-span-4 h-full overflow-hidden", mobileTab === "tree" ? "block" : "hidden lg:block")}>
           <ModuleLessonTree
             track={selectedTrack}
             modules={modules}
@@ -507,7 +507,7 @@ export function AdminContentPage() {
 
         {/* Right Pane: Content Editor Pane (5 Cols on desktop) */}
         <div
-          className={cn("md:col-span-5 h-full overflow-hidden", mobileTab === "editor" ? "block" : "hidden md:block")}
+          className={cn("lg:col-span-5 h-full overflow-hidden", mobileTab === "editor" ? "block" : "hidden lg:block")}
         >
           <ContentEditorPane
             selection={selection}

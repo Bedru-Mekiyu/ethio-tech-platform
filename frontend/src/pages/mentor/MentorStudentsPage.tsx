@@ -105,9 +105,9 @@ function StatCard({
       <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${toneClass}`}>
         <Icon size={15} />
       </div>
-      <p className="mt-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold">{label}</p>
+      <p className="mt-3 text-[10px] uppercase tracking-wider text-slate-700 font-bold">{label}</p>
       <p className="mt-1 text-xl font-bold text-slate-900 font-mono">{value}</p>
-      {note && <p className="mt-0.5 text-xs text-slate-500">{note}</p>}
+      {note && <p className="mt-0.5 text-xs font-medium text-slate-600">{note}</p>}
     </Card>
   );
 }
@@ -152,7 +152,7 @@ function StudentRow({
         />
         <div className="min-w-0 flex-1">
           <p className="truncate text-xs font-semibold text-slate-900">{student.fullName}</p>
-          <p className="mt-0.5 text-[11px] text-slate-500">
+          <p className="mt-0.5 text-[11px] font-medium text-slate-600">
             Level {student.level ?? 1} · {student.xp ?? 0} XP
           </p>
         </div>
@@ -160,11 +160,11 @@ function StudentRow({
         <div className="hidden items-center gap-5 md:flex">
           <div className="text-center">
             <p className="text-xs font-semibold text-slate-900">{student.sessionsAttended ?? 0}</p>
-            <p className="text-[10px] text-slate-400">Sessions</p>
+            <p className="text-[10px] font-medium text-slate-600">Sessions</p>
           </div>
           <div className="text-center">
             <p className="text-xs font-semibold text-slate-900">{attendanceRate}%</p>
-            <p className="text-[10px] text-slate-400">Attendance</p>
+            <p className="text-[10px] font-medium text-slate-600">Attendance</p>
           </div>
           <div className="text-center">
             <p
@@ -175,7 +175,7 @@ function StudentRow({
             >
               {avgScore ? avgScore.toFixed(1) : "—"}
             </p>
-            <p className="text-[10px] text-slate-400">Avg Score</p>
+            <p className="text-[10px] font-medium text-slate-600">Avg Score</p>
           </div>
           <Badge
             variant={
@@ -191,7 +191,7 @@ function StudentRow({
           </Badge>
         </div>
 
-        <div className="shrink-0 text-slate-400">
+        <div className="shrink-0 text-slate-600">
           {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </button>
@@ -202,7 +202,7 @@ function StudentRow({
           {/* Quick stats grid */}
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Tracks Enrolled</p>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Tracks Enrolled</p>
               <div className="mt-1.5 flex flex-wrap gap-1">
                 {student.enrolledTracks && student.enrolledTracks.length > 0 ? (
                   student.enrolledTracks.map((track) => (
@@ -211,19 +211,19 @@ function StudentRow({
                     </Badge>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-400">No tracks</span>
+                  <span className="text-xs font-medium text-slate-500">No tracks</span>
                 )}
               </div>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Attendance Rate</p>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Attendance Rate</p>
               <ProgressBar value={attendanceRate} max={100} className="mt-2 h-1.5" />
               <p className="mt-1.5 text-xs font-semibold text-slate-900">
                 {student.sessionsAttended ?? 0} / {student.totalSessions ?? 0} sessions
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-              <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-400">Last Active</p>
+              <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Last Active</p>
               <p className="mt-1.5 text-xs font-semibold text-slate-900">
                 {student.lastActiveAt
                   ? new Date(student.lastActiveAt).toLocaleDateString(undefined, {
@@ -233,7 +233,7 @@ function StudentRow({
                     })
                   : "Unknown"}
               </p>
-              <p className="mt-0.5 text-[10px] text-slate-400">
+              <p className="mt-0.5 text-[10px] font-medium text-slate-600">
                 {student.lastActiveAt
                   ? `${Math.round((Date.now() - Date.parse(student.lastActiveAt)) / (1000 * 60 * 60 * 24))} days ago`
                   : "—"}
@@ -244,14 +244,16 @@ function StudentRow({
           {/* Feedback history */}
           {student.feedbackHistory && student.feedbackHistory.length > 0 ? (
             <div className="space-y-2">
-              <h4 className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Feedback History</h4>
+              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Feedback History</h4>
               {student.feedbackHistory.slice(0, 5).map((fb, idx) => (
                 <div key={idx} className="rounded-2xl border border-slate-200 bg-white p-3 space-y-1 shadow-sm">
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-semibold text-slate-900">{fb.sessionTitle}</span>
-                    <span className="text-[10px] text-slate-400">{new Date(fb.createdAt).toLocaleDateString()}</span>
+                    <span className="text-[10px] font-medium text-slate-600">
+                      {new Date(fb.createdAt).toLocaleDateString()}
+                    </span>
                   </div>
-                  {fb.comment && <p className="text-xs text-slate-600">{fb.comment}</p>}
+                  {fb.comment && <p className="text-xs text-slate-700">{fb.comment}</p>}
                 </div>
               ))}
             </div>
@@ -362,11 +364,11 @@ export function MentorStudentsPage() {
   return (
     <div className="space-y-6 text-slate-900">
       {/* Header */}
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Your Learners Directory</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Track attendance, review engagement scores, and view feedback history for every student in your circle.
             </p>
           </div>
@@ -411,18 +413,18 @@ export function MentorStudentsPage() {
       <Card className="border-slate-200 bg-white p-4 shadow-sm">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative max-w-sm flex-1">
-            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
             <Input
               placeholder="Search by name, email, or track..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+              className="pl-9 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
             />
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1">
-              <Filter size={12} className="text-slate-400" />
-              <span className="text-[11px] text-slate-500 font-medium">Engagement:</span>
+              <Filter size={12} className="text-slate-500" />
+              <span className="text-[11px] text-slate-700 font-semibold">Engagement:</span>
             </div>
             {(["all", "high", "medium", "low"] as const).map((f) => (
               <button
@@ -433,7 +435,7 @@ export function MentorStudentsPage() {
                   "rounded px-2.5 py-1 text-[11px] capitalize transition font-medium",
                   filterEngagement === f
                     ? "bg-slate-900 text-white shadow-xs"
-                    : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
+                    : "border border-slate-200 bg-white text-slate-700 hover:text-slate-900 hover:border-slate-300",
                 )}
               >
                 {f}
@@ -442,8 +444,8 @@ export function MentorStudentsPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <div className="flex items-center gap-1">
-              <ArrowUpDown size={12} className="text-slate-400" />
-              <span className="text-[11px] text-slate-500 font-medium">Sort:</span>
+              <ArrowUpDown size={12} className="text-slate-500" />
+              <span className="text-[11px] text-slate-700 font-semibold">Sort:</span>
             </div>
             {sortOptions.map((opt) => (
               <button

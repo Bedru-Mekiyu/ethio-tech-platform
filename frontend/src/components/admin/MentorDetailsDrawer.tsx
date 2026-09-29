@@ -254,30 +254,30 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
     <>
       <div className="fixed inset-0 z-40 bg-black/50" onClick={onClose} aria-hidden="true" />
       <aside
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-xl flex-col border-l border-[var(--border)] bg-[var(--bg)] shadow-2xl"
+        className="fixed inset-y-0 right-0 z-50 flex w-full sm:max-w-xl flex-col border-l border-slate-200 bg-white shadow-2xl"
         role="dialog"
         aria-modal="true"
         aria-label="Mentor application details"
       >
-        <div className="flex items-center gap-4 border-b border-[var(--border)] px-6 py-4">
+        <div className="flex items-center gap-4 border-b border-slate-200 px-6 py-4 bg-slate-50/80">
           {linkedUser?.avatarUrl ? (
             <img
               src={linkedUser.avatarUrl}
               alt={app?.fullName ?? "Mentor"}
-              className="h-14 w-14 rounded-full border border-[var(--border)] bg-white/5 object-cover"
+              className="h-14 w-14 rounded-full border border-slate-200 bg-slate-100 object-cover"
             />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--border)] bg-primary/10 text-lg font-bold text-primary">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full border border-slate-200 bg-primary/10 text-lg font-bold text-primary">
               {(app?.fullName ?? "?").charAt(0).toUpperCase()}
             </div>
           )}
           <div className="flex-1">
-            <h2 className="text-lg font-semibold text-white">{app?.fullName ?? "Application"}</h2>
-            <p className="text-sm text-[var(--text-muted)]">{app?.email}</p>
+            <h2 className="text-lg font-bold text-slate-900">{app?.fullName ?? "Application"}</h2>
+            <p className="text-sm text-slate-600 font-medium">{app?.email}</p>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-2 text-[var(--text-muted)] hover:bg-white/5 hover:text-white"
+            className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors"
             aria-label="Close drawer"
           >
             <X size={20} />
@@ -299,22 +299,22 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                 )}
               </div>
 
-              <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Application</h3>
+              <section className="space-y-2 text-sm text-slate-700">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">Application</h3>
                 <p>
-                  <span className="text-[var(--text-muted)]">Role: </span>
+                  <span className="text-slate-600 font-medium">Role: </span>
                   {app.currentRole}
                   {app.currentCompany ? ` at ${app.currentCompany}` : ""}
                 </p>
                 <p>
-                  <span className="text-[var(--text-muted)]">Experience: </span>
+                  <span className="text-slate-600 font-medium">Experience: </span>
                   {app.yearsExperience ?? 0} years
                 </p>
                 <p>
-                  <span className="text-[var(--text-muted)]">Location: </span>
+                  <span className="text-slate-600 font-medium">Location: </span>
                   {app.location ?? "Not provided"}
                 </p>
-                <p className="rounded-xl border border-[var(--border)] bg-white/5 p-3 leading-6 text-[var(--text-secondary)]">
+                <p className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 leading-6 text-slate-800">
                   {app.whyMentor}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -336,79 +336,77 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                 )}
               </section>
 
-              <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Account</h3>
+              <section className="space-y-2 text-sm text-slate-700">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">Account</h3>
                 {linkedUser ? (
                   <>
                     <p>
-                      <span className="text-[var(--text-muted)]">User ID: </span>
+                      <span className="text-slate-600 font-medium">User ID: </span>
                       {linkedUser.id}
                     </p>
                     <p>
-                      <span className="text-[var(--text-muted)]">Role: </span>
+                      <span className="text-slate-600 font-medium">Role: </span>
                       {linkedUser.role}
                     </p>
                     <p>
-                      <span className="text-[var(--text-muted)]">Last login: </span>
+                      <span className="text-slate-600 font-medium">Last login: </span>
                       {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
                     </p>
                     {detail?.credentialsStatus.provisionedAt && (
                       <p>
-                        <span className="text-[var(--text-muted)]">Provisioned: </span>
+                        <span className="text-slate-600 font-medium">Provisioned: </span>
                         {new Date(detail.credentialsStatus.provisionedAt).toLocaleString()}
                       </p>
                     )}
                     {detail?.credentialsStatus.sentAt && (
                       <p>
-                        <span className="text-[var(--text-muted)]">Credentials: </span>
+                        <span className="text-slate-600 font-medium">Credentials: </span>
                         {detail.credentialsStatus.deliveryMethod ?? "sent"}{" "}
                         {new Date(detail.credentialsStatus.sentAt).toLocaleString()}
                       </p>
                     )}
                   </>
                 ) : (
-                  <p className="text-[var(--text-secondary)]">No linked user account yet.</p>
+                  <p className="text-slate-600">No linked user account yet.</p>
                 )}
               </section>
 
-              <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                  Login history
-                </h3>
+              <section className="space-y-2 text-sm text-slate-700">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">Login history</h3>
                 {linkedUser ? (
                   <>
                     <p>
-                      <span className="text-[var(--text-muted)]">Last login: </span>
+                      <span className="text-slate-600 font-medium">Last login: </span>
                       {linkedUser.lastLoginAt ? new Date(linkedUser.lastLoginAt).toLocaleString() : "Never"}
                     </p>
                     {loginHistory?.lastLoginIp && (
                       <p>
-                        <span className="text-[var(--text-muted)]">Last IP: </span>
+                        <span className="text-slate-600 font-medium">Last IP: </span>
                         {loginHistory.lastLoginIp}
                       </p>
                     )}
                     <p>
-                      <span className="text-[var(--text-muted)]">Active sessions: </span>
+                      <span className="text-slate-600 font-medium">Active sessions: </span>
                       {loginHistory?.activeSessions ?? 0}
                     </p>
                     {(loginHistory?.devices ?? []).length > 0 && (
                       <div className="space-y-2 pt-1">
-                        <p className="text-xs text-[var(--text-muted)]">Registered devices:</p>
+                        <p className="text-xs font-semibold text-slate-700">Registered devices:</p>
                         {loginHistory!.devices!.map((device, i) => (
                           <div
                             key={i}
-                            className="flex items-start gap-2 rounded-lg border border-[var(--border)] bg-white/5 p-2"
+                            className="flex items-start gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 p-2.5"
                           >
                             {device.type === "mobile" ? (
-                              <Smartphone size={14} className="mt-0.5 text-[var(--text-muted)]" />
+                              <Smartphone size={14} className="mt-0.5 text-slate-500" />
                             ) : (
-                              <Monitor size={14} className="mt-0.5 text-[var(--text-muted)]" />
+                              <Monitor size={14} className="mt-0.5 text-slate-500" />
                             )}
                             <div className="flex-1 text-xs">
-                              <p className="text-[var(--text-secondary)]">{device.type}</p>
-                              {device.ip && <p className="text-[var(--text-muted)]">{device.ip}</p>}
+                              <p className="font-semibold text-slate-900 capitalize">{device.type}</p>
+                              {device.ip && <p className="text-slate-600">{device.ip}</p>}
                               {device.lastUsedAt && (
-                                <p className="text-[var(--text-muted)]">
+                                <p className="text-slate-500 text-[11px]">
                                   Last used: {new Date(device.lastUsedAt).toLocaleDateString()}
                                 </p>
                               )}
@@ -419,31 +417,31 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                     )}
                   </>
                 ) : (
-                  <p className="text-[var(--text-secondary)]">No account activity yet.</p>
+                  <p className="text-slate-600">No account activity yet.</p>
                 )}
               </section>
 
-              <section className="space-y-2 text-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Teaching</h3>
+              <section className="space-y-2 text-sm text-slate-700">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">Teaching</h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-lg border border-[var(--border)] bg-white/5 p-3 text-center">
-                    <p className="text-2xl font-bold text-white">{detail?.teaching.totalSessions ?? 0}</p>
-                    <p className="text-xs text-[var(--text-muted)]">Sessions</p>
+                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+                    <p className="text-2xl font-bold text-slate-900">{detail?.teaching.totalSessions ?? 0}</p>
+                    <p className="text-xs text-slate-600 font-medium">Sessions</p>
                   </div>
-                  <div className="rounded-lg border border-[var(--border)] bg-white/5 p-3 text-center">
-                    <p className="text-2xl font-bold text-white">{detail?.teaching.studentsCount ?? 0}</p>
-                    <p className="text-xs text-[var(--text-muted)]">Students</p>
+                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-center">
+                    <p className="text-2xl font-bold text-slate-900">{detail?.teaching.studentsCount ?? 0}</p>
+                    <p className="text-xs text-slate-600 font-medium">Students</p>
                   </div>
                 </div>
                 {(detail?.teaching.sessions ?? []).length > 0 && (
                   <div className="space-y-2 pt-1">
-                    <p className="text-xs text-[var(--text-muted)]">Recent sessions:</p>
+                    <p className="text-xs font-semibold text-slate-700">Recent sessions:</p>
                     {detail!.teaching.sessions.slice(0, 5).map((session, i) => (
                       <div
                         key={i}
-                        className="flex items-center justify-between rounded-lg border border-[var(--border)] bg-white/5 px-3 py-2"
+                        className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-slate-50/70 px-3 py-2 text-xs"
                       >
-                        <span className="truncate text-sm text-[var(--text-secondary)]">
+                        <span className="truncate font-medium text-slate-900">
                           {session.title ?? "Untitled session"}
                         </span>
                         <Badge
@@ -454,6 +452,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
                                 ? "warning"
                                 : "default"
                           }
+                          size="sm"
                         >
                           {session.status ?? "scheduled"}
                         </Badge>
@@ -465,13 +464,13 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
 
               {canReview && isAdmin && (
                 <div>
-                  <label className="mb-2 block text-xs uppercase tracking-wider text-[var(--text-muted)]">
+                  <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
                     Review notes
                   </label>
                   <textarea
                     value={reviewNotes}
                     onChange={(e) => setReviewNotes(e.target.value)}
-                    className="min-h-[80px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-card)] p-3 text-sm outline-none focus:border-primary resize-y"
+                    className="min-h-[80px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
                     placeholder="Optional approval notes or internal feedback"
                   />
                 </div>
@@ -488,7 +487,7 @@ export function MentorDetailsDrawer({ applicationId, onClose, onUpdated }: Mento
         </div>
 
         {isAdmin && app && (
-          <div className="border-t border-[var(--border)] px-6 py-4">
+          <div className="border-t border-slate-200 px-6 py-4 bg-slate-50/80">
             <div className="flex flex-wrap gap-2">
               {app.status === "pending_review" && (
                 <Button

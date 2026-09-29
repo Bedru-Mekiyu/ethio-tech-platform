@@ -425,7 +425,7 @@ Ethio-Tech Mentorship Team`;
   return (
     <div className="space-y-6 text-[var(--text-primary)]">
       {/* Top Header */}
-      <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-3">
             <Button
@@ -469,7 +469,7 @@ Ethio-Tech Mentorship Team`;
           {/* Main Content Area */}
           <div className="space-y-6 lg:col-span-2">
             {/* Applicant Profile Card */}
-            <Card className="border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+            <Card className="border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex items-start gap-3.5">
                   {linkedUser?.avatarUrl ? (
@@ -485,11 +485,11 @@ Ethio-Tech Mentorship Team`;
                   )}
                   <div>
                     <h2 className="text-base font-bold text-slate-900">{app.fullName}</h2>
-                    <p className="text-xs text-slate-600">
+                    <p className="text-xs font-medium text-slate-700">
                       {app.currentRole}
                       {app.currentCompany ? ` • ${app.currentCompany}` : ""}
                     </p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">{app.email}</p>
+                    <p className="text-[11px] font-medium text-slate-600 mt-0.5">{app.email}</p>
                     <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                       {statusBadge(app.status)}
                       {linkedUser?.mentorAccountStatus && (
@@ -553,38 +553,38 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 1: Application Profile */}
             {activeTab === "application" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                     Application Overview
                   </h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs text-slate-500">Current Position</p>
+                      <p className="text-xs font-medium text-slate-600">Current Position</p>
                       <p className="text-sm font-medium text-slate-900">
                         {app.currentRole}
                         {app.currentCompany ? ` at ${app.currentCompany}` : ""}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Experience</p>
+                      <p className="text-xs font-medium text-slate-600">Experience</p>
                       <p className="text-sm font-medium text-slate-900">{app.yearsExperience ?? 0} years</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Location</p>
+                      <p className="text-xs font-medium text-slate-600">Location</p>
                       <p className="text-sm font-medium text-slate-900">{app.location ?? "Not provided"}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Availability</p>
+                      <p className="text-xs font-medium text-slate-600">Availability</p>
                       <p className="text-sm capitalize font-medium text-slate-900">{app.availability ?? "Flexible"}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Mentoring Style</p>
+                      <p className="text-xs font-medium text-slate-600">Mentoring Style</p>
                       <p className="text-sm font-medium text-slate-900">
                         {(app.mentoringStyle ?? []).join(", ") || "Live Sessions & Reviews"}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500">Application Date</p>
+                      <p className="text-xs font-medium text-slate-600">Application Date</p>
                       <p className="text-sm font-medium text-slate-900">
                         {app.createdAt ? new Date(app.createdAt).toLocaleDateString() : "Recently"}
                       </p>
@@ -592,14 +592,14 @@ Ethio-Tech Mentorship Team`;
                   </div>
 
                   <div>
-                    <p className="text-xs text-slate-500 mb-1">Why do you want to mentor on Ethio-Tech?</p>
-                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm leading-relaxed text-slate-700">
+                    <p className="text-xs font-medium text-slate-600 mb-1">Why do you want to mentor on Ethio-Tech?</p>
+                    <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 p-4 text-sm leading-relaxed text-slate-800">
                       {app.whyMentor || "No statement provided."}
                     </div>
                   </div>
 
                   <div>
-                    <p className="mb-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+                    <p className="mb-2 text-xs text-slate-700 font-semibold uppercase tracking-wider">
                       Specialized Skills & Tech Stack
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -624,11 +624,13 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 2: Evaluation Rubric & Interview */}
             {activeTab === "rubric" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-6 shadow-sm">
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <h3 className="text-base font-bold text-slate-900">Structured Evaluation Rubric</h3>
-                      <p className="text-xs text-slate-500">Evaluate candidate across standard screening dimensions.</p>
+                      <p className="text-xs font-medium text-slate-600">
+                        Evaluate candidate across standard screening dimensions.
+                      </p>
                     </div>
                     <Badge variant={rubric.variant} className="text-sm py-1.5 px-3">
                       {rubric.percentage}% - {rubric.recommendation}
@@ -688,7 +690,7 @@ Ethio-Tech Mentorship Team`;
                             {rubricScores[c.key]}/5 ({c.labels[rubricScores[c.key] - 1]})
                           </span>
                         </div>
-                        <p className="text-xs text-slate-500">{c.desc}</p>
+                        <p className="text-xs font-medium text-slate-600">{c.desc}</p>
                         <div className="grid grid-cols-5 gap-2 pt-1">
                           {[1, 2, 3, 4, 5].map((v) => (
                             <button
@@ -717,7 +719,7 @@ Ethio-Tech Mentorship Team`;
                 </section>
 
                 {/* Direct Interview Scheduling Section */}
-                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
                   <div className="flex items-center gap-2">
                     <Calendar size={18} className="text-slate-900" />
                     <h3 className="text-base font-bold text-slate-900">Screening Interview & Calendar</h3>
@@ -725,7 +727,7 @@ Ethio-Tech Mentorship Team`;
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                         Dedicated Video Room
                       </p>
                       <input
@@ -753,8 +755,8 @@ Ethio-Tech Mentorship Team`;
                     </div>
 
                     <div className="space-y-2 rounded-xl border border-slate-200/80 bg-slate-50/60 p-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Calendar Invite</p>
-                      <p className="text-xs text-slate-600">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-700">Calendar Invite</p>
+                      <p className="text-xs font-medium text-slate-600">
                         Schedule directly on Google Calendar with prefilled agenda and meeting link.
                       </p>
                       <div className="pt-2">
@@ -773,7 +775,7 @@ Ethio-Tech Mentorship Team`;
 
                   <div className="space-y-2 pt-2">
                     <div className="flex items-center justify-between">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                         Email Invite Template
                       </p>
                       <Button
@@ -799,21 +801,21 @@ Ethio-Tech Mentorship Team`;
             {/* Tab 3: Account & Credentials */}
             {activeTab === "account" && (
               <div className="space-y-6">
-                <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Linked User Account</h3>
+                <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">Linked User Account</h3>
                   {linkedUser ? (
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div>
-                        <p className="text-xs text-slate-500">User ID</p>
+                        <p className="text-xs font-medium text-slate-600">User ID</p>
                         <p className="text-sm font-mono text-slate-900">{linkedUser.id}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500">Role</p>
-                        <p className="text-sm text-slate-900 capitalize">{linkedUser.role}</p>
+                        <p className="text-xs font-medium text-slate-600">Role</p>
+                        <p className="text-sm text-slate-900 capitalize font-medium">{linkedUser.role}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500">Last Login</p>
-                        <p className="text-sm text-slate-900">
+                        <p className="text-xs font-medium text-slate-600">Last Login</p>
+                        <p className="text-sm text-slate-900 font-medium">
                           {linkedUser.lastLoginAt
                             ? new Date(linkedUser.lastLoginAt).toLocaleString()
                             : "Never logged in"}
@@ -821,16 +823,16 @@ Ethio-Tech Mentorship Team`;
                       </div>
                       {detail?.credentialsStatus.provisionedAt && (
                         <div>
-                          <p className="text-xs text-slate-500">Provisioned At</p>
-                          <p className="text-sm text-slate-900">
+                          <p className="text-xs font-medium text-slate-600">Provisioned At</p>
+                          <p className="text-sm text-slate-900 font-medium">
                             {new Date(detail.credentialsStatus.provisionedAt).toLocaleString()}
                           </p>
                         </div>
                       )}
                       {detail?.credentialsStatus.sentAt && (
                         <div>
-                          <p className="text-xs text-slate-500">Credentials Status</p>
-                          <p className="text-sm text-slate-900">
+                          <p className="text-xs font-medium text-slate-600">Credentials Status</p>
+                          <p className="text-sm text-slate-900 font-medium">
                             Sent via {detail.credentialsStatus.deliveryMethod ?? "email"} on{" "}
                             {new Date(detail.credentialsStatus.sentAt).toLocaleString()}
                           </p>
@@ -839,8 +841,8 @@ Ethio-Tech Mentorship Team`;
                     </div>
                   ) : (
                     <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center">
-                      <p className="text-sm text-slate-700">No active user account provisioned yet.</p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-sm font-semibold text-slate-800">No active user account provisioned yet.</p>
+                      <p className="text-xs font-medium text-slate-600 mt-1">
                         Once approved, you can create credentials or provision automatically.
                       </p>
                     </div>
@@ -848,21 +850,21 @@ Ethio-Tech Mentorship Team`;
                 </section>
 
                 {linkedUser && (
-                  <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                       Security & Login History
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-3">
                       <div>
-                        <p className="text-xs text-slate-500">Active Sessions</p>
+                        <p className="text-xs font-medium text-slate-600">Active Sessions</p>
                         <p className="text-xl font-bold text-slate-900">{loginHistory?.activeSessions ?? 0}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500">Last IP Address</p>
+                        <p className="text-xs font-medium text-slate-600">Last IP Address</p>
                         <p className="text-sm font-mono text-slate-900">{loginHistory?.lastLoginIp ?? "N/A"}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-slate-500">Registered Devices</p>
+                        <p className="text-xs font-medium text-slate-600">Registered Devices</p>
                         <p className="text-xl font-bold text-slate-900">{loginHistory?.devices?.length ?? 0}</p>
                       </div>
                     </div>
@@ -876,17 +878,19 @@ Ethio-Tech Mentorship Team`;
                           >
                             <div className="flex items-center gap-2.5">
                               {device.type === "mobile" ? (
-                                <Smartphone size={16} className="text-slate-500" />
+                                <Smartphone size={16} className="text-slate-600" />
                               ) : (
-                                <Monitor size={16} className="text-slate-500" />
+                                <Monitor size={16} className="text-slate-600" />
                               )}
                               <div>
-                                <span className="font-medium text-slate-900 capitalize">{device.type}</span>
-                                {device.ip && <span className="text-slate-500 ml-2">({device.ip})</span>}
+                                <span className="font-semibold text-slate-900 capitalize">{device.type}</span>
+                                {device.ip && <span className="text-slate-600 font-medium ml-2">({device.ip})</span>}
                               </div>
                             </div>
                             {device.lastUsedAt && (
-                              <span className="text-slate-500">{new Date(device.lastUsedAt).toLocaleDateString()}</span>
+                              <span className="text-slate-600 font-medium">
+                                {new Date(device.lastUsedAt).toLocaleDateString()}
+                              </span>
                             )}
                           </div>
                         ))}
@@ -899,28 +903,24 @@ Ethio-Tech Mentorship Team`;
 
             {/* Tab 4: Teaching */}
             {activeTab === "teaching" && (
-              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-6 shadow-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                   Teaching Metrics & Cohort Activity
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
                     <p className="text-2xl font-bold text-slate-900">{detail?.teaching.totalSessions ?? 0}</p>
-                    <p className="text-[11px] font-semibold text-slate-500 mt-1 uppercase tracking-wider">
-                      Total Sessions
-                    </p>
+                    <p className="text-[11px] font-bold text-slate-600 mt-1 uppercase tracking-wider">Total Sessions</p>
                   </div>
                   <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-center">
                     <p className="text-2xl font-bold text-slate-900">{detail?.teaching.studentsCount ?? 0}</p>
-                    <p className="text-[11px] font-semibold text-slate-500 mt-1 uppercase tracking-wider">
-                      Mentees Guided
-                    </p>
+                    <p className="text-[11px] font-bold text-slate-600 mt-1 uppercase tracking-wider">Mentees Guided</p>
                   </div>
                 </div>
 
                 {(detail?.teaching.sessions ?? []).length > 0 ? (
                   <div className="space-y-2">
-                    <p className="text-xs font-semibold text-slate-500">Recent Sessions:</p>
+                    <p className="text-xs font-semibold text-slate-700">Recent Sessions:</p>
                     {detail!.teaching.sessions.slice(0, 8).map((session, i) => (
                       <div
                         key={i}
@@ -942,15 +942,15 @@ Ethio-Tech Mentorship Team`;
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-slate-500">No cohort sessions recorded yet.</p>
+                  <p className="text-xs font-medium text-slate-600">No cohort sessions recorded yet.</p>
                 )}
               </section>
             )}
 
             {/* Tab 5: Audit Timeline */}
             {activeTab === "audit" && (
-              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-4 shadow-sm">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">
                   Application Audit Trail
                 </h3>
                 {id && <MentorAuditTimeline applicationId={id} />}
@@ -959,8 +959,8 @@ Ethio-Tech Mentorship Team`;
 
             {/* Review Notes Box */}
             {canReview && isAdmin && (
-              <section className="rounded-2xl border border-slate-200/80 bg-white p-6 space-y-3 shadow-sm">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500">
+              <section className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-3 shadow-sm">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700">
                   Review & Feedback Notes
                 </label>
                 <textarea
@@ -976,9 +976,9 @@ Ethio-Tech Mentorship Team`;
           {/* Right Action Sidebar */}
           <div className="space-y-4 lg:col-span-1">
             {isAdmin && app && (
-              <div className="sticky top-6 rounded-2xl border border-slate-200/80 bg-white p-5 space-y-4 shadow-sm">
+              <div className="sticky top-6 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 space-y-4 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500">Quick Actions</h3>
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-700">Quick Actions</h3>
                   {statusBadge(app.status)}
                 </div>
 

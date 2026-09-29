@@ -26,6 +26,7 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
   --color-text-danger: var(--text-danger);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);

@@ -42,27 +42,33 @@ export function MentorActionConfirmDialog({
       aria-label={title}
     >
       <div
-        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl"
+        className="w-full max-w-lg rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
-        <p className="mt-2 text-sm text-slate-600">{description}</p>
+        <h2 className="text-lg font-bold text-slate-900">{title}</h2>
+        <p className="mt-2 text-xs sm:text-sm text-slate-700 leading-relaxed">{description}</p>
 
         {requireReason && onReasonChange && (
           <textarea
             value={reason}
             onChange={(e) => onReasonChange(e.target.value)}
             placeholder={`Enter ${reasonLabel.toLowerCase()}...`}
-            className="mt-4 min-h-[100px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
+            className="mt-4 min-h-[90px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
             aria-label={reasonLabel}
           />
         )}
 
-        <div className="mt-6 flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose} disabled={loading}>
+        <div className="mt-6 flex flex-col-reverse sm:flex-row justify-end gap-2.5 sm:gap-3">
+          <Button variant="outline" size="sm" onClick={onClose} disabled={loading} className="w-full sm:w-auto">
             Cancel
           </Button>
-          <Button variant={confirmVariant} onClick={onConfirm} disabled={!canConfirm || loading}>
+          <Button
+            variant={confirmVariant}
+            size="sm"
+            onClick={onConfirm}
+            disabled={!canConfirm || loading}
+            className="w-full sm:w-auto"
+          >
             {loading ? "Processing…" : confirmLabel}
           </Button>
         </div>

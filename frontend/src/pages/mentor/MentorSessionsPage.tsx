@@ -153,11 +153,11 @@ export function MentorSessionsPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Session Management</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Schedule live classes, track attendance, and launch virtual classrooms from a calm schedule view.
             </p>
           </div>
@@ -174,19 +174,19 @@ export function MentorSessionsPage() {
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Upcoming sessions</p>
+          <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Upcoming sessions</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">{upcoming.length}</p>
         </Card>
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Past sessions</p>
+          <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Past sessions</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">{past.length}</p>
         </Card>
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Total sessions</p>
+          <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Total sessions</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">{sessions.length}</p>
         </Card>
         <Card className="border-slate-200 bg-white p-4 shadow-sm">
-          <p className="text-[10px] uppercase font-semibold tracking-wider text-slate-500">Fill rate</p>
+          <p className="text-[10px] uppercase font-bold tracking-wider text-slate-700">Fill rate</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">
             {sessions.length
               ? Math.round(
@@ -196,7 +196,7 @@ export function MentorSessionsPage() {
               : 0}
             %
           </p>
-          <p className="mt-0.5 text-[10px] text-slate-400">Enrolled learners ratio</p>
+          <p className="mt-0.5 text-[10px] font-medium text-slate-600">Enrolled learners ratio</p>
         </Card>
       </div>
 
@@ -210,7 +210,7 @@ export function MentorSessionsPage() {
               "rounded-md border px-3 py-1 text-xs capitalize transition-all font-medium",
               filter === value
                 ? "border-slate-900 bg-slate-900 text-white shadow-xs"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900",
+                : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:text-slate-900",
             )}
           >
             {value}
@@ -219,7 +219,7 @@ export function MentorSessionsPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div>
               <h2 className="text-sm font-semibold text-slate-900">{monthLabel(cursor)}</h2>
@@ -228,7 +228,7 @@ export function MentorSessionsPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 w-8 p-0 text-slate-600"
+                className="h-8 w-8 p-0 text-slate-700"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() - 1, 1))}
               >
                 <ChevronLeft size={14} />
@@ -236,7 +236,7 @@ export function MentorSessionsPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="h-8 w-8 p-0 text-slate-600"
+                className="h-8 w-8 p-0 text-slate-700"
                 onClick={() => setCursor((value) => new Date(value.getFullYear(), value.getMonth() + 1, 1))}
               >
                 <ChevronRight size={14} />
@@ -244,7 +244,7 @@ export function MentorSessionsPage() {
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] uppercase font-semibold tracking-wider text-slate-400">
+          <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-[10px] uppercase font-bold tracking-wider text-slate-600">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div key={day} className="py-1">
                 {day}
@@ -278,7 +278,7 @@ export function MentorSessionsPage() {
                           </div>
                         ))}
                         {sessionsForDay.length > 2 ? (
-                          <p className="text-[9px] text-slate-400 font-medium">+{sessionsForDay.length - 2} more</p>
+                          <p className="text-[9px] text-slate-600 font-semibold">+{sessionsForDay.length - 2} more</p>
                         ) : null}
                       </div>
                     </>
@@ -289,11 +289,11 @@ export function MentorSessionsPage() {
           </div>
         </Card>
 
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div>
               <h2 className="text-sm font-semibold text-slate-900">Live Session Queue</h2>
-              <p className="text-xs text-slate-500">Scheduled interactive classrooms</p>
+              <p className="text-xs font-medium text-slate-600">Scheduled interactive classrooms</p>
             </div>
             <Link to="/app/workspace" className="text-xs font-semibold text-primary hover:underline">
               Open workspace →
@@ -312,7 +312,7 @@ export function MentorSessionsPage() {
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="min-w-0">
                         <p className="text-xs font-semibold text-slate-900 truncate">{session.title}</p>
-                        <p className="text-[11px] text-slate-500">
+                        <p className="text-[11px] font-medium text-slate-600">
                           {session.scheduledAt ? new Date(session.scheduledAt).toLocaleString() : "TBD"}
                         </p>
                       </div>
@@ -321,7 +321,7 @@ export function MentorSessionsPage() {
                       </Badge>
                     </div>
                     <div className="mt-2.5 space-y-1.5">
-                      <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <div className="flex items-center justify-between text-[11px] font-medium text-slate-600">
                         <span>
                           {participantCount}
                           {session.maxParticipants
@@ -366,18 +366,20 @@ export function MentorSessionsPage() {
       {createOpen ? (
         <dialog
           ref={dialogRef}
-          className="fixed inset-0 z-[9998] m-auto w-full max-w-md rounded-xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/50"
+          className="fixed inset-0 z-[9998] m-auto w-[calc(100%-2rem)] max-w-md rounded-xl border border-slate-200 bg-white p-0 text-slate-900 shadow-2xl backdrop:bg-slate-900/50"
         >
-          <form onSubmit={handleCreateSubmit} className="p-6 space-y-4">
+          <form onSubmit={handleCreateSubmit} className="p-4 sm:p-6 space-y-4">
             <div className="flex items-start justify-between border-b border-slate-100 pb-3">
               <div>
                 <h2 className="text-sm font-bold text-slate-900">Create New Session</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Schedule a live classroom session for your cohort.</p>
+                <p className="text-xs font-medium text-slate-600 mt-0.5">
+                  Schedule a live classroom session for your cohort.
+                </p>
               </div>
               <button
                 type="button"
                 onClick={() => setCreateOpen(false)}
-                className="text-slate-400 hover:text-slate-700"
+                className="text-slate-500 hover:text-slate-900"
                 aria-label="Close"
               >
                 <X size={16} />
@@ -391,7 +393,7 @@ export function MentorSessionsPage() {
                   name="title"
                   required
                   maxLength={120}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
                   placeholder="e.g. Intro to Microservices & Docker"
                 />
               </label>
@@ -422,7 +424,7 @@ export function MentorSessionsPage() {
                 <Input
                   name="description"
                   maxLength={500}
-                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
                   placeholder="What will learners build?"
                 />
               </label>

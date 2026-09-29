@@ -282,7 +282,7 @@ export function AdminOperationsPage() {
   return (
     <div className="space-y-6 text-slate-900">
       {/* ─── 1. Command Center Header Banner ─── */}
-      <Card className="rounded-2xl border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
@@ -301,7 +301,7 @@ export function AdminOperationsPage() {
               </Badge>
             </div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Operations Center</h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Real-time service orchestration, infrastructure readiness, connection telemetry, and security audit
               streams.
             </p>
@@ -311,7 +311,7 @@ export function AdminOperationsPage() {
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             {/* Auto-refresh interval dropdown */}
             <div className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs text-slate-600">
-              <Clock size={12} className="text-slate-500" />
+              <Clock size={12} className="text-slate-600" />
               <span>Poll:</span>
               <select
                 aria-label="Select Telemetry Polling Interval"
@@ -353,7 +353,7 @@ export function AdminOperationsPage() {
 
         {/* Diagnostic Utility Buttons Bar */}
         <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3.5">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-700 mr-1 flex items-center gap-1">
             <Terminal size={12} className="text-slate-900" />
             Diagnostics:
           </span>
@@ -396,7 +396,7 @@ export function AdminOperationsPage() {
               <Server className="text-slate-900" size={15} />
               Services Health Grid
             </h2>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs font-medium text-slate-600">
               Heartbeat monitoring across application server, persistence engine, and WebSocket gateways
             </p>
           </div>
@@ -429,20 +429,20 @@ export function AdminOperationsPage() {
                   </div>
 
                   <h3 className="mt-3 text-xs font-bold text-slate-900">{svc.name}</h3>
-                  <p className="text-[10px] font-medium text-slate-500">{svc.category}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-slate-600 line-clamp-2">{svc.description}</p>
+                  <p className="text-[10px] font-semibold text-slate-600">{svc.category}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-slate-700 line-clamp-2">{svc.description}</p>
                 </div>
 
                 <div className="mt-3 space-y-1.5 border-t border-slate-100 pt-2.5">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 text-[11px]">Latency:</span>
+                    <span className="text-slate-600 font-medium text-[11px]">Latency:</span>
                     <span className="font-semibold text-slate-900">{svc.latency}</span>
                   </div>
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 text-[11px]">Load:</span>
+                    <span className="text-slate-600 font-medium text-[11px]">Load:</span>
                     <span className="font-semibold text-slate-900">{svc.throughput}</span>
                   </div>
-                  <div className="flex items-center justify-between text-[11px] text-slate-500">
+                  <div className="flex items-center justify-between text-[11px] font-medium text-slate-600">
                     <span className="truncate max-w-[110px]">{svc.versionOrRegion}</span>
                     <CheckCircle2 size={12} className="text-slate-900 shrink-0" />
                   </div>
@@ -460,7 +460,7 @@ export function AdminOperationsPage() {
             <Activity className="text-slate-900" size={15} />
             Live Resource Telemetry
           </h2>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs font-medium text-slate-600">
             Runtime environment, database connection status, socket concurrency, and security controls
           </p>
         </div>
@@ -469,7 +469,7 @@ export function AdminOperationsPage() {
           {/* Telemetry 1: API Server Runtime */}
           <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-700">
                 Application Server
               </span>
               <Cpu size={14} className="text-slate-900" />
@@ -479,7 +479,7 @@ export function AdminOperationsPage() {
                 {health.live?.status === "OK" ? "Operational" : "Active"}
               </span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] font-medium text-slate-600 border-t border-slate-100 pt-2">
               <span>API Version: {health.live?.version ?? "v1"}</span>
               <span className="text-slate-900 font-medium">Node.js</span>
             </div>
@@ -488,7 +488,7 @@ export function AdminOperationsPage() {
           {/* Telemetry 2: Database Connection */}
           <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Database Store</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-700">Database Store</span>
               <Database size={14} className="text-slate-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
@@ -496,7 +496,7 @@ export function AdminOperationsPage() {
                 {health.ready?.database ?? "Connected"}
               </span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] font-medium text-slate-600 border-t border-slate-100 pt-2">
               <span>State: {health.ready?.status ?? "ready"}</span>
               <span className="text-slate-900 font-medium">Mongoose</span>
             </div>
@@ -505,16 +505,16 @@ export function AdminOperationsPage() {
           {/* Telemetry 3: Socket Concurrency */}
           <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-700">
                 Socket Concurrency
               </span>
               <Wifi size={14} className="text-slate-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">{health.realtime?.activeSockets ?? 0}</span>
-              <span className="text-xs text-slate-500">Active Connections</span>
+              <span className="text-xs font-medium text-slate-600">Active Connections</span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] font-medium text-slate-600 border-t border-slate-100 pt-2">
               <span>
                 Rooms: <strong className="text-slate-700">{health.realtime?.rooms ?? 0}</strong>
               </span>
@@ -525,14 +525,14 @@ export function AdminOperationsPage() {
           {/* Telemetry 4: Security Shield & Request Volume */}
           <Card className="rounded-xl border-slate-200/80 bg-white p-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Security Shield</span>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-700">Security Shield</span>
               <ShieldCheck size={14} className="text-slate-900" />
             </div>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="text-xl font-bold text-slate-900">Protected</span>
-              <span className="text-xs text-slate-500">RBAC Active</span>
+              <span className="text-xs font-medium text-slate-600">RBAC Active</span>
             </div>
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-2">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] font-medium text-slate-600 border-t border-slate-100 pt-2">
               <span>Rate Limiting: Active</span>
               <span className="text-slate-900 font-medium">JWT Secure</span>
             </div>
@@ -541,14 +541,14 @@ export function AdminOperationsPage() {
       </div>
 
       {/* ─── 4. Searchable & Filterable Security Audit Log Stream ─── */}
-      <Card className="rounded-2xl border-slate-200/80 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="rounded-2xl border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between border-b border-slate-100 pb-3.5">
           <div>
             <div className="flex items-center gap-2">
               <FileClock size={15} className="text-slate-900" />
               <CardTitle className="text-sm font-semibold text-slate-900">Privileged Security Audit Stream</CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-500 mt-0.5">
+            <CardDescription className="text-xs font-medium text-slate-600 mt-0.5">
               Tamper-evident logs of privileged administrative actions, role escalations, and system events.
             </CardDescription>
           </div>
@@ -574,13 +574,13 @@ export function AdminOperationsPage() {
         <div className="mt-4 flex flex-col gap-2.5 rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 md:flex-row md:items-center md:justify-between">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={13} />
             <input
               type="text"
               placeholder="Search action, actor, resource ID, or IP..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-8 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-colors"
+              className="h-8 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-900 placeholder:text-slate-500 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900 transition-colors"
             />
           </div>
 
@@ -673,13 +673,13 @@ export function AdminOperationsPage() {
                           >
                             {method}
                           </span>
-                          <span className="text-[11px] text-slate-500 font-mono">
+                          <span className="text-[11px] font-mono text-slate-600 font-medium">
                             {log.resource}
                             {log.resourceId ? ` • #${log.resourceId}` : ""}
                           </span>
                         </div>
                         {log.metadata?.reason ? (
-                          <p className="mt-0.5 text-xs text-slate-500 italic">
+                          <p className="mt-0.5 text-xs text-slate-600 font-medium italic">
                             &ldquo;{String(log.metadata.reason)}&rdquo;
                           </p>
                         ) : null}
@@ -687,13 +687,15 @@ export function AdminOperationsPage() {
                     </div>
 
                     {/* Right: Actor & IP & Timestamp */}
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
                       <div className="flex items-center gap-1.5">
                         <div className="flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 text-[10px] font-bold text-slate-700">
                           {log.actor?.fullName ? log.actor.fullName.charAt(0) : "S"}
                         </div>
                         <div>
-                          <p className="font-medium text-slate-800 text-xs">{log.actor?.fullName ?? "System Worker"}</p>
+                          <p className="font-semibold text-slate-900 text-xs">
+                            {log.actor?.fullName ?? "System Worker"}
+                          </p>
                         </div>
                         <Badge variant={roleBadgeVariant} size="sm">
                           {log.actor?.role ?? "system"}
@@ -701,13 +703,13 @@ export function AdminOperationsPage() {
                       </div>
 
                       {log.ip ? (
-                        <div className="flex items-center gap-1 text-slate-500 font-mono text-[11px]">
-                          <Globe size={11} className="text-slate-400" />
+                        <div className="flex items-center gap-1 text-slate-600 font-mono text-[11px]">
+                          <Globe size={11} className="text-slate-500" />
                           <span>{log.ip}</span>
                         </div>
                       ) : null}
 
-                      <div className="flex items-center gap-1 text-slate-500 text-[11px]">
+                      <div className="flex items-center gap-1 text-slate-600 font-medium text-[11px]">
                         <Clock size={11} />
                         <span>
                           {log.createdAt
@@ -775,7 +777,7 @@ export function AdminOperationsPage() {
             <h3 className="mt-2 text-xs font-semibold text-slate-900">
               {allLogs.length === 0 ? "No administrative audit events recorded yet" : "No audit records match filters"}
             </h3>
-            <p className="mt-0.5 text-xs text-slate-500">
+            <p className="mt-0.5 text-xs font-medium text-slate-600">
               {allLogs.length === 0
                 ? "Administrative actions and role permissions will automatically be recorded here."
                 : "Try adjusting your search query or reset category and role filters."}

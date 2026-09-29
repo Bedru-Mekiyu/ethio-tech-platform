@@ -6,10 +6,10 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Card({ className, variant = "default", children, ...props }: CardProps) {
   const variants = {
-    default: "card-surface p-6",
-    elevated: "card-surface p-6 shadow-[var(--shadow-lg)] border-[var(--border-strong)]",
-    interactive: "card-surface p-6 card-interactive",
-    ghost: "rounded-[var(--radius-2xl)] border border-transparent bg-transparent p-6",
+    default: "card-surface p-4 sm:p-5 md:p-6",
+    elevated: "card-surface p-4 sm:p-5 md:p-6 shadow-[var(--shadow-lg)] border-[var(--border-strong)]",
+    interactive: "card-surface p-4 sm:p-5 md:p-6 card-interactive",
+    ghost: "rounded-[var(--radius-2xl)] border border-transparent bg-transparent p-4 sm:p-5 md:p-6",
   };
 
   return (
@@ -20,17 +20,25 @@ export function Card({ className, variant = "default", children, ...props }: Car
 }
 
 export function CardHeader({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <div className={cn("mb-4 flex items-center justify-between gap-4", className)}>{children}</div>;
+  return (
+    <div className={cn("mb-3 sm:mb-4 flex flex-wrap items-center justify-between gap-3", className)}>{children}</div>
+  );
 }
 
 export function CardTitle({ className, children }: { className?: string; children: React.ReactNode }) {
   return (
-    <h3 className={cn("text-sm font-semibold tracking-tight text-[var(--text-primary)]", className)}>{children}</h3>
+    <h3 className={cn("text-sm sm:text-base font-semibold tracking-tight text-[var(--text-primary)]", className)}>
+      {children}
+    </h3>
   );
 }
 
 export function CardDescription({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <p className={cn("mt-0.5 text-xs leading-relaxed text-[var(--text-secondary)]", className)}>{children}</p>;
+  return (
+    <p className={cn("mt-0.5 text-xs sm:text-sm leading-relaxed text-[var(--text-secondary)]", className)}>
+      {children}
+    </p>
+  );
 }
 
 export function CardContent({ className, children }: { className?: string; children: React.ReactNode }) {

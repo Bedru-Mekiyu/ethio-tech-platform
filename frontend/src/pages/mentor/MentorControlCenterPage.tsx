@@ -410,11 +410,11 @@ export default function MentorControlCenterPage() {
 
       <div className="grid gap-3 sm:grid-cols-3">
         <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Waiting students</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Waiting students</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">
             {meetingStatus === "waiting_for_host" || meetingStatus === "scheduled" ? Math.max(0, presenceCount) : 0}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-slate-600 font-medium">
             {meetingStatus === "waiting_for_host"
               ? "Students are ready for you to start."
               : meetingStatus === "scheduled"
@@ -423,14 +423,14 @@ export default function MentorControlCenterPage() {
           </p>
         </Card>
         <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">In-room participants</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700">In-room participants</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900">{overview?.liveParticipants ?? 0}</p>
-          <p className="mt-0.5 text-xs text-slate-500">Active learners in the live classroom.</p>
+          <p className="mt-0.5 text-xs text-slate-600 font-medium">Active learners in the live classroom.</p>
         </Card>
         <Card className="border-slate-200/80 bg-white p-4 shadow-sm">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Meeting status</p>
+          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700">Meeting status</p>
           <p className="mt-1.5 text-xl font-bold text-slate-900 capitalize">{meetingStatus.replace("_", " ")}</p>
-          <p className="mt-0.5 text-xs text-slate-500">Live status synchronized across all devices.</p>
+          <p className="mt-0.5 text-xs text-slate-600 font-medium">Live status synchronized across all devices.</p>
         </Card>
       </div>
 
@@ -442,37 +442,77 @@ export default function MentorControlCenterPage() {
       {/* Main workspace tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList
-          className="mcc-tabs-list w-full overflow-x-auto flex-nowrap shrink-0 mb-4"
+          className="mcc-tabs-list w-full overflow-x-auto flex-nowrap shrink-0 mb-4 p-1 rounded-xl bg-slate-100 border border-slate-200"
           aria-label="Control center panels"
         >
-          <TabsTrigger value="overview" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 1">
+          <TabsTrigger
+            value="overview"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 1"
+          >
             Overview
           </TabsTrigger>
-          <TabsTrigger value="participants" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 2">
+          <TabsTrigger
+            value="participants"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 2"
+          >
             Participants ({overview?.liveParticipants})
           </TabsTrigger>
-          <TabsTrigger value="chat" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 3">
+          <TabsTrigger
+            value="chat"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 3"
+          >
             Live Chat
           </TabsTrigger>
-          <TabsTrigger value="questions" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 4">
+          <TabsTrigger
+            value="questions"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 4"
+          >
             Q&A ({overview?.questionsWaiting})
           </TabsTrigger>
-          <TabsTrigger value="polls" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 5">
+          <TabsTrigger
+            value="polls"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 5"
+          >
             Polls ({overview?.activePolls})
           </TabsTrigger>
-          <TabsTrigger value="resources" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 6">
+          <TabsTrigger
+            value="resources"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 6"
+          >
             Resources
           </TabsTrigger>
-          <TabsTrigger value="recordings" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 7">
+          <TabsTrigger
+            value="recordings"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 7"
+          >
             Playbacks
           </TabsTrigger>
-          <TabsTrigger value="notes" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 8">
+          <TabsTrigger
+            value="notes"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 8"
+          >
             Class Notes
           </TabsTrigger>
-          <TabsTrigger value="engagement" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 9">
+          <TabsTrigger
+            value="engagement"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 9"
+          >
             Engagement
           </TabsTrigger>
-          <TabsTrigger value="alerts" className="mcc-tabs-trigger text-xs py-2 px-4" title="Press 0">
+          <TabsTrigger
+            value="alerts"
+            className="mcc-tabs-trigger text-xs py-2 px-3 sm:px-4 whitespace-nowrap shrink-0"
+            title="Press 0"
+          >
             Alerts
           </TabsTrigger>
         </TabsList>
@@ -511,7 +551,7 @@ export default function MentorControlCenterPage() {
                       </div>
                     ))}
                     {(!data?.participants || data.participants.length === 0) && (
-                      <p className="text-xs text-slate-400 text-center py-4">No participants online</p>
+                      <p className="text-xs font-medium text-slate-600 text-center py-4">No participants online</p>
                     )}
                   </div>
                   {data?.participants && data.participants.length > 5 && (

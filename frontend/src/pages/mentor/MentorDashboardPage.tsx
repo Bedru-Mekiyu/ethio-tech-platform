@@ -189,7 +189,7 @@ export function MentorDashboardPage() {
       className="space-y-8 text-slate-900"
     >
       {/* Top Mentor Banner */}
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
             <div className="flex items-center gap-2">
@@ -199,12 +199,14 @@ export function MentorDashboardPage() {
               >
                 <Star size={12} className="text-amber-500 fill-amber-400" /> Lead Mentor
               </Badge>
-              <span className="text-xs text-slate-400 font-mono">ID: {user?.id?.slice(-6) ?? "MEN-99"}</span>
+              <span className="text-xs text-slate-600 font-mono font-medium">
+                ID: {user?.id?.slice(-6) ?? "MEN-99"}
+              </span>
             </div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Mentor Command Center, {firstName}
             </h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Track student progress, grade submissions queue, and manage interactive LiveKit classrooms.
             </p>
           </div>
@@ -241,20 +243,20 @@ export function MentorDashboardPage() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Mentor Rating</span>
+            <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Mentor Rating</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-50 text-amber-600 border border-amber-100">
               <Star size={15} className="fill-amber-400" />
             </div>
           </div>
           <p className="mt-2 text-xl font-bold text-slate-900">{mentorScore ? `${mentorScore}/100` : "—"}</p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs font-medium text-slate-600">
             {mentorScore ? "Verified mentor evaluation" : "Awaiting student reviews"}
           </p>
         </Card>
 
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Cohort Engagement</span>
+            <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Cohort Engagement</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
               <Users size={15} />
             </div>
@@ -264,7 +266,7 @@ export function MentorDashboardPage() {
               ? `${Math.round(dashboard.contributionMetrics.engagement)}%`
               : "—"}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs font-medium text-slate-600">
             {dashboard?.activeStudents !== undefined
               ? `${dashboard.activeStudents} active mentees`
               : "Assigned cohort mentees"}
@@ -273,13 +275,13 @@ export function MentorDashboardPage() {
 
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Submissions Queue</span>
+            <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">Submissions Queue</span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
               <FileCheck size={15} />
             </div>
           </div>
           <p className="mt-2 text-xl font-bold text-slate-900">{pendingSubmissions.length}</p>
-          <p className="mt-0.5 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs font-medium text-slate-600">
             {pendingSubmissions.length === 1
               ? "1 project awaiting review"
               : `${pendingSubmissions.length} projects awaiting review`}
@@ -288,7 +290,7 @@ export function MentorDashboardPage() {
 
         <Card className="border-slate-200 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wider">
               Sessions Delivered
             </span>
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200">
@@ -298,7 +300,7 @@ export function MentorDashboardPage() {
           <p className="mt-2 text-xl font-bold text-slate-900">
             {dashboard?.mentor?.totalSessions ?? dashboard?.mySessions?.length ?? 0}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">Live classrooms delivered</p>
+          <p className="mt-0.5 text-xs font-medium text-slate-600">Live classrooms delivered</p>
         </Card>
       </div>
 
@@ -306,11 +308,13 @@ export function MentorDashboardPage() {
       <div className="grid gap-6 lg:grid-cols-12 items-start">
         {/* Left 7 Columns: Upcoming Teaching Sessions */}
         <div className="lg:col-span-7 space-y-6">
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-slate-900">Upcoming Teaching Sessions</h2>
-                <p className="text-xs text-slate-500">LiveKit interactive rooms with attendance verification</p>
+                <p className="text-xs font-medium text-slate-600">
+                  LiveKit interactive rooms with attendance verification
+                </p>
               </div>
               <Link
                 to="/mentor/sessions"
@@ -347,9 +351,9 @@ export function MentorDashboardPage() {
                       </div>
                       <div className="space-y-0.5 min-w-0">
                         <p className="text-xs font-semibold text-slate-900 truncate">{session.title}</p>
-                        <div className="flex items-center gap-2 text-[11px] text-slate-500">
+                        <div className="flex items-center gap-2 text-[11px] font-medium text-slate-600">
                           <span className="flex items-center gap-1">
-                            <Calendar size={11} className="text-slate-400" />
+                            <Calendar size={11} className="text-slate-500" />
                             {new Date(session.scheduledAt).toLocaleDateString([], {
                               month: "short",
                               day: "numeric",
@@ -357,7 +361,7 @@ export function MentorDashboardPage() {
                           </span>
                           <span>•</span>
                           <span className="flex items-center gap-1">
-                            <Clock3 size={11} className="text-slate-400" />
+                            <Clock3 size={11} className="text-slate-500" />
                             {new Date(session.scheduledAt).toLocaleTimeString([], {
                               hour: "2-digit",
                               minute: "2-digit",
@@ -383,8 +387,8 @@ export function MentorDashboardPage() {
                 ))
               ) : (
                 <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
-                  <Clock3 size={28} className="mx-auto text-slate-300 mb-2" />
-                  <p className="text-xs text-slate-500">No upcoming live classrooms scheduled</p>
+                  <Clock3 size={28} className="mx-auto text-slate-400 mb-2" />
+                  <p className="text-xs font-medium text-slate-600">No upcoming live classrooms scheduled</p>
                   <Link to="/mentor/sessions">
                     <Button size="sm" variant="outline" className="mt-3 text-xs">
                       Schedule New Session
@@ -396,11 +400,11 @@ export function MentorDashboardPage() {
           </Card>
 
           {/* Mentor Impact & Teaching Analytics Widget */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-slate-900">Cohort Retention & Impact</h2>
-                <p className="text-xs text-slate-500">Measured over the last 30 active days</p>
+                <p className="text-xs font-medium text-slate-600">Measured over the last 30 active days</p>
               </div>
               <Link to="/mentor/students" className="text-xs font-semibold text-primary hover:underline">
                 View Students →
@@ -409,13 +413,13 @@ export function MentorDashboardPage() {
 
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Session Quality</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Session Quality</span>
                 <p className="text-lg font-bold text-slate-900">{impact ? `${impact}%` : "—"}</p>
                 <ProgressBar value={impact ?? 0} max={100} className="mt-1.5 h-1" />
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Reviews Delivered</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Reviews Delivered</span>
                 <p className="text-lg font-bold text-slate-900">
                   {dashboard?.contributionMetrics?.feedbackCount
                     ? `${dashboard.contributionMetrics.feedbackCount} reviews`
@@ -429,7 +433,7 @@ export function MentorDashboardPage() {
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50/60 p-3.5 space-y-1">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Mentee Engagement</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Mentee Engagement</span>
                 <p className="text-lg font-bold text-slate-900">
                   {dashboard?.contributionMetrics?.engagement
                     ? `${Math.round(dashboard.contributionMetrics.engagement)}%`
@@ -443,11 +447,13 @@ export function MentorDashboardPage() {
 
         {/* Right 5 Columns: Student Submissions Queue */}
         <div className="lg:col-span-5 space-y-6">
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-xs">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-xs">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3.5">
               <div>
                 <h2 className="text-sm font-semibold text-slate-900">Student Submissions Queue</h2>
-                <p className="text-xs text-slate-500">{pendingSubmissions.length} projects pending code review</p>
+                <p className="text-xs font-medium text-slate-600">
+                  {pendingSubmissions.length} projects pending code review
+                </p>
               </div>
               <Link to="/mentor/reviews" className="text-xs font-semibold text-primary hover:underline">
                 View All →
@@ -467,12 +473,16 @@ export function MentorDashboardPage() {
                           <span className="text-xs font-semibold text-slate-900 truncate">
                             {sub.student?.fullName ?? "Learner"}
                           </span>
-                          <span className="text-[10px] text-slate-400 font-mono truncate">{sub.student?.email}</span>
+                          <span className="text-[10px] text-slate-600 font-mono font-medium truncate">
+                            {sub.student?.email}
+                          </span>
                         </div>
                         <p className="text-xs font-semibold text-slate-900 truncate">
                           {sub.project?.title ?? "Track Project Submission"}
                         </p>
-                        <p className="text-[11px] text-slate-500">Track: {sub.project?.track?.title ?? "Core Track"}</p>
+                        <p className="text-[11px] font-medium text-slate-600">
+                          Track: {sub.project?.track?.title ?? "Core Track"}
+                        </p>
                       </div>
 
                       <Badge variant="warning" className="text-[10px] py-0 px-1.5 shrink-0">
@@ -481,7 +491,7 @@ export function MentorDashboardPage() {
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-slate-200">
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] font-medium text-slate-600">
                         Submitted: {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "Recently"}
                       </span>
                       <Link to="/mentor/reviews">
@@ -496,8 +506,10 @@ export function MentorDashboardPage() {
               ) : (
                 <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-slate-50/50">
                   <FileCheck size={28} className="mx-auto text-slate-400 mb-2" />
-                  <p className="text-xs font-medium text-slate-700">Review queue is clear</p>
-                  <p className="mt-0.5 text-[11px] text-slate-500">No student submissions awaiting code review.</p>
+                  <p className="text-xs font-semibold text-slate-800">Review queue is clear</p>
+                  <p className="mt-0.5 text-[11px] font-medium text-slate-600">
+                    No student submissions awaiting code review.
+                  </p>
                 </div>
               )}
             </div>
@@ -515,7 +527,7 @@ export function MentorDashboardPage() {
                   <Users size={14} className="text-slate-900" />
                   <span>My Students Directory</span>
                 </div>
-                <ChevronRight size={13} className="text-slate-400" />
+                <ChevronRight size={13} className="text-slate-500" />
               </Link>
 
               <Link
@@ -526,7 +538,7 @@ export function MentorDashboardPage() {
                   <Clock size={14} className="text-amber-500" />
                   <span>Set Office Hours & Availability</span>
                 </div>
-                <ChevronRight size={13} className="text-slate-400" />
+                <ChevronRight size={13} className="text-slate-500" />
               </Link>
 
               <Link
@@ -537,7 +549,7 @@ export function MentorDashboardPage() {
                   <FileCheck size={14} className="text-slate-900" />
                   <span>Student Code Review Queue</span>
                 </div>
-                <ChevronRight size={13} className="text-slate-400" />
+                <ChevronRight size={13} className="text-slate-500" />
               </Link>
             </div>
           </Card>

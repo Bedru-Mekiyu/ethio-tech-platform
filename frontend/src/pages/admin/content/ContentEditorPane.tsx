@@ -292,7 +292,7 @@ export function ContentEditorPane({
       <div className="border-b border-slate-200/80 p-4 bg-white shadow-2xs">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 text-xs text-slate-500 min-w-0 flex-1">
+          <div className="flex items-center gap-2 text-xs text-slate-600 min-w-0 flex-1">
             <span className="flex items-center gap-1 font-semibold text-slate-900 truncate">
               {isEditingTrack && <BookOpen size={14} className="text-slate-900 shrink-0" />}
               {isEditingModule && <FolderOpen size={14} className="text-slate-900 shrink-0" />}
@@ -301,16 +301,16 @@ export function ContentEditorPane({
                 (selection.type === "new-track" ? "Tracks / New Track" : selectedTrack?.title || "Track Configuration")}
               {isEditingModule && (
                 <>
-                  <span className="text-slate-500">{selectedTrack?.title}</span>
+                  <span className="text-slate-600 font-medium">{selectedTrack?.title}</span>
                   <ChevronRight size={12} className="text-slate-400" />
                   <span>{selectedModule?.title || "New Module"}</span>
                 </>
               )}
               {isEditingLesson && (
                 <>
-                  <span className="text-slate-500 hidden sm:inline">{selectedTrack?.title}</span>
+                  <span className="text-slate-600 font-medium hidden sm:inline">{selectedTrack?.title}</span>
                   <ChevronRight size={12} className="hidden sm:inline text-slate-400" />
-                  <span className="text-slate-500">{selectedModule?.title}</span>
+                  <span className="text-slate-600 font-medium">{selectedModule?.title}</span>
                   <ChevronRight size={12} className="text-slate-400" />
                   <span>{selectedLesson?.title || "New Lesson"}</span>
                 </>
@@ -318,15 +318,15 @@ export function ContentEditorPane({
             </span>
 
             {/* Unsaved status */}
-            <div className="ml-2 flex items-center gap-1.5">
+            <div className="ml-2 flex items-center gap-1.5 shrink-0">
               {isDirty ? (
-                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-600">
+                <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
                   Unsaved changes
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 text-[10px] text-slate-500">
-                  <CheckCircle2 size={11} className="text-slate-900" />
+                <span className="inline-flex items-center gap-1 text-[10px] text-slate-600 font-medium">
+                  <CheckCircle2 size={12} className="text-slate-900" />
                   Saved
                 </span>
               )}

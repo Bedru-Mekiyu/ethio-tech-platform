@@ -247,15 +247,15 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-1 items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div className="flex flex-1 items-center gap-2 sm:gap-3">
           <div className="relative flex-1 max-w-md">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <Input
               value={searchInput}
               onChange={(e) => handleSearch(e.target.value)}
               placeholder="Search by name, email, city, company..."
-              className="pl-9 h-9 text-xs rounded-lg border-slate-200 bg-white text-slate-900"
+              className="pl-9 h-9 text-xs rounded-xl border-slate-200 bg-white text-slate-900"
               aria-label="Search users"
             />
           </div>
@@ -265,7 +265,7 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             onClick={() => setShowFilters(!showFilters)}
             aria-pressed={showFilters}
             aria-label="Toggle filters"
-            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9 text-xs"
+            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9 text-xs rounded-xl"
           >
             <Filter size={14} className="mr-1.5" />
             Filters
@@ -280,14 +280,14 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
             size="sm"
             onClick={() => refetch()}
             aria-label="Refresh"
-            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9"
+            className="border-slate-200 text-slate-700 hover:text-slate-900 h-9 rounded-xl"
           >
             <RefreshCw size={14} />
           </Button>
         </div>
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 justify-between sm:justify-end">
           <select
-            className="h-9 rounded-lg border border-slate-200 bg-white px-2.5 text-xs text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-xs"
+            className="h-9 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 shadow-xs"
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
@@ -312,9 +312,9 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               adminUserService.exportUsers(params);
             }}
             aria-label="Export users"
-            className="border-slate-200 text-slate-700 hover:text-slate-900"
+            className="border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl"
           >
-            <Download size={16} className="mr-2" />
+            <Download size={14} className="mr-1.5" />
             Export
           </Button>
         </div>
@@ -396,24 +396,18 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
                   aria-label={allSelected ? "Deselect all" : "Select all"}
                 />
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">User</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">Role</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-                Status
-              </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">XP</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">Track</th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-                Joined
-              </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">User</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Role</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Status</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">XP</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Track</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Joined</th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
                 Last Login
               </th>
-              <th className="px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-                Verified
-              </th>
+              <th className="px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">Verified</th>
               {showActions && (
-                <th className="w-20 px-3.5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <th className="w-20 px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-700">
                   Actions
                 </th>
               )}
@@ -565,8 +559,8 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
         </table>
       </div>
 
-      <div className="flex items-center justify-between">
-        <p className="text-xs text-slate-500">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <p className="text-xs text-slate-700 font-medium">
           {pagination ? `Page ${pagination.page} of ${pagination.totalPages} (${pagination.total} total)` : ""}
         </p>
         <div className="flex items-center gap-2">

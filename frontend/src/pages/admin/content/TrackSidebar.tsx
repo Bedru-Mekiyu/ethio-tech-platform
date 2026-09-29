@@ -236,7 +236,7 @@ export function TrackSidebar({
                     <h3
                       className={cn(
                         "text-xs font-semibold leading-tight line-clamp-1 transition-colors",
-                        isSelected ? "text-zinc-950 font-bold" : "text-slate-800 group-hover:text-slate-900",
+                        isSelected ? "text-slate-950 font-bold" : "text-slate-900 group-hover:text-slate-950",
                       )}
                     >
                       {track.title}
@@ -245,11 +245,11 @@ export function TrackSidebar({
                 </div>
 
                 {track.description && (
-                  <p className="mt-1 text-[11px] text-slate-500 line-clamp-1">{track.description}</p>
+                  <p className="mt-1 text-[11px] text-slate-600 line-clamp-1">{track.description}</p>
                 )}
 
-                <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
-                  <span className="flex items-center gap-1 text-slate-700 font-medium">
+                <div className="mt-2.5 flex flex-wrap items-center gap-2 text-[10px] text-slate-600">
+                  <span className="flex items-center gap-1 text-slate-800 font-semibold">
                     <Layers size={11} className="text-slate-600" />
                     {moduleCount} {moduleCount === 1 ? "module" : "mods"}
                   </span>

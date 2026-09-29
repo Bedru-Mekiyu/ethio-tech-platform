@@ -151,13 +151,13 @@ function StatCard({
       role="button"
       tabIndex={0}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
-      className={`cursor-pointer rounded-xl border p-4 transition-all duration-200 shadow-xs ${
+      className={`cursor-pointer rounded-2xl border p-3.5 sm:p-4 transition-all duration-200 shadow-xs ${
         active
           ? "border-slate-900 bg-slate-100 text-slate-900 ring-1 ring-slate-900/10"
           : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/50"
       }`}
     >
-      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">{label}</p>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-700">{label}</p>
       <p className="mt-1.5 text-xl font-bold text-slate-900 font-mono">{count}</p>
     </div>
   );
@@ -199,21 +199,21 @@ function ApplicationCard({
 
   return (
     <Card
-      className={`group relative space-y-4 rounded-2xl border p-5 transition-all duration-200 shadow-xs ${
+      className={`group relative space-y-4 rounded-2xl border p-4 sm:p-5 transition-all duration-200 shadow-xs ${
         selected
           ? "border-slate-900 bg-slate-50 ring-1 ring-slate-900/20"
           : "border-slate-200/80 bg-white hover:border-slate-300 hover:bg-slate-50/40"
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-3 min-w-0 flex-1">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onToggleSelect(application._id);
             }}
-            className="mt-1 text-slate-400 hover:text-slate-900 transition-colors"
+            className="mt-1 text-slate-400 hover:text-slate-900 transition-colors shrink-0"
             aria-label={selected ? "Deselect applicant" : "Select applicant"}
           >
             {selected ? (
@@ -228,21 +228,21 @@ function ApplicationCard({
             role="button"
             tabIndex={0}
             onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onOpen(application._id)}
-            className="cursor-pointer"
+            className="cursor-pointer min-w-0 flex-1"
           >
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-semibold text-slate-900 group-hover:text-primary transition-colors">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
                 {application.fullName}
               </h3>
               <Badge variant={rubric.variant} className="text-[11px] gap-1">
                 <Sparkles size={11} /> {rubric.percentage}% Match
               </Badge>
             </div>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs sm:text-sm text-slate-700 font-medium">
               {application.currentRole}
               {application.currentCompany ? ` • ${application.currentCompany}` : ""}
             </p>
-            <p className="text-xs text-slate-500 mt-0.5">{application.email}</p>
+            <p className="text-xs text-slate-600 mt-0.5">{application.email}</p>
           </div>
         </div>
 
@@ -370,23 +370,33 @@ function ApplicationCard({
       {canAct && (
         <div className="pt-2 border-t border-slate-100 space-y-3" onClick={(e) => e.stopPropagation()}>
           <div>
-            <label className="mb-1.5 block text-xs uppercase tracking-wider text-slate-500 font-medium">
+            <label className="mb-1.5 block text-xs uppercase tracking-wider text-slate-700 font-bold">
               Review notes & rubric feedback
             </label>
             <textarea
               value={reviewNotes}
               onChange={(e) => onReviewNotesChange(application._id, e.target.value)}
               placeholder="Add feedback, approval remarks, or specific information requested..."
-              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
+              className="min-h-[70px] w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-900 outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 resize-y"
               aria-label="Review notes"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
-            <Button size="sm" variant="primary" onClick={() => onApprove(application._id)} className="gap-1.5">
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() => onApprove(application._id)}
+              className="gap-1.5 flex-1 sm:flex-none"
+            >
               <CheckCircle2 size={15} /> Approve
             </Button>
-            <Button size="sm" variant="danger" onClick={() => onReject(application._id)} className="gap-1.5">
+            <Button
+              size="sm"
+              variant="danger"
+              onClick={() => onReject(application._id)}
+              className="gap-1.5 flex-1 sm:flex-none"
+            >
               <XCircle size={15} /> Reject
             </Button>
             {isPending && (
@@ -394,7 +404,7 @@ function ApplicationCard({
                 size="sm"
                 variant="outline"
                 onClick={() => onRequestChanges(application._id)}
-                className="gap-1.5 border-slate-200 text-slate-700"
+                className="gap-1.5 border-slate-200 text-slate-700 flex-1 sm:flex-none"
               >
                 <FileText size={15} /> Request Info
               </Button>
@@ -403,7 +413,7 @@ function ApplicationCard({
               size="sm"
               variant="outline"
               onClick={() => onOpen(application._id)}
-              className="border-slate-200 text-slate-700"
+              className="border-slate-200 text-slate-700 flex-1 sm:flex-none"
             >
               View Full Profile
             </Button>

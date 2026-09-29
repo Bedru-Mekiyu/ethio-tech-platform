@@ -7,8 +7,8 @@ export const Input = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTML
       <input
         ref={ref}
         className={cn(
-          "h-11 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 text-sm text-[var(--text-primary)]",
-          "placeholder:text-[var(--text-muted)]",
+          "h-10 sm:h-11 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-3.5 sm:px-4 text-xs sm:text-sm text-[var(--text-primary)]",
+          "placeholder:text-[var(--text-subtle)]",
           "transition-[border-color,box-shadow] duration-200",
           "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
@@ -29,8 +29,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttrib
       <textarea
         ref={ref}
         className={cn(
-          "min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-4 py-3 text-sm text-[var(--text-primary)]",
-          "placeholder:text-[var(--text-muted)]",
+          "min-h-[100px] sm:min-h-[120px] w-full rounded-xl border border-[var(--border)] bg-[var(--bg-input)] px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm text-[var(--text-primary)]",
+          "placeholder:text-[var(--text-subtle)]",
           "transition-[border-color,box-shadow] duration-200",
           "focus:border-[var(--border-focus)] focus:outline-none focus:shadow-[var(--shadow-input-focus)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
@@ -59,7 +59,10 @@ export function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={cn("mb-1.5 block text-sm font-medium tracking-[0.01em] text-[var(--text-primary)]", className)}
+      className={cn(
+        "mb-1.5 block text-xs sm:text-sm font-semibold tracking-[0.01em] text-[var(--text-primary)]",
+        className,
+      )}
     >
       {children}
       {required && <span className="ml-0.5 text-danger">*</span>}

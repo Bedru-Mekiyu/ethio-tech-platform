@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Spinner } from "./spinner";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center gap-2 rounded-lg border border-transparent font-medium tracking-[0.01em] transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer",
+  "relative inline-flex items-center justify-center gap-2 rounded-xl border border-transparent font-medium tracking-[0.01em] transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer whitespace-nowrap shrink-0",
   {
     variants: {
       variant: {
@@ -20,10 +20,10 @@ const buttonVariants = cva(
           "bg-gradient-to-b from-red-500 to-danger text-white shadow-xs border border-red-700 hover:from-red-600 hover:to-red-700 active:scale-[0.98] transition-all",
       },
       size: {
-        sm: "h-8 px-3 text-xs rounded-md gap-1.5",
-        md: "h-9 px-4 text-sm rounded-lg",
-        lg: "h-11 px-5 text-sm font-semibold rounded-lg",
-        icon: "h-9 w-9 p-0 rounded-lg",
+        sm: "h-8 px-2.5 sm:px-3 text-xs rounded-lg gap-1.5",
+        md: "h-9 px-3.5 sm:px-4 text-xs sm:text-sm rounded-xl gap-2",
+        lg: "h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base font-semibold rounded-xl gap-2.5",
+        icon: "h-9 w-9 p-0 rounded-xl shrink-0",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },

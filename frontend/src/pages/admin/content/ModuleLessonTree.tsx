@@ -304,7 +304,7 @@ export function ModuleLessonTree({
                           className={cn(
                             "group/les flex cursor-pointer items-center justify-between gap-2 rounded-xl p-2 text-left transition-all",
                             isLessonSelected
-                              ? "bg-slate-100 border border-slate-300 shadow-xs text-zinc-950 font-semibold"
+                              ? "bg-slate-100 border border-slate-300 shadow-xs text-slate-950 font-bold"
                               : "hover:bg-slate-100 border border-transparent text-slate-700",
                           )}
                         >
@@ -315,29 +315,31 @@ export function ModuleLessonTree({
 
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-1">
-                                <span className="text-[10px] font-mono text-slate-400">
+                                <span className="text-[10px] font-mono text-slate-500">
                                   #{lesson.order ?? lesIdx + 1}
                                 </span>
                                 <p
                                   className={cn(
                                     "text-xs truncate font-medium",
-                                    isLessonSelected ? "text-zinc-950 font-semibold" : "text-slate-800",
+                                    isLessonSelected ? "text-slate-950 font-bold" : "text-slate-800",
                                   )}
                                 >
                                   {lesson.title}
                                 </p>
                               </div>
-                              <div className="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5">
+                              <div className="flex items-center gap-2 text-[10px] text-slate-600 font-medium mt-0.5">
                                 {lesson.durationMinutes ? (
                                   <span className="flex items-center gap-0.5">
                                     <Clock size={10} /> {lesson.durationMinutes}m
                                   </span>
                                 ) : null}
                                 {lesson.xpReward ? (
-                                  <span className="text-slate-900 font-medium">+{lesson.xpReward} XP</span>
+                                  <span className="text-slate-900 font-semibold">+{lesson.xpReward} XP</span>
                                 ) : null}
                                 {lesson.type && (
-                                  <span className="uppercase text-[9px] font-medium text-slate-500">{lesson.type}</span>
+                                  <span className="uppercase text-[9px] font-semibold text-slate-600">
+                                    {lesson.type}
+                                  </span>
                                 )}
                               </div>
                             </div>

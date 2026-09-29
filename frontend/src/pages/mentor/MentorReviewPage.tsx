@@ -55,7 +55,7 @@ function ScoreBadge({ score, label }: { score: number; label: string }) {
   return (
     <div className="flex flex-col items-center gap-0.5 bg-slate-50 border border-slate-200 rounded-lg px-2 py-0.5">
       <span className={cn("text-xs font-bold", color)}>{score.toFixed(1)}</span>
-      <span className="text-[8px] uppercase tracking-wider text-slate-400 font-semibold">{label}</span>
+      <span className="text-[8px] uppercase tracking-wider text-slate-700 font-bold">{label}</span>
     </div>
   );
 }
@@ -83,27 +83,27 @@ function ReviewWorkspace({
           <p className="text-xs font-semibold text-slate-900 truncate">
             {submission.project?.title ?? "Project submission"}
           </p>
-          <p className="text-[11px] text-slate-500">{submission.student?.fullName}</p>
+          <p className="text-[11px] font-medium text-slate-600">{submission.student?.fullName}</p>
         </div>
         <Badge variant={statusTone(submission.status)} size="sm">
           {submission.status ?? "pending"}
         </Badge>
       </div>
       <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50/60 p-3">
-        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-semibold tracking-wider text-slate-400">
+        <div className="mb-1 flex items-center gap-1.5 text-[10px] uppercase font-bold tracking-wider text-slate-700">
           <FileText size={12} />
           <span>Files Attached</span>
         </div>
-        <p className="text-xs leading-relaxed text-slate-600">
+        <p className="text-xs leading-relaxed text-slate-700 font-medium">
           {submission.files?.length
             ? `${submission.files.length} file${submission.files.length === 1 ? "" : "s"} attached for review.`
             : "No files attached yet."}
         </p>
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+      <div className="mt-3 flex items-center gap-2 text-xs font-medium text-slate-600">
         <span>Grade: {submission.grade ?? 0}/100</span>
         {submission.createdAt ? (
-          <span className="text-slate-400">· {new Date(submission.createdAt).toLocaleDateString()}</span>
+          <span className="text-slate-600">· {new Date(submission.createdAt).toLocaleDateString()}</span>
         ) : null}
       </div>
     </button>
@@ -236,13 +236,13 @@ export function MentorReviewPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+      <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Interactive Project Review Board
             </h1>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Review submissions, evaluate performance scores, and provide actionable mentor feedback.
             </p>
           </div>
@@ -262,7 +262,7 @@ export function MentorReviewPage() {
               "rounded px-3 py-1 text-xs transition font-medium capitalize",
               filter === option.value
                 ? "border border-slate-900 bg-slate-900 text-white shadow-xs"
-                : "border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:border-slate-300",
+                : "border border-slate-200 bg-white text-slate-700 hover:text-slate-900 hover:border-slate-300",
             )}
           >
             {option.label}
@@ -271,7 +271,7 @@ export function MentorReviewPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-        <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div>
               <h2 className="text-sm font-semibold text-slate-900">Submissions Awaiting Feedback</h2>
@@ -300,7 +300,7 @@ export function MentorReviewPage() {
 
         <div className="space-y-6">
           {/* Selected details */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <div>
                 <h3 className="text-sm font-semibold text-slate-900">{selected?.project?.title ?? "Project"}</h3>
@@ -309,7 +309,7 @@ export function MentorReviewPage() {
                 {selected?.status ?? "pending"}
               </Badge>
             </div>
-            <div className="mt-3 space-y-2 text-xs text-slate-500">
+            <div className="mt-3 space-y-2 text-xs font-medium text-slate-600">
               <p>
                 Student: <strong className="text-slate-900">{selected?.student?.fullName ?? "Learner"}</strong>
               </p>
@@ -320,7 +320,7 @@ export function MentorReviewPage() {
           </Card>
 
           {/* Feedback & Review Form */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="space-y-3.5">
               <div>
                 <Label className="text-xs font-medium text-slate-700">Grade Score (0 - 100)</Label>
@@ -339,13 +339,13 @@ export function MentorReviewPage() {
                   value={feedback}
                   onChange={(event) => setFeedback(event.target.value)}
                   placeholder="What should the student improve? Point out strengths..."
-                  className="mt-1 min-h-20 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                  className="mt-1 min-h-20 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
                 />
               </div>
 
               {/* Session Performance Ratings */}
               <div className="border-t border-slate-100 pt-3.5 space-y-2.5">
-                <h4 className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">
+                <h4 className="text-[10px] font-bold text-slate-700 uppercase tracking-wider">
                   Session Performance Rating (Optional)
                 </h4>
                 <div className="space-y-2.5">
@@ -369,7 +369,7 @@ export function MentorReviewPage() {
                     <div className="space-y-2.5 animate-in fade-in duration-300">
                       <div className="grid grid-cols-3 gap-2">
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Participation</label>
+                          <label className="text-[10px] text-slate-700 font-semibold uppercase">Participation</label>
                           <Select
                             className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(participationScore)}
@@ -383,7 +383,7 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Communication</label>
+                          <label className="text-[10px] text-slate-700 font-semibold uppercase">Communication</label>
                           <Select
                             className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(communicationScore)}
@@ -397,7 +397,7 @@ export function MentorReviewPage() {
                           </Select>
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] text-slate-500 font-medium uppercase">Professionalism</label>
+                          <label className="text-[10px] text-slate-700 font-semibold uppercase">Professionalism</label>
                           <Select
                             className="h-7 text-xs bg-white border-slate-200 text-slate-900"
                             value={String(professionalismScore)}
@@ -417,7 +417,7 @@ export function MentorReviewPage() {
                           value={sessionComment}
                           onChange={(e) => setSessionComment(e.target.value)}
                           placeholder="Session performance comments..."
-                          className="mt-1 min-h-14 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-400"
+                          className="mt-1 min-h-14 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
                         />
                       </div>
                     </div>
@@ -470,7 +470,7 @@ export function MentorReviewPage() {
           </Card>
 
           {/* Student Feedback History */}
-          <Card className="border-slate-200 bg-white p-5 sm:p-6 shadow-sm">
+          <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <div className="bg-slate-100 p-1.5 rounded-lg text-slate-900 border border-slate-200">
                 <MessageSquare size={14} />
@@ -501,7 +501,9 @@ export function MentorReviewPage() {
                           <p className="font-semibold text-slate-900 truncate max-w-[150px]">
                             {fb.sessionTitle ?? "Session review"}
                           </p>
-                          <p className="text-[10px] text-slate-400">{new Date(fb.createdAt).toLocaleDateString()}</p>
+                          <p className="text-[10px] text-slate-600 font-medium">
+                            {new Date(fb.createdAt).toLocaleDateString()}
+                          </p>
                         </div>
                         <div className="flex gap-1">
                           <ScoreBadge score={fb.participationScore ?? fb.score} label="PRT" />
@@ -509,13 +511,13 @@ export function MentorReviewPage() {
                           <ScoreBadge score={fb.professionalismScore ?? fb.score} label="PRF" />
                         </div>
                       </div>
-                      {fb.comment && <p className="text-xs text-slate-600 italic">&ldquo;{fb.comment}&rdquo;</p>}
+                      {fb.comment && <p className="text-xs text-slate-700 italic">&ldquo;{fb.comment}&rdquo;</p>}
                     </div>
                   ),
                 )}
               </div>
             ) : (
-              <div className="text-center py-4 text-xs text-slate-400">
+              <div className="text-center py-4 text-xs text-slate-600 font-medium">
                 No past feedback records for this student yet.
               </div>
             )}

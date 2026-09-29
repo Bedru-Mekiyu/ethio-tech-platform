@@ -53,10 +53,11 @@
   --danger-subtle: #fef2f2;
   --danger-contrast: #ffffff;
 
-  /* ─── Text Hierarchy (WCAG AA Compliant on White & Elevated) ─── */
+  /* ─── Text Hierarchy (WCAG AA & AAA Compliant on White & Elevated) ─── */
   --text-primary: #0f172a; /* 16.6:1 contrast on white */
-  --text-secondary: #475569; /* 5.8:1 contrast on white (WCAG AA) */
-  --text-muted: #64748b; /* 4.6:1 contrast on white (WCAG AA) */
+  --text-secondary: #334155; /* 8.5:1 contrast on white (WCAG AAA) - crisp dark slate */
+  --text-muted: #475569; /* 5.8:1 contrast on white (WCAG AA) - readable medium slate */
+  --text-subtle: #64748b; /* 4.6:1 contrast on white (WCAG AA) - hint slate */
   --text-danger: #dc2626;
   --text-inverse: #ffffff;
 
