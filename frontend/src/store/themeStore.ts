@@ -17,6 +17,8 @@ function getInitialTheme(): Theme {
 function applyThemeToDOM(theme: Theme) {
   try {
     const root = document.documentElement;
+    // Briefly enable CSS transitions for smooth theme cross-fade
+    root.classList.add("theme-transitioning");
     if (theme === "dark") {
       root.classList.add("dark");
       root.setAttribute("data-theme", "dark");
@@ -26,6 +28,10 @@ function applyThemeToDOM(theme: Theme) {
       root.removeAttribute("data-theme");
       root.style.colorScheme = "light";
     }
+    // Remove the transition enabler after the animation window
+    setTimeout(() => {
+      root.classList.remove("theme-transitioning");
+    }, 300);
   } catch {
     // Non-DOM environment fallback
   }

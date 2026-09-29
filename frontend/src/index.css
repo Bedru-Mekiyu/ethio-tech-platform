@@ -173,6 +173,12 @@ img {
   border-color: rgba(30, 58, 138, 0.25);
 }
 
+/* Dark mode: card-interactive hover uses luminous white border instead of navy */
+.dark .card-interactive:hover,
+[data-theme="dark"] .card-interactive:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
 .surface-panel {
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -274,6 +280,15 @@ img {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #e2e8f0;
   border-radius: 9999px;
+}
+
+.dark .custom-scrollbar,
+[data-theme="dark"] .custom-scrollbar {
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb,
+[data-theme="dark"] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .container-narrow {
@@ -609,6 +624,35 @@ dialog {
 
 .press-scale:active {
   transform: scale(0.98);
+}
+
+/* ─── Theme Switch Cross-Fade (applied only during toggle gesture) ─── */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ─── Dark Mode Typography Micro-Refinements ─── */
+.dark .type-caption,
+.dark .type-eyebrow,
+.dark .stat-label,
+[data-theme="dark"] .type-caption,
+[data-theme="dark"] .type-eyebrow,
+[data-theme="dark"] .stat-label {
+  opacity: 0.78;
+  letter-spacing: 0.08em;
+}
+
+.dark ::selection,
+[data-theme="dark"] ::selection {
+  background: rgba(239, 68, 68, 0.25);
+  color: #f8fafc;
 }
 
 /* ─── Reduced Motion ─── */
