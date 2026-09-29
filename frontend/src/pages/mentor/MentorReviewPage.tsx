@@ -60,6 +60,26 @@ function ScoreBadge({ score, label }: { score: number; label: string }) {
   );
 }
 
+function QueueAgeBadge({ createdAt }: { createdAt?: string }) {
+  const [now] = useState(() => Date.now());
+  if (!createdAt) return null;
+  const elapsedMs = now - new Date(createdAt).getTime();
+  const elapsedDays = Math.floor(elapsedMs / (1000 * 60 * 60 * 24));
+  const elapsedHours = Math.floor(elapsedMs / (1000 * 60 * 60));
+
+  if (elapsedDays >= 2) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
+        Needs review · {elapsedDays}d in queue
+      </span>
+    );
+  }
+  if (elapsedHours >= 24) {
+    return <span className="text-[10px] font-medium text-slate-600">Waiting {elapsedDays}d</span>;
+  }
+  return <span className="text-[10px] font-medium text-emerald-700">New · {Math.max(1, elapsedHours)}h ago</span>;
+}
+
 function ReviewWorkspace({
   submission,
   isSelected,
@@ -100,11 +120,14 @@ function ReviewWorkspace({
             : "No files attached yet."}
         </p>
       </div>
-      <div className="mt-3 flex items-center gap-2 text-xs font-medium text-slate-600">
+      <div className="mt-3 flex items-center justify-between text-xs font-medium text-slate-600">
         <span>Grade: {submission.grade ?? 0}/100</span>
-        {submission.createdAt ? (
-          <span className="text-slate-600">· {new Date(submission.createdAt).toLocaleDateString()}</span>
-        ) : null}
+        <div className="flex items-center gap-1.5 flex-wrap">
+          {submission.createdAt ? (
+            <span className="text-slate-500">{new Date(submission.createdAt).toLocaleDateString()}</span>
+          ) : null}
+          {submission.status === "pending" && <QueueAgeBadge createdAt={submission.createdAt} />}
+        </div>
       </div>
     </button>
   );

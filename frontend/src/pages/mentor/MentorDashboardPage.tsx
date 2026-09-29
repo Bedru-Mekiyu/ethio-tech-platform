@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -31,6 +31,26 @@ import { MeetingCard } from "@/components/meeting/MeetingCard";
 import { useMeetings } from "@/hooks/useMeetings";
 import type { MeetingViewModel } from "@/lib/realtime";
 import { usePageTitle } from "@/hooks/usePageTitle";
+
+function QueueAgeBadge({ createdAt }: { createdAt?: string }) {
+  const [now] = useState(() => Date.now());
+  if (!createdAt) return null;
+  const elapsedMs = now - new Date(createdAt).getTime();
+  const elapsedDays = Math.floor(elapsedMs / (1000 * 60 * 60 * 24));
+  const elapsedHours = Math.floor(elapsedMs / (1000 * 60 * 60));
+
+  if (elapsedDays >= 2) {
+    return (
+      <span className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200/80">
+        Needs review · {elapsedDays}d in queue
+      </span>
+    );
+  }
+  if (elapsedHours >= 24) {
+    return <span className="text-[10px] font-medium text-slate-600">Waiting {elapsedDays}d</span>;
+  }
+  return <span className="text-[10px] font-medium text-emerald-700">New · {Math.max(1, elapsedHours)}h ago</span>;
+}
 
 function MentorDashboardSkeleton() {
   return (
@@ -207,7 +227,21 @@ export function MentorDashboardPage() {
               Mentor Command Center, {firstName}
             </h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Track student progress, grade submissions queue, and manage interactive LiveKit classrooms.
+              {activeMeeting ? (
+                <>
+                  <span className="font-semibold text-slate-900">
+                    {activeMeeting.status === "active" ? "Active room in progress" : "Upcoming session scheduled"}
+                  </span>
+                  {" · "}
+                  {activeMeeting.title || "Live Mentorship Session"}
+                  {" · "}
+                </>
+              ) : null}
+              <span className={pendingSubmissions.length > 0 ? "font-semibold text-amber-700" : "text-slate-600"}>
+                {pendingSubmissions.length === 1
+                  ? "1 project submission awaiting code review"
+                  : `${pendingSubmissions.length} project submissions awaiting review`}
+              </span>
             </p>
           </div>
 
@@ -491,9 +525,12 @@ export function MentorDashboardPage() {
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-slate-200">
-                      <span className="text-[10px] font-medium text-slate-600">
-                        Submitted: {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "Recently"}
-                      </span>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-[10px] font-medium text-slate-500">
+                          {sub.createdAt ? new Date(sub.createdAt).toLocaleDateString() : "Recently"}
+                        </span>
+                        <QueueAgeBadge createdAt={sub.createdAt} />
+                      </div>
                       <Link to="/mentor/reviews">
                         <Button size="sm" variant="primary" className="text-xs gap-1 font-medium py-1 px-2.5">
                           <FileCheck size={12} />
