@@ -196,7 +196,7 @@ export default function ChatPanel({ sessionId }: ChatPanelProps) {
         </div>
 
         {/* Input box */}
-        <div className="shrink-0 flex gap-2 pt-2 border-t border-slate-100">
+        <div className="shrink-0 flex flex-wrap gap-2 pt-2 border-t border-slate-100">
           <select
             value={chatType}
             onChange={(e) => setChatType(e.target.value as "public" | "announcement" | "direct" | "private_question")}

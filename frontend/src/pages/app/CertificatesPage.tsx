@@ -49,7 +49,7 @@ export function CertificatesPage() {
           actionHref="/app/tracks"
         />
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2">
           {certificates.map((cert) => (
             <Card
               key={cert._id}

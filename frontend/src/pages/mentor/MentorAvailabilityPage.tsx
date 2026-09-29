@@ -52,12 +52,12 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
 
   return (
     <div>
-      <label className="block text-xs font-medium text-slate-700 mb-1">{label}</label>
+      <label className="block text-xs font-medium text-slate-700 mb-1 truncate">{label}</label>
       <div className="flex gap-1.5">
         <select
           value={hour}
           onChange={(e) => setHour(Number(e.target.value))}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
+          className="h-8 w-full rounded-lg border border-slate-200 bg-white px-1 sm:px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
         >
           {HOURS.map((h) => (
             <option key={h} value={h}>
@@ -69,7 +69,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={minute}
           onChange={(e) => setMinute(Number(e.target.value))}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
+          className="h-8 w-full rounded-lg border border-slate-200 bg-white px-1 sm:px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
         >
           {MINUTES.map((m) => (
             <option key={m} value={m}>
@@ -80,7 +80,7 @@ function TimePicker({ value, onChange, label }: TimePickerProps) {
         <select
           value={period}
           onChange={(e) => setPeriod(e.target.value as "AM" | "PM")}
-          className="h-8 rounded-lg border border-slate-200 bg-white px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
+          className="h-8 w-full rounded-lg border border-slate-200 bg-white px-1 sm:px-2 text-xs text-slate-900 outline-none focus:border-slate-900"
         >
           <option value="AM">AM</option>
           <option value="PM">PM</option>
@@ -217,7 +217,7 @@ export function MentorAvailabilityPage() {
                 ))}
               </select>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-3 grid-cols-2">
               <TimePicker
                 value={draft.startMinutes}
                 onChange={(m) => setDraft((s) => ({ ...s, startMinutes: m }))}

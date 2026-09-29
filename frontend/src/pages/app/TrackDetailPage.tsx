@@ -192,7 +192,7 @@ export function TrackDetailPage() {
           </div>
 
           {/* Quick Metrics Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 xl:w-[26rem] rounded-xl border border-slate-200 bg-slate-50/70 p-3.5">
             <div className="space-y-0.5">
               <p className="text-[10px] uppercase tracking-wider text-slate-600 font-medium flex items-center gap-1 font-semibold">
                 <Clock size={10} className="text-slate-700" />
@@ -468,7 +468,7 @@ export function TrackDetailPage() {
                   <Layers3 size={14} />
                   Tooling & Framework Ecosystem
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                   {(data.tooling ?? []).map((tool) => (
                     <div
                       key={tool.name}
@@ -486,7 +486,7 @@ export function TrackDetailPage() {
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-600 font-medium">
                   Skill Mastery Matrix
                 </h3>
-                <div className="grid gap-4 sm:grid-cols-1 sm:grid-cols-2">
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
                   {(data.competencyGroups ?? []).map((group) => (
                     <div
                       key={group.category}

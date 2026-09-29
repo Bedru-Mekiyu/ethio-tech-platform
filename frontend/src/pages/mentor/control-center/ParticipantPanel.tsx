@@ -126,7 +126,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
             </Badge>
           </h3>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
           <Button
             size="sm"
             variant="outline"
@@ -146,7 +146,7 @@ export default function ParticipantPanel({ participants, sessionId, onAction }: 
         </div>
       </div>
 
-      <div className="flex gap-2 mb-3">
+      <div className="flex flex-wrap gap-2 mb-3">
         <div className="relative flex-1">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 font-medium" />
           <Input

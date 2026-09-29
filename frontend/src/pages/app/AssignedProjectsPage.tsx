@@ -255,7 +255,7 @@ export function AssignedProjectsPage() {
       </Card>
 
       <div
-        className="flex items-center rounded-xl border border-slate-200/80 bg-slate-100/80 p-1 w-fit shadow-xs"
+        className="flex items-center overflow-x-auto rounded-xl border border-slate-200/80 bg-slate-100/80 p-1 w-full sm:w-fit shadow-xs"
         role="tablist"
       >
         {(["active", "submitted", "graded"] as const).map((t) => (

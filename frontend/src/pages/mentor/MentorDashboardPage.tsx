@@ -343,7 +343,7 @@ export function MentorDashboardPage() {
                 upcomingSessions.map((session) => (
                   <div
                     key={session._id}
-                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
+                    className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50/60 p-3.5 hover:border-slate-300 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 shrink-0">
@@ -371,7 +371,7 @@ export function MentorDashboardPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex flex-wrap items-center gap-2 shrink-0 mt-2 sm:mt-0">
                       <Link to={`/mentor/control-center/${session._id}`}>
                         <Button size="sm" variant="outline" className="text-xs gap-1 py-1 px-2 text-slate-700">
                           <Settings size={12} /> Controls
