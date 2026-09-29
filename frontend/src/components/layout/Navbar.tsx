@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X, ArrowRight, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuthStore, getDashboardPath } from "@/store/authStore";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export interface NavItem {
   to: string;
@@ -57,7 +58,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-200",
+        "sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md transition-all duration-200 dark:border-white/10 dark:bg-slate-900/95",
         className,
       )}
     >
@@ -77,8 +78,8 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
                 cn(
                   "relative px-3 py-1.5 text-sm font-medium rounded-md transition-colors duration-150",
                   isActive
-                    ? "text-primary font-semibold bg-red-50/50"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60",
+                    ? "text-primary font-semibold bg-red-50/50 dark:bg-red-950/30"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/60 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800/60",
                 )
               }
             >
@@ -87,8 +88,9 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
           ))}
         </nav>
 
-        {/* Desktop CTA Action Buttons */}
-        <div className="hidden items-center gap-3 md:flex">
+        {/* Desktop CTA Action Buttons & Theme Switcher */}
+        <div className="hidden items-center gap-2.5 md:flex">
+          <ThemeToggle size="sm" />
           {user ? (
             <Link to={getDashboardPath(user.role)}>
               <Button size="sm" className="gap-1.5 font-medium">
@@ -100,7 +102,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             <>
               <Link
                 to="/login"
-                className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors duration-150"
+                className="px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors duration-150"
               >
                 Sign in
               </Link>
@@ -114,17 +116,20 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
           )}
         </div>
 
-        {/* Mobile Hamburger Toggle Button */}
-        <button
-          type="button"
-          className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-nav-drawer"
-        >
-          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
+        {/* Mobile Header Actions */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle size="sm" />
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-900 dark:border-white/10 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-drawer"
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Navigation */}
@@ -136,7 +141,7 @@ export function Navbar({ className, items = MARKETING_NAV_ITEMS }: NavbarProps) 
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-slate-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg"
+            className="border-t border-slate-200 bg-white px-5 py-5 md:hidden flex flex-col gap-4 overflow-hidden shadow-lg dark:border-white/10 dark:bg-slate-900"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"

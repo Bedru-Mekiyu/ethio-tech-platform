@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { LogOut, Lock, UserCircle2 } from "lucide-react";
+import { LogOut, Lock, UserCircle2, Palette } from "lucide-react";
+import { ThemeSegmentedControl } from "@/components/ui/theme-toggle";
 import { useAuthStore } from "@/store/authStore";
 import { logoutApi, changePassword } from "@/services/authService";
 import {
@@ -558,6 +559,27 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
                   </Link>
                 </div>
               </form>
+            </Card>
+          </motion.div>
+
+          {/* Appearance & Theme Card */}
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-6 dark:border-white/10 dark:bg-slate-900">
+              <CardHeader className="p-0 border-b border-slate-100 dark:border-white/10 pb-3 mb-4">
+                <CardTitle className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Palette size={15} className="text-slate-600 dark:text-slate-400" /> Interface Appearance
+                </CardTitle>
+              </CardHeader>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="max-w-xl">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                    Choose your workspace display mode. The platform defaults to the crisp Light theme for maximum
+                    daytime readability. Dark mode offers a calibrated low-glare canvas for evening code reviews and
+                    extended study sprints.
+                  </p>
+                </div>
+                <ThemeSegmentedControl />
+              </div>
             </Card>
           </motion.div>
         </div>

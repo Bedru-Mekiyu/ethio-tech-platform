@@ -159,6 +159,7 @@ declare module "lucide-react" {
   export const NotebookPen: IconComponent;
   export const Octagon: IconComponent;
   export const Package: IconComponent;
+  export const Palette: IconComponent;
   export const PanelLeftClose: IconComponent;
   export const PanelLeftOpen: IconComponent;
   export const Paperclip: IconComponent;
@@ -215,6 +216,8 @@ declare module "lucide-react" {
   export const Store: IconComponent;
   export const Strikethrough: IconComponent;
   export const Syringe: IconComponent;
+  export const Sun: IconComponent;
+  export const SunMedium: IconComponent;
   export const Table: IconComponent;
   export const Tablet: IconComponent;
   export const Tag: IconComponent;
