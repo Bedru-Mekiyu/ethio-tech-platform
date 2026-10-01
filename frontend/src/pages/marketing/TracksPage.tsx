@@ -100,16 +100,6 @@ export function TracksPage() {
       <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8 relative z-10">
           <div className="mx-auto max-w-4xl text-center space-y-5">
-            <motion.div
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 shadow-xs"
-            >
-              <Code2 size={13} className="text-[var(--secondary)]" />
-              Production Curriculums
-            </motion.div>
-
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -135,26 +125,30 @@ export function TracksPage() {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: 0.15 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 sm:grid-cols-4"
+              className="mt-8 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-4 sm:p-5 shadow-xs max-w-4xl mx-auto"
             >
-              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-                <p className="text-xl font-bold text-slate-900">6</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Core Tracks</p>
-              </Card>
-              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-                <p className="text-xl font-bold text-slate-900">{totalCapstones}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                  Audited Capstones
-                </p>
-              </Card>
-              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-                <p className="text-xl font-bold text-slate-900">{totalLiveHours}+</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Mentorship Hours</p>
-              </Card>
-              <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-                <p className="text-xl font-bold text-slate-900">100%</p>
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-slate-500 font-semibold">Tuition Free</p>
-              </Card>
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 sm:grid-cols-4 text-center">
+                <div className="pt-2 sm:pt-0">
+                  <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">6</p>
+                  <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Engineering Tracks</p>
+                </div>
+                <div className="pt-3 sm:pt-0 sm:pl-4">
+                  <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {totalCapstones}+
+                  </p>
+                  <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Audited Capstones</p>
+                </div>
+                <div className="pt-3 sm:pt-0 sm:pl-4">
+                  <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    {totalLiveHours}+
+                  </p>
+                  <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Mentorship Hours</p>
+                </div>
+                <div className="pt-3 sm:pt-0 sm:pl-4">
+                  <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">100%</p>
+                  <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Tuition-Free</p>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -271,43 +265,51 @@ export function TracksPage() {
                       {/* Key stats bar */}
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 text-center">
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Clock size={11} className="text-slate-700" />
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium flex items-center justify-center gap-1">
+                            <Clock size={11} className="text-slate-500" />
                             Duration
                           </p>
-                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.estimatedWeeks} Weeks</p>
+                          <p className="mt-0.5 font-bold text-slate-900 dark:text-white text-xs">
+                            {track.estimatedWeeks} Weeks
+                          </p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <Video size={11} className="text-slate-700" />
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium flex items-center justify-center gap-1">
+                            <Video size={11} className="text-slate-500" />
                             Live Sessions
                           </p>
-                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.liveSessionsCount} Workshops</p>
+                          <p className="mt-0.5 font-bold text-slate-900 dark:text-white text-xs">
+                            {track.liveSessionsCount} Workshops
+                          </p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
-                            <GraduationCap size={11} className="text-slate-700" />
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium flex items-center justify-center gap-1">
+                            <GraduationCap size={11} className="text-slate-500" />
                             1:1 Mentorship
                           </p>
-                          <p className="mt-0.5 font-bold text-slate-900 text-xs">{track.mentorshipHours} Hours</p>
+                          <p className="mt-0.5 font-bold text-slate-900 dark:text-white text-xs">
+                            {track.mentorshipHours} Hours
+                          </p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium flex items-center justify-center gap-1">
                             <Award size={11} className="text-[var(--secondary)]" />
                             XP Reward
                           </p>
-                          <p className="mt-0.5 font-bold text-slate-900 text-xs">+{track.xpReward} XP</p>
+                          <p className="mt-0.5 font-bold text-slate-900 dark:text-white text-xs">
+                            +{track.xpReward} XP
+                          </p>
                         </div>
                       </div>
 
                       {/* Practical Capstones Showcase */}
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+                          <h3 className="text-xs font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
                             <Code2 size={13} className="text-[var(--secondary)]" />
                             Capstone Projects
                           </h3>
-                          <span className="text-[10px] text-slate-500">Preview code and architecture</span>
+                          <span className="text-[11px] text-slate-500">Preview code and architecture</span>
                         </div>
 
                         <div className="grid gap-2.5 sm:grid-cols-2">

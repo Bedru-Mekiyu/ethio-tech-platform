@@ -424,30 +424,33 @@ export function HubsPage() {
         </div>
 
         {/* Key Metrics Strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 sm:grid-cols-4">
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-slate-900 font-mono">6</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Regional Hubs</p>
-            <p className="mt-0.5 text-xs text-slate-600">Active national nodes</p>
-          </Card>
-
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-slate-900 font-mono">{totalWorkstations}</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Workstations</p>
-            <p className="mt-0.5 text-xs text-slate-600">Dual-screen & GPU rigs</p>
-          </Card>
-
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-slate-900 font-mono">{totalOpenSeats}</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Available Today</p>
-            <p className="mt-0.5 text-xs text-slate-600">Instant reservation</p>
-          </Card>
-
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-3.5 text-center shadow-xs">
-            <p className="text-xl font-bold text-[var(--secondary)]">100% Free</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Community Access</p>
-            <p className="mt-0.5 text-xs text-slate-600">+50 XP per check-in</p>
-          </Card>
+        <div className="mt-8 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-4 sm:p-5 shadow-xs max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 sm:grid-cols-4 text-center">
+            <div className="pt-2 sm:pt-0">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">6</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Regional Hubs</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Active national nodes</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {totalWorkstations}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Workstations</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Dual-screen & GPU rigs</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {totalOpenSeats}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Available Today</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Instant reservation</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--secondary)]">100% Free</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Community Access</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">+50 XP per check-in</p>
+            </div>
+          </div>
         </div>
       </motion.section>
 

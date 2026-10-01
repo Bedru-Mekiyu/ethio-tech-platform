@@ -5,7 +5,6 @@ import { motion, useReducedMotion, type Variants, AnimatePresence } from "framer
 import {
   ArrowRight,
   Award,
-  BookOpen,
   CheckCircle2,
   ChevronDown,
   Clock,
@@ -14,7 +13,6 @@ import {
   FileCode2,
   Globe,
   GraduationCap,
-  Layers3,
   Radio,
   Search,
   ShieldCheck,
@@ -206,7 +204,6 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
 interface RolePersona {
   id: "student" | "mentor" | "employer";
   title: string;
-  eyebrow: string;
   badge: string;
   icon: LucideIcon;
   description: string;
@@ -221,7 +218,6 @@ const ROLE_PERSONAS: RolePersona[] = [
   {
     id: "student",
     title: "The Student Experience",
-    eyebrow: "For Aspiring Software Architects",
     badge: "100% Free Tuition",
     icon: GraduationCap,
     description:
@@ -257,7 +253,6 @@ const ROLE_PERSONAS: RolePersona[] = [
   {
     id: "mentor",
     title: "The Mentor Experience",
-    eyebrow: "For Senior Engineers & Technical Leads",
     badge: "Flexible 1-3 hrs/week",
     icon: Users,
     description: "Share your expertise through structured office hours, PR reviews, and system design masterclasses.",
@@ -292,7 +287,6 @@ const ROLE_PERSONAS: RolePersona[] = [
   {
     id: "employer",
     title: "The Hiring Partner Experience",
-    eyebrow: "For Tech Companies & Enterprise Teams",
     badge: "Zero Placement Fees",
     icon: Award,
     description:
@@ -434,30 +428,24 @@ export function HowItWorksPage() {
   const totalXp = tracks.reduce((sum, track) => sum + (track.xpReward ?? 0), 0);
 
   return (
-    <div className="relative min-h-screen text-[var(--text-primary)] overflow-hidden">
-      {/* Luminous Ambient Background Glow */}
-      <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)] dark:opacity-20"
-        aria-hidden="true"
-      />
-
+    <div className="relative min-h-screen text-[var(--text-primary)]">
       {/* ─── Hero Section ─── */}
       <motion.section
-        className="relative mx-auto max-w-7xl px-4 pb-14 pt-16 lg:px-8"
+        className="relative mx-auto max-w-7xl px-4 pb-12 pt-14 sm:pt-16 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 dark:text-white break-words">
             How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400 font-normal">
             From baseline calibration to small-group mentor pairing, sandbox development, squad code defense, and
             verified career placement.
           </p>
 
-          <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
+          <div className="mt-7 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
               <Button size="lg" className="font-medium w-full sm:w-auto">
                 Create Student Account <ArrowRight className="ml-2 h-4 w-4" />
@@ -475,63 +463,43 @@ export function HowItWorksPage() {
               Explore Stages
             </Button>
           </div>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-slate-600">
-            {[
-              "Sub-150ms WebRTC Labs",
-              "Production Git PRs",
-              "Squad Accountability",
-              "Verifiable Passports",
-              "Zero Tuition Fees",
-            ].map((item) => (
-              <span
-                key={item}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-2.5 py-1 text-slate-700 shadow-[var(--shadow-xs)]"
-              >
-                <CheckCircle2 className="h-3.5 w-3.5 text-[var(--secondary)]" />
-                {item}
-              </span>
-            ))}
-          </div>
         </div>
 
-        {/* Live Catalog Momentum Metrics */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-              <Layers3 size={16} />
+        {/* Live Catalog Momentum Metrics Strip */}
+        <div className="mt-10 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-5 shadow-xs max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 md:grid-cols-4 text-center">
+            <div className="pt-2 sm:pt-0">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(tracks.length)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Engineering Tracks</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Fullstack, AI, Cloud, Mobile</p>
             </div>
-            <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(tracks.length)}</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Core Tech Tracks</p>
-            <p className="mt-0.5 text-xs text-slate-600">Fullstack, AI, Cloud, Mobile</p>
-          </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-              <BookOpen size={16} />
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(totalModules)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Interactive Modules</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Structured syllabus progression</p>
             </div>
-            <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalModules)}</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Interactive Modules</p>
-            <p className="mt-0.5 text-xs text-slate-600">Structured knowledge blocks</p>
-          </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-              <Code2 size={16} />
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(totalLessons)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Hands-on Labs</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Real codebases and PR reviews</p>
             </div>
-            <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalLessons)}</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Hands-on Labs</p>
-            <p className="mt-0.5 text-xs text-slate-600">Real git repos & tests</p>
-          </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-5 text-center shadow-[var(--shadow-card)] transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)]">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-              <Zap size={16} />
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(totalXp)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Total Skill XP</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Earned via audited completions</p>
             </div>
-            <p className="mt-2.5 text-xl font-bold text-slate-900">{formatCompactNumber(totalXp)}</p>
-            <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">XP Catalog</p>
-            <p className="mt-0.5 text-xs text-slate-600">Earned through verified PRs</p>
-          </Card>
+          </div>
         </div>
       </motion.section>
 

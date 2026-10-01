@@ -488,10 +488,10 @@ export function HomePage() {
           2. NATIONAL REACH & IMPACT METRICS BAR + ARCHITECTURE PILLARS
       ────────────────────────────────────────────────────────────── */}
       <section className="page-shell pb-12 lg:pb-14">
-        <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6">
-            <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-slate-900">
+        <div className="rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-5 sm:p-6 shadow-xs space-y-6">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 md:grid-cols-4 text-center">
+            <div className="pt-2 sm:pt-0">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {data ? (
                   <>{formatCompactCount(activeLearnersCount)}+</>
                 ) : (
@@ -501,24 +501,24 @@ export function HomePage() {
                   />
                 )}
               </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Active Learners</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Secondary to University</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Active Learners</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Secondary to university</p>
             </div>
 
-            <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-slate-900">45,000+</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Mentorship Hours</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Live Pair Sessions</p>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">45,000+</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Mentorship Hours</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Live pair programming sessions</p>
             </div>
 
-            <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-slate-900">6 Hubs</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Regional Tech Hubs</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Six Physical Centers</p>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">6 Hubs</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Regional Tech Hubs</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Physical centers nationwide</p>
             </div>
 
-            <div className="text-center">
-              <p className="text-2xl font-bold tracking-tight text-slate-900">
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
                 {data ? (
                   <>{approvalRate}%</>
                 ) : (
@@ -528,14 +528,14 @@ export function HomePage() {
                   />
                 )}
               </p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Capstone Approval</p>
-              <p className="mt-0.5 text-[11px] text-slate-500">Audited Code Reviews</p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Capstone Approval</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Audited code reviews</p>
             </div>
           </div>
 
-          {/* Folded Architecture Highlight Strip */}
-          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Core Learning Stack</p>
+          {/* Integrated Architecture Stack Strip */}
+          <div className="pt-4 border-t border-slate-100 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Core Learning Stack</span>
             <div className="flex flex-wrap gap-2">
               {[
                 { icon: Video, label: "WebRTC Classrooms" },
@@ -548,9 +548,9 @@ export function HomePage() {
                 return (
                   <div
                     key={item.label}
-                    className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 px-2.5 py-1 text-xs text-slate-700 shadow-[var(--shadow-xs)] hover:border-slate-300 hover:bg-white transition-all"
+                    className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-slate-900/50 px-2.5 py-1 text-xs text-slate-700 dark:text-slate-300 shadow-2xs hover:border-slate-300 dark:hover:border-white/20 transition-all"
                   >
-                    <Icon size={13} className="text-[var(--secondary)]" />
+                    <Icon size={13} className="text-slate-600 dark:text-slate-400" />
                     <span>{item.label}</span>
                   </div>
                 );

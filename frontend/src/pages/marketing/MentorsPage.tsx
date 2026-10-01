@@ -2,19 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import {
-  ArrowRight,
-  BadgeCheck,
-  CheckCircle2,
-  Clock,
-  Code2,
-  Search,
-  ShieldCheck,
-  Trophy,
-  Users,
-  Video,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, BadgeCheck, CheckCircle2, Code2, Search, ShieldCheck, Video } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,30 +83,6 @@ function MentorSkeleton() {
   );
 }
 
-function MentorStatCard({
-  icon: Icon,
-  value,
-  label,
-  helper,
-}: {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  helper: string;
-  tone?: "primary" | "default" | "warning";
-}) {
-  return (
-    <Card className="rounded-2xl border-slate-200/80 bg-white p-4 text-center transition-all hover:border-slate-300 shadow-xs hover:shadow-sm">
-      <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-xl border border-blue-100 bg-blue-50 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
-        <Icon size={16} />
-      </div>
-      <p className="mt-2 text-xl font-bold tracking-tight text-slate-900 font-mono">{value}</p>
-      <p className="mt-0.5 text-[10px] uppercase tracking-wider font-semibold text-slate-500">{label}</p>
-      <p className="mt-0.5 text-xs text-slate-600">{helper}</p>
-    </Card>
-  );
-}
-
 function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageMentor; featured?: boolean }) {
   const score = Math.min(100, mentor.mentorScore ?? 95);
 
@@ -161,7 +125,7 @@ function MentorCard({ mentor, featured = false }: { mentor: MarketingMentorPageM
 
         {/* Mentor Rating & Sessions Bar */}
         <div className="space-y-1 pt-1">
-          <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+          <div className="flex items-center justify-between text-[11px] font-medium text-slate-600 dark:text-slate-400">
             <span>Student Rating</span>
             <span className="text-slate-800 font-bold font-mono">{score}% Satisfaction</span>
           </div>
@@ -296,59 +260,48 @@ export function MentorsPage() {
             </Button>
           </a>
         </div>
-
-        {/* Requirements & Commitment Callout Strip */}
-        <div className="rounded-2xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-4 max-w-3xl mx-auto flex flex-wrap items-center justify-around gap-4 text-xs text-slate-600 shadow-xs">
-          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
-            <ShieldCheck size={14} className="text-[var(--secondary)]" /> Requirement: 2+ Years Senior Experience
-          </span>
-          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
-            <Clock size={14} className="text-[var(--secondary)]" /> Commitment: 2–4 Hours / Week (Flexible)
-          </span>
-          <span className="flex items-center gap-1.5 font-semibold text-slate-800">
-            <Trophy size={14} className="text-[var(--secondary)]" /> Verified Leadership Credentials
-          </span>
-        </div>
       </motion.section>
 
       {/* ─── Guild Stats Strip ─── */}
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <MentorStatCard
-          icon={Users}
-          value={formatCompactNumber(data?.stats?.totalMentors ?? allMentors.length)}
-          label="Senior Mentors"
-          helper="Active in the verified guild"
-          tone="primary"
-        />
-        <MentorStatCard
-          icon={BadgeCheck}
-          value={formatCompactNumber(data?.stats?.verifiedMentors ?? allMentors.filter((m) => m.isVerified).length)}
-          label="Verified Practitioners"
-          helper="From leading engineering teams"
-          tone="default"
-        />
-        <MentorStatCard
-          icon={Video}
-          value={formatCompactNumber(
-            data?.stats?.totalSessions ?? allMentors.reduce((sum, m) => sum + (m.totalSessions ?? 0), 0),
-          )}
-          label="Mentorship Sessions"
-          helper="Live code reviews & office hours"
-          tone="default"
-        />
-        <MentorStatCard
-          icon={Trophy}
-          value={
-            data?.stats?.averageScore
-              ? `${data.stats.averageScore}%`
-              : allMentors.length > 0
-                ? `${Math.round(allMentors.reduce((sum, m) => sum + (m.mentorScore ?? 95), 0) / allMentors.length)}%`
-                : "—"
-          }
-          label="Student Rating"
-          helper="Consistently high quality standard"
-          tone="warning"
-        />
+      <section className="max-w-5xl mx-auto">
+        <div className="rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-5 shadow-xs">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 sm:grid-cols-4 text-center">
+            <div className="pt-2 sm:pt-0">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(data?.stats?.totalMentors ?? allMentors.length)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Senior Mentors</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Active engineering guild</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(data?.stats?.verifiedMentors ?? allMentors.filter((m) => m.isVerified).length)}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Verified Practitioners</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Global engineering leads</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {formatCompactNumber(
+                  data?.stats?.totalSessions ?? allMentors.reduce((sum, m) => sum + (m.totalSessions ?? 0), 0),
+                )}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Mentorship Sessions</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Live code reviews & office hours</p>
+            </div>
+            <div className="pt-3 sm:pt-0 sm:pl-4">
+              <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {data?.stats?.averageScore
+                  ? `${data.stats.averageScore}%`
+                  : allMentors.length > 0
+                    ? `${Math.round(allMentors.reduce((sum, m) => sum + (m.mentorScore ?? 95), 0) / allMentors.length)}%`
+                    : "—"}
+              </p>
+              <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">Learner Satisfaction</p>
+              <p className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">Consistently verified quality</p>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ─── The Mentorship Framework ─── */}

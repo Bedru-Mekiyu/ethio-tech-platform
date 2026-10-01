@@ -229,25 +229,19 @@ export function AboutPage() {
   ];
 
   return (
-    <div className="relative min-h-screen text-[var(--text-primary)] overflow-hidden">
-      {/* Luminous Ambient Background Glow */}
-      <div
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(185,28,28,0.04),rgba(30,58,138,0.03),transparent_70%)] dark:opacity-20"
-        aria-hidden="true"
-      />
-
+    <div className="relative min-h-screen text-[var(--text-primary)]">
       {/* ─── Hero Section ─── */}
       <motion.section
-        className="relative mx-auto max-w-7xl px-4 pb-12 pt-14 lg:px-8"
+        className="relative mx-auto max-w-7xl px-4 pb-12 pt-14 sm:pt-16 lg:px-8"
         variants={sectionVariants}
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 dark:text-white break-words">
             Engineering Education Built for <span className="text-primary">Ethiopian Developers</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
+          <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400 font-normal">
             Tuition-free learning combining industry mentorship, in-browser Linux environments, peer code reviews, and
             regional learning hubs.
           </p>
@@ -270,57 +264,28 @@ export function AboutPage() {
                 const el = document.getElementById("delivery-architecture");
                 if (el) el.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-slate-600 hover:text-slate-900 font-medium"
+              className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-medium"
             >
               View Architecture
             </Button>
           </div>
-
-          <div className="mt-8 flex flex-wrap justify-center gap-2 text-xs text-slate-600">
-            {(
-              data?.hero.highlights ?? [
-                "100% Free & Open Source",
-                "WebRTC Sub-150ms Live Labs",
-                "Engineering Mentor Network",
-                "Offline-First Mesh Sync",
-                "Verifiable Proof-of-Work",
-              ]
-            ).map((item) => (
-              <span
-                key={item}
-                className="flex items-center gap-1.5 rounded-lg border border-slate-200/80 bg-white px-2.5 py-1 text-xs text-slate-700 shadow-[var(--shadow-xs)]"
-              >
-                <CheckCircle2 className="h-3.5 w-3.5 text-[var(--secondary)]" />
-                {item}
-              </span>
-            ))}
-          </div>
         </div>
       </motion.section>
 
-      {/* ─── Platform High-Impact Stats ─── */}
-      <section className="px-4 py-4 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <Card
-                key={stat.label}
-                className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-                    <Icon size={18} />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold tracking-tight text-slate-900">{stat.value}</p>
-                    <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">{stat.label}</p>
-                  </div>
-                </div>
-                <p className="mt-2 text-xs text-slate-600">{stat.helper}</p>
-              </Card>
-            );
-          })}
+      {/* ─── Platform High-Impact Stats Strip ─── */}
+      <section className="px-4 py-4 lg:px-8 max-w-7xl mx-auto">
+        <div className="rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/60 p-5 sm:p-6 shadow-xs">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 md:grid-cols-4 text-center">
+            {stats.map((stat, idx) => (
+              <div key={stat.label} className={idx === 0 ? "pt-2 sm:pt-0" : "pt-3 sm:pt-0 sm:pl-4"}>
+                <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">{stat.label}</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{stat.helper}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -333,10 +298,10 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white break-words">
             Developing Ethiopia's <span className="text-primary">Engineering Potential</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal max-w-xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-400 font-normal max-w-xl mx-auto">
             With over 125 million citizens and 70% under 30, Ethiopia holds immense engineering talent. EthioTech
             provides the production tooling and mentorship to bridge academic theory with industry standards.
           </p>
@@ -345,19 +310,17 @@ export function AboutPage() {
         {/* Demographic Facts Grid */}
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ETHIOPIAN_DEMOGRAPHIC_FACTS.map((fact) => {
-            const Icon = fact.icon;
             return (
-              <Card
+              <div
                 key={fact.label}
-                className="rounded-2xl border border-slate-200/80 bg-white p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[var(--shadow-card-hover)] shadow-[var(--shadow-card)]"
+                className="rounded-xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900 p-5 shadow-2xs transition-all hover:border-slate-300 dark:hover:border-white/20"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-                  <Icon size={18} />
-                </div>
-                <p className="mt-3 text-2xl font-bold text-slate-900">{fact.metric}</p>
-                <h3 className="mt-0.5 text-sm font-semibold text-slate-900">{fact.label}</h3>
-                <p className="mt-1.5 text-xs leading-5 text-slate-600">{fact.description}</p>
-              </Card>
+                <p className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  {fact.metric}
+                </p>
+                <h3 className="mt-1 text-xs font-semibold text-slate-800 dark:text-slate-200">{fact.label}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400">{fact.description}</p>
+              </div>
             );
           })}
         </div>
