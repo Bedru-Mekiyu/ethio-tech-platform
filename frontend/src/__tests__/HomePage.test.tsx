@@ -72,11 +72,11 @@ describe("HomePage Component Suite", () => {
     );
 
     const headline = await screen.findByRole("heading", {
-      name: /Ship Production Systems.*Get Reviewed by Working Engineers/i,
+      name: /Learn From Engineers Shipping in Production Right Now/i,
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Move beyond isolated tutorials.*pull request audits/i)).toBeDefined();
+    expect(screen.getByText(/Not instructors reading slides.*Senior engineers reviewing your code/i)).toBeDefined();
     expect(screen.getAllByRole("button", { name: /Explore 6 Engineering Tracks/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button", { name: /Start Learning Free/i }).length).toBeGreaterThan(0);
 

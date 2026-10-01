@@ -385,19 +385,14 @@ export function MentorsPage() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+            <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-slate-900/50 dark:border-white/10">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.mentorship.codeReview}
                 alt="Senior African software engineer conducting a pair programming code review session with a developer over dual monitors"
                 aspectRatio="aspect-[4/3]"
                 className="w-full object-cover"
+                wrapperClassName="w-full border-none bg-transparent"
               />
-              <div className="border-t border-slate-200 bg-slate-50 px-3.5 py-2.5">
-                <p className="text-[11px] font-medium text-slate-600 flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
-                  <span>Personalized code review and technical career mentoring</span>
-                </p>
-              </div>
             </div>
           </div>
         </div>
