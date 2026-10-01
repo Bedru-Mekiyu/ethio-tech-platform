@@ -72,16 +72,16 @@ describe("HomePage Component Suite", () => {
     );
 
     const headline = await screen.findByRole("heading", {
-      name: /Code Production Software with Senior Diaspora Mentors/i,
+      name: /Build Production Software with Experienced Engineering Mentors/i,
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Structured learning tracks, live code reviews from diaspora engineers/i)).toBeDefined();
-    expect(screen.getAllByRole("button", { name: /View Tracks/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("button", { name: /Start Free/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Structured learning tracks, live code reviews from industry engineers/i)).toBeDefined();
+    expect(screen.getAllByRole("button", { name: /Explore Curriculum/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: /Create Student Account/i }).length).toBeGreaterThan(0);
 
     // Check for the platform badge
-    expect(screen.getByText(/Engineering Education for Ethiopia/i)).toBeDefined();
+    expect(screen.getByText(/Software Engineering Education/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {
@@ -132,7 +132,7 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(screen.getAllByText(/Diaspora Mentors/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Engineering Mentors/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Learn Directly From/i)).toBeDefined();
     expect(screen.getAllByRole("button", { name: /Apply to Mentor/i }).length).toBeGreaterThan(0);
   }, 15000);

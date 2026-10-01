@@ -179,7 +179,7 @@ export function MentorDashboardPage() {
           {/* Status Progression Checklist */}
           <div className="rounded-xl border border-slate-200/80 dark:border-white/10 bg-slate-50/70 dark:bg-white/[0.02] p-4 sm:p-5 space-y-3">
             <p className="text-xs font-semibold text-slate-900 dark:text-white">
-              {isRejected ? "Review Outcome & Follow-Up:" : "Admissions Verification Roadmap:"}
+              {isRejected ? "Review Outcome & Follow-Up:" : "Admissions Verification Status:"}
             </p>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li className="flex items-center gap-2.5">
@@ -195,7 +195,7 @@ export function MentorDashboardPage() {
                 <span>
                   {isRejected
                     ? "Admissions review completed — feedback available upon request"
-                    : "Guild Admissions Committee background verification in progress (typically 2–3 business days)"}
+                    : "Mentor admissions verification in progress (typically 2–3 business days)"}
                 </span>
               </li>
               <li className="flex items-center gap-2.5">
@@ -203,7 +203,7 @@ export function MentorDashboardPage() {
                 <span>
                   {isRejected
                     ? "Re-application eligible after further senior engineering experience"
-                    : "Console authorization, video rooms, and code review queue access unlocked"}
+                    : "Session controls, video rooms, and code review queue access unlocked"}
                 </span>
               </li>
             </ul>
@@ -231,7 +231,7 @@ export function MentorDashboardPage() {
   if (isError) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-slate-900">Mentor Command Center</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Mentor Dashboard</h1>
         <QueryError message="Could not load your dashboard." onRetry={() => refetch()} />
       </div>
     );
@@ -260,7 +260,7 @@ export function MentorDashboardPage() {
               </span>
             </div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-              Mentor Command Center, {firstName}
+              Mentor Dashboard, {firstName}
             </h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
               {activeMeeting ? (
@@ -285,7 +285,7 @@ export function MentorDashboardPage() {
             <Link to={activeSessionId ? `/mentor/control-center/${activeSessionId}` : "/mentor/sessions"}>
               <Button variant="primary" className="gap-2 text-xs font-medium">
                 <Settings size={14} />
-                Open Control Center
+                Session Controls
                 {activeMeeting?.status === "active" && (
                   <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                 )}

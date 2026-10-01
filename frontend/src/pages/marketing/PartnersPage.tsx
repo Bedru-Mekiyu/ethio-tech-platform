@@ -82,7 +82,7 @@ const partnerFrameworks = [
       "Standardized Monitoring, Evaluation, and Learning (MEL) export dashboards",
     ],
     metrics: "Auditable milestone tracking linked directly to verified student project completion.",
-    partnerTypes: ["Multilateral Donors", "Philanthropic Trusts", "Youth Development NGOs", "Diaspora Foundations"],
+    partnerTypes: ["Multilateral Donors", "Philanthropic Trusts", "Youth Development NGOs", "Technology Foundations"],
   },
   {
     id: "government" as PartnerPillar,
@@ -166,7 +166,7 @@ const faqs = [
     a: "We provide an optimized lightweight micro-server image that runs on standard campus hardware or low-power mini-PCs. It caches all video lectures, interactive coding sandboxes, and documentation locally.",
   },
   {
-    q: "Can international organizations and diaspora firms hire directly through the platform?",
+    q: "Can international organizations and technology companies hire directly through the platform?",
     a: "Yes. We support remote global hiring pipelines, hybrid co-op models, and direct contractor onboarding with verified identity and tax-compliant documentation.",
   },
   {

@@ -392,7 +392,7 @@ export function HubsPage() {
       >
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
           <Globe size={13} className="text-[var(--secondary)]" />
-          <span>Regional Physical Tech Infrastructure</span>
+          <span>Regional Learning Hubs</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
@@ -400,8 +400,8 @@ export function HubsPage() {
         </h1>
 
         <p className="mx-auto max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-          Reserve developer workstations, consult on-duty mentors, access offline LAN caches, and earn XP across six
-          national innovation corridors.
+          Reserve developer workstations with reliable power, access local offline caches, and collaborate with peers
+          and mentors across regional partner centers.
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">

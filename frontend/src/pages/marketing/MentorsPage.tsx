@@ -365,9 +365,9 @@ export function MentorsPage() {
               How Mentorship Works at EthioTech
             </h2>
             <p className="text-xs leading-relaxed text-slate-600">
-              EthioTech connects Ethiopian software engineering students with senior diaspora practitioners and industry
-              leads across Silicon Valley, Europe, and Pan-Africa. Every interaction is structured around real
-              codebases, asynchronous GitHub PR feedback, and high-leverage architectural review.
+              EthioTech connects software engineering students with senior practitioners and industry leads across
+              global and regional tech ecosystems. Every interaction is structured around real codebases, asynchronous
+              GitHub PR feedback, and high-leverage architectural review.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div className="rounded-xl border border-slate-200/80 bg-white p-3.5 shadow-xs">

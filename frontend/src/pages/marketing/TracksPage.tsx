@@ -117,7 +117,7 @@ export function TracksPage() {
               className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15]"
             >
               Master Production Engineering with <br className="hidden sm:inline" />
-              <span className="text-primary">Senior Diaspora Mentors</span>
+              <span className="text-primary">Experienced Mentors</span>
             </motion.h1>
 
             <motion.p
@@ -126,8 +126,8 @@ export function TracksPage() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal"
             >
-              Build distributed systems, mobile apps, and cloud architectures with live weekly code reviews from senior
-              diaspora engineers.
+              Build distributed systems, mobile apps, and cloud architectures with live weekly code reviews from
+              experienced engineers.
             </motion.p>
 
             {/* Quick Metrics Bar */}
@@ -594,9 +594,9 @@ export function TracksPage() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                 <Video size={18} />
               </div>
-              <h3 className="text-sm font-semibold text-slate-900">Diaspora Mentorship</h3>
+              <h3 className="text-sm font-semibold text-slate-900">Engineering Mentorship</h3>
               <p className="text-xs leading-relaxed text-slate-600">
-                Weekly live code breakdowns with Ethiopian staff engineers from Silicon Valley and Europe.
+                Weekly live code breakdowns with experienced staff engineers and technical leads.
               </p>
             </Card>
 

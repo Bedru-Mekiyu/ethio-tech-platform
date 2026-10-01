@@ -43,9 +43,9 @@ export function CertificatesPage() {
       </Card>
       {certificates.length === 0 ? (
         <EmptyState
-          title="No certificates yet"
-          description="Finish a learning track and earn mentor verification to unlock certificates."
-          actionLabel="View Tracks"
+          title="No certificates earned yet"
+          description="Complete all required track modules and capstone projects to receive verified course certificates."
+          actionLabel="Browse Tracks"
           actionHref="/app/tracks"
         />
       ) : (

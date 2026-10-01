@@ -113,7 +113,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     id: "live-mentorship",
     title: "2. Low-Latency Live Mentorship",
     shortTitle: "2. Live Mentorship",
-    subtitle: "Sub-150ms pair-programming with Ethiopian diaspora tech leads",
+    subtitle: "Sub-150ms pair programming and code reviews with senior tech leads",
     icon: Radio,
     badge: "Sub-150ms WebRTC",
     overview:
@@ -163,7 +163,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: FileCode2,
     badge: "Peer & Mentor Sign-Off",
     overview:
-      "Before any code merges, learners must pass rigorous peer review in their 4-6 engineer squad. Students review each other's pull requests, audit security vulnerabilities, and defend architectural trade-offs during weekly squad standups with a diaspora mentor.",
+      "Before any code merges, learners must pass rigorous peer review in their 4-6 engineer squad. Students review each other's pull requests, audit security vulnerabilities, and defend architectural trade-offs during weekly squad standups with an experienced engineering mentor.",
     keyDeliverables: [
       "At least 2 peer code approvals and 1 mentor architectural sign-off per feature",
       "Live 15-minute architectural defense presentation of system design choices",
@@ -225,7 +225,7 @@ const ROLE_PERSONAS: RolePersona[] = [
     badge: "100% Free Tuition",
     icon: GraduationCap,
     description:
-      "Transform your career through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from senior diaspora engineers.",
+      "Advance your technical capabilities through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from experienced software engineers.",
     image: LOCAL_MEDIA_ASSETS.hero.collaboration,
     imageAlt: "Engineering squads collaborating on real-world production codebases",
     keyBenefits: [
@@ -256,13 +256,12 @@ const ROLE_PERSONAS: RolePersona[] = [
   {
     id: "mentor",
     title: "The Mentor Experience",
-    eyebrow: "For Diaspora & Industry Tech Leads",
+    eyebrow: "For Senior Engineers & Technical Leads",
     badge: "Flexible 1-3 hrs/week",
     icon: Users,
-    description:
-      "Give back to Ethiopia's software ecosystem with maximum leverage. Share your expertise through structured office hours, PR reviews, and system design masterclasses.",
+    description: "Share your expertise through structured office hours, PR reviews, and system design masterclasses.",
     image: LOCAL_MEDIA_ASSETS.mentorship.codeReview,
-    imageAlt: "Senior diaspora engineers mentoring students on architectural design and code reviews",
+    imageAlt: "Experienced engineers mentoring students on architectural design and code reviews",
     keyBenefits: [
       {
         title: "High-Leverage Structured Format",
@@ -271,12 +270,12 @@ const ROLE_PERSONAS: RolePersona[] = [
       },
       {
         title: "Guide Emerging Engineers",
-        desc: "Directly mentor high-potential Ethiopian engineers and help shape emerging African software architects.",
+        desc: "Directly mentor high-potential engineers and help shape competent production software engineers.",
         icon: Sparkles,
       },
       {
-        title: "Diaspora Engineering Network",
-        desc: "Connect with fellow senior engineers, managers, and founders across Silicon Valley, Europe, and Pan-Africa.",
+        title: "Senior Engineering Community",
+        desc: "Connect with fellow senior engineers, managers, and founders across global and regional tech ecosystems.",
         icon: Globe,
       },
       {
@@ -336,7 +335,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Is EthioTech really 100% free? Are there any hidden fees or ISA contracts?",
     answer:
-      "Yes, EthioTech is 100% free for all students. We do not charge tuition, registration fees, or income-share agreements (ISAs). We operate as an open-impact digital public good funded by diaspora philanthropy, educational grants, and non-extractive enterprise sponsorships.",
+      "Yes, EthioTech is 100% free for all students. We do not charge tuition, registration fees, or income-share agreements (ISAs). We operate as an open-impact digital public good funded by philanthropic donations, educational grants, and non-extractive enterprise sponsorships.",
     category: "students",
   },
   {
@@ -352,7 +351,7 @@ const FAQ_ITEMS: FaqItem[] = [
     category: "students",
   },
   {
-    question: "What are the requirements to become a diaspora or industry mentor?",
+    question: "What are the requirements to become a mentor?",
     answer:
       "We welcome software engineers, tech leads, engineering managers, and architects with 2+ years of professional production experience. We look for individuals committed to volunteering 1-3 hours per week for code reviews, 1-on-1 office hours, or tech talks.",
     category: "mentors",
@@ -455,14 +454,14 @@ export function HowItWorksPage() {
             How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-            From baseline calibration to diaspora pairing, sandbox development, squad code defense, and verified career
-            placement.
+            From baseline calibration to small-group mentor pairing, sandbox development, squad code defense, and
+            verified career placement.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
               <Button size="lg" className="font-medium w-full sm:w-auto">
-                Start Free <ArrowRight className="ml-2 h-4 w-4" />
+                Create Student Account <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button
@@ -742,7 +741,7 @@ export function HowItWorksPage() {
             What It Looks Like For You
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-            Explore how students, diaspora mentors, and hiring partners collaborate inside EthioTech.
+            Explore how students, engineering mentors, and hiring partners collaborate inside EthioTech.
           </p>
 
           {/* Role Tabs */}
@@ -1037,10 +1036,11 @@ export function HowItWorksPage() {
                 <span>Start Today</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-                Ready to accelerate your software engineering journey?
+                Ready to build production-grade software?
               </h2>
               <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
-                Enroll in a track, meet your squad, and begin building production systems with real diaspora mentors.
+                Enroll in a track, collaborate with your squad, and build software with guidance from experienced
+                engineers.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">

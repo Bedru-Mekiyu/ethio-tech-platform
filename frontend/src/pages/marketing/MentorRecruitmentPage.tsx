@@ -115,25 +115,24 @@ const MENTOR_BENEFITS = [
   },
   {
     icon: Cpu,
-    title: "Elite Diaspora Peer Network",
+    title: "Engineering Leadership Network",
     description:
-      "Join private quarterly Guild roundtables, diaspora engineering dinners, and technology policy advisory circles.",
+      "Connect with fellow engineering leads, participate in technical roundtables, and share best practices.",
   },
   {
     icon: Trophy,
     title: "Stipends & Impact Recognition",
-    description:
-      "Optional honorariums for high-frequency mentors and public recognition on our National Builders Wall.",
+    description: "Optional honorariums for high-frequency mentors and public recognition in our mentor directory.",
   },
 ];
 
 const TESTIMONIALS = [
   {
     quote:
-      "Mentoring with EthioTech is the most rewarding 2 hours of my week. Reviewing code written by brilliant students across Ethiopia reminds me why I fell in love with software engineering.",
+      "Mentoring with EthioTech is the most rewarding 2 hours of my week. Reviewing code written by brilliant students reminds me why I fell in love with software engineering.",
     author: "Dawit Abebe",
     role: "Principal Systems Architect",
-    company: "Diaspora Engineering Guild (Seattle / Addis)",
+    company: "Enterprise Cloud Systems",
   },
   {
     quote:
@@ -267,16 +266,16 @@ export function MentorRecruitmentPage() {
       >
         <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-white/[0.04] px-3.5 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs">
           <ShieldCheck size={14} className="text-slate-900 dark:text-slate-100" />
-          <span>Senior Engineering Guild Membership</span>
+          <span>Engineering Mentorship</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.12] break-words">
-          Guide Ethiopia&apos;s Emerging <span className="text-primary">Software Architects</span>
+          Mentor Emerging <span className="text-primary">Software Engineers</span>
         </h1>
 
         <p className="mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400 font-normal">
-          Join senior engineers and architects guiding ambitious Ethiopian developers through structured code reviews,
-          system design, and career placement.
+          Support developers as they build production software through weekly code reviews, system design discussions,
+          and project evaluations.
         </p>
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 pt-2">
@@ -288,7 +287,7 @@ export function MentorRecruitmentPage() {
           </a>
           <a href="#onboarding-process" className="w-full sm:w-auto">
             <Button variant="secondary" size="md" className="w-full sm:w-auto font-semibold shadow-xs">
-              View Onboarding Journey
+              View Onboarding Steps
             </Button>
           </a>
         </div>
@@ -301,11 +300,11 @@ export function MentorRecruitmentPage() {
           </div>
           <div className="flex items-center gap-1.5">
             <Trophy size={14} className="text-slate-700 dark:text-slate-300" />
-            <span>Top 5% of Applicant Engineers Selected</span>
+            <span>Structured Review & Verification Process</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Users size={14} className="text-slate-700 dark:text-slate-300" />
-            <span>Join 50+ Active Tech Leads</span>
+            <span>Connect with Experienced Technical Leads</span>
           </div>
         </div>
 

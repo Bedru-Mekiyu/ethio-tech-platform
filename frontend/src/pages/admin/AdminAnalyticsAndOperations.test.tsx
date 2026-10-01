@@ -131,11 +131,11 @@ describe("AdminPage Component Suite", () => {
   it("renders platform overview hero and polished KPI StatCards", async () => {
     renderWithProviders(<AdminPage />);
 
-    expect(await screen.findByText("Platform Analytics & Growth")).toBeTruthy();
+    expect(await screen.findByText("Platform Overview")).toBeTruthy();
     expect(screen.getByText("Active Learners")).toBeTruthy();
     expect(screen.getByText("Total Students")).toBeTruthy();
-    expect(screen.getByText("Diaspora Mentors")).toBeTruthy();
-    expect(screen.getByText("30d XP Velocity")).toBeTruthy();
+    expect(screen.getByText("Active Mentors")).toBeTruthy();
+    expect(screen.getByText("30-Day Platform XP")).toBeTruthy();
 
     // Verify calculated metric values
     expect(screen.getByText("342")).toBeTruthy();

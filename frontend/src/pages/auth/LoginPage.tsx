@@ -81,7 +81,7 @@ export function LoginPage() {
       <motion.div variants={fadeUp} custom={0} className="space-y-1 text-center sm:text-left">
         <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Sign In</h2>
         <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
-          Enter your credentials to access your engineering workspace.
+          Enter your email and password to access your account.
         </p>
       </motion.div>
 
@@ -164,7 +164,7 @@ export function LoginPage() {
         className="mt-6 border-t border-slate-100 dark:border-white/10 pt-5 text-center space-y-2.5"
       >
         <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
-          New to EthioTech?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             to="/register"
             className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1.5"
@@ -174,7 +174,7 @@ export function LoginPage() {
           </Link>
         </p>
         <p className="text-xs text-slate-500 dark:text-slate-400">
-          Senior engineer or tech lead?{" "}
+          Experienced engineer?{" "}
           <Link
             to="/mentor-recruitment"
             className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1.5"

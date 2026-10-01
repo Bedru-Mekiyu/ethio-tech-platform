@@ -421,25 +421,25 @@ export function HomePage() {
           <div className="space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] backdrop-blur-xs">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-              <span>Engineering Education for Ethiopia</span>
+              <span>Software Engineering Education</span>
             </div>
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
             <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
-              Code Production Software with <span className="text-primary">Senior Diaspora Mentors</span>
+              Build Production Software with <span className="text-primary">Experienced Engineering Mentors</span>
             </h1>
 
             {/* Subtitle - Trimmed to comfortable 16-18px */}
             <p className="text-base sm:text-lg leading-relaxed text-slate-600 max-w-xl font-normal">
-              Structured learning tracks, live code reviews from diaspora engineers, and solar-powered hubs across six
-              Ethiopian cities.
+              Structured learning tracks, live code reviews from industry engineers, and regional learning hubs with
+              backup power and fiber connectivity.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto gap-2 font-medium">
-                  <span>Start Free</span>
+                  <span>Create Student Account</span>
                   <ArrowRight size={16} />
                 </Button>
               </Link>
@@ -453,7 +453,7 @@ export function HomePage() {
                 }}
               >
                 <Compass size={16} />
-                <span>View Tracks</span>
+                <span>Explore Curriculum</span>
               </Button>
             </div>
 
@@ -641,8 +641,8 @@ export function HomePage() {
             Everything Needed to Ship <span className="text-primary">Production Code</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-            Built for Ethiopian engineers: live diaspora classrooms, in-browser Linux workspaces, peer squads, and
-            employer-verified certificates.
+            A complete technical learning environment: live mentor reviews, in-browser Linux workspaces, peer squads,
+            and verifiable project portfolios.
           </p>
         </div>
 
@@ -1046,14 +1046,14 @@ export function HomePage() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
               <Award size={13} className="text-[var(--secondary)]" />
-              <span>Diaspora Mentors</span>
+              <span>Engineering Mentors</span>
             </div>
             <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-              Learn Directly From <span className="text-primary">Diaspora Engineers</span>
+              Learn Directly From <span className="text-primary">Experienced Engineers</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-              Direct access to Ethiopian staff engineers, architects, and technical founders from Silicon Valley,
-              Europe, and leading local enterprises.
+              Direct access to staff engineers, system architects, and technical leaders from global and regional
+              technology companies.
             </p>
           </div>
 
@@ -1272,7 +1272,7 @@ export function HomePage() {
             <div className="flex flex-col sm:flex-row gap-3 sm:flex-wrap lg:justify-end">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto font-medium">
-                  <span>Start Free</span>
+                  <span>Create Student Account</span>
                   <ArrowRight size={16} className="ml-1.5" />
                 </Button>
               </Link>

@@ -297,7 +297,7 @@ export function NotificationsPage() {
                 );
               })
             ) : (
-              <EmptyState title="No unread updates" description="You have caught up with all live notifications." />
+              <EmptyState title="No unread notifications" description="You have reviewed all recent updates." />
             )}
           </div>
         </Card>
@@ -306,7 +306,9 @@ export function NotificationsPage() {
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center gap-2 text-slate-600 font-medium border-b border-slate-100 pb-3">
               <CheckCircle2 size={13} className="text-[var(--secondary)]" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">Recent Read Items</span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+                Earlier Notifications
+              </span>
             </div>
             <div className="mt-4 space-y-2.5">
               {grouped.recent.length ? (
@@ -322,10 +324,7 @@ export function NotificationsPage() {
                   </div>
                 ))
               ) : (
-                <EmptyState
-                  title="No past notifications"
-                  description="Read items will appear here for archival reference."
-                />
+                <EmptyState title="No past notifications" description="Read notifications will appear here." />
               )}
             </div>
           </Card>

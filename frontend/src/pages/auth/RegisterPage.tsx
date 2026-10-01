@@ -89,11 +89,11 @@ export function RegisterPage() {
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">
           <Code2 size={11} className="text-slate-700" />
-          <span>Student Registration</span>
+          <span>Student Account</span>
         </div>
         <h2 className="text-xl font-bold tracking-tight text-slate-900">Create Student Account</h2>
         <p className="text-xs text-slate-600 font-medium">
-          Join hands-on software engineering tracks with senior mentor support.
+          Create an account to enroll in tracks and join weekly mentor sessions.
         </p>
       </motion.div>
 
@@ -135,7 +135,7 @@ export function RegisterPage() {
             id="password"
             label="Password"
             error={errors.password?.message}
-            description="Min 8 chars, letters & numbers"
+            description="Minimum 8 characters with letters and numbers"
           >
             <PasswordInput
               autoComplete="new-password"
@@ -191,7 +191,7 @@ export function RegisterPage() {
           id="learningInterests"
           label="Learning interests (optional)"
           error={errors.learningInterests?.message}
-          description="e.g. Fullstack Web, Mobile Apps, Cloud Architecture"
+          description="e.g. Frontend, backend, mobile, or cloud infrastructure"
         >
           <Input
             placeholder="Web, Mobile, AI, Cloud"
@@ -225,9 +225,9 @@ export function RegisterPage() {
         className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-3 text-center"
       >
         <p className="text-xs text-slate-600">
-          Want to mentor students?{" "}
+          Experienced engineer interested in mentoring?{" "}
           <Link to="/mentor-recruitment" className="font-semibold text-slate-900 hover:text-slate-700 ml-1">
-            Apply as Mentor
+            Apply to Mentor
           </Link>
         </p>
       </motion.div>

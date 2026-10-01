@@ -740,8 +740,9 @@ export function DonationPage() {
                 <li className="flex items-start gap-2.5">
                   <CheckCircle2 size={15} className="mt-0.5 text-[var(--secondary)] shrink-0" />
                   <span>
-                    <strong className="text-slate-900 font-semibold">Diaspora Freight:</strong> Free consolidated bulk
-                    shipping from our partner collection points in Washington D.C., Atlanta, London, and Frankfurt.
+                    <strong className="text-slate-900 font-semibold">Consolidated International Freight:</strong> Free
+                    consolidated bulk shipping from our partner collection points in Washington D.C., Atlanta, London,
+                    and Frankfurt.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
@@ -896,7 +897,7 @@ export function DonationPage() {
               >
                 <div>
                   <Label required>Donor / Organization Name</Label>
-                  <Input required placeholder="e.g. Diaspora Tech Guild" />
+                  <Input required placeholder="e.g. Acme Tech Foundation" />
                 </div>
                 <div>
                   <Label required>Email Address</Label>

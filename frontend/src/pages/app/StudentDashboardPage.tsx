@@ -105,7 +105,7 @@ export function StudentDashboardPage() {
     mutationFn: completeDailyChallenge,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dashboard", "student"] });
-      toast.success("Daily Challenge Completed! +25 XP awarded · Learning Streak Maintained 🔥");
+      toast.success("Daily challenge completed. +25 XP awarded.");
     },
     onError: () => {
       toast.error("Could not claim challenge reward. Please try again.");
@@ -126,7 +126,7 @@ export function StudentDashboardPage() {
     } catch {
       // ignore storage errors
     }
-    toast.success("Hub Arrival Verified! +50 XP awarded · Workstation Ready 🏢");
+    toast.success("Hub check-in confirmed. +50 XP awarded.");
   };
 
   if (isError) return <QueryError onRetry={() => refetch()} />;
@@ -430,9 +430,9 @@ export function StudentDashboardPage() {
               </div>
             ) : (
               <div className="mt-3.5 rounded-xl border border-dashed border-slate-200 p-5 text-center bg-slate-50/40 dark:bg-white/[0.02] dark:border-white/10">
-                <p className="text-xs text-slate-600 font-semibold">No individual project assignments pending.</p>
+                <p className="text-xs text-slate-600 font-semibold">No projects currently assigned.</p>
                 <p className="mt-0.5 text-[11px] text-slate-600 font-medium">
-                  Build production capstones and earn mentor reviews to populate your verified Skill Passport.
+                  Select a project from the catalog to build and submit for mentor review.
                 </p>
                 <Link to="/app/projects" className="mt-2.5 inline-block">
                   <Button
@@ -440,7 +440,7 @@ export function StudentDashboardPage() {
                     variant="outline"
                     className="text-xs border-slate-200 bg-white font-semibold shadow-xs hover:bg-slate-50 whitespace-nowrap"
                   >
-                    Browse Project Catalog
+                    Browse Projects
                   </Button>
                 </Link>
               </div>

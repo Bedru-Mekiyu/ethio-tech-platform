@@ -5,6 +5,7 @@ import {
   Award,
   BadgeCheck,
   CheckCircle2,
+  Code2,
   Download,
   ExternalLink,
   Flame,
@@ -74,7 +75,7 @@ function ProgressSkeleton() {
 }
 
 export function ProgressPage() {
-  usePageTitle("Progress & Mastery");
+  usePageTitle("Learning Progress");
   const user = useAuthStore((s) => s.user);
   const [tab, setTab] = useState<Tab>("overview");
   const [badgeFilter, setBadgeFilter] = useState<BadgeFilter>("all");
@@ -207,7 +208,6 @@ export function ProgressPage() {
           level,
           xp: estimatedXp,
           tier,
-          icon: "💻",
         };
       });
     }
@@ -218,14 +218,12 @@ export function ProgressPage() {
         level: Math.max(10, baseProgress),
         xp: user?.xp ?? 0,
         tier: baseProgress >= 50 ? "Proficient" : "Novice",
-        icon: "💻",
       },
       {
         name: "Problem Solving & Logic",
         level: Math.max(10, Math.round(baseProgress * 0.85)),
         xp: Math.round((user?.xp ?? 0) * 0.85),
         tier: baseProgress >= 50 ? "Proficient" : "Novice",
-        icon: "⚙️",
       },
     ];
   }, [dashboard?.progressByTrack, user?.xp]);
@@ -241,9 +239,9 @@ export function ProgressPage() {
       {/* Top Header */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Progress & Mastery Hub</h1>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 md:text-2xl">Learning Progress</h1>
           <p className="mt-0.5 text-xs text-slate-600 font-medium">
-            Track your skill mastery, verified credentials, achievement badges, and project portfolio.
+            Review track completion, earned credentials, badges, and project submissions.
           </p>
         </div>
 
@@ -445,7 +443,9 @@ export function ProgressPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm">{skill.icon}</span>
+                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-blue-50 text-[var(--secondary)] border border-blue-100 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
+                        <Code2 size={13} />
+                      </div>
                       <span className="text-xs font-bold text-slate-900">{skill.name}</span>
                     </div>
                     <Badge

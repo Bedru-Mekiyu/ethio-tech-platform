@@ -24,9 +24,9 @@ import { cn, formatXp, getRankTitle } from "@/lib/utils";
 type LeaderboardTab = "students" | "mentors" | "teams";
 
 const tabs: Array<{ id: LeaderboardTab; label: string; description: string }> = [
-  { id: "students", label: "Students", description: "XP-driven rankings" },
-  { id: "mentors", label: "Mentors", description: "Teaching impact rankings" },
-  { id: "teams", label: "Teams", description: "Squad momentum rankings" },
+  { id: "students", label: "Students", description: "Coursework and project XP" },
+  { id: "mentors", label: "Mentors", description: "Session hours and code reviews" },
+  { id: "teams", label: "Teams", description: "Squad collaboration and milestones" },
 ];
 
 function numberFormatter(value: number) {
@@ -196,10 +196,10 @@ export function LeaderboardPage() {
     <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8 space-y-10">
       <div className="text-center space-y-3">
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
-          National Engineering Contributor Index
+          Platform Leaderboard
         </h1>
         <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600">
-          Rankings updated continuously from verified code reviews, sprint commits, and technical capstone evaluations.
+          Rankings based on completed lessons, verified project submissions, and code reviews.
         </p>
       </div>
 

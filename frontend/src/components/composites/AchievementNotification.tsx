@@ -33,7 +33,7 @@ export function AchievementToast({ socket }: AchievementToastProps) {
       const n = payload as NotificationPayload;
       if (n.type === "badge" || n.type === "xp") {
         const id = `ach-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        setNotifications((prev) => [...prev, { id, title: "Achievement Unlocked", body: n.message, at: n.at }]);
+        setNotifications((prev) => [...prev, { id, title: "Milestone Reached", body: n.message, at: n.at }]);
         setTimeout(() => {
           setNotifications((prev) => prev.filter((x) => x.id !== id));
         }, 6000);

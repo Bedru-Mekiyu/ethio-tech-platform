@@ -89,10 +89,10 @@ const REGIONAL_DIVIDE_SOLUTIONS = [
     tag: "Physical Mesh",
   },
   {
-    title: "3. Global Ethiopian Diaspora Bridge",
+    title: "3. Industry Mentorship Network",
     subtitle: "Engineering mentorship delivered locally",
     description:
-      "Over 250 Ethiopian tech leaders working at Google, Microsoft, Amazon, Safaricom, and African unicorns conduct weekly live reviews, bridging local talent to global engineering standards.",
+      "Experienced engineers and technical leads conduct weekly live reviews, connecting learners directly to production engineering standards.",
     icon: Layers3,
     tag: "Mentorship",
   },
@@ -134,7 +134,7 @@ const ROADMAP_DATA: RoadmapMilestone[] = [
     deliverables: [
       "WebRTC audio mesh with sub-150ms latency",
       "Initial 4 curriculum tracks with 150+ interactive lessons",
-      "5,000+ registered learners & 80+ diaspora mentors onboarded",
+      "Learners and industry mentors onboarded across initial cohorts",
       "Pilot regional hub established in Hawassa",
     ],
   },
@@ -177,7 +177,7 @@ const ROADMAP_DATA: RoadmapMilestone[] = [
       "Expansion into Kenya, Rwanda, and Uganda regional university networks",
       "Decentralized student credential verification on open public ledger",
       "100,000+ certified production-ready software engineers placed globally",
-      "Fully self-sustaining open-impact endowment funded by diaspora philanthropy",
+      "Self-sustaining educational model supported by community contributions and grants",
     ],
   },
 ];
@@ -209,7 +209,7 @@ export function AboutPage() {
     {
       icon: Globe,
       value: formatCompactCount(data?.stats.mentorNetwork ?? 250),
-      label: "Diaspora Mentors",
+      label: "Engineering Mentors",
       helper: "Engineering leaders worldwide",
       tone: "default" as const,
     },
@@ -253,14 +253,14 @@ export function AboutPage() {
             Engineering Education Built for <span className="text-primary">Ethiopian Developers</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
-            Tuition-free learning combining diaspora mentorship, in-browser Linux environments, peer code reviews, and
-            physical regional hubs across Ethiopia.
+            Tuition-free learning combining industry mentorship, in-browser Linux environments, peer code reviews, and
+            regional learning hubs.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-3">
             <Link to="/register">
               <Button size="lg" className="font-medium w-full sm:w-auto">
-                Start Free <ArrowRight className="ml-2 h-4 w-4" />
+                Create Student Account <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Link to="/mentor-recruitment">
@@ -286,7 +286,7 @@ export function AboutPage() {
               data?.hero.highlights ?? [
                 "100% Free & Open Source",
                 "WebRTC Sub-150ms Live Labs",
-                "Diaspora Mentor Network",
+                "Engineering Mentor Network",
                 "Offline-First Mesh Sync",
                 "Verifiable Proof-of-Work",
               ]
@@ -481,7 +481,7 @@ export function AboutPage() {
             <h3 className="mt-4 text-lg font-bold text-slate-900">Engineering Mission</h3>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">
               Democratize production software engineering education across Ethiopia through tuition-free curriculum,
-              live diaspora mentorship, and regional tech hubs.
+              live mentor code reviews, and regional learning hubs.
             </p>
           </Card>
 
@@ -537,11 +537,11 @@ export function AboutPage() {
 
               <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3.5">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-900">3. Diaspora Mentorship Mesh</span>
+                  <span className="font-semibold text-slate-900">3. Technical Mentorship Network</span>
                   <span className="text-[11px] text-slate-500 font-medium">Global Network</span>
                 </div>
                 <p className="mt-1 text-xs text-slate-600">
-                  Weekly code reviews and async architecture feedback from Ethiopian staff engineers worldwide.
+                  Weekly code reviews and async architecture feedback from experienced software engineers worldwide.
                 </p>
               </div>
 
@@ -571,7 +571,7 @@ export function AboutPage() {
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">
               {data?.bridge.description ??
-                "EthioTech operates as an open-impact digital public good. We bridge the structural divide by linking university classrooms directly to diaspora tech leads and production codebases."}
+                "EthioTech connects university learners directly to experienced technical leads and production codebases."}
             </p>
 
             <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
@@ -593,7 +593,7 @@ export function AboutPage() {
               {(
                 data?.bridge.bullets ?? [
                   "Zero-cost access: No tuition, no upfront fees, and no income-share agreements.",
-                  "Live pair programming with diaspora leads at top global tech companies.",
+                  "Live code reviews and pair programming with experienced technical leads.",
                   "Physical Regional Hubs with reliable power and internet across 6 university cities.",
                 ]
               ).map((bullet, index) => {
@@ -750,8 +750,8 @@ export function AboutPage() {
               </div>
               <h3 className="mt-3 text-sm font-semibold text-slate-900">Ethical Philanthropic Model</h3>
               <p className="mt-1.5 text-xs leading-relaxed text-slate-600">
-                We operate free from extractive investor incentives. Funding is derived exclusively from diaspora tech
-                philanthropy, educational grants, and CSR partnerships. No student is ever charged tuition.
+                We operate free from extractive investor incentives. Funding is derived from philanthropic donations,
+                community contributors, educational grants, and CSR partnerships. No student is ever charged tuition.
               </p>
             </Card>
 
@@ -782,8 +782,8 @@ export function AboutPage() {
                 Ready to transform your engineering trajectory?
               </h2>
               <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-slate-700 dark:text-slate-300 font-medium sm:text-sm">
-                Whether you are a university student building production systems or a diaspora engineer guiding emerging
-                talent, EthioTech provides the platform.
+                Whether you are an aspiring software engineer building production systems or an experienced engineer
+                guiding emerging talent, EthioTech provides the platform.
               </p>
             </div>
             <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap lg:justify-end">

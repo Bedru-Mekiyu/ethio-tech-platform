@@ -3,9 +3,9 @@ import { Logo } from "@/components/brand/Logo";
 import { Shield, Zap, Users } from "lucide-react";
 
 const features = [
-  { icon: Zap, label: "Live classrooms", desc: "Real-time sessions with mentors" },
-  { icon: Shield, label: "XP system", desc: "Track progress with achievements" },
-  { icon: Users, label: "Mentor network", desc: "Learn from industry engineers" },
+  { icon: Zap, label: "Live Code Reviews", desc: "Weekly small-group sessions with experienced engineers" },
+  { icon: Shield, label: "Milestone Tracking", desc: "Structured curriculum with verifiable project completion" },
+  { icon: Users, label: "Technical Mentorship", desc: "Direct feedback on architecture, testing, and implementation" },
 ] as const;
 
 export function AuthLayout() {
@@ -28,17 +28,15 @@ export function AuthLayout() {
           <div className="mt-12">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3 py-0.5 text-xs font-medium text-slate-700">
               <Shield size={12} className="text-slate-700" />
-              <span>Pan-Ethiopian Engineering Platform</span>
+              <span>Software Engineering Education</span>
             </div>
             <h1 className="mt-5 max-w-md text-xl font-bold leading-tight tracking-tight text-slate-900 xl:text-2xl">
-              {isLogin
-                ? "Welcome back to your engineering workspace"
-                : "Start learning software engineering with verified mentorship"}
+              {isLogin ? "Sign in to your account" : "Learn software engineering through direct mentorship"}
             </h1>
             <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-600 sm:text-sm">
               {isLogin
-                ? "Your active tracks, code sandboxes, squad sessions, and regional hub passes are ready."
-                : "Join high school students and university engineers mastering practical web, mobile, AI, and cloud architectures."}
+                ? "Access your coursework, project repositories, and mentor review sessions."
+                : "Structured curriculum, in-browser development environments, and weekly code reviews with experienced engineers."}
             </p>
           </div>
 

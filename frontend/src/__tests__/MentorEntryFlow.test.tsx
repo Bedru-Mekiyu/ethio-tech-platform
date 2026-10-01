@@ -57,8 +57,8 @@ describe("Mentor Entry Flow Suite", () => {
       );
 
       // Verify headline
-      expect(screen.getByText(/Guide Ethiopia's Emerging/i)).toBeTruthy();
-      expect(screen.getByText(/Software Architects/i)).toBeTruthy();
+      expect(screen.getByText(/Mentor Emerging/i)).toBeTruthy();
+      expect(screen.getByText(/Software Engineers/i)).toBeTruthy();
 
       // Verify fields
       expect(screen.getByLabelText(/Full Name/i)).toBeTruthy();

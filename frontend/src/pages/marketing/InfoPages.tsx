@@ -212,7 +212,7 @@ export function TermsPage() {
   return (
     <InfoPage
       title="Platform Terms of Service"
-      intro="Our terms ensure a safe, collaborative, and academically rigorous environment for Ethiopian students, diaspora mentors, and partner institutions."
+      intro="Our terms ensure a safe, collaborative, and academically rigorous environment for learners, engineering mentors, and partner institutions."
       sections={[
         {
           title: "Academic Integrity & Code Originality",

@@ -22,8 +22,8 @@ export function Footer({ className }: FooterProps) {
           <div className="space-y-4 lg:col-span-2">
             <Logo variant="full" subtitle="East Africa" />
             <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed max-w-sm">
-              Tuition-free software engineering education for Ethiopia: live diaspora mentorship, in-browser Linux
-              environments, peer squads, and regional tech hubs.
+              Tuition-free software engineering education: structured learning tracks, mentor code reviews, in-browser
+              Linux environments, peer squads, and regional learning hubs.
             </p>
 
             {/* Social Links */}
@@ -209,7 +209,7 @@ export function Footer({ className }: FooterProps) {
             <span>© {new Date().getFullYear()} EthioTech Platform</span>
           </div>
 
-          <p className="text-slate-600 dark:text-slate-400 font-medium">Engineered for Ethiopian developers</p>
+          <p className="text-slate-600 dark:text-slate-400 font-medium">Open software engineering education</p>
         </div>
       </div>
     </footer>

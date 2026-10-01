@@ -217,16 +217,16 @@ export function AdminPage() {
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-900">
                 <Radio size={11} className="animate-pulse text-[var(--secondary)]" />
-                Command Center
+                Admin Console
               </span>
               <Badge variant="outline" size="sm">
                 Production Data
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Analytics & Growth</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Overview</h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Real-time intelligence across learner engagement, diaspora mentorship, regional hub capacity, and
-              gamification XP velocity.
+              Operational metrics across student enrollment, active mentorship, learning hub attendance, and course
+              progress.
             </p>
           </div>
 
@@ -287,13 +287,13 @@ export function AdminPage() {
           icon={<Users className="text-slate-900" size={18} />}
         />
         <StatCard
-          label="Diaspora Mentors"
+          label="Active Mentors"
           value={mentorCount.toLocaleString()}
-          sub="Verified global industry guides"
+          sub="Verified engineering mentors"
           icon={<GraduationCap className="text-slate-900" size={18} />}
         />
         <StatCard
-          label="30d XP Velocity"
+          label="30-Day Platform XP"
           value={`${xpEarned30d.toLocaleString()} XP`}
           sub={`${sessionFillRate}% session fill rate`}
           icon={<Zap className="text-amber-500" size={18} />}
@@ -488,7 +488,7 @@ export function AdminPage() {
             <div className="flex items-center gap-2">
               <Award size={15} className="text-amber-500" />
               <div>
-                <CardTitle className="text-sm font-semibold text-slate-900">Top Diaspora Mentors</CardTitle>
+                <CardTitle className="text-sm font-semibold text-slate-900">Top Mentors</CardTitle>
                 <CardDescription className="text-xs font-medium text-slate-600">
                   Highest rated guides by sessions & feedback
                 </CardDescription>
@@ -547,7 +547,7 @@ export function AdminPage() {
               })
             ) : (
               <div className="p-6 text-center rounded-lg border border-dashed border-slate-200">
-                <p className="text-xs font-medium text-slate-600">No diaspora mentor ratings recorded yet.</p>
+                <p className="text-xs font-medium text-slate-600">No mentor ratings recorded yet.</p>
               </div>
             )}
           </div>
