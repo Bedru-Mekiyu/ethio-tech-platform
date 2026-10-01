@@ -417,10 +417,10 @@ export function AdminContentPage() {
           <div>
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 rounded-full bg-slate-900" />
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum Content Studio</h1>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Curriculum & Content Management</h1>
             </div>
             <p className="text-xs sm:text-sm text-slate-700 mt-0.5 font-medium">
-              Master-detail hierarchical architect for learning tracks, modules, video lectures, and code labs.
+              Manage track structures, modules, lesson content, coding challenges, and capstone projects.
             </p>
           </div>
 

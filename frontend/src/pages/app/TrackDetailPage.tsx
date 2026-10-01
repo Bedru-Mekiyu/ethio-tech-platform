@@ -37,7 +37,7 @@ function TrackDetailSkeleton() {
     <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8 space-y-8">
       <Skeleton className="h-6 w-36 rounded-full" />
       <Skeleton className="h-48 rounded-[28px]" />
-      <div className="grid gap-4 sm:p-5 md:p-6 xl:grid-cols-[1.1fr_0.9fr]">
+      <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <Skeleton className="h-[30rem] rounded-[28px]" />
         <Skeleton className="h-[30rem] rounded-[28px]" />
       </div>
@@ -139,7 +139,7 @@ export function TrackDetailPage() {
 
       {/* Hero Banner Card */}
       <Card className="border border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-xs">
-        <div className="flex flex-col gap-4 sm:p-5 md:p-6 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-3">
             <div className="flex flex-wrap items-center gap-1.5">
               <Badge variant="outline" size="sm">

@@ -21,17 +21,17 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
             <Trophy size={16} />
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Live Engagement Leaderboard</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Session Participation & Engagement</h3>
           </div>
         </div>
         <Badge variant="warning" className="h-5 px-1.5">
-          {scores.length} Active Candidates
+          {scores.length} Participants
         </Badge>
       </div>
 
       {sortedScores.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-8">
-          <p className="text-xs text-slate-600 font-medium">No engagement data recorded for this session yet</p>
+          <p className="text-xs text-slate-600 font-medium">No participation activity recorded for this session yet.</p>
         </div>
       ) : (
         <div className="space-y-2.5 max-h-[500px] overflow-y-auto mcc-scrollbar pr-1">
@@ -50,13 +50,13 @@ export default function EngagementPanel({ scores }: EngagementPanelProps) {
                 )}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="flex items-center justify-center shrink-0 w-6 h-6">
+                  <div className="flex items-center justify-center shrink-0 w-7 h-6">
                     {rank === 1 ? (
-                      <span className="text-lg">🥇</span>
+                      <span className="text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded">#1</span>
                     ) : rank === 2 ? (
-                      <span className="text-lg">🥈</span>
+                      <span className="text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/[0.06] px-1.5 py-0.5 rounded">#2</span>
                     ) : rank === 3 ? (
-                      <span className="text-lg">🥉</span>
+                      <span className="text-xs font-bold text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-1.5 py-0.5 rounded">#3</span>
                     ) : (
                       <span className="text-xs font-bold text-slate-600 font-medium">{rank}</span>
                     )}

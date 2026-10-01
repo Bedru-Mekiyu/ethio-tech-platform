@@ -32,7 +32,7 @@ function SubmitSkeleton() {
   return (
     <div className="space-y-6">
       <Skeleton className="h-32 rounded-[28px]" />
-      <div className="grid gap-4 sm:p-5 md:p-6 xl:grid-cols-[1.08fr_0.92fr]">
+      <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
         <Skeleton className="min-h-[34rem] rounded-[28px]" />
         <Skeleton className="min-h-[34rem] rounded-[28px]" />
       </div>
@@ -135,19 +135,19 @@ export function ProjectSubmitPage() {
 
   return (
     <div className="space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="max-w-3xl space-y-2">
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Project Submission Portal</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Submit Project for Review</h1>
             <p className="text-xs text-slate-600 font-medium max-w-2xl leading-relaxed">
-              Choose an active capstone assignment, attach your GitHub repository and live deployment URLs, and submit
-              for mentor review.
+              Select an assigned capstone project, provide your GitHub repository and live deployment URLs, and submit
+              for mentor evaluation.
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
               <Link to="/app/projects">
                 <Button size="sm" variant="primary" type="button" className="text-xs font-medium gap-1.5">
                   <Rocket size={13} />
-                  View Assignments
+                  View Projects & Assignments
                 </Button>
               </Link>
               <Link to={selectedProject?.trackId ? `/app/tracks/${selectedProject.trackId}` : "/app/tracks"}>
@@ -180,9 +180,9 @@ export function ProjectSubmitPage() {
         </div>
       </Card>
 
-      <div className="grid gap-4 sm:p-5 md:p-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
         <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">Active Assignment Board</h2>
               <Badge variant="success" size="sm">
@@ -230,7 +230,7 @@ export function ProjectSubmitPage() {
             </div>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
               <h2 className="text-sm font-semibold text-slate-900">{selectedProject?.title}</h2>
               <Badge variant="outline" size="sm">
@@ -264,7 +264,7 @@ export function ProjectSubmitPage() {
         </div>
 
         <div className="space-y-6">
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <CardHeader className="p-0 border-b border-slate-100 pb-3">
               <CardTitle className="text-sm font-semibold text-slate-900">Send Final Build</CardTitle>
             </CardHeader>
@@ -348,7 +348,7 @@ export function ProjectSubmitPage() {
             </form>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center gap-2 text-slate-600 font-medium">
               <CheckCircle2 size={14} className="text-[var(--secondary)]" />
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">
@@ -372,7 +372,7 @@ export function ProjectSubmitPage() {
             </div>
           </Card>
 
-          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center gap-2 text-slate-600 font-medium">
               <FileCode2 size={14} className="text-[var(--secondary)]" />
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-600">Recent submissions</span>
@@ -399,7 +399,7 @@ export function ProjectSubmitPage() {
       </div>
 
       {latestSubmission && (
-        <Card className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm dark:bg-white/[0.02] dark:border-white/10">
+        <Card className="rounded-2xl border border-slate-200/80 bg-slate-50/60 p-4 sm:p-5 md:p-6 shadow-sm dark:bg-white/[0.02] dark:border-white/10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h3 className="mt-1 text-xl font-bold text-slate-900">

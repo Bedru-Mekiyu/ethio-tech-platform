@@ -97,7 +97,7 @@ export function LessonPage() {
       </div>
 
       {/* Lesson Header Card */}
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             {lesson?.moduleTitle && (
@@ -127,7 +127,7 @@ export function LessonPage() {
       </Card>
 
       {/* Main Content Card */}
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 space-y-6 shadow-sm">
         {/* Prerequisites if any */}
         {lesson?.prerequisites && lesson.prerequisites.length > 0 && (
           <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-4 dark:bg-white/[0.02] dark:border-white/10">
@@ -183,7 +183,7 @@ export function LessonPage() {
 
         {/* Challenge Task Box */}
         {lesson?.challengeTask && (
-          <div className="rounded-xl border border-amber-200/90 bg-amber-50/60 p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 space-y-1.5 shadow-2xs">
+          <div className="rounded-xl border border-amber-200/90 bg-amber-50/60 p-4 sm:p-5 md:p-6 space-y-1.5 shadow-2xs">
             <p className="text-[10px] font-bold uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
               <CheckCircle size={13} className="text-amber-600" />
               Interactive Challenge Task

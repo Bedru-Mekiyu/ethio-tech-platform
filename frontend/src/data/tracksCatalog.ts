@@ -1822,7 +1822,7 @@ export const loginRateLimiter = rateLimit({
         estimatedHours: 36,
         techStack: ["Figma", "React", "TypeScript", "Tailwind CSS", "Radix UI", "Storybook", "Framer Motion"],
         architectureHighlights: [
-          "Design token architecture exported seamlessly from Figma variables into CSS custom properties",
+          "Design token architecture exported directly from Figma variables into CSS custom properties",
           "100% WCAG 2.1 AA accessible with automated Axe-Core test runners on all Storybook stories",
           "Compound React components with full focus management and ARIA descriptions",
         ],

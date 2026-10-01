@@ -379,7 +379,7 @@ export default function MentorControlCenterPage() {
             <ArrowLeft size={16} aria-hidden="true" />
           </Button>
           <div>
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Mentor OS Control Center</h1>
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Mentor Control Center</h1>
             <p className="text-xs text-slate-500 mt-0.5">Session ID: {sessionId?.toUpperCase()}</p>
           </div>
           <Badge
@@ -396,9 +396,9 @@ export default function MentorControlCenterPage() {
           variant="outline"
           className="h-8 text-xs border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-lg"
           onClick={() => refetch()}
-          aria-label="Refresh dashboard data"
+          aria-label="Refresh session data"
         >
-          <RefreshCw size={12} className="mr-1.5" aria-hidden="true" /> Refresh Dashboard
+          <RefreshCw size={12} className="mr-1.5" aria-hidden="true" /> Refresh Session Data
         </Button>
       </div>
 

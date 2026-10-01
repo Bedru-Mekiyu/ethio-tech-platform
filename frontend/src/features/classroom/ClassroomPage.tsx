@@ -25,7 +25,7 @@ import { StudentPollsPanel } from "./panels/StudentPollsPanel";
 import { StudentNotesPanel } from "./panels/StudentNotesPanel";
 import { StudentResourcesPanel } from "./panels/StudentResourcesPanel";
 
-import { MessageSquare, HelpCircle, BarChart3, FileText, Folder, Layers, X, Send, Sparkles } from "lucide-react";
+import { MessageSquare, HelpCircle, BarChart3, FileText, Folder, Layers, X, Send, Clock, Pencil } from "lucide-react";
 
 interface ChatMsg {
   id: string;
@@ -345,7 +345,7 @@ export function ClassroomPage() {
             <div className="relative flex flex-1 flex-col bg-slate-50">
               <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2.5 shadow-xs">
                 <div className="flex items-center gap-2 text-xs font-semibold text-slate-900">
-                  <Sparkles className="h-4 w-4 text-slate-900" />
+                  <Pencil className="h-4 w-4 text-slate-900" />
                   <span>Collaborative Whiteboard</span>
                 </div>
                 <button
@@ -389,10 +389,10 @@ export function ClassroomPage() {
             <div className="flex h-full items-center justify-center bg-slate-50 px-6 text-center">
               <div className="max-w-md rounded-3xl border border-slate-200/80 bg-white p-8 shadow-md">
                 <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-900">
-                  <Sparkles className="h-7 w-7" />
+                  <Clock className="h-7 w-7" />
                 </div>
                 <h2 className="text-lg font-bold text-slate-900">
-                  {meetingStatus === "active" ? "Connecting to LiveKit Media Server..." : "Session is Not Live Yet"}
+                  {meetingStatus === "active" ? "Connecting to LiveKit Media Server..." : "Session Not Started"}
                 </h2>
                 <p className="mt-2 text-xs text-slate-500 leading-relaxed">
                   {meetingStatus === "scheduled"
@@ -410,7 +410,7 @@ export function ClassroomPage() {
                   onClick={() => navigate("/app/sessions")}
                   className="mt-6 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-5 py-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors shadow-xs"
                 >
-                  Back to Sessions
+                  Return to Sessions
                 </button>
               </div>
             </div>
@@ -463,7 +463,7 @@ export function ClassroomPage() {
                   <div className="flex-1 overflow-y-auto space-y-3 pr-1">
                     {chatMessages.length === 0 ? (
                       <div className="flex h-full items-center justify-center text-center text-xs text-slate-400">
-                        No messages yet. Say hello in chat!
+                        No messages in chat yet.
                       </div>
                     ) : (
                       chatMessages.map((msg) => (

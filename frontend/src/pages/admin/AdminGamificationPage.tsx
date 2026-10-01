@@ -402,7 +402,7 @@ export function AdminGamificationPage() {
         const defaultChallenges: DailyChallenge[] = [
           {
             _id: "ch_1",
-            title: "Solve 1 Algorithmic Kata",
+            title: "Complete 1 Code Challenge",
             description: "Submit an accepted solution on the platform code arena.",
             category: "daily_quest",
             xpReward: 50,
@@ -411,7 +411,7 @@ export function AdminGamificationPage() {
           },
           {
             _id: "ch_2",
-            title: "Review a Cohort Peer's PR",
+            title: "Review Peer Pull Request",
             description: "Provide constructive line comments and approve a student PR.",
             category: "community_task",
             xpReward: 75,
@@ -420,7 +420,7 @@ export function AdminGamificationPage() {
           },
           {
             _id: "ch_3",
-            title: "Push 3 Commits to Capstone Repo",
+            title: "Commit Progress to Capstone Project",
             description: "Keep Git history active with structured commit messages.",
             category: "capstone_challenge",
             xpReward: 100,
@@ -491,7 +491,7 @@ export function AdminGamificationPage() {
         },
         ...(old ?? []),
       ]);
-      toast.success(`Badge "${newBadgeName}" created successfully!`);
+      toast.success(`Badge "${newBadgeName}" created successfully.`);
       setCreateBadgeOpen(false);
       setNewBadgeName("");
       setNewBadgeDesc("");
@@ -534,7 +534,7 @@ export function AdminGamificationPage() {
         },
         ...(old ?? []),
       ]);
-      toast.success("Daily quest created successfully!");
+      toast.success("Daily quest created successfully.");
       setCreateChallengeOpen(false);
       setNewChallengeTitle("");
       setNewChallengeDesc("");

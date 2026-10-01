@@ -166,7 +166,7 @@ describe("CalendarPage Component Test Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(await screen.findByText(/Study Planner & Calendar/i)).toBeDefined();
+    expect(await screen.findByText(/Schedule & Calendar/i)).toBeDefined();
     expect(screen.getByText(/Study Streak/i)).toBeDefined();
     expect(screen.getByText(/hrs completed/i)).toBeDefined();
     expect(screen.getByText(/Sync Sessions/i)).toBeDefined();
@@ -211,7 +211,7 @@ describe("CalendarPage Component Test Suite", () => {
       </QueryClientProvider>,
     );
 
-    await screen.findByText(/Study Planner & Calendar/i);
+    await screen.findByText(/Schedule & Calendar/i);
 
     const prevBtn = screen.getByRole("button", { name: /Previous period/i });
     const nextBtn = screen.getByRole("button", { name: /Next period/i });
@@ -221,7 +221,7 @@ describe("CalendarPage Component Test Suite", () => {
     fireEvent.click(prevBtn);
     fireEvent.click(todayBtn);
 
-    expect(screen.getByText(/Study Planner & Calendar/i)).toBeDefined();
+    expect(screen.getByText(/Schedule & Calendar/i)).toBeDefined();
   });
 
   it("filters events in Study Agenda view by search term and type", async () => {
@@ -263,7 +263,7 @@ describe("CalendarPage Component Test Suite", () => {
       </QueryClientProvider>,
     );
 
-    await screen.findByText(/Study Planner & Calendar/i);
+    await screen.findByText(/Schedule & Calendar/i);
 
     // Open add modal
     const addBtn = screen.getByRole("button", { name: /Schedule Block/i });

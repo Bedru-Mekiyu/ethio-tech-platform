@@ -230,7 +230,7 @@ function StudentTrackCard({
           </p>
           <p className="text-xs text-slate-600 leading-relaxed">
             {done
-              ? "All milestones completed! Review capstones or explore another track."
+              ? "All milestones completed. Review capstones or explore another pathway."
               : track.enrolled
                 ? "Active track. Attend upcoming live workshops & submit code checkpoints."
                 : "Available to start anytime. Includes 1:1 mentor code reviews."}

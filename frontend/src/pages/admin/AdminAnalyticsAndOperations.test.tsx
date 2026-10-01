@@ -185,7 +185,7 @@ describe("AdminOperationsPage Component Suite", () => {
   it("renders operations center header and all 5 services in the health grid", async () => {
     renderWithProviders(<AdminOperationsPage />);
 
-    expect(await screen.findByText("Platform Operations Center")).toBeTruthy();
+    expect(await screen.findByText("Platform Operations & Health")).toBeTruthy();
     expect(screen.getByText("Systems Active")).toBeTruthy();
 
     // Services (rendered after healthQuery resolves)

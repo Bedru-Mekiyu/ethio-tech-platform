@@ -52,21 +52,21 @@ const ETHIOPIAN_DEMOGRAPHIC_FACTS = [
     metric: "100k+",
     label: "Annual STEM Graduates",
     description:
-      "50+ public universities graduate tens of thousands of engineers annually, yet face critical shortage of practical labs.",
+      "Over 50 public universities graduate engineers annually, but lack sufficient practical lab infrastructure.",
     icon: GraduationCap,
   },
   {
     metric: "14+",
     label: "Regional Universities Linked",
     description:
-      "Bridging the regional digital divide between Addis Ababa and universities in Hawassa, Jimma, Bahir Dar, Mekelle, and Dire Dawa.",
+      "Connecting engineering students across Addis Ababa, Hawassa, Jimma, Bahir Dar, Mekelle, and Dire Dawa.",
     icon: MapPinned,
   },
   {
     metric: "$0",
     label: "Tuition or Subscription Fees",
     description:
-      "Fully subsidized non-profit model guaranteeing equal access to all students regardless of economic background.",
+      "Tuition-free non-profit model ensuring equal access regardless of economic background.",
     icon: Users,
   },
 ];
@@ -76,7 +76,7 @@ const REGIONAL_DIVIDE_SOLUTIONS = [
     title: "1. Edge-Optimized & Offline Sync",
     subtitle: "Built for resilient regional connectivity",
     description:
-      "Our platform uses an ultra-compact lightweight protocol and ServiceWorker caching. Interactive exercises run in in-browser WASM sandbox environments, allowing students to learn even during intermittent network drops.",
+      "Lightweight client protocols and in-browser WebAssembly runtimes keep coding exercises responsive even during intermittent network drops.",
     icon: Radio,
     tag: "Offline First",
   },
@@ -84,7 +84,7 @@ const REGIONAL_DIVIDE_SOLUTIONS = [
     title: "2. Physical Hub Mesh Network",
     subtitle: "Safe spaces with power, fast fiber & workstations",
     description:
-      "We partner with regional tech centers and universities to host dedicated EthioTech Learning Hubs equipped with backup power, high-speed fiber internet, and collaborative hardware setups.",
+      "Regional hubs equipped with generator power, dedicated fiber connectivity, and collaborative Linux workstations.",
     icon: Building2Icon,
     tag: "Physical Mesh",
   },
@@ -100,7 +100,7 @@ const REGIONAL_DIVIDE_SOLUTIONS = [
     title: "4. Open-Source Production Repositories",
     subtitle: "No toy code, only verifiable proof-of-work",
     description:
-      "All projects are maintained as open-source codebases with full git histories, automated CI test suites, and live staging URLs that serve as definitive proof of competence for employers.",
+      "Open-source project repositories with structured Git histories, automated test suites, and live deployment URLs verified by employers.",
     icon: FileCodeIcon,
     tag: "Proof of Work",
   },
@@ -342,12 +342,11 @@ export function AboutPage() {
             <span>National Context & Strategic Imperative</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
-            Unlocking Ethiopia’s <span className="text-primary">Demographic Dividend</span>
+            Developing Ethiopia's <span className="text-primary">Engineering Potential</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-            With over 125 million citizens and 70% under the age of 30, Ethiopia holds immense engineering potential.
-            EthioTech provides the production-grade tooling and mentorship needed to bridge academic theory with
-            industry demands.
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal max-w-xl mx-auto">
+            With over 125 million citizens and 70% under 30, Ethiopia holds immense engineering talent.
+            EthioTech provides the production tooling and mentorship to bridge academic theory with industry standards.
           </p>
         </div>
 

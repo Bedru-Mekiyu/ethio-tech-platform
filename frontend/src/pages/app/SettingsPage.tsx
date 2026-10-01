@@ -289,7 +289,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
   return (
     <>
       <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-6 text-slate-900">
-        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+        <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Account Settings</h1>
@@ -316,10 +316,10 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
         )}
 
         {/* Main Grid Forms */}
-        <div className="grid gap-4 sm:p-5 md:p-6 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2">
           {/* Profile Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-4 sm:p-5 md:p-6">
+            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                   <UserCircle2 size={15} className="text-slate-600" /> Personal Profile
@@ -493,7 +493,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
 
           {/* Security Password Card */}
           <motion.div variants={itemVariants}>
-            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-4 sm:p-5 md:p-6">
+            <Card className="rounded-2xl border border-slate-200 bg-white shadow-sm p-4 sm:p-5 md:p-6">
               <CardHeader className="p-0 border-b border-slate-100 pb-3 mb-4">
                 <CardTitle className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                   <Lock size={15} className="text-slate-600" /> Security & Password
@@ -573,9 +573,7 @@ export function SettingsPage({ scope }: { scope: "student" | "mentor" | "admin" 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="max-w-xl">
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                    Choose your workspace display mode. The platform defaults to the crisp Light theme for maximum
-                    daytime readability. Dark mode offers a calibrated low-glare canvas for evening code reviews and
-                    extended study sprints.
+                    Choose your interface appearance. Light theme provides high daytime contrast, while Dark theme reduces glare for late-night sessions.
                   </p>
                 </div>
                 <ThemeSegmentedControl />

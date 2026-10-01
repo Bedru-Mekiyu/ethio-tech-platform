@@ -138,10 +138,10 @@ export function MentorAvailabilityPage() {
       <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="space-y-1">
           <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">
-            Mentor Availability & Office Hours
+            Mentor Office Hours & Availability
           </h1>
           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-            Set weekly recurring windows when students can book 1-on-1 consultations and project reviews.
+            Configure recurring weekly availability windows for student consultations, code reviews, and office hours.
           </p>
         </div>
       </Card>
@@ -150,7 +150,7 @@ export function MentorAvailabilityPage() {
         <CardHeader className="p-0 border-b border-slate-100 pb-3.5">
           <CardTitle className="flex items-center justify-between text-sm font-semibold text-slate-900">
             <span className="flex items-center gap-2">
-              <CalendarClock size={15} className="text-[var(--secondary)]" /> Weekly Availability Slots
+              <CalendarClock size={15} className="text-[var(--secondary)]" /> Recurring Availability Windows
             </span>
             <Button
               size="sm"
@@ -158,7 +158,7 @@ export function MentorAvailabilityPage() {
               onClick={() => setShowForm(!showForm)}
               className="h-7 gap-1 text-xs font-medium text-slate-700"
             >
-              <Plus size={13} /> Add Slot
+              <Plus size={13} /> Add Availability Slot
             </Button>
           </CardTitle>
         </CardHeader>
@@ -190,7 +190,7 @@ export function MentorAvailabilityPage() {
             ))}
             {!slots.length ? (
               <li className="py-4 text-center text-xs text-slate-600 font-medium">
-                No slots configured. Click &quot;Add Slot&quot; to configure your office hours.
+                No availability windows configured. Click &quot;Add Availability Slot&quot; to publish recurring office hours.
               </li>
             ) : null}
           </ul>
@@ -200,7 +200,7 @@ export function MentorAvailabilityPage() {
       {showForm && (
         <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 space-y-4 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-wider text-slate-600 font-medium">
-            New Availability Slot
+            Add Recurring Time Slot
           </p>
           <div className="space-y-3">
             <div>
@@ -241,7 +241,7 @@ export function MentorAvailabilityPage() {
               onClick={() => saveMutation.mutate([...slots, draft])}
               className="text-xs font-medium"
             >
-              {saveMutation.isPending ? "Saving..." : "Save Slot"}
+              {saveMutation.isPending ? "Saving..." : "Save Availability Slot"}
             </Button>
             <Button
               variant="outline"

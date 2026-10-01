@@ -173,10 +173,10 @@ export function NotificationsPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-              Notifications & Activity Feed
+              Notifications & Activity
             </h1>
-            <p className="text-xs text-slate-600 font-medium max-w-2xl leading-relaxed">
-              Classroom, project deliverables, and mentor updates so you can respond quickly.
+            <p className="text-xs text-slate-600 font-medium max-w-xl leading-relaxed">
+              Track updates, project reviews, and mentorship alerts in one place.
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5">

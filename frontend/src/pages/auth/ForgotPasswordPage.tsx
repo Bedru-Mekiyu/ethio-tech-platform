@@ -46,13 +46,13 @@ export function ForgotPasswordPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm"
     >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
           Sign In

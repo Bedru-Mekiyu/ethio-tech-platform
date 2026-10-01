@@ -173,7 +173,7 @@ export function MentorOnboardingPage() {
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] px-2.5 py-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
             <ShieldCheck size={13} />
-            <span>Senior Mentor Console Activation</span>
+            <span>Mentor Console Activation</span>
           </div>
           <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
             Step {stepIndex + 1} of {STEPS.length}
@@ -184,7 +184,7 @@ export function MentorOnboardingPage() {
           Mentor Onboarding
         </h1>
         <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          Complete these setup steps to activate your mentor console and interactive tools.
+          Complete your account setup to activate the mentor dashboard, project review queue, and classroom tools.
         </p>
       </div>
 
@@ -281,7 +281,7 @@ export function MentorOnboardingPage() {
                 <li className="flex items-start gap-2">
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5">•</span>
                   <span>
-                    <strong>Scheduled Punctuality:</strong> Honor confirmed 1-on-1 office hours and notify guild leads
+                    <strong>Scheduled Punctuality:</strong> Honor confirmed 1-on-1 office hours and notify platform administrators
                     at least 24 hours in advance if a conflict arises.
                   </span>
                 </li>
@@ -346,7 +346,7 @@ export function MentorOnboardingPage() {
               <FormField
                 id="bio"
                 label="Professional Bio"
-                description="A brief summary of your industry journey, technical passions, and what you enjoy mentoring."
+                description="A concise summary of your engineering background, core technologies, and mentoring focus."
               >
                 <Textarea
                   id="bio"
@@ -489,7 +489,7 @@ export function MentorOnboardingPage() {
           <div className="space-y-5">
             <div className="space-y-1">
               <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                Set Teaching Availability
+                Set Weekly Availability
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Add at least one weekly window. You can refine this later in mentor availability settings.
@@ -554,7 +554,7 @@ export function MentorOnboardingPage() {
                     </>
                   ) : (
                     <>
-                      Finish Onboarding & Enter Console
+                      Complete Onboarding & Go to Dashboard
                       <ChevronRight size={14} />
                     </>
                   )}

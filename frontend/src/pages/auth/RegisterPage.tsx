@@ -84,7 +84,7 @@ export function RegisterPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
         <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">

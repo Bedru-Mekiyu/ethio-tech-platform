@@ -61,9 +61,9 @@ export function SessionFeedbackPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[var(--secondary)] border border-blue-100/80">
             <CheckCircle size={24} />
           </div>
-          <h1 className="text-xl font-bold text-slate-900">Feedback Received</h1>
+          <h1 className="text-xl font-bold text-slate-900">Feedback Submitted</h1>
           <p className="text-xs text-slate-600 font-medium max-w-md">
-            Your input directly helps mentors optimize future sessions and peer reviews.
+            Your feedback helps mentors refine future classroom sessions and technical reviews.
           </p>
           <div className="flex flex-wrap gap-2.5 pt-2">
             <Link to="/app/sessions">

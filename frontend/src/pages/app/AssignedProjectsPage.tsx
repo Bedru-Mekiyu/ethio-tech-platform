@@ -71,7 +71,7 @@ function AssignedProjectCard({ project }: { project: NonNullable<StudentDashboar
   const actionRoute = `/app/projects/submit?mode=${actionMode}${project.projectId ? `&projectId=${project.projectId}` : ""}`;
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <Badge variant={statusTone} size="sm">
@@ -125,7 +125,7 @@ function AssignmentCard({ assignment }: { assignment: Assignment }) {
   const overdue = isOverdue(assignment.dueDate) && status === "pending";
 
   return (
-    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
+    <Card className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -238,12 +238,12 @@ export function AssignedProjectsPage() {
 
   return (
     <div className="page-shell space-y-6 text-slate-900">
-      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+      <Card className="rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Assigned Projects & Tasks</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Projects & Assignments</h1>
             <p className="mt-0.5 text-xs text-slate-600 font-medium">
-              Track assignments, submit milestone repositories, and review mentor feedback.
+              Track assignments, submit project repositories, and review mentor evaluation notes.
             </p>
           </div>
           <Link to="/app/projects/submit">
@@ -277,7 +277,7 @@ export function AssignedProjectsPage() {
 
       {total === 0 ? (
         <EmptyState
-          title="No projects yet"
+          title="No projects assigned yet"
           description="Enroll in a learning track to see your projects and assignments here."
           actionLabel="Browse Tracks"
           actionHref="/app/tracks"

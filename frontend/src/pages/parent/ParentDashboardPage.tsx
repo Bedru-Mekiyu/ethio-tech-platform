@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ShieldCheck, Sparkles, BookOpen, Bell, Users } from "lucide-react";
+import { ShieldCheck, HelpCircle, BookOpen, Bell, Users } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { fetchParentDashboard } from "@/services/parentService";
 import { Card } from "@/components/ui/card";
@@ -42,7 +42,7 @@ export function ParentDashboardPage() {
           <div className="flex flex-wrap gap-2">
             <Link to="/parent/settings">
               <Button variant="outline" size="sm" className="text-xs">
-                Account settings
+                Account Settings
               </Button>
             </Link>
             <Link to="/app/notifications">
@@ -56,9 +56,9 @@ export function ParentDashboardPage() {
 
       {!data?.hasLinkedStudents ? (
         <EmptyState
-          title="No student profile linked yet"
-          description="Support can connect your account to a learner so progress and alerts appear here."
-          actionLabel="Contact support"
+          title="No students currently linked"
+          description="Contact support with your student's account email to link accounts and view progress reports."
+          actionLabel="Contact Support"
           onAction={() => navigate("/contact")}
         />
       ) : (
@@ -90,7 +90,7 @@ export function ParentDashboardPage() {
               </div>
               <div className="mt-3 pt-2 border-t border-slate-100">
                 <Link to="/app/dashboard" className="text-xs font-medium text-primary hover:underline">
-                  View Learning Hub →
+                  View Student Dashboard →
                 </Link>
               </div>
             </Card>
@@ -118,12 +118,12 @@ export function ParentDashboardPage() {
           </p>
         </Card>
         <Card className="border-slate-200 bg-white p-4.5 shadow-xs">
-          <div className="flex items-center gap-2 text-amber-500">
-            <Sparkles size={16} />
+          <div className="flex items-center gap-2 text-slate-700">
+            <HelpCircle size={16} />
             <p className="text-xs font-semibold text-slate-900">Support & Inquiries</p>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-slate-600">
-            Need to link another student? Our team is available 24/7.
+            To link another student account or ask about curriculum progress, contact our support team.
           </p>
           <Link to="/contact" className="mt-2.5 inline-block text-xs font-medium text-primary hover:underline">
             Contact Support →

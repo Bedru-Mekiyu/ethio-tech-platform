@@ -1489,7 +1489,7 @@ export function CodingWorkspacePage() {
             className="h-8 gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs px-3 rounded-lg border-0 shadow-xs"
           >
             <Play size={12} className={cn("fill-current", isRunning && "animate-spin")} />
-            <span>{isRunning ? "Running..." : "Run"}</span>
+            <span>{isRunning ? "Running..." : "Run Code"}</span>
             <span className="hidden md:inline font-mono text-[10px] opacity-80 ml-0.5">⌘↵</span>
           </Button>
 
@@ -1501,7 +1501,7 @@ export function CodingWorkspacePage() {
             className="h-8 gap-1.5 bg-primary hover:bg-[var(--primary-hover)] text-white font-semibold text-xs px-3.5 rounded-lg border-0 shadow-xs"
           >
             <Send size={12} className={cn(isSubmitting && "animate-pulse")} />
-            <span className="hidden sm:inline">{submittedSuccess ? "Submitted ✓" : "Submit"}</span>
+            <span className="hidden sm:inline">{submittedSuccess ? "Submitted ✓" : "Submit Code"}</span>
           </Button>
         </div>
       </header>
@@ -1511,7 +1511,7 @@ export function CodingWorkspacePage() {
         <div className="flex items-center justify-between bg-blue-50/70 border-b border-blue-100 px-4 py-2 text-xs text-slate-900 animate-fadeIn">
           <div className="flex flex-wrap items-center gap-2">
             <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-            <span className="font-semibold">Solution verified & submitted successfully!</span>
+            <span className="font-semibold">Solution verified and submitted successfully.</span>
             <span className="text-[var(--secondary)] font-mono font-bold">(+100 XP Earned)</span>
           </div>
           <Link

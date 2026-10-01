@@ -43,7 +43,7 @@ test.describe("Cross-Role and Authorization Boundaries Suite", () => {
           state: {
             user: {
               id: "mentor-qa-1",
-              fullName: "Diaspora Mentor",
+              fullName: "Senior Engineering Mentor",
               email: "mentor@ethiotech.com",
               role: "mentor",
               isVerified: true,

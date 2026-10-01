@@ -243,7 +243,7 @@ export function MentorReviewPage() {
     return (
       <EmptyState
         title="No submissions in queue"
-        description="When students submit projects, they'll show up here for review."
+        description="Completed student capstone projects and assignments will appear here for code review."
       />
     );
   }
@@ -251,8 +251,8 @@ export function MentorReviewPage() {
   if (!filtered.length) {
     return (
       <EmptyState
-        title="No submissions in this filter"
-        description="Try another status filter to review available submissions."
+        title="No submissions matching filter"
+        description="Select a different filter status to display submissions."
       />
     );
   }
@@ -263,10 +263,10 @@ export function MentorReviewPage() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-              Interactive Project Review Board
+              Project Review Board
             </h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Review submissions, evaluate performance scores, and provide actionable mentor feedback.
+              Review capstone code submissions, evaluate project rubrics, and deliver technical feedback.
             </p>
           </div>
           <Badge variant="success" size="sm">
@@ -297,7 +297,7 @@ export function MentorReviewPage() {
         <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between gap-3 border-b border-slate-100 pb-3.5">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">Submissions Awaiting Feedback</h2>
+              <h2 className="text-sm font-semibold text-slate-900">Submissions Queue</h2>
             </div>
             <Badge variant="outline" size="sm">
               {filtered.length} items
@@ -460,7 +460,7 @@ export function MentorReviewPage() {
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
                   <Send size={12} className="mr-1" />
-                  Save Review
+                  Save Draft Review
                 </Button>
                 <Button
                   size="sm"
@@ -473,7 +473,7 @@ export function MentorReviewPage() {
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
                   <CheckCircle2 size={12} className="mr-1" />
-                  Approve
+                  Approve Submission
                 </Button>
                 <Button
                   size="sm"
@@ -486,7 +486,7 @@ export function MentorReviewPage() {
                   disabled={reviewMutation.isPending || isSubmittingSessionFeedback || !selected}
                 >
                   <XCircle size={12} className="mr-1" />
-                  Reject
+                  Request Revisions
                 </Button>
               </div>
             </div>
@@ -541,7 +541,7 @@ export function MentorReviewPage() {
               </div>
             ) : (
               <div className="text-center py-4 text-xs text-slate-600 font-medium">
-                No past feedback records for this student yet.
+                No previous session feedback recorded for this student.
               </div>
             )}
           </Card>

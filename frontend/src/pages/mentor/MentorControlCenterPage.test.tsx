@@ -185,7 +185,7 @@ describe("MentorControlCenterPage", () => {
     renderWithProviders(<Page />);
     await waitFor(() => {
       expect(screen.getAllByText("Almaz").length).toBeGreaterThan(0);
-      expect(screen.getAllByText("Admit All Candidates").length).toBeGreaterThan(0);
+      expect(screen.getAllByText("Admit All Students").length).toBeGreaterThan(0);
     });
   });
 

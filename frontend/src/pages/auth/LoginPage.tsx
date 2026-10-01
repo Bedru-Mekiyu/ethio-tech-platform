@@ -167,9 +167,9 @@ export function LoginPage() {
           Don&apos;t have an account?{" "}
           <Link
             to="/register"
-            className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1.5"
+            className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1"
           >
-            <span>Create Student Account</span>
+            <span>Create account</span>
             <ArrowRight size={13} />
           </Link>
         </p>
@@ -177,9 +177,9 @@ export function LoginPage() {
           Experienced engineer?{" "}
           <Link
             to="/mentor-recruitment"
-            className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1.5"
+            className="font-semibold text-slate-900 dark:text-white transition hover:text-slate-700 dark:hover:text-slate-200 ml-1 inline-flex items-center gap-1"
           >
-            <span>Apply to Mentor</span>
+            <span>Apply to mentor</span>
             <ArrowRight size={13} />
           </Link>
         </p>

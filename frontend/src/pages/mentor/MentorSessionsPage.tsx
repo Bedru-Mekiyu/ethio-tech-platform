@@ -359,7 +359,10 @@ export function MentorSessionsPage() {
                 );
               })
             ) : (
-              <EmptyState title="No sessions found" description="Try another filter or create a new session." />
+              <EmptyState
+                title="No sessions scheduled"
+                description="Select a different filter or create a new session for your cohort."
+              />
             )}
           </div>
         </Card>
@@ -427,7 +430,7 @@ export function MentorSessionsPage() {
                   name="description"
                   maxLength={500}
                   className="mt-1 text-xs bg-white border-slate-200 text-slate-900 placeholder:text-slate-500"
-                  placeholder="What will learners build?"
+                  placeholder="Session objectives, topics covered, and prerequisites"
                 />
               </label>
             </div>
@@ -450,7 +453,7 @@ export function MentorSessionsPage() {
                 disabled={createMutation.isPending}
                 className="text-xs font-medium"
               >
-                {createMutation.isPending ? "Creating…" : "Create Session"}
+                {createMutation.isPending ? "Scheduling…" : "Create Session"}
               </Button>
             </div>
           </form>

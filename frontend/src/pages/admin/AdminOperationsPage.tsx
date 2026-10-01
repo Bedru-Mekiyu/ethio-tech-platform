@@ -300,10 +300,9 @@ export function AdminOperationsPage() {
                 API {health.live?.version ?? "v1"}
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Operations Center</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Operations & Health</h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Real-time service orchestration, infrastructure readiness, connection telemetry, and security audit
-              streams.
+              Infrastructure health, service connectivity, real-time telemetry, and administrative audit logs.
             </p>
           </div>
 
@@ -394,7 +393,7 @@ export function AdminOperationsPage() {
           <div>
             <h2 className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
               <Server className="text-slate-900" size={15} />
-              Services Health Grid
+              Service Health Overview
             </h2>
             <p className="text-xs font-medium text-slate-600">
               Heartbeat monitoring across application server, persistence engine, and WebSocket gateways

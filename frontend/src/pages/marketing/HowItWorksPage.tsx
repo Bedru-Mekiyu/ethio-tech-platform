@@ -94,7 +94,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: Compass,
     badge: "Adaptive Onboarding",
     overview:
-      "Learners begin with an adaptive 45-minute technical assessment evaluating algorithmic logic, system fundamentals, and career objectives. Our calibration engine maps learners to their optimal entry tier—from CS Foundations to Fullstack Cloud, Applied AI Systems, Cloud DevOps, or Mobile Engineering.",
+      "Learners complete an adaptive 45-minute technical assessment evaluating algorithmic logic and system fundamentals. The calibration engine places each learner into their optimal track tier with a personalized roadmap.",
     keyDeliverables: [
       "Customized 16-week learning roadmap with estimated completion milestone",
       "Automated squad matchmaking placing you with 4-5 complementary peers",
@@ -117,7 +117,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: Radio,
     badge: "Sub-150ms WebRTC",
     overview:
-      "Forget static pre-recorded videos. Students join interactive live labs and weekly 1-on-1 office hours powered by WebRTC mesh audio and synchronized code editors, streaming at under 48kbps to maintain fast responsiveness even over 3G/4G networks across regional Ethiopia.",
+      "Students join interactive live classrooms and weekly office hours with synchronized code editors and low-bandwidth WebRTC audio, maintaining responsiveness even over regional 3G and 4G networks.",
     keyDeliverables: [
       "Weekly 30-minute 1-on-1 architectural consultations with Staff/Senior engineers",
       "Live squad debugging clinics with shared terminal and audio synchronization",
@@ -140,7 +140,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: Terminal,
     badge: "Production Labs",
     overview:
-      "Every module requires shipping production-grade code. Using in-browser WebAssembly kernels and containerized microservices, learners build real distributed backends, implement JWT/OAuth authentication, optimize database indexing, and write comprehensive automated test suites.",
+      "Every module requires shipping tested code. Using in-browser Linux containers, learners build distributed backends, implement secure authentication, optimize database queries, and write automated test suites.",
     keyDeliverables: [
       "Production-ready GitHub repositories with full commit and branching history",
       "Automated unit, integration, and security test suites with >85% code coverage",
@@ -163,7 +163,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: FileCode2,
     badge: "Peer & Mentor Sign-Off",
     overview:
-      "Before any code merges, learners must pass rigorous peer review in their 4-6 engineer squad. Students review each other's pull requests, audit security vulnerabilities, and defend architectural trade-offs during weekly squad standups with an experienced engineering mentor.",
+      "Before code merges, learners submit pull requests to their 4-peer squad. Students review code for logic and security, then defend architectural choices during weekly mentor standups.",
     keyDeliverables: [
       "At least 2 peer code approvals and 1 mentor architectural sign-off per feature",
       "Live 15-minute architectural defense presentation of system design choices",
@@ -186,7 +186,7 @@ const LIFECYCLE_STAGES: LifecycleStage[] = [
     icon: Trophy,
     badge: "Direct Hiring Pipeline",
     overview:
-      "Upon track completion and capstone defense, learners receive a verified Skill Passport. This replaces traditional resumes with verifiable proof-of-work, granting direct interview pathways with vetted hiring partners across Ethiopia, Africa, and global engineering teams.",
+      "Upon track completion and capstone defense, learners receive a verified Skill Passport linking to their audited GitHub repositories, opening direct interview pathways with partner companies.",
     keyDeliverables: [
       "Verified Skill Passport detailing validated technical competencies",
       "Live interactive portfolio featuring deployed apps and commit timelines",

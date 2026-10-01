@@ -127,9 +127,9 @@ export function NotFoundPage() {
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-slate-200/80 bg-white shadow-md p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-primary font-bold">404 Error</p>
+          <p className="text-xs uppercase tracking-wider text-primary font-bold">404 Not Found</p>
           <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900 break-words">Page Not Found</h1>
-          <p className="mt-1.5 text-xs text-slate-600">The page you requested does not exist or has moved.</p>
+          <p className="mt-1.5 text-xs text-slate-600">The requested page could not be found or has moved.</p>
 
           {import.meta.env.DEV && (
             <p className="mt-3 text-[11px] text-slate-500 break-all font-mono bg-slate-50 border border-slate-200/80 py-1.5 px-3 rounded-lg">
@@ -177,7 +177,7 @@ export function NotFoundPage() {
             >
               <Button size="sm" className="font-semibold shadow-xs">
                 <Home size={14} className="mr-1.5" />
-                Go Home
+                {user ? "Return to Dashboard" : "Return to Home"}
               </Button>
             </Link>
           </div>

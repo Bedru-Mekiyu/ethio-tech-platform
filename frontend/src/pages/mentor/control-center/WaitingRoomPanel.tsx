@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
-import { DoorOpen, UserCheck, UserX, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { DoorOpen, UserCheck, UserX, Volume2, VolumeX, CheckCircle2 } from "lucide-react";
 import type { MentorControlData } from "@/services/mentorControlService";
 
 interface WaitingRoomPanelProps {
@@ -93,14 +93,14 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
             className="h-7 text-[10px] px-2 gap-1"
             onClick={() => setAutoAdmit(!autoAdmit)}
           >
-            <Sparkles size={11} /> {autoAdmit ? "Auto-Admit ON" : "Auto-Admit"}
+            <CheckCircle2 size={11} /> {autoAdmit ? "Auto-Admit Active" : "Auto-Admit"}
           </Button>
         </div>
       </div>
 
       {queue.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-          <p className="text-xs text-slate-600 font-medium">No participants waiting</p>
+          <p className="text-xs text-slate-600 font-medium">No students waiting in queue</p>
         </div>
       ) : (
         <div className="flex-1 space-y-2 max-h-64 overflow-y-auto mcc-scrollbar pr-1">
@@ -150,7 +150,7 @@ export default function WaitingRoomPanel({ queue, onAction }: WaitingRoomPanelPr
           className="w-full mt-3 h-8 text-xs border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100"
           onClick={() => onAction("admit-all", "")}
         >
-          <UserCheck size={13} className="mr-1.5" /> Admit All Candidates
+          <UserCheck size={13} className="mr-1.5" /> Admit All Students
         </Button>
       )}
     </Card>

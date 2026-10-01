@@ -378,7 +378,7 @@ export function CalendarPage() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Study Planner & Calendar</h1>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Schedule & Calendar</h1>
               <Badge
                 variant="secondary"
                 size="sm"
@@ -388,7 +388,7 @@ export function CalendarPage() {
               </Badge>
             </div>
             <p className="text-xs text-slate-500 max-w-2xl leading-relaxed">
-              Coordinate study blocks, live mentorship sessions, capstone milestones, and physical tech hub visits.
+              Schedule study sessions, attend live mentor classrooms, and track project milestones.
             </p>
           </div>
 

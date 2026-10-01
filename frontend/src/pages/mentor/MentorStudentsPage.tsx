@@ -367,9 +367,9 @@ export function MentorStudentsPage() {
       <Card className="border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Your Learners Directory</h1>
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight sm:text-2xl">Learners Directory</h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              Track attendance, review engagement scores, and view feedback history for every student in your circle.
+              Track attendance, review engagement metrics, and view feedback history for assigned students.
             </p>
           </div>
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-slate-900 border border-slate-200 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shrink-0">
@@ -384,7 +384,7 @@ export function MentorStudentsPage() {
           label="Total Students"
           value={data?.totalStudents ?? students.length}
           icon={Users}
-          note="In your mentoring circle"
+          note="Assigned to your cohorts"
         />
         <StatCard
           label="Avg Engagement"
@@ -480,11 +480,11 @@ export function MentorStudentsPage() {
         ) : (
           <Card className="border-slate-200 bg-white p-8 text-center shadow-sm">
             <EmptyState
-              title={search ? "No students match your search" : "No students yet"}
+              title={search ? "No students match search" : "No students assigned yet"}
               description={
                 search
                   ? "Try adjusting your search or filter criteria."
-                  : "Students will appear here once they attend your mentoring sessions."
+                  : "Students will appear here once enrolled in your cohorts or after attending sessions."
               }
             />
           </Card>

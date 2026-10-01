@@ -139,7 +139,7 @@ describe("AdminContentPage Master-Detail CMS", () => {
   it("renders the 3-pane master-detail layout and track list", async () => {
     renderAdminContentPage();
 
-    expect(screen.getByText("Curriculum Content Studio")).toBeTruthy();
+    expect(screen.getByText("Curriculum & Content Management")).toBeTruthy();
     expect(screen.getByText("Curriculum Tracks")).toBeTruthy();
 
     expect(await screen.findByText("Fullstack Web Development")).toBeTruthy();

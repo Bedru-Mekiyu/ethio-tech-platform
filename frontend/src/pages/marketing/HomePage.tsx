@@ -163,7 +163,7 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     liveSessions: 36,
     xpReward: 4000,
     description:
-      "Master network security, penetration testing, defensive architecture, application security, and cryptographic protocols.",
+      "Network defense, penetration testing, application security, and cryptographic protocols.",
     skills: ["Penetration Testing", "SOC Operations", "Network Defense", "Cryptography", "OWASP Top 10", "Wireshark"],
     capstones: [
       "Enterprise Security Audit & Penetration Report",
@@ -286,10 +286,10 @@ const SHOWCASE_TABS: ShowcaseTab[] = [
     id: "classroom",
     label: "Live Classroom",
     icon: Video,
-    tagline: "Live Classrooms with Multi-User Code Projection",
+    tagline: "Low-Bandwidth Live Classrooms with Code Projection",
     badge: "Low-Bandwidth Ready",
     description:
-      "Interactive video learning engineered for Ethiopian network conditions. Includes live code takeovers, digital whiteboards, and timestamped session recordings.",
+      "Interactive video learning engineered for low bandwidth with mentor code takeovers, digital whiteboards, and timestamped recordings.",
     benefits: [
       "Adaptive streaming down to 256 kbps",
       "Live mentor screen takeover and line-by-line debugging",
@@ -301,10 +301,10 @@ const SHOWCASE_TABS: ShowcaseTab[] = [
     id: "sandbox",
     label: "In-Browser Workspace",
     icon: Terminal,
-    tagline: "Zero-Setup Linux Development Environment in Your Browser",
+    tagline: "In-Browser Linux Workspaces with Instant Terminal",
     badge: "Instant Launch",
     description:
-      "Write code in an in-browser Monaco editor backed by Linux containers with Node.js, Python, Go, and PostgreSQL ready in seconds.",
+      "Write code in a browser-based Monaco editor backed by Linux containers with Node.js, Python, Go, and PostgreSQL ready in seconds.",
     benefits: [
       "Integrated test runner with instant feedback",
       "Pre-configured fullstack starter projects",
@@ -331,10 +331,10 @@ const SHOWCASE_TABS: ShowcaseTab[] = [
     id: "certs",
     label: "Certificates",
     icon: Award,
-    tagline: "Verifiable Credentials Linked Directly to Audited Code",
+    tagline: "Verifiable Credentials Linked to Audited Repositories",
     badge: "Employer Audited",
     description:
-      "EthioTech certificates are cryptographically signed and link directly to audited GitHub project repositories. Employers verify real code quality in one click.",
+      "Cryptographically signed certificates linking directly to audited GitHub project repositories for one-click employer verification.",
     benefits: [
       "Cryptographically signed verification signatures",
       "Direct links to audited GitHub repositories",
@@ -640,7 +640,7 @@ export function HomePage() {
           <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Everything Needed to Ship <span className="text-primary">Production Code</span>
           </h2>
-          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal max-w-xl mx-auto">
             A complete technical learning environment: live mentor reviews, in-browser Linux workspaces, peer squads,
             and verifiable project portfolios.
           </p>

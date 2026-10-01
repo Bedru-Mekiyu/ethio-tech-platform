@@ -349,27 +349,27 @@ Ethio-Tech Mentorship Team`;
     }
   > = {
     approve: {
-      title: "Approve application",
+      title: "Approve Mentor Application",
       description: "This will provision a mentor account and send activation credentials.",
-      confirmLabel: "Approve",
+      confirmLabel: "Approve Application",
     },
     reject: {
-      title: "Reject application",
+      title: "Reject Mentor Application",
       description: "The applicant will be notified with your reason.",
-      confirmLabel: "Reject",
+      confirmLabel: "Reject Application",
       variant: "danger",
       requireReason: true,
     },
     "request-changes": {
-      title: "Request changes",
+      title: "Request Application Revisions",
       description: "The applicant will be asked to update and resubmit.",
-      confirmLabel: "Send request",
+      confirmLabel: "Request Revisions",
       requireReason: true,
     },
     resend: {
-      title: "Resend credentials",
+      title: "Resend Activation Credentials",
       description: "Generate a new activation link and notify the mentor.",
-      confirmLabel: "Resend",
+      confirmLabel: "Resend Credentials",
     },
     "reset-password": {
       title: "Reset password",
@@ -383,9 +383,9 @@ Ethio-Tech Mentorship Team`;
       confirmLabel: "Archive",
     },
     suspend: {
-      title: "Suspend mentor",
+      title: "Suspend Mentor Account",
       description: "Suspend the linked mentor account and revoke active sessions.",
-      confirmLabel: "Suspend",
+      confirmLabel: "Suspend Mentor",
       variant: "danger",
       requireReason: true,
     },
@@ -440,7 +440,7 @@ Ethio-Tech Mentorship Team`;
             <h1 className="text-xl font-bold text-slate-900 sm:text-2xl">{app?.fullName ?? "Mentor Detail"}</h1>
             {app && (
               <Badge variant={rubric.variant} size="sm">
-                {rubric.percentage}% Match
+                {rubric.percentage}% Rubric Score
               </Badge>
             )}
           </div>

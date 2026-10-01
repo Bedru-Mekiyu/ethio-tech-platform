@@ -24,7 +24,6 @@ import {
   Shield,
   Briefcase,
   GraduationCap,
-  Sparkles,
   Download,
   RefreshCw,
   X,
@@ -640,7 +639,7 @@ function QuickActionDrawer({ user, onClose, onUserUpdated }: QuickActionDrawerPr
                   onClick={generateRandomPassword}
                   className="text-xs text-primary hover:text-primary-hover hover:underline flex items-center gap-1 font-medium"
                 >
-                  <Sparkles size={12} /> Generate Secure Random Password
+                  <Key size={12} /> Generate Strong Password
                 </button>
               </div>
             </div>
@@ -1061,7 +1060,7 @@ export function AdminUsersPage() {
         <div className="rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-sm">
           <p className="text-[10px] uppercase tracking-wider text-slate-700 font-bold">Mentors</p>
           <p className="mt-1 text-xl sm:text-2xl font-bold text-slate-900">{mentorCount.toLocaleString()}</p>
-          <p className="text-[11px] text-slate-600 mt-0.5 font-medium">Active guides</p>
+          <p className="text-[11px] text-slate-600 mt-0.5 font-medium">Active mentors</p>
         </div>
 
         <div className="rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-sm">
@@ -1073,7 +1072,7 @@ export function AdminUsersPage() {
         <div className="rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-sm">
           <p className="text-[10px] uppercase tracking-wider text-amber-700 font-bold">Admins & Staff</p>
           <p className="mt-1 text-xl sm:text-2xl font-bold text-slate-900">{adminCount.toLocaleString()}</p>
-          <p className="text-[11px] text-slate-600 mt-0.5 font-medium">Platform ops</p>
+          <p className="text-[11px] text-slate-600 mt-0.5 font-medium">Platform operations</p>
         </div>
 
         <div className="rounded-2xl border border-slate-200/80 bg-white p-3.5 sm:p-4 shadow-sm">
@@ -1179,7 +1178,7 @@ export function AdminUsersPage() {
                     onClick={generateRandomPasswordForCreate}
                     className="text-[11px] font-medium text-primary hover:text-primary-hover hover:underline flex items-center gap-1"
                   >
-                    <Sparkles size={11} /> Generate Random
+                    <Key size={11} /> Generate Password
                   </button>
                 </div>
                 <Input

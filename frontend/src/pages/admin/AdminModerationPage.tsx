@@ -384,7 +384,7 @@ function ApplicationCard({
           </div>
 
           <div className="rounded-xl border border-slate-200/80 bg-slate-50/60 dark:bg-white/[0.02] dark:border-white/10 p-3.5 text-xs sm:text-sm leading-relaxed text-slate-700">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Why Mentor?</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Mentoring Motivation</p>
             <p className="line-clamp-3">{application.whyMentor || "No motivation statement provided."}</p>
           </div>
 
@@ -432,7 +432,7 @@ function ApplicationCard({
                   onClick={() => onApprove(application._id)}
                   className="gap-1.5 flex-1 sm:flex-none"
                 >
-                  <CheckCircle2 size={15} /> Approve
+                  <CheckCircle2 size={15} /> Approve Mentor
                 </Button>
                 <Button
                   size="sm"
@@ -440,7 +440,7 @@ function ApplicationCard({
                   onClick={() => onReject(application._id)}
                   className="gap-1.5 flex-1 sm:flex-none"
                 >
-                  <XCircle size={15} /> Reject
+                  <XCircle size={15} /> Reject Application
                 </Button>
                 {isPending && (
                   <Button
@@ -449,7 +449,7 @@ function ApplicationCard({
                     onClick={() => onRequestChanges(application._id)}
                     className="gap-1.5 border-slate-200 text-slate-700 flex-1 sm:flex-none"
                   >
-                    <FileText size={15} /> Request Info
+                    <FileText size={15} /> Request Revisions
                   </Button>
                 )}
                 <Button
@@ -458,7 +458,7 @@ function ApplicationCard({
                   onClick={() => onOpen(application._id)}
                   className="border-slate-200 text-slate-700 flex-1 sm:flex-none"
                 >
-                  View Full Profile
+                  View Full Application
                 </Button>
               </div>
             </div>
@@ -645,7 +645,7 @@ function InterviewModal({ application, onClose }: InterviewModalProps) {
 
 Hi ${application.fullName},
 
-Thank you for applying to become a mentor on the Ethio-Tech platform!
+Thank you for applying to mentor on the Ethio-Tech platform.
 
 We reviewed your background as a ${application.currentRole} and would love to schedule a quick 30-minute screening conversation to discuss cohort mentorship opportunities and answer any questions you may have.
 
@@ -666,7 +666,7 @@ Ethio-Tech Mentorship Team`;
         setCopiedTemplate(true);
         setTimeout(() => setCopiedTemplate(false), 2000);
       }
-      toast.success("Copied to clipboard!");
+      toast.success("Copied to clipboard.");
     } catch {
       toast.error("Failed to copy");
     }

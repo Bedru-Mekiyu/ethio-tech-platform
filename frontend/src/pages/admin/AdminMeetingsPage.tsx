@@ -118,10 +118,10 @@ export function AdminMeetingsPage() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1">
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-              Live Sessions Control Center
+              Platform Meeting Monitor
             </h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
-              One unified view of scheduled, live, completed, and cancelled sessions across the platform.
+              Monitor scheduled, live, completed, and cancelled mentorship sessions across all cohorts.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">

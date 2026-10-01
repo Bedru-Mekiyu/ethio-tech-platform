@@ -80,7 +80,7 @@ export function ResetPasswordPage() {
       <motion.div
         initial="hidden"
         animate="show"
-        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm text-slate-900"
+        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm text-slate-900"
       >
         <motion.div variants={fadeUp} custom={0}>
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-rose-200 bg-rose-50 text-rose-600">
@@ -104,13 +104,13 @@ export function ResetPasswordPage() {
     <motion.div
       initial="hidden"
       animate="show"
-      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-4 md:p-6 shadow-sm"
+      className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm"
     >
       {/* Back link */}
       <motion.div variants={fadeUp} custom={0}>
         <Link
           to="/login"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 font-medium transition hover:text-slate-900"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition hover:text-slate-900"
         >
           <ArrowLeft size={13} />
           Sign In

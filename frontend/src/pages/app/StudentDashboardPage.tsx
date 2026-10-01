@@ -358,13 +358,13 @@ export function StudentDashboardPage() {
           </Card>
 
           {/* ─── Assigned Projects & Tasks ─── */}
-          <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+          <Card className="rounded-2xl border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-[var(--secondary)] border border-blue-100">
                   <BookOpen size={14} />
                 </div>
-                <h3 className="text-sm font-bold text-slate-900">Assigned Projects & Portfolios</h3>
+                <h3 className="text-sm font-bold text-slate-900">Projects & Assignments</h3>
               </div>
               <Link
                 to="/app/projects"
@@ -449,7 +449,7 @@ export function StudentDashboardPage() {
 
           {/* ─── Physical Hub Arrival & Access Pass Widget ─── */}
           {activeBooking ? (
-            <Card className="rounded-2xl border-slate-200/80 bg-white p-5 md:p-4 sm:p-5 md:p-6 shadow-sm">
+            <Card className="rounded-2xl border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
@@ -457,7 +457,7 @@ export function StudentDashboardPage() {
                       <Building2 size={14} />
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-700">
-                      Physical Hub Arrival & Pass
+                      Regional Hub Access Pass
                     </span>
                     {activeBooking.status === "checked_in" || hubCheckedIn ? (
                       <Badge
