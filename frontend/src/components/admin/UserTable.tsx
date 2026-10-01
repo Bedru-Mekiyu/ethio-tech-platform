@@ -536,7 +536,6 @@ export function UserTable({ onSelectUser, showActions = true }: UserTableProps) 
               <tr>
                 <td colSpan={showActions ? 10 : 9} className="p-0">
                   <EmptyState
-                    eyebrow="Directory"
                     title="No users found"
                     description="Try adjusting your search or filters to see more results."
                     illustration={<Users size={26} className="text-slate-400 opacity-80" />}

@@ -449,11 +449,7 @@ export function HowItWorksPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 mb-4 shadow-[var(--shadow-xs)] backdrop-blur-xs">
-            <Zap size={13} className="text-[var(--secondary)]" />
-            <span>The 5-Stage Engineering Engine</span>
-          </div>
-          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
             How aspiring engineers become <span className="text-primary">production-ready</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
@@ -546,9 +542,6 @@ export function HowItWorksPage() {
       >
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
-              <span>Step-by-Step Flow</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               The 5-Stage Learner Lifecycle
             </h2>
@@ -667,14 +660,7 @@ export function HowItWorksPage() {
                   <div className="space-y-3 lg:col-span-5">
                     <div className="rounded-2xl border border-slate-200/80 bg-slate-50/60 dark:bg-slate-900/50 p-5 shadow-[var(--shadow-xs)] space-y-4">
                       <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-                        <div>
-                          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                            Verification Standards
-                          </span>
-                          <h4 className="text-xs font-bold text-slate-900 mt-0.5">
-                            Stage {currentStage.step} Quality Gates
-                          </h4>
-                        </div>
+                        <h4 className="text-xs font-bold text-slate-900">Stage {currentStage.step} Quality Gates</h4>
                         <Badge variant="secondary" size="sm">
                           {currentStage.badge}
                         </Badge>
@@ -737,9 +723,6 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
-            <span>Ecosystem Experience</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             What It Looks Like For You
           </h2>
@@ -784,12 +767,7 @@ export function HowItWorksPage() {
               <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
                 <div className="lg:col-span-7">
                   <div className="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-[var(--secondary)]">
-                        {currentRoleData.eyebrow}
-                      </span>
-                      <h3 className="mt-0.5 text-xl font-bold text-slate-900 md:text-2xl">{currentRoleData.title}</h3>
-                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 md:text-2xl">{currentRoleData.title}</h3>
                     <Badge variant="secondary" size="md">
                       {currentRoleData.badge}
                     </Badge>
@@ -852,9 +830,6 @@ export function HowItWorksPage() {
       <section className="border-t border-slate-200/80 bg-slate-50/60 dark:bg-slate-900/50 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
-              <span>Curriculum Architecture</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Choose Your Engineering Pathway
             </h2>
@@ -941,9 +916,6 @@ export function HowItWorksPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-700 mb-3 shadow-xs">
-            <span>Got Questions?</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Frequently Asked Questions
           </h2>
@@ -1035,9 +1007,6 @@ export function HowItWorksPage() {
         <Card className="mx-auto max-w-7xl overflow-hidden rounded-2xl border-slate-200/90 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1 text-xs font-semibold text-slate-700 mb-2.5 shadow-xs">
-                <span>Start Today</span>
-              </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
                 Ready to build production-grade software?
               </h2>

@@ -127,8 +127,7 @@ export function NotFoundPage() {
     <div className="flex min-h-[60vh] items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="rounded-2xl border border-slate-200/80 bg-white shadow-md p-6 sm:p-8 text-center">
-          <p className="text-xs uppercase tracking-wider text-primary font-bold">404 Not Found</p>
-          <h1 className="mt-2 text-xl font-bold tracking-tight text-slate-900 break-words">Page Not Found</h1>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 break-words">404: Page Not Found</h1>
           <p className="mt-1.5 text-xs text-slate-600">The requested page could not be found or has moved.</p>
 
           {import.meta.env.DEV && (

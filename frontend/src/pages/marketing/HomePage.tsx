@@ -15,15 +15,12 @@ import {
   CheckCircle2,
   MapPin,
   Building2,
-  Globe,
   Check,
   Star,
   Compass,
-  BookOpen,
   Radio,
   Smartphone,
   ChevronRight,
-  Layers,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -418,11 +415,6 @@ export function HomePage() {
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           {/* Left Column: Copy & CTAs */}
           <div className="space-y-5">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] backdrop-blur-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-              <span>Tuition-Free Engineering Fellowship</span>
-            </div>
-
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
             <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
               Learn From Engineers Shipping in Production Right Now.
@@ -580,11 +572,7 @@ export function HomePage() {
         viewport={{ once: true, amount: 0.15 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
-            <Layers size={13} className="text-[var(--secondary)]" />
-            <span>Platform Features</span>
-          </div>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Everything Needed to Ship <span className="text-primary">Production Code</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal max-w-xl mx-auto">
@@ -842,11 +830,7 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
-              <BookOpen size={13} className="text-[var(--secondary)]" />
-              <span>Structured Tracks</span>
-            </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Curriculums Built for <span className="text-primary">Production Engineering</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -991,11 +975,7 @@ export function HomePage() {
       >
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
-              <Award size={13} className="text-[var(--secondary)]" />
-              <span>Engineering Mentors</span>
-            </div>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
               Learn Directly From <span className="text-primary">Experienced Engineers</span>
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
@@ -1081,11 +1061,6 @@ export function HomePage() {
         <div className="rounded-2xl border border-slate-200/80 bg-white p-6 md:p-8 shadow-[var(--shadow-card)]">
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold tracking-wide text-slate-800 shadow-[var(--shadow-xs)]">
-                <Globe size={13} className="text-[var(--secondary)]" />
-                <span>Regional Tech Hubs</span>
-              </div>
-
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
                 Six Regional Hubs Powering <span className="text-primary">Nationwide Access</span>
               </h2>

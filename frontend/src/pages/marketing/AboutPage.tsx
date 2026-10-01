@@ -244,11 +244,7 @@ export function AboutPage() {
         animate="visible"
       >
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 mb-4 shadow-[var(--shadow-xs)] backdrop-blur-xs">
-            <Zap size={13} className="text-[var(--secondary)]" />
-            <span>The Ethiopian Software Engineering Movement</span>
-          </div>
-          <h1 className="mt-2 text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
+          <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold leading-[1.15] tracking-tight text-slate-900 break-words">
             Engineering Education Built for <span className="text-primary">Ethiopian Developers</span>
           </h1>
           <p className="mx-auto mt-4 max-w-3xl text-base sm:text-lg leading-relaxed text-slate-600 font-normal">
@@ -337,9 +333,6 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
-            <span>National Context & Strategic Imperative</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Developing Ethiopia's <span className="text-primary">Engineering Potential</span>
           </h2>
@@ -470,11 +463,8 @@ export function AboutPage() {
       >
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] hover:-translate-y-0.5 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-                <Target size={20} />
-              </div>
-              <Badge variant="secondary">Our Mission</Badge>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
+              <Target size={20} />
             </div>
             <h3 className="mt-4 text-lg font-bold text-slate-900">Engineering Mission</h3>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -484,11 +474,8 @@ export function AboutPage() {
           </Card>
 
           <Card className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[var(--shadow-card)] hover:-translate-y-0.5 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
-                <Compass size={20} />
-              </div>
-              <Badge variant="secondary">Our Vision</Badge>
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50/70 text-[var(--secondary)] border border-blue-200/60 dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300 shadow-[var(--shadow-xs)]">
+              <Compass size={20} />
             </div>
             <h3 className="mt-4 text-lg font-bold text-slate-900">Long-Term Vision</h3>
             <p className="mt-2 text-xs leading-relaxed text-slate-600">
@@ -561,9 +548,6 @@ export function AboutPage() {
           </Card>
 
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-2 shadow-[var(--shadow-xs)]">
-              <span>National Impact Model</span>
-            </div>
             <h3 className="text-xl font-bold leading-tight sm:text-2xl text-slate-900">
               {data?.bridge.title ?? "Bridging the Gap from Campus to Cloud"}
             </h3>
@@ -636,9 +620,6 @@ export function AboutPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
-            <span>Trajectory & Execution</span>
-          </div>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Platform Roadmap & Milestones
           </h2>
@@ -718,9 +699,6 @@ export function AboutPage() {
       <section className="border-t border-slate-200/80 bg-slate-50/50 dark:bg-slate-900/50 py-12 lg:py-14">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-3 shadow-[var(--shadow-xs)]">
-              <span>Institutional Trust</span>
-            </div>
             <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Governance & Open Impact Model
             </h2>
@@ -772,10 +750,6 @@ export function AboutPage() {
         <Card className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-slate-200/80 bg-white dark:border-white/10 dark:bg-[var(--bg-card)] p-6 sm:p-8 shadow-[var(--shadow-card)]">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-slate-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-200 px-3 py-0.5 text-xs font-semibold text-slate-800 mb-2.5 shadow-[var(--shadow-xs)]">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-                <span>Join the Movement</span>
-              </div>
               <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl break-words">
                 Ready to transform your engineering trajectory?
               </h2>

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ArrowRight, AlertCircle, Code2 } from "lucide-react";
+import { ArrowRight, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
@@ -87,10 +87,6 @@ export function RegisterPage() {
       className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm"
     >
       <motion.div variants={fadeUp} custom={0} className="space-y-1.5 text-center sm:text-left">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-700">
-          <Code2 size={11} className="text-slate-700" />
-          <span>Student Account</span>
-        </div>
         <h2 className="text-xl font-bold tracking-tight text-slate-900">Create Student Account</h2>
         <p className="text-xs text-slate-600 font-medium">
           Create an account to enroll in tracks and join weekly mentor sessions.

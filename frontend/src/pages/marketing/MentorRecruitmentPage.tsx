@@ -264,11 +264,6 @@ export function MentorRecruitmentPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100/80 dark:bg-white/[0.04] px-3.5 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs">
-          <ShieldCheck size={14} className="text-slate-900 dark:text-slate-100" />
-          <span>Engineering Mentorship</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.12] break-words">
           Mentor Emerging <span className="text-primary">Software Engineers</span>
         </h1>
@@ -328,7 +323,6 @@ export function MentorRecruitmentPage() {
       {/* ─── Guild Value Proposition ─── */}
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary">Why Senior Engineers Join</Badge>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             High Impact. Zero Friction Mentoring.
           </h2>
@@ -364,7 +358,6 @@ export function MentorRecruitmentPage() {
       {/* ─── 4-Step Frictionless Onboarding Process ─── */}
       <section id="onboarding-process" className="space-y-6 scroll-mt-20">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary">Streamlined Process</Badge>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             The 4-Step Mentor Onboarding Journey
           </h2>
@@ -407,10 +400,6 @@ export function MentorRecruitmentPage() {
             {/* Left: Expectations & Guidelines */}
             <div className="space-y-6">
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] px-2.5 py-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
-                  <ShieldCheck size={13} className="text-slate-800 dark:text-slate-200" />
-                  <span>Admissions Committee</span>
-                </div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                   Join the Guild
                 </h2>
@@ -816,7 +805,6 @@ export function MentorRecruitmentPage() {
       {/* ─── Testimonials from Active Mentors ─── */}
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary">Guild Voices</Badge>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             Hear From Our Active Senior Mentors
           </h2>

@@ -209,11 +209,6 @@ export function PartnersPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/70 px-3.5 py-1 text-xs font-semibold text-[var(--secondary)] shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
-          <Building2 size={13} className="text-[var(--secondary)]" />
-          <span>Institutional Alliances & Ecosystem</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Building Ethiopia&apos;s Digital Economy Through <span className="text-primary">Strategic Alliances</span>
         </h1>
@@ -269,12 +264,6 @@ export function PartnersPage() {
       {/* ─── 4 Collaboration Frameworks Section ─── */}
       <section id="frameworks" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Collaboration Pillars
-          </Badge>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Tailored Frameworks for Every Stakeholder
           </h2>
@@ -400,12 +389,6 @@ export function PartnersPage() {
       {/* ─── Partnership Process / Lifecycle ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Structured Delivery
-          </Badge>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 break-words">
             The Partnership Lifecycle
           </h2>
@@ -441,12 +424,6 @@ export function PartnersPage() {
       {/* ─── Institutional Collaboration Principles ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Institutional Governance
-          </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Core Collaboration Standards
           </h2>
@@ -481,11 +458,6 @@ export function PartnersPage() {
         <Card className="relative overflow-hidden rounded-2xl border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div className="space-y-5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-blue-50/70 px-3.5 py-1 text-xs font-semibold text-[var(--secondary)] shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
-                <Mail size={13} className="text-[var(--secondary)]" />
-                <span>Institutional Relations</span>
-              </div>
-
               <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
                 Institutional Partnership
               </h2>
@@ -669,12 +641,6 @@ export function PartnersPage() {
       {/* ─── Institutional FAQ Section ─── */}
       <section className="space-y-6">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Institutional FAQ
-          </Badge>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Frequently Asked Questions
           </h2>

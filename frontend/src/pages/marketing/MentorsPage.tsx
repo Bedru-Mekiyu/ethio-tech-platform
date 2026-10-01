@@ -274,11 +274,6 @@ export function MentorsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
-          <Users size={13} className="text-[var(--secondary)]" />
-          <span>Global Ethiopian Engineering Guild</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Learn From Senior Engineers Shaping <span className="text-primary">Global & African Tech</span>
         </h1>
@@ -360,7 +355,6 @@ export function MentorsPage() {
       <section className="space-y-8">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7 space-y-4">
-            <Badge variant="secondary">Structured Learning</Badge>
             <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               How Mentorship Works at EthioTech
             </h2>
@@ -427,8 +421,7 @@ export function MentorsPage() {
       <section id="mentor-directory" className="space-y-6 scroll-mt-16">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <Badge variant="secondary">Directory</Badge>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1 break-words">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Browse the Mentor Directory
             </h2>
             <p className="text-xs text-slate-600 mt-0.5">Filter by engineering domain, company, or tech stack.</p>
@@ -466,7 +459,6 @@ export function MentorsPage() {
 
         {allMentors.length === 0 ? (
           <EmptyState
-            eyebrow="Mentor Guild"
             title="No mentors registered yet"
             description="Our mentor network is currently accepting applications from senior engineers and tech leads."
             actionLabel="Apply to Mentor"
@@ -474,7 +466,6 @@ export function MentorsPage() {
           />
         ) : filteredMentors.length === 0 ? (
           <EmptyState
-            eyebrow="Filter Results"
             title="No matching mentors found"
             description="Try adjusting your search query or specialty filter."
             actionLabel="Reset Filters"
@@ -517,7 +508,6 @@ export function MentorsPage() {
       {/* ─── Bottom CTA Banner ─── */}
       <Card className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <Badge variant="secondary">Join the Guild</Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Are You a Senior Engineer?
           </h2>

@@ -12,7 +12,6 @@ import {
   Clock,
   Copy,
   Cpu,
-  Globe,
   MapPin,
   Monitor,
   RefreshCw,
@@ -390,11 +389,6 @@ export function HubsPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
-          <Globe size={13} className="text-[var(--secondary)]" />
-          <span>Regional Learning Hubs</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Physical Tech Hubs <span className="text-primary">Across Ethiopia</span>
         </h1>
@@ -488,7 +482,6 @@ export function HubsPage() {
         /* ─── DIGITAL PASSES & FAST ARRIVAL CHECK-IN VIEW ─── */
         <section className="space-y-8">
           <div className="mx-auto max-w-3xl text-center space-y-2">
-            <Badge variant="secondary">Arrival Verification</Badge>
             <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
               Digital Hub Passes & Physical Check-In
             </h2>
@@ -660,8 +653,7 @@ export function HubsPage() {
           <section id="hubs-explorer" className="space-y-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <Badge variant="secondary">Regional Network</Badge>
-                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl mt-1 break-words">
+                <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
                   Ethiopian Innovation Corridors
                 </h2>
                 <p className="text-xs text-slate-600 mt-0.5">
@@ -964,7 +956,6 @@ export function HubsPage() {
           <section className="space-y-8">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-6 space-y-4">
-                <Badge variant="secondary">Resilient Offline Design</Badge>
                 <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
                   Engineered for High-Reliability Local Operations
                 </h2>
@@ -1037,10 +1028,7 @@ export function HubsPage() {
           <Card className="w-full max-w-2xl border-slate-200 bg-white p-5 sm:p-6 space-y-4 shadow-xl my-6 text-slate-900">
             <div className="flex items-start justify-between border-b border-slate-200 pb-4">
               <div>
-                <Badge variant="outline" size="sm">
-                  Physical Seat & Mentor Booking
-                </Badge>
-                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 mt-1">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
                   Book at {bookingHub.city} Tech Hub
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">{bookingHub.address}</p>
@@ -1376,8 +1364,7 @@ export function HubsPage() {
       {/* ─── Bottom Host / Partner CTA ─── */}
       <Card className="rounded-2xl border border-slate-200/90 bg-white p-6 sm:p-10 text-center space-y-4 shadow-sm">
         <div className="mx-auto max-w-2xl space-y-2">
-          <Badge variant="secondary">Ecosystem Partnership</Badge>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 mt-1 break-words">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 break-words">
             Want to Host a Community Hub in Your City?
           </h2>
           <p className="text-xs md:text-sm text-slate-600 leading-relaxed">

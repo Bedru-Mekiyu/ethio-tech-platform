@@ -79,7 +79,7 @@ describe("HubsPage Component Suite", () => {
     fireEvent.click(bookButtons[0]);
 
     // Check modal opens
-    expect(await screen.findByText(/Physical Seat & Mentor Booking/i)).toBeDefined();
+    expect(await screen.findByText(/Book at.*Tech Hub/i)).toBeDefined();
 
     // Select Afternoon slot
     const afternoonSlot = screen.getByText(/Afternoon Session/i);

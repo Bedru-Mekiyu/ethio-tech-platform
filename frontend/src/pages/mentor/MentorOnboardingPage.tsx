@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AlertCircle, ChevronRight, Loader2, ShieldCheck, Upload, User, Clock, Check } from "lucide-react";
+import { AlertCircle, ChevronRight, Loader2, Upload, User, Clock, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
@@ -170,11 +170,7 @@ export function MentorOnboardingPage() {
     <div className="mx-auto max-w-2xl px-4 py-8 sm:py-12 space-y-6 text-slate-900 dark:text-slate-100">
       {/* ─── Header & Progress ─── */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.04] px-2.5 py-0.5 text-xs font-semibold text-slate-800 dark:text-slate-200">
-            <ShieldCheck size={13} />
-            <span>Mentor Console Activation</span>
-          </div>
+        <div className="flex items-center justify-end">
           <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
             Step {stepIndex + 1} of {STEPS.length}
           </span>
@@ -281,8 +277,8 @@ export function MentorOnboardingPage() {
                 <li className="flex items-start gap-2">
                   <span className="font-bold text-slate-900 dark:text-white mt-0.5">•</span>
                   <span>
-                    <strong>Scheduled Punctuality:</strong> Honor confirmed 1-on-1 office hours and notify platform administrators
-                    at least 24 hours in advance if a conflict arises.
+                    <strong>Scheduled Punctuality:</strong> Honor confirmed 1-on-1 office hours and notify platform
+                    administrators at least 24 hours in advance if a conflict arises.
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -488,9 +484,7 @@ export function MentorOnboardingPage() {
         {activeStep === "availability" && (
           <div className="space-y-5">
             <div className="space-y-1">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
-                Set Weekly Availability
-              </h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">Set Weekly Availability</h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                 Add at least one weekly window. You can refine this later in mentor availability settings.
               </p>

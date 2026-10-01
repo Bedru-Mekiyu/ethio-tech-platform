@@ -374,10 +374,6 @@ export function TracksPage() {
       >
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-semibold text-slate-800 mb-1.5">
-              <Code2 size={12} />
-              Career-Aligned Engineering Curriculum
-            </div>
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">Learning Pathways</h1>
             <p className="text-xs text-slate-600 font-medium mt-1 max-w-2xl leading-relaxed">
               Choose your engineering pathway, track your milestones, and build production-grade capstone projects with

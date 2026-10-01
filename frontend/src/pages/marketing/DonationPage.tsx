@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   Copy,
   CreditCard,
-  Heart,
   Laptop2,
   Lock,
   ShieldCheck,
@@ -202,11 +201,6 @@ export function DonationPage() {
         initial={reduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
-          <Heart size={13} className="text-primary" />
-          <span>Transparent Impact Philanthropy</span>
-        </div>
-
         <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-slate-900 leading-[1.15] break-words">
           Fund Ethiopian Developers Through <span className="text-primary">Sovereign Education</span>
         </h1>
@@ -232,7 +226,6 @@ export function DonationPage() {
       {/* ─── Interactive Scholarship Breakdown & Donation Calculator ─── */}
       <section id="donate-now" className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge variant="secondary">Direct Impact Model</Badge>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Choose Your Student Sponsorship Tier
           </h2>
@@ -686,12 +679,6 @@ export function DonationPage() {
       {/* ─── Hardware Donation Drive Section ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Hardware Drive
-          </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Donate Laptops & Regional Hub Equipment
           </h2>
@@ -722,12 +709,6 @@ export function DonationPage() {
         <Card className="rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 shadow-sm">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2 items-center">
             <div className="space-y-3.5">
-              <Badge
-                variant="secondary"
-                className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-              >
-                Drop-off & International Freight
-              </Badge>
               <h3 className="text-xl font-bold text-slate-900">How Hardware Donations Work</h3>
               <ul className="space-y-2.5 text-xs text-slate-600">
                 <li className="flex items-start gap-2.5">
@@ -784,12 +765,6 @@ export function DonationPage() {
       {/* ─── Transparent Fund Allocation & Governance ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Zero Overhead Waste
-          </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Transparent Fund Allocation
           </h2>
@@ -818,12 +793,6 @@ export function DonationPage() {
       {/* ─── Donor Recognition & Perks Wall ─── */}
       <section className="space-y-8">
         <div className="mx-auto max-w-3xl text-center space-y-2">
-          <Badge
-            variant="secondary"
-            className="border-blue-200/80 bg-blue-50/70 text-[var(--secondary)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300"
-          >
-            Donor Honor Roll
-          </Badge>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl break-words">
             Donor Recognition & Stewardship
           </h2>
@@ -856,10 +825,7 @@ export function DonationPage() {
           <Card className="w-full max-w-lg rounded-2xl border-slate-200/80 bg-white p-6 md:p-8 space-y-5 shadow-2xl text-slate-900">
             <div className="flex items-start justify-between">
               <div>
-                <Badge variant="secondary" size="sm">
-                  Hardware Pledge
-                </Badge>
-                <h3 className="text-xl font-bold text-slate-900 mt-1">Register Equipment Donation</h3>
+                <h3 className="text-xl font-bold text-slate-900">Register Equipment Donation</h3>
               </div>
               <button
                 type="button"

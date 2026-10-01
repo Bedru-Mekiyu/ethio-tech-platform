@@ -26,11 +26,7 @@ export function AuthLayout() {
         <div className="relative z-10">
           <Logo />
           <div className="mt-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3 py-0.5 text-xs font-medium text-slate-700">
-              <Shield size={12} className="text-slate-700" />
-              <span>Software Engineering Education</span>
-            </div>
-            <h1 className="mt-5 max-w-md text-xl font-bold leading-tight tracking-tight text-slate-900 xl:text-2xl">
+            <h1 className="max-w-md text-xl font-bold leading-tight tracking-tight text-slate-900 xl:text-2xl">
               {isLogin ? "Sign in to your account" : "Learn software engineering through direct mentorship"}
             </h1>
             <p className="mt-3 max-w-md text-xs leading-relaxed text-slate-600 sm:text-sm">

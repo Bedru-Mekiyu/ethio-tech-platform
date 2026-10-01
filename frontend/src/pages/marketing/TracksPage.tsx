@@ -616,10 +616,6 @@ export function TracksPage() {
       {/* CTA Footer Banner */}
       <section className="relative overflow-hidden border-t border-slate-200/80 bg-white py-12 lg:py-16 text-center">
         <div className="mx-auto max-w-2xl px-4 space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1 text-xs font-semibold text-slate-800 shadow-xs">
-            <CheckCircle2 size={12} className="text-[var(--secondary)]" />
-            <span>Tuition-Free Education</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 break-words">
             Start Your Engineering Pathway
           </h2>

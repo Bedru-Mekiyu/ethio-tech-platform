@@ -80,8 +80,8 @@ describe("HomePage Component Suite", () => {
     expect(screen.getAllByRole("button", { name: /Explore 6 Engineering Tracks/i }).length).toBeGreaterThan(0);
     expect(screen.getAllByRole("button", { name: /Start Learning Free/i }).length).toBeGreaterThan(0);
 
-    // Check for the platform badge
-    expect(screen.getByText(/Tuition-Free Engineering Fellowship/i)).toBeDefined();
+    // Check for the trust row
+    expect(screen.getByText(/100% Tuition-Free/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {
@@ -132,7 +132,7 @@ describe("HomePage Component Suite", () => {
       </QueryClientProvider>,
     );
 
-    expect(screen.getAllByText(/Engineering Mentors/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Experienced Engineers/i).length).toBeGreaterThan(0);
     expect(screen.getByText(/Learn Directly From/i)).toBeDefined();
     expect(screen.getAllByRole("button", { name: /Apply to Mentor/i }).length).toBeGreaterThan(0);
   }, 15000);

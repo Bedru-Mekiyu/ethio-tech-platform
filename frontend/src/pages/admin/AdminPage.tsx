@@ -18,7 +18,6 @@ import {
   Layers,
   MapPin,
   Monitor,
-  Radio,
   RefreshCw,
   Sparkles,
   Star,
@@ -214,15 +213,6 @@ export function AdminPage() {
       <Card className="border-slate-200/80 bg-white p-4 sm:p-5 md:p-6 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl space-y-1.5">
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-2.5 py-0.5 text-[11px] font-medium text-slate-900">
-                <Radio size={11} className="animate-pulse text-[var(--secondary)]" />
-                Admin Console
-              </span>
-              <Badge variant="outline" size="sm">
-                Production Data
-              </Badge>
-            </div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Overview</h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Operational metrics across student enrollment, active mentorship, learning hub attendance, and course

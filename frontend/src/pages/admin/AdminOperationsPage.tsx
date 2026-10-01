@@ -294,13 +294,12 @@ export function AdminOperationsPage() {
                 Systems Active
               </span>
               <Badge variant="outline" size="sm">
-                Health Monitor
-              </Badge>
-              <Badge variant="outline" size="sm">
                 API {health.live?.version ?? "v1"}
               </Badge>
             </div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">Platform Operations & Health</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
+              Platform Operations & Health
+            </h1>
             <p className="text-xs font-medium text-slate-600 leading-relaxed">
               Infrastructure health, service connectivity, real-time telemetry, and administrative audit logs.
             </p>
