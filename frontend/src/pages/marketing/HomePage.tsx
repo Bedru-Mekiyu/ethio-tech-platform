@@ -473,73 +473,20 @@ export function HomePage() {
             </div>
           </div>
 
-          {/* Right Column: Platform Workspace & Real Collaboration Preview */}
+          {/* Right Column: Hero Engineering Imagery */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[var(--shadow-card)] space-y-3.5">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-                <span className="text-xs font-semibold text-slate-800">Live Pull Request Audit</span>
-                <Badge variant="secondary" size="sm" className="gap-1.5 font-medium text-xs">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-                  Active Session
-                </Badge>
-              </div>
-
-              {/* Authentic Developer Engineering Workstation Image */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/80">
-                <SmartImage
-                  src={LOCAL_MEDIA_ASSETS.hero.collaboration}
-                  alt="African software engineer in headphones reviewing terminal commands and VS Code files on a dual-display workstation"
-                  priority
-                  hoverEffect="zoom"
-                  className="h-full w-full object-cover"
-                  wrapperClassName="h-full w-full border-none bg-transparent"
-                  width={1200}
-                  quality={85}
-                />
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between rounded-lg bg-slate-900/85 px-3 py-1.5 text-xs text-white backdrop-blur-sm border border-white/10">
-                  <span className="flex items-center gap-1.5 font-medium">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Active Engineering Session
-                  </span>
-                  <span className="text-slate-300 font-mono text-[11px]">Addis Ababa • WebRTC Mesh</span>
-                </div>
-              </div>
-
-              {/* Single Live Mentorship Session Line */}
-              <div className="rounded-xl border border-slate-200/80 bg-slate-50/70 dark:bg-slate-900/50 p-3 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <Avatar
-                    name="Selamawit Tekle"
-                    userId="selamawit-tekle"
-                    role="mentor"
-                    size="sm"
-                    className="border border-slate-200 shrink-0"
-                  />
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-slate-900 truncate">Selamawit Tekle</p>
-                    <p className="text-[11px] text-slate-500 truncate">Senior Infrastructure Engineer</p>
-                  </div>
-                </div>
-                <span className="flex items-center gap-1 text-xs font-medium text-slate-700 shrink-0">
-                  <Radio size={12} className="text-[var(--secondary)] animate-pulse" /> WebRTC • 48ms
-                </span>
-              </div>
-
-              {/* Single Track Progress Line */}
-              <div className="rounded-xl border border-slate-200/80 bg-white p-3 space-y-2 shadow-[var(--shadow-xs)]">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-800 truncate">Cloud Backend & Distributed Systems</span>
-                  <span className="font-mono font-bold text-slate-900">50%</span>
-                </div>
-                <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
-                  <div className="h-full bg-[var(--secondary)] rounded-full transition-all" style={{ width: "50%" }} />
-                </div>
-                <div className="flex items-center justify-between text-[11px] text-slate-500">
-                  <span>Module 4: Connection Pooling & Migrations</span>
-                  <span>18 / 18 Tests Passing</span>
-                </div>
-              </div>
+            <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-slate-900/50">
+              <SmartImage
+                src={LOCAL_MEDIA_ASSETS.hero.collaboration}
+                alt="African software engineer debugging live code and connected mobile device at a workstation"
+                priority
+                aspectRatio="aspect-[4/3]"
+                hoverEffect="zoom"
+                className="h-full w-full object-cover"
+                wrapperClassName="h-full w-full border-none bg-transparent"
+                width={1200}
+                quality={88}
+              />
             </div>
           </div>
         </div>
