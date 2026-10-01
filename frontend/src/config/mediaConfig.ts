@@ -45,8 +45,8 @@ export const MEDIA_CATEGORIES = {
     hero: [
       {
         id: "hero-collaboration",
-        unsplashId: "photo-1573164574472-797cdf4a583a",
-        alt: "African software engineer debugging live code and connected mobile device at a workstation",
+        unsplashId: "photo-1531482615713-2afd69097998",
+        alt: "Two African software engineers reviewing code logic and architecture over a monitor in a tech office",
         blurDataUrl:
           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },

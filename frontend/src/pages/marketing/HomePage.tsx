@@ -478,7 +478,7 @@ export function HomePage() {
             <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-slate-900/50">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.hero.collaboration}
-                alt="African software engineer debugging live code and connected mobile device at a workstation"
+                alt="Two African software engineers reviewing code logic and architecture over a monitor in a tech office"
                 priority
                 aspectRatio="aspect-[4/3]"
                 hoverEffect="zoom"

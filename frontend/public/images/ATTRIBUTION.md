@@ -5,8 +5,7 @@ All visual assets included in `frontend/public/images/` are authentic technology
 All assets are licensed under the **Unsplash License**, which permits free commercial and non-commercial usage, modification, and distribution without requiring financial compensation or attribution (attribution is provided here in accordance with open-source and engineering best practices):
 
 | Asset | Local Path | Unsplash ID | Photographer / Origin | Context & Representation |
-| :--- | :--- | :--- | :--- | :--- |
-| **Hero Engineering** | `/images/hero/software-team-collaboration.webp` | `photo-1573164574472-797cdf4a583a` | Christina @ wocintechchat | African software engineer conducting a live code debugging session on a MacBook Pro with physical connected mobile device on a clean minimalist table |
+| **Hero Engineering** | `/images/hero/software-team-collaboration.webp` | `photo-1531482615713-2afd69097998` | Neslihan Gunaydin | Two African software engineers collaborating on code logic and architecture review over an external monitor and laptop workstation in an active tech office |
 | **Technical Mentorship** | `/images/mentorship/technical-mentorship.webp` | `photo-1528901166007-3784c7dd3653` | Neslihan Gunaydin | African software engineer conducting a pair programming code review session with a developer over dual monitors |
 | **Campus Bridge** | `/images/community/tech-community-classroom.webp` | `photo-1620829813573-7c9e1877706f` | Arowolo Joshua | Young African engineering student deeply focused on coding on a laptop in a university technical workspace |
 | **Regional Tech Hubs** | `/images/hubs/tech-hub-workshop.webp` | `photo-1624314138470-5a2f24623f10` | Gift Habeshaw (Addis Ababa, Ethiopia) | Modern Addis Ababa skyline with the Commercial Bank of Ethiopia headquarters tower reflecting across Friendship Park lake |
