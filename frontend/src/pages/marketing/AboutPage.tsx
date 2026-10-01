@@ -65,8 +65,7 @@ const ETHIOPIAN_DEMOGRAPHIC_FACTS = [
   {
     metric: "$0",
     label: "Tuition or Subscription Fees",
-    description:
-      "Tuition-free non-profit model ensuring equal access regardless of economic background.",
+    description: "Tuition-free non-profit model ensuring equal access regardless of economic background.",
     icon: Users,
   },
 ];
@@ -345,8 +344,8 @@ export function AboutPage() {
             Developing Ethiopia's <span className="text-primary">Engineering Potential</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal max-w-xl mx-auto">
-            With over 125 million citizens and 70% under 30, Ethiopia holds immense engineering talent.
-            EthioTech provides the production tooling and mentorship to bridge academic theory with industry standards.
+            With over 125 million citizens and 70% under 30, Ethiopia holds immense engineering talent. EthioTech
+            provides the production tooling and mentorship to bridge academic theory with industry standards.
           </p>
         </div>
 
@@ -576,7 +575,7 @@ export function AboutPage() {
             <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-100 shadow-[var(--shadow-card)] dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.community.classroom}
-                alt="University technology classroom connecting students directly with hands-on software curriculum"
+                alt="Young African engineering student deeply focused on coding on a laptop in a university technical workspace"
                 aspectRatio="aspect-[16/9]"
                 className="w-full object-cover"
               />

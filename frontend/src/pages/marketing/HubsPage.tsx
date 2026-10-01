@@ -992,7 +992,7 @@ export function HubsPage() {
                 <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <SmartImage
                     src={LOCAL_MEDIA_ASSETS.hubs.workshop}
-                    alt="Physical technology learning hub equipped with dual monitors and high-speed developer workstations"
+                    alt="Modern Addis Ababa skyline with the Commercial Bank of Ethiopia headquarters tower reflecting across Friendship Park lake"
                     aspectRatio="aspect-[16/10]"
                     className="w-full object-cover"
                   />

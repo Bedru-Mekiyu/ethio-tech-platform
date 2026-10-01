@@ -227,7 +227,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     description:
       "Advance your technical capabilities through structured tracks, hands-on production codebases, collaborative squads, and direct guidance from experienced software engineers.",
     image: LOCAL_MEDIA_ASSETS.hero.collaboration,
-    imageAlt: "Engineering squads collaborating on real-world production codebases",
+    imageAlt:
+      "African software engineer in headphones reviewing terminal commands and VS Code files on a curved display",
     keyBenefits: [
       {
         title: "Zero Financial Barriers",
@@ -261,7 +262,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     icon: Users,
     description: "Share your expertise through structured office hours, PR reviews, and system design masterclasses.",
     image: LOCAL_MEDIA_ASSETS.mentorship.codeReview,
-    imageAlt: "Experienced engineers mentoring students on architectural design and code reviews",
+    imageAlt:
+      "Senior African software engineer conducting a pair programming code review session with a developer over dual monitors",
     keyBenefits: [
       {
         title: "High-Leverage Structured Format",
@@ -296,7 +298,8 @@ const ROLE_PERSONAS: RolePersona[] = [
     description:
       "Hire vetted, production-ready software engineers with verified proof-of-work, production git histories, and strong teamwork habits.",
     image: LOCAL_MEDIA_ASSETS.events.hackathon,
-    imageAlt: "Top graduate teams showcasing enterprise-grade systems at live developer showcases",
+    imageAlt:
+      "African software engineering team collaborating on laptops covered in developer community stickers during a hackathon sprint",
     keyBenefits: [
       {
         title: "Proof-of-Work Over Resumes",

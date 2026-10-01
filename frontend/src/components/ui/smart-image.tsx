@@ -15,6 +15,7 @@ export interface SmartImageProps extends React.ImgHTMLAttributes<HTMLImageElemen
   hoverEffect?: "none" | "zoom" | "lift" | "glow";
   wrapperClassName?: string;
   aspectRatio?: string;
+  priority?: boolean;
 }
 
 function generateSrcSet(unsplashId: string, fit: "crop" | "facearea" | "fill" | "max" | "min" | "scale"): string {
@@ -34,6 +35,9 @@ export function SmartImage({
   className,
   wrapperClassName,
   aspectRatio,
+  priority = false,
+  loading,
+  fetchPriority,
   ...props
 }: SmartImageProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -44,6 +48,9 @@ export function SmartImage({
   const placeholderSrc = unsplashId ? getBlurPlaceholderUrl(unsplashId) : "";
   const srcSet = unsplashId ? generateSrcSet(unsplashId, fit) : undefined;
   const sizesAttr = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px";
+
+  const computedLoading = loading ?? (priority ? "eager" : "lazy");
+  const computedFetchPriority = fetchPriority ?? (priority ? "high" : "auto");
 
   const hoverVariants = {
     none: {},
@@ -82,7 +89,8 @@ export function SmartImage({
           srcSet={srcSet}
           sizes={sizesAttr}
           alt={alt}
-          loading="lazy"
+          loading={computedLoading}
+          fetchPriority={computedFetchPriority}
           decoding="async"
           className={cn(
             "h-full w-full object-cover transition-opacity duration-500 ease-out",

@@ -162,8 +162,7 @@ const RICH_CURRICULUM_TRACKS: RichTrackData[] = [
     moduleCount: 10,
     liveSessions: 36,
     xpReward: 4000,
-    description:
-      "Network defense, penetration testing, application security, and cryptographic protocols.",
+    description: "Network defense, penetration testing, application security, and cryptographic protocols.",
     skills: ["Penetration Testing", "SOC Operations", "Network Defense", "Cryptography", "OWASP Top 10", "Wireshark"],
     capstones: [
       "Enterprise Security Audit & Penetration Report",
@@ -486,21 +485,22 @@ export function HomePage() {
                 </Badge>
               </div>
 
-              {/* Authentic Developer Collaboration Image */}
+              {/* Authentic Developer Engineering Workstation Image */}
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/80">
                 <SmartImage
                   src={LOCAL_MEDIA_ASSETS.hero.collaboration}
-                  alt="Young software engineers collaborating on system architecture in a modern tech workspace"
+                  alt="African software engineer in headphones reviewing terminal commands and VS Code files on a curved ultrawide display"
+                  priority
                   hoverEffect="zoom"
                   className="h-full w-full object-cover"
                   wrapperClassName="h-full w-full border-none bg-transparent"
-                  width={800}
+                  width={1200}
                   quality={85}
                 />
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between rounded-lg bg-slate-900/85 px-3 py-1.5 text-xs text-white backdrop-blur-sm border border-white/10">
                   <span className="flex items-center gap-1.5 font-medium">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    Live Peer Review
+                    Active Engineering Session
                   </span>
                   <span className="text-slate-300 font-mono text-[11px]">Addis Ababa • Remote Mesh</span>
                 </div>
@@ -1181,7 +1181,7 @@ export function HomePage() {
               <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-slate-200/80">
                 <SmartImage
                   src={LOCAL_MEDIA_ASSETS.events.hackathon}
-                  alt="Software developers and engineering teams collaborating during an in-person hackathon sprint"
+                  alt="African software engineering team collaborating on laptops covered in developer community stickers during a hackathon sprint"
                   hoverEffect="zoom"
                   className="h-full w-full object-cover"
                   wrapperClassName="h-full w-full border-none bg-transparent"

@@ -121,7 +121,8 @@ export function MarketingTrackDetailPage() {
         {(track.localImage || track.unsplashId) && (
           <div className="hidden lg:block">
             <SmartImage
-              src={track.localImage ?? `https://images.unsplash.com/${track.unsplashId}?fm=webp&fit=crop&w=800&q=80`}
+              src={track.localImage}
+              unsplashId={track.unsplashId}
               alt={`${track.title} — EthioTech curriculum track`}
               className="h-72 w-full rounded-2xl object-cover border border-slate-200/90 shadow-sm"
               aspectRatio="aspect-[4/3]"

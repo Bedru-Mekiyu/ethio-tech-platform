@@ -45,29 +45,29 @@ export const MEDIA_CATEGORIES = {
     hero: [
       {
         id: "hero-collaboration",
-        unsplashId: "photo-1531482615713-2afd69097998",
-        alt: "Young developers collaborating on a software architecture project in a modern tech workspace",
+        unsplashId: "photo-1730130054404-c2bd8e7038c2",
+        alt: "African software engineer in studio headphones deeply engaged in VS Code, terminal git commands, and interface systems on a curved ultrawide display",
         blurDataUrl:
           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },
       {
         id: "hero-engineering",
-        unsplashId: "photo-1522071820081-009f0129c71c",
-        alt: "Student engineer designing code pipelines in front of multiple screen setups with neon ambient light",
+        unsplashId: "photo-1604145559206-e3bce0040e2d",
+        alt: "African software engineer developing secure authentication services in TypeScript on a mechanical keyboard workstation",
         blurDataUrl:
           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },
       {
         id: "hero-classroom",
-        unsplashId: "photo-1515187029135-18ee286d815b",
-        alt: "Innovative technology laboratory workshop with team solving engineering tasks",
+        unsplashId: "photo-1620829813573-7c9e1877706f",
+        alt: "Young African engineering student deeply focused on coding on a laptop in a university technical workspace",
         blurDataUrl:
           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },
     ] as MediaAsset[],
     features: {
       realtime: "photo-1607604276583-eef5d076aa5f", // neon ambient coding space
-      mentorship: "photo-1573497019940-1c28c88b4f3e", // remote meeting call
+      mentorship: "photo-1528901166007-3784c7dd3653", // pair programming code review
       gamification: "photo-1634017839464-5c339ebe3cb4", // 3D abstract shapes/rewards
     },
   },
@@ -75,13 +75,13 @@ export const MEDIA_CATEGORIES = {
     coding: [
       {
         id: "dash-coding-setup",
-        unsplashId: "photo-1607604276583-eef5d076aa5f",
-        alt: "Clean programming setup with VS Code editor open under custom keyboard lights",
+        unsplashId: "photo-1687603917313-ccae1a289a9d",
+        alt: "High-resolution display showing TypeScript and React hooks with syntax highlighting in a dark-theme code editor",
       },
       {
         id: "dash-workspace",
-        unsplashId: "photo-1555066931-4365d14bab8c",
-        alt: "Sleek software engineering environment with high resolution screen arrays",
+        unsplashId: "photo-1547860664-b8537ca5f833",
+        alt: "African software engineer building responsive user interfaces in VS Code with a live browser preview",
       },
     ] as MediaAsset[],
     stats: {
@@ -93,13 +93,13 @@ export const MEDIA_CATEGORIES = {
     sessions: [
       {
         id: "mentor-teaching",
-        unsplashId: "photo-1573496359142-b8d87734a5a2",
-        alt: "Senior engineer explaining logic streams in a collaborative session",
+        unsplashId: "photo-1528901166007-3784c7dd3653",
+        alt: "Senior African software engineer conducting a pair programming code review session with a developer over dual monitors",
       },
       {
         id: "mentor-collaboration",
-        unsplashId: "photo-1507537297725-24a1c029d3ca",
-        alt: "Global professionals talking over software mockups and system logs",
+        unsplashId: "photo-1573164713619-24c711fe7878",
+        alt: "Software engineers collaborating on technical architecture during an engineering sprint",
       },
     ] as MediaAsset[],
   },
@@ -107,13 +107,13 @@ export const MEDIA_CATEGORIES = {
     immersive: [
       {
         id: "class-virtual-lab",
-        unsplashId: "photo-1635070041078-e363dbe005cb",
-        alt: "Connected virtual laboratory with interactive engineering overlays",
+        unsplashId: "photo-1620829813573-7c9e1877706f",
+        alt: "Young African engineering student deeply focused on coding on a laptop in a university technical workspace",
       },
       {
         id: "class-pair-programming",
-        unsplashId: "photo-1522071820081-009f0129c71c",
-        alt: "Pair programming in a high-end dark-themed environment",
+        unsplashId: "photo-1528901166007-3784c7dd3653",
+        alt: "Pair programming in a modern collaborative developer environment",
       },
     ] as MediaAsset[],
   },
@@ -121,13 +121,13 @@ export const MEDIA_CATEGORIES = {
     showcase: [
       {
         id: "community-hackathon",
-        unsplashId: "photo-1504384308090-c894fdcc538d",
-        alt: "Active software engineering sprint event",
+        unsplashId: "photo-1573164713619-24c711fe7878",
+        alt: "African software engineering team collaborating on laptops covered in developer community stickers during a hackathon sprint",
       },
       {
         id: "community-pitch",
-        unsplashId: "photo-1522071820081-009f0129c71c",
-        alt: "Developers collaborating on a software project",
+        unsplashId: "photo-1521791136064-7986c2920216",
+        alt: "Technology partners agreeing on engineering internships and junior hiring commitments in Nairobi",
       },
     ] as MediaAsset[],
   },

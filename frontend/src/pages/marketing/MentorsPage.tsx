@@ -388,7 +388,7 @@ export function MentorsPage() {
             <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-xs dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
               <SmartImage
                 src={LOCAL_MEDIA_ASSETS.mentorship.codeReview}
-                alt="Senior software engineer mentoring a junior developer on system design and code implementation"
+                alt="Senior African software engineer conducting a pair programming code review session with a developer over dual monitors"
                 aspectRatio="aspect-[4/3]"
                 className="w-full object-cover"
               />

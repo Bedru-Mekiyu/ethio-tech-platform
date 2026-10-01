@@ -130,7 +130,7 @@ export const TRACKS_CATALOG: TrackCatalogItem[] = [
     xpReward: 3400,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1555066931-4365d14bab8c",
+    unsplashId: "photo-1687603917313-ccae1a289a9d",
     localImage: "/images/tracks/fullstack-cloud.webp",
     marketDemand: {
       rating: "Very High",
@@ -515,7 +515,7 @@ export function setupCollaborationRoom(io: Server) {
     xpReward: 3000,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1551650975-87deedd944c3",
+    unsplashId: "photo-1521790361543-f645cf042ec4",
     localImage: "/images/tracks/mobile-engineering.webp",
     marketDemand: {
       rating: "Very High",
@@ -825,7 +825,7 @@ export function CourierLiveMap({ orderId }: { orderId: string }) {
     xpReward: 3200,
     featured: true,
     badgeColor: "default",
-    unsplashId: "photo-1550751827-4bd374c3f58b",
+    unsplashId: "photo-1558494949-ef010cbdcc31",
     localImage: "/images/tracks/cloud-devops.webp",
     marketDemand: {
       rating: "Very High",
@@ -1124,7 +1124,7 @@ export async function handler(event: S3Event) {
     xpReward: 3500,
     featured: true,
     badgeColor: "warning",
-    unsplashId: "photo-1555949963-aa79dcee981c",
+    unsplashId: "photo-1515879218367-8466d910aaa4",
     localImage: "/images/tracks/applied-ai-systems.webp",
     marketDemand: {
       rating: "Extremely High",
@@ -1426,7 +1426,7 @@ class MultilingualAssistant:
     xpReward: 3100,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1581291518857-4e27b48ff24e",
+    unsplashId: "photo-1604145559206-e3bce0040e2d",
     localImage: "/images/tracks/fintech-systems.webp",
     marketDemand: {
       rating: "Extremely High",
@@ -1709,7 +1709,7 @@ export const loginRateLimiter = rateLimit({
     xpReward: 2800,
     featured: true,
     badgeColor: "outline",
-    unsplashId: "photo-1526498460520-4c246339dccb",
+    unsplashId: "photo-1547860664-b8537ca5f833",
     localImage: "/images/tracks/frontend-engineering.webp",
     marketDemand: {
       rating: "High",
