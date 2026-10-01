@@ -425,13 +425,13 @@ export function HomePage() {
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
             <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
-              Ship Production Systems. <span className="text-primary">Get Reviewed by Working Engineers.</span>
+              Learn From Engineers Shipping in Production Right Now.
             </h1>
 
             {/* Subtitle - Persuasive Reason-to-Believe */}
             <p className="text-base sm:text-lg leading-relaxed text-slate-600 max-w-xl font-normal">
-              Move beyond isolated tutorials. Build fullstack services and distributed systems with line-by-line pull
-              request audits from industry engineers—backed by regional tech hubs with dedicated power and fiber.
+              Not instructors reading slides. Senior engineers reviewing your code, line by line, the way they'd review
+              a teammate's.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
