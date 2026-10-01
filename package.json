@@ -23,14 +23,24 @@
     "@rollup/rollup-linux-x64-gnu": "4.61.1"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": [
+    "frontend/**/*.{ts,tsx,js,jsx}": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --fix --config frontend/eslint.config.js"
     ],
-    "*.css": [
+    "backend/**/*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix --config backend/eslint.config.js"
+    ],
+    "e2e/**/*.{ts,js}": [
       "prettier --write"
     ],
-    "*.json": [
+    "./*.{ts,js,mjs,cjs}": [
+      "prettier --write"
+    ],
+    "**/*.css": [
+      "prettier --write"
+    ],
+    "**/*.json": [
       "prettier --write"
     ]
   },

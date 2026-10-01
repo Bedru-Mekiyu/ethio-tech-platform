@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 
+// End-to-end integration suite for cross-role access boundaries
 test.describe("Cross-Role and Authorization Boundaries Suite", () => {
   test("Public visitor sees Sign in / Join EthioTech CTAs on marketing navbar", async ({ page }) => {
     await page.goto("/");

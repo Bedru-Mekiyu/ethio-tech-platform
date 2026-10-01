@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * EthioTech Playwright E2E Configuration
+ * EthioTech Platform Playwright E2E Configuration
  * Docs: https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
