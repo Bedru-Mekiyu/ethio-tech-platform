@@ -46,7 +46,7 @@ export const MEDIA_CATEGORIES = {
       {
         id: "hero-collaboration",
         unsplashId: "photo-1730130054404-c2bd8e7038c2",
-        alt: "African software engineer in studio headphones deeply engaged in VS Code, terminal git commands, and interface systems on a curved ultrawide display",
+        alt: "African software engineer in headphones reviewing terminal commands and VS Code files on a dual-display workstation",
         blurDataUrl:
           "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4IDUiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjUiIGZpbGw9IiMwYTEwMWMiLz48L3N2Zz4=",
       },

@@ -420,25 +420,25 @@ export function HomePage() {
           <div className="space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/95 px-3 py-1 text-xs font-semibold text-slate-800 shadow-[var(--shadow-xs)] backdrop-blur-xs">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
-              <span>Software Engineering Education</span>
+              <span>Tuition-Free Engineering Fellowship</span>
             </div>
 
             {/* Main Headline - Balanced & Fixed Size (36-44px desktop / 28-32px mobile) */}
             <h1 className="text-3xl font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.65rem] text-slate-900 max-w-2xl break-words">
-              Build Production Software with <span className="text-primary">Experienced Engineering Mentors</span>
+              Ship Production Systems. <span className="text-primary">Get Reviewed by Working Engineers.</span>
             </h1>
 
-            {/* Subtitle - Trimmed to comfortable 16-18px */}
+            {/* Subtitle - Persuasive Reason-to-Believe */}
             <p className="text-base sm:text-lg leading-relaxed text-slate-600 max-w-xl font-normal">
-              Structured learning tracks, live code reviews from industry engineers, and regional learning hubs with
-              backup power and fiber connectivity.
+              Move beyond isolated tutorials. Build fullstack services and distributed systems with line-by-line pull
+              request audits from industry engineers—backed by regional tech hubs with dedicated power and fiber.
             </p>
 
             {/* Primary & Secondary Action CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:items-center pt-1">
               <Link to="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto gap-2 font-medium">
-                  <span>Create Student Account</span>
+                  <span>Start Learning Free</span>
                   <ArrowRight size={16} />
                 </Button>
               </Link>
@@ -452,19 +452,19 @@ export function HomePage() {
                 }}
               >
                 <Compass size={16} />
-                <span>Explore Curriculum</span>
+                <span>Explore 6 Engineering Tracks</span>
               </Button>
             </div>
 
-            {/* Single Row of Trust Points */}
+            {/* Single Row of Differentiated Trust Points */}
             <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-                <span>Tuition-Free Access</span>
+                <span>100% Tuition-Free</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
-                <span>Low-Bandwidth Classrooms</span>
+                <span>Solar-Backed Tech Hubs</span>
               </div>
               <div className="flex items-center gap-1.5 font-medium text-slate-800">
                 <CheckCircle2 size={15} className="text-[var(--secondary)]" />
@@ -478,7 +478,7 @@ export function HomePage() {
             <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[var(--shadow-card)] space-y-3.5">
               {/* Header */}
               <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
-                <span className="text-xs font-semibold text-slate-800">Collaborative Engineering</span>
+                <span className="text-xs font-semibold text-slate-800">Live Pull Request Audit</span>
                 <Badge variant="secondary" size="sm" className="gap-1.5 font-medium text-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--secondary)] animate-pulse" />
                   Active Session
@@ -489,7 +489,7 @@ export function HomePage() {
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-slate-200/80">
                 <SmartImage
                   src={LOCAL_MEDIA_ASSETS.hero.collaboration}
-                  alt="African software engineer in headphones reviewing terminal commands and VS Code files on a curved ultrawide display"
+                  alt="African software engineer in headphones reviewing terminal commands and VS Code files on a dual-display workstation"
                   priority
                   hoverEffect="zoom"
                   className="h-full w-full object-cover"
@@ -502,7 +502,7 @@ export function HomePage() {
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     Active Engineering Session
                   </span>
-                  <span className="text-slate-300 font-mono text-[11px]">Addis Ababa • Remote Mesh</span>
+                  <span className="text-slate-300 font-mono text-[11px]">Addis Ababa • WebRTC Mesh</span>
                 </div>
               </div>
 
@@ -518,26 +518,26 @@ export function HomePage() {
                   />
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-900 truncate">Selamawit Tekle</p>
-                    <p className="text-[11px] text-slate-500 truncate">Senior Fellow · Distributed Systems</p>
+                    <p className="text-[11px] text-slate-500 truncate">Senior Infrastructure Engineer</p>
                   </div>
                 </div>
                 <span className="flex items-center gap-1 text-xs font-medium text-slate-700 shrink-0">
-                  <Radio size={12} className="text-[var(--secondary)] animate-pulse" /> Sub-150ms
+                  <Radio size={12} className="text-[var(--secondary)] animate-pulse" /> WebRTC • 48ms
                 </span>
               </div>
 
               {/* Single Track Progress Line */}
               <div className="rounded-xl border border-slate-200/80 bg-white p-3 space-y-2 shadow-[var(--shadow-xs)]">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-800 truncate">Fullstack Cloud & Distributed Systems</span>
+                  <span className="font-semibold text-slate-800 truncate">Cloud Backend & Distributed Systems</span>
                   <span className="font-mono font-bold text-slate-900">50%</span>
                 </div>
                 <div className="h-1.5 w-full rounded-full bg-slate-100 overflow-hidden dark:bg-white/[0.04] dark:border-white/10 dark:text-slate-300">
                   <div className="h-full bg-[var(--secondary)] rounded-full transition-all" style={{ width: "50%" }} />
                 </div>
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
-                  <span>Module 4: PostgreSQL Pooling</span>
-                  <span>8 / 16 Lessons</span>
+                  <span>Module 4: Connection Pooling & Migrations</span>
+                  <span>18 / 18 Tests Passing</span>
                 </div>
               </div>
             </div>

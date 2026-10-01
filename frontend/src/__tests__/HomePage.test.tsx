@@ -72,16 +72,16 @@ describe("HomePage Component Suite", () => {
     );
 
     const headline = await screen.findByRole("heading", {
-      name: /Build Production Software with Experienced Engineering Mentors/i,
+      name: /Ship Production Systems.*Get Reviewed by Working Engineers/i,
     });
     expect(headline).toBeDefined();
 
-    expect(screen.getByText(/Structured learning tracks, live code reviews from industry engineers/i)).toBeDefined();
-    expect(screen.getAllByRole("button", { name: /Explore Curriculum/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("button", { name: /Create Student Account/i }).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Move beyond isolated tutorials.*pull request audits/i)).toBeDefined();
+    expect(screen.getAllByRole("button", { name: /Explore 6 Engineering Tracks/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("button", { name: /Start Learning Free/i }).length).toBeGreaterThan(0);
 
     // Check for the platform badge
-    expect(screen.getByText(/Software Engineering Education/i)).toBeDefined();
+    expect(screen.getByText(/Tuition-Free Engineering Fellowship/i)).toBeDefined();
   }, 15000);
 
   it("renders the trust points and regional reach section", async () => {
